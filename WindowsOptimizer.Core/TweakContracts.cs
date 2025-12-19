@@ -16,7 +16,18 @@ public enum TweakStatus
     NotApplicable,
     Detected,
     Applied,
+    Verified,
+    RolledBack,
+    Skipped,
     Failed
+}
+
+public enum TweakAction
+{
+    Detect,
+    Apply,
+    Verify,
+    Rollback
 }
 
 public sealed record TweakResult(
