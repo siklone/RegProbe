@@ -19,9 +19,11 @@ public sealed class MonitorViewModel : ViewModelBase
     private readonly DemoTweak _demoTweak = new();
     private CancellationTokenSource? _cts;
     private bool _isRunning;
+    private int _runCount;
     private string _statusMessage = "Ready to run.";
     private string _runModeLabel = "Mode: Preview (DryRun)";
     private string _lastUpdatedText = "Last update: -";
+    private string _lastDurationText = "Duration: -";
 
     public MonitorViewModel()
     {
@@ -77,6 +79,12 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _statusMessage, value);
     }
 
+    public int RunCount
+    {
+        get => _runCount;
+        private set => SetProperty(ref _runCount, value);
+    }
+
     public string RunModeLabel
     {
         get => _runModeLabel;
@@ -89,6 +97,12 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _lastUpdatedText, value);
     }
 
+    public string LastDurationText
+    {
+        get => _lastDurationText;
+        private set => SetProperty(ref _lastDurationText, value);
+    }
+
     private async Task RunPipelineAsync(bool dryRun)
     {
         if (IsRunning)
@@ -98,6 +112,8 @@ public sealed class MonitorViewModel : ViewModelBase
 
         IsRunning = true;
         StartCancellation();
+        RunCount++;
+        var startedAt = DateTimeOffset.UtcNow;
         RunModeLabel = dryRun ? "Mode: Preview (DryRun)" : "Mode: Apply";
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         ResetSteps();
@@ -117,14 +133,17 @@ public sealed class MonitorViewModel : ViewModelBase
             ApplyReport(report);
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
+            LastDurationText = $"Duration: {FormatDuration(report.CompletedAt - report.StartedAt)}";
         }
         catch (OperationCanceledException)
         {
             StatusMessage = "Run cancelled.";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         catch (Exception ex)
         {
             StatusMessage = $"Run failed: {ex.Message}";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         finally
         {
@@ -205,6 +224,21 @@ public sealed class MonitorViewModel : ViewModelBase
         }
 
         return null;
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        if (duration.TotalSeconds < 1)
+        {
+            return $"{duration.TotalMilliseconds:0} ms";
+        }
+
+        if (duration.TotalMinutes < 1)
+        {
+            return $"{duration.TotalSeconds:0.0} s";
+        }
+
+        return $"{duration.TotalMinutes:0.0} min";
     }
 
     private sealed class DemoTweak : ITweak
