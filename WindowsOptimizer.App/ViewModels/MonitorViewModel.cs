@@ -15,15 +15,20 @@ public sealed class MonitorViewModel : ViewModelBase
     private readonly RelayCommand _runPreviewCommand;
     private readonly RelayCommand _runApplyCommand;
     private readonly RelayCommand _cancelCommand;
+    private readonly RelayCommand _resetCommand;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly DemoTweak _demoTweak = new();
     private CancellationTokenSource? _cts;
     private bool _isRunning;
     private int _runCount;
+    private bool _verifyAfterApply = true;
+    private bool _rollbackOnFailure = true;
     private string _statusMessage = "Ready to run.";
     private string _runModeLabel = "Mode: Preview (DryRun)";
     private string _lastUpdatedText = "Last update: -";
     private string _lastDurationText = "Duration: -";
+    private string _currentStepText = "Current step: -";
+    private string _lastOutcomeText = "Last result: -";
 
     public MonitorViewModel()
     {
@@ -45,6 +50,7 @@ public sealed class MonitorViewModel : ViewModelBase
         _runPreviewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
         _runApplyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _resetCommand = new RelayCommand(_ => ResetMonitor(), _ => !IsRunning);
     }
 
     public string Title => "Monitor";
@@ -59,6 +65,8 @@ public sealed class MonitorViewModel : ViewModelBase
 
     public ICommand CancelCommand => _cancelCommand;
 
+    public ICommand ResetCommand => _resetCommand;
+
     public bool IsRunning
     {
         get => _isRunning;
@@ -69,6 +77,7 @@ public sealed class MonitorViewModel : ViewModelBase
                 _runPreviewCommand.RaiseCanExecuteChanged();
                 _runApplyCommand.RaiseCanExecuteChanged();
                 _cancelCommand.RaiseCanExecuteChanged();
+                _resetCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -83,6 +92,18 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         get => _runCount;
         private set => SetProperty(ref _runCount, value);
+    }
+
+    public bool VerifyAfterApply
+    {
+        get => _verifyAfterApply;
+        set => SetProperty(ref _verifyAfterApply, value);
+    }
+
+    public bool RollbackOnFailure
+    {
+        get => _rollbackOnFailure;
+        set => SetProperty(ref _rollbackOnFailure, value);
     }
 
     public string RunModeLabel
@@ -103,6 +124,18 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _lastDurationText, value);
     }
 
+    public string CurrentStepText
+    {
+        get => _currentStepText;
+        private set => SetProperty(ref _currentStepText, value);
+    }
+
+    public string LastOutcomeText
+    {
+        get => _lastOutcomeText;
+        private set => SetProperty(ref _lastOutcomeText, value);
+    }
+
     public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
 
     private async Task RunPipelineAsync(bool dryRun)
@@ -121,13 +154,14 @@ public sealed class MonitorViewModel : ViewModelBase
         ResetSteps();
         Steps.First().MarkInProgress();
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = "Current step: Detect";
 
         var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
         var options = new TweakExecutionOptions
         {
             DryRun = dryRun,
-            VerifyAfterApply = true,
-            RollbackOnFailure = true
+            VerifyAfterApply = VerifyAfterApply,
+            RollbackOnFailure = RollbackOnFailure
         };
 
         try
@@ -137,16 +171,19 @@ public sealed class MonitorViewModel : ViewModelBase
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
             LastDurationText = $"Duration: {FormatDuration(report.CompletedAt - report.StartedAt)}";
+            LastOutcomeText = report.Succeeded ? "Last result: Success" : "Last result: Failed";
         }
         catch (OperationCanceledException)
         {
             StatusMessage = "Run cancelled.";
             LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
+            LastOutcomeText = "Last result: Cancelled";
         }
         catch (Exception ex)
         {
             StatusMessage = $"Run failed: {ex.Message}";
             LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
+            LastOutcomeText = "Last result: Failed";
         }
         finally
         {
@@ -160,6 +197,7 @@ public sealed class MonitorViewModel : ViewModelBase
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = $"Current step: {update.Action} ({update.Status})";
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -194,6 +232,7 @@ public sealed class MonitorViewModel : ViewModelBase
             step.Reset();
         }
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = "Current step: -";
     }
 
     private void CancelRun()
@@ -205,6 +244,23 @@ public sealed class MonitorViewModel : ViewModelBase
 
         _cts.Cancel();
         StatusMessage = "Cancellation requested.";
+    }
+
+    private void ResetMonitor()
+    {
+        if (IsRunning)
+        {
+            return;
+        }
+
+        ResetSteps();
+        StatusMessage = "Ready to run.";
+        RunModeLabel = "Mode: Preview (DryRun)";
+        LastUpdatedText = "Last update: -";
+        LastDurationText = "Duration: -";
+        CurrentStepText = "Current step: -";
+        LastOutcomeText = "Last result: -";
+        RunCount = 0;
     }
 
     private void StartCancellation()
