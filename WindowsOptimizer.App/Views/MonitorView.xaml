@@ -124,6 +124,10 @@
                             Margin="0,0,8,0" />
                     <Button Content="Cancel"
                             Command="{Binding CancelCommand}"
+                            Padding="14,6"
+                            Margin="0,0,8,0" />
+                    <Button Content="Reset"
+                            Command="{Binding ResetCommand}"
                             Padding="14,6" />
                 </StackPanel>
             </Grid>

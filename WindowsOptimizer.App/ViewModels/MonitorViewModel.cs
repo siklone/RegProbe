@@ -15,6 +15,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private readonly RelayCommand _runPreviewCommand;
     private readonly RelayCommand _runApplyCommand;
     private readonly RelayCommand _cancelCommand;
+    private readonly RelayCommand _resetCommand;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly DemoTweak _demoTweak = new();
     private CancellationTokenSource? _cts;
@@ -48,6 +49,7 @@ public sealed class MonitorViewModel : ViewModelBase
         _runPreviewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
         _runApplyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _resetCommand = new RelayCommand(_ => ResetMonitor(), _ => !IsRunning);
     }
 
     public string Title => "Monitor";
@@ -62,6 +64,8 @@ public sealed class MonitorViewModel : ViewModelBase
 
     public ICommand CancelCommand => _cancelCommand;
 
+    public ICommand ResetCommand => _resetCommand;
+
     public bool IsRunning
     {
         get => _isRunning;
@@ -72,6 +76,7 @@ public sealed class MonitorViewModel : ViewModelBase
                 _runPreviewCommand.RaiseCanExecuteChanged();
                 _runApplyCommand.RaiseCanExecuteChanged();
                 _cancelCommand.RaiseCanExecuteChanged();
+                _resetCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -229,6 +234,22 @@ public sealed class MonitorViewModel : ViewModelBase
 
         _cts.Cancel();
         StatusMessage = "Cancellation requested.";
+    }
+
+    private void ResetMonitor()
+    {
+        if (IsRunning)
+        {
+            return;
+        }
+
+        ResetSteps();
+        StatusMessage = "Ready to run.";
+        RunModeLabel = "Mode: Preview (DryRun)";
+        LastUpdatedText = "Last update: -";
+        LastDurationText = "Duration: -";
+        CurrentStepText = "Current step: -";
+        RunCount = 0;
     }
 
     private void StartCancellation()
