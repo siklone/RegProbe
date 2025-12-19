@@ -81,13 +81,28 @@
                            Text="{Binding ExportStatusMessage}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <TextBlock Margin="0,4,0,0"
+                           Text="{Binding BulkStatusMessage}"
+                           Foreground="#8A8D93"
+                           FontSize="11" />
             </StackPanel>
-            <Button Grid.Column="1"
-                    Content="Export Logs"
-                    Command="{Binding ExportLogsCommand}"
-                    Padding="14,6"
-                    Margin="12,6,0,0"
-                    VerticalAlignment="Top" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="12,6,0,0">
+                <Button Content="Preview All"
+                        Command="{Binding PreviewAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Apply All"
+                        Command="{Binding ApplyAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Cancel All"
+                        Command="{Binding CancelAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Export Logs"
+                        Command="{Binding ExportLogsCommand}"
+                        Padding="12,6" />
+            </StackPanel>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">

@@ -38,8 +38,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         ResetSteps();
 
-        _previewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
-        _applyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
+        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => !IsRunning);
+        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => !IsRunning);
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => !IsRunning);
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => !IsRunning);
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
@@ -91,14 +91,18 @@ public sealed class TweakItemViewModel : ViewModelBase
         private set => SetProperty(ref _lastUpdatedText, value);
     }
 
-    private async Task RunPipelineAsync(bool dryRun)
+    public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
+
+    public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
+
+    private async Task RunAsync(bool dryRun, CancellationToken ct)
     {
         if (IsRunning)
         {
             return;
         }
 
-        StartCancellation();
+        StartCancellation(ct);
         IsRunning = true;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
@@ -142,7 +146,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        StartCancellation();
+        StartCancellation(CancellationToken.None);
         IsRunning = true;
         StatusMessage = $"{action} started.";
         var step = Steps.FirstOrDefault(item => item.Action == action);
@@ -189,10 +193,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = "Cancellation requested.";
     }
 
-    private void StartCancellation()
+    private void StartCancellation(CancellationToken ct)
     {
         ClearCancellation();
-        _cts = new CancellationTokenSource();
+        _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
     }
 
     private void ClearCancellation()

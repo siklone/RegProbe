@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -17,9 +18,15 @@ public sealed class TweaksViewModel : ViewModelBase
 {
     private readonly ITweakLogStore _logStore;
     private readonly RelayCommand _exportLogsCommand;
+    private readonly RelayCommand _previewAllCommand;
+    private readonly RelayCommand _applyAllCommand;
+    private readonly RelayCommand _cancelAllCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
+    private string _bulkStatusMessage = "Bulk actions are idle.";
     private bool _isExporting;
+    private bool _isBulkRunning;
     private string _searchText = string.Empty;
+    private CancellationTokenSource? _bulkCts;
 
     public TweaksViewModel()
     {
@@ -55,6 +62,9 @@ public sealed class TweaksViewModel : ViewModelBase
         TweaksView.Filter = FilterTweaks;
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
+        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => !IsBulkRunning);
+        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => !IsBulkRunning);
+        _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
     }
 
     public string Title => "Tweaks";
@@ -65,10 +75,22 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ICommand ExportLogsCommand => _exportLogsCommand;
 
+    public ICommand PreviewAllCommand => _previewAllCommand;
+
+    public ICommand ApplyAllCommand => _applyAllCommand;
+
+    public ICommand CancelAllCommand => _cancelAllCommand;
+
     public string ExportStatusMessage
     {
         get => _exportStatusMessage;
         private set => SetProperty(ref _exportStatusMessage, value);
+    }
+
+    public string BulkStatusMessage
+    {
+        get => _bulkStatusMessage;
+        private set => SetProperty(ref _bulkStatusMessage, value);
     }
 
     public bool IsExporting
@@ -79,6 +101,20 @@ public sealed class TweaksViewModel : ViewModelBase
             if (SetProperty(ref _isExporting, value))
             {
                 _exportLogsCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsBulkRunning
+    {
+        get => _isBulkRunning;
+        private set
+        {
+            if (SetProperty(ref _isBulkRunning, value))
+            {
+                _previewAllCommand.RaiseCanExecuteChanged();
+                _applyAllCommand.RaiseCanExecuteChanged();
+                _cancelAllCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -129,6 +165,71 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             IsExporting = false;
         }
+    }
+
+    private async Task RunBulkAsync(bool dryRun)
+    {
+        if (IsBulkRunning)
+        {
+            return;
+        }
+
+        StartBulkCancellation();
+        IsBulkRunning = true;
+        BulkStatusMessage = dryRun ? "Bulk preview started." : "Bulk apply started.";
+
+        try
+        {
+            var items = TweaksView.Cast<TweakItemViewModel>().ToList();
+            foreach (var item in items)
+            {
+                _bulkCts?.Token.ThrowIfCancellationRequested();
+                BulkStatusMessage = $"Running {item.Name}...";
+
+                if (dryRun)
+                {
+                    await item.RunPreviewAsync(_bulkCts?.Token ?? CancellationToken.None);
+                }
+                else
+                {
+                    await item.RunApplyAsync(_bulkCts?.Token ?? CancellationToken.None);
+                }
+            }
+
+            BulkStatusMessage = "Bulk run completed.";
+        }
+        catch (OperationCanceledException)
+        {
+            BulkStatusMessage = "Bulk run cancelled.";
+        }
+        finally
+        {
+            IsBulkRunning = false;
+            ClearBulkCancellation();
+        }
+    }
+
+    private void CancelBulk()
+    {
+        if (!IsBulkRunning || _bulkCts is null)
+        {
+            return;
+        }
+
+        _bulkCts.Cancel();
+        BulkStatusMessage = "Bulk cancellation requested.";
+    }
+
+    private void StartBulkCancellation()
+    {
+        ClearBulkCancellation();
+        _bulkCts = new CancellationTokenSource();
+    }
+
+    private void ClearBulkCancellation()
+    {
+        _bulkCts?.Dispose();
+        _bulkCts = null;
     }
 
     private bool FilterTweaks(object obj)
