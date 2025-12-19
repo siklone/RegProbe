@@ -147,6 +147,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasOutcome));
                 OnPropertyChanged(nameof(OutcomeText));
                 OnPropertyChanged(nameof(OutcomeSummary));
+                OnPropertyChanged(nameof(OutcomeSortRank));
 
                 if (value == TweakRunOutcome.Failed)
                 {
@@ -166,6 +167,16 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakRunOutcome.Cancelled => "Cancelled",
         TweakRunOutcome.Skipped => "Skipped",
         _ => "Idle"
+    };
+
+    public int OutcomeSortRank => LastOutcome switch
+    {
+        TweakRunOutcome.Failed => 0,
+        TweakRunOutcome.InProgress => 1,
+        TweakRunOutcome.Cancelled => 2,
+        TweakRunOutcome.Skipped => 3,
+        TweakRunOutcome.Success => 4,
+        _ => 5
     };
 
     public string OutcomeSummary => HasOutcome
