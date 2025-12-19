@@ -3,6 +3,7 @@ set -euo pipefail
 
 BASE_BRANCH="${BASE_BRANCH:-main}"
 COMMENT_BODY="${CODEX_COMMENT:-@codex review}"
+GH_BIN="${GH_BIN:-gh}"
 
 cd "$(git rev-parse --show-toplevel)"
 
@@ -17,13 +18,17 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-if ! command -v gh >/dev/null 2>&1; then
-  echo "GitHub CLI (gh) is not installed." >&2
-  echo "Install: https://github.com/cli/cli#installation" >&2
-  exit 1
+if ! command -v "$GH_BIN" >/dev/null 2>&1; then
+  if [[ -x "$HOME/.local/bin/gh" ]]; then
+    GH_BIN="$HOME/.local/bin/gh"
+  else
+    echo "GitHub CLI (gh) is not installed." >&2
+    echo "Install: https://github.com/cli/cli#installation" >&2
+    exit 1
+  fi
 fi
 
-if ! gh auth status >/dev/null 2>&1; then
+if ! "$GH_BIN" auth status >/dev/null 2>&1; then
   echo "gh is not authenticated. Run: gh auth login" >&2
   exit 1
 fi
@@ -33,11 +38,11 @@ body="${2:-Automated PR via scripts/codex_pr.sh}"
 
 git push -u origin "$branch"
 
-pr_url="$(gh pr view --json url -q .url 2>/dev/null || true)"
+pr_url="$("$GH_BIN" pr view --json url -q .url 2>/dev/null || true)"
 if [[ -z "$pr_url" ]]; then
-  pr_url="$(gh pr create --title "$title" --body "$body" --base "$BASE_BRANCH" --head "$branch")"
+  pr_url="$("$GH_BIN" pr create --title "$title" --body "$body" --base "$BASE_BRANCH" --head "$branch")"
 fi
 
-gh pr comment "$pr_url" --body "$COMMENT_BODY"
+"$GH_BIN" pr comment "$pr_url" --body "$COMMENT_BODY"
 
 echo "PR: $pr_url"
