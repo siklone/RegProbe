@@ -50,6 +50,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string Name => _tweak.Name;
 
+    public string Id => _tweak.Id;
+
     public string Description => _tweak.Description;
 
     public TweakRiskLevel Risk => _tweak.Risk;

@@ -216,12 +216,15 @@
                                             Padding="12,4" />
                                 </StackPanel>
 
-                                <TextBlock Grid.Row="1"
-                                           Grid.ColumnSpan="2"
-                                           Margin="0,6,0,0"
-                                           Text="{Binding Description}"
-                                           Foreground="#4B4B4B"
-                                           TextWrapping="Wrap" />
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
+                                    <TextBlock Text="{Binding Description}"
+                                               Foreground="#4B4B4B"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Margin="0,4,0,0"
+                                               Text="{Binding Id}"
+                                               Foreground="#8A8D93"
+                                               FontSize="10" />
+                                </StackPanel>
 
                                 <Expander Grid.Row="2"
                                           Grid.ColumnSpan="2"
