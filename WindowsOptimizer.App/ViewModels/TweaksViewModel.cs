@@ -37,6 +37,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
 
@@ -235,6 +236,12 @@ public sealed class TweaksViewModel : ViewModelBase
         private set => SetProperty(ref _filterSummary, value);
     }
 
+    public bool HasVisibleTweaks
+    {
+        get => _hasVisibleTweaks;
+        private set => SetProperty(ref _hasVisibleTweaks, value);
+    }
+
     private async Task ExportLogsAsync()
     {
         if (IsExporting)
@@ -392,6 +399,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        HasVisibleTweaks = visible > 0;
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
     }
