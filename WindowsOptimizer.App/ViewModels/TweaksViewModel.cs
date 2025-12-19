@@ -30,6 +30,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _resetAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
+    private readonly RelayCommand _openAppLogCommand;
     private readonly RelayCommand _openCsvLogCommand;
     private readonly RelayCommand _copyCsvPathCommand;
     private readonly RelayCommand _expandAllDetailsCommand;
@@ -53,6 +54,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
+    private readonly string _appLogFilePath;
     private readonly string _tweakLogFilePath;
 
     public TweaksViewModel()
@@ -60,6 +62,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var paths = AppPaths.FromEnvironment();
         var logger = new FileAppLogger(paths);
         _logFolderPath = paths.LogDirectory;
+        _appLogFilePath = paths.LogFilePath;
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
@@ -124,6 +127,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _resetAllCommand = new RelayCommand(_ => ResetAllStatuses(), _ => CanResetAll());
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
+        _openAppLogCommand = new RelayCommand(_ => OpenAppLog());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _copyCsvPathCommand = new RelayCommand(_ => CopyCsvPath());
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
@@ -157,6 +161,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
+
+    public ICommand OpenAppLogCommand => _openAppLogCommand;
 
     public ICommand OpenCsvLogCommand => _openCsvLogCommand;
 
@@ -726,6 +732,30 @@ public sealed class TweaksViewModel : ViewModelBase
         catch (Exception ex)
         {
             ExportStatusMessage = $"Open log failed: {ex.Message}";
+        }
+    }
+
+    private void OpenAppLog()
+    {
+        try
+        {
+            if (!File.Exists(_appLogFilePath))
+            {
+                ExportStatusMessage = "No app log file yet. Run a tweak to generate one.";
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = _appLogFilePath,
+                UseShellExecute = true
+            });
+
+            ExportStatusMessage = $"Opened app log: {_appLogFilePath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Open app log failed: {ex.Message}";
         }
     }
 

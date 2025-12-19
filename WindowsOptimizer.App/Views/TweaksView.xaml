@@ -214,6 +214,11 @@
                         ToolTip="Open the log folder."
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Open App Log"
+                        Command="{Binding OpenAppLogCommand}"
+                        ToolTip="Open the app log file."
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Open CSV Log"
                         Command="{Binding OpenCsvLogCommand}"
                         ToolTip="Open the tweak log CSV file."
