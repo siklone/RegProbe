@@ -30,6 +30,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _lastDurationText = "Duration: -";
     private string _lastActionText = string.Empty;
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
+    private int _runCount;
     private bool _isDetailsExpanded = true;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline)
@@ -185,6 +186,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         ? $"{LastActionText} - {OutcomeText}"
         : "No runs yet";
 
+    public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
+
+    public int RunCount
+    {
+        get => _runCount;
+        private set => SetProperty(ref _runCount, value);
+    }
+
     public bool IsDetailsExpanded
     {
         get => _isDetailsExpanded;
@@ -219,6 +228,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        RunCount++;
         var startedAt = DateTimeOffset.UtcNow;
         var actionLabel = dryRun ? "Preview" : "Apply";
         LastActionText = actionLabel;
@@ -228,6 +238,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastDurationText = "Duration: -";
         ResetSteps();
         Steps.First().MarkInProgress();
+        OnPropertyChanged(nameof(StepProgressText));
 
         var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
         var options = new TweakExecutionOptions
@@ -283,12 +294,14 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        RunCount++;
         var startedAt = DateTimeOffset.UtcNow;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = $"{action} started.";
         var step = Steps.FirstOrDefault(item => item.Action == action);
         step?.MarkInProgress();
+        OnPropertyChanged(nameof(StepProgressText));
 
         try
         {
@@ -302,6 +315,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
+            OnPropertyChanged(nameof(StepProgressText));
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -364,6 +378,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
+        OnPropertyChanged(nameof(StepProgressText));
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -388,6 +403,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             step.ApplyResult(reportStep.Result.Status, reportStep.Result.Message, reportStep.Result.Timestamp);
         }
+        OnPropertyChanged(nameof(StepProgressText));
     }
 
     private void ResetSteps()
@@ -396,6 +412,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             step.Reset();
         }
+        OnPropertyChanged(nameof(StepProgressText));
     }
 
     public void ResetStatus()
@@ -411,6 +428,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = "Idle";
         LastUpdatedText = "Last update: -";
         LastDurationText = "Duration: -";
+        RunCount = 0;
+        IsDetailsExpanded = false;
     }
 
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
@@ -473,6 +492,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         return $"{duration.TotalMinutes:0.0} min";
+    }
+
+    private int GetCompletedStepCount()
+    {
+        return Steps.Count(step => step.State != TweakStepState.Pending && step.State != TweakStepState.InProgress);
     }
 
     private bool CanRun()
