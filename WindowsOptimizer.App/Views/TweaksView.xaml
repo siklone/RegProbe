@@ -145,6 +145,10 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="12,6,0,0">
+                <Button Content="Detect All"
+                        Command="{Binding DetectAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Preview All"
                         Command="{Binding PreviewAllCommand}"
                         Padding="12,6"

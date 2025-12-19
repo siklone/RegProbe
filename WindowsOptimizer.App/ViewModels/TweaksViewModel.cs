@@ -20,6 +20,7 @@ public sealed class TweaksViewModel : ViewModelBase
 {
     private readonly ITweakLogStore _logStore;
     private readonly RelayCommand _exportLogsCommand;
+    private readonly RelayCommand _detectAllCommand;
     private readonly RelayCommand _previewAllCommand;
     private readonly RelayCommand _applyAllCommand;
     private readonly RelayCommand _verifyAllCommand;
@@ -89,6 +90,7 @@ public sealed class TweaksViewModel : ViewModelBase
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
+        _detectAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Detect", (item, token) => item.RunDetectAsync(token)), _ => CanRunBulk());
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulk());
         _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", (item, token) => item.RunApplyAsync(token)), _ => CanRunBulk());
         _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
@@ -110,6 +112,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICollectionView TweaksView { get; }
 
     public ICommand ExportLogsCommand => _exportLogsCommand;
+
+    public ICommand DetectAllCommand => _detectAllCommand;
 
     public ICommand PreviewAllCommand => _previewAllCommand;
 
@@ -162,6 +166,7 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _isBulkRunning, value))
             {
+                _detectAllCommand.RaiseCanExecuteChanged();
                 _previewAllCommand.RaiseCanExecuteChanged();
                 _applyAllCommand.RaiseCanExecuteChanged();
                 _verifyAllCommand.RaiseCanExecuteChanged();
@@ -415,6 +420,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
         HasVisibleTweaks = visible > 0;
+        _detectAllCommand.RaiseCanExecuteChanged();
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
@@ -425,6 +431,7 @@ public sealed class TweaksViewModel : ViewModelBase
     {
         if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
         {
+            _detectAllCommand.RaiseCanExecuteChanged();
             _previewAllCommand.RaiseCanExecuteChanged();
             _applyAllCommand.RaiseCanExecuteChanged();
             _verifyAllCommand.RaiseCanExecuteChanged();
