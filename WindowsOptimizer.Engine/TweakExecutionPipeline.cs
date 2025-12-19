@@ -82,6 +82,30 @@ public sealed class TweakExecutionPipeline
         return BuildReport(tweak, options, steps, startedAt);
     }
 
+    public Task<TweakExecutionStep> ExecuteStepAsync(
+        ITweak tweak,
+        TweakAction action,
+        IProgress<TweakExecutionUpdate>? progress = null,
+        CancellationToken ct = default)
+    {
+        if (tweak is null)
+        {
+            throw new ArgumentNullException(nameof(tweak));
+        }
+
+        var operation = action switch
+        {
+            TweakAction.Detect => tweak.DetectAsync,
+            TweakAction.Apply => tweak.ApplyAsync,
+            TweakAction.Verify => tweak.VerifyAsync,
+            TweakAction.Rollback => tweak.RollbackAsync,
+            _ => throw new ArgumentOutOfRangeException(nameof(action), action, "Unsupported action.")
+        };
+
+        var steps = new List<TweakExecutionStep>();
+        return RunStepAsync(tweak, action, operation, steps, progress, ct);
+    }
+
     private static TweakExecutionReport BuildReport(
         ITweak tweak,
         TweakExecutionOptions options,

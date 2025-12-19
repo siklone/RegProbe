@@ -54,6 +54,20 @@ public sealed class TweakExecutionPipelineTests
     }
 
     [Fact]
+    public async Task ExecuteStepAsync_RunsRequestedAction()
+    {
+        var logger = new RecordingLogger();
+        var pipeline = new TweakExecutionPipeline(logger);
+        var tweak = new RecordingTweak();
+
+        var step = await pipeline.ExecuteStepAsync(tweak, TweakAction.Verify);
+
+        Assert.Equal(1, tweak.VerifyCalls);
+        Assert.Equal(TweakAction.Verify, step.Action);
+        Assert.Equal(TweakStatus.Verified, step.Result.Status);
+    }
+
+    [Fact]
     public async Task CancelDuringApply_DoesNotRollback()
     {
         var logger = new RecordingLogger();
