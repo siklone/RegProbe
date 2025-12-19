@@ -82,6 +82,10 @@
                                Text="{Binding StatusMessage}"
                                Foreground="#4B4B4B" />
                     <TextBlock Margin="0,4,0,0"
+                               Text="{Binding CurrentStepText}"
+                               Foreground="#8A8D93"
+                               FontSize="11" />
+                    <TextBlock Margin="0,4,0,0"
                                Text="{Binding LastUpdatedText}"
                                Foreground="#8A8D93"
                                FontSize="11" />

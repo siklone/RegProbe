@@ -26,6 +26,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private string _runModeLabel = "Mode: Preview (DryRun)";
     private string _lastUpdatedText = "Last update: -";
     private string _lastDurationText = "Duration: -";
+    private string _currentStepText = "Current step: -";
 
     public MonitorViewModel()
     {
@@ -117,6 +118,12 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _lastDurationText, value);
     }
 
+    public string CurrentStepText
+    {
+        get => _currentStepText;
+        private set => SetProperty(ref _currentStepText, value);
+    }
+
     public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
 
     private async Task RunPipelineAsync(bool dryRun)
@@ -135,6 +142,7 @@ public sealed class MonitorViewModel : ViewModelBase
         ResetSteps();
         Steps.First().MarkInProgress();
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = "Current step: Detect";
 
         var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
         var options = new TweakExecutionOptions
@@ -174,6 +182,7 @@ public sealed class MonitorViewModel : ViewModelBase
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = $"Current step: {update.Action} ({update.Status})";
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -208,6 +217,7 @@ public sealed class MonitorViewModel : ViewModelBase
             step.Reset();
         }
         OnPropertyChanged(nameof(StepProgressText));
+        CurrentStepText = "Current step: -";
     }
 
     private void CancelRun()
