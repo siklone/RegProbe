@@ -75,16 +75,17 @@ public sealed class TweaksViewModel : ViewModelBase
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
-        UpdateFilterSummary();
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
-        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => !IsBulkRunning);
-        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => !IsBulkRunning);
+        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => CanRunBulk());
+        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => CanRunBulk());
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
+
+        UpdateFilterSummary();
     }
 
     public string Title => "Tweaks";
@@ -270,6 +271,16 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    private bool CanRunBulk()
+    {
+        if (IsBulkRunning)
+        {
+            return false;
+        }
+
+        return TweaksView.Cast<object>().Any();
+    }
+
     private async Task RunBulkAsync(bool dryRun)
     {
         if (IsBulkRunning)
@@ -381,6 +392,8 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        _previewAllCommand.RaiseCanExecuteChanged();
+        _applyAllCommand.RaiseCanExecuteChanged();
     }
 
     private void ResetFilters()
