@@ -346,7 +346,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private void ResetStatus()
+    public void ResetStatus()
     {
         if (IsRunning)
         {
