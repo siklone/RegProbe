@@ -1,5 +1,7 @@
 # Windows Policies
 
+Requires elevation: No.
+
 This section is based on my [admx-parser](https://github.com/nohuto/admx-parser) project. You can get the whole parsed ADMX content via:
 
 ```powershell

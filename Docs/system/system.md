@@ -1,5 +1,7 @@
 # Disable Service Splitting
 
+Requires elevation: Yes (HKLM).
+
 Prevents services running under `svchost.exe` from being split into separate processes, keeping all grouped services within the same instance. This simplifies process management but increases the risk of system instability and reduces service isolation.
 
 `Windows Internals 7th Edition, Part 2` handpicked snippets (shortened):
@@ -48,6 +50,8 @@ Miscellaneous notes:
 ```
 
 # Kernel Values
+
+Requires elevation: Yes (HKLM).
 
 Since many people don't yet know which values exist and what default value they have, here's a list. I used IDA, WinDbg, WinObjEx, Windows Internals E7 P1 to create it. Many applied values are defaults, some not. See documentation below for details. The applied data is sometimes pure speculation.
 
@@ -182,6 +186,8 @@ Everything listed below is based on personal research. Mistakes may exist, but I
 ![](https://github.com/nohuto/win-config/blob/main/system/images/kernel2.png?raw=true)
 
 # DXG Kernel Values
+
+Requires elevation: Yes (HKLM).
 
 `dxgkrnl.sys` is Windows DirectX/WDDM graphics kernel driver that mediates between apps and the GPU to schedule work, manage graphics memory, present frames, and handle TDR hang recovery.
 
@@ -439,6 +445,8 @@ Everything listed below is based on personal research. Mistakes may exist, but I
 
 # DWM Values
 
+Requires elevation: Yes (HKLM).
+
 This option currently includes some speculations and default values. I haven't had time yet to test the behavior of the changed data.
 
 ---
@@ -559,6 +567,8 @@ Everything listed below is based on personal research. Mistakes may exist, but I
 
 # Win32PrioritySeparation
 
+Requires elevation: Yes (HKLM).
+
 "The value of this entry determines, in part, how much processor time the threads of a process receive each time they are scheduled, and how much the allotted time can vary. It also affects the relative priority of the threads of foreground and background processes. The value of this entry is a 6-bit bitmask consisting of three sets of two bits (AABBCC). Each set of two bits determines a different characteristic of the optimizing strategy.
 - The highest two bits (AABBCC) determine whether each processor interval is relatively long or short.
 - The middle two bits (AABBCC) determine whether the length of the interval varies or is fixed.
@@ -596,6 +606,8 @@ for ($i=0; $i -le 271; $i++) {
 > [system/assets | Win32PrioritySeparation.pdf](https://github.com/nohuto/win-config/blob/main/system/assets/Win32PrioritySeparation.pdf)
 
 # System Responsiveness
+
+Requires elevation: Yes (HKLM).
 
 "Determines the percentage of CPU resources that should be guaranteed to low-priority tasks. For example, if this value is 20, then 20% of CPU resources are reserved for low-priority tasks. Note that values that are not evenly divisible by 10 are rounded down to the nearest multiple of 10. Values below 10 and above 100 are clamped to 20. A value of 100 disables MMCSS (driver returns `STATUS_SERVER_DISABLED`)." (`mmcss.sys`)
 
@@ -647,6 +659,8 @@ CiSystemResponsiveness = 10 * (value / 10);
 > [system/assets | sysresp-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/sysresp-CiConfigInitialize.c)
 
 # Disable Scheduled Tasks
+
+Requires elevation: Yes (system tasks).
 
 Disables all kind of scheduled tasks most users don't need. Read through the list before switching the option. See suboptions for customization - enabling all suboptions until `Disable Miscellaenous Tasks` is the same as enabling the option switch.
 
@@ -729,6 +743,8 @@ powershell -Command "Get-ScheduledTask -TaskPath '\' | Where-Object { $_.TaskNam
 ```
 
 # Disable Services/Drivers
+
+Requires elevation: Yes (system services).
 
 The main option doesn't apply all suboptions. For further custumization use [serviwin](https://www.nirsoft.net/utils/serviwin.html).
 
@@ -886,6 +902,8 @@ See [services](https://github.com/nohuto/win-config/blob/main/system/assets/serv
 
 # Time Zone
 
+Requires elevation: Yes (system setting).
+
 | ID                              | Display Name                                                  | ID                              | Display Name                                              |
 | ------------------------------- | ------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------- |
 | Afghanistan Standard Time       | (UTC+04:30) Kabul                                             | Alaskan Standard Time           | (UTC-09:00) Alaska                                        |
@@ -967,6 +985,8 @@ Get-TimeZone -ListAvailable
 
 # Enable Game Mode
 
+Requires elevation: No.
+
 Game Mode should: "Prevents Windows Update from performing driver installations and sending restart notifications" Does it work? Not really, in my experience it tends to lower the priority and prevent driver updates (correct me if you've experienced otherwise) - It may also mess with process/thread priorities. Not all games support it, generally leave it enabled or benchmark the differences in equal scenarios.
 
 It might set CPU affinites (`AffinitizeToExclusiveCpus`, `CpuExclusivityMaskHig`, `CpuExclusivityMaskLow`) for the game process and the maximum amount of cores the game uses (`MaxCpuCount`). The percentage of GPU memory (`PercentGpuMemoryAllocatedToGame`), GPU time (`PercentGpuTimeAllocatedToGame`) & system compositor (`PercentGpuMemoryAllocatedToSystemCompositor`) that will be dedicated to the game. It may also create a list of processes (`RelatedProcessNames`) that are gaming related, which means that they won't be affected from the game mode. These are just assumptions, I haven't looked into it in detail yet (`GamingHandlers.c`).
@@ -990,6 +1010,8 @@ Miscellaneous notes:
 ```
 
 # Disable Windows Search
+
+Requires elevation: Yes (system services).
 
 | **Suboption** | **Description** |
 | ---- | ---- |
@@ -1067,6 +1089,8 @@ SystemSettings.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Se
 
 # Enable HAGS
 
+Requires elevation: Yes (HKLM).
+
 HAGS feature is introduced specifically for the WDDM. If disabled the CPU manages the GPU scheduling via a high-priority kernel thread, GPU context switches and task scheduling are handled by the CPU (CPU offloads graphics intensive tasks to the GPU for rendering). If enabled the GPU handles its own scheduling using a built in scheduler processor, context switching between GPU tasks is done directly on the GPU. It is especially beneficial, if you've a slow CPU, or if the CPU is heavily loaded with other tasks.
 
 "It depends on your hardware, if you want HAGS to be enabled or not. E.g if using a old GPU, it may not fully support the new scheduler."
@@ -1088,6 +1112,8 @@ SystemSettingsAdminFlows.exe	RegSetValue	HKLM\System\CurrentControlSet\Control\G
 ```
 
 # Disable Storage Sense
+
+Requires elevation: Yes (HKLM).
 
 Storage Sense deletes temporary files automatically - revert it by changing it back to `1`.
 
@@ -1133,6 +1159,8 @@ Storage Sense deletes temporary files automatically - revert it by changing it b
 
 # Reduce Shutdown Time
 
+Requires elevation: No.
+
 Forces hung apps and services to terminate faster.
 
 ```
@@ -1152,6 +1180,8 @@ More timeout related values located in `HKCU\Control Panel\Desktop`: `CriticalAp
 
 # Disable FTH
 
+Requires elevation: Yes (HKLM).
+
 Used for preventing legacy or unstable applications from crashing, read through the picture below for more detailed information (`Windows Internals 7th Edition, Part 1, Page 347`).
 
 > https://github.com/nohuto/Windows-Books/releases/download/7th-Edition/Windows-Internals-E7-P1.pdf  
@@ -1162,11 +1192,15 @@ Used for preventing legacy or unstable applications from crashing, read through 
 
 # Disable Accessibility Features
 
+Requires elevation: No.
+
 Disables multiple accessibility features such as `Sticky Keys`, `Toggle Keys`, `Mouse Keys`, `Sound Sentry`, `High Contrast` and more (read trough the file for more).
 
 > https://github.com/microsoft/accessibility-insights-windows/blob/main/docs/TelemetryOverview.md#control-of-telemery
 
 # Detailed Verbose Messages
+
+Requires elevation: Yes (HKLM).
 
 Enables detailed messages at restart, shut down, sign out, and sign in, which can be helpful.
 
@@ -1196,6 +1230,8 @@ Note: This policy setting is ignored if the \"Remove Boot/Shutdown/Logon/Logoff 
 
 # Disable Aero Shake
 
+Requires elevation: No.
+
 Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse.
 
 ![](https://www.techjunkie.com/wp-content/uploads/2018/10/windows-aero-shake-example.gif)
@@ -1222,6 +1258,8 @@ Prevents windows from being minimized or restored when the active window is shak
 
 # Disable JPEG Reduction
 
+Requires elevation: No.
+
 Windows reduces the quality of JPEG images you set as the desktop background to `85%` by default, you can set it to `100%` via the option switch.
 
 ```c
@@ -1238,6 +1276,8 @@ Default value is `85` -> `85%` (gets used if value isn't present), clamp range i
 
 # Disable Low Disk Space Checks
 
+Requires elevation: No.
+
 Disables the `Low Disk Space` notification.
 
 > https://github.com/nohuto/win-registry/blob/main/records/CV-Explorer.txt
@@ -1245,6 +1285,8 @@ Disables the `Low Disk Space` notification.
 ![](https://github.com/nohuto/win-config/blob/main/system/images/lowdiskspace.jpg?raw=true)
 
 # Enable Segment Heap
+
+Requires elevation: Yes (HKLM).
 
 "With the introduction of Windows 10, Segment Heap, a new native heap implementation was also introduced. It is currently the native heap implementation used in Windows apps (formerly called Modern/Metro apps) and in certain system processes, while the older native heap implementation (NT Heap) is still the default for traditional applications."
 
@@ -1296,6 +1338,8 @@ Enabling segment heap globally forces the system to use the newer segmented allo
 ![](https://github.com/nohuto/win-config/blob/main/system/images/segment5.png?raw=true)
 
 # Disable Notifications
+
+Requires elevation: Yes (system policies).
 
 Disables lock screen, desktop, feature advertisement balloon notifications, notification area, notifications network usage and more.
 
@@ -1504,6 +1548,8 @@ According to pseudocode, it has a range from `0` to `0xFFFFFFFF`. Fallback of `5
 
 # Export Explorer/Taskbar Pins
 
+Requires elevation: No.
+
 Can be useful when creating your own image and trying to automate the installation and configuration part.
 
 Quick access pins are saved in a file named `f01b4d95cf55d32a.automaticDestinations-ms`, located at:
@@ -1536,6 +1582,8 @@ Gets current values of `Favorites` (taskbar pins) & `UIOrderList` (system tray i
 
 # Disable Timestamp Interval
 
+Requires elevation: Yes (HKLM).
+
 Disables the interval at which reliability events are timestamped (will not log regular timestamped reliability events).
 
 ```c
@@ -1552,6 +1600,8 @@ Only this path gets read, `TimeStampEnabled` doesn't get read?
 > [system/assets | timestamp-OsEventsTimestampInterval.c](https://github.com/nohuto/win-config/blob/main/system/assets/timestamp-OsEventsTimestampInterval.c)
 
 # Disable Prefetch & Superfetch
+
+Requires elevation: Yes (HKLM).
 
 Disables prefetcher (includes disabling `ApplicationLaunchPrefetching` & `ApplicationPreLaunch`) features, used to speed up the boot process and application startup by preloading data - **shouldn't be disabled**, leaving it for documentation reasons. Read through the pictures for more detailed information.
 
@@ -1584,6 +1634,8 @@ More detailed information about prefetch and superfetch on page `413`f & `472`f.
 ![](https://github.com/nohuto/win-config/blob/main/system/images/prefetch4.png?raw=true)
 
 # Optimize File System
+
+Requires elevation: Yes (HKLM).
 
 Small documentation on several values the option applies, see links below for more details.
 
@@ -1622,6 +1674,8 @@ Symlink: `C:\Users\YourName\Desktop\logo.png`
 > [system/assets | filesystem-NtfsUpdateDynamicRegistrySettings.c](https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c)
 
 # Disable Clipboard
+
+Requires elevation: Yes (HKLM).
 
 If you copy or cut something it gets stored to your clipboard.
 
@@ -1703,6 +1757,8 @@ Additional value, which get's read:
 
 # Disable Background GP Updates
 
+Requires elevation: Yes (HKLM).
+
 "This policy setting prevents Group Policy from being updated while the computer is in use. This policy setting applies to Group Policy for computers, users, and domain controllers.If you enable this policy setting, the system waits until the current user logs off the system before updating the computer and user settings.If you disable or do not configure this policy setting, updates can be applied while users are working."
 
 ```json
@@ -1723,6 +1779,8 @@ Additional value, which get's read:
 ```
 
 # Disable Memory Compression
+
+Requires elevation: Yes (system setting).
 
 Memory compression compresses rarely used or less frequently accessed data in RAM so it takes up less space. Windows does this to keep more data in physical memory and avoid writing to the pagefile, which reduces disk I/O. When the data is needed again, it's decompressed. It's faster than paging to disk, but it costs CPU.
 
@@ -1755,6 +1813,8 @@ PSComputerName               :
 
 # Disable Page Combining
 
+Requires elevation: Yes (system setting).
+
 Page combining spots identical RAM pages across processes and merges them into a single shared page. Instead of keeping 50 copies of the same DLL/data page, the memory manager keeps one, maps it to everyone, and marks it `copy-on-write`. As long as nobody changes it, everyone shares the same physical page and RAM usage drops. If a process writes to it, Windows gives that process its own private copy and leaves the shared one intact. It's a background RAM deduplicator, basically.
 
 See the current page combining state on your system via:
@@ -1781,6 +1841,8 @@ PSComputerName               :
 
 # Enable Detailed BSoD
 
+Requires elevation: Yes (HKLM).
+
 | Aspect                    | New BSoD (Windows 8/10/11)                      | Old BSoD (Windows 7/classic)                                                      |
 | ------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
 | Main look                 | Big blue screen, sad face, simple text, QR code | Plain blue text screen, no icons                                                  |
@@ -1796,6 +1858,8 @@ Enabling the options includes setting `AutoReboot` to `0` ("The option specifies
 > https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options
 
 # Display Scaling
+
+Requires elevation: No.
 
 Changes the size of text, apps, and other items. Note that on laptops the default display scaling might not be `100%`. You can set a custom scaling size via `System > Display > Custom scaling`:
 
@@ -1841,6 +1905,8 @@ SystemSettings.exe	RegSetValue	HKCU\Control Panel\Desktop\MonitorRemovalRecalcBe
 ```
 
 # BCD Edits
+
+Requires elevation: Yes (BCD).
 
 `bcdedit /timeout 3`
 Decrease timeout of dual-boot selection window (default of `10`).
@@ -1995,6 +2061,8 @@ bootmenupolicy          Standard
 
 # Disable Autoruns
 
+Requires elevation: Yes (HKLM).
+
 The `Open` buttons downloads & executes [`Autoruns.exe`](https://live.sysinternals.com/Autoruns.exe). It's recommended to disable all kind of autoruns in the `Logon` section that you don't need, examples:
 ```c
 OneDrive
@@ -2022,6 +2090,8 @@ HKLM\Software\Microsoft\Windows\CurrentVersion\Run
 > https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
 
 # Enable FSO
+
+Requires elevation: Yes (HKLM).
 
 ### FSE (Fullscreen Exclusive)
 
@@ -2099,6 +2169,8 @@ Win32_GameModeUserRelatedProcesses
 
 # App Archive
 
+Requires elevation: Yes (HKLM).
+
 "Automatically archive your infrequently used apps to save storage and internet bandwidth. Your files and data will still be saved, and the app's full version will be restored on your next use if it's still available."
 
 If enabled, the system will periodically check for such infrequently used apps. By default app archiving is turned on.
@@ -2134,6 +2206,8 @@ HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\InstallService\Stubification\S-{I
 
 # Page File
 
+Requires elevation: Yes (system setting).
+
 Several notes I took while reading trough `Windows Internals Part 1, Edition 7`, everything written below is based on it.
 
 **You should calculate it while daily workload, or your peak value won't be accurate.**
@@ -2163,6 +2237,8 @@ When this policy is enabled, it causes the system pagefile to be cleared upon cl
 
 # Disable Mobility Center
 
+Requires elevation: Yes (HKLM).
+
 Note that this is a laptop only feature. The "Mobility Center" is a feature that includes controls for screen brightness, power options, volume, battery status, wireless network status, external display settings, and more.
 
 ![](https://github.com/nohuto/win-config/blob/main/system/images/mobility-center.png?raw=true)
@@ -2188,6 +2264,8 @@ Note that this is a laptop only feature. The "Mobility Center" is a feature that
 ```
 
 # Disable Hyper-V
+
+Requires elevation: Yes (system features).
 
 "Many third-party virtualization applications don't work together with Hyper-V. Affected applications include VMware Workstation and VirtualBox. These applications might not start virtual machines, or they may fall back to a slower, emulated mode. Many virtualization applications depend on hardware virtualization extensions that are available on most modern processors. It includes Intel VT-x and AMD-V. Only one software component can use this hardware at a time. The hardware cannot be shared between virtualization applications."
 

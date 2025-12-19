@@ -1,5 +1,7 @@
 # Disable General Telemetry
 
+Requires elevation: Yes (system policies).
+
 Prevents sending info about your computer to microsoft, disables the diagnostic log collection, bluetooth ads (`DataCollection.admx`), the inventory collector. It disables the ads ID ("Windows creates a unique advertising ID per user, allowing apps and ad networks to deliver targeted ads. When enabled, it works like a cookie, linking personal data to the ID for personalized ads. This setting only affects Windows apps using the advertising ID, not web-based ads or third-party methods.") which should be disabled by default, if you toggled all options off in the OS installation phase. See policy explanations below for more details.
 
 ```powershell
@@ -273,6 +275,8 @@ These [policies](https://learn.microsoft.com/en-us/windows/client-management/mdm
 
 # Disable Automatic Map Downloads
 
+Requires elevation: Yes (system policies).
+
 Disables automatic network traffic on the settings page and prevents automatic downloading or updating of map data, limiting location-related data updates.
 
 `AllowOfflineMapsDownloadOverMeteredConnection` & `EnableOfflineMapsAutoUpdate`:
@@ -324,6 +328,8 @@ return v5;
 
 # Disable Website Access to Language List
 
+Requires elevation: No.
+
 "Sets the HTTP Accept Language from the Language List opt-out setting." Disables `Let websites provide locally relevant content by accessing my language list`.
 
 Using `Set-WinAcceptLanguageFromLanguageListOptOut`
@@ -342,6 +348,8 @@ Set-WinAcceptLanguageFromLanguageListOptOut -OptOut $True
 > https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#181-general
 
 # Disable Auto Maintenance
+
+Requires elevation: Yes (system policies).
 
 Runs updates and scans daily when your PC is idle, it helps keep your system secure and efficient without affecting performance. Theres no actual reason to disable it, as it doesn't do anything while being active, however if you've any reason for not wanting it to run the tasks while being in idle, toggle the switch.
 
@@ -375,6 +383,8 @@ Miscellaneous notes:
 ```
 
 # Disable WMPlayer Telemetry
+
+Requires elevation: Yes (system policies).
 
 WMPlayer (Windows Media Player) sends player usage data by default, if using the "Recommended ". This option turns off the `Diagnistics and Feedback` option, use the suboptions for further configuration.
 
@@ -502,6 +512,8 @@ Miscellaneous notes:
 
 # Disable Xbox Game Bar
 
+Requires elevation: No.
+
 GameDVR is a built-in gameplay capture (Xbox Game Bar) for clips/screenshots, with optional background recording.
 
 ---
@@ -544,6 +556,8 @@ Miscellaneous notes:
 
 # Disable PSR
 
+Requires elevation: Yes (system policies).
+
 "Steps Recorder, also known as Problems Steps Recorder (PSR) in Windows 7, is a Windows inbox program that records screenshots of the desktop along with the annotated steps while recording the activity on the screen. The screenshots and annotated text are saved to a file for later viewing."
 
 It is a deprecated feature, as the banner shows:
@@ -585,6 +599,8 @@ ren %SystemRoot%\System32\psr.exe psr.exe.nv
 
 # Disable App Launch Tracking
 
+Requires elevation: No.
+
 `Privacy & security > General : Let Windows improve Start and search results by tracking app launches`
 
 ```bat
@@ -593,6 +609,8 @@ ren %SystemRoot%\System32\psr.exe psr.exe.nv
 ```
 
 # Disable Location Access
+
+Requires elevation: Yes (system policies).
 
 Disables app access to your location, locating your system will be disabled, geolocation service gets disabled.
 
@@ -665,6 +683,8 @@ Disables app access to your location, locating your system will be disabled, geo
 
 # Disable Sensors
 
+Requires elevation: Yes (system policies).
+
 Blocks apps/system from using hardware sensors such as ambient light, orientation, and other motion/position sensors (features like adaptive brightness, auto rotation and sensor based behaviors will no longer work).
 
 "This policy setting turns off the sensor feature for this computer. If you enable this policy setting, the sensor feature is turned off, and all programs on this computer can't use the sensor feature."
@@ -716,11 +736,15 @@ Miscellaneous notes (ignore):
 
 # Disable Windows Insider
 
+Requires elevation: Yes (system policies).
+
 `AllowBuildPreview` is used up to V1703, I'll still leave it. `Computer Configuration > Administrative Templates > Windows Component > Windows Update > Windows Update for Business : Manage Preview Builds` for W10+ versions.
 
 > https://learn.microsoft.com/en-us/windows-insider/business/manage-builds
 
 # Disable PowerShell & .NET Telemetry
+
+Requires elevation: No (per-user env vars).
 
 PowerShell Telemetry:
 "At startup, PowerShell sends diagnostic data including OS manufacturer, name, and version; PowerShell version; `POWERSHELL_DISTRIBUTION_CHANNEL`; Application Insights SDK version; approximate location from IP; command-line parameters (without values); current Execution Policy; and randomly generated GUIDs for the user and session."
@@ -738,6 +762,8 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 # Disable Reserved Storage
 
+Requires elevation: Yes (system policies).
+
 "Windows reserves `~7 GB` of disk space to ensure updates and system processes run reliably. Temporary files and updates use this reserved area first. If it's full, Windows uses normal disk space or asks for external storage. Size increases with optional features or extra languages. Unused ones can be removed to reduce it."
 
 `dism /online /Set-ReservedStorageState /State:Disabled /NoRestart` / `Set-WindowsReservedStorageState -State Disabled` set:
@@ -747,6 +773,8 @@ dismhost.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveM
 > https://learn.microsoft.com/en-us/powershell/module/dism/set-windowsreservedstoragestate?view=windowsserver2025-ps
 
 # Disable Biometrics 
+
+Requires elevation: Yes (system policies).
 
 Biometric is used for fingerprint, facial recognition, and other biometric authentication methods in Windows Hello and related security features.
 
@@ -828,6 +856,8 @@ mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy 
 ```
 
 # Disable Remote Desktop
+
+Requires elevation: Yes (system policies).
 
 Disables remote desktop, remote assistance, RPC traffic, and device redirection.
 > https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remotepc/remote-pc-connections-faq  
@@ -1065,6 +1095,8 @@ Miscellaneous notes:
 ```
 
 # Deny App Access
+
+Requires elevation: Yes (system policies).
 
 Denies the access for everything, only leaving the microphone enabled. See JSON content below for details. Note `Deny 'User Info Access'` = prevents users from managing the ability to allow apps (not desktop apps) to access the user name, account picture, and domain information - this option doesn't get applied via the main option.
 
@@ -1606,6 +1638,8 @@ svchost.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Capabilit
 
 # Disable Startup ETS
 
+Requires elevation: Yes (system paths).
+
 "The AutoLogger event tracing session records events that occur early in the operating system boot process. Applications and device drivers can use the AutoLogger session to capture traces before the user logs in. Note that some device drivers, such as disk device drivers, are not loaded at the time the AutoLogger session begins."
 
 See your current running ETS via `Performance Monitor > Data Collector Sets > Startup Event Trace Sessions`.
@@ -1641,6 +1675,8 @@ Removing all autologgers will cause issues, therefore it's not recommended to re
 > https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/ETW/configuring-and-starting-an-autologger-session.md
 
 # Disable Inking & Typing Personalization
+
+Requires elevation: Yes (system policies).
 
 Used for better suggestions by creating a custom dictionary using your typing history and handwriting patterns. Disables autocorrection of misspelled words, highlight of misspelled words, and typing insights - would use AI to suggest words, autocorrect spelling mistakes etc. (`Privacy & security > Inking & typing personalization` & `Time & Language > Typing`).
 
@@ -1711,11 +1747,15 @@ Used for better suggestions by creating a custom dictionary using your typing hi
 
 # Disable Online Speech Recognition
 
+Requires elevation: No.
+
 `HasAccepted` disables online speech recognition, voice input to apps like Cortana, and data upload to Microsoft. `AllowSpeechModelUpdate` blocks automatic updates of speech recognition and synthesis models. I found`DisableSpeechInput` randomly while looking for `HasAccepted`, related to mixed reality environments.
 > https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#bkmk-priv-speech  
 > [privacy/assets | locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c)
 
 # Disable Microsoft Copilot
+
+Requires elevation: No.
 
 "Microsoft introduced Windows Copilot in May 2023. It became available in Windows 11 starting with build 23493 (Dev), 22631.2129 (Beta), and 25982 (Canary). A public preview began rolling out on September 26, 2023, with build 22621.2361 (Windows 11 22H2 KB5030310). It adds integrated AI features to assist with tasks like summarizing web content, writing, and generating images. Windows Copilot appears as a sidebar docked to the right and runs alongside open apps. In Windows 10, Copilot is available in build 19045.3754 for eligible devices in the Release Preview Channel running version 22H2. Users must enable "Get the latest updates as soon as they're available" and check for updates. The rollout is phased via Controlled Feature Rollout (CFR). Windows 10 Pro devices managed by organizations, and all Enterprise or Education editions, are excluded from the initial rollout. Copilot requires signing in with a Microsoft account (MSA) or Azure Active Directory (Entra ID). Users with local accounts can use Copilot up to ten times before sign-in is enforced."
 
@@ -1760,6 +1800,8 @@ v16 = L"FailedToGetReason"; // if value is missing
 
 # Disable Recall
 
+Requires elevation: No.
+
 "Allows you to control whether Windows saves snapshots of the screen and analyzes the user's activity on their device. If you enable this policy setting, Windows will not be able to save snapshots and users won't be able to search for or browse through their historical device activity using Recall. If you disable or do not configure this policy setting, Windows will save snapshots of the screen and users will be able to search for or browse through a timeline of their past activities using Recall." (`WindowsCopilot.admx`)
 
 ```json
@@ -1783,6 +1825,8 @@ v16 = L"FailedToGetReason"; // if value is missing
 ```
 
 # Disable Camera
+
+Requires elevation: Yes (system policies).
 
 Disallows the use of a camera on your system, by denying access via `LetAppsAccessCamera`/`AllowCamera`/services (and app permission).
 
@@ -1851,6 +1895,8 @@ Disallows the use of a camera on your system, by denying access via `LetAppsAcce
 ```
 
 # Disable Suggestions/Tips/Tricks
+
+Requires elevation: Yes (system policies).
 
 Disables all kind of suggestions: in start, text suggestions (multilingual...), in the timeline, content. `338389` is the only value named `SubscribedContent-{number}Enabled` that exists by default.
 
@@ -1982,6 +2028,8 @@ Disable edge related suggestions with (search suggestions in address bar):
 ```
 
 # Disable Synchronization
+
+Requires elevation: Yes (system policies).
 
 Disables all kind of synchronization.
 
@@ -2173,6 +2221,8 @@ Disables all kind of synchronization.
 
 # Disable Activity History
 
+Requires elevation: Yes (system policies).
+
 `EnableActivityFeed` enables or disables publishing and syncing of activities across devices. `PublishUserActivities` allows or blocks local publishing of user activities. `UploadUserActivities` allows or blocks uploading of user activities to the cloud, deletion is not affected.
 
 ```json
@@ -2249,6 +2299,8 @@ Disables all kind of synchronization.
 
 # Disable Cross-Device Experiences
 
+Requires elevation: Yes (system policies).
+
 Disables Cross-Device experiences (allows you to use `Share Across Devices`/`Nearby Sharing` functionalities) & share accross devices. With `Share across devices`, you can continue app experiences on other devices connected to your account (set to `My device only` by default).
 
 ---
@@ -2304,6 +2356,8 @@ L"WifiLastDisabledNearShare",
 
 # Disable Phone Linking
 
+Requires elevation: Yes (system policies).
+
 "This policy allows IT admins to turn off the ability to Link a Phone with a PC to continue reading, emailing and other tasks that requires linking between Phone and PC.If you enable this policy setting, the Windows device will be able to enroll in Phone-PC linking functionality and participate in Continue on PC experiences.If you disable this policy setting, the Windows device is not allowed to be linked to Phones, will remove itself from the device list of any linked Phones, and cannot participate in Continue on PC experiences.If you do not configure this policy setting, the default behavior depends on the Windows edition. Changes to this policy take effect on reboot."
 
 This option will also disable resume ("Start something on one device and continue on this PC") - `System Settings > Apps > Resume`.
@@ -2340,6 +2394,8 @@ By default resume is enabled, OneDrive is the only app which exists under the "C
 
 # Disable File History
 
+Requires elevation: Yes (system policies).
+
 "File History automatically backs up versions of files in your user folders (Documents, Music, Pictures, Videos, Desktop) and offline OneDrive. It tracks changes via the NTFS change journal (fast, low overhead) and saves only changed files. You must choose a backup target (external drive or network share). If that target is unavailable, it caches copies locally and syncs them when the target returns. You can browse and restore any version or recover lost/deleted files."
 
 ```json
@@ -2363,6 +2419,8 @@ By default resume is enabled, OneDrive is the only app which exists under the "C
 ```
 
 # Disable MDM Enrollment
+
+Requires elevation: Yes (system policies).
 
 `DisableRegistration`:  
 "This policy setting specifies whether Mobile Device Management (MDM) Enrollment is allowed. When MDM is enabled, it allows the user to have the computer remotely managed by a MDM Server. If you do not configure this policy setting, MDM Enrollment will be enabled. If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments.If you disable this policy setting, MDM Enrollment will be enabled for all users."
@@ -2415,6 +2473,8 @@ By default resume is enabled, OneDrive is the only app which exists under the "C
 
 # Disable Feedback Prompts
 
+Requires elevation: Yes (system policies).
+
 "This policy setting allows an organization to prevent its devices from showing feedback questions from Microsoft.If you enable this policy setting, users will no longer see feedback notifications through the Windows Feedback app.If you disable or do not configure this policy setting, users may see notifications through the Windows Feedback app asking users for feedback.Note: If you disable or do not configure this policy setting, users can control how often they receive feedback questions."
 
 Includes setting `Feedback Frequency` to `0` via `NumberOfSIUFInPeriod` & `PeriodInNanoSeconds`.
@@ -2440,6 +2500,8 @@ Includes setting `Feedback Frequency` to `0` via `NumberOfSIUFInPeriod` & `Perio
 ```
 
 # Disable CEIP
+
+Requires elevation: Yes (system policies).
 
 Voluntary program that collects usage data to help improve the quality and performance of its products.
 
@@ -2502,6 +2564,8 @@ Voluntary program that collects usage data to help improve the quality and perfo
 
 # Disable Cortana
 
+Requires elevation: Yes (system policies).
+
 "Cortana was a virtual assistant developed by Microsoft that used the Bing search engine to perform tasks such as setting reminders and answering questions for users."
 
 > https://en.wikipedia.org/wiki/Cortana_(virtual_assistant)  
@@ -2510,6 +2574,8 @@ Voluntary program that collects usage data to help improve the quality and perfo
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowcortana
 
 # Hide Last Logged-In User
+
+Requires elevation: Yes (system policies).
 
 Note that if you use this option and don't have a password, you'll have to enter your username at each boot.
 
@@ -2577,6 +2643,8 @@ services.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 
 # Disable Background Apps
 
+Requires elevation: Yes (system policies).
+
 "This policy setting specifies whether Windows apps can run in the background.You can specify either a default setting for all apps or a per-app setting by specifying a Package Family Name. You can get the Package Family Name for an app by using the Get-AppPackage Windows PowerShell cmdlet. A per-app setting overrides the default setting.If you choose the \"User is in control\" option, employees in your organization can decide whether Windows apps can run in the background by using Settings Privacy on the device.If you choose the "Force Allow" option, Windows apps are allowed to run in the background and employees in your organization cannot change it.If you choose the "Force Deny" option, Windows apps are not allowed to run in the background and employees in your organization cannot change it.If you disable or do not configure this policy setting, employees in your organization can decide whether Windows apps can run in the background by using Settings Privacy on the device. If an app is open when this Group Policy object is applied on a device, employees must restart the app or device for the policy changes to be applied to the app."
 
 ```
@@ -2614,6 +2682,8 @@ mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy 
 ```
 
 # Disable WER
+
+Requires elevation: Yes (system policies).
 
 WER (Windows Error Reporting) sends error logs to Microsoft, disabling it keeps error data local.
 
@@ -2916,6 +2986,8 @@ Default is `0`, non zero would enable the behaviour? The value doesn't exist by 
 
 # Troubleshooter Preference
 
+Requires elevation: Yes (system policies).
+
 It's set to `Ask me before running` by default.
 
 | Option | Description |
@@ -3018,6 +3090,8 @@ Miscellaneous notes:
 
 # Disable Crash Dumps
 
+Requires elevation: Yes (system policies).
+
 Disables the crash dump, logging. Not all values may be read on your system.
 
 ```c
@@ -3036,6 +3110,8 @@ CrashDumpEnabled REG_DWORD 0x1 and FilterPages REG_DWORD 0x1 = Active memory dum
 > [privacy/assets | crashdmp-SecureDump_PrepareForInit.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c)
 
 # Disable Sleep Study
+
+Requires elevation: Yes (system policies).
 
 Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, and turning off the scheduled task.
 
@@ -3108,6 +3184,8 @@ Miscellaenous notes:
 
 # Disable RSoP Logging
 
+Requires elevation: Yes (system policies).
+
 "This setting allows you to enable or disable Resultant Set of Policy (RSoP) logging on a client computer.RSoP logs information on Group Policy settings that have been applied to the client. This information includes details such as which Group Policy Objects (GPO) were applied where they came from and the client-side extension settings that were included.If you enable this setting RSoP logging is turned off.If you disable or do not configure this setting RSoP logging is turned on. By default RSoP logging is always on.Note: To view the RSoP information logged on a client computer you can use the RSoP snap-in in the Microsoft Management Console (MMC)."
 
 > https://www.windows-security.org/370c915e44b6a75efac0d24669aa9434/turn-off-resultant-set-of-policy-logging
@@ -3120,6 +3198,8 @@ Miscellaenous notes:
 > https://learn.microsoft.com/en-us/previous-versions/windows/desktop/Policy/developing-an-rsop-management-tool  
 
 # Disable Desktop Heap Logging
+
+Requires elevation: Yes (system policies).
 
 "It is meant to log information about desktop heap usage. This can be helpful when diagnosing issues where system resources for desktop objects might be strained." 
 
@@ -3142,6 +3222,8 @@ __int64 IsDesktopHeapLoggingOn(void)
 > https://github.com/nohuto/win-registry/blob/main/records/Winows-NT.txt
 
 # Disable Message Sync
+
+Requires elevation: Yes (system policies).
 
 "This policy setting allows backup and restore of cellular text messages to Microsoft's cloud services. Disable this feature to avoid information being stored on servers outside of your organization's control."
 
@@ -3172,6 +3254,8 @@ __int64 IsDesktopHeapLoggingOn(void)
 ```
 
 # Disable CSC
+
+Requires elevation: Yes (system policies).
 
 Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables `CSC`/`CscService`, disables the two `Offline Files` scheduled tasks (they're disabled by default), and renames `mobsync.exe` to block execution.
 
@@ -3293,11 +3377,15 @@ Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, 
 
 # Disable Cloud Content Search
 
+Requires elevation: Yes (system policies).
+
 "Cloud Content Search lets Windows Search include results from your signed-in cloud accounts personal Microsoft account (OneDrive, Outlook, Bing) and/or work/school (OneDrive for Business, SharePoint, Outlook) alongside local files. Turn it on per account to get those items and Bing-personalized suggestions, turn it off to keep search limited to local content (and non-personalized web)."
 
 ![](https://github.com/nohuto/win-config/blob/main/privacy/images/cloudsearch.png?raw=true)
 
 # Disable Microsoft Accounts
+
+Requires elevation: Yes (system policies).
 
 "This setting prevents using the Settings app to add a Microsoft account for single sign-on (SSO) authentication for Microsoft services and some background services, or using a Microsoft account for single sign-on to other applications or services.
 
@@ -3323,6 +3411,8 @@ services.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 ```
 
 # Opt-Out KMS Activation Telemetry
+
+Requires elevation: Yes (system policies).
 
 Friendly name: `Turn off KMS Client Online AVS Validation`
 
@@ -3358,6 +3448,8 @@ If you disable or don't configure this policy setting, KMS client activation dat
 
 # Disable Font Providers
 
+Requires elevation: Yes (system policies).
+
 "This policy setting determines whether Windows is allowed to download fonts and font catalog data from an online font provider.
 
 If you enable this policy setting, Windows periodically queries an online font provider to determine whether a new font catalog is available. Windows may also download font data if needed to format or render text.
@@ -3386,6 +3478,8 @@ If you disable this policy setting, Windows does not connect to an online font p
 
 # Disable Local Security Questions
 
+Requires elevation: Yes (system policies).
+
 Prevent the use of security questions for local accounts.
 
 ```json
@@ -3406,6 +3500,8 @@ Prevent the use of security questions for local accounts.
 ```
 
 # Disable Application Compatibility
+
+Requires elevation: Yes (system policies).
 
 Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and `CompatTelRunner.exe`) and the Application Experience tasks. It reduces telemetry, and some attack surface, but removes most automatic compatibility checks, upgrade assessments and some app related backup/recovery features.
 
@@ -3558,6 +3654,8 @@ Currently includes all existing tasks in `\\Microsoft\\Windows\\Application Expe
 
 # Disable Census Data Collection
 
+Requires elevation: Yes (system policies).
+
 `DeviceCensus.exe` = "Device and configuration data collection tool"
 
 "In a nutshell, Device Census is a telemetry process from Microsoft. It will analyze the use of the webcam and other components. Then, the data will be transmitted anonymously to Microsoft to help optimize Windows for future versions and fix bugs. In addition, it only checks how often the devices are used and don't record anything."
@@ -3575,6 +3673,8 @@ Currently includes all existing tasks in `\\Microsoft\\Windows\\Application Expe
 ```
 
 # Disable OneSettings Download
+
+Requires elevation: Yes (system policies).
 
 Services Configuration is used by Windows components and apps, such as the telemetry service, to dynamically update their configuration. If you turn off this service, apps using this service may stop working.
 
@@ -3620,6 +3720,8 @@ If enabled = "Windows will periodically attempt to connect with the OneSettings 
 ```
 
 # Disable F1 Help Key
+
+Requires elevation: Yes (system paths).
 
 Works via renaming `HelpPane.exe` (Help and Support Windows desktop application) which was the help component in `W8`/`W8.1`. The executeable still exists but calls to it will either start the `Get Started` application (if user is offline), or opens a browser instance and redirects the browser to an online topic. Note that `HelpPane` still handles the `F1` shortcut.
 

@@ -1,5 +1,7 @@
 # Interrupt Handling and Affinity Policies
 
+Requires elevation: Yes (device registry/HKLM).
+
 Note that everything written below is based on:
 > [affinities/assets | E7-P2.pdf](https://github.com/nohuto/win-config/blob/main/affinities/assets/E7-P2.pdf)  
 > [drivers/kernel | introduction-to-interrupt-service-routines](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-interrupt-service-routines)  

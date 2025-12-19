@@ -1,5 +1,7 @@
 # Mouse Values
 
+Requires elevation: No.
+
 `RawMouseThrottleDuration` controls the throttle interval (in ms) for delivering raw mouse input to background windows. "We set out to reduce the amount of processing time it took to handle input requests by throttling and coalescing background raw mouse listeners and capping their message rate." 
 
 Validate the changes with [MouseTester](https://github.com/valleyofdoom/MouseTester), move `MouseTester.exe` to the background after starting it by opening a different window.
@@ -46,6 +48,8 @@ HKCU\Control Panel\Mouse\MouseSensitivity	Type: REG_SZ, Length: 6, Data: 10
 
 # Keyboard Values
 
+Requires elevation: No.
+
 | **Setting**           | **Description**                                                                                          | **Default** | **Changed To** |
 | --------------------- | -------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
 | **Repeat Delay**      | Controls how long you need to hold down a key before it starts repeating when typing.                    | 1           | 0              |
@@ -60,6 +64,8 @@ rundll32.exe	RegSetValue	HKCU\Keyboard Layout\Toggle\Layout Hotkey	Type: REG_SZ,
 ```
 
 # Disable Audio Ducking
+
+Requires elevation: No.
 
 "Windows audio ducking is a dynamic audio processing technique that enables the **automatic adjustment of audio levels** between different audio sources on a Windows-based computer or operating system."
 > https://multimedia.easeus.com/ai-article/windows-audio-ducking.html
@@ -87,6 +93,8 @@ RegSetValue	HKCU\Software\Microsoft\Multimedia\Audio\UserDuckingPreference	Type:
 
 # Disable Audio Enhancements
 
+Requires elevation: Yes (HKLM audio device settings).
+
 The difference is minor (picture), preferable just disable them. Open `mmsys.cpl`, go into propeties of your used device, click on the `Advanced` tab and disable all enhancements. Run `Disable-Exclusive-Mode.bat` with [powerrun](https://www.sordum.org/downloads/?power-run), otherwise the values won't get applied.
 
 ```powershell
@@ -100,6 +108,8 @@ The difference is minor (picture), preferable just disable them. Open `mmsys.cpl
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/audioenhance.png?raw=true)
 
 # Disable Spatial Audio
+
+Requires elevation: Yes (HKLM audio settings).
 
 Spatial audio positions sounds in 3D space around you, surround sound mainly anchors audio to speaker directions.
 
@@ -118,6 +128,8 @@ Miscellaneous notes:
 ```
 
 # Disable System Sounds
+
+Requires elevation: No.
 
 Disables system sounds and removes sound events. I did use the keys, which Windows would disable:
 ```powershell
@@ -176,6 +188,8 @@ The revert data is based on `W11 LTSC IoT Enterprise 2024` defaults.
 `DisableStartupSound` is set to `1` by default (`LogonUI\BootAnimation`).
 
 # Disable AutoPlay/Autorun
+
+Requires elevation: No.
 
 AutoRun is a mechanism that uses an `autorun.inf` file on removable media (like CDs or old USB sticks) to specify a program that should start automatically when the media is inserted. Typical use case was auto starting setup programs on software CDs. Because malware abused this behavior, Windows now strongly restricts or disables automatic execution from `autorun.inf` on most removable drives.
 
@@ -245,6 +259,9 @@ HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHa
 ```
 
 # Disk Write Cache Policy 
+
+Requires elevation: Yes (device registry).
+
 Enables write cache & turns off write cache buffer flushing on all connected disks.
 
 ```
@@ -255,6 +272,8 @@ Enables write cache & turns off write cache buffer flushing on all connected dis
 > [peripheral/assets | diskwritecache.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/diskwritecache.c)
 
 # Disable Bluetooth
+
+Requires elevation: Yes (services/drivers).
 
 | Service/Driver | Description |
 | --- | --- |
@@ -276,6 +295,8 @@ Enables write cache & turns off write cache buffer flushing on all connected dis
 | `RFCOMM` | Bluetooth Device (RFCOMM Protocol TDI) |
 
 # M/K DQS
+
+Requires elevation: Yes (driver registry).
 
 The value exists by default and is set to `100` decimal (`64` hex). Reducing it doesn't reduce your latency, leave it default.
 
@@ -312,6 +333,8 @@ Otherwise `v11 * 24`
 
 # Device Manager
 
+Requires elevation: Yes (pnputil).
+
 The `Clean` option removes non present devices (`-PresentOnly:$false`/`Status -eq 'Unknown'`) via `/remove-device` ([`pnputil`](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax)).
 
 | Component | Description | Note |
@@ -341,6 +364,8 @@ Click on `View` > `Devices by connection`.
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
 
 # Disable Touch & Tablet
+
+Requires elevation: Yes (device disable).
 
 Disable the touch screen feature of your device with:
 ```powershell
@@ -485,6 +510,8 @@ Windows 7/XP:
 
 # Disable Wake on Input
 
+Requires elevation: Yes (powercfg/system).
+
 ```bat
 powercfg /devicequery wake_programmable
 powercfg /devicequery wake_armed
@@ -556,6 +583,8 @@ All available flags (`powercfg /devicequery query_flag`):
 
 # Disable Dynamic Lighting
 
+Requires elevation: No.
+
 "Dynamic Lighting is a feature that allows you to control LED-powered devices such as keyboards, mice, and other illuminated accessories. This feature enables you to coordinate the colors of LEDs, creating a unified lighting experience both within Windows and across all your devices."
 
 | Value | Type | Values | Ranges | Notes |
@@ -574,6 +603,8 @@ All available flags (`powercfg /devicequery query_flag`):
 > https://support.microsoft.com/en-us/windows/control-dynamic-lighting-devices-in-windows-8e8f22e3-e820-476c-8f9d-9ffc7b6ffcd2
 
 # Disable Printing
+
+Requires elevation: Yes (services/HKCR).
 
 Disables printer related services (`Spooler`, `PrintWorkFlowUserSvc`, `PrintNotify`, `usbprint`, `McpManagementService`, `PrintScanBrokerService`, `PrintDeviceConfigurationService`), and various optional features / scheduled tasks.
 
@@ -647,6 +678,8 @@ Remove-Printer -Name "Printer Name"
 
 # Sample Rate
 
+Requires elevation: No.
+
 For your knowledge: The sample rate is the amount of times (in a second) an audio singal is measured. The amount of bits that are used to represent each sample (higher bit range = higher dynamic range and volume potential). The best sample rate and bit depth depends on what you're doing, the most commonly used sample rate for production and similar is `44.1` kHz.
 
 `44.1` kHz = `44,100` times per second
@@ -665,6 +698,8 @@ As you may know a bit can be `0` or `1`, means (bit depth * `6` = dB):
 
 # Mouse DPI
 
+Requires elevation: No.
+
 Use `800` or `1600`. Going too low will end in worse results, as shown in the pictures ([1](https://www.youtube.com/watch?v=mwf_F2VboFQ&t=458s), [2](https://www.youtube.com/watch?v=imYBTj2RXFs&t=274s)).
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/dpi1.png?raw=true)
@@ -673,12 +708,16 @@ Use `800` or `1600`. Going too low will end in worse results, as shown in the pi
 
 # Polling Rate
 
+Requires elevation: No.
+
 Higher sampling rates reduce jitter and latency and ensure more accurate cursor positioning (first image), but may affect performance depending on the hardware (CPU cycles) - [*](https://www.youtube.com/watch?v=jtATbpMqbL4). Using `4 kHz` on a mid-tier PC should not be a problem. Run benchmarks on your system to check whether your PC can handle this rate. It should always be `1 kHz+`. You can use [MouseTester](https://github.com/valleyofdoom/MouseTester/releases) to check if your current polling rate is stable.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/polling1.png?raw=true)
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/polling2.png?raw=true)
 
 # Monitor Settings
+
+Requires elevation: No.
 
 Before starting the configuration, load your default settings, as many settings are already correctly configured by default.
 

@@ -1,5 +1,7 @@
 # Desktop Wallpaper
 
+Requires elevation: No.
+
 This is a collection of some wallpapers that I've found over time. Added for people who may never have spent time changing their background, or for anyone else. Head over to [visibility/desc.md#desktop-wallpaper](https://github.com/nohuto/win-config/blob/main/visibility/desc.md#desktop-wallpaper), if you want to see the wallpapers in a seperate window.
 
 `Asia`:
@@ -116,6 +118,8 @@ It get's changed via the "Wallpaper" policy:
 
 # Account Picture
 
+Requires elevation: Yes (ProgramData/HKLM).
+
 Changes the user account picture via:
 ```
 C:\ProgramData\Microsoft\Default Account Pictures
@@ -148,6 +152,8 @@ C:\ProgramData\Microsoft\Default Account Pictures
 ```
 
 # Explorer Options
+
+Requires elevation: Yes (HKLM policy).
 
 It changes every setting, which is shown in the `Folder Options` window. Some are personal preference, see suboptions bellow for customization.
 
@@ -188,6 +194,8 @@ Miscellaneous notes:
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsconnectnow
 
 # Accent Color
+
+Requires elevation: No.
 
 This set's the accent color globally and if `AccentColor` (`HKEY_CURRENT_USER\Software\Noverse`) isn't set via the tool settings yet, this will also directly impact the WinConfig colors.
 
@@ -286,6 +294,8 @@ Ignore it, this is the old "Nord Accent Color" json block.
 
 # Enable Dark Theme
 
+Requires elevation: No.
+
 `darktheme-GetThemeFromUnattendSetup.c` for information about the comments, otherwise ignore them.
 
 > [visibility/assets | darktheme-GetThemeFromUnattendSetup.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/darktheme-GetThemeFromUnattendSetup.c)
@@ -294,6 +304,8 @@ Ignore it, this is the old "Nord Accent Color" json block.
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/darktheme2.png?raw=true)
 
 # Disable Transparency
+
+Requires elevation: No.
 
 The pictures below show: `Transparency On`, `Transparency Off`.
 
@@ -308,6 +320,8 @@ Miscellaneous notes:
 ```
 
 # Disable Audio / Video Preview
+
+Requires elevation: No.
 
 Disables the preview function for (extensions):
 ```
@@ -338,6 +352,8 @@ Hide preview pane:
 
 # Remove Home & Gallery
 
+Requires elevation: Yes (HKLM policy).
+
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/homegal.png?raw=true)
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/homenet.png?raw=true)
 
@@ -365,6 +381,8 @@ Miscellaneous comments:
 
 # Classic Context Menu
 
+Requires elevation: No.
+
 Use it on W11, unless you like the new menu - remove the key, to revert it.
 
 Before & after:
@@ -373,6 +391,8 @@ Before & after:
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/classicona.png?raw=true)
 
 # Disable Animations
+
+Requires elevation: Yes (HKLM policy).
 
 Minimize, Maximize, Taskbar Animations / First Sign-In Animations. These options are also changeable via `SystemPropertiesPerformance` (`WIN + R`) - first three.
 
@@ -469,6 +489,8 @@ CMachine::RegQueryDWORD(
 
 # Disable Automatic Folder Type Discovery
 
+Requires elevation: No.
+
 "Folder discovery is a feature that customizes the view settings of folders based on their content. For example, a folder with images might display thumbnails, while a folder with documents might show a list view. While this can be useful, it can also be frustrating if you prefer a uniform view for all folders."
 
 Removing the `Bags` & `BagMRU` key resets all folder settings (view, size,...), `NotSpecified` sets the template to `General Items`. The other templates would be `Documents`, `Music`, `Videos` (folder: `Properties > Customize > Optimize this folder for:`)
@@ -479,6 +501,8 @@ The revert may not work correctly yet, as it only creates the `Bags`/`BagsMRU` k
 > https://github.com/LesFerch/WinSetView
 
 # Hide Language Bar
+
+Requires elevation: No.
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/languagebar.png?raw=true)
 
@@ -523,11 +547,15 @@ RegSetValue	HKCU\Software\Microsoft\CTF\LangBar\Label	Type: REG_DWORD, Length: 4
 
 # System Clock Seconds
 
+Requires elevation: No.
+
 "Uses more power" (in relation to laptops).
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/clock.png?raw=true)
 
 # Taskbar Settings
+
+Requires elevation: Yes (HKLM policy).
 
 Removes the search box, moves the taskbar to the left, removes badges, disables the flashes on the app icons, removes the "Task View" button. (`Personalization > Taskbar`)
 
@@ -582,6 +610,8 @@ Disallowing it via the `AllowNewsAndInterests` policy won't set `TaskbarDa` to 0
 
 # Optimize Visual Effects
 
+Requires elevation: No.
+
 `UserPreferencesMask`:
 
 |Position|Meaning|
@@ -609,6 +639,8 @@ Disallowing it via the `AllowNewsAndInterests` policy won't set `TaskbarDa` to 0
 
 # Hide Shortcut Icon
 
+Requires elevation: No.
+
 Removes the `- Shortcut` text, hides the shortcut & compression arrows. Works by replacing the shortcut `.ico` with a [blank image](https://github.com/nohuto/Files/releases/download/miscellaneous/Blank.ico).
 
 Before:
@@ -621,6 +653,8 @@ After:
 
 # 'New' Context Menu
 
+Requires elevation: No.
+
 Instead of creating a `.txt` file, then renaming it to e.g. `.bat` / `.ps1`, you can add these options to the 'new' context menu. This may also change the `Type` shown in the explorer (only `.bat` is affected of the three).
 
 `Remove 'Add to Favorites' Option`, `Remove 'Share' Option`, `Remove 'Send to' Option`, `Remove 'bmp'/'zip' Options` don't have a revert yet.
@@ -629,6 +663,8 @@ Instead of creating a `.txt` file, then renaming it to e.g. `.bat` / `.ps1`, you
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/newcontext2.png?raw=true)
 
 # Desktop Icon Spacing
+
+Requires elevation: No.
 
 Location:
 ```
@@ -668,6 +704,8 @@ Desktop icon size notes:
 
 # Detailed File Transfer
 
+Requires elevation: No.
+
 When you copy, move, or delete a file or folder, a progress dialog appears. You can switch between `More details` and `Fewer details`. By default, the dialog opens in the same view you last used (if you didn't switch it yet, `0` is used).
 
 `EnthusiastMode` - `0` = fewer detailes:
@@ -679,6 +717,8 @@ When you copy, move, or delete a file or folder, a progress dialog appears. You 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/filetransfer1.png?raw=true)
 
 # Alt-Tab App Tabs
+
+Requires elevation: No.
 
 Select the amount of recent tabs from apps in the alt+tab menu.
 
@@ -739,11 +779,15 @@ Classic (`AltTabSettings` - `1`):
 
 # Remove Quick Access
 
+Requires elevation: No.
+
 Removes the `Quick access` in the File Explorer & sets `Open File Exporer to` to `This PC`.
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/quickaccess.png?raw=true)
 
 # System Fonts
+
+Requires elevation: Yes (HKLM).
 
 W11 uses `Segoe UI` by default. You can change it via registry edits, the selected font will be used for desktop interfaces, explorer, some apps (`StartAllBack` will use it), but won't get applied for e.g., `SystemSettings.exe` and app fonts in general. Some fonts will cause issues - `Yu Gothic UI Light` uses `¥` instead of `\` (picture).
 
@@ -855,6 +899,8 @@ IconFont    Type: REG_BINARY, Length: 92, Data: E5 FF FF FF 00 00 00 00 00 00 00
 > [visibility/assets | textsize-TextScaleDialogTemplate.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/textsize-TextScaleDialogTemplate.c)
 
 # Hide Lock Screen
+
+Requires elevation: Yes (HKLM policy).
 
 Disables the lock screen (skips the lock screen and go directly to the login screen). See content below for details on the suboptions.
 
@@ -1058,6 +1104,8 @@ HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscripti
 
 # Hide Most Used Apps
 
+Requires elevation: Yes (HKLM policy).
+
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/mostused.jpg?raw=true)
 
 ```json
@@ -1114,6 +1162,8 @@ HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscripti
 ```
 
 # Disable Spotlight
+
+Requires elevation: No.
 
 Spotlight is used to provide new pictures on your lock screen.
 
@@ -1245,6 +1295,8 @@ Spotlight is used to provide new pictures on your lock screen.
 
 # Black PS Background
 
+Requires elevation: No.
+
 Since `powershell.exe` has default color of white (foreground) and blue (background), some may want to change it.
 
 `ScreenColors` value, located in `HKCU\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe`  
@@ -1303,6 +1355,8 @@ for %%L in ("%APPDATA%\Microsoft\Windows\Start Menu\Programs\Windows PowerShell\
 
 # Disable Theme Mouse Changes
 
+Requires elevation: No.
+
 Prevent Themes from changing the mouse cursor.
 
 `Disable Theme Desktop Icons Changes` prevent themes from changing desktop icons.
@@ -1310,6 +1364,8 @@ Prevent Themes from changing the mouse cursor.
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/thememouse.png?raw=true)
 
 # Hide Disabled/Disconnected Devices
+
+Requires elevation: No.
 
 Hides disabled/disconnected devices in the `mmsys.cpl` window.
 
@@ -1326,6 +1382,8 @@ rundll32.exe	RegSetValue	HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\Show
 ```
 
 # Force Classic Control Panel
+
+Requires elevation: No.
 
 "This policy setting controls the default Control Panel view, whether by category or icons. If this policy setting is enabled, the Control Panel opens to the icon view. If this policy setting is disabled, the Control Panel opens to the category view."
 
@@ -1358,6 +1416,8 @@ Category view:
 ```
 
 # Decrease Mouse Hover Time
+
+Requires elevation: No.
 
 `MouseHoverTime` controls how long the mouse must stay still over something before Windows treats it as a hover.
 
@@ -1430,6 +1490,8 @@ Timers 32771/32777/32776 clamp the delay to >=2 seconds, so setting `MenuShowDel
 
 # OEM Information
 
+Requires elevation: Yes (HKLM).
+
 Set your own support information in `System > About` (or `Control Panel > System and Security > System`. All values are saved in:
 ```
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation
@@ -1471,6 +1533,8 @@ Example:
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/oem.png?raw=true)
 
 # Settings Page Visibility 
+
+Requires elevation: Yes (HKLM).
 
 It controls which pages in the windows settings app are visible (blocked pages are removed from view and direct access redirects to the main settings page).
 

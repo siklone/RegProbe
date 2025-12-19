@@ -9,6 +9,11 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Verify runs after Apply when `VerifyAfterApply` is enabled.
 - Rollback runs automatically when Apply or Verify fails (default) or when the user requests it.
 
+## Elevation requirements
+- Tweaks that touch HKLM/HKCR, services, drivers, scheduled tasks, BCD, or system directories must run elevated.
+- HKCU and user-profile tweaks can run without elevation.
+- Each tweak doc section includes a `Requires elevation:` line to indicate the expected privilege.
+
 ## Monitoring system
 
 ### Logging
