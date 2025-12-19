@@ -23,9 +23,13 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _cancelAllCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
+    private string _filterSummary = "Showing 0 of 0 tweaks.";
     private bool _isExporting;
     private bool _isBulkRunning;
     private string _searchText = string.Empty;
+    private bool _showSafe = true;
+    private bool _showAdvanced = true;
+    private bool _showRisky = true;
     private CancellationTokenSource? _bulkCts;
 
     public TweaksViewModel()
@@ -62,6 +66,7 @@ public sealed class TweaksViewModel : ViewModelBase
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        UpdateFilterSummary();
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => !IsBulkRunning);
@@ -129,8 +134,54 @@ public sealed class TweaksViewModel : ViewModelBase
             if (SetProperty(ref _searchText, value))
             {
                 TweaksView.Refresh();
+                UpdateFilterSummary();
             }
         }
+    }
+
+    public bool ShowSafe
+    {
+        get => _showSafe;
+        set
+        {
+            if (SetProperty(ref _showSafe, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowAdvanced
+    {
+        get => _showAdvanced;
+        set
+        {
+            if (SetProperty(ref _showAdvanced, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowRisky
+    {
+        get => _showRisky;
+        set
+        {
+            if (SetProperty(ref _showRisky, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public string FilterSummary
+    {
+        get => _filterSummary;
+        private set => SetProperty(ref _filterSummary, value);
     }
 
     private async Task ExportLogsAsync()
@@ -241,6 +292,21 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (item.Risk == TweakRiskLevel.Safe && !_showSafe)
+        {
+            return false;
+        }
+
+        if (item.Risk == TweakRiskLevel.Advanced && !_showAdvanced)
+        {
+            return false;
+        }
+
+        if (item.Risk == TweakRiskLevel.Risky && !_showRisky)
+        {
+            return false;
+        }
+
         if (string.IsNullOrWhiteSpace(_searchText))
         {
             return true;
@@ -249,5 +315,12 @@ public sealed class TweaksViewModel : ViewModelBase
         return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void UpdateFilterSummary()
+    {
+        var total = Tweaks.Count;
+        var visible = TweaksView.Cast<object>().Count();
+        FilterSummary = $"Showing {visible} of {total} tweaks.";
     }
 }
