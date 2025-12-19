@@ -3,14 +3,133 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="StepIndicatorStyle" TargetType="Ellipse">
+            <Setter Property="Fill" Value="#B9BDC6" />
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Height" Value="10" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.InProgress}">
+                    <Setter Property="Fill" Value="#F0B429" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Success}">
+                    <Setter Property="Fill" Value="#4CAF50" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Failed}">
+                    <Setter Property="Fill" Value="#D64545" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Skipped}">
+                    <Setter Property="Fill" Value="#7A7F87" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.NotApplicable}">
+                    <Setter Property="Fill" Value="#7A7F87" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StepCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#E3E5E8" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="14" />
+            <Setter Property="Margin" Value="0,0,12,12" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.InProgress}">
+                    <Setter Property="BorderBrush" Value="#F0B429" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Success}">
+                    <Setter Property="BorderBrush" Value="#4CAF50" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Failed}">
+                    <Setter Property="BorderBrush" Value="#D64545" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <StackPanel>
             <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Margin="0,8,0,0"
-                       Text="Monitoring insights will appear here."
+            <TextBlock Margin="0,6,0,0"
+                       Text="Live status for the tweak execution pipeline."
                        Foreground="#4B4B4B"
                        TextWrapping="Wrap" />
         </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="#FFFFFF"
+                BorderBrush="#E3E5E8"
+                BorderThickness="1"
+                CornerRadius="12"
+                Margin="0,16,0,16"
+                Padding="16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding CurrentTweakName}" FontWeight="SemiBold" />
+                    <TextBlock Margin="0,4,0,0"
+                               Text="{Binding StatusMessage}"
+                               Foreground="#4B4B4B" />
+                    <TextBlock Margin="0,4,0,0"
+                               Text="{Binding LastUpdatedText}"
+                               Foreground="#8A8D93"
+                               FontSize="11" />
+                    <TextBlock Margin="0,4,0,0"
+                               Text="{Binding RunModeLabel}"
+                               Foreground="#8A8D93"
+                               FontSize="11" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Preview Run"
+                            Command="{Binding RunPreviewCommand}"
+                            Padding="14,6"
+                            Margin="0,0,8,0" />
+                    <Button Content="Apply Run"
+                            Command="{Binding RunApplyCommand}"
+                            Padding="14,6" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding Steps}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource StepCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding ActionLabel}" FontSize="13" FontWeight="SemiBold" />
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,2,6,0" />
+                                <TextBlock Text="{Binding StatusText}" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <TextBlock Margin="0,6,0,0"
+                                       Text="{Binding Message}"
+                                       Foreground="#5B606A"
+                                       FontSize="11"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,6,0,0"
+                                       Text="{Binding TimestampText}"
+                                       Foreground="#8A8D93"
+                                       FontSize="10" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
