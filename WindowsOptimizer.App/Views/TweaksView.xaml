@@ -220,10 +220,17 @@
                                     <TextBlock Text="{Binding Description}"
                                                Foreground="#4B4B4B"
                                                TextWrapping="Wrap" />
-                                    <TextBlock Margin="0,4,0,0"
-                                               Text="{Binding Id}"
-                                               Foreground="#8A8D93"
-                                               FontSize="10" />
+                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                        <TextBlock Text="{Binding Id}"
+                                                   Foreground="#8A8D93"
+                                                   FontSize="10"
+                                                   VerticalAlignment="Center" />
+                                        <Button Content="Copy ID"
+                                                Command="{Binding CopyIdCommand}"
+                                                Padding="6,1"
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center" />
+                                    </StackPanel>
                                 </StackPanel>
 
                                 <Expander Grid.Row="2"

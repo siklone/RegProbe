@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
@@ -18,6 +19,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _verifyCommand;
     private readonly RelayCommand _rollbackCommand;
     private readonly RelayCommand _cancelCommand;
+    private readonly RelayCommand _copyIdCommand;
     private CancellationTokenSource? _cts;
     private bool _isRunning;
     private string _statusMessage = "Idle";
@@ -46,6 +48,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => !IsRunning);
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => !IsRunning);
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _copyIdCommand = new RelayCommand(_ => CopyId());
     }
 
     public string Name => _tweak.Name;
@@ -67,6 +70,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand RollbackCommand => _rollbackCommand;
 
     public ICommand CancelCommand => _cancelCommand;
+
+    public ICommand CopyIdCommand => _copyIdCommand;
 
     public bool IsRunning
     {
@@ -329,5 +334,18 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         return null;
+    }
+
+    private void CopyId()
+    {
+        try
+        {
+            Clipboard.SetText(Id);
+            StatusMessage = "Tweak ID copied to clipboard.";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Copy failed: {ex.Message}";
+        }
     }
 }
