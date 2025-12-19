@@ -125,6 +125,12 @@
                            Text="{Binding BulkProgressText}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <ProgressBar Height="6"
+                             Margin="0,4,0,0"
+                             Minimum="0"
+                             Maximum="{Binding BulkProgressTotal}"
+                             Value="{Binding BulkProgressCurrent}"
+                             Visibility="{Binding HasBulkProgress, Converter={StaticResource BoolToVisibility}}" />
                 <TextBlock Margin="0,4,0,0"
                            Text="{Binding FilterSummary}"
                            Foreground="#8A8D93"
@@ -167,6 +173,10 @@
                         Margin="0,0,8,0" />
                 <Button Content="Cancel All"
                         Command="{Binding CancelAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Clear Results"
+                        Command="{Binding ResetAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
                 <Button Content="Expand Details"

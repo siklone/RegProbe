@@ -26,6 +26,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _verifyAllCommand;
     private readonly RelayCommand _rollbackAllCommand;
     private readonly RelayCommand _cancelAllCommand;
+    private readonly RelayCommand _resetAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
@@ -38,6 +39,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
+    private bool _hasBulkProgress;
     private string _searchText = string.Empty;
     private bool _showSafe = true;
     private bool _showAdvanced = true;
@@ -96,6 +98,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
         _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulk());
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
+        _resetAllCommand = new RelayCommand(_ => ResetAllStatuses(), _ => CanResetAll());
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
@@ -124,6 +127,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand RollbackAllCommand => _rollbackAllCommand;
 
     public ICommand CancelAllCommand => _cancelAllCommand;
+
+    public ICommand ResetAllCommand => _resetAllCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
@@ -172,6 +177,7 @@ public sealed class TweaksViewModel : ViewModelBase
                 _verifyAllCommand.RaiseCanExecuteChanged();
                 _rollbackAllCommand.RaiseCanExecuteChanged();
                 _cancelAllCommand.RaiseCanExecuteChanged();
+                _resetAllCommand.RaiseCanExecuteChanged();
                 SetBulkLock(value);
             }
         }
@@ -196,9 +202,16 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _bulkProgressTotal, value))
             {
+                HasBulkProgress = value > 0;
                 OnPropertyChanged(nameof(BulkProgressText));
             }
         }
+    }
+
+    public bool HasBulkProgress
+    {
+        get => _hasBulkProgress;
+        private set => SetProperty(ref _hasBulkProgress, value);
     }
 
     public string BulkProgressText => BulkProgressTotal == 0
@@ -315,6 +328,11 @@ public sealed class TweaksViewModel : ViewModelBase
         return TweaksView.Cast<object>().Any();
     }
 
+    private bool CanResetAll()
+    {
+        return !IsBulkRunning && !Tweaks.Any(item => item.IsRunning);
+    }
+
     private async Task RunBulkAsync(string label, Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
         if (IsBulkRunning)
@@ -368,6 +386,21 @@ public sealed class TweaksViewModel : ViewModelBase
 
         _bulkCts.Cancel();
         BulkStatusMessage = "Bulk cancellation requested.";
+    }
+
+    private void ResetAllStatuses()
+    {
+        if (!CanResetAll())
+        {
+            return;
+        }
+
+        foreach (var item in Tweaks)
+        {
+            item.ResetStatus();
+        }
+
+        BulkStatusMessage = "All tweak statuses cleared.";
     }
 
     private void StartBulkCancellation()
@@ -425,6 +458,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
+        _resetAllCommand.RaiseCanExecuteChanged();
     }
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -436,6 +470,7 @@ public sealed class TweaksViewModel : ViewModelBase
             _applyAllCommand.RaiseCanExecuteChanged();
             _verifyAllCommand.RaiseCanExecuteChanged();
             _rollbackAllCommand.RaiseCanExecuteChanged();
+            _resetAllCommand.RaiseCanExecuteChanged();
         }
     }
 
