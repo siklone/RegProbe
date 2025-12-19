@@ -151,6 +151,14 @@
                         Command="{Binding CancelAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Expand Details"
+                        Command="{Binding ExpandAllDetailsCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Collapse Details"
+                        Command="{Binding CollapseAllDetailsCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Open Log Folder"
                         Command="{Binding OpenLogFolderCommand}"
                         Padding="12,6"

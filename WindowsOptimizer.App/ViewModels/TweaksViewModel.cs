@@ -24,6 +24,8 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _cancelAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
+    private readonly RelayCommand _expandAllDetailsCommand;
+    private readonly RelayCommand _collapseAllDetailsCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -81,6 +83,8 @@ public sealed class TweaksViewModel : ViewModelBase
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
+        _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
+        _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
     }
 
     public string Title => "Tweaks";
@@ -100,6 +104,10 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
+
+    public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
+
+    public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
 
     public string ExportStatusMessage
     {
@@ -397,6 +405,14 @@ public sealed class TweaksViewModel : ViewModelBase
         catch (Exception ex)
         {
             ExportStatusMessage = $"Open log folder failed: {ex.Message}";
+        }
+    }
+
+    private void SetDetailsExpanded(bool isExpanded)
+    {
+        foreach (var item in Tweaks)
+        {
+            item.IsDetailsExpanded = isExpanded;
         }
     }
 }
