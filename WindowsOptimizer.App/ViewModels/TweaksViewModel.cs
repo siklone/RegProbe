@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
@@ -415,14 +416,35 @@ public sealed class TweaksViewModel : ViewModelBase
             return;
         }
 
+        var items = TweaksView.Cast<TweakItemViewModel>().ToList();
+        if (items.Count == 0)
+        {
+            return;
+        }
+
+        var actionLabel = label.ToLowerInvariant();
+        var requiresRiskConfirmation = IsRiskyBulkAction(label);
+        if (requiresRiskConfirmation)
+        {
+            var riskyCount = items.Count(item => item.Risk == TweakRiskLevel.Risky);
+            if (riskyCount > 0 && !ConfirmBulkRisky(actionLabel, riskyCount))
+            {
+                BulkStatusMessage = $"Bulk {actionLabel} cancelled.";
+                return;
+            }
+        }
+
         StartBulkCancellation();
         IsBulkRunning = true;
-        var actionLabel = label.ToLowerInvariant();
         BulkStatusMessage = $"Bulk {actionLabel} started.";
+
+        if (requiresRiskConfirmation)
+        {
+            SetRiskConfirmationSuppressed(items, true);
+        }
 
         try
         {
-            var items = TweaksView.Cast<TweakItemViewModel>().ToList();
             BulkProgressTotal = items.Count;
             BulkProgressCurrent = 0;
             OnPropertyChanged(nameof(BulkProgressText));
@@ -450,7 +472,39 @@ public sealed class TweaksViewModel : ViewModelBase
             BulkProgressTotal = 0;
             OnPropertyChanged(nameof(BulkProgressText));
             ClearBulkCancellation();
+            if (requiresRiskConfirmation)
+            {
+                SetRiskConfirmationSuppressed(items, false);
+            }
         }
+    }
+
+    private static bool IsRiskyBulkAction(string label)
+    {
+        return label.Equals("Apply", StringComparison.OrdinalIgnoreCase)
+            || label.Equals("Rollback", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static void SetRiskConfirmationSuppressed(IEnumerable<TweakItemViewModel> items, bool isSuppressed)
+    {
+        foreach (var item in items)
+        {
+            if (item.Risk == TweakRiskLevel.Risky)
+            {
+                item.SuppressRiskConfirmation = isSuppressed;
+            }
+        }
+    }
+
+    private static bool ConfirmBulkRisky(string actionLabel, int riskyCount)
+    {
+        var result = MessageBox.Show(
+            $"Bulk {actionLabel} includes {riskyCount} risky tweak(s). Proceed?",
+            "Confirm risky bulk action",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        return result == MessageBoxResult.Yes;
     }
 
     private void CancelBulk()

@@ -107,6 +107,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    internal bool SuppressRiskConfirmation { get; set; }
+
     public string StatusMessage
     {
         get => _statusMessage;
@@ -439,6 +441,11 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private bool ConfirmRiskyAction(string actionLabel)
     {
+        if (SuppressRiskConfirmation)
+        {
+            return true;
+        }
+
         if (_tweak.Risk != TweakRiskLevel.Risky)
         {
             return true;
