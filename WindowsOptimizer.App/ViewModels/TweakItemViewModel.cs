@@ -24,6 +24,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _lastUpdatedText = "Last update: -";
     private string _lastActionText = string.Empty;
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
+    private bool _isDetailsExpanded = true;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline)
     {
@@ -134,6 +135,12 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string OutcomeSummary => HasOutcome
         ? $"{LastActionText} - {OutcomeText}"
         : "No runs yet";
+
+    public bool IsDetailsExpanded
+    {
+        get => _isDetailsExpanded;
+        set => SetProperty(ref _isDetailsExpanded, value);
+    }
 
     public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
 

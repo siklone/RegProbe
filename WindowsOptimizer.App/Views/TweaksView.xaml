@@ -168,7 +168,6 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -216,38 +215,46 @@
                                            Foreground="#4B4B4B"
                                            TextWrapping="Wrap" />
 
-                                <ItemsControl Grid.Row="2" Grid.ColumnSpan="2" Margin="0,12,0,0" ItemsSource="{Binding Steps}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <UniformGrid Columns="4" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Margin="0,0,12,0">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,3,6,0" />
-                                                    <TextBlock Text="{Binding ActionLabel}" FontSize="12" FontWeight="SemiBold" />
-                                                </StackPanel>
-                                                <TextBlock Margin="0,4,0,0"
-                                                           Text="{Binding StatusText}"
-                                                           Foreground="#5B606A"
-                                                           FontSize="11" />
-                                                <TextBlock Margin="0,4,0,0"
-                                                           Text="{Binding Message}"
-                                                           Foreground="#8A8D93"
-                                                           FontSize="10"
-                                                           TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <Expander Grid.Row="2"
+                                          Grid.ColumnSpan="2"
+                                          Margin="0,12,0,0"
+                                          IsExpanded="{Binding IsDetailsExpanded}"
+                                          Header="Details">
+                                    <StackPanel>
+                                        <ItemsControl ItemsSource="{Binding Steps}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="4" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Margin="0,0,12,0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,3,6,0" />
+                                                            <TextBlock Text="{Binding ActionLabel}" FontSize="12" FontWeight="SemiBold" />
+                                                        </StackPanel>
+                                                        <TextBlock Margin="0,4,0,0"
+                                                                   Text="{Binding StatusText}"
+                                                                   Foreground="#5B606A"
+                                                                   FontSize="11" />
+                                                        <TextBlock Margin="0,4,0,0"
+                                                                   Text="{Binding Message}"
+                                                                   Foreground="#8A8D93"
+                                                                   FontSize="10"
+                                                                   TextWrapping="Wrap" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
 
-                                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,10,0,0">
-                                    <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
-                                    <TextBlock Text=" • " Foreground="#A6A8AF" Margin="6,0" />
-                                    <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
-                                </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                            <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
+                                            <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
+                                            <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
                             </Grid>
                         </Border>
                     </DataTemplate>
