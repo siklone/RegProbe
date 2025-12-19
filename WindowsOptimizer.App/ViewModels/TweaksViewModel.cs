@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _applyAllCommand;
     private readonly RelayCommand _cancelAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
+    private readonly RelayCommand _openLogFolderCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -34,11 +36,13 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private CancellationTokenSource? _bulkCts;
+    private readonly string _logFolderPath;
 
     public TweaksViewModel()
     {
         var paths = AppPaths.FromEnvironment();
         var logger = new FileAppLogger(paths);
+        _logFolderPath = paths.LogDirectory;
         _logStore = new FileTweakLogStore(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
@@ -76,6 +80,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => !IsBulkRunning);
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
+        _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
     }
 
     public string Title => "Tweaks";
@@ -93,6 +98,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand CancelAllCommand => _cancelAllCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
+
+    public ICommand OpenLogFolderCommand => _openLogFolderCommand;
 
     public string ExportStatusMessage
     {
@@ -373,5 +380,23 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+    }
+
+    private void OpenLogFolder()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = _logFolderPath,
+                UseShellExecute = true
+            });
+
+            ExportStatusMessage = $"Opened log folder: {_logFolderPath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Open log folder failed: {ex.Message}";
+        }
     }
 }

@@ -151,6 +151,10 @@
                         Command="{Binding CancelAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Open Log Folder"
+                        Command="{Binding OpenLogFolderCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Export Logs"
                         Command="{Binding ExportLogsCommand}"
                         Padding="12,6" />
