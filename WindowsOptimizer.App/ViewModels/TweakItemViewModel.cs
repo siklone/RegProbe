@@ -30,6 +30,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _lastDurationText = "Duration: -";
     private string _lastActionText = string.Empty;
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
+    private int _runCount;
     private bool _isDetailsExpanded = true;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline)
@@ -187,6 +188,12 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
 
+    public int RunCount
+    {
+        get => _runCount;
+        private set => SetProperty(ref _runCount, value);
+    }
+
     public bool IsDetailsExpanded
     {
         get => _isDetailsExpanded;
@@ -221,6 +228,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        RunCount++;
         var startedAt = DateTimeOffset.UtcNow;
         var actionLabel = dryRun ? "Preview" : "Apply";
         LastActionText = actionLabel;
@@ -286,6 +294,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        RunCount++;
         var startedAt = DateTimeOffset.UtcNow;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
@@ -419,6 +428,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = "Idle";
         LastUpdatedText = "Last update: -";
         LastDurationText = "Duration: -";
+        RunCount = 0;
     }
 
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)

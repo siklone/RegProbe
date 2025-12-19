@@ -393,6 +393,8 @@
                                             <TextBlock Text="{Binding LastDurationText}" Foreground="#8A8D93" />
                                             <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
                                             <TextBlock Text="{Binding StepProgressText}" Foreground="#8A8D93" />
+                                            <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
+                                            <TextBlock Text="{Binding RunCount, StringFormat=Runs: {0}}" Foreground="#8A8D93" />
                                         </StackPanel>
                                         </StackPanel>
                                     </Expander>
