@@ -26,6 +26,8 @@ public sealed class TweaksViewModel : ViewModelBase
     private string _filterSummary = "Showing 0 of 0 tweaks.";
     private bool _isExporting;
     private bool _isBulkRunning;
+    private int _bulkProgressCurrent;
+    private int _bulkProgressTotal;
     private string _searchText = string.Empty;
     private bool _showSafe = true;
     private bool _showAdvanced = true;
@@ -125,6 +127,34 @@ public sealed class TweaksViewModel : ViewModelBase
             }
         }
     }
+
+    public int BulkProgressCurrent
+    {
+        get => _bulkProgressCurrent;
+        private set
+        {
+            if (SetProperty(ref _bulkProgressCurrent, value))
+            {
+                OnPropertyChanged(nameof(BulkProgressText));
+            }
+        }
+    }
+
+    public int BulkProgressTotal
+    {
+        get => _bulkProgressTotal;
+        private set
+        {
+            if (SetProperty(ref _bulkProgressTotal, value))
+            {
+                OnPropertyChanged(nameof(BulkProgressText));
+            }
+        }
+    }
+
+    public string BulkProgressText => BulkProgressTotal == 0
+        ? "Bulk progress: 0/0"
+        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
 
     public string SearchText
     {
@@ -234,6 +264,9 @@ public sealed class TweaksViewModel : ViewModelBase
         try
         {
             var items = TweaksView.Cast<TweakItemViewModel>().ToList();
+            BulkProgressTotal = items.Count;
+            BulkProgressCurrent = 0;
+            OnPropertyChanged(nameof(BulkProgressText));
             foreach (var item in items)
             {
                 _bulkCts?.Token.ThrowIfCancellationRequested();
@@ -247,6 +280,9 @@ public sealed class TweaksViewModel : ViewModelBase
                 {
                     await item.RunApplyAsync(_bulkCts?.Token ?? CancellationToken.None);
                 }
+
+                BulkProgressCurrent++;
+                OnPropertyChanged(nameof(BulkProgressText));
             }
 
             BulkStatusMessage = "Bulk run completed.";
@@ -258,6 +294,9 @@ public sealed class TweaksViewModel : ViewModelBase
         finally
         {
             IsBulkRunning = false;
+            BulkProgressCurrent = 0;
+            BulkProgressTotal = 0;
+            OnPropertyChanged(nameof(BulkProgressText));
             ClearBulkCancellation();
         }
     }
