@@ -184,7 +184,7 @@
                             Padding="10,2" />
                 </WrapPanel>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="12,6,0,0">
+            <WrapPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="12,6,0,0">
                 <Button Content="Detect All"
                         Command="{Binding DetectAllCommand}"
                         ToolTip="Run detection for all visible tweaks."
@@ -259,7 +259,7 @@
                         Command="{Binding ExportLogsCommand}"
                         ToolTip="Export tweak logs to CSV."
                         Padding="12,6" />
-            </StackPanel>
+            </WrapPanel>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
