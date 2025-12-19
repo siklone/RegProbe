@@ -15,6 +15,12 @@
             <Setter Property="CornerRadius" Value="12" />
             <Setter Property="Padding" Value="16" />
             <Setter Property="Margin" Value="0,0,0,14" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                    <Setter Property="BorderBrush" Value="#F0B429" />
+                    <Setter Property="Background" Value="#FFFCF2" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="RiskBadgeStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="8" />
@@ -147,12 +153,32 @@
                         Command="{Binding ApplyAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Verify All"
+                        Command="{Binding VerifyAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Rollback All"
+                        Command="{Binding RollbackAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Cancel All"
                         Command="{Binding CancelAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Expand Details"
+                        Command="{Binding ExpandAllDetailsCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Collapse Details"
+                        Command="{Binding CollapseAllDetailsCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Open Log Folder"
                         Command="{Binding OpenLogFolderCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Open CSV Log"
+                        Command="{Binding OpenCsvLogCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
                 <Button Content="Export Logs"
@@ -162,115 +188,161 @@
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
-            <ItemsControl ItemsSource="{Binding TweaksView}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Style="{StaticResource TweakCardStyle}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+            <Grid>
+                <ItemsControl ItemsSource="{Binding TweaksView}"
+                              Visibility="{Binding HasVisibleTweaks, Converter={StaticResource BoolToVisibility}}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TweakCardStyle}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" />
-                                    <Border Style="{StaticResource RiskBadgeStyle}" Margin="10,0,0,0">
-                                        <TextBlock Text="{Binding Risk}" FontSize="11" FontWeight="SemiBold" />
-                                    </Border>
-                                    <Border Style="{StaticResource OutcomeBadgeStyle}"
-                                            Margin="10,0,0,0"
-                                            Visibility="{Binding HasOutcome, Converter={StaticResource BoolToVisibility}}">
-                                        <TextBlock Text="{Binding OutcomeSummary}" FontSize="11" FontWeight="SemiBold" />
-                                    </Border>
-                                </StackPanel>
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" />
+                                        <Border Style="{StaticResource RiskBadgeStyle}" Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding Risk}" FontSize="11" FontWeight="SemiBold" />
+                                        </Border>
+                                        <Border Style="{StaticResource OutcomeBadgeStyle}"
+                                                Margin="10,0,0,0"
+                                                Visibility="{Binding HasOutcome, Converter={StaticResource BoolToVisibility}}">
+                                            <TextBlock Text="{Binding OutcomeSummary}" FontSize="11" FontWeight="SemiBold" />
+                                        </Border>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button Content="Preview"
-                                            Command="{Binding PreviewCommand}"
-                                            Padding="12,4"
-                                            Margin="0,0,6,0" />
-                                    <Button Content="Apply"
-                                            Command="{Binding ApplyCommand}"
-                                            Padding="12,4"
-                                            Margin="0,0,6,0" />
-                                    <Button Content="Verify"
-                                            Command="{Binding VerifyCommand}"
-                                            Padding="12,4"
-                                            Margin="0,0,6,0" />
-                                    <Button Content="Rollback"
-                                            Command="{Binding RollbackCommand}"
-                                            Padding="12,4"
-                                            Margin="0,0,6,0" />
-                                    <Button Content="Cancel"
-                                            Command="{Binding CancelCommand}"
-                                            Padding="12,4" />
-                                </StackPanel>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="Preview"
+                                                Command="{Binding PreviewCommand}"
+                                                Padding="12,4"
+                                                Margin="0,0,6,0" />
+                                        <Button Content="Apply"
+                                                Command="{Binding ApplyCommand}"
+                                                Padding="12,4"
+                                                Margin="0,0,6,0" />
+                                        <Button Content="Verify"
+                                                Command="{Binding VerifyCommand}"
+                                                Padding="12,4"
+                                                Margin="0,0,6,0" />
+                                        <Button Content="Rollback"
+                                                Command="{Binding RollbackCommand}"
+                                                Padding="12,4"
+                                                Margin="0,0,6,0" />
+                                        <Button Content="Cancel"
+                                                Command="{Binding CancelCommand}"
+                                                Padding="12,4" />
+                                    </StackPanel>
 
-                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
-                                    <TextBlock Text="{Binding Description}"
-                                               Foreground="#4B4B4B"
-                                               TextWrapping="Wrap" />
-                                    <TextBlock Margin="0,4,0,0"
-                                               Text="{Binding Id}"
-                                               Foreground="#8A8D93"
-                                               FontSize="10" />
-                                </StackPanel>
-
-                                <Expander Grid.Row="2"
-                                          Grid.ColumnSpan="2"
-                                          Margin="0,12,0,0"
-                                          IsExpanded="{Binding IsDetailsExpanded}"
-                                          Header="Details">
-                                    <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding Steps}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <UniformGrid Columns="4" />
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Margin="0,0,12,0">
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,3,6,0" />
-                                                            <TextBlock Text="{Binding ActionLabel}" FontSize="12" FontWeight="SemiBold" />
-                                                        </StackPanel>
-                                                        <TextBlock Margin="0,4,0,0"
-                                                                   Text="{Binding StatusText}"
-                                                                   Foreground="#5B606A"
-                                                                   FontSize="11" />
-                                                        <TextBlock Margin="0,4,0,0"
-                                                                   Text="{Binding Message}"
-                                                                   Foreground="#8A8D93"
-                                                                   FontSize="10"
-                                                                   TextWrapping="Wrap" />
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-
-                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                            <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
-                                            <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
-                                            <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
+                                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
+                                        <ProgressBar Height="4"
+                                                     Margin="0,0,0,8"
+                                                     IsIndeterminate="True"
+                                                     Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}" />
+                                        <TextBlock Text="{Binding Description}"
+                                                   Foreground="#4B4B4B"
+                                                   TextWrapping="Wrap" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                            <TextBlock Text="{Binding Id}"
+                                                       Foreground="#8A8D93"
+                                                       FontSize="10"
+                                                       VerticalAlignment="Center" />
+                                            <Button Content="Copy ID"
+                                                    Command="{Binding CopyIdCommand}"
+                                                    Padding="6,1"
+                                                    Margin="8,0,0,0"
+                                                    VerticalAlignment="Center" />
                                         </StackPanel>
                                     </StackPanel>
-                                </Expander>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+
+                                    <Expander Grid.Row="2"
+                                              Grid.ColumnSpan="2"
+                                              Margin="0,12,0,0"
+                                              IsExpanded="{Binding IsDetailsExpanded}"
+                                              Header="Details">
+                                        <StackPanel>
+                                            <ItemsControl ItemsSource="{Binding Steps}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <UniformGrid Columns="4" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Margin="0,0,12,0">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,3,6,0" />
+                                                                <TextBlock Text="{Binding ActionLabel}" FontSize="12" FontWeight="SemiBold" />
+                                                            </StackPanel>
+                                                            <TextBlock Margin="0,4,0,0"
+                                                                       Text="{Binding StatusText}"
+                                                                       Foreground="#5B606A"
+                                                                       FontSize="11" />
+                                                            <TextBlock Margin="0,4,0,0"
+                                                                       Text="{Binding Message}"
+                                                                       Foreground="#8A8D93"
+                                                                       FontSize="10"
+                                                                       TextWrapping="Wrap" />
+                                                            <TextBlock Margin="0,4,0,0"
+                                                                       Text="{Binding TimestampText}"
+                                                                       Foreground="#A6A8AF"
+                                                                       FontSize="10" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
+                                                <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
+                                                <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Expander>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border Padding="24"
+                        Background="#FAFAFB"
+                        BorderBrush="#E3E5E8"
+                        BorderThickness="1"
+                        CornerRadius="12">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasVisibleTweaks}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="No tweaks match your filters."
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Margin="0,6,0,0"
+                                   Text="Clear the search or enable more risk levels to see results."
+                                   Foreground="#6B6F76"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>
