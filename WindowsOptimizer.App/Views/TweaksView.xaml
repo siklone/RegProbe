@@ -66,13 +66,29 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Margin="0,6,0,0"
-                       Text="Preview runs are DryRun by default. Use Apply to execute a tweak and Verify/Rollback for follow-up actions."
-                       Foreground="#4B4B4B"
-                       TextWrapping="Wrap" />
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
+                <TextBlock Margin="0,6,0,0"
+                           Text="Preview runs are DryRun by default. Use Apply to execute a tweak and Verify/Rollback for follow-up actions."
+                           Foreground="#4B4B4B"
+                           TextWrapping="Wrap" />
+                <TextBlock Margin="0,6,0,0"
+                           Text="{Binding ExportStatusMessage}"
+                           Foreground="#8A8D93"
+                           FontSize="11" />
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Content="Export Logs"
+                    Command="{Binding ExportLogsCommand}"
+                    Padding="14,6"
+                    Margin="12,6,0,0"
+                    VerticalAlignment="Top" />
+        </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
             <ItemsControl ItemsSource="{Binding Tweaks}">
