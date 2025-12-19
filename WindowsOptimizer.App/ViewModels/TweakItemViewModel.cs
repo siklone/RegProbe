@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
@@ -18,8 +19,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _verifyCommand;
     private readonly RelayCommand _rollbackCommand;
     private readonly RelayCommand _cancelCommand;
+    private readonly RelayCommand _copyIdCommand;
     private CancellationTokenSource? _cts;
     private bool _isRunning;
+    private bool _isBulkLocked;
     private string _statusMessage = "Idle";
     private string _lastUpdatedText = "Last update: -";
     private string _lastActionText = string.Empty;
@@ -41,14 +44,17 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         ResetSteps();
 
-        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => !IsRunning);
-        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => !IsRunning);
-        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => !IsRunning);
-        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => !IsRunning);
-        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanRun());
+        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
+        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
+        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
+        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
+        _copyIdCommand = new RelayCommand(_ => CopyId());
     }
 
     public string Name => _tweak.Name;
+
+    public string Id => _tweak.Id;
 
     public string Description => _tweak.Description;
 
@@ -66,6 +72,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public ICommand CancelCommand => _cancelCommand;
 
+    public ICommand CopyIdCommand => _copyIdCommand;
+
     public bool IsRunning
     {
         get => _isRunning;
@@ -73,11 +81,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             if (SetProperty(ref _isRunning, value))
             {
-                _previewCommand.RaiseCanExecuteChanged();
-                _applyCommand.RaiseCanExecuteChanged();
-                _verifyCommand.RaiseCanExecuteChanged();
-                _rollbackCommand.RaiseCanExecuteChanged();
-                _cancelCommand.RaiseCanExecuteChanged();
+                UpdateCommandStates();
+            }
+        }
+    }
+
+    public bool IsBulkLocked
+    {
+        get => _isBulkLocked;
+        set
+        {
+            if (SetProperty(ref _isBulkLocked, value))
+            {
+                UpdateCommandStates();
             }
         }
     }
@@ -146,6 +162,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
 
+    public Task RunVerifyAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Verify, ct);
+
+    public Task RunRollbackAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Rollback, ct);
+
     private async Task RunAsync(bool dryRun, CancellationToken ct)
     {
         if (IsRunning)
@@ -196,14 +216,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private async Task RunSingleStepAsync(TweakAction action)
+    private async Task RunSingleStepAsync(TweakAction action, CancellationToken ct)
     {
         if (IsRunning)
         {
             return;
         }
 
-        StartCancellation(CancellationToken.None);
+        StartCancellation(ct);
         IsRunning = true;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
@@ -221,7 +241,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 }
             });
 
-            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? CancellationToken.None);
+            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
@@ -327,5 +347,37 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         return null;
+    }
+
+    private void CopyId()
+    {
+        try
+        {
+            Clipboard.SetText(Id);
+            StatusMessage = "Tweak ID copied to clipboard.";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Copy failed: {ex.Message}";
+        }
+    }
+
+    private bool CanRun()
+    {
+        return !IsRunning && !IsBulkLocked;
+    }
+
+    private bool CanCancel()
+    {
+        return IsRunning && !IsBulkLocked;
+    }
+
+    private void UpdateCommandStates()
+    {
+        _previewCommand.RaiseCanExecuteChanged();
+        _applyCommand.RaiseCanExecuteChanged();
+        _verifyCommand.RaiseCanExecuteChanged();
+        _rollbackCommand.RaiseCanExecuteChanged();
+        _cancelCommand.RaiseCanExecuteChanged();
     }
 }

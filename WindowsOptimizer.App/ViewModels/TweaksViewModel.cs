@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,8 +22,14 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _exportLogsCommand;
     private readonly RelayCommand _previewAllCommand;
     private readonly RelayCommand _applyAllCommand;
+    private readonly RelayCommand _verifyAllCommand;
+    private readonly RelayCommand _rollbackAllCommand;
     private readonly RelayCommand _cancelAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
+    private readonly RelayCommand _openLogFolderCommand;
+    private readonly RelayCommand _openCsvLogCommand;
+    private readonly RelayCommand _expandAllDetailsCommand;
+    private readonly RelayCommand _collapseAllDetailsCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -33,12 +41,17 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
+    private readonly string _logFolderPath;
+    private readonly string _tweakLogFilePath;
 
     public TweaksViewModel()
     {
         var paths = AppPaths.FromEnvironment();
         var logger = new FileAppLogger(paths);
+        _logFolderPath = paths.LogDirectory;
+        _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
@@ -65,17 +78,29 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline)
         };
 
+        foreach (var tweak in Tweaks)
+        {
+            tweak.PropertyChanged += OnTweakPropertyChanged;
+        }
+
         TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
-        UpdateFilterSummary();
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
-        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => !IsBulkRunning);
-        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => !IsBulkRunning);
+        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulk());
+        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", (item, token) => item.RunApplyAsync(token)), _ => CanRunBulk());
+        _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
+        _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulk());
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
+        _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
+        _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
+        _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
+        _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
+
+        UpdateFilterSummary();
     }
 
     public string Title => "Tweaks";
@@ -90,9 +115,21 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ICommand ApplyAllCommand => _applyAllCommand;
 
+    public ICommand VerifyAllCommand => _verifyAllCommand;
+
+    public ICommand RollbackAllCommand => _rollbackAllCommand;
+
     public ICommand CancelAllCommand => _cancelAllCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
+
+    public ICommand OpenLogFolderCommand => _openLogFolderCommand;
+
+    public ICommand OpenCsvLogCommand => _openCsvLogCommand;
+
+    public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
+
+    public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
 
     public string ExportStatusMessage
     {
@@ -127,7 +164,10 @@ public sealed class TweaksViewModel : ViewModelBase
             {
                 _previewAllCommand.RaiseCanExecuteChanged();
                 _applyAllCommand.RaiseCanExecuteChanged();
+                _verifyAllCommand.RaiseCanExecuteChanged();
+                _rollbackAllCommand.RaiseCanExecuteChanged();
                 _cancelAllCommand.RaiseCanExecuteChanged();
+                SetBulkLock(value);
             }
         }
     }
@@ -218,6 +258,12 @@ public sealed class TweaksViewModel : ViewModelBase
         private set => SetProperty(ref _filterSummary, value);
     }
 
+    public bool HasVisibleTweaks
+    {
+        get => _hasVisibleTweaks;
+        private set => SetProperty(ref _hasVisibleTweaks, value);
+    }
+
     private async Task ExportLogsAsync()
     {
         if (IsExporting)
@@ -254,7 +300,17 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
-    private async Task RunBulkAsync(bool dryRun)
+    private bool CanRunBulk()
+    {
+        if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
+        {
+            return false;
+        }
+
+        return TweaksView.Cast<object>().Any();
+    }
+
+    private async Task RunBulkAsync(string label, Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
         if (IsBulkRunning)
         {
@@ -263,7 +319,8 @@ public sealed class TweaksViewModel : ViewModelBase
 
         StartBulkCancellation();
         IsBulkRunning = true;
-        BulkStatusMessage = dryRun ? "Bulk preview started." : "Bulk apply started.";
+        var actionLabel = label.ToLowerInvariant();
+        BulkStatusMessage = $"Bulk {actionLabel} started.";
 
         try
         {
@@ -274,22 +331,14 @@ public sealed class TweaksViewModel : ViewModelBase
             foreach (var item in items)
             {
                 _bulkCts?.Token.ThrowIfCancellationRequested();
-                BulkStatusMessage = $"Running {item.Name}...";
-
-                if (dryRun)
-                {
-                    await item.RunPreviewAsync(_bulkCts?.Token ?? CancellationToken.None);
-                }
-                else
-                {
-                    await item.RunApplyAsync(_bulkCts?.Token ?? CancellationToken.None);
-                }
+                BulkStatusMessage = $"Running {actionLabel} on {item.Name}...";
+                await runner(item, _bulkCts?.Token ?? CancellationToken.None);
 
                 BulkProgressCurrent++;
                 OnPropertyChanged(nameof(BulkProgressText));
             }
 
-            BulkStatusMessage = "Bulk run completed.";
+            BulkStatusMessage = $"Bulk {actionLabel} completed.";
         }
         catch (OperationCanceledException)
         {
@@ -365,6 +414,22 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        HasVisibleTweaks = visible > 0;
+        _previewAllCommand.RaiseCanExecuteChanged();
+        _applyAllCommand.RaiseCanExecuteChanged();
+        _verifyAllCommand.RaiseCanExecuteChanged();
+        _rollbackAllCommand.RaiseCanExecuteChanged();
+    }
+
+    private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
+        {
+            _previewAllCommand.RaiseCanExecuteChanged();
+            _applyAllCommand.RaiseCanExecuteChanged();
+            _verifyAllCommand.RaiseCanExecuteChanged();
+            _rollbackAllCommand.RaiseCanExecuteChanged();
+        }
     }
 
     private void ResetFilters()
@@ -373,5 +438,63 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+    }
+
+    private void OpenLogFolder()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = _logFolderPath,
+                UseShellExecute = true
+            });
+
+            ExportStatusMessage = $"Opened log folder: {_logFolderPath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Open log folder failed: {ex.Message}";
+        }
+    }
+
+    private void OpenCsvLog()
+    {
+        try
+        {
+            if (!File.Exists(_tweakLogFilePath))
+            {
+                ExportStatusMessage = "No tweak log file yet. Run a tweak to generate one.";
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = _tweakLogFilePath,
+                UseShellExecute = true
+            });
+
+            ExportStatusMessage = $"Opened log file: {_tweakLogFilePath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Open log failed: {ex.Message}";
+        }
+    }
+
+    private void SetDetailsExpanded(bool isExpanded)
+    {
+        foreach (var item in Tweaks)
+        {
+            item.IsDetailsExpanded = isExpanded;
+        }
+    }
+
+    private void SetBulkLock(bool isLocked)
+    {
+        foreach (var item in Tweaks)
+        {
+            item.IsBulkLocked = isLocked;
+        }
     }
 }
