@@ -39,6 +39,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
+    private bool _hasBulkProgress;
     private string _searchText = string.Empty;
     private bool _showSafe = true;
     private bool _showAdvanced = true;
@@ -201,9 +202,16 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _bulkProgressTotal, value))
             {
+                HasBulkProgress = value > 0;
                 OnPropertyChanged(nameof(BulkProgressText));
             }
         }
+    }
+
+    public bool HasBulkProgress
+    {
+        get => _hasBulkProgress;
+        private set => SetProperty(ref _hasBulkProgress, value);
     }
 
     public string BulkProgressText => BulkProgressTotal == 0

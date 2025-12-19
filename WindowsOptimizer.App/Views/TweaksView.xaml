@@ -125,6 +125,12 @@
                            Text="{Binding BulkProgressText}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <ProgressBar Height="6"
+                             Margin="0,4,0,0"
+                             Minimum="0"
+                             Maximum="{Binding BulkProgressTotal}"
+                             Value="{Binding BulkProgressCurrent}"
+                             Visibility="{Binding HasBulkProgress, Converter={StaticResource BoolToVisibility}}" />
                 <TextBlock Margin="0,4,0,0"
                            Text="{Binding FilterSummary}"
                            Foreground="#8A8D93"
