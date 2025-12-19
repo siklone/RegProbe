@@ -269,6 +269,10 @@
                                                                    Foreground="#8A8D93"
                                                                    FontSize="10"
                                                                    TextWrapping="Wrap" />
+                                                        <TextBlock Margin="0,4,0,0"
+                                                                   Text="{Binding TimestampText}"
+                                                                   Foreground="#A6A8AF"
+                                                                   FontSize="10" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
