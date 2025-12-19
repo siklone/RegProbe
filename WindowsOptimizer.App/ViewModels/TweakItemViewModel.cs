@@ -14,6 +14,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 {
     private readonly ITweak _tweak;
     private readonly TweakExecutionPipeline _pipeline;
+    private readonly RelayCommand _detectCommand;
     private readonly RelayCommand _previewCommand;
     private readonly RelayCommand _applyCommand;
     private readonly RelayCommand _verifyCommand;
@@ -44,6 +45,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         ResetSteps();
 
+        _detectCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Detect, CancellationToken.None), _ => CanRun());
         _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanRun());
         _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
@@ -61,6 +63,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public TweakRiskLevel Risk => _tweak.Risk;
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
+
+    public ICommand DetectCommand => _detectCommand;
 
     public ICommand PreviewCommand => _previewCommand;
 
@@ -161,6 +165,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
 
     public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
+
+    public Task RunDetectAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Detect, ct);
 
     public Task RunVerifyAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Verify, ct);
 
@@ -374,6 +380,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void UpdateCommandStates()
     {
+        _detectCommand.RaiseCanExecuteChanged();
         _previewCommand.RaiseCanExecuteChanged();
         _applyCommand.RaiseCanExecuteChanged();
         _verifyCommand.RaiseCanExecuteChanged();
