@@ -243,14 +243,18 @@
                                                 Command="{Binding VerifyCommand}"
                                                 Padding="12,4"
                                                 Margin="0,0,6,0" />
-                                        <Button Content="Rollback"
-                                                Command="{Binding RollbackCommand}"
-                                                Padding="12,4"
-                                                Margin="0,0,6,0" />
-                                        <Button Content="Cancel"
-                                                Command="{Binding CancelCommand}"
-                                                Padding="12,4" />
-                                    </StackPanel>
+                                    <Button Content="Rollback"
+                                            Command="{Binding RollbackCommand}"
+                                            Padding="12,4"
+                                            Margin="0,0,6,0" />
+                                    <Button Content="Cancel"
+                                            Command="{Binding CancelCommand}"
+                                            Padding="12,4"
+                                            Margin="0,0,6,0" />
+                                    <Button Content="Reset"
+                                            Command="{Binding ResetCommand}"
+                                            Padding="12,4" />
+                                </StackPanel>
 
                                     <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
                                         <ProgressBar Height="4"

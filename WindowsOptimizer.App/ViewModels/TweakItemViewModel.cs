@@ -20,6 +20,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _verifyCommand;
     private readonly RelayCommand _rollbackCommand;
     private readonly RelayCommand _cancelCommand;
+    private readonly RelayCommand _resetCommand;
     private readonly RelayCommand _copyIdCommand;
     private CancellationTokenSource? _cts;
     private bool _isRunning;
@@ -51,6 +52,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
+        _resetCommand = new RelayCommand(_ => ResetStatus(), _ => CanReset());
         _copyIdCommand = new RelayCommand(_ => CopyId());
     }
 
@@ -75,6 +77,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand RollbackCommand => _rollbackCommand;
 
     public ICommand CancelCommand => _cancelCommand;
+
+    public ICommand ResetCommand => _resetCommand;
 
     public ICommand CopyIdCommand => _copyIdCommand;
 
@@ -342,6 +346,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    private void ResetStatus()
+    {
+        if (IsRunning)
+        {
+            return;
+        }
+
+        ResetSteps();
+        LastActionText = string.Empty;
+        LastOutcome = TweakRunOutcome.None;
+        StatusMessage = "Idle";
+        LastUpdatedText = "Last update: -";
+    }
+
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
     {
         for (var i = 0; i < Steps.Count - 1; i++)
@@ -378,6 +396,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         return IsRunning && !IsBulkLocked;
     }
 
+    private bool CanReset()
+    {
+        return !IsRunning && !IsBulkLocked;
+    }
+
     private void UpdateCommandStates()
     {
         _detectCommand.RaiseCanExecuteChanged();
@@ -386,5 +409,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         _verifyCommand.RaiseCanExecuteChanged();
         _rollbackCommand.RaiseCanExecuteChanged();
         _cancelCommand.RaiseCanExecuteChanged();
+        _resetCommand.RaiseCanExecuteChanged();
     }
 }
