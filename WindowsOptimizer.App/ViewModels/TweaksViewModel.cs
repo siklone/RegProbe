@@ -41,6 +41,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private string _filterSummary = "Showing 0 of 0 tweaks.";
     private string _riskSummary = "Safe: 0 | Advanced: 0 | Risky: 0";
     private string _bulkTargetSummary = "Bulk actions target 0 tweaks.";
+    private string _outcomeSummary = "Outcomes: 0 success | 0 failed | 0 cancelled | 0 running | 0 skipped";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -404,6 +405,12 @@ public sealed class TweaksViewModel : ViewModelBase
         private set => SetProperty(ref _bulkTargetSummary, value);
     }
 
+    public string OutcomeSummary
+    {
+        get => _outcomeSummary;
+        private set => SetProperty(ref _outcomeSummary, value);
+    }
+
     public bool HasVisibleTweaks
     {
         get => _hasVisibleTweaks;
@@ -668,6 +675,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var advancedCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Advanced);
         var riskyCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Risky);
         RiskSummary = $"Safe: {safeCount} | Advanced: {advancedCount} | Risky: {riskyCount}";
+        UpdateOutcomeSummary();
         HasVisibleTweaks = visible > 0;
         _detectAllCommand.RaiseCanExecuteChanged();
         _previewAllCommand.RaiseCanExecuteChanged();
@@ -728,6 +736,21 @@ public sealed class TweaksViewModel : ViewModelBase
             TweaksView.Refresh();
             UpdateFilterSummary();
         }
+
+        if (isRunningChange || outcomeChange)
+        {
+            UpdateOutcomeSummary();
+        }
+    }
+
+    private void UpdateOutcomeSummary()
+    {
+        var successCount = Tweaks.Count(item => item.LastOutcome == TweakRunOutcome.Success);
+        var failedCount = Tweaks.Count(item => item.LastOutcome == TweakRunOutcome.Failed);
+        var cancelledCount = Tweaks.Count(item => item.LastOutcome == TweakRunOutcome.Cancelled);
+        var runningCount = Tweaks.Count(item => item.LastOutcome == TweakRunOutcome.InProgress);
+        var skippedCount = Tweaks.Count(item => item.LastOutcome == TweakRunOutcome.Skipped);
+        OutcomeSummary = $"Outcomes: {successCount} success | {failedCount} failed | {cancelledCount} cancelled | {runningCount} running | {skippedCount} skipped";
     }
 
     private void ResetFilters()
