@@ -32,14 +32,17 @@
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Safe}">
                     <Setter Property="Background" Value="#E8F5E9" />
                     <Setter Property="BorderBrush" Value="#B6E2C2" />
+                    <Setter Property="ToolTip" Value="Safe: reversible and low risk." />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Advanced}">
                     <Setter Property="Background" Value="#FFF5E5" />
                     <Setter Property="BorderBrush" Value="#F6D6A8" />
+                    <Setter Property="ToolTip" Value="Advanced: moderate risk changes." />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Risky}">
                     <Setter Property="Background" Value="#FDECEC" />
                     <Setter Property="BorderBrush" Value="#F1B9B9" />
+                    <Setter Property="ToolTip" Value="Risky: higher impact changes." />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
