@@ -105,6 +105,10 @@
                                Text="{Binding RunModeLabel}"
                                Foreground="#8A8D93"
                                FontSize="11" />
+                    <TextBlock Margin="0,4,0,0"
+                               Text="{Binding LastOutcomeText}"
+                               Foreground="#8A8D93"
+                               FontSize="11" />
                     <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
                         <CheckBox Content="Verify after apply"
                                   IsChecked="{Binding VerifyAfterApply}"
@@ -124,6 +128,10 @@
                             Margin="0,0,8,0" />
                     <Button Content="Cancel"
                             Command="{Binding CancelCommand}"
+                            Padding="14,6"
+                            Margin="0,0,8,0" />
+                    <Button Content="Reset"
+                            Command="{Binding ResetCommand}"
                             Padding="14,6" />
                 </StackPanel>
             </Grid>
