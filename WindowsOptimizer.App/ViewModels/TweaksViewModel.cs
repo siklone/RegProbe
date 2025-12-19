@@ -80,6 +80,24 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
                     (settings, value) => settings.DemoTweakBetaEnabled = value),
+                pipeline),
+            new(new SettingsToggleTweak(
+                    "demo.gamma",
+                    "Demo: Tune startup sequencing",
+                    "Demo toggle stored in app settings. Marked advanced to exercise filtering.",
+                    TweakRiskLevel.Advanced,
+                    settingsStore,
+                    settings => settings.DemoTweakGammaEnabled,
+                    (settings, value) => settings.DemoTweakGammaEnabled = value),
+                pipeline),
+            new(new SettingsToggleTweak(
+                    "demo.delta",
+                    "Demo: Aggressive cleanup mode",
+                    "Demo toggle stored in app settings. Marked risky to exercise confirmations.",
+                    TweakRiskLevel.Risky,
+                    settingsStore,
+                    settings => settings.DemoTweakDeltaEnabled,
+                    (settings, value) => settings.DemoTweakDeltaEnabled = value),
                 pipeline)
         };
 
