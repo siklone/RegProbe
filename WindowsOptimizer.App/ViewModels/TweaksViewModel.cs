@@ -40,6 +40,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
     private string _riskSummary = "Safe: 0 | Advanced: 0 | Risky: 0";
+    private string _bulkTargetSummary = "Bulk actions target 0 tweaks.";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -366,6 +367,12 @@ public sealed class TweaksViewModel : ViewModelBase
         private set => SetProperty(ref _riskSummary, value);
     }
 
+    public string BulkTargetSummary
+    {
+        get => _bulkTargetSummary;
+        private set => SetProperty(ref _bulkTargetSummary, value);
+    }
+
     public bool HasVisibleTweaks
     {
         get => _hasVisibleTweaks;
@@ -620,6 +627,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        BulkTargetSummary = $"Bulk actions target {visible} tweak{(visible == 1 ? string.Empty : "s")}.";
         var safeCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Safe);
         var advancedCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Advanced);
         var riskyCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Risky);
