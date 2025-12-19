@@ -20,6 +20,8 @@ public sealed class MonitorViewModel : ViewModelBase
     private CancellationTokenSource? _cts;
     private bool _isRunning;
     private int _runCount;
+    private bool _verifyAfterApply = true;
+    private bool _rollbackOnFailure = true;
     private string _statusMessage = "Ready to run.";
     private string _runModeLabel = "Mode: Preview (DryRun)";
     private string _lastUpdatedText = "Last update: -";
@@ -85,6 +87,18 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _runCount, value);
     }
 
+    public bool VerifyAfterApply
+    {
+        get => _verifyAfterApply;
+        set => SetProperty(ref _verifyAfterApply, value);
+    }
+
+    public bool RollbackOnFailure
+    {
+        get => _rollbackOnFailure;
+        set => SetProperty(ref _rollbackOnFailure, value);
+    }
+
     public string RunModeLabel
     {
         get => _runModeLabel;
@@ -126,8 +140,8 @@ public sealed class MonitorViewModel : ViewModelBase
         var options = new TweakExecutionOptions
         {
             DryRun = dryRun,
-            VerifyAfterApply = true,
-            RollbackOnFailure = true
+            VerifyAfterApply = VerifyAfterApply,
+            RollbackOnFailure = RollbackOnFailure
         };
 
         try
