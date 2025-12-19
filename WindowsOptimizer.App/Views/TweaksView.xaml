@@ -125,6 +125,10 @@
                            Text="{Binding BulkProgressText}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <TextBlock Margin="0,4,0,0"
+                           Text="{Binding BulkTargetSummary}"
+                           Foreground="#8A8D93"
+                           FontSize="11" />
                 <ProgressBar Height="6"
                              Margin="0,4,0,0"
                              Minimum="0"
