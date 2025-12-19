@@ -382,7 +382,8 @@ public sealed class TweaksViewModel : ViewModelBase
                 OnPropertyChanged(nameof(BulkProgressText));
             }
 
-            BulkStatusMessage = $"Bulk {actionLabel} completed.";
+            var outcomeSummary = BuildOutcomeSummary(items);
+            BulkStatusMessage = $"Bulk {actionLabel} completed: {outcomeSummary}.";
         }
         catch (OperationCanceledException)
         {
@@ -490,6 +491,37 @@ public sealed class TweaksViewModel : ViewModelBase
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
         _resetAllCommand.RaiseCanExecuteChanged();
+    }
+
+    private static string BuildOutcomeSummary(IReadOnlyCollection<TweakItemViewModel> items)
+    {
+        var succeeded = items.Count(item => item.LastOutcome == TweakRunOutcome.Success);
+        var failed = items.Count(item => item.LastOutcome == TweakRunOutcome.Failed);
+        var cancelled = items.Count(item => item.LastOutcome == TweakRunOutcome.Cancelled);
+        var skipped = items.Count(item => item.LastOutcome == TweakRunOutcome.Skipped);
+
+        var parts = new System.Collections.Generic.List<string>();
+        if (succeeded > 0)
+        {
+            parts.Add($"{succeeded} success");
+        }
+
+        if (failed > 0)
+        {
+            parts.Add($"{failed} failed");
+        }
+
+        if (cancelled > 0)
+        {
+            parts.Add($"{cancelled} cancelled");
+        }
+
+        if (skipped > 0)
+        {
+            parts.Add($"{skipped} skipped");
+        }
+
+        return parts.Count == 0 ? "no results" : string.Join(", ", parts);
     }
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
