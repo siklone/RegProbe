@@ -27,6 +27,8 @@ public sealed class AppPaths
 
     public string LogFilePath => Path.Combine(LogDirectory, "app.log");
 
+    public string TweakLogFilePath => Path.Combine(LogDirectory, "tweak-log.csv");
+
     public void EnsureDirectories()
     {
         Directory.CreateDirectory(AppDataRoot);
