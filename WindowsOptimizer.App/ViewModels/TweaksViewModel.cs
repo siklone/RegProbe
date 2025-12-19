@@ -218,7 +218,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public string BulkProgressText => BulkProgressTotal == 0
         ? "Bulk progress: 0/0"
-        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
+        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal} ({BulkProgressCurrent * 100 / BulkProgressTotal}%)";
 
     public string SearchText
     {
