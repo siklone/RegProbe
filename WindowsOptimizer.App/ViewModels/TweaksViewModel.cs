@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _cancelAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
+    private readonly RelayCommand _openCsvLogCommand;
     private readonly RelayCommand _expandAllDetailsCommand;
     private readonly RelayCommand _collapseAllDetailsCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
@@ -42,12 +44,14 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
+    private readonly string _tweakLogFilePath;
 
     public TweaksViewModel()
     {
         var paths = AppPaths.FromEnvironment();
         var logger = new FileAppLogger(paths);
         _logFolderPath = paths.LogDirectory;
+        _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
@@ -92,6 +96,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
+        _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
 
@@ -119,6 +124,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
+
+    public ICommand OpenCsvLogCommand => _openCsvLogCommand;
 
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
@@ -448,6 +455,30 @@ public sealed class TweaksViewModel : ViewModelBase
         catch (Exception ex)
         {
             ExportStatusMessage = $"Open log folder failed: {ex.Message}";
+        }
+    }
+
+    private void OpenCsvLog()
+    {
+        try
+        {
+            if (!File.Exists(_tweakLogFilePath))
+            {
+                ExportStatusMessage = "No tweak log file yet. Run a tweak to generate one.";
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = _tweakLogFilePath,
+                UseShellExecute = true
+            });
+
+            ExportStatusMessage = $"Opened log file: {_tweakLogFilePath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Open log failed: {ex.Message}";
         }
     }
 
