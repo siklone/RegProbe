@@ -22,6 +22,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _isRunning;
     private string _statusMessage = "Idle";
     private string _lastUpdatedText = "Last update: -";
+    private string _lastActionText = string.Empty;
+    private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline)
     {
@@ -91,6 +93,48 @@ public sealed class TweakItemViewModel : ViewModelBase
         private set => SetProperty(ref _lastUpdatedText, value);
     }
 
+    public string LastActionText
+    {
+        get => _lastActionText;
+        private set
+        {
+            if (SetProperty(ref _lastActionText, value))
+            {
+                OnPropertyChanged(nameof(OutcomeSummary));
+            }
+        }
+    }
+
+    public TweakRunOutcome LastOutcome
+    {
+        get => _lastOutcome;
+        private set
+        {
+            if (SetProperty(ref _lastOutcome, value))
+            {
+                OnPropertyChanged(nameof(HasOutcome));
+                OnPropertyChanged(nameof(OutcomeText));
+                OnPropertyChanged(nameof(OutcomeSummary));
+            }
+        }
+    }
+
+    public bool HasOutcome => LastOutcome != TweakRunOutcome.None;
+
+    public string OutcomeText => LastOutcome switch
+    {
+        TweakRunOutcome.InProgress => "Running",
+        TweakRunOutcome.Success => "Success",
+        TweakRunOutcome.Failed => "Failed",
+        TweakRunOutcome.Cancelled => "Cancelled",
+        TweakRunOutcome.Skipped => "Skipped",
+        _ => "Idle"
+    };
+
+    public string OutcomeSummary => HasOutcome
+        ? $"{LastActionText} - {OutcomeText}"
+        : "No runs yet";
+
     public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
 
     public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
@@ -104,6 +148,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        var actionLabel = dryRun ? "Preview" : "Apply";
+        LastActionText = actionLabel;
+        LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
         ResetSteps();
@@ -121,15 +168,18 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             var report = await _pipeline.ExecuteAsync(_tweak, options, progress, _cts?.Token ?? CancellationToken.None);
             ApplyReport(report);
+            LastOutcome = report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
         {
+            LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = "Run cancelled.";
         }
         catch (Exception ex)
         {
+            LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"Run failed: {ex.Message}";
         }
         finally
@@ -148,6 +198,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(CancellationToken.None);
         IsRunning = true;
+        LastActionText = action.ToString();
+        LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = $"{action} started.";
         var step = Steps.FirstOrDefault(item => item.Action == action);
         step?.MarkInProgress();
@@ -164,15 +216,18 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? CancellationToken.None);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
+            LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
         {
+            LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = $"{action} cancelled.";
         }
         catch (Exception ex)
         {
+            LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"{action} failed: {ex.Message}";
         }
         finally
@@ -203,6 +258,17 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         _cts?.Dispose();
         _cts = null;
+    }
+
+    private static TweakRunOutcome MapOutcome(TweakStatus status)
+    {
+        return status switch
+        {
+            TweakStatus.Failed => TweakRunOutcome.Failed,
+            TweakStatus.Skipped => TweakRunOutcome.Skipped,
+            TweakStatus.NotApplicable => TweakRunOutcome.Skipped,
+            _ => TweakRunOutcome.Success
+        };
     }
 
     private void OnProgressUpdate(TweakExecutionUpdate update)
