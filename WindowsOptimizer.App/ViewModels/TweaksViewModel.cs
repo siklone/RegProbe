@@ -470,6 +470,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
     }
 
