@@ -44,6 +44,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _showOnlyFailed;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
@@ -270,6 +271,19 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    public bool ShowOnlyFailed
+    {
+        get => _showOnlyFailed;
+        set
+        {
+            if (SetProperty(ref _showOnlyFailed, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
     public string FilterSummary
     {
         get => _filterSummary;
@@ -437,6 +451,11 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (_showOnlyFailed && item.LastOutcome != TweakRunOutcome.Failed)
+        {
+            return false;
+        }
+
         if (string.IsNullOrWhiteSpace(_searchText))
         {
             return true;
@@ -480,6 +499,7 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowOnlyFailed = false;
     }
 
     private void OpenLogFolder()
