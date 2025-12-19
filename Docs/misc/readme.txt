@@ -1,0 +1,1 @@
+This is mostly what Nohuxi (a person) found out on his own and his own stuff. We can use the stuff since they are open source but maybe remove the name.

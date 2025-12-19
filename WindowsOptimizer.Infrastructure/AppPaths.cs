@@ -1,0 +1,41 @@
+using System;
+using System.IO;
+
+namespace WindowsOptimizer.Infrastructure;
+
+public sealed class AppPaths
+{
+    public const string AppFolderName = "WindowsOptimizerSuite";
+
+    public AppPaths(string baseAppDataPath)
+    {
+        if (string.IsNullOrWhiteSpace(baseAppDataPath))
+        {
+            throw new ArgumentException("Base app data path is required.", nameof(baseAppDataPath));
+        }
+
+        BaseAppDataPath = baseAppDataPath;
+    }
+
+    public string BaseAppDataPath { get; }
+
+    public string AppDataRoot => Path.Combine(BaseAppDataPath, AppFolderName);
+
+    public string SettingsFilePath => Path.Combine(AppDataRoot, "settings.json");
+
+    public string LogDirectory => Path.Combine(AppDataRoot, "logs");
+
+    public string LogFilePath => Path.Combine(LogDirectory, "app.log");
+
+    public void EnsureDirectories()
+    {
+        Directory.CreateDirectory(AppDataRoot);
+        Directory.CreateDirectory(LogDirectory);
+    }
+
+    public static AppPaths FromEnvironment()
+    {
+        var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        return new AppPaths(basePath);
+    }
+}
