@@ -152,6 +152,9 @@
                     <CheckBox Content="Only Failed"
                               IsChecked="{Binding ShowOnlyFailed}"
                               Margin="0,0,12,0" />
+                    <CheckBox Content="Only Running"
+                              IsChecked="{Binding ShowOnlyRunning}"
+                              Margin="0,0,12,0" />
                     <Button Content="Reset Filters"
                             Command="{Binding ResetFiltersCommand}"
                             Padding="10,2" />

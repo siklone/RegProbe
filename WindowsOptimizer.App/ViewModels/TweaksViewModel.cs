@@ -45,6 +45,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _showOnlyRunning;
     private bool _showOnlyFailed;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
@@ -297,6 +298,29 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _showOnlyFailed, value))
             {
+                if (value && ShowOnlyRunning)
+                {
+                    ShowOnlyRunning = false;
+                }
+
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowOnlyRunning
+    {
+        get => _showOnlyRunning;
+        set
+        {
+            if (SetProperty(ref _showOnlyRunning, value))
+            {
+                if (value && ShowOnlyFailed)
+                {
+                    ShowOnlyFailed = false;
+                }
+
                 TweaksView.Refresh();
                 UpdateFilterSummary();
             }
@@ -482,6 +506,11 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (_showOnlyRunning && !item.IsRunning)
+        {
+            return false;
+        }
+
         if (string.IsNullOrWhiteSpace(_searchText))
         {
             return true;
@@ -544,7 +573,10 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
+        var isRunningChange = e.PropertyName == nameof(TweakItemViewModel.IsRunning);
+        var outcomeChange = e.PropertyName == nameof(TweakItemViewModel.LastOutcome);
+
+        if (isRunningChange)
         {
             _detectAllCommand.RaiseCanExecuteChanged();
             _previewAllCommand.RaiseCanExecuteChanged();
@@ -552,6 +584,12 @@ public sealed class TweaksViewModel : ViewModelBase
             _verifyAllCommand.RaiseCanExecuteChanged();
             _rollbackAllCommand.RaiseCanExecuteChanged();
             _resetAllCommand.RaiseCanExecuteChanged();
+        }
+
+        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && ShowOnlyFailed))
+        {
+            TweaksView.Refresh();
+            UpdateFilterSummary();
         }
     }
 
@@ -561,6 +599,7 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowOnlyRunning = false;
         ShowOnlyFailed = false;
     }
 
