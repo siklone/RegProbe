@@ -34,6 +34,8 @@ public sealed class TweakExecutionPipeline
         var steps = new List<TweakExecutionStep>();
         var startedAt = DateTimeOffset.UtcNow;
 
+        ct.ThrowIfCancellationRequested();
+
         var detectStep = await RunStepAsync(tweak, TweakAction.Detect, tweak.DetectAsync, steps, progress, ct);
         if (detectStep.Result.Status == TweakStatus.NotApplicable)
         {
@@ -158,7 +160,12 @@ public sealed class TweakExecutionPipeline
         TweakResult result;
         try
         {
+            ct.ThrowIfCancellationRequested();
             result = await operation(ct);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
         }
         catch (Exception ex)
         {
