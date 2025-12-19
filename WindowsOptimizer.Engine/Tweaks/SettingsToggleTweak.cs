@@ -72,9 +72,16 @@ public sealed class SettingsToggleTweak : ITweak
 
     public async Task<TweakResult> RollbackAsync(CancellationToken ct)
     {
-        var rollbackValue = _detectedValue ?? !_targetValue;
-        await UpdateSettingAsync(rollbackValue, ct);
-        var state = rollbackValue ? "enabled" : "disabled";
+        if (_detectedValue is null)
+        {
+            return new TweakResult(
+                TweakStatus.Skipped,
+                "Rollback skipped because no prior detect state is available.",
+                DateTimeOffset.UtcNow);
+        }
+
+        await UpdateSettingAsync(_detectedValue.Value, ct);
+        var state = _detectedValue.Value ? "enabled" : "disabled";
         return new TweakResult(TweakStatus.RolledBack, $"Rolled back to {state}.", DateTimeOffset.UtcNow);
     }
 
