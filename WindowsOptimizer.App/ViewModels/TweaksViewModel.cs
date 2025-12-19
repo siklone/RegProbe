@@ -143,6 +143,7 @@ public sealed class TweaksViewModel : ViewModelBase
                 _previewAllCommand.RaiseCanExecuteChanged();
                 _applyAllCommand.RaiseCanExecuteChanged();
                 _cancelAllCommand.RaiseCanExecuteChanged();
+                SetBulkLock(value);
             }
         }
     }
@@ -413,6 +414,14 @@ public sealed class TweaksViewModel : ViewModelBase
         foreach (var item in Tweaks)
         {
             item.IsDetailsExpanded = isExpanded;
+        }
+    }
+
+    private void SetBulkLock(bool isLocked)
+    {
+        foreach (var item in Tweaks)
+        {
+            item.IsBulkLocked = isLocked;
         }
     }
 }

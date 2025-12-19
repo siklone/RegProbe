@@ -22,6 +22,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _copyIdCommand;
     private CancellationTokenSource? _cts;
     private bool _isRunning;
+    private bool _isBulkLocked;
     private string _statusMessage = "Idle";
     private string _lastUpdatedText = "Last update: -";
     private string _lastActionText = string.Empty;
@@ -43,11 +44,11 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         ResetSteps();
 
-        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => !IsRunning);
-        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => !IsRunning);
-        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => !IsRunning);
-        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => !IsRunning);
-        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanRun());
+        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
+        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => CanRun());
+        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => CanRun());
+        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
     }
 
@@ -80,11 +81,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             if (SetProperty(ref _isRunning, value))
             {
-                _previewCommand.RaiseCanExecuteChanged();
-                _applyCommand.RaiseCanExecuteChanged();
-                _verifyCommand.RaiseCanExecuteChanged();
-                _rollbackCommand.RaiseCanExecuteChanged();
-                _cancelCommand.RaiseCanExecuteChanged();
+                UpdateCommandStates();
+            }
+        }
+    }
+
+    public bool IsBulkLocked
+    {
+        get => _isBulkLocked;
+        set
+        {
+            if (SetProperty(ref _isBulkLocked, value))
+            {
+                UpdateCommandStates();
             }
         }
     }
@@ -347,5 +356,24 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             StatusMessage = $"Copy failed: {ex.Message}";
         }
+    }
+
+    private bool CanRun()
+    {
+        return !IsRunning && !IsBulkLocked;
+    }
+
+    private bool CanCancel()
+    {
+        return IsRunning && !IsBulkLocked;
+    }
+
+    private void UpdateCommandStates()
+    {
+        _previewCommand.RaiseCanExecuteChanged();
+        _applyCommand.RaiseCanExecuteChanged();
+        _verifyCommand.RaiseCanExecuteChanged();
+        _rollbackCommand.RaiseCanExecuteChanged();
+        _cancelCommand.RaiseCanExecuteChanged();
     }
 }
