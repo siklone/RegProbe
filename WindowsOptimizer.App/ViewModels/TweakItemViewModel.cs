@@ -17,6 +17,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _applyCommand;
     private readonly RelayCommand _verifyCommand;
     private readonly RelayCommand _rollbackCommand;
+    private readonly RelayCommand _cancelCommand;
+    private CancellationTokenSource? _cts;
     private bool _isRunning;
     private string _statusMessage = "Idle";
     private string _lastUpdatedText = "Last update: -";
@@ -40,6 +42,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _applyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => !IsRunning);
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => !IsRunning);
+        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
     }
 
     public string Name => _tweak.Name;
@@ -58,6 +61,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public ICommand RollbackCommand => _rollbackCommand;
 
+    public ICommand CancelCommand => _cancelCommand;
+
     public bool IsRunning
     {
         get => _isRunning;
@@ -69,6 +74,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 _applyCommand.RaiseCanExecuteChanged();
                 _verifyCommand.RaiseCanExecuteChanged();
                 _rollbackCommand.RaiseCanExecuteChanged();
+                _cancelCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -92,6 +98,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
+        StartCancellation();
         IsRunning = true;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
@@ -108,7 +115,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         try
         {
-            var report = await _pipeline.ExecuteAsync(_tweak, options, progress, CancellationToken.None);
+            var report = await _pipeline.ExecuteAsync(_tweak, options, progress, _cts?.Token ?? CancellationToken.None);
             ApplyReport(report);
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
@@ -124,6 +131,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         finally
         {
             IsRunning = false;
+            ClearCancellation();
         }
     }
 
@@ -134,6 +142,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
+        StartCancellation();
         IsRunning = true;
         StatusMessage = $"{action} started.";
         var step = Steps.FirstOrDefault(item => item.Action == action);
@@ -149,7 +158,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 }
             });
 
-            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, CancellationToken.None);
+            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? CancellationToken.None);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
             StatusMessage = $"{action} {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -165,7 +174,31 @@ public sealed class TweakItemViewModel : ViewModelBase
         finally
         {
             IsRunning = false;
+            ClearCancellation();
         }
+    }
+
+    private void CancelRun()
+    {
+        if (!IsRunning || _cts is null)
+        {
+            return;
+        }
+
+        _cts.Cancel();
+        StatusMessage = "Cancellation requested.";
+    }
+
+    private void StartCancellation()
+    {
+        ClearCancellation();
+        _cts = new CancellationTokenSource();
+    }
+
+    private void ClearCancellation()
+    {
+        _cts?.Dispose();
+        _cts = null;
     }
 
     private void OnProgressUpdate(TweakExecutionUpdate update)
