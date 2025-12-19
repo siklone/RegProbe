@@ -35,6 +35,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
+    private string _riskSummary = "Safe: 0 | Advanced: 0 | Risky: 0";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -290,6 +291,12 @@ public sealed class TweaksViewModel : ViewModelBase
         private set => SetProperty(ref _filterSummary, value);
     }
 
+    public string RiskSummary
+    {
+        get => _riskSummary;
+        private set => SetProperty(ref _riskSummary, value);
+    }
+
     public bool HasVisibleTweaks
     {
         get => _hasVisibleTweaks;
@@ -463,6 +470,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -471,6 +479,10 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        var safeCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Safe);
+        var advancedCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Advanced);
+        var riskyCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Risky);
+        RiskSummary = $"Safe: {safeCount} | Advanced: {advancedCount} | Risky: {riskyCount}";
         HasVisibleTweaks = visible > 0;
         _detectAllCommand.RaiseCanExecuteChanged();
         _previewAllCommand.RaiseCanExecuteChanged();
