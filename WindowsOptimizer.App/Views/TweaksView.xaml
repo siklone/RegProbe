@@ -324,11 +324,13 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
 
-                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
-                                                <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
-                                                <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
-                                            </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                            <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
+                                            <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
+                                            <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
+                                            <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
+                                            <TextBlock Text="{Binding LastDurationText}" Foreground="#8A8D93" />
+                                        </StackPanel>
                                         </StackPanel>
                                     </Expander>
                                 </Grid>

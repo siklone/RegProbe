@@ -27,6 +27,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _isBulkLocked;
     private string _statusMessage = "Idle";
     private string _lastUpdatedText = "Last update: -";
+    private string _lastDurationText = "Duration: -";
     private string _lastActionText = string.Empty;
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
     private bool _isDetailsExpanded = true;
@@ -118,6 +119,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         private set => SetProperty(ref _lastUpdatedText, value);
     }
 
+    public string LastDurationText
+    {
+        get => _lastDurationText;
+        private set => SetProperty(ref _lastDurationText, value);
+    }
+
     public string LastActionText
     {
         get => _lastActionText;
@@ -194,11 +201,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        var startedAt = DateTimeOffset.UtcNow;
         var actionLabel = dryRun ? "Preview" : "Apply";
         LastActionText = actionLabel;
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
+        LastDurationText = "Duration: -";
         ResetSteps();
         Steps.First().MarkInProgress();
 
@@ -217,16 +226,19 @@ public sealed class TweakItemViewModel : ViewModelBase
             LastOutcome = report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
+            LastDurationText = $"Duration: {FormatDuration(report.CompletedAt - report.StartedAt)}";
         }
         catch (OperationCanceledException)
         {
             LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = "Run cancelled.";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         catch (Exception ex)
         {
             LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"Run failed: {ex.Message}";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         finally
         {
@@ -253,6 +265,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         IsRunning = true;
+        var startedAt = DateTimeOffset.UtcNow;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = $"{action} started.";
@@ -274,16 +287,19 @@ public sealed class TweakItemViewModel : ViewModelBase
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         catch (OperationCanceledException)
         {
             LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = $"{action} cancelled.";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         catch (Exception ex)
         {
             LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"{action} failed: {ex.Message}";
+            LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
         }
         finally
         {
@@ -376,6 +392,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastOutcome = TweakRunOutcome.None;
         StatusMessage = "Idle";
         LastUpdatedText = "Last update: -";
+        LastDurationText = "Duration: -";
     }
 
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
@@ -418,6 +435,21 @@ public sealed class TweakItemViewModel : ViewModelBase
             MessageBoxImage.Warning);
 
         return result == MessageBoxResult.Yes;
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        if (duration.TotalSeconds < 1)
+        {
+            return $"{duration.TotalMilliseconds:0} ms";
+        }
+
+        if (duration.TotalMinutes < 1)
+        {
+            return $"{duration.TotalSeconds:0.0} s";
+        }
+
+        return $"{duration.TotalMinutes:0.0} min";
     }
 
     private bool CanRun()
