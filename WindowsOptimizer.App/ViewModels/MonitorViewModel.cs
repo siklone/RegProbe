@@ -28,6 +28,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private string _lastUpdatedText = "Last update: -";
     private string _lastDurationText = "Duration: -";
     private string _currentStepText = "Current step: -";
+    private string _lastOutcomeText = "Last result: -";
 
     public MonitorViewModel()
     {
@@ -129,6 +130,12 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _currentStepText, value);
     }
 
+    public string LastOutcomeText
+    {
+        get => _lastOutcomeText;
+        private set => SetProperty(ref _lastOutcomeText, value);
+    }
+
     public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
 
     private async Task RunPipelineAsync(bool dryRun)
@@ -164,16 +171,19 @@ public sealed class MonitorViewModel : ViewModelBase
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
             LastDurationText = $"Duration: {FormatDuration(report.CompletedAt - report.StartedAt)}";
+            LastOutcomeText = report.Succeeded ? "Last result: Success" : "Last result: Failed";
         }
         catch (OperationCanceledException)
         {
             StatusMessage = "Run cancelled.";
             LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
+            LastOutcomeText = "Last result: Cancelled";
         }
         catch (Exception ex)
         {
             StatusMessage = $"Run failed: {ex.Message}";
             LastDurationText = $"Duration: {FormatDuration(DateTimeOffset.UtcNow - startedAt)}";
+            LastOutcomeText = "Last result: Failed";
         }
         finally
         {
@@ -249,6 +259,7 @@ public sealed class MonitorViewModel : ViewModelBase
         LastUpdatedText = "Last update: -";
         LastDurationText = "Duration: -";
         CurrentStepText = "Current step: -";
+        LastOutcomeText = "Last result: -";
         RunCount = 0;
     }
 
