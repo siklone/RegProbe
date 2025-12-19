@@ -21,6 +21,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _previewAllCommand;
     private readonly RelayCommand _applyAllCommand;
     private readonly RelayCommand _cancelAllCommand;
+    private readonly RelayCommand _resetFiltersCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -74,6 +75,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => !IsBulkRunning);
         _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => !IsBulkRunning);
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
+        _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
     }
 
     public string Title => "Tweaks";
@@ -89,6 +91,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ApplyAllCommand => _applyAllCommand;
 
     public ICommand CancelAllCommand => _cancelAllCommand;
+
+    public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public string ExportStatusMessage
     {
@@ -361,5 +365,13 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+    }
+
+    private void ResetFilters()
+    {
+        SearchText = string.Empty;
+        ShowSafe = true;
+        ShowAdvanced = true;
+        ShowRisky = true;
     }
 }
