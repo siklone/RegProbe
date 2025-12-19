@@ -147,6 +147,11 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasOutcome));
                 OnPropertyChanged(nameof(OutcomeText));
                 OnPropertyChanged(nameof(OutcomeSummary));
+
+                if (value == TweakRunOutcome.Failed)
+                {
+                    IsDetailsExpanded = true;
+                }
             }
         }
     }

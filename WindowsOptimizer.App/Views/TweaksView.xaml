@@ -135,6 +135,10 @@
                            Text="{Binding FilterSummary}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <TextBlock Margin="0,4,0,0"
+                           Text="{Binding RiskSummary}"
+                           Foreground="#8A8D93"
+                           FontSize="11" />
                 <StackPanel Margin="0,6,0,0" Orientation="Horizontal">
                     <CheckBox Content="Safe"
                               IsChecked="{Binding ShowSafe}"
@@ -144,6 +148,9 @@
                               Margin="0,0,12,0" />
                     <CheckBox Content="Risky"
                               IsChecked="{Binding ShowRisky}"
+                              Margin="0,0,12,0" />
+                    <CheckBox Content="Only Failed"
+                              IsChecked="{Binding ShowOnlyFailed}"
                               Margin="0,0,12,0" />
                     <Button Content="Reset Filters"
                             Command="{Binding ResetFiltersCommand}"
