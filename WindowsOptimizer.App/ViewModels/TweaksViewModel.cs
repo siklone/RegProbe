@@ -47,6 +47,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showRisky = true;
     private bool _showOnlyRunning;
     private bool _showOnlyFailed;
+    private bool _sortFailedFirst;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
@@ -109,8 +110,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
         TweaksView.Filter = FilterTweaks;
-        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
-        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        ApplySort();
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
         _detectAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Detect", (item, token) => item.RunDetectAsync(token)), _ => CanRunBulk());
@@ -327,6 +327,18 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    public bool SortFailedFirst
+    {
+        get => _sortFailedFirst;
+        set
+        {
+            if (SetProperty(ref _sortFailedFirst, value))
+            {
+                ApplySort();
+            }
+        }
+    }
+
     public string FilterSummary
     {
         get => _filterSummary;
@@ -522,6 +534,19 @@ public sealed class TweaksViewModel : ViewModelBase
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
     }
 
+    private void ApplySort()
+    {
+        TweaksView.SortDescriptions.Clear();
+        if (SortFailedFirst)
+        {
+            TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.OutcomeSortRank), ListSortDirection.Ascending));
+        }
+
+        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
+        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        TweaksView.Refresh();
+    }
+
     private void UpdateFilterSummary()
     {
         var total = Tweaks.Count;
@@ -586,7 +611,7 @@ public sealed class TweaksViewModel : ViewModelBase
             _resetAllCommand.RaiseCanExecuteChanged();
         }
 
-        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && ShowOnlyFailed))
+        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && (ShowOnlyFailed || SortFailedFirst)))
         {
             TweaksView.Refresh();
             UpdateFilterSummary();
@@ -601,6 +626,7 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowRisky = true;
         ShowOnlyRunning = false;
         ShowOnlyFailed = false;
+        SortFailedFirst = false;
     }
 
     private void OpenLogFolder()
