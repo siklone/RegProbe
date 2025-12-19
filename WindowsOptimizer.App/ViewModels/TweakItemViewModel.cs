@@ -429,6 +429,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastUpdatedText = "Last update: -";
         LastDurationText = "Duration: -";
         RunCount = 0;
+        IsDetailsExpanded = false;
     }
 
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
