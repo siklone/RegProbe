@@ -39,19 +39,19 @@ public sealed class TweakExecutionPipeline
         var detectStep = await RunStepAsync(tweak, TweakAction.Detect, tweak.DetectAsync, steps, progress, ct);
         if (detectStep.Result.Status == TweakStatus.NotApplicable)
         {
-            AppendSkippedSteps(tweak, steps, progress, "Detect returned NotApplicable.");
+            await AppendSkippedStepsAsync(tweak, steps, progress, "Detect returned NotApplicable.", ct);
             return BuildReport(tweak, options, steps, startedAt);
         }
 
         if (detectStep.Result.Status == TweakStatus.Failed)
         {
-            AppendSkippedSteps(tweak, steps, progress, "Detect failed.");
+            await AppendSkippedStepsAsync(tweak, steps, progress, "Detect failed.", ct);
             return BuildReport(tweak, options, steps, startedAt);
         }
 
         if (options.DryRun)
         {
-            AppendSkippedSteps(tweak, steps, progress, "DryRun enabled.");
+            await AppendSkippedStepsAsync(tweak, steps, progress, "DryRun enabled.", ct);
             return BuildReport(tweak, options, steps, startedAt);
         }
 
@@ -76,10 +76,34 @@ public sealed class TweakExecutionPipeline
         }
         else
         {
-            AppendSkippedStep(tweak, TweakAction.Verify, steps, progress, "Verify disabled by options.");
+            await AppendSkippedStepAsync(tweak, TweakAction.Verify, steps, progress, "Verify disabled by options.", ct);
         }
 
         return BuildReport(tweak, options, steps, startedAt);
+    }
+
+    public Task<TweakExecutionStep> ExecuteStepAsync(
+        ITweak tweak,
+        TweakAction action,
+        IProgress<TweakExecutionUpdate>? progress = null,
+        CancellationToken ct = default)
+    {
+        if (tweak is null)
+        {
+            throw new ArgumentNullException(nameof(tweak));
+        }
+
+        Func<CancellationToken, Task<TweakResult>> operation = action switch
+        {
+            TweakAction.Detect => tweak.DetectAsync,
+            TweakAction.Apply => tweak.ApplyAsync,
+            TweakAction.Verify => tweak.VerifyAsync,
+            TweakAction.Rollback => tweak.RollbackAsync,
+            _ => throw new ArgumentOutOfRangeException(nameof(action), action, "Unsupported action.")
+        };
+
+        var steps = new List<TweakExecutionStep>();
+        return RunStepAsync(tweak, action, operation, steps, progress, ct);
     }
 
     private static TweakExecutionReport BuildReport(
@@ -121,23 +145,25 @@ public sealed class TweakExecutionPipeline
         return false;
     }
 
-    private void AppendSkippedSteps(
+    private async Task AppendSkippedStepsAsync(
         ITweak tweak,
         List<TweakExecutionStep> steps,
         IProgress<TweakExecutionUpdate>? progress,
-        string reason)
+        string reason,
+        CancellationToken ct)
     {
-        AppendSkippedStep(tweak, TweakAction.Apply, steps, progress, reason);
-        AppendSkippedStep(tweak, TweakAction.Verify, steps, progress, reason);
-        AppendSkippedStep(tweak, TweakAction.Rollback, steps, progress, reason);
+        await AppendSkippedStepAsync(tweak, TweakAction.Apply, steps, progress, reason, ct);
+        await AppendSkippedStepAsync(tweak, TweakAction.Verify, steps, progress, reason, ct);
+        await AppendSkippedStepAsync(tweak, TweakAction.Rollback, steps, progress, reason, ct);
     }
 
-    private void AppendSkippedStep(
+    private async Task AppendSkippedStepAsync(
         ITweak tweak,
         TweakAction action,
         List<TweakExecutionStep> steps,
         IProgress<TweakExecutionUpdate>? progress,
-        string reason)
+        string reason,
+        CancellationToken ct)
     {
         var result = new TweakResult(
             TweakStatus.Skipped,
@@ -146,7 +172,7 @@ public sealed class TweakExecutionPipeline
 
         var step = new TweakExecutionStep(action, result);
         steps.Add(step);
-        ReportStep(tweak, step, progress, null);
+        await ReportStep(tweak, step, progress, ct);
     }
 
     private async Task<TweakExecutionStep> RunStepAsync(

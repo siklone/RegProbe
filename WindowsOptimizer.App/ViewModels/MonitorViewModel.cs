@@ -14,8 +14,10 @@ public sealed class MonitorViewModel : ViewModelBase
 {
     private readonly RelayCommand _runPreviewCommand;
     private readonly RelayCommand _runApplyCommand;
+    private readonly RelayCommand _cancelCommand;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly DemoTweak _demoTweak = new();
+    private CancellationTokenSource? _cts;
     private bool _isRunning;
     private string _statusMessage = "Ready to run.";
     private string _runModeLabel = "Mode: Preview (DryRun)";
@@ -40,6 +42,7 @@ public sealed class MonitorViewModel : ViewModelBase
 
         _runPreviewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
         _runApplyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
+        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
     }
 
     public string Title => "Monitor";
@@ -52,6 +55,8 @@ public sealed class MonitorViewModel : ViewModelBase
 
     public ICommand RunApplyCommand => _runApplyCommand;
 
+    public ICommand CancelCommand => _cancelCommand;
+
     public bool IsRunning
     {
         get => _isRunning;
@@ -61,6 +66,7 @@ public sealed class MonitorViewModel : ViewModelBase
             {
                 _runPreviewCommand.RaiseCanExecuteChanged();
                 _runApplyCommand.RaiseCanExecuteChanged();
+                _cancelCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -91,6 +97,7 @@ public sealed class MonitorViewModel : ViewModelBase
         }
 
         IsRunning = true;
+        StartCancellation();
         RunModeLabel = dryRun ? "Mode: Preview (DryRun)" : "Mode: Apply";
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         ResetSteps();
@@ -106,10 +113,14 @@ public sealed class MonitorViewModel : ViewModelBase
 
         try
         {
-            var report = await _pipeline.ExecuteAsync(_demoTweak, options, progress, CancellationToken.None);
+            var report = await _pipeline.ExecuteAsync(_demoTweak, options, progress, _cts?.Token ?? CancellationToken.None);
             ApplyReport(report);
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
+        }
+        catch (OperationCanceledException)
+        {
+            StatusMessage = "Run cancelled.";
         }
         catch (Exception ex)
         {
@@ -118,6 +129,7 @@ public sealed class MonitorViewModel : ViewModelBase
         finally
         {
             IsRunning = false;
+            ClearCancellation();
         }
     }
 
@@ -157,6 +169,29 @@ public sealed class MonitorViewModel : ViewModelBase
         {
             step.Reset();
         }
+    }
+
+    private void CancelRun()
+    {
+        if (!IsRunning || _cts is null)
+        {
+            return;
+        }
+
+        _cts.Cancel();
+        StatusMessage = "Cancellation requested.";
+    }
+
+    private void StartCancellation()
+    {
+        ClearCancellation();
+        _cts = new CancellationTokenSource();
+    }
+
+    private void ClearCancellation()
+    {
+        _cts?.Dispose();
+        _cts = null;
     }
 
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)

@@ -7,6 +7,7 @@ public sealed class MainViewModel : ViewModelBase
     private NavigationItem? _selectedNavigationItem;
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
+    private readonly RelayCommand _clearSearchCommand;
 
     public MainViewModel()
     {
@@ -26,6 +27,8 @@ public sealed class MainViewModel : ViewModelBase
         };
 
         SelectedNavigationItem = NavigationItems[0];
+
+        _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
     }
 
     public ObservableCollection<NavigationItem> NavigationItems { get; }
@@ -38,6 +41,7 @@ public sealed class MainViewModel : ViewModelBase
             if (SetProperty(ref _selectedNavigationItem, value))
             {
                 CurrentViewModel = _selectedNavigationItem?.ViewModel;
+                SyncSearchText();
             }
         }
     }
@@ -51,6 +55,23 @@ public sealed class MainViewModel : ViewModelBase
     public string SearchText
     {
         get => _searchText;
-        set => SetProperty(ref _searchText, value);
+        set
+        {
+            if (SetProperty(ref _searchText, value))
+            {
+                SyncSearchText();
+                _clearSearchCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public RelayCommand ClearSearchCommand => _clearSearchCommand;
+
+    private void SyncSearchText()
+    {
+        if (_currentViewModel is TweaksViewModel tweaksViewModel)
+        {
+            tweaksViewModel.SearchText = _searchText;
+        }
     }
 }
