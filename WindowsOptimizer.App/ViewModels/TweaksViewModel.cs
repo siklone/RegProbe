@@ -74,6 +74,11 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline)
         };
 
+        foreach (var tweak in Tweaks)
+        {
+            tweak.PropertyChanged += OnTweakPropertyChanged;
+        }
+
         TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
@@ -290,7 +295,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private bool CanRunBulk()
     {
-        if (IsBulkRunning)
+        if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
         {
             return false;
         }
@@ -407,6 +412,17 @@ public sealed class TweaksViewModel : ViewModelBase
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
+    }
+
+    private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
+        {
+            _previewAllCommand.RaiseCanExecuteChanged();
+            _applyAllCommand.RaiseCanExecuteChanged();
+            _verifyAllCommand.RaiseCanExecuteChanged();
+            _rollbackAllCommand.RaiseCanExecuteChanged();
+        }
     }
 
     private void ResetFilters()
