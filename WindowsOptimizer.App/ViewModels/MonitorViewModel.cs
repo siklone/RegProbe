@@ -215,6 +215,7 @@ public sealed class MonitorViewModel : ViewModelBase
         public string Name => "Demo tweak pipeline";
         public string Description => "Simulated tweak run for monitoring UI.";
         public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+        public bool RequiresElevation => false;
 
         public Task<TweakResult> DetectAsync(CancellationToken ct)
             => SimulateAsync(TweakStatus.Detected, "Configuration snapshot captured.", ct);

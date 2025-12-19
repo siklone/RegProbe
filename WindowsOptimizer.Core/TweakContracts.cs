@@ -42,6 +42,7 @@ public interface ITweak
     string Name { get; }
     string Description { get; }
     TweakRiskLevel Risk { get; }
+    bool RequiresElevation { get; }
     Task<TweakResult> DetectAsync(CancellationToken ct);
     Task<TweakResult> ApplyAsync(CancellationToken ct);
     Task<TweakResult> VerifyAsync(CancellationToken ct);

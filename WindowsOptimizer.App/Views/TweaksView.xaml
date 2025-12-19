@@ -43,6 +43,19 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ElevationBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="6,2" />
+            <Setter Property="Background" Value="#FFF2E1" />
+            <Setter Property="BorderBrush" Value="#F1C47A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsElevationBlocked}" Value="True">
+                    <Setter Property="Background" Value="#FDECEC" />
+                    <Setter Property="BorderBrush" Value="#F1B9B9" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="StepIndicatorStyle" TargetType="Ellipse">
             <Setter Property="Fill" Value="#B9BDC6" />
             <Setter Property="Width" Value="9" />
@@ -125,6 +138,20 @@
                            Text="{Binding BulkProgressText}"
                            Foreground="#8A8D93"
                            FontSize="11" />
+                <TextBlock Margin="0,4,0,0"
+                           Text="{Binding ElevationStatusMessage}"
+                           FontSize="11">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#8A8D93" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsElevated}" Value="False">
+                                    <Setter Property="Foreground" Value="#C65D00" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
                 <TextBlock Margin="0,4,0,0"
                            Text="{Binding FilterSummary}"
                            Foreground="#8A8D93"
@@ -220,6 +247,12 @@
                                                 Visibility="{Binding HasOutcome, Converter={StaticResource BoolToVisibility}}">
                                             <TextBlock Text="{Binding OutcomeSummary}" FontSize="11" FontWeight="SemiBold" />
                                         </Border>
+                                        <Border Style="{StaticResource ElevationBadgeStyle}"
+                                                Margin="10,0,0,0"
+                                                Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}"
+                                                ToolTip="{Binding ElevationTooltip}">
+                                            <TextBlock Text="{Binding ElevationBadgeText}" FontSize="11" FontWeight="SemiBold" />
+                                        </Border>
                                     </StackPanel>
 
                                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -256,6 +289,11 @@
                                         <TextBlock Text="{Binding Description}"
                                                    Foreground="#4B4B4B"
                                                    TextWrapping="Wrap" />
+                                        <TextBlock Margin="0,4,0,0"
+                                                   Text="{Binding ElevationWarningText}"
+                                                   Foreground="#C65D00"
+                                                   FontSize="11"
+                                                   Visibility="{Binding IsElevationBlocked, Converter={StaticResource BoolToVisibility}}" />
                                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                                             <TextBlock Text="{Binding Id}"
                                                        Foreground="#8A8D93"

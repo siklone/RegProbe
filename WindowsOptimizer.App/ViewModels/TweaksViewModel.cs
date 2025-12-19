@@ -12,6 +12,7 @@ using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -30,6 +31,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _openCsvLogCommand;
     private readonly RelayCommand _expandAllDetailsCommand;
     private readonly RelayCommand _collapseAllDetailsCommand;
+    private readonly bool _isElevated;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -55,6 +57,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _logStore = new FileTweakLogStore(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
+        _isElevated = ProcessElevation.IsElevated();
 
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
@@ -66,7 +69,8 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakAlphaEnabled,
                     (settings, value) => settings.DemoTweakAlphaEnabled = value),
-                pipeline),
+                pipeline,
+                _isElevated),
             new(new SettingsToggleTweak(
                     "demo.beta",
                     "Demo: Reduce background noise",
@@ -75,7 +79,8 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
                     (settings, value) => settings.DemoTweakBetaEnabled = value),
-                pipeline)
+                pipeline,
+                _isElevated)
         };
 
         foreach (var tweak in Tweaks)
@@ -104,6 +109,12 @@ public sealed class TweaksViewModel : ViewModelBase
     }
 
     public string Title => "Tweaks";
+
+    public bool IsElevated => _isElevated;
+
+    public string ElevationStatusMessage => IsElevated
+        ? "Running with administrator privileges."
+        : "Running without administrator privileges. Admin-required tweaks are locked.";
 
     public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 
