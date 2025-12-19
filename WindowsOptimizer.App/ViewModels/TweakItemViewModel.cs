@@ -183,6 +183,15 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
+        if (!dryRun && !ConfirmRiskyAction("apply"))
+        {
+            LastActionText = "Apply";
+            LastOutcome = TweakRunOutcome.Cancelled;
+            StatusMessage = "Apply cancelled.";
+            LastUpdatedText = "Last update: -";
+            return;
+        }
+
         StartCancellation(ct);
         IsRunning = true;
         var actionLabel = dryRun ? "Preview" : "Apply";
@@ -230,6 +239,15 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         if (IsRunning)
         {
+            return;
+        }
+
+        if (action == TweakAction.Rollback && !ConfirmRiskyAction("rollback"))
+        {
+            LastActionText = action.ToString();
+            LastOutcome = TweakRunOutcome.Cancelled;
+            StatusMessage = "Rollback cancelled.";
+            LastUpdatedText = "Last update: -";
             return;
         }
 
@@ -384,6 +402,22 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             StatusMessage = $"Copy failed: {ex.Message}";
         }
+    }
+
+    private bool ConfirmRiskyAction(string actionLabel)
+    {
+        if (_tweak.Risk != TweakRiskLevel.Risky)
+        {
+            return true;
+        }
+
+        var result = MessageBox.Show(
+            $"This tweak is marked Risky. Proceed with {actionLabel}?",
+            "Confirm risky tweak",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        return result == MessageBoxResult.Yes;
     }
 
     private bool CanRun()
