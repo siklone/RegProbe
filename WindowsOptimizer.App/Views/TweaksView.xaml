@@ -153,6 +153,14 @@
                         Command="{Binding ApplyAllCommand}"
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Verify All"
+                        Command="{Binding VerifyAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
+                <Button Content="Rollback All"
+                        Command="{Binding RollbackAllCommand}"
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Cancel All"
                         Command="{Binding CancelAllCommand}"
                         Padding="12,6"

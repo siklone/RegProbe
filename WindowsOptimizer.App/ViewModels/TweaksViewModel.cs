@@ -21,6 +21,8 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _exportLogsCommand;
     private readonly RelayCommand _previewAllCommand;
     private readonly RelayCommand _applyAllCommand;
+    private readonly RelayCommand _verifyAllCommand;
+    private readonly RelayCommand _rollbackAllCommand;
     private readonly RelayCommand _cancelAllCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
@@ -78,8 +80,10 @@ public sealed class TweaksViewModel : ViewModelBase
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
-        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync(true), _ => CanRunBulk());
-        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync(false), _ => CanRunBulk());
+        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulk());
+        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", (item, token) => item.RunApplyAsync(token)), _ => CanRunBulk());
+        _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
+        _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulk());
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
@@ -100,6 +104,10 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand PreviewAllCommand => _previewAllCommand;
 
     public ICommand ApplyAllCommand => _applyAllCommand;
+
+    public ICommand VerifyAllCommand => _verifyAllCommand;
+
+    public ICommand RollbackAllCommand => _rollbackAllCommand;
 
     public ICommand CancelAllCommand => _cancelAllCommand;
 
@@ -144,6 +152,8 @@ public sealed class TweaksViewModel : ViewModelBase
             {
                 _previewAllCommand.RaiseCanExecuteChanged();
                 _applyAllCommand.RaiseCanExecuteChanged();
+                _verifyAllCommand.RaiseCanExecuteChanged();
+                _rollbackAllCommand.RaiseCanExecuteChanged();
                 _cancelAllCommand.RaiseCanExecuteChanged();
                 SetBulkLock(value);
             }
@@ -288,7 +298,7 @@ public sealed class TweaksViewModel : ViewModelBase
         return TweaksView.Cast<object>().Any();
     }
 
-    private async Task RunBulkAsync(bool dryRun)
+    private async Task RunBulkAsync(string label, Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
         if (IsBulkRunning)
         {
@@ -297,7 +307,8 @@ public sealed class TweaksViewModel : ViewModelBase
 
         StartBulkCancellation();
         IsBulkRunning = true;
-        BulkStatusMessage = dryRun ? "Bulk preview started." : "Bulk apply started.";
+        var actionLabel = label.ToLowerInvariant();
+        BulkStatusMessage = $"Bulk {actionLabel} started.";
 
         try
         {
@@ -308,22 +319,14 @@ public sealed class TweaksViewModel : ViewModelBase
             foreach (var item in items)
             {
                 _bulkCts?.Token.ThrowIfCancellationRequested();
-                BulkStatusMessage = $"Running {item.Name}...";
-
-                if (dryRun)
-                {
-                    await item.RunPreviewAsync(_bulkCts?.Token ?? CancellationToken.None);
-                }
-                else
-                {
-                    await item.RunApplyAsync(_bulkCts?.Token ?? CancellationToken.None);
-                }
+                BulkStatusMessage = $"Running {actionLabel} on {item.Name}...";
+                await runner(item, _bulkCts?.Token ?? CancellationToken.None);
 
                 BulkProgressCurrent++;
                 OnPropertyChanged(nameof(BulkProgressText));
             }
 
-            BulkStatusMessage = "Bulk run completed.";
+            BulkStatusMessage = $"Bulk {actionLabel} completed.";
         }
         catch (OperationCanceledException)
         {
@@ -402,6 +405,8 @@ public sealed class TweaksViewModel : ViewModelBase
         HasVisibleTweaks = visible > 0;
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
+        _verifyAllCommand.RaiseCanExecuteChanged();
+        _rollbackAllCommand.RaiseCanExecuteChanged();
     }
 
     private void ResetFilters()

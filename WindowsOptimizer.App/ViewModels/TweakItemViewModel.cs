@@ -46,8 +46,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanRun());
         _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
-        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify), _ => CanRun());
-        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback), _ => CanRun());
+        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
+        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
     }
@@ -162,6 +162,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
 
+    public Task RunVerifyAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Verify, ct);
+
+    public Task RunRollbackAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Rollback, ct);
+
     private async Task RunAsync(bool dryRun, CancellationToken ct)
     {
         if (IsRunning)
@@ -212,14 +216,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private async Task RunSingleStepAsync(TweakAction action)
+    private async Task RunSingleStepAsync(TweakAction action, CancellationToken ct)
     {
         if (IsRunning)
         {
             return;
         }
 
-        StartCancellation(CancellationToken.None);
+        StartCancellation(ct);
         IsRunning = true;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
@@ -237,7 +241,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 }
             });
 
-            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? CancellationToken.None);
+            var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
