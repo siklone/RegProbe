@@ -1,9 +1,24 @@
 ﻿<Application x:Class="WindowsOptimizer.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WindowsOptimizer.App"
+             xmlns:views="clr-namespace:WindowsOptimizer.App.Views"
+             xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+            <views:DashboardView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
+            <views:TweaksView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:MonitorViewModel}">
+            <views:MonitorView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+            <views:SettingsView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
+            <views:AboutView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
