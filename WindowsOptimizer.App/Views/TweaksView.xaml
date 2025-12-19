@@ -91,7 +91,7 @@
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
-            <ItemsControl ItemsSource="{Binding Tweaks}">
+            <ItemsControl ItemsSource="{Binding TweaksView}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel />

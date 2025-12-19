@@ -38,6 +38,7 @@ public sealed class MainViewModel : ViewModelBase
             if (SetProperty(ref _selectedNavigationItem, value))
             {
                 CurrentViewModel = _selectedNavigationItem?.ViewModel;
+                SyncSearchText();
             }
         }
     }
@@ -51,6 +52,20 @@ public sealed class MainViewModel : ViewModelBase
     public string SearchText
     {
         get => _searchText;
-        set => SetProperty(ref _searchText, value);
+        set
+        {
+            if (SetProperty(ref _searchText, value))
+            {
+                SyncSearchText();
+            }
+        }
+    }
+
+    private void SyncSearchText()
+    {
+        if (_currentViewModel is TweaksViewModel tweaksViewModel)
+        {
+            tweaksViewModel.SearchText = _searchText;
+        }
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
@@ -17,6 +19,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _exportLogsCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
     private bool _isExporting;
+    private string _searchText = string.Empty;
 
     public TweaksViewModel()
     {
@@ -48,12 +51,17 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline)
         };
 
+        TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
+        TweaksView.Filter = FilterTweaks;
+
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
     }
 
     public string Title => "Tweaks";
 
     public ObservableCollection<TweakItemViewModel> Tweaks { get; }
+
+    public ICollectionView TweaksView { get; }
 
     public ICommand ExportLogsCommand => _exportLogsCommand;
 
@@ -71,6 +79,18 @@ public sealed class TweaksViewModel : ViewModelBase
             if (SetProperty(ref _isExporting, value))
             {
                 _exportLogsCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (SetProperty(ref _searchText, value))
+            {
+                TweaksView.Refresh();
             }
         }
     }
@@ -109,5 +129,22 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             IsExporting = false;
         }
+    }
+
+    private bool FilterTweaks(object obj)
+    {
+        if (obj is not TweakItemViewModel item)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(_searchText))
+        {
+            return true;
+        }
+
+        return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
     }
 }
