@@ -79,12 +79,24 @@
                         CornerRadius="8"
                         Padding="10,6">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <TextBox x:Name="SearchBox"
+                                 Grid.Column="0"
                                  Background="Transparent"
                                  BorderThickness="0"
                                  FontSize="14"
                                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Text="Search"
+                        <Button Grid.Column="1"
+                                Content="Clear"
+                                Command="{Binding ClearSearchCommand}"
+                                Padding="6,2"
+                                Margin="6,0,0,0"
+                                VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="0"
+                                   Text="Search"
                                    Foreground="#8A8D93"
                                    IsHitTestVisible="False"
                                    Margin="2,0,0,0"
