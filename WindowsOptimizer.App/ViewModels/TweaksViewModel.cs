@@ -45,7 +45,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _showOnlyRunning;
     private bool _showOnlyFailed;
+    private bool _sortFailedFirst;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
@@ -80,6 +82,24 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
                     (settings, value) => settings.DemoTweakBetaEnabled = value),
+                pipeline),
+            new(new SettingsToggleTweak(
+                    "demo.gamma",
+                    "Demo: Tune startup sequencing",
+                    "Demo toggle stored in app settings. Marked advanced to exercise filtering.",
+                    TweakRiskLevel.Advanced,
+                    settingsStore,
+                    settings => settings.DemoTweakGammaEnabled,
+                    (settings, value) => settings.DemoTweakGammaEnabled = value),
+                pipeline),
+            new(new SettingsToggleTweak(
+                    "demo.delta",
+                    "Demo: Aggressive cleanup mode",
+                    "Demo toggle stored in app settings. Marked risky to exercise confirmations.",
+                    TweakRiskLevel.Risky,
+                    settingsStore,
+                    settings => settings.DemoTweakDeltaEnabled,
+                    (settings, value) => settings.DemoTweakDeltaEnabled = value),
                 pipeline)
         };
 
@@ -90,8 +110,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
         TweaksView.Filter = FilterTweaks;
-        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
-        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        ApplySort();
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
         _detectAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Detect", (item, token) => item.RunDetectAsync(token)), _ => CanRunBulk());
@@ -218,7 +237,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public string BulkProgressText => BulkProgressTotal == 0
         ? "Bulk progress: 0/0"
-        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
+        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal} ({BulkProgressCurrent * 100 / BulkProgressTotal}%)";
 
     public string SearchText
     {
@@ -279,8 +298,43 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _showOnlyFailed, value))
             {
+                if (value && ShowOnlyRunning)
+                {
+                    ShowOnlyRunning = false;
+                }
+
                 TweaksView.Refresh();
                 UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowOnlyRunning
+    {
+        get => _showOnlyRunning;
+        set
+        {
+            if (SetProperty(ref _showOnlyRunning, value))
+            {
+                if (value && ShowOnlyFailed)
+                {
+                    ShowOnlyFailed = false;
+                }
+
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool SortFailedFirst
+    {
+        get => _sortFailedFirst;
+        set
+        {
+            if (SetProperty(ref _sortFailedFirst, value))
+            {
+                ApplySort();
             }
         }
     }
@@ -464,6 +518,11 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (_showOnlyRunning && !item.IsRunning)
+        {
+            return false;
+        }
+
         if (string.IsNullOrWhiteSpace(_searchText))
         {
             return true;
@@ -473,6 +532,19 @@ public sealed class TweaksViewModel : ViewModelBase
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void ApplySort()
+    {
+        TweaksView.SortDescriptions.Clear();
+        if (SortFailedFirst)
+        {
+            TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.OutcomeSortRank), ListSortDirection.Ascending));
+        }
+
+        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
+        TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        TweaksView.Refresh();
     }
 
     private void UpdateFilterSummary()
@@ -526,7 +598,10 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
+        var isRunningChange = e.PropertyName == nameof(TweakItemViewModel.IsRunning);
+        var outcomeChange = e.PropertyName == nameof(TweakItemViewModel.LastOutcome);
+
+        if (isRunningChange)
         {
             _detectAllCommand.RaiseCanExecuteChanged();
             _previewAllCommand.RaiseCanExecuteChanged();
@@ -534,6 +609,12 @@ public sealed class TweaksViewModel : ViewModelBase
             _verifyAllCommand.RaiseCanExecuteChanged();
             _rollbackAllCommand.RaiseCanExecuteChanged();
             _resetAllCommand.RaiseCanExecuteChanged();
+        }
+
+        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && (ShowOnlyFailed || SortFailedFirst)))
+        {
+            TweaksView.Refresh();
+            UpdateFilterSummary();
         }
     }
 
@@ -543,7 +624,9 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowOnlyRunning = false;
         ShowOnlyFailed = false;
+        SortFailedFirst = false;
     }
 
     private void OpenLogFolder()
