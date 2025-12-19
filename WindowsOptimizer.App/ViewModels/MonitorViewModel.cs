@@ -103,6 +103,8 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _lastDurationText, value);
     }
 
+    public string StepProgressText => $"Steps: {GetCompletedStepCount()}/{Steps.Count}";
+
     private async Task RunPipelineAsync(bool dryRun)
     {
         if (IsRunning)
@@ -118,6 +120,7 @@ public sealed class MonitorViewModel : ViewModelBase
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         ResetSteps();
         Steps.First().MarkInProgress();
+        OnPropertyChanged(nameof(StepProgressText));
 
         var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
         var options = new TweakExecutionOptions
@@ -156,6 +159,7 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
+        OnPropertyChanged(nameof(StepProgressText));
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -180,6 +184,7 @@ public sealed class MonitorViewModel : ViewModelBase
 
             step.ApplyResult(reportStep.Result.Status, reportStep.Result.Message, reportStep.Result.Timestamp);
         }
+        OnPropertyChanged(nameof(StepProgressText));
     }
 
     private void ResetSteps()
@@ -188,6 +193,7 @@ public sealed class MonitorViewModel : ViewModelBase
         {
             step.Reset();
         }
+        OnPropertyChanged(nameof(StepProgressText));
     }
 
     private void CancelRun()
@@ -239,6 +245,11 @@ public sealed class MonitorViewModel : ViewModelBase
         }
 
         return $"{duration.TotalMinutes:0.0} min";
+    }
+
+    private int GetCompletedStepCount()
+    {
+        return Steps.Count(step => step.State != TweakStepState.Pending && step.State != TweakStepState.InProgress);
     }
 
     private sealed class DemoTweak : ITweak

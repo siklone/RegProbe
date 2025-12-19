@@ -90,6 +90,10 @@
                                Foreground="#8A8D93"
                                FontSize="11" />
                     <TextBlock Margin="0,4,0,0"
+                               Text="{Binding StepProgressText}"
+                               Foreground="#8A8D93"
+                               FontSize="11" />
+                    <TextBlock Margin="0,4,0,0"
                                Text="{Binding RunCount, StringFormat=Runs: {0}}"
                                Foreground="#8A8D93"
                                FontSize="11" />
