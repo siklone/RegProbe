@@ -35,6 +35,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
+    private string _riskSummary = "Safe: 0 | Advanced: 0 | Risky: 0";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -44,6 +45,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _showOnlyFailed;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
@@ -270,10 +272,29 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    public bool ShowOnlyFailed
+    {
+        get => _showOnlyFailed;
+        set
+        {
+            if (SetProperty(ref _showOnlyFailed, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
     public string FilterSummary
     {
         get => _filterSummary;
         private set => SetProperty(ref _filterSummary, value);
+    }
+
+    public string RiskSummary
+    {
+        get => _riskSummary;
+        private set => SetProperty(ref _riskSummary, value);
     }
 
     public bool HasVisibleTweaks
@@ -437,6 +458,11 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (_showOnlyFailed && item.LastOutcome != TweakRunOutcome.Failed)
+        {
+            return false;
+        }
+
         if (string.IsNullOrWhiteSpace(_searchText))
         {
             return true;
@@ -444,6 +470,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -452,6 +479,10 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
+        var safeCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Safe);
+        var advancedCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Advanced);
+        var riskyCount = Tweaks.Count(item => item.Risk == TweakRiskLevel.Risky);
+        RiskSummary = $"Safe: {safeCount} | Advanced: {advancedCount} | Risky: {riskyCount}";
         HasVisibleTweaks = visible > 0;
         _detectAllCommand.RaiseCanExecuteChanged();
         _previewAllCommand.RaiseCanExecuteChanged();
@@ -480,6 +511,7 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowOnlyFailed = false;
     }
 
     private void OpenLogFolder()
