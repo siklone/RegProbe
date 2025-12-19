@@ -219,6 +219,11 @@
                         ToolTip="Open the tweak log CSV file."
                         Padding="12,6"
                         Margin="0,0,8,0" />
+                <Button Content="Copy CSV Path"
+                        Command="{Binding CopyCsvPathCommand}"
+                        ToolTip="Copy the tweak log CSV path."
+                        Padding="12,6"
+                        Margin="0,0,8,0" />
                 <Button Content="Export Logs"
                         Command="{Binding ExportLogsCommand}"
                         ToolTip="Export tweak logs to CSV."

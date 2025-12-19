@@ -31,6 +31,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
+    private readonly RelayCommand _copyCsvPathCommand;
     private readonly RelayCommand _expandAllDetailsCommand;
     private readonly RelayCommand _collapseAllDetailsCommand;
     private string _exportStatusMessage = "Logs are ready to export.";
@@ -124,6 +125,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
+        _copyCsvPathCommand = new RelayCommand(_ => CopyCsvPath());
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
 
@@ -157,6 +159,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
 
     public ICommand OpenCsvLogCommand => _openCsvLogCommand;
+
+    public ICommand CopyCsvPathCommand => _copyCsvPathCommand;
 
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
@@ -722,6 +726,19 @@ public sealed class TweaksViewModel : ViewModelBase
         catch (Exception ex)
         {
             ExportStatusMessage = $"Open log failed: {ex.Message}";
+        }
+    }
+
+    private void CopyCsvPath()
+    {
+        try
+        {
+            Clipboard.SetText(_tweakLogFilePath);
+            ExportStatusMessage = $"Copied log path: {_tweakLogFilePath}.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Copy log path failed: {ex.Message}";
         }
     }
 
