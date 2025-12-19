@@ -1,5 +1,7 @@
 # Disable xHCI IMOD
 
+Requires elevation: Yes (hardware registers).
+
 This option currently works via a external python file, I'll probably implement it into the GUI soon.
 
 | Flag | Description |
@@ -68,6 +70,8 @@ When a TRB event triggers the Interrupt Pending (`IP`) flag, host notification i
 | 31:2 | Reserved and Preserved. |
 
 # Power Values
+
+Requires elevation: Yes (HKLM power settings).
 
 This option serves as a general values overview for the `Power` key (similar to `DXG Kernel Values`/`Kernel Values`/`DWM Values`). Several values are applied, some have been changed, others are default values. The applied data is sometimes pure speculation. 
 
@@ -243,6 +247,8 @@ Everything listed below is based on personal research. Mistakes may exist, but I
 
 # Disable Device Powersavings
 
+Requires elevation: Yes (system power settings).
+
 Disables USB selective suspend, idle power management, and related LP features.
 
 I added some comments to `QueryUsbflagsValuesForDevice.c`, since it renamed the values.
@@ -329,6 +335,8 @@ ForcePortPower
 
 # Disable Hibernation
 
+Requires elevation: Yes (system power settings).
+
 Windows uses hibernation to provide a fast startup experience. When available, it's also used on mobile devices to extend the usable battery life of a system by giving a mechanism to save all of the user's state prior to shutting down the system. In a hibernate transition, all the contents of memory are written to a file on the primary system drive, the hibernation file. This preserves the state of the operating system, applications, and devices. In the case where the combined memory footprint consumes all of physical memory, the hibernation file must be large enough to ensure there's space to save all the contents of physical memory. Since data is written to non-volatile storage, DRAM does not need to maintain self-refresh and can be powered off, which means power consumption of hibernation is very low, almost the same as power off.
 
 During a full shutdown and boot (S5), the entire user session is torn down and restarted on the next boot. In contrast, during a hibernation (S4), the user session is closed and the user state is saved.
@@ -373,6 +381,8 @@ RegSetValue	HKLM\System\CurrentControlSet\Control\Power\HibernateEnabled	Type: R
 
 
 # Reduced HiberFile
+
+Requires elevation: Yes (system power settings).
 
 Hibernation files are used for hybrid sleep, fast startup, and [standard hibernation](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states#hibernate-state-s4). There are two types, differentiated by size, a full and reduced size hibernation file. Only fast startup can use a reduced hibernation file.
 
@@ -432,6 +442,8 @@ To verify or change the type of hibernation file used, run the *powercfg.exe* ut
 > https://learn.microsoft.com/en-us/windows/win32/power/system-power-states
 
 # Remove Power Options
+
+Requires elevation: Yes (system power settings).
 
 Removes the `Hibernate`, `Lock`, `Sleep` power options.
 
@@ -507,6 +519,8 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Start\HideSwitchAcco
 ```
 
 # Disable Hiberboot
+
+Requires elevation: Yes (system power settings).
 
 Fast startup is a type of shutdown that uses a hibernation file to speed up the subsequent boot. During this type of shutdown, the user is logged off before the hibernation file is created. Fast startup allows for a smaller hibernation file, more appropriate for systems with less storage capabilities.
 
@@ -586,6 +600,8 @@ if ( result >= 0 )
 
 # Disable Power Throttling
 
+Requires elevation: Yes (system power settings).
+
 ```
 Power throttling, introduced in W10 and present in W11, limits CPU usage for background or minimized applications. It reduces the processing power available to these apps while allowing active applications to run normally.
 ```
@@ -602,6 +618,8 @@ You can see processes, which use power throttling by enabling the column (`Detai
 ![](https://github.com/nohuto/win-config/blob/main/power/images/powerth.png?raw=true)
 
 # Disable Energy Estimation
+
+Requires elevation: Yes (system power settings).
 
 Not needed, if you disable energy estimation:
 ```json
@@ -629,6 +647,8 @@ Not needed, if you disable energy estimation:
 `Disable Battery Capacity Section` = Disables the battery capacity section on the battery saver page of the system settings app.
 
 # Powerplan
+
+Requires elevation: Yes (system power settings).
 
 Use the commands below, to import power plans by double-clicking them. Modify the powerplan via `PowerSettingsExplorer.exe`.
 > http://www.mediafire.com/file/wt37sbsejk7iepm/PowerSettingsExplorer.zip
@@ -663,6 +683,8 @@ Shows the current available sleep states on your system.
 > https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options#option_availablesleepstates
 
 # Disable HDD Parking
+
+Requires elevation: Yes (system power settings).
 
 `EnableHDDParking` is set to `1` by default, `EnableDIPM`/`EnableHIPM` are set to `0` by default.
 
@@ -728,6 +750,8 @@ Additional notes: `EnableALPEDisableHotplug` (`0`), `AhciDisablePxHotplug` - `am
 
 # Disable Storport Idle
 
+Requires elevation: Yes (system power settings).
+
 "Storport provides support for idle power management to allow storage devices to enter a low power state when not in use. Storport's idle power management (IPM) support includes handling idle power management for storage devices under its management, in coordination with the Power Manager in Windows.
 
 Storport IPM allows the classpnp and disk class drivers to send the SCSI Stop Unit command to the storage device when it's idle for some period of time. The idle period is configurable by the system administrator. The Storport miniport driver is responsible for how the command is used by the Storport miniport driver to conserve power.
@@ -741,6 +765,8 @@ Storport Idle Power Management (IPM) isn't enabled by default. It can be enabled
 > [power/assets | storport.c](https://github.com/nohuto/win-config/blob/main/power/assets/storport.c)
 
 # NoLazyMode
+
+Requires elevation: Yes (system power settings).
 
 `NoLazyMode` = `0` (default)
 `LazyModeTimeout` = `1000000` (default)
@@ -760,6 +786,8 @@ It sets `NoLazyMode` to `0`, don't set it to `1`. This is currently more likely 
 ![](https://github.com/nohuto/win-config/blob/main/power/images/nolazymode.png?raw=true)
 
 # Disable Timer Coalescing
+
+Requires elevation: Yes (system power settings).
 
 "CoalesecingTimerinterval is a computer system energy-saving technique that reduces CPU power consumption by reducing the precision of software timers to allow the synchronization of process wake-ups, minimizing the number of times the CPU is forced to perform the relatively power-costly operation of entering and exiting idle states"
 
@@ -823,6 +851,8 @@ The `CoalescingTimerInterval` value exist (takes a default of `1500` dec, `DeepI
 
 # Disable USB Battery Saver 
 
+Requires elevation: Yes (system power settings).
+
 Used to stop USB devices when your screen is off - Obviously only for laptop users.
 
 ```
@@ -833,6 +863,8 @@ Stop USB devices when my screen is off to help battery.
 > [power/assets | usbbattery-OpenQueryAttemptRecoveryFromUsbPowerDrainValue.c](https://github.com/nohuto/win-config/blob/main/power/assets/usbbattery-OpenQueryAttemptRecoveryFromUsbPowerDrainValue.c)
 
 # USB Flags
+
+Requires elevation: Yes (system power settings).
 
 In `USBXHCI.SYS`. Disables S0 idle on the host controller - remains in the working state (S0)?
 ```
@@ -900,6 +932,8 @@ UsbflagsDeviceKey = (*(__int64 (__fastcall **)(PWDF_DRIVER_GLOBALS, __int64, con
 
 # Disable Audio Idle
 
+Requires elevation: Yes (system power settings).
+
 | Parameter              | Desc                                                                                    | Default  | Notes                                                                 |
 | ---------------------- | --------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------- |
 | `ConservationIdleTime` | Idle timeout for the device, when the system is on battery power.                       | `0`      | `0` disables the inactivity timer for this mode, value is in seconds. |
@@ -924,6 +958,8 @@ I currently disable it, by setting the timeouts to `ff ff ff ff` (`~4.29e9 s ≈
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/audio/portcls-registry-power-settings  
 
 # Disable NVMe Perf Throttling
+
+Requires elevation: Yes (system power settings).
 
 It get intialized, unsure what exactly it does. Might be related to thermal throttling (controller cuts IOPS and bandwidth to lower heat and protect the drive)?
 
@@ -954,6 +990,8 @@ else if (v6 == 4 && ResultLength >= 4)  // REG_DWORD
 
 # Disable Storage Idle States
 
+Requires elevation: Yes (system power settings).
+
 Disables idle states for NVMe, SSD, SD, HDD. This is currently more of a possible idea. 
 
 If `IdleStatesNumber` is set, the other values are ignored? Let me know if you have a better interpretation.
@@ -964,6 +1002,8 @@ If `IdleStatesNumber` is set, the other values are ignored? Let me know if you h
 > [power/assets | storageidle-PmPowerContextInitialization.c](https://github.com/nohuto/win-config/blob/main/power/assets/nvmeperf-ClassUpdateDynamicRegistrySettings.c)
 
 # Disable PM in Standby Mode
+
+Requires elevation: Yes (system power settings).
 
 This policy setting specifies that power management is disabled when the machine enters connected standby mode.
 - If this policy setting is enabled, Windows Connection Manager doesn't manage adapter radios to reduce power consumption when the machine enters connected standby mode.
@@ -1026,6 +1066,8 @@ This policy setting specifies that power management is disabled when the machine
 ```
 
 # Disable NIC Power Savings
+
+Requires elevation: Yes (system power settings).
 
 You can get a lot of information about data ranges and more from `.inf` files, see examples below.
 
@@ -1195,6 +1237,8 @@ Miscellaneous notes:
 ```
 
 # Disable Audio Execution Power Requests
+
+Requires elevation: Yes (system power settings).
 
 There's no official documentation on this value, but it probably controls whether audio activity can trigger power execution requests, reducing the responsiveness of the system to power management events, maybe ending up with less efficient power usage or preventing certain power related actions from being triggered.
 

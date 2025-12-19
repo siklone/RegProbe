@@ -1,5 +1,7 @@
 # Disable UAC
 
+Requires elevation: Yes (system policies).
+
 Disabling UAC stops the prompts for administrative permissions, allowing programs and processes to run with elevated rights without user confirmation. Save `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` before running it.
 
 Remove the `Run as Administrator` context menu option (`.bat`, `.cmd` files) with:
@@ -105,6 +107,8 @@ Value: `EnableVirtualization`
 
 # PS Unrestricted Policy
 
+Requires elevation: Yes (HKLM policy).
+
 Used to make powershell (`.ps1`) scripts work on your PC without showing any warning.
 
 | **Value Name** | **Description** |
@@ -154,6 +158,8 @@ powershell.exe    HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerS
 
 # Disable Windows Update
 
+Requires elevation: Yes (system policies).
+
 It works via pausing updates and disabling related services:
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings
@@ -191,6 +197,8 @@ Miscellaneous notes:
 ```
 
 # Disable System Mitigations
+
+Requires elevation: Yes (system policies).
 
 Security features that protect against memory based attacks like buffer overflows and code injection. Enabling this option will reduce system security.
 
@@ -310,6 +318,8 @@ dword_140FC41E0 dd 1 // default - 0 = disabled
 > https://en.wikipedia.org/wiki/Address_space_layout_randomization
 
 # Disable WU Driver Updates
+
+Requires elevation: Yes (system policies).
 
 "Do not include drivers with Windows Updates", "Prevent device metadata retrieval from the Internet":
 
@@ -484,6 +494,8 @@ dword_140FC41E0 dd 1 // default - 0 = disabled
 
 # Disable Windows Defender
 
+Requires elevation: Yes (system policies).
+
 You'll have to boot into `safeboot` to apply some of the changes:
 ```bat
 bcdedit /set safeboot minimal
@@ -533,6 +545,8 @@ endlocal
 > [security/assets | Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt)
 
 # Disable Windows Firewall
+
+Requires elevation: Yes (system policies).
 
 It disables the profiles, but leaves the services/driver running.
 
@@ -667,6 +681,8 @@ HKLM\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\Pu
 
 # Opt-Out DMA Remapping
 
+Requires elevation: Yes (system policies).
+
 "To ensure compatibility with Kernel DMA Protection and DMAGuard Policy, PCIe device drivers can opt into Direct Memory Access (DMA) remapping. DMA remapping for device drivers protects against memory corruption and malicious DMA attacks, and provides a higher level of compatibility for devices. Also, devices with DMA remapping-compatible drivers can start and perform DMA regardless of lock screen status. On Kernel DMA Protection enabled systems, DMAGuard Policy might block devices, with DMA remapping-incompatible drivers, connected to external/exposed PCIe ports (for example, M.2, Thunderbolt), depending on the policy value set by the system administrator. DMA remapping isn't supported for graphics device drivers. `DmaRemappingCompatible` key is ignored if `RemappingSupported` is set."
 
 "Only use this per-driver method for Windows versions up to Windows 11 23H2. Use the [per-device method](https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/pci/enabling-dma-remapping-for-device-drivers.md#per-device-opt-in-mechanism)."
@@ -725,6 +741,8 @@ DisableNativeNVMeStack db 0 // default
 
 # Disable System Restore
 
+Requires elevation: Yes (system settings).
+
 ```powershell
 Disable-ComputerRestore -Drive "C:\"
 ```
@@ -739,6 +757,8 @@ Does:
 > https://learn.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service
 
 # Disable Downloads Blocking
+
+Requires elevation: No.
 
 Windows adds a hidden tag called `Zone.Identifier` to files downloaded from the internet. This tag (also known as MotW) stores info about the file's origin and helps apply security warnings, see files including the tag with:
 ```powershell
@@ -795,6 +815,8 @@ dir C:\Path\*Files* | Unblock-File -> Multiple files
 
 # Disable WPBT
 
+Requires elevation: Yes (system policies).
+
 WPBT allows hardware manufacturers to run programs during Windows startup that may introduce unwanted software.
 ```
 \Registry\Machine\SYSTEM\ControlSet001\Control\Session Manager : DisableWpbtExecution
@@ -805,11 +827,15 @@ WPBT allows hardware manufacturers to run programs during Windows startup that m
 
 # Block MRT via WU
 
+Requires elevation: Yes (system policies).
+
 MRT takes a lot of time, there are better tools (e.g. MalwareBytes).
 
 ![](https://github.com/nohuto/win-config/blob/main/security/images/mrt.png?raw=true)
 
 # Disable Bitlocker & EFS
+
+Requires elevation: Yes (system policies).
 
 Disable bitlocker on all volumes:
 ```powershell
@@ -854,6 +880,8 @@ ERROR_VOLUME_NOT_SUPPORT_EFS = 0x8007177E;
 > [Windows API - Error Defines](https://github.com/arizvisa/BugId-mWindowsAPI/blob/904a1c0bd22c019ef6ca8313945fe38f4ca26f30/mDefines/mErrorDefines.py#L1793)
 
 # Disable VBS (HVCI)
+
+Requires elevation: Yes (system policies).
 
 VBS won't work if Hyper-V is disabled. HVCI = hypervisor-protected code integrity.
 
@@ -963,6 +991,8 @@ Set-VMSecurity -VMName <VMName> -VirtualizationBasedSecurityOptOut $true
 
 # Disable Password Reveal 
 
+Requires elevation: Yes (system policies).
+
 "This policy setting allows you to configure the display of the password reveal button in password entry user experiences. If you enable this policy setting, the password reveal button won't be displayed after a user types a password in the password entry text box. If you disable or don't configure this policy setting, the password reveal button will be displayed after a user types a password in the password entry text box. By default, the password reveal button is displayed after a user types a password in the password entry text box."
 
 `Disable Picture Password Sign-In`:  
@@ -1008,6 +1038,8 @@ Set-VMSecurity -VMName <VMName> -VirtualizationBasedSecurityOptOut $true
 
 # Disable P2P Updates
 
+Requires elevation: Yes (system policies).
+
 Default is configured to LAN. The Group Download mode combined with Group ID, enables administrators to create custom device groups that share content between devices in the group. Download mode dictates which download sources clients are allowed to use when downloading Windows updates in addition to Windows Update servers.
 
 The option applies `0` = disables peer-to-peer (P2P) caching but still allows Delivery Optimization to download content over HTTP from the download's original source or a Microsoft Connected Cache server.
@@ -1036,6 +1068,8 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\DeliveryOptimization
 
 # Increased DH & RSA Key
 
+Requires elevation: Yes (system policies).
+
 By default it uses a minimum size of `1024` bits (both) - hardens Windows TLS engine by forcing minimum key sizes during secure communications (SSL/TLS handshake process).
 
 "NSA recommends RSA key transport and ephemeral DH (DHE) or ECDH (ECDHE) mechanisms, with RSA or DHE key exchange using at least 3072-bit keys and ECDHE key exchanges using the secp384r1 elliptic curve. For RSA keytransport and DH/DHE key exchange, keys less than 2048 bits should not be used, and ECDH/ECDHE using custom curves should not be used."
@@ -1044,6 +1078,8 @@ By default it uses a minimum size of `1024` bits (both) - hardens Windows TLS en
 > https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings?tabs=diffie-hellman
 
 # Disable Legacy TLS/Crypto
+
+Requires elevation: Yes (system policies).
 
 Disables legacy/insecure protocols, ciphers, renegotiation, hashes, and forces .NET apps to use strong cryptography (Disables RC2 (40/56/128), RC4 (40/56/64/128), DES, 3DES, NULL, MD5/SHA-1, SSL 2.0/3.0, TLS 1.0/1.1, DTLS 1.0, insecure TLS renegotiation - Enables TLS SCSV, .NET StrongCrypto & SystemDefaultTlsVersions, NTLMv2 only). Windows may use insecure connections for e.g. older software (compatibility reasons), so disabling them can cause issues with old software.
 
@@ -1112,11 +1148,16 @@ DTLS 1.2 & TLS 1.3:
 ```
 
 # Enable USB Write Protection
+
+Requires elevation: Yes (system policies).
+
 Restricts write access to USB devices (read only). You can also change it with `diskpart`, by selecting the disk with `select disk` and chaning it to read only with `attributes disk set readonly` (revert it with `attributes disk clear readonly`).
 
 Rather leave USB connection error notifications enabled, unless there's a specific reason for it.
 
 # Increase TDR
+
+Requires elevation: Yes (system policies).
 
 "TDR stands for Timeout Detection and Recovery. This is a feature of the Windows operating system which detects response problems from a graphics card, and recovers to a functional desktop by resetting the card. If the operating system does not receive a response from a graphics card within a certain amount of time (default is 2 seconds), the operating system resets the graphics card."
 
@@ -1184,6 +1225,8 @@ if (dword_1C015B874 != v15) {
 
 # Password Age
 
+Requires elevation: Yes (system policies).
+
 `/MAXPWAGE:{days | UNLIMITED}`:  
 "Sets the maximum number of days that a password is valid. No limit is specified by using UNLIMITED. /MAXPWAGE can't be less than /MINPWAGE. The range is 1-999; the default is 90 days."
 
@@ -1201,6 +1244,8 @@ Congigure the policy yourself via `Computer Configuration > Windows Settings > S
 ![](https://github.com/nohuto/win-config/blob/main/security/images/passwordage.png?raw=true)
 
 # Trusted Path Credential Prompting
+
+Requires elevation: Yes (system policies).
 
 This policy setting requires the user to enter Microsoft Windows credentials using a trusted path, to prevent a Trojan horse or other types of malicious code from stealing the user's Windows credentials.
 
@@ -1222,6 +1267,8 @@ This policy setting requires the user to enter Microsoft Windows credentials usi
 ```
 
 # Dynamic Lock
+
+Requires elevation: Yes (system policies).
 
 Automatically locks your device when you're away. It requires Bluetooth to be active. This option is disabled by default.
 
@@ -1260,6 +1307,8 @@ Miscellaneous notes:
 ```
 
 # Sudo
+
+Requires elevation: Yes (system policies).
 
 [Sudo](https://github.com/microsoft/sudo) is a new way for users to run elevated commands (as an administrator) directly from an unelevated console session on Windows.
 

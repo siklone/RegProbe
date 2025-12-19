@@ -1,5 +1,7 @@
 # Encrypted DNS
 
+Requires elevation: Yes (system network settings).
+
 Unencrypted = DNS queries and responses are sent in plaintext.
 DoH = DNS queries and responses are encrypted, yet they are sent via HTTP or HTTP/2 protocols instead of directly via UDP. DoH ensures that attackers cannot spoof or modify DNS traffic. From a network administrator's perspective, DoH traffic looks like any other HTTPS traffic.
 
@@ -57,6 +59,8 @@ Some additional info about HTTP request methods you may want to know:
 > https://dnsimple.com/comics
 
 # SMB Configuration
+
+Requires elevation: Yes (system network settings).
 
 SMB Client -> Outbound connections:  
 > https://learn.microsoft.com/en-us/powershell/module/smbshare/set-smbclientconfiguration?view=windowsserver2025-ps
@@ -188,6 +192,8 @@ RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\
 
 # QoS Policy
 
+Requires elevation: Yes (system network settings).
+
 Adding the QoS policy via LGPE:
 ```powershell
 HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\Fortnite\Version    Type: REG_SZ, Length: 8, Data: 1.0
@@ -223,6 +229,8 @@ Capturing the network activity after adding the policy:
 ![](https://github.com/nohuto/win-config/blob/main/network/images/qosexplanation.png?raw=true)
 
 # Disable Network Discovery
+
+Requires elevation: Yes (system network settings).
 
 "LLTDIO and Responder are network protocol drivers used for Link Layer Topology Discovery and network diagnostics. LLTDIO discovers network topology and supports QoS functions, while Responder allows the device to be identified and take part in network health assessments."
 
@@ -373,6 +381,8 @@ RegistryKey<unsigned char>::Initialize(
 
 # Congestion Provider
 
+Requires elevation: Yes (system network settings).
+
 Placeholder.
 
 > https://www3.cs.stonybrook.edu/~anshul/comsnets24_bbrbbrv2.pdf  
@@ -393,6 +403,8 @@ Get-NetTCPSetting | Select SettingName, CongestionProvider
 
 # Disable Wi-Fi
 
+Requires elevation: Yes (system network settings).
+
 Disables Wi-Fi services/drivers, scheduled tasks.
 
 | Service/Driver | Description |
@@ -409,6 +421,8 @@ Disables Wi-Fi services/drivers, scheduled tasks.
 ```
 
 # Disable Active Probing
+
+Requires elevation: Yes (system network settings).
 
 Active probing sends HTTP requests from the client to a predefined web probe server (by default `www.msftconnecttest.com/connecttest.txt`), using both IPv4 and IPv6 in parallel. If it gets an HTTP 200 response with the expected payload, NCSI marks the interface as having internet connectivity, if the probe fails or returns errors (for example, blocked by a proxy or DNS issues), NCSI treats connectivity as limited.
 
@@ -510,6 +524,8 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Connectivity\Disallo
 
 # Disable VPNs
 
+Requires elevation: Yes (system network settings).
+
 SSTP VPN & other VPNs - enable the services, to revert it.
 
 Get current VPN connections:
@@ -560,6 +576,8 @@ if ( !v17[0] )
 
 # Disable SMBv1/SMBv2
 
+Requires elevation: Yes (system network settings).
+
 SMBv1 is only needed for old computers or software (that you usually don't have) and should be disabled, as it's unsafe & not efficient.
 
 Detect current states with:
@@ -608,6 +626,8 @@ Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force
 > https://thelinuxcode.com/how-to-detect-and-turn-on-off-smbv1-smbv2-and-smbv3-in-windows/
 
 # Disable NetBIOS/mDNS/LLMNR
+
+Requires elevation: Yes (system network settings).
 
 "`NetbiosOptions` specifies the configurable security settings for the NetBIOS service and determines the mode of operation for NetBIOS over TCP/IP on the parent interface."
 
@@ -716,6 +736,8 @@ RegSetValue	HKLM\System\CurrentControlSet\Services\NetBT\Parameters\Interfaces\T
 
 # Disable IPv6
 
+Requires elevation: Yes (system network settings).
+
 `0xFFFFFFFF` disables all IPv6 interfaces, even ones Windows needs. The TCP/IP stack then waits for them to initialize and times out, which adds the `~5s` boot delay. The documentation below was taken from the official support articles.
 
 Min Value: `0x00` (default value)  
@@ -769,6 +791,8 @@ For each bit, **0** means false and **1** means true. Refer to the following tab
 
 # Disable Wi-Fi Sense
 
+Requires elevation: Yes (system network settings).
+
 Wi-Fi Sense is enabled by default and, when you're signed in with a Microsoft account, can share Wi-Fi access (password stays encrypted in MS servers) with your Outlook and Skype contacts, Facebook contacts can be added. When you join a new network, it asks whether to share it. Networks you used before the upgrade won't trigger the prompt.
 
 > https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/configure-wifi-sense-and-paid-wifi-service
@@ -794,6 +818,8 @@ Wi-Fi Sense is enabled by default and, when you're signed in with a Microsoft ac
 ```
 
 # Enable Offloads
+
+Requires elevation: Yes (system network settings).
 
 Network offload features transfer processing tasks from the CPU to the network adapter hardware, reducing system overhead and improving overall network performance. Common offload features include TCP checksum offload, Large Send Offload (LSO), and Receive Side Scaling (RSS).
 
@@ -851,6 +877,8 @@ Excludes (deprecated, chimney too):
 > https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/using-registry-values-to-enable-and-disable-task-offloading.md
 
 # Disable WoL
+
+Requires elevation: Yes (system network settings).
 
 The wake-on-LAN (WOL) feature wakes the computer from a low power state when a network adapter detects a WOL event (typically, a specially constructed Ethernet packet). WOL is supported from *S3* sleep or *S4* hibernate. It's not supported from fast startup or *S5* soft off shutdown states. NICs aren't armed for wake in these states because users don't expect their systems to wake up on their own. WOL is not officially supported from the *S5* soft off state. However, the BIOS on some systems might support arming NICs for wake, even though Windows isn't involved in the process.
 
@@ -947,6 +975,8 @@ HKR, Ndi\Params\WakeUpModeCap\enum,  "2",        0 , %WakeUpMode_Pattern%
 
 # Increase Buffers
 
+Requires elevation: Yes (system network settings).
+
 The maximum data differs for users, e.g. if applying `4096` it may get rejected, see `inf` blocks below.
 
 Transmit Buffers:  
@@ -999,6 +1029,8 @@ HKR, "", *TransmitBuffers,  %REG_SZ%, "2048"
 Reminder: Each adapter uses it's own default values, means that the `default`/`min`/`max` may be different for you.
 
 # Enable IM/ITR
+
+Requires elevation: Yes (system network settings).
 
 Some NICs expose multiple interrupt-moderation levels. Use interrupt moderation for CPU-bound workloads and weigh host-CPU savings against added latency. For the lowest possible latency, disable Interrupt Moderation, accepting higher CPU use as a tradeoff. At higher link speeds more interrupts drive up CPU and hurt performance, increasing the ITR lowers the interrupt rate and improves performance. IM batches received packets and starts a timer on first arrival, interrupting when the buffer fills or the timer expires. Many NICs offer more than on/off, with low/medium/high rates that map to shorter or longer timers to favor latency or reduce interrupts.
 
@@ -1054,6 +1086,8 @@ Miscellaneous notes:
 ```
 
 # Enable RSS
+
+Requires elevation: Yes (system network settings).
 
 "Receive-Side Scaling (RSS), also known as multi-queue receive, distributes network receive processing across several hardware-based receive queues, allowing inbound network traffic to be processed by multiple CPUs. RSS can be used to relieve bottlenecks in receive interrupt processing caused by overloading a single CPU, and to reduce network latency."
 
@@ -1157,6 +1191,8 @@ Enables strict argument validation for upper layer testing. Set along with the R
 
 # Disable File/Printer Sharing
 
+Requires elevation: Yes (system network settings).
+
 Disables "Allow other on the network to access shared files and printers on this device" via `@FirewallAPI.dll,-28502` & `ms_msclient`.
 
 ```powershell
@@ -1199,6 +1235,8 @@ Ethernet                       File and Printer Sharing for Microsoft Networks  
 
 # Disable LLSE
 
+Requires elevation: Yes (system network settings).
+
 This setting is used to enable/disable the logging of link state changes. If enabled, a link-up change event or a link-down change event generates a message that is displayed in the system event logger. This message contains the link's speed and duplex. Administrators view the event message from the system event log.
 
 The following events are logged:  
@@ -1224,6 +1262,8 @@ Miscellaenous notes:
 ```
 
 # Disable Flow Control
+
+Requires elevation: Yes (system network settings).
 
 A sending station (computer or network switch) may be transmitting data faster than the other end of the link can accept it. Using flow control, the receiving station can signal the sender requesting suspension of transmissions until the receiver catches up.
 
@@ -1255,6 +1295,8 @@ These 2 examples also show that each adapter/driver have their own defaults.
 
 # Enable Jumbo Packets
 
+Requires elevation: Yes (system network settings).
+
 As the name says ("Jumbo"), it is used for big packets, you won't use this feature. Jumbo packets are disabled by default. Enable Jumbo Packets **only if all devices across the network support them** and are configured to use the same frame size.
 
 The Jumbo Frames feature enables or disables Jumbo Packet capability. The standard Ethernet frame size is about `1514 bytes`, while Jumbo Packets are larger than this. Jumbo Packets can increase throughput and decrease CPU utilization. However, additional latency may be introduced.
@@ -1279,6 +1321,8 @@ HKR, Ndi\params\*JumboPacket,	Default,	0, "0"
 `1514` = Disabled.
 
 # Enable RSC/URO
+
+Requires elevation: Yes (system network settings).
 
 When receiving data, the miniport driver, NDIS, and TCP/IP must all look at each protocol data unit (PDU) header information separately. When large amounts of data are being received, a large amount of overhead is created. Receive segment coalescing (RSC) reduces this overhead by coalescing a sequence of received segments and passing them to the host TCP/IP stack in one operation, so that NDIS and TCP/IP need to only look at one header for the entire sequence.
 
@@ -1361,6 +1405,8 @@ Miscellaneous notes:
 
 # Disable VMQ
 
+Requires elevation: Yes (system network settings).
+
 VMQ is a scaling networking technology for the Hyper-V switch. Without VMQ the networking performance of the Hyper-V switch bound to this network adapter may be reduced. VMQ offloads packet processing to NIC hardware queues, with each queue tied to a specific VM. This increases throughput, spreads work across CPU cores, lowers host CPU use, and scales effectively as more VMs are added on Hyper-V.
 
 It depends on your adapter/driver if VMQ is enabled/disabled by default:
@@ -1407,6 +1453,8 @@ HKR, "", *VMQ, %REG_SZ%, "1"
 
 
 # Disable SR-IOV
+
+Requires elevation: Yes (system network settings).
 
 Single Root I/O Virtualization (SR-IOV) is an extension to the PCI Express (PCIe) specification that improves network performance in virtualized environments. SR-IOV allows devices, such as network adapters, to separate access to their resources among various PCIe hardware functions, enabling near-native network performance in Hyper-V virtual machines.
 
@@ -1466,6 +1514,8 @@ HKR, "", *VMQVlanFiltering, %REG_SZ%, "1"
 
 # Disable FEC
 
+Requires elevation: Yes (system network settings).
+
 FEC (forwarded error correction) improves link stability, but increases latency. Many high quality optics, direct attach cables, and backplane channels provide a stable link without FEC.
 
 `Auto FEC`: Sets the FEC Mode based on the capabilities of the attached cable.  
@@ -1509,6 +1559,8 @@ HKR, Ndi\Params\FecMode,                         type,                   0, "enu
 
 # Enable Legacy Switch Compatibility Mode
 
+Requires elevation: Yes (system network settings).
+
 Probably a setting that controls how the adapter handles link negotiation when it's connected behind certain (usually older) network switches. There's no official documentation on it, but it seems to be disabled by default. Some older switches may have problems with modern auto negotiation behavior, enabling the mode (probably) changes how the NIC negotiates speed/duplex so that it behaves more like older hardware.
 
 This should only be enabled, if needed. The text above is just a personal assumption.
@@ -1527,6 +1579,8 @@ HKR, PROSetNdi\NdiExt\Params\LinkNegotiationProcess,    ExposeLevel,            
 ```
 
 # NDIS Poll Mode
+
+Requires elevation: Yes (system network settings).
 
 `Threaded DPC + Adaptive` = NDIS poll mode disabled, aptive receive completion method, packet burst buffering via threaded DPC.  
 `NDIS Poll Mode` = Packet burst handing disabled (unsupported), NDIS poll mode enabled.

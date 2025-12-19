@@ -1,5 +1,7 @@
 # WinSxS Folder
 
+Requires elevation: Yes (DISM/system files).
+
 Get the current size of the WinSxS folder, by pasting the following command into `cmd`:
 ```cmd
 Dism.exe /Online /Cleanup-Image /AnalyzeComponentStore
@@ -50,6 +52,8 @@ The value doesn't exist on more recent versions.
 
 # Windows.old
 
+Requires elevation: Yes (system files).
+
 Removes old/previous windows installation files from `Windows.old`.
 
 ```
@@ -62,6 +66,8 @@ If it's been fewer than 10 days since you upgraded to Windows, your previous ver
 
 # SRUM Data
 
+Requires elevation: Yes (system database).
+
 Deletes the SRUM database file, which tracks app, service, and network usage.
 
 Location:
@@ -73,6 +79,8 @@ Read the SRUM data:
 
 # DirectX Shader Cache
 
+Requires elevation: No (per-user caches; admin only for system-wide caches).
+
 Clears the DirectX caches and any vendor caches (NVIDIA `DXCache`/`GLCache`/`NV_Cache`, AMD `DXCache`, Intel `DXCache`). Clearing the cache forces shaders to be recompiled the next time an application starts. Expect a short period of shader compilation stutter immediately after cleaning.
 
 Remember to temporarily set `Shader Cache Size` to `Disabled`, use the option, then return it to `Unlimited` so the driver use the files.
@@ -81,6 +89,8 @@ Remember to temporarily set `Shader Cache Size` to `Disabled`, use the option, t
 
 # Recycle Bin
 
+Requires elevation: No.
+
 Empties the recycle bin for every mounted drive. Windows stores deleted files per volume in `$Recycle.Bin`, so if you have multiple volumes this can recover more space than the Explorer UI shows.
 
 ```powershell
@@ -88,6 +98,8 @@ C:\$Recycle.Bin\S-<user-id>
 ```
 
 # Shadow Copies
+
+Requires elevation: Yes (vssadmin).
 
 Removes all copies (volume backups). See your current shadows with:
 ```cmd
@@ -99,9 +111,13 @@ vssadmin list shadows /for=<ForVolumeSpec> /shadow=<ShadowID>
 
 # Background History
 
+Requires elevation: No.
+
 The personalization window keeps the last five wallpaper paths in `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers` (`BackgroundHistoryPath0-4`) and cached copies under `%AppData%\Microsoft\Windows\Themes\CachedFiles`.
 
 # Font Cache
+
+Requires elevation: Yes (system cache).
 
 The font cache is a file or set of files to manage and display the installed fonts so they load faster. Sometimes the font cache may become corrupted and cause fonts to not rendering properly, or displaying invalid characters. If not having such issues there's no point in clearing it.
 
@@ -111,17 +127,25 @@ The font cache is a file or set of files to manage and display the installed fon
 
 # Temporary Internet Files
 
+Requires elevation: No.
+
 Legacy WinINet consumers (Explorer, old Control Panel surfaces, webviews inside installers, etc.) still use `%LOCALAPPDATA%\Microsoft\Windows\INetCache`, `%LOCALAPPDATA%\Microsoft\Windows\INetCookies`, `%LOCALAPPDATA%\Microsoft\Windows\WebCache`, `%LOCALAPPDATA%\Microsoft\Windows\History`. Expect the first launch of an affected app to take longer while it rebuilds HTTP caches.
 
 # Delivery Optimization Files
+
+Requires elevation: Yes (system services/dirs).
 
 Delivery Optimization (DoSvc) stores update files under `C:\Windows\SoftwareDistribution\DeliveryOptimization` and uses `C:\ProgramData\Microsoft\Network\Downloader` for the BITS session data. The option stops DoSvc to delete the files, but won't start it as it's not recommended to have it enabled anyway.
 
 # Temporary Files
 
+Requires elevation: Yes (system temp).
+
 Per user temporary files are saved in `%TEMP%`, global files under `%WINDIR%\Temp`. Some installers never delete leftovers, so those can pollute the folder. Anything that is still used will be skipped.
 
 # Clipboard History
+
+Requires elevation: No.
 
 Currently clears the in memory buffer via `echo. | clip`. [`clip`](https://github.com/nohuto/windowsserverdocs/blob/main/WindowsServerDocs/administration/windows-commands/clip.md) saves thatever it gets into the clipboard, and [`echo.`](https://github.com/nohuto/windowsserverdocs/blob/main/WindowsServerDocs/administration/windows-commands/echo.md#examples) = blank line.
 
@@ -132,13 +156,19 @@ Get-Clipboard
 
 # DNS Cache
 
+Requires elevation: Yes (flushdns).
+
 `Get-DnsClientCache` shows the resolver cache that stores recent lookups. Flushing it via `ipconfig /flushdns` can fix stale entries after moving domains or switching VPN profiles (or if editing the hosts file).
 
 # WER Files
 
+Requires elevation: Yes (system WER).
+
 Windows Error Reporting (WER) queues crash dumps and report metadata under `%PROGRAMDATA%\Microsoft\Windows\WER` (system) and `%LOCALAPPDATA%\Microsoft\Windows\WER` (per user). Clearing the queue removes pending uploads and archived `.wer` files.
 
 # Event Logs
+
+Requires elevation: Yes.
 
 Only do this if you want to export the data elsewhere or purposely delete logs (security logs can't be recovered afterward).
 
@@ -151,21 +181,31 @@ wevtutil el
 
 # Windows Update Cache
 
+Requires elevation: Yes.
+
 Troubleshooting update loops often requires resetting `%WINDIR%\SoftwareDistribution` and `%WINDIR%\System32\catroot2`. This forces Windows Update to redownload the catalog metadata.
 
 # Thumbnail Cache
+
+Requires elevation: No.
 
 Placeholder.
 
 # Prefetch Files
 
+Requires elevation: Yes.
+
 Placeholder.
 
 # BSoD Memory Dump Files
 
+Requires elevation: Yes.
+
 Placeholder.
 
 # Product Key
+
+Requires elevation: Yes.
 
 "Some servicing operations require the product key to be available in the registry during Out of Box Experience (OOBE) operations. The /cpky option removes the product key from the registry to prevent this key from being stolen by malicious code. For retail installations that deploy keys, the best practice is to run this option. This option isn't required for MAK and KMS host keys, because this is the default behavior for those keys. This option is required only for other types of keys whose default behavior isn't to clear the key from the registry."
 
@@ -173,8 +213,12 @@ Placeholder.
 
 # Downloaded Program Files
 
+Requires elevation: Yes.
+
 Placeholder.
 
 # System Logs
+
+Requires elevation: Yes.
 
 Placeholder.

@@ -1,5 +1,7 @@
 # NVFetch
 
+Requires elevation: No.
+
 Used to be my personal `neofetch`/`fastfetch` replacement with more details. Some arguments will probably also get added like `ids`, so it doesn't display the serial numbers and miscellaneous HWIDs by default.
 
 ![](https://github.com/nohuto/win-config/blob/main/misc/images/nvfetch.png?raw=true)
@@ -48,6 +50,8 @@ Valid colors: `Black`, `Blue`, `Cyan`, `DarkBlue`, `DarkCyan`, `DarkGray`, `Dark
 > https://github.com/dylanaraps/neofetch
 
 # Explorer Blur
+
+Requires elevation: No (per-user install/config).
 
 Installs [ExplorerBlurMica](https://github.com/Maplespe/ExplorerBlurMica), which adds a background blur/acrylic/mica effect effect to the explorer:
 
@@ -98,6 +102,8 @@ a=120
 
 # Notepad++
 
+Requires elevation: Yes (HKCR default editor).
+
 You can either change it yourself in:
 ```
 HKCR\batfile\shell\edit\command
@@ -105,6 +111,8 @@ HKCR\batfile\shell\edit\command
 or use the option switch, which selects [notepad++](https://notepad-plus-plus.org/downloads/) as default editor.
 
 # StartAllBack Settings
+
+Requires elevation: Yes (machine install).
 
 Installation:
 ```powershell
@@ -226,6 +234,8 @@ All values `StartAllBack` reads that are located in `HKCU\Software\StartIsBack` 
 
 # System Informer
 
+Requires elevation: Yes (Task Manager replacement).
+
 Since system informer is a lot better than the default task manager, it is recommended to replace it.
 
 > https://systeminformer.io/
@@ -239,6 +249,8 @@ Enable `Theme support` (dark mode) and disable `Check for updates automatically`
 
 # Registry Finder
 
+Requires elevation: No.
+
 An improved editor that supports dark mode, a far better `Find` tool, and much more. 
 
 Installation:
@@ -249,6 +261,8 @@ winget install SergeyFilippov.RegistryFinder
 > https://registry-finder.com
 
 # 7-Zip Settings
+
+Requires elevation: No.
 
 7-Zip minimal context menu settings:
 
@@ -278,6 +292,8 @@ winget install M2Team.NanaZip
 > https://github.com/M2Team/NanaZip
 
 # Disable VSC Telemetry
+
+Requires elevation: No (user settings).
 
 **Caution:** The revert currently deletes `settings.json`. Means any settings you used beside the ones which get applied using this option will get removed.
 
@@ -310,6 +326,8 @@ export const enum TelemetryLevel {
 > https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/workbench/services/assignment/common/assignmentService.ts#L110
 
 # Disable VS Telemetry
+
+Requires elevation: Yes (HKLM/ProgramData).
 
 Disables VS telemetry, SQM data collection, IntelliCode remote analysis, feedback features, and the `DiagnosticsHub` logger. Disabling `VSStandardCollectorService150` could cause issues, I added it as a comment.
 
@@ -382,6 +400,8 @@ Miscellaneous notes:
 
 # Disable MS Office Telemetry
 
+Requires elevation: Yes.
+
 Disables logging, data collection, opts out from CEIP, disables feedback collection and telemetry agent tasks.
 
 | Category                                     | Where it appears | What the agent collects (by default)                                                                                                    | Scope / Versions                                                | Notes & Exceptions                                                                                                                                                                       |
@@ -440,6 +460,8 @@ Disables logging, data collection, opts out from CEIP, disables feedback collect
 > https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office
 
 # Disable OneDrive
+
+Requires elevation: Yes (HKLM policy).
 
 `DisableLibrariesDefaultSaveToOneDrive` sets local storage as the default save location, `DisableFileSync` disables OneDrive on Windows 8.1 including app and picker access removal and stops sync and hides the Explorer entry, `DisableFileSyncNGSC` disables OneDrive via the Next-Gen Sync Client with the same effect, `DisableMeteredNetworkFileSync` set to `0` blocks syncing on all metered connections, `PreventNetworkTrafficPreUserSignIn` stops the OneDrive client from generating network traffic until the user signs in, `System.IsPinnedToNameSpaceTree` set to `0` hides OneDrive from File Explorer's navigation pane in both CLSID locations.
 
@@ -534,6 +556,8 @@ Disables logging, data collection, opts out from CEIP, disables feedback collect
 ```
 
 # Disable Edge Features
+
+Requires elevation: Yes (policy).
 
 Edge is a whole mess, I wouldn't recommend anyone to use it, but here's an option that applies the following values:
 
@@ -686,6 +710,8 @@ See all edge policies here:
 ```
 
 # Hash Generator
+
+Requires elevation: No.
 
 "The `Get-FileHash` cmdlet computes the hash value for a file by using a specified hash algorithm. A hash value is a unique value that corresponds to the content of the file. Rather than identifying the contents of a file by its file name, extension, or other designation, a hash assigns a unique value to the contents of a file. File names and extensions can be changed without altering the content of the file, and without changing the hash value. Similarly, the file's content can be changed without changing the name or extension. However, changing even a single character in the contents of a file changes the hash value of the file.
 
