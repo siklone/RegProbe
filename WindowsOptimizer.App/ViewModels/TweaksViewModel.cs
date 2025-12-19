@@ -52,6 +52,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showRisky = true;
     private bool _showOnlyRunning;
     private bool _showOnlyFailed;
+    private bool _showOnlySucceeded;
     private bool _sortFailedFirst;
     private bool _hasVisibleTweaks;
     private CancellationTokenSource? _bulkCts;
@@ -318,6 +319,10 @@ public sealed class TweaksViewModel : ViewModelBase
                 {
                     ShowOnlyRunning = false;
                 }
+                if (value && ShowOnlySucceeded)
+                {
+                    ShowOnlySucceeded = false;
+                }
 
                 TweaksView.Refresh();
                 UpdateFilterSummary();
@@ -335,6 +340,32 @@ public sealed class TweaksViewModel : ViewModelBase
                 if (value && ShowOnlyFailed)
                 {
                     ShowOnlyFailed = false;
+                }
+                if (value && ShowOnlySucceeded)
+                {
+                    ShowOnlySucceeded = false;
+                }
+
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowOnlySucceeded
+    {
+        get => _showOnlySucceeded;
+        set
+        {
+            if (SetProperty(ref _showOnlySucceeded, value))
+            {
+                if (value && ShowOnlyFailed)
+                {
+                    ShowOnlyFailed = false;
+                }
+                if (value && ShowOnlyRunning)
+                {
+                    ShowOnlyRunning = false;
                 }
 
                 TweaksView.Refresh();
@@ -593,6 +624,11 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        if (_showOnlySucceeded && item.LastOutcome != TweakRunOutcome.Success)
+        {
+            return false;
+        }
+
         if (_showOnlyRunning && !item.IsRunning)
         {
             return false;
@@ -687,7 +723,7 @@ public sealed class TweaksViewModel : ViewModelBase
             _resetAllCommand.RaiseCanExecuteChanged();
         }
 
-        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && (ShowOnlyFailed || SortFailedFirst)))
+        if ((isRunningChange && ShowOnlyRunning) || (outcomeChange && (ShowOnlyFailed || ShowOnlySucceeded || SortFailedFirst)))
         {
             TweaksView.Refresh();
             UpdateFilterSummary();
@@ -702,6 +738,7 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowRisky = true;
         ShowOnlyRunning = false;
         ShowOnlyFailed = false;
+        ShowOnlySucceeded = false;
         SortFailedFirst = false;
     }
 

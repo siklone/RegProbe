@@ -159,6 +159,9 @@
                     <CheckBox Content="Only Running"
                               IsChecked="{Binding ShowOnlyRunning}"
                               Margin="0,0,12,0" />
+                    <CheckBox Content="Only Succeeded"
+                              IsChecked="{Binding ShowOnlySucceeded}"
+                              Margin="0,0,12,0" />
                     <CheckBox Content="Failed First"
                               IsChecked="{Binding SortFailedFirst}"
                               Margin="0,0,12,0" />
