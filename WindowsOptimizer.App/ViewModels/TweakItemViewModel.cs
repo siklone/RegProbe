@@ -14,6 +14,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 {
     private readonly ITweak _tweak;
     private readonly TweakExecutionPipeline _pipeline;
+    private readonly bool _isElevated;
     private readonly RelayCommand _detectCommand;
     private readonly RelayCommand _previewCommand;
     private readonly RelayCommand _applyCommand;
@@ -30,10 +31,11 @@ public sealed class TweakItemViewModel : ViewModelBase
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
     private bool _isDetailsExpanded = true;
 
-    public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline)
+    public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
         _tweak = tweak ?? throw new ArgumentNullException(nameof(tweak));
         _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+        _isElevated = isElevated;
 
         Steps = new ObservableCollection<TweakStepStatusViewModel>
         {
@@ -61,6 +63,22 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string Description => _tweak.Description;
 
     public TweakRiskLevel Risk => _tweak.Risk;
+
+    public bool RequiresElevation => _tweak.RequiresElevation;
+
+    public bool IsElevated => _isElevated;
+
+    public bool IsElevationBlocked => RequiresElevation && !IsElevated;
+
+    public string ElevationBadgeText => "Admin required";
+
+    public string ElevationTooltip => IsElevated
+        ? "Requires administrator privileges."
+        : "Requires administrator privileges. Run the app as administrator.";
+
+    public string ElevationWarningText => IsElevationBlocked
+        ? "Requires elevation. Run the app as administrator to use this tweak."
+        : string.Empty;
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
@@ -180,8 +198,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         StartCancellation(ct);
-        IsRunning = true;
         var actionLabel = dryRun ? "Preview" : "Apply";
+        if (TryBlockForElevation(actionLabel, null))
+        {
+            ClearCancellation();
+            return;
+        }
+
+        IsRunning = true;
         LastActionText = actionLabel;
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
@@ -230,6 +254,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         StartCancellation(ct);
+        if (TryBlockForElevation(action.ToString(), action))
+        {
+            ClearCancellation();
+            return;
+        }
+
         IsRunning = true;
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
@@ -342,6 +372,36 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    private bool TryBlockForElevation(string actionLabel, TweakAction? step)
+    {
+        if (!IsElevationBlocked)
+        {
+            return false;
+        }
+
+        var timestamp = DateTimeOffset.UtcNow;
+        LastActionText = actionLabel;
+        LastOutcome = TweakRunOutcome.Skipped;
+        StatusMessage = "Requires elevation. Run the app as administrator.";
+        LastUpdatedText = $"Last update: {timestamp.ToLocalTime():HH:mm:ss}";
+
+        if (step is null)
+        {
+            ResetSteps();
+            foreach (var item in Steps)
+            {
+                item.ApplyResult(TweakStatus.Skipped, "Requires elevation.", timestamp);
+            }
+        }
+        else
+        {
+            var target = Steps.FirstOrDefault(item => item.Action == step.Value);
+            target?.ApplyResult(TweakStatus.Skipped, "Requires elevation.", timestamp);
+        }
+
+        return true;
+    }
+
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
     {
         for (var i = 0; i < Steps.Count - 1; i++)
@@ -370,7 +430,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private bool CanRun()
     {
-        return !IsRunning && !IsBulkLocked;
+        return !IsRunning && !IsBulkLocked && !IsElevationBlocked;
     }
 
     private bool CanCancel()

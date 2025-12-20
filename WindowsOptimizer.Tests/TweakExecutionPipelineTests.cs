@@ -110,6 +110,7 @@ public sealed class TweakExecutionPipelineTests
         public string Name { get; } = "Test Tweak";
         public string Description { get; } = "Test tweak for pipeline.";
         public TweakRiskLevel Risk { get; } = TweakRiskLevel.Safe;
+        public bool RequiresElevation { get; } = false;
 
         public int DetectCalls { get; private set; }
         public int ApplyCalls { get; private set; }
@@ -157,6 +158,7 @@ public sealed class TweakExecutionPipelineTests
         public string Name { get; } = "Cancelable Tweak";
         public string Description { get; } = "Cancel during apply.";
         public TweakRiskLevel Risk { get; } = TweakRiskLevel.Safe;
+        public bool RequiresElevation { get; } = false;
 
         public int DetectCalls { get; private set; }
         public int ApplyCalls { get; private set; }

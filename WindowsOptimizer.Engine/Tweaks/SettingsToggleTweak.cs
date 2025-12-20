@@ -22,12 +22,14 @@ public sealed class SettingsToggleTweak : ITweak
         ISettingsStore settingsStore,
         Func<AppSettings, bool> getter,
         Action<AppSettings, bool> setter,
-        bool targetValue = true)
+        bool targetValue = true,
+        bool requiresElevation = false)
     {
         Id = id ?? throw new ArgumentNullException(nameof(id));
         Name = name ?? throw new ArgumentNullException(nameof(name));
         Description = description ?? throw new ArgumentNullException(nameof(description));
         Risk = risk;
+        RequiresElevation = requiresElevation;
         _settingsStore = settingsStore ?? throw new ArgumentNullException(nameof(settingsStore));
         _getter = getter ?? throw new ArgumentNullException(nameof(getter));
         _setter = setter ?? throw new ArgumentNullException(nameof(setter));
@@ -38,6 +40,7 @@ public sealed class SettingsToggleTweak : ITweak
     public string Name { get; }
     public string Description { get; }
     public TweakRiskLevel Risk { get; }
+    public bool RequiresElevation { get; }
 
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
