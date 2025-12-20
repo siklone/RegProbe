@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -553,6 +554,22 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            new(CreateRegistryValueSetTweak(
+                    "peripheral.disable-language-switch-hotkey",
+                    "Disable Language Switch Hotkey",
+                    "Disables the keyboard hotkey used to switch input languages.",
+                    TweakRiskLevel.Safe,
+                    RegistryHive.CurrentUser,
+                    @"Keyboard Layout\Toggle",
+                    new[]
+                    {
+                        new RegistryValueSetEntry("Language Hotkey", RegistryValueKind.String, "3"),
+                        new RegistryValueSetEntry("Hotkey", RegistryValueKind.String, "3"),
+                        new RegistryValueSetEntry("Layout Hotkey", RegistryValueKind.String, "3")
+                    },
+                    requiresElevation: false),
+                pipeline,
+                _isElevated),
             new(CreateRegistryTweak(
                     "power.hide-lock-option",
                     "Hide Lock Power Option",
@@ -560,6 +577,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     TweakRiskLevel.Advanced,
                     RegistryHive.LocalMachine,
                     @"Software\Policies\Microsoft\Windows\Explorer",
+                    "ShowLockOption",
                     "ShowLockOption",
                     RegistryValueKind.DWord,
                     0),
@@ -1178,6 +1196,33 @@ public sealed class TweaksViewModel : ViewModelBase
             valueName,
             valueKind,
             targetValue,
+            accessor,
+            view,
+            requiresElevation);
+    }
+
+    private RegistryValueSetTweak CreateRegistryValueSetTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        RegistryHive hive,
+        string keyPath,
+        IReadOnlyList<RegistryValueSetEntry> entries,
+        RegistryView view = RegistryView.Default,
+        bool? requiresElevation = null)
+    {
+        var effectiveRequiresElevation = requiresElevation ?? hive != RegistryHive.CurrentUser;
+        var accessor = effectiveRequiresElevation ? _elevatedRegistryAccessor : _localRegistryAccessor;
+
+        return new RegistryValueSetTweak(
+            id,
+            name,
+            description,
+            risk,
+            hive,
+            keyPath,
+            entries,
             accessor,
             view,
             requiresElevation);
