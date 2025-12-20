@@ -570,6 +570,24 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            new(CreateRegistryValueSetTweak(
+                    "peripheral.disable-pointer-precision",
+                    "Disable Enhance Pointer Precision",
+                    "Disables mouse acceleration (enhance pointer precision).",
+                    TweakRiskLevel.Safe,
+                    RegistryHive.CurrentUser,
+                    @"Control Panel\Mouse",
+                    new[]
+                    {
+                        new RegistryValueSetEntry("MouseTrails", RegistryValueKind.String, "0"),
+                        new RegistryValueSetEntry("MouseThreshold1", RegistryValueKind.String, "0"),
+                        new RegistryValueSetEntry("MouseThreshold2", RegistryValueKind.String, "0"),
+                        new RegistryValueSetEntry("MouseSpeed", RegistryValueKind.String, "0"),
+                        new RegistryValueSetEntry("MouseSensitivity", RegistryValueKind.String, "10")
+                    },
+                    requiresElevation: false),
+                pipeline,
+                _isElevated),
             new(CreateRegistryTweak(
                     "visibility.hide-people-bar",
                     "Hide People Bar",
