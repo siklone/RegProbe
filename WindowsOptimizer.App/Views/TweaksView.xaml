@@ -157,6 +157,10 @@
                            Foreground="#8A8D93"
                            FontSize="11" />
                 <StackPanel Margin="0,6,0,0" Orientation="Horizontal">
+                    <TextBox Width="220"
+                             Margin="0,0,12,0"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             ToolTip="Search by name, description, ID, or risk." />
                     <CheckBox Content="Safe"
                               IsChecked="{Binding ShowSafe}"
                               Margin="0,0,12,0" />
