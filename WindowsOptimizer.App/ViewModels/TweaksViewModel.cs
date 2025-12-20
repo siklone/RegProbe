@@ -946,6 +946,18 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
+                    "privacy.disable-diagnostic-data-delete",
+                    "Disable Diagnostic Data Deletion",
+                    "Disables the ability to delete diagnostic data in Settings.",
+                    TweakRiskLevel.Risky,
+                    RegistryHive.LocalMachine,
+                    @"Software\Policies\Microsoft\Windows\DataCollection",
+                    "DisableDeviceDelete",
+                    RegistryValueKind.DWord,
+                    1),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
                     "privacy.disable-onesettings-downloads",
                     "Disable OneSettings Downloads",
                     "Stops Windows from downloading configuration settings from OneSettings.",
