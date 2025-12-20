@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Infrastructure.Registry;
 using Xunit;
 
 public sealed class RegistryValueTweakTests
@@ -72,6 +73,7 @@ public sealed class RegistryValueTweakTests
 
     private static RegistryValueTweak BuildTweak(string keyPath, string valueName)
     {
+        var registryAccessor = new LocalRegistryAccessor();
         return new RegistryValueTweak(
             "test.registry",
             "Test registry tweak",
@@ -82,6 +84,7 @@ public sealed class RegistryValueTweakTests
             valueName,
             RegistryValueKind.DWord,
             1,
+            registryAccessor,
             requiresElevation: false);
     }
 

@@ -5,21 +5,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Infrastructure.Registry;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 
 public sealed class RegistryValueTweak : ITweak
 {
-    private readonly RegistryHive _hive;
-    private readonly RegistryView _view;
-    private readonly string _keyPath;
-    private readonly string _valueName;
     private readonly RegistryValueKind _valueKind;
     private readonly object _targetValue;
+    private readonly RegistryValueData _targetValueData;
+    private readonly IRegistryAccessor _registryAccessor;
+    private readonly RegistryValueReference _reference;
     private bool _hasDetected;
     private bool _valueExists;
     private object? _detectedValue;
-    private RegistryValueKind _detectedKind;
+    private RegistryValueData? _detectedValueData;
 
     public RegistryValueTweak(
         string id,
@@ -31,6 +31,7 @@ public sealed class RegistryValueTweak : ITweak
         string valueName,
         RegistryValueKind valueKind,
         object targetValue,
+        IRegistryAccessor registryAccessor,
         RegistryView view = RegistryView.Default,
         bool? requiresElevation = null)
     {
@@ -38,12 +39,13 @@ public sealed class RegistryValueTweak : ITweak
         Name = name ?? throw new ArgumentNullException(nameof(name));
         Description = description ?? throw new ArgumentNullException(nameof(description));
         Risk = risk;
-        _hive = hive;
-        _view = view;
-        _keyPath = string.IsNullOrWhiteSpace(keyPath)
-            ? throw new ArgumentException("Key path is required.", nameof(keyPath))
-            : keyPath;
-        _valueName = valueName ?? throw new ArgumentNullException(nameof(valueName));
+        _reference = new RegistryValueReference(
+            hive,
+            view,
+            string.IsNullOrWhiteSpace(keyPath)
+                ? throw new ArgumentException("Key path is required.", nameof(keyPath))
+                : keyPath,
+            valueName ?? throw new ArgumentNullException(nameof(valueName)));
         if (valueKind is RegistryValueKind.None or RegistryValueKind.Unknown)
         {
             throw new ArgumentOutOfRangeException(nameof(valueKind), valueKind, "Registry value kind must be a concrete type.");
@@ -51,6 +53,8 @@ public sealed class RegistryValueTweak : ITweak
 
         _valueKind = valueKind;
         _targetValue = targetValue ?? throw new ArgumentNullException(nameof(targetValue));
+        _targetValueData = RegistryValueData.FromObject(_valueKind, _targetValue);
+        _registryAccessor = registryAccessor ?? throw new ArgumentNullException(nameof(registryAccessor));
         RequiresElevation = requiresElevation ?? hive != RegistryHive.CurrentUser;
     }
 
@@ -60,138 +64,157 @@ public sealed class RegistryValueTweak : ITweak
     public TweakRiskLevel Risk { get; }
     public bool RequiresElevation { get; }
 
-    public Task<TweakResult> DetectAsync(CancellationToken ct)
+    public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
-        var (valueExists, value, kind) = ReadCurrentValue();
-        _hasDetected = true;
-        _valueExists = valueExists;
-        _detectedValue = value;
-        _detectedKind = kind;
+        try
+        {
+            var (valueExists, value, _, data) = await ReadCurrentValueAsync(ct);
+            _hasDetected = true;
+            _valueExists = valueExists;
+            _detectedValue = value;
+            _detectedValueData = data;
 
-        var message = valueExists
-            ? $"Current value is {FormatValue(value)}."
-            : "Value not set.";
-        return Task.FromResult(new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow));
+            var message = valueExists
+                ? $"Current value is {FormatValue(value)}."
+                : "Value not set.";
+            return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Detect failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
     }
 
-    public Task<TweakResult> ApplyAsync(CancellationToken ct)
+    public async Task<TweakResult> ApplyAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
-        using var key = OpenOrCreateKey();
-        key.SetValue(_valueName, _targetValue, _valueKind);
+        try
+        {
+            await _registryAccessor.SetValueAsync(_reference, _targetValueData, ct);
 
-        var message = $"Set value to {FormatValue(_targetValue)}.";
-        return Task.FromResult(new TweakResult(TweakStatus.Applied, message, DateTimeOffset.UtcNow));
+            var message = $"Set value to {FormatValue(_targetValue)}.";
+            return new TweakResult(TweakStatus.Applied, message, DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Apply failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
     }
 
-    public Task<TweakResult> VerifyAsync(CancellationToken ct)
+    public async Task<TweakResult> VerifyAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
-        var (valueExists, value, kind) = ReadCurrentValue();
-        if (!valueExists)
+        try
         {
-            return Task.FromResult(new TweakResult(
-                TweakStatus.Failed,
-                "Verification failed. Value is missing.",
-                DateTimeOffset.UtcNow));
-        }
+            var (valueExists, value, kind, _) = await ReadCurrentValueAsync(ct);
+            if (!valueExists)
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    "Verification failed. Value is missing.",
+                    DateTimeOffset.UtcNow);
+            }
 
-        if (kind != _valueKind)
+            if (kind != _valueKind)
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    $"Verification failed. Expected registry type {_valueKind}, found {kind}.",
+                    DateTimeOffset.UtcNow);
+            }
+
+            if (!ValuesEqual(value, _targetValue))
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    $"Verification failed. Expected {FormatValue(_targetValue)}, found {FormatValue(value)}.",
+                    DateTimeOffset.UtcNow);
+            }
+
+            return new TweakResult(
+                TweakStatus.Verified,
+                "Verified desired value.",
+                DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
-            return Task.FromResult(new TweakResult(
-                TweakStatus.Failed,
-                $"Verification failed. Expected registry type {_valueKind}, found {kind}.",
-                DateTimeOffset.UtcNow));
+            throw;
         }
-
-        if (!ValuesEqual(value, _targetValue))
+        catch (Exception ex)
         {
-            return Task.FromResult(new TweakResult(
-                TweakStatus.Failed,
-                $"Verification failed. Expected {FormatValue(_targetValue)}, found {FormatValue(value)}.",
-                DateTimeOffset.UtcNow));
+            return new TweakResult(TweakStatus.Failed, $"Verify failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
         }
-
-        return Task.FromResult(new TweakResult(
-            TweakStatus.Verified,
-            "Verified desired value.",
-            DateTimeOffset.UtcNow));
     }
 
-    public Task<TweakResult> RollbackAsync(CancellationToken ct)
+    public async Task<TweakResult> RollbackAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         if (!_hasDetected)
         {
-            return Task.FromResult(new TweakResult(
+            return new TweakResult(
                 TweakStatus.Skipped,
                 "Rollback skipped because no prior detect state is available.",
-                DateTimeOffset.UtcNow));
+                DateTimeOffset.UtcNow);
         }
 
-        if (!_valueExists)
+        try
         {
-            using var key = OpenWritableKey();
-            if (key is not null && key.GetValue(_valueName) is not null)
+            if (!_valueExists)
             {
-                key.DeleteValue(_valueName, false);
+                await _registryAccessor.DeleteValueAsync(_reference, ct);
+
+                return new TweakResult(
+                    TweakStatus.RolledBack,
+                    "Removed value to restore default.",
+                    DateTimeOffset.UtcNow);
             }
 
-            return Task.FromResult(new TweakResult(
-                TweakStatus.RolledBack,
-                "Removed value to restore default.",
-                DateTimeOffset.UtcNow));
-        }
+            if (_detectedValueData is null)
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    "Rollback failed. Prior value was not captured.",
+                    DateTimeOffset.UtcNow);
+            }
 
-        using (var key = OpenOrCreateKey())
+            await _registryAccessor.SetValueAsync(_reference, _detectedValueData, ct);
+
+            var message = $"Rolled back to {FormatValue(_detectedValue)}.";
+            return new TweakResult(TweakStatus.RolledBack, message, DateTimeOffset.UtcNow);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
-            key.SetValue(_valueName, _detectedValue!, _detectedKind);
+            throw;
         }
-
-        var message = $"Rolled back to {FormatValue(_detectedValue)}.";
-        return Task.FromResult(new TweakResult(TweakStatus.RolledBack, message, DateTimeOffset.UtcNow));
+        catch (Exception ex)
+        {
+            return new TweakResult(TweakStatus.Failed, $"Rollback failed: {ex.Message}", DateTimeOffset.UtcNow, ex);
+        }
     }
 
-    private RegistryKey OpenOrCreateKey()
+    private async Task<(bool ValueExists, object? Value, RegistryValueKind Kind, RegistryValueData? Data)> ReadCurrentValueAsync(CancellationToken ct)
     {
-        using var baseKey = RegistryKey.OpenBaseKey(_hive, _view);
-        var key = baseKey.CreateSubKey(_keyPath, true);
-        if (key is null)
+        var result = await _registryAccessor.ReadValueAsync(_reference, ct);
+        if (!result.Exists || result.Value is null)
         {
-            throw new InvalidOperationException($"Failed to open registry key {_hive}\\{_keyPath}.");
+            return (false, null, RegistryValueKind.Unknown, null);
         }
 
-        return key;
-    }
-
-    private RegistryKey? OpenWritableKey()
-    {
-        using var baseKey = RegistryKey.OpenBaseKey(_hive, _view);
-        return baseKey.OpenSubKey(_keyPath, true);
-    }
-
-    private (bool ValueExists, object? Value, RegistryValueKind Kind) ReadCurrentValue()
-    {
-        using var baseKey = RegistryKey.OpenBaseKey(_hive, _view);
-        using var key = baseKey.OpenSubKey(_keyPath, false);
-        if (key is null)
-        {
-            return (false, null, RegistryValueKind.Unknown);
-        }
-
-        var value = key.GetValue(_valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
-        if (value is null)
-        {
-            return (false, null, RegistryValueKind.Unknown);
-        }
-
-        var kind = key.GetValueKind(_valueName);
-        return (true, value, kind);
+        var value = result.Value.ToObject();
+        return (true, value, result.Value.Kind, result.Value);
     }
 
     private static bool ValuesEqual(object? actual, object? expected)

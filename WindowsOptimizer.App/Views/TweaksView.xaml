@@ -50,7 +50,7 @@
             <Setter Property="BorderBrush" Value="#F1C47A" />
             <Setter Property="BorderThickness" Value="1" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsElevationBlocked}" Value="True">
+                <DataTrigger Binding="{Binding WillPromptForElevation}" Value="True">
                     <Setter Property="Background" Value="#FDECEC" />
                     <Setter Property="BorderBrush" Value="#F1B9B9" />
                 </DataTrigger>
@@ -297,7 +297,7 @@
                                                    Text="{Binding ElevationWarningText}"
                                                    Foreground="#C65D00"
                                                    FontSize="11"
-                                                   Visibility="{Binding IsElevationBlocked, Converter={StaticResource BoolToVisibility}}" />
+                                                   Visibility="{Binding WillPromptForElevation, Converter={StaticResource BoolToVisibility}}" />
                                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                                             <TextBlock Text="{Binding Id}"
                                                        Foreground="#8A8D93"
