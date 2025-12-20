@@ -578,7 +578,6 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryHive.LocalMachine,
                     @"Software\Policies\Microsoft\Windows\Explorer",
                     "ShowLockOption",
-                    "ShowLockOption",
                     RegistryValueKind.DWord,
                     0),
                 pipeline,
