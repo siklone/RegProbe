@@ -177,6 +177,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            new(CreateRegistryTweak(
                     "notifications.disable-toast",
                     "Disable Toast Notifications",
                     "Blocks toast notifications for the current user.",
