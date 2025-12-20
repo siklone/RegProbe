@@ -14,6 +14,8 @@ using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.Infrastructure.Elevation;
+using WindowsOptimizer.Infrastructure.Registry;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -32,6 +34,8 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _expandAllDetailsCommand;
     private readonly RelayCommand _collapseAllDetailsCommand;
     private readonly bool _isElevated;
+    private readonly IRegistryAccessor _localRegistryAccessor;
+    private readonly IRegistryAccessor _elevatedRegistryAccessor;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -58,10 +62,18 @@ public sealed class TweaksViewModel : ViewModelBase
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
         _isElevated = ProcessElevation.IsElevated();
+        var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
+        {
+            HostExecutablePath = ElevatedHostLocator.GetExecutablePath(),
+            PipeName = ElevatedHostDefaults.PipeName,
+            ParentProcessId = Process.GetCurrentProcess().Id
+        });
+        _localRegistryAccessor = new LocalRegistryAccessor();
+        _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
 
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.aero-shake",
                     "Disable Aero Shake",
                     "Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse.",
@@ -74,7 +86,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-jpeg-reduction",
                     "Disable JPEG Reduction",
                     "Sets the desktop wallpaper JPEG import quality to 100% to avoid compression artifacts.",
@@ -87,7 +99,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-low-disk-space-checks",
                     "Disable Low Disk Space Checks",
                     "Disables the Low Disk Space warning notifications for the current user.",
@@ -100,7 +112,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.enable-game-mode",
                     "Enable Game Mode",
                     "Ensures Game Mode is enabled for the current user.",
@@ -113,7 +125,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "security.enable-dynamic-lock",
                     "Enable Dynamic Lock",
                     "Automatically locks the device when the paired Bluetooth device is away.",
@@ -126,7 +138,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-dst-notifications",
                     "Disable DST Change Notifications",
                     "Turns off daylight saving time change notifications.",
@@ -139,7 +151,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-search-highlights",
                     "Disable Search Highlights (User)",
                     "Turns off search highlights in the search box for the current user.",
@@ -152,7 +164,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "notifications.disable-toast",
                     "Disable Toast Notifications",
                     "Blocks toast notifications for the current user.",
@@ -165,7 +177,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "notifications.disable-lockscreen-toast",
                     "Disable Lock Screen Toast Notifications",
                     "Prevents toast notifications from appearing on the lock screen.",
@@ -178,7 +190,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "notifications.disable-tile",
                     "Disable Tile Notifications",
                     "Prevents apps from updating tiles and tile badges.",
@@ -191,7 +203,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "notifications.disable-mirroring",
                     "Disable Notification Mirroring",
                     "Stops notifications from being mirrored to other devices.",
@@ -204,7 +216,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.verbose-status-messages",
                     "Enable Verbose Status Messages",
                     "Shows detailed status messages during startup, shutdown, logon, and logoff.",
@@ -216,7 +228,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-store-open-with",
                     "Disable Store in Open With",
                     "Removes the \"Look for an app in the Store\" option from Open With.",
@@ -228,7 +240,32 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
+                    "visibility.disable-common-control-animations",
+                    "Disable Common Control Animations",
+                    "Turns off common control and window animations for the current user.",
+                    TweakRiskLevel.Safe,
+                    RegistryHive.CurrentUser,
+                    @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
+                    "TurnOffSPIAnimations",
+                    RegistryValueKind.DWord,
+                    1,
+                    requiresElevation: false),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
+                    "visibility.disable-window-animations",
+                    "Disable Window Animations",
+                    "Disables window animations like minimize and restore.",
+                    TweakRiskLevel.Advanced,
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Windows\DWM",
+                    "DisallowAnimations",
+                    RegistryValueKind.DWord,
+                    1),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
                     "visibility.default-account-picture",
                     "Use Default Account Picture",
                     "Forces the default account picture for all users on this device.",
@@ -240,7 +277,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "visibility.disable-wcn-wizards",
                     "Disable Windows Connect Now Wizards",
                     "Disables Windows Connect Now setup wizards for wireless and device setup.",
@@ -252,7 +289,44 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
+                    "visibility.disable-first-signin-animation",
+                    "Disable First Sign-In Animation",
+                    "Skips the first sign-in animation and Microsoft account opt-in prompt.",
+                    TweakRiskLevel.Advanced,
+                    RegistryHive.LocalMachine,
+                    @"Software\Microsoft\Windows\CurrentVersion\Policies\System",
+                    "EnableFirstLogonAnimation",
+                    RegistryValueKind.DWord,
+                    0),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
+                    "visibility.hide-language-bar",
+                    "Hide Language Bar",
+                    "Hides the language bar UI for the current user.",
+                    TweakRiskLevel.Safe,
+                    RegistryHive.CurrentUser,
+                    @"Software\Microsoft\CTF\LangBar",
+                    "ShowStatus",
+                    RegistryValueKind.DWord,
+                    3,
+                    requiresElevation: false),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
+                    "visibility.disable-widgets",
+                    "Disable Widgets",
+                    "Disables the Widgets/News and Interests feature.",
+                    TweakRiskLevel.Advanced,
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Dsh",
+                    "AllowNewsAndInterests",
+                    RegistryValueKind.DWord,
+                    0),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
                     "power.hide-lock-option",
                     "Hide Lock Power Option",
                     "Hides the Lock option from the power menu.",
@@ -264,7 +338,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "power.hide-sleep-option",
                     "Hide Sleep Power Option",
                     "Hides the Sleep option from the power menu.",
@@ -276,7 +350,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "power.hide-hibernate-option",
                     "Hide Hibernate Power Option",
                     "Hides the Hibernate option from the power menu.",
@@ -288,7 +362,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "power.disable-fast-startup",
                     "Disable Fast Startup",
                     "Disables fast startup (hiberboot) via policy.",
@@ -300,7 +374,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.enable-hags",
                     "Enable Hardware-Accelerated GPU Scheduling",
                     "Lets the GPU handle its own scheduling for improved responsiveness.",
@@ -312,7 +386,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     2),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-storage-sense",
                     "Disable Storage Sense",
                     "Turns off Storage Sense automatic cleanup.",
@@ -324,7 +398,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-storage-sense-temp-cleanup",
                     "Disable Storage Sense Temporary Files Cleanup",
                     "Prevents Storage Sense from deleting temporary files.",
@@ -336,7 +410,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "system.disable-search-highlights-policy",
                     "Disable Search Highlights (Policy)",
                     "Disables search highlights via policy for all users.",
@@ -348,7 +422,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-application-telemetry",
                     "Disable Application Telemetry",
                     "Stops the Application Telemetry engine from collecting usage data.",
@@ -360,7 +434,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.limit-diagnostic-log-collection",
                     "Limit Diagnostic Log Collection",
                     "Prevents additional diagnostic logs from being collected.",
@@ -372,7 +446,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-diagnostic-data-viewer",
                     "Disable Diagnostic Data Viewer",
                     "Blocks access to the Diagnostic Data Viewer in Settings.",
@@ -384,7 +458,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-onesettings-downloads",
                     "Disable OneSettings Downloads",
                     "Stops Windows from downloading configuration settings from OneSettings.",
@@ -396,7 +470,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.limit-dump-collection",
                     "Limit Dump Collection",
                     "Limits diagnostic dumps to reduce the data sent in diagnostics.",
@@ -408,7 +482,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-telemetry-optin-ui",
                     "Disable Diagnostic Data Opt-in UI",
                     "Disables the diagnostic data opt-in settings UI in Settings.",
@@ -420,7 +494,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-telemetry-change-notifications",
                     "Disable Diagnostic Data Change Notifications",
                     "Stops opt-in change notifications for diagnostic data.",
@@ -432,7 +506,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "privacy.disable-device-name-telemetry",
                     "Disable Device Name in Diagnostics",
                     "Prevents the device name from being included in diagnostic data.",
@@ -444,7 +518,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "security.disable-password-reveal",
                     "Disable Password Reveal Button",
                     "Hides the password reveal button in credential prompts.",
@@ -456,7 +530,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "security.disable-picture-password",
                     "Disable Picture Password Sign-In",
                     "Prevents domain users from using picture password sign-in.",
@@ -468,7 +542,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "network.enable-lltdio",
                     "Enable LLTD Mapper I/O",
                     "Enables the LLTD Mapper I/O driver for network topology discovery.",
@@ -480,7 +554,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "network.enable-lltd-responder",
                     "Enable LLTD Responder",
                     "Enables the LLTD Responder driver for network topology discovery.",
@@ -492,7 +566,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(new RegistryValueTweak(
+            new(CreateRegistryTweak(
                     "security.enable-sudo",
                     "Enable Sudo (Normal Mode)",
                     "Enables sudo for Windows with normal in-place elevation behavior.",
@@ -557,7 +631,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public string ElevationStatusMessage => IsElevated
         ? "Running with administrator privileges."
-        : "Running without administrator privileges. Admin-required tweaks are locked.";
+        : "Running without administrator privileges. Admin-required tweaks will prompt for elevation.";
 
     public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 
@@ -716,6 +790,37 @@ public sealed class TweaksViewModel : ViewModelBase
     {
         get => _hasVisibleTweaks;
         private set => SetProperty(ref _hasVisibleTweaks, value);
+    }
+
+    private RegistryValueTweak CreateRegistryTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        RegistryHive hive,
+        string keyPath,
+        string valueName,
+        RegistryValueKind valueKind,
+        object targetValue,
+        RegistryView view = RegistryView.Default,
+        bool? requiresElevation = null)
+    {
+        var effectiveRequiresElevation = requiresElevation ?? hive != RegistryHive.CurrentUser;
+        var accessor = effectiveRequiresElevation ? _elevatedRegistryAccessor : _localRegistryAccessor;
+
+        return new RegistryValueTweak(
+            id,
+            name,
+            description,
+            risk,
+            hive,
+            keyPath,
+            valueName,
+            valueKind,
+            targetValue,
+            accessor,
+            view,
+            requiresElevation);
     }
 
     private async Task ExportLogsAsync()

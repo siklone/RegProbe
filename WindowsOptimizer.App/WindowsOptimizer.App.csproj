@@ -13,6 +13,17 @@
     <ProjectReference Include="..\\WindowsOptimizer.Core\\WindowsOptimizer.Core.csproj" />
     <ProjectReference Include="..\\WindowsOptimizer.Engine\\WindowsOptimizer.Engine.csproj" />
     <ProjectReference Include="..\\WindowsOptimizer.Infrastructure\\WindowsOptimizer.Infrastructure.csproj" />
+    <ProjectReference Include="..\\WindowsOptimizer.ElevatedHost\\WindowsOptimizer.ElevatedHost.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
+
+  <Target Name="CopyElevatedHost" AfterTargets="Build">
+    <PropertyGroup>
+      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\net8.0-windows\\</ElevatedHostOutputDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)WindowsOptimizer.ElevatedHost.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ElevatedHostFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
 
 </Project>

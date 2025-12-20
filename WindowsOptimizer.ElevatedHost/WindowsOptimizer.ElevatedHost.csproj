@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\\WindowsOptimizer.Infrastructure\\WindowsOptimizer.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

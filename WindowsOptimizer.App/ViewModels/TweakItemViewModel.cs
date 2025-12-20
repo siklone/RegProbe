@@ -68,16 +68,16 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsElevated => _isElevated;
 
-    public bool IsElevationBlocked => RequiresElevation && !IsElevated;
+    public bool WillPromptForElevation => RequiresElevation && !IsElevated;
 
     public string ElevationBadgeText => "Admin required";
 
     public string ElevationTooltip => IsElevated
         ? "Requires administrator privileges."
-        : "Requires administrator privileges. Run the app as administrator.";
+        : "Requires administrator privileges. You'll be prompted to approve the action.";
 
-    public string ElevationWarningText => IsElevationBlocked
-        ? "Requires elevation. Run the app as administrator to use this tweak."
+    public string ElevationWarningText => WillPromptForElevation
+        ? "Requires elevation. Approve the UAC prompt to continue."
         : string.Empty;
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
@@ -199,11 +199,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StartCancellation(ct);
         var actionLabel = dryRun ? "Preview" : "Apply";
-        if (TryBlockForElevation(actionLabel, null))
-        {
-            ClearCancellation();
-            return;
-        }
 
         IsRunning = true;
         LastActionText = actionLabel;
@@ -254,11 +249,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         StartCancellation(ct);
-        if (TryBlockForElevation(action.ToString(), action))
-        {
-            ClearCancellation();
-            return;
-        }
 
         IsRunning = true;
         LastActionText = action.ToString();
@@ -372,36 +362,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private bool TryBlockForElevation(string actionLabel, TweakAction? step)
-    {
-        if (!IsElevationBlocked)
-        {
-            return false;
-        }
-
-        var timestamp = DateTimeOffset.UtcNow;
-        LastActionText = actionLabel;
-        LastOutcome = TweakRunOutcome.Skipped;
-        StatusMessage = "Requires elevation. Run the app as administrator.";
-        LastUpdatedText = $"Last update: {timestamp.ToLocalTime():HH:mm:ss}";
-
-        if (step is null)
-        {
-            ResetSteps();
-            foreach (var item in Steps)
-            {
-                item.ApplyResult(TweakStatus.Skipped, "Requires elevation.", timestamp);
-            }
-        }
-        else
-        {
-            var target = Steps.FirstOrDefault(item => item.Action == step.Value);
-            target?.ApplyResult(TweakStatus.Skipped, "Requires elevation.", timestamp);
-        }
-
-        return true;
-    }
-
     private TweakStepStatusViewModel? GetNextStep(TweakAction action)
     {
         for (var i = 0; i < Steps.Count - 1; i++)
@@ -430,7 +390,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private bool CanRun()
     {
-        return !IsRunning && !IsBulkLocked && !IsElevationBlocked;
+        return !IsRunning && !IsBulkLocked;
     }
 
     private bool CanCancel()
