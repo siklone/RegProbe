@@ -61,6 +61,19 @@ public sealed class TweaksViewModel : ViewModelBase
 
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
+            new(new RegistryValueTweak(
+                    "system.aero-shake",
+                    "Disable Aero Shake",
+                    "Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse.",
+                    TweakRiskLevel.Safe,
+                    RegistryHive.CurrentUser,
+                    @"Software\Policies\Microsoft\Windows\Explorer",
+                    "NoWindowMinimizingShortcuts",
+                    RegistryValueKind.DWord,
+                    1,
+                    requiresElevation: false),
+                pipeline,
+                _isElevated),
             new(new SettingsToggleTweak(
                     "demo.alpha",
                     "Demo: Enable performance profile",
