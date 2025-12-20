@@ -669,6 +669,18 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
+                    "network.disable-smb1",
+                    "Disable SMBv1",
+                    "Disables the legacy SMBv1 protocol on the server.",
+                    TweakRiskLevel.Advanced,
+                    RegistryHive.LocalMachine,
+                    @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+                    "SMB1",
+                    RegistryValueKind.DWord,
+                    0),
+                pipeline,
+                _isElevated),
+            new(CreateRegistryTweak(
                     "power.hide-lock-option",
                     "Hide Lock Power Option",
                     "Hides the Lock option from the power menu.",
