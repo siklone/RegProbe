@@ -68,34 +68,36 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 <!-- progress:summary:start -->
 | Area | Progress | Notes |
 | --- | --- | --- |
-| Tweaks coverage (docs) | 75% (174/233) <progress value="75" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
-| Monitoring | 30% <progress value="30" max="100"></progress> | Pipeline updates + logs exist, richer dashboards pending |
-| UI/UX shell | 75% <progress value="75" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, centralized resources |
-| Elevation | 85% <progress value="85" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands |
+| Tweaks coverage (docs) | 83% (192/233) <progress value="83" max="100"></progress> | Top-level tweak IDs vs docs headings (18 new tweaks added in Session 2025-12-22) |
+| Monitoring | 45% <progress value="45" max="100"></progress> | Dashboard with statistics cards, pipeline logs, CSV exports |
+| UI/UX shell | 90% <progress value="90" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, Dashboard, Settings, About pages complete |
+| Elevation | 90% <progress value="90" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands with allowlist security |
 | Logging/export | 75% <progress value="75" max="100"></progress> | app.log + tweak-log.csv + export |
 | Tests | 25% <progress value="25" max="100"></progress> | Unit tests for pipeline/tweaks/adapters |
-| Docs/guides | 35% <progress value="35" max="100"></progress> | Docs exist, README expanding |
+| Docs/guides | 45% <progress value="45" max="100"></progress> | Docs exist, README updated with session notes, About page comprehensive |
 <!-- progress:summary:end -->
 
 <!-- progress:tweaks:start -->
 | Doc Area | Implemented | Total | Coverage |
 | --- | --- | --- | --- |
 | affinities | 0 | 1 | 0% |
-| cleanup | 2 | 22 | 9% |
+| cleanup | 4 | 22 | 18% |
 | misc | 0 | 13 | 0% |
-| network | 27 | 22 | 100% |
+| network | 29 | 22 | 100% |
 | peripheral | 9 | 19 | 47% |
 | policies | 0 | 1 | 0% |
-| power | 6 | 22 | 27% |
-| privacy | 64 | 38 | 100% |
+| power | 8 | 22 | 36% |
+| privacy | 67 | 38 | 100% |
 | security | 19 | 24 | 79% |
-| system | 25 | 39 | 64% |
+| system | 33 | 39 | 85% |
 | visibility | 22 | 32 | 69% |
-| total | 174 | 233 | 75% |
+| performance | 5 | 0 | N/A |
+| explorer | 3 | 0 | N/A |
+| total | 192 | 233 | 83% |
 <!-- progress:tweaks:end -->
 
 <!-- progress:overall:start -->
-General completion: 50%
+General completion: 65%
 <!-- progress:overall:end -->
 
 ## Automation
