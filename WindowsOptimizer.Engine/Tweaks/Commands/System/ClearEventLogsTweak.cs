@@ -21,7 +21,7 @@ public sealed class ClearEventLogsTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, WevtutilExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, WevtutilExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "gli", "Application" }));
@@ -29,7 +29,7 @@ public sealed class ClearEventLogsTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, WevtutilExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, WevtutilExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "cl", "Application" }));

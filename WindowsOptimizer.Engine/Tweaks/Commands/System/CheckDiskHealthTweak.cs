@@ -21,7 +21,7 @@ public sealed class CheckDiskHealthTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, ChkdskExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, ChkdskExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "C:" }));
@@ -29,7 +29,7 @@ public sealed class CheckDiskHealthTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, ChkdskExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, ChkdskExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "C:" }));

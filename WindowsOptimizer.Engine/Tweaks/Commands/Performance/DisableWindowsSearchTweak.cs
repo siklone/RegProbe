@@ -21,7 +21,7 @@ public sealed class DisableWindowsSearchTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "query", "WSearch" }));
@@ -29,7 +29,7 @@ public sealed class DisableWindowsSearchTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "stop", "WSearch" }));
@@ -42,7 +42,7 @@ public sealed class DisableWindowsSearchTweak : CommandTweak
             return null;
         }
 
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, ScExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "start", "WSearch" }));

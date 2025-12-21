@@ -21,7 +21,7 @@ public sealed class FlushDnsCacheTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, IpConfigExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, IpConfigExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/displaydns" }));
@@ -29,7 +29,7 @@ public sealed class FlushDnsCacheTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, IpConfigExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, IpConfigExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/flushdns" }));

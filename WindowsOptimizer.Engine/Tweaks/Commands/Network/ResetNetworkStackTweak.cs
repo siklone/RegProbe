@@ -21,7 +21,7 @@ public sealed class ResetNetworkStackTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, NetshExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, NetshExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "winsock", "show", "catalog" }));
@@ -29,7 +29,7 @@ public sealed class ResetNetworkStackTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, NetshExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, NetshExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "winsock", "reset" }));
