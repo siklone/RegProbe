@@ -23,7 +23,7 @@ internal sealed class LocalServiceManager : IServiceManager
         }
 
         var exists = false;
-        var startMode = ServiceStartMode.Unknown;
+        var startMode = Infrastructure.Services.ServiceStartMode.Unknown;
         using (var key = Registry.LocalMachine.OpenSubKey(BuildServiceKeyPath(serviceName), false))
         {
             if (key != null)
@@ -59,7 +59,7 @@ internal sealed class LocalServiceManager : IServiceManager
             throw new ArgumentException("Service name is required.", nameof(serviceName));
         }
 
-        if (startMode is ServiceStartMode.Unknown)
+        if (startMode is Infrastructure.Services.ServiceStartMode.Unknown)
         {
             throw new ArgumentOutOfRangeException(nameof(startMode), startMode, "Start mode must be a concrete value.");
         }
