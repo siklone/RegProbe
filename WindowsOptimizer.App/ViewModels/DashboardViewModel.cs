@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Text;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 
@@ -7,7 +9,7 @@ namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class DashboardViewModel : ViewModelBase
 {
-    private readonly ITweakLogStore _logStore;
+    private readonly AppPaths _paths;
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
     private int _tweaksRolledBack;
@@ -15,9 +17,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public DashboardViewModel()
     {
-        var paths = AppPaths.FromEnvironment();
-        _logStore = new FileTweakLogStore(paths);
-
+        _paths = AppPaths.FromEnvironment();
         LoadStatistics();
     }
 
@@ -57,33 +57,88 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         TotalTweaksAvailable = 100; // This will be dynamic when we count actual tweaks
 
-        // Count applied and rolled back tweaks from log store
-        var allLogs = _logStore.GetAllLogs();
+        // Count applied and rolled back tweaks from log file
         var appliedCount = 0;
         var rolledBackCount = 0;
 
-        foreach (var log in allLogs)
+        if (File.Exists(_paths.TweakLogFilePath))
         {
-            if (log.Action == Core.TweakAction.Apply && log.Outcome == Core.TweakOutcome.Success)
+            try
             {
-                appliedCount++;
+                var lines = File.ReadAllLines(_paths.TweakLogFilePath, Encoding.UTF8);
+
+                // Skip header row
+                foreach (var line in lines.Skip(1))
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    var parts = ParseCsvLine(line);
+                    if (parts.Length >= 5)
+                    {
+                        var action = parts[3];
+                        var status = parts[4];
+
+                        if (action == "Apply" && status == "Applied")
+                        {
+                            appliedCount++;
+                        }
+                        else if (action == "Rollback" && status == "RolledBack")
+                        {
+                            rolledBackCount++;
+                        }
+                    }
+                }
+
+                // Get log file size
+                var fileInfo = new FileInfo(_paths.TweakLogFilePath);
+                LogFileSizeBytes = fileInfo.Length;
             }
-            else if (log.Action == Core.TweakAction.Rollback && log.Outcome == Core.TweakOutcome.Success)
+            catch
             {
-                rolledBackCount++;
+                // If we can't read the log file, just use default values
             }
         }
 
         TweaksApplied = appliedCount;
         TweaksRolledBack = rolledBackCount;
+    }
 
-        // Get log file size
-        var paths = AppPaths.FromEnvironment();
-        if (File.Exists(paths.TweakLogFilePath))
+    private static string[] ParseCsvLine(string line)
+    {
+        var result = new System.Collections.Generic.List<string>();
+        var current = new StringBuilder();
+        var inQuotes = false;
+
+        for (var i = 0; i < line.Length; i++)
         {
-            var fileInfo = new FileInfo(paths.TweakLogFilePath);
-            LogFileSizeBytes = fileInfo.Length;
+            var c = line[i];
+
+            if (c == '"')
+            {
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++; // Skip next quote
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (c == ',' && !inQuotes)
+            {
+                result.Add(current.ToString());
+                current.Clear();
+            }
+            else
+            {
+                current.Append(c);
+            }
         }
+
+        result.Add(current.ToString());
+        return result.ToArray();
     }
 
     private static string FormatBytes(long bytes)

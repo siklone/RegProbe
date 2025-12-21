@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
@@ -21,10 +23,10 @@ public sealed class SettingsViewModel : ViewModelBase
         var paths = AppPaths.FromEnvironment();
         _settingsStore = new SettingsStore(paths);
 
-        _saveCommand = new RelayCommand(_ => SaveSettings(), _ => !IsSaving);
+        _saveCommand = new RelayCommand(_ => _ = SaveSettingsAsync(), _ => !IsSaving);
         _testWebhookCommand = new RelayCommand(_ => _ = TestWebhookAsync(), _ => !IsTesting && !string.IsNullOrWhiteSpace(DiscordWebhookUrl));
 
-        LoadSettings();
+        _ = LoadSettingsAsync();
     }
 
     public string Title => "Settings";
@@ -87,29 +89,37 @@ public sealed class SettingsViewModel : ViewModelBase
 
     public ICommand TestWebhookCommand => _testWebhookCommand;
 
-    private void LoadSettings()
+    private async Task LoadSettingsAsync()
     {
-        var settings = _settingsStore.Load();
-        DiscordWebhookUrl = settings.DiscordWebhookUrl ?? string.Empty;
-        DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
-        DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
-        StatusMessage = "Settings loaded successfully.";
+        try
+        {
+            var settings = await _settingsStore.LoadAsync(CancellationToken.None);
+            DiscordWebhookUrl = settings.DiscordWebhookUrl ?? string.Empty;
+            DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
+            DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
+            StatusMessage = "Settings loaded successfully.";
+        }
+        catch (System.Exception ex)
+        {
+            StatusMessage = $"Failed to load settings: {ex.Message}";
+        }
     }
 
-    private void SaveSettings()
+    private async Task SaveSettingsAsync()
     {
         IsSaving = true;
         StatusMessage = "Saving settings...";
 
         try
         {
-            _settingsStore.Update(settings =>
+            var settings = new AppSettings
             {
-                settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
-                settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
-                settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
-            });
+                DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl,
+                DiscordNotificationsEnabled = DiscordNotificationsEnabled,
+                DiscordAutoPatchEnabled = DiscordAutoPatchEnabled
+            };
 
+            await _settingsStore.SaveAsync(settings, CancellationToken.None);
             StatusMessage = "Settings saved successfully!";
         }
         catch (System.Exception ex)
@@ -122,7 +132,7 @@ public sealed class SettingsViewModel : ViewModelBase
         }
     }
 
-    private async System.Threading.Tasks.Task TestWebhookAsync()
+    private async Task TestWebhookAsync()
     {
         IsTesting = true;
         StatusMessage = "Testing Discord webhook...";
@@ -133,7 +143,7 @@ public sealed class SettingsViewModel : ViewModelBase
             var result = await client.SendMessageAsync(
                 DiscordWebhookUrl,
                 "🧪 Test message from Windows Optimizer Suite! Webhook is working correctly.",
-                System.Threading.CancellationToken.None);
+                CancellationToken.None);
 
             if (result.Success)
             {
