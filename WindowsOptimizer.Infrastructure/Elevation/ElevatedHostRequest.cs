@@ -8,4 +8,5 @@ public sealed record ElevatedHostRequest(
     ElevatedRegistryRequest? RegistryRequest = null,
     ElevatedServiceRequest? ServiceRequest = null,
     ElevatedScheduledTaskRequest? ScheduledTaskRequest = null,
-    ElevatedFileRequest? FileRequest = null);
+    ElevatedFileRequest? FileRequest = null,
+    ElevatedCommandRequest? CommandRequest = null);

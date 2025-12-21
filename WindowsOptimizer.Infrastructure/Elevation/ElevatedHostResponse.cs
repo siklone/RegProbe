@@ -8,4 +8,5 @@ public sealed record ElevatedHostResponse(
     ElevatedRegistryResponse? RegistryResponse = null,
     ElevatedServiceResponse? ServiceResponse = null,
     ElevatedScheduledTaskResponse? ScheduledTaskResponse = null,
-    ElevatedFileResponse? FileResponse = null);
+    ElevatedFileResponse? FileResponse = null,
+    ElevatedCommandResponse? CommandResponse = null);
