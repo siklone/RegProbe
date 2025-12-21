@@ -21,7 +21,7 @@ public sealed class DisableReservedStorageTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/online", "/Get-ReservedStorageState" }));
@@ -29,7 +29,7 @@ public sealed class DisableReservedStorageTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/online", "/Set-ReservedStorageState", "/State:Disabled", "/NoRestart" }));
@@ -42,7 +42,7 @@ public sealed class DisableReservedStorageTweak : CommandTweak
             return null;
         }
 
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/online", "/Set-ReservedStorageState", "/State:Enabled", "/NoRestart" }));

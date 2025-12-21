@@ -21,7 +21,7 @@ public sealed class DisableUsbSelectiveSuspendTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/query" }));
@@ -29,7 +29,7 @@ public sealed class DisableUsbSelectiveSuspendTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_USB", "USBSELECTIVESUSPEND", "0" }));
@@ -42,7 +42,7 @@ public sealed class DisableUsbSelectiveSuspendTweak : CommandTweak
             return null;
         }
 
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
+        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32PowerCfgExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_USB", "USBSELECTIVESUSPEND", "1" }));
