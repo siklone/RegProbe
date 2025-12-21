@@ -69,21 +69,21 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
         var oldElement = _currentElement;
         var newContent = AssociatedObject.Content;
 
-        if (oldElement != null && newContent is FrameworkElement newElement)
+        if (oldElement != null && newContent is FrameworkElement element)
         {
             AnimateOut(oldElement, () =>
             {
                 // After old element fades out, bring in new element
-                _currentElement = newElement;
-                PrepareElement(newElement);
-                AnimateIn(newElement);
+                _currentElement = element;
+                PrepareElement(element);
+                AnimateIn(element);
             });
         }
-        else if (newContent is FrameworkElement newElement)
+        else if (newContent is FrameworkElement element)
         {
-            _currentElement = newElement;
-            PrepareElement(newElement);
-            AnimateIn(newElement);
+            _currentElement = element;
+            PrepareElement(element);
+            AnimateIn(element);
         }
     }
 
