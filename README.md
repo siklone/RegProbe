@@ -37,13 +37,14 @@ Implemented tweak types include:
 - Service start mode batches with optional stop behavior.
 - Scheduled task enable/disable batches.
 - File rename toggles for system executables.
+- **Command-based tweaks** that execute System32 commands (powercfg, DISM, bcdedit) through an allowlist security model.
 
 ## Architecture overview
 - `WindowsOptimizer.App`: WPF UI, filters, bulk commands, and execution status.
 - `WindowsOptimizer.Core`: tweak contracts, enums, and result types.
-- `WindowsOptimizer.Engine`: execution pipeline + tweak implementations.
-- `WindowsOptimizer.Infrastructure`: adapters (registry, services, tasks, files), settings, logging.
-- `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages).
+- `WindowsOptimizer.Engine`: execution pipeline + tweak implementations (registry, services, tasks, files, **commands**).
+- `WindowsOptimizer.Infrastructure`: adapters (registry, services, tasks, files, **commands with allowlist**), settings, logging.
+- `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages) - handles registry, services, tasks, files, and **command execution**.
 - `WindowsOptimizer.Tests`: unit tests for contracts, adapters, and tweak logic.
 
 ## Data and logs
@@ -67,10 +68,10 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 <!-- progress:summary:start -->
 | Area | Progress | Notes |
 | --- | --- | --- |
-| Tweaks coverage (docs) | 73% (170/233) <progress value="73" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
+| Tweaks coverage (docs) | 75% (174/233) <progress value="75" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
 | Monitoring | 30% <progress value="30" max="100"></progress> | Pipeline updates + logs exist, richer dashboards pending |
 | UI/UX shell | 75% <progress value="75" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, centralized resources |
-| Elevation | 70% <progress value="70" max="100"></progress> | ElevatedHost + registry/services/tasks/files |
+| Elevation | 85% <progress value="85" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands |
 | Logging/export | 75% <progress value="75" max="100"></progress> | app.log + tweak-log.csv + export |
 | Tests | 25% <progress value="25" max="100"></progress> | Unit tests for pipeline/tweaks/adapters |
 | Docs/guides | 35% <progress value="35" max="100"></progress> | Docs exist, README expanding |
@@ -80,17 +81,17 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 | Doc Area | Implemented | Total | Coverage |
 | --- | --- | --- | --- |
 | affinities | 0 | 1 | 0% |
-| cleanup | 0 | 22 | 0% |
+| cleanup | 2 | 22 | 9% |
 | misc | 0 | 13 | 0% |
 | network | 27 | 22 | 100% |
 | peripheral | 9 | 19 | 47% |
 | policies | 0 | 1 | 0% |
-| power | 4 | 22 | 18% |
+| power | 6 | 22 | 27% |
 | privacy | 64 | 38 | 100% |
 | security | 19 | 24 | 79% |
 | system | 25 | 39 | 64% |
 | visibility | 22 | 32 | 69% |
-| total | 170 | 233 | 73% |
+| total | 174 | 233 | 75% |
 <!-- progress:tweaks:end -->
 
 <!-- progress:overall:start -->

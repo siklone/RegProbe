@@ -13,8 +13,11 @@ using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Commands.Power;
+using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Files;
 using WindowsOptimizer.Infrastructure.Registry;
@@ -43,6 +46,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly IServiceManager _elevatedServiceManager;
     private readonly IScheduledTaskManager _elevatedTaskManager;
     private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
+    private readonly ICommandRunner _elevatedCommandRunner;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -80,6 +84,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
         _elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
         _elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
+        _elevatedCommandRunner = new ElevatedCommandRunner(elevatedHostClient);
         var systemRoot = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
         var system32Path = Path.Combine(systemRoot, "System32");
         var mobsyncPath = Path.Combine(system32Path, "mobsync.exe");
@@ -2692,6 +2697,22 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
                     (settings, value) => settings.DemoTweakBetaEnabled = value),
+                pipeline,
+                _isElevated),
+
+            // Command-based Power Tweaks
+            new(new DisableHibernationTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new DisableUsbSelectiveSuspendTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+
+            // Command-based Cleanup Tweaks
+            new(new CleanupComponentStoreTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new DisableReservedStorageTweak(_elevatedCommandRunner),
                 pipeline,
                 _isElevated)
         };

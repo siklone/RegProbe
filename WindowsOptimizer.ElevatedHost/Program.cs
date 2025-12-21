@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
+using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Files;
 using WindowsOptimizer.Infrastructure.Registry;
@@ -45,6 +46,8 @@ public static class Program
         var serviceManager = new LocalServiceManager();
         var taskManager = new LocalScheduledTaskManager();
         var fileSystemAccessor = new LocalFileSystemAccessor();
+        var commandAllowlist = CommandAllowlist.CreateDefault();
+        var commandRunner = new LocalCommandRunner();
 
         while (!ct.IsCancellationRequested)
         {
@@ -64,7 +67,7 @@ public static class Program
                 break;
             }
 
-            await HandleConnectionAsync(server, registryAccessor, serviceManager, taskManager, fileSystemAccessor, ct);
+            await HandleConnectionAsync(server, registryAccessor, serviceManager, taskManager, fileSystemAccessor, commandAllowlist, commandRunner, ct);
         }
     }
 
@@ -74,6 +77,8 @@ public static class Program
         IServiceManager serviceManager,
         IScheduledTaskManager taskManager,
         IFileSystemAccessor fileSystemAccessor,
+        CommandAllowlist commandAllowlist,
+        ICommandRunner commandRunner,
         CancellationToken ct)
     {
         ElevatedHostRequest? request = null;
@@ -86,6 +91,8 @@ public static class Program
                 serviceManager,
                 taskManager,
                 fileSystemAccessor,
+                commandAllowlist,
+                commandRunner,
                 ct);
             await PipeMessageSerializer.WriteAsync(server, response, ct);
         }
@@ -122,6 +129,8 @@ public static class Program
         IServiceManager serviceManager,
         IScheduledTaskManager taskManager,
         IFileSystemAccessor fileSystemAccessor,
+        CommandAllowlist commandAllowlist,
+        ICommandRunner commandRunner,
         CancellationToken ct)
     {
         switch (request.RequestType)
@@ -202,6 +211,26 @@ public static class Program
                     request.RequestId,
                     ElevatedHostRequestType.FileSystem,
                     FileResponse: fileResponse);
+            }
+            case ElevatedHostRequestType.Command:
+            {
+                if (request.CommandRequest is null)
+                {
+                    return new ElevatedHostResponse(
+                        request.RequestId,
+                        ElevatedHostRequestType.Command,
+                        CommandResponse: new ElevatedCommandResponse(
+                            request.RequestId,
+                            false,
+                            "Command request payload is required.",
+                            null));
+                }
+
+                var commandResponse = await HandleCommandRequestAsync(request.CommandRequest, commandAllowlist, commandRunner, ct);
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.Command,
+                    CommandResponse: commandResponse);
             }
             default:
                 return new ElevatedHostResponse(
@@ -396,6 +425,41 @@ public static class Program
         }
     }
 
+    private static async Task<ElevatedCommandResponse> HandleCommandRequestAsync(
+        ElevatedCommandRequest request,
+        CommandAllowlist allowlist,
+        ICommandRunner runner,
+        CancellationToken ct)
+    {
+        try
+        {
+            if (!allowlist.IsAllowed(request.Command, out var reason))
+            {
+                return new ElevatedCommandResponse(
+                    request.RequestId,
+                    false,
+                    $"Command not allowed: {reason}",
+                    null);
+            }
+
+            var result = await runner.RunAsync(request.Command, ct);
+
+            return new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                result);
+        }
+        catch (Exception ex)
+        {
+            return new ElevatedCommandResponse(
+                request.RequestId,
+                false,
+                ex.Message,
+                null);
+        }
+    }
+
     private static ElevatedHostResponse CreateErrorResponse(ElevatedHostRequest request, string message)
     {
         return request.RequestType switch
@@ -416,6 +480,10 @@ public static class Program
                 request.RequestId,
                 ElevatedHostRequestType.FileSystem,
                 FileResponse: new ElevatedFileResponse(request.RequestId, false, message)),
+            ElevatedHostRequestType.Command => new ElevatedHostResponse(
+                request.RequestId,
+                ElevatedHostRequestType.Command,
+                CommandResponse: new ElevatedCommandResponse(request.RequestId, false, message, null)),
             _ => new ElevatedHostResponse(
                 request.RequestId,
                 request.RequestType,
