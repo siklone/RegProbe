@@ -104,39 +104,33 @@ General completion: 50%
 - Usage: `scripts/codex_pr.sh "Title" "Body"`.
 - Optional env vars: `BASE_BRANCH`, `CODEX_COMMENT`, `GH_BIN`.
 
-## Recent Development Session (2025-12-21)
+## Recent Development Sessions
 
-This session implemented three major phases of enhancements:
+### Session 2025-12-22: UI Polish & Feature Expansion
+- **Enhanced Dashboard**: Statistics cards showing tweaks available, applied, and rolled back
+- **Improved About Page**: Comprehensive application information, features, safety notes, and project details
+- **Settings Page**: Discord webhook integration UI with test functionality
+- **18 New Tweaks Added**:
+  - **Performance** (5): Disable Superfetch, Windows Search, Window Animations, Menu Delay, Taskbar Animations
+  - **Privacy** (3): Disable Activity History, App Diagnostics, Location Tracking
+  - **Explorer** (3): Show Hidden Files, File Extensions, Full Path in Title
+  - **Network** (2): Flush DNS Cache, Reset Winsock Catalog
+  - **System** (5): Check Disk Health, Clear Event Logs, Disable Startup Delay, Remove Shortcut Arrow, Verbose Status
+- **Expanded Command Allowlist**: Added sc.exe, ipconfig.exe, netsh.exe, chkdsk.exe, wevtutil.exe with 40+ safe operations
+- **Total Tweaks**: 110+ optimizations now available!
 
-### Phase 1: Modern UI Foundation
-- **Nord-inspired theme**: Centralized color palette with 16 Nord colors
-- **Smooth animations**: 60 FPS page transitions with fade and slide effects using Microsoft.Xaml.Behaviors.Wpf
-- **Centralized resources**: Colors.xaml, Styles.xaml, Animations.xaml, Converters.xaml
-- **Performance monitoring**: Built-in FPS counter via PerformanceMonitor
-- **Navigation behaviors**: NavigationTransitionBehavior for seamless page transitions
-- **Modern card styles**: Glassmorphism effects, drop shadows, hover animations
-
-### Phase 2: Command-Based Tweaks Infrastructure
-- **Command execution framework**: ICommandRunner, LocalCommandRunner, ElevatedCommandRunner
-- **Security allowlist**: CommandAllowlist enforces System32-only executables with exact argument matching
-- **Elevated integration**: Added Command request type to ElevatedHost named pipe protocol
-- **CommandTweak base class**: Abstract tweak implementation for command-based operations
-- **New tweaks implemented** (4 total):
-  - **Power**: DisableHibernationTweak, DisableUsbSelectiveSuspendTweak
-  - **Cleanup**: CleanupComponentStoreTweak, DisableReservedStorageTweak
-- **Allowlisted commands**: powercfg.exe, DISM.exe, bcdedit.exe with 30+ safe operations
-- **Complete test coverage**: Unit tests with mocked command runners
-
-### Phase 3: Discord Integration & Patch Packaging
-- **DiscordWebhookClient**: HTTP client for Discord webhooks (messages, embeds, file uploads)
-- **Rich embeds**: Discord embeds with Nord color palette based on tweak status
-- **DiscordNotificationService**: High-level service with settings integration
-  - Tweak execution notifications with color-coded statuses
-  - Bulk execution summaries with success/failure counts
-  - Automatic patch file uploads
-- **PatchPackager**: Create ZIP archives of execution logs
-  - Includes tweak-log.csv, app.log, and README
-  - Automatic manifest generation with statistics
-- **Settings integration**: DiscordWebhookUrl, DiscordNotificationsEnabled, DiscordAutoPatchEnabled
-
-All changes committed to `feat/command-tweaks` branch with detailed commit messages.
+### Session 2025-12-21: Foundation & Integration
+- **Phase 1 - Modern UI Foundation**:
+  - Nord-inspired theme with centralized color palette
+  - 60 FPS page transitions with fade and slide effects
+  - Performance monitoring with built-in FPS counter
+  - Modern card styles with glassmorphism effects
+- **Phase 2 - Command-Based Tweaks**:
+  - Command execution framework with security allowlist
+  - ElevatedHost integration for privileged commands
+  - 4 initial command tweaks (Power + Cleanup)
+  - Allowlisted: powercfg.exe, DISM.exe, bcdedit.exe
+- **Phase 3 - Discord Integration**:
+  - Discord webhook client with rich embeds
+  - Automatic patch file packaging and uploads
+  - Settings integration for webhook configuration
