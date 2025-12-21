@@ -23,6 +23,11 @@ public sealed class CommandAllowlist
         var powercfg = Path.Combine(systemDirectory, "powercfg.exe");
         var dism = Path.Combine(systemDirectory, "dism.exe");
         var bcdedit = Path.Combine(systemDirectory, "bcdedit.exe");
+        var sc = Path.Combine(systemDirectory, "sc.exe");
+        var ipconfig = Path.Combine(systemDirectory, "ipconfig.exe");
+        var netsh = Path.Combine(systemDirectory, "netsh.exe");
+        var chkdsk = Path.Combine(systemDirectory, "chkdsk.exe");
+        var wevtutil = Path.Combine(systemDirectory, "wevtutil.exe");
 
         var allowed = new Dictionary<string, List<string[]>>(StringComparer.OrdinalIgnoreCase)
         {
@@ -87,6 +92,65 @@ public sealed class CommandAllowlist
                 new[] { "/timeout", "5" },
                 new[] { "/timeout", "10" },
                 new[] { "/timeout", "30" }
+            },
+            [sc] = new List<string[]>
+            {
+                // Service control - query (safe read-only)
+                new[] { "query", "SysMain" },
+                new[] { "query", "WSearch" },
+
+                // Service control - stop/start
+                new[] { "stop", "SysMain" },
+                new[] { "start", "SysMain" },
+                new[] { "stop", "WSearch" },
+                new[] { "start", "WSearch" }
+            },
+            [ipconfig] = new List<string[]>
+            {
+                // Display DNS cache (read-only)
+                new[] { "/displaydns" },
+
+                // Flush DNS cache
+                new[] { "/flushdns" },
+
+                // Release/renew IP
+                new[] { "/release" },
+                new[] { "/renew" },
+
+                // Display all network info (read-only)
+                new[] { "/all" }
+            },
+            [netsh] = new List<string[]>
+            {
+                // Winsock reset
+                new[] { "winsock", "reset" },
+                new[] { "winsock", "show", "catalog" },
+
+                // IP reset
+                new[] { "int", "ip", "reset" },
+
+                // Interface management (read-only)
+                new[] { "interface", "show", "interface" },
+                new[] { "interface", "ip", "show", "config" }
+            },
+            [chkdsk] = new List<string[]>
+            {
+                // Check disk health (read-only)
+                new[] { "C:" },
+                new[] { "D:" },
+                new[] { "E:" }
+            },
+            [wevtutil] = new List<string[]>
+            {
+                // Get log info (read-only)
+                new[] { "gli", "Application" },
+                new[] { "gli", "System" },
+                new[] { "gli", "Security" },
+
+                // Clear logs
+                new[] { "cl", "Application" },
+                new[] { "cl", "System" },
+                new[] { "cl", "Security" }
             }
         };
 

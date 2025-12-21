@@ -15,6 +15,9 @@ using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands.Power;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
+using WindowsOptimizer.Engine.Tweaks.Commands.Performance;
+using WindowsOptimizer.Engine.Tweaks.Commands.Network;
+using WindowsOptimizer.Engine.Tweaks.Commands.System;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Commands;
@@ -2713,6 +2716,30 @@ public sealed class TweaksViewModel : ViewModelBase
                 pipeline,
                 _isElevated),
             new(new DisableReservedStorageTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+
+            // Command-based Performance Tweaks
+            new(new DisableSuperfetchTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new DisableWindowsSearchTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+
+            // Command-based Network Tweaks
+            new(new FlushDnsCacheTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new ResetNetworkStackTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+
+            // Command-based System Tweaks
+            new(new CheckDiskHealthTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new ClearEventLogsTweak(_elevatedCommandRunner),
                 pipeline,
                 _isElevated)
         };
