@@ -17,6 +17,7 @@ This app aims to make system tuning repeatable and transparent. It separates UI 
 - `ITweak` implementations stay small and composable; multi-step changes use composite tweaks.
 - Engine pipeline owns execution flow, progress reporting, and rollback rules.
 - Infrastructure adapters isolate OS concerns (registry, services, tasks, file system).
+- Monitoring providers live in Infrastructure and feed live telemetry to the UI.
 - ElevatedHost handles privileged actions over a named pipe with JSON messages.
 
 ## How tweaks are implemented
@@ -43,6 +44,16 @@ Implemented tweak types include:
 - `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages).
 - `WindowsOptimizer.Tests`: unit tests for contracts, adapters, and tweak logic.
 
+## Monitoring (preview)
+- Live card dashboard for CPU/GPU temps, voltage, load, power, and fan speed.
+- Powered by LibreHardwareMonitor sensors; update interval is currently 2s.
+- Status banner shows provider and last refresh timestamp.
+- If the provider is unavailable, the UI stays up with a fallback status.
+
+## Discord integration (preview)
+- Settings allow storing a Discord webhook and sending a test ping.
+- Auto patch uploads are planned; toggle is present but not wired to build outputs yet.
+
 ## Data and logs
 - Settings: `%AppData%\\WindowsOptimizerSuite\\settings.json`
 - App log: `%AppData%\\WindowsOptimizerSuite\\logs\\app.log`
@@ -65,8 +76,8 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 | Area | Progress | Notes |
 | --- | --- | --- |
 | Tweaks coverage (docs) | 73% (170/233) <progress value="73" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
-| Monitoring | 30% <progress value="30" max="100"></progress> | Pipeline updates + logs exist, richer dashboards pending |
-| UI/UX shell | 45% <progress value="45" max="100"></progress> | MVVM shell, filters, bulk actions done; polish ongoing |
+| Monitoring | 40% <progress value="40" max="100"></progress> | Live sensor cards + status banner; richer analytics pending |
+| UI/UX shell | 50% <progress value="50" max="100"></progress> | MVVM shell, filters, bulk actions, animated cards |
 | Elevation | 70% <progress value="70" max="100"></progress> | ElevatedHost + registry/services/tasks/files |
 | Logging/export | 75% <progress value="75" max="100"></progress> | app.log + tweak-log.csv + export |
 | Tests | 25% <progress value="25" max="100"></progress> | Unit tests for pipeline/tweaks/adapters |
@@ -91,7 +102,7 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 <!-- progress:tweaks:end -->
 
 <!-- progress:overall:start -->
-General completion: 50%
+General completion: 53%
 <!-- progress:overall:end -->
 
 ## Automation

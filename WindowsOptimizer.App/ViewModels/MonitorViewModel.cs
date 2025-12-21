@@ -1,86 +1,94 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WindowsOptimizer.Core;
-using WindowsOptimizer.Engine;
-using WindowsOptimizer.Infrastructure;
+using System.Windows.Threading;
+using WindowsOptimizer.Infrastructure.Monitoring;
 
 namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MonitorViewModel : ViewModelBase
 {
-    private readonly RelayCommand _runPreviewCommand;
-    private readonly RelayCommand _runApplyCommand;
-    private readonly RelayCommand _cancelCommand;
-    private readonly TweakExecutionPipeline _pipeline;
-    private readonly DemoTweak _demoTweak = new();
-    private CancellationTokenSource? _cts;
-    private bool _isRunning;
-    private string _statusMessage = "Ready to run.";
-    private string _runModeLabel = "Mode: Preview (DryRun)";
+    private readonly ISensorProvider _sensorProvider;
+    private readonly DispatcherTimer _refreshTimer;
+    private readonly RelayCommand _startCommand;
+    private readonly RelayCommand _stopCommand;
+    private readonly RelayCommand _refreshCommand;
+    private readonly List<TileDefinition> _tileDefinitions;
+    private bool _isMonitoring;
+    private bool _isRefreshing;
+    private string _statusMessage = "Waiting for sensor data.";
     private string _lastUpdatedText = "Last update: -";
+    private string _providerText = "Provider: -";
 
     public MonitorViewModel()
     {
-        Steps = new ObservableCollection<TweakStepStatusViewModel>
+        try
         {
-            new(TweakAction.Detect),
-            new(TweakAction.Apply),
-            new(TweakAction.Verify),
-            new(TweakAction.Rollback)
+            _sensorProvider = new LibreHardwareMonitorProvider();
+            ProviderText = "Provider: LibreHardwareMonitor";
+        }
+        catch (Exception ex)
+        {
+            _sensorProvider = new NullSensorProvider(ex.Message);
+            StatusMessage = "Hardware sensors unavailable. Monitoring is in fallback mode.";
+            ProviderText = "Provider: Unavailable";
+        }
+
+        Highlights = new ObservableCollection<MonitorTileViewModel>
+        {
+            new("cpu-temp", "CPU Temp", "#F97316"),
+            new("gpu-temp", "GPU Temp", "#EF4444"),
+            new("cpu-load", "CPU Load", "#38BDF8"),
+            new("gpu-load", "GPU Load", "#60A5FA"),
+            new("mem-load", "Memory Load", "#22C55E"),
+            new("cpu-power", "CPU Power", "#F59E0B"),
+            new("cpu-voltage", "CPU Voltage", "#A855F7"),
+            new("fan-speed", "Fan Speed", "#94A3B8")
         };
 
-        ResetSteps();
+        _tileDefinitions = new List<TileDefinition>
+        {
+            new(Highlights[0], SensorType.Temperature, new[] { "CPU", "Package" }, "C", 85),
+            new(Highlights[1], SensorType.Temperature, new[] { "GPU", "Core" }, "C", 85),
+            new(Highlights[2], SensorType.Load, new[] { "CPU" }, "%", 90),
+            new(Highlights[3], SensorType.Load, new[] { "GPU" }, "%", 90),
+            new(Highlights[4], SensorType.Load, new[] { "Memory" }, "%", 90),
+            new(Highlights[5], SensorType.Power, new[] { "CPU" }, "W", 120),
+            new(Highlights[6], SensorType.Voltage, new[] { "CPU", "V" }, "V", 1.35),
+            new(Highlights[7], SensorType.Fan, new[] { "Fan" }, "RPM", null)
+        };
 
-        var paths = AppPaths.FromEnvironment();
-        var logger = new FileAppLogger(paths);
-        var logStore = new FileTweakLogStore(paths);
-        _pipeline = new TweakExecutionPipeline(logger, logStore);
+        _refreshTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(2)
+        };
+        _refreshTimer.Tick += (_, _) => _ = RefreshAsync();
 
-        _runPreviewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
-        _runApplyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
-        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        _startCommand = new RelayCommand(_ => StartMonitoring(), _ => !IsMonitoring);
+        _stopCommand = new RelayCommand(_ => StopMonitoring(), _ => IsMonitoring);
+        _refreshCommand = new RelayCommand(_ => _ = RefreshAsync(), _ => !IsRefreshing);
+
+        StartMonitoring();
     }
 
     public string Title => "Monitor";
 
-    public string CurrentTweakName => _demoTweak.Name;
+    public ObservableCollection<MonitorTileViewModel> Highlights { get; }
 
-    public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
+    public ICommand StartCommand => _startCommand;
 
-    public ICommand RunPreviewCommand => _runPreviewCommand;
+    public ICommand StopCommand => _stopCommand;
 
-    public ICommand RunApplyCommand => _runApplyCommand;
-
-    public ICommand CancelCommand => _cancelCommand;
-
-    public bool IsRunning
-    {
-        get => _isRunning;
-        private set
-        {
-            if (SetProperty(ref _isRunning, value))
-            {
-                _runPreviewCommand.RaiseCanExecuteChanged();
-                _runApplyCommand.RaiseCanExecuteChanged();
-                _cancelCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
+    public ICommand RefreshCommand => _refreshCommand;
 
     public string StatusMessage
     {
         get => _statusMessage;
         private set => SetProperty(ref _statusMessage, value);
-    }
-
-    public string RunModeLabel
-    {
-        get => _runModeLabel;
-        private set => SetProperty(ref _runModeLabel, value);
     }
 
     public string LastUpdatedText
@@ -89,150 +97,137 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _lastUpdatedText, value);
     }
 
-    private async Task RunPipelineAsync(bool dryRun)
+    public string ProviderText
     {
-        if (IsRunning)
+        get => _providerText;
+        private set => SetProperty(ref _providerText, value);
+    }
+
+    public bool IsMonitoring
+    {
+        get => _isMonitoring;
+        private set
+        {
+            if (SetProperty(ref _isMonitoring, value))
+            {
+                _startCommand.RaiseCanExecuteChanged();
+                _stopCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    private void StartMonitoring()
+    {
+        if (IsMonitoring)
         {
             return;
         }
 
-        IsRunning = true;
-        StartCancellation();
-        RunModeLabel = dryRun ? "Mode: Preview (DryRun)" : "Mode: Apply";
-        StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
-        ResetSteps();
-        Steps.First().MarkInProgress();
+        IsMonitoring = true;
+        StatusMessage = "Live monitoring started.";
+        _refreshTimer.Start();
+        _ = RefreshAsync();
+    }
 
-        var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
-        var options = new TweakExecutionOptions
+    private void StopMonitoring()
+    {
+        if (!IsMonitoring)
         {
-            DryRun = dryRun,
-            VerifyAfterApply = true,
-            RollbackOnFailure = true
-        };
+            return;
+        }
+
+        _refreshTimer.Stop();
+        IsMonitoring = false;
+        StatusMessage = "Monitoring paused.";
+    }
+
+    private async Task RefreshAsync()
+    {
+        if (_isRefreshing)
+        {
+            return;
+        }
+
+        _isRefreshing = true;
+        _refreshCommand.RaiseCanExecuteChanged();
 
         try
         {
-            var report = await _pipeline.ExecuteAsync(_demoTweak, options, progress, _cts?.Token ?? CancellationToken.None);
-            ApplyReport(report);
-            StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
-            LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
-        }
-        catch (OperationCanceledException)
-        {
-            StatusMessage = "Run cancelled.";
+            var snapshot = await _sensorProvider.CaptureAsync(CancellationToken.None);
+            UpdateTiles(snapshot.Readings);
+            ProviderText = $"Provider: {snapshot.Source}";
+            LastUpdatedText = $"Last update: {snapshot.CapturedAt.ToLocalTime():HH:mm:ss}";
+            StatusMessage = $"Live: {snapshot.Readings.Count} sensors.";
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Run failed: {ex.Message}";
+            StatusMessage = $"Monitor error: {ex.Message}";
         }
         finally
         {
-            IsRunning = false;
-            ClearCancellation();
+            _isRefreshing = false;
+            _refreshCommand.RaiseCanExecuteChanged();
         }
     }
 
-    private void OnProgressUpdate(TweakExecutionUpdate update)
+    private void UpdateTiles(IReadOnlyList<SensorReading> readings)
     {
-        var step = Steps.FirstOrDefault(item => item.Action == update.Action);
-        step?.ApplyResult(update.Status, update.Message, update.Timestamp);
-
-        StatusMessage = $"{update.Action}: {update.Status}";
-        LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
-
-        var nextStep = GetNextStep(update.Action);
-        if (nextStep is not null && nextStep.State == TweakStepState.Pending)
+        foreach (var definition in _tileDefinitions)
         {
-            nextStep.MarkInProgress();
-        }
-    }
+            var reading = FindReading(readings, definition.Type, definition.Keywords)
+                          ?? FindFallback(readings, definition.Type);
 
-    private void ApplyReport(TweakExecutionReport report)
-    {
-        foreach (var step in Steps)
-        {
-            var reportStep = report.Steps.FirstOrDefault(item => item.Action == step.Action);
-            if (reportStep is null)
+            if (reading is null)
             {
-                step.MarkNotRequired("Step not executed.");
+                definition.Tile.Update(null, definition.Unit, "Sensor unavailable", "No data", false);
                 continue;
             }
 
-            step.ApplyResult(reportStep.Result.Status, reportStep.Result.Message, reportStep.Result.Timestamp);
+            var unit = string.IsNullOrWhiteSpace(definition.Unit) ? reading.Unit : definition.Unit;
+            var isWarning = definition.WarningThreshold.HasValue && reading.Value >= definition.WarningThreshold.Value;
+            var status = isWarning ? "High" : "OK";
+            definition.Tile.Update(reading.Value, unit, reading.Name, status, isWarning);
         }
     }
 
-    private void ResetSteps()
+    private static SensorReading? FindReading(IEnumerable<SensorReading> readings, SensorType type, string[] keywords)
     {
-        foreach (var step in Steps)
+        return readings.FirstOrDefault(reading =>
+            reading.Type == type &&
+            keywords.All(keyword => reading.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase)));
+    }
+
+    private static SensorReading? FindFallback(IEnumerable<SensorReading> readings, SensorType type)
+    {
+        return readings
+            .Where(reading => reading.Type == type)
+            .OrderByDescending(reading => reading.Value)
+            .FirstOrDefault();
+    }
+
+    private sealed record TileDefinition(
+        MonitorTileViewModel Tile,
+        SensorType Type,
+        string[] Keywords,
+        string Unit,
+        double? WarningThreshold);
+
+    private sealed class NullSensorProvider : ISensorProvider
+    {
+        private readonly string _reason;
+
+        public NullSensorProvider(string reason)
         {
-            step.Reset();
-        }
-    }
-
-    private void CancelRun()
-    {
-        if (!IsRunning || _cts is null)
-        {
-            return;
-        }
-
-        _cts.Cancel();
-        StatusMessage = "Cancellation requested.";
-    }
-
-    private void StartCancellation()
-    {
-        ClearCancellation();
-        _cts = new CancellationTokenSource();
-    }
-
-    private void ClearCancellation()
-    {
-        _cts?.Dispose();
-        _cts = null;
-    }
-
-    private TweakStepStatusViewModel? GetNextStep(TweakAction action)
-    {
-        for (var i = 0; i < Steps.Count - 1; i++)
-        {
-            if (Steps[i].Action == action)
-            {
-                return Steps[i + 1];
-            }
+            _reason = string.IsNullOrWhiteSpace(reason) ? "Unavailable" : reason;
         }
 
-        return null;
-    }
-
-    private sealed class DemoTweak : ITweak
-    {
-        private static readonly TimeSpan StepDelay = TimeSpan.FromMilliseconds(450);
-
-        public string Id => "demo.monitor";
-        public string Name => "Demo tweak pipeline";
-        public string Description => "Simulated tweak run for monitoring UI.";
-        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
-        public bool RequiresElevation => false;
-
-        public Task<TweakResult> DetectAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Detected, "Configuration snapshot captured.", ct);
-
-        public Task<TweakResult> ApplyAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Applied, "Simulated tweak applied.", ct);
-
-        public Task<TweakResult> VerifyAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Verified, "Verification completed.", ct);
-
-        public Task<TweakResult> RollbackAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.RolledBack, "Rollback completed.", ct);
-
-        private static async Task<TweakResult> SimulateAsync(TweakStatus status, string message, CancellationToken ct)
+        public Task<MonitoringSnapshot> CaptureAsync(CancellationToken ct)
         {
-            await Task.Delay(StepDelay, ct);
-            return new TweakResult(status, message, DateTimeOffset.UtcNow);
+            var snapshot = new MonitoringSnapshot(
+                Array.Empty<SensorReading>(),
+                DateTimeOffset.UtcNow,
+                $"Unavailable ({_reason})");
+            return Task.FromResult(snapshot);
         }
     }
 }
