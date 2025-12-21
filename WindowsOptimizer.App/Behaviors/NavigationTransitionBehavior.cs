@@ -1,4 +1,5 @@
 using Microsoft.Xaml.Behaviors;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -29,6 +30,7 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
     }
 
     private FrameworkElement? _currentElement;
+    private DependencyPropertyDescriptor? _contentPropertyDescriptor;
 
     protected override void OnAttached()
     {
@@ -39,13 +41,19 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
     protected override void OnDetaching()
     {
         AssociatedObject.Loaded -= OnLoaded;
-        AssociatedObject.ContentChanged -= OnContentChanged;
+        if (_contentPropertyDescriptor != null)
+        {
+            _contentPropertyDescriptor.RemoveValueChanged(AssociatedObject, OnContentChanged);
+        }
         base.OnDetaching();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        AssociatedObject.ContentChanged += OnContentChanged;
+        _contentPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(
+            ContentControl.ContentProperty,
+            typeof(ContentControl));
+        _contentPropertyDescriptor?.AddValueChanged(AssociatedObject, OnContentChanged);
 
         // Initialize first view
         if (AssociatedObject.Content is FrameworkElement element)
@@ -56,22 +64,22 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
         }
     }
 
-    private void OnContentChanged(object sender, DependencyPropertyChangedEventArgs e)
+    private void OnContentChanged(object? sender, EventArgs e)
     {
-        if (e.OldValue is FrameworkElement oldElement)
+        var oldElement = _currentElement;
+        var newContent = AssociatedObject.Content;
+
+        if (oldElement != null && newContent is FrameworkElement newElement)
         {
             AnimateOut(oldElement, () =>
             {
                 // After old element fades out, bring in new element
-                if (e.NewValue is FrameworkElement newElement)
-                {
-                    _currentElement = newElement;
-                    PrepareElement(newElement);
-                    AnimateIn(newElement);
-                }
+                _currentElement = newElement;
+                PrepareElement(newElement);
+                AnimateIn(newElement);
             });
         }
-        else if (e.NewValue is FrameworkElement newElement)
+        else if (newContent is FrameworkElement newElement)
         {
             _currentElement = newElement;
             PrepareElement(newElement);
