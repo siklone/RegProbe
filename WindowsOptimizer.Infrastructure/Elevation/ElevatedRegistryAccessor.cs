@@ -22,8 +22,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
             reference,
             null);
 
-        var response = await _client.SendAsync(request, ct);
-        EnsureResponse(request, response);
+        var response = await SendAsync(request, ct);
 
         if (response.ReadResult is null)
         {
@@ -41,8 +40,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
             reference,
             value);
 
-        var response = await _client.SendAsync(request, ct);
-        EnsureResponse(request, response);
+        await SendAsync(request, ct);
     }
 
     public async Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
@@ -53,12 +51,25 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
             reference,
             null);
 
-        var response = await _client.SendAsync(request, ct);
-        EnsureResponse(request, response);
+        await SendAsync(request, ct);
     }
 
-    private static void EnsureResponse(ElevatedRegistryRequest request, ElevatedRegistryResponse response)
+    private async Task<ElevatedRegistryResponse> SendAsync(
+        ElevatedRegistryRequest request,
+        CancellationToken ct)
     {
+        var hostRequest = new ElevatedHostRequest(
+            request.RequestId,
+            ElevatedHostRequestType.Registry,
+            RegistryRequest: request);
+
+        var hostResponse = await _client.SendAsync(hostRequest, ct);
+        if (hostResponse.ResponseType != ElevatedHostRequestType.Registry || hostResponse.RegistryResponse is null)
+        {
+            throw new ElevatedHostException("Elevated host did not return a registry response.");
+        }
+
+        var response = hostResponse.RegistryResponse;
         if (response.RequestId != request.RequestId)
         {
             throw new ElevatedHostException("Elevated host response did not match the request.");
@@ -71,5 +82,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
                 : response.Error;
             throw new ElevatedHostException(message);
         }
+
+        return response;
     }
 }

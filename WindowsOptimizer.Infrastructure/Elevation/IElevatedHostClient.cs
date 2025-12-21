@@ -5,5 +5,5 @@ namespace WindowsOptimizer.Infrastructure.Elevation;
 
 public interface IElevatedHostClient
 {
-    Task<ElevatedRegistryResponse> SendAsync(ElevatedRegistryRequest request, CancellationToken ct);
+    Task<ElevatedHostResponse> SendAsync(ElevatedHostRequest request, CancellationToken ct);
 }

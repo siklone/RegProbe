@@ -4,7 +4,10 @@ using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Infrastructure.Elevation;
+using WindowsOptimizer.Infrastructure.Files;
 using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Infrastructure.Tasks;
 
 namespace WindowsOptimizer.ElevatedHost;
 
@@ -38,7 +41,10 @@ public static class Program
 
     private static async Task RunServerAsync(string pipeName, CancellationToken ct)
     {
-        var accessor = new LocalRegistryAccessor();
+        var registryAccessor = new LocalRegistryAccessor();
+        var serviceManager = new LocalServiceManager();
+        var taskManager = new LocalScheduledTaskManager();
+        var fileSystemAccessor = new LocalFileSystemAccessor();
 
         while (!ct.IsCancellationRequested)
         {
@@ -58,20 +64,29 @@ public static class Program
                 break;
             }
 
-            await HandleConnectionAsync(server, accessor, ct);
+            await HandleConnectionAsync(server, registryAccessor, serviceManager, taskManager, fileSystemAccessor, ct);
         }
     }
 
     private static async Task HandleConnectionAsync(
         NamedPipeServerStream server,
-        IRegistryAccessor accessor,
+        IRegistryAccessor registryAccessor,
+        IServiceManager serviceManager,
+        IScheduledTaskManager taskManager,
+        IFileSystemAccessor fileSystemAccessor,
         CancellationToken ct)
     {
-        ElevatedRegistryRequest? request = null;
+        ElevatedHostRequest? request = null;
         try
         {
-            request = await PipeMessageSerializer.ReadAsync<ElevatedRegistryRequest>(server, ct);
-            var response = await HandleRequestAsync(request, accessor, ct);
+            request = await PipeMessageSerializer.ReadAsync<ElevatedHostRequest>(server, ct);
+            var response = await HandleRequestAsync(
+                request,
+                registryAccessor,
+                serviceManager,
+                taskManager,
+                fileSystemAccessor,
+                ct);
             await PipeMessageSerializer.WriteAsync(server, response, ct);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
@@ -90,11 +105,7 @@ public static class Program
                 return;
             }
 
-            var response = new ElevatedRegistryResponse(
-                request.RequestId,
-                false,
-                ex.Message,
-                null);
+            var response = CreateErrorResponse(request, ex.Message);
             try
             {
                 await PipeMessageSerializer.WriteAsync(server, response, CancellationToken.None);
@@ -105,9 +116,107 @@ public static class Program
         }
     }
 
-    private static async Task<ElevatedRegistryResponse> HandleRequestAsync(
+    private static async Task<ElevatedHostResponse> HandleRequestAsync(
+        ElevatedHostRequest request,
+        IRegistryAccessor registryAccessor,
+        IServiceManager serviceManager,
+        IScheduledTaskManager taskManager,
+        IFileSystemAccessor fileSystemAccessor,
+        CancellationToken ct)
+    {
+        switch (request.RequestType)
+        {
+            case ElevatedHostRequestType.Registry:
+            {
+                if (request.RegistryRequest is null)
+                {
+                    return new ElevatedHostResponse(
+                        request.RequestId,
+                        ElevatedHostRequestType.Registry,
+                        RegistryResponse: new ElevatedRegistryResponse(
+                            request.RequestId,
+                            false,
+                            "Registry request payload is required.",
+                            null));
+                }
+
+                var registryResponse = await HandleRegistryRequestAsync(request.RegistryRequest, registryAccessor, ct);
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.Registry,
+                    RegistryResponse: registryResponse);
+            }
+            case ElevatedHostRequestType.Service:
+            {
+                if (request.ServiceRequest is null)
+                {
+                    return new ElevatedHostResponse(
+                        request.RequestId,
+                        ElevatedHostRequestType.Service,
+                        ServiceResponse: new ElevatedServiceResponse(
+                            request.RequestId,
+                            false,
+                            "Service request payload is required."));
+                }
+
+                var serviceResponse = await HandleServiceRequestAsync(request.ServiceRequest, serviceManager, ct);
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.Service,
+                    ServiceResponse: serviceResponse);
+            }
+            case ElevatedHostRequestType.ScheduledTask:
+            {
+                if (request.ScheduledTaskRequest is null)
+                {
+                    return new ElevatedHostResponse(
+                        request.RequestId,
+                        ElevatedHostRequestType.ScheduledTask,
+                        ScheduledTaskResponse: new ElevatedScheduledTaskResponse(
+                            request.RequestId,
+                            false,
+                            "Scheduled task request payload is required."));
+                }
+
+                var taskResponse = await HandleScheduledTaskRequestAsync(request.ScheduledTaskRequest, taskManager, ct);
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.ScheduledTask,
+                    ScheduledTaskResponse: taskResponse);
+            }
+            case ElevatedHostRequestType.FileSystem:
+            {
+                if (request.FileRequest is null)
+                {
+                    return new ElevatedHostResponse(
+                        request.RequestId,
+                        ElevatedHostRequestType.FileSystem,
+                        FileResponse: new ElevatedFileResponse(
+                            request.RequestId,
+                            false,
+                            "File request payload is required."));
+                }
+
+                var fileResponse = await HandleFileRequestAsync(request.FileRequest, fileSystemAccessor, ct);
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.FileSystem,
+                    FileResponse: fileResponse);
+            }
+            default:
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    request.RequestType,
+                    FileResponse: new ElevatedFileResponse(
+                        request.RequestId,
+                        false,
+                        "Unsupported elevated host request."));
+        }
+    }
+
+    private static async Task<ElevatedRegistryResponse> HandleRegistryRequestAsync(
         ElevatedRegistryRequest request,
-        IRegistryAccessor accessor,
+        IRegistryAccessor registryAccessor,
         CancellationToken ct)
     {
         try
@@ -116,7 +225,7 @@ public static class Program
             {
                 case ElevatedRegistryOperation.ReadValue:
                 {
-                    var result = await accessor.ReadValueAsync(request.Reference, ct);
+                    var result = await registryAccessor.ReadValueAsync(request.Reference, ct);
                     return new ElevatedRegistryResponse(request.RequestId, true, null, result);
                 }
                 case ElevatedRegistryOperation.SetValue:
@@ -126,12 +235,12 @@ public static class Program
                         throw new InvalidDataException("Registry value payload is required.");
                     }
 
-                    await accessor.SetValueAsync(request.Reference, request.Value, ct);
+                    await registryAccessor.SetValueAsync(request.Reference, request.Value, ct);
                     return new ElevatedRegistryResponse(request.RequestId, true, null, null);
                 }
                 case ElevatedRegistryOperation.DeleteValue:
                 {
-                    await accessor.DeleteValueAsync(request.Reference, ct);
+                    await registryAccessor.DeleteValueAsync(request.Reference, ct);
                     return new ElevatedRegistryResponse(request.RequestId, true, null, null);
                 }
                 default:
@@ -150,6 +259,168 @@ public static class Program
                 ex.Message,
                 null);
         }
+    }
+
+    private static async Task<ElevatedServiceResponse> HandleServiceRequestAsync(
+        ElevatedServiceRequest request,
+        IServiceManager serviceManager,
+        CancellationToken ct)
+    {
+        try
+        {
+            switch (request.Operation)
+            {
+                case ElevatedServiceOperation.Query:
+                {
+                    var info = await serviceManager.QueryAsync(request.ServiceName, ct);
+                    return new ElevatedServiceResponse(request.RequestId, true, null, info);
+                }
+                case ElevatedServiceOperation.SetStartMode:
+                {
+                    if (request.StartMode is null)
+                    {
+                        throw new InvalidDataException("Service start mode is required.");
+                    }
+
+                    await serviceManager.SetStartModeAsync(request.ServiceName, request.StartMode.Value, ct);
+                    return new ElevatedServiceResponse(request.RequestId, true, null);
+                }
+                case ElevatedServiceOperation.Start:
+                {
+                    await serviceManager.StartAsync(request.ServiceName, ct);
+                    return new ElevatedServiceResponse(request.RequestId, true, null);
+                }
+                case ElevatedServiceOperation.Stop:
+                {
+                    await serviceManager.StopAsync(request.ServiceName, ct);
+                    return new ElevatedServiceResponse(request.RequestId, true, null);
+                }
+                case ElevatedServiceOperation.List:
+                {
+                    var names = await serviceManager.ListServiceNamesAsync(ct);
+                    return new ElevatedServiceResponse(request.RequestId, true, null, null, names);
+                }
+                default:
+                    return new ElevatedServiceResponse(
+                        request.RequestId,
+                        false,
+                        "Unsupported service operation.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return new ElevatedServiceResponse(
+                request.RequestId,
+                false,
+                ex.Message);
+        }
+    }
+
+    private static async Task<ElevatedScheduledTaskResponse> HandleScheduledTaskRequestAsync(
+        ElevatedScheduledTaskRequest request,
+        IScheduledTaskManager taskManager,
+        CancellationToken ct)
+    {
+        try
+        {
+            switch (request.Operation)
+            {
+                case ElevatedScheduledTaskOperation.Query:
+                {
+                    var info = await taskManager.QueryAsync(request.TaskPath, ct);
+                    return new ElevatedScheduledTaskResponse(request.RequestId, true, null, info);
+                }
+                case ElevatedScheduledTaskOperation.SetEnabled:
+                {
+                    if (request.Enabled is null)
+                    {
+                        throw new InvalidDataException("Scheduled task enabled state is required.");
+                    }
+
+                    await taskManager.SetEnabledAsync(request.TaskPath, request.Enabled.Value, ct);
+                    return new ElevatedScheduledTaskResponse(request.RequestId, true, null);
+                }
+                default:
+                    return new ElevatedScheduledTaskResponse(
+                        request.RequestId,
+                        false,
+                        "Unsupported scheduled task operation.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return new ElevatedScheduledTaskResponse(
+                request.RequestId,
+                false,
+                ex.Message);
+        }
+    }
+
+    private static async Task<ElevatedFileResponse> HandleFileRequestAsync(
+        ElevatedFileRequest request,
+        IFileSystemAccessor fileSystemAccessor,
+        CancellationToken ct)
+    {
+        try
+        {
+            switch (request.Operation)
+            {
+                case ElevatedFileOperation.Exists:
+                {
+                    var exists = await fileSystemAccessor.FileExistsAsync(request.SourcePath, ct);
+                    return new ElevatedFileResponse(request.RequestId, true, null, exists);
+                }
+                case ElevatedFileOperation.Move:
+                {
+                    if (string.IsNullOrWhiteSpace(request.DestinationPath))
+                    {
+                        throw new InvalidDataException("Destination path is required.");
+                    }
+
+                    await fileSystemAccessor.MoveFileAsync(request.SourcePath, request.DestinationPath, ct);
+                    return new ElevatedFileResponse(request.RequestId, true, null);
+                }
+                default:
+                    return new ElevatedFileResponse(
+                        request.RequestId,
+                        false,
+                        "Unsupported file operation.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return new ElevatedFileResponse(
+                request.RequestId,
+                false,
+                ex.Message);
+        }
+    }
+
+    private static ElevatedHostResponse CreateErrorResponse(ElevatedHostRequest request, string message)
+    {
+        return request.RequestType switch
+        {
+            ElevatedHostRequestType.Registry => new ElevatedHostResponse(
+                request.RequestId,
+                ElevatedHostRequestType.Registry,
+                RegistryResponse: new ElevatedRegistryResponse(request.RequestId, false, message, null)),
+            ElevatedHostRequestType.Service => new ElevatedHostResponse(
+                request.RequestId,
+                ElevatedHostRequestType.Service,
+                ServiceResponse: new ElevatedServiceResponse(request.RequestId, false, message)),
+            ElevatedHostRequestType.ScheduledTask => new ElevatedHostResponse(
+                request.RequestId,
+                ElevatedHostRequestType.ScheduledTask,
+                ScheduledTaskResponse: new ElevatedScheduledTaskResponse(request.RequestId, false, message)),
+            ElevatedHostRequestType.FileSystem => new ElevatedHostResponse(
+                request.RequestId,
+                ElevatedHostRequestType.FileSystem,
+                FileResponse: new ElevatedFileResponse(request.RequestId, false, message)),
+            _ => new ElevatedHostResponse(
+                request.RequestId,
+                request.RequestType,
+                FileResponse: new ElevatedFileResponse(request.RequestId, false, message))
+        };
     }
 
     private static async Task MonitorParentAsync(int parentProcessId, CancellationTokenSource cts)

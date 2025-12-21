@@ -15,7 +15,7 @@ public sealed class ElevatedRegistryAccessorTests
         var expected = new RegistryValueReadResult(
             true,
             new RegistryValueData(RegistryValueKind.DWord, NumericValue: 1));
-        client.ResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, true, null, expected);
+        client.RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, true, null, expected);
 
         var accessor = new ElevatedRegistryAccessor(client);
         var reference = new RegistryValueReference(
@@ -28,7 +28,7 @@ public sealed class ElevatedRegistryAccessorTests
 
         Assert.True(result.Exists);
         Assert.Equal(expected, result);
-        Assert.Equal(ElevatedRegistryOperation.ReadValue, client.LastRequest!.Operation);
+        Assert.Equal(ElevatedRegistryOperation.ReadValue, client.LastRequest!.RegistryRequest!.Operation);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public sealed class ElevatedRegistryAccessorTests
     {
         var client = new RecordingClient
         {
-            ResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "boom", null)
+            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "boom", null)
         };
         var accessor = new ElevatedRegistryAccessor(client);
         var reference = new RegistryValueReference(
@@ -64,20 +64,23 @@ public sealed class ElevatedRegistryAccessorTests
 
         await accessor.DeleteValueAsync(reference, CancellationToken.None);
 
-        Assert.Equal(ElevatedRegistryOperation.DeleteValue, client.LastRequest!.Operation);
+        Assert.Equal(ElevatedRegistryOperation.DeleteValue, client.LastRequest!.RegistryRequest!.Operation);
     }
 
     private sealed class RecordingClient : IElevatedHostClient
     {
-        public ElevatedRegistryRequest? LastRequest { get; private set; }
-        public Func<ElevatedRegistryRequest, ElevatedRegistryResponse>? ResponseFactory { get; set; }
+        public ElevatedHostRequest? LastRequest { get; private set; }
+        public Func<ElevatedRegistryRequest, ElevatedRegistryResponse>? RegistryResponseFactory { get; set; }
 
-        public Task<ElevatedRegistryResponse> SendAsync(ElevatedRegistryRequest request, CancellationToken ct)
+        public Task<ElevatedHostResponse> SendAsync(ElevatedHostRequest request, CancellationToken ct)
         {
             LastRequest = request;
-            var response = ResponseFactory?.Invoke(request)
+            var registryRequest = request.RegistryRequest
+                ?? throw new InvalidOperationException("Registry request payload is required.");
+            var response = RegistryResponseFactory?.Invoke(registryRequest)
                 ?? new ElevatedRegistryResponse(request.RequestId, true, null, null);
-            return Task.FromResult(response);
+            var hostResponse = new ElevatedHostResponse(request.RequestId, request.RequestType, RegistryResponse: response);
+            return Task.FromResult(hostResponse);
         }
     }
 }

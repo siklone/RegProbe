@@ -1,0 +1,45 @@
+{
+  "manual_rows": [
+    {
+      "area": "Monitoring",
+      "percent": 30,
+      "notes": "Pipeline updates + logs exist, richer dashboards pending"
+    },
+    {
+      "area": "UI/UX shell",
+      "percent": 45,
+      "notes": "MVVM shell, filters, bulk actions done; polish ongoing"
+    },
+    {
+      "area": "Elevation",
+      "percent": 70,
+      "notes": "ElevatedHost + registry/services/tasks/files"
+    },
+    {
+      "area": "Logging/export",
+      "percent": 75,
+      "notes": "app.log + tweak-log.csv + export"
+    },
+    {
+      "area": "Tests",
+      "percent": 25,
+      "notes": "Unit tests for pipeline/tweaks/adapters"
+    },
+    {
+      "area": "Docs/guides",
+      "percent": 35,
+      "notes": "Docs exist, README expanding"
+    }
+  ],
+  "tweaks_row": {
+    "area": "Tweaks coverage (docs)",
+    "notes": "Top-level tweak IDs vs docs headings (coverage capped at 100%)"
+  },
+  "exclude_prefixes": [
+    "demo"
+  ],
+  "prefix_map": {
+    "audio": "peripheral",
+    "notifications": "system"
+  }
+}

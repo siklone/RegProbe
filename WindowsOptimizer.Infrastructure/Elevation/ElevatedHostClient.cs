@@ -23,7 +23,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         }
     }
 
-    public async Task<ElevatedRegistryResponse> SendAsync(ElevatedRegistryRequest request, CancellationToken ct)
+    public async Task<ElevatedHostResponse> SendAsync(ElevatedHostRequest request, CancellationToken ct)
     {
         if (request is null)
         {
@@ -79,8 +79,8 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         }
     }
 
-    private async Task<ElevatedRegistryResponse> SendOnceAsync(
-        ElevatedRegistryRequest request,
+    private async Task<ElevatedHostResponse> SendOnceAsync(
+        ElevatedHostRequest request,
         TimeSpan timeout,
         CancellationToken ct)
     {
@@ -94,7 +94,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         await pipe.ConnectAsync(timeoutMs, ct);
 
         await PipeMessageSerializer.WriteAsync(pipe, request, ct);
-        return await PipeMessageSerializer.ReadAsync<ElevatedRegistryResponse>(pipe, ct);
+        return await PipeMessageSerializer.ReadAsync<ElevatedHostResponse>(pipe, ct);
     }
 
     private async Task<bool> TryConnectAsync(TimeSpan timeout, CancellationToken ct)

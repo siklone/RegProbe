@@ -16,7 +16,10 @@ using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Elevation;
+using WindowsOptimizer.Infrastructure.Files;
 using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Infrastructure.Tasks;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -37,6 +40,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly bool _isElevated;
     private readonly IRegistryAccessor _localRegistryAccessor;
     private readonly IRegistryAccessor _elevatedRegistryAccessor;
+    private readonly IServiceManager _elevatedServiceManager;
+    private readonly IScheduledTaskManager _elevatedTaskManager;
+    private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private string _filterSummary = "Showing 0 of 0 tweaks.";
@@ -71,6 +77,17 @@ public sealed class TweaksViewModel : ViewModelBase
         });
         _localRegistryAccessor = new LocalRegistryAccessor();
         _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
+        _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
+        _elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
+        _elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
+        var systemRoot = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+        var system32Path = Path.Combine(systemRoot, "System32");
+        var mobsyncPath = Path.Combine(system32Path, "mobsync.exe");
+        var mobsyncDisabledPath = mobsyncPath + ".disabled";
+        var psrPath = Path.Combine(system32Path, "psr.exe");
+        var psrDisabledPath = psrPath + ".disabled";
+        var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
+        var helpPaneDisabledPath = helpPanePath + ".disabled";
 
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
@@ -1574,16 +1591,31 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(CreateRegistryTweak(
+            new(CreateCompositeTweak(
                     "privacy.disable-steps-recorder",
                     "Disable Steps Recorder",
                     "Disables Steps Recorder to prevent recording user actions.",
                     TweakRiskLevel.Advanced,
-                    RegistryHive.LocalMachine,
-                    @"Software\Policies\Microsoft\Windows\AppCompat",
-                    "DisableUAR",
-                    RegistryValueKind.DWord,
-                    1),
+                    new ITweak[]
+                    {
+                        CreateRegistryTweak(
+                            "privacy.disable-steps-recorder.policy",
+                            "Disable Steps Recorder (Policy)",
+                            "Disables Steps Recorder via policy.",
+                            TweakRiskLevel.Advanced,
+                            RegistryHive.LocalMachine,
+                            @"Software\Policies\Microsoft\Windows\AppCompat",
+                            "DisableUAR",
+                            RegistryValueKind.DWord,
+                            1),
+                        CreateFileRenameTweak(
+                            "privacy.disable-steps-recorder.binary",
+                            "Disable Steps Recorder (Binary)",
+                            "Renames the Steps Recorder binary to block execution.",
+                            TweakRiskLevel.Advanced,
+                            psrPath,
+                            psrDisabledPath)
+                    }),
                 pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
@@ -2083,16 +2115,49 @@ public sealed class TweaksViewModel : ViewModelBase
                     0),
                 pipeline,
                 _isElevated),
-            new(CreateRegistryTweak(
+            new(CreateCompositeTweak(
                     "privacy.disable-offline-files",
                     "Disable Offline Files",
-                    "Disables Offline Files (CSC) feature.",
+                    "Disables Offline Files (CSC) via policy, services, tasks, and Sync Center.",
                     TweakRiskLevel.Advanced,
-                    RegistryHive.LocalMachine,
-                    @"Software\Policies\Microsoft\Windows\NetCache",
-                    "Enabled",
-                    RegistryValueKind.DWord,
-                    0),
+                    new ITweak[]
+                    {
+                        CreateRegistryTweak(
+                            "privacy.disable-offline-files.policy",
+                            "Disable Offline Files (Policy)",
+                            "Disables Offline Files policy.",
+                            TweakRiskLevel.Advanced,
+                            RegistryHive.LocalMachine,
+                            @"Software\Policies\Microsoft\Windows\NetCache",
+                            "Enabled",
+                            RegistryValueKind.DWord,
+                            0),
+                        CreateServiceStartModeBatchTweak(
+                            "privacy.disable-offline-files.services",
+                            "Disable Offline Files (Services)",
+                            "Disables Offline Files services.",
+                            TweakRiskLevel.Advanced,
+                            new[] { "CSC", "CscService" },
+                            ServiceStartMode.Disabled,
+                            stopRunning: true),
+                        CreateScheduledTaskBatchTweak(
+                            "privacy.disable-offline-files.tasks",
+                            "Disable Offline Files (Tasks)",
+                            "Disables Offline Files scheduled tasks.",
+                            TweakRiskLevel.Advanced,
+                            new[]
+                            {
+                                @"\Microsoft\Windows\Offline Files\Background Synchronization",
+                                @"\Microsoft\Windows\Offline Files\Logon Synchronization"
+                            }),
+                        CreateFileRenameTweak(
+                            "privacy.disable-offline-files.binary",
+                            "Disable Offline Files (Sync Center)",
+                            "Renames Sync Center to block Offline Files execution.",
+                            TweakRiskLevel.Advanced,
+                            mobsyncPath,
+                            mobsyncDisabledPath)
+                    }),
                 pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
@@ -2143,22 +2208,44 @@ public sealed class TweaksViewModel : ViewModelBase
                     1),
                 pipeline,
                 _isElevated),
-            new(CreateRegistryValueSetTweak(
+            new(CreateCompositeTweak(
                     "privacy.disable-application-compatibility",
                     "Disable Application Compatibility",
-                    "Turns off Windows application compatibility components and telemetry.",
+                    "Turns off Windows application compatibility components, telemetry, and related tasks.",
                     TweakRiskLevel.Risky,
-                    RegistryHive.LocalMachine,
-                    @"Software\Policies\Microsoft\Windows\AppCompat",
-                    new[]
+                    new ITweak[]
                     {
-                        new RegistryValueSetEntry("DisableEngine", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisableAPISamping", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisableApplicationFootprint", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisableInstallTracing", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisableWin32AppBackup", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisablePcaUI", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("SbEnable", RegistryValueKind.DWord, 0)
+                        CreateRegistryValueSetTweak(
+                            "privacy.disable-application-compatibility.policy",
+                            "Disable Application Compatibility (Policy)",
+                            "Turns off application compatibility policies.",
+                            TweakRiskLevel.Risky,
+                            RegistryHive.LocalMachine,
+                            @"Software\Policies\Microsoft\Windows\AppCompat",
+                            new[]
+                            {
+                                new RegistryValueSetEntry("DisableEngine", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("DisableAPISamping", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("DisableApplicationFootprint", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("DisableInstallTracing", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("DisableWin32AppBackup", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("DisablePcaUI", RegistryValueKind.DWord, 1),
+                                new RegistryValueSetEntry("SbEnable", RegistryValueKind.DWord, 0)
+                            }),
+                        CreateScheduledTaskBatchTweak(
+                            "privacy.disable-application-compatibility.tasks",
+                            "Disable Application Compatibility (Tasks)",
+                            "Disables Application Experience scheduled tasks.",
+                            TweakRiskLevel.Risky,
+                            new[]
+                            {
+                                @"\Microsoft\Windows\Application Experience\MareBackup",
+                                @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
+                                @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp",
+                                @"\Microsoft\Windows\Application Experience\PcaPatchDbTask",
+                                @"\Microsoft\Windows\Application Experience\SdbinstMergeDbTask",
+                                @"\Microsoft\Windows\Application Experience\StartupAppTask"
+                            })
                     }),
                 pipeline,
                 _isElevated),
@@ -2350,6 +2437,229 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableRspndr",
                     RegistryValueKind.DWord,
                     1),
+                pipeline,
+                _isElevated),
+            new(CreateScheduledTaskBatchTweak(
+                    "system.disable-scheduled-tasks",
+                    "Disable Scheduled Tasks",
+                    "Disables common scheduled tasks tied to telemetry, maintenance, and update workflows.",
+                    TweakRiskLevel.Risky,
+                    new[]
+                    {
+                        @"\Microsoft\Windows\Application Experience\MareBackup",
+                        @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
+                        @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp",
+                        @"\Microsoft\Windows\Application Experience\StartupAppTask",
+                        @"\Microsoft\Windows\ApplicationData\DsSvcCleanup",
+                        @"\Microsoft\Windows\Autochk\Proxy",
+                        @"\Microsoft\Windows\CloudExperienceHost\CreateObjectTask",
+                        @"\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
+                        @"\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
+                        @"\Microsoft\Windows\Defrag\ScheduledDefrag",
+                        @"\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner",
+                        @"\Microsoft\Windows\Diagnosis\Scheduled",
+                        @"\Microsoft\Windows\Diagnosis\UnexpectedCodePath",
+                        @"\Microsoft\Windows\DiskCleanup\SilentCleanup",
+                        @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector",
+                        @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
+                        @"\Microsoft\Windows\DiskFootprint\Diagnostics",
+                        @"\Microsoft\Windows\DiskFootprint\StorageSense",
+                        @"\Microsoft\Windows\Feedback\Siuf\DmClient",
+                        @"\Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload",
+                        @"\Microsoft\Windows\InstallService\ScanForUpdates",
+                        @"\Microsoft\Windows\InstallService\ScanForUpdatesAsUser",
+                        @"\Microsoft\Windows\InstallService\SmartRetry",
+                        @"\Microsoft\Windows\InstallService\WakeUpAndContinueUpdates",
+                        @"\Microsoft\Windows\InstallService\WakeUpAndScanForUpdates",
+                        @"\Microsoft\Windows\International\Synchronize Language Settings",
+                        @"\Microsoft\Windows\LanguageComponentsInstaller\Installation",
+                        @"\Microsoft\Windows\LanguageComponentsInstaller\ReconcileLanguageResources",
+                        @"\Microsoft\Windows\LanguageComponentsInstaller\Uninstallation",
+                        @"\Microsoft\Windows\Maps\MapsUpdateTask",
+                        @"\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem",
+                        @"\Microsoft\Windows\Registry\RegIdleBackup",
+                        @"\Microsoft\Windows\RetailDemo\CleanupOfflineContent",
+                        @"\Microsoft\Windows\Speech\SpeechModelDownloadTask",
+                        @"\Microsoft\Windows\Sysmain\ResPriStaticDbSync",
+                        @"\Microsoft\Windows\Sysmain\WsSwapAssessmentTask",
+                        @"\Microsoft\Windows\Time Synchronization\ForceSynchronizeTime",
+                        @"\Microsoft\Windows\Time Synchronization\SynchronizeTime",
+                        @"\Microsoft\Windows\UNP\RunUpdateNotificationMgr",
+                        @"\Microsoft\Windows\Windows Error Reporting\QueueReporting"
+                    }),
+                pipeline,
+                _isElevated),
+            new(CreateServiceStartModeBatchTweak(
+                    "system.disable-services-drivers",
+                    "Disable Services/Drivers",
+                    "Disables selected services and drivers from starting automatically; running services may continue until restart.",
+                    TweakRiskLevel.Risky,
+                    new[]
+                    {
+                        "bam",
+                        "dam",
+                        "ShellHWDetection",
+                        "Beep",
+                        "WbioSrvc",
+                        "BTAGService",
+                        "BluetoothUserService_*",
+                        "BthA2dp",
+                        "BthAvctpSvc",
+                        "BthEnum",
+                        "BthHFEnum",
+                        "BthLEEnum",
+                        "BthMini",
+                        "BTHMODEM",
+                        "BTHPORT",
+                        "bthserv",
+                        "BTHUSB",
+                        "DeviceAssociationBrokerSvc",
+                        "DeviceAssociationService",
+                        "Microsoft_Bluetooth_AvrcpTransport",
+                        "RFCOMM",
+                        "BcastDVRUserService",
+                        "FrameServer",
+                        "FrameServerMonitor",
+                        "cdrom",
+                        "cbdhsvc",
+                        "DsmSvc",
+                        "Dhcp",
+                        "DusmSvc",
+                        "DPS",
+                        "diagsvc",
+                        "WdiServiceHost",
+                        "WdiSystemHost",
+                        "TroubleshootingSvc",
+                        "Ndu",
+                        "MicrosoftEdgeElevationService",
+                        "edgeupdate",
+                        "edgeupdatem",
+                        "LanmanServer",
+                        "LanmanWorkstation",
+                        "GameInputSvc",
+                        "bttflt",
+                        "gencounter",
+                        "hvcrash",
+                        "HvHost",
+                        "hvservice",
+                        "hyperkbd",
+                        "HyperVideo",
+                        "storflt",
+                        "Vid",
+                        "vmbus",
+                        "vmgid",
+                        "vmicguestinterface",
+                        "vmicheartbeat",
+                        "vmickvpexchange",
+                        "vmicrdv",
+                        "vmicshutdown",
+                        "vmictimesync",
+                        "vmicvmsession",
+                        "vmicvss",
+                        "vpci",
+                        "Tcpip6",
+                        "IpxlatCfgSvc",
+                        "iphlpsvc",
+                        "lfsvc",
+                        "MapsBroker",
+                        "fdPHost",
+                        "FDResPub",
+                        "SSDPSRV",
+                        "upnphost",
+                        "MsLldp",
+                        "rspndr",
+                        "lltdio",
+                        "lltdsvc",
+                        "ClickToRunSvc",
+                        "PhoneSvc",
+                        "TapiSrv",
+                        "RmSvc",
+                        "WpcMonSvc",
+                        "McpManagementService",
+                        "PrintDeviceConfigurationService",
+                        "PrintNotify",
+                        "PrintScanBrokerService",
+                        "PrintWorkflowUserSvc",
+                        "Spooler",
+                        "usbprint",
+                        "CloudBackupRestoreSvc",
+                        "SDRSVC",
+                        "swprv",
+                        "VSS",
+                        "wbengine",
+                        "RemoteAccess",
+                        "RemoteRegistry",
+                        "SessionEnv",
+                        "TermService",
+                        "UmRdpService",
+                        "SensorDataService",
+                        "SensrSvc",
+                        "SensorService",
+                        "wlidsvc",
+                        "CertPropSvc",
+                        "SCardSvr",
+                        "ScDeviceEnum",
+                        "SCPolicySvc",
+                        "scfilter",
+                        "SysMain",
+                        "AppXSvc",
+                        "camsvc",
+                        "ClipSVC",
+                        "InstallService",
+                        "LicenseManager",
+                        "PushToInstall",
+                        "lmhosts",
+                        "DiagTrack",
+                        "dmwappushservice",
+                        "InventorySvc",
+                        "PcaSvc",
+                        "wuqisvc",
+                        "Themes",
+                        "W32Time",
+                        "autotimesvc",
+                        "tzautoupdate",
+                        "luafv",
+                        "UnistoreSvc",
+                        "UserDataSvc",
+                        "WerSvc",
+                        "wercplsupport",
+                        "WlanSvc",
+                        "vwififlt",
+                        "wisvc",
+                        "WSearch",
+                        "WaaSMedicSvc",
+                        "UsoSvc",
+                        "wuauserv",
+                        "XboxGipSvc",
+                        "xboxgip",
+                        "XblAuthManager",
+                        "XblGameSave",
+                        "XboxNetApiSvc",
+                        "WalletService",
+                        "PenService",
+                        "buttonconverter"
+                    },
+                    ServiceStartMode.Disabled,
+                    stopRunning: false),
+                pipeline,
+                _isElevated),
+            new(CreateServiceStartModeBatchTweak(
+                    "system.disable-windows-search-service",
+                    "Disable Windows Search Service",
+                    "Disables Windows Search indexing service (WSearch).",
+                    TweakRiskLevel.Advanced,
+                    new[] { "WSearch" },
+                    ServiceStartMode.Disabled,
+                    stopRunning: true),
+                pipeline,
+                _isElevated),
+            new(CreateFileRenameTweak(
+                    "privacy.disable-f1-help",
+                    "Disable F1 Help",
+                    "Disables F1 help by renaming HelpPane.exe.",
+                    TweakRiskLevel.Advanced,
+                    helpPanePath,
+                    helpPaneDisabledPath),
                 pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
@@ -2659,6 +2969,86 @@ public sealed class TweaksViewModel : ViewModelBase
             risk,
             entries,
             accessor,
+            requiresElevation);
+    }
+
+    private CompositeTweak CreateCompositeTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<ITweak> tweaks)
+    {
+        return new CompositeTweak(id, name, description, risk, tweaks);
+    }
+
+    private ServiceStartModeBatchTweak CreateServiceStartModeBatchTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<string> serviceNames,
+        ServiceStartMode targetStartMode,
+        bool stopRunning = true,
+        bool? requiresElevation = null)
+    {
+        if (serviceNames is null)
+        {
+            throw new ArgumentNullException(nameof(serviceNames));
+        }
+
+        var entries = serviceNames.Select(serviceName => new ServiceStartModeEntry(serviceName, targetStartMode)).ToList();
+        return new ServiceStartModeBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            entries,
+            _elevatedServiceManager,
+            stopRunning,
+            requiresElevation);
+    }
+
+    private ScheduledTaskBatchTweak CreateScheduledTaskBatchTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<string> taskPaths,
+        bool? requiresElevation = null)
+    {
+        if (taskPaths is null)
+        {
+            throw new ArgumentNullException(nameof(taskPaths));
+        }
+
+        return new ScheduledTaskBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            taskPaths,
+            _elevatedTaskManager,
+            requiresElevation);
+    }
+
+    private FileRenameTweak CreateFileRenameTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        string sourcePath,
+        string disabledPath,
+        bool? requiresElevation = null)
+    {
+        return new FileRenameTweak(
+            id,
+            name,
+            description,
+            risk,
+            sourcePath,
+            disabledPath,
+            _elevatedFileSystemAccessor,
             requiresElevation);
     }
 
