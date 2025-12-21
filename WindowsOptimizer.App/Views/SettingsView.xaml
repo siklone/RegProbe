@@ -4,13 +4,133 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <Grid Margin="24">
-        <StackPanel>
-            <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Margin="0,8,0,0"
-                       Text="Settings and preferences will appear here."
-                       Foreground="#4B4B4B"
-                       TextWrapping="Wrap" />
-        </StackPanel>
-    </Grid>
+    <UserControl.Resources>
+        <Style x:Key="SectionCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#E3E5E8" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="24" />
+            <Setter Property="Margin" Value="0,0,0,20" />
+        </Style>
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#2E3440" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+        </Style>
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#4C566A" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+        <Style x:Key="HelpTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#8A8D93" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24">
+            <StackPanel>
+                <!-- Header -->
+                <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" Foreground="#2E3440" />
+                <TextBlock Margin="0,8,0,24"
+                           Text="Configure application preferences and integration settings."
+                           Foreground="#4C566A"
+                           TextWrapping="Wrap" />
+
+                <!-- Discord Integration Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="🔔 Discord Integration" Style="{StaticResource SectionHeaderStyle}" />
+
+                        <!-- Webhook URL -->
+                        <TextBlock Text="Webhook URL" Style="{StaticResource FieldLabelStyle}" />
+                        <TextBox Text="{Binding DiscordWebhookUrl, UpdateSourceTrigger=PropertyChanged}"
+                                 Padding="8"
+                                 Margin="0,0,0,0" />
+                        <TextBlock Style="{StaticResource HelpTextStyle}">
+                            <Run Text="Enter your Discord webhook URL to receive notifications about tweak operations." />
+                            <LineBreak />
+                            <Run Text="You can create a webhook in your Discord server settings → Integrations → Webhooks." />
+                        </TextBlock>
+
+                        <!-- Notifications Enabled -->
+                        <CheckBox Content="Enable Discord Notifications"
+                                  IsChecked="{Binding DiscordNotificationsEnabled}"
+                                  Margin="0,16,0,0" />
+                        <TextBlock Style="{StaticResource HelpTextStyle}">
+                            <Run Text="Send notifications to Discord when tweaks are applied, verified, or rolled back." />
+                        </TextBlock>
+
+                        <!-- Auto Patch Enabled -->
+                        <CheckBox Content="Enable Automatic Patch Creation"
+                                  IsChecked="{Binding DiscordAutoPatchEnabled}"
+                                  Margin="0,16,0,0" />
+                        <TextBlock Style="{StaticResource HelpTextStyle}">
+                            <Run Text="Automatically create and upload .patch files to Discord when tweaks are applied." />
+                        </TextBlock>
+
+                        <!-- Test Button -->
+                        <Button Content="Test Webhook"
+                                Command="{Binding TestWebhookCommand}"
+                                Padding="16,8"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Application Info Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="ℹ️ Application Information" Style="{StaticResource SectionHeaderStyle}" />
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Version:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
+                            <TextBlock Text="1.0.0" Foreground="#5E81AC" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Build:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
+                            <TextBlock Text="Release" Foreground="#5E81AC" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Target Framework:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
+                            <TextBlock Text=".NET 8.0" Foreground="#5E81AC" />
+                        </StackPanel>
+
+                        <TextBlock Margin="0,16,0,0"
+                                   Foreground="#4C566A"
+                                   TextWrapping="Wrap">
+                            <Run Text="Windows Optimizer Suite" FontWeight="SemiBold" />
+                            <Run Text="- A modern, safe, and reversible Windows optimization tool built with WPF and .NET 8." />
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Status Message -->
+                <Border Background="#ECEFF4"
+                        BorderBrush="#D8DEE9"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="12">
+                    <TextBlock Text="{Binding StatusMessage}"
+                               Foreground="#4C566A"
+                               TextWrapping="Wrap" />
+                </Border>
+
+                <!-- Save Button -->
+                <Button Content="Save Settings"
+                        Command="{Binding SaveCommand}"
+                        Padding="20,10"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Left"
+                        FontWeight="SemiBold" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
