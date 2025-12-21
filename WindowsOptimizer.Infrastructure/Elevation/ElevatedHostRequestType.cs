@@ -5,5 +5,6 @@ public enum ElevatedHostRequestType
     Registry,
     Service,
     ScheduledTask,
-    FileSystem
+    FileSystem,
+    Command
 }

@@ -13,7 +13,10 @@ This app aims to make system tuning repeatable and transparent. It separates UI 
 - Logs and export: every step written to app log and CSV.
 
 ## How the code is written
-- WPF MVVM shell with view models and commands that run tweaks in bulk or per-item.
+- **Modern WPF MVVM shell** with Nord-inspired theme, smooth animations, and 60 FPS transitions.
+- **Centralized theming**: Colors, Styles, Animations in `WindowsOptimizer.App/Resources/`.
+- **Smooth navigation**: Page transitions with fade and slide effects using Microsoft.Xaml.Behaviors.
+- **Performance monitoring**: Built-in FPS counter tracks rendering performance.
 - `ITweak` implementations stay small and composable; multi-step changes use composite tweaks.
 - Engine pipeline owns execution flow, progress reporting, and rollback rules.
 - Infrastructure adapters isolate OS concerns (registry, services, tasks, file system).
@@ -34,13 +37,14 @@ Implemented tweak types include:
 - Service start mode batches with optional stop behavior.
 - Scheduled task enable/disable batches.
 - File rename toggles for system executables.
+- **Command-based tweaks** that execute System32 commands (powercfg, DISM, bcdedit) through an allowlist security model.
 
 ## Architecture overview
 - `WindowsOptimizer.App`: WPF UI, filters, bulk commands, and execution status.
 - `WindowsOptimizer.Core`: tweak contracts, enums, and result types.
-- `WindowsOptimizer.Engine`: execution pipeline + tweak implementations.
-- `WindowsOptimizer.Infrastructure`: adapters (registry, services, tasks, files), settings, logging.
-- `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages).
+- `WindowsOptimizer.Engine`: execution pipeline + tweak implementations (registry, services, tasks, files, **commands**).
+- `WindowsOptimizer.Infrastructure`: adapters (registry, services, tasks, files, **commands with allowlist**), settings, logging.
+- `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages) - handles registry, services, tasks, files, and **command execution**.
 - `WindowsOptimizer.Tests`: unit tests for contracts, adapters, and tweak logic.
 
 ## Data and logs
@@ -64,10 +68,10 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 <!-- progress:summary:start -->
 | Area | Progress | Notes |
 | --- | --- | --- |
-| Tweaks coverage (docs) | 73% (170/233) <progress value="73" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
+| Tweaks coverage (docs) | 75% (174/233) <progress value="75" max="100"></progress> | Top-level tweak IDs vs docs headings (coverage capped at 100%) |
 | Monitoring | 30% <progress value="30" max="100"></progress> | Pipeline updates + logs exist, richer dashboards pending |
-| UI/UX shell | 45% <progress value="45" max="100"></progress> | MVVM shell, filters, bulk actions done; polish ongoing |
-| Elevation | 70% <progress value="70" max="100"></progress> | ElevatedHost + registry/services/tasks/files |
+| UI/UX shell | 75% <progress value="75" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, centralized resources |
+| Elevation | 85% <progress value="85" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands |
 | Logging/export | 75% <progress value="75" max="100"></progress> | app.log + tweak-log.csv + export |
 | Tests | 25% <progress value="25" max="100"></progress> | Unit tests for pipeline/tweaks/adapters |
 | Docs/guides | 35% <progress value="35" max="100"></progress> | Docs exist, README expanding |
@@ -77,17 +81,17 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 | Doc Area | Implemented | Total | Coverage |
 | --- | --- | --- | --- |
 | affinities | 0 | 1 | 0% |
-| cleanup | 0 | 22 | 0% |
+| cleanup | 2 | 22 | 9% |
 | misc | 0 | 13 | 0% |
 | network | 27 | 22 | 100% |
 | peripheral | 9 | 19 | 47% |
 | policies | 0 | 1 | 0% |
-| power | 4 | 22 | 18% |
+| power | 6 | 22 | 27% |
 | privacy | 64 | 38 | 100% |
 | security | 19 | 24 | 79% |
 | system | 25 | 39 | 64% |
 | visibility | 22 | 32 | 69% |
-| total | 170 | 233 | 73% |
+| total | 174 | 233 | 75% |
 <!-- progress:tweaks:end -->
 
 <!-- progress:overall:start -->
@@ -99,3 +103,40 @@ General completion: 50%
 - Requires GitHub CLI (`gh`) with `gh auth login`.
 - Usage: `scripts/codex_pr.sh "Title" "Body"`.
 - Optional env vars: `BASE_BRANCH`, `CODEX_COMMENT`, `GH_BIN`.
+
+## Recent Development Session (2025-12-21)
+
+This session implemented three major phases of enhancements:
+
+### Phase 1: Modern UI Foundation
+- **Nord-inspired theme**: Centralized color palette with 16 Nord colors
+- **Smooth animations**: 60 FPS page transitions with fade and slide effects using Microsoft.Xaml.Behaviors.Wpf
+- **Centralized resources**: Colors.xaml, Styles.xaml, Animations.xaml, Converters.xaml
+- **Performance monitoring**: Built-in FPS counter via PerformanceMonitor
+- **Navigation behaviors**: NavigationTransitionBehavior for seamless page transitions
+- **Modern card styles**: Glassmorphism effects, drop shadows, hover animations
+
+### Phase 2: Command-Based Tweaks Infrastructure
+- **Command execution framework**: ICommandRunner, LocalCommandRunner, ElevatedCommandRunner
+- **Security allowlist**: CommandAllowlist enforces System32-only executables with exact argument matching
+- **Elevated integration**: Added Command request type to ElevatedHost named pipe protocol
+- **CommandTweak base class**: Abstract tweak implementation for command-based operations
+- **New tweaks implemented** (4 total):
+  - **Power**: DisableHibernationTweak, DisableUsbSelectiveSuspendTweak
+  - **Cleanup**: CleanupComponentStoreTweak, DisableReservedStorageTweak
+- **Allowlisted commands**: powercfg.exe, DISM.exe, bcdedit.exe with 30+ safe operations
+- **Complete test coverage**: Unit tests with mocked command runners
+
+### Phase 3: Discord Integration & Patch Packaging
+- **DiscordWebhookClient**: HTTP client for Discord webhooks (messages, embeds, file uploads)
+- **Rich embeds**: Discord embeds with Nord color palette based on tweak status
+- **DiscordNotificationService**: High-level service with settings integration
+  - Tweak execution notifications with color-coded statuses
+  - Bulk execution summaries with success/failure counts
+  - Automatic patch file uploads
+- **PatchPackager**: Create ZIP archives of execution logs
+  - Includes tweak-log.csv, app.log, and README
+  - Automatic manifest generation with statistics
+- **Settings integration**: DiscordWebhookUrl, DiscordNotificationsEnabled, DiscordAutoPatchEnabled
+
+All changes committed to `feat/command-tweaks` branch with detailed commit messages.

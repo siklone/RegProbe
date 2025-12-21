@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:WindowsOptimizer.App.Behaviors"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
         Width="1200"
         Height="720"
-        Background="#F4F3EF"
+        Background="{StaticResource BackgroundDarkestBrush}"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="ListBox">
@@ -52,10 +54,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.RowSpan="2" Background="#1C1E24">
+        <Grid Grid.RowSpan="2" Background="{StaticResource BackgroundDarkBrush}">
             <StackPanel Margin="16,24,16,16">
-                <TextBlock Text="Optimizer Suite" Foreground="#FFFFFF" FontSize="18" FontWeight="Bold" />
-                <TextBlock Text="Sprint 0B Shell" Foreground="#A6A8AF" FontSize="12" Margin="0,2,0,18" />
+                <TextBlock Text="Optimizer Suite" Foreground="{StaticResource ForegroundBrightestBrush}" FontSize="18" FontWeight="Bold" />
+                <TextBlock Text="Modern UI" Foreground="{StaticResource ForegroundLightBrush}" FontSize="12" Margin="0,2,0,18" />
                 <ListBox ItemsSource="{Binding NavigationItems}"
                          SelectedItem="{Binding SelectedNavigationItem}"
                          Background="Transparent">
@@ -117,8 +119,12 @@
             </Grid>
         </Grid>
 
-        <Border Grid.Row="1" Grid.Column="1" Background="#F4F3EF">
-            <ContentControl Content="{Binding CurrentViewModel}" />
+        <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource BackgroundDarkestBrush}">
+            <ContentControl Content="{Binding CurrentViewModel}">
+                <i:Interaction.Behaviors>
+                    <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide" />
+                </i:Interaction.Behaviors>
+            </ContentControl>
         </Border>
     </Grid>
 </Window>
