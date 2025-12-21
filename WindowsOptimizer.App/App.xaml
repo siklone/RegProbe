@@ -5,20 +5,31 @@
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
-            <views:DashboardView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
-            <views:TweaksView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:MonitorViewModel}">
-            <views:MonitorView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
-            <views:SettingsView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
-            <views:AboutView />
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Theme Resources -->
+                <ResourceDictionary Source="Resources/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Animations.xaml"/>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- View-ViewModel Mapping -->
+            <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+                <views:DashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
+                <views:TweaksView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:MonitorViewModel}">
+                <views:MonitorView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
+                <views:AboutView />
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

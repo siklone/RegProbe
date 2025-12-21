@@ -1,0 +1,17 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters">
+
+    <!-- Boolean to Visibility Converter -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <!-- Inverse Boolean Converter -->
+    <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+
+    <!-- Null to Visibility Converter -->
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+
+    <!-- String Empty to Visibility Converter -->
+    <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter"/>
+
+</ResourceDictionary>
