@@ -4,13 +4,141 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <Grid Margin="24">
-        <StackPanel>
-            <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Margin="0,8,0,0"
-                       Text="Welcome to Windows Optimizer. Use the navigation to explore available sections."
-                       Foreground="#4B4B4B"
-                       TextWrapping="Wrap" />
-        </StackPanel>
-    </Grid>
+    <UserControl.Resources>
+        <Style x:Key="StatCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#E3E5E8" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Margin" Value="0,0,16,16" />
+        </Style>
+        <Style x:Key="StatValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#2E3440" />
+        </Style>
+        <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#5E81AC" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+        </Style>
+        <Style x:Key="InfoCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#ECEFF4" />
+            <Setter Property="BorderBrush" Value="#D8DEE9" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,24">
+                <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" Foreground="#2E3440" />
+                <TextBlock Margin="0,8,0,0"
+                           Text="Welcome to Windows Optimizer Suite. Monitor your system optimizations and track applied tweaks."
+                           Foreground="#4C566A"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!-- Statistics Grid -->
+            <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,24">
+                <!-- Total Tweaks Available -->
+                <Border Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="📦" FontSize="24" />
+                        <TextBlock Text="{Binding TotalTweaksAvailable}" Style="{StaticResource StatValueStyle}" />
+                        <TextBlock Text="Tweaks Available" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Tweaks Applied -->
+                <Border Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="✅" FontSize="24" />
+                        <TextBlock Text="{Binding TweaksApplied}" Style="{StaticResource StatValueStyle}" Foreground="#A3BE8C" />
+                        <TextBlock Text="Tweaks Applied" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Tweaks Rolled Back -->
+                <Border Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="↩️" FontSize="24" />
+                        <TextBlock Text="{Binding TweaksRolledBack}" Style="{StaticResource StatValueStyle}" Foreground="#EBCB8B" />
+                        <TextBlock Text="Tweaks Rolled Back" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Log File Size -->
+                <Border Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="📄" FontSize="24" />
+                        <TextBlock Text="{Binding LogFileSizeFormatted}" Style="{StaticResource StatValueStyle}" FontSize="28" />
+                        <TextBlock Text="Log File Size" Style="{StaticResource StatLabelStyle}" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- System Status -->
+            <Border Grid.Row="2" Style="{StaticResource InfoCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="System Status" FontSize="18" FontWeight="SemiBold" Foreground="#2E3440" />
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <TextBlock Text="Elevation:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
+                        <TextBlock Text="{Binding ElevationStatus}" Foreground="#5E81AC" />
+                    </StackPanel>
+                    <TextBlock Margin="0,8,0,0"
+                               Foreground="#4C566A"
+                               TextWrapping="Wrap">
+                        <Run Text="💡 Tip:" FontWeight="SemiBold" />
+                        <Run Text="Navigate to the Tweaks section to view and apply system optimizations. Use Preview mode to test changes before applying them." />
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <!-- Quick Actions -->
+            <Border Grid.Row="3" Style="{StaticResource StatCardStyle}" VerticalAlignment="Top">
+                <StackPanel>
+                    <TextBlock Text="Quick Info" FontSize="18" FontWeight="SemiBold" Foreground="#2E3440" Margin="0,0,0,12" />
+
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock Text="🎯 Features" FontWeight="SemiBold" Foreground="#5E81AC" />
+                        <TextBlock Margin="12,4,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            • <Run Text="Registry-based tweaks" FontWeight="SemiBold" /> - Modify Windows registry for system optimizations
+                        </TextBlock>
+                        <TextBlock Margin="12,2,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            • <Run Text="Service management" FontWeight="SemiBold" /> - Control Windows services
+                        </TextBlock>
+                        <TextBlock Margin="12,2,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            • <Run Text="Command-based tweaks" FontWeight="SemiBold" /> - Execute system commands safely
+                        </TextBlock>
+                        <TextBlock Margin="12,2,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            • <Run Text="File system operations" FontWeight="SemiBold" /> - Manage system files
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock Text="🛡️ Safety" FontWeight="SemiBold" Foreground="#5E81AC" />
+                        <TextBlock Margin="12,4,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            All tweaks support <Run FontWeight="SemiBold">Preview</Run>, <Run FontWeight="SemiBold">Apply</Run>, <Run FontWeight="SemiBold">Verify</Run>, and <Run FontWeight="SemiBold">Rollback</Run> operations.
+                        </TextBlock>
+                        <TextBlock Margin="12,4,0,0" Foreground="#4C566A" TextWrapping="Wrap">
+                            Changes are logged and can be reversed safely.
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
