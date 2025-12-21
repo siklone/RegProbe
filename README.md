@@ -103,3 +103,40 @@ General completion: 50%
 - Requires GitHub CLI (`gh`) with `gh auth login`.
 - Usage: `scripts/codex_pr.sh "Title" "Body"`.
 - Optional env vars: `BASE_BRANCH`, `CODEX_COMMENT`, `GH_BIN`.
+
+## Recent Development Session (2025-12-21)
+
+This session implemented three major phases of enhancements:
+
+### Phase 1: Modern UI Foundation
+- **Nord-inspired theme**: Centralized color palette with 16 Nord colors
+- **Smooth animations**: 60 FPS page transitions with fade and slide effects using Microsoft.Xaml.Behaviors.Wpf
+- **Centralized resources**: Colors.xaml, Styles.xaml, Animations.xaml, Converters.xaml
+- **Performance monitoring**: Built-in FPS counter via PerformanceMonitor
+- **Navigation behaviors**: NavigationTransitionBehavior for seamless page transitions
+- **Modern card styles**: Glassmorphism effects, drop shadows, hover animations
+
+### Phase 2: Command-Based Tweaks Infrastructure
+- **Command execution framework**: ICommandRunner, LocalCommandRunner, ElevatedCommandRunner
+- **Security allowlist**: CommandAllowlist enforces System32-only executables with exact argument matching
+- **Elevated integration**: Added Command request type to ElevatedHost named pipe protocol
+- **CommandTweak base class**: Abstract tweak implementation for command-based operations
+- **New tweaks implemented** (4 total):
+  - **Power**: DisableHibernationTweak, DisableUsbSelectiveSuspendTweak
+  - **Cleanup**: CleanupComponentStoreTweak, DisableReservedStorageTweak
+- **Allowlisted commands**: powercfg.exe, DISM.exe, bcdedit.exe with 30+ safe operations
+- **Complete test coverage**: Unit tests with mocked command runners
+
+### Phase 3: Discord Integration & Patch Packaging
+- **DiscordWebhookClient**: HTTP client for Discord webhooks (messages, embeds, file uploads)
+- **Rich embeds**: Discord embeds with Nord color palette based on tweak status
+- **DiscordNotificationService**: High-level service with settings integration
+  - Tweak execution notifications with color-coded statuses
+  - Bulk execution summaries with success/failure counts
+  - Automatic patch file uploads
+- **PatchPackager**: Create ZIP archives of execution logs
+  - Includes tweak-log.csv, app.log, and README
+  - Automatic manifest generation with statistics
+- **Settings integration**: DiscordWebhookUrl, DiscordNotificationsEnabled, DiscordAutoPatchEnabled
+
+All changes committed to `feat/command-tweaks` branch with detailed commit messages.
