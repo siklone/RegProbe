@@ -28,6 +28,10 @@ public sealed class CommandAllowlist
         var netsh = Path.Combine(systemDirectory, "netsh.exe");
         var chkdsk = Path.Combine(systemDirectory, "chkdsk.exe");
         var wevtutil = Path.Combine(systemDirectory, "wevtutil.exe");
+        var vssadmin = Path.Combine(systemDirectory, "vssadmin.exe");
+        var cleanmgr = Path.Combine(systemDirectory, "cleanmgr.exe");
+        var cscript = Path.Combine(systemDirectory, "cscript.exe");
+        var powershell = Path.Combine(systemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe");
 
         var allowed = new Dictionary<string, List<string[]>>(StringComparer.OrdinalIgnoreCase)
         {
@@ -98,12 +102,18 @@ public sealed class CommandAllowlist
                 // Service control - query (safe read-only)
                 new[] { "query", "SysMain" },
                 new[] { "query", "WSearch" },
+                new[] { "query", "DoSvc" },
+                new[] { "query", "FontCache" },
 
                 // Service control - stop/start
                 new[] { "stop", "SysMain" },
                 new[] { "start", "SysMain" },
                 new[] { "stop", "WSearch" },
-                new[] { "start", "WSearch" }
+                new[] { "start", "WSearch" },
+                new[] { "stop", "DoSvc" },
+                new[] { "start", "DoSvc" },
+                new[] { "stop", "FontCache" },
+                new[] { "start", "FontCache" }
             },
             [ipconfig] = new List<string[]>
             {
@@ -150,7 +160,40 @@ public sealed class CommandAllowlist
                 // Clear logs
                 new[] { "cl", "Application" },
                 new[] { "cl", "System" },
-                new[] { "cl", "Security" }
+                new[] { "cl", "Security" },
+
+                // Enum all logs (read-only)
+                new[] { "el" }
+            },
+            [vssadmin] = new List<string[]>
+            {
+                // List shadow copies (read-only)
+                new[] { "list", "shadows" },
+                new[] { "list", "shadows", "/for=C:" },
+                new[] { "list", "shadows", "/for=D:" },
+                new[] { "list", "shadows", "/for=E:" },
+
+                // Delete all shadow copies (RISKY - requires confirmation)
+                new[] { "delete", "shadows", "/all", "/quiet" },
+                new[] { "delete", "shadows", "/for=C:", "/all", "/quiet" },
+                new[] { "delete", "shadows", "/for=D:", "/all", "/quiet" },
+                new[] { "delete", "shadows", "/for=E:", "/all", "/quiet" }
+            },
+            [powershell] = new List<string[]>
+            {
+                // Clear Recycle Bin (safe, requires confirmation in UI)
+                new[] { "-NoProfile", "-NonInteractive", "-Command", "Clear-RecycleBin", "-Force", "-ErrorAction", "SilentlyContinue" },
+                new[] { "-NoProfile", "-NonInteractive", "-Command", "Clear-RecycleBin", "-DriveLetter", "C", "-Force", "-ErrorAction", "SilentlyContinue" },
+                new[] { "-NoProfile", "-NonInteractive", "-Command", "Clear-RecycleBin", "-DriveLetter", "D", "-Force", "-ErrorAction", "SilentlyContinue" },
+
+                // Clear clipboard (safe)
+                new[] { "-NoProfile", "-NonInteractive", "-Command", "Set-Clipboard", "-Value", "$null" }
+            },
+            [cscript] = new List<string[]>
+            {
+                // Product key removal (slmgr.vbs)
+                new[] { "//NoLogo", Path.Combine(systemDirectory, "slmgr.vbs"), "/cpky" },
+                new[] { "//NoLogo", Path.Combine(systemDirectory, "slmgr.vbs"), "/dli" }
             }
         };
 
