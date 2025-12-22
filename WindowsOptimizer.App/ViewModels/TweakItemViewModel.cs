@@ -29,7 +29,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _lastUpdatedText = "Last update: -";
     private string _lastActionText = string.Empty;
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
-    private bool _isDetailsExpanded = true;
+    private bool _isDetailsExpanded = false;
+    private TweakAppliedStatus _appliedStatus = TweakAppliedStatus.Unknown;
+    private bool _isToggleEnabled = true;
+    private readonly RelayCommand _toggleCommand;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -54,6 +57,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
+        _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
     }
 
     public string Name => _tweak.Name;
@@ -124,6 +128,51 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand CancelCommand => _cancelCommand;
 
     public ICommand CopyIdCommand => _copyIdCommand;
+
+    public ICommand ToggleCommand => _toggleCommand;
+
+    // Simplified status for first-glance view
+    public TweakAppliedStatus AppliedStatus
+    {
+        get => _appliedStatus;
+        private set
+        {
+            if (SetProperty(ref _appliedStatus, value))
+            {
+                OnPropertyChanged(nameof(IsApplied));
+                OnPropertyChanged(nameof(StatusIcon));
+                OnPropertyChanged(nameof(StatusColor));
+                OnPropertyChanged(nameof(StatusText));
+                _toggleCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsApplied => AppliedStatus == TweakAppliedStatus.Applied;
+
+    public string StatusIcon => AppliedStatus switch
+    {
+        TweakAppliedStatus.Applied => "✓",
+        TweakAppliedStatus.NotApplied => "○",
+        TweakAppliedStatus.Error => "✕",
+        _ => "?"
+    };
+
+    public string StatusColor => AppliedStatus switch
+    {
+        TweakAppliedStatus.Applied => "#A3BE8C",
+        TweakAppliedStatus.NotApplied => "#4C566A",
+        TweakAppliedStatus.Error => "#BF616A",
+        _ => "#EBCB8B"
+    };
+
+    public string StatusText => AppliedStatus switch
+    {
+        TweakAppliedStatus.Applied => "Applied",
+        TweakAppliedStatus.NotApplied => "Not Applied",
+        TweakAppliedStatus.Error => "Error",
+        _ => "Unknown"
+    };
 
     public bool IsRunning
     {
@@ -435,5 +484,76 @@ public sealed class TweakItemViewModel : ViewModelBase
         _verifyCommand.RaiseCanExecuteChanged();
         _rollbackCommand.RaiseCanExecuteChanged();
         _cancelCommand.RaiseCanExecuteChanged();
+        _toggleCommand.RaiseCanExecuteChanged();
     }
+
+    private bool CanToggle()
+    {
+        return !IsRunning && !IsBulkLocked && AppliedStatus != TweakAppliedStatus.Unknown;
+    }
+
+    /// <summary>
+    /// Toggle the tweak: Apply if not applied, Rollback if applied
+    /// </summary>
+    private async Task ToggleAsync()
+    {
+        if (!CanToggle()) return;
+
+        if (AppliedStatus == TweakAppliedStatus.Applied)
+        {
+            await RunRollbackAsync(CancellationToken.None);
+            await DetectStatusAsync();
+        }
+        else
+        {
+            await RunApplyAsync(CancellationToken.None);
+            await DetectStatusAsync();
+        }
+    }
+
+    /// <summary>
+    /// Detect if tweak is currently applied
+    /// </summary>
+    public async Task DetectStatusAsync()
+    {
+        if (IsRunning) return;
+
+        try
+        {
+            var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
+            
+            // Interpret detect result to determine applied status
+            if (result.Result.Status == TweakStatus.Detected)
+            {
+                AppliedStatus = TweakAppliedStatus.Applied;
+            }
+            else if (result.Result.Status == TweakStatus.NotDetected)
+            {
+                AppliedStatus = TweakAppliedStatus.NotApplied;
+            }
+            else if (result.Result.Status == TweakStatus.Failed)
+            {
+                AppliedStatus = TweakAppliedStatus.Error;
+            }
+            else
+            {
+                AppliedStatus = TweakAppliedStatus.NotApplied;
+            }
+        }
+        catch
+        {
+            AppliedStatus = TweakAppliedStatus.Unknown;
+        }
+    }
+}
+
+/// <summary>
+/// Simplified status for first-glance view
+/// </summary>
+public enum TweakAppliedStatus
+{
+    Unknown,
+    Applied,
+    NotApplied,
+    Error
 }

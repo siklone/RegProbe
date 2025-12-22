@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -9,15 +10,16 @@ namespace WindowsOptimizer.App.ViewModels;
 /// </summary>
 public sealed class CategoryGroupViewModel : ViewModelBase
 {
-    private bool _isExpanded = true;
+    private bool _isExpanded = false; // Start collapsed for performance
     private readonly ObservableCollection<TweakItemViewModel> _tweaks;
+    private bool _hasDetected = false;
 
     public CategoryGroupViewModel(string categoryName, string categoryIcon)
     {
         CategoryName = categoryName;
         CategoryIcon = categoryIcon;
         _tweaks = new ObservableCollection<TweakItemViewModel>();
-        ToggleExpandCommand = new RelayCommand(_ => IsExpanded = !IsExpanded);
+        ToggleExpandCommand = new RelayCommand(_ => ToggleExpand());
     }
 
     public string CategoryName { get; }
@@ -64,5 +66,25 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         OnPropertyChanged(nameof(TweakCount));
         OnPropertyChanged(nameof(CountBadge));
         OnPropertyChanged(nameof(VisibleTweakCount));
+    }
+
+    private void ToggleExpand()
+    {
+        IsExpanded = !IsExpanded;
+        
+        // Auto-detect tweak status when first expanded
+        if (IsExpanded && !_hasDetected)
+        {
+            _hasDetected = true;
+            _ = DetectAllTweaksAsync();
+        }
+    }
+
+    private async Task DetectAllTweaksAsync()
+    {
+        foreach (var tweak in _tweaks)
+        {
+            await tweak.DetectStatusAsync();
+        }
     }
 }
