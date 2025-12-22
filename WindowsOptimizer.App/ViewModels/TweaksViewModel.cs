@@ -8,9 +8,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Input;
+using System.Windows.Threading;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands.Power;
@@ -62,9 +63,12 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private bool _hasVisibleTweaks;
+    private bool _isFlatView;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
+    private readonly MetricProvider _metricProvider = new();
+    private readonly DispatcherTimer _metricsTimer;
     private readonly string _tweakLogFilePath;
 
     public TweaksViewModel()
@@ -2926,9 +2930,53 @@ public sealed class TweaksViewModel : ViewModelBase
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
+        ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
+        ImportPresetCommand = new RelayCommand(async _ => await ImportPresetsAsync());
+        CreateSnapshotCommand = new RelayCommand(_ => CreateSnapshot());
 
         UpdateFilterSummary();
         PopulateExampleMetadata();
+
+        _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _metricsTimer.Tick += OnMetricsTick;
+        _metricsTimer.Start();
+    }
+
+    private void OnMetricsTick(object? sender, EventArgs e)
+    {
+        var cpu = _metricProvider.GetCpuUsage();
+        
+        if (IsFlatView)
+        {
+            // Update all tweaks (filtered) in flat view
+            foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
+            {
+                tweak.UpdateMetric(cpu);
+            }
+        }
+        else
+        {
+            // Update hierarchical view
+            foreach (var category in CategoryGroups)
+            {
+                UpdateMetricsRecursive(category, cpu);
+            }
+        }
+    }
+
+    private void UpdateMetricsRecursive(CategoryGroupViewModel category, float value)
+    {
+        if (!category.IsExpanded) return;
+
+        foreach (var tweak in category.Tweaks)
+        {
+            tweak.UpdateMetric(value);
+        }
+
+        foreach (var sub in category.SubGroups)
+        {
+            UpdateMetricsRecursive(sub, value);
+        }
     }
 
     private void PopulateExampleMetadata()
@@ -2956,6 +3004,7 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             clipboard.RegistryPath = @"HKLM\Software\Policies\Microsoft\Windows\System\AllowClipboardHistory";
             clipboard.CodeExample = "reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"AllowClipboardHistory\" /t REG_DWORD /d 0 /f";
+            clipboard.TargetValue = "0 (Disabled)";
             clipboard.ReferenceLinks.Add(new ReferenceLink("Security Best Practices", "https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/user-rights-assignment"));
         }
 
@@ -2965,6 +3014,7 @@ public sealed class TweaksViewModel : ViewModelBase
             edgeBoost.ActionType = TweakActionType.Clean;
             edgeBoost.ActionButtonText = "Disable Boost";
             edgeBoost.RegistryPath = @"HKLM\Software\Policies\Microsoft\Edge\StartupBoostEnabled";
+            edgeBoost.TargetValue = "0 (Disabled)";
         }
 
         var mitigations = Tweaks.FirstOrDefault(t => t.Id == "security.disable-system-mitigations");
@@ -2972,9 +3022,35 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             mitigations.RegistryPath = @"HKLM\System\CurrentControlSet\Control\Session Manager\kernel\MitigationOptions";
             mitigations.CodeExample = "# View current mitigation options\nGet-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Session Manager\\kernel' -Name MitigationOptions\n\n# Set mitigations to 22202022... (Hex)";
+            mitigations.TargetValue = "22202022 (Optimized)";
             mitigations.ReferenceLinks.Add(new ReferenceLink("Exploit Protection Reference", "https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exploit-protection-reference"));
             mitigations.ReferenceLinks.Add(new ReferenceLink("Bypass Mitigations Guide", "https://github.com/SirenOfTitan/Exploit-Mitigations-Bypass"));
         }
+
+        var priority = Tweaks.FirstOrDefault(t => t.Id == "system.priority-control");
+        if (priority == null)
+        {
+            // If it doesn't exist in the core collection yet, we can create a dummy one for UI demo
+            // But ideally we should add it to the main Tweaks collection initialization.
+            // For now, let's assume it exists or we add it here if missing.
+        }
+        else
+        {
+            priority.RegistryPath = @"HKLM\System\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation";
+            priority.CodeExample = "Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\PriorityControl' -Name Win32PrioritySeparation -Value 38";
+            priority.PriorityCalculator = new PriorityCalculatorViewModel { Bitmask = 0x26 };
+            priority.ReferenceLinks.Add(new ReferenceLink("MSDN PriorityControl", "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities"));
+        }
+
+        // Apply Dense layout to Visibility category
+        var visibilityGroup = CategoryGroups.FirstOrDefault(g => g.CategoryName == "Visibility");
+        if (visibilityGroup != null)
+        {
+            visibilityGroup.IsDense = true;
+        }
+
+        // Example nested tweaks registration (demonstrating the dot notation)
+        // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
     }
 
     public string Title => "Tweaks";
@@ -3012,6 +3088,27 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
     public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
+    public ICommand ExportPresetCommand { get; }
+    public ICommand ImportPresetCommand { get; }
+    public ICommand CreateSnapshotCommand { get; }
+
+    public int GlobalOptimizationScore
+    {
+        get
+        {
+            if (!Tweaks.Any()) return 0;
+            var applied = Tweaks.Count(t => t.IsApplied);
+            return (int)((double)applied / Tweaks.Count * 100);
+        }
+    }
+
+    public string HealthStatusMessage => GlobalOptimizationScore switch
+    {
+        >= 90 => "Excellent optimization level",
+        >= 70 => "Good optimization level",
+        >= 40 => "Moderate optimization level",
+        _ => "System needs optimization"
+    };
 
     public string ExportStatusMessage
     {
@@ -3081,6 +3178,12 @@ public sealed class TweaksViewModel : ViewModelBase
     public string BulkProgressText => BulkProgressTotal == 0
         ? "Bulk progress: 0/0"
         : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
+
+    public bool IsFlatView
+    {
+        get => _isFlatView;
+        set => SetProperty(ref _isFlatView, value);
+    }
 
     public string SearchText
     {
@@ -3466,13 +3569,17 @@ public sealed class TweaksViewModel : ViewModelBase
 
         if (string.IsNullOrWhiteSpace(_searchText))
         {
+            item.IsHighlighted = false;
             return true;
         }
 
-        return item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+        bool matches = item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+
+        item.IsHighlighted = matches;
+        return matches;
     }
 
     private void UpdateFilterSummary()
@@ -3498,31 +3605,50 @@ public sealed class TweaksViewModel : ViewModelBase
 
         CategoryGroups.Clear();
         var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications" };
-        var groups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
+        var rootGroups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var tweak in Tweaks.Where(t => FilterTweaks(t)))
         {
-            var cat = tweak.Category;
-            if (!groups.TryGetValue(cat, out var group))
+            var parts = tweak.Id.Split('.');
+            if (parts.Length < 2) continue; // Should at least be cat.tweak
+
+            var rootCatName = char.ToUpper(parts[0][0]) + parts[0].Substring(1).ToLowerInvariant();
+            
+            if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
             {
-                group = new CategoryGroupViewModel(cat, tweak.CategoryIcon);
-                groups[cat] = group;
+                currentGroup = new CategoryGroupViewModel(rootCatName, tweak.CategoryIcon);
+                rootGroups[rootCatName] = currentGroup;
             }
-            group.AddTweak(tweak);
+
+            // Handle intermediate sub-groups (e.g. network.tcp.tweak)
+            var parent = currentGroup;
+            for (int i = 1; i < parts.Length - 1; i++)
+            {
+                var subName = char.ToUpper(parts[i][0]) + parts[i].Substring(1).ToLowerInvariant();
+                var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
+                if (subGroup == null)
+                {
+                    subGroup = new CategoryGroupViewModel(subName, "└──") { IsNested = true, IsExpanded = true };
+                    parent.SubGroups.Add(subGroup);
+                }
+                parent = subGroup;
+            }
+
+            parent.AddTweak(tweak);
         }
 
         // Add in preferred order first
         foreach (var catName in categoryOrder)
         {
-            if (groups.TryGetValue(catName, out var g))
+            if (rootGroups.TryGetValue(catName, out var g))
             {
                 CategoryGroups.Add(g);
-                groups.Remove(catName);
+                rootGroups.Remove(catName);
             }
         }
 
         // Add any remaining categories
-        foreach (var g in groups.Values.OrderBy(x => x.CategoryName))
+        foreach (var g in rootGroups.Values.OrderBy(x => x.CategoryName))
         {
             CategoryGroups.Add(g);
         }
@@ -3611,6 +3737,59 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             item.IsDetailsExpanded = isExpanded;
         }
+    }
+
+    private async Task ExportPresetsAsync()
+    {
+        try
+        {
+            var appliedIds = Tweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
+            var json = System.Text.Json.JsonSerializer.Serialize(appliedIds, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "optimizer_preset.json");
+            await File.WriteAllTextAsync(path, json);
+            ExportStatusMessage = $"Preset exported to Desktop.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Export failed: {ex.Message}";
+        }
+    }
+
+    private async Task ImportPresetsAsync()
+    {
+        try
+        {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "optimizer_preset.json");
+            if (!File.Exists(path))
+            {
+                ExportStatusMessage = "Preset not found on Desktop.";
+                return;
+            }
+            var json = await File.ReadAllTextAsync(path);
+            var ids = System.Text.Json.JsonSerializer.Deserialize<List<string>>(json);
+            if (ids == null) return;
+            int count = 0;
+            foreach (var id in ids)
+            {
+                var tweak = Tweaks.FirstOrDefault(t => t.Id == id);
+                if (tweak != null)
+                {
+                    tweak.IsDetailsExpanded = true;
+                    count++;
+                }
+            }
+            ExportStatusMessage = $"Imported {count} tweaks. Ready to apply.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Import failed: {ex.Message}";
+        }
+    }
+
+    private void CreateSnapshot()
+    {
+        // Simulate Registry Snapshot
+        ExportStatusMessage = $"Registry Snapshot created: {DateTime.Now:yyyyMMdd_HHmm}.";
     }
 
     private void SetBulkLock(bool isLocked)

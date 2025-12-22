@@ -13,6 +13,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
     private int _tweaksRolledBack;
+    private int _optimizationScore;
     private long _logFileSizeBytes;
 
     public DashboardViewModel()
@@ -39,6 +40,12 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         get => _tweaksRolledBack;
         set => SetProperty(ref _tweaksRolledBack, value);
+    }
+
+    public int OptimizationScore
+    {
+        get => _optimizationScore;
+        set => SetProperty(ref _optimizationScore, value);
     }
 
     public long LogFileSizeBytes

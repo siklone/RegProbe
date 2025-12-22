@@ -6,5 +6,6 @@ public enum ElevatedHostRequestType
     Service,
     ScheduledTask,
     FileSystem,
-    Command
+    Command,
+    Ping
 }

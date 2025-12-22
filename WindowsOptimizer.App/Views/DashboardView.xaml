@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <viewModels:ScoreToOffsetConverter x:Key="ScoreToOffsetConverter"/>
+        
         <!-- Glassmorphism Stat Card -->
         <Style x:Key="GlassStatCardStyle" TargetType="Border">
             <Setter Property="Background">
@@ -94,21 +97,41 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Header -->
-            <StackPanel Grid.Row="0" Margin="0,0,0,32">
-                <TextBlock Text="Welcome back! 👋" 
-                           FontSize="14" 
-                           Foreground="#88C0D0"
-                           Margin="0,0,0,4"/>
-                <TextBlock Text="{Binding Title}" 
-                           FontSize="32" 
-                           FontWeight="Bold" 
-                           Foreground="#ECEFF4"/>
-                <TextBlock Margin="0,8,0,0"
-                           Text="Monitor your system optimizations and track applied tweaks."
-                           Foreground="#D8DEE9"
-                           FontSize="14"/>
-            </StackPanel>
+            <!-- Header with Health Gauge -->
+            <Grid Grid.Row="0" Margin="0,0,0,32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Welcome back! 👋" 
+                               FontSize="14" 
+                               Foreground="#88C0D0"
+                               Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding Title}" 
+                               FontSize="32" 
+                               FontWeight="Bold" 
+                               Foreground="#ECEFF4"/>
+                    <TextBlock Margin="0,8,0,0"
+                               Text="Monitor your system optimizations and track applied tweaks."
+                               Foreground="#D8DEE9"
+                               FontSize="14"/>
+                </StackPanel>
+
+                <!-- Circular Health Gauge -->
+                <Grid Grid.Column="1" Width="140" Height="140" Margin="24,0,0,0">
+                    <Ellipse Stroke="#3B4252" StrokeThickness="12" Fill="Transparent"/>
+                    <Ellipse x:Name="ScoreRing" Stroke="#5E81AC" StrokeThickness="12" Fill="Transparent" 
+                             StrokeDashArray="100, 100" StrokeDashOffset="{Binding OptimizationScore, ConverterParameter=314, Converter={StaticResource ScoreToOffsetConverter}}"/>
+                    
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}" 
+                                   FontSize="28" FontWeight="Bold" Foreground="#ECEFF4" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Health" FontSize="11" Foreground="#88C0D0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
 
             <!-- Statistics Grid -->
             <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,-16,24">

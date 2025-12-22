@@ -232,6 +232,12 @@ public static class Program
                     ElevatedHostRequestType.Command,
                     CommandResponse: commandResponse);
             }
+            case ElevatedHostRequestType.Ping:
+            {
+                return new ElevatedHostResponse(
+                    request.RequestId,
+                    ElevatedHostRequestType.Ping);
+            }
             default:
                 return new ElevatedHostResponse(
                     request.RequestId,

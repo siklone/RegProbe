@@ -13,6 +13,9 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     private bool _isExpanded = false; // Start collapsed for performance
     private readonly ObservableCollection<TweakItemViewModel> _tweaks;
     private bool _hasDetected = false;
+    private readonly ObservableCollection<CategoryGroupViewModel> _subGroups = new();
+    private bool _isNested = false;
+    private bool _isDense = false;
 
     public CategoryGroupViewModel(string categoryName, string categoryIcon)
     {
@@ -29,6 +32,22 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     public string DisplayName => $"{CategoryIcon} {CategoryName}";
 
     public ObservableCollection<TweakItemViewModel> Tweaks => _tweaks;
+
+    public ObservableCollection<CategoryGroupViewModel> SubGroups => _subGroups;
+
+    public bool HasSubGroups => SubGroups.Any();
+
+    public bool IsNested
+    {
+        get => _isNested;
+        set => SetProperty(ref _isNested, value);
+    }
+
+    public bool IsDense
+    {
+        get => _isDense;
+        set => SetProperty(ref _isDense, value);
+    }
 
     public int TweakCount => _tweaks.Count;
 

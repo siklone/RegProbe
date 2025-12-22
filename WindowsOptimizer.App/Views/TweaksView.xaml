@@ -8,6 +8,11 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <viewModels:InverseBooleanConverter x:Key="InverseBool" />
+        <viewModels:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibility" />
+        <viewModels:NestedMarginConverter x:Key="NestedMarginConverter" />
+        <viewModels:NestedBackgroundConverter x:Key="NestedBackgroundConverter" />
+        <viewModels:SparklinePointsConverter x:Key="SparklinePointsConverter" />
         
         <!-- Status Color Converter -->
         <SolidColorBrush x:Key="AppliedBrush" Color="#A3BE8C"/>
@@ -325,6 +330,377 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Tab Button Style -->
+        <Style x:Key="TabButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="#3B4252"/>
+            <Setter Property="Foreground" Value="#D8DEE9"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#4C566A"/>
+                    <Setter Property="Foreground" Value="#88C0D0"/>
+                    <Setter Property="BorderBrush" Value="#88C0D0"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsChecked" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#434C5E"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <!-- Rounded ComboBox Style -->
+        <Style x:Key="RoundedComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#3B4252"/>
+            <Setter Property="Foreground" Value="#D8DEE9"/>
+            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <Grid>
+                                <ToggleButton Name="ToggleButton" 
+                                              Background="Transparent" 
+                                              BorderThickness="0"
+                                              IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ContentPresenter Name="ContentSite" 
+                                                  IsHitTestVisible="False" 
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                  Margin="5,3,23,3"
+                                                  VerticalAlignment="Center"/>
+                                <Path Name="Arrow" 
+                                      Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 Z" 
+                                      Fill="#5E81AC" 
+                                      HorizontalAlignment="Right" 
+                                      VerticalAlignment="Center" 
+                                      Margin="0,0,8,0"/>
+                                <Popup Name="Popup" 
+                                       Placement="Bottom" 
+                                       IsOpen="{TemplateBinding IsDropDownOpen}" 
+                                       AllowsTransparency="True" 
+                                       Focusable="False" 
+                                       PopupAnimation="Slide">
+                                    <Border Name="DropDownBorder" 
+                                            Background="#3B4252" 
+                                            BorderBrush="#4C566A" 
+                                            BorderThickness="1" 
+                                            CornerRadius="4">
+                                        <ScrollViewer SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        </Style>
+
+        <!-- Recursive Category Template -->
+        <DataTemplate x:Key="CategoryTemplate" DataType="{x:Type viewModels:CategoryGroupViewModel}">
+            <StackPanel Margin="{Binding IsNested, Converter={StaticResource NestedMarginConverter}}">
+                <!-- Category Header -->
+                <Border Background="{Binding IsNested, Converter={StaticResource NestedBackgroundConverter}}" 
+                        CornerRadius="8" 
+                        Margin="0,0,0,8"
+                        Padding="12,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding CategoryIcon}" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding CategoryName}" FontSize="14" FontWeight="Bold" Foreground="#ECEFF4" VerticalAlignment="Center"/>
+                        
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border Background="#4C566A" CornerRadius="10" Padding="8,2" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding CountBadge}" Foreground="#D8DEE9" FontSize="10" FontWeight="Bold"/>
+                            </Border>
+                            <ToggleButton IsChecked="{Binding IsExpanded}" Style="{StaticResource ExpanderButtonStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Nested Content -->
+                <StackPanel Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}">
+                    <!-- SubGroups Recursive Call -->
+                    <ItemsControl ItemsSource="{Binding SubGroups}" ItemTemplate="{StaticResource CategoryTemplate}"/>
+                    
+                    <!-- Tweaks In This Group -->
+                    <ItemsControl ItemsSource="{Binding Tweaks}" ItemTemplate="{StaticResource TweakItemTemplate}"
+                                  VirtualizingPanel.IsVirtualizing="True"
+                                  VirtualizingPanel.VirtualizationMode="Recycling">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel x:Name="TweaksPanel"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDense}" Value="True">
+                                        <Setter Property="ItemsPanel">
+                                            <Setter.Value>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="3"/>
+                                                </ItemsPanelTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <!-- Expander Button Style -->
+        <Style x:Key="ExpanderButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" Padding="4">
+                            <TextBlock x:Name="Icon" Text="▶" Foreground="#88C0D0" FontSize="12" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="0"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Icon" 
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                           To="90" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Icon" 
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                           To="0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Tweak Item Template -->
+        <DataTemplate x:Key="TweakItemTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
+            <Border Background="#3B4252" 
+                    CornerRadius="10" 
+                    Margin="0,0,0,10" 
+                    Padding="16"
+                    BorderThickness="1">
+                <Border.RenderTransform>
+                    <TranslateTransform Y="0"/>
+                </Border.RenderTransform>
+                <Border.Effect>
+                    <DropShadowEffect x:Name="CardShadow" Color="#000000" BlurRadius="8" ShadowDepth="2" Opacity="0.2"/>
+                </Border.Effect>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                <Setter Property="BorderBrush" Value="#EBCB8B"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="Background" Value="#4C566A"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                
+                <StackPanel>
+                    <!-- Main Card content (simplified for brevity here, actual will have full details) -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Status Indicator -->
+                        <Border Width="32" Height="32" CornerRadius="16" Margin="0,0,12,0" Background="#434C5E">
+                             <TextBlock Text="{Binding StatusIcon}" Foreground="{Binding StatusColor, Converter={StaticResource ColorToBrushConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                        </Border>
+                        
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
+                            <TextBlock Text="{Binding Description}" Foreground="#88C0D0" FontSize="10" TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                             <ToggleButton IsChecked="{Binding IsDetailsExpanded}" Style="{StaticResource ExpanderButtonStyle}" Margin="8,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!-- Expanded Details Area -->
+                    <StackPanel Visibility="{Binding IsDetailsExpanded, Converter={StaticResource BoolToVisibility}}" Margin="0,12,0,0">
+                         <!-- Detail Tabs -->
+                         <UniformGrid Columns="2" Margin="0,0,0,16">
+                             <ToggleButton IsChecked="{Binding ShowTerminal, Converter={StaticResource InverseBool}, Mode=TwoWay}"
+                                           Content="Technical Info"
+                                           Style="{StaticResource TabButtonStyle}"/>
+                             <ToggleButton IsChecked="{Binding ShowTerminal, Mode=TwoWay}"
+                                           Content="Execution Log"
+                                           Style="{StaticResource TabButtonStyle}"/>
+                         </UniformGrid>
+
+                         <!-- Tab View 1: Technical Info -->
+                         <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource InverseBoolToVisibility}}">
+                             <!-- Registry Info -->
+                             <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,12">
+                                 <TextBlock Text="Registry Location" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                 <Grid>
+                                     <Grid.ColumnDefinitions>
+                                         <ColumnDefinition Width="*"/>
+                                         <ColumnDefinition Width="Auto"/>
+                                     </Grid.ColumnDefinitions>
+                                     <Border Background="#2E3440" CornerRadius="4" Padding="8,6">
+                                         <TextBlock Text="{Binding RegistryPath}" Foreground="#88C0D0" FontSize="11" FontFamily="Consolas" TextWrapping="Wrap"/>
+                                     </Border>
+                                     <Button Grid.Column="1" Command="{Binding CopyRegistryPathCommand}" Content="📋" Style="{StaticResource CompactButton}" Margin="4,0,0,0"/>
+                                 </Grid>
+                             </StackPanel>
+
+                             <!-- Registry Diff -->
+                             <StackPanel Visibility="{Binding HasDiff, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,12">
+                                 <TextBlock Text="Registry Value Comparison" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                 <UniformGrid Columns="2">
+                                     <Border Background="#2E3440" CornerRadius="4,0,0,4" Padding="8,6" BorderBrush="#4C566A" BorderThickness="1,1,0,1">
+                                         <StackPanel>
+                                              <TextBlock Text="CURRENT" FontSize="8" Foreground="#88C0D0" FontWeight="Bold" Margin="0,0,0,2"/>
+                                              <TextBlock Text="{Binding CurrentValue}" Foreground="#EBCB8B" FontSize="11" FontFamily="Consolas"/>
+                                         </StackPanel>
+                                     </Border>
+                                     <Border Background="#2E3440" CornerRadius="0,4,4,0" Padding="8,6" BorderBrush="#4C566A" BorderThickness="1">
+                                         <StackPanel>
+                                              <TextBlock Text="TARGET" FontSize="8" Foreground="#88C0D0" FontWeight="Bold" Margin="0,0,0,2"/>
+                                              <TextBlock Text="{Binding TargetValue}" Foreground="#A3BE8C" FontSize="11" FontFamily="Consolas"/>
+                                         </StackPanel>
+                                     </Border>
+                                 </UniformGrid>
+                             </StackPanel>
+
+                             <!-- Priority Calculator -->
+                             <StackPanel Visibility="{Binding HasPriorityCalculator, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,12">
+                                 <TextBlock Text="System Priority Calculator" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,8"/>
+                                 <Border Background="#2E3440" CornerRadius="4" Padding="12">
+                                     <StackPanel>
+                                         <TextBlock Text="{Binding PriorityCalculator.Description}" Foreground="#EBCB8B" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                         <UniformGrid Columns="3">
+                                             <ComboBox SelectedIndex="{Binding PriorityCalculator.IntervalLength}" Style="{StaticResource RoundedComboBox}" FontSize="10" Margin="0,0,4,0">
+                                                 <ComboBoxItem Content="Short"/><ComboBoxItem Content="Long"/>
+                                             </ComboBox>
+                                             <ComboBox SelectedIndex="{Binding PriorityCalculator.IntervalType}" Style="{StaticResource RoundedComboBox}" FontSize="10" Margin="0,0,4,0">
+                                                 <ComboBoxItem Content="Variable"/><ComboBoxItem Content="Fixed"/>
+                                             </ComboBox>
+                                             <ComboBox SelectedIndex="{Binding PriorityCalculator.Boost}" Style="{StaticResource RoundedComboBox}" FontSize="10">
+                                                 <ComboBoxItem Content="None"/><ComboBoxItem Content="Middle"/><ComboBoxItem Content="Max"/>
+                                             </ComboBox>
+                                         </UniformGrid>
+                                     </StackPanel>
+                                 </Border>
+                             </StackPanel>
+
+                             <!-- System Impact Sparkline -->
+                             <StackPanel Margin="0,0,0,12">
+                                 <TextBlock Text="System Impact Estimator" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,8"/>
+                                 <Border Background="#2E3440" CornerRadius="4" Padding="12,8">
+                                     <Grid>
+                                         <Grid.ColumnDefinitions>
+                                              <ColumnDefinition Width="Auto"/>
+                                              <ColumnDefinition Width="*"/>
+                                         </Grid.ColumnDefinitions>
+                                         <TextBlock Text="📈" FontSize="16" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                         <Polyline Grid.Column="1" Points="{Binding SparklinePoints, Converter={StaticResource SparklinePointsConverter}}" 
+                                                   Stroke="#88C0D0" StrokeThickness="1.5" Opacity="0.7" 
+                                                   VerticalAlignment="Center" Height="40" Stretch="Fill"/>
+                                     </Grid>
+                                 </Border>
+                             </StackPanel>
+
+                             <!-- Code Example -->
+                             <StackPanel Visibility="{Binding HasCodeExample, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,12">
+                                 <TextBlock Text="Command Preview" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                 <Border Background="#2E3440" CornerRadius="4" Padding="12">
+                                     <TextBlock Text="{Binding CodeExample}" Foreground="#A3BE8C" FontSize="11" FontFamily="Consolas" TextWrapping="Wrap"/>
+                                 </Border>
+                             </StackPanel>
+
+                             <!-- Reference Links -->
+                             <ItemsControl ItemsSource="{Binding ReferenceLinks}" Margin="0,0,0,12">
+                                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                 <ItemsControl.ItemTemplate>
+                                     <DataTemplate><Button Content="{Binding Title}" Style="{StaticResource LinkButtonStyle}" Margin="0,0,12,4"/></DataTemplate>
+                                 </ItemsControl.ItemTemplate>
+                             </ItemsControl>
+                         </StackPanel>
+
+                         <!-- Tab View 2: Execution Log -->
+                         <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource BoolToVisibility}}">
+                             <Border Background="#1E222A" CornerRadius="4" Padding="12" Height="150">
+                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                     <TextBlock Text="{Binding TerminalOutput}" Foreground="#D8DEE9" FontSize="11" FontFamily="Consolas" TextWrapping="Wrap"/>
+                                 </ScrollViewer>
+                             </Border>
+                         </StackPanel>
+
+                         <!-- Footer Actions -->
+                         <Border Background="#2E3440" CornerRadius="4" Padding="10" Margin="0,4,0,0">
+                             <Grid>
+                                 <StackPanel Orientation="Horizontal">
+                                     <Button Content="Detect" Command="{Binding DetectCommand}" Style="{StaticResource CompactButton}" Margin="0,0,6,0"/>
+                                     <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" Style="{StaticResource CompactButton}" Background="#5E81AC"/>
+                                 </StackPanel>
+                                 <TextBlock HorizontalAlignment="Right" Text="{Binding StatusMessage}" Foreground="#88C0D0" FontSize="10" VerticalAlignment="Center" FontStyle="Italic"/>
+                             </Grid>
+                         </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="#2E3440">
@@ -376,7 +752,12 @@
                                       Margin="0,0,14,0"/>
                             <CheckBox Content="⚠ Risky" 
                                       Style="{StaticResource FilterCheckbox}"
-                                      IsChecked="{Binding ShowRisky}"/>
+                                      IsChecked="{Binding ShowRisky}"
+                                      Margin="0,0,14,0"/>
+                            <CheckBox Content="Ξ Flat View" 
+                                      Style="{StaticResource FilterCheckbox}"
+                                      IsChecked="{Binding IsFlatView}"
+                                      ToolTip="Flatten category hierarchy for maximum performance"/>
                         </StackPanel>
 
                         <!-- Actions -->
@@ -385,6 +766,17 @@
                                     Command="{Binding ResetFiltersCommand}"
                                     Style="{StaticResource CompactButton}"
                                     Margin="0,0,8,0"/>
+                            <Button Content="Export" 
+                                    Command="{Binding ExportPresetCommand}"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,4,0"/>
+                            <Button Content="Import" 
+                                    Command="{Binding ImportPresetCommand}"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,4,0"/>
+                            <Button Content="Snapshot" 
+                                    Command="{Binding CreateSnapshotCommand}"
+                                    Style="{StaticResource CompactButton}"/>
                             <Button Content="Apply All" 
                                     Command="{Binding ApplyAllCommand}" 
                                     Style="{StaticResource FilterButton}"/>
@@ -394,11 +786,13 @@
             </StackPanel>
         </Border>
 
-        <!-- Category Groups with Virtualization -->
-        <ScrollViewer Grid.Row="1" 
-                      VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Disabled"
-                      Padding="24,0,24,24">
+        <!-- Main Content Area: Conditional between Hierarchical and Flat View -->
+        <Grid Grid.Row="1">
+            <!-- Hierarchical Category View -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                          HorizontalScrollBarVisibility="Disabled"
+                          Padding="24,0,24,24"
+                          Visibility="{Binding IsFlatView, Converter={StaticResource InverseBoolToVisibility}}">
             <ItemsControl ItemsSource="{Binding CategoryGroups}"
                           VirtualizingPanel.IsVirtualizing="True"
                           VirtualizingPanel.VirtualizationMode="Recycling">
@@ -868,98 +1262,165 @@
                                                             CornerRadius="6"
                                                             Padding="16">
                                                         <StackPanel>
-                                                            <!-- Row 1: Registry Info -->
-                                                            <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" 
-                                                                        Margin="0,0,0,12">
-                                                                <TextBlock Text="Registry Location" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Border Background="#2E3440" CornerRadius="4" Padding="8,6">
-                                                                        <TextBlock Text="{Binding RegistryPath}" 
-                                                                                   Foreground="#88C0D0" 
-                                                                                   FontSize="11" 
-                                                                                   FontFamily="Consolas"
-                                                                                   TextWrapping="Wrap"/>
-                                                                    </Border>
-                                                                    <Button Grid.Column="1" 
-                                                                            Command="{Binding CopyRegistryPathCommand}"
-                                                                            Content="📋" 
-                                                                            Style="{StaticResource CompactButton}"
-                                                                            VerticalAlignment="Stretch"
-                                                                            Margin="4,0,0,0"
-                                                                            ToolTip="Copy registry path"/>
-                                                                </Grid>
-                                                            </StackPanel>
+                                                            <!-- Detail Tabs -->
+                                                            <UniformGrid Columns="2" Margin="0,0,0,16">
+                                                                <ToggleButton IsChecked="{Binding ShowTerminal, Converter={StaticResource InverseBool}, Mode=TwoWay}"
+                                                                              Content="Technical Info"
+                                                                              Style="{StaticResource TabButtonStyle}"/>
+                                                                <ToggleButton IsChecked="{Binding ShowTerminal, Mode=TwoWay}"
+                                                                              Content="Execution Log"
+                                                                              Style="{StaticResource TabButtonStyle}"/>
+                                                            </UniformGrid>
 
-                                                            <!-- Row 2: Sub-Options (if any) -->
-                                                            <StackPanel Visibility="{Binding HasSubOptions, Converter={StaticResource BoolToVisibility}}" 
-                                                                        Margin="0,0,0,12">
-                                                                <TextBlock Text="Configuration Overrides" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,6"/>
-                                                                <ItemsControl ItemsSource="{Binding SubOptions}">
-                                                                    <ItemsControl.ItemTemplate>
-                                                                        <DataTemplate>
-                                                                            <Grid Margin="0,0,0,4">
+                                                            <!-- Tab View 1: Technical Info -->
+                                                            <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource InverseBoolToVisibility}}">
+                                                                <!-- Registry Info -->
+                                                                <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="Registry Location" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Border Background="#2E3440" CornerRadius="4" Padding="8,6">
+                                                                            <TextBlock Text="{Binding RegistryPath}" 
+                                                                                       Foreground="#88C0D0" 
+                                                                                       FontSize="11" 
+                                                                                       FontFamily="Consolas"
+                                                                                       TextWrapping="Wrap"/>
+                                                                        </Border>
+                                                                        <Button Grid.Column="1" 
+                                                                                Command="{Binding CopyRegistryPathCommand}"
+                                                                                Content="📋" 
+                                                                                Style="{StaticResource CompactButton}"
+                                                                                VerticalAlignment="Stretch"
+                                                                                Margin="4,0,0,0"
+                                                                                ToolTip="Copy registry path"/>
+                                                                    </Grid>
+                                                                </StackPanel>
+
+                                                                <!-- Priority Calculator Specialized UI -->
+                                                                <StackPanel Visibility="{Binding HasPriorityCalculator, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="System Priority Calculator" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,8"/>
+                                                                    <Border Background="#2E3440" CornerRadius="4" Padding="12">
+                                                                        <StackPanel>
+                                                                            <Grid Margin="0,0,0,10">
                                                                                 <Grid.ColumnDefinitions>
                                                                                     <ColumnDefinition Width="*"/>
                                                                                     <ColumnDefinition Width="Auto"/>
                                                                                 </Grid.ColumnDefinitions>
-                                                                                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Foreground="#D8DEE9" FontSize="11"/>
-                                                                                
-                                                                                <!-- Handle different sub-option types -->
-                                                                                <CheckBox Grid.Column="1" IsChecked="{Binding IsEnabled}" VerticalAlignment="Center">
-                                                                                    <CheckBox.Style>
-                                                                                        <Style TargetType="CheckBox" BasedOn="{StaticResource FilterCheckbox}">
-                                                                                            <Style.Triggers>
-                                                                                                <DataTrigger Binding="{Binding Type}" Value="Numeric">
-                                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                                                </DataTrigger>
-                                                                                            </Style.Triggers>
-                                                                                        </Style>
-                                                                                    </CheckBox.Style>
-                                                                                </CheckBox>
+                                                                                <TextBlock Text="{Binding PriorityCalculator.Description}" Foreground="#EBCB8B" FontSize="11" FontWeight="SemiBold"/>
+                                                                                <TextBlock Grid.Column="1" Text="{Binding PriorityCalculator.Bitmask, StringFormat='Value: 0x{0:X2}'}" Foreground="#88C0D0" FontSize="11" FontFamily="Consolas"/>
                                                                             </Grid>
-                                                                        </DataTemplate>
-                                                                    </ItemsControl.ItemTemplate>
-                                                                </ItemsControl>
+                                                                            
+                                                                            <UniformGrid Columns="3" Margin="0,5">
+                                                                                <StackPanel Margin="0,0,10,0">
+                                                                                    <TextBlock Text="Length" FontSize="9" Foreground="#4C566A" Margin="0,0,0,4"/>
+                                                                                    <ComboBox SelectedIndex="{Binding PriorityCalculator.IntervalLength}" Style="{StaticResource RoundedComboBox}" FontSize="10">
+                                                                                        <ComboBoxItem Content="Short (01)" ToolTip="Best for responsiveness"/>
+                                                                                        <ComboBoxItem Content="Long (10)" ToolTip="Best for servers"/>
+                                                                                    </ComboBox>
+                                                                                </StackPanel>
+                                                                                <StackPanel Margin="0,0,10,0">
+                                                                                    <TextBlock Text="Type" FontSize="9" Foreground="#4C566A" Margin="0,0,0,4"/>
+                                                                                    <ComboBox SelectedIndex="{Binding PriorityCalculator.IntervalType}" Style="{StaticResource RoundedComboBox}" FontSize="10">
+                                                                                        <ComboBoxItem Content="Variable (01)" ToolTip="Dynamic scheduling"/>
+                                                                                        <ComboBoxItem Content="Fixed (10)" ToolTip="Equal priority"/>
+                                                                                    </ComboBox>
+                                                                                </StackPanel>
+                                                                                <StackPanel>
+                                                                                    <TextBlock Text="Boost" FontSize="9" Foreground="#4C566A" Margin="0,0,0,4"/>
+                                                                                    <ComboBox SelectedIndex="{Binding PriorityCalculator.Boost}" Style="{StaticResource RoundedComboBox}" FontSize="10">
+                                                                                        <ComboBoxItem Content="None (01)"/>
+                                                                                        <ComboBoxItem Content="Middle (10)"/>
+                                                                                        <ComboBoxItem Content="Maximum (11)"/>
+                                                                                    </ComboBox>
+                                                                                </StackPanel>
+                                                                            </UniformGrid>
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                                <!-- Sub-Options -->
+                                                                <StackPanel Visibility="{Binding HasSubOptions, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="Configuration Overrides" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,6"/>
+                                                                    <ItemsControl ItemsSource="{Binding SubOptions}">
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Grid Margin="0,0,0,4">
+                                                                                    <Grid.ColumnDefinitions>
+                                                                                        <ColumnDefinition Width="*"/>
+                                                                                        <ColumnDefinition Width="Auto"/>
+                                                                                    </Grid.ColumnDefinitions>
+                                                                                    <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Foreground="#D8DEE9" FontSize="11"/>
+                                                                                    <CheckBox Grid.Column="1" IsChecked="{Binding IsEnabled}" VerticalAlignment="Center">
+                                                                                        <CheckBox.Style>
+                                                                                            <Style TargetType="CheckBox" BasedOn="{StaticResource FilterCheckbox}">
+                                                                                                <Style.Triggers>
+                                                                                                    <DataTrigger Binding="{Binding Type}" Value="Numeric">
+                                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                                    </DataTrigger>
+                                                                                                </Style.Triggers>
+                                                                                            </Style>
+                                                                                        </CheckBox.Style>
+                                                                                    </CheckBox>
+                                                                                </Grid>
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </StackPanel>
+
+                                                                <!-- Code Example -->
+                                                                <StackPanel Visibility="{Binding HasCodeExample, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="Command Preview" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                    <Border Background="#2E3440" CornerRadius="4" Padding="12" BorderBrush="#3B4252" BorderThickness="1">
+                                                                        <TextBlock Text="{Binding CodeExample}" 
+                                                                                   Foreground="#A3BE8C" 
+                                                                                   FontSize="11" 
+                                                                                   FontFamily="Consolas"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                                <!-- Reference Links -->
+                                                                <StackPanel Visibility="{Binding HasReferenceLinks, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="Documentation &amp; Sources" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                    <ItemsControl ItemsSource="{Binding ReferenceLinks}">
+                                                                        <ItemsControl.ItemsPanel>
+                                                                            <ItemsPanelTemplate>
+                                                                                <WrapPanel Orientation="Horizontal"/>
+                                                                            </ItemsPanelTemplate>
+                                                                        </ItemsControl.ItemsPanel>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Button Content="{Binding Title}" 
+                                                                                        Style="{StaticResource LinkButtonStyle}"
+                                                                                        Margin="0,0,12,4"/>
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </StackPanel>
                                                             </StackPanel>
 
-                                                            <!-- Row 3: Code Example -->
-                                                            <StackPanel Visibility="{Binding HasCodeExample, Converter={StaticResource BoolToVisibility}}" 
-                                                                        Margin="0,0,0,12">
-                                                                <TextBlock Text="Command Preview" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
-                                                                <Border Background="#2E3440" CornerRadius="4" Padding="12" BorderBrush="#3B4252" BorderThickness="1">
-                                                                    <TextBlock Text="{Binding CodeExample}" 
-                                                                               Foreground="#A3BE8C" 
-                                                                               FontSize="11" 
-                                                                               FontFamily="Consolas"
-                                                                               TextWrapping="Wrap"/>
+                                                            <!-- Tab View 2: Execution Log (Terminal) -->
+                                                            <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource BoolToVisibility}}">
+                                                                <Border Background="#1E222A" CornerRadius="4" Padding="12" Height="180">
+                                                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                                        <TextBlock Text="{Binding TerminalOutput, FallbackValue='Execution logs will appear here...'}" 
+                                                                                   Foreground="#D8DEE9" 
+                                                                                   FontSize="11" 
+                                                                                   FontFamily="Consolas"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </ScrollViewer>
                                                                 </Border>
                                                             </StackPanel>
 
-                                                            <!-- Row 4: Reference Links -->
-                                                            <StackPanel Visibility="{Binding HasReferenceLinks, Converter={StaticResource BoolToVisibility}}" 
-                                                                        Margin="0,0,0,12">
-                                                                <TextBlock Text="Documentation &amp; Sources" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
-                                                                <ItemsControl ItemsSource="{Binding ReferenceLinks}">
-                                                                    <ItemsControl.ItemsPanel>
-                                                                        <ItemsPanelTemplate>
-                                                                            <WrapPanel Orientation="Horizontal"/>
-                                                                        </ItemsPanelTemplate>
-                                                                    </ItemsControl.ItemsPanel>
-                                                                    <ItemsControl.ItemTemplate>
-                                                                        <DataTemplate>
-                                                                            <Button Content="{Binding Title}" 
-                                                                                    Style="{StaticResource LinkButtonStyle}"
-                                                                                    Margin="0,0,12,4"/>
-                                                                        </DataTemplate>
-                                                                    </ItemsControl.ItemTemplate>
-                                                                </ItemsControl>
-                                                            </StackPanel>
-
-                                                            <!-- Row 5: Action Pipeline & Status -->
+                                                            <!-- Shared Actions Footer -->
                                                             <Border Background="#2E3440" CornerRadius="4" Padding="10" Margin="0,4,0,0">
                                                                 <StackPanel>
                                                                     <Grid Margin="0,0,0,8">
@@ -991,6 +1452,33 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+            <!-- Flat High-Performance List View -->
+            <ListBox ItemsSource="{Binding TweaksView}"
+                     ItemTemplate="{StaticResource TweakItemTemplate}"
+                     Visibility="{Binding IsFlatView, Converter={StaticResource BoolToVisibility}}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="24,0,24,24"
+                     HorizontalContentAlignment="Stretch"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Grid>
 
         <!-- Empty State -->
         <Border Grid.Row="1"

@@ -26,6 +26,14 @@ public sealed class MainViewModel : ViewModelBase
             new("about", "About", "ℹ️", about)
         };
 
+        // Link Health Score
+        tweaks.PropertyChanged += (s, e) => {
+            if (e.PropertyName == nameof(TweaksViewModel.GlobalOptimizationScore)) {
+                dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+            }
+        };
+        dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+
         SelectedNavigationItem = NavigationItems[0];
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));

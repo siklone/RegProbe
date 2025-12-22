@@ -29,19 +29,45 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
         return Task.FromResult(new RegistryValueReadResult(true, data));
     }
 
-    public Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
+    public async Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
-        using var key = OpenOrCreateKey(reference);
-        key.SetValue(reference.ValueName, value.ToObject(), value.Kind);
-        return Task.CompletedTask;
+        try
+        {
+            using var key = OpenOrCreateKey(reference);
+            key.SetValue(reference.ValueName, value.ToObject(), value.Kind);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            // If access denied, try to take ownership and retry
+            using (new RegistryOwnershipScope(reference.Hive, reference.View, reference.KeyPath))
+            {
+                using var key = OpenOrCreateKey(reference);
+                key.SetValue(reference.ValueName, value.ToObject(), value.Kind);
+            }
+        }
     }
 
-    public Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
+    public async Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
+        try
+        {
+            await ExecuteDeleteAsync(reference);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            using (new RegistryOwnershipScope(reference.Hive, reference.View, reference.KeyPath))
+            {
+                await ExecuteDeleteAsync(reference);
+            }
+        }
+    }
+
+    private static Task ExecuteDeleteAsync(RegistryValueReference reference)
+    {
         using var baseKey = RegistryKey.OpenBaseKey(reference.Hive, reference.View);
         using var key = baseKey.OpenSubKey(reference.KeyPath, true);
         if (key is not null && key.GetValue(reference.ValueName) is not null)

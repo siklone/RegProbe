@@ -40,6 +40,13 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _toggleCommand;
     private readonly RelayCommand _customActionCommand;
     private readonly RelayCommand _copyRegistryPathCommand;
+    private string _terminalOutput = string.Empty;
+    private bool _showTerminal = false;
+    private PriorityCalculatorViewModel? _priorityCalculator;
+    private bool _isHighlighted = false;
+    private string _currentValue = "Unknown";
+    private string _targetValue = "Optimized";
+    private ObservableCollection<double> _sparklinePoints = new();
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -183,6 +190,73 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasReferenceLinks => ReferenceLinks.Any();
 
+    public PriorityCalculatorViewModel? PriorityCalculator
+    {
+        get => _priorityCalculator;
+        set { if (SetProperty(ref _priorityCalculator, value)) OnPropertyChanged(nameof(HasPriorityCalculator)); }
+    }
+
+    public bool HasPriorityCalculator => PriorityCalculator != null;
+
+    public bool IsHighlighted
+    {
+        get => _isHighlighted;
+        set => SetProperty(ref _isHighlighted, value);
+    }
+
+    public string CurrentValue
+    {
+        get => _currentValue;
+        set => SetProperty(ref _currentValue, value);
+    }
+
+    public string TargetValue
+    {
+        get => _targetValue;
+        set => SetProperty(ref _targetValue, value);
+    }
+
+    public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";
+
+    public ObservableCollection<double> SparklinePoints
+    {
+        get => _sparklinePoints;
+        set => SetProperty(ref _sparklinePoints, value);
+    }
+
+    public void UpdateMetric(double value)
+    {
+        _sparklinePoints.Add(value);
+        if (_sparklinePoints.Count > 20)
+        {
+            _sparklinePoints.RemoveAt(0);
+        }
+    }
+
+    public string TerminalOutput
+    {
+        get => _terminalOutput;
+        private set => SetProperty(ref _terminalOutput, value);
+    }
+
+    public bool ShowTerminal
+    {
+        get => _showTerminal;
+        set => SetProperty(ref _showTerminal, value);
+    }
+
+    private void AppendToTerminal(string message)
+    {
+        if (string.IsNullOrEmpty(message)) return;
+        var timestamp = DateTime.Now.ToString("HH:mm:ss");
+        TerminalOutput += $"[{timestamp}] {message}\n";
+    }
+
+    private void ClearTerminal()
+    {
+        TerminalOutput = string.Empty;
+    }
+
     // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
     {
@@ -307,7 +381,13 @@ public sealed class TweakItemViewModel : ViewModelBase
     public bool IsDetailsExpanded
     {
         get => _isDetailsExpanded;
-        set => SetProperty(ref _isDetailsExpanded, value);
+        set
+        {
+            if (SetProperty(ref _isDetailsExpanded, value) && value)
+            {
+                GenerateMockSparkline();
+            }
+        }
     }
 
     public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
@@ -335,6 +415,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
+        ClearTerminal();
+        AppendToTerminal(dryRun ? "Starting Pre-Execution Check (Dry Run)..." : "Starting Execution Pipeline...");
         ResetSteps();
         Steps.First().MarkInProgress();
 
@@ -399,6 +481,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
+            AppendToTerminal($"{action} Result: {result.Result.Status}. {result.Result.Message}");
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action} {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -458,6 +541,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
+
+        AppendToTerminal($"> {update.Action}: {update.Status} - {update.Message}");
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -601,6 +686,21 @@ public sealed class TweakItemViewModel : ViewModelBase
             else
             {
                 AppliedStatus = TweakAppliedStatus.NotApplied;
+            }
+
+            // Extract current value if possible from the message (e.g., "Current value is 1.")
+            if (!string.IsNullOrEmpty(result.Result.Message) && result.Result.Message.Contains("Current value is "))
+            {
+                var parts = result.Result.Message.Split(new[] { "Current value is " }, StringSplitOptions.None);
+                if (parts.Length > 1)
+                {
+                    CurrentValue = parts[1].TrimEnd('.');
+                }
+            }
+            else if (result.Result.Status == TweakStatus.Detected || result.Result.Status == TweakStatus.Applied)
+            {
+                // Fallback if applied but value not in message
+                CurrentValue = TargetValue; 
             }
         }
         catch
