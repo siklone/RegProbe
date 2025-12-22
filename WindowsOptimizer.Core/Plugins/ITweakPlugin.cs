@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using WindowsOptimizer.Core.Tweaks;
-
 namespace WindowsOptimizer.Core.Plugins;
 
 public interface ITweakPlugin
