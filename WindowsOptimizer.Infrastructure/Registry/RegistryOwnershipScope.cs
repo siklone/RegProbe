@@ -2,6 +2,7 @@ using System;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using Microsoft.Win32;
+using WindowsOptimizer.Infrastructure.Elevation;
 
 namespace WindowsOptimizer.Infrastructure.Registry;
 
