@@ -3059,7 +3059,8 @@ public sealed class TweaksViewModel : ViewModelBase
             {
                 System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
                 {
-                    ApplyFilters();
+                    TweaksView.Refresh();
+                    UpdateFilterSummary();
                     BuildCategoryGroups();
                 });
             }
