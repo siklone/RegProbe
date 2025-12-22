@@ -2941,6 +2941,8 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ICollectionView TweaksView { get; }
 
+    public ObservableCollection<CategoryGroupViewModel> CategoryGroups { get; } = new();
+
     public ICommand ExportLogsCommand => _exportLogsCommand;
 
     public ICommand PreviewAllCommand => _previewAllCommand;
@@ -3416,6 +3418,57 @@ public sealed class TweaksViewModel : ViewModelBase
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
+        BuildCategoryGroups();
+    }
+
+    private void BuildCategoryGroups()
+    {
+        CategoryGroups.Clear();
+        var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications" };
+        var groups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var tweak in Tweaks.Where(t => FilterTweaks(t)))
+        {
+            var cat = tweak.Category;
+            if (!groups.TryGetValue(cat, out var group))
+            {
+                group = new CategoryGroupViewModel(cat, tweak.CategoryIcon);
+                groups[cat] = group;
+            }
+            group.AddTweak(tweak);
+        }
+
+        // Add in preferred order first
+        foreach (var catName in categoryOrder)
+        {
+            if (groups.TryGetValue(catName, out var g))
+            {
+                CategoryGroups.Add(g);
+                groups.Remove(catName);
+            }
+        }
+
+        // Add any remaining categories
+        foreach (var g in groups.Values.OrderBy(x => x.CategoryName))
+        {
+            CategoryGroups.Add(g);
+        }
+    }
+
+    public void ExpandAllCategories()
+    {
+        foreach (var group in CategoryGroups)
+        {
+            group.IsExpanded = true;
+        }
+    }
+
+    public void CollapseAllCategories()
+    {
+        foreach (var group in CategoryGroups)
+        {
+            group.IsExpanded = false;
+        }
     }
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)

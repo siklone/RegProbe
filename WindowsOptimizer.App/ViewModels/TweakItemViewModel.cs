@@ -80,6 +80,35 @@ public sealed class TweakItemViewModel : ViewModelBase
         ? "Requires elevation. Approve the UAC prompt to continue."
         : string.Empty;
 
+    public string Category => ExtractCategory(Id);
+
+    public string CategoryIcon => GetCategoryIcon(Category);
+
+    private static string ExtractCategory(string id)
+    {
+        var dotIndex = id.IndexOf('.');
+        if (dotIndex <= 0) return "Other";
+        var cat = id.Substring(0, dotIndex);
+        return char.ToUpper(cat[0]) + cat.Substring(1).ToLowerInvariant();
+    }
+
+    private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
+    {
+        "system" => "⚙️",
+        "security" => "🔒",
+        "privacy" => "👁️",
+        "network" => "🌐",
+        "visibility" => "👀",
+        "audio" => "🔊",
+        "peripheral" => "🖱️",
+        "power" => "⚡",
+        "performance" => "🚀",
+        "cleanup" => "🧹",
+        "explorer" => "📁",
+        "notifications" => "🔔",
+        _ => "📦"
+    };
+
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
     public ICommand DetectCommand => _detectCommand;

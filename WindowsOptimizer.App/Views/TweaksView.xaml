@@ -8,387 +8,527 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        <Style x:Key="TweakCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#E3E5E8" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="16" />
-            <Setter Property="Margin" Value="0,0,0,14" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsRunning}" Value="True">
-                    <Setter Property="BorderBrush" Value="#F0B429" />
-                    <Setter Property="Background" Value="#FFFCF2" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        
+        <!-- Risk Badge Styles -->
         <Style x:Key="RiskBadgeStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Padding" Value="6,2" />
-            <Setter Property="Background" Value="#E8EEF6" />
-            <Setter Property="BorderBrush" Value="#C9D5E8" />
+            <Setter Property="Background" Value="#3B4252" />
+            <Setter Property="BorderBrush" Value="#4C566A" />
             <Setter Property="BorderThickness" Value="1" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Safe}">
-                    <Setter Property="Background" Value="#E8F5E9" />
-                    <Setter Property="BorderBrush" Value="#B6E2C2" />
+                    <Setter Property="Background" Value="#2E4A3E" />
+                    <Setter Property="BorderBrush" Value="#A3BE8C" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Advanced}">
-                    <Setter Property="Background" Value="#FFF5E5" />
-                    <Setter Property="BorderBrush" Value="#F6D6A8" />
+                    <Setter Property="Background" Value="#4A3E2E" />
+                    <Setter Property="BorderBrush" Value="#EBCB8B" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Risk}" Value="{x:Static core:TweakRiskLevel.Risky}">
-                    <Setter Property="Background" Value="#FDECEC" />
-                    <Setter Property="BorderBrush" Value="#F1B9B9" />
+                    <Setter Property="Background" Value="#4A2E2E" />
+                    <Setter Property="BorderBrush" Value="#BF616A" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
         <Style x:Key="ElevationBadgeStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Padding" Value="6,2" />
-            <Setter Property="Background" Value="#FFF2E1" />
-            <Setter Property="BorderBrush" Value="#F1C47A" />
+            <Setter Property="Background" Value="#4A3E2E" />
+            <Setter Property="BorderBrush" Value="#D08770" />
             <Setter Property="BorderThickness" Value="1" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding WillPromptForElevation}" Value="True">
-                    <Setter Property="Background" Value="#FDECEC" />
-                    <Setter Property="BorderBrush" Value="#F1B9B9" />
-                </DataTrigger>
-            </Style.Triggers>
         </Style>
-        <Style x:Key="StepIndicatorStyle" TargetType="Ellipse">
-            <Setter Property="Fill" Value="#B9BDC6" />
-            <Setter Property="Width" Value="9" />
-            <Setter Property="Height" Value="9" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.InProgress}">
-                    <Setter Property="Fill" Value="#F0B429" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Success}">
-                    <Setter Property="Fill" Value="#4CAF50" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Failed}">
-                    <Setter Property="Fill" Value="#D64545" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Skipped}">
-                    <Setter Property="Fill" Value="#7A7F87" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.NotApplicable}">
-                    <Setter Property="Fill" Value="#7A7F87" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+
         <Style x:Key="OutcomeBadgeStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Padding" Value="6,2" />
-            <Setter Property="Background" Value="#EEF1F4" />
-            <Setter Property="BorderBrush" Value="#D3D8DE" />
+            <Setter Property="Background" Value="#3B4252" />
+            <Setter Property="BorderBrush" Value="#4C566A" />
             <Setter Property="BorderThickness" Value="1" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding LastOutcome}" Value="{x:Static viewModels:TweakRunOutcome.InProgress}">
-                    <Setter Property="Background" Value="#FFF5E5" />
-                    <Setter Property="BorderBrush" Value="#F6D6A8" />
+                    <Setter Property="Background" Value="#4A3E2E" />
+                    <Setter Property="BorderBrush" Value="#EBCB8B" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding LastOutcome}" Value="{x:Static viewModels:TweakRunOutcome.Success}">
-                    <Setter Property="Background" Value="#E8F5E9" />
-                    <Setter Property="BorderBrush" Value="#B6E2C2" />
+                    <Setter Property="Background" Value="#2E4A3E" />
+                    <Setter Property="BorderBrush" Value="#A3BE8C" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding LastOutcome}" Value="{x:Static viewModels:TweakRunOutcome.Failed}">
-                    <Setter Property="Background" Value="#FDECEC" />
-                    <Setter Property="BorderBrush" Value="#F1B9B9" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding LastOutcome}" Value="{x:Static viewModels:TweakRunOutcome.Cancelled}">
-                    <Setter Property="Background" Value="#EFE7FF" />
-                    <Setter Property="BorderBrush" Value="#D6C7F4" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding LastOutcome}" Value="{x:Static viewModels:TweakRunOutcome.Skipped}">
-                    <Setter Property="Background" Value="#EEF1F4" />
-                    <Setter Property="BorderBrush" Value="#C7CCD4" />
+                    <Setter Property="Background" Value="#4A2E2E" />
+                    <Setter Property="BorderBrush" Value="#BF616A" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="StepIndicatorStyle" TargetType="Ellipse">
+            <Setter Property="Fill" Value="#4C566A" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Height" Value="8" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.InProgress}">
+                    <Setter Property="Fill" Value="#EBCB8B" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Success}">
+                    <Setter Property="Fill" Value="#A3BE8C" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="{x:Static viewModels:TweakStepState.Failed}">
+                    <Setter Property="Fill" Value="#BF616A" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Compact Action Button Style -->
+        <Style x:Key="CompactActionButton" TargetType="Button">
+            <Setter Property="Background" Value="#3B4252"/>
+            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#4C566A"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Filter Toolbar Button Style -->
+        <Style x:Key="ToolbarButton" TargetType="Button">
+            <Setter Property="Background" Value="#5E81AC"/>
+            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#81A1C1"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern TextBox Style -->
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#3B4252"/>
+            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Checkbox Style -->
+        <Style x:Key="FilterCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#D8DEE9"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
     </UserControl.Resources>
 
-    <Grid Margin="24">
+    <Grid Background="#2E3440">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" />
-                <TextBlock Margin="0,6,0,0"
-                           Text="Preview runs are DryRun by default. Use Apply to execute a tweak and Verify/Rollback for follow-up actions."
-                           Foreground="#4B4B4B"
-                           TextWrapping="Wrap" />
-                <TextBlock Margin="0,6,0,0"
-                           Text="{Binding ExportStatusMessage}"
-                           Foreground="#8A8D93"
-                           FontSize="11" />
-                <TextBlock Margin="0,4,0,0"
-                           Text="{Binding BulkStatusMessage}"
-                           Foreground="#8A8D93"
-                           FontSize="11" />
-                <TextBlock Margin="0,4,0,0"
-                           Text="{Binding BulkProgressText}"
-                           Foreground="#8A8D93"
-                           FontSize="11" />
-                <TextBlock Margin="0,4,0,0"
-                           Text="{Binding ElevationStatusMessage}"
-                           FontSize="11">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Foreground" Value="#8A8D93" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsElevated}" Value="False">
-                                    <Setter Property="Foreground" Value="#C65D00" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBlock Margin="0,4,0,0"
-                           Text="{Binding FilterSummary}"
-                           Foreground="#8A8D93"
-                           FontSize="11" />
-                <StackPanel Margin="0,6,0,0" Orientation="Horizontal">
-                    <TextBox Width="220"
-                             Margin="0,0,12,0"
-                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             ToolTip="Search by name, description, ID, or risk." />
-                    <CheckBox Content="Safe"
-                              IsChecked="{Binding ShowSafe}"
-                              Margin="0,0,12,0" />
-                    <CheckBox Content="Advanced"
-                              IsChecked="{Binding ShowAdvanced}"
-                              Margin="0,0,12,0" />
-                    <CheckBox Content="Risky"
-                              IsChecked="{Binding ShowRisky}"
-                              Margin="0,0,12,0" />
-                    <Button Content="Reset Filters"
-                            Command="{Binding ResetFiltersCommand}"
-                            Padding="10,2" />
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="12,6,0,0">
-                <Button Content="Preview All"
-                        Command="{Binding PreviewAllCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Apply All"
-                        Command="{Binding ApplyAllCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Verify All"
-                        Command="{Binding VerifyAllCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Rollback All"
-                        Command="{Binding RollbackAllCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Cancel All"
-                        Command="{Binding CancelAllCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Expand Details"
-                        Command="{Binding ExpandAllDetailsCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Collapse Details"
-                        Command="{Binding CollapseAllDetailsCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Open Log Folder"
-                        Command="{Binding OpenLogFolderCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Open CSV Log"
-                        Command="{Binding OpenCsvLogCommand}"
-                        Padding="12,6"
-                        Margin="0,0,8,0" />
-                <Button Content="Export Logs"
-                        Command="{Binding ExportLogsCommand}"
-                        Padding="12,6" />
-            </StackPanel>
-        </Grid>
-
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,16,0,0">
+        <!-- Header Section -->
+        <Border Grid.Row="0" Background="#2E3440" Padding="24,20">
             <Grid>
-                <ItemsControl ItemsSource="{Binding TweaksView}"
-                              Visibility="{Binding HasVisibleTweaks, Converter={StaticResource BoolToVisibility}}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Style="{StaticResource TweakCardStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" />
-                                        <Border Style="{StaticResource RiskBadgeStyle}" Margin="10,0,0,0">
-                                            <TextBlock Text="{Binding Risk}" FontSize="11" FontWeight="SemiBold" />
-                                        </Border>
-                                        <Border Style="{StaticResource OutcomeBadgeStyle}"
-                                                Margin="10,0,0,0"
-                                                Visibility="{Binding HasOutcome, Converter={StaticResource BoolToVisibility}}">
-                                            <TextBlock Text="{Binding OutcomeSummary}" FontSize="11" FontWeight="SemiBold" />
-                                        </Border>
-                                        <Border Style="{StaticResource ElevationBadgeStyle}"
-                                                Margin="10,0,0,0"
-                                                Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}"
-                                                ToolTip="{Binding ElevationTooltip}">
-                                            <TextBlock Text="{Binding ElevationBadgeText}" FontSize="11" FontWeight="SemiBold" />
-                                        </Border>
-                                    </StackPanel>
+                <!-- Title and Status -->
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="{Binding Title}" 
+                               FontSize="26" 
+                               FontWeight="SemiBold" 
+                               Foreground="#ECEFF4"/>
+                    <TextBlock Margin="0,4,0,0"
+                               Text="Grouped by category. Click headers to expand/collapse."
+                               Foreground="#81A1C1"
+                               FontSize="12"/>
+                    <TextBlock Margin="0,4,0,0"
+                               Text="{Binding FilterSummary}"
+                               Foreground="#88C0D0"
+                               FontSize="11"
+                               FontWeight="Medium"/>
+                </StackPanel>
 
-                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button Content="Detect"
-                                            Command="{Binding DetectCommand}"
-                                            Padding="12,4"
-                                            Margin="0,0,6,0" />
-                                    <Button Content="Preview"
-                                            Command="{Binding PreviewCommand}"
-                                            Padding="12,4"
-                                                Margin="0,0,6,0" />
-                                        <Button Content="Apply"
-                                                Command="{Binding ApplyCommand}"
-                                                Padding="12,4"
-                                                Margin="0,0,6,0" />
-                                        <Button Content="Verify"
-                                                Command="{Binding VerifyCommand}"
-                                                Padding="12,4"
-                                                Margin="0,0,6,0" />
-                                        <Button Content="Rollback"
-                                                Command="{Binding RollbackCommand}"
-                                                Padding="12,4"
-                                                Margin="0,0,6,0" />
-                                        <Button Content="Cancel"
-                                                Command="{Binding CancelCommand}"
-                                                Padding="12,4" />
-                                    </StackPanel>
+                <!-- Filter Bar -->
+                <Border Grid.Row="1" Margin="0,16,0,0" Padding="16,12" Background="#3B4252" CornerRadius="8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
-                                        <ProgressBar Height="4"
-                                                     Margin="0,0,0,8"
-                                                     IsIndeterminate="True"
-                                                     Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}" />
-                                        <TextBlock Text="{Binding Description}"
-                                                   Foreground="#4B4B4B"
-                                                   TextWrapping="Wrap" />
-                                        <TextBlock Margin="0,4,0,0"
-                                                   Text="{Binding ElevationWarningText}"
-                                                   Foreground="#C65D00"
-                                                   FontSize="11"
-                                                   Visibility="{Binding WillPromptForElevation, Converter={StaticResource BoolToVisibility}}" />
-                                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                                            <TextBlock Text="{Binding Id}"
-                                                       Foreground="#8A8D93"
-                                                       FontSize="10"
-                                                       VerticalAlignment="Center" />
-                                            <Button Content="Copy ID"
-                                                    Command="{Binding CopyIdCommand}"
-                                                    Padding="6,1"
-                                                    Margin="8,0,0,0"
-                                                    VerticalAlignment="Center" />
-                                        </StackPanel>
-                                    </StackPanel>
+                        <!-- Search Box -->
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBox Width="240"
+                                     Style="{StaticResource SearchTextBoxStyle}"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Search by name, description, ID, or category"/>
+                        </StackPanel>
 
-                                    <Expander Grid.Row="2"
-                                              Grid.ColumnSpan="2"
-                                              Margin="0,12,0,0"
-                                              IsExpanded="{Binding IsDetailsExpanded}"
-                                              Header="Details">
-                                        <StackPanel>
-                                            <ItemsControl ItemsSource="{Binding Steps}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <UniformGrid Columns="4" />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel Margin="0,0,12,0">
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,3,6,0" />
-                                                                <TextBlock Text="{Binding ActionLabel}" FontSize="12" FontWeight="SemiBold" />
-                                                            </StackPanel>
-                                                            <TextBlock Margin="0,4,0,0"
-                                                                       Text="{Binding StatusText}"
-                                                                       Foreground="#5B606A"
-                                                                       FontSize="11" />
-                                                            <TextBlock Margin="0,4,0,0"
-                                                                       Text="{Binding Message}"
-                                                                       Foreground="#8A8D93"
-                                                                       FontSize="10"
-                                                                       TextWrapping="Wrap" />
-                                                            <TextBlock Margin="0,4,0,0"
-                                                                       Text="{Binding TimestampText}"
-                                                                       Foreground="#A6A8AF"
-                                                                       FontSize="10" />
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+                        <!-- Risk Filters -->
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
+                            <CheckBox Content="✓ Safe" 
+                                      Style="{StaticResource FilterCheckBoxStyle}"
+                                      IsChecked="{Binding ShowSafe}" 
+                                      Margin="0,0,16,0"/>
+                            <CheckBox Content="⚡ Advanced" 
+                                      Style="{StaticResource FilterCheckBoxStyle}"
+                                      IsChecked="{Binding ShowAdvanced}" 
+                                      Margin="0,0,16,0"/>
+                            <CheckBox Content="⚠️ Risky" 
+                                      Style="{StaticResource FilterCheckBoxStyle}"
+                                      IsChecked="{Binding ShowRisky}" 
+                                      Margin="0,0,16,0"/>
+                            <Button Content="Reset" 
+                                    Command="{Binding ResetFiltersCommand}"
+                                    Style="{StaticResource CompactActionButton}"/>
+                        </StackPanel>
 
-                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                                <TextBlock Text="{Binding StatusMessage}" Foreground="#4B4B4B" />
-                                                <TextBlock Text=" - " Foreground="#A6A8AF" Margin="6,0" />
-                                                <TextBlock Text="{Binding LastUpdatedText}" Foreground="#8A8D93" />
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </Expander>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <Border Padding="24"
-                        Background="#FAFAFB"
-                        BorderBrush="#E3E5E8"
-                        BorderThickness="1"
-                        CornerRadius="12">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding HasVisibleTweaks}" Value="False">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="No tweaks match your filters."
-                                   FontSize="15"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Center" />
-                        <TextBlock Margin="0,6,0,0"
-                                   Text="Clear the search or enable more risk levels to see results."
-                                   Foreground="#6B6F76"
-                                   TextWrapping="Wrap"
-                                   HorizontalAlignment="Center" />
-                    </StackPanel>
+                        <!-- Bulk Actions -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <Button Content="Apply All" 
+                                    Command="{Binding ApplyAllCommand}" 
+                                    Style="{StaticResource ToolbarButton}"
+                                    Margin="0,0,6,0"/>
+                            <Button Content="Verify All" 
+                                    Command="{Binding VerifyAllCommand}" 
+                                    Style="{StaticResource ToolbarButton}"
+                                    Margin="0,0,6,0"/>
+                            <Button Content="Export" 
+                                    Command="{Binding ExportLogsCommand}" 
+                                    Style="{StaticResource CompactActionButton}"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
+
+                <!-- Status Messages -->
+                <StackPanel Grid.Row="2" Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Text="{Binding ElevationStatusMessage}"
+                               FontSize="11"
+                               Margin="0,0,20,0">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#8FBCBB"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsElevated}" Value="False">
+                                        <Setter Property="Foreground" Value="#D08770"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="{Binding BulkProgressText}"
+                               Foreground="#88C0D0"
+                               FontSize="11"/>
+                </StackPanel>
             </Grid>
+        </Border>
+
+        <!-- Category Groups -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="24,0,24,24">
+            <ItemsControl ItemsSource="{Binding CategoryGroups}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,16">
+                            <StackPanel>
+                                <!-- Category Header -->
+                                <Border Background="#3B4252" 
+                                        CornerRadius="10" 
+                                        Padding="16,12" 
+                                        Cursor="Hand"
+                                        Margin="0,0,0,8">
+                                    <Border.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick" Command="{Binding ToggleExpandCommand}"/>
+                                    </Border.InputBindings>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Expand Icon -->
+                                        <TextBlock Grid.Column="0" 
+                                                   Text="{Binding ExpanderIcon}" 
+                                                   FontSize="12" 
+                                                   Foreground="#88C0D0"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,12,0"/>
+
+                                        <!-- Category Name with Icon -->
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding CategoryIcon}" 
+                                                       FontSize="18" 
+                                                       Margin="0,0,10,0"/>
+                                            <TextBlock Text="{Binding CategoryName}" 
+                                                       FontSize="16" 
+                                                       FontWeight="SemiBold" 
+                                                       Foreground="#ECEFF4"/>
+                                        </StackPanel>
+
+                                        <!-- Count Badge -->
+                                        <Border Grid.Column="2" 
+                                                Background="#5E81AC" 
+                                                CornerRadius="10" 
+                                                Padding="10,4"
+                                                Margin="0,0,8,0">
+                                            <TextBlock Text="{Binding CountBadge}" 
+                                                       FontSize="12" 
+                                                       FontWeight="Bold" 
+                                                       Foreground="#ECEFF4"
+                                                       HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Tweaks List (Collapsible) -->
+                                <ItemsControl ItemsSource="{Binding Tweaks}"
+                                              Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}"
+                                              Margin="20,0,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- Tweak Card -->
+                                            <Border Background="#3B4252" 
+                                                    CornerRadius="8" 
+                                                    Padding="14" 
+                                                    Margin="0,0,0,8"
+                                                    BorderBrush="#434C5E"
+                                                    BorderThickness="1">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <!-- Tweak Name and Badges -->
+                                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Name}" 
+                                                                   FontSize="14" 
+                                                                   FontWeight="SemiBold" 
+                                                                   Foreground="#ECEFF4"/>
+                                                        <Border Style="{StaticResource RiskBadgeStyle}" Margin="10,0,0,0">
+                                                            <TextBlock Text="{Binding Risk}" 
+                                                                       FontSize="10" 
+                                                                       FontWeight="SemiBold" 
+                                                                       Foreground="#D8DEE9"/>
+                                                        </Border>
+                                                        <Border Style="{StaticResource OutcomeBadgeStyle}"
+                                                                Margin="8,0,0,0"
+                                                                Visibility="{Binding HasOutcome, Converter={StaticResource BoolToVisibility}}">
+                                                            <TextBlock Text="{Binding OutcomeSummary}" 
+                                                                       FontSize="10" 
+                                                                       FontWeight="SemiBold" 
+                                                                       Foreground="#D8DEE9"/>
+                                                        </Border>
+                                                        <Border Style="{StaticResource ElevationBadgeStyle}"
+                                                                Margin="8,0,0,0"
+                                                                Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}"
+                                                                ToolTip="{Binding ElevationTooltip}">
+                                                            <TextBlock Text="🔒 Admin" 
+                                                                       FontSize="10" 
+                                                                       FontWeight="SemiBold" 
+                                                                       Foreground="#D8DEE9"/>
+                                                        </Border>
+                                                    </StackPanel>
+
+                                                    <!-- Action Buttons -->
+                                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                                        <Button Content="Detect" 
+                                                                Command="{Binding DetectCommand}" 
+                                                                Style="{StaticResource CompactActionButton}"
+                                                                Margin="0,0,4,0"/>
+                                                        <Button Content="Preview" 
+                                                                Command="{Binding PreviewCommand}" 
+                                                                Style="{StaticResource CompactActionButton}"
+                                                                Margin="0,0,4,0"/>
+                                                        <Button Content="Apply" 
+                                                                Command="{Binding ApplyCommand}" 
+                                                                Style="{StaticResource CompactActionButton}"
+                                                                Background="#5E81AC"
+                                                                Margin="0,0,4,0"/>
+                                                        <Button Content="Verify" 
+                                                                Command="{Binding VerifyCommand}" 
+                                                                Style="{StaticResource CompactActionButton}"
+                                                                Margin="0,0,4,0"/>
+                                                        <Button Content="Rollback" 
+                                                                Command="{Binding RollbackCommand}" 
+                                                                Style="{StaticResource CompactActionButton}"/>
+                                                    </StackPanel>
+
+                                                    <!-- Description and Progress -->
+                                                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,8,0,0">
+                                                        <ProgressBar Height="3"
+                                                                     Margin="0,0,0,6"
+                                                                     IsIndeterminate="True"
+                                                                     Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}"
+                                                                     Foreground="#88C0D0"
+                                                                     Background="#434C5E"/>
+                                                        <TextBlock Text="{Binding Description}"
+                                                                   Foreground="#D8DEE9"
+                                                                   FontSize="12"
+                                                                   TextWrapping="Wrap"/>
+                                                        <TextBlock Margin="0,4,0,0"
+                                                                   Text="{Binding Id}"
+                                                                   Foreground="#4C566A"
+                                                                   FontSize="10"/>
+                                                    </StackPanel>
+
+                                                    <!-- Details Expander -->
+                                                    <Expander Grid.Row="2" 
+                                                              Grid.ColumnSpan="2" 
+                                                              Margin="0,8,0,0"
+                                                              IsExpanded="{Binding IsDetailsExpanded}"
+                                                              Header="Details"
+                                                              Foreground="#88C0D0"
+                                                              FontSize="11">
+                                                        <StackPanel Margin="0,8,0,0">
+                                                            <ItemsControl ItemsSource="{Binding Steps}">
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <UniformGrid Columns="4"/>
+                                                                    </ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackPanel Margin="0,0,10,0">
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <Ellipse Style="{StaticResource StepIndicatorStyle}" Margin="0,2,6,0"/>
+                                                                                <TextBlock Text="{Binding ActionLabel}" 
+                                                                                           FontSize="11" 
+                                                                                           FontWeight="SemiBold" 
+                                                                                           Foreground="#ECEFF4"/>
+                                                                            </StackPanel>
+                                                                            <TextBlock Margin="0,2,0,0"
+                                                                                       Text="{Binding StatusText}"
+                                                                                       Foreground="#88C0D0"
+                                                                                       FontSize="10"/>
+                                                                            <TextBlock Margin="0,2,0,0"
+                                                                                       Text="{Binding TimestampText}"
+                                                                                       Foreground="#4C566A"
+                                                                                       FontSize="9"/>
+                                                                        </StackPanel>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </StackPanel>
+                                                    </Expander>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
+
+        <!-- Empty State -->
+        <Border Grid.Row="1"
+                Padding="24"
+                Background="#3B4252"
+                CornerRadius="12"
+                Margin="24"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasVisibleTweaks}" Value="False">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="📭" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                <TextBlock Text="No tweaks match your filters"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Foreground="#ECEFF4"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Margin="0,6,0,0"
+                           Text="Try adjusting your search or enabling more risk levels."
+                           Foreground="#88C0D0"
+                           FontSize="12"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
