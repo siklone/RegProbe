@@ -69,6 +69,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly string _logFolderPath;
     private readonly MetricProvider _metricProvider = new();
     private readonly DispatcherTimer _metricsTimer;
+    private readonly IProfileSyncService _syncService = new ProfileSyncService();
+    private readonly PluginLoader _pluginLoader = new();
+    private readonly KernelImpactAnalyzer _kernelAnalyzer = new();
     private readonly string _tweakLogFilePath;
 
     public TweaksViewModel()
@@ -2936,6 +2939,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         UpdateFilterSummary();
         PopulateExampleMetadata();
+        LoadPlugins();
 
         _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _metricsTimer.Tick += OnMetricsTick;
@@ -2945,13 +2949,17 @@ public sealed class TweaksViewModel : ViewModelBase
     private void OnMetricsTick(object? sender, EventArgs e)
     {
         var cpu = _metricProvider.GetCpuUsage();
+        var kernelEfficiency = _kernelAnalyzer.GetKernelEfficiencyScore() * 100.0;
+        
+        // Combine CPU usage and Kernel Efficiency for a more "God-Tier" impact metric
+        var combinedImpact = (cpu + kernelEfficiency) / 2.0;
         
         if (IsFlatView)
         {
             // Update all tweaks (filtered) in flat view
             foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
             {
-                tweak.UpdateMetric(cpu);
+                tweak.UpdateMetric(combinedImpact);
             }
         }
         else
@@ -2959,7 +2967,7 @@ public sealed class TweaksViewModel : ViewModelBase
             // Update hierarchical view
             foreach (var category in CategoryGroups)
             {
-                UpdateMetricsRecursive(category, cpu);
+                UpdateMetricsRecursive(category, (float)combinedImpact);
             }
         }
     }
@@ -3798,5 +3806,37 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             item.IsBulkLocked = isLocked;
         }
+    }
+
+    private void LoadPlugins()
+    {
+        try
+        {
+            var pluginsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
+            if (!Directory.Exists(pluginsPath)) Directory.CreateDirectory(pluginsPath);
+            
+            var plugins = _pluginLoader.LoadPlugins(pluginsPath);
+            foreach (var plugin in plugins)
+            {
+                Debug.WriteLine($"God-Tier Plugin Loaded: {plugin.PluginName} v{plugin.Version}");
+                // In a production scenario, plugin tweaks would be merged into CategoryGroups here
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Plugin system error: {ex.Message}");
+        }
+    }
+
+    public async Task ExportEncryptedProfileAsync(string filePath, string password)
+    {
+        var enabledIds = AllTweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
+        await _syncService.ExportProfileAsync(filePath, password, enabledIds);
+    }
+
+    public async Task ImportEncryptedProfileAsync(string filePath, string password)
+    {
+        var enabledIds = await _syncService.ImportProfileAsync(filePath, password);
+        // Sync logic to match imported IDs with existing tweaks
     }
 }
