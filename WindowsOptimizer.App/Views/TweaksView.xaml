@@ -819,55 +819,51 @@
                         <Border Margin="0,0,0,12">
                             <StackPanel>
                                 <!-- Category Header with Smooth Animations -->
-                                <Border x:Name="CategoryHeader"
-                                        CornerRadius="8"
-                                        Padding="14,10"
-                                        Cursor="Hand"
-                                        Margin="0,0,0,6">
-                                    <Border.Effect>
-                                        <DropShadowEffect x:Name="HeaderShadow"
-                                                        Color="#81A1C1"
-                                                        BlurRadius="0"
-                                                        ShadowDepth="0"
-                                                        Opacity="0"/>
-                                    </Border.Effect>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="#3B4252"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Trigger.EnterActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                              To="#434C5E" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                               Storyboard.TargetProperty="BlurRadius"
-                                                                               To="12" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                               Storyboard.TargetProperty="Opacity"
-                                                                               To="0.4" Duration="0:0:0.15"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </Trigger.EnterActions>
-                                                    <Trigger.ExitActions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                              To="#3B4252" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                               Storyboard.TargetProperty="BlurRadius"
-                                                                               To="0" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                               Storyboard.TargetProperty="Opacity"
-                                                                               To="0" Duration="0:0:0.15"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </Trigger.ExitActions>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
+                                    <Border x:Name="CategoryHeader"
+                                            Background="#3B4252"
+                                            CornerRadius="8"
+                                            Padding="14,10"
+                                            Cursor="Hand"
+                                            Margin="0,0,0,6">
+                                        <Border.Effect>
+                                            <DropShadowEffect x:Name="HeaderShadow"
+                                                            Color="#81A1C1"
+                                                            BlurRadius="0"
+                                                            ShadowDepth="0"
+                                                            Opacity="0"/>
+                                        </Border.Effect>
+                                        <Border.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetName="CategoryHeader"
+                                                                      Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                      To="#434C5E" Duration="0:0:0.15"/>
+                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+                                                                       Storyboard.TargetProperty="BlurRadius"
+                                                                       To="12" Duration="0:0:0.15"/>
+                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+                                                                       Storyboard.TargetProperty="Opacity"
+                                                                       To="0.4" Duration="0:0:0.15"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetName="CategoryHeader"
+                                                                      Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                      To="#3B4252" Duration="0:0:0.15"/>
+                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+                                                                       Storyboard.TargetProperty="BlurRadius"
+                                                                       To="0" Duration="0:0:0.15"/>
+                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+                                                                       Storyboard.TargetProperty="Opacity"
+                                                                       To="0" Duration="0:0:0.15"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Border.Triggers>
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick" Command="{Binding ToggleExpandCommand}"/>
                                     </Border.InputBindings>
