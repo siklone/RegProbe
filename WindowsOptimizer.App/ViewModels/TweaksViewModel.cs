@@ -3073,6 +3073,8 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 
+    public IEnumerable<TweakItemViewModel> AllTweaks => Tweaks;
+
     public ICollectionView TweaksView { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups { get; } = new();
@@ -3827,6 +3829,22 @@ public sealed class TweaksViewModel : ViewModelBase
         catch (Exception ex)
         {
             Debug.WriteLine($"Plugin system error: {ex.Message}");
+        }
+    }
+
+    public void ApplyRecommendations(IEnumerable<TweakRecommendation> recommendations)
+    {
+        if (recommendations == null) return;
+        
+        foreach (var recommendation in recommendations)
+        {
+            var tweak = Tweaks.FirstOrDefault(t => t.Id == recommendation.TweakId);
+            if (tweak != null)
+            {
+                tweak.IsRecommended = true;
+                tweak.RecommendationReason = recommendation.Reason;
+                tweak.RecommendationConfidence = recommendation.ConfidenceScore;
+            }
         }
     }
 

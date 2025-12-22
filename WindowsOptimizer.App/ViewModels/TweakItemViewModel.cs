@@ -213,6 +213,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         set => SetProperty(ref _currentValue, value);
     }
 
+    public string TargetValue
+    {
+        get => _targetValue;
+        set => SetProperty(ref _targetValue, value);
+    }
+
     public bool IsRecommended
     {
         get => _isRecommended;
@@ -245,6 +251,16 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (_sparklinePoints.Count > 20)
         {
             _sparklinePoints.RemoveAt(0);
+        }
+    }
+
+    private void GenerateMockSparkline()
+    {
+        if (_sparklinePoints.Any()) return;
+        var r = new Random(Id.GetHashCode());
+        for (int i = 0; i < 15; i++)
+        {
+            _sparklinePoints.Add(r.Next(20, 80));
         }
     }
 

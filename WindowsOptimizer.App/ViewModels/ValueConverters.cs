@@ -89,7 +89,7 @@ public sealed class SparklinePointsConverter : IValueConverter
         if (value is System.Collections.Generic.IEnumerable<double> points)
         {
             var pointsList = points as System.Collections.Generic.IList<double> ?? System.Linq.Enumerable.ToList(points);
-            if (!pointsList.Any()) return null;
+            if (!pointsList.Any()) return DependencyProperty.UnsetValue;
 
             var pc = new System.Windows.Media.PointCollection(pointsList.Count);
             double x = 0;
@@ -104,7 +104,7 @@ public sealed class SparklinePointsConverter : IValueConverter
             }
             return pc;
         }
-        return null;
+        return DependencyProperty.UnsetValue;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
