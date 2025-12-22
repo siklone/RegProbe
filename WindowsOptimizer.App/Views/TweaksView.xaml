@@ -300,6 +300,31 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
+        <!-- Link Button Style -->
+        <Style x:Key="LinkButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#88C0D0"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0,1"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#81A1C1"/>
+                    <Setter Property="BorderBrush" Value="#81A1C1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid Background="#2E3440">
@@ -835,44 +860,124 @@
                                                         </ToggleButton>
                                                     </StackPanel>
 
-                                                    <!-- Expanded Details -->
+                                                    <!-- Expanded Details: Reference tool inspired rich metadata -->
                                                     <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"
                                                             Visibility="{Binding IsDetailsExpanded, Converter={StaticResource BoolToVisibility}}"
                                                             Margin="0,12,0,0"
                                                             Background="#434C5E"
                                                             CornerRadius="6"
-                                                            Padding="12">
+                                                            Padding="16">
                                                         <StackPanel>
-                                                            <!-- Advanced Actions -->
-                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                                                <Button Content="Detect" 
-                                                                        Command="{Binding DetectCommand}" 
-                                                                        Style="{StaticResource CompactButton}"
-                                                                        Margin="0,0,6,0"/>
-                                                                <Button Content="Preview" 
-                                                                        Command="{Binding PreviewCommand}" 
-                                                                        Style="{StaticResource CompactButton}"
-                                                                        Margin="0,0,6,0"/>
-                                                                <Button Content="Apply" 
-                                                                        Command="{Binding ApplyCommand}" 
-                                                                        Style="{StaticResource CompactButton}"
-                                                                        Background="#5E81AC"
-                                                                        Margin="0,0,6,0"/>
-                                                                <Button Content="Verify" 
-                                                                        Command="{Binding VerifyCommand}" 
-                                                                        Style="{StaticResource CompactButton}"
-                                                                        Margin="0,0,6,0"/>
-                                                                <Button Content="Rollback" 
-                                                                        Command="{Binding RollbackCommand}" 
-                                                                        Style="{StaticResource CompactButton}"/>
+                                                            <!-- Row 1: Registry Info -->
+                                                            <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" 
+                                                                        Margin="0,0,0,12">
+                                                                <TextBlock Text="Registry Location" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Border Background="#2E3440" CornerRadius="4" Padding="8,6">
+                                                                        <TextBlock Text="{Binding RegistryPath}" 
+                                                                                   Foreground="#88C0D0" 
+                                                                                   FontSize="11" 
+                                                                                   FontFamily="Consolas"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </Border>
+                                                                    <Button Grid.Column="1" 
+                                                                            Command="{Binding CopyRegistryPathCommand}"
+                                                                            Content="📋" 
+                                                                            Style="{StaticResource CompactButton}"
+                                                                            VerticalAlignment="Stretch"
+                                                                            Margin="4,0,0,0"
+                                                                            ToolTip="Copy registry path"/>
+                                                                </Grid>
                                                             </StackPanel>
 
-                                                            <!-- Status Info -->
-                                                            <TextBlock Foreground="#88C0D0" FontSize="10">
-                                                                <Run Text="ID:"/> <Run Text="{Binding Id}"/>
-                                                                <Run Text=" | "/>
-                                                                <Run Text="{Binding StatusMessage}"/>
-                                                            </TextBlock>
+                                                            <!-- Row 2: Sub-Options (if any) -->
+                                                            <StackPanel Visibility="{Binding HasSubOptions, Converter={StaticResource BoolToVisibility}}" 
+                                                                        Margin="0,0,0,12">
+                                                                <TextBlock Text="Configuration Overrides" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,6"/>
+                                                                <ItemsControl ItemsSource="{Binding SubOptions}">
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <Grid Margin="0,0,0,4">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*"/>
+                                                                                    <ColumnDefinition Width="Auto"/>
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Foreground="#D8DEE9" FontSize="11"/>
+                                                                                
+                                                                                <!-- Handle different sub-option types -->
+                                                                                <CheckBox Grid.Column="1" IsChecked="{Binding IsEnabled}" VerticalAlignment="Center">
+                                                                                    <CheckBox.Style>
+                                                                                        <Style TargetType="CheckBox" BasedOn="{StaticResource FilterCheckbox}">
+                                                                                            <Style.Triggers>
+                                                                                                <DataTrigger Binding="{Binding Type}" Value="Numeric">
+                                                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                                </DataTrigger>
+                                                                                            </Style.Triggers>
+                                                                                        </Style>
+                                                                                    </CheckBox.Style>
+                                                                                </CheckBox>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+                                                            </StackPanel>
+
+                                                            <!-- Row 3: Code Example -->
+                                                            <StackPanel Visibility="{Binding HasCodeExample, Converter={StaticResource BoolToVisibility}}" 
+                                                                        Margin="0,0,0,12">
+                                                                <TextBlock Text="Command Preview" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                <Border Background="#2E3440" CornerRadius="4" Padding="12" BorderBrush="#3B4252" BorderThickness="1">
+                                                                    <TextBlock Text="{Binding CodeExample}" 
+                                                                               Foreground="#A3BE8C" 
+                                                                               FontSize="11" 
+                                                                               FontFamily="Consolas"
+                                                                               TextWrapping="Wrap"/>
+                                                                </Border>
+                                                            </StackPanel>
+
+                                                            <!-- Row 4: Reference Links -->
+                                                            <StackPanel Visibility="{Binding HasReferenceLinks, Converter={StaticResource BoolToVisibility}}" 
+                                                                        Margin="0,0,0,12">
+                                                                <TextBlock Text="Documentation &amp; Sources" FontSize="10" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4"/>
+                                                                <ItemsControl ItemsSource="{Binding ReferenceLinks}">
+                                                                    <ItemsControl.ItemsPanel>
+                                                                        <ItemsPanelTemplate>
+                                                                            <WrapPanel Orientation="Horizontal"/>
+                                                                        </ItemsPanelTemplate>
+                                                                    </ItemsControl.ItemsPanel>
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button Content="{Binding Title}" 
+                                                                                    Style="{StaticResource LinkButtonStyle}"
+                                                                                    Margin="0,0,12,4"/>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+                                                            </StackPanel>
+
+                                                            <!-- Row 5: Action Pipeline & Status -->
+                                                            <Border Background="#2E3440" CornerRadius="4" Padding="10" Margin="0,4,0,0">
+                                                                <StackPanel>
+                                                                    <Grid Margin="0,0,0,8">
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <Button Content="Detect" Command="{Binding DetectCommand}" Style="{StaticResource CompactButton}" Margin="0,0,6,0"/>
+                                                                            <Button Content="Preview" Command="{Binding PreviewCommand}" Style="{StaticResource CompactButton}" Margin="0,0,6,0"/>
+                                                                            <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" Style="{StaticResource CompactButton}" Background="#5E81AC" Margin="0,0,6,0"/>
+                                                                            <Button Content="Verify" Command="{Binding VerifyCommand}" Style="{StaticResource CompactButton}" Margin="0,0,6,0"/>
+                                                                            <Button Content="Rollback" Command="{Binding RollbackCommand}" Style="{StaticResource CompactButton}"/>
+                                                                        </StackPanel>
+                                                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#88C0D0" FontSize="10">
+                                                                            <Run Text="ID:"/> <Run Text="{Binding Id}"/>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                    <Separator Background="#3B4252" Margin="0,2,0,8"/>
+                                                                    <TextBlock Text="{Binding StatusMessage}" Foreground="#D8DEE9" FontSize="11" FontStyle="Italic"/>
+                                                                </StackPanel>
+                                                            </Border>
                                                         </StackPanel>
                                                     </Border>
                                                 </Grid>

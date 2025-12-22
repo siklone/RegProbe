@@ -2928,6 +2928,53 @@ public sealed class TweaksViewModel : ViewModelBase
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
 
         UpdateFilterSummary();
+        PopulateExampleMetadata();
+    }
+
+    private void PopulateExampleMetadata()
+    {
+        var aeroShake = Tweaks.FirstOrDefault(t => t.Id == "system.aero-shake");
+        if (aeroShake != null)
+        {
+            aeroShake.RegistryPath = @"HKCU\Software\Policies\Microsoft\Windows\Explorer\NoWindowMinimizingShortcuts";
+            aeroShake.CodeExample = "reg add \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\" /v \"NoWindowMinimizingShortcuts\" /t REG_DWORD /d 1 /f";
+            aeroShake.ReferenceLinks.Add(new ReferenceLink("Policy Documentation", "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-explorer"));
+        }
+
+        var gameMode = Tweaks.FirstOrDefault(t => t.Id == "system.enable-game-mode");
+        if (gameMode != null)
+        {
+            gameMode.RegistryPath = @"HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled";
+            gameMode.CodeExample = "reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v \"AutoGameModeEnabled\" /t REG_DWORD /d 1 /f";
+            gameMode.SubOptions.Add(new TweakSubOption("Enable Game Bar", TweakSubOptionType.Toggle) { IsEnabled = true });
+            gameMode.SubOptions.Add(new TweakSubOption("Allow Background DVR", TweakSubOptionType.Toggle));
+            gameMode.ReferenceLinks.Add(new ReferenceLink("Xbox Support", "https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc"));
+        }
+
+        var clipboard = Tweaks.FirstOrDefault(t => t.Id == "system.disable-clipboard-history");
+        if (clipboard != null)
+        {
+            clipboard.RegistryPath = @"HKLM\Software\Policies\Microsoft\Windows\System\AllowClipboardHistory";
+            clipboard.CodeExample = "reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"AllowClipboardHistory\" /t REG_DWORD /d 0 /f";
+            clipboard.ReferenceLinks.Add(new ReferenceLink("Security Best Practices", "https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/user-rights-assignment"));
+        }
+
+        var edgeBoost = Tweaks.FirstOrDefault(t => t.Id == "system.disable-edge-startup-boost");
+        if (edgeBoost != null)
+        {
+            edgeBoost.ActionType = TweakActionType.Clean;
+            edgeBoost.ActionButtonText = "Disable Boost";
+            edgeBoost.RegistryPath = @"HKLM\Software\Policies\Microsoft\Edge\StartupBoostEnabled";
+        }
+
+        var mitigations = Tweaks.FirstOrDefault(t => t.Id == "security.disable-system-mitigations");
+        if (mitigations != null)
+        {
+            mitigations.RegistryPath = @"HKLM\System\CurrentControlSet\Control\Session Manager\kernel\MitigationOptions";
+            mitigations.CodeExample = "# View current mitigation options\nGet-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Session Manager\\kernel' -Name MitigationOptions\n\n# Set mitigations to 22202022... (Hex)";
+            mitigations.ReferenceLinks.Add(new ReferenceLink("Exploit Protection Reference", "https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exploit-protection-reference"));
+            mitigations.ReferenceLinks.Add(new ReferenceLink("Bypass Mitigations Guide", "https://github.com/SirenOfTitan/Exploit-Mitigations-Bypass"));
+        }
     }
 
     public string Title => "Tweaks";

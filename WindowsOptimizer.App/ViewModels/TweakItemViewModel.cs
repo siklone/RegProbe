@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +33,13 @@ public sealed class TweakItemViewModel : ViewModelBase
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
     private bool _isDetailsExpanded = false;
     private TweakAppliedStatus _appliedStatus = TweakAppliedStatus.Unknown;
+    private TweakActionType _actionType = TweakActionType.Toggle;
+    private string _actionButtonText = "Apply";
+    private string _registryPath = string.Empty;
+    private string _codeExample = string.Empty;
     private readonly RelayCommand _toggleCommand;
+    private readonly RelayCommand _customActionCommand;
+    private readonly RelayCommand _copyRegistryPathCommand;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -47,6 +55,9 @@ public sealed class TweakItemViewModel : ViewModelBase
             new(TweakAction.Rollback)
         };
 
+        ReferenceLinks = new ObservableCollection<ReferenceLink>();
+        SubOptions = new ObservableCollection<TweakSubOption>();
+
         ResetSteps();
 
         _detectCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Detect, CancellationToken.None), _ => CanRun());
@@ -57,6 +68,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
         _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
+        _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
+        _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
     }
 
     public string Name => _tweak.Name;
@@ -129,6 +142,46 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand CopyIdCommand => _copyIdCommand;
 
     public ICommand ToggleCommand => _toggleCommand;
+
+    public ICommand CustomActionCommand => _customActionCommand;
+
+    public ICommand CopyRegistryPathCommand => _copyRegistryPathCommand;
+
+    public TweakActionType ActionType
+    {
+        get => _actionType;
+        set => SetProperty(ref _actionType, value);
+    }
+
+    public string ActionButtonText
+    {
+        get => _actionButtonText;
+        set => SetProperty(ref _actionButtonText, value);
+    }
+
+    public string RegistryPath
+    {
+        get => _registryPath;
+        set => SetProperty(ref _registryPath, value);
+    }
+
+    public string CodeExample
+    {
+        get => _codeExample;
+        set => SetProperty(ref _codeExample, value);
+    }
+
+    public ObservableCollection<ReferenceLink> ReferenceLinks { get; }
+
+    public ObservableCollection<TweakSubOption> SubOptions { get; }
+
+    public bool HasSubOptions => SubOptions.Any();
+
+    public bool HasRegistryPath => !string.IsNullOrEmpty(RegistryPath);
+
+    public bool HasCodeExample => !string.IsNullOrEmpty(CodeExample);
+
+    public bool HasReferenceLinks => ReferenceLinks.Any();
 
     // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
@@ -510,6 +563,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    private void CopyRegistryPath()
+    {
+        try
+        {
+            Clipboard.SetText(RegistryPath);
+            StatusMessage = "Registry path copied to clipboard.";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Copy failed: {ex.Message}";
+        }
+    }
+
     /// <summary>
     /// Detect if tweak is currently applied
     /// </summary>
@@ -522,9 +588,6 @@ public sealed class TweakItemViewModel : ViewModelBase
             var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
             
             // Interpret detect result to determine applied status
-            // Detected/Applied/Verified = tweak is currently active
-            // NotApplicable/Skipped/RolledBack = tweak is not applied
-            // Failed = error state
             if (result.Result.Status == TweakStatus.Detected || 
                 result.Result.Status == TweakStatus.Applied || 
                 result.Result.Status == TweakStatus.Verified)
@@ -537,7 +600,6 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
             else
             {
-                // NotApplicable, Skipped, RolledBack = Not Applied
                 AppliedStatus = TweakAppliedStatus.NotApplied;
             }
         }
@@ -546,6 +608,84 @@ public sealed class TweakItemViewModel : ViewModelBase
             AppliedStatus = TweakAppliedStatus.Unknown;
         }
     }
+
+    private async Task RunCustomActionAsync()
+    {
+        // For specific action types like Open, we might want different behavior
+        if (ActionType == TweakActionType.Open)
+        {
+            // Placeholder: Typically this would trigger a specific property on ITweak or similar
+            StatusMessage = $"Opening associated tool for {Name}...";
+            return;
+        }
+
+        await RunApplyAsync(CancellationToken.None);
+    }
+}
+
+/// <summary>
+/// Types of primary actions for a tweak
+/// </summary>
+public enum TweakActionType
+{
+    Toggle,
+    Open,
+    Import,
+    Export,
+    Clean,
+    Remove,
+    Custom
+}
+
+/// <summary>
+/// A reference link for documentation or sources
+/// </summary>
+public sealed class ReferenceLink
+{
+    public ReferenceLink(string title, string url)
+    {
+        Title = title;
+        Url = url;
+    }
+    public string Title { get; }
+    public string Url { get; }
+}
+
+/// <summary>
+/// A sub-option for fine-tuning a tweak
+/// </summary>
+public sealed class TweakSubOption : ViewModelBase
+{
+    private bool _isEnabled;
+    private string _value = string.Empty;
+
+    public TweakSubOption(string label, TweakSubOptionType type)
+    {
+        Label = label;
+        Type = type;
+    }
+
+    public string Label { get; }
+    public TweakSubOptionType Type { get; }
+
+    public bool IsEnabled
+    {
+        get => _isEnabled;
+        set => SetProperty(ref _isEnabled, value);
+    }
+
+    public string Value
+    {
+        get => _value;
+        set => SetProperty(ref _value, value);
+    }
+}
+
+public enum TweakSubOptionType
+{
+    Toggle,
+    Numeric,
+    Dropdown
 }
 
 /// <summary>
