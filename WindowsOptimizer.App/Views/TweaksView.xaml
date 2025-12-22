@@ -968,50 +968,48 @@
                                                                     ShadowDepth="2"
                                                                     Opacity="0.2"/>
                                                 </Border.Effect>
-                                                <Border.Style>
-                                                    <Style TargetType="Border">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Trigger.EnterActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                                                                           To="-2" Duration="0:0:0.15">
-                                                                                <DoubleAnimation.EasingFunction>
-                                                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                                                </DoubleAnimation.EasingFunction>
-                                                                            </DoubleAnimation>
-                                                                            <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                                           Storyboard.TargetProperty="BlurRadius"
-                                                                                           To="16" Duration="0:0:0.15"/>
-                                                                            <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                                           Storyboard.TargetProperty="ShadowDepth"
-                                                                                           To="6" Duration="0:0:0.15"/>
-                                                                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                                          To="#434C5E" Duration="0:0:0.15"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </Trigger.EnterActions>
-                                                                <Trigger.ExitActions>
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                                                                           To="0" Duration="0:0:0.15"/>
-                                                                            <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                                           Storyboard.TargetProperty="BlurRadius"
-                                                                                           To="8" Duration="0:0:0.15"/>
-                                                                            <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                                           Storyboard.TargetProperty="ShadowDepth"
-                                                                                           To="2" Duration="0:0:0.15"/>
-                                                                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                                          To="#3B4252" Duration="0:0:0.15"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </Trigger.ExitActions>
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
+                                                <Border.Triggers>
+                                                    <EventTrigger RoutedEvent="MouseEnter">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
+                                                                               Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                               To="-2" Duration="0:0:0.15">
+                                                                    <DoubleAnimation.EasingFunction>
+                                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                                    </DoubleAnimation.EasingFunction>
+                                                                </DoubleAnimation>
+                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+                                                                               Storyboard.TargetProperty="BlurRadius"
+                                                                               To="16" Duration="0:0:0.15"/>
+                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+                                                                               Storyboard.TargetProperty="ShadowDepth"
+                                                                               To="6" Duration="0:0:0.15"/>
+                                                                <ColorAnimation Storyboard.TargetName="TweakCard"
+                                                                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                              To="#434C5E" Duration="0:0:0.15"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                    <EventTrigger RoutedEvent="MouseLeave">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
+                                                                               Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                               To="0" Duration="0:0:0.15"/>
+                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+                                                                               Storyboard.TargetProperty="BlurRadius"
+                                                                               To="8" Duration="0:0:0.15"/>
+                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+                                                                               Storyboard.TargetProperty="ShadowDepth"
+                                                                               To="2" Duration="0:0:0.15"/>
+                                                                <ColorAnimation Storyboard.TargetName="TweakCard"
+                                                                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                              To="#3B4252" Duration="0:0:0.15"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Border.Triggers>
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="{Binding StatusColor}"/>
                                                 </Border.BorderBrush>
