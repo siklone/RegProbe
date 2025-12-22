@@ -4,13 +4,13 @@ using WindowsOptimizer.Core.Services;
 
 namespace WindowsOptimizer.Engine.Intelligence;
 
-public Task<IEnumerable<TweakRecommendation>> GetRecommendationsAsync(HardwareProfile profile)
-{
-    return Task.Run(() => GetRecommendations(profile));
-}
-
 public sealed class RecommendationEngine : IRecommendationEngine
 {
+    public Task<IEnumerable<TweakRecommendation>> GetRecommendationsAsync(HardwareProfile profile)
+    {
+        return Task.Run(() => GetRecommendations(profile));
+    }
+
     public IEnumerable<TweakRecommendation> GetRecommendations(HardwareProfile profile)
     {
         var recommendations = new List<TweakRecommendation>();
