@@ -523,13 +523,14 @@ public sealed class TweakItemViewModel : ViewModelBase
             var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
             
             // Interpret detect result to determine applied status
-            if (result.Result.Status == TweakStatus.Detected)
+            // Detected/Applied/Verified = tweak is currently active
+            // NotApplicable/Skipped/RolledBack = tweak is not applied
+            // Failed = error state
+            if (result.Result.Status == TweakStatus.Detected || 
+                result.Result.Status == TweakStatus.Applied || 
+                result.Result.Status == TweakStatus.Verified)
             {
                 AppliedStatus = TweakAppliedStatus.Applied;
-            }
-            else if (result.Result.Status == TweakStatus.NotDetected)
-            {
-                AppliedStatus = TweakAppliedStatus.NotApplied;
             }
             else if (result.Result.Status == TweakStatus.Failed)
             {
@@ -537,6 +538,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
             else
             {
+                // NotApplicable, Skipped, RolledBack = Not Applied
                 AppliedStatus = TweakAppliedStatus.NotApplied;
             }
         }
