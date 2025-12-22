@@ -566,7 +566,21 @@
                         </Border>
                         
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
+                                <Border Background="#A3BE8C" 
+                                        CornerRadius="4" 
+                                        Padding="6,2" 
+                                        Margin="8,0,0,0"
+                                        Visibility="{Binding IsRecommended, Converter={StaticResource BoolToVisibility}}"
+                                        ToolTip="{Binding RecommendationReason}">
+                                    <TextBlock Text="★ RECOMMENDED" 
+                                               Foreground="#2E3440" 
+                                               FontSize="8" 
+                                               FontWeight="Bold" 
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
                             <TextBlock Text="{Binding Description}" Foreground="#88C0D0" FontSize="10" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
                         

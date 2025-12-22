@@ -47,6 +47,9 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _currentValue = "Unknown";
     private string _targetValue = "Optimized";
     private ObservableCollection<double> _sparklinePoints = new();
+    private bool _isRecommended;
+    private string _recommendationReason = string.Empty;
+    private double _recommendationConfidence;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -210,10 +213,22 @@ public sealed class TweakItemViewModel : ViewModelBase
         set => SetProperty(ref _currentValue, value);
     }
 
-    public string TargetValue
+    public bool IsRecommended
     {
-        get => _targetValue;
-        set => SetProperty(ref _targetValue, value);
+        get => _isRecommended;
+        set => SetProperty(ref _isRecommended, value);
+    }
+
+    public string RecommendationReason
+    {
+        get => _recommendationReason;
+        set => SetProperty(ref _recommendationReason, value);
+    }
+
+    public double RecommendationConfidence
+    {
+        get => _recommendationConfidence;
+        set => SetProperty(ref _recommendationConfidence, value);
     }
 
     public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";

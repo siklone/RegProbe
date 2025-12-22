@@ -1,4 +1,8 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using WindowsOptimizer.Core.Services;
+using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Engine.Intelligence;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -8,6 +12,8 @@ public sealed class MainViewModel : ViewModelBase
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
+    private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
+    private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
 
     public MainViewModel()
     {
@@ -37,6 +43,30 @@ public sealed class MainViewModel : ViewModelBase
         SelectedNavigationItem = NavigationItems[0];
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
+
+        // Initialize Intelligence
+        Task.Run(InitializeIntelligenceAsync);
+    }
+
+    private async Task InitializeIntelligenceAsync()
+    {
+        try
+        {
+            var profile = await _hardwareDiscovery.GetHardwareProfileAsync();
+            var recommendations = _recommendationEngine.GetRecommendations(profile);
+            
+            foreach (var item in NavigationItems)
+            {
+                if (item.ViewModel is TweaksViewModel tweaks)
+                {
+                    tweaks.ApplyRecommendations(recommendations);
+                }
+            }
+        }
+        catch
+        {
+            // Fail silently or log
+        }
     }
 
     public ObservableCollection<NavigationItem> NavigationItems { get; }
