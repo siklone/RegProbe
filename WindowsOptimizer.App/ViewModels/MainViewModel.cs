@@ -19,11 +19,11 @@ public sealed class MainViewModel : ViewModelBase
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
-            new("dashboard", "Dashboard", dashboard),
-            new("tweaks", "Tweaks", tweaks),
-            new("monitor", "Monitor", monitor),
-            new("settings", "Settings", settings),
-            new("about", "About", about)
+            new("dashboard", "Dashboard", "📊", dashboard),
+            new("tweaks", "Tweaks", "⚙️", tweaks),
+            new("monitor", "Monitor", "📈", monitor),
+            new("settings", "Settings", "⚡", settings),
+            new("about", "About", "ℹ️", about)
         };
 
         SelectedNavigationItem = NavigationItems[0];

@@ -6,140 +6,177 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="SectionCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#E3E5E8" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="24" />
-            <Setter Property="Margin" Value="0,0,0,20" />
-        </Style>
-        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="#2E3440" />
-            <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Background" Value="#3B4252"/>
+            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="24">
-            <StackPanel>
-                <!-- Header -->
-                <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="SemiBold" Foreground="#2E3440" />
-                <TextBlock Margin="0,8,0,24"
-                           Text="Modern, safe, and reversible Windows optimization tool"
-                           Foreground="#4C566A"
-                           TextWrapping="Wrap" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#2E3440">
+        <Grid Margin="32">
+            <StackPanel MaxWidth="800" HorizontalAlignment="Left">
+                <!-- Header with Logo -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,32">
+                    <Border Background="#5E81AC" CornerRadius="16" Padding="16" Margin="0,0,20,0">
+                        <TextBlock Text="⚡" FontSize="32"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Title}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold" 
+                                   Foreground="#ECEFF4"/>
+                        <TextBlock Margin="0,4,0,0"
+                                   Text="Modern, safe, and reversible Windows optimization tool"
+                                   Foreground="#88C0D0"
+                                   FontSize="14"/>
+                    </StackPanel>
+                </StackPanel>
 
-                <!-- Application Info -->
+                <!-- Version Info Cards -->
+                <UniformGrid Columns="4" Margin="0,0,0,20">
+                    <Border Background="#434C5E" CornerRadius="10" Padding="16" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Version" Foreground="#4C566A" FontSize="11"/>
+                            <TextBlock Text="1.0.0" Foreground="#88C0D0" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#434C5E" CornerRadius="10" Padding="16" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Build" Foreground="#4C566A" FontSize="11"/>
+                            <TextBlock Text="Release" Foreground="#A3BE8C" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#434C5E" CornerRadius="10" Padding="16" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Framework" Foreground="#4C566A" FontSize="11"/>
+                            <TextBlock Text=".NET 8" Foreground="#B48EAD" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#434C5E" CornerRadius="10" Padding="16">
+                        <StackPanel>
+                            <TextBlock Text="Architecture" Foreground="#4C566A" FontSize="11"/>
+                            <TextBlock Text="x64" Foreground="#EBCB8B" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <!-- Features Section -->
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="Application Information" Style="{StaticResource SectionHeaderStyle}" />
-
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                            <TextBlock Text="Version:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
-                            <TextBlock Text="1.0.0" Foreground="#5E81AC" />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="#88C0D0" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="🎯" FontSize="16"/>
+                            </Border>
+                            <TextBlock Text="Core Features" 
+                                       FontSize="18" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#ECEFF4"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                            <TextBlock Text="Build:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
-                            <TextBlock Text="Release" Foreground="#5E81AC" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Grid.Column="0" Background="#434C5E" CornerRadius="8" Padding="14" Margin="0,0,8,8">
+                                <StackPanel>
+                                    <TextBlock Text="⚙️ Registry Tweaks" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                    <TextBlock Text="Modify Windows registry safely" Foreground="#88C0D0" FontSize="11" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Grid.Row="0" Grid.Column="1" Background="#434C5E" CornerRadius="8" Padding="14" Margin="8,0,0,8">
+                                <StackPanel>
+                                    <TextBlock Text="🔧 Service Management" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                    <TextBlock Text="Control Windows services" Foreground="#88C0D0" FontSize="11" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Grid.Row="1" Grid.Column="0" Background="#434C5E" CornerRadius="8" Padding="14" Margin="0,8,8,0">
+                                <StackPanel>
+                                    <TextBlock Text="💻 Command Execution" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                    <TextBlock Text="Secure command allowlist" Foreground="#88C0D0" FontSize="11" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Grid.Row="1" Grid.Column="1" Background="#434C5E" CornerRadius="8" Padding="14" Margin="8,8,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="💬 Discord Integration" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                    <TextBlock Text="Webhook notifications" Foreground="#88C0D0" FontSize="11" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Safety Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="#A3BE8C" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="🛡️" FontSize="16"/>
+                            </Border>
+                            <TextBlock Text="Safety &amp; Reliability" 
+                                       FontSize="18" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#ECEFF4"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                            <TextBlock Text="Target Framework:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
-                            <TextBlock Text=".NET 8.0" Foreground="#5E81AC" />
-                        </StackPanel>
+                        <Border Background="#2E4A3E" CornerRadius="8" Padding="16">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                    <TextBlock Text="✓" Foreground="#A3BE8C" FontWeight="Bold" Margin="0,0,8,0"/>
+                                    <TextBlock Text="All tweaks support Preview, Apply, Verify, and Rollback" Foreground="#D8DEE9"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                    <TextBlock Text="✓" Foreground="#A3BE8C" FontWeight="Bold" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Changes logged to CSV for audit trails" Foreground="#D8DEE9"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="✓" Foreground="#A3BE8C" FontWeight="Bold" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Elevated operations isolated in separate host process" Foreground="#D8DEE9"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Architecture:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
-                            <TextBlock Text="x64" Foreground="#5E81AC" />
+                <!-- Project Info -->
+                <Border Background="#434C5E" CornerRadius="8" Padding="16">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔗" FontSize="16" Margin="0,0,12,0"/>
+                        <StackPanel>
+                            <TextBlock Text="Repository" Foreground="#4C566A" FontSize="11"/>
+                            <TextBlock Text="github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks" 
+                                       Foreground="#88C0D0" FontSize="13"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
-                <!-- Features -->
-                <Border Style="{StaticResource SectionCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Core Features" Style="{StaticResource SectionHeaderStyle}" />
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            <Run Text="Registry-based Tweaks" FontWeight="SemiBold" />
-                            <LineBreak />
-                            <Run Text="Modify Windows registry for system optimizations with full rollback support." />
-                        </TextBlock>
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            <Run Text="Service Management" FontWeight="SemiBold" />
-                            <LineBreak />
-                            <Run Text="Control Windows services safely with elevation handling." />
-                        </TextBlock>
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            <Run Text="Command-based Tweaks" FontWeight="SemiBold" />
-                            <LineBreak />
-                            <Run Text="Execute system commands with allowlist security and verification." />
-                        </TextBlock>
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            <Run Text="Discord Integration" FontWeight="SemiBold" />
-                            <LineBreak />
-                            <Run Text="Receive notifications and automatic patch uploads via Discord webhooks." />
-                        </TextBlock>
-
-                        <TextBlock Foreground="#4C566A" TextWrapping="Wrap">
-                            <Run Text="Modern UI" FontWeight="SemiBold" />
-                            <LineBreak />
-                            <Run Text="Built with WPF and Nord color palette, featuring smooth animations." />
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- Safety -->
-                <Border Style="{StaticResource SectionCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Safety &amp; Reliability" Style="{StaticResource SectionHeaderStyle}" />
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            All tweaks support Preview, Apply, Verify, and Rollback operations.
-                        </TextBlock>
-
-                        <TextBlock Margin="0,0,0,8" Foreground="#4C566A" TextWrapping="Wrap">
-                            Changes are logged to CSV files for audit trails and can be reversed safely.
-                        </TextBlock>
-
-                        <TextBlock Foreground="#4C566A" TextWrapping="Wrap">
-                            Elevated operations are isolated to a separate host process for security.
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- Links -->
-                <Border Style="{StaticResource SectionCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Project Information" Style="{StaticResource SectionHeaderStyle}" />
-
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                            <TextBlock Text="Repository:" FontWeight="SemiBold" Foreground="#4C566A" Margin="0,0,8,0" />
-                            <TextBlock Text="github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks" Foreground="#5E81AC" />
-                        </StackPanel>
-
-                        <TextBlock Foreground="#4C566A" TextWrapping="Wrap">
-                            This is an open-source project built with modern .NET technologies and WPF for a native Windows experience.
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- License -->
-                <Border Background="#ECEFF4"
-                        BorderBrush="#D8DEE9"
+                <!-- Warning -->
+                <Border Background="#4A3E2E" 
+                        BorderBrush="#EBCB8B" 
                         BorderThickness="1"
-                        CornerRadius="8"
-                        Padding="12">
-                    <TextBlock Foreground="#4C566A" TextWrapping="Wrap">
-                        <Run Text="Windows Optimizer Suite" FontWeight="SemiBold" />
-                        <Run Text="- Use at your own risk. Always create a system restore point before applying system tweaks." />
-                    </TextBlock>
+                        CornerRadius="8" 
+                        Padding="16"
+                        Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚠️" FontSize="16" Margin="0,0,12,0"/>
+                        <TextBlock Foreground="#EBCB8B" FontSize="12">
+                            <Run FontWeight="SemiBold">Warning:</Run>
+                            <Run>Always create a system restore point before applying system tweaks.</Run>
+                        </TextBlock>
+                    </StackPanel>
                 </Border>
             </StackPanel>
         </Grid>
