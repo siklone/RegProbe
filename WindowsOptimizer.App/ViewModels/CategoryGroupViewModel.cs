@@ -54,18 +54,32 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     public void AddTweak(TweakItemViewModel tweak)
     {
-        _tweaks.Add(tweak);
-        OnPropertyChanged(nameof(TweakCount));
-        OnPropertyChanged(nameof(CountBadge));
-        OnPropertyChanged(nameof(VisibleTweakCount));
+        if (System.Windows.Application.Current?.Dispatcher?.CheckAccess() ?? true)
+        {
+            _tweaks.Add(tweak);
+            OnPropertyChanged(nameof(TweakCount));
+            OnPropertyChanged(nameof(CountBadge));
+            OnPropertyChanged(nameof(VisibleTweakCount));
+        }
+        else
+        {
+            System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() => AddTweak(tweak));
+        }
     }
 
     public void ClearTweaks()
     {
-        _tweaks.Clear();
-        OnPropertyChanged(nameof(TweakCount));
-        OnPropertyChanged(nameof(CountBadge));
-        OnPropertyChanged(nameof(VisibleTweakCount));
+        if (System.Windows.Application.Current?.Dispatcher?.CheckAccess() ?? true)
+        {
+            _tweaks.Clear();
+            OnPropertyChanged(nameof(TweakCount));
+            OnPropertyChanged(nameof(CountBadge));
+            OnPropertyChanged(nameof(VisibleTweakCount));
+        }
+        else
+        {
+            System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() => ClearTweaks());
+        }
     }
 
     private void ToggleExpand()

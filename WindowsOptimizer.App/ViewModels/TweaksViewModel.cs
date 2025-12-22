@@ -62,6 +62,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private bool _hasVisibleTweaks;
+    private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
     private readonly string _tweakLogFilePath;
@@ -3041,10 +3042,28 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             if (SetProperty(ref _searchText, value))
             {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
+                TriggerSearchUpdate();
             }
         }
+    }
+
+    private void TriggerSearchUpdate()
+    {
+        _searchCts?.Cancel();
+        _searchCts = new CancellationTokenSource();
+        var token = _searchCts.Token;
+
+        Task.Delay(300, token).ContinueWith(t =>
+        {
+            if (!t.IsCanceled)
+            {
+                System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
+                {
+                    ApplyFilters();
+                    BuildCategoryGroups();
+                });
+            }
+        }, token);
     }
 
     public bool ShowSafe
@@ -3423,6 +3442,12 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private void BuildCategoryGroups()
     {
+        if (!(System.Windows.Application.Current?.Dispatcher?.CheckAccess() ?? true))
+        {
+            System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() => BuildCategoryGroups());
+            return;
+        }
+
         CategoryGroups.Clear();
         var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications" };
         var groups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
