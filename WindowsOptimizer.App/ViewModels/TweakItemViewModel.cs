@@ -31,7 +31,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
     private bool _isDetailsExpanded = false;
     private TweakAppliedStatus _appliedStatus = TweakAppliedStatus.Unknown;
-    private bool _isToggleEnabled = true;
     private readonly RelayCommand _toggleCommand;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)

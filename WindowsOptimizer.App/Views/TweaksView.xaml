@@ -437,17 +437,13 @@
                                                                                 CornerRadius="10"
                                                                                 Background="#D8DEE9"
                                                                                 HorizontalAlignment="Left"
-                                                                                Margin="3,0,0,0">
-                                                                            <Border.RenderTransform>
-                                                                                <TranslateTransform X="0"/>
-                                                                            </Border.RenderTransform>
-                                                                        </Border>
+                                                                                Margin="3,0,0,0"/>
                                                                     </Grid>
                                                                     <ControlTemplate.Triggers>
                                                                         <DataTrigger Binding="{Binding IsApplied}" Value="True">
                                                                             <Setter TargetName="Track" Property="Background" Value="#A3BE8C"/>
                                                                             <Setter TargetName="Thumb" Property="Background" Value="#ECEFF4"/>
-                                                                            <Setter TargetName="Thumb" Property="(UIElement.RenderTransform).(TranslateTransform.X)" Value="24"/>
+                                                                            <Setter TargetName="Thumb" Property="Margin" Value="27,0,0,0"/>
                                                                         </DataTrigger>
                                                                         <Trigger Property="IsEnabled" Value="False">
                                                                             <Setter Property="Opacity" Value="0.5"/>
