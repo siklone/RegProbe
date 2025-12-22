@@ -26,6 +26,7 @@ internal sealed class LocalScheduledTaskManager : IScheduledTaskManager
         {
             service = Activator.CreateInstance(Type.GetTypeFromProgID("Schedule.Service")
                 ?? throw new InvalidOperationException("Task Scheduler service is not available."));
+            if (service == null) throw new InvalidOperationException("Task Scheduler instance is null.");
             service.Connect();
             folder = service.GetFolder(folderPath);
             task = folder.GetTask(taskName);
@@ -62,6 +63,7 @@ internal sealed class LocalScheduledTaskManager : IScheduledTaskManager
         {
             service = Activator.CreateInstance(Type.GetTypeFromProgID("Schedule.Service")
                 ?? throw new InvalidOperationException("Task Scheduler service is not available."));
+            if (service == null) throw new InvalidOperationException("Task Scheduler instance is null.");
             service.Connect();
             folder = service.GetFolder(folderPath);
             task = folder.GetTask(taskName);
