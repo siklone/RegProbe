@@ -554,17 +554,32 @@
                     <!-- Main Card content (simplified for brevity here, actual will have full details) -->
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>  <!-- Checkbox -->
+                            <ColumnDefinition Width="Auto"/>  <!-- Status -->
+                            <ColumnDefinition Width="*"/>     <!-- Content -->
+                            <ColumnDefinition Width="Auto"/>  <!-- Actions -->
                         </Grid.ColumnDefinitions>
-                        
+
+                        <!-- Selection Checkbox -->
+                        <CheckBox Grid.Column="0"
+                                  IsChecked="{Binding IsSelected}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,10,0"
+                                  ToolTip="Select for batch operations">
+                            <CheckBox.Style>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="Foreground" Value="#88C0D0"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Style>
+                            </CheckBox.Style>
+                        </CheckBox>
+
                         <!-- Status Indicator -->
-                        <Border Width="32" Height="32" CornerRadius="16" Margin="0,0,12,0" Background="#434C5E">
+                        <Border Grid.Column="1" Width="32" Height="32" CornerRadius="16" Margin="0,0,12,0" Background="#434C5E">
                              <TextBlock Text="{Binding StatusIcon}" Foreground="{Binding StatusColor}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
                         </Border>
-                        
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
+                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
                                 <Border Background="#A3BE8C" 
@@ -582,8 +597,8 @@
                             </StackPanel>
                             <TextBlock Text="{Binding Description}" Foreground="#88C0D0" FontSize="10" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                        
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
                              <ToggleButton IsChecked="{Binding IsDetailsExpanded}" Style="{StaticResource ExpanderButtonStyle}" Margin="8,0,0,0"/>
                         </StackPanel>
                     </Grid>
@@ -793,6 +808,62 @@
                             <Button Content="Apply All" 
                                     Command="{Binding ApplyAllCommand}" 
                                     Style="{StaticResource FilterButton}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Selection Toolbar -->
+                <Border Background="#434C5E" CornerRadius="10" Padding="16,12" Margin="0,12,0,0"
+                        Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Selection Info -->
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="✓" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#A3BE8C"/>
+                            <TextBlock Text="{Binding SelectionSummary}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="#ECEFF4"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Selection Controls -->
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Select All Visible"
+                                    Command="{Binding SelectAllCommand}"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,8,0"/>
+                            <Button Content="Deselect All"
+                                    Command="{Binding DeselectAllCommand}"
+                                    Style="{StaticResource CompactButton}"/>
+                        </StackPanel>
+
+                        <!-- Batch Actions -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <Button Content="Detect Selected"
+                                    Command="{Binding DetectSelectedCommand}"
+                                    Style="{StaticResource FilterButton}"
+                                    Background="#5E81AC"
+                                    Margin="0,0,6,0"/>
+                            <Button Content="Apply Selected"
+                                    Command="{Binding ApplySelectedCommand}"
+                                    Style="{StaticResource FilterButton}"
+                                    Background="#A3BE8C"
+                                    Margin="0,0,6,0"/>
+                            <Button Content="Verify Selected"
+                                    Command="{Binding VerifySelectedCommand}"
+                                    Style="{StaticResource FilterButton}"
+                                    Background="#88C0D0"
+                                    Margin="0,0,6,0"/>
+                            <Button Content="Rollback Selected"
+                                    Command="{Binding RollbackSelectedCommand}"
+                                    Style="{StaticResource FilterButton}"
+                                    Background="#BF616A"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -1013,9 +1084,10 @@
                                                 </Border.Triggers>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>  <!-- Checkbox -->
+                                                        <ColumnDefinition Width="Auto"/>  <!-- Status -->
+                                                        <ColumnDefinition Width="*"/>     <!-- Content -->
+                                                        <ColumnDefinition Width="Auto"/>  <!-- Actions -->
                                                     </Grid.ColumnDefinitions>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto"/>
@@ -1023,8 +1095,22 @@
                                                         <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
 
+                                                    <!-- Selection Checkbox -->
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{Binding IsSelected}"
+                                                              VerticalAlignment="Center"
+                                                              Margin="0,0,10,0"
+                                                              ToolTip="Select for batch operations">
+                                                        <CheckBox.Style>
+                                                            <Style TargetType="CheckBox">
+                                                                <Setter Property="Foreground" Value="#88C0D0"/>
+                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                            </Style>
+                                                        </CheckBox.Style>
+                                                    </CheckBox>
+
                                                     <!-- Status Indicator -->
-                                                    <Border Grid.Column="0" Grid.RowSpan="2"
+                                                    <Border Grid.Column="1" Grid.RowSpan="2"
                                                             Width="36" Height="36"
                                                             CornerRadius="18"
                                                             Margin="0,0,14,0"
@@ -1066,15 +1152,15 @@
                                                     </Border>
 
                                                     <!-- Tweak Info -->
-                                                    <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Name}" 
-                                                                   FontSize="13" 
-                                                                   FontWeight="SemiBold" 
+                                                    <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   FontSize="13"
+                                                                   FontWeight="SemiBold"
                                                                    Foreground="#ECEFF4"
                                                                    VerticalAlignment="Center"/>
                                                         <Border Style="{StaticResource RiskBadgeStyle}" Margin="8,0,0,0">
-                                                            <TextBlock Text="{Binding Risk}" 
-                                                                       FontSize="9" 
+                                                            <TextBlock Text="{Binding Risk}"
+                                                                       FontSize="9"
                                                                        Foreground="#D8DEE9"/>
                                                         </Border>
                                                         <Border Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}"
@@ -1083,7 +1169,7 @@
                                                         </Border>
                                                     </StackPanel>
 
-                                                    <TextBlock Grid.Column="1" Grid.Row="1"
+                                                    <TextBlock Grid.Column="2" Grid.Row="1"
                                                                Text="{Binding Description}"
                                                                Foreground="#88C0D0"
                                                                FontSize="11"
@@ -1091,8 +1177,8 @@
                                                                Margin="0,4,0,0"/>
 
                                                     <!-- Toggle and Actions -->
-                                                    <StackPanel Grid.Column="2" Grid.RowSpan="2" 
-                                                                Orientation="Horizontal" 
+                                                    <StackPanel Grid.Column="3" Grid.RowSpan="2"
+                                                                Orientation="Horizontal"
                                                                 VerticalAlignment="Center">
                                                         <!-- Loading Indicator with Pulse Animation -->
                                                         <Border Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}"
@@ -1260,7 +1346,7 @@
                                                     </StackPanel>
 
                                                     <!-- Expanded Details: Reference tool inspired rich metadata -->
-                                                    <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"
+                                                    <Border Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2"
                                                             Visibility="{Binding IsDetailsExpanded, Converter={StaticResource BoolToVisibility}}"
                                                             Margin="0,12,0,0"
                                                             Background="#434C5E"

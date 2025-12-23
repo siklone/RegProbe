@@ -51,6 +51,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _isRecommended;
     private string _recommendationReason = string.Empty;
     private double _recommendationConfidence;
+    private bool _isSelected;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -354,6 +355,12 @@ public sealed class TweakItemViewModel : ViewModelBase
                 UpdateCommandStates();
             }
         }
+    }
+
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
     }
 
     public string StatusMessage

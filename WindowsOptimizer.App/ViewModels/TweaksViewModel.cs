@@ -45,6 +45,12 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _verifyAllCommand;
     private readonly RelayCommand _rollbackAllCommand;
     private readonly RelayCommand _cancelAllCommand;
+    private readonly RelayCommand _selectAllCommand;
+    private readonly RelayCommand _deselectAllCommand;
+    private readonly RelayCommand _detectSelectedCommand;
+    private readonly RelayCommand _applySelectedCommand;
+    private readonly RelayCommand _verifySelectedCommand;
+    private readonly RelayCommand _rollbackSelectedCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
@@ -64,6 +70,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
+    private int _selectedCount;
     private string _searchText = string.Empty;
     private bool _showSafe = true;
     private bool _showAdvanced = true;
@@ -3060,6 +3067,27 @@ public sealed class TweaksViewModel : ViewModelBase
         _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
         _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulk());
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
+        _selectAllCommand = new RelayCommand(_ => SelectAll());
+        _deselectAllCommand = new RelayCommand(_ => DeselectAll());
+        _detectSelectedCommand = new RelayCommand(
+            _ => _ = RunBulkAsync("Detect Selected", GetSelectedTweaks, (item, token) => item.RunDetectAsync(token)),
+            _ => CanRunBulkOnSelected());
+        _applySelectedCommand = new RelayCommand(
+            _ => _ = RunBulkAsync("Apply Selected", GetSelectedTweaks, (item, token) => item.RunApplyAsync(token)),
+            _ => CanRunBulkOnSelected());
+        _verifySelectedCommand = new RelayCommand(
+            _ => _ = RunBulkAsync("Verify Selected", GetSelectedTweaks, (item, token) => item.RunVerifyAsync(token)),
+            _ => CanRunBulkOnSelected());
+        _rollbackSelectedCommand = new RelayCommand(
+            _ => _ = RunBulkAsync("Rollback Selected", GetSelectedTweaks, (item, token) => item.RunRollbackAsync(token)),
+            _ => CanRunBulkOnSelected());
+
+        // Subscribe to selection changes for all tweaks
+        foreach (var tweak in Tweaks)
+        {
+            tweak.PropertyChanged += OnTweakPropertyChanged;
+        }
+
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
@@ -3221,6 +3249,18 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ICommand CancelAllCommand => _cancelAllCommand;
 
+    public ICommand SelectAllCommand => _selectAllCommand;
+
+    public ICommand DeselectAllCommand => _deselectAllCommand;
+
+    public ICommand DetectSelectedCommand => _detectSelectedCommand;
+
+    public ICommand ApplySelectedCommand => _applySelectedCommand;
+
+    public ICommand VerifySelectedCommand => _verifySelectedCommand;
+
+    public ICommand RollbackSelectedCommand => _rollbackSelectedCommand;
+
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
@@ -3320,6 +3360,29 @@ public sealed class TweaksViewModel : ViewModelBase
     public string BulkProgressText => BulkProgressTotal == 0
         ? "Bulk progress: 0/0"
         : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
+
+    public int SelectedCount
+    {
+        get => _selectedCount;
+        private set
+        {
+            if (SetProperty(ref _selectedCount, value))
+            {
+                OnPropertyChanged(nameof(SelectionSummary));
+                OnPropertyChanged(nameof(HasSelection));
+                _detectSelectedCommand?.RaiseCanExecuteChanged();
+                _applySelectedCommand?.RaiseCanExecuteChanged();
+                _verifySelectedCommand?.RaiseCanExecuteChanged();
+                _rollbackSelectedCommand?.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public string SelectionSummary => SelectedCount == 0
+        ? "No tweaks selected"
+        : $"{SelectedCount} tweak{(SelectedCount == 1 ? "" : "s")} selected";
+
+    public bool HasSelection => SelectedCount > 0;
 
     public bool IsFlatView
     {
@@ -3620,7 +3683,17 @@ public sealed class TweaksViewModel : ViewModelBase
         return TweaksView.Cast<object>().Any();
     }
 
+    // Existing signature - delegates to new overload
     private async Task RunBulkAsync(string label, Func<TweakItemViewModel, CancellationToken, Task> runner)
+    {
+        await RunBulkAsync(label, GetAllFilteredTweaks, runner);
+    }
+
+    // New overload - supports custom tweak collections
+    private async Task RunBulkAsync(
+        string label,
+        Func<List<TweakItemViewModel>> getTweaks,
+        Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
         if (IsBulkRunning)
         {
@@ -3629,15 +3702,22 @@ public sealed class TweaksViewModel : ViewModelBase
 
         StartBulkCancellation();
         IsBulkRunning = true;
+        SetBulkLock(true);
         var actionLabel = label.ToLowerInvariant();
-        BulkStatusMessage = $"Bulk {actionLabel} started.";
 
         try
         {
-            var items = TweaksView.Cast<TweakItemViewModel>().ToList();
+            var items = getTweaks();
+            if (items.Count == 0)
+            {
+                BulkStatusMessage = $"No tweaks to {actionLabel}.";
+                return;
+            }
+
             BulkProgressTotal = items.Count;
             BulkProgressCurrent = 0;
             OnPropertyChanged(nameof(BulkProgressText));
+
             foreach (var item in items)
             {
                 _bulkCts?.Token.ThrowIfCancellationRequested();
@@ -3648,20 +3728,69 @@ public sealed class TweaksViewModel : ViewModelBase
                 OnPropertyChanged(nameof(BulkProgressText));
             }
 
-            BulkStatusMessage = $"Bulk {actionLabel} completed.";
+            BulkStatusMessage = $"Bulk {actionLabel} completed ({items.Count} tweaks).";
         }
         catch (OperationCanceledException)
         {
-            BulkStatusMessage = "Bulk run cancelled.";
+            BulkStatusMessage = $"Bulk {actionLabel} cancelled.";
+        }
+        catch (Exception ex)
+        {
+            BulkStatusMessage = $"Bulk {actionLabel} failed: {ex.Message}";
         }
         finally
         {
             IsBulkRunning = false;
+            SetBulkLock(false);
             BulkProgressCurrent = 0;
             BulkProgressTotal = 0;
             OnPropertyChanged(nameof(BulkProgressText));
             ClearBulkCancellation();
         }
+    }
+
+    private List<TweakItemViewModel> GetAllFilteredTweaks()
+    {
+        return TweaksView.Cast<TweakItemViewModel>().ToList();
+    }
+
+    private List<TweakItemViewModel> GetSelectedTweaks()
+    {
+        return Tweaks.Where(t => t.IsSelected).ToList();
+    }
+
+    private void SelectAll()
+    {
+        foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
+        {
+            tweak.IsSelected = true;
+        }
+    }
+
+    private void DeselectAll()
+    {
+        foreach (var tweak in Tweaks)
+        {
+            tweak.IsSelected = false;
+        }
+    }
+
+    private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(TweakItemViewModel.IsSelected))
+        {
+            UpdateSelectionCount();
+        }
+    }
+
+    private void UpdateSelectionCount()
+    {
+        SelectedCount = Tweaks.Count(t => t.IsSelected);
+    }
+
+    private bool CanRunBulkOnSelected()
+    {
+        return !IsBulkRunning && SelectedCount > 0 && !Tweaks.Any(item => item.IsRunning);
     }
 
     private void CancelBulk()
