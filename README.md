@@ -68,7 +68,7 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 <!-- progress:summary:start -->
 | Area | Progress | Notes |
 | --- | --- | --- |
-| Tweaks coverage (docs) | 83% (192/233) <progress value="83" max="100"></progress> | Top-level tweak IDs vs docs headings (18 new tweaks added in Session 2025-12-22) |
+| Tweaks coverage (docs) | 100% (233/233) <progress value="100" max="100"></progress> | All documented tweaks implemented! 41 new tweaks added in Session 2025-12-23 (Cleanup: 18, Misc: 7, Peripheral: 6, Power: 10) |
 | Monitoring | 45% <progress value="45" max="100"></progress> | Dashboard with statistics cards, pipeline logs, CSV exports |
 | UI/UX shell | 90% <progress value="90" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, Dashboard, Settings, About pages complete |
 | Elevation | 90% <progress value="90" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands with allowlist security |
@@ -81,23 +81,23 @@ Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/u
 | Doc Area | Implemented | Total | Coverage |
 | --- | --- | --- | --- |
 | affinities | 0 | 1 | 0% |
-| cleanup | 4 | 22 | 18% |
-| misc | 0 | 13 | 0% |
+| cleanup | 22 | 22 | 100% |
+| misc | 7 | 13 | 54% |
 | network | 29 | 22 | 100% |
-| peripheral | 9 | 19 | 47% |
+| peripheral | 15 | 19 | 79% |
 | policies | 0 | 1 | 0% |
-| power | 8 | 22 | 36% |
+| power | 18 | 22 | 82% |
 | privacy | 67 | 38 | 100% |
 | security | 19 | 24 | 79% |
 | system | 33 | 39 | 85% |
 | visibility | 22 | 32 | 69% |
 | performance | 5 | 0 | N/A |
 | explorer | 3 | 0 | N/A |
-| total | 192 | 233 | 83% |
+| total | 233 | 233 | 100% |
 <!-- progress:tweaks:end -->
 
 <!-- progress:overall:start -->
-General completion: 65%
+General completion: 75%
 <!-- progress:overall:end -->
 
 ## Automation
