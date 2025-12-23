@@ -34,7 +34,7 @@ public sealed class ClearDeliveryOptimizationFilesTweak : FileCleanupTweak
         // Stop DoSvc (Delivery Optimization) service
         try
         {
-            var psi = new System.Diagnostics.ProcessStartInfo
+            var psi = new ProcessStartInfo
             {
                 FileName = "sc.exe",
                 Arguments = "stop DoSvc",
@@ -42,7 +42,7 @@ public sealed class ClearDeliveryOptimizationFilesTweak : FileCleanupTweak
                 CreateNoWindow = true
             };
 
-            using var process = System.Diagnostics.Process.Start(psi);
+            using var process = Process.Start(psi);
             if (process != null)
             {
                 await process.WaitForExitAsync(ct);

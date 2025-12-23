@@ -22,7 +22,7 @@ public sealed class ClearShadowCopiesTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, VssAdminExe);
+        var executable = Path.Combine(Environment.SystemDirectory, VssAdminExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "list", "shadows" }));
@@ -30,7 +30,7 @@ public sealed class ClearShadowCopiesTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, VssAdminExe);
+        var executable = Path.Combine(Environment.SystemDirectory, VssAdminExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "delete", "shadows", "/all", "/quiet" }));

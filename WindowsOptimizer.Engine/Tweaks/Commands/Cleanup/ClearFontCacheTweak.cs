@@ -33,7 +33,7 @@ public sealed class ClearFontCacheTweak : FileCleanupTweak
         // Stop FontCache service before cleanup
         try
         {
-            var psi = new System.Diagnostics.ProcessStartInfo
+            var psi = new ProcessStartInfo
             {
                 FileName = "sc.exe",
                 Arguments = "stop FontCache",
@@ -41,7 +41,7 @@ public sealed class ClearFontCacheTweak : FileCleanupTweak
                 CreateNoWindow = true
             };
 
-            using var process = System.Diagnostics.Process.Start(psi);
+            using var process = Process.Start(psi);
             if (process != null)
             {
                 await process.WaitForExitAsync(ct);
@@ -65,7 +65,7 @@ public sealed class ClearFontCacheTweak : FileCleanupTweak
         // Restart FontCache service after cleanup
         try
         {
-            var psi = new System.Diagnostics.ProcessStartInfo
+            var psi = new ProcessStartInfo
             {
                 FileName = "sc.exe",
                 Arguments = "start FontCache",
@@ -73,7 +73,7 @@ public sealed class ClearFontCacheTweak : FileCleanupTweak
                 CreateNoWindow = true
             };
 
-            using var process = System.Diagnostics.Process.Start(psi);
+            using var process = Process.Start(psi);
             if (process != null)
             {
                 await process.WaitForExitAsync(ct);

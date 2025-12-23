@@ -22,8 +22,8 @@ public sealed class RemoveProductKeyTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, CscriptExe);
-        var slmgrPath = System.IO.Path.Combine(Environment.SystemDirectory, "slmgr.vbs");
+        var executable = Path.Combine(Environment.SystemDirectory, CscriptExe);
+        var slmgrPath = Path.Combine(Environment.SystemDirectory, "slmgr.vbs");
 
         return new CommandRequest(
             executable,
@@ -32,8 +32,8 @@ public sealed class RemoveProductKeyTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(Environment.SystemDirectory, CscriptExe);
-        var slmgrPath = System.IO.Path.Combine(Environment.SystemDirectory, "slmgr.vbs");
+        var executable = Path.Combine(Environment.SystemDirectory, CscriptExe);
+        var slmgrPath = Path.Combine(Environment.SystemDirectory, "slmgr.vbs");
 
         return new CommandRequest(
             executable,

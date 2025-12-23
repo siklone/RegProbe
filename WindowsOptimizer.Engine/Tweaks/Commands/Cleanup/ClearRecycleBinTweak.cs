@@ -22,7 +22,7 @@ public sealed class ClearRecycleBinTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = System.IO.Path.Combine(
+        var executable = Path.Combine(
             Environment.SystemDirectory,
             "WindowsPowerShell",
             "v1.0",
@@ -37,7 +37,7 @@ public sealed class ClearRecycleBinTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = System.IO.Path.Combine(
+        var executable = Path.Combine(
             Environment.SystemDirectory,
             "WindowsPowerShell",
             "v1.0",

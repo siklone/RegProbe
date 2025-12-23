@@ -22,7 +22,7 @@ public sealed class CleanupComponentStoreTweak : CommandTweak
 
     protected override CommandRequest GetDetectCommand()
     {
-        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
+        var executable = global::Path.Combine(Environment.SystemDirectory, System32DismExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/online", "/Cleanup-Image", "/AnalyzeComponentStore" }));
@@ -30,7 +30,7 @@ public sealed class CleanupComponentStoreTweak : CommandTweak
 
     protected override CommandRequest GetApplyCommand()
     {
-        var executable = global::System.IO.Path.Combine(Environment.SystemDirectory, System32DismExe);
+        var executable = global::Path.Combine(Environment.SystemDirectory, System32DismExe);
         return new CommandRequest(
             executable,
             new ReadOnlyCollection<string>(new[] { "/online", "/Cleanup-Image", "/StartComponentCleanup" }));
