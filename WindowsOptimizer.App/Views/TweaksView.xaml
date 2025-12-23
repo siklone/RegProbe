@@ -747,7 +747,7 @@
                         <!-- Search -->
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBox Width="260"
+                            <TextBox Width="200"
                                      Style="{StaticResource SearchBoxStyle}"
                                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                      ToolTip="Search tweaks..."/>
