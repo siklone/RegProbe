@@ -21,6 +21,9 @@ using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
 using WindowsOptimizer.Engine.Tweaks.Commands.Performance;
 using WindowsOptimizer.Engine.Tweaks.Commands.Network;
 using WindowsOptimizer.Engine.Tweaks.Commands.System;
+using WindowsOptimizer.Engine.Tweaks.Misc;
+using WindowsOptimizer.Engine.Tweaks.Peripheral;
+using WindowsOptimizer.Engine.Tweaks.Power;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Commands;
@@ -2909,7 +2912,130 @@ public sealed class TweaksViewModel : ViewModelBase
             new(new CheckDiskHealthTweak(_elevatedCommandRunner),
                 pipeline,
                 _isElevated),
-            new(new ClearEventLogsTweak(_elevatedCommandRunner),
+            new(new ClearEventLogsTweak(_elevatedCommandRunner, "System"),
+                pipeline,
+                _isElevated),
+
+            // ==================== NEW CLEANUP TWEAKS ====================
+
+            // Cleanup: File-based tweaks
+            new(new ClearTemporaryFilesTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearRecycleBinTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new ClearDirectXShaderCacheTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearThumbnailCacheTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearWindowsUpdateCacheTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearWERFilesTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearPrefetchFilesTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearShadowCopiesTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+            new(new ClearFontCacheTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearWindowsOldTweak(),
+                pipeline,
+                _isElevated),
+            new(new ClearMemoryDumpFilesTweak(),
+                pipeline,
+                _isElevated),
+            new(new RemoveProductKeyTweak(_elevatedCommandRunner),
+                pipeline,
+                _isElevated),
+
+            // ==================== NEW MISC TWEAKS ====================
+
+            // Telemetry & Privacy
+            new(DisableOneDriveTweaks.CreateDisableOneDriveTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(DisableVisualStudioTelemetryTweak.CreateDisableVisualStudioTelemetryTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(DisableOfficeTelemetryTweak.CreateDisableOfficeTelemetryTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(new DisableVSCodeTelemetryTweak(),
+                pipeline,
+                _isElevated),
+            new(SetNotepadPlusPlusDefaultEditorTweak.CreateSetNotepadPlusPlusDefaultEditorTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // ==================== NEW PERIPHERAL TWEAKS ====================
+
+            // Mouse
+            new(MouseTweaks.CreateDisableMouseThrottleTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(MouseTweaks.CreateDisableMouseAccelerationTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // Keyboard
+            new(KeyboardTweaks.CreateOptimizeKeyboardRepeatTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // Audio
+            new(AudioTweaks.CreateDisableAudioDuckingTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(AudioTweaks.CreateDisableAudioEnhancementsTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // ==================== NEW POWER TWEAKS ====================
+
+            // Power Settings
+            new(PowerSettingsTweaks.CreateDisableModernStandbyTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(PowerSettingsTweaks.CreateDisableFastStartupTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(PowerSettingsTweaks.CreateDisablePowerThrottlingTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(PowerSettingsTweaks.CreateOptimizePowerSettingsTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // Network Power
+            new(NetworkAdapterPowerTweaks.CreateDisableNetworkAdapterPowerSavingTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(NetworkAdapterPowerTweaks.CreateOptimizeGamingNetworkTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+
+            // CPU Power
+            new(CPUPowerTweaks.CreateDisableCPUParkingTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(CPUPowerTweaks.CreateDisableIdleStatesTweak(_elevatedRegistryAccessor),
+                pipeline,
+                _isElevated),
+            new(CPUPowerTweaks.CreateOptimizeCPUBoostTweak(_elevatedRegistryAccessor),
                 pipeline,
                 _isElevated)
         };
