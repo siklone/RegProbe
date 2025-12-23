@@ -1,238 +1,130 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using WindowsOptimizer.Core;
-using WindowsOptimizer.Engine;
+using System.Windows.Threading;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.Infrastructure.Metrics;
 
 namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MonitorViewModel : ViewModelBase
 {
-    private readonly RelayCommand _runPreviewCommand;
-    private readonly RelayCommand _runApplyCommand;
-    private readonly RelayCommand _cancelCommand;
-    private readonly TweakExecutionPipeline _pipeline;
-    private readonly DemoTweak _demoTweak = new();
-    private CancellationTokenSource? _cts;
-    private bool _isRunning;
-    private string _statusMessage = "Ready to run.";
-    private string _runModeLabel = "Mode: Preview (DryRun)";
-    private string _lastUpdatedText = "Last update: -";
+    private readonly MetricProvider _metricProvider;
+    private readonly ProcessMonitor _processMonitor = new();
+    private readonly NetworkMonitor _networkMonitor = new();
+    private readonly DiskMonitor _diskMonitor = new();
+    private readonly DispatcherTimer _updateTimer;
+
+    private double _cpuUsage;
+    private double _ramUsedGb;
+    private double _ramTotalGb;
+    private double _cpuTemp;
+    private double _gpuTemp;
 
     public MonitorViewModel()
     {
-        Steps = new ObservableCollection<TweakStepStatusViewModel>
-        {
-            new(TweakAction.Detect),
-            new(TweakAction.Apply),
-            new(TweakAction.Verify),
-            new(TweakAction.Rollback)
-        };
-
-        ResetSteps();
-
         var paths = AppPaths.FromEnvironment();
-        var logger = new FileAppLogger(paths);
-        var logStore = new FileTweakLogStore(paths);
-        _pipeline = new TweakExecutionPipeline(logger, logStore);
+        _metricProvider = new MetricProvider();
 
-        _runPreviewCommand = new RelayCommand(_ => _ = RunPipelineAsync(true), _ => !IsRunning);
-        _runApplyCommand = new RelayCommand(_ => _ = RunPipelineAsync(false), _ => !IsRunning);
-        _cancelCommand = new RelayCommand(_ => CancelRun(), _ => IsRunning);
+        // Initialize collections
+        CpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+        RamHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+        TopProcessesByCpu = new ObservableCollection<ProcessInfo>();
+        TopProcessesByRam = new ObservableCollection<ProcessInfo>();
+        NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
+        Disks = new ObservableCollection<DiskInfo>();
+
+        // Timer: 1 second refresh
+        _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _updateTimer.Tick += OnUpdateTick;
+        _updateTimer.Start();
+
+        // Get initial total RAM
+        RamTotalGb = _metricProvider.GetTotalRamGb();
     }
 
     public string Title => "Monitor";
 
-    public string CurrentTweakName => _demoTweak.Name;
+    public ObservableCollection<double> CpuHistory { get; }
+    public ObservableCollection<double> RamHistory { get; }
+    public ObservableCollection<ProcessInfo> TopProcessesByCpu { get; }
+    public ObservableCollection<ProcessInfo> TopProcessesByRam { get; }
+    public ObservableCollection<NetworkAdapterInfo> NetworkAdapters { get; }
+    public ObservableCollection<DiskInfo> Disks { get; }
 
-    public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
-
-    public ICommand RunPreviewCommand => _runPreviewCommand;
-
-    public ICommand RunApplyCommand => _runApplyCommand;
-
-    public ICommand CancelCommand => _cancelCommand;
-
-    public bool IsRunning
+    public double CpuUsage
     {
-        get => _isRunning;
-        private set
-        {
-            if (SetProperty(ref _isRunning, value))
-            {
-                _runPreviewCommand.RaiseCanExecuteChanged();
-                _runApplyCommand.RaiseCanExecuteChanged();
-                _cancelCommand.RaiseCanExecuteChanged();
-            }
-        }
+        get => _cpuUsage;
+        private set => SetProperty(ref _cpuUsage, value);
     }
 
-    public string StatusMessage
+    public double RamUsedGb
     {
-        get => _statusMessage;
-        private set => SetProperty(ref _statusMessage, value);
+        get => _ramUsedGb;
+        private set => SetProperty(ref _ramUsedGb, value);
     }
 
-    public string RunModeLabel
+    public double RamTotalGb
     {
-        get => _runModeLabel;
-        private set => SetProperty(ref _runModeLabel, value);
+        get => _ramTotalGb;
+        private set => SetProperty(ref _ramTotalGb, value);
     }
 
-    public string LastUpdatedText
+    public double RamUsagePercent => RamTotalGb > 0 ? (RamUsedGb / RamTotalGb) * 100 : 0;
+
+    public double CpuTemp
     {
-        get => _lastUpdatedText;
-        private set => SetProperty(ref _lastUpdatedText, value);
+        get => _cpuTemp;
+        private set => SetProperty(ref _cpuTemp, value);
     }
 
-    private async Task RunPipelineAsync(bool dryRun)
+    public double GpuTemp
     {
-        if (IsRunning)
-        {
-            return;
-        }
-
-        IsRunning = true;
-        StartCancellation();
-        RunModeLabel = dryRun ? "Mode: Preview (DryRun)" : "Mode: Apply";
-        StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
-        ResetSteps();
-        Steps.First().MarkInProgress();
-
-        var progress = new Progress<TweakExecutionUpdate>(OnProgressUpdate);
-        var options = new TweakExecutionOptions
-        {
-            DryRun = dryRun,
-            VerifyAfterApply = true,
-            RollbackOnFailure = true
-        };
-
-        try
-        {
-            var report = await _pipeline.ExecuteAsync(_demoTweak, options, progress, _cts?.Token ?? CancellationToken.None);
-            ApplyReport(report);
-            StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
-            LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
-        }
-        catch (OperationCanceledException)
-        {
-            StatusMessage = "Run cancelled.";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Run failed: {ex.Message}";
-        }
-        finally
-        {
-            IsRunning = false;
-            ClearCancellation();
-        }
+        get => _gpuTemp;
+        private set => SetProperty(ref _gpuTemp, value);
     }
 
-    private void OnProgressUpdate(TweakExecutionUpdate update)
+    private void OnUpdateTick(object? sender, EventArgs e)
     {
-        var step = Steps.FirstOrDefault(item => item.Action == update.Action);
-        step?.ApplyResult(update.Status, update.Message, update.Timestamp);
+        // Update system metrics
+        CpuUsage = _metricProvider.GetCpuUsage();
+        RamUsedGb = _metricProvider.GetUsedRamGb();
+        CpuTemp = _metricProvider.GetCpuTemperature();
+        GpuTemp = _metricProvider.GetGpuTemperature();
 
-        StatusMessage = $"{update.Action}: {update.Status}";
-        LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
+        // Update history (60 second sliding window)
+        UpdateHistory(CpuHistory, CpuUsage);
+        UpdateHistory(RamHistory, RamUsagePercent);
 
-        var nextStep = GetNextStep(update.Action);
-        if (nextStep is not null && nextStep.State == TweakStepState.Pending)
+        // Update top processes
+        UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
+        UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
+
+        // Update network adapters
+        UpdateCollection(NetworkAdapters, _networkMonitor.GetActiveAdapters());
+
+        // Update disks
+        UpdateCollection(Disks, _diskMonitor.GetDiskActivity());
+
+        // Cleanup dead process entries
+        _processMonitor.Cleanup();
+
+        // Trigger RamUsagePercent update
+        OnPropertyChanged(nameof(RamUsagePercent));
+    }
+
+    private void UpdateHistory(ObservableCollection<double> history, double newValue)
+    {
+        history.RemoveAt(0);
+        history.Add(newValue);
+    }
+
+    private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
+    {
+        collection.Clear();
+        foreach (var item in newItems)
         {
-            nextStep.MarkInProgress();
-        }
-    }
-
-    private void ApplyReport(TweakExecutionReport report)
-    {
-        foreach (var step in Steps)
-        {
-            var reportStep = report.Steps.FirstOrDefault(item => item.Action == step.Action);
-            if (reportStep is null)
-            {
-                step.MarkNotRequired("Step not executed.");
-                continue;
-            }
-
-            step.ApplyResult(reportStep.Result.Status, reportStep.Result.Message, reportStep.Result.Timestamp);
-        }
-    }
-
-    private void ResetSteps()
-    {
-        foreach (var step in Steps)
-        {
-            step.Reset();
-        }
-    }
-
-    private void CancelRun()
-    {
-        if (!IsRunning || _cts is null)
-        {
-            return;
-        }
-
-        _cts.Cancel();
-        StatusMessage = "Cancellation requested.";
-    }
-
-    private void StartCancellation()
-    {
-        ClearCancellation();
-        _cts = new CancellationTokenSource();
-    }
-
-    private void ClearCancellation()
-    {
-        _cts?.Dispose();
-        _cts = null;
-    }
-
-    private TweakStepStatusViewModel? GetNextStep(TweakAction action)
-    {
-        for (var i = 0; i < Steps.Count - 1; i++)
-        {
-            if (Steps[i].Action == action)
-            {
-                return Steps[i + 1];
-            }
-        }
-
-        return null;
-    }
-
-    private sealed class DemoTweak : ITweak
-    {
-        private static readonly TimeSpan StepDelay = TimeSpan.FromMilliseconds(450);
-
-        public string Id => "demo.monitor";
-        public string Name => "Demo tweak pipeline";
-        public string Description => "Simulated tweak run for monitoring UI.";
-        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
-        public bool RequiresElevation => false;
-
-        public Task<TweakResult> DetectAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Detected, "Configuration snapshot captured.", ct);
-
-        public Task<TweakResult> ApplyAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Applied, "Simulated tweak applied.", ct);
-
-        public Task<TweakResult> VerifyAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.Verified, "Verification completed.", ct);
-
-        public Task<TweakResult> RollbackAsync(CancellationToken ct)
-            => SimulateAsync(TweakStatus.RolledBack, "Rollback completed.", ct);
-
-        private static async Task<TweakResult> SimulateAsync(TweakStatus status, string message, CancellationToken ct)
-        {
-            await Task.Delay(StepDelay, ct);
-            return new TweakResult(status, message, DateTimeOffset.UtcNow);
+            collection.Add(item);
         }
     }
 }
