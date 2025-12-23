@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
 
@@ -315,12 +316,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => "?"
     };
 
-    public string StatusColor => AppliedStatus switch
+    public Brush StatusColor => AppliedStatus switch
     {
-        TweakAppliedStatus.Applied => "#A3BE8C",
-        TweakAppliedStatus.NotApplied => "#4C566A",
-        TweakAppliedStatus.Error => "#BF616A",
-        _ => "#EBCB8B"
+        TweakAppliedStatus.Applied => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A3BE8C")),
+        TweakAppliedStatus.NotApplied => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4C566A")),
+        TweakAppliedStatus.Error => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BF616A")),
+        _ => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EBCB8B"))
     };
 
     public string StatusText => AppliedStatus switch
