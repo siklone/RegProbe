@@ -2977,6 +2977,9 @@ public sealed class TweaksViewModel : ViewModelBase
             new(SetNotepadPlusPlusDefaultEditorTweak.CreateSetNotepadPlusPlusDefaultEditorTweak(_elevatedRegistryAccessor),
                 pipeline,
                 _isElevated),
+            new(SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak(_localRegistryAccessor),
+                pipeline,
+                _isElevated),
 
             // ==================== NEW PERIPHERAL TWEAKS ====================
 
