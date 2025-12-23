@@ -107,7 +107,7 @@ public abstract class FileCleanupTweak : ITweak
         }
     }
 
-    public async Task<TweakResult> ApplyAsync(CancellationToken ct)
+    public virtual async Task<TweakResult> ApplyAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
