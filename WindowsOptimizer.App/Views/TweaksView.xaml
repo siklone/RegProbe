@@ -1437,7 +1437,7 @@
                                                                             <Button Content="Rollback" Command="{Binding RollbackCommand}" Style="{StaticResource CompactButton}"/>
                                                                         </StackPanel>
                                                                         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#88C0D0" FontSize="10">
-                                                                            <Run Text="ID:"/> <Run Text="{Binding Id}"/>
+                                                                            <Run Text="ID:"/> <Run Text="{Binding Id, Mode=OneWay}"/>
                                                                         </TextBlock>
                                                                     </Grid>
                                                                     <Separator Background="#3B4252" Margin="0,2,0,8"/>
