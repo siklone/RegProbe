@@ -957,7 +957,8 @@
                                                     CornerRadius="8"
                                                     Padding="14,12"
                                                     Margin="0,0,0,6"
-                                                    BorderThickness="2,0,0,0">
+                                                    BorderThickness="2,0,0,0"
+                                                    BorderBrush="{Binding StatusColor}">
                                                 <Border.RenderTransform>
                                                     <TranslateTransform Y="0"/>
                                                 </Border.RenderTransform>
@@ -1010,7 +1011,6 @@
                                                         </BeginStoryboard>
                                                     </EventTrigger>
                                                 </Border.Triggers>
-                                                <Border BorderBrush="{Binding StatusColor}">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
