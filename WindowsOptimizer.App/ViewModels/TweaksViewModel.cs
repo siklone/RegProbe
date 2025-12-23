@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Intelligence;
+using WindowsOptimizer.Core.Models;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.Engine;
@@ -51,6 +52,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _applySelectedCommand;
     private readonly RelayCommand _verifySelectedCommand;
     private readonly RelayCommand _rollbackSelectedCommand;
+    private readonly RelayCommand _loadPresetCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
@@ -86,14 +88,17 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly PluginLoader _pluginLoader = new();
     private readonly KernelImpactAnalyzer _kernelAnalyzer = new();
     private readonly string _tweakLogFilePath;
+    private readonly IProfileManager _profileManager;
 
     public TweaksViewModel()
     {
         var paths = AppPaths.FromEnvironment();
+        paths.EnsureDirectories();
         var logger = new FileAppLogger(paths);
         _logFolderPath = paths.LogDirectory;
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
+        _profileManager = new ProfileManager(paths);
         var pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
         _isElevated = ProcessElevation.IsElevated();
@@ -3081,13 +3086,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _rollbackSelectedCommand = new RelayCommand(
             _ => _ = RunBulkAsync("Rollback Selected", GetSelectedTweaks, (item, token) => item.RunRollbackAsync(token)),
             _ => CanRunBulkOnSelected());
-
-        // Subscribe to selection changes for all tweaks
-        foreach (var tweak in Tweaks)
-        {
-            tweak.PropertyChanged += OnTweakPropertyChanged;
-        }
-
+        _loadPresetCommand = new RelayCommand(async parameter => await LoadPresetAsync(parameter));
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
@@ -3100,6 +3099,7 @@ public sealed class TweaksViewModel : ViewModelBase
         UpdateFilterSummary();
         PopulateExampleMetadata();
         LoadPlugins();
+        _ = InitializePresetsAsync();
 
         _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _metricsTimer.Tick += OnMetricsTick;
@@ -3260,6 +3260,8 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand VerifySelectedCommand => _verifySelectedCommand;
 
     public ICommand RollbackSelectedCommand => _rollbackSelectedCommand;
+
+    public ICommand LoadPresetCommand => _loadPresetCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
@@ -3781,6 +3783,13 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             UpdateSelectionCount();
         }
+        else if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
+        {
+            _previewAllCommand.RaiseCanExecuteChanged();
+            _applyAllCommand.RaiseCanExecuteChanged();
+            _verifyAllCommand.RaiseCanExecuteChanged();
+            _rollbackAllCommand.RaiseCanExecuteChanged();
+        }
     }
 
     private void UpdateSelectionCount()
@@ -3941,17 +3950,6 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
-    private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
-        {
-            _previewAllCommand.RaiseCanExecuteChanged();
-            _applyAllCommand.RaiseCanExecuteChanged();
-            _verifyAllCommand.RaiseCanExecuteChanged();
-            _rollbackAllCommand.RaiseCanExecuteChanged();
-        }
-    }
-
     private void ResetFilters()
     {
         SearchText = string.Empty;
@@ -4014,11 +4012,41 @@ public sealed class TweaksViewModel : ViewModelBase
     {
         try
         {
+            var dialog = new SaveFileDialog
+            {
+                Filter = "Optimizer Profile (*.json)|*.json|All Files (*.*)|*.*",
+                FileName = $"optimizer_profile_{DateTime.Now:yyyyMMdd_HHmmss}.json",
+                Title = "Export Profile"
+            };
+
+            if (dialog.ShowDialog() != true)
+            {
+                return;
+            }
+
+            var selectedIds = Tweaks.Where(t => t.IsSelected).Select(t => t.Id).ToList();
             var appliedIds = Tweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
-            var json = System.Text.Json.JsonSerializer.Serialize(appliedIds, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "optimizer_preset.json");
-            await File.WriteAllTextAsync(path, json);
-            ExportStatusMessage = $"Preset exported to Desktop.";
+
+            var profile = new Core.Models.TweakProfile
+            {
+                Name = Path.GetFileNameWithoutExtension(dialog.FileName),
+                Description = $"Custom profile exported on {DateTime.Now:yyyy-MM-dd HH:mm}",
+                Author = "User",
+                CreatedDate = DateTime.Now,
+                Version = "1.0",
+                SelectedTweakIds = selectedIds.Count > 0 ? selectedIds : appliedIds,
+                AppliedTweakIds = appliedIds,
+                Metadata = new Core.Models.ProfileMetadata
+                {
+                    TargetUseCase = "Custom",
+                    TotalTweakCount = selectedIds.Count > 0 ? selectedIds.Count : appliedIds.Count,
+                    TweaksByCategory = new Dictionary<string, int>(),
+                    TweaksByRiskLevel = new Dictionary<string, int>()
+                }
+            };
+
+            await _profileManager.SaveProfileAsync(profile, dialog.FileName);
+            ExportStatusMessage = $"Profile exported successfully to {Path.GetFileName(dialog.FileName)}";
         }
         catch (Exception ex)
         {
@@ -4030,30 +4058,94 @@ public sealed class TweaksViewModel : ViewModelBase
     {
         try
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "optimizer_preset.json");
-            if (!File.Exists(path))
+            var dialog = new OpenFileDialog
             {
-                ExportStatusMessage = "Preset not found on Desktop.";
+                Filter = "Optimizer Profile (*.json)|*.json|All Files (*.*)|*.*",
+                Title = "Import Profile"
+            };
+
+            if (dialog.ShowDialog() != true)
+            {
                 return;
             }
-            var json = await File.ReadAllTextAsync(path);
-            var ids = System.Text.Json.JsonSerializer.Deserialize<List<string>>(json);
-            if (ids == null) return;
-            int count = 0;
-            foreach (var id in ids)
+
+            var profile = await _profileManager.LoadProfileAsync(dialog.FileName);
+
+            // Clear current selections
+            foreach (var tweak in Tweaks)
+            {
+                tweak.IsSelected = false;
+            }
+
+            // Mark tweaks as selected based on profile
+            int selectedCount = 0;
+            foreach (var id in profile.SelectedTweakIds)
             {
                 var tweak = Tweaks.FirstOrDefault(t => t.Id == id);
                 if (tweak != null)
                 {
+                    tweak.IsSelected = true;
                     tweak.IsDetailsExpanded = true;
-                    count++;
+                    selectedCount++;
                 }
             }
-            ExportStatusMessage = $"Imported {count} tweaks. Ready to apply.";
+
+            ExportStatusMessage = $"Imported profile '{profile.Name}': {selectedCount}/{profile.SelectedTweakIds.Count} tweaks selected. Ready to apply.";
         }
         catch (Exception ex)
         {
             ExportStatusMessage = $"Import failed: {ex.Message}";
+        }
+    }
+
+    private async Task LoadPresetAsync(object? parameter)
+    {
+        try
+        {
+            var presetName = parameter as string;
+            if (string.IsNullOrEmpty(presetName))
+            {
+                return;
+            }
+
+            var profile = await _profileManager.CreatePresetAsync(presetName);
+
+            // Clear current selections
+            foreach (var tweak in Tweaks)
+            {
+                tweak.IsSelected = false;
+            }
+
+            // Mark tweaks as selected based on preset
+            int selectedCount = 0;
+            foreach (var id in profile.SelectedTweakIds)
+            {
+                var tweak = Tweaks.FirstOrDefault(t => t.Id == id);
+                if (tweak != null)
+                {
+                    tweak.IsSelected = true;
+                    selectedCount++;
+                }
+            }
+
+            ExportStatusMessage = $"Loaded '{profile.Name}' preset: {selectedCount}/{profile.SelectedTweakIds.Count} tweaks selected.";
+        }
+        catch (Exception ex)
+        {
+            ExportStatusMessage = $"Failed to load preset: {ex.Message}";
+        }
+    }
+
+    private async Task InitializePresetsAsync()
+    {
+        try
+        {
+            await _profileManager.InitializePresetsAsync();
+        }
+        catch (Exception ex)
+        {
+            // Silently fail - presets are not critical
+            Debug.WriteLine($"Failed to initialize presets: {ex.Message}");
         }
     }
 

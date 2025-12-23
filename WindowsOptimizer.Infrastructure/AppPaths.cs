@@ -29,10 +29,16 @@ public sealed class AppPaths
 
     public string TweakLogFilePath => Path.Combine(LogDirectory, "tweak-log.csv");
 
+    public string ProfilesDirectory => Path.Combine(AppDataRoot, "profiles");
+
+    public string PresetsDirectory => Path.Combine(AppDataRoot, "presets");
+
     public void EnsureDirectories()
     {
         Directory.CreateDirectory(AppDataRoot);
         Directory.CreateDirectory(LogDirectory);
+        Directory.CreateDirectory(ProfilesDirectory);
+        Directory.CreateDirectory(PresetsDirectory);
     }
 
     public static AppPaths FromEnvironment()

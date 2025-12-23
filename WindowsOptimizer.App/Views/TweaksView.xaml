@@ -790,7 +790,33 @@
 
                         <!-- Actions -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Button Content="Reset" 
+                            <!-- Quick Preset Buttons -->
+                            <Button Content="Gaming"
+                                    Command="{Binding LoadPresetCommand}"
+                                    CommandParameter="Gaming"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,4,0"
+                                    ToolTip="Load Gaming preset"/>
+                            <Button Content="Privacy"
+                                    Command="{Binding LoadPresetCommand}"
+                                    CommandParameter="Privacy"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,4,0"
+                                    ToolTip="Load Privacy preset"/>
+                            <Button Content="Performance"
+                                    Command="{Binding LoadPresetCommand}"
+                                    CommandParameter="Performance"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,4,0"
+                                    ToolTip="Load Performance preset"/>
+                            <Button Content="Minimal"
+                                    Command="{Binding LoadPresetCommand}"
+                                    CommandParameter="Minimal"
+                                    Style="{StaticResource CompactButton}"
+                                    Margin="0,0,8,0"
+                                    ToolTip="Load Minimal preset"/>
+
+                            <Button Content="Reset"
                                     Command="{Binding ResetFiltersCommand}"
                                     Style="{StaticResource CompactButton}"
                                     Margin="0,0,8,0"/>
