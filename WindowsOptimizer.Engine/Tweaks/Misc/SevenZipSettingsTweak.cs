@@ -17,38 +17,38 @@ public static class SevenZipSettingsTweak
             // Cascaded context menu (1 = enabled, 0 = disabled)
             new RegistryValueBatchEntry(
                 RegistryHive.CurrentUser,
-                RegistryView.Default,
                 @"Software\7-Zip\Options",
                 "CascadedMenu",
                 RegistryValueKind.DWord,
-                1),
+                1,
+                RegistryView.Default),
 
             // Eliminate duplication of root folders (1 = enabled, 0 = disabled)
             new RegistryValueBatchEntry(
                 RegistryHive.CurrentUser,
-                RegistryView.Default,
                 @"Software\7-Zip\Options",
                 "ElimDupExtract",
                 RegistryValueKind.DWord,
-                1),
+                1,
+                RegistryView.Default),
 
             // Icons in context menu (1 = enabled, 0 = disabled)
             new RegistryValueBatchEntry(
                 RegistryHive.CurrentUser,
-                RegistryView.Default,
                 @"Software\7-Zip\Options",
                 "MenuIcons",
                 RegistryValueKind.DWord,
-                1),
+                1,
+                RegistryView.Default),
 
             // Propagate Zone.Id stream (delete = No, 1 = Yes, 2 = For Office files)
             new RegistryValueBatchEntry(
                 RegistryHive.CurrentUser,
-                RegistryView.Default,
                 @"Software\7-Zip\Options",
                 "WriteZoneIdExtract",
                 RegistryValueKind.DWord,
-                1)
+                1,
+                RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

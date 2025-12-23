@@ -61,7 +61,7 @@ public sealed class ClearBackgroundHistoryTweak : FileCleanupTweak
         catch (Exception ex)
         {
             return new TweakResult(
-                TweakStatus.PartiallyApplied,
+                TweakStatus.Failed,
                 $"Files cleared but registry cleanup failed: {ex.Message}",
                 DateTimeOffset.UtcNow,
                 ex);

@@ -18,13 +18,7 @@ public static class AudioTweaks
             // 0 = Mute all other sounds
             // 1 = Reduce by 80% (default)
             // 2 = Reduce by 50%
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Software\Microsoft\Multimedia\Audio",
-                "UserDuckingPreference",
-                RegistryValueKind.DWord,
-                3)
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Multimedia\Audio", "UserDuckingPreference", RegistryValueKind.DWord, 3, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -47,22 +41,10 @@ public static class AudioTweaks
         {
             // Disable exclusive mode for all devices (pattern-based, would need custom implementation)
             // For now, add common audio enhancement disable keys
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Software\Microsoft\Windows\CurrentVersion\Audio",
-                "DisableProtectedAudioDG",
-                RegistryValueKind.DWord,
-                1),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Audio", "DisableProtectedAudioDG", RegistryValueKind.DWord, 1, RegistryView.Default),
 
             // Disable audio enhancements globally
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render",
-                "DisableEnhancements",
-                RegistryValueKind.DWord,
-                1)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "DisableEnhancements", RegistryValueKind.DWord, 1, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

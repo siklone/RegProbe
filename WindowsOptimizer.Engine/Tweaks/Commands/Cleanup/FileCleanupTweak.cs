@@ -167,7 +167,7 @@ public abstract class FileCleanupTweak : ITweak
             }
 
             return new TweakResult(
-                errors.Count == 0 ? TweakStatus.Applied : TweakStatus.PartiallyApplied,
+                errors.Count == 0 ? TweakStatus.Applied : TweakStatus.Failed,
                 message,
                 DateTimeOffset.UtcNow);
         }

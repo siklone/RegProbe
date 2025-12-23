@@ -13,22 +13,10 @@ public static class SetNotepadPlusPlusDefaultEditorTweak
         var entries = new List<RegistryValueBatchEntry>
         {
             // Batch files editor
-            new RegistryValueBatchEntry(
-                RegistryHive.ClassesRoot,
-                RegistryView.Default,
-                @"batfile\shell\edit\command",
-                "",
-                RegistryValueKind.String,
-                "\"C:\\Program Files\\Notepad++\\notepad++.exe\" \"%1\""),
+            new RegistryValueBatchEntry(RegistryHive.ClassesRoot, @"batfile\shell\edit\command", "", RegistryValueKind.String, "\"C:\\Program Files\\Notepad++\\notepad++.exe\" \"%1\"", RegistryView.Default),
 
             // Text files editor (optional, can be extended)
-            new RegistryValueBatchEntry(
-                RegistryHive.ClassesRoot,
-                RegistryView.Default,
-                @"txtfile\shell\edit\command",
-                "",
-                RegistryValueKind.String,
-                "\"C:\\Program Files\\Notepad++\\notepad++.exe\" \"%1\"")
+            new RegistryValueBatchEntry(RegistryHive.ClassesRoot, @"txtfile\shell\edit\command", "", RegistryValueKind.String, "\"C:\\Program Files\\Notepad++\\notepad++.exe\" \"%1\"", RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

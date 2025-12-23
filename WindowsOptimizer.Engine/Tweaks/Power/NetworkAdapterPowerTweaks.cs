@@ -20,31 +20,13 @@ public static class NetworkAdapterPowerTweaks
             // and apply settings to each adapter instance
 
             // Common Intel adapter settings
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters",
-                "DisableTaskOffload",
-                RegistryValueKind.DWord,
-                0), // 0 = enable offload (better performance)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", RegistryValueKind.DWord, 0, RegistryView.Default), // 0 = enable offload (better performance)
 
             // Disable network throttling
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile",
-                "NetworkThrottlingIndex",
-                RegistryValueKind.DWord,
-                0xFFFFFFFF), // Disable throttling
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", RegistryValueKind.DWord, 0xFFFFFFFF, RegistryView.Default), // Disable throttling
 
             // System responsiveness (audio/multimedia priority)
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile",
-                "SystemResponsiveness",
-                RegistryValueKind.DWord,
-                0) // 0 = best responsiveness (default 20)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 0, RegistryView.Default) // 0 = best responsiveness (default 20)
         };
 
         return new RegistryValueBatchTweak(
@@ -65,45 +47,15 @@ public static class NetworkAdapterPowerTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Game priority boost
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-                "Priority",
-                RegistryValueKind.DWord,
-                8), // High priority
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Priority", RegistryValueKind.DWord, 8, RegistryView.Default), // High priority
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-                "Scheduling Category",
-                RegistryValueKind.String,
-                "High"),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Scheduling Category", RegistryValueKind.String, "High", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-                "SFIO Priority",
-                RegistryValueKind.String,
-                "High"),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "SFIO Priority", RegistryValueKind.String, "High", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-                "GPU Priority",
-                RegistryValueKind.DWord,
-                8),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "GPU Priority", RegistryValueKind.DWord, 8, RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-                "Affinity",
-                RegistryValueKind.DWord,
-                0)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Affinity", RegistryValueKind.DWord, 0, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

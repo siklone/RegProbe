@@ -12,13 +12,7 @@ public static class DisableVisualStudioTelemetryTweak
         var entries = new List<RegistryValueBatchEntry>();
 
         // VS Telemetry
-        entries.Add(new RegistryValueBatchEntry(
-            RegistryHive.LocalMachine,
-            RegistryView.Default,
-            @"SOFTWARE\Policies\Microsoft\VisualStudio\SQM",
-            "OptIn",
-            RegistryValueKind.DWord,
-            0));
+        entries.Add(new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\VisualStudio\SQM", "OptIn", RegistryValueKind.DWord, 0, RegistryView.Default));
 
         // Feedback settings
         var feedbackPolicies = new Dictionary<string, int>
@@ -30,26 +24,14 @@ public static class DisableVisualStudioTelemetryTweak
 
         foreach (var policy in feedbackPolicies)
         {
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SOFTWARE\Policies\Microsoft\VisualStudio\Feedback",
-                policy.Key,
-                RegistryValueKind.DWord,
-                policy.Value));
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", policy.Key, RegistryValueKind.DWord, policy.Value, RegistryView.Default));
         }
 
         // SQM opt-in for different VS versions
         var versions = new[] { "14.0", "15.0", "16.0", "17.0" }; // VS 2015, 2017, 2019, 2022
         foreach (var version in versions)
         {
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                $@"SOFTWARE\Microsoft\VSCommon\{version}\SQM",
-                "OptIn",
-                RegistryValueKind.DWord,
-                0));
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.LocalMachine, $@"SOFTWARE\Microsoft\VSCommon\{version}\SQM", "OptIn", RegistryValueKind.DWord, 0, RegistryView.Default));
         }
 
         return new RegistryValueBatchTweak(

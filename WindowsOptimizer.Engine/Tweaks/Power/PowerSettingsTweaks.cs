@@ -14,22 +14,10 @@ public static class PowerSettingsTweaks
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "MSDisabled",
-                RegistryValueKind.DWord,
-                1),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "MSDisabled", RegistryValueKind.DWord, 1, RegistryView.Default),
 
             // Disable aggressive standby actions
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power\ModernSleep",
-                "EnabledActions",
-                RegistryValueKind.DWord,
-                0)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\ModernSleep", "EnabledActions", RegistryValueKind.DWord, 0, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -49,13 +37,7 @@ public static class PowerSettingsTweaks
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "HiberbootEnabled",
-                RegistryValueKind.DWord,
-                0)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -75,13 +57,7 @@ public static class PowerSettingsTweaks
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power\PowerThrottling",
-                "PowerThrottlingOff",
-                RegistryValueKind.DWord,
-                1)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", RegistryValueKind.DWord, 1, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -102,57 +78,21 @@ public static class PowerSettingsTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Disable coalescing (reduces timer coalescing delays)
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "CoalescingTimerInterval",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "CoalescingTimerInterval", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Disable deep IO coalescing
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "DeepIoCoalescingEnabled",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "DeepIoCoalescingEnabled", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Enable event processor
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "EventProcessorEnabled",
-                RegistryValueKind.DWord,
-                1),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "EventProcessorEnabled", RegistryValueKind.DWord, 1, RegistryView.Default),
 
             // Disable parking (let all cores run)
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "LatencyToleranceParked",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceParked", RegistryValueKind.DWord, 0, RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "LatencyToleranceSoftParked",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceSoftParked", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Energy estimation
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "EnergyEstimationEnabled",
-                RegistryValueKind.DWord,
-                0)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "EnergyEstimationEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

@@ -62,13 +62,7 @@ public static class DisableEdgeFeaturesTweaks
 
         foreach (var policy in policies)
         {
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                basePath,
-                policy.Key,
-                RegistryValueKind.DWord,
-                policy.Value));
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.LocalMachine, basePath, policy.Key, RegistryValueKind.DWord, policy.Value, RegistryView.Default));
         }
 
         // EdgeUI policies (Windows 8/8.1 specific)
@@ -86,21 +80,9 @@ public static class DisableEdgeFeaturesTweaks
         foreach (var policy in edgeUIPolicies)
         {
             // Add for both HKLM and HKCU
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                edgeUIPath,
-                policy.Key,
-                RegistryValueKind.DWord,
-                policy.Value));
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.LocalMachine, edgeUIPath, policy.Key, RegistryValueKind.DWord, policy.Value, RegistryView.Default));
 
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                edgeUIPath,
-                policy.Key,
-                RegistryValueKind.DWord,
-                policy.Value));
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, edgeUIPath, policy.Key, RegistryValueKind.DWord, policy.Value, RegistryView.Default));
         }
 
         return new RegistryValueBatchTweak(

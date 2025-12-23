@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Infrastructure.Commands;
 

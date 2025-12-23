@@ -14,37 +14,13 @@ public static class DisableOfficeTelemetryTweak
         // Office telemetry agent
         var basePath = @"Software\Policies\Microsoft\Office\16.0\OSM";
 
-        entries.Add(new RegistryValueBatchEntry(
-            RegistryHive.CurrentUser,
-            RegistryView.Default,
-            basePath,
-            "EnableLogging",
-            RegistryValueKind.DWord,
-            0));
+        entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, basePath, "EnableLogging", RegistryValueKind.DWord, 0, RegistryView.Default));
 
-        entries.Add(new RegistryValueBatchEntry(
-            RegistryHive.CurrentUser,
-            RegistryView.Default,
-            basePath,
-            "EnableUpload",
-            RegistryValueKind.DWord,
-            0));
+        entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, basePath, "EnableUpload", RegistryValueKind.DWord, 0, RegistryView.Default));
 
-        entries.Add(new RegistryValueBatchEntry(
-            RegistryHive.CurrentUser,
-            RegistryView.Default,
-            @"Software\Policies\Microsoft\Office\16.0\Common",
-            "QMEnable",
-            RegistryValueKind.DWord,
-            0));
+        entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Policies\Microsoft\Office\16.0\Common", "QMEnable", RegistryValueKind.DWord, 0, RegistryView.Default));
 
-        entries.Add(new RegistryValueBatchEntry(
-            RegistryHive.CurrentUser,
-            RegistryView.Default,
-            @"Software\Policies\Microsoft\Office\16.0\Common\Feedback",
-            "Enabled",
-            RegistryValueKind.DWord,
-            0));
+        entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Policies\Microsoft\Office\16.0\Common\Feedback", "Enabled", RegistryValueKind.DWord, 0, RegistryView.Default));
 
         // Prevent telemetry for specific Office applications
         var applications = new Dictionary<string, string>
@@ -62,26 +38,14 @@ public static class DisableOfficeTelemetryTweak
 
         foreach (var app in applications)
         {
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                $@"{basePath}\preventedapplications",
-                app.Key,
-                RegistryValueKind.DWord,
-                1)); // 1 = Prevent reporting
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, $@"{basePath}\preventedapplications", app.Key, RegistryValueKind.DWord, 1, RegistryView.Default)); // 1 = Prevent reporting
         }
 
         // Prevent telemetry for solution types
         var solutionTypes = new[] { "agave", "appaddins", "comaddins", "documentfiles", "templatefiles" };
         foreach (var solutionType in solutionTypes)
         {
-            entries.Add(new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                $@"{basePath}\preventedsolutiontypes",
-                solutionType,
-                RegistryValueKind.DWord,
-                1)); // 1 = Prevent reporting
+            entries.Add(new RegistryValueBatchEntry(RegistryHive.CurrentUser, $@"{basePath}\preventedsolutiontypes", solutionType, RegistryValueKind.DWord, 1, RegistryView.Default)); // 1 = Prevent reporting
         }
 
         return new RegistryValueBatchTweak(

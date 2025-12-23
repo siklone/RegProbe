@@ -15,31 +15,13 @@ public static class KeyboardTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Minimum repeat delay (0 = shortest delay before repeat starts)
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Keyboard",
-                "KeyboardDelay",
-                RegistryValueKind.String,
-                "0"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Keyboard", "KeyboardDelay", RegistryValueKind.String, "0", RegistryView.Default),
 
             // Maximum repeat rate (31 = fastest repeat)
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Keyboard",
-                "KeyboardSpeed",
-                RegistryValueKind.String,
-                "31"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Keyboard", "KeyboardSpeed", RegistryValueKind.String, "31", RegistryView.Default),
 
             // Slower cursor blink rate (900ms, easier on eyes)
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Desktop",
-                "CursorBlinkRate",
-                RegistryValueKind.String,
-                "900")
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", RegistryValueKind.String, "900", RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -60,29 +42,11 @@ public static class KeyboardTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // 3 = Not assigned (disables hotkey)
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Keyboard Layout\Toggle",
-                "Language Hotkey",
-                RegistryValueKind.String,
-                "3"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Keyboard Layout\Toggle", "Language Hotkey", RegistryValueKind.String, "3", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Keyboard Layout\Toggle",
-                "Hotkey",
-                RegistryValueKind.String,
-                "3"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Keyboard Layout\Toggle", "Hotkey", RegistryValueKind.String, "3", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Keyboard Layout\Toggle",
-                "Layout Hotkey",
-                RegistryValueKind.String,
-                "3")
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Keyboard Layout\Toggle", "Layout Hotkey", RegistryValueKind.String, "3", RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

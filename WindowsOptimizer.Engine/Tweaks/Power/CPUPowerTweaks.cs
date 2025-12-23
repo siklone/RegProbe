@@ -15,39 +15,15 @@ public static class CPUPowerTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Disable parking algorithm
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "LatencyToleranceParked",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceParked", RegistryValueKind.DWord, 0, RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "LatencyToleranceSoftParked",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceSoftParked", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Initial unpark count (max cores active)
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "Class1InitialUnparkCount",
-                RegistryValueKind.DWord,
-                100), // High value keeps cores unparked
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "Class1InitialUnparkCount", RegistryValueKind.DWord, 100, RegistryView.Default), // High value keeps cores unparked
 
             // Multipark granularity
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "MultiparkGranularity",
-                RegistryValueKind.DWord,
-                100)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "MultiparkGranularity", RegistryValueKind.DWord, 100, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -68,31 +44,13 @@ public static class CPUPowerTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Disable idle states at boot
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "DisableIdleStatesAtBoot",
-                RegistryValueKind.DWord,
-                1),
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "DisableIdleStatesAtBoot", RegistryValueKind.DWord, 1, RegistryView.Default),
 
             // Reduce idle state timeout
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "IdleStateTimeout",
-                RegistryValueKind.DWord,
-                0), // Minimal timeout
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", RegistryValueKind.DWord, 0, RegistryView.Default), // Minimal timeout
 
             // Exit latency check (disable deep sleep)
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "ExitLatencyCheckEnabled",
-                RegistryValueKind.DWord,
-                1)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "ExitLatencyCheckEnabled", RegistryValueKind.DWord, 1, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -113,40 +71,16 @@ public static class CPUPowerTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Performance boost settings
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "PerfBoostAtGuaranteed",
-                RegistryValueKind.DWord,
-                1), // Enable boost at guaranteed frequency
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfBoostAtGuaranteed", RegistryValueKind.DWord, 1, RegistryView.Default), // Enable boost at guaranteed frequency
 
             // High performance duration after boot
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "HighPerfDurationBoot",
-                RegistryValueKind.DWord,
-                120000), // 2 minutes high perf after boot
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HighPerfDurationBoot", RegistryValueKind.DWord, 120000, RegistryView.Default), // 2 minutes high perf after boot
 
             // Latency tolerance
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "LatencyToleranceDefault",
-                RegistryValueKind.DWord,
-                0), // Minimum latency tolerance
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceDefault", RegistryValueKind.DWord, 0, RegistryView.Default), // Minimum latency tolerance
 
             // Performance calculation
-            new RegistryValueBatchEntry(
-                RegistryHive.LocalMachine,
-                RegistryView.Default,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "PerfCalculateActualUtilization",
-                RegistryValueKind.DWord,
-                1)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfCalculateActualUtilization", RegistryValueKind.DWord, 1, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

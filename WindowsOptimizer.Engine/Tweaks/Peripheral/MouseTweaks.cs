@@ -15,31 +15,13 @@ public static class MouseTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Disable raw mouse throttling
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "RawMouseThrottleEnabled",
-                RegistryValueKind.DWord,
-                0),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "RawMouseThrottleEnabled", RegistryValueKind.DWord, 0, RegistryView.Default),
 
             // Set minimum throttle duration (1ms = 1000Hz)
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "RawMouseThrottleDuration",
-                RegistryValueKind.DWord,
-                1),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "RawMouseThrottleDuration", RegistryValueKind.DWord, 1, RegistryView.Default),
 
             // Set minimum leeway
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "RawMouseThrottleLeeway",
-                RegistryValueKind.DWord,
-                2)
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "RawMouseThrottleLeeway", RegistryValueKind.DWord, 2, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
@@ -60,38 +42,14 @@ public static class MouseTweaks
         var entries = new List<RegistryValueBatchEntry>
         {
             // Disable mouse acceleration
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "MouseSpeed",
-                RegistryValueKind.String,
-                "0"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", RegistryValueKind.String, "0", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "MouseThreshold1",
-                RegistryValueKind.String,
-                "0"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", RegistryValueKind.String, "0", RegistryView.Default),
 
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "MouseThreshold2",
-                RegistryValueKind.String,
-                "0"),
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", RegistryValueKind.String, "0", RegistryView.Default),
 
             // Keep sensitivity at default
-            new RegistryValueBatchEntry(
-                RegistryHive.CurrentUser,
-                RegistryView.Default,
-                @"Control Panel\Mouse",
-                "MouseSensitivity",
-                RegistryValueKind.String,
-                "10")
+            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseSensitivity", RegistryValueKind.String, "10", RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
