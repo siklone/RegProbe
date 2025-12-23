@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Intelligence;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.Engine;
