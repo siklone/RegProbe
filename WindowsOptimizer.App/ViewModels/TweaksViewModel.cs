@@ -92,10 +92,11 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly string _tweakLogFilePath;
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
+    private readonly IEnumerable<ITweakProvider>? _providerList;
 
     public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
     {
-        var providerList = providers;
+        _providerList = providers;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         var logger = new FileAppLogger(paths);
@@ -3234,7 +3235,7 @@ public sealed class TweaksViewModel : ViewModelBase
         // Example nested tweaks registration (demonstrating the dot notation)
         // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
 
-        if (providerList != null)
+        if (_providerList != null)
         {
             var tweakContext = new TweakContext(
                 _localRegistryAccessor,
@@ -3243,7 +3244,7 @@ public sealed class TweaksViewModel : ViewModelBase
                 _elevatedTaskManager,
                 _elevatedFileSystemAccessor);
 
-            foreach (var provider in providerList)
+            foreach (var provider in _providerList)
             {
                 var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
                 foreach (var tweak in providerTweaks)
