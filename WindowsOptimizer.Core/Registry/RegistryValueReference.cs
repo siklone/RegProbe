@@ -1,6 +1,6 @@
 using Microsoft.Win32;
 
-namespace WindowsOptimizer.Infrastructure.Registry;
+namespace WindowsOptimizer.Core.Registry;
 
 public sealed record RegistryValueReference(
     RegistryHive Hive,

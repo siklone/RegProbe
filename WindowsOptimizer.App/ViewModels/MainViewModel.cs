@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core.Services;
-using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.Engine.Intelligence;
+using WindowsOptimizer.App.Services.TweakProviders;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -18,7 +18,8 @@ public sealed class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         var dashboard = new DashboardViewModel();
-        var tweaks = new TweaksViewModel();
+        var systemProvider = new SystemTweakProvider();
+        var tweaks = new TweaksViewModel(new ITweakProvider[] { systemProvider });
         var monitor = new MonitorViewModel();
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();

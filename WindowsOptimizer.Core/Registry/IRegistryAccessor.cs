@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsOptimizer.Infrastructure.Registry;
+namespace WindowsOptimizer.Core.Registry;
 
 public interface IRegistryAccessor
 {

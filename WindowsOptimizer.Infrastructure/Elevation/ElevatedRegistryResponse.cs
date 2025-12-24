@@ -1,5 +1,5 @@
 using System;
-using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Infrastructure.Elevation;
 

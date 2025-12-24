@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks;
-using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Core.Registry;
 using Xunit;
 
 public sealed class RegistryValueBatchTweakTests

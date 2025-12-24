@@ -5,10 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
-using WindowsOptimizer.Infrastructure.Files;
-using WindowsOptimizer.Infrastructure.Registry;
-using WindowsOptimizer.Infrastructure.Services;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Files;
+using WindowsOptimizer.Core.Registry;
+using WindowsOptimizer.Core.Services;
+using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.ElevatedHost;
 

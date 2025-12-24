@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks;
-using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Core.Services;
 using Xunit;
 
 public sealed class ServiceStartModeBatchTweakTests

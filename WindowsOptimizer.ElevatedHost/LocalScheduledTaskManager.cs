@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.ElevatedHost;
 

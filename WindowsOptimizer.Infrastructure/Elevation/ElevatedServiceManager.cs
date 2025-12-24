@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Core.Services;
 
 namespace WindowsOptimizer.Infrastructure.Elevation;
 

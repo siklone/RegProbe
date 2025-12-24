@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsOptimizer.Infrastructure.Files;
+namespace WindowsOptimizer.Core.Files;
 
 public interface IFileSystemAccessor
 {

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Tasks;
 using Xunit;
 
 public sealed class ScheduledTaskBatchTweakTests

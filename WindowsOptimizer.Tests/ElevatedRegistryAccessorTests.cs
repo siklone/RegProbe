@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using WindowsOptimizer.Infrastructure.Elevation;
-using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Core.Registry;
 using Xunit;
 
 public sealed class ElevatedRegistryAccessorTests

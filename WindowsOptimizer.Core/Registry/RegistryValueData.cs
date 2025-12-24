@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Microsoft.Win32;
 
-namespace WindowsOptimizer.Infrastructure.Registry;
+namespace WindowsOptimizer.Core.Registry;
 
 public sealed record RegistryValueData(
     RegistryValueKind Kind,

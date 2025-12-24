@@ -1,4 +1,4 @@
-using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.Core.Services;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 

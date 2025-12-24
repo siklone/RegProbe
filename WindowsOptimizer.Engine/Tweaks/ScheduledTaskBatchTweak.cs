@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 

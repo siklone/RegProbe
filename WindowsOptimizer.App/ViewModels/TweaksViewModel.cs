@@ -30,10 +30,10 @@ using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
-using WindowsOptimizer.Infrastructure.Files;
-using WindowsOptimizer.Infrastructure.Registry;
-using WindowsOptimizer.Infrastructure.Services;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Files;
+using WindowsOptimizer.Core.Registry;
+using WindowsOptimizer.Core.Services;
+using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -89,8 +89,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly KernelImpactAnalyzer _kernelAnalyzer = new();
     private readonly string _tweakLogFilePath;
     private readonly IProfileManager _profileManager;
+    private readonly TweakExecutionPipeline _pipeline;
 
-    public TweaksViewModel()
+    public TweaksViewModel(IEnumerable<ITweakProvider>? tweakProviders = null)
     {
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
@@ -99,7 +100,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         _profileManager = new ProfileManager(paths);
-        var pipeline = new TweakExecutionPipeline(logger, _logStore);
+        _pipeline = new TweakExecutionPipeline(logger, _logStore);
         var settingsStore = new SettingsStore(paths);
         _isElevated = ProcessElevation.IsElevated();
         var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
@@ -120,8 +121,9 @@ public sealed class TweaksViewModel : ViewModelBase
         var mobsyncDisabledPath = mobsyncPath + ".disabled";
         var psrPath = Path.Combine(system32Path, "psr.exe");
         var psrDisabledPath = psrPath + ".disabled";
-        var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
         var helpPaneDisabledPath = helpPanePath + ".disabled";
+
+        LoadPlugins();
 
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
@@ -151,6 +153,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
                     "system.disable-low-disk-space-checks",
                     "Disable Low Disk Space Checks",
@@ -164,6 +167,8 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            */
+            /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
                     "system.enable-game-mode",
                     "Enable Game Mode",
@@ -177,6 +182,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+             */
             new(CreateRegistryTweak(
                     "security.enable-dynamic-lock",
                     "Enable Dynamic Lock",
@@ -190,6 +196,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
                     "system.disable-dst-notifications",
                     "Disable DST Change Notifications",
@@ -203,6 +210,8 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            */
+            /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
                     "system.disable-search-highlights",
                     "Disable Search Highlights (User)",
@@ -216,6 +225,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     requiresElevation: false),
                 pipeline,
                 _isElevated),
+            */
             new(CreateRegistryValueSetTweak(
                     "system.disable-clipboard-history",
                     "Disable Clipboard History & Sync",
@@ -3219,6 +3229,25 @@ public sealed class TweaksViewModel : ViewModelBase
 
         // Example nested tweaks registration (demonstrating the dot notation)
         // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
+
+        if (tweakProviders != null)
+        {
+            var tweakContext = new TweakContext(
+                _localRegistryAccessor, 
+                _elevatedRegistryAccessor, 
+                _elevatedServiceManager, 
+                _elevatedTaskManager, 
+                _elevatedFileSystemAccessor);
+
+            foreach (var provider in tweakProviders)
+            {
+                var providerTweaks = provider.CreateTweaks(pipeline, tweakContext, _isElevated);
+                foreach (var tweak in providerTweaks)
+                {
+                    Tweaks.Add(new TweakItemViewModel(tweak, pipeline, _isElevated));
+                }
+            }
+        }
     }
 
     public string Title => "Tweaks";
@@ -4174,7 +4203,12 @@ public sealed class TweaksViewModel : ViewModelBase
             foreach (var plugin in plugins)
             {
                 Debug.WriteLine($"God-Tier Plugin Loaded: {plugin.PluginName} v{plugin.Version}");
-                // In a production scenario, plugin tweaks would be merged into CategoryGroups here
+                
+                var pluginTweaks = plugin.GetTweaks();
+                foreach (var tweak in pluginTweaks)
+                {
+                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
+                }
             }
         }
         catch (Exception ex)

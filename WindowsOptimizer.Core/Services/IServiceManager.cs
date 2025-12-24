@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsOptimizer.Infrastructure.Services;
+namespace WindowsOptimizer.Core.Services;
 
 public interface IServiceManager
 {

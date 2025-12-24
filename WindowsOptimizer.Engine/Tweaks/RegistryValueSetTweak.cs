@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 

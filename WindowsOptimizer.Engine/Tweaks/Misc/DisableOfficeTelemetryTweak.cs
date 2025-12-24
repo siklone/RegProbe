@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Engine.Tweaks.Misc;
 

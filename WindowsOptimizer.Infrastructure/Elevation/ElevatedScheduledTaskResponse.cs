@@ -1,5 +1,5 @@
 using System;
-using WindowsOptimizer.Infrastructure.Tasks;
+using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.Infrastructure.Elevation;
 
