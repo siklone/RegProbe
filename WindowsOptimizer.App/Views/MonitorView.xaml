@@ -166,7 +166,7 @@
                 </Border>
 
                 <!-- RAM Usage Card -->
-                <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Column="1">
                     <Border.Style>
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
