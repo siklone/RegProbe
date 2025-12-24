@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Win32;
+using WinRegistry = Microsoft.Win32.Registry;
+using WinRegistryValueKind = Microsoft.Win32.RegistryValueKind;
+using WinRegistryKey = Microsoft.Win32.RegistryKey;
 
 namespace WindowsOptimizer.Core.Scripting;
 
@@ -54,7 +56,7 @@ public sealed class ScriptApi
 
         try
         {
-            return Registry.GetValue(keyPath, valueName, null);
+            return WinRegistry.GetValue(keyPath, valueName, null);
         }
         catch (Exception ex)
         {
@@ -75,8 +77,8 @@ public sealed class ScriptApi
 
         try
         {
-            var kind = Enum.Parse<RegistryValueKind>(valueKind);
-            Registry.SetValue(keyPath, valueName, value, kind);
+            var kind = Enum.Parse<WinRegistryValueKind>(valueKind);
+            WinRegistry.SetValue(keyPath, valueName, value, kind);
             Print($"Registry set: {keyPath}\\{valueName} = {value}");
             return true;
         }
@@ -298,18 +300,18 @@ public sealed class ScriptApi
             fullPath.StartsWith(Path.GetFullPath(allowedPath), StringComparison.OrdinalIgnoreCase));
     }
 
-    private RegistryKey? GetRegistryKey(string keyPath, bool writable)
+    private WinRegistryKey? GetRegistryKey(string keyPath, bool writable)
     {
         var parts = keyPath.Split('\\');
         if (parts.Length < 2) return null;
 
         var hive = parts[0].ToUpperInvariant() switch
         {
-            "HKEY_CURRENT_USER" or "HKCU" => Registry.CurrentUser,
-            "HKEY_LOCAL_MACHINE" or "HKLM" => Registry.LocalMachine,
-            "HKEY_CLASSES_ROOT" or "HKCR" => Registry.ClassesRoot,
-            "HKEY_USERS" or "HKU" => Registry.Users,
-            "HKEY_CURRENT_CONFIG" or "HKCC" => Registry.CurrentConfig,
+            "HKEY_CURRENT_USER" or "HKCU" => WinRegistry.CurrentUser,
+            "HKEY_LOCAL_MACHINE" or "HKLM" => WinRegistry.LocalMachine,
+            "HKEY_CLASSES_ROOT" or "HKCR" => WinRegistry.ClassesRoot,
+            "HKEY_USERS" or "HKU" => WinRegistry.Users,
+            "HKEY_CURRENT_CONFIG" or "HKCC" => WinRegistry.CurrentConfig,
             _ => null
         };
 
