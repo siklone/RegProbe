@@ -19,8 +19,19 @@ public sealed class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         var dashboard = new DashboardViewModel();
-        var systemProvider = new SystemTweakProvider();
-        var tweaks = new TweaksViewModel(new ITweakProvider[] { systemProvider });
+
+        // Initialize all tweak providers
+        var providers = new ITweakProvider[]
+        {
+            new SystemTweakProvider(),
+            new PrivacyTweakProvider(),
+            new NetworkTweakProvider(),
+            new PowerTweakProvider(),
+            new PeripheralTweakProvider(),
+            new MiscTweakProvider()
+        };
+
+        var tweaks = new TweaksViewModel(providers);
         var monitor = new MonitorViewModel();
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
