@@ -26,7 +26,7 @@ public sealed class HelloWorldTweak : ITweak
     public Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         var fileExists = File.Exists(_filePath);
-        var status = fileExists ? TweakStatus.Applied : TweakStatus.NotApplied;
+        var status = fileExists ? TweakStatus.Applied : TweakStatus.Detected;
         var message = fileExists
             ? $"Hello World file exists at {_filePath}"
             : "Hello World file not found";

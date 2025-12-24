@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Infrastructure.Registry;
 
