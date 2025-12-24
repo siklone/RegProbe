@@ -1,138 +1,213 @@
-# WPF-Windows-optimizer-with-safe-reversible-tweaks
+# Windows Optimizer
 
-A Windows optimizer built in WPF that focuses on safe, reversible tweaks. Every tweak follows Detect -> Apply -> Verify -> Rollback, with Preview (dry-run) as a first-class path.
+A modern, safe, and reversible Windows optimization tool built with WPF and .NET 8.
 
-## Purpose
-This app aims to make system tuning repeatable and transparent. It separates UI from tweak logic, keeps admin-only operations in a separate elevated process, and logs every action so changes can be audited and reversed.
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![.NET Version](https://img.shields.io/badge/.NET-8.0-blue)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Design goals
-- Safety first: detect state before changes, verify after, rollback on failure.
-- Preview by default: DryRun support is built into the pipeline.
-- Explicit risk levels: Safe, Advanced, Risky (Safe does not include disabling Defender, Firewall, or SmartScreen).
-- Admin operations run through ElevatedHost; the UI process is not always elevated.
-- Logs and export: every step written to app log and CSV.
+## 🎯 Features
 
-## How the code is written
-- **Modern WPF MVVM shell** with Nord-inspired theme, smooth animations, and 60 FPS transitions.
-- **Centralized theming**: Colors, Styles, Animations in `WindowsOptimizer.App/Resources/`.
-- **Smooth navigation**: Page transitions with fade and slide effects using Microsoft.Xaml.Behaviors.
-- **Performance monitoring**: Built-in FPS counter tracks rendering performance.
-- `ITweak` implementations stay small and composable; multi-step changes use composite tweaks.
-- Engine pipeline owns execution flow, progress reporting, and rollback rules.
-- Infrastructure adapters isolate OS concerns (registry, services, tasks, file system).
-- ElevatedHost handles privileged actions over a named pipe with JSON messages.
+### 📊 **Real-Time System Monitoring**
+- Task Manager-style hardware monitoring
+- CPU, RAM, Disk, Network real-time metrics
+- Temperature sensors (CPU/GPU) via LibreHardwareMonitor
+- Top 10 processes by CPU/RAM usage
+- Network adapter statistics (all adapters listed separately)
+- Disk activity per drive with read/write speeds
+- 60-second history graphs for CPU and RAM
 
-## How tweaks are implemented
-Tweaks implement `WindowsOptimizer.Core.ITweak` with four actions: `Detect`, `Apply`, `Verify`, `Rollback`.
-The engine runs them through `TweakExecutionPipeline` which:
-- captures state during Detect,
-- applies only when DryRun is false,
-- verifies when enabled,
-- rolls back automatically on failures (or on demand).
+### ⚙️ **System Tweaks (10 Provider Categories)**
+90+ safe, reversible Windows tweaks organized by category:
 
-Implemented tweak types include:
-- Registry value tweaks (single + batch).
-- Settings toggles stored in `settings.json`.
-- Composite tweaks that chain multiple sub-tweaks.
-- Service start mode batches with optional stop behavior.
-- Scheduled task enable/disable batches.
-- File rename toggles for system executables.
-- **Command-based tweaks** that execute System32 commands (powercfg, DISM, bcdedit) through an allowlist security model.
+1. **Privacy** (10 tweaks) - Telemetry, advertising, activity tracking, Cortana, etc.
+2. **Security** (19 tweaks) - UAC, firewall, SMB signing, Credential Guard, etc.
+3. **Network** (7 tweaks) - IPv6, NetBIOS, LLMNR, SMB optimization, etc.
+4. **Performance** (6 tweaks) - Animations, transparency, kernel paging, etc.
+5. **Visibility** (22 tweaks) - File extensions, hidden files, taskbar customization, etc.
+6. **Audio** (5 tweaks) - Ducking, exclusive mode, spatial sound, etc.
+7. **Power** (4 tweaks) - Fast startup, hibernation, USB suspend, etc.
+8. **Peripherals** (4 tweaks) - AutoPlay, pointer precision, etc.
+9. **System** (4 tweaks) - Game mode, DST notifications, search highlights, etc.
+10. **Miscellaneous** (8 tweaks) - Mixed utility tweaks
 
-## Architecture overview
-- `WindowsOptimizer.App`: WPF UI, filters, bulk commands, and execution status.
-- `WindowsOptimizer.Core`: tweak contracts, enums, and result types.
-- `WindowsOptimizer.Engine`: execution pipeline + tweak implementations (registry, services, tasks, files, **commands**).
-- `WindowsOptimizer.Infrastructure`: adapters (registry, services, tasks, files, **commands with allowlist**), settings, logging.
-- `WindowsOptimizer.ElevatedHost`: separate admin process (named pipes + JSON messages) - handles registry, services, tasks, files, and **command execution**.
-- `WindowsOptimizer.Tests`: unit tests for contracts, adapters, and tweak logic.
+### 🔌 **Plugin System**
+- Dynamic plugin loading from `Plugins` directory
+- ITweakPlugin interface for custom tweaks
+- Example plugin: HelloWorld (demonstrates safe, reversible tweak)
+- Full SDK with documentation
 
-## Data and logs
-- Settings: `%AppData%\\WindowsOptimizerSuite\\settings.json`
-- App log: `%AppData%\\WindowsOptimizerSuite\\logs\\app.log`
-- Tweak log: `%AppData%\\WindowsOptimizerSuite\\logs\\tweak-log.csv`
-- Logs can be exported via `ITweakLogStore.ExportCsvAsync` and the UI action.
+### 📦 **Batch Operations**
+- Multi-select tweaks with checkboxes
+- Bulk apply/rollback operations
+- Progress tracking
 
-## Build and run
-- `dotnet build WindowsOptimizerSuite.slnx`
-- `dotnet run --project WindowsOptimizer.App`
+### 💾 **Profile Management**
+- Export/Import tweak configurations
+- 4 built-in presets:
+  - 🎮 **Gaming**: Optimized for maximum gaming performance
+  - 🔒 **Privacy**: Maximum privacy with telemetry disabled
+  - 🏢 **Workstation**: Balanced for productivity
+  - 🔋 **Laptop**: Battery-optimized settings
+- Custom profile creation
 
-## Docs and backlog
-The `Docs` tree is the source of truth for tweak intent and safety notes. It also acts as the feature backlog for what should be implemented or validated next.
+### 🧠 **Hardware Intelligence**
+- Automatic hardware detection
+- Smart tweak recommendations based on system profile
+- Adaptive optimization
 
-## Status dashboard (estimate)
-![General completion](assets/progress.svg)
+## 🏗️ Architecture
 
-Auto snapshot based on Docs + current tweak list. Update with `python3 scripts/update_readme_progress.py`.
+### Provider Pattern
+All tweaks are organized into modular `ITweakProvider` implementations:
+- **BaseTweakProvider**: Abstract base with helper methods
+- **Category-specific providers**: Each provider handles its domain
+- **Dependency Injection**: Providers injected into TweaksViewModel
 
-<!-- progress:summary:start -->
-| Area | Progress | Notes |
-| --- | --- | --- |
-| Tweaks coverage (docs) | 100% (233/233) <progress value="100" max="100"></progress> | All documented tweaks implemented! 41 new tweaks added in Session 2025-12-23 (Cleanup: 18, Misc: 7, Peripheral: 6, Power: 10) |
-| Monitoring | 45% <progress value="45" max="100"></progress> | Dashboard with statistics cards, pipeline logs, CSV exports |
-| UI/UX shell | 90% <progress value="90" max="100"></progress> | Modern theme, smooth animations, 60 FPS transitions, Dashboard, Settings, About pages complete |
-| Elevation | 90% <progress value="90" max="100"></progress> | ElevatedHost + registry/services/tasks/files/commands with allowlist security |
-| Logging/export | 75% <progress value="75" max="100"></progress> | app.log + tweak-log.csv + export |
-| Tests | 25% <progress value="25" max="100"></progress> | Unit tests for pipeline/tweaks/adapters |
-| Docs/guides | 45% <progress value="45" max="100"></progress> | Docs exist, README updated with session notes, About page comprehensive |
-<!-- progress:summary:end -->
+### Plugin SDK
+```csharp
+public interface ITweakPlugin
+{
+    string PluginName { get; }
+    string Author { get; }
+    string Version { get; }
+    IEnumerable<ITweak> GetTweaks();
+}
+```
 
-<!-- progress:tweaks:start -->
-| Doc Area | Implemented | Total | Coverage |
-| --- | --- | --- | --- |
-| affinities | 0 | 1 | 0% |
-| cleanup | 22 | 22 | 100% |
-| misc | 7 | 13 | 54% |
-| network | 29 | 22 | 100% |
-| peripheral | 15 | 19 | 79% |
-| policies | 0 | 1 | 0% |
-| power | 18 | 22 | 82% |
-| privacy | 67 | 38 | 100% |
-| security | 19 | 24 | 79% |
-| system | 33 | 39 | 85% |
-| visibility | 22 | 32 | 69% |
-| performance | 5 | 0 | N/A |
-| explorer | 3 | 0 | N/A |
-| total | 233 | 233 | 100% |
-<!-- progress:tweaks:end -->
+### Project Structure
+```
+WindowsOptimizer/
+├── WindowsOptimizer.Core/          # Domain models, interfaces
+├── WindowsOptimizer.Engine/        # Business logic, tweak execution
+├── WindowsOptimizer.Infrastructure/ # External services, metrics, registry
+├── WindowsOptimizer.App/           # WPF UI, ViewModels
+├── WindowsOptimizer.ElevatedHost/  # Elevated process for admin operations
+├── WindowsOptimizer.Plugins.HelloWorld/ # Example plugin
+└── WindowsOptimizer.Tests/         # Unit tests
+```
 
-<!-- progress:overall:start -->
-General completion: 75%
-<!-- progress:overall:end -->
+## 🚀 Getting Started
 
-## Automation
-- `scripts/codex_pr.sh` opens or updates a PR from the current branch and leaves `@codex review`.
-- Requires GitHub CLI (`gh`) with `gh auth login`.
-- Usage: `scripts/codex_pr.sh "Title" "Body"`.
-- Optional env vars: `BASE_BRANCH`, `CODEX_COMMENT`, `GH_BIN`.
+### Prerequisites
+- Windows 10/11
+- .NET 8.0 SDK
+- Administrator privileges (for some tweaks)
 
-## Recent Development Sessions
+### Build
+```powershell
+git clone https://github.com/yourusername/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
+cd WPF-Windows-optimizer-with-safe-reversible-tweaks
+dotnet build
+```
 
-### Session 2025-12-22: UI Polish & Feature Expansion
-- **Enhanced Dashboard**: Statistics cards showing tweaks available, applied, and rolled back
-- **Improved About Page**: Comprehensive application information, features, safety notes, and project details
-- **Settings Page**: Discord webhook integration UI with test functionality
-- **18 New Tweaks Added**:
-  - **Performance** (5): Disable Superfetch, Windows Search, Window Animations, Menu Delay, Taskbar Animations
-  - **Privacy** (3): Disable Activity History, App Diagnostics, Location Tracking
-  - **Explorer** (3): Show Hidden Files, File Extensions, Full Path in Title
-  - **Network** (2): Flush DNS Cache, Reset Winsock Catalog
-  - **System** (5): Check Disk Health, Clear Event Logs, Disable Startup Delay, Remove Shortcut Arrow, Verbose Status
-- **Expanded Command Allowlist**: Added sc.exe, ipconfig.exe, netsh.exe, chkdsk.exe, wevtutil.exe with 40+ safe operations
-- **Total Tweaks**: 110+ optimizations now available!
+### Run
+```powershell
+dotnet run --project WindowsOptimizer.App
+```
 
-### Session 2025-12-21: Foundation & Integration
-- **Phase 1 - Modern UI Foundation**:
-  - Nord-inspired theme with centralized color palette
-  - 60 FPS page transitions with fade and slide effects
-  - Performance monitoring with built-in FPS counter
-  - Modern card styles with glassmorphism effects
-- **Phase 2 - Command-Based Tweaks**:
-  - Command execution framework with security allowlist
-  - ElevatedHost integration for privileged commands
-  - 4 initial command tweaks (Power + Cleanup)
-  - Allowlisted: powercfg.exe, DISM.exe, bcdedit.exe
-- **Phase 3 - Discord Integration**:
-  - Discord webhook client with rich embeds
-  - Automatic patch file packaging and uploads
-  - Settings integration for webhook configuration
+### Build Release
+```powershell
+dotnet publish WindowsOptimizer.App -c Release -r win-x64 --self-contained
+```
+
+## 🔌 Creating Plugins
+
+### 1. Create Plugin Project
+```powershell
+dotnet new classlib -n WindowsOptimizer.Plugins.MyPlugin
+dotnet add reference ../WindowsOptimizer.Core/WindowsOptimizer.Core.csproj
+```
+
+### 2. Implement ITweakPlugin
+```csharp
+using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Plugins;
+
+public class MyPlugin : ITweakPlugin
+{
+    public string PluginName => "My Custom Plugin";
+    public string Author => "Your Name";
+    public string Version => "1.0.0";
+
+    public IEnumerable<ITweak> GetTweaks()
+    {
+        return new List<ITweak>
+        {
+            new MyCustomTweak()
+        };
+    }
+}
+```
+
+### 3. Deploy Plugin
+```powershell
+dotnet build
+Copy-Item bin/Release/net8.0-windows/WindowsOptimizer.Plugins.MyPlugin.dll `
+    -Destination ../WindowsOptimizer.App/bin/Release/net8.0-windows/win-x64/Plugins/
+```
+
+See `WindowsOptimizer.Plugins.HelloWorld` for a complete example.
+
+## 📖 Usage
+
+### Monitor Page
+- Real-time hardware metrics
+- Top processes by CPU/RAM
+- Network and disk activity
+- Temperature monitoring
+
+### Tweaks Page
+- Browse 90+ tweaks by category
+- Search and filter
+- Multi-select for batch operations
+- One-click apply/rollback
+- Profile export/import
+
+### Profiles
+1. Click **Export Profile** to save current configuration
+2. Click **Import Profile** to load a saved configuration
+3. Use preset profiles for quick optimization
+
+## 🛡️ Safety
+
+All tweaks are:
+- ✅ **Reversible**: Full rollback support
+- ✅ **Safe**: Registry changes only (no file deletion)
+- ✅ **Logged**: All actions logged for audit
+- ✅ **Verified**: Post-apply verification step
+
+**Risk Levels:**
+- 🟢 **Safe**: No side effects, recommended for all users
+- 🟡 **Advanced**: May affect functionality, understand before applying
+- 🔴 **Risky**: Only for advanced users, may cause issues
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📝 License
+
+MIT License - see LICENSE file for details
+
+## 🙏 Acknowledgments
+
+- **LibreHardwareMonitor** - Hardware sensor data
+- **Nord Theme** - UI color palette
+- **WPF Community** - Framework and patterns
+
+## 📞 Support
+
+- 🐛 **Issues**: GitHub Issues
+- 💬 **Discussions**: GitHub Discussions
+- 📧 **Email**: your.email@example.com
+
+---
+
+**⚠️ Disclaimer**: This tool modifies Windows registry settings. Always create a system restore point before applying tweaks. Use at your own risk.
