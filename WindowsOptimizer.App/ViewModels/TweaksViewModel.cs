@@ -3123,27 +3123,35 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private void OnMetricsTick(object? sender, EventArgs e)
     {
-        var cpu = _metricProvider.GetCpuUsage();
-        var kernelEfficiency = _kernelAnalyzer.GetKernelEfficiencyScore() * 100.0;
-        
-        // Combine CPU usage and Kernel Efficiency for a more "God-Tier" impact metric
-        var combinedImpact = (cpu + kernelEfficiency) / 2.0;
-        
-        if (IsFlatView)
+        try
         {
-            // Update all tweaks (filtered) in flat view
-            foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
+            var cpu = _metricProvider.GetCpuUsage();
+            var kernelEfficiency = _kernelAnalyzer.GetKernelEfficiencyScore() * 100.0;
+
+            // Combine CPU usage and Kernel Efficiency for a more "God-Tier" impact metric
+            var combinedImpact = (cpu + kernelEfficiency) / 2.0;
+
+            if (IsFlatView)
             {
-                tweak.UpdateMetric(combinedImpact);
+                // Update all tweaks (filtered) in flat view
+                foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
+                {
+                    tweak.UpdateMetric(combinedImpact);
+                }
+            }
+            else
+            {
+                // Update hierarchical view
+                foreach (var category in CategoryGroups)
+                {
+                    UpdateMetricsRecursive(category, (float)combinedImpact);
+                }
             }
         }
-        else
+        catch (Exception ex)
         {
-            // Update hierarchical view
-            foreach (var category in CategoryGroups)
-            {
-                UpdateMetricsRecursive(category, (float)combinedImpact);
-            }
+            System.Diagnostics.Debug.WriteLine($"TweaksViewModel metrics update error: {ex.Message}");
+            // Continue running - don't crash the app
         }
     }
 

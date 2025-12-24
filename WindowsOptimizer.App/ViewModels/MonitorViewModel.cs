@@ -86,31 +86,39 @@ public sealed class MonitorViewModel : ViewModelBase
 
     private void OnUpdateTick(object? sender, EventArgs e)
     {
-        // Update system metrics
-        CpuUsage = _metricProvider.GetCpuUsage();
-        RamUsedGb = _metricProvider.GetUsedRamGb();
-        CpuTemp = _metricProvider.GetCpuTemperature();
-        GpuTemp = _metricProvider.GetGpuTemperature();
+        try
+        {
+            // Update system metrics
+            CpuUsage = _metricProvider.GetCpuUsage();
+            RamUsedGb = _metricProvider.GetUsedRamGb();
+            CpuTemp = _metricProvider.GetCpuTemperature();
+            GpuTemp = _metricProvider.GetGpuTemperature();
 
-        // Update history (60 second sliding window)
-        UpdateHistory(CpuHistory, CpuUsage);
-        UpdateHistory(RamHistory, RamUsagePercent);
+            // Update history (60 second sliding window)
+            UpdateHistory(CpuHistory, CpuUsage);
+            UpdateHistory(RamHistory, RamUsagePercent);
 
-        // Update top processes
-        UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
-        UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
+            // Update top processes
+            UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
+            UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
 
-        // Update network adapters
-        UpdateCollection(NetworkAdapters, _networkMonitor.GetActiveAdapters());
+            // Update network adapters
+            UpdateCollection(NetworkAdapters, _networkMonitor.GetActiveAdapters());
 
-        // Update disks
-        UpdateCollection(Disks, _diskMonitor.GetDiskActivity());
+            // Update disks
+            UpdateCollection(Disks, _diskMonitor.GetDiskActivity());
 
-        // Cleanup dead process entries
-        _processMonitor.Cleanup();
+            // Cleanup dead process entries
+            _processMonitor.Cleanup();
 
-        // Trigger RamUsagePercent update
-        OnPropertyChanged(nameof(RamUsagePercent));
+            // Trigger RamUsagePercent update
+            OnPropertyChanged(nameof(RamUsagePercent));
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel update error: {ex.Message}");
+            // Continue running - don't crash the app
+        }
     }
 
     private void UpdateHistory(ObservableCollection<double> history, double newValue)
