@@ -42,10 +42,34 @@
         <StackPanel Margin="20">
 
             <!-- Header -->
-            <StackPanel Margin="0,0,0,20">
-                <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="#ECEFF4"/>
-                <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="#D8DEE9" Margin="0,4,0,0"/>
-            </StackPanel>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="#ECEFF4"/>
+                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="#D8DEE9" Margin="0,4,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
+                    <TextBlock Text="Refresh Rate:" Foreground="#D8DEE9" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <ComboBox ItemsSource="{Binding RefreshIntervalOptions}"
+                              SelectedItem="{Binding RefreshIntervalSeconds, Mode=TwoWay}"
+                              Width="80" Background="#3B4252" Foreground="#ECEFF4" BorderBrush="#4C566A">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Mode=OneWay}"/><Run Text="s"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <Button Grid.Column="2" Content="Export to CSV" Command="{Binding ExportMetricsCommand}"
+                        Background="#88C0D0" Foreground="White" BorderThickness="0"
+                        Padding="16,8" FontSize="14" FontWeight="SemiBold" Cursor="Hand" VerticalAlignment="Center"/>
+            </Grid>
 
             <!-- System Information Section -->
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
@@ -119,9 +143,23 @@
 
                 <!-- CPU Usage Card -->
                 <Border Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                    <Border.Style>
+                        <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCpuAlertActive}" Value="True">
+                                    <Setter Property="BorderBrush" Value="#BF616A"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <StackPanel>
-                        <TextBlock Text="CPU Usage" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#88C0D0" Margin="0,0,0,4">
+                        <Grid>
+                            <TextBlock Text="CPU Usage" FontSize="12" Foreground="#D8DEE9"/>
+                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="#BF616A" FontWeight="Bold"
+                                       HorizontalAlignment="Right" Visibility="{Binding IsCpuAlertActive, Converter={StaticResource BoolToVisibility}}"/>
+                        </Grid>
+                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#88C0D0" Margin="0,8,0,4">
                             <Run Text="{Binding CpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
                         </TextBlock>
                     </StackPanel>
@@ -129,9 +167,23 @@
 
                 <!-- RAM Usage Card -->
                 <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                    <Border.Style>
+                        <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsRamAlertActive}" Value="True">
+                                    <Setter Property="BorderBrush" Value="#BF616A"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <StackPanel>
-                        <TextBlock Text="RAM Usage" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="#A3BE8C" Margin="0,0,0,4">
+                        <Grid>
+                            <TextBlock Text="RAM Usage" FontSize="12" Foreground="#D8DEE9"/>
+                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="#BF616A" FontWeight="Bold"
+                                       HorizontalAlignment="Right" Visibility="{Binding IsRamAlertActive, Converter={StaticResource BoolToVisibility}}"/>
+                        </Grid>
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="#A3BE8C" Margin="0,8,0,4">
                             <Run Text="{Binding RamUsedGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" / " FontSize="16" Foreground="#D8DEE9"/><Run Text="{Binding RamTotalGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB" FontSize="16"/>
                         </TextBlock>
                         <TextBlock FontSize="14" Foreground="#D8DEE9">
@@ -205,6 +257,68 @@
                                 </Canvas>
                             </Viewbox>
                         </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Network and Disk I/O Charts Row -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Network I/O Chart -->
+                <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
+                    <StackPanel>
+                        <TextBlock Text="Network I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
+                            <Viewbox Stretch="Fill">
+                                <Canvas Width="600" Height="100">
+                                    <Polyline Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                              Stroke="#A3BE8C" StrokeThickness="2"/>
+                                    <Polyline Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                              Stroke="#88C0D0" StrokeThickness="2"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Border>
+                        <Grid Margin="0,8,0,0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Border Width="12" Height="12" Background="#A3BE8C" Margin="0,0,4,0"/>
+                                <TextBlock Text="Download" Foreground="#D8DEE9" FontSize="11"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Border Width="12" Height="12" Background="#88C0D0" Margin="0,0,4,0"/>
+                                <TextBlock Text="Upload" Foreground="#D8DEE9" FontSize="11"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Disk I/O Chart -->
+                <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Disk I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
+                            <Viewbox Stretch="Fill">
+                                <Canvas Width="600" Height="100">
+                                    <Polyline Points="{Binding DiskReadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                              Stroke="#A3BE8C" StrokeThickness="2"/>
+                                    <Polyline Points="{Binding DiskWriteHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                              Stroke="#BF616A" StrokeThickness="2"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Border>
+                        <Grid Margin="0,8,0,0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Border Width="12" Height="12" Background="#A3BE8C" Margin="0,0,4,0"/>
+                                <TextBlock Text="Read" Foreground="#D8DEE9" FontSize="11"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Border Width="12" Height="12" Background="#BF616A" Margin="0,0,4,0"/>
+                                <TextBlock Text="Write" Foreground="#D8DEE9" FontSize="11"/>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </Border>
             </Grid>
