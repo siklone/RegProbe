@@ -35,12 +35,30 @@ public sealed class NetworkMonitor
                 catch { continue; }
             }
 
+            // Only add adapter if counters were successfully created
+            if (!_sendCounters.ContainsKey(adapterName) || !_receiveCounters.ContainsKey(adapterName))
+                continue;
+
+            float sendRate = 0;
+            float receiveRate = 0;
+
+            try
+            {
+                sendRate = _sendCounters[adapterName].NextValue();
+                receiveRate = _receiveCounters[adapterName].NextValue();
+            }
+            catch
+            {
+                // Skip this adapter if performance counters fail
+                continue;
+            }
+
             adapters.Add(new NetworkAdapterInfo
             {
                 Name = adapterName,
                 Type = nic.NetworkInterfaceType.ToString(),
-                SendBytesPerSec = _sendCounters[adapterName].NextValue(),
-                ReceiveBytesPerSec = _receiveCounters[adapterName].NextValue(),
+                SendBytesPerSec = sendRate,
+                ReceiveBytesPerSec = receiveRate,
                 TotalBytesSent = stats.BytesSent,
                 TotalBytesReceived = stats.BytesReceived
             });
