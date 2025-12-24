@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,6 +15,21 @@ public sealed class NetworkMonitor
     {
         var adapters = new List<NetworkAdapterInfo>();
 
+        // Get all available Network Interface instances
+        PerformanceCounterCategory category;
+        string[] instanceNames;
+
+        try
+        {
+            category = new PerformanceCounterCategory("Network Interface");
+            instanceNames = category.GetInstanceNames();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to get Network Interface instances: {ex.Message}");
+            return adapters; // Return empty list if category is not available
+        }
+
         foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
         {
             if (nic.OperationalStatus != OperationalStatus.Up)
@@ -22,17 +38,57 @@ public sealed class NetworkMonitor
             var stats = nic.GetIPv4Statistics();
             var adapterName = nic.Name;
 
+            // Try to find matching instance name
+            // Performance counter names may differ slightly from NetworkInterface.Name
+            var matchingInstance = instanceNames.FirstOrDefault(name =>
+                name.Equals(adapterName, StringComparison.OrdinalIgnoreCase) ||
+                name.Contains(adapterName) ||
+                adapterName.Contains(name)
+            );
+
             // Get or create performance counters
             if (!_sendCounters.ContainsKey(adapterName))
             {
+                if (matchingInstance == null)
+                {
+                    Debug.WriteLine($"No matching performance counter instance for adapter: {adapterName}");
+
+                    // Add adapter without rate info
+                    adapters.Add(new NetworkAdapterInfo
+                    {
+                        Name = adapterName,
+                        Type = nic.NetworkInterfaceType.ToString(),
+                        SendBytesPerSec = 0,
+                        ReceiveBytesPerSec = 0,
+                        TotalBytesSent = stats.BytesSent,
+                        TotalBytesReceived = stats.BytesReceived
+                    });
+                    continue;
+                }
+
                 try
                 {
                     _sendCounters[adapterName] = new PerformanceCounter(
-                        "Network Interface", "Bytes Sent/sec", adapterName);
+                        "Network Interface", "Bytes Sent/sec", matchingInstance);
                     _receiveCounters[adapterName] = new PerformanceCounter(
-                        "Network Interface", "Bytes Received/sec", adapterName);
+                        "Network Interface", "Bytes Received/sec", matchingInstance);
                 }
-                catch { continue; }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to create performance counters for {adapterName}: {ex.Message}");
+
+                    // Add adapter without rate info
+                    adapters.Add(new NetworkAdapterInfo
+                    {
+                        Name = adapterName,
+                        Type = nic.NetworkInterfaceType.ToString(),
+                        SendBytesPerSec = 0,
+                        ReceiveBytesPerSec = 0,
+                        TotalBytesSent = stats.BytesSent,
+                        TotalBytesReceived = stats.BytesReceived
+                    });
+                    continue;
+                }
             }
 
             // Only add adapter if counters were successfully created
@@ -47,10 +103,10 @@ public sealed class NetworkMonitor
                 sendRate = _sendCounters[adapterName].NextValue();
                 receiveRate = _receiveCounters[adapterName].NextValue();
             }
-            catch
+            catch (Exception ex)
             {
-                // Skip this adapter if performance counters fail
-                continue;
+                Debug.WriteLine($"Failed to read performance counters for {adapterName}: {ex.Message}");
+                // Continue with 0 values instead of skipping
             }
 
             adapters.Add(new NetworkAdapterInfo

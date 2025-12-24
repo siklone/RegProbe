@@ -13,24 +13,79 @@ public sealed class DiskMonitor
     {
         var disks = new List<DiskInfo>();
 
+        // Get all available PhysicalDisk instances
+        var category = new PerformanceCounterCategory("PhysicalDisk");
+        var instanceNames = category.GetInstanceNames();
+
         foreach (var drive in DriveInfo.GetDrives())
         {
-            if (drive.DriveType != DriveType.Fixed)
+            if (drive.DriveType != DriveType.Fixed || !drive.IsReady)
                 continue;
 
             var driveName = drive.Name.TrimEnd('\\'); // "C:"
-            var instanceName = $"{drive.Name[0]}:"; // Physical disk instance name
+
+            // Try multiple possible instance name formats
+            var possibleInstanceNames = new[]
+            {
+                $"{drive.Name[0]}:",                    // "C:"
+                $"{drive.Name[0]} {drive.Name[1]}",     // "C :"
+                drive.Name.TrimEnd('\\'),               // "C:"
+                "0",                                     // First physical disk
+                "_Total"                                 // Total for all disks
+            };
+
+            // Find the first matching instance name
+            string? matchingInstance = null;
+            foreach (var possible in possibleInstanceNames)
+            {
+                if (instanceNames.Contains(possible))
+                {
+                    matchingInstance = possible;
+                    break;
+                }
+            }
+
+            // If no match found, skip this drive
+            if (matchingInstance == null)
+            {
+                Debug.WriteLine($"No PhysicalDisk instance found for drive {driveName}");
+
+                // Add drive info without I/O stats
+                disks.Add(new DiskInfo
+                {
+                    DriveLetter = driveName,
+                    TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
+                    FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
+                    ReadBytesPerSec = 0,
+                    WriteBytesPerSec = 0
+                });
+                continue;
+            }
 
             if (!_counters.ContainsKey(driveName))
             {
                 try
                 {
                     _counters[driveName] = (
-                        new PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", instanceName),
-                        new PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", instanceName)
+                        new PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", matchingInstance),
+                        new PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", matchingInstance)
                     );
                 }
-                catch { continue; }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to create performance counters for {driveName}: {ex.Message}");
+
+                    // Add drive info without I/O stats
+                    disks.Add(new DiskInfo
+                    {
+                        DriveLetter = driveName,
+                        TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
+                        FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
+                        ReadBytesPerSec = 0,
+                        WriteBytesPerSec = 0
+                    });
+                    continue;
+                }
             }
 
             // Only add disk if counters were successfully created
@@ -47,10 +102,10 @@ public sealed class DiskMonitor
                 readRate = readCounter.NextValue();
                 writeRate = writeCounter.NextValue();
             }
-            catch
+            catch (Exception ex)
             {
-                // Skip this disk if performance counters fail
-                continue;
+                Debug.WriteLine($"Failed to read performance counters for {driveName}: {ex.Message}");
+                // Continue with 0 values instead of skipping
             }
 
             disks.Add(new DiskInfo
