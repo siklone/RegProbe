@@ -33,57 +33,100 @@ public sealed class MonitorViewModel : ViewModelBase
 
     public MonitorViewModel()
     {
-        var paths = AppPaths.FromEnvironment();
-        _metricProvider = new MetricProvider();
-
-        // Initialize collections
-        CpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        RamHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        NetworkUploadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        NetworkDownloadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        DiskReadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        DiskWriteHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
-        TopProcessesByCpu = new ObservableCollection<ProcessInfo>();
-        TopProcessesByRam = new ObservableCollection<ProcessInfo>();
-        NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
-        Disks = new ObservableCollection<DiskInfo>();
-        RefreshIntervalOptions = new ObservableCollection<int> { 1, 2, 5 };
-
-        // Timer: 1 second refresh
-        _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        _updateTimer.Tick += OnUpdateTick;
-        _updateTimer.Start();
-
-        // Get initial total RAM and system info
-        RamTotalGb = _metricProvider.GetTotalRamGb();
-        SystemInfo = _metricProvider.GetSystemInfo();
-
-        // Initialize process management commands
-        KillProcessCommand = new RelayCommand(param =>
+        try
         {
-            if (param is ProcessInfo process)
-            {
-                _processMonitor.KillProcess(process.Pid);
-            }
-        });
+            var paths = AppPaths.FromEnvironment();
+            _metricProvider = new MetricProvider();
 
-        SuspendProcessCommand = new RelayCommand(param =>
+            // Initialize collections
+            CpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            RamHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            NetworkUploadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            NetworkDownloadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            DiskReadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            DiskWriteHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            TopProcessesByCpu = new ObservableCollection<ProcessInfo>();
+            TopProcessesByRam = new ObservableCollection<ProcessInfo>();
+            NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
+            Disks = new ObservableCollection<DiskInfo>();
+            RefreshIntervalOptions = new ObservableCollection<int> { 1, 2, 5 };
+
+            // Initialize process management commands
+            KillProcessCommand = new RelayCommand(param =>
+            {
+                if (param is ProcessInfo process)
+                {
+                    _processMonitor.KillProcess(process.Pid);
+                }
+            });
+
+            SuspendProcessCommand = new RelayCommand(param =>
+            {
+                if (param is ProcessInfo process)
+                {
+                    _processMonitor.SuspendProcess(process.Pid);
+                }
+            });
+
+            ResumeProcessCommand = new RelayCommand(param =>
+            {
+                if (param is ProcessInfo process)
+                {
+                    _processMonitor.ResumeProcess(process.Pid);
+                }
+            });
+
+            ExportMetricsCommand = new RelayCommand(_ => ExportMetricsToCsv());
+
+            // Get initial total RAM and system info (with error handling)
+            try
+            {
+                RamTotalGb = _metricProvider.GetTotalRamGb();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to get total RAM: {ex.Message}");
+                RamTotalGb = 0;
+            }
+
+            try
+            {
+                SystemInfo = _metricProvider.GetSystemInfo();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to get system info: {ex.Message}");
+                SystemInfo = null;
+            }
+
+            // Timer: 1 second refresh (start after initialization)
+            _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _updateTimer.Tick += OnUpdateTick;
+            _updateTimer.Start();
+        }
+        catch (Exception ex)
         {
-            if (param is ProcessInfo process)
-            {
-                _processMonitor.SuspendProcess(process.Pid);
-            }
-        });
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel initialization failed: {ex.Message}");
 
-        ResumeProcessCommand = new RelayCommand(param =>
-        {
-            if (param is ProcessInfo process)
-            {
-                _processMonitor.ResumeProcess(process.Pid);
-            }
-        });
+            // Ensure collections are initialized even if other initialization fails
+            CpuHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            RamHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            NetworkUploadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            NetworkDownloadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            DiskReadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            DiskWriteHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            TopProcessesByCpu ??= new ObservableCollection<ProcessInfo>();
+            TopProcessesByRam ??= new ObservableCollection<ProcessInfo>();
+            NetworkAdapters ??= new ObservableCollection<NetworkAdapterInfo>();
+            Disks ??= new ObservableCollection<DiskInfo>();
+            RefreshIntervalOptions ??= new ObservableCollection<int> { 1, 2, 5 };
 
-        ExportMetricsCommand = new RelayCommand(_ => ExportMetricsToCsv());
+            // Initialize commands if they weren't created
+            KillProcessCommand ??= new RelayCommand(_ => { });
+            SuspendProcessCommand ??= new RelayCommand(_ => { });
+            ResumeProcessCommand ??= new RelayCommand(_ => { });
+            ExportMetricsCommand ??= new RelayCommand(_ => { });
+        }
     }
 
     private void ExportMetricsToCsv()

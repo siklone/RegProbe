@@ -14,8 +14,19 @@ public sealed class DiskMonitor
         var disks = new List<DiskInfo>();
 
         // Get all available PhysicalDisk instances
-        var category = new PerformanceCounterCategory("PhysicalDisk");
-        var instanceNames = category.GetInstanceNames();
+        PerformanceCounterCategory category;
+        string[] instanceNames;
+
+        try
+        {
+            category = new PerformanceCounterCategory("PhysicalDisk");
+            instanceNames = category.GetInstanceNames();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to get PhysicalDisk instances: {ex.Message}");
+            return disks; // Return empty list if category is not available
+        }
 
         foreach (var drive in DriveInfo.GetDrives())
         {
