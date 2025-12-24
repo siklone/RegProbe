@@ -142,7 +142,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- CPU Usage Card -->
-                <Border Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Column="0">
                     <Border.Style>
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
