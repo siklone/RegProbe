@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Services;
 
 namespace WindowsOptimizer.Engine.Services;
 

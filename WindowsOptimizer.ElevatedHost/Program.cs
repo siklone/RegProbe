@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
+using WindowsOptimizer.Infrastructure.Registry;
 using WindowsOptimizer.Core.Files;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;

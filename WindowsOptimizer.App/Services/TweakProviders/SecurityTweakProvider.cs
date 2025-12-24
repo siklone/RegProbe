@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Registry;
+using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;

@@ -4,6 +4,7 @@ using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Tweaks;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 

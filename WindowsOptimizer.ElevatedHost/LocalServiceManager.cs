@@ -5,7 +5,10 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using WindowsOptimizer.Core.Services;
+using ServiceStartMode = WindowsOptimizer.Core.Services.ServiceStartMode;
+using ServiceStatus = WindowsOptimizer.Core.Services.ServiceStatus;
+using ServiceInfo = WindowsOptimizer.Core.Services.ServiceInfo;
+using IServiceManager = WindowsOptimizer.Core.Services.IServiceManager;
 
 namespace WindowsOptimizer.ElevatedHost;
 
@@ -23,7 +26,7 @@ internal sealed class LocalServiceManager : IServiceManager
         }
 
         var exists = false;
-        var startMode = Infrastructure.Services.ServiceStartMode.Unknown;
+        var startMode = ServiceStartMode.Unknown;
         using (var key = Registry.LocalMachine.OpenSubKey(BuildServiceKeyPath(serviceName), false))
         {
             if (key != null)
@@ -50,7 +53,7 @@ internal sealed class LocalServiceManager : IServiceManager
         return Task.FromResult(new ServiceInfo(exists, startMode, status));
     }
 
-    public Task SetStartModeAsync(string serviceName, Infrastructure.Services.ServiceStartMode startMode, CancellationToken ct)
+    public Task SetStartModeAsync(string serviceName, ServiceStartMode startMode, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
@@ -59,7 +62,7 @@ internal sealed class LocalServiceManager : IServiceManager
             throw new ArgumentException("Service name is required.", nameof(serviceName));
         }
 
-        if (startMode is Infrastructure.Services.ServiceStartMode.Unknown)
+        if (startMode is ServiceStartMode.Unknown)
         {
             throw new ArgumentOutOfRangeException(nameof(startMode), startMode, "Start mode must be a concrete value.");
         }
@@ -142,20 +145,20 @@ internal sealed class LocalServiceManager : IServiceManager
         return $"SYSTEM\\CurrentControlSet\\Services\\{serviceName}";
     }
 
-    private static Infrastructure.Services.ServiceStartMode MapStartMode(object? startValue)
+    private static ServiceStartMode MapStartMode(object? startValue)
     {
         return startValue switch
         {
             int start => start switch
             {
-                0 => Infrastructure.Services.ServiceStartMode.Boot,
-                1 => Infrastructure.Services.ServiceStartMode.System,
-                2 => Infrastructure.Services.ServiceStartMode.Automatic,
-                3 => Infrastructure.Services.ServiceStartMode.Manual,
-                4 => Infrastructure.Services.ServiceStartMode.Disabled,
-                _ => Infrastructure.Services.ServiceStartMode.Unknown
+                0 => ServiceStartMode.Boot,
+                1 => ServiceStartMode.System,
+                2 => ServiceStartMode.Automatic,
+                3 => ServiceStartMode.Manual,
+                4 => ServiceStartMode.Disabled,
+                _ => ServiceStartMode.Unknown
             },
-            _ => Infrastructure.Services.ServiceStartMode.Unknown
+            _ => ServiceStartMode.Unknown
         };
     }
 

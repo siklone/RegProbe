@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
+using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.App.Services.TweakProviders;
 
 namespace WindowsOptimizer.App.ViewModels;

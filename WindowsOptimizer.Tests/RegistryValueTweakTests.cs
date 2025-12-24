@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Core.Registry;
+using WindowsOptimizer.Infrastructure.Registry;
 using Xunit;
 
 public sealed class RegistryValueTweakTests

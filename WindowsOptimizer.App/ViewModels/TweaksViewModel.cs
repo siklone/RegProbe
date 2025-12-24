@@ -15,7 +15,10 @@ using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Intelligence;
 using WindowsOptimizer.Core.Models;
 using WindowsOptimizer.Core.Services;
+using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Metrics;
+using WindowsOptimizer.Infrastructure.Registry;
+using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Engine.Tweaks;
@@ -30,7 +33,6 @@ using WindowsOptimizer.Engine.Tweaks.Power;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Commands;
-using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Core.Files;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Tasks;
@@ -91,8 +93,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
 
-    public TweaksViewModel(IEnumerable<ITweakProvider>? tweakProviders = null)
+    public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
     {
+        var providerList = providers;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         var logger = new FileAppLogger(paths);
@@ -121,6 +124,7 @@ public sealed class TweaksViewModel : ViewModelBase
         var mobsyncDisabledPath = mobsyncPath + ".disabled";
         var psrPath = Path.Combine(system32Path, "psr.exe");
         var psrDisabledPath = psrPath + ".disabled";
+        var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
         var helpPaneDisabledPath = helpPanePath + ".disabled";
 
         LoadPlugins();
@@ -138,7 +142,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-jpeg-reduction",
@@ -151,7 +155,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     100,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
@@ -165,7 +169,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             */
             /* Migrated to SystemTweakProvider
@@ -180,7 +184,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
              */
             new(CreateRegistryTweak(
@@ -194,7 +198,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             /* Migrated to SystemTweakProvider
             new(CreateRegistryTweak(
@@ -208,7 +212,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             */
             /* Migrated to SystemTweakProvider
@@ -223,7 +227,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             */
             new(CreateRegistryValueSetTweak(
@@ -238,7 +242,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("AllowClipboardHistory", RegistryValueKind.DWord, 0),
                         new RegistryValueSetEntry("AllowCrossDeviceClipboard", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-clipboard-redirection",
@@ -250,7 +254,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "fDisableClip",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-background-gp-updates",
@@ -262,7 +266,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableBkGndGroupPolicy",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-auto-maintenance",
@@ -274,7 +278,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "MaintenanceDisabled",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "notifications.disable-toast",
@@ -287,7 +291,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "notifications.disable-lockscreen-toast",
@@ -300,7 +304,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "notifications.disable-tile",
@@ -313,7 +317,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "notifications.disable-mirroring",
@@ -326,7 +330,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.verbose-status-messages",
@@ -338,7 +342,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "VerboseStatus",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-store-open-with",
@@ -350,7 +354,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoUseStoreOpenWith",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-common-control-animations",
@@ -363,7 +367,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-window-animations",
@@ -375,7 +379,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisallowAnimations",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.default-account-picture",
@@ -387,7 +391,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "UseDefaultTile",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-wcn-wizards",
@@ -399,7 +403,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableWcnUi",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-first-signin-animation",
@@ -411,7 +415,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableFirstLogonAnimation",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.hide-language-bar",
@@ -424,7 +428,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     3,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-widgets",
@@ -436,7 +440,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowNewsAndInterests",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-features",
@@ -449,7 +453,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-welcome",
@@ -462,7 +466,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-action-center",
@@ -475,7 +479,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-settings",
@@ -488,7 +492,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-desktop-collection",
@@ -501,7 +505,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-lock-screen",
@@ -513,7 +517,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoLockScreen",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-lock-screen-camera",
@@ -525,7 +529,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoLockScreenCamera",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-lock-screen-slideshow",
@@ -537,7 +541,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoLockScreenSlideshow",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-lock-screen-motion",
@@ -549,7 +553,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AnimateLockScreenBackground",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-lock-screen-changes",
@@ -561,7 +565,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoChangingLockScreen",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-acrylic-logon",
@@ -573,7 +577,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableAcrylicBackgroundOnLogon",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.disable-spotlight-third-party",
@@ -586,7 +590,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.hide-most-used-apps",
@@ -598,7 +602,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "ShowOrHideMostUsedApps",
                     RegistryValueKind.DWord,
                     2),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-restartable-apps",
@@ -611,7 +615,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "audio.disable-ducking",
@@ -624,7 +628,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     3,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "audio.show-hidden-devices",
@@ -637,7 +641,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "audio.show-disconnected-devices",
@@ -650,7 +654,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "audio.disable-spatial-audio",
@@ -662,7 +666,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableSpatialOnLowLatency",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "audio.disable-system-sounds",
@@ -721,7 +725,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"AppEvents\Schemes\Apps\sapisvr\HubSleepSound\.current", "", RegistryValueKind.String, string.Empty)
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "peripheral.disable-language-switch-hotkey",
@@ -737,7 +741,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("Layout Hotkey", RegistryValueKind.String, "3")
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "peripheral.disable-pointer-precision",
@@ -755,7 +759,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("MouseSensitivity", RegistryValueKind.String, "10")
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.hide-people-bar",
@@ -768,7 +772,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "peripheral.disable-autoplay",
@@ -781,7 +785,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "peripheral.autoplay-take-no-action",
@@ -820,7 +824,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\AutorunINFLegacyArrival", "", RegistryValueKind.String, "MSTakeNoAction")
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-disable-bandwidth-throttling",
@@ -832,7 +836,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableBandwidthThrottling",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-enable-large-mtu",
@@ -844,7 +848,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableLargeMtu",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "network.smb-require-signing-client",
@@ -858,7 +862,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
                         new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "network.smb-require-signing-server",
@@ -872,7 +876,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
                         new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-encrypt-data",
@@ -884,7 +888,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EncryptData",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-reject-unencrypted-access",
@@ -896,7 +900,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "RejectUnencryptedAccess",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-disable-leasing",
@@ -908,7 +912,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableLeasing",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.smb-enable-multichannel",
@@ -920,7 +924,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableMultiChannel",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "network.smb-enable-quic",
@@ -932,7 +936,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "network.smb-require-dialect-3_1_1",
@@ -946,7 +950,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MaxSmb2Dialect", RegistryValueKind.DWord, 65536)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "network.smb-set-cipher-suite-order",
@@ -968,7 +972,7 @@ public sealed class TweaksViewModel : ViewModelBase
                             RegistryValueKind.MultiString,
                             new[] { "AES_256_GCM", "AES_256_CCM" })
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "network.disable-default-shares",
@@ -980,7 +984,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareServer", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-smb1",
@@ -992,7 +996,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "SMB1",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-smb2",
@@ -1004,7 +1008,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "SMB2",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "visibility.force-classic-control-panel",
@@ -1017,7 +1021,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "power.hide-lock-option",
@@ -1029,7 +1033,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "ShowLockOption",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "power.hide-sleep-option",
@@ -1041,7 +1045,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "ShowSleepOption",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "power.hide-hibernate-option",
@@ -1053,7 +1057,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "ShowHibernateOption",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "power.disable-fast-startup",
@@ -1065,7 +1069,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "HiberbootEnabled",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.enable-hags",
@@ -1077,7 +1081,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "HwSchMode",
                     RegistryValueKind.DWord,
                     2),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-storage-sense",
@@ -1089,7 +1093,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowStorageSenseGlobal",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-storage-sense-temp-cleanup",
@@ -1101,7 +1105,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowStorageSenseTemporaryFilesCleanup",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-search-highlights-policy",
@@ -1113,7 +1117,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableDynamicContentInWSB",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-service-splitting",
@@ -1125,7 +1129,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "SvcHostSplitThresholdInKB",
                     RegistryValueKind.DWord,
                     -1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-llmnr",
@@ -1137,7 +1141,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableMulticast",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-mdns",
@@ -1149,7 +1153,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableMDNS",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-netbios-resolution",
@@ -1161,7 +1165,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableNetbios",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-smart-name-resolution",
@@ -1173,7 +1177,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableSmartNameResolution",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "network.disable-lltd",
@@ -1193,7 +1197,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("AllowRspndrOnPublicNet", RegistryValueKind.DWord, 0),
                         new RegistryValueSetEntry("ProhibitRspndrOnPrivateNet", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "network.disable-active-probing",
@@ -1207,7 +1211,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "EnableUserActiveProbing", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "MaxActiveProbes", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.prefer-ipv4",
@@ -1219,7 +1223,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisabledComponents",
                     RegistryValueKind.DWord,
                     32),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-ipv6",
@@ -1231,7 +1235,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisabledComponents",
                     RegistryValueKind.DWord,
                     255),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-wifi-sense",
@@ -1243,7 +1247,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AutoConnectAllowedOEM",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.disable-plaintext-smb-passwords",
@@ -1255,7 +1259,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnablePlainTextPassword",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.require-ntlmv2-session-security",
@@ -1267,7 +1271,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NTLMMinClientSec",
                     RegistryValueKind.DWord,
                     537395200),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-diagnostic-data",
@@ -1280,7 +1284,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows", "DCEInUseTelemetryDisabled", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\wbem\Tracing", "enableWinmgmtTelemetry", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "privacy.disable-activity-history",
@@ -1295,7 +1299,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("PublishUserActivities", RegistryValueKind.DWord, 0),
                         new RegistryValueSetEntry("UploadUserActivities", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-cross-device-experiences",
@@ -1307,7 +1311,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableCdp",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-phone-linking",
@@ -1319,7 +1323,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableMmx",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-resume",
@@ -1332,7 +1336,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "privacy.disable-cli-telemetry",
@@ -1347,7 +1351,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("DOTNET_CLI_TELEMETRY_OPTOUT", RegistryValueKind.String, "1")
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-language-list-access",
@@ -1360,7 +1364,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "privacy.disable-wmplayer-telemetry",
@@ -1382,7 +1386,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("DisableMRUPlaylists", RegistryValueKind.DWord, 1)
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "privacy.disable-sync-settings",
@@ -1413,7 +1417,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("DisableWindowsSettingSync", RegistryValueKind.DWord, 2),
                         new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-search-history",
@@ -1426,7 +1430,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-search-box-suggestions",
@@ -1439,7 +1443,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-recommended-section",
@@ -1451,7 +1455,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "HideRecommendedSection",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-recommended-section-user",
@@ -1464,7 +1468,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-recommended-personalized-sites",
@@ -1476,7 +1480,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "HideRecommendedPersonalizedSites",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-recommended-personalized-sites-user",
@@ -1489,7 +1493,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "privacy.disable-suggestions",
@@ -1507,7 +1511,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("SubscribedContent-353696Enabled", RegistryValueKind.DWord, 0)
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-consumer-account-content",
@@ -1519,7 +1523,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableConsumerAccountStateContent",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-online-tips",
@@ -1531,7 +1535,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowOnlineTips",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-edge-search-suggestions",
@@ -1544,7 +1548,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Edge", "LocalProvidersEnabled", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\MicrosoftEdge\SearchScopes", "ShowSearchSuggestionsGlobal", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-location",
@@ -1556,7 +1560,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableLocation",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-location-consent",
@@ -1585,7 +1589,7 @@ public sealed class TweaksViewModel : ViewModelBase
                             1)
                     },
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-location-consent-system",
@@ -1597,7 +1601,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Value",
                     RegistryValueKind.String,
                     "Deny"),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-location-scripting",
@@ -1609,7 +1613,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableLocationScripting",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-windows-location-provider",
@@ -1621,7 +1625,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableWindowsLocationProvider",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-sensors",
@@ -1633,7 +1637,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableSensors",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateCompositeTweak(
                     "privacy.disable-steps-recorder",
@@ -1660,7 +1664,7 @@ public sealed class TweaksViewModel : ViewModelBase
                             psrPath,
                             psrDisabledPath)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-app-launch-tracking",
@@ -1673,7 +1677,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-reserved-storage",
@@ -1685,7 +1689,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableDeletes",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-biometrics",
@@ -1697,7 +1701,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Enabled",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-biometrics-logon",
@@ -1709,7 +1713,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Enabled",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-biometrics-domain-logon",
@@ -1721,7 +1725,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Domain Accounts",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-remote-assistance",
@@ -1733,7 +1737,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "fAllowToGetHelp",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "security.disable-windows-update",
@@ -1757,7 +1761,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "UseWUServer", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update", "AUOptions", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "security.disable-wu-driver-updates",
@@ -1771,7 +1775,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "DontSearchWindowsUpdate", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Device Metadata", "PreventDeviceMetadataFromNetwork", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-p2p-updates",
@@ -1783,7 +1787,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DODownloadMode",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "security.disable-system-mitigations",
@@ -1815,7 +1819,7 @@ public sealed class TweaksViewModel : ViewModelBase
                                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
                             })
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "security.disable-windows-firewall",
@@ -1828,7 +1832,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile", "EnableFirewall", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-system-restore",
@@ -1840,7 +1844,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "RPSessionInterval",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-downloads-blocking",
@@ -1853,7 +1857,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-wpbt",
@@ -1865,7 +1869,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableWpbtExecution",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "security.disable-vbs",
@@ -1880,7 +1884,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("HypervisorEnforcedCodeIntegrity", RegistryValueKind.DWord, 0),
                         new RegistryValueSetEntry("LsaCfgFlags", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.trusted-path-credential-prompting",
@@ -1892,7 +1896,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableSecureCredentialPrompting",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "security.disable-ntfs-encryption",
@@ -1904,7 +1908,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Policies", "NtfsDisableEncryption", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Control\FileSystem", "NtfsDisableEncryption", RegistryValueKind.DWord, 1)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-application-telemetry",
@@ -1916,7 +1920,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AITEnable",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.limit-diagnostic-log-collection",
@@ -1928,7 +1932,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "LimitDiagnosticLogCollection",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-diagnostic-data-viewer",
@@ -1940,7 +1944,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableDiagnosticDataViewer",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-diagnostic-data-delete",
@@ -1952,7 +1956,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableDeviceDelete",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-onesettings-downloads",
@@ -1964,7 +1968,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableOneSettingsDownloads",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.limit-dump-collection",
@@ -1976,7 +1980,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "LimitDumpCollection",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-telemetry-optin-ui",
@@ -1988,7 +1992,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableTelemetryOptInSettingsUx",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-telemetry-change-notifications",
@@ -2000,7 +2004,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableTelemetryOptInChangeNotification",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-device-name-telemetry",
@@ -2012,7 +2016,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowDeviceNameInTelemetry",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-file-history",
@@ -2024,7 +2028,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Disabled",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-mdm-enrollment",
@@ -2036,7 +2040,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableRegistration",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-feedback-notifications",
@@ -2048,7 +2052,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DoNotShowFeedbackNotifications",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-ceip",
@@ -2061,7 +2065,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Messenger\Client", "CEIP", RegistryValueKind.DWord, 2)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.deny-app-access",
@@ -2097,7 +2101,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsActivateWithVoiceAboveLock", RegistryValueKind.DWord, 2),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, 2)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-background-apps",
@@ -2109,7 +2113,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "LetAppsRunInBackground",
                     RegistryValueKind.DWord,
                     2),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-wer",
@@ -2121,7 +2125,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Disabled",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-rsop-logging",
@@ -2133,7 +2137,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "RsopLogging", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\SYSTEM", "RsopLogging", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.troubleshooter-dont-run",
@@ -2145,7 +2149,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\WindowsMitigation", "UserPreference", RegistryValueKind.DWord, 1),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations", "TroubleshootingAllowRecommendations", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-message-sync",
@@ -2157,7 +2161,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowMessageSync",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateCompositeTweak(
                     "privacy.disable-offline-files",
@@ -2202,7 +2206,7 @@ public sealed class TweaksViewModel : ViewModelBase
                             mobsyncPath,
                             mobsyncDisabledPath)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.block-microsoft-accounts",
@@ -2214,7 +2218,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoConnectedUser",
                     RegistryValueKind.DWord,
                     3),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-kms-activation-telemetry",
@@ -2226,7 +2230,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoGenTicket",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-font-providers",
@@ -2238,7 +2242,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableFontProviders",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-local-security-questions",
@@ -2250,7 +2254,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "NoLocalPasswordResetQuestions",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateCompositeTweak(
                     "privacy.disable-application-compatibility",
@@ -2291,7 +2295,7 @@ public sealed class TweaksViewModel : ViewModelBase
                                 @"\Microsoft\Windows\Application Experience\StartupAppTask"
                             })
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-inking-typing-personalization",
@@ -2304,7 +2308,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowSuggestedAppsInWindowsInkWorkspace", RegistryValueKind.DWord, 0),
                         new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowWindowsInkWorkspace", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-copilot",
@@ -2317,7 +2321,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-recall",
@@ -2330,7 +2334,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-camera",
@@ -2342,7 +2346,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "AllowCamera",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueBatchTweak(
                     "privacy.disable-sleep-study-diagnostics",
@@ -2370,7 +2374,7 @@ public sealed class TweaksViewModel : ViewModelBase
                             RegistryValueKind.DWord,
                             0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-last-logged-in-user",
@@ -2382,7 +2386,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DontDisplayLastUserName",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.hide-username-at-signin",
@@ -2394,7 +2398,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DontDisplayUserName",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryValueSetTweak(
                     "security.uac-never-notify",
@@ -2409,7 +2413,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         new RegistryValueSetEntry("ConsentPromptBehaviorAdmin", RegistryValueKind.DWord, 0),
                         new RegistryValueSetEntry("PromptOnSecureDesktop", RegistryValueKind.DWord, 0)
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-uac",
@@ -2421,7 +2425,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableLUA",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.powershell-unrestricted",
@@ -2433,7 +2437,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "ExecutionPolicy",
                     RegistryValueKind.String,
                     "Unrestricted"),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-password-reveal",
@@ -2445,7 +2449,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisablePasswordReveal",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.disable-picture-password",
@@ -2457,7 +2461,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "BlockDomainPicturePassword",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.enable-lltdio",
@@ -2469,7 +2473,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableLLTDIO",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "network.enable-lltd-responder",
@@ -2481,7 +2485,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableRspndr",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateScheduledTaskBatchTweak(
                     "system.disable-scheduled-tasks",
@@ -2531,7 +2535,7 @@ public sealed class TweaksViewModel : ViewModelBase
                         @"\Microsoft\Windows\UNP\RunUpdateNotificationMgr",
                         @"\Microsoft\Windows\Windows Error Reporting\QueueReporting"
                     }),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateServiceStartModeBatchTweak(
                     "system.disable-services-drivers",
@@ -2685,7 +2689,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     },
                     ServiceStartMode.Disabled,
                     stopRunning: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateServiceStartModeBatchTweak(
                     "system.disable-windows-search-service",
@@ -2695,7 +2699,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     new[] { "WSearch" },
                     ServiceStartMode.Disabled,
                     stopRunning: true),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateFileRenameTweak(
                     "privacy.disable-f1-help",
@@ -2704,7 +2708,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     TweakRiskLevel.Advanced,
                     helpPanePath,
                     helpPaneDisabledPath),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "security.enable-sudo",
@@ -2716,7 +2720,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "Enabled",
                     RegistryValueKind.DWord,
                     3),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Performance - Visual Effects
@@ -2731,7 +2735,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.String,
                     "0",
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "performance.disable-menu-show-delay",
@@ -2744,7 +2748,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.String,
                     "0",
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "performance.disable-taskbar-animations",
@@ -2757,7 +2761,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Privacy Tweaks
@@ -2771,7 +2775,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "EnableActivityFeed",
                     RegistryValueKind.DWord,
                     0),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-app-diagnostics",
@@ -2783,7 +2787,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "LetAppsAccessDiagnosticInfo",
                     RegistryValueKind.DWord,
                     2),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "privacy.disable-location-tracking",
@@ -2795,7 +2799,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "DisableLocation",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Explorer Enhancements
@@ -2810,7 +2814,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "explorer.show-file-extensions",
@@ -2823,7 +2827,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "explorer.show-full-path",
@@ -2836,7 +2840,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     1,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // System Tweaks
@@ -2851,7 +2855,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     RegistryValueKind.DWord,
                     0,
                     requiresElevation: false),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.disable-shortcut-arrow",
@@ -2863,7 +2867,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "29",
                     RegistryValueKind.String,
                     @"%windir%\System32\shell32.dll,-50"),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CreateRegistryTweak(
                     "system.verbose-status-messages",
@@ -2875,7 +2879,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     "VerboseStatus",
                     RegistryValueKind.DWord,
                     1),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             new(new SettingsToggleTweak(
@@ -2886,7 +2890,7 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakAlphaEnabled,
                     (settings, value) => settings.DemoTweakAlphaEnabled = value),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new SettingsToggleTweak(
                     "demo.beta",
@@ -2896,173 +2900,173 @@ public sealed class TweaksViewModel : ViewModelBase
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
                     (settings, value) => settings.DemoTweakBetaEnabled = value),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Command-based Power Tweaks
             new(new DisableHibernationTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new DisableUsbSelectiveSuspendTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Command-based Cleanup Tweaks
             new(new CleanupComponentStoreTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new DisableReservedStorageTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Command-based Performance Tweaks
             new(new DisableSuperfetchTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new DisableWindowsSearchTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Command-based Network Tweaks
             new(new FlushDnsCacheTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ResetNetworkStackTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Command-based System Tweaks
             new(new CheckDiskHealthTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearEventLogsTweak(_elevatedCommandRunner, "System"),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // ==================== NEW CLEANUP TWEAKS ====================
 
             // Cleanup: File-based tweaks
             new(new ClearTemporaryFilesTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearRecycleBinTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearDirectXShaderCacheTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearThumbnailCacheTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearWindowsUpdateCacheTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearWERFilesTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearPrefetchFilesTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearShadowCopiesTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearFontCacheTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearWindowsOldTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new ClearMemoryDumpFilesTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new RemoveProductKeyTweak(_elevatedCommandRunner),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // ==================== NEW MISC TWEAKS ====================
 
             // Telemetry & Privacy
             new(DisableOneDriveTweaks.CreateDisableOneDriveTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(DisableVisualStudioTelemetryTweak.CreateDisableVisualStudioTelemetryTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(DisableOfficeTelemetryTweak.CreateDisableOfficeTelemetryTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(new DisableVSCodeTelemetryTweak(),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(SetNotepadPlusPlusDefaultEditorTweak.CreateSetNotepadPlusPlusDefaultEditorTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // ==================== NEW PERIPHERAL TWEAKS ====================
 
             // Mouse
             new(MouseTweaks.CreateDisableMouseThrottleTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(MouseTweaks.CreateDisableMouseAccelerationTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Keyboard
             new(KeyboardTweaks.CreateOptimizeKeyboardRepeatTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Audio
             new(AudioTweaks.CreateDisableAudioDuckingTweak(_localRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(AudioTweaks.CreateDisableAudioEnhancementsTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // ==================== NEW POWER TWEAKS ====================
 
             // Power Settings
             new(PowerSettingsTweaks.CreateDisableModernStandbyTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(PowerSettingsTweaks.CreateDisableFastStartupTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(PowerSettingsTweaks.CreateDisablePowerThrottlingTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(PowerSettingsTweaks.CreateOptimizePowerSettingsTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // Network Power
             new(NetworkAdapterPowerTweaks.CreateDisableNetworkAdapterPowerSavingTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(NetworkAdapterPowerTweaks.CreateOptimizeGamingNetworkTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
 
             // CPU Power
             new(CPUPowerTweaks.CreateDisableCPUParkingTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CPUPowerTweaks.CreateDisableIdleStatesTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated),
             new(CPUPowerTweaks.CreateOptimizeCPUBoostTweak(_elevatedRegistryAccessor),
-                pipeline,
+                _pipeline,
                 _isElevated)
         };
 
@@ -3230,21 +3234,21 @@ public sealed class TweaksViewModel : ViewModelBase
         // Example nested tweaks registration (demonstrating the dot notation)
         // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
 
-        if (tweakProviders != null)
+        if (providerList != null)
         {
             var tweakContext = new TweakContext(
-                _localRegistryAccessor, 
-                _elevatedRegistryAccessor, 
-                _elevatedServiceManager, 
-                _elevatedTaskManager, 
+                _localRegistryAccessor,
+                _elevatedRegistryAccessor,
+                _elevatedServiceManager,
+                _elevatedTaskManager,
                 _elevatedFileSystemAccessor);
 
-            foreach (var provider in tweakProviders)
+            foreach (var provider in providerList)
             {
-                var providerTweaks = provider.CreateTweaks(pipeline, tweakContext, _isElevated);
+                var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
                 foreach (var tweak in providerTweaks)
                 {
-                    Tweaks.Add(new TweakItemViewModel(tweak, pipeline, _isElevated));
+                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
                 }
             }
         }
