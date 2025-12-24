@@ -115,9 +115,24 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     private async Task DetectAllTweaksAsync()
     {
-        foreach (var tweak in _tweaks)
+        try
         {
-            await tweak.DetectStatusAsync();
+            foreach (var tweak in _tweaks)
+            {
+                try
+                {
+                    await tweak.DetectStatusAsync();
+                }
+                catch (System.Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Failed to detect status for {tweak.Name}: {ex.Message}");
+                    // Continue with other tweaks even if one fails
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"DetectAllTweaksAsync failed: {ex.Message}");
         }
     }
 }
