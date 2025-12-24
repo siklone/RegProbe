@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Threading;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Metrics;
@@ -20,6 +21,8 @@ public sealed class MonitorViewModel : ViewModelBase
     private double _ramTotalGb;
     private double _cpuTemp;
     private double _gpuTemp;
+    private double _gpuUsage;
+    private SystemInfo? _systemInfo;
 
     public MonitorViewModel()
     {
@@ -39,8 +42,34 @@ public sealed class MonitorViewModel : ViewModelBase
         _updateTimer.Tick += OnUpdateTick;
         _updateTimer.Start();
 
-        // Get initial total RAM
+        // Get initial total RAM and system info
         RamTotalGb = _metricProvider.GetTotalRamGb();
+        SystemInfo = _metricProvider.GetSystemInfo();
+
+        // Initialize process management commands
+        KillProcessCommand = new RelayCommand(param =>
+        {
+            if (param is ProcessInfo process)
+            {
+                _processMonitor.KillProcess(process.Pid);
+            }
+        });
+
+        SuspendProcessCommand = new RelayCommand(param =>
+        {
+            if (param is ProcessInfo process)
+            {
+                _processMonitor.SuspendProcess(process.Pid);
+            }
+        });
+
+        ResumeProcessCommand = new RelayCommand(param =>
+        {
+            if (param is ProcessInfo process)
+            {
+                _processMonitor.ResumeProcess(process.Pid);
+            }
+        });
     }
 
     public string Title => "Monitor";
@@ -84,6 +113,22 @@ public sealed class MonitorViewModel : ViewModelBase
         private set => SetProperty(ref _gpuTemp, value);
     }
 
+    public double GpuUsage
+    {
+        get => _gpuUsage;
+        private set => SetProperty(ref _gpuUsage, value);
+    }
+
+    public SystemInfo? SystemInfo
+    {
+        get => _systemInfo;
+        private set => SetProperty(ref _systemInfo, value);
+    }
+
+    public ICommand KillProcessCommand { get; }
+    public ICommand SuspendProcessCommand { get; }
+    public ICommand ResumeProcessCommand { get; }
+
     private void OnUpdateTick(object? sender, EventArgs e)
     {
         try
@@ -93,6 +138,7 @@ public sealed class MonitorViewModel : ViewModelBase
             RamUsedGb = _metricProvider.GetUsedRamGb();
             CpuTemp = _metricProvider.GetCpuTemperature();
             GpuTemp = _metricProvider.GetGpuTemperature();
+            GpuUsage = _metricProvider.GetGpuUsage();
 
             // Update history (60 second sliding window)
             UpdateHistory(CpuHistory, CpuUsage);

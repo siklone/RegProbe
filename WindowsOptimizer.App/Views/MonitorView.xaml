@@ -47,9 +47,70 @@
                 <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="#D8DEE9" Margin="0,4,0,0"/>
             </StackPanel>
 
+            <!-- System Information Section -->
+            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="System Information" Style="{StaticResource SectionHeaderStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- OS Name -->
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Operating System" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.OsName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                        </StackPanel>
+
+                        <!-- OS Version -->
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="16,0,0,12">
+                            <TextBlock Text="OS Version" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.OsVersion}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                        </StackPanel>
+
+                        <!-- CPU Name -->
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Processor" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.CpuName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                            <TextBlock FontSize="12" Foreground="#D8DEE9" Margin="0,2,0,0">
+                                <Run Text="{Binding SystemInfo.CpuCores}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads}"/><Run Text=" Threads"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!-- GPU Name -->
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="16,0,0,12">
+                            <TextBlock Text="Graphics Card" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.GpuName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                        </StackPanel>
+
+                        <!-- Total RAM -->
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Total Memory" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock FontSize="14" Foreground="#ECEFF4" FontWeight="Medium">
+                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}}"/><Run Text=" GB"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!-- Uptime -->
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="16,0,0,12">
+                            <TextBlock Text="System Uptime" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.UptimeFormatted}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
             <!-- Stats Cards Row -->
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -89,8 +150,18 @@
                     </StackPanel>
                 </Border>
 
-                <!-- GPU Temperature Card -->
+                <!-- GPU Usage Card -->
                 <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="GPU Usage" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4">
+                            <Run Text="{Binding GpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- GPU Temperature Card -->
+                <Border Grid.Column="4" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="GPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
                         <TextBlock FontSize="32" FontWeight="Bold" Foreground="#B48EAD" Margin="0,0,0,4">
@@ -155,17 +226,39 @@
                                     <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium" VerticalAlignment="Center"/>
-                                            <TextBlock Grid.Column="1" Foreground="#D8DEE9" FontSize="12" Margin="8,0" VerticalAlignment="Center">
-                                                <Run Text="PID: "/><Run Text="{Binding Pid}"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="2" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
+                                                <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                                    <Run Text="PID: "/><Run Text="{Binding Pid}"/>
+                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads}"/>
+                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
                                                 <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}}"/><Run Text="%"/>
                                             </TextBlock>
+                                            <Button Grid.Column="2" Content="Kill"
+                                                    Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                            <Button Grid.Column="3" Content="Suspend"
+                                                    Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                            <Button Grid.Column="4" Content="Resume"
+                                                    Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -184,17 +277,39 @@
                                     <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium" VerticalAlignment="Center"/>
-                                            <TextBlock Grid.Column="1" Foreground="#D8DEE9" FontSize="12" Margin="8,0" VerticalAlignment="Center">
-                                                <Run Text="PID: "/><Run Text="{Binding Pid}"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="2" Foreground="#A3BE8C" FontWeight="Bold" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
+                                                <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                                    <Run Text="PID: "/><Run Text="{Binding Pid}"/>
+                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads}"/>
+                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1" Foreground="#A3BE8C" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
                                                 <Run Text="{Binding RamMb, StringFormat={}{0:F0}}"/><Run Text=" MB"/>
                                             </TextBlock>
+                                            <Button Grid.Column="2" Content="Kill"
+                                                    Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                            <Button Grid.Column="3" Content="Suspend"
+                                                    Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                            <Button Grid.Column="4" Content="Resume"
+                                                    Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
