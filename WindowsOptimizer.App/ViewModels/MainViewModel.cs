@@ -25,9 +25,13 @@ public sealed class MainViewModel : ViewModelBase
         {
             new SystemTweakProvider(),
             new PrivacyTweakProvider(),
+            new SecurityTweakProvider(),
             new NetworkTweakProvider(),
             new PowerTweakProvider(),
             new PeripheralTweakProvider(),
+            new VisibilityTweakProvider(),
+            new PerformanceTweakProvider(),
+            new AudioTweakProvider(),
             new MiscTweakProvider()
         };
 
