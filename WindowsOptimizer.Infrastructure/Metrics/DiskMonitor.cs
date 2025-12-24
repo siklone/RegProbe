@@ -33,15 +33,33 @@ public sealed class DiskMonitor
                 catch { continue; }
             }
 
+            // Only add disk if counters were successfully created
+            if (!_counters.ContainsKey(driveName))
+                continue;
+
             var (readCounter, writeCounter) = _counters[driveName];
+
+            float readRate = 0;
+            float writeRate = 0;
+
+            try
+            {
+                readRate = readCounter.NextValue();
+                writeRate = writeCounter.NextValue();
+            }
+            catch
+            {
+                // Skip this disk if performance counters fail
+                continue;
+            }
 
             disks.Add(new DiskInfo
             {
                 DriveLetter = driveName,
                 TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
                 FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
-                ReadBytesPerSec = readCounter.NextValue(),
-                WriteBytesPerSec = writeCounter.NextValue()
+                ReadBytesPerSec = readRate,
+                WriteBytesPerSec = writeRate
             });
         }
 
