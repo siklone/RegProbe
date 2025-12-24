@@ -248,17 +248,17 @@
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#BF616A" Foreground="White" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#A3BE8C" Foreground="White" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -299,17 +299,17 @@
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#BF616A" Foreground="White" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     Background="#A3BE8C" Foreground="White" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" CornerRadius="4" FontSize="11" Cursor="Hand"/>
+                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
