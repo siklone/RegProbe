@@ -5,6 +5,7 @@ using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Engine.Tweaks;
 using Microsoft.Win32;
 

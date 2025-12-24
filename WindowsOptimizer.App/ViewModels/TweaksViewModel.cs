@@ -17,6 +17,7 @@ using WindowsOptimizer.Core.Models;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands.Power;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
@@ -32,7 +33,6 @@ using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Core.Files;
 using WindowsOptimizer.Core.Registry;
-using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.App.ViewModels;

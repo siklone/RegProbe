@@ -1,4 +1,4 @@
-namespace WindowsOptimizer.Infrastructure.Services;
+namespace WindowsOptimizer.Core.Services;
 
 public enum ServiceStartMode
 {

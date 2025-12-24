@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Engine;
 
-namespace WindowsOptimizer.Core.Services;
+namespace WindowsOptimizer.Engine.Services;
 
 public interface ITweakProvider
 {
