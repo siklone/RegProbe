@@ -26,7 +26,9 @@ public sealed class ProcessMonitor
                     Name = process.ProcessName,
                     Pid = process.Id,
                     CpuPercent = cpuUsage,
-                    RamMb = ramMb
+                    RamMb = ramMb,
+                    Threads = process.Threads.Count,
+                    Handles = process.HandleCount
                 });
             }
             catch
@@ -53,7 +55,9 @@ public sealed class ProcessMonitor
                     Name = process.ProcessName,
                     Pid = process.Id,
                     RamMb = ramMb,
-                    CpuPercent = 0 // Not needed for RAM sort
+                    CpuPercent = 0, // Not needed for RAM sort
+                    Threads = process.Threads.Count,
+                    Handles = process.HandleCount
                 });
             }
             catch { }
@@ -94,6 +98,83 @@ public sealed class ProcessMonitor
             _previousCpuUsage.Remove(pid);
         }
     }
+
+    public bool KillProcess(int pid)
+    {
+        try
+        {
+            var process = Process.GetProcessById(pid);
+            process.Kill();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public bool SuspendProcess(int pid)
+    {
+        try
+        {
+            var process = Process.GetProcessById(pid);
+            foreach (System.Diagnostics.ProcessThread thread in process.Threads)
+            {
+                var threadHandle = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
+                if (threadHandle != IntPtr.Zero)
+                {
+                    SuspendThread(threadHandle);
+                    CloseHandle(threadHandle);
+                }
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public bool ResumeProcess(int pid)
+    {
+        try
+        {
+            var process = Process.GetProcessById(pid);
+            foreach (System.Diagnostics.ProcessThread thread in process.Threads)
+            {
+                var threadHandle = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
+                if (threadHandle != IntPtr.Zero)
+                {
+                    ResumeThread(threadHandle);
+                    CloseHandle(threadHandle);
+                }
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    // P/Invoke for thread suspension
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern IntPtr OpenThread(ThreadAccess dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern uint SuspendThread(IntPtr hThread);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern int ResumeThread(IntPtr hThread);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool CloseHandle(IntPtr hObject);
+
+    [System.Flags]
+    private enum ThreadAccess : int
+    {
+        SUSPEND_RESUME = 0x0002
+    }
 }
 
 public sealed class ProcessInfo
@@ -102,4 +183,9 @@ public sealed class ProcessInfo
     public int Pid { get; set; }
     public double CpuPercent { get; set; }
     public double RamMb { get; set; }
+    public int Threads { get; set; }
+    public int Handles { get; set; }
+    public string Status { get; set; } = "Running";
+
+    public string RamFormatted => $"{RamMb:F1} MB";
 }

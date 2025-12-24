@@ -104,6 +104,91 @@ public sealed class MetricProvider : IDisposable
         return 0;
     }
 
+    public double GetGpuUsage()
+    {
+        if (_computer == null) return 0;
+
+        foreach (var hardware in _computer.Hardware)
+        {
+            if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                hardware.HardwareType == HardwareType.GpuAmd ||
+                hardware.HardwareType == HardwareType.GpuIntel)
+            {
+                hardware.Update();
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (sensor.SensorType == SensorType.Load &&
+                        (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU Core")))
+                        return sensor.Value ?? 0;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public SystemInfo GetSystemInfo()
+    {
+        var info = new SystemInfo();
+
+        try
+        {
+            // Get OS info
+            using (var searcher = new ManagementObjectSearcher("SELECT Caption, Version FROM Win32_OperatingSystem"))
+            {
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    info.OsName = obj["Caption"]?.ToString() ?? "Unknown";
+                    info.OsVersion = obj["Version"]?.ToString() ?? "Unknown";
+                }
+            }
+
+            // Get CPU info
+            using (var searcher = new ManagementObjectSearcher("SELECT Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor"))
+            {
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    info.CpuName = obj["Name"]?.ToString()?.Trim() ?? "Unknown";
+                    info.CpuCores = Convert.ToInt32(obj["NumberOfCores"] ?? 0);
+                    info.CpuThreads = Convert.ToInt32(obj["NumberOfLogicalProcessors"] ?? 0);
+                    break; // Take first CPU
+                }
+            }
+
+            // Get system uptime
+            using (var searcher = new ManagementObjectSearcher("SELECT LastBootUpTime FROM Win32_OperatingSystem"))
+            {
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    var bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
+                    info.Uptime = DateTime.Now - bootTime;
+                }
+            }
+
+            // Get GPU name
+            if (_computer != null)
+            {
+                foreach (var hardware in _computer.Hardware)
+                {
+                    if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                        hardware.HardwareType == HardwareType.GpuAmd ||
+                        hardware.HardwareType == HardwareType.GpuIntel)
+                    {
+                        info.GpuName = hardware.Name;
+                        break;
+                    }
+                }
+            }
+
+            info.TotalRamGb = GetTotalRamGb();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to get system info: {ex.Message}");
+        }
+
+        return info;
+    }
+
     public double GetTotalRamGb()
     {
         var totalRam = 0.0;
@@ -142,4 +227,18 @@ public sealed class MetricProvider : IDisposable
             _disposed = true;
         }
     }
+}
+
+public sealed class SystemInfo
+{
+    public string OsName { get; set; } = "Unknown";
+    public string OsVersion { get; set; } = "Unknown";
+    public string CpuName { get; set; } = "Unknown";
+    public int CpuCores { get; set; }
+    public int CpuThreads { get; set; }
+    public string GpuName { get; set; } = "Unknown";
+    public double TotalRamGb { get; set; }
+    public TimeSpan Uptime { get; set; }
+
+    public string UptimeFormatted => $"{(int)Uptime.TotalDays}d {Uptime.Hours}h {Uptime.Minutes}m";
 }
