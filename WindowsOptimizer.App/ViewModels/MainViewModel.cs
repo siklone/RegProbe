@@ -108,10 +108,10 @@ public sealed class MainViewModel : ViewModelBase
         get => _selectedNavigationItem;
         set
         {
-            System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem setter: New value = {value?.ViewName}");
+            System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem setter: New value = {value?.Id}");
             if (SetProperty(ref _selectedNavigationItem, value))
             {
-                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.ViewName}");
+                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
                 CurrentViewModel = _selectedNavigationItem?.ViewModel;
                 System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: CurrentViewModel set successfully");
                 SyncSearchText();
