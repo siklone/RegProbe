@@ -37,7 +37,21 @@ public sealed class MainViewModel : ViewModelBase
         };
 
         var tweaks = new TweaksViewModel(providers);
-        var monitor = new MonitorViewModel();
+
+        MonitorViewModel monitor;
+        try
+        {
+            monitor = new MonitorViewModel();
+            System.Diagnostics.Debug.WriteLine("MonitorViewModel created successfully");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"CRITICAL: Failed to create MonitorViewModel: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+            System.Diagnostics.Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+            throw; // Re-throw to see the actual error
+        }
+
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
 
