@@ -710,10 +710,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
-            
+
             // Interpret detect result to determine applied status
-            if (result.Result.Status == TweakStatus.Detected || 
-                result.Result.Status == TweakStatus.Applied || 
+            if (result.Result.Status == TweakStatus.Detected ||
+                result.Result.Status == TweakStatus.Applied ||
                 result.Result.Status == TweakStatus.Verified)
             {
                 AppliedStatus = TweakAppliedStatus.Applied;
@@ -739,11 +739,13 @@ public sealed class TweakItemViewModel : ViewModelBase
             else if (result.Result.Status == TweakStatus.Detected || result.Result.Status == TweakStatus.Applied)
             {
                 // Fallback if applied but value not in message
-                CurrentValue = TargetValue; 
+                CurrentValue = TargetValue;
             }
         }
-        catch
+        catch (Exception ex)
         {
+            Debug.WriteLine($"DetectStatusAsync failed for tweak '{Name}' (ID: {Id}): {ex.Message}");
+            Debug.WriteLine($"Stack trace: {ex.StackTrace}");
             AppliedStatus = TweakAppliedStatus.Unknown;
         }
     }

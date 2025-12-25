@@ -101,15 +101,22 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         }
     }
 
-    private void ToggleExpand()
+    private async void ToggleExpand()
     {
         IsExpanded = !IsExpanded;
-        
+
         // Auto-detect tweak status when first expanded
         if (IsExpanded && !_hasDetected)
         {
             _hasDetected = true;
-            _ = DetectAllTweaksAsync();
+            try
+            {
+                await DetectAllTweaksAsync();
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ToggleExpand DetectAllTweaksAsync failed: {ex.Message}");
+            }
         }
     }
 
