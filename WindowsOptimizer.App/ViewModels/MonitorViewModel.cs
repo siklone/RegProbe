@@ -138,9 +138,8 @@ public sealed class MonitorViewModel : ViewModelBase
             // Timer: 1 second refresh (start after initialization)
             _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _updateTimer.Tick += OnUpdateTick;
-            // TEMPORARILY DISABLED FOR DEBUGGING
-            // _updateTimer.Start();
-            System.Diagnostics.Debug.WriteLine("MonitorViewModel: Timer created but NOT started (debugging)");
+            _updateTimer.Start();
+            System.Diagnostics.Debug.WriteLine("MonitorViewModel: Timer started successfully");
         }
         catch (Exception ex)
         {
