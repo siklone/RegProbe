@@ -446,6 +446,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
+        LogToFile($"RunAsync START: Tweak '{Name}' (ID: {Id}), DryRun={dryRun}");
         StartCancellation(ct);
         var actionLabel = dryRun ? "Preview" : "Apply";
 
@@ -469,7 +470,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         try
         {
+            LogToFile($"RunAsync: Calling ExecuteAsync for '{Name}'");
             var report = await _pipeline.ExecuteAsync(_tweak, options, progress, _cts?.Token ?? CancellationToken.None);
+            LogToFile($"RunAsync: ExecuteAsync COMPLETED for '{Name}', Succeeded={report.Succeeded}");
             ApplyReport(report);
             LastOutcome = report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
@@ -477,16 +480,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
         catch (OperationCanceledException)
         {
+            LogToFile($"RunAsync: '{Name}' was CANCELLED");
             LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = "Run cancelled.";
         }
         catch (Exception ex)
         {
+            LogToFile($"RunAsync: '{Name}' FAILED with exception: {ex.Message}");
+            LogToFile($"Stack: {ex.StackTrace}");
             LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"Run failed: {ex.Message}";
         }
         finally
         {
+            LogToFile($"RunAsync END: '{Name}' IsRunning=false");
             IsRunning = false;
             ClearCancellation();
         }
@@ -761,6 +768,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         await RunApplyAsync(CancellationToken.None);
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
+            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
+        }
     }
 }
 
