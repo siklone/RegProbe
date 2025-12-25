@@ -136,10 +136,18 @@ public sealed class MonitorViewModel : ViewModelBase
             }
 
             // Timer: 1 second refresh (start after initialization)
-            _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _updateTimer.Tick += OnUpdateTick;
-            _updateTimer.Start();
-            System.Diagnostics.Debug.WriteLine("MonitorViewModel: Timer started successfully");
+            try
+            {
+                _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                _updateTimer.Tick += OnUpdateTick;
+                _updateTimer.Start();
+                System.Diagnostics.Debug.WriteLine("MonitorViewModel: Timer started successfully");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to start timer: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Timer start stack trace: {ex.StackTrace}");
+            }
         }
         catch (Exception ex)
         {
@@ -319,13 +327,20 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine("OnUpdateTick: Started");
+
             // Update system metrics (with null checks)
             if (_metricProvider != null)
             {
+                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting CPU usage");
                 CpuUsage = _metricProvider.GetCpuUsage();
+                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting RAM usage");
                 RamUsedGb = _metricProvider.GetUsedRamGb();
+                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting CPU temp");
                 CpuTemp = _metricProvider.GetCpuTemperature();
+                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting GPU temp");
                 GpuTemp = _metricProvider.GetGpuTemperature();
+                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting GPU usage");
                 GpuUsage = _metricProvider.GetGpuUsage();
             }
 
