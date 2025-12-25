@@ -12,11 +12,11 @@ namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MonitorViewModel : ViewModelBase
 {
-    private readonly MetricProvider _metricProvider;
-    private readonly ProcessMonitor _processMonitor = new();
-    private readonly NetworkMonitor _networkMonitor = new();
-    private readonly DiskMonitor _diskMonitor = new();
-    private readonly DispatcherTimer _updateTimer;
+    private readonly MetricProvider? _metricProvider;
+    private readonly ProcessMonitor? _processMonitor;
+    private readonly NetworkMonitor? _networkMonitor;
+    private readonly DiskMonitor? _diskMonitor;
+    private readonly DispatcherTimer? _updateTimer;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -36,7 +36,43 @@ public sealed class MonitorViewModel : ViewModelBase
         try
         {
             var paths = AppPaths.FromEnvironment();
-            _metricProvider = new MetricProvider();
+
+            // Initialize monitors safely
+            try
+            {
+                _metricProvider = new MetricProvider();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create MetricProvider: {ex.Message}");
+            }
+
+            try
+            {
+                _processMonitor = new ProcessMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create ProcessMonitor: {ex.Message}");
+            }
+
+            try
+            {
+                _networkMonitor = new NetworkMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create NetworkMonitor: {ex.Message}");
+            }
+
+            try
+            {
+                _diskMonitor = new DiskMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create DiskMonitor: {ex.Message}");
+            }
 
             // Initialize collections
             CpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
@@ -54,7 +90,7 @@ public sealed class MonitorViewModel : ViewModelBase
             // Initialize process management commands
             KillProcessCommand = new RelayCommand(param =>
             {
-                if (param is ProcessInfo process)
+                if (param is ProcessInfo process && _processMonitor != null)
                 {
                     _processMonitor.KillProcess(process.Pid);
                 }
@@ -62,7 +98,7 @@ public sealed class MonitorViewModel : ViewModelBase
 
             SuspendProcessCommand = new RelayCommand(param =>
             {
-                if (param is ProcessInfo process)
+                if (param is ProcessInfo process && _processMonitor != null)
                 {
                     _processMonitor.SuspendProcess(process.Pid);
                 }
@@ -70,7 +106,7 @@ public sealed class MonitorViewModel : ViewModelBase
 
             ResumeProcessCommand = new RelayCommand(param =>
             {
-                if (param is ProcessInfo process)
+                if (param is ProcessInfo process && _processMonitor != null)
                 {
                     _processMonitor.ResumeProcess(process.Pid);
                 }
@@ -81,7 +117,7 @@ public sealed class MonitorViewModel : ViewModelBase
             // Get initial total RAM and system info (with error handling)
             try
             {
-                RamTotalGb = _metricProvider.GetTotalRamGb();
+                RamTotalGb = _metricProvider?.GetTotalRamGb() ?? 0;
             }
             catch (Exception ex)
             {
@@ -91,7 +127,7 @@ public sealed class MonitorViewModel : ViewModelBase
 
             try
             {
-                SystemInfo = _metricProvider.GetSystemInfo();
+                SystemInfo = _metricProvider?.GetSystemInfo();
             }
             catch (Exception ex)
             {
@@ -242,7 +278,7 @@ public sealed class MonitorViewModel : ViewModelBase
         get => _refreshIntervalSeconds;
         set
         {
-            if (SetProperty(ref _refreshIntervalSeconds, value))
+            if (SetProperty(ref _refreshIntervalSeconds, value) && _updateTimer != null)
             {
                 _updateTimer.Interval = TimeSpan.FromSeconds(value);
             }
@@ -282,46 +318,58 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         try
         {
-            // Update system metrics
-            CpuUsage = _metricProvider.GetCpuUsage();
-            RamUsedGb = _metricProvider.GetUsedRamGb();
-            CpuTemp = _metricProvider.GetCpuTemperature();
-            GpuTemp = _metricProvider.GetGpuTemperature();
-            GpuUsage = _metricProvider.GetGpuUsage();
+            // Update system metrics (with null checks)
+            if (_metricProvider != null)
+            {
+                CpuUsage = _metricProvider.GetCpuUsage();
+                RamUsedGb = _metricProvider.GetUsedRamGb();
+                CpuTemp = _metricProvider.GetCpuTemperature();
+                GpuTemp = _metricProvider.GetGpuTemperature();
+                GpuUsage = _metricProvider.GetGpuUsage();
+            }
 
             // Update history (60 second sliding window)
             UpdateHistory(CpuHistory, CpuUsage);
             UpdateHistory(RamHistory, RamUsagePercent);
 
             // Update network and disk I/O history
-            var networkAdapters = _networkMonitor.GetActiveAdapters();
-            var totalUpload = networkAdapters.Sum(a => a.SendMbps);
-            var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
-            UpdateHistory(NetworkUploadHistory, totalUpload);
-            UpdateHistory(NetworkDownloadHistory, totalDownload);
+            if (_networkMonitor != null)
+            {
+                var networkAdapters = _networkMonitor.GetActiveAdapters();
+                var totalUpload = networkAdapters.Sum(a => a.SendMbps);
+                var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
+                UpdateHistory(NetworkUploadHistory, totalUpload);
+                UpdateHistory(NetworkDownloadHistory, totalDownload);
 
-            var disks = _diskMonitor.GetDiskActivity();
-            var totalRead = disks.Sum(d => d.ReadMBps);
-            var totalWrite = disks.Sum(d => d.WriteMBps);
-            UpdateHistory(DiskReadHistory, totalRead);
-            UpdateHistory(DiskWriteHistory, totalWrite);
+                // Update network adapters list
+                UpdateCollection(NetworkAdapters, networkAdapters);
+            }
+
+            if (_diskMonitor != null)
+            {
+                var disks = _diskMonitor.GetDiskActivity();
+                var totalRead = disks.Sum(d => d.ReadMBps);
+                var totalWrite = disks.Sum(d => d.WriteMBps);
+                UpdateHistory(DiskReadHistory, totalRead);
+                UpdateHistory(DiskWriteHistory, totalWrite);
+
+                // Update disks list
+                UpdateCollection(Disks, disks);
+            }
 
             // Update top processes
-            UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
-            UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
+            if (_processMonitor != null)
+            {
+                UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
+                UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
 
-            // Update network adapters
-            UpdateCollection(NetworkAdapters, networkAdapters);
-
-            // Update disks
-            UpdateCollection(Disks, disks);
+                // Cleanup dead process entries
+                _processMonitor.Cleanup();
+            }
 
             // Check alert thresholds
             IsCpuAlertActive = CpuUsage >= CpuAlertThreshold;
             IsRamAlertActive = RamUsagePercent >= RamAlertThreshold;
-
-            // Cleanup dead process entries
-            _processMonitor.Cleanup();
 
             // Trigger RamUsagePercent update
             OnPropertyChanged(nameof(RamUsagePercent));
