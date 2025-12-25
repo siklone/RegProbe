@@ -19,6 +19,11 @@ public sealed class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+        // Show log file location
+        var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+        System.Windows.MessageBox.Show($"Debug log file location:\n{logPath}\n\nCheck this file after crash!", "Debug Info", System.Windows.MessageBoxButton.OK);
+        LogToFile("========== APPLICATION STARTED ==========");
+
         var dashboard = new DashboardViewModel();
 
         // Initialize all tweak providers
