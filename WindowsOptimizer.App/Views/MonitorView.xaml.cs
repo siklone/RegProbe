@@ -10,16 +10,30 @@ public partial class MonitorView : UserControl
     {
         try
         {
-            Debug.WriteLine("MonitorView: Constructor started");
+            LogToFile("MonitorView: Constructor started");
             InitializeComponent();
-            Debug.WriteLine("MonitorView: InitializeComponent completed successfully");
+            LogToFile("MonitorView: InitializeComponent completed successfully");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"CRITICAL: MonitorView constructor failed: {ex.Message}");
-            Debug.WriteLine($"Stack trace: {ex.StackTrace}");
-            Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+            LogToFile($"CRITICAL: MonitorView constructor failed: {ex.Message}");
+            LogToFile($"Stack trace: {ex.StackTrace}");
+            LogToFile($"Inner exception: {ex.InnerException?.Message}");
             throw;
+        }
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
+            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
         }
     }
 }

@@ -108,13 +108,22 @@ public sealed class MainViewModel : ViewModelBase
         get => _selectedNavigationItem;
         set
         {
-            System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem setter: New value = {value?.Id}");
-            if (SetProperty(ref _selectedNavigationItem, value))
+            try
             {
-                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
-                CurrentViewModel = _selectedNavigationItem?.ViewModel;
-                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: CurrentViewModel set successfully");
-                SyncSearchText();
+                LogToFile($"SelectedNavigationItem setter: New value = {value?.Id}");
+                if (SetProperty(ref _selectedNavigationItem, value))
+                {
+                    LogToFile($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
+                    CurrentViewModel = _selectedNavigationItem?.ViewModel;
+                    LogToFile($"SelectedNavigationItem: CurrentViewModel set successfully");
+                    SyncSearchText();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"CRASH in SelectedNavigationItem setter: {ex.Message}");
+                LogToFile($"Stack: {ex.StackTrace}");
+                throw;
             }
         }
     }
@@ -124,9 +133,18 @@ public sealed class MainViewModel : ViewModelBase
         get => _currentViewModel;
         private set
         {
-            System.Diagnostics.Debug.WriteLine($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
-            SetProperty(ref _currentViewModel, value);
-            System.Diagnostics.Debug.WriteLine($"CurrentViewModel setter: Set complete");
+            try
+            {
+                LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
+                SetProperty(ref _currentViewModel, value);
+                LogToFile($"CurrentViewModel setter: Set complete");
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"CRASH in CurrentViewModel setter: {ex.Message}");
+                LogToFile($"Stack: {ex.StackTrace}");
+                throw;
+            }
         }
     }
 
@@ -150,6 +168,20 @@ public sealed class MainViewModel : ViewModelBase
         if (_currentViewModel is TweaksViewModel tweaksViewModel)
         {
             tweaksViewModel.SearchText = _searchText;
+        }
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
+            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
         }
     }
 }
