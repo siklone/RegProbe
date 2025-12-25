@@ -108,9 +108,12 @@ public sealed class MainViewModel : ViewModelBase
         get => _selectedNavigationItem;
         set
         {
+            System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem setter: New value = {value?.ViewName}");
             if (SetProperty(ref _selectedNavigationItem, value))
             {
+                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.ViewName}");
                 CurrentViewModel = _selectedNavigationItem?.ViewModel;
+                System.Diagnostics.Debug.WriteLine($"SelectedNavigationItem: CurrentViewModel set successfully");
                 SyncSearchText();
             }
         }
@@ -119,7 +122,12 @@ public sealed class MainViewModel : ViewModelBase
     public ViewModelBase? CurrentViewModel
     {
         get => _currentViewModel;
-        private set => SetProperty(ref _currentViewModel, value);
+        private set
+        {
+            System.Diagnostics.Debug.WriteLine($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
+            SetProperty(ref _currentViewModel, value);
+            System.Diagnostics.Debug.WriteLine($"CurrentViewModel setter: Set complete");
+        }
     }
 
     public string SearchText
