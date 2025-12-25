@@ -135,18 +135,19 @@ public sealed class MonitorViewModel : ViewModelBase
                 SystemInfo = null;
             }
 
-            // Timer: 1 second refresh (start after initialization)
+            // Timer: 1 second refresh (DISABLED - investigating crash)
             try
             {
                 _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
                 _updateTimer.Tick += OnUpdateTick;
-                _updateTimer.Start();
-                System.Diagnostics.Debug.WriteLine("MonitorViewModel: Timer started successfully");
+                // TEMPORARILY DISABLED
+                // _updateTimer.Start();
+                LogToFile("MonitorViewModel: Timer created but NOT started (investigating crash)");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to start timer: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Timer start stack trace: {ex.StackTrace}");
+                LogToFile($"Failed to create timer: {ex.Message}");
+                LogToFile($"Timer creation stack trace: {ex.StackTrace}");
             }
         }
         catch (Exception ex)
@@ -409,6 +410,20 @@ public sealed class MonitorViewModel : ViewModelBase
         foreach (var item in newItems)
         {
             collection.Add(item);
+        }
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
+            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
         }
     }
 }
