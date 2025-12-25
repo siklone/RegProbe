@@ -103,20 +103,32 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     private async void ToggleExpand()
     {
-        IsExpanded = !IsExpanded;
-
-        // Auto-detect tweak status when first expanded
-        if (IsExpanded && !_hasDetected)
+        try
         {
-            _hasDetected = true;
-            try
+            LogToFile($"ToggleExpand: Category '{CategoryName}' IsExpanded changing to {!IsExpanded}");
+            IsExpanded = !IsExpanded;
+
+            // Auto-detect tweak status when first expanded
+            if (IsExpanded && !_hasDetected)
             {
-                await DetectAllTweaksAsync();
+                _hasDetected = true;
+                LogToFile($"ToggleExpand: Starting DetectAllTweaksAsync for '{CategoryName}' with {_tweaks.Count} tweaks");
+                try
+                {
+                    await DetectAllTweaksAsync();
+                    LogToFile($"ToggleExpand: DetectAllTweaksAsync completed for '{CategoryName}'");
+                }
+                catch (System.Exception ex)
+                {
+                    LogToFile($"ToggleExpand: DetectAllTweaksAsync FAILED for '{CategoryName}': {ex.Message}");
+                    LogToFile($"Stack: {ex.StackTrace}");
+                }
             }
-            catch (System.Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"ToggleExpand DetectAllTweaksAsync failed: {ex.Message}");
-            }
+        }
+        catch (System.Exception ex)
+        {
+            LogToFile($"CRASH in ToggleExpand for '{CategoryName}': {ex.Message}");
+            LogToFile($"Stack: {ex.StackTrace}");
         }
     }
 
@@ -128,18 +140,34 @@ public sealed class CategoryGroupViewModel : ViewModelBase
             {
                 try
                 {
+                    LogToFile($"DetectAllTweaksAsync: Detecting '{tweak.Name}'");
                     await tweak.DetectStatusAsync();
+                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
                 }
                 catch (System.Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Failed to detect status for {tweak.Name}: {ex.Message}");
+                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' FAILED: {ex.Message}");
                     // Continue with other tweaks even if one fails
                 }
             }
         }
         catch (System.Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"DetectAllTweaksAsync failed: {ex.Message}");
+            LogToFile($"DetectAllTweaksAsync outer catch FAILED: {ex.Message}");
+        }
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
+            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
         }
     }
 }
