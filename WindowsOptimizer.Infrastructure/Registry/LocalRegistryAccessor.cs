@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -11,6 +12,14 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
     public Task<RegistryValueReadResult> ReadValueAsync(RegistryValueReference reference, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
+
+        // Check if we're on Windows - registry only works on Windows
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            throw new PlatformNotSupportedException(
+                "Windows Registry operations are only supported on Windows. " +
+                "The application is currently running on " + RuntimeInformation.OSDescription);
+        }
 
         using var baseKey = RegistryKey.OpenBaseKey(reference.Hive, reference.View);
         using var key = baseKey.OpenSubKey(reference.KeyPath, false);
@@ -34,6 +43,14 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
     {
         ct.ThrowIfCancellationRequested();
 
+        // Check if we're on Windows - registry only works on Windows
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            throw new PlatformNotSupportedException(
+                "Windows Registry operations are only supported on Windows. " +
+                "The application is currently running on " + RuntimeInformation.OSDescription);
+        }
+
         try
         {
             using var key = OpenOrCreateKey(reference);
@@ -53,6 +70,14 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
     public async Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
+
+        // Check if we're on Windows - registry only works on Windows
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            throw new PlatformNotSupportedException(
+                "Windows Registry operations are only supported on Windows. " +
+                "The application is currently running on " + RuntimeInformation.OSDescription);
+        }
 
         try
         {

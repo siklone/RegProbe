@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,6 +29,14 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         if (request is null)
         {
             throw new ArgumentNullException(nameof(request));
+        }
+
+        // Check if we're on Windows - elevated host only works on Windows
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            throw new PlatformNotSupportedException(
+                "Elevated operations are only supported on Windows. " +
+                "The application is currently running on " + RuntimeInformation.OSDescription);
         }
 
         try
@@ -58,20 +67,28 @@ public sealed class ElevatedHostClient : IElevatedHostClient
                 return;
             }
 
+            LogToFile($"ElevatedHostClient: Checking if host is already running");
             if (await TryConnectAsync(_options.InitialConnectTimeout, ct))
             {
                 _isReady = true;
+                LogToFile($"ElevatedHostClient: Host is already running");
                 return;
             }
 
+            LogToFile($"ElevatedHostClient: Host not running, starting it");
             StartHost();
 
+            LogToFile($"ElevatedHostClient: Waiting {_options.StartupConnectTimeout.TotalSeconds}s for host to start");
             if (!await TryConnectAsync(_options.StartupConnectTimeout, ct))
             {
-                throw new ElevatedHostException("Failed to connect to the elevated host.");
+                var exePath = _options.HostExecutablePath ?? "unknown";
+                throw new ElevatedHostException(
+                    $"Failed to connect to the elevated host after starting it. " +
+                    $"EXE path: {exePath}. Check if UAC prompt was shown and accepted.");
             }
 
             _isReady = true;
+            LogToFile($"ElevatedHostClient: Successfully connected to host");
         }
         finally
         {
@@ -124,6 +141,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
             throw new ElevatedHostLaunchException("Elevated host executable path is not configured.");
         }
 
+        LogToFile($"ElevatedHostClient: Checking for host executable at: {_options.HostExecutablePath}");
         if (!File.Exists(_options.HostExecutablePath))
         {
             throw new ElevatedHostLaunchException($"Elevated host not found at '{_options.HostExecutablePath}'.");
@@ -134,6 +152,8 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         {
             arguments += $" --parent-pid {_options.ParentProcessId}";
         }
+
+        LogToFile($"ElevatedHostClient: Starting host with arguments: {arguments}");
         var startInfo = new ProcessStartInfo
         {
             FileName = _options.HostExecutablePath,
@@ -146,14 +166,24 @@ public sealed class ElevatedHostClient : IElevatedHostClient
 
         try
         {
-            Process.Start(startInfo);
+            var process = Process.Start(startInfo);
+            if (process != null)
+            {
+                LogToFile($"ElevatedHostClient: Host process started with PID {process.Id}");
+            }
+            else
+            {
+                LogToFile($"ElevatedHostClient: Process.Start returned null - UAC likely cancelled");
+            }
         }
         catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
         {
+            LogToFile($"ElevatedHostClient: Elevation was cancelled by the user (error 1223)");
             throw new ElevatedHostLaunchException("Elevation was cancelled by the user.", ex);
         }
         catch (Exception ex)
         {
+            LogToFile($"ElevatedHostClient: Failed to start host: {ex.GetType().Name}: {ex.Message}");
             throw new ElevatedHostLaunchException("Failed to start the elevated host.", ex);
         }
     }
@@ -161,5 +191,19 @@ public sealed class ElevatedHostClient : IElevatedHostClient
     private static bool IsConnectFailure(Exception ex)
     {
         return ex is TimeoutException or IOException;
+    }
+
+    private static void LogToFile(string message)
+    {
+        try
+        {
+            var logPath = Path.Combine(Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
+            File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+        }
+        catch
+        {
+            // Ignore logging errors
+        }
     }
 }
