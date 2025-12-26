@@ -35,12 +35,12 @@
       <ElevatedHostDestinationDir>$(TargetDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
-      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />
+      <ElevatedHostFilesAfterBuild Include="$(ElevatedHostOutputDir)**\\*.*" />
     </ItemGroup>
 
     <Copy
-      SourceFiles="@(ElevatedHostFiles)"
-      DestinationFiles="@(ElevatedHostFiles->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SourceFiles="@(ElevatedHostFilesAfterBuild)"
+      DestinationFiles="@(ElevatedHostFilesAfterBuild->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
       SkipUnchangedFiles="true" />
   </Target>
 
@@ -53,12 +53,12 @@
       <ElevatedHostDestinationDir>$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
-      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />
+      <ElevatedHostFilesAfterPublish Include="$(ElevatedHostOutputDir)**\\*.*" />
     </ItemGroup>
 
     <Copy
-      SourceFiles="@(ElevatedHostFiles)"
-      DestinationFiles="@(ElevatedHostFiles->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SourceFiles="@(ElevatedHostFilesAfterPublish)"
+      DestinationFiles="@(ElevatedHostFilesAfterPublish->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
       SkipUnchangedFiles="true" />
   </Target>
 
