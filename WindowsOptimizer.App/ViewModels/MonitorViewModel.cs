@@ -135,19 +135,16 @@ public sealed class MonitorViewModel : ViewModelBase
                 SystemInfo = null;
             }
 
-            // Timer: 1 second refresh (DISABLED - investigating crash)
+            // Timer: 1 second refresh
             try
             {
                 _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
                 _updateTimer.Tick += OnUpdateTick;
-                // TEMPORARILY DISABLED
-                // _updateTimer.Start();
-                LogToFile("MonitorViewModel: Timer created but NOT started (investigating crash)");
+                _updateTimer.Start();
             }
             catch (Exception ex)
             {
-                LogToFile($"Failed to create timer: {ex.Message}");
-                LogToFile($"Timer creation stack trace: {ex.StackTrace}");
+                System.Diagnostics.Debug.WriteLine($"Failed to start timer: {ex.Message}");
             }
         }
         catch (Exception ex)
@@ -328,20 +325,13 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         try
         {
-            System.Diagnostics.Debug.WriteLine("OnUpdateTick: Started");
-
             // Update system metrics (with null checks)
             if (_metricProvider != null)
             {
-                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting CPU usage");
                 CpuUsage = _metricProvider.GetCpuUsage();
-                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting RAM usage");
                 RamUsedGb = _metricProvider.GetUsedRamGb();
-                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting CPU temp");
                 CpuTemp = _metricProvider.GetCpuTemperature();
-                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting GPU temp");
                 GpuTemp = _metricProvider.GetGpuTemperature();
-                System.Diagnostics.Debug.WriteLine("OnUpdateTick: Getting GPU usage");
                 GpuUsage = _metricProvider.GetGpuUsage();
             }
 
