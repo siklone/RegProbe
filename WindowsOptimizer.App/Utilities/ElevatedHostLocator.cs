@@ -8,6 +8,6 @@ public static class ElevatedHostLocator
 {
     public static string GetExecutablePath()
     {
-        return Path.Combine(AppContext.BaseDirectory, ElevatedHostDefaults.ExecutableName);
+        return Path.Combine(AppContext.BaseDirectory, "ElevatedHost", ElevatedHostDefaults.ExecutableName);
     }
 }

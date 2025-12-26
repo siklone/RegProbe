@@ -26,14 +26,25 @@
     <ProjectReference Include="..\\WindowsOptimizer.ElevatedHost\\WindowsOptimizer.ElevatedHost.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
-  <Target Name="CopyElevatedHost" AfterTargets="Build">
+  <Target Name="CopyElevatedHost" AfterTargets="Build;Publish">
     <PropertyGroup>
-      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\net8.0-windows\\</ElevatedHostOutputDir>
+      <ElevatedHostRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</ElevatedHostRid>
+      <ElevatedHostRid Condition="'$(ElevatedHostRid)' == ''">win-x64</ElevatedHostRid>
+
+      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\$(ElevatedHostRid)\\</ElevatedHostOutputDir>
+
+      <!-- When publishing, prefer PublishDir; otherwise use OutDir -->
+      <ElevatedHostDestinationDir Condition="'$(PublishDir)' != ''">$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
+      <ElevatedHostDestinationDir Condition="'$(ElevatedHostDestinationDir)' == ''">$(OutDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
-      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)WindowsOptimizer.ElevatedHost.*" />
+      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(ElevatedHostFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+
+    <Copy
+      SourceFiles="@(ElevatedHostFiles)"
+      DestinationFiles="@(ElevatedHostFiles->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

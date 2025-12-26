@@ -97,9 +97,9 @@
 **Solution:**
 - Added **platform detection** to `ElevatedHostClient` and `LocalRegistryAccessor`
 - Immediately throws `PlatformNotSupportedException` on non-Windows platforms
-- Reduced `StartupConnectTimeout` from 30s to **5 seconds**
+- `StartupConnectTimeout` remains **30 seconds on Windows** (allows time for UAC + host startup)
 - Added comprehensive logging to `ElevatedHostClient` for debugging
-- Total timeout per tweak reduced from ~30s to ~6s (1s initial + 5s startup)
+- Total time on non-Windows reduced to near-immediate failure (no connection attempts)
 
 **Files Changed:**
 - `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
@@ -205,12 +205,12 @@
 
 **Description:**
 - First time applying a tweak that requires elevation, a UAC prompt appears
-- User must accept the UAC prompt within 5 seconds
+- User must accept the UAC prompt within ~30 seconds
 - If UAC is cancelled or timed out, the tweak fails
 
 **Expected Behavior:**
 - UAC prompt is **normal and required** for system-level tweaks
-- 5-second timeout ensures the application doesn't hang
+- Startup connect timeout prevents indefinite hangs
 - Subsequent tweaks use the same elevated host (no additional UAC prompts)
 
 **Workaround:** Accept UAC prompt quickly when it appears

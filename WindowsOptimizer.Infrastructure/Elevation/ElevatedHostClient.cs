@@ -158,6 +158,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         {
             FileName = _options.HostExecutablePath,
             Arguments = arguments,
+            WorkingDirectory = Path.GetDirectoryName(_options.HostExecutablePath) ?? string.Empty,
             UseShellExecute = true,
             Verb = "runas",
             CreateNoWindow = true,
@@ -167,14 +168,24 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         try
         {
             var process = Process.Start(startInfo);
-            if (process != null)
-            {
-                LogToFile($"ElevatedHostClient: Host process started with PID {process.Id}");
-            }
-            else
+            if (process is null)
             {
                 LogToFile($"ElevatedHostClient: Process.Start returned null - UAC likely cancelled");
+                throw new ElevatedHostLaunchException("Failed to start elevated host process (UAC likely cancelled).");
             }
+
+            LogToFile($"ElevatedHostClient: Host process started with PID {process.Id}");
+
+            // If the process exits immediately, surface a clearer error instead of waiting for pipe timeouts.
+            if (process.WaitForExit(500))
+            {
+                LogToFile($"ElevatedHostClient: Host process exited immediately with code {process.ExitCode}");
+                throw new ElevatedHostLaunchException(
+                    $"Elevated host exited immediately with code {process.ExitCode}. " +
+                    "Check that all ElevatedHost dependencies were copied next to the executable.");
+            }
+
+            process.Dispose();
         }
         catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
         {
