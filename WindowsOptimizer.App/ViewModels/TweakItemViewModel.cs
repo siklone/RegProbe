@@ -975,7 +975,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                     : value.ToString() ?? "Unknown";
             case RegistryValueKind.Binary:
                 return value is byte[] bytes
-                    ? $"0x{BitConverter.ToString(bytes).Replace(\"-\", string.Empty)}"
+                    ? $"0x{BitConverter.ToString(bytes).Replace("-", string.Empty)}"
                     : value.ToString() ?? "Unknown";
             default:
                 return value.ToString() ?? "Unknown";
