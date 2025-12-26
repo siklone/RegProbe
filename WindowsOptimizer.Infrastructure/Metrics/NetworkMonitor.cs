@@ -133,32 +133,23 @@ public sealed class NetworkMonitor
 
     private static (long TotalBytesSent, long TotalBytesReceived) GetTotalBytes(NetworkInterface nic)
     {
-        long totalSent = 0;
-        long totalReceived = 0;
-
         try
         {
-            var stats = nic.GetIPv4Statistics();
-            totalSent += stats.BytesSent;
-            totalReceived += stats.BytesReceived;
+            var stats = nic.GetIPStatistics();
+            return (stats.BytesSent, stats.BytesReceived);
         }
         catch
         {
-            // Ignore
+            try
+            {
+                var stats = nic.GetIPv4Statistics();
+                return (stats.BytesSent, stats.BytesReceived);
+            }
+            catch
+            {
+                return (0, 0);
+            }
         }
-
-        try
-        {
-            var stats = nic.GetIPv6Statistics();
-            totalSent += stats.BytesSent;
-            totalReceived += stats.BytesReceived;
-        }
-        catch
-        {
-            // Ignore
-        }
-
-        return (totalSent, totalReceived);
     }
 
     private static string? FindMatchingInstance(string[] instanceNames, NetworkInterface nic)
