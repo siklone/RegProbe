@@ -187,7 +187,27 @@ public sealed class TweakExecutionPipeline
         try
         {
             ct.ThrowIfCancellationRequested();
-            result = await operation(ct);
+
+            // Add timeout to prevent hanging (30 seconds per step)
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            cts.CancelAfter(TimeSpan.FromSeconds(30));
+
+            var operationTask = operation(cts.Token);
+            var timeoutTask = Task.Delay(Timeout.Infinite, cts.Token);
+
+            var completedTask = await Task.WhenAny(operationTask, timeoutTask);
+
+            if (completedTask == operationTask)
+            {
+                result = await operationTask;
+            }
+            else
+            {
+                result = new TweakResult(
+                    TweakStatus.Failed,
+                    $"Operation timed out after 30 seconds during {action}.",
+                    DateTimeOffset.UtcNow);
+            }
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
