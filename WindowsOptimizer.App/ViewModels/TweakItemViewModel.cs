@@ -43,6 +43,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _toggleCommand;
     private readonly RelayCommand _customActionCommand;
     private readonly RelayCommand _copyRegistryPathCommand;
+    private readonly RelayCommand _openReferenceLinkCommand;
     private string _terminalOutput = string.Empty;
     private bool _showTerminal = false;
     private PriorityCalculatorViewModel? _priorityCalculator;
@@ -84,6 +85,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
         _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
         _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
+        _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
 
         TryPopulateTechnicalInfo();
     }
@@ -102,7 +104,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool WillPromptForElevation => RequiresElevation && !IsElevated;
 
-    public string ElevationBadgeText => "Admin required";
+    public string ElevationBadgeText => "Admin";
 
     public string ElevationTooltip => IsElevated
         ? "Requires administrator privileges."
@@ -115,6 +117,21 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string Category => ExtractCategory(Id);
 
     public string CategoryIcon => GetCategoryIcon(Category);
+
+    public string StatusTooltip => AppliedStatus switch
+    {
+        TweakAppliedStatus.Applied => "Applied. Current state matches the desired configuration.",
+        TweakAppliedStatus.NotApplied => "Not applied. Detected state differs from the desired configuration.",
+        TweakAppliedStatus.Error => "Error. Open Execution Log for details.",
+        _ => "Unknown. Click Detect to read current state."
+    };
+
+    public string ActionsHelpTooltip =>
+        "Detect: Reads current state (no changes)\n" +
+        "Preview: Dry run (no changes)\n" +
+        "Apply: Detect -> Apply -> Verify (Rollback on failure)\n" +
+        "Verify: Confirms current state matches desired\n" +
+        "Rollback: Restores value captured by Detect (same app session)";
 
     private static string ExtractCategory(string id)
     {
@@ -162,6 +179,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand CustomActionCommand => _customActionCommand;
 
     public ICommand CopyRegistryPathCommand => _copyRegistryPathCommand;
+
+    public ICommand OpenReferenceLinkCommand => _openReferenceLinkCommand;
 
     public TweakActionType ActionType
     {
@@ -590,7 +609,9 @@ public sealed class TweakItemViewModel : ViewModelBase
             AppendToTerminal($"{action} Result: {result.Result.Status}. {result.Result.Message}");
             UpdateAfterSingleStep(action, result.Result);
             LastOutcome = MapOutcome(result.Result.Status);
-            StatusMessage = $"{action}: {result.Result.Status}.";
+            StatusMessage = string.IsNullOrWhiteSpace(result.Result.Message)
+                ? result.Result.Status.ToString()
+                : result.Result.Message;
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
@@ -711,7 +732,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         AppendToTerminal($"> {update.Action}: {update.Status} - {update.Message}");
 
-        StatusMessage = $"{update.Action}: {update.Status}";
+        StatusMessage = string.IsNullOrWhiteSpace(update.Message)
+            ? $"{update.Action}: {update.Status}"
+            : update.Message;
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
 
         if (update.Action == TweakAction.Detect)
@@ -830,6 +853,25 @@ public sealed class TweakItemViewModel : ViewModelBase
         catch (Exception ex)
         {
             StatusMessage = $"Copy failed: {ex.Message}";
+        }
+    }
+
+    private void OpenReferenceLink(object? parameter)
+    {
+        if (parameter is not string url || string.IsNullOrWhiteSpace(url))
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            StatusMessage = "Opening link...";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Could not open link: {ex.Message}";
+            LogToFile($"OpenReferenceLink failed: {ex.Message} ({url})");
         }
     }
 
