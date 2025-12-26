@@ -106,15 +106,14 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="4"
-                                Padding="{TemplateBinding Padding}"
-                                RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
+	                    <ControlTemplate TargetType="Button">
+	                        <Border x:Name="Border"
+	                                Background="{TemplateBinding Background}"
+	                                CornerRadius="4"
+	                                RenderTransformOrigin="0.5,0.5">
+	                            <Border.RenderTransform>
+	                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+	                            </Border.RenderTransform>
                             <Border.Effect>
                                 <DropShadowEffect x:Name="ButtonShadow"
                                                 Color="#000000"
@@ -122,20 +121,29 @@
                                                 ShadowDepth="2"
                                                 Opacity="0"/>
                             </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="Border"
-                                                          Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                          To="#4C566A" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.05" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
+	                            <Grid>
+	                                <Border x:Name="HoverOverlay"
+	                                        Background="#4C566A"
+	                                        CornerRadius="4"
+	                                        Opacity="0"
+	                                        IsHitTestVisible="False"/>
+	                                <ContentPresenter HorizontalAlignment="Center"
+	                                                  VerticalAlignment="Center"
+	                                                  Margin="{TemplateBinding Padding}"/>
+	                            </Grid>
+	                        </Border>
+	                        <ControlTemplate.Triggers>
+	                            <Trigger Property="IsMouseOver" Value="True">
+	                                <Trigger.EnterActions>
+	                                    <BeginStoryboard>
+	                                        <Storyboard>
+	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+	                                                           Storyboard.TargetProperty="Opacity"
+	                                                           To="1" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                                           To="1.05" Duration="0:0:0.15">
+	                                                <DoubleAnimation.EasingFunction>
+	                                                    <QuadraticEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
@@ -150,15 +158,15 @@
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="Border"
-                                                          Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                          To="#434C5E" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.0" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                <Trigger.ExitActions>
+	                                    <BeginStoryboard>
+	                                        <Storyboard>
+	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+	                                                           Storyboard.TargetProperty="Opacity"
+	                                                           To="0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                                           To="1.0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                            To="1.0" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetName="ButtonShadow"
                                                            Storyboard.TargetProperty="Opacity"
@@ -193,15 +201,14 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="6"
-                                Padding="{TemplateBinding Padding}"
-                                RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                            </Border.RenderTransform>
+	                    <ControlTemplate TargetType="Button">
+	                        <Border x:Name="Border"
+	                                Background="{TemplateBinding Background}"
+	                                CornerRadius="6"
+	                                RenderTransformOrigin="0.5,0.5">
+	                            <Border.RenderTransform>
+	                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+	                            </Border.RenderTransform>
                             <Border.Effect>
                                 <DropShadowEffect x:Name="FilterShadow"
                                                 Color="#5E81AC"
@@ -209,20 +216,29 @@
                                                 ShadowDepth="0"
                                                 Opacity="0"/>
                             </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="Border"
-                                                          Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                          To="#81A1C1" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.05" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
+	                            <Grid>
+	                                <Border x:Name="HoverOverlay"
+	                                        Background="#81A1C1"
+	                                        CornerRadius="6"
+	                                        Opacity="0"
+	                                        IsHitTestVisible="False"/>
+	                                <ContentPresenter HorizontalAlignment="Center"
+	                                                  VerticalAlignment="Center"
+	                                                  Margin="{TemplateBinding Padding}"/>
+	                            </Grid>
+	                        </Border>
+	                        <ControlTemplate.Triggers>
+	                            <Trigger Property="IsMouseOver" Value="True">
+	                                <Trigger.EnterActions>
+	                                    <BeginStoryboard>
+	                                        <Storyboard>
+	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+	                                                           Storyboard.TargetProperty="Opacity"
+	                                                           To="1" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                                           To="1.05" Duration="0:0:0.15">
+	                                                <DoubleAnimation.EasingFunction>
+	                                                    <QuadraticEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
@@ -240,15 +256,15 @@
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="Border"
-                                                          Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                          To="#5E81AC" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.0" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                <Trigger.ExitActions>
+	                                    <BeginStoryboard>
+	                                        <Storyboard>
+	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+	                                                           Storyboard.TargetProperty="Opacity"
+	                                                           To="0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                                           To="1.0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                            To="1.0" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetName="FilterShadow"
                                                            Storyboard.TargetProperty="BlurRadius"
@@ -916,44 +932,46 @@
                         <Border Margin="0,0,0,12">
                             <StackPanel>
                                 <!-- Category Header with Smooth Animations -->
-                                    <Border x:Name="CategoryHeader"
-                                            Background="#3B4252"
-                                            CornerRadius="8"
-                                            Padding="14,10"
-                                            Cursor="Hand"
-                                            Margin="0,0,0,6">
-                                        <Border.Effect>
-                                            <DropShadowEffect x:Name="HeaderShadow"
-                                                            Color="#81A1C1"
-                                                            BlurRadius="0"
+	                                    <Border x:Name="CategoryHeader"
+	                                            CornerRadius="8"
+	                                            Padding="14,10"
+	                                            Cursor="Hand"
+	                                            Margin="0,0,0,6">
+	                                        <Border.Background>
+	                                            <SolidColorBrush x:Name="CategoryHeaderBackgroundBrush" Color="#3B4252"/>
+	                                        </Border.Background>
+	                                        <Border.Effect>
+	                                            <DropShadowEffect x:Name="HeaderShadow"
+	                                                            Color="#81A1C1"
+	                                                            BlurRadius="0"
                                                             ShadowDepth="0"
                                                             Opacity="0"/>
                                         </Border.Effect>
-                                        <Border.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation Storyboard.TargetName="CategoryHeader"
-                                                                      Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                      To="#434C5E" Duration="0:0:0.15"/>
-                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                       Storyboard.TargetProperty="BlurRadius"
-                                                                       To="12" Duration="0:0:0.15"/>
+	                                        <Border.Triggers>
+	                                            <EventTrigger RoutedEvent="MouseEnter">
+	                                                <BeginStoryboard>
+	                                                    <Storyboard>
+	                                                        <ColorAnimation Storyboard.TargetName="CategoryHeaderBackgroundBrush"
+	                                                                      Storyboard.TargetProperty="Color"
+	                                                                      To="#434C5E" Duration="0:0:0.15"/>
+	                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+	                                                                       Storyboard.TargetProperty="BlurRadius"
+	                                                                       To="12" Duration="0:0:0.15"/>
                                                         <DoubleAnimation Storyboard.TargetName="HeaderShadow"
                                                                        Storyboard.TargetProperty="Opacity"
                                                                        To="0.4" Duration="0:0:0.15"/>
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <ColorAnimation Storyboard.TargetName="CategoryHeader"
-                                                                      Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                      To="#3B4252" Duration="0:0:0.15"/>
-                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                       Storyboard.TargetProperty="BlurRadius"
-                                                                       To="0" Duration="0:0:0.15"/>
+	                                            <EventTrigger RoutedEvent="MouseLeave">
+	                                                <BeginStoryboard>
+	                                                    <Storyboard>
+	                                                        <ColorAnimation Storyboard.TargetName="CategoryHeaderBackgroundBrush"
+	                                                                      Storyboard.TargetProperty="Color"
+	                                                                      To="#3B4252" Duration="0:0:0.15"/>
+	                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
+	                                                                       Storyboard.TargetProperty="BlurRadius"
+	                                                                       To="0" Duration="0:0:0.15"/>
                                                         <DoubleAnimation Storyboard.TargetName="HeaderShadow"
                                                                        Storyboard.TargetProperty="Opacity"
                                                                        To="0" Duration="0:0:0.15"/>
@@ -1049,16 +1067,18 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <!-- Tweak Card with Smooth Hover Effects -->
-                                            <Border x:Name="TweakCard"
-                                                    Background="#3B4252"
-                                                    CornerRadius="8"
-                                                    Padding="14,12"
-                                                    Margin="0,0,0,6"
-                                                    BorderThickness="2,0,0,0"
-                                                    BorderBrush="{Binding StatusColor}">
-                                                <Border.RenderTransform>
-                                                    <TranslateTransform Y="0"/>
-                                                </Border.RenderTransform>
+	                                            <Border x:Name="TweakCard"
+	                                                    CornerRadius="8"
+	                                                    Padding="14,12"
+	                                                    Margin="0,0,0,6"
+	                                                    BorderThickness="2,0,0,0"
+	                                                    BorderBrush="{Binding StatusColor}">
+	                                                <Border.Background>
+	                                                    <SolidColorBrush x:Name="TweakCardBackgroundBrush" Color="#3B4252"/>
+	                                                </Border.Background>
+	                                                <Border.RenderTransform>
+	                                                    <TranslateTransform Y="0"/>
+	                                                </Border.RenderTransform>
                                                 <Border.Effect>
                                                     <DropShadowEffect x:Name="CardShadow"
                                                                     Color="#000000"
@@ -1067,10 +1087,10 @@
                                                                     Opacity="0.2"/>
                                                 </Border.Effect>
                                                 <Border.Triggers>
-                                                    <EventTrigger RoutedEvent="MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
+	                                                    <EventTrigger RoutedEvent="MouseEnter">
+	                                                        <BeginStoryboard>
+	                                                            <Storyboard>
+	                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
                                                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                                                                                To="-2" Duration="0:0:0.15">
                                                                     <DoubleAnimation.EasingFunction>
@@ -1080,33 +1100,33 @@
                                                                 <DoubleAnimation Storyboard.TargetName="CardShadow"
                                                                                Storyboard.TargetProperty="BlurRadius"
                                                                                To="16" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                               Storyboard.TargetProperty="ShadowDepth"
-                                                                               To="6" Duration="0:0:0.15"/>
-                                                                <ColorAnimation Storyboard.TargetName="TweakCard"
-                                                                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                              To="#434C5E" Duration="0:0:0.15"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
+	                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+	                                                                               Storyboard.TargetProperty="ShadowDepth"
+	                                                                               To="6" Duration="0:0:0.15"/>
+	                                                                <ColorAnimation Storyboard.TargetName="TweakCardBackgroundBrush"
+	                                                                              Storyboard.TargetProperty="Color"
+	                                                                              To="#434C5E" Duration="0:0:0.15"/>
+	                                                            </Storyboard>
+	                                                        </BeginStoryboard>
+	                                                    </EventTrigger>
+	                                                    <EventTrigger RoutedEvent="MouseLeave">
+	                                                        <BeginStoryboard>
+	                                                            <Storyboard>
+	                                                                <DoubleAnimation Storyboard.TargetName="TweakCard"
                                                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                                                                                To="0" Duration="0:0:0.15"/>
                                                                 <DoubleAnimation Storyboard.TargetName="CardShadow"
                                                                                Storyboard.TargetProperty="BlurRadius"
                                                                                To="8" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                               Storyboard.TargetProperty="ShadowDepth"
-                                                                               To="2" Duration="0:0:0.15"/>
-                                                                <ColorAnimation Storyboard.TargetName="TweakCard"
-                                                                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                              To="#3B4252" Duration="0:0:0.15"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
+	                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
+	                                                                               Storyboard.TargetProperty="ShadowDepth"
+	                                                                               To="2" Duration="0:0:0.15"/>
+	                                                                <ColorAnimation Storyboard.TargetName="TweakCardBackgroundBrush"
+	                                                                              Storyboard.TargetProperty="Color"
+	                                                                              To="#3B4252" Duration="0:0:0.15"/>
+	                                                            </Storyboard>
+	                                                        </BeginStoryboard>
+	                                                    </EventTrigger>
                                                 </Border.Triggers>
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
