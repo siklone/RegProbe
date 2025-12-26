@@ -103,9 +103,9 @@
                         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
                             <TextBlock Text="Processor" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding SystemInfo.CpuName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
-                            <TextBlock FontSize="12" Foreground="#D8DEE9" Margin="0,2,0,0">
-                                <Run Text="{Binding SystemInfo.CpuCores}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads}"/><Run Text=" Threads"/>
-                            </TextBlock>
+	                            <TextBlock FontSize="12" Foreground="#D8DEE9" Margin="0,2,0,0">
+	                                <Run Text="{Binding SystemInfo.CpuCores, Mode=OneWay}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads, Mode=OneWay}"/><Run Text=" Threads"/>
+	                            </TextBlock>
                         </StackPanel>
 
                         <!-- GPU Name -->
@@ -117,9 +117,9 @@
                         <!-- Total RAM -->
                         <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
                             <TextBlock Text="Total Memory" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock FontSize="14" Foreground="#ECEFF4" FontWeight="Medium">
-                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}}"/><Run Text=" GB"/>
-                            </TextBlock>
+	                            <TextBlock FontSize="14" Foreground="#ECEFF4" FontWeight="Medium">
+	                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
+	                            </TextBlock>
                         </StackPanel>
 
                         <!-- Uptime -->
@@ -350,13 +350,13 @@
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
                                                 <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
-                                                    <Run Text="PID: "/><Run Text="{Binding Pid}"/>
-                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads}"/>
-                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles}"/>
+	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
+	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                             <TextBlock Grid.Column="1" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
-                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}}"/><Run Text="%"/>
+	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                                             </TextBlock>
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -401,13 +401,13 @@
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
                                                 <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
-                                                    <Run Text="PID: "/><Run Text="{Binding Pid}"/>
-                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads}"/>
-                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles}"/>
+	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
+	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                             <TextBlock Grid.Column="1" Foreground="#A3BE8C" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
-                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}}"/><Run Text=" MB"/>
+	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
                                             </TextBlock>
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -454,21 +454,21 @@
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="16,0,0,0">
                                             <TextBlock Text="Download" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
-                                                <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F2}}"/><Run Text=" Mbps"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
+	                                                <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+	                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" Margin="16,0,0,0">
                                             <TextBlock Text="Upload" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#88C0D0" FontWeight="Bold" FontSize="14">
-                                                <Run Text="{Binding SendMbps, StringFormat={}{0:F2}}"/><Run Text=" Mbps"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#88C0D0" FontWeight="Bold" FontSize="14">
+	                                                <Run Text="{Binding SendMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+	                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="3" Margin="16,0,0,0">
                                             <TextBlock Text="Total Received" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#EBCB8B" FontWeight="Medium" FontSize="12">
-                                                <Run Text="{Binding TotalBytesReceived, StringFormat={}{0:N0}}"/><Run Text=" bytes"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#EBCB8B" FontWeight="Medium" FontSize="12">
+	                                                <Run Text="{Binding TotalBytesReceived, StringFormat={}{0:N0}, Mode=OneWay}"/><Run Text=" bytes"/>
+	                                            </TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -505,36 +505,36 @@
 
                                         <!-- Disk Space Info -->
                                         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-                                            <TextBlock FontSize="11" Foreground="#D8DEE9">
-                                                <Run Text="{Binding UsedSpaceGb, StringFormat={}{0:F1}}"/><Run Text=" GB used of "/><Run Text="{Binding TotalSizeGb, StringFormat={}{0:F1}}"/><Run Text=" GB"/>
-                                            </TextBlock>
-                                            <TextBlock FontSize="11" Foreground="#D8DEE9" Margin="0,2,0,0">
-                                                <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}}"/><Run Text=" GB free"/>
-                                            </TextBlock>
+	                                            <TextBlock FontSize="11" Foreground="#D8DEE9">
+	                                                <Run Text="{Binding UsedSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB used of "/><Run Text="{Binding TotalSizeGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
+	                                            </TextBlock>
+	                                            <TextBlock FontSize="11" Foreground="#D8DEE9" Margin="0,2,0,0">
+	                                                <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB free"/>
+	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Read Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="8,0">
                                             <TextBlock Text="Read" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
-                                                <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}}"/><Run Text=" MB/s"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
+	                                                <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
+	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Write Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="3" Margin="8,0">
                                             <TextBlock Text="Write" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#BF616A" FontWeight="Bold" FontSize="14">
-                                                <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}}"/><Run Text=" MB/s"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#BF616A" FontWeight="Bold" FontSize="14">
+	                                                <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
+	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Usage Percent -->
                                         <StackPanel Grid.Row="0" Grid.Column="4" Margin="8,0,0,0">
                                             <TextBlock Text="Usage" Foreground="#D8DEE9" FontSize="11"/>
-                                            <TextBlock Foreground="#EBCB8B" FontWeight="Bold" FontSize="14">
-                                                <Run Text="{Binding UsedPercent, StringFormat={}{0:F1}}"/><Run Text="%"/>
-                                            </TextBlock>
+	                                            <TextBlock Foreground="#EBCB8B" FontWeight="Bold" FontSize="14">
+	                                                <Run Text="{Binding UsedPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
+	                                            </TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </Border>

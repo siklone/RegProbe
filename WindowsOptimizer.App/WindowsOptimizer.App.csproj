@@ -26,16 +26,31 @@
     <ProjectReference Include="..\\WindowsOptimizer.ElevatedHost\\WindowsOptimizer.ElevatedHost.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
-  <Target Name="CopyElevatedHost" AfterTargets="Build;Publish">
+  <Target Name="CopyElevatedHostAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
     <PropertyGroup>
       <ElevatedHostRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</ElevatedHostRid>
       <ElevatedHostRid Condition="'$(ElevatedHostRid)' == ''">win-x64</ElevatedHostRid>
 
       <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\$(ElevatedHostRid)\\</ElevatedHostOutputDir>
+      <ElevatedHostDestinationDir>$(TargetDir)ElevatedHost\\</ElevatedHostDestinationDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />
+    </ItemGroup>
 
-      <!-- When publishing, prefer PublishDir; otherwise use OutDir -->
-      <ElevatedHostDestinationDir Condition="'$(PublishDir)' != ''">$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
-      <ElevatedHostDestinationDir Condition="'$(ElevatedHostDestinationDir)' == ''">$(TargetDir)ElevatedHost\\</ElevatedHostDestinationDir>
+    <Copy
+      SourceFiles="@(ElevatedHostFiles)"
+      DestinationFiles="@(ElevatedHostFiles->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyElevatedHostAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <ElevatedHostRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</ElevatedHostRid>
+      <ElevatedHostRid Condition="'$(ElevatedHostRid)' == ''">win-x64</ElevatedHostRid>
+
+      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\$(ElevatedHostRid)\\</ElevatedHostOutputDir>
+      <ElevatedHostDestinationDir>$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
       <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />

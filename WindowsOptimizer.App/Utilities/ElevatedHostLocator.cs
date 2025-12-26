@@ -17,6 +17,13 @@ public static class ElevatedHostLocator
             return subfolderPath;
         }
 
+        // Some build flows (or older copy targets) may place the host under a "publish" folder.
+        var publishSubfolderPath = Path.Combine(baseDirectory, "publish", "ElevatedHost", ElevatedHostDefaults.ExecutableName);
+        if (File.Exists(publishSubfolderPath))
+        {
+            return publishSubfolderPath;
+        }
+
         // Backward compatibility: older builds placed the executable next to the main app.
         var legacyPath = Path.Combine(baseDirectory, ElevatedHostDefaults.ExecutableName);
         if (File.Exists(legacyPath))
