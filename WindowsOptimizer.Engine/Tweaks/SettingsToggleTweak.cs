@@ -48,7 +48,8 @@ public sealed class SettingsToggleTweak : ITweak
         var current = _getter(settings);
         _detectedValue = current;
         var state = current ? "enabled" : "disabled";
-        return new TweakResult(TweakStatus.Detected, $"Current value is {state}.", DateTimeOffset.UtcNow);
+        var status = current == _targetValue ? TweakStatus.Applied : TweakStatus.Detected;
+        return new TweakResult(status, $"Current value is {state}.", DateTimeOffset.UtcNow);
     }
 
     public async Task<TweakResult> ApplyAsync(CancellationToken ct)

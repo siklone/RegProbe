@@ -101,16 +101,28 @@ public sealed class RegistryValueSetTweak : ITweak
         try
         {
             _snapshots.Clear();
+            var matchingTargets = 0;
             foreach (var entry in _entries)
             {
                 var result = await _registryAccessor.ReadValueAsync(entry.Reference, ct);
                 _snapshots[entry.Reference.ValueName] = new RegistryValueSnapshot(result.Exists, result.Value);
+
+                if (result.Exists
+                    && result.Value is not null
+                    && result.Value.Kind == entry.TargetData.Kind
+                    && ValuesEqual(result.Value.ToObject(), entry.TargetValue))
+                {
+                    matchingTargets++;
+                }
             }
 
             _hasDetected = true;
             var detectedCount = _snapshots.Values.Count(snapshot => snapshot.Exists);
-            var message = $"Detected {detectedCount} of {_entries.Count} values.";
-            return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
+            var status = matchingTargets == _entries.Count ? TweakStatus.Applied : TweakStatus.Detected;
+            var message = status == TweakStatus.Applied
+                ? $"All {_entries.Count} values already match the desired configuration."
+                : $"Detected {detectedCount} of {_entries.Count} values (matches: {matchingTargets}).";
+            return new TweakResult(status, message, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {

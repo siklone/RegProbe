@@ -64,22 +64,41 @@ public sealed class RegistryValueTweak : ITweak
     public TweakRiskLevel Risk { get; }
     public bool RequiresElevation { get; }
 
+    public RegistryValueReference Reference => _reference;
+
+    public RegistryValueKind ValueKind => _valueKind;
+
+    public object TargetValue => _targetValue;
+
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
         try
         {
-            var (valueExists, value, _, data) = await ReadCurrentValueAsync(ct);
+            var (valueExists, value, kind, data) = await ReadCurrentValueAsync(ct);
             _hasDetected = true;
             _valueExists = valueExists;
             _detectedValue = value;
             _detectedValueData = data;
 
-            var message = valueExists
-                ? $"Current value is {FormatValue(value)}."
-                : "Value not set.";
-            return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
+            if (!valueExists)
+            {
+                return new TweakResult(TweakStatus.Detected, "Value not set.", DateTimeOffset.UtcNow);
+            }
+
+            if (kind == _valueKind && ValuesEqual(value, _targetValue))
+            {
+                return new TweakResult(
+                    TweakStatus.Applied,
+                    $"Current value is {FormatValue(value)}.",
+                    DateTimeOffset.UtcNow);
+            }
+
+            return new TweakResult(
+                TweakStatus.Detected,
+                $"Current value is {FormatValue(value)}.",
+                DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {

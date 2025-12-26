@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Tweaks;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -82,6 +84,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
         _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
         _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
+
+        TryPopulateTechnicalInfo();
     }
 
     public string Name => _tweak.Name;
@@ -174,13 +178,26 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string RegistryPath
     {
         get => _registryPath;
-        set => SetProperty(ref _registryPath, value);
+        set
+        {
+            if (SetProperty(ref _registryPath, value))
+            {
+                OnPropertyChanged(nameof(HasRegistryPath));
+                OnPropertyChanged(nameof(HasDiff));
+            }
+        }
     }
 
     public string CodeExample
     {
         get => _codeExample;
-        set => SetProperty(ref _codeExample, value);
+        set
+        {
+            if (SetProperty(ref _codeExample, value))
+            {
+                OnPropertyChanged(nameof(HasCodeExample));
+            }
+        }
     }
 
     public ObservableCollection<ReferenceLink> ReferenceLinks { get; }
@@ -212,7 +229,13 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string CurrentValue
     {
         get => _currentValue;
-        set => SetProperty(ref _currentValue, value);
+        set
+        {
+            if (SetProperty(ref _currentValue, value))
+            {
+                OnPropertyChanged(nameof(HasDiff));
+            }
+        }
     }
 
     public string TargetValue
@@ -474,6 +497,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             var report = await _pipeline.ExecuteAsync(_tweak, options, progress, _cts?.Token ?? CancellationToken.None);
             LogToFile($"RunAsync: ExecuteAsync COMPLETED for '{Name}', Succeeded={report.Succeeded}");
             ApplyReport(report);
+            UpdateAfterRun(report);
             LastOutcome = report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
@@ -496,6 +520,42 @@ public sealed class TweakItemViewModel : ViewModelBase
             LogToFile($"RunAsync END: '{Name}' IsRunning=false");
             IsRunning = false;
             ClearCancellation();
+        }
+    }
+
+    private void UpdateAfterRun(TweakExecutionReport report)
+    {
+        if (!report.Succeeded)
+        {
+            AppliedStatus = TweakAppliedStatus.Error;
+            return;
+        }
+
+        if (report.DryRun)
+        {
+            var detect = report.Steps.FirstOrDefault(step => step.Action == TweakAction.Detect);
+            AppliedStatus = detect?.Result.Status switch
+            {
+                TweakStatus.Applied or TweakStatus.Verified => TweakAppliedStatus.Applied,
+                TweakStatus.Detected => TweakAppliedStatus.NotApplied,
+                _ => AppliedStatus
+            };
+            return;
+        }
+
+        if (report.RolledBack)
+        {
+            AppliedStatus = TweakAppliedStatus.NotApplied;
+            return;
+        }
+
+        if (report.Verified || report.Applied)
+        {
+            AppliedStatus = TweakAppliedStatus.Applied;
+            if (report.Verified)
+            {
+                CurrentValue = TargetValue;
+            }
         }
     }
 
@@ -528,6 +588,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
             AppendToTerminal($"{action} Result: {result.Result.Status}. {result.Result.Message}");
+            UpdateAfterSingleStep(action, result.Result);
             LastOutcome = MapOutcome(result.Result.Status);
             StatusMessage = $"{action}: {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
@@ -546,6 +607,66 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             IsRunning = false;
             ClearCancellation();
+        }
+    }
+
+    private void UpdateAfterSingleStep(TweakAction action, TweakResult result)
+    {
+        switch (action)
+        {
+            case TweakAction.Detect:
+                AppliedStatus = result.Status switch
+                {
+                    TweakStatus.Applied or TweakStatus.Verified => TweakAppliedStatus.Applied,
+                    TweakStatus.Detected => TweakAppliedStatus.NotApplied,
+                    TweakStatus.NotApplicable => TweakAppliedStatus.NotApplied,
+                    TweakStatus.Skipped => TweakAppliedStatus.NotApplied,
+                    TweakStatus.Failed => TweakAppliedStatus.Error,
+                    _ => AppliedStatus
+                };
+
+                TryUpdateCurrentValueFromMessage(result.Message);
+                if (CurrentValue == "Unknown" && result.Status is TweakStatus.Applied or TweakStatus.Verified)
+                {
+                    CurrentValue = TargetValue;
+                }
+
+                break;
+            case TweakAction.Apply:
+                if (result.Status == TweakStatus.Applied)
+                {
+                    AppliedStatus = TweakAppliedStatus.Applied;
+                    CurrentValue = TargetValue;
+                }
+                else if (result.Status == TweakStatus.Failed)
+                {
+                    AppliedStatus = TweakAppliedStatus.Error;
+                }
+
+                break;
+            case TweakAction.Verify:
+                if (result.Status == TweakStatus.Verified)
+                {
+                    AppliedStatus = TweakAppliedStatus.Applied;
+                    CurrentValue = TargetValue;
+                }
+                else if (result.Status == TweakStatus.Failed)
+                {
+                    AppliedStatus = TweakAppliedStatus.NotApplied;
+                }
+
+                break;
+            case TweakAction.Rollback:
+                if (result.Status == TweakStatus.RolledBack)
+                {
+                    AppliedStatus = TweakAppliedStatus.NotApplied;
+                }
+                else if (result.Status == TweakStatus.Failed)
+                {
+                    AppliedStatus = TweakAppliedStatus.Error;
+                }
+
+                break;
         }
     }
 
@@ -592,6 +713,11 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         StatusMessage = $"{update.Action}: {update.Status}";
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
+
+        if (update.Action == TweakAction.Detect)
+        {
+            TryUpdateCurrentValueFromMessage(update.Message);
+        }
 
         var nextStep = GetNextStep(update.Action);
         if (nextStep is not null && nextStep.State == TweakStepState.Pending)
@@ -707,6 +833,155 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    private void TryPopulateTechnicalInfo()
+    {
+        if (_tweak is not RegistryValueTweak registryValueTweak)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(RegistryPath))
+        {
+            RegistryPath = FormatRegistryValuePath(registryValueTweak.Reference);
+        }
+
+        if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
+        {
+            TargetValue = FormatRegistryValueForDisplay(registryValueTweak.ValueKind, registryValueTweak.TargetValue);
+        }
+
+        if (string.IsNullOrWhiteSpace(CodeExample))
+        {
+            CodeExample = BuildRegistryCommandPreview(
+                registryValueTweak.Reference,
+                registryValueTweak.ValueKind,
+                registryValueTweak.TargetValue);
+        }
+    }
+
+    private static string FormatRegistryValuePath(WindowsOptimizer.Core.Registry.RegistryValueReference reference)
+    {
+        var key = FormatRegistryKey(reference);
+        return $"{key}\\{reference.ValueName}";
+    }
+
+    private static string FormatRegistryKey(WindowsOptimizer.Core.Registry.RegistryValueReference reference)
+    {
+        var keyPath = (reference.KeyPath ?? string.Empty).Trim().TrimStart('\\').TrimEnd('\\');
+        if (keyPath.StartsWith("HKEY_", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCR\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKU\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCC\\", StringComparison.OrdinalIgnoreCase))
+        {
+            return keyPath;
+        }
+
+        var hive = reference.Hive switch
+        {
+            RegistryHive.LocalMachine => "HKLM",
+            RegistryHive.CurrentUser => "HKCU",
+            RegistryHive.ClassesRoot => "HKCR",
+            RegistryHive.Users => "HKU",
+            RegistryHive.CurrentConfig => "HKCC",
+            _ => reference.Hive.ToString()
+        };
+
+        return string.IsNullOrEmpty(keyPath) ? hive : $"{hive}\\{keyPath}";
+    }
+
+    private static string BuildRegistryCommandPreview(
+        WindowsOptimizer.Core.Registry.RegistryValueReference reference,
+        RegistryValueKind valueKind,
+        object targetValue)
+    {
+        var key = FormatRegistryKey(reference);
+        var regType = valueKind switch
+        {
+            RegistryValueKind.String => "REG_SZ",
+            RegistryValueKind.ExpandString => "REG_EXPAND_SZ",
+            RegistryValueKind.MultiString => "REG_MULTI_SZ",
+            RegistryValueKind.Binary => "REG_BINARY",
+            RegistryValueKind.DWord => "REG_DWORD",
+            RegistryValueKind.QWord => "REG_QWORD",
+            _ => $"REG_{valueKind.ToString().ToUpperInvariant()}"
+        };
+
+        var viewFlag = reference.View switch
+        {
+            RegistryView.Registry32 => " /reg:32",
+            RegistryView.Registry64 => " /reg:64",
+            _ => string.Empty
+        };
+
+        var data = FormatRegistryValueForRegAdd(valueKind, targetValue);
+
+        return string.Join(
+            Environment.NewLine,
+            $"reg add \"{key}\" /v \"{reference.ValueName}\" /t {regType} /d {data} /f{viewFlag}",
+            $"reg query \"{key}\" /v \"{reference.ValueName}\"{viewFlag}");
+    }
+
+    private static string FormatRegistryValueForRegAdd(RegistryValueKind valueKind, object value)
+    {
+        switch (valueKind)
+        {
+            case RegistryValueKind.DWord:
+            case RegistryValueKind.QWord:
+                return Convert.ToInt64(value).ToString();
+            case RegistryValueKind.MultiString:
+                if (value is string[] strings)
+                {
+                    var combined = string.Join("\\0", strings);
+                    return $"\"{combined}\\0\"";
+                }
+
+                return $"\"{value}\"";
+            case RegistryValueKind.String:
+            case RegistryValueKind.ExpandString:
+                return $"\"{value}\"";
+            case RegistryValueKind.Binary:
+                if (value is byte[] bytes)
+                {
+                    var hex = BitConverter.ToString(bytes).Replace("-", string.Empty);
+                    return hex;
+                }
+
+                return value.ToString() ?? string.Empty;
+            default:
+                return value.ToString() ?? string.Empty;
+        }
+    }
+
+    private static string FormatRegistryValueForDisplay(RegistryValueKind valueKind, object value)
+    {
+        switch (valueKind)
+        {
+            case RegistryValueKind.DWord:
+            case RegistryValueKind.QWord:
+                try
+                {
+                    var number = Convert.ToInt64(value);
+                    return $"{number} (0x{number:X})";
+                }
+                catch
+                {
+                    return value.ToString() ?? "Unknown";
+                }
+            case RegistryValueKind.MultiString:
+                return value is string[] strings
+                    ? string.Join("; ", strings)
+                    : value.ToString() ?? "Unknown";
+            case RegistryValueKind.Binary:
+                return value is byte[] bytes
+                    ? $"0x{BitConverter.ToString(bytes).Replace(\"-\", string.Empty)}"
+                    : value.ToString() ?? "Unknown";
+            default:
+                return value.ToString() ?? "Unknown";
+        }
+    }
+
     /// <summary>
     /// Detect if tweak is currently applied
     /// </summary>
@@ -718,34 +993,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
 
-            // Interpret detect result to determine applied status
-            if (result.Result.Status == TweakStatus.Detected ||
-                result.Result.Status == TweakStatus.Applied ||
-                result.Result.Status == TweakStatus.Verified)
+            AppliedStatus = result.Result.Status switch
             {
-                AppliedStatus = TweakAppliedStatus.Applied;
-            }
-            else if (result.Result.Status == TweakStatus.Failed)
-            {
-                AppliedStatus = TweakAppliedStatus.Error;
-            }
-            else
-            {
-                AppliedStatus = TweakAppliedStatus.NotApplied;
-            }
+                TweakStatus.Applied or TweakStatus.Verified => TweakAppliedStatus.Applied,
+                TweakStatus.Detected => TweakAppliedStatus.NotApplied,
+                TweakStatus.NotApplicable => TweakAppliedStatus.NotApplied,
+                TweakStatus.Skipped => TweakAppliedStatus.NotApplied,
+                TweakStatus.Failed => TweakAppliedStatus.Error,
+                _ => TweakAppliedStatus.Unknown
+            };
 
-            // Extract current value if possible from the message (e.g., "Current value is 1.")
-            if (!string.IsNullOrEmpty(result.Result.Message) && result.Result.Message.Contains("Current value is "))
+            TryUpdateCurrentValueFromMessage(result.Result.Message);
+
+            if (CurrentValue == "Unknown" && result.Result.Status is TweakStatus.Applied or TweakStatus.Verified)
             {
-                var parts = result.Result.Message.Split(new[] { "Current value is " }, StringSplitOptions.None);
-                if (parts.Length > 1)
-                {
-                    CurrentValue = parts[1].TrimEnd('.');
-                }
-            }
-            else if (result.Result.Status == TweakStatus.Detected || result.Result.Status == TweakStatus.Applied)
-            {
-                // Fallback if applied but value not in message
                 CurrentValue = TargetValue;
             }
         }
@@ -755,6 +1016,44 @@ public sealed class TweakItemViewModel : ViewModelBase
             Debug.WriteLine($"Stack trace: {ex.StackTrace}");
             AppliedStatus = TweakAppliedStatus.Unknown;
         }
+    }
+
+    private void TryUpdateCurrentValueFromMessage(string? message)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            return;
+        }
+
+        if (message.Contains("Value not set", StringComparison.OrdinalIgnoreCase))
+        {
+            CurrentValue = "Not set";
+            return;
+        }
+
+        if (TryExtractAfterPrefix(message, "Current value is ", out var value))
+        {
+            CurrentValue = value.TrimEnd('.');
+            return;
+        }
+
+        if (TryExtractAfterPrefix(message, "Current state:", out var state))
+        {
+            CurrentValue = state.Trim();
+        }
+    }
+
+    private static bool TryExtractAfterPrefix(string message, string prefix, out string value)
+    {
+        value = string.Empty;
+        var index = message.IndexOf(prefix, StringComparison.OrdinalIgnoreCase);
+        if (index < 0)
+        {
+            return false;
+        }
+
+        value = message[(index + prefix.Length)..];
+        return true;
     }
 
     private async Task RunCustomActionAsync()

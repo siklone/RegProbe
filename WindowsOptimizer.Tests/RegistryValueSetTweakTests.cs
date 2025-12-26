@@ -11,6 +11,29 @@ using Xunit;
 public sealed class RegistryValueSetTweakTests
 {
     [Fact]
+    public async Task Detect_WhenAllValuesMatchTarget_ReturnsApplied()
+    {
+        var keyPath = BuildKeyPath();
+
+        using (var key = Registry.CurrentUser.CreateSubKey(keyPath, true))
+        {
+            key!.SetValue("Language Hotkey", "3", RegistryValueKind.String);
+            key.SetValue("Hotkey", "3", RegistryValueKind.String);
+        }
+
+        try
+        {
+            var tweak = BuildTweak(keyPath, "3");
+            var detect = await tweak.DetectAsync(CancellationToken.None);
+            Assert.Equal(TweakStatus.Applied, detect.Status);
+        }
+        finally
+        {
+            Registry.CurrentUser.DeleteSubKeyTree(keyPath, false);
+        }
+    }
+
+    [Fact]
     public async Task ApplyRollback_WhenValuesMissing_RestoresMissingValues()
     {
         var keyPath = BuildKeyPath();

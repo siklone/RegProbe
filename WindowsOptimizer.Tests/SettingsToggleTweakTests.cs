@@ -8,6 +8,17 @@ using Xunit;
 public sealed class SettingsToggleTweakTests
 {
     [Fact]
+    public async Task Detect_WhenAlreadyInDesiredState_ReturnsApplied()
+    {
+        var store = new InMemorySettingsStore(new AppSettings { DemoTweakAlphaEnabled = true });
+        var tweak = BuildTweak(store);
+
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+    }
+
+    [Fact]
     public async Task RollbackWithoutDetect_SkipsAndDoesNotChangeValue()
     {
         var store = new InMemorySettingsStore(new AppSettings { DemoTweakAlphaEnabled = false });

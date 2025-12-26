@@ -11,6 +11,29 @@ using Xunit;
 public sealed class RegistryValueTweakTests
 {
     [Fact]
+    public async Task Detect_WhenValueMatchesTarget_ReturnsApplied()
+    {
+        var keyPath = BuildKeyPath();
+        var valueName = "TestValue";
+
+        using (var key = Registry.CurrentUser.CreateSubKey(keyPath, true))
+        {
+            key!.SetValue(valueName, 1, RegistryValueKind.DWord);
+        }
+
+        try
+        {
+            var tweak = BuildTweak(keyPath, valueName);
+            var detect = await tweak.DetectAsync(CancellationToken.None);
+            Assert.Equal(TweakStatus.Applied, detect.Status);
+        }
+        finally
+        {
+            Registry.CurrentUser.DeleteSubKeyTree(keyPath, false);
+        }
+    }
+
+    [Fact]
     public async Task ApplyRollback_WhenValueMissing_RestoresMissingValue()
     {
         var keyPath = BuildKeyPath();
