@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,20 +14,23 @@ public sealed class DiskMonitor
     {
         var disks = new List<DiskInfo>();
 
-        // Get all available PhysicalDisk instances
-        PerformanceCounterCategory category;
-        string[] instanceNames;
+        // Get per-volume disk activity. LogicalDisk instances map directly to drive letters (C:, D: ...),
+        // unlike PhysicalDisk which uses "0 C:" style instance names.
+        string[] instanceNames = Array.Empty<string>();
+        var perfCountersAvailable = false;
 
         try
         {
-            category = new PerformanceCounterCategory("PhysicalDisk");
+            var category = new PerformanceCounterCategory("LogicalDisk");
             instanceNames = category.GetInstanceNames();
+            perfCountersAvailable = true;
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to get PhysicalDisk instances: {ex.Message}");
-            return disks; // Return empty list if category is not available
+            Debug.WriteLine($"Failed to get LogicalDisk instances: {ex.Message}");
         }
+
+        var activeDriveNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var drive in DriveInfo.GetDrives())
         {
@@ -34,89 +38,48 @@ public sealed class DiskMonitor
                 continue;
 
             var driveName = drive.Name.TrimEnd('\\'); // "C:"
+            activeDriveNames.Add(driveName);
 
-            // Try multiple possible instance name formats
-            var possibleInstanceNames = new[]
+            if (perfCountersAvailable && !_counters.ContainsKey(driveName))
             {
-                $"{drive.Name[0]}:",                    // "C:"
-                $"{drive.Name[0]} {drive.Name[1]}",     // "C :"
-                drive.Name.TrimEnd('\\'),               // "C:"
-                "0",                                     // First physical disk
-                "_Total"                                 // Total for all disks
-            };
-
-            // Find the first matching instance name
-            string? matchingInstance = null;
-            foreach (var possible in possibleInstanceNames)
-            {
-                if (instanceNames.Contains(possible))
+                var instanceName = instanceNames.FirstOrDefault(name =>
+                    name.Equals(driveName, StringComparison.OrdinalIgnoreCase));
+                if (instanceName is null)
                 {
-                    matchingInstance = possible;
-                    break;
+                    Debug.WriteLine($"No LogicalDisk instance found for drive {driveName}");
                 }
-            }
-
-            // If no match found, skip this drive
-            if (matchingInstance == null)
-            {
-                Debug.WriteLine($"No PhysicalDisk instance found for drive {driveName}");
-
-                // Add drive info without I/O stats
-                disks.Add(new DiskInfo
+                else
                 {
-                    DriveLetter = driveName,
-                    TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
-                    FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
-                    ReadBytesPerSec = 0,
-                    WriteBytesPerSec = 0
-                });
-                continue;
-            }
-
-            if (!_counters.ContainsKey(driveName))
-            {
-                try
-                {
-                    _counters[driveName] = (
-                        new PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", matchingInstance),
-                        new PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", matchingInstance)
-                    );
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Failed to create performance counters for {driveName}: {ex.Message}");
-
-                    // Add drive info without I/O stats
-                    disks.Add(new DiskInfo
+                    try
                     {
-                        DriveLetter = driveName,
-                        TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
-                        FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
-                        ReadBytesPerSec = 0,
-                        WriteBytesPerSec = 0
-                    });
-                    continue;
+                        _counters[driveName] = (
+                            new PerformanceCounter("LogicalDisk", "Disk Read Bytes/sec", instanceName),
+                            new PerformanceCounter("LogicalDisk", "Disk Write Bytes/sec", instanceName)
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Failed to create performance counters for {driveName}: {ex.Message}");
+                    }
                 }
             }
-
-            // Only add disk if counters were successfully created
-            if (!_counters.ContainsKey(driveName))
-                continue;
-
-            var (readCounter, writeCounter) = _counters[driveName];
 
             float readRate = 0;
             float writeRate = 0;
 
-            try
+            if (_counters.TryGetValue(driveName, out var counters))
             {
-                readRate = readCounter.NextValue();
-                writeRate = writeCounter.NextValue();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to read performance counters for {driveName}: {ex.Message}");
-                // Continue with 0 values instead of skipping
+                var (readCounter, writeCounter) = counters;
+                try
+                {
+                    readRate = readCounter.NextValue();
+                    writeRate = writeCounter.NextValue();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to read performance counters for {driveName}: {ex.Message}");
+                    // Continue with 0 values instead of skipping
+                }
             }
 
             disks.Add(new DiskInfo
@@ -129,6 +92,7 @@ public sealed class DiskMonitor
             });
         }
 
+        CleanupInactive(activeDriveNames);
         return disks;
     }
 
@@ -138,6 +102,18 @@ public sealed class DiskMonitor
         {
             read?.Dispose();
             write?.Dispose();
+        }
+    }
+
+    private void CleanupInactive(HashSet<string> activeDriveNames)
+    {
+        foreach (var driveName in _counters.Keys.Where(name => !activeDriveNames.Contains(name)).ToList())
+        {
+            if (_counters.Remove(driveName, out var counters))
+            {
+                counters.Read.Dispose();
+                counters.Write.Dispose();
+            }
         }
     }
 }

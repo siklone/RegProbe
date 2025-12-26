@@ -134,27 +134,41 @@
 
 ---
 
+### 6. Monitor Network/Disk Monitoring Fallback Improvements (Unreleased)
+**Problem:** Network adapters and disk activity could appear empty (or stuck at 0) when performance counters are unavailable or when instance mapping fails.
+
+**Solution:**
+- `NetworkMonitor` now falls back to delta-based throughput using `System.Net.NetworkInformation` totals when performance counters are unavailable/unmatched
+- `DiskMonitor` uses `LogicalDisk` performance counters (drive-letter instances) for more reliable per-drive I/O rates
+- Both monitors avoid returning an empty list solely because performance counters are unavailable
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs verification on Windows 10/11 native
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
 **Severity:** Medium
-**Status:** 🔍 **INVESTIGATING**
+**Status:** 🧪 **NEEDS TESTING**
 
 **Description:**
-- Network Adapters section shows empty
-- Disk Activity section shows empty
+- Network Adapters and/or Disk Activity may show empty (or show 0 I/O) on some environments
 - Other monitoring metrics (CPU, RAM, Processes) work correctly
 
 **Possible Causes:**
-- Performance counter instance name detection failing
-- Network interface enumeration failing on WSL2/Linux
-- Disk performance counters not available on non-Windows platforms
+- Performance counter availability / mapping differences across environments
+- Platform limitations (WSL2/Linux)
 
 **Workaround:** None currently
 
 **Files Affected:**
-- `WindowsOptimizer.Infrastructure/Monitoring/NetworkMonitor.cs`
-- `WindowsOptimizer.Infrastructure/Monitoring/DiskMonitor.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
 
 **Priority:** Medium - affects monitoring functionality but doesn't crash
 
@@ -223,7 +237,7 @@
 
 **Files to Review:**
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.Infrastructure/Monitoring/*.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/*.cs`
 
 ---
 
