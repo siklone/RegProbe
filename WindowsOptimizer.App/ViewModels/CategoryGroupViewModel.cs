@@ -141,8 +141,21 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 try
                 {
                     LogToFile($"DetectAllTweaksAsync: Detecting '{tweak.Name}'");
-                    await tweak.DetectStatusAsync();
-                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
+
+                    // Add timeout to prevent hanging
+                    var detectTask = tweak.DetectStatusAsync();
+                    var timeoutTask = System.Threading.Tasks.Task.Delay(5000); // 5 second timeout
+                    var completedTask = await System.Threading.Tasks.Task.WhenAny(detectTask, timeoutTask);
+
+                    if (completedTask == timeoutTask)
+                    {
+                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' TIMEOUT (5s)");
+                    }
+                    else
+                    {
+                        await detectTask; // Ensure we await to catch any exceptions
+                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
+                    }
                 }
                 catch (System.Exception ex)
                 {
