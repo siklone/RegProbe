@@ -93,19 +93,60 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
 
     private void PrepareElement(FrameworkElement element)
     {
-        // Ensure element has transform groups
-        if (element.RenderTransform is not TransformGroup)
+        // Ensure element has a mutable transform we can animate.
+        // WPF can freeze Freezables coming from resources/templates; animating a frozen transform throws:
+        // "Cannot animate '(0).(1)' on an immutable object instance."
+        if (element.RenderTransform is TransformGroup existingGroup)
         {
-            element.RenderTransform = new TransformGroup
+            if (existingGroup.IsFrozen || existingGroup.Children.IsFrozen)
             {
-                Children = new TransformCollection
-                {
-                    new ScaleTransform(),
-                    new TranslateTransform()
-                }
-            };
+                element.RenderTransform = existingGroup.CloneCurrentValue();
+            }
         }
+        else if (element.RenderTransform is Freezable freezable && freezable.IsFrozen)
+        {
+            element.RenderTransform = (Transform)freezable.CloneCurrentValue();
+        }
+
+        if (element.RenderTransform is not TransformGroup group)
+        {
+            group = new TransformGroup();
+            group.Children.Add(new ScaleTransform());
+            group.Children.Add(new TranslateTransform());
+            element.RenderTransform = group;
+        }
+
+        EnsureTranslateTransform(group);
         element.RenderTransformOrigin = new Point(0.5, 0.5);
+    }
+
+    private static TranslateTransform EnsureTranslateTransform(TransformGroup group)
+    {
+        for (var i = 0; i < group.Children.Count; i++)
+        {
+            if (group.Children[i] is TranslateTransform existing)
+            {
+                if (existing.IsFrozen)
+                {
+                    var clone = existing.CloneCurrentValue();
+                    group.Children[i] = clone;
+                    return clone;
+                }
+
+                return existing;
+            }
+        }
+
+        var translate = new TranslateTransform();
+        group.Children.Add(translate);
+        return translate;
+    }
+
+    private TranslateTransform GetTranslateTransform(FrameworkElement element)
+    {
+        PrepareElement(element);
+        var group = (TransformGroup)element.RenderTransform;
+        return EnsureTranslateTransform(group);
     }
 
     private void AnimateOut(FrameworkElement element, Action? onCompleted = null)
@@ -128,6 +169,7 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
 
         if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
         {
+            var translate = GetTranslateTransform(element);
             var slideOut = new DoubleAnimation
             {
                 From = 0,
@@ -135,8 +177,8 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
                 Duration = TimeSpan.FromMilliseconds(200),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTarget(slideOut, element);
-            Storyboard.SetTargetProperty(slideOut, new PropertyPath("RenderTransform.Children[1].X"));
+            Storyboard.SetTarget(slideOut, translate);
+            Storyboard.SetTargetProperty(slideOut, new PropertyPath(TranslateTransform.XProperty));
             storyboard.Children.Add(slideOut);
         }
 
@@ -168,6 +210,7 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
 
         if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
         {
+            var translate = GetTranslateTransform(element);
             var slideIn = new DoubleAnimation
             {
                 From = 50,
@@ -175,8 +218,8 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
                 Duration = TimeSpan.FromMilliseconds(300),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
-            Storyboard.SetTarget(slideIn, element);
-            Storyboard.SetTargetProperty(slideIn, new PropertyPath("RenderTransform.Children[1].X"));
+            Storyboard.SetTarget(slideIn, translate);
+            Storyboard.SetTargetProperty(slideIn, new PropertyPath(TranslateTransform.XProperty));
             storyboard.Children.Add(slideIn);
         }
 

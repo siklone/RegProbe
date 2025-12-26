@@ -27,13 +27,25 @@ public sealed class DashboardViewModel : ViewModelBase
     public int TotalTweaksAvailable
     {
         get => _totalTweaksAvailable;
-        set => SetProperty(ref _totalTweaksAvailable, value);
+        set
+        {
+            if (SetProperty(ref _totalTweaksAvailable, value))
+            {
+                OnPropertyChanged(nameof(OptimizationScoreDetails));
+            }
+        }
     }
 
     public int TweaksApplied
     {
         get => _tweaksApplied;
-        set => SetProperty(ref _tweaksApplied, value);
+        set
+        {
+            if (SetProperty(ref _tweaksApplied, value))
+            {
+                OnPropertyChanged(nameof(OptimizationScoreDetails));
+            }
+        }
     }
 
     public int TweaksRolledBack
@@ -47,6 +59,11 @@ public sealed class DashboardViewModel : ViewModelBase
         get => _optimizationScore;
         set => SetProperty(ref _optimizationScore, value);
     }
+
+    public string OptimizationScoreDetails =>
+        TotalTweaksAvailable <= 0
+            ? "Health is calculated from Tweaks. Run Detect to refresh current states."
+            : $"{TweaksApplied} / {TotalTweaksAvailable} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
 
     public long LogFileSizeBytes
     {
@@ -62,7 +79,8 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private void LoadStatistics()
     {
-        TotalTweaksAvailable = 100; // This will be dynamic when we count actual tweaks
+        // These will be updated live by MainViewModel from TweaksViewModel.
+        TotalTweaksAvailable = 0;
 
         // Count applied and rolled back tweaks from log file
         var appliedCount = 0;

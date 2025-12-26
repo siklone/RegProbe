@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using LibreHardwareMonitor.Hardware;
@@ -64,27 +65,55 @@ public sealed class MetricProvider : IDisposable
 
     public double GetCpuTemperature()
     {
-        if (_computer == null) return 0;
+        if (_computer == null) return double.NaN;
 
         foreach (var hardware in _computer.Hardware)
         {
             if (hardware.HardwareType == HardwareType.Cpu)
             {
                 hardware.Update();
-                foreach (var sensor in hardware.Sensors)
+                var temps = hardware.Sensors
+                    .Where(s => s.SensorType == SensorType.Temperature && s.Value.HasValue)
+                    .ToList();
+
+                if (temps.Count == 0)
                 {
-                    if (sensor.SensorType == SensorType.Temperature &&
-                        (sensor.Name.Contains("Package") || sensor.Name.Contains("Core Average")))
-                        return sensor.Value ?? 0;
+                    continue;
                 }
+
+                var preferred = temps.FirstOrDefault(s => s.Name.Contains("Package", StringComparison.OrdinalIgnoreCase))
+                                ?? temps.FirstOrDefault(s => s.Name.Contains("Tctl", StringComparison.OrdinalIgnoreCase)
+                                                             || s.Name.Contains("Tdie", StringComparison.OrdinalIgnoreCase))
+                                ?? temps.FirstOrDefault(s => s.Name.Contains("Core Average", StringComparison.OrdinalIgnoreCase))
+                                ?? temps.FirstOrDefault(s => s.Name.Contains("CCD", StringComparison.OrdinalIgnoreCase));
+
+                if (preferred?.Value is { } preferredValue)
+                {
+                    return preferredValue;
+                }
+
+                var coreTemps = temps
+                    .Where(s => s.Name.Contains("Core", StringComparison.OrdinalIgnoreCase)
+                                && !s.Name.Contains("Max", StringComparison.OrdinalIgnoreCase)
+                                && !s.Name.Contains("Package", StringComparison.OrdinalIgnoreCase))
+                    .Select(s => s.Value!.Value)
+                    .ToList();
+
+                if (coreTemps.Count > 0)
+                {
+                    return coreTemps.Average();
+                }
+
+                return temps.Max(s => s.Value!.Value);
             }
         }
-        return 0;
+
+        return double.NaN;
     }
 
     public double GetGpuTemperature()
     {
-        if (_computer == null) return 0;
+        if (_computer == null) return double.NaN;
 
         foreach (var hardware in _computer.Hardware)
         {
@@ -97,11 +126,11 @@ public sealed class MetricProvider : IDisposable
                 {
                     if (sensor.SensorType == SensorType.Temperature &&
                         (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU")))
-                        return sensor.Value ?? 0;
+                        return sensor.Value ?? double.NaN;
                 }
             }
         }
-        return 0;
+        return double.NaN;
     }
 
     public double GetGpuUsage()

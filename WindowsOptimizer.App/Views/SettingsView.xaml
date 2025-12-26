@@ -227,7 +227,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                             <Border Background="#5E81AC" CornerRadius="8" Padding="8" Margin="0,0,12,0">
-                                <TextBlock Text="ℹ️" FontSize="16"/>
+                                <TextBlock Text="ℹ️" FontFamily="Segoe UI Emoji" FontSize="16"/>
                             </Border>
                             <TextBlock Text="Application Information" 
                                        FontSize="18" 
@@ -245,17 +245,17 @@
                             
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="Version" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="1.0.0" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding AppVersion}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
                             
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="Build" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="Release" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding BuildConfiguration}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
                             
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="Framework" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text=".NET 8.0" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding Framework}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
                         </Grid>
 

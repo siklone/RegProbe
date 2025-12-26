@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -2885,8 +2886,8 @@ public sealed class TweaksViewModel : ViewModelBase
 
             new(new SettingsToggleTweak(
                     "demo.alpha",
-                    "Demo: Enable performance profile",
-                    "Demo toggle stored in app settings. Safe preview/apply/rollback for pipeline testing.",
+                    "Demo (Internal): Performance profile",
+                    "Internal demo toggle stored in app settings only. No Windows/system changes. Useful to test Preview/Apply/Verify/Rollback pipeline.",
                     TweakRiskLevel.Safe,
                     settingsStore,
                     settings => settings.DemoTweakAlphaEnabled,
@@ -2895,8 +2896,8 @@ public sealed class TweaksViewModel : ViewModelBase
                 _isElevated),
             new(new SettingsToggleTweak(
                     "demo.beta",
-                    "Demo: Reduce background noise",
-                    "Demo toggle stored in app settings. No system changes are applied.",
+                    "Demo (Internal): Reduce background noise",
+                    "Internal demo toggle stored in app settings only. No Windows/system changes. Useful to validate UI + logging flows.",
                     TweakRiskLevel.Safe,
                     settingsStore,
                     settings => settings.DemoTweakBetaEnabled,
@@ -3075,6 +3076,8 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             tweak.PropertyChanged += OnTweakPropertyChanged;
         }
+
+        Tweaks.CollectionChanged += OnTweaksCollectionChanged;
 
         TweaksView = CollectionViewSource.GetDefaultView(Tweaks);
         TweaksView.Filter = FilterTweaks;
@@ -3318,15 +3321,28 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand ImportPresetCommand { get; }
     public ICommand CreateSnapshotCommand { get; }
 
+    public int ScorableTweaksTotal => Tweaks.Count(IsScorableForHealth);
+
+    public int ScorableTweaksApplied => Tweaks.Count(t => IsScorableForHealth(t) && t.IsApplied);
+
     public int GlobalOptimizationScore
     {
         get
         {
-            if (!Tweaks.Any()) return 0;
-            var applied = Tweaks.Count(t => t.IsApplied);
-            return (int)((double)applied / Tweaks.Count * 100);
+            var total = ScorableTweaksTotal;
+            if (total == 0)
+            {
+                return 0;
+            }
+
+            var applied = ScorableTweaksApplied;
+            return (int)Math.Round((double)applied / total * 100, MidpointRounding.AwayFromZero);
         }
     }
+
+    public string HealthCalculationSummary => ScorableTweaksTotal == 0
+        ? "Health is calculated from Tweaks. Run Detect to refresh current states."
+        : $"{ScorableTweaksApplied} / {ScorableTweaksTotal} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
 
     public string HealthStatusMessage => GlobalOptimizationScore switch
     {
@@ -3335,6 +3351,10 @@ public sealed class TweaksViewModel : ViewModelBase
         >= 40 => "Moderate optimization level",
         _ => "System needs optimization"
     };
+
+    private static bool IsScorableForHealth(TweakItemViewModel tweak) =>
+        !tweak.Id.StartsWith("demo.", StringComparison.OrdinalIgnoreCase)
+        && tweak.Risk != TweakRiskLevel.Risky;
 
     public string ExportStatusMessage
     {
@@ -3832,6 +3852,41 @@ public sealed class TweaksViewModel : ViewModelBase
             _verifyAllCommand.RaiseCanExecuteChanged();
             _rollbackAllCommand.RaiseCanExecuteChanged();
         }
+        else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied) or nameof(TweakItemViewModel.AppliedStatus))
+        {
+            RaiseHealthMetricsChanged();
+        }
+    }
+
+    private void OnTweaksCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (var item in e.NewItems.OfType<TweakItemViewModel>())
+            {
+                item.PropertyChanged += OnTweakPropertyChanged;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (var item in e.OldItems.OfType<TweakItemViewModel>())
+            {
+                item.PropertyChanged -= OnTweakPropertyChanged;
+            }
+        }
+
+        UpdateSelectionCount();
+        RaiseHealthMetricsChanged();
+    }
+
+    private void RaiseHealthMetricsChanged()
+    {
+        OnPropertyChanged(nameof(GlobalOptimizationScore));
+        OnPropertyChanged(nameof(HealthStatusMessage));
+        OnPropertyChanged(nameof(ScorableTweaksTotal));
+        OnPropertyChanged(nameof(ScorableTweaksApplied));
+        OnPropertyChanged(nameof(HealthCalculationSummary));
     }
 
     private void UpdateSelectionCount()

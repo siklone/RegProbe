@@ -36,6 +36,30 @@
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
+
+        <Style x:Key="HeaderActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#434C5E"/>
+            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -46,29 +70,17 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="#ECEFF4"/>
                     <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="#D8DEE9" Margin="0,4,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
-                    <TextBlock Text="Refresh Rate:" Foreground="#D8DEE9" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <ComboBox ItemsSource="{Binding RefreshIntervalOptions}"
-                              SelectedItem="{Binding RefreshIntervalSeconds, Mode=TwoWay}"
-                              Width="80" Background="#3B4252" Foreground="#ECEFF4" BorderBrush="#4C566A">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding Mode=OneWay}"/><Run Text="s"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
-                <Button Grid.Column="2" Content="Export to CSV" Command="{Binding ExportMetricsCommand}"
-                        Background="#88C0D0" Foreground="White" BorderThickness="0"
-                        Padding="16,8" FontSize="14" FontWeight="SemiBold" Cursor="Hand" VerticalAlignment="Center"/>
+                <Button Grid.Column="1"
+                        Content="Save"
+                        ToolTip="Saves a CSV snapshot to your Desktop."
+                        Command="{Binding ExportMetricsCommand}"
+                        Style="{StaticResource HeaderActionButtonStyle}"
+                        VerticalAlignment="Center"/>
             </Grid>
 
             <!-- System Information Section -->
@@ -196,9 +208,11 @@
                 <Border Grid.Column="2" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="CPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#EBCB8B" Margin="0,0,0,4">
-                            <Run Text="{Binding CpuTemp, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text="°C" FontSize="20"/>
-                        </TextBlock>
+                        <TextBlock Text="{Binding CpuTempText}"
+                                   FontSize="32"
+                                   FontWeight="Bold"
+                                   Foreground="#EBCB8B"
+                                   Margin="0,0,0,4"/>
                     </StackPanel>
                 </Border>
 
@@ -216,9 +230,11 @@
                 <Border Grid.Column="4" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="GPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#B48EAD" Margin="0,0,0,4">
-                            <Run Text="{Binding GpuTemp, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text="°C" FontSize="20"/>
-                        </TextBlock>
+                        <TextBlock Text="{Binding GpuTempText}"
+                                   FontSize="32"
+                                   FontWeight="Bold"
+                                   Foreground="#B48EAD"
+                                   Margin="0,0,0,4"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -237,7 +253,7 @@
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
                             <Viewbox Stretch="Fill">
                                 <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#88C0D0" StrokeThickness="2"/>
                                 </Canvas>
                             </Viewbox>
@@ -252,7 +268,7 @@
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
                             <Viewbox Stretch="Fill">
                                 <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#A3BE8C" StrokeThickness="2"/>
                                 </Canvas>
                             </Viewbox>
@@ -275,9 +291,9 @@
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
                             <Viewbox Stretch="Fill">
                                 <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#A3BE8C" StrokeThickness="2"/>
-                                    <Polyline Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#88C0D0" StrokeThickness="2"/>
                                 </Canvas>
                             </Viewbox>
@@ -302,9 +318,9 @@
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
                             <Viewbox Stretch="Fill">
                                 <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding DiskReadHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding DiskReadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#A3BE8C" StrokeThickness="2"/>
-                                    <Polyline Points="{Binding DiskWriteHistory, Converter={StaticResource SparklinePointsConverter}}"
+                                    <Polyline Points="{Binding DiskWriteHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
                                               Stroke="#BF616A" StrokeThickness="2"/>
                                 </Canvas>
                             </Viewbox>
@@ -432,6 +448,60 @@
                     </StackPanel>
                 </Border>
             </Grid>
+
+            <!-- Top Network Processes -->
+            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Top 10 Processes by Network (Approx.)" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Based on total process I/O bytes. May include disk activity."
+                               Foreground="#4C566A"
+                               FontSize="11"
+                               Margin="0,0,0,8"/>
+                    <ItemsControl ItemsSource="{Binding TopProcessesByNetwork}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
+                                            <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                                <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
+                                                <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                            <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+                                        </TextBlock>
+                                        <Button Grid.Column="2" Content="Kill"
+                                                Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                        <Button Grid.Column="3" Content="Suspend"
+                                                Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                        <Button Grid.Column="4" Content="Resume"
+                                                Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
 
             <!-- Network Adapters Section -->
             <Border Style="{StaticResource SectionCardStyle}">

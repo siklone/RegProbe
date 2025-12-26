@@ -5,6 +5,7 @@ using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.App.Services.TweakProviders;
+using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -66,13 +67,24 @@ public sealed class MainViewModel : ViewModelBase
             new("about", "About", "ℹ️", about)
         };
 
-        // Link Health Score
-        tweaks.PropertyChanged += (s, e) => {
-            if (e.PropertyName == nameof(TweaksViewModel.GlobalOptimizationScore)) {
-                dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+        // Link Health Score + Counts (live from Tweaks)
+        void SyncDashboardHealth()
+        {
+            dashboard.TotalTweaksAvailable = tweaks.ScorableTweaksTotal;
+            dashboard.TweaksApplied = tweaks.ScorableTweaksApplied;
+            dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+        }
+
+        tweaks.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName is nameof(TweaksViewModel.GlobalOptimizationScore)
+                or nameof(TweaksViewModel.ScorableTweaksTotal)
+                or nameof(TweaksViewModel.ScorableTweaksApplied))
+            {
+                SyncDashboardHealth();
             }
         };
-        dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+        SyncDashboardHealth();
 
         SelectedNavigationItem = NavigationItems[0];
 
@@ -104,6 +116,10 @@ public sealed class MainViewModel : ViewModelBase
     }
 
     public ObservableCollection<NavigationItem> NavigationItems { get; }
+
+    public string AppVersionLabel => AppInfo.VersionLabel;
+
+    public string AppCopyrightLabel => AppInfo.CopyrightLabel;
 
     public NavigationItem? SelectedNavigationItem
     {

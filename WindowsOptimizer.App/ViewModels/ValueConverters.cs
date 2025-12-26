@@ -88,6 +88,7 @@ public sealed class SparklinePointsConverter : IValueConverter
     {
         if (value is System.Collections.Generic.IEnumerable<double> points)
         {
+            var autoScale = parameter is string s && s.Contains("auto", StringComparison.OrdinalIgnoreCase);
             var pointsList = System.Linq.Enumerable.ToList(points);
             if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
 
@@ -101,9 +102,8 @@ public sealed class SparklinePointsConverter : IValueConverter
                 }
             }
 
-            // Preserve percent-style scaling for typical 0-100 series; auto-scale for larger ranges (e.g., Mbps/MBps).
             var maxValue = System.Linq.Enumerable.Max(pointsList);
-            var scaleMax = maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue);
+            var scaleMax = autoScale ? Math.Max(1.0, maxValue) : (maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue));
 
             var pc = new System.Windows.Media.PointCollection(pointsList.Count);
             double x = 0;

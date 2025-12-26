@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
 public sealed class ProcessMonitor
 {
     private Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _previousCpuUsage = new();
+    private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousIoUsage = new();
 
     public List<ProcessInfo> GetTopProcessesByCpu(int count = 10)
     {
@@ -66,6 +68,41 @@ public sealed class ProcessMonitor
         return processes.OrderByDescending(p => p.RamMb).Take(count).ToList();
     }
 
+    public List<ProcessInfo> GetTopProcessesByIo(int count = 10)
+    {
+        var processes = new List<ProcessInfo>();
+        var currentTime = DateTime.UtcNow;
+
+        foreach (var process in Process.GetProcesses())
+        {
+            try
+            {
+                if (!TryGetIoBytes(process, out var totalBytes))
+                {
+                    continue;
+                }
+
+                var ioMbps = CalculateIoMbps(process.Id, totalBytes, currentTime);
+
+                processes.Add(new ProcessInfo
+                {
+                    Name = process.ProcessName,
+                    Pid = process.Id,
+                    IoMbps = ioMbps,
+                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
+                    Threads = process.Threads.Count,
+                    Handles = process.HandleCount
+                });
+            }
+            catch
+            {
+                // Process may have exited or is not accessible
+            }
+        }
+
+        return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
+    }
+
     private double CalculateCpuUsage(Process process, DateTime currentTime)
     {
         var pid = process.Id;
@@ -88,6 +125,46 @@ public sealed class ProcessMonitor
         return 0;
     }
 
+    private double CalculateIoMbps(int pid, ulong currentTotalBytes, DateTime currentTime)
+    {
+        if (_previousIoUsage.TryGetValue(pid, out var previous))
+        {
+            var seconds = (currentTime - previous.Time).TotalSeconds;
+            var diffBytes = currentTotalBytes >= previous.TotalBytes ? currentTotalBytes - previous.TotalBytes : 0;
+
+            _previousIoUsage[pid] = (currentTime, currentTotalBytes);
+
+            if (seconds > 0)
+            {
+                var bytesPerSecond = diffBytes / seconds;
+                return (bytesPerSecond * 8.0) / (1024.0 * 1024.0);
+            }
+
+            return 0;
+        }
+
+        _previousIoUsage[pid] = (currentTime, currentTotalBytes);
+        return 0;
+    }
+
+    private static bool TryGetIoBytes(Process process, out ulong totalBytes)
+    {
+        totalBytes = 0;
+
+        if (process.HasExited)
+        {
+            return false;
+        }
+
+        if (!GetProcessIoCounters(process.Handle, out var counters))
+        {
+            return false;
+        }
+
+        totalBytes = counters.ReadTransferCount + counters.WriteTransferCount + counters.OtherTransferCount;
+        return true;
+    }
+
     public void Cleanup()
     {
         // Remove entries for processes that no longer exist
@@ -96,6 +173,12 @@ public sealed class ProcessMonitor
         foreach (var pid in deadPids)
         {
             _previousCpuUsage.Remove(pid);
+        }
+
+        var deadIoPids = _previousIoUsage.Keys.Where(pid => !currentPids.Contains(pid)).ToList();
+        foreach (var pid in deadIoPids)
+        {
+            _previousIoUsage.Remove(pid);
         }
     }
 
@@ -175,6 +258,20 @@ public sealed class ProcessMonitor
     {
         SUSPEND_RESUME = 0x0002
     }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetProcessIoCounters(IntPtr hProcess, out IoCounters ioCounters);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct IoCounters
+    {
+        public ulong ReadOperationCount;
+        public ulong WriteOperationCount;
+        public ulong OtherOperationCount;
+        public ulong ReadTransferCount;
+        public ulong WriteTransferCount;
+        public ulong OtherTransferCount;
+    }
 }
 
 public sealed class ProcessInfo
@@ -183,9 +280,11 @@ public sealed class ProcessInfo
     public int Pid { get; set; }
     public double CpuPercent { get; set; }
     public double RamMb { get; set; }
+    public double IoMbps { get; set; }
     public int Threads { get; set; }
     public int Handles { get; set; }
     public string Status { get; set; } = "Running";
 
     public string RamFormatted => $"{RamMb:F1} MB";
+    public string IoFormatted => $"{IoMbps:F2} Mbps";
 }

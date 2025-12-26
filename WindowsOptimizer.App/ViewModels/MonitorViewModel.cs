@@ -21,11 +21,10 @@ public sealed class MonitorViewModel : ViewModelBase
     private double _cpuUsage;
     private double _ramUsedGb;
     private double _ramTotalGb;
-    private double _cpuTemp;
-    private double _gpuTemp;
+    private double _cpuTemp = double.NaN;
+    private double _gpuTemp = double.NaN;
     private double _gpuUsage;
     private SystemInfo? _systemInfo;
-    private int _refreshIntervalSeconds = 1;
     private double _cpuAlertThreshold = 90.0;
     private double _ramAlertThreshold = 90.0;
     private bool _isCpuAlertActive;
@@ -83,9 +82,9 @@ public sealed class MonitorViewModel : ViewModelBase
             DiskWriteHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             TopProcessesByCpu = new ObservableCollection<ProcessInfo>();
             TopProcessesByRam = new ObservableCollection<ProcessInfo>();
+            TopProcessesByNetwork = new ObservableCollection<ProcessInfo>();
             NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
             Disks = new ObservableCollection<DiskInfo>();
-            RefreshIntervalOptions = new ObservableCollection<int> { 1, 2, 5 };
 
             // Initialize process management commands
             KillProcessCommand = new RelayCommand(param =>
@@ -160,9 +159,9 @@ public sealed class MonitorViewModel : ViewModelBase
             DiskWriteHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             TopProcessesByCpu ??= new ObservableCollection<ProcessInfo>();
             TopProcessesByRam ??= new ObservableCollection<ProcessInfo>();
+            TopProcessesByNetwork ??= new ObservableCollection<ProcessInfo>();
             NetworkAdapters ??= new ObservableCollection<NetworkAdapterInfo>();
             Disks ??= new ObservableCollection<DiskInfo>();
-            RefreshIntervalOptions ??= new ObservableCollection<int> { 1, 2, 5 };
 
             // Initialize commands if they weren't created
             KillProcessCommand ??= new RelayCommand(_ => { });
@@ -185,9 +184,9 @@ public sealed class MonitorViewModel : ViewModelBase
             csv.AppendLine("Metric,Value");
             csv.AppendLine($"CPU Usage,{CpuUsage:F2}%");
             csv.AppendLine($"RAM Usage,{RamUsedGb:F2} GB / {RamTotalGb:F2} GB ({RamUsagePercent:F2}%)");
-            csv.AppendLine($"CPU Temperature,{CpuTemp:F1}°C");
+            csv.AppendLine($"CPU Temperature,{(HasCpuTemp ? $"{CpuTemp:F1}°C" : "N/A")}");
             csv.AppendLine($"GPU Usage,{GpuUsage:F2}%");
-            csv.AppendLine($"GPU Temperature,{GpuTemp:F1}°C");
+            csv.AppendLine($"GPU Temperature,{(HasGpuTemp ? $"{GpuTemp:F1}°C" : "N/A")}");
             csv.AppendLine();
             csv.AppendLine("System Information");
             csv.AppendLine($"OS,{SystemInfo?.OsName}");
@@ -213,6 +212,14 @@ public sealed class MonitorViewModel : ViewModelBase
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.RamMb:F0},{proc.Threads},{proc.Handles}");
             }
 
+            csv.AppendLine();
+            csv.AppendLine("Top Processes by Network (Approx.)");
+            csv.AppendLine("Name,PID,Mbps,Threads,Handles");
+            foreach (var proc in TopProcessesByNetwork)
+            {
+                csv.AppendLine($"{proc.Name},{proc.Pid},{proc.IoMbps:F2},{proc.Threads},{proc.Handles}");
+            }
+
             File.WriteAllText(filepath, csv.ToString());
             System.Diagnostics.Debug.WriteLine($"Metrics exported to: {filepath}");
         }
@@ -232,9 +239,9 @@ public sealed class MonitorViewModel : ViewModelBase
     public ObservableCollection<double> DiskWriteHistory { get; }
     public ObservableCollection<ProcessInfo> TopProcessesByCpu { get; }
     public ObservableCollection<ProcessInfo> TopProcessesByRam { get; }
+    public ObservableCollection<ProcessInfo> TopProcessesByNetwork { get; }
     public ObservableCollection<NetworkAdapterInfo> NetworkAdapters { get; }
     public ObservableCollection<DiskInfo> Disks { get; }
-    public ObservableCollection<int> RefreshIntervalOptions { get; }
 
     public double CpuUsage
     {
@@ -259,14 +266,36 @@ public sealed class MonitorViewModel : ViewModelBase
     public double CpuTemp
     {
         get => _cpuTemp;
-        private set => SetProperty(ref _cpuTemp, value);
+        private set
+        {
+            if (SetProperty(ref _cpuTemp, value))
+            {
+                OnPropertyChanged(nameof(HasCpuTemp));
+                OnPropertyChanged(nameof(CpuTempText));
+            }
+        }
     }
+
+    public bool HasCpuTemp => double.IsFinite(CpuTemp) && CpuTemp > 0;
+
+    public string CpuTempText => HasCpuTemp ? $"{CpuTemp:F0}°C" : "N/A";
 
     public double GpuTemp
     {
         get => _gpuTemp;
-        private set => SetProperty(ref _gpuTemp, value);
+        private set
+        {
+            if (SetProperty(ref _gpuTemp, value))
+            {
+                OnPropertyChanged(nameof(HasGpuTemp));
+                OnPropertyChanged(nameof(GpuTempText));
+            }
+        }
     }
+
+    public bool HasGpuTemp => double.IsFinite(GpuTemp) && GpuTemp > 0;
+
+    public string GpuTempText => HasGpuTemp ? $"{GpuTemp:F0}°C" : "N/A";
 
     public double GpuUsage
     {
@@ -278,18 +307,6 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         get => _systemInfo;
         private set => SetProperty(ref _systemInfo, value);
-    }
-
-    public int RefreshIntervalSeconds
-    {
-        get => _refreshIntervalSeconds;
-        set
-        {
-            if (SetProperty(ref _refreshIntervalSeconds, value) && _updateTimer != null)
-            {
-                _updateTimer.Interval = TimeSpan.FromSeconds(value);
-            }
-        }
     }
 
     public double CpuAlertThreshold
@@ -330,8 +347,11 @@ public sealed class MonitorViewModel : ViewModelBase
             {
                 CpuUsage = _metricProvider.GetCpuUsage();
                 RamUsedGb = _metricProvider.GetUsedRamGb();
-                CpuTemp = _metricProvider.GetCpuTemperature();
-                GpuTemp = _metricProvider.GetGpuTemperature();
+                var cpuTemp = _metricProvider.GetCpuTemperature();
+                CpuTemp = double.IsFinite(cpuTemp) && cpuTemp > 0 ? cpuTemp : double.NaN;
+
+                var gpuTemp = _metricProvider.GetGpuTemperature();
+                GpuTemp = double.IsFinite(gpuTemp) && gpuTemp > 0 ? gpuTemp : double.NaN;
                 GpuUsage = _metricProvider.GetGpuUsage();
             }
 
@@ -369,6 +389,7 @@ public sealed class MonitorViewModel : ViewModelBase
             {
                 UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
                 UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
+                UpdateCollection(TopProcessesByNetwork, _processMonitor.GetTopProcessesByIo(10));
 
                 // Cleanup dead process entries
                 _processMonitor.Cleanup();

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ public sealed class SettingsViewModel : ViewModelBase
     private string _statusMessage = "Settings loaded.";
     private bool _isSaving;
     private bool _isTesting;
+    private readonly RelayCommand _openUrlCommand;
 
     public SettingsViewModel()
     {
@@ -25,11 +27,39 @@ public sealed class SettingsViewModel : ViewModelBase
 
         _saveCommand = new RelayCommand(_ => _ = SaveSettingsAsync(), _ => !IsSaving);
         _testWebhookCommand = new RelayCommand(_ => _ = TestWebhookAsync(), _ => !IsTesting && !string.IsNullOrWhiteSpace(DiscordWebhookUrl));
+        _openUrlCommand = new RelayCommand(parameter =>
+        {
+            if (parameter is not string url || string.IsNullOrWhiteSpace(url))
+            {
+                return;
+            }
+
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch
+            {
+                // Ignore link launch failures
+            }
+        });
 
         _ = LoadSettingsAsync();
     }
 
     public string Title => "Settings";
+
+    public string AppVersion => AppInfo.Version;
+
+    public string BuildConfiguration => AppInfo.BuildConfiguration;
+
+    public string Framework => AppInfo.FrameworkLabel;
+
+    public string RepositoryUrl => AppInfo.RepositoryUrl;
 
     public string DiscordWebhookUrl
     {
@@ -88,6 +118,8 @@ public sealed class SettingsViewModel : ViewModelBase
     public ICommand SaveCommand => _saveCommand;
 
     public ICommand TestWebhookCommand => _testWebhookCommand;
+
+    public ICommand OpenUrlCommand => _openUrlCommand;
 
     private async Task LoadSettingsAsync()
     {
