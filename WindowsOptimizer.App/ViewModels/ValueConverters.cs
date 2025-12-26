@@ -88,8 +88,22 @@ public sealed class SparklinePointsConverter : IValueConverter
     {
         if (value is System.Collections.Generic.IEnumerable<double> points)
         {
-            var pointsList = points as System.Collections.Generic.IList<double> ?? System.Linq.Enumerable.ToList(points);
-            if (!pointsList.Any()) return DependencyProperty.UnsetValue;
+            var pointsList = System.Linq.Enumerable.ToList(points);
+            if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
+
+            // Guard against NaN/Infinity values from perf counters and other sources.
+            for (var i = 0; i < pointsList.Count; i++)
+            {
+                var v = pointsList[i];
+                if (!double.IsFinite(v) || v < 0)
+                {
+                    pointsList[i] = 0;
+                }
+            }
+
+            // Preserve percent-style scaling for typical 0-100 series; auto-scale for larger ranges (e.g., Mbps/MBps).
+            var maxValue = System.Linq.Enumerable.Max(pointsList);
+            var scaleMax = maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue);
 
             var pc = new System.Windows.Media.PointCollection(pointsList.Count);
             double x = 0;
@@ -99,7 +113,7 @@ public sealed class SparklinePointsConverter : IValueConverter
             
             foreach (var p in pointsList)
             {
-                pc.Add(new Point(x, canvasHeight - (p / 100.0 * canvasHeight))); 
+                pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight))); 
                 x += xStep;
             }
             return pc;
