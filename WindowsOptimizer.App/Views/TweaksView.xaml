@@ -1325,15 +1325,8 @@
                                                                         </Trigger>
                                                                         <Trigger Property="IsMouseOver" Value="True">
                                                                             <Setter TargetName="Track" Property="BorderBrush" Value="#81A1C1"/>
-                                                                            <Trigger.EnterActions>
-                                                                                <BeginStoryboard>
-                                                                                    <Storyboard>
-                                                                                        <DoubleAnimation Storyboard.TargetName="Track"
-                                                                                                       Storyboard.TargetProperty="(Border.BorderThickness).(Thickness.Left)"
-                                                                                                       To="2" Duration="0:0:0.15"/>
-                                                                                    </Storyboard>
-                                                                                </BeginStoryboard>
-                                                                            </Trigger.EnterActions>
+                                                                            <!-- Thickness components can't be animated directly; animate the whole Thickness. -->
+                                                                            <Setter TargetName="Track" Property="BorderThickness" Value="2"/>
                                                                         </Trigger>
                                                                     </ControlTemplate.Triggers>
                                                                 </ControlTemplate>

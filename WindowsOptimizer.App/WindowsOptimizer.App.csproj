@@ -35,7 +35,7 @@
 
       <!-- When publishing, prefer PublishDir; otherwise use OutDir -->
       <ElevatedHostDestinationDir Condition="'$(PublishDir)' != ''">$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
-      <ElevatedHostDestinationDir Condition="'$(ElevatedHostDestinationDir)' == ''">$(OutDir)ElevatedHost\\</ElevatedHostDestinationDir>
+      <ElevatedHostDestinationDir Condition="'$(ElevatedHostDestinationDir)' == ''">$(TargetDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
       <ElevatedHostFiles Include="$(ElevatedHostOutputDir)**\\*.*" />

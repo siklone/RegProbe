@@ -3,11 +3,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
+using System.Threading;
 
 namespace WindowsOptimizer.App;
 
 public partial class App : Application
 {
+    private static int _dispatcherErrorDialogShown;
+
     protected override void OnStartup(StartupEventArgs e)
     {
         DispatcherUnhandledException += OnDispatcherUnhandledException;
@@ -21,16 +24,19 @@ public partial class App : Application
     {
         AppDiagnostics.LogException("DispatcherUnhandledException", e.Exception);
 
-        try
+        if (Interlocked.Exchange(ref _dispatcherErrorDialogShown, 1) == 0)
         {
-            MessageBox.Show(
-                $"Unexpected error: {e.Exception.Message}\n\nDetails were written to %TEMP%\\WindowsOptimizer_Debug.log",
-                "Windows Optimizer",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
-        }
-        catch
-        {
+            try
+            {
+                MessageBox.Show(
+                    $"Unexpected error: {e.Exception.Message}\n\nDetails were written to %TEMP%\\WindowsOptimizer_Debug.log",
+                    "Windows Optimizer",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch
+            {
+            }
         }
 
         // Keep the app alive so the user can export logs / continue using other pages.

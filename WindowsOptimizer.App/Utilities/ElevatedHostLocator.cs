@@ -8,6 +8,22 @@ public static class ElevatedHostLocator
 {
     public static string GetExecutablePath()
     {
-        return Path.Combine(AppContext.BaseDirectory, "ElevatedHost", ElevatedHostDefaults.ExecutableName);
+        var baseDirectory = AppContext.BaseDirectory;
+
+        // Preferred layout: keep the elevated host in a subfolder with its dependencies.
+        var subfolderPath = Path.Combine(baseDirectory, "ElevatedHost", ElevatedHostDefaults.ExecutableName);
+        if (File.Exists(subfolderPath))
+        {
+            return subfolderPath;
+        }
+
+        // Backward compatibility: older builds placed the executable next to the main app.
+        var legacyPath = Path.Combine(baseDirectory, ElevatedHostDefaults.ExecutableName);
+        if (File.Exists(legacyPath))
+        {
+            return legacyPath;
+        }
+
+        return subfolderPath;
     }
 }

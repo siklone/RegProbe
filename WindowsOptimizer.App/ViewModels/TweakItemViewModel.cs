@@ -529,7 +529,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
             AppendToTerminal($"{action} Result: {result.Result.Status}. {result.Result.Message}");
             LastOutcome = MapOutcome(result.Result.Status);
-            StatusMessage = $"{action} {result.Result.Status}.";
+            StatusMessage = $"{action}: {result.Result.Status}.";
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
