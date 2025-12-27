@@ -1,120 +1,94 @@
-# WPF Windows Optimizer - Handoff Report & Project Status
+# Windows Optimizer — Handoff (for Claude/Agents)
 
-This document summarizes the current state of the project for the incoming development agent.
+**Last Updated:** 2025-12-27  
+**Branch:** `main`  
 
-## Current Build Status: ✅ 100% GREEN
-- **Zero Errors**: Fixed all MC4011 (XAML scope violation) and CS0246/CS1061 (Cascading ViewModel) errors.
-- **Zero Warnings**: Resolved CS8603 (Nullability) warnings in converters.
-- **Stable Branch**: `main` is now in a production-ready, buildable state.
-- **100% Tweak Coverage**: All 233 documented tweaks from Docs/ are now implemented!
+This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
 
----
+## Quick Start
 
-## Session 2025-12-23: Tweak Implementation Sprint
+- Build: `dotnet build`
+- Run: `dotnet run --project WindowsOptimizer.App`
+- Logs:
+  - Debug log: `%TEMP%\WindowsOptimizer_Debug.log`
+  - Tweak CSV log: created under the app’s log directory (see `AppPaths`)
 
-### Overview
-Completed the implementation of all remaining documented tweaks, bringing total coverage from 83% (192/233) to 100% (233/233). This represents a massive +41 tweak addition across four major categories.
+## Recent High-Impact Changes (Good to Know)
 
-### Implemented Tweaks by Category
+- **Tweaks page crash fixes**
+  - Freezable animations were causing intermittent WPF crashes (`Cannot animate '(0).(1)'...`, `BorderThickness property...`).
+  - Fix: avoid animating template Freezables; use overlay opacity + transforms only.
+  - Commit: `fc21306`
 
-#### Cleanup (18 tweaks) - Now 100% Complete
-Created `FileCleanupTweak` base class for reusable file/folder cleanup logic with automatic size calculation, service management hooks, and error collection.
+- **ElevatedHost discovery improvements**
+  - When running via `dotnet run`, the app can’t rely on publish layout paths.
+  - Fix: robust path discovery + env var override + better error logging.
+  - Commits: `46abd80`, `969700f`
 
-1. `ClearTemporaryFilesTweak` - Clears Windows temp folder and user temp files
-2. `ClearRecycleBinTweak` - Empties Recycle Bin via PowerShell
-3. `ClearShadowCopiesTweak` - Deletes VSS shadow copies with vssadmin
-4. `ClearEventLogsTweak` - Wipes Windows event logs (System/Application/Security)
-5. `ClearThumbnailCacheTweak` - Removes thumbnail cache database
-6. `ClearPrefetchFilesTweak` - Clears prefetch data
-7. `ClearMemoryDumpFilesTweak` - Removes minidump and memory.dmp files
-8. `ClearWERFilesTweak` - Clears Windows Error Reporting data
-9. `ClearSRUMDataTweak` - Removes System Resource Usage Monitor database
-10. `ClearDirectXShaderCacheTweak` - Clears DirectX shader cache
-11. `ClearFontCacheTweak` - Removes font cache files
-12. `ClearTemporaryInternetFilesTweak` - Clears IE/Edge cache
-13. `ClearDeliveryOptimizationFilesTweak` - Removes Windows Update delivery optimization cache
-14. `ClearBackgroundHistoryTweak` - Clears Windows Background History
-15. `ClearWindowsUpdateCacheTweak` - Clears SoftwareDistribution cache
-16. `ClearWindowsOldTweak` - Removes Windows.old folder
-17. `CleanupComponentStoreTweak` - DISM component store cleanup
-18. `DisableReservedStorageTweak` - Disables Windows reserved storage
+- **Dashboard health score UX**
+  - Health now reflects *detected* tweak states only; shows `—` until at least one tweak has been detected.
+  - Commit: `7c66e13`
 
-Extended `CommandAllowlist` with vssadmin, powershell, cscript, cleanmgr commands (60+ new safe command combinations).
+- **Tweaks UX improvements**
+  - Compact “Impact: Current → Target” line on collapsed cards.
+  - More robust “Policy/Documentation” link opening.
+  - Commits: `d49a726`, `7a5ed0c`
 
-#### Misc (7 tweaks) - Now 54% Complete
-1. `DisableOneDriveTweaks` - Disables OneDrive sync, file picker, Explorer integration
-2. `DisableEdgeFeaturesTweaks` - Disables Edge sidebar, shopping, rewards, telemetry
-3. `DisableVisualStudioTelemetryTweak` - Disables VS telemetry, SQM, feedback, IntelliCode
-4. `DisableOfficeTelemetryTweak` - Disables Office telemetry agent and data collection
-5. `DisableVSCodeTelemetryTweak` - Disables VSCode telemetry, crash reports, auto-updates
-6. `SetNotepadPlusPlusDefaultEditorTweak` - Sets Notepad++ as default .txt/.bat/.cmd editor
-7. `SevenZipSettingsTweak` - Optimizes 7-Zip context menu (cascaded, icons, Zone.Id)
+## Current Known Issues / Incomplete Work (Prioritized)
 
-#### Peripheral (6 tweaks) - Now 79% Complete
-1. `MouseTweaks.CreateDisableMouseThrottleTweak` - Disables mouse input throttling
-2. `MouseTweaks.CreateDisableMouseAccelerationTweak` - Disables mouse acceleration
-3. `KeyboardTweaks.CreateOptimizeKeyRepeatRateTweak` - Sets optimal key repeat rate
-4. `KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak` - Disables Alt+Shift language switch
-5. `AudioTweaks.CreateDisableAudioDuckingTweak` - Disables Windows audio ducking
-6. `AudioTweaks.CreateDisableAudioEnhancementsTweak` - Disables audio enhancements
+1) **Monitoring charts are hard to read**
+   - Current sparklines don’t show scale or context clearly.
+   - Add: gridlines, min/max labels, and a consistent vertical range (or clear autoscale indicator).
+   - Relevant: `WindowsOptimizer.App/Views/MonitorView.xaml`, `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
 
-#### Power (10 tweaks) - Now 82% Complete
-1. `PowerSettingsTweaks.CreateDisableModernStandbyTweak` - Switches from S0 to S3 sleep
-2. `PowerSettingsTweaks.CreateDisableFastStartupTweak` - Disables hiberboot
-3. `PowerSettingsTweaks.CreateDisablePowerThrottlingTweak` - Disables power throttling
-4. `PowerSettingsTweaks.CreateOptimizePowerSettingsTweak` - Optimizes timer coalescing, IO coalescing, energy estimation
-5. `NetworkAdapterPowerTweaks.CreateDisableNetworkAdapterPowerSavingTweak` - Disables network throttling
-6. `NetworkAdapterPowerTweaks.CreateOptimizeGamingNetworkTweak` - Optimizes gaming network priority
-7. `CPUPowerTweaks.CreateDisableCPUParkingTweak` - Keeps all CPU cores active
-8. `CPUPowerTweaks.CreateDisableIdleStatesTweak` - Disables C-States for minimum latency
-9. `CPUPowerTweaks.CreateOptimizeCPUBoostTweak` - Optimizes CPU boost behavior
-10. _(Note: 10th tweak already existed from previous session)_
+2) **CPU temp often shows `N/A`**
+   - This may be expected on some systems depending on sensor availability.
+   - UX improvement: add a tooltip explaining why (`LibreHardwareMonitor`/sensor access) and/or a “last updated”/error indicator.
+   - Relevant: `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`, `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
 
-### Technical Architecture Additions
-- **FileCleanupTweak Base Class**: Provides reusable pattern for file/folder deletion with size calculation, service hooks, and error handling
-- **CommandAllowlist Extension**: Added 60+ safe command combinations for vssadmin, powershell, cscript operations
-- **Factory Pattern**: All new tweaks use static factory methods for consistent instantiation
-- **UI Integration**: All 41 tweaks registered in TweaksViewModel with category organization
+3) **ElevatedHost packaging still needs verification**
+   - Tweaks page warns if host is missing, but publish/build should reliably copy it.
+   - Add: MSBuild/post-publish copy step + CI check.
+   - Relevant: `WindowsOptimizer.App/WindowsOptimizer.App.csproj`, `WindowsOptimizer.ElevatedHost/*`
 
-### Git History
-- 4 commits pushed to main
-- Files changed: 37 new files + 3 modified
-- Lines added: +2,718
-- All commits include AI co-authoring attribution
+4) **Rollback persistence is session-scoped**
+   - Current rollback behavior depends on the last Detect snapshot in the same app session.
+   - A crash or restart loses “original state” for rollback.
+   - Next: implement durable state capture (JSON/SQLite) before Apply.
+   - Relevant: `WindowsOptimizer.Engine/TweakExecutionPipeline.cs`, tweak implementations in `WindowsOptimizer.Engine/Tweaks/*`
 
----
+5) **Category detection cancellation/race**
+   - Categories can still race if opened/closed quickly; timeouts exist but cancellation would be cleaner.
+   - Relevant: `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs`
 
-## Completed Tasks Breakdown
+## Guardrails (Do Not Break)
 
-### 1. Build Stabilization & XAML Refactoring
-- **XAML MC4011 Resolution**: Refactored `CategoryHeader` and `TweakCard` animations to use `EventTriggers`. This bypassed the scope limitations of `Style.Triggers` and allowed successful sibling element targeting (`CardShadow`, `HeaderShadow`).
-- **ViewModelMember Restoration**: Fixed logic holes in `TweaksViewModel.cs` and `TweakItemViewModel.cs`:
-  - Restored `ApplyRecommendations`: Re-enabled the AI recommendation engine UI bridge.
-  - Restored `AllTweaks`: Re-enabled Profile Export/Encrypted Synchronization functionality.
-  - Restored `TargetValue`: Fixed the Registry Diff viewer data source.
-  - Restored `GenerateMockSparkline`: Stabilized the UI impact graph visualizations.
-- **Namespace Integrity**: Restored lost `using` directives for `System.Windows.Input` and `WindowsOptimizer.Core.Services`.
+- **SAFE tweaks must be reversible**: Detect → Apply → Verify → Rollback
+- **Default is Preview/DryRun**: no automatic system changes
+- **Do not add “disable Defender/Firewall/SmartScreen” under SAFE**
+- **Admin operations must run via ElevatedHost** (separate process); app is not always-admin
+- **Always log actions**; logs must be exportable
+- **WPF animation rule**: do not animate Freezables created in templates/resources; prefer named transforms and overlay opacity
 
-### 2. Phase 5 & 6 Feature Implementation
-- **Registry Diff Viewer**: Real-time side-by-side comparison in the Tweak Details tab.
-- **System Health Engine**: Global scoring (0-100) with a premium circular gauge in the Dashboard.
-- **Optimization Presets**: Desktop-based JSON import/export for batch tweak applications.
-- **Real-time Metrics**: Polyline-based sparklines for system impact estimation.
-- **Encrypted Sync**: AES-256 profile synchronization for secure configuration portability.
+## Operational Notes
 
----
+- ElevatedHost path override: `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`
+- Recommended publish layout: include `ElevatedHost/WindowsOptimizer.ElevatedHost.exe` beside the main app output.
 
-## Technical Debt / Next Steps
-- **Performance Optimization**: While build is green, the `TweaksViewModel.cs` is approaching 4000 lines. Refactoring into sub-ViewModels (Category-specific) is recommended.
-- **Plugin Expansion**: The `PluginLoader` system is ready; next steps involve creating actual `.dll` based plugin examples for third-party expansion.
-- **WIX Installer**: Consider integrating a proper setup project now that the build is stable.
+## Where to Look (Common Entry Points)
 
----
+- Tweaks UI: `WindowsOptimizer.App/Views/TweaksView.xaml`
+- Tweak VM logic: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- Tweaks aggregation/filtering: `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- Dashboard health: `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
+- ElevatedHost discovery: `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`
+- Monitor UI/VM: `WindowsOptimizer.App/Views/MonitorView.xaml`, `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- Metrics sources: `WindowsOptimizer.Infrastructure/Metrics/*.cs`
+- Pipeline orchestration: `WindowsOptimizer.Engine/TweakExecutionPipeline.cs`
 
-## Final Verification Command
-To verify the state, simply run:
-```powershell
-dotnet build --configuration Release
-```
+## Suggested Next PRs (Order)
 
-**Status: READY FOR DEPLOYMENT** 🚀
+1. Improve Monitor charts readability + CPU temp tooltip
+2. Make ElevatedHost publish copying deterministic (build step + CI check)
+3. Add durable rollback state store (before Apply)
+

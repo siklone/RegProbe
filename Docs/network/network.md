@@ -1,5 +1,7 @@
 # Encrypted DNS
 
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+
 Requires elevation: Yes (system network settings).
 
 Unencrypted = DNS queries and responses are sent in plaintext.

@@ -3,6 +3,8 @@
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.
 
+> **Note (2025-12-27):** Rollback currently relies on the last Detect snapshot within the same app session. Durable rollback across app restarts is not implemented yet.
+
 ## Safety guarantees (Detect -> Apply -> Verify -> Rollback)
 - Detect always runs first to capture current configuration.
 - Apply runs only when Detect succeeds and DryRun is false.
@@ -13,6 +15,10 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Tweaks that touch HKLM/HKCR, services, drivers, scheduled tasks, BCD, or system directories must run elevated.
 - HKCU and user-profile tweaks can run without elevation.
 - Each tweak doc section includes a `Requires elevation:` line to indicate the expected privilege.
+
+### ElevatedHost discovery (dev runs)
+When running via `dotnet run`, you can override the elevated host location with:
+`WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`.
 
 ## Monitoring system
 
@@ -31,4 +37,4 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Preview (default): run the pipeline with `DryRun = true` to see what would change.
 - Apply: run the pipeline with `DryRun = false`.
 - Verify: keep `VerifyAfterApply = true` or call `ITweak.VerifyAsync` explicitly.
-- Rollback: call `ITweak.RollbackAsync` directly or rely on automatic rollback when a step fails.
+- Rollback: restores values captured by the last Detect (same app session) and is also used automatically when Apply/Verify fails.

@@ -5,32 +5,26 @@ A modern, safe, and reversible Windows optimization tool built with WPF and .NET
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-TBD-yellow)
 
 ## 🎯 Features
 
 ### 📊 **Real-Time System Monitoring**
 - Task Manager-style hardware monitoring
 - CPU, RAM, Disk, Network real-time metrics
-- Temperature sensors (CPU/GPU) via LibreHardwareMonitor
+- Temperature sensors (CPU/GPU) via LibreHardwareMonitor (may show N/A if sensors aren't available)
 - Top 10 processes by CPU/RAM usage
-- Network adapter statistics (all adapters listed separately)
+- Top 10 processes by network (approx. process I/O bytes; may include disk activity)
+- Network adapter statistics (all adapters listed separately, with throughput)
 - Disk activity per drive with read/write speeds
 - 60-second history graphs for CPU and RAM
+- Save a CSV snapshot to your Desktop
 
-### ⚙️ **System Tweaks (10 Provider Categories)**
-90+ safe, reversible Windows tweaks organized by category:
-
-1. **Privacy** (10 tweaks) - Telemetry, advertising, activity tracking, Cortana, etc.
-2. **Security** (19 tweaks) - UAC, firewall, SMB signing, Credential Guard, etc.
-3. **Network** (7 tweaks) - IPv6, NetBIOS, LLMNR, SMB optimization, etc.
-4. **Performance** (6 tweaks) - Animations, transparency, kernel paging, etc.
-5. **Visibility** (22 tweaks) - File extensions, hidden files, taskbar customization, etc.
-6. **Audio** (5 tweaks) - Ducking, exclusive mode, spatial sound, etc.
-7. **Power** (4 tweaks) - Fast startup, hibernation, USB suspend, etc.
-8. **Peripherals** (4 tweaks) - AutoPlay, pointer precision, etc.
-9. **System** (4 tweaks) - Game mode, DST notifications, search highlights, etc.
-10. **Miscellaneous** (8 tweaks) - Mixed utility tweaks
+### ⚙️ **System Tweaks**
+- Safe/reversible pipeline: Detect → Apply → Verify → Rollback
+- Default behavior is Preview/DryRun (no system changes until you Apply)
+- Risk levels: Safe / Advanced / Risky
+- Category-based navigation + search + batch actions
 
 ### 🔌 **Plugin System**
 - Dynamic plugin loading from `Plugins` directory
@@ -93,11 +87,11 @@ WindowsOptimizer/
 ### Prerequisites
 - Windows 10/11
 - .NET 8.0 SDK
-- Administrator privileges (for some tweaks)
+- Administrator privileges (for some tweaks; admin operations run via `WindowsOptimizer.ElevatedHost`)
 
 ### Build
 ```powershell
-git clone https://github.com/yourusername/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
+git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
 cd WPF-Windows-optimizer-with-safe-reversible-tweaks
 dotnet build
 ```
@@ -106,6 +100,9 @@ dotnet build
 ```powershell
 dotnet run --project WindowsOptimizer.App
 ```
+
+> Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
+> `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`
 
 ### Build Release
 ```powershell
@@ -159,7 +156,7 @@ See `WindowsOptimizer.Plugins.HelloWorld` for a complete example.
 - Temperature monitoring
 
 ### Tweaks Page
-- Browse 90+ tweaks by category
+- Browse tweaks by category
 - Search and filter
 - Multi-select for batch operations
 - One-click apply/rollback
@@ -173,10 +170,10 @@ See `WindowsOptimizer.Plugins.HelloWorld` for a complete example.
 ## 🛡️ Safety
 
 All tweaks are:
-- ✅ **Reversible**: Full rollback support
-- ✅ **Safe**: Registry changes only (no file deletion)
-- ✅ **Logged**: All actions logged for audit
+- ✅ **Reversible**: Detect → Apply → Verify → Rollback (rollback currently relies on the last Detect snapshot in the same app session)
+- ✅ **Logged**: All actions logged for audit (`%TEMP%\\WindowsOptimizer_Debug.log` and `tweak-log.csv`)
 - ✅ **Verified**: Post-apply verification step
+- ✅ **Preview-first**: No system changes until you click Apply
 
 **Risk Levels:**
 - 🟢 **Safe**: No side effects, recommended for all users
@@ -194,7 +191,7 @@ Contributions welcome! Please:
 
 ## 📝 License
 
-MIT License - see LICENSE file for details
+TBD (no LICENSE file committed yet).
 
 ## 🙏 Acknowledgments
 
@@ -206,7 +203,7 @@ MIT License - see LICENSE file for details
 
 - 🐛 **Issues**: GitHub Issues
 - 💬 **Discussions**: GitHub Discussions
-- 📧 **Email**: your.email@example.com
+- 🧾 **Logs**: `%TEMP%\\WindowsOptimizer_Debug.log`
 
 ---
 

@@ -1,5 +1,7 @@
 # NVFetch
 
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+
 Requires elevation: No.
 
 Used to be my personal `neofetch`/`fastfetch` replacement with more details. Some arguments will probably also get added like `ids`, so it doesn't display the serial numbers and miscellaneous HWIDs by default.
@@ -12,7 +14,7 @@ It currently gets most of the information using the [`Get-CimInstance`](https://
 ```powershell
 nvidia-smi -q
 ```
-[`nvfetch-win32cimv2.txt`]((https://github.com/nohuto/win-config/blob/main/misc/assets)) shows class names in the `root\CIMV2` namespace, filtered with `Win32*`.
+[`nvfetch-win32cimv2.txt`](https://github.com/nohuto/win-config/blob/main/misc/assets) shows class names in the `root\CIMV2` namespace, filtered with `Win32*`.
 
 | **Category** | **Query** | **Fields/Description** |
 | ---- | ---- | ---- |

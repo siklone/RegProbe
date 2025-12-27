@@ -13,7 +13,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 ### 1. Fork and Clone
 
 ```bash
-git clone https://github.com/yourusername/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
+git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
 cd WPF-Windows-optimizer-with-safe-reversible-tweaks
 ```
 
@@ -84,7 +84,10 @@ dotnet run --project WindowsOptimizer.App
 
 ### Debug
 
-Open `WindowsOptimizer.sln` in Visual Studio and press F5.
+Open `WindowsOptimizerSuite.slnx` in Visual Studio and press F5.
+
+> Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
+> `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`
 
 ## Adding New Tweaks
 

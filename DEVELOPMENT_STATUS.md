@@ -134,7 +134,7 @@
 
 ---
 
-### 6. Monitor Network/Disk Monitoring Fallback Improvements (Unreleased)
+### 6. Monitor Network/Disk Monitoring Fallback Improvements (Commits: `b047e4c`, `c2e8520`)
 **Problem:** Network adapters and disk activity could appear empty (or stuck at 0) when performance counters are unavailable or when instance mapping fails.
 
 **Solution:**
@@ -150,7 +150,27 @@
 
 ---
 
-### 7. Tweaks UI - Hover Animation Stability + Tooltips (Commit: `fc21306`)
+### 7. Dashboard Health - Measured (Detected) Scoring (Commit: `7c66e13`)
+**Problem:** Dashboard health score could show `0%` even on a healthy system because no tweaks were detected yet.
+
+**Root Cause:**
+- Health was computed from all scorable tweaks, but most tweaks start in an `Unknown` state until Detect runs.
+
+**Solution:**
+- Health score is now computed from *detected* scorable tweaks only.
+- Dashboard shows `—` until at least one tweak has a detected state.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/Views/DashboardView.xaml`
+
+**Status:** ✅ **IMPLEMENTED**
+
+---
+
+### 8. Tweaks UI - Hover Animation Stability + Tooltips (Commit: `fc21306`)
 **Problem:** Tweaks page could intermittently crash with animation errors like:
 - `Cannot animate '(0).(1)' on an immutable object instance.`
 - `'BorderThickness' property does not point to a DependencyObject...`
@@ -170,7 +190,7 @@
 
 ---
 
-### 8. Tweaks Count Mismatch (Dashboard vs Tweaks) (Unreleased)
+### 9. Tweaks Count Mismatch (Dashboard vs Tweaks) (Commits: `41839dc`, `5fe0757`, `6dbc736`)
 **Problem:** Dashboard could show a higher tweak count than the Tweaks page (e.g., 313 vs 224).
 
 **Root Cause:**
@@ -188,7 +208,7 @@
 
 ---
 
-### 9. Scheduled Tasks Batch - Detect Robustness (Unreleased)
+### 10. Scheduled Tasks Batch - Detect Robustness (Commit: `5fe0757`)
 **Problem:** Some environments don't have every scheduled task listed; Detect could fail on missing tasks instead of treating them as "not present".
 
 **Solution:**
@@ -200,6 +220,24 @@
 - `WindowsOptimizer.Tests/ScheduledTaskBatchTweakTests.cs`
 
 **Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows
+
+---
+
+### 11. ElevatedHost Discovery + Missing Host Warning (Commits: `46abd80`, `969700f`)
+**Problem:** When running via `dotnet run`, the app could fail to find the ElevatedHost executable and all admin-required tweaks would fail.
+
+**Solution:**
+- ElevatedHost path discovery now checks common publish layouts, RID folders, and dev bin outputs.
+- Env var override supported: `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH`.
+- Tweaks page shows a clear warning banner if the host executable is missing.
+
+**Files Changed:**
+- `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Packaging still needs verification
 
 ---
 
@@ -217,7 +255,8 @@
 - Performance counter availability / mapping differences across environments
 - Platform limitations (WSL2/Linux)
 
-**Workaround:** None currently
+**Notes:**
+- Fallbacks were added (see commits `b047e4c`, `c2e8520`) but still need broad validation on Windows 10/11.
 
 **Files Affected:**
 - `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
@@ -318,14 +357,14 @@
 **Status:** ⚠️ **BUILD CONFIGURATION**
 
 **Description:**
-- WindowsOptimizer.ElevatedHost.exe must be in the same directory as the main app
-- If missing, all elevation-required tweaks will fail
-- Build configuration might not copy the ElevatedHost.exe to output directory
+- ElevatedHost must be discoverable for elevation-required tweaks.
+- If missing, admin-required tweaks will fail (the Tweaks page now shows a warning banner with the expected path).
+- Build/publish configuration might still fail to copy the ElevatedHost into the app output directory.
 
 **Recommendation:**
-- Verify ElevatedHost.exe exists in build output
-- Add post-build copy command if missing
-- Add application startup check for ElevatedHost.exe existence
+- Verify ElevatedHost exists in the publish output (`ElevatedHost/WindowsOptimizer.ElevatedHost.exe`)
+- Add a post-build/publish copy step if missing (and/or CI check)
+- Consider a startup health check in addition to the Tweaks page banner
 
 **Files to Review:**
 - `WindowsOptimizer.App/WindowsOptimizer.App.csproj`
@@ -395,10 +434,9 @@
   - Check performance counter availability
   - Add fallback using WMI or P/Invoke
 
-- [ ] **Add ElevatedHost.exe Existence Check**
-  - Check on application startup
-  - Show clear error message if missing
-  - Disable elevation-required tweaks if unavailable
+- [x] **Warn when ElevatedHost is missing**
+  - Tweaks page shows a warning banner when the host executable isn't found
+  - Remaining work: ensure publish output copies `ElevatedHost/WindowsOptimizer.ElevatedHost.exe` reliably (CI/build step)
 
 - [ ] **Implement Tweak State Persistence**
   - Save original values to durable storage before applying
@@ -494,13 +532,12 @@
 
 ## 📊 Statistics
 
-**Total Commits (Recent):** 5
-**Files Modified (Recent):** 8
-**Lines Added:** ~150
-**Lines Removed:** ~10
-**Bugs Fixed:** 4 critical, 1 minor
-**Platform Checks Added:** 2
-**Timeout Mechanisms Added:** 2
+Key recent commits (not exhaustive):
+- `46abd80` ElevatedHost discovery for `dotnet run`
+- `7c66e13` Dashboard health shows measured state
+- `7a5ed0c` Tweaks link opening + compact search
+- `fc21306` Tweaks crash fix (avoid Freezable animations)
+- `969700f` Tweaks warning when ElevatedHost missing
 
 ---
 
@@ -529,6 +566,6 @@ If you encounter issues:
 
 ---
 
-**Last Build:** December 26, 2025
-**Build Status:** ✅ Passing (with known issues)
+**Last Build:** Unverified in this environment (run `dotnet build` on Windows 10/11)
+**Build Status:** ⚠️ Requires Windows verification
 **Ready for Production:** ⚠️ Needs testing on Windows 10/11 native

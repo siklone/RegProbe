@@ -1,5 +1,7 @@
 # Agent Rules (Windows Optimizer)
 
+**Last Reviewed:** 2025-12-27
+
 ## Safety
 - SAFE tweaks must be reversible: Detect -> Apply -> Verify -> Rollback.
 - Default behavior is DryRun/Preview; do not apply system changes automatically.

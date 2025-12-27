@@ -2,6 +2,8 @@
 
 A sample plugin demonstrating the Windows Optimizer plugin system.
 
+**Last Updated:** 2025-12-27
+
 ## What It Does
 
 This plugin creates a simple text file on your Desktop called `HelloFromWindowsOptimizer.txt`.
@@ -29,11 +31,12 @@ dotnet build
 ## Installation
 
 1. Build the plugin
-2. Copy `bin/Release/net8.0-windows/WindowsOptimizer.Plugins.HelloWorld.dll` to the `Plugins` directory
+2. Copy `bin/Release/net8.0-windows/WindowsOptimizer.Plugins.HelloWorld.dll` into the app's `Plugins` folder (next to `WindowsOptimizer.App.exe`)
 3. Restart Windows Optimizer
 4. The "Hello World Plugin Example" tweak will appear in the Tweaks list
+
+> Tip: The app loads plugins from `AppDomain.CurrentDomain.BaseDirectory/Plugins` and will create that folder on startup if it doesn't exist.
 
 ## Files Created
 
 - `%USERPROFILE%\Desktop\HelloFromWindowsOptimizer.txt`
-

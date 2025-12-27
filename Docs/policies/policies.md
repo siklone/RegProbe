@@ -1,5 +1,7 @@
 # Windows Policies
 
+> **Doc note (2025-12-27):** This document is a reference for Windows policy (ADMX) notes and parsing. The app currently only links out to documentation; it does not ship a full policy editor UI.
+
 Requires elevation: No.
 
 This section is based on my [admx-parser](https://github.com/nohuto/admx-parser) project. You can get the whole parsed ADMX content via:

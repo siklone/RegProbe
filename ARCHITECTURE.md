@@ -99,6 +99,12 @@ public interface ITweakProvider
 - INotifyPropertyChanged via ViewModelBase
 - RelayCommand for button actions
 - DispatcherTimer for metrics updates (1 sec interval)
+- Health score is derived from *detected* tweak states (run Detect to populate current/applied status)
+
+**WPF Stability Notes**:
+- Avoid animating Freezables created in templates/resources (`DropShadowEffect`, `SolidColorBrush`, etc.) because they can be frozen/shared.
+- Prefer animating named transforms (`TranslateTransform`, `ScaleTransform`, `RotateTransform`) and overlay `Opacity`.
+- When using shared resources for transforms, set `x:Shared="False"` to avoid shared instances.
 
 ### WindowsOptimizer.ElevatedHost
 **Purpose**: UAC elevation and privileged operations
@@ -107,6 +113,12 @@ public interface ITweakProvider
 - Named pipe communication (parent ↔ elevated child)
 - JSON-based request/response protocol
 - Automatic process lifetime management
+
+**Executable Discovery**:
+- The app is not always-admin; admin-required operations run via ElevatedHost.
+- The UI resolves the ElevatedHost path via `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`.
+- You can override discovery with the env var `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH`.
+- Recommended publish layout: `WindowsOptimizer.App/.../win-x64/ElevatedHost/WindowsOptimizer.ElevatedHost.exe`.
 
 ## Design Patterns
 
@@ -267,6 +279,7 @@ public class MyCustomTweak : ITweak
 - Named pipes with process ID validation
 - JSON-only communication (no code execution)
 - Automatic cleanup on parent exit
+- If ElevatedHost is missing, Tweaks UI shows a warning with the expected path and override hint.
 
 ### Registry Safety
 - All changes via abstraction (IRegistryAccessor)
