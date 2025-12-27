@@ -144,7 +144,10 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         LogToFile($"ElevatedHostClient: Checking for host executable at: {_options.HostExecutablePath}");
         if (!File.Exists(_options.HostExecutablePath))
         {
-            throw new ElevatedHostLaunchException($"Elevated host not found at '{_options.HostExecutablePath}'.");
+            throw new ElevatedHostLaunchException(
+                $"Elevated host not found at '{_options.HostExecutablePath}'. " +
+                $"If you're running from source, ensure '{ElevatedHostDefaults.ExecutableName}' is copied next to the app " +
+                $"or set {ElevatedHostDefaults.OverridePathEnvVar} to a valid full path.");
         }
 
         var arguments = $"--pipe \"{_options.PipeName}\"";
