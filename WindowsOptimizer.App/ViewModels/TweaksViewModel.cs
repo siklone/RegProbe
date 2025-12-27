@@ -3451,7 +3451,13 @@ public sealed class TweaksViewModel : ViewModelBase
     public bool IsFlatView
     {
         get => _isFlatView;
-        set => SetProperty(ref _isFlatView, value);
+        set
+        {
+            if (SetProperty(ref _isFlatView, value))
+            {
+                UpdateFilterSummary();
+            }
+        }
     }
 
     public string SearchText
@@ -3480,7 +3486,6 @@ public sealed class TweaksViewModel : ViewModelBase
                 {
                     TweaksView.Refresh();
                     UpdateFilterSummary();
-                    BuildCategoryGroups();
                 });
             }
         }, token);
@@ -3964,12 +3969,12 @@ public sealed class TweaksViewModel : ViewModelBase
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
         FilterSummary = $"Showing {visible} of {total} tweaks.";
-        HasVisibleTweaks = visible > 0;
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
         BuildCategoryGroups();
+        HasVisibleTweaks = visible > 0 && (IsFlatView || CategoryGroups.Count > 0);
     }
 
     private void BuildCategoryGroups()
@@ -3980,16 +3985,32 @@ public sealed class TweaksViewModel : ViewModelBase
             return;
         }
 
-        CategoryGroups.Clear();
+        static string FormatGroupName(string segment, string fallback)
+        {
+            if (string.IsNullOrWhiteSpace(segment))
+            {
+                return fallback;
+            }
+
+            segment = segment.Trim();
+            return segment.Length == 1
+                ? segment.ToUpperInvariant()
+                : char.ToUpperInvariant(segment[0]) + segment[1..].ToLowerInvariant();
+        }
+
         var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications" };
         var rootGroups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var tweak in Tweaks.Where(t => FilterTweaks(t)))
         {
-            var parts = tweak.Id.Split('.');
-            if (parts.Length < 2) continue; // Should at least be cat.tweak
+            var parts = (tweak.Id ?? string.Empty)
+                .Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (parts.Length == 0)
+            {
+                continue;
+            }
 
-            var rootCatName = char.ToUpper(parts[0][0]) + parts[0].Substring(1).ToLowerInvariant();
+            var rootCatName = FormatGroupName(parts[0], "Other");
             
             if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
             {
@@ -4004,7 +4025,7 @@ public sealed class TweaksViewModel : ViewModelBase
             var parent = currentGroup;
             for (int i = 1; i < parts.Length - 1; i++)
             {
-                var subName = char.ToUpper(parts[i][0]) + parts[i].Substring(1).ToLowerInvariant();
+                var subName = FormatGroupName(parts[i], "Other");
                 var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
                 if (subGroup == null)
                 {
@@ -4017,18 +4038,23 @@ public sealed class TweaksViewModel : ViewModelBase
             parent.AddTweak(tweak);
         }
 
+        var orderedGroups = new List<CategoryGroupViewModel>();
+
         // Add in preferred order first
         foreach (var catName in categoryOrder)
         {
             if (rootGroups.TryGetValue(catName, out var g))
             {
-                CategoryGroups.Add(g);
+                orderedGroups.Add(g);
                 rootGroups.Remove(catName);
             }
         }
 
         // Add any remaining categories
-        foreach (var g in rootGroups.Values.OrderBy(x => x.CategoryName))
+        orderedGroups.AddRange(rootGroups.Values.OrderBy(x => x.CategoryName));
+
+        CategoryGroups.Clear();
+        foreach (var g in orderedGroups)
         {
             CategoryGroups.Add(g);
         }
