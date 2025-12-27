@@ -417,6 +417,15 @@ public sealed class MonitorViewModel : ViewModelBase
 
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
     {
+        if (collection.Count == newItems.Count)
+        {
+            for (var i = 0; i < newItems.Count; i++)
+            {
+                collection[i] = newItems[i];
+            }
+            return;
+        }
+
         collection.Clear();
         foreach (var item in newItems)
         {

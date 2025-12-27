@@ -17,6 +17,16 @@ namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
+    private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
+    private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#EBCB8B");
+    private static readonly SolidColorBrush ErrorStatusBrush = CreateFrozenBrush("#BF616A");
+    private static readonly SolidColorBrush UnknownStatusBrush = CreateFrozenBrush("#88C0D0");
+
+    private static readonly SolidColorBrush AppliedStatusBackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
+    private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
+    private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
+    private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
+
     private readonly ITweak _tweak;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly bool _isElevated;
@@ -343,6 +353,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(IsApplied));
                 OnPropertyChanged(nameof(StatusIcon));
                 OnPropertyChanged(nameof(StatusColor));
+                OnPropertyChanged(nameof(StatusBadgeBackground));
                 OnPropertyChanged(nameof(StatusText));
                 _toggleCommand.RaiseCanExecuteChanged();
             }
@@ -361,10 +372,18 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Brush StatusColor => AppliedStatus switch
     {
-        TweakAppliedStatus.Applied => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A3BE8C")),
-        TweakAppliedStatus.NotApplied => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4C566A")),
-        TweakAppliedStatus.Error => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BF616A")),
-        _ => new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EBCB8B"))
+        TweakAppliedStatus.Applied => AppliedStatusBrush,
+        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
+        TweakAppliedStatus.Error => ErrorStatusBrush,
+        _ => UnknownStatusBrush
+    };
+
+    public Brush StatusBadgeBackground => AppliedStatus switch
+    {
+        TweakAppliedStatus.Applied => AppliedStatusBackgroundBrush,
+        TweakAppliedStatus.NotApplied => NotAppliedStatusBackgroundBrush,
+        TweakAppliedStatus.Error => ErrorStatusBackgroundBrush,
+        _ => UnknownStatusBackgroundBrush
     };
 
     public string StatusText => AppliedStatus switch
@@ -374,6 +393,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Error => "Error",
         _ => "Unknown"
     };
+
+    private static SolidColorBrush CreateFrozenBrush(string hex)
+    {
+        var color = (Color)ColorConverter.ConvertFromString(hex);
+        var brush = new SolidColorBrush(color);
+        brush.Freeze();
+        return brush;
+    }
 
     public bool IsRunning
     {

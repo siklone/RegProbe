@@ -599,14 +599,21 @@
                         </CheckBox>
 
                         <!-- Status Indicator -->
-	                        <Border Grid.Column="1"
+                        <Border Grid.Column="1"
 	                                Width="32"
 	                                Height="32"
 	                                CornerRadius="16"
 	                                Margin="0,0,12,0"
-	                                Background="#434C5E"
+	                                Background="{Binding StatusBadgeBackground}"
+                                    BorderBrush="{Binding StatusColor}"
+                                    BorderThickness="1"
 	                                ToolTip="{Binding StatusTooltip}">
-	                             <TextBlock Text="{Binding StatusIcon}" Foreground="{Binding StatusColor}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+	                             <TextBlock Text="{Binding StatusIcon}"
+                                               Foreground="{Binding StatusColor}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"/>
 	                        </Border>
 
                         <StackPanel Grid.Column="2" VerticalAlignment="Center">
@@ -1197,40 +1204,18 @@
 	                                                            CornerRadius="18"
 	                                                            Margin="0,0,14,0"
 	                                                            VerticalAlignment="Center"
+                                                                Background="{Binding StatusBadgeBackground}"
+                                                                BorderBrush="{Binding StatusColor}"
+                                                                BorderThickness="1"
 	                                                            ToolTip="{Binding StatusTooltip}">
-                                                        <Border.Style>
-                                                            <Style TargetType="Border">
-                                                                <Setter Property="Background" Value="#434C5E"/>
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
-                                                                        <Setter Property="Background" Value="#2E4A3E"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
-                                                                        <Setter Property="Background" Value="#4A2E2E"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Border.Style>
                                                         <TextBlock Text="{Binding StatusIcon}" 
                                                                    FontSize="16"
+                                                                   FontWeight="SemiBold"
                                                                    HorizontalAlignment="Center"
                                                                    VerticalAlignment="Center">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="TextBlock">
-                                                                    <Setter Property="Foreground" Value="#4C566A"/>
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
-                                                                            <Setter Property="Foreground" Value="#A3BE8C"/>
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
-                                                                            <Setter Property="Foreground" Value="#BF616A"/>
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Unknown}">
-                                                                            <Setter Property="Foreground" Value="#EBCB8B"/>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
+                                                            <TextBlock.Foreground>
+                                                                <Binding Path="StatusColor"/>
+                                                            </TextBlock.Foreground>
                                                         </TextBlock>
                                                     </Border>
 

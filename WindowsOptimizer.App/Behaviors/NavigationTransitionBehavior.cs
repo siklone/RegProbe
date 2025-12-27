@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using WindowsOptimizer.App.Diagnostics;
 
 namespace WindowsOptimizer.App.Behaviors;
 
@@ -153,77 +154,111 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
     {
         var storyboard = new Storyboard();
 
-        if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
+        try
         {
-            var fadeOut = new DoubleAnimation
+            if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
             {
-                From = 1.0,
-                To = 0.0,
-                Duration = TimeSpan.FromMilliseconds(200),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTarget(fadeOut, element);
-            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
-            storyboard.Children.Add(fadeOut);
-        }
+                var fadeOut = new DoubleAnimation
+                {
+                    From = 1.0,
+                    To = 0.0,
+                    Duration = TimeSpan.FromMilliseconds(200),
+                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+                };
+                Storyboard.SetTarget(fadeOut, element);
+                Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
+                storyboard.Children.Add(fadeOut);
+            }
 
-        if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
-        {
-            var translate = GetTranslateTransform(element);
-            var slideOut = new DoubleAnimation
+            if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
             {
-                From = 0,
-                To = -50,
-                Duration = TimeSpan.FromMilliseconds(200),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTarget(slideOut, translate);
-            Storyboard.SetTargetProperty(slideOut, new PropertyPath(TranslateTransform.XProperty));
-            storyboard.Children.Add(slideOut);
-        }
+                var translate = GetTranslateTransform(element);
+                var slideOut = new DoubleAnimation
+                {
+                    From = 0,
+                    To = -50,
+                    Duration = TimeSpan.FromMilliseconds(200),
+                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+                };
+                Storyboard.SetTarget(slideOut, translate);
+                Storyboard.SetTargetProperty(slideOut, new PropertyPath(TranslateTransform.XProperty));
+                storyboard.Children.Add(slideOut);
+            }
 
-        if (onCompleted != null)
+            if (onCompleted != null)
+            {
+                storyboard.Completed += (s, e) => onCompleted();
+            }
+
+            storyboard.Begin();
+        }
+        catch (Exception ex)
         {
-            storyboard.Completed += (s, e) => onCompleted();
-        }
+            AppDiagnostics.LogException("NavigationTransitionBehavior.AnimateOut", ex);
 
-        storyboard.Begin();
+            try
+            {
+                element.Opacity = 0;
+                GetTranslateTransform(element).X = -50;
+            }
+            catch
+            {
+            }
+
+            onCompleted?.Invoke();
+        }
     }
 
     private void AnimateIn(FrameworkElement element)
     {
         var storyboard = new Storyboard();
 
-        if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
+        try
         {
-            var fadeIn = new DoubleAnimation
+            if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
             {
-                From = 0.0,
-                To = 1.0,
-                Duration = TimeSpan.FromMilliseconds(300),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            };
-            Storyboard.SetTarget(fadeIn, element);
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
-            storyboard.Children.Add(fadeIn);
-        }
+                var fadeIn = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 1.0,
+                    Duration = TimeSpan.FromMilliseconds(300),
+                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+                };
+                Storyboard.SetTarget(fadeIn, element);
+                Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
+                storyboard.Children.Add(fadeIn);
+            }
 
-        if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
+            if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
+            {
+                var translate = GetTranslateTransform(element);
+                var slideIn = new DoubleAnimation
+                {
+                    From = 50,
+                    To = 0,
+                    Duration = TimeSpan.FromMilliseconds(300),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+                Storyboard.SetTarget(slideIn, translate);
+                Storyboard.SetTargetProperty(slideIn, new PropertyPath(TranslateTransform.XProperty));
+                storyboard.Children.Add(slideIn);
+            }
+
+            element.Opacity = Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide ? 0 : 1;
+            storyboard.Begin();
+        }
+        catch (Exception ex)
         {
-            var translate = GetTranslateTransform(element);
-            var slideIn = new DoubleAnimation
-            {
-                From = 50,
-                To = 0,
-                Duration = TimeSpan.FromMilliseconds(300),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
-            Storyboard.SetTarget(slideIn, translate);
-            Storyboard.SetTargetProperty(slideIn, new PropertyPath(TranslateTransform.XProperty));
-            storyboard.Children.Add(slideIn);
-        }
+            AppDiagnostics.LogException("NavigationTransitionBehavior.AnimateIn", ex);
 
-        element.Opacity = Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide ? 0 : 1;
-        storyboard.Begin();
+            try
+            {
+                element.Opacity = 1;
+                GetTranslateTransform(element).X = 0;
+            }
+            catch
+            {
+            }
+        }
     }
 }

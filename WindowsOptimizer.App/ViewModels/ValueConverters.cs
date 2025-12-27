@@ -116,6 +116,7 @@ public sealed class SparklinePointsConverter : IValueConverter
                 pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight))); 
                 x += xStep;
             }
+            pc.Freeze();
             return pc;
         }
         return DependencyProperty.UnsetValue;

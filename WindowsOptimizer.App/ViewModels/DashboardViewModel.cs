@@ -15,6 +15,8 @@ public sealed class DashboardViewModel : ViewModelBase
     private int _tweaksRolledBack;
     private int _optimizationScore;
     private long _logFileSizeBytes;
+    private int _healthTweaksTotal;
+    private int _healthTweaksApplied;
 
     public DashboardViewModel()
     {
@@ -48,6 +50,30 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
+    public int HealthTweaksTotal
+    {
+        get => _healthTweaksTotal;
+        set
+        {
+            if (SetProperty(ref _healthTweaksTotal, value))
+            {
+                OnPropertyChanged(nameof(OptimizationScoreDetails));
+            }
+        }
+    }
+
+    public int HealthTweaksApplied
+    {
+        get => _healthTweaksApplied;
+        set
+        {
+            if (SetProperty(ref _healthTweaksApplied, value))
+            {
+                OnPropertyChanged(nameof(OptimizationScoreDetails));
+            }
+        }
+    }
+
     public int TweaksRolledBack
     {
         get => _tweaksRolledBack;
@@ -61,9 +87,9 @@ public sealed class DashboardViewModel : ViewModelBase
     }
 
     public string OptimizationScoreDetails =>
-        TotalTweaksAvailable <= 0
+        HealthTweaksTotal <= 0
             ? "Health is calculated from Tweaks. Run Detect to refresh current states."
-            : $"{TweaksApplied} / {TotalTweaksAvailable} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
+            : $"{HealthTweaksApplied} / {HealthTweaksTotal} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
 
     public long LogFileSizeBytes
     {

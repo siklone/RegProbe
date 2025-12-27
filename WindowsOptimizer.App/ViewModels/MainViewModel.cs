@@ -70,8 +70,10 @@ public sealed class MainViewModel : ViewModelBase
         // Link Health Score + Counts (live from Tweaks)
         void SyncDashboardHealth()
         {
-            dashboard.TotalTweaksAvailable = tweaks.ScorableTweaksTotal;
+            dashboard.TotalTweaksAvailable = tweaks.Tweaks.Count;
             dashboard.TweaksApplied = tweaks.ScorableTweaksApplied;
+            dashboard.HealthTweaksTotal = tweaks.ScorableTweaksTotal;
+            dashboard.HealthTweaksApplied = tweaks.ScorableTweaksApplied;
             dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
         }
 

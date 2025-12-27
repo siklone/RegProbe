@@ -28,11 +28,7 @@
                     <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="4" Opacity="0.3" Direction="270"/>
                 </Setter.Value>
             </Setter>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="RenderTransform" Value="{StaticResource UiScaleTransform}"/>
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Style.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
@@ -152,7 +148,7 @@
                             <TextBlock Text="📦" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="{Binding TotalTweaksAvailable}" Style="{StaticResource StatValueStyle}"/>
-                        <TextBlock Text="Tweaks Available" Style="{StaticResource StatLabelStyle}"/>
+                        <TextBlock Text="Total Tweaks" Style="{StaticResource StatLabelStyle}"/>
                     </StackPanel>
                 </Border>
 
@@ -163,7 +159,7 @@
                             <TextBlock Text="✅" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <TextBlock Text="{Binding TweaksApplied}" Style="{StaticResource StatValueStyle}" Foreground="#A3BE8C"/>
-                        <TextBlock Text="Tweaks Applied" Style="{StaticResource StatLabelStyle}"/>
+                        <TextBlock Text="Applied (Health)" Style="{StaticResource StatLabelStyle}"/>
                     </StackPanel>
                 </Border>
 

@@ -6,6 +6,15 @@
         <ResourceDictionary Source="Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <!-- Freezable helpers: make transforms non-shared so animations never hit frozen/shared instances -->
+    <ScaleTransform x:Key="UiScaleTransform" x:Shared="False" ScaleX="1" ScaleY="1"/>
+    <ScaleTransform x:Key="UiScaleTransformCompact" x:Shared="False" ScaleX="1" ScaleY="1"/>
+    <RotateTransform x:Key="UiRotateTransform" x:Shared="False" Angle="0"/>
+    <TransformGroup x:Key="UiSensorTransformGroup" x:Shared="False">
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
+        <TranslateTransform X="0" Y="0"/>
+    </TransformGroup>
+
     <!-- Modern Card Style -->
     <Style x:Key="ModernCardStyle" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource BackgroundDarkBrush}"/>
@@ -22,11 +31,7 @@
                                 Opacity="0.3"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="1" ScaleY="1"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="RenderTransform" Value="{StaticResource UiScaleTransform}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -78,11 +83,7 @@
         <Setter Property="Padding" Value="16,8"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="1" ScaleY="1"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="RenderTransform" Value="{StaticResource UiScaleTransform}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -154,14 +155,7 @@
                                 Opacity="0.4"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                    <TranslateTransform X="0" Y="0"/>
-                </TransformGroup>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="RenderTransform" Value="{StaticResource UiSensorTransformGroup}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
     </Style>
 
@@ -172,11 +166,7 @@
         <Setter Property="Stroke" Value="{StaticResource AccentBrightCyanBrush}"/>
         <Setter Property="StrokeThickness" Value="3"/>
         <Setter Property="StrokeDashArray" Value="6 4"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <RotateTransform Angle="0"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="RenderTransform" Value="{StaticResource UiRotateTransform}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="Loaded">
@@ -273,11 +263,7 @@
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="14"/>
         <Setter Property="Margin" Value="0,0,0,8"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="1" ScaleY="1"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="RenderTransform" Value="{StaticResource UiScaleTransformCompact}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
