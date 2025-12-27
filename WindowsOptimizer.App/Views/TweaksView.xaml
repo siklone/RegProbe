@@ -113,19 +113,12 @@
 		                                Background="{TemplateBinding Background}"
 		                                CornerRadius="4"
 		                                RenderTransformOrigin="0.5,0.5">
-		                            <Border.RenderTransform>
-		                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
-		                            </Border.RenderTransform>
-                            <Border.Effect>
-                                <DropShadowEffect x:Name="ButtonShadow"
-                                                Color="#000000"
-                                                BlurRadius="4"
-                                                ShadowDepth="2"
-                                                Opacity="0"/>
-                            </Border.Effect>
-	                            <Grid>
-	                                <Border x:Name="HoverOverlay"
-	                                        Background="#4C566A"
+			                            <Border.RenderTransform>
+			                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
+			                            </Border.RenderTransform>
+		                            <Grid>
+		                                <Border x:Name="HoverOverlay"
+		                                        Background="#4C566A"
 	                                        CornerRadius="4"
 	                                        Opacity="0"
 	                                        IsHitTestVisible="False"/>
@@ -149,19 +142,16 @@
 		                                                    <QuadraticEase EasingMode="EaseOut"/>
 		                                                </DoubleAnimation.EasingFunction>
 		                                            </DoubleAnimation>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.05" Duration="0:0:0.15">
-		                                                <DoubleAnimation.EasingFunction>
-		                                                    <QuadraticEase EasingMode="EaseOut"/>
-		                                                </DoubleAnimation.EasingFunction>
-		                                            </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="ButtonShadow"
-                                                           Storyboard.TargetProperty="Opacity"
-                                                           To="0.3" Duration="0:0:0.15"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
+			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
+			                                                           Storyboard.TargetProperty="ScaleY"
+			                                                           To="1.05" Duration="0:0:0.15">
+			                                                <DoubleAnimation.EasingFunction>
+			                                                    <QuadraticEase EasingMode="EaseOut"/>
+			                                                </DoubleAnimation.EasingFunction>
+			                                            </DoubleAnimation>
+	                                        </Storyboard>
+	                                    </BeginStoryboard>
+	                                </Trigger.EnterActions>
 	                                <Trigger.ExitActions>
 	                                    <BeginStoryboard>
 	                                        <Storyboard>
@@ -171,15 +161,12 @@
 		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
 		                                                           Storyboard.TargetProperty="ScaleX"
 		                                                           To="1.0" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.0" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetName="ButtonShadow"
-                                                           Storyboard.TargetProperty="Opacity"
-                                                           To="0" Duration="0:0:0.15"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
+			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
+			                                                           Storyboard.TargetProperty="ScaleY"
+			                                                           To="1.0" Duration="0:0:0.15"/>
+	                                        </Storyboard>
+	                                    </BeginStoryboard>
+	                                </Trigger.ExitActions>
                             </Trigger>
 		                            <Trigger Property="IsPressed" Value="True">
 		                                <Setter TargetName="BorderScale" Property="ScaleX" Value="0.95"/>
@@ -211,19 +198,12 @@
 		                                Background="{TemplateBinding Background}"
 		                                CornerRadius="6"
 		                                RenderTransformOrigin="0.5,0.5">
-		                            <Border.RenderTransform>
-		                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
-		                            </Border.RenderTransform>
-                            <Border.Effect>
-                                <DropShadowEffect x:Name="FilterShadow"
-                                                Color="#5E81AC"
-                                                BlurRadius="0"
-                                                ShadowDepth="0"
-                                                Opacity="0"/>
-                            </Border.Effect>
-	                            <Grid>
-	                                <Border x:Name="HoverOverlay"
-	                                        Background="#81A1C1"
+			                            <Border.RenderTransform>
+			                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
+			                            </Border.RenderTransform>
+		                            <Grid>
+		                                <Border x:Name="HoverOverlay"
+		                                        Background="#81A1C1"
 	                                        CornerRadius="6"
 	                                        Opacity="0"
 	                                        IsHitTestVisible="False"/>
@@ -250,19 +230,13 @@
 		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
 		                                                           Storyboard.TargetProperty="ScaleY"
 		                                                           To="1.05" Duration="0:0:0.15">
-		                                                <DoubleAnimation.EasingFunction>
-		                                                    <QuadraticEase EasingMode="EaseOut"/>
-		                                                </DoubleAnimation.EasingFunction>
-	                                            </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="FilterShadow"
-                                                           Storyboard.TargetProperty="BlurRadius"
-                                                           To="16" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetName="FilterShadow"
-                                                           Storyboard.TargetProperty="Opacity"
-                                                           To="0.5" Duration="0:0:0.15"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
+			                                                <DoubleAnimation.EasingFunction>
+			                                                    <QuadraticEase EasingMode="EaseOut"/>
+			                                                </DoubleAnimation.EasingFunction>
+		                                            </DoubleAnimation>
+	                                        </Storyboard>
+	                                    </BeginStoryboard>
+	                                </Trigger.EnterActions>
 	                                <Trigger.ExitActions>
 	                                    <BeginStoryboard>
 	                                        <Storyboard>
@@ -272,18 +246,12 @@
 		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
 		                                                           Storyboard.TargetProperty="ScaleX"
 		                                                           To="1.0" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.0" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetName="FilterShadow"
-                                                           Storyboard.TargetProperty="BlurRadius"
-                                                           To="0" Duration="0:0:0.15"/>
-                                            <DoubleAnimation Storyboard.TargetName="FilterShadow"
-                                                           Storyboard.TargetProperty="Opacity"
-                                                           To="0" Duration="0:0:0.15"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
+			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
+			                                                           Storyboard.TargetProperty="ScaleY"
+			                                                           To="1.0" Duration="0:0:0.15"/>
+	                                        </Storyboard>
+	                                    </BeginStoryboard>
+	                                </Trigger.ExitActions>
                             </Trigger>
 		                            <Trigger Property="IsPressed" Value="True">
 		                                <Setter TargetName="BorderScale" Property="ScaleX" Value="0.95"/>
@@ -1035,63 +1003,47 @@
                         <Border Margin="0,0,0,12">
                             <StackPanel>
                                 <!-- Category Header with Smooth Animations -->
-	                                    <Border x:Name="CategoryHeader"
-	                                            CornerRadius="8"
-	                                            Padding="14,10"
-	                                            Cursor="Hand"
-	                                            Margin="0,0,0,6">
-	                                        <Border.Background>
-	                                            <SolidColorBrush x:Name="CategoryHeaderBackgroundBrush" Color="#3B4252"/>
-	                                        </Border.Background>
-	                                        <Border.Effect>
-	                                            <DropShadowEffect x:Name="HeaderShadow"
-	                                                            Color="#81A1C1"
-	                                                            BlurRadius="0"
-                                                            ShadowDepth="0"
-                                                            Opacity="0"/>
-                                        </Border.Effect>
-	                                        <Border.Triggers>
-	                                            <EventTrigger RoutedEvent="MouseEnter">
-	                                                <BeginStoryboard>
-	                                                    <Storyboard>
-	                                                        <ColorAnimation Storyboard.TargetName="CategoryHeaderBackgroundBrush"
-	                                                                      Storyboard.TargetProperty="Color"
-	                                                                      To="#434C5E" Duration="0:0:0.15"/>
-	                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-	                                                                       Storyboard.TargetProperty="BlurRadius"
-	                                                                       To="12" Duration="0:0:0.15"/>
-                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                       Storyboard.TargetProperty="Opacity"
-                                                                       To="0.4" Duration="0:0:0.15"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-	                                            <EventTrigger RoutedEvent="MouseLeave">
-	                                                <BeginStoryboard>
-	                                                    <Storyboard>
-	                                                        <ColorAnimation Storyboard.TargetName="CategoryHeaderBackgroundBrush"
-	                                                                      Storyboard.TargetProperty="Color"
-	                                                                      To="#3B4252" Duration="0:0:0.15"/>
-	                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-	                                                                       Storyboard.TargetProperty="BlurRadius"
-	                                                                       To="0" Duration="0:0:0.15"/>
-                                                        <DoubleAnimation Storyboard.TargetName="HeaderShadow"
-                                                                       Storyboard.TargetProperty="Opacity"
-                                                                       To="0" Duration="0:0:0.15"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Border.Triggers>
-                                    <Border.InputBindings>
-                                        <MouseBinding MouseAction="LeftClick" Command="{Binding ToggleExpandCommand}"/>
-                                    </Border.InputBindings>
-                                    <!-- Use a Grid with Transparent background to catch clicks anywhere on the header -->
-                                    <Grid Background="Transparent">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+		                                    <Border x:Name="CategoryHeader"
+		                                            CornerRadius="8"
+		                                            Cursor="Hand"
+		                                            Margin="0,0,0,6"
+		                                            Background="#3B4252">
+		                                        <Border.Triggers>
+		                                            <EventTrigger RoutedEvent="MouseEnter">
+		                                                <BeginStoryboard>
+		                                                    <Storyboard>
+		                                                        <DoubleAnimation Storyboard.TargetName="CategoryHeaderHoverOverlay"
+		                                                                       Storyboard.TargetProperty="Opacity"
+		                                                                       To="0.35" Duration="0:0:0.15"/>
+		                                                    </Storyboard>
+		                                                </BeginStoryboard>
+		                                            </EventTrigger>
+		                                            <EventTrigger RoutedEvent="MouseLeave">
+		                                                <BeginStoryboard>
+		                                                    <Storyboard>
+		                                                        <DoubleAnimation Storyboard.TargetName="CategoryHeaderHoverOverlay"
+		                                                                       Storyboard.TargetProperty="Opacity"
+		                                                                       To="0" Duration="0:0:0.15"/>
+		                                                    </Storyboard>
+		                                                </BeginStoryboard>
+		                                            </EventTrigger>
+		                                        </Border.Triggers>
+		                                    <Border.InputBindings>
+		                                        <MouseBinding MouseAction="LeftClick" Command="{Binding ToggleExpandCommand}"/>
+		                                    </Border.InputBindings>
+		                                    <Grid>
+		                                        <Border x:Name="CategoryHeaderHoverOverlay"
+		                                                Background="#434C5E"
+		                                                CornerRadius="8"
+		                                                Opacity="0"
+		                                                IsHitTestVisible="False"/>
+		                                        <!-- Use a Grid with Transparent background to catch clicks anywhere on the header -->
+		                                        <Grid Background="Transparent" Margin="14,10">
+		                                        <Grid.ColumnDefinitions>
+		                                            <ColumnDefinition Width="Auto"/>
+		                                            <ColumnDefinition Width="*"/>
+		                                            <ColumnDefinition Width="Auto"/>
+		                                        </Grid.ColumnDefinitions>
 
 	                                        <TextBlock x:Name="ExpanderIcon"
 	                                                   Grid.Column="0"
@@ -1122,9 +1074,10 @@
                                                        FontSize="11" 
                                                        FontWeight="Bold" 
                                                        Foreground="#ECEFF4"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
+		                                        </Border>
+		                                        </Grid>
+		                                    </Grid>
+		                                </Border>
 
                                 <!-- Tweaks List (Simplified, nested virtualization removed to prevent Layout Cycle) -->
                                 <ItemsControl ItemsSource="{Binding Tweaks}"
@@ -1138,83 +1091,76 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <!-- Tweak Card with Smooth Hover Effects -->
-	                                            <Border x:Name="TweakCard"
-	                                                    CornerRadius="8"
-	                                                    Padding="14,12"
-	                                                    Margin="0,0,0,6"
-	                                                    BorderThickness="2,0,0,0"
-	                                                    BorderBrush="{Binding StatusColor}">
-	                                                <Border.Background>
-	                                                    <SolidColorBrush x:Name="TweakCardBackgroundBrush" Color="#3B4252"/>
-	                                                </Border.Background>
-		                                                <Border.RenderTransform>
-		                                                    <TranslateTransform x:Name="TweakCardTranslate" Y="0"/>
-		                                                </Border.RenderTransform>
-                                                <Border.Effect>
-                                                    <DropShadowEffect x:Name="CardShadow"
-                                                                    Color="#000000"
-                                                                    BlurRadius="8"
-                                                                    ShadowDepth="2"
-                                                                    Opacity="0.2"/>
-                                                </Border.Effect>
-                                                <Border.Triggers>
-	                                                    <EventTrigger RoutedEvent="MouseEnter">
+		                                            <Border x:Name="TweakCard"
+		                                                    CornerRadius="8"
+		                                                    Padding="14,12"
+		                                                    Margin="0,0,0,6"
+		                                                    BorderThickness="2,0,0,0"
+		                                                    BorderBrush="{Binding StatusColor}"
+		                                                    Background="#3B4252">
+			                                                <Border.RenderTransform>
+			                                                    <TranslateTransform x:Name="TweakCardTranslate" Y="0"/>
+			                                                </Border.RenderTransform>
+		                                                <Border.Effect>
+		                                                    <DropShadowEffect Color="#000000"
+		                                                                      BlurRadius="8"
+		                                                                      ShadowDepth="2"
+		                                                                      Opacity="0.2"/>
+		                                                </Border.Effect>
+		                                                <Border.Triggers>
+		                                                    <EventTrigger RoutedEvent="MouseEnter">
 	                                                        <BeginStoryboard>
 	                                                            <Storyboard>
 			                                                                <DoubleAnimation Storyboard.TargetName="TweakCardTranslate"
 			                                                                               Storyboard.TargetProperty="Y"
 			                                                                               To="-2" Duration="0:0:0.15">
-                                                                    <DoubleAnimation.EasingFunction>
-                                                                        <QuadraticEase EasingMode="EaseOut"/>
-                                                                    </DoubleAnimation.EasingFunction>
-                                                                </DoubleAnimation>
-                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                               Storyboard.TargetProperty="BlurRadius"
-                                                                               To="16" Duration="0:0:0.15"/>
-	                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-	                                                                               Storyboard.TargetProperty="ShadowDepth"
-	                                                                               To="6" Duration="0:0:0.15"/>
-	                                                                <ColorAnimation Storyboard.TargetName="TweakCardBackgroundBrush"
-	                                                                              Storyboard.TargetProperty="Color"
-	                                                                              To="#434C5E" Duration="0:0:0.15"/>
-	                                                            </Storyboard>
-	                                                        </BeginStoryboard>
-	                                                    </EventTrigger>
-	                                                    <EventTrigger RoutedEvent="MouseLeave">
+	                                                                    <DoubleAnimation.EasingFunction>
+	                                                                        <QuadraticEase EasingMode="EaseOut"/>
+	                                                                    </DoubleAnimation.EasingFunction>
+	                                                                </DoubleAnimation>
+	                                                                <DoubleAnimation Storyboard.TargetName="TweakCardHoverOverlay"
+	                                                                               Storyboard.TargetProperty="Opacity"
+	                                                                               To="0.35" Duration="0:0:0.15"/>
+		                                                            </Storyboard>
+		                                                        </BeginStoryboard>
+		                                                    </EventTrigger>
+		                                                    <EventTrigger RoutedEvent="MouseLeave">
 	                                                        <BeginStoryboard>
 	                                                            <Storyboard>
-		                                                                <DoubleAnimation Storyboard.TargetName="TweakCardTranslate"
-		                                                                               Storyboard.TargetProperty="Y"
-		                                                                               To="0" Duration="0:0:0.15"/>
-                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-                                                                               Storyboard.TargetProperty="BlurRadius"
-                                                                               To="8" Duration="0:0:0.15"/>
-	                                                                <DoubleAnimation Storyboard.TargetName="CardShadow"
-	                                                                               Storyboard.TargetProperty="ShadowDepth"
-	                                                                               To="2" Duration="0:0:0.15"/>
-	                                                                <ColorAnimation Storyboard.TargetName="TweakCardBackgroundBrush"
-	                                                                              Storyboard.TargetProperty="Color"
-	                                                                              To="#3B4252" Duration="0:0:0.15"/>
-	                                                            </Storyboard>
-	                                                        </BeginStoryboard>
-	                                                    </EventTrigger>
-                                                </Border.Triggers>
-                                                <Grid>
+			                                                                <DoubleAnimation Storyboard.TargetName="TweakCardTranslate"
+			                                                                               Storyboard.TargetProperty="Y"
+			                                                                               To="0" Duration="0:0:0.15"/>
+	                                                                <DoubleAnimation Storyboard.TargetName="TweakCardHoverOverlay"
+	                                                                               Storyboard.TargetProperty="Opacity"
+	                                                                               To="0" Duration="0:0:0.15"/>
+		                                                            </Storyboard>
+		                                                        </BeginStoryboard>
+		                                                    </EventTrigger>
+		                                                </Border.Triggers>
+		                                                <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>  <!-- Checkbox -->
                                                         <ColumnDefinition Width="Auto"/>  <!-- Status -->
                                                         <ColumnDefinition Width="*"/>     <!-- Content -->
                                                         <ColumnDefinition Width="Auto"/>  <!-- Actions -->
                                                     </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
+	                                                    <Grid.RowDefinitions>
+	                                                        <RowDefinition Height="Auto"/>
+	                                                        <RowDefinition Height="Auto"/>
+	                                                        <RowDefinition Height="Auto"/>
+	                                                    </Grid.RowDefinitions>
 
-                                                    <!-- Selection Checkbox -->
-                                                    <CheckBox Grid.Column="0"
-                                                              IsChecked="{Binding IsSelected}"
+	                                                    <Border x:Name="TweakCardHoverOverlay"
+	                                                            Grid.ColumnSpan="4"
+	                                                            Grid.RowSpan="3"
+	                                                            Background="#434C5E"
+	                                                            CornerRadius="6"
+	                                                            Opacity="0"
+	                                                            IsHitTestVisible="False"/>
+
+	                                                    <!-- Selection Checkbox -->
+	                                                    <CheckBox Grid.Column="0"
+	                                                              IsChecked="{Binding IsSelected}"
                                                               VerticalAlignment="Center"
                                                               Margin="0,0,10,0"
                                                               ToolTip="Select for batch operations">
@@ -1326,23 +1272,15 @@
 	                                                                Cursor="Hand">
                                                             <Button.Template>
                                                                 <ControlTemplate TargetType="Button">
-                                                                    <Grid Width="50" Height="26">
-                                                                        <Border x:Name="Track"
-                                                                                Background="#434C5E"
-                                                                                CornerRadius="13"
-                                                                                BorderBrush="#4C566A"
-                                                                                BorderThickness="1">
-                                                                            <Border.Effect>
-                                                                                <DropShadowEffect x:Name="TrackGlow"
-                                                                                                Color="#A3BE8C"
-                                                                                                BlurRadius="0"
-                                                                                                ShadowDepth="0"
-                                                                                                Opacity="0"/>
-                                                                            </Border.Effect>
-                                                                        </Border>
-                                                                        <Border x:Name="Thumb"
-                                                                                Width="20" Height="20"
-                                                                                CornerRadius="10"
+	                                                                    <Grid Width="50" Height="26">
+	                                                                        <Border x:Name="Track"
+	                                                                                Background="#434C5E"
+	                                                                                CornerRadius="13"
+	                                                                                BorderBrush="#4C566A"
+	                                                                                BorderThickness="1"/>
+	                                                                        <Border x:Name="Thumb"
+	                                                                                Width="20" Height="20"
+	                                                                                CornerRadius="10"
                                                                                 Background="#D8DEE9"
                                                                                 HorizontalAlignment="Left"
                                                                                 Margin="3,0,0,0">
@@ -1358,26 +1296,20 @@
                                                                         <DataTrigger Binding="{Binding IsApplied}" Value="True">
                                                                             <Setter TargetName="Track" Property="Background" Value="#A3BE8C"/>
                                                                             <Setter TargetName="Thumb" Property="Background" Value="#ECEFF4"/>
-                                                                            <DataTrigger.EnterActions>
-                                                                                <BeginStoryboard>
-                                                                                    <Storyboard>
-	                                                                                        <DoubleAnimation Storyboard.TargetName="ThumbTranslate"
-	                                                                                                       Storyboard.TargetProperty="X"
+	                                                                            <DataTrigger.EnterActions>
+	                                                                                <BeginStoryboard>
+	                                                                                    <Storyboard>
+		                                                                                        <DoubleAnimation Storyboard.TargetName="ThumbTranslate"
+		                                                                                                       Storyboard.TargetProperty="X"
 	                                                                                                       To="24" Duration="0:0:0.2">
                                                                                             <DoubleAnimation.EasingFunction>
                                                                                                 <CubicEase EasingMode="EaseOut"/>
-                                                                                            </DoubleAnimation.EasingFunction>
-                                                                                        </DoubleAnimation>
-                                                                                        <DoubleAnimation Storyboard.TargetName="TrackGlow"
-                                                                                                       Storyboard.TargetProperty="BlurRadius"
-                                                                                                       To="15" Duration="0:0:0.2"/>
-                                                                                        <DoubleAnimation Storyboard.TargetName="TrackGlow"
-                                                                                                       Storyboard.TargetProperty="Opacity"
-                                                                                                       To="0.6" Duration="0:0:0.2"/>
-                                                                                    </Storyboard>
-                                                                                </BeginStoryboard>
-                                                                            </DataTrigger.EnterActions>
-                                                                            <DataTrigger.ExitActions>
+	                                                                                            </DoubleAnimation.EasingFunction>
+	                                                                                        </DoubleAnimation>
+	                                                                                    </Storyboard>
+	                                                                                </BeginStoryboard>
+	                                                                            </DataTrigger.EnterActions>
+	                                                                            <DataTrigger.ExitActions>
                                                                                 <BeginStoryboard>
                                                                                     <Storyboard>
 	                                                                                        <DoubleAnimation Storyboard.TargetName="ThumbTranslate"
@@ -1385,18 +1317,12 @@
 	                                                                                                       To="0" Duration="0:0:0.2">
                                                                                             <DoubleAnimation.EasingFunction>
                                                                                                 <CubicEase EasingMode="EaseOut"/>
-                                                                                            </DoubleAnimation.EasingFunction>
-                                                                                        </DoubleAnimation>
-                                                                                        <DoubleAnimation Storyboard.TargetName="TrackGlow"
-                                                                                                       Storyboard.TargetProperty="BlurRadius"
-                                                                                                       To="0" Duration="0:0:0.2"/>
-                                                                                        <DoubleAnimation Storyboard.TargetName="TrackGlow"
-                                                                                                       Storyboard.TargetProperty="Opacity"
-                                                                                                       To="0" Duration="0:0:0.2"/>
-                                                                                    </Storyboard>
-                                                                                </BeginStoryboard>
-                                                                            </DataTrigger.ExitActions>
-                                                                        </DataTrigger>
+	                                                                                            </DoubleAnimation.EasingFunction>
+	                                                                                        </DoubleAnimation>
+	                                                                                    </Storyboard>
+	                                                                                </BeginStoryboard>
+	                                                                            </DataTrigger.ExitActions>
+	                                                                        </DataTrigger>
                                                                         <Trigger Property="IsEnabled" Value="False">
                                                                             <Setter Property="Opacity" Value="0.5"/>
                                                                         </Trigger>
