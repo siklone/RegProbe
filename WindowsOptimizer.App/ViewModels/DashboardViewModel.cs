@@ -58,6 +58,8 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _healthTweaksTotal, value))
             {
                 OnPropertyChanged(nameof(OptimizationScoreDetails));
+                OnPropertyChanged(nameof(HasHealthData));
+                OnPropertyChanged(nameof(OptimizationScoreDisplayText));
             }
         }
     }
@@ -83,13 +85,23 @@ public sealed class DashboardViewModel : ViewModelBase
     public int OptimizationScore
     {
         get => _optimizationScore;
-        set => SetProperty(ref _optimizationScore, value);
+        set
+        {
+            if (SetProperty(ref _optimizationScore, value))
+            {
+                OnPropertyChanged(nameof(OptimizationScoreDisplayText));
+            }
+        }
     }
 
     public string OptimizationScoreDetails =>
         HealthTweaksTotal <= 0
-            ? "Health is calculated from Tweaks. Run Detect to refresh current states."
-            : $"{HealthTweaksApplied} / {HealthTweaksTotal} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
+            ? "Health is calculated from detected states. Run Detect to refresh current states."
+            : $"{HealthTweaksApplied} / {HealthTweaksTotal} detected tweaks applied (Safe+Advanced; excludes Demo/Risky).";
+
+    public bool HasHealthData => HealthTweaksTotal > 0;
+
+    public string OptimizationScoreDisplayText => HasHealthData ? $"{OptimizationScore}%" : "—";
 
     public long LogFileSizeBytes
     {

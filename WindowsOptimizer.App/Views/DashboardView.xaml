@@ -115,19 +115,31 @@
                                FontSize="14"/>
                 </StackPanel>
 
-                <!-- Circular Health Gauge -->
-                <StackPanel Grid.Column="1" Margin="24,0,0,0" HorizontalAlignment="Right">
-                    <Grid Width="140" Height="140" ToolTip="{Binding OptimizationScoreDetails}">
-                        <Ellipse Stroke="#3B4252" StrokeThickness="12" Fill="Transparent"/>
-                        <Ellipse x:Name="ScoreRing" Stroke="#5E81AC" StrokeThickness="12" Fill="Transparent" 
-                                 StrokeDashArray="100, 100" StrokeDashOffset="{Binding OptimizationScore, ConverterParameter=314, Converter={StaticResource ScoreToOffsetConverter}}"/>
+	                <!-- Circular Health Gauge -->
+	                <StackPanel Grid.Column="1" Margin="24,0,0,0" HorizontalAlignment="Right">
+	                    <Grid Width="140" Height="140" ToolTip="{Binding OptimizationScoreDetails}">
+	                        <Ellipse Stroke="#3B4252" StrokeThickness="12" Fill="Transparent"/>
+	                        <Ellipse x:Name="ScoreRing" Stroke="#5E81AC" StrokeThickness="12" Fill="Transparent" 
+	                                 StrokeDashArray="100, 100"
+	                                 StrokeDashOffset="{Binding OptimizationScore, ConverterParameter=314, Converter={StaticResource ScoreToOffsetConverter}}">
+	                            <Ellipse.Style>
+	                                <Style TargetType="Ellipse">
+	                                    <Setter Property="Opacity" Value="1"/>
+	                                    <Style.Triggers>
+	                                        <DataTrigger Binding="{Binding HasHealthData}" Value="False">
+	                                            <Setter Property="Opacity" Value="0.25"/>
+	                                        </DataTrigger>
+	                                    </Style.Triggers>
+	                                </Style>
+	                            </Ellipse.Style>
+	                        </Ellipse>
                         
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}" 
-                                       FontSize="28" FontWeight="Bold" Foreground="#ECEFF4" HorizontalAlignment="Center"/>
-                            <TextBlock Text="Health" FontSize="11" Foreground="#88C0D0" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
+	                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+	                            <TextBlock Text="{Binding OptimizationScoreDisplayText}" 
+	                                       FontSize="28" FontWeight="Bold" Foreground="#ECEFF4" HorizontalAlignment="Center"/>
+	                            <TextBlock Text="Health" FontSize="11" Foreground="#88C0D0" HorizontalAlignment="Center"/>
+	                        </StackPanel>
+	                    </Grid>
 
                     <TextBlock Text="{Binding OptimizationScoreDetails}"
                                Foreground="#4C566A"

@@ -3323,13 +3323,15 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public int ScorableTweaksTotal => Tweaks.Count(IsScorableForHealth);
 
+    public int ScorableTweaksMeasuredTotal => Tweaks.Count(t => IsScorableForHealth(t) && t.AppliedStatus != TweakAppliedStatus.Unknown);
+
     public int ScorableTweaksApplied => Tweaks.Count(t => IsScorableForHealth(t) && t.IsApplied);
 
     public int GlobalOptimizationScore
     {
         get
         {
-            var total = ScorableTweaksTotal;
+            var total = ScorableTweaksMeasuredTotal;
             if (total == 0)
             {
                 return 0;
@@ -3340,9 +3342,9 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
-    public string HealthCalculationSummary => ScorableTweaksTotal == 0
-        ? "Health is calculated from Tweaks. Run Detect to refresh current states."
-        : $"{ScorableTweaksApplied} / {ScorableTweaksTotal} tweaks applied (Safe+Advanced; excludes Demo/Risky).";
+    public string HealthCalculationSummary => ScorableTweaksMeasuredTotal == 0
+        ? "Health is calculated from detected states. Run Detect to refresh current states."
+        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected tweaks applied (Safe+Advanced; excludes Demo/Risky).";
 
     public string HealthStatusMessage => GlobalOptimizationScore switch
     {
@@ -3890,6 +3892,7 @@ public sealed class TweaksViewModel : ViewModelBase
         OnPropertyChanged(nameof(GlobalOptimizationScore));
         OnPropertyChanged(nameof(HealthStatusMessage));
         OnPropertyChanged(nameof(ScorableTweaksTotal));
+        OnPropertyChanged(nameof(ScorableTweaksMeasuredTotal));
         OnPropertyChanged(nameof(ScorableTweaksApplied));
         OnPropertyChanged(nameof(HealthCalculationSummary));
     }

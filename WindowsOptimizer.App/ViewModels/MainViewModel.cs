@@ -72,7 +72,7 @@ public sealed class MainViewModel : ViewModelBase
         {
             dashboard.TotalTweaksAvailable = tweaks.Tweaks.Count;
             dashboard.TweaksApplied = tweaks.ScorableTweaksApplied;
-            dashboard.HealthTweaksTotal = tweaks.ScorableTweaksTotal;
+            dashboard.HealthTweaksTotal = tweaks.ScorableTweaksMeasuredTotal;
             dashboard.HealthTweaksApplied = tweaks.ScorableTweaksApplied;
             dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
         }
@@ -80,7 +80,7 @@ public sealed class MainViewModel : ViewModelBase
         tweaks.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName is nameof(TweaksViewModel.GlobalOptimizationScore)
-                or nameof(TweaksViewModel.ScorableTweaksTotal)
+                or nameof(TweaksViewModel.ScorableTweaksMeasuredTotal)
                 or nameof(TweaksViewModel.ScorableTweaksApplied))
             {
                 SyncDashboardHealth();
