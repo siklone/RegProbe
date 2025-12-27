@@ -59,13 +59,15 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
-    private readonly RelayCommand _expandAllDetailsCommand;
-    private readonly RelayCommand _collapseAllDetailsCommand;
-    private readonly bool _isElevated;
-    private readonly IRegistryAccessor _localRegistryAccessor;
-    private readonly IRegistryAccessor _elevatedRegistryAccessor;
-    private readonly IServiceManager _elevatedServiceManager;
-    private readonly IScheduledTaskManager _elevatedTaskManager;
+	private readonly RelayCommand _expandAllDetailsCommand;
+	private readonly RelayCommand _collapseAllDetailsCommand;
+	private readonly bool _isElevated;
+	private readonly string _elevatedHostExecutablePath;
+	private readonly bool _isElevatedHostAvailable;
+	private readonly IRegistryAccessor _localRegistryAccessor;
+	private readonly IRegistryAccessor _elevatedRegistryAccessor;
+	private readonly IServiceManager _elevatedServiceManager;
+	private readonly IScheduledTaskManager _elevatedTaskManager;
     private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
     private readonly ICommandRunner _elevatedCommandRunner;
     private string _exportStatusMessage = "Logs are ready to export.";
@@ -105,15 +107,17 @@ public sealed class TweaksViewModel : ViewModelBase
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         _profileManager = new ProfileManager(paths);
-        _pipeline = new TweakExecutionPipeline(logger, _logStore);
-        var settingsStore = new SettingsStore(paths);
-        _isElevated = ProcessElevation.IsElevated();
-        var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
-        {
-            HostExecutablePath = ElevatedHostLocator.GetExecutablePath(),
-            PipeName = ElevatedHostDefaults.PipeName,
-            ParentProcessId = Process.GetCurrentProcess().Id
-        });
+		_pipeline = new TweakExecutionPipeline(logger, _logStore);
+		var settingsStore = new SettingsStore(paths);
+		_isElevated = ProcessElevation.IsElevated();
+		_elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
+		_isElevatedHostAvailable = File.Exists(_elevatedHostExecutablePath);
+		var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
+		{
+			HostExecutablePath = _elevatedHostExecutablePath,
+			PipeName = ElevatedHostDefaults.PipeName,
+			ParentProcessId = Process.GetCurrentProcess().Id
+		});
         _localRegistryAccessor = new LocalRegistryAccessor();
         _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
         _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
@@ -3268,13 +3272,19 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public string Title => "Tweaks";
 
-    public bool IsElevated => _isElevated;
+	public bool IsElevated => _isElevated;
 
-    public string ElevationStatusMessage => IsElevated
-        ? "Running with administrator privileges."
-        : "Running without administrator privileges. Admin-required tweaks will prompt for elevation.";
+	public string ElevationStatusMessage => IsElevated
+		? "Running with administrator privileges."
+		: "Running without administrator privileges. Admin-required tweaks will prompt for elevation.";
 
-    public ObservableCollection<TweakItemViewModel> Tweaks { get; }
+	public bool IsElevatedHostAvailable => _isElevatedHostAvailable;
+
+	public string ElevatedHostStatusMessage => IsElevatedHostAvailable
+		? string.Empty
+		: $"ElevatedHost not found. Expected at: {_elevatedHostExecutablePath}. Build WindowsOptimizer.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
+
+	public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 
     public IEnumerable<TweakItemViewModel> AllTweaks => Tweaks;
 

@@ -917,11 +917,31 @@
 	                                    ToolTip="Apply all visible tweaks (Detect → Apply → Verify)."/>
                         </StackPanel>
                     </Grid>
-                </Border>
+	                </Border>
 
-                <!-- Selection Toolbar -->
-                <Border Background="#434C5E" CornerRadius="10" Padding="16,12" Margin="0,12,0,0"
-                        Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+	                <!-- Elevated Host Missing Warning -->
+	                <Border Background="#4A3E2E"
+	                        CornerRadius="10"
+	                        Padding="12,10"
+	                        Margin="0,10,0,0"
+	                        Visibility="{Binding IsElevatedHostAvailable, Converter={StaticResource InverseBoolToVisibility}}">
+	                    <StackPanel Orientation="Horizontal">
+	                        <TextBlock FontFamily="Segoe MDL2 Assets"
+	                                   Text="&#xE7BA;"
+	                                   FontSize="14"
+	                                   Foreground="#EBCB8B"
+	                                   Margin="0,0,8,0"
+	                                   VerticalAlignment="Center"/>
+	                        <TextBlock Text="{Binding ElevatedHostStatusMessage}"
+	                                   Foreground="#EBCB8B"
+	                                   FontSize="11"
+	                                   TextWrapping="Wrap"/>
+	                    </StackPanel>
+	                </Border>
+
+	                <!-- Selection Toolbar -->
+	                <Border Background="#434C5E" CornerRadius="10" Padding="16,12" Margin="0,12,0,0"
+	                        Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
