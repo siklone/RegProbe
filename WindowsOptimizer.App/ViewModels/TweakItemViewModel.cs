@@ -933,11 +933,35 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         try
         {
-            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            LogToFile($"OpenReferenceLink: {url}");
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true,
+                Verb = "open"
+            };
+
+            Process.Start(startInfo);
             StatusMessage = "Opening link...";
         }
         catch (Exception ex)
         {
+            try
+            {
+                // Fallback: use explorer to open the URL (avoids shell association edge cases).
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",
+                    Arguments = url,
+                    UseShellExecute = true
+                });
+                StatusMessage = "Opening link...";
+                return;
+            }
+            catch
+            {
+            }
+
             StatusMessage = $"Could not open link: {ex.Message}";
             LogToFile($"OpenReferenceLink failed: {ex.Message} ({url})");
         }

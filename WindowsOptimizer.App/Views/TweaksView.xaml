@@ -299,18 +299,18 @@
         </Style>
 
         <!-- Search Box Style -->
-        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#3B4252"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="MinHeight" Value="32"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
+	        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+	            <Setter Property="Background" Value="#3B4252"/>
+	            <Setter Property="Foreground" Value="#ECEFF4"/>
+	            <Setter Property="BorderBrush" Value="#4C566A"/>
+	            <Setter Property="BorderThickness" Value="1"/>
+	            <Setter Property="Padding" Value="8,4"/>
+	            <Setter Property="FontSize" Value="12"/>
+	            <Setter Property="MinHeight" Value="28"/>
+	            <Setter Property="VerticalContentAlignment" Value="Center"/>
+	            <Setter Property="Template">
+	                <Setter.Value>
+	                    <ControlTemplate TargetType="TextBox">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -336,24 +336,26 @@
 	            </Style.Triggers>
 	        </Style>
         <!-- Link Button Style -->
-        <Style x:Key="LinkButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#88C0D0"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Padding" Value="0,1"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
+	        <Style x:Key="LinkButtonStyle" TargetType="Button">
+	            <Setter Property="Background" Value="Transparent"/>
+	            <Setter Property="Foreground" Value="#88C0D0"/>
+	            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+	            <Setter Property="BorderBrush" Value="Transparent"/>
+	            <Setter Property="Padding" Value="0,2"/>
+	            <Setter Property="FontSize" Value="11"/>
+	            <Setter Property="Cursor" Value="Hand"/>
+	            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+	            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
+	            <Setter Property="Template">
+	                <Setter.Value>
+	                    <ControlTemplate TargetType="Button">
+	                        <Border Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+	                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center"/>
+	                        </Border>
+	                    </ControlTemplate>
+	                </Setter.Value>
+	            </Setter>
+	            <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="#81A1C1"/>
                     <Setter Property="BorderBrush" Value="#81A1C1"/>
@@ -862,10 +864,10 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Search -->
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
-	                            <TextBox Width="180"
+	                        <!-- Search -->
+	                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+	                            <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+	                            <TextBox Width="160"
 	                                     Style="{StaticResource SearchBoxStyle}"
 	                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
 	                                     ToolTip="Search tweaks..."/>
