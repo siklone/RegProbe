@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using WindowsOptimizer.Core;
 
 namespace WindowsOptimizer.Infrastructure;
 
@@ -155,6 +156,62 @@ public sealed class RollbackStateStore : IRollbackStateStore
     }
 
     /// <summary>
+    /// Saves a TweakRollbackSnapshot from an IRollbackAwareTweak.
+    /// Converts it to RollbackEntry internally.
+    /// </summary>
+    public async Task SaveSnapshotAsync(TweakRollbackSnapshot snapshot, CancellationToken ct)
+    {
+        if (snapshot is null) throw new ArgumentNullException(nameof(snapshot));
+
+        var entry = new RollbackEntry
+        {
+            TweakId = snapshot.TweakId,
+            TweakName = snapshot.TweakName,
+            Category = snapshot.SnapshotType.ToString(),
+            RegistryHive = snapshot.RegistryHive,
+            RegistryPath = snapshot.RegistryPath,
+            RegistryValueName = snapshot.RegistryValueName,
+            OriginalValueKind = snapshot.RegistryValueKind,
+            OriginalValue = snapshot.OriginalValueJson,
+            ValueExisted = snapshot.ValueExisted,
+            ServiceName = snapshot.ServiceName,
+            OriginalStartMode = snapshot.OriginalStartMode,
+            CapturedAt = snapshot.CapturedAt,
+            Status = RollbackStatus.Pending
+        };
+
+        await SaveOriginalStateAsync(entry, ct);
+    }
+
+    /// <summary>
+    /// Gets a TweakRollbackSnapshot for a specific tweak if available.
+    /// </summary>
+    public async Task<TweakRollbackSnapshot?> GetSnapshotAsync(string tweakId, CancellationToken ct)
+    {
+        var entry = await GetOriginalStateAsync(tweakId, ct);
+        if (entry is null)
+        {
+            return null;
+        }
+
+        return new TweakRollbackSnapshot
+        {
+            TweakId = entry.TweakId,
+            TweakName = entry.TweakName,
+            SnapshotType = Enum.TryParse<TweakSnapshotType>(entry.Category, out var type) ? type : TweakSnapshotType.Other,
+            RegistryHive = entry.RegistryHive,
+            RegistryPath = entry.RegistryPath,
+            RegistryValueName = entry.RegistryValueName,
+            RegistryValueKind = entry.OriginalValueKind,
+            OriginalValueJson = entry.OriginalValue?.ToString(),
+            ValueExisted = entry.ValueExisted,
+            ServiceName = entry.ServiceName,
+            OriginalStartMode = entry.OriginalStartMode,
+            CapturedAt = entry.CapturedAt
+        };
+    }
+
+    /// <summary>
     /// Clears all pending rollback entries.
     /// Use with caution - typically after user confirms they don't want to recover.
     /// </summary>
@@ -229,10 +286,12 @@ public sealed class RollbackStateStore : IRollbackStateStore
 public interface IRollbackStateStore
 {
     Task SaveOriginalStateAsync(RollbackEntry entry, CancellationToken ct);
+    Task SaveSnapshotAsync(Core.TweakRollbackSnapshot snapshot, CancellationToken ct);
     Task MarkAppliedAsync(string tweakId, CancellationToken ct);
     Task MarkRolledBackAsync(string tweakId, CancellationToken ct);
     Task<IReadOnlyList<RollbackEntry>> GetPendingRollbacksAsync(CancellationToken ct);
     Task<RollbackEntry?> GetOriginalStateAsync(string tweakId, CancellationToken ct);
+    Task<Core.TweakRollbackSnapshot?> GetSnapshotAsync(string tweakId, CancellationToken ct);
     Task ClearAllAsync(CancellationToken ct);
 }
 

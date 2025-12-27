@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -9,7 +10,7 @@ using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 
-public sealed class RegistryValueTweak : ITweak
+public sealed class RegistryValueTweak : ITweak, IRollbackAwareTweak
 {
     private readonly RegistryValueKind _valueKind;
     private readonly object _targetValue;
@@ -286,4 +287,100 @@ public sealed class RegistryValueTweak : ITweak
 
         return value.ToString() ?? "<null>";
     }
+
+    #region IRollbackAwareTweak Implementation
+
+    public bool HasCapturedState => _hasDetected;
+
+    public TweakRollbackSnapshot? GetRollbackSnapshot()
+    {
+        if (!_hasDetected)
+        {
+            return null;
+        }
+
+        string? originalValueJson = null;
+        if (_detectedValue is not null)
+        {
+            try
+            {
+                originalValueJson = JsonSerializer.Serialize(_detectedValue);
+            }
+            catch
+            {
+                // If serialization fails, use string representation
+                originalValueJson = _detectedValue.ToString();
+            }
+        }
+
+        return new TweakRollbackSnapshot
+        {
+            TweakId = Id,
+            TweakName = Name,
+            SnapshotType = TweakSnapshotType.Registry,
+            RegistryHive = _reference.Hive.ToString(),
+            RegistryPath = _reference.SubKeyPath,
+            RegistryValueName = _reference.ValueName,
+            RegistryValueKind = _valueKind.ToString(),
+            OriginalValueJson = originalValueJson,
+            ValueExisted = _valueExists,
+            CapturedAt = DateTimeOffset.UtcNow
+        };
+    }
+
+    public void RestoreFromSnapshot(TweakRollbackSnapshot snapshot)
+    {
+        if (snapshot is null || snapshot.TweakId != Id)
+        {
+            return;
+        }
+
+        _hasDetected = true;
+        _valueExists = snapshot.ValueExisted;
+
+        if (!string.IsNullOrEmpty(snapshot.OriginalValueJson) && snapshot.ValueExisted)
+        {
+            try
+            {
+                // Try to deserialize based on value kind
+                _detectedValue = DeserializeValue(snapshot.OriginalValueJson, snapshot.RegistryValueKind);
+                if (_detectedValue is not null)
+                {
+                    _detectedValueData = RegistryValueData.FromObject(_valueKind, _detectedValue);
+                }
+            }
+            catch
+            {
+                // If deserialization fails, we can't restore
+                _hasDetected = false;
+            }
+        }
+    }
+
+    private static object? DeserializeValue(string json, string? valueKind)
+    {
+        if (string.IsNullOrEmpty(json))
+        {
+            return null;
+        }
+
+        try
+        {
+            return valueKind switch
+            {
+                "DWord" => JsonSerializer.Deserialize<int>(json),
+                "QWord" => JsonSerializer.Deserialize<long>(json),
+                "String" or "ExpandString" => JsonSerializer.Deserialize<string>(json),
+                "MultiString" => JsonSerializer.Deserialize<string[]>(json),
+                "Binary" => JsonSerializer.Deserialize<byte[]>(json),
+                _ => JsonSerializer.Deserialize<object>(json)
+            };
+        }
+        catch
+        {
+            return json; // Fall back to raw string
+        }
+    }
+
+    #endregion
 }

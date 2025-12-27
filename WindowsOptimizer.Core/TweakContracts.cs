@@ -48,3 +48,58 @@ public interface ITweak
     Task<TweakResult> VerifyAsync(CancellationToken ct);
     Task<TweakResult> RollbackAsync(CancellationToken ct);
 }
+
+/// <summary>
+/// Optional interface for tweaks that support durable rollback state capture.
+/// Implement this to enable crash recovery and persistent rollback.
+/// </summary>
+public interface IRollbackAwareTweak : ITweak
+{
+    /// <summary>
+    /// Returns true if Detect has been called and original state is available.
+    /// </summary>
+    bool HasCapturedState { get; }
+
+    /// <summary>
+    /// Gets the captured original state after Detect, or null if not available.
+    /// Call this AFTER DetectAsync but BEFORE ApplyAsync.
+    /// </summary>
+    TweakRollbackSnapshot? GetRollbackSnapshot();
+
+    /// <summary>
+    /// Restores state from a persisted snapshot. Used for crash recovery.
+    /// </summary>
+    void RestoreFromSnapshot(TweakRollbackSnapshot snapshot);
+}
+
+/// <summary>
+/// Serializable snapshot of a tweak's original state for crash recovery.
+/// </summary>
+public sealed class TweakRollbackSnapshot
+{
+    public string TweakId { get; init; } = string.Empty;
+    public string TweakName { get; init; } = string.Empty;
+    public TweakSnapshotType SnapshotType { get; init; }
+
+    // Registry-specific
+    public string? RegistryHive { get; init; }
+    public string? RegistryPath { get; init; }
+    public string? RegistryValueName { get; init; }
+    public string? RegistryValueKind { get; init; }
+    public string? OriginalValueJson { get; init; }
+    public bool ValueExisted { get; init; }
+
+    // Service-specific (future)
+    public string? ServiceName { get; init; }
+    public string? OriginalStartMode { get; init; }
+
+    public DateTimeOffset CapturedAt { get; init; } = DateTimeOffset.UtcNow;
+}
+
+public enum TweakSnapshotType
+{
+    Registry,
+    Service,
+    File,
+    Other
+}

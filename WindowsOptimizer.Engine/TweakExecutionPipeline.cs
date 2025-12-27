@@ -11,11 +11,13 @@ public sealed class TweakExecutionPipeline
 {
     private readonly IAppLogger _logger;
     private readonly ITweakLogStore? _logStore;
+    private readonly IRollbackStateStore? _rollbackStore;
 
-    public TweakExecutionPipeline(IAppLogger logger, ITweakLogStore? logStore = null)
+    public TweakExecutionPipeline(IAppLogger logger, ITweakLogStore? logStore = null, IRollbackStateStore? rollbackStore = null)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _logStore = logStore;
+        _rollbackStore = rollbackStore;
     }
 
     public async Task<TweakExecutionReport> ExecuteAsync(
@@ -55,12 +57,19 @@ public sealed class TweakExecutionPipeline
             return BuildReport(tweak, options, steps, startedAt);
         }
 
+        // Save rollback state before Apply for crash recovery
+        await SaveRollbackStateAsync(tweak, ct);
+
         var applyStep = await RunStepAsync(tweak, TweakAction.Apply, tweak.ApplyAsync, steps, progress, ct);
         if (applyStep.Result.Status == TweakStatus.Failed)
         {
             if (options.RollbackOnFailure)
             {
-                await RunStepAsync(tweak, TweakAction.Rollback, tweak.RollbackAsync, steps, progress, ct);
+                var rollbackStep = await RunStepAsync(tweak, TweakAction.Rollback, tweak.RollbackAsync, steps, progress, ct);
+                if (rollbackStep.Result.Status == TweakStatus.RolledBack)
+                {
+                    await MarkRolledBackAsync(tweak, ct);
+                }
             }
 
             return BuildReport(tweak, options, steps, startedAt);
@@ -71,11 +80,22 @@ public sealed class TweakExecutionPipeline
             var verifyStep = await RunStepAsync(tweak, TweakAction.Verify, tweak.VerifyAsync, steps, progress, ct);
             if (verifyStep.Result.Status == TweakStatus.Failed && options.RollbackOnFailure)
             {
-                await RunStepAsync(tweak, TweakAction.Rollback, tweak.RollbackAsync, steps, progress, ct);
+                var rollbackStep = await RunStepAsync(tweak, TweakAction.Rollback, tweak.RollbackAsync, steps, progress, ct);
+                if (rollbackStep.Result.Status == TweakStatus.RolledBack)
+                {
+                    await MarkRolledBackAsync(tweak, ct);
+                }
+            }
+            else if (verifyStep.Result.Status == TweakStatus.Verified)
+            {
+                // Mark as successfully applied after verification
+                await MarkAppliedAsync(tweak, ct);
             }
         }
         else
         {
+            // No verification, but Apply succeeded, mark as applied
+            await MarkAppliedAsync(tweak, ct);
             await AppendSkippedStepAsync(tweak, TweakAction.Verify, steps, progress, "Verify disabled by options.", ct);
         }
 
@@ -270,5 +290,67 @@ public sealed class TweakExecutionPipeline
             step.Result.Status,
             step.Result.Message,
             step.Result.Timestamp == default ? DateTimeOffset.UtcNow : step.Result.Timestamp));
+    }
+
+    private async Task SaveRollbackStateAsync(ITweak tweak, CancellationToken ct)
+    {
+        if (_rollbackStore is null)
+        {
+            return;
+        }
+
+        try
+        {
+            if (tweak is IRollbackAwareTweak rollbackAware && rollbackAware.HasCapturedState)
+            {
+                var snapshot = rollbackAware.GetRollbackSnapshot();
+                if (snapshot is not null)
+                {
+                    await _rollbackStore.SaveSnapshotAsync(snapshot, ct);
+                    _logger.Log(LogLevel.Debug, $"Saved rollback state for {tweak.Id}", null);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log but don't fail the operation
+            _logger.Log(LogLevel.Warning, $"Failed to save rollback state for {tweak.Id}: {ex.Message}", ex);
+        }
+    }
+
+    private async Task MarkAppliedAsync(ITweak tweak, CancellationToken ct)
+    {
+        if (_rollbackStore is null)
+        {
+            return;
+        }
+
+        try
+        {
+            await _rollbackStore.MarkAppliedAsync(tweak.Id, ct);
+            _logger.Log(LogLevel.Debug, $"Marked {tweak.Id} as applied", null);
+        }
+        catch (Exception ex)
+        {
+            _logger.Log(LogLevel.Warning, $"Failed to mark {tweak.Id} as applied: {ex.Message}", ex);
+        }
+    }
+
+    private async Task MarkRolledBackAsync(ITweak tweak, CancellationToken ct)
+    {
+        if (_rollbackStore is null)
+        {
+            return;
+        }
+
+        try
+        {
+            await _rollbackStore.MarkRolledBackAsync(tweak.Id, ct);
+            _logger.Log(LogLevel.Debug, $"Marked {tweak.Id} as rolled back", null);
+        }
+        catch (Exception ex)
+        {
+            _logger.Log(LogLevel.Warning, $"Failed to mark {tweak.Id} as rolled back: {ex.Message}", ex);
+        }
     }
 }

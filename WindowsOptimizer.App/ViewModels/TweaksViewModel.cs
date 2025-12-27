@@ -96,6 +96,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
+    private readonly IRollbackStateStore _rollbackStore;
 
     public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
     {
@@ -107,7 +108,8 @@ public sealed class TweaksViewModel : ViewModelBase
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
         _profileManager = new ProfileManager(paths);
-		_pipeline = new TweakExecutionPipeline(logger, _logStore);
+        _rollbackStore = new RollbackStateStore(paths);
+		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
 		var settingsStore = new SettingsStore(paths);
 		_isElevated = ProcessElevation.IsElevated();
 		_elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
