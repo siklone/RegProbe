@@ -205,7 +205,8 @@
                 </Border>
 
                 <!-- CPU Temperature Card -->
-                <Border Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Column="2" Style="{StaticResource StatCardStyle}"
+                        ToolTip="CPU temperature sensor via LibreHardwareMonitor. Shows N/A if sensor data is unavailable (requires admin rights or hardware support).">
                     <StackPanel>
                         <TextBlock Text="CPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
                         <TextBlock Text="{Binding CpuTempText}"
@@ -213,6 +214,10 @@
                                    FontWeight="Bold"
                                    Foreground="#EBCB8B"
                                    Margin="0,0,0,4"/>
+                        <TextBlock Text="Sensor: LibreHardwareMonitor"
+                                   FontSize="9"
+                                   Foreground="#4C566A"
+                                   Visibility="{Binding IsCpuTempAvailable, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
                 </Border>
 
@@ -249,14 +254,40 @@
                 <!-- CPU History Chart -->
                 <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
                     <StackPanel>
-                        <TextBlock Text="CPU History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid>
+                            <TextBlock Text="CPU History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <TextBlock Text="Max: " Foreground="#4C566A" FontSize="11"/>
+                                <TextBlock Text="{Binding CpuHistoryMax, StringFormat={}{0:F0}%}" Foreground="#88C0D0" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Min: " Foreground="#4C566A" FontSize="11"/>
+                                <TextBlock Text="{Binding CpuHistoryMin, StringFormat={}{0:F0}%}" Foreground="#88C0D0" FontSize="11" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Grid>
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
-                            <Viewbox Stretch="Fill">
-                                <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                              Stroke="#88C0D0" StrokeThickness="2"/>
-                                </Canvas>
-                            </Viewbox>
+                            <Grid>
+                                <!-- Y-Axis Labels -->
+                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
+                                    <TextBlock Text="100%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="50%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Center" Margin="0,35,0,0"/>
+                                    <TextBlock Text="0%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Bottom" Margin="0,35,0,0"/>
+                                </StackPanel>
+                                <!-- Chart Area with Gridlines -->
+                                <Border Margin="30,0,0,0">
+                                    <Grid>
+                                        <!-- Horizontal Gridlines -->
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <!-- Sparkline -->
+                                        <Viewbox Stretch="Fill">
+                                            <Canvas Width="600" Height="100">
+                                                <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
+                                                          Stroke="#88C0D0" StrokeThickness="2"/>
+                                            </Canvas>
+                                        </Viewbox>
+                                    </Grid>
+                                </Border>
+                            </Grid>
                         </Border>
                     </StackPanel>
                 </Border>
@@ -264,14 +295,40 @@
                 <!-- RAM History Chart -->
                 <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
                     <StackPanel>
-                        <TextBlock Text="RAM History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid>
+                            <TextBlock Text="RAM History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <TextBlock Text="Max: " Foreground="#4C566A" FontSize="11"/>
+                                <TextBlock Text="{Binding RamHistoryMax, StringFormat={}{0:F0}%}" Foreground="#A3BE8C" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Min: " Foreground="#4C566A" FontSize="11"/>
+                                <TextBlock Text="{Binding RamHistoryMin, StringFormat={}{0:F0}%}" Foreground="#A3BE8C" FontSize="11" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Grid>
                         <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10">
-                            <Viewbox Stretch="Fill">
-                                <Canvas Width="600" Height="100">
-                                    <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                              Stroke="#A3BE8C" StrokeThickness="2"/>
-                                </Canvas>
-                            </Viewbox>
+                            <Grid>
+                                <!-- Y-Axis Labels -->
+                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
+                                    <TextBlock Text="100%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="50%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Center" Margin="0,35,0,0"/>
+                                    <TextBlock Text="0%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Bottom" Margin="0,35,0,0"/>
+                                </StackPanel>
+                                <!-- Chart Area with Gridlines -->
+                                <Border Margin="30,0,0,0">
+                                    <Grid>
+                                        <!-- Horizontal Gridlines -->
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <!-- Sparkline -->
+                                        <Viewbox Stretch="Fill">
+                                            <Canvas Width="600" Height="100">
+                                                <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
+                                                          Stroke="#A3BE8C" StrokeThickness="2"/>
+                                            </Canvas>
+                                        </Viewbox>
+                                    </Grid>
+                                </Border>
+                            </Grid>
                         </Border>
                     </StackPanel>
                 </Border>

@@ -278,7 +278,15 @@ public sealed class MonitorViewModel : ViewModelBase
 
     public bool HasCpuTemp => double.IsFinite(CpuTemp) && CpuTemp > 0;
 
+    public bool IsCpuTempAvailable => HasCpuTemp;
+
     public string CpuTempText => HasCpuTemp ? $"{CpuTemp:F0}°C" : "N/A";
+
+    // Chart Min/Max values for better readability
+    public double CpuHistoryMax => CpuHistory.Count > 0 ? CpuHistory.Max() : 0;
+    public double CpuHistoryMin => CpuHistory.Count > 0 ? CpuHistory.Min() : 0;
+    public double RamHistoryMax => RamHistory.Count > 0 ? RamHistory.Max() : 0;
+    public double RamHistoryMin => RamHistory.Count > 0 ? RamHistory.Min() : 0;
 
     public double GpuTemp
     {
@@ -358,6 +366,12 @@ public sealed class MonitorViewModel : ViewModelBase
             // Update history (60 second sliding window)
             UpdateHistory(CpuHistory, CpuUsage);
             UpdateHistory(RamHistory, RamUsagePercent);
+
+            // Notify Min/Max updates for chart labels
+            OnPropertyChanged(nameof(CpuHistoryMax));
+            OnPropertyChanged(nameof(CpuHistoryMin));
+            OnPropertyChanged(nameof(RamHistoryMax));
+            OnPropertyChanged(nameof(RamHistoryMin));
 
             // Update network and disk I/O history
             if (_networkMonitor != null)

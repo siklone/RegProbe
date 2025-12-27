@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -16,6 +17,8 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     private readonly ObservableCollection<CategoryGroupViewModel> _subGroups = new();
     private bool _isNested = false;
     private bool _isDense = false;
+    private CancellationTokenSource? _detectionCts;
+    private bool _isDetecting = false;
 
     public CategoryGroupViewModel(string categoryName, string categoryIcon)
     {
@@ -108,6 +111,14 @@ public sealed class CategoryGroupViewModel : ViewModelBase
             LogToFile($"ToggleExpand: Category '{CategoryName}' IsExpanded changing to {!IsExpanded}");
             IsExpanded = !IsExpanded;
 
+            // Cancel any pending detection when collapsing
+            if (!IsExpanded && _isDetecting)
+            {
+                LogToFile($"ToggleExpand: Cancelling detection for '{CategoryName}'");
+                CancelDetection();
+                return;
+            }
+
             // Auto-detect tweak status when first expanded
             if (IsExpanded && !_hasDetected)
             {
@@ -117,6 +128,11 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 {
                     await DetectAllTweaksAsync();
                     LogToFile($"ToggleExpand: DetectAllTweaksAsync completed for '{CategoryName}'");
+                }
+                catch (System.OperationCanceledException)
+                {
+                    LogToFile($"ToggleExpand: DetectAllTweaksAsync CANCELLED for '{CategoryName}'");
+                    _hasDetected = false; // Allow retry when re-expanded
                 }
                 catch (System.Exception ex)
                 {
@@ -132,30 +148,66 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         }
     }
 
+    private void CancelDetection()
+    {
+        try
+        {
+            _detectionCts?.Cancel();
+            _detectionCts?.Dispose();
+            _detectionCts = null;
+            _isDetecting = false;
+        }
+        catch (System.Exception ex)
+        {
+            LogToFile($"CancelDetection error: {ex.Message}");
+        }
+    }
+
     private async Task DetectAllTweaksAsync()
     {
+        // Create new cancellation token for this detection run
+        CancelDetection(); // Cancel any previous detection
+        _detectionCts = new CancellationTokenSource();
+        var ct = _detectionCts.Token;
+        _isDetecting = true;
+
         try
         {
             foreach (var tweak in _tweaks)
             {
+                // Check cancellation before each tweak
+                ct.ThrowIfCancellationRequested();
+
                 try
                 {
                     LogToFile($"DetectAllTweaksAsync: Detecting '{tweak.Name}'");
 
-                    // Add timeout to prevent hanging
-                    var detectTask = tweak.DetectStatusAsync();
-                    var timeoutTask = System.Threading.Tasks.Task.Delay(5000); // 5 second timeout
-                    var completedTask = await System.Threading.Tasks.Task.WhenAny(detectTask, timeoutTask);
+                    // Add timeout to prevent hanging (with cancellation support)
+                    using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                    timeoutCts.CancelAfter(5000); // 5 second timeout
 
-                    if (completedTask == timeoutTask)
-                    {
-                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' TIMEOUT (5s)");
-                    }
-                    else
+                    var detectTask = tweak.DetectStatusAsync();
+                    var timeoutTask = Task.Delay(Timeout.Infinite, timeoutCts.Token);
+                    var completedTask = await Task.WhenAny(detectTask, timeoutTask);
+
+                    if (completedTask == detectTask)
                     {
                         await detectTask; // Ensure we await to catch any exceptions
                         LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
                     }
+                    else if (ct.IsCancellationRequested)
+                    {
+                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' CANCELLED");
+                        throw new System.OperationCanceledException(ct);
+                    }
+                    else
+                    {
+                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' TIMEOUT (5s)");
+                    }
+                }
+                catch (System.OperationCanceledException) when (ct.IsCancellationRequested)
+                {
+                    throw; // Re-throw cancellation
                 }
                 catch (System.Exception ex)
                 {
@@ -164,9 +216,10 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 }
             }
         }
-        catch (System.Exception ex)
+        finally
         {
-            LogToFile($"DetectAllTweaksAsync outer catch FAILED: {ex.Message}");
+            _isDetecting = false;
+            LogToFile($"DetectAllTweaksAsync: Detection finished for '{CategoryName}'");
         }
     }
 
