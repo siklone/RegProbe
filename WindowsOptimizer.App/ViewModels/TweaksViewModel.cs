@@ -129,8 +129,6 @@ public sealed class TweaksViewModel : ViewModelBase
         var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
         var helpPaneDisabledPath = helpPanePath + ".disabled";
 
-        LoadPlugins();
-
         Tweaks = new ObservableCollection<TweakItemViewModel>
         {
             new(CreateRegistryTweak(
@@ -3114,9 +3112,9 @@ public sealed class TweaksViewModel : ViewModelBase
         ImportPresetCommand = new RelayCommand(async _ => await ImportPresetsAsync());
         CreateSnapshotCommand = new RelayCommand(_ => CreateSnapshot());
 
-        UpdateFilterSummary();
         PopulateExampleMetadata();
         LoadPlugins();
+        UpdateFilterSummary();
         _ = InitializePresetsAsync();
 
         _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -3236,18 +3234,15 @@ public sealed class TweaksViewModel : ViewModelBase
             priority.ReferenceLinks.Add(new ReferenceLink("MSDN PriorityControl", "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities"));
         }
 
-        // Apply Dense layout to Visibility category
-        var visibilityGroup = CategoryGroups.FirstOrDefault(g => g.CategoryName == "Visibility");
-        if (visibilityGroup != null)
-        {
-            visibilityGroup.IsDense = true;
-        }
-
         // Example nested tweaks registration (demonstrating the dot notation)
         // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
 
         if (_providerList != null)
         {
+            var existingIds = new HashSet<string>(
+                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
+                StringComparer.OrdinalIgnoreCase);
+
             var tweakContext = new TweakContext(
                 _localRegistryAccessor,
                 _elevatedRegistryAccessor,
@@ -3260,6 +3255,11 @@ public sealed class TweaksViewModel : ViewModelBase
                 var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
                 foreach (var tweak in providerTweaks)
                 {
+                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
+                    {
+                        continue;
+                    }
+
                     Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
                 }
             }
@@ -3993,7 +3993,10 @@ public sealed class TweaksViewModel : ViewModelBase
             
             if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
             {
-                currentGroup = new CategoryGroupViewModel(rootCatName, tweak.CategoryIcon);
+                currentGroup = new CategoryGroupViewModel(rootCatName, tweak.CategoryIcon)
+                {
+                    IsDense = rootCatName.Equals("Visibility", StringComparison.OrdinalIgnoreCase)
+                };
                 rootGroups[rootCatName] = currentGroup;
             }
 
@@ -4264,6 +4267,10 @@ public sealed class TweaksViewModel : ViewModelBase
     {
         try
         {
+            var existingIds = new HashSet<string>(
+                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
+                StringComparer.OrdinalIgnoreCase);
+
             var pluginsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
             if (!Directory.Exists(pluginsPath)) Directory.CreateDirectory(pluginsPath);
             
@@ -4275,6 +4282,11 @@ public sealed class TweaksViewModel : ViewModelBase
                 var pluginTweaks = plugin.GetTweaks();
                 foreach (var tweak in pluginTweaks)
                 {
+                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
+                    {
+                        continue;
+                    }
+
                     Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
                 }
             }

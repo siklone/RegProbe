@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 26, 2025
+**Last Updated:** December 27, 2025
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -147,6 +147,56 @@
 - `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
 
 **Status:** 🧪 **IMPLEMENTED** - Needs verification on Windows 10/11 native
+
+---
+
+### 7. Tweaks UI - Hover Animation Stability + Tooltips (Unreleased)
+**Problem:** Tweaks page could intermittently crash with animation errors (immutable Freezable) and key buttons lacked clear hover help.
+
+**Solution:**
+- Fixed storyboard targets in Tweaks button templates to animate the correct named element.
+- Added a modern fade-in tooltip style and short tooltips for batch actions (Detect/Apply/Verify/Rollback Selected) and filters.
+- Reduced redundant status text (e.g., "Detect: Detected" now shows just the result).
+
+**Files Changed:**
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.App/Resources/Styles.xaml`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows 10/11
+
+---
+
+### 8. Tweaks Count Mismatch (Dashboard vs Tweaks) (Unreleased)
+**Problem:** Dashboard could show a higher tweak count than the Tweaks page (e.g., 313 vs 224).
+
+**Root Cause:**
+- Provider/plugin tweaks were added after the initial category/group build, so the UI tree and summary were not rebuilt.
+
+**Solution:**
+- Rebuild filter summary and category groups after providers/plugins load.
+- De-duplicate provider/plugin tweaks by ID.
+- Make Visibility category dense layout persistent during rebuilds.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows
+
+---
+
+### 9. Scheduled Tasks Batch - Detect Robustness (Unreleased)
+**Problem:** Some environments don't have every scheduled task listed; Detect could fail on missing tasks instead of treating them as "not present".
+
+**Solution:**
+- Treat task "not found" errors as missing tasks (non-fatal) and continue.
+- Added unit tests covering not-found detection and apply/verify behavior.
+
+**Files Changed:**
+- `WindowsOptimizer.Engine/Tweaks/ScheduledTaskBatchTweak.cs`
+- `WindowsOptimizer.Tests/ScheduledTaskBatchTweakTests.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows
 
 ---
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core;
@@ -62,16 +63,51 @@ public sealed class ScheduledTaskBatchTweak : ITweak
         try
         {
             _snapshots.Clear();
+            var errors = 0;
+            var missing = 0;
+            string? firstError = null;
             foreach (var taskPath in _taskPaths)
             {
-                var info = await _taskManager.QueryAsync(taskPath, ct);
-                _snapshots[taskPath] = new TaskSnapshot(info.Exists, info.Enabled);
+                try
+                {
+                    var info = await _taskManager.QueryAsync(taskPath, ct);
+                    _snapshots[taskPath] = new TaskSnapshot(info.Exists, info.Enabled);
+                    if (!info.Exists)
+                    {
+                        missing++;
+                    }
+                }
+                catch (Exception ex) when (IsNotFound(ex))
+                {
+                    _snapshots[taskPath] = new TaskSnapshot(false, false);
+                    missing++;
+                }
+                catch (Exception ex)
+                {
+                    _snapshots[taskPath] = new TaskSnapshot(false, false);
+                    errors++;
+                    firstError ??= $"{taskPath}: {ex.Message}";
+                }
             }
 
             _hasDetected = true;
             var detectedCount = _snapshots.Values.Count(snapshot => snapshot.Exists);
-            var message = $"Detected {detectedCount} of {_taskPaths.Count} tasks.";
-            return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
+
+            if (errors > 0 && detectedCount == 0 && missing == 0)
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    $"Detect failed: {firstError ?? "Unknown error."}",
+                    DateTimeOffset.UtcNow);
+            }
+
+            var summary = errors > 0
+                ? $"Detected {detectedCount} of {_taskPaths.Count} tasks ({missing} missing, {errors} errors)."
+                : missing > 0
+                    ? $"Detected {detectedCount} of {_taskPaths.Count} tasks ({missing} missing)."
+                    : $"Detected {detectedCount} of {_taskPaths.Count} tasks.";
+
+            return new TweakResult(TweakStatus.Detected, summary, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
@@ -128,7 +164,16 @@ public sealed class ScheduledTaskBatchTweak : ITweak
         {
             foreach (var taskPath in _taskPaths)
             {
-                var info = await _taskManager.QueryAsync(taskPath, ct);
+                ScheduledTaskInfo info;
+                try
+                {
+                    info = await _taskManager.QueryAsync(taskPath, ct);
+                }
+                catch (Exception ex) when (IsNotFound(ex))
+                {
+                    continue;
+                }
+
                 if (!info.Exists)
                 {
                     continue;
@@ -209,9 +254,42 @@ public sealed class ScheduledTaskBatchTweak : ITweak
 
     private async Task<TaskSnapshot> GetSnapshotAsync(string taskPath, CancellationToken ct)
     {
-        var info = await _taskManager.QueryAsync(taskPath, ct);
-        return new TaskSnapshot(info.Exists, info.Enabled);
+        try
+        {
+            var info = await _taskManager.QueryAsync(taskPath, ct);
+            return new TaskSnapshot(info.Exists, info.Enabled);
+        }
+        catch (Exception ex) when (IsNotFound(ex))
+        {
+            return new TaskSnapshot(false, false);
+        }
     }
 
     private sealed record TaskSnapshot(bool Exists, bool Enabled);
+
+    private static bool IsNotFound(Exception ex)
+    {
+        const uint fileNotFound = 0x80070002;
+        const uint pathNotFound = 0x80070003;
+
+        for (var current = ex; current is not null; current = current.InnerException)
+        {
+            if (current is COMException com)
+            {
+                var code = unchecked((uint)com.ErrorCode);
+                if (code == fileNotFound || code == pathNotFound)
+                {
+                    return true;
+                }
+            }
+
+            var hresult = unchecked((uint)current.HResult);
+            if (hresult == fileNotFound || hresult == pathNotFound)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

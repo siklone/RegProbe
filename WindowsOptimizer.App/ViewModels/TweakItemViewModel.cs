@@ -117,8 +117,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string ElevationBadgeText => "Admin";
 
     public string ElevationTooltip => IsElevated
-        ? "Requires administrator privileges."
-        : "Requires administrator privileges. You'll be prompted to approve the action.";
+        ? "Admin required. Runs via ElevatedHost."
+        : "Admin required. You'll get a UAC prompt and it runs via ElevatedHost.";
 
     public string ElevationWarningText => WillPromptForElevation
         ? "Requires elevation. Approve the UAC prompt to continue."
@@ -760,7 +760,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         AppendToTerminal($"> {update.Action}: {update.Status} - {update.Message}");
 
         StatusMessage = string.IsNullOrWhiteSpace(update.Message)
-            ? $"{update.Action}: {update.Status}"
+            ? update.Status.ToString()
             : update.Message;
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
 

@@ -97,14 +97,16 @@
         </Style>
 
         <!-- Compact Button Style with Smooth Animations -->
-        <Style x:Key="CompactButton" TargetType="Button">
-            <Setter Property="Background" Value="#434C5E"/>
-            <Setter Property="Foreground" Value="#D8DEE9"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
+	        <Style x:Key="CompactButton" TargetType="Button">
+	            <Setter Property="Background" Value="#434C5E"/>
+	            <Setter Property="Foreground" Value="#D8DEE9"/>
+	            <Setter Property="BorderThickness" Value="0"/>
+	            <Setter Property="Padding" Value="10,5"/>
+	            <Setter Property="FontSize" Value="11"/>
+	            <Setter Property="Cursor" Value="Hand"/>
+	            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+	            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
+	            <Setter Property="Template">
                 <Setter.Value>
 	                    <ControlTemplate TargetType="Button">
 	                        <Border x:Name="Border"
@@ -140,18 +142,20 @@
 	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 	                                                           Storyboard.TargetProperty="Opacity"
 	                                                           To="1" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
 	                                                           To="1.05" Duration="0:0:0.15">
 	                                                <DoubleAnimation.EasingFunction>
 	                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.05" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+	                                                </DoubleAnimation.EasingFunction>
+	                                            </DoubleAnimation>
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                                           To="1.05" Duration="0:0:0.15">
+	                                                <DoubleAnimation.EasingFunction>
+	                                                    <QuadraticEase EasingMode="EaseOut"/>
+	                                                </DoubleAnimation.EasingFunction>
+	                                            </DoubleAnimation>
                                             <DoubleAnimation Storyboard.TargetName="ButtonShadow"
                                                            Storyboard.TargetProperty="Opacity"
                                                            To="0.3" Duration="0:0:0.15"/>
@@ -164,10 +168,12 @@
 	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 	                                                           Storyboard.TargetProperty="Opacity"
 	                                                           To="0" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
 	                                                           To="1.0" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                                           To="1.0" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetName="ButtonShadow"
                                                            Storyboard.TargetProperty="Opacity"
                                                            To="0" Duration="0:0:0.15"/>
@@ -192,14 +198,16 @@
         </Style>
 
         <!-- Filter Bar Button with Smooth Animations -->
-        <Style x:Key="FilterButton" TargetType="Button">
-            <Setter Property="Background" Value="#5E81AC"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="14,8"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
+	        <Style x:Key="FilterButton" TargetType="Button">
+	            <Setter Property="Background" Value="#5E81AC"/>
+	            <Setter Property="Foreground" Value="#ECEFF4"/>
+	            <Setter Property="BorderThickness" Value="0"/>
+	            <Setter Property="Padding" Value="14,8"/>
+	            <Setter Property="FontWeight" Value="Medium"/>
+	            <Setter Property="Cursor" Value="Hand"/>
+	            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+	            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
+	            <Setter Property="Template">
                 <Setter.Value>
 	                    <ControlTemplate TargetType="Button">
 	                        <Border x:Name="Border"
@@ -235,18 +243,20 @@
 	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 	                                                           Storyboard.TargetProperty="Opacity"
 	                                                           To="1" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
 	                                                           To="1.05" Duration="0:0:0.15">
 	                                                <DoubleAnimation.EasingFunction>
 	                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.05" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
+	                                                </DoubleAnimation.EasingFunction>
+	                                            </DoubleAnimation>
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                                           To="1.05" Duration="0:0:0.15">
+	                                                <DoubleAnimation.EasingFunction>
+	                                                    <QuadraticEase EasingMode="EaseOut"/>
+	                                                </DoubleAnimation.EasingFunction>
+	                                            </DoubleAnimation>
                                             <DoubleAnimation Storyboard.TargetName="FilterShadow"
                                                            Storyboard.TargetProperty="BlurRadius"
                                                            To="16" Duration="0:0:0.15"/>
@@ -262,10 +272,12 @@
 	                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 	                                                           Storyboard.TargetProperty="Opacity"
 	                                                           To="0" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
 	                                                           To="1.0" Duration="0:0:0.15"/>
-	                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.0" Duration="0:0:0.15"/>
+	                                            <DoubleAnimation Storyboard.TargetName="Border"
+	                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+	                                                           To="1.0" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetName="FilterShadow"
                                                            Storyboard.TargetProperty="BlurRadius"
                                                            To="0" Duration="0:0:0.15"/>
@@ -875,24 +887,29 @@
                                     Margin="0,0,8,0"
                                     ToolTip="Load Minimal preset"/>
 
-                            <Button Content="Reset"
-                                    Command="{Binding ResetFiltersCommand}"
-                                    Style="{StaticResource CompactButton}"
-                                    Margin="0,0,8,0"/>
-                            <Button Content="Export" 
-                                    Command="{Binding ExportPresetCommand}"
-                                    Style="{StaticResource CompactButton}"
-                                    Margin="0,0,4,0"/>
-                            <Button Content="Import" 
-                                    Command="{Binding ImportPresetCommand}"
-                                    Style="{StaticResource CompactButton}"
-                                    Margin="0,0,4,0"/>
-                            <Button Content="Snapshot" 
-                                    Command="{Binding CreateSnapshotCommand}"
-                                    Style="{StaticResource CompactButton}"/>
-                            <Button Content="Apply All" 
-                                    Command="{Binding ApplyAllCommand}" 
-                                    Style="{StaticResource FilterButton}"/>
+	                            <Button Content="Reset"
+	                                    Command="{Binding ResetFiltersCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    Margin="0,0,8,0"
+	                                    ToolTip="Reset filters (search + risk + view)."/>
+	                            <Button Content="Export" 
+	                                    Command="{Binding ExportPresetCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    Margin="0,0,4,0"
+	                                    ToolTip="Export presets and snapshots."/>
+	                            <Button Content="Import" 
+	                                    Command="{Binding ImportPresetCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    Margin="0,0,4,0"
+	                                    ToolTip="Import presets."/>
+	                            <Button Content="Snapshot" 
+	                                    Command="{Binding CreateSnapshotCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    ToolTip="Create a snapshot of current states."/>
+	                            <Button Content="Apply All" 
+	                                    Command="{Binding ApplyAllCommand}" 
+	                                    Style="{StaticResource FilterButton}"
+	                                    ToolTip="Apply all visible tweaks (Detect → Apply → Verify)."/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -919,36 +936,42 @@
 
                         <!-- Selection Controls -->
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Content="Select All Visible"
-                                    Command="{Binding SelectAllCommand}"
-                                    Style="{StaticResource CompactButton}"
-                                    Margin="0,0,8,0"/>
-                            <Button Content="Deselect All"
-                                    Command="{Binding DeselectAllCommand}"
-                                    Style="{StaticResource CompactButton}"/>
+	                            <Button Content="Select All Visible"
+	                                    Command="{Binding SelectAllCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    Margin="0,0,8,0"
+	                                    ToolTip="Selects all currently visible tweaks."/>
+	                            <Button Content="Deselect All"
+	                                    Command="{Binding DeselectAllCommand}"
+	                                    Style="{StaticResource CompactButton}"
+	                                    ToolTip="Clears the current selection."/>
                         </StackPanel>
 
                         <!-- Batch Actions -->
                         <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <Button Content="Detect Selected"
-                                    Command="{Binding DetectSelectedCommand}"
-                                    Style="{StaticResource FilterButton}"
-                                    Background="#5E81AC"
-                                    Margin="0,0,6,0"/>
-                            <Button Content="Apply Selected"
-                                    Command="{Binding ApplySelectedCommand}"
-                                    Style="{StaticResource FilterButton}"
-                                    Background="#A3BE8C"
-                                    Margin="0,0,6,0"/>
-                            <Button Content="Verify Selected"
-                                    Command="{Binding VerifySelectedCommand}"
-                                    Style="{StaticResource FilterButton}"
-                                    Background="#88C0D0"
-                                    Margin="0,0,6,0"/>
-                            <Button Content="Rollback Selected"
-                                    Command="{Binding RollbackSelectedCommand}"
-                                    Style="{StaticResource FilterButton}"
-                                    Background="#BF616A"/>
+	                            <Button Content="Detect Selected"
+	                                    Command="{Binding DetectSelectedCommand}"
+	                                    Style="{StaticResource FilterButton}"
+	                                    Background="#5E81AC"
+	                                    Margin="0,0,6,0"
+	                                    ToolTip="Detect selected tweaks (no changes)."/>
+	                            <Button Content="Apply Selected"
+	                                    Command="{Binding ApplySelectedCommand}"
+	                                    Style="{StaticResource FilterButton}"
+	                                    Background="#A3BE8C"
+	                                    Margin="0,0,6,0"
+	                                    ToolTip="Apply selected tweaks (Detect → Apply → Verify)."/>
+	                            <Button Content="Verify Selected"
+	                                    Command="{Binding VerifySelectedCommand}"
+	                                    Style="{StaticResource FilterButton}"
+	                                    Background="#88C0D0"
+	                                    Margin="0,0,6,0"
+	                                    ToolTip="Verify selected tweaks are in the desired state."/>
+	                            <Button Content="Rollback Selected"
+	                                    Command="{Binding RollbackSelectedCommand}"
+	                                    Style="{StaticResource FilterButton}"
+	                                    Background="#BF616A"
+	                                    ToolTip="Rollback selected tweaks using the last Detect snapshot (this session)."/>
                         </StackPanel>
                     </Grid>
                 </Border>

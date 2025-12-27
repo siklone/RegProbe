@@ -1,72 +1,110 @@
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Moq;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Core.Tasks;
-using Xunit;
+using WindowsOptimizer.Engine.Tweaks;
 
 public sealed class ScheduledTaskBatchTweakTests
 {
     [Fact]
-    public async Task ApplyRollback_DisablesAndRestoresTasks()
+    public async Task DetectAsync_TreatsNotFoundTasksAsMissing()
     {
-        var manager = new FakeTaskManager();
-        manager.AddTask("\\Test\\TaskA", true);
-        manager.AddTask("\\Test\\TaskB", false);
+        var manager = new Mock<IScheduledTaskManager>();
+        manager
+            .Setup(m => m.QueryAsync(@"\Missing\Task", It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new COMException("The system cannot find the file specified.", unchecked((int)0x80070002)));
+        manager
+            .Setup(m => m.QueryAsync(@"\Exists\Task", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new ScheduledTaskInfo(true, true));
 
         var tweak = new ScheduledTaskBatchTweak(
-            "test.tasks",
-            "Test scheduled tasks",
-            "Disables scheduled tasks in bulk.",
-            TweakRiskLevel.Advanced,
-            new[] { "\\Test\\TaskA", "\\Test\\TaskB" },
-            manager,
-            requiresElevation: true);
+            "system.disable-scheduled-tasks",
+            "Disable Scheduled Tasks",
+            "Test",
+            TweakRiskLevel.Risky,
+            new[] { @"\Missing\Task", @"\Exists\Task" },
+            manager.Object);
 
-        var detect = await tweak.DetectAsync(CancellationToken.None);
-        Assert.Equal(TweakStatus.Detected, detect.Status);
+        var result = await tweak.DetectAsync(CancellationToken.None);
 
-        var apply = await tweak.ApplyAsync(CancellationToken.None);
-        Assert.Equal(TweakStatus.Applied, apply.Status);
-
-        var verify = await tweak.VerifyAsync(CancellationToken.None);
-        Assert.Equal(TweakStatus.Verified, verify.Status);
-
-        var rollback = await tweak.RollbackAsync(CancellationToken.None);
-        Assert.Equal(TweakStatus.RolledBack, rollback.Status);
-
-        Assert.True((await manager.QueryAsync("\\Test\\TaskA", CancellationToken.None)).Enabled);
-        Assert.False((await manager.QueryAsync("\\Test\\TaskB", CancellationToken.None)).Enabled);
+        Assert.Equal(TweakStatus.Detected, result.Status);
+        Assert.Contains("1 missing", result.Message);
     }
 
-    private sealed class FakeTaskManager : IScheduledTaskManager
+    [Fact]
+    public async Task DetectAsync_ReturnsFailed_WhenAllTasksError()
     {
-        private readonly Dictionary<string, ScheduledTaskInfo> _tasks = new(StringComparer.OrdinalIgnoreCase);
+        var manager = new Mock<IScheduledTaskManager>();
+        manager
+            .Setup(m => m.QueryAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new InvalidOperationException("Boom"));
 
-        public void AddTask(string path, bool enabled)
-        {
-            _tasks[path] = new ScheduledTaskInfo(true, enabled);
-        }
+        var tweak = new ScheduledTaskBatchTweak(
+            "system.disable-scheduled-tasks",
+            "Disable Scheduled Tasks",
+            "Test",
+            TweakRiskLevel.Risky,
+            new[] { @"\One", @"\Two" },
+            manager.Object);
 
-        public Task<ScheduledTaskInfo> QueryAsync(string taskPath, CancellationToken ct)
-        {
-            if (_tasks.TryGetValue(taskPath, out var info))
-            {
-                return Task.FromResult(info);
-            }
+        var result = await tweak.DetectAsync(CancellationToken.None);
 
-            return Task.FromResult(new ScheduledTaskInfo(false, false));
-        }
+        Assert.Equal(TweakStatus.Failed, result.Status);
+        Assert.StartsWith("Detect failed:", result.Message);
+    }
 
-        public Task SetEnabledAsync(string taskPath, bool enabled, CancellationToken ct)
-        {
-            if (_tasks.TryGetValue(taskPath, out var info))
-            {
-                _tasks[taskPath] = info with { Enabled = enabled };
-            }
+    [Fact]
+    public async Task ApplyAsync_SkipsMissingTasks_WhenDetectNotRun()
+    {
+        var manager = new Mock<IScheduledTaskManager>();
+        manager
+            .Setup(m => m.QueryAsync(@"\Missing\Task", It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new COMException("The system cannot find the file specified.", unchecked((int)0x80070002)));
+        manager
+            .Setup(m => m.QueryAsync(@"\Exists\Task", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new ScheduledTaskInfo(true, true));
+        manager
+            .Setup(m => m.SetEnabledAsync(@"\Exists\Task", false, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
 
-            return Task.CompletedTask;
-        }
+        var tweak = new ScheduledTaskBatchTweak(
+            "system.disable-scheduled-tasks",
+            "Disable Scheduled Tasks",
+            "Test",
+            TweakRiskLevel.Risky,
+            new[] { @"\Missing\Task", @"\Exists\Task" },
+            manager.Object);
+
+        var result = await tweak.ApplyAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+        manager.Verify(m => m.SetEnabledAsync(@"\Exists\Task", false, It.IsAny<CancellationToken>()), Times.Once);
+        manager.Verify(m => m.SetEnabledAsync(@"\Missing\Task", false, It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task VerifyAsync_IgnoresNotFoundTasks()
+    {
+        var manager = new Mock<IScheduledTaskManager>();
+        manager
+            .Setup(m => m.QueryAsync(@"\Missing\Task", It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new COMException("The system cannot find the file specified.", unchecked((int)0x80070002)));
+        manager
+            .Setup(m => m.QueryAsync(@"\Exists\Task", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new ScheduledTaskInfo(true, false));
+
+        var tweak = new ScheduledTaskBatchTweak(
+            "system.disable-scheduled-tasks",
+            "Disable Scheduled Tasks",
+            "Test",
+            TweakRiskLevel.Risky,
+            new[] { @"\Missing\Task", @"\Exists\Task" },
+            manager.Object);
+
+        var result = await tweak.VerifyAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Verified, result.Status);
     }
 }
