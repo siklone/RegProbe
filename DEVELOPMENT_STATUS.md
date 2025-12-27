@@ -150,18 +150,21 @@
 
 ---
 
-### 7. Tweaks UI - Hover Animation Stability + Tooltips (Unreleased)
-**Problem:** Tweaks page could intermittently crash with animation errors (immutable Freezable) and key buttons lacked clear hover help.
+### 7. Tweaks UI - Hover Animation Stability + Tooltips (Commit: `fc21306`)
+**Problem:** Tweaks page could intermittently crash with animation errors like:
+- `Cannot animate '(0).(1)' on an immutable object instance.`
+- `'BorderThickness' property does not point to a DependencyObject...`
+
+**Root Cause:**
+- Animations targeting **Freezable** objects created in templates (e.g., `DropShadowEffect`, `SolidColorBrush`) can hit frozen/shared instances and throw on the UI thread.
 
 **Solution:**
-- Fixed storyboard targets in Tweaks button templates to animate the correct named element.
-- Added a modern fade-in tooltip style and short tooltips for batch actions (Detect/Apply/Verify/Rollback Selected) and filters.
-- Reduced redundant status text (e.g., "Detect: Detected" now shows just the result).
+- Removed risky Freezable animations (shadow blur/depth/color) on Tweaks cards and headers.
+- Kept hover feedback using safe animations only (overlay `Opacity`, `TranslateTransform`, `ScaleTransform` on named transforms).
+- Added/kept short hover tooltips for batch actions (Detect/Preview/Apply/Verify/Rollback) and filters.
 
 **Files Changed:**
 - `WindowsOptimizer.App/Views/TweaksView.xaml`
-- `WindowsOptimizer.App/Resources/Styles.xaml`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
 
 **Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows 10/11
 
