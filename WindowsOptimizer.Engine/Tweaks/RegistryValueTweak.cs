@@ -319,7 +319,7 @@ public sealed class RegistryValueTweak : ITweak, IRollbackAwareTweak
             TweakName = Name,
             SnapshotType = TweakSnapshotType.Registry,
             RegistryHive = _reference.Hive.ToString(),
-            RegistryPath = _reference.SubKeyPath,
+            RegistryPath = _reference.KeyPath,
             RegistryValueName = _reference.ValueName,
             RegistryValueKind = _valueKind.ToString(),
             OriginalValueJson = originalValueJson,
