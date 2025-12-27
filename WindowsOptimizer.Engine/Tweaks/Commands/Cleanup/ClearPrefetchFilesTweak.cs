@@ -9,7 +9,7 @@ public sealed class ClearPrefetchFilesTweak : FileCleanupTweak
 {
     public ClearPrefetchFilesTweak()
         : base(
-            id: "cleanup-prefetch-files",
+            id: "cleanup.prefetch-files",
             name: "Clear Prefetch Files",
             description: "Clears Windows prefetch files used for application launch optimization. Files will be regenerated over time.",
             risk: TweakRiskLevel.Safe,

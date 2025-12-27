@@ -9,7 +9,7 @@ public sealed class ClearWindowsUpdateCacheTweak : FileCleanupTweak
 {
     public ClearWindowsUpdateCacheTweak()
         : base(
-            id: "cleanup-windows-update-cache",
+            id: "cleanup.windows-update-cache",
             name: "Clear Windows Update Cache",
             description: "Resets Windows Update cache (SoftwareDistribution and catroot2). Use this to fix update loops. Update catalog metadata will be redownloaded.",
             risk: TweakRiskLevel.Advanced,

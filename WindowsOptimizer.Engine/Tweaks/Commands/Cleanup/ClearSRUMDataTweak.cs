@@ -9,7 +9,7 @@ public sealed class ClearSRUMDataTweak : FileCleanupTweak
 {
     public ClearSRUMDataTweak()
         : base(
-            id: "cleanup-srum-data",
+            id: "cleanup.srum-data",
             name: "Clear SRUM Database",
             description: "Deletes the System Resource Usage Monitor (SRUM) database which tracks app, service, and network usage.",
             risk: TweakRiskLevel.Advanced,

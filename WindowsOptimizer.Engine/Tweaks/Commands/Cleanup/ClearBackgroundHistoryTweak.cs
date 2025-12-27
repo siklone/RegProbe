@@ -12,7 +12,7 @@ public sealed class ClearBackgroundHistoryTweak : FileCleanupTweak
 {
     public ClearBackgroundHistoryTweak()
         : base(
-            id: "cleanup-background-history",
+            id: "cleanup.background-history",
             name: "Clear Wallpaper History",
             description: "Clears the personalization wallpaper history registry entries and cached background files.",
             risk: TweakRiskLevel.Safe,

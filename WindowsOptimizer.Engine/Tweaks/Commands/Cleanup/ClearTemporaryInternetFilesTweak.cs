@@ -9,7 +9,7 @@ public sealed class ClearTemporaryInternetFilesTweak : FileCleanupTweak
 {
     public ClearTemporaryInternetFilesTweak()
         : base(
-            id: "cleanup-internet-temp-files",
+            id: "cleanup.internet-temp-files",
             name: "Clear Temporary Internet Files",
             description: "Clears legacy WinINet cache (INetCache, INetCookies, WebCache, History). Used by Explorer, old Control Panel, and some installers.",
             risk: TweakRiskLevel.Safe,

@@ -13,7 +13,7 @@ public sealed class ClearEventLogsTweak : CommandTweak
 
     public ClearEventLogsTweak(ICommandRunner commandRunner, string logName = "System")
         : base(
-            id: $"cleanup-eventlog-{logName.ToLowerInvariant()}",
+            id: $"cleanup.eventlog-{logName.ToLowerInvariant()}",
             name: $"Clear {logName} Event Log",
             description: $"Clears the Windows {logName} event log. WARNING: Logs cannot be recovered after clearing.",
             risk: TweakRiskLevel.Advanced,

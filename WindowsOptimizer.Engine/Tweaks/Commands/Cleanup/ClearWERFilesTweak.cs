@@ -9,7 +9,7 @@ public sealed class ClearWERFilesTweak : FileCleanupTweak
 {
     public ClearWERFilesTweak()
         : base(
-            id: "cleanup-wer-files",
+            id: "cleanup.wer-files",
             name: "Clear Windows Error Reporting Files",
             description: "Deletes Windows Error Reporting (WER) crash dumps and report metadata from system and user folders.",
             risk: TweakRiskLevel.Safe,

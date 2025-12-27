@@ -9,7 +9,7 @@ public sealed class ClearWindowsOldTweak : FileCleanupTweak
 {
     public ClearWindowsOldTweak()
         : base(
-            id: "cleanup-windows-old",
+            id: "cleanup.windows-old",
             name: "Delete Windows.old Folder",
             description: "Removes previous Windows installation files from Windows.old. WARNING: You will not be able to roll back to the previous Windows version after deletion.",
             risk: TweakRiskLevel.Risky,

@@ -9,7 +9,7 @@ public sealed class ClearThumbnailCacheTweak : FileCleanupTweak
 {
     public ClearThumbnailCacheTweak()
         : base(
-            id: "cleanup-thumbnail-cache",
+            id: "cleanup.thumbnail-cache",
             name: "Clear Thumbnail Cache",
             description: "Clears Explorer thumbnail cache files. Thumbnails will be regenerated when needed.",
             risk: TweakRiskLevel.Safe,

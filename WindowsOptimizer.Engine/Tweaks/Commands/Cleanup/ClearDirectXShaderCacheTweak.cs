@@ -9,7 +9,7 @@ public sealed class ClearDirectXShaderCacheTweak : FileCleanupTweak
 {
     public ClearDirectXShaderCacheTweak()
         : base(
-            id: "cleanup-directx-shader-cache",
+            id: "cleanup.directx-shader-cache",
             name: "Clear DirectX Shader Cache",
             description: "Clears DirectX and vendor shader caches (NVIDIA, AMD, Intel). Shaders will be recompiled on next app launch.",
             risk: TweakRiskLevel.Safe,

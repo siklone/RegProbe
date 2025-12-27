@@ -9,7 +9,7 @@ public sealed class ClearMemoryDumpFilesTweak : FileCleanupTweak
 {
     public ClearMemoryDumpFilesTweak()
         : base(
-            id: "cleanup-memory-dumps",
+            id: "cleanup.memory-dumps",
             name: "Clear Memory Dump Files",
             description: "Deletes BSoD memory dump files (MEMORY.DMP). These can be several GB in size.",
             risk: TweakRiskLevel.Safe,

@@ -12,7 +12,7 @@ public sealed class CleanupComponentStoreTweak : CommandTweak
 
     public CleanupComponentStoreTweak(ICommandRunner commandRunner)
         : base(
-            id: "cleanup-component-store",
+            id: "cleanup.component-store",
             name: "Cleanup Component Store",
             description: "Cleans up the Windows component store (WinSxS folder) to free up disk space. This is a safe operation that removes superseded components and reduces the size of the component store.",
             risk: TweakRiskLevel.Safe,

@@ -12,7 +12,7 @@ public sealed class ClearRecycleBinTweak : CommandTweak
 
     public ClearRecycleBinTweak(ICommandRunner commandRunner)
         : base(
-            id: "cleanup-recycle-bin",
+            id: "cleanup.recycle-bin",
             name: "Empty Recycle Bin",
             description: "Empties the Recycle Bin for all drives. Files cannot be recovered after deletion.",
             risk: TweakRiskLevel.Safe,

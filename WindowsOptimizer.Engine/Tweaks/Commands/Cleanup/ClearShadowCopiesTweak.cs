@@ -12,7 +12,7 @@ public sealed class ClearShadowCopiesTweak : CommandTweak
 
     public ClearShadowCopiesTweak(ICommandRunner commandRunner)
         : base(
-            id: "cleanup-shadow-copies",
+            id: "cleanup.shadow-copies",
             name: "Clear Shadow Copies",
             description: "Removes all shadow copies (volume backups) to free up disk space. WARNING: This permanently removes System Restore points and volume snapshots.",
             risk: TweakRiskLevel.Risky,

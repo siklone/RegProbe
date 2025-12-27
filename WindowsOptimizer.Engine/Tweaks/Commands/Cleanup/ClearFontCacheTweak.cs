@@ -12,7 +12,7 @@ public sealed class ClearFontCacheTweak : FileCleanupTweak
 {
     public ClearFontCacheTweak()
         : base(
-            id: "cleanup-font-cache",
+            id: "cleanup.font-cache",
             name: "Clear Font Cache",
             description: "Clears the Windows font cache. Use this if fonts are not rendering properly. The FontCache service will be stopped and restarted.",
             risk: TweakRiskLevel.Safe,

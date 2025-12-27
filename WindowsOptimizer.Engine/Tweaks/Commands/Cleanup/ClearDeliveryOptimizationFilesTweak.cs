@@ -12,7 +12,7 @@ public sealed class ClearDeliveryOptimizationFilesTweak : FileCleanupTweak
 {
     public ClearDeliveryOptimizationFilesTweak()
         : base(
-            id: "cleanup-delivery-optimization",
+            id: "cleanup.delivery-optimization",
             name: "Clear Delivery Optimization Files",
             description: "Deletes Delivery Optimization cache used for Windows Update P2P sharing. The DoSvc service will be stopped.",
             risk: TweakRiskLevel.Safe,
