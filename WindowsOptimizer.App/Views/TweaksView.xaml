@@ -628,11 +628,11 @@
                                                FontWeight="SemiBold"/>
 	                        </Border>
 
-                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
-                                <Border Background="#A3BE8C" 
-                                        CornerRadius="4" 
+	                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+	                            <StackPanel Orientation="Horizontal">
+	                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="12"/>
+	                                <Border Background="#A3BE8C" 
+	                                        CornerRadius="4" 
                                         Padding="6,2" 
                                         Margin="8,0,0,0"
                                         Visibility="{Binding IsRecommended, Converter={StaticResource BoolToVisibility}}"
@@ -642,10 +642,19 @@
                                                FontSize="8" 
                                                FontWeight="Bold" 
                                                VerticalAlignment="Center"/>
-                                </Border>
-                            </StackPanel>
-                            <TextBlock Text="{Binding Description}" Foreground="#88C0D0" FontSize="10" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
+	                                </Border>
+	                            </StackPanel>
+	                            <TextBlock Text="{Binding Description}" Foreground="#88C0D0" FontSize="10" TextTrimming="CharacterEllipsis"/>
+	                            <TextBlock Text="{Binding CompactInfoLine}"
+	                                       Foreground="#D8DEE9"
+	                                       FontSize="10"
+	                                       FontFamily="Consolas"
+	                                       Margin="0,2,0,0"
+	                                       Opacity="0.85"
+	                                       TextTrimming="CharacterEllipsis"
+	                                       Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"
+	                                       ToolTip="{Binding CompactInfoLine}"/>
+	                        </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
                              <ToggleButton IsChecked="{Binding IsDetailsExpanded}" Style="{StaticResource ExpanderButtonStyle}" Margin="8,0,0,0"/>

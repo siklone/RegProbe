@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 
@@ -60,6 +61,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _isHighlighted = false;
     private string _currentValue = "Unknown";
     private string _targetValue = "Optimized";
+    private readonly string _impactAreaLabel;
     private ObservableCollection<double> _sparklinePoints = new();
     private bool _isRecommended;
     private string _recommendationReason = string.Empty;
@@ -96,6 +98,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
         _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
         _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
+
+        _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
 
         TryPopulateTechnicalInfo();
     }
@@ -167,6 +171,17 @@ public sealed class TweakItemViewModel : ViewModelBase
         "notifications" => "🔔",
         _ => "📦"
     };
+
+    private static string DetermineImpactAreaLabel(ITweak tweak)
+    {
+        return tweak switch
+        {
+            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak => "Registry",
+            ServiceStartModeBatchTweak => "Service",
+            ScheduledTaskBatchTweak => "Task",
+            _ => "Other"
+        };
+    }
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
@@ -263,6 +278,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _currentValue, value))
             {
                 OnPropertyChanged(nameof(HasDiff));
+                OnPropertyChanged(nameof(CompactInfoLine));
             }
         }
     }
@@ -270,7 +286,32 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string TargetValue
     {
         get => _targetValue;
-        set => SetProperty(ref _targetValue, value);
+        set
+        {
+            if (SetProperty(ref _targetValue, value))
+            {
+                OnPropertyChanged(nameof(CompactInfoLine));
+            }
+        }
+    }
+
+    public string ImpactAreaLabel => _impactAreaLabel;
+
+    public bool HasCompactInfoLine => ImpactAreaLabel is "Registry" or "Service" or "Task";
+
+    public string CompactInfoLine
+    {
+        get
+        {
+            if (!HasCompactInfoLine)
+            {
+                return string.Empty;
+            }
+
+            var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
+            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
+            return $"{ImpactAreaLabel}: {current} → {target}";
+        }
     }
 
     public bool IsRecommended
@@ -904,28 +945,58 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void TryPopulateTechnicalInfo()
     {
-        if (_tweak is not RegistryValueTweak registryValueTweak)
+        switch (_tweak)
         {
-            return;
-        }
+            case RegistryValueTweak registryValueTweak:
+                if (string.IsNullOrWhiteSpace(RegistryPath))
+                {
+                    RegistryPath = FormatRegistryValuePath(registryValueTweak.Reference);
+                }
 
-        if (string.IsNullOrWhiteSpace(RegistryPath))
-        {
-            RegistryPath = FormatRegistryValuePath(registryValueTweak.Reference);
-        }
+                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
+                {
+                    TargetValue = FormatRegistryValueForDisplay(registryValueTweak.ValueKind, registryValueTweak.TargetValue);
+                }
 
-        if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
-        {
-            TargetValue = FormatRegistryValueForDisplay(registryValueTweak.ValueKind, registryValueTweak.TargetValue);
-        }
+                if (string.IsNullOrWhiteSpace(CodeExample))
+                {
+                    CodeExample = BuildRegistryCommandPreview(
+                        registryValueTweak.Reference,
+                        registryValueTweak.ValueKind,
+                        registryValueTweak.TargetValue);
+                }
 
-        if (string.IsNullOrWhiteSpace(CodeExample))
-        {
-            CodeExample = BuildRegistryCommandPreview(
-                registryValueTweak.Reference,
-                registryValueTweak.ValueKind,
-                registryValueTweak.TargetValue);
+                break;
+            case RegistryValueBatchTweak:
+            case RegistryValueSetTweak:
+                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
+                {
+                    TargetValue = "Multiple values";
+                }
+
+                break;
+            case ServiceStartModeBatchTweak serviceStartModeBatchTweak:
+                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
+                {
+                    TargetValue = FormatServiceStartModeForDisplay(serviceStartModeBatchTweak.TargetStartModeSummary);
+                }
+
+                break;
+            case ScheduledTaskBatchTweak:
+                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
+                {
+                    TargetValue = "Disabled";
+                }
+
+                break;
         }
+    }
+
+    private static string FormatServiceStartModeForDisplay(ServiceStartMode startMode)
+    {
+        return startMode == ServiceStartMode.Unknown
+            ? "Mixed"
+            : startMode.ToString();
     }
 
     private static string FormatRegistryValuePath(WindowsOptimizer.Core.Registry.RegistryValueReference reference)
@@ -1108,7 +1179,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         if (TryExtractAfterPrefix(message, "Current state:", out var state))
         {
-            CurrentValue = state.Trim();
+            CurrentValue = state.Trim().TrimEnd('.');
         }
     }
 

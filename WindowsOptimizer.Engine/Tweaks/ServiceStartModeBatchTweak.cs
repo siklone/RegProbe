@@ -63,6 +63,9 @@ public sealed class ServiceStartModeBatchTweak : ITweak
         }
 
         _entries = entries;
+        TargetStartModeSummary = entries.Select(entry => entry.TargetStartMode).Distinct().Count() == 1
+            ? entries[0].TargetStartMode
+            : ServiceStartMode.Unknown;
         RequiresElevation = requiresElevation ?? true;
     }
 
@@ -71,6 +74,7 @@ public sealed class ServiceStartModeBatchTweak : ITweak
     public string Description { get; }
     public TweakRiskLevel Risk { get; }
     public bool RequiresElevation { get; }
+    public ServiceStartMode TargetStartModeSummary { get; }
 
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
@@ -88,8 +92,28 @@ public sealed class ServiceStartModeBatchTweak : ITweak
 
             _hasDetected = true;
             var detectedCount = _snapshots.Values.Count(snapshot => snapshot.Exists);
-            var message = $"Detected {detectedCount} of {targets.Count} services.";
-            return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
+            var missingCount = targets.Count - detectedCount;
+            var matchingTargets = targets.Count(target =>
+                _snapshots.TryGetValue(target.ServiceName, out var snapshot)
+                && snapshot.Exists
+                && snapshot.StartMode == target.TargetStartMode);
+
+            var status = detectedCount == 0
+                ? TweakStatus.NotApplicable
+                : matchingTargets == detectedCount
+                    ? TweakStatus.Applied
+                    : TweakStatus.Detected;
+
+            var summary = missingCount > 0
+                ? $"Detected {detectedCount} of {targets.Count} services ({missingCount} missing)."
+                : $"Detected {detectedCount} of {targets.Count} services.";
+
+            var currentState = detectedCount == 0
+                ? "Not present"
+                : GetStartModeSummary(_snapshots.Values.Where(snapshot => snapshot.Exists).Select(snapshot => snapshot.StartMode));
+
+            var message = $"{summary} Current state: {currentState}.";
+            return new TweakResult(status, message, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
@@ -305,4 +329,24 @@ public sealed class ServiceStartModeBatchTweak : ITweak
     private sealed record ServiceTarget(string ServiceName, ServiceStartMode TargetStartMode);
 
     private sealed record ServiceSnapshot(bool Exists, ServiceStartMode StartMode, ServiceStatus Status);
+
+    private static string GetStartModeSummary(IEnumerable<ServiceStartMode> startModes)
+    {
+        var distinct = startModes
+            .Where(mode => mode != ServiceStartMode.Unknown)
+            .Distinct()
+            .ToArray();
+
+        if (distinct.Length == 0)
+        {
+            return "Unknown";
+        }
+
+        if (distinct.Length == 1)
+        {
+            return distinct[0].ToString();
+        }
+
+        return "Mixed";
+    }
 }

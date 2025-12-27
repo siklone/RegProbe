@@ -92,6 +92,7 @@ public sealed class ScheduledTaskBatchTweak : ITweak
 
             _hasDetected = true;
             var detectedCount = _snapshots.Values.Count(snapshot => snapshot.Exists);
+            var enabledCount = _snapshots.Values.Count(snapshot => snapshot.Exists && snapshot.Enabled);
 
             if (errors > 0 && detectedCount == 0 && missing == 0)
             {
@@ -107,7 +108,27 @@ public sealed class ScheduledTaskBatchTweak : ITweak
                     ? $"Detected {detectedCount} of {_taskPaths.Count} tasks ({missing} missing)."
                     : $"Detected {detectedCount} of {_taskPaths.Count} tasks.";
 
-            return new TweakResult(TweakStatus.Detected, summary, DateTimeOffset.UtcNow);
+            var status = detectedCount == 0 && errors == 0
+                ? TweakStatus.NotApplicable
+                : errors > 0
+                    ? TweakStatus.Detected
+                    : enabledCount == 0
+                        ? TweakStatus.Applied
+                        : TweakStatus.Detected;
+
+            var currentState = detectedCount == 0
+                ? errors > 0
+                    ? "Unknown"
+                    : "Not present"
+                : errors > 0
+                    ? "Unknown"
+                    : enabledCount == 0
+                        ? "Disabled"
+                        : enabledCount == detectedCount
+                            ? "Enabled"
+                            : $"{enabledCount} enabled";
+
+            return new TweakResult(status, $"{summary} Current state: {currentState}.", DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
