@@ -499,8 +499,8 @@
                     <!-- SubGroups Recursive Call -->
                     <ItemsControl ItemsSource="{Binding SubGroups}" ItemTemplate="{StaticResource CategoryTemplate}"/>
                     
-                    <!-- Tweaks In This Group -->
-                    <ItemsControl ItemsSource="{Binding Tweaks}" ItemTemplate="{StaticResource TweakItemTemplate}"
+                    <!-- Tweaks In This Group (uses VisibleTweaks for lazy loading) -->
+                    <ItemsControl ItemsSource="{Binding VisibleTweaks}" ItemTemplate="{StaticResource TweakItemTemplate}"
                                   VirtualizingPanel.IsVirtualizing="True"
                                   VirtualizingPanel.VirtualizationMode="Recycling">
                         <ItemsControl.ItemsPanel>
@@ -1143,9 +1143,8 @@
 		                                    </Grid>
 		                                </Border>
 
-                                <!-- Tweaks List (Simplified, nested virtualization removed to prevent Layout Cycle) -->
-                                <ItemsControl ItemsSource="{Binding Tweaks}"
-                                              Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}"
+                                <!-- Tweaks List (uses VisibleTweaks for lazy loading - empty when collapsed) -->
+                                <ItemsControl ItemsSource="{Binding VisibleTweaks}"
                                               Margin="16,0,0,0">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>

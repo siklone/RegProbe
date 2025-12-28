@@ -98,12 +98,14 @@
     </Window.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- Main Layout Grid -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!-- Enhanced Sidebar -->
+            <!-- Enhanced Sidebar -->
         <Border Grid.Column="0" Background="#2E3440">
             <Border.Effect>
                 <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="0" Opacity="0.3" Direction="0"/>
@@ -188,8 +190,9 @@
                 </i:Interaction.Behaviors>
             </ContentControl>
         </Border>
+        </Grid>
 
-        <!-- System Tray Icon (placed here to avoid property element ordering issues) -->
+        <!-- System Tray Icon (outside layout Grid to avoid rendering in window) -->
         <tb:TaskbarIcon x:Name="TrayIcon"
                         ToolTipText="Windows Optimizer Suite"
                         Visibility="Visible"

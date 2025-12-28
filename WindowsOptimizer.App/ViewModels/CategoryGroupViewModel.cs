@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -36,6 +37,12 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     public ObservableCollection<TweakItemViewModel> Tweaks => _tweaks;
 
+    /// <summary>
+    /// Returns tweaks only when expanded, empty otherwise. This improves performance
+    /// by not creating UI elements for collapsed categories.
+    /// </summary>
+    public IEnumerable<TweakItemViewModel> VisibleTweaks => _isExpanded ? _tweaks : Enumerable.Empty<TweakItemViewModel>();
+
     public ObservableCollection<CategoryGroupViewModel> SubGroups => _subGroups;
 
     public bool HasSubGroups => SubGroups.Any();
@@ -66,6 +73,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
             if (SetProperty(ref _isExpanded, value))
             {
                 OnPropertyChanged(nameof(ExpanderIcon));
+                OnPropertyChanged(nameof(VisibleTweaks)); // Notify UI to update items
             }
         }
     }
