@@ -52,7 +52,7 @@ public static class SevenZipSettingsTweak
         };
 
         return new RegistryValueBatchTweak(
-            id: "misc-optimize-7zip-settings",
+            id: "misc.optimize-7zip-settings",
             name: "Optimize 7-Zip Context Menu Settings",
             description: "Configures 7-Zip with optimal settings: cascaded menu, eliminate duplicate extraction folders, show icons in context menu, and propagate Zone.Id stream for Office files.",
             risk: TweakRiskLevel.Safe,

@@ -86,7 +86,7 @@ public static class DisableEdgeFeaturesTweaks
         }
 
         return new RegistryValueBatchTweak(
-            id: "misc-disable-edge-features",
+            id: "misc.disable-edge-features",
             name: "Disable Microsoft Edge Features",
             description: "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
             risk: TweakRiskLevel.Advanced,

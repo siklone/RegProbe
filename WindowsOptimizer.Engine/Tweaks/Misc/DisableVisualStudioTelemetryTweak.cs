@@ -35,7 +35,7 @@ public static class DisableVisualStudioTelemetryTweak
         }
 
         return new RegistryValueBatchTweak(
-            id: "misc-disable-visual-studio-telemetry",
+            id: "misc.disable-visual-studio-telemetry",
             name: "Disable Visual Studio Telemetry",
             description: "Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022.",
             risk: TweakRiskLevel.Safe,

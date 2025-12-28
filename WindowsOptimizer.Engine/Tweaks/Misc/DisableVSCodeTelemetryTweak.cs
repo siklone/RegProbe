@@ -18,7 +18,7 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
 
     public DisableVSCodeTelemetryTweak()
     {
-        Id = "misc-disable-vscode-telemetry";
+        Id = "misc.disable-vscode-telemetry";
         Name = "Disable VS Code Telemetry";
         Description = "Disables VS Code telemetry, crash reports, experiments, automatic updates, and online data fetching in user settings.json.";
         Risk = TweakRiskLevel.Safe;

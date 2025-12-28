@@ -25,7 +25,7 @@ public static class KeyboardTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-keyboard-optimize-repeat",
+            id: "peripheral.keyboard-optimize-repeat",
             name: "Optimize Keyboard Repeat Rate",
             description: "Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms.",
             risk: TweakRiskLevel.Safe,
@@ -50,7 +50,7 @@ public static class KeyboardTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-keyboard-disable-language-hotkey",
+            id: "peripheral.keyboard-disable-language-hotkey",
             name: "Disable Language Switch Hotkey",
             description: "Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing.",
             risk: TweakRiskLevel.Safe,

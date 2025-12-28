@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:behaviors="clr-namespace:WindowsOptimizer.App.Behaviors"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
         Width="1280"
@@ -97,6 +98,106 @@
     </Window.Resources>
 
     <Grid>
+        <!-- System Tray Icon -->
+        <tb:TaskbarIcon x:Name="TrayIcon"
+                        ToolTipText="Windows Optimizer Suite"
+                        Visibility="Visible"
+                        TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
+            <!-- Tray Icon (programmatic) -->
+            <tb:TaskbarIcon.IconSource>
+                <DrawingImage>
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing Brush="#5E81AC">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry Center="16,16" RadiusX="14" RadiusY="14"/>
+                            </GeometryDrawing.Geometry>
+                            <GeometryDrawing.Pen>
+                                <Pen Brush="#88C0D0" Thickness="2"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </tb:TaskbarIcon.IconSource>
+
+            <!-- Fancy Tooltip with Stats -->
+            <tb:TaskbarIcon.TrayToolTip>
+                <Border Background="#2E3440"
+                        BorderBrush="#4C566A"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="12">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Windows Optimizer Suite"
+                                       Foreground="#ECEFF4"
+                                       FontWeight="Bold"
+                                       FontSize="13"/>
+                        </StackPanel>
+                        <Border Background="#3B4252" CornerRadius="4" Padding="8" Margin="0,0,0,6">
+                            <StackPanel>
+                                <TextBlock Text="Health Score" Foreground="#88C0D0" FontSize="10" Margin="0,0,0,2"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}"
+                                               Foreground="#A3BE8C"
+                                               FontSize="20"
+                                               FontWeight="Bold"/>
+                                    <TextBlock Text=" optimized"
+                                               Foreground="#D8DEE9"
+                                               FontSize="11"
+                                               VerticalAlignment="Bottom"
+                                               Margin="0,0,0,3"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📊" FontFamily="Segoe UI Emoji" FontSize="11" Margin="0,0,4,0"/>
+                            <TextBlock Foreground="#D8DEE9" FontSize="11">
+                                <Run Text="{Binding TweaksApplied, Mode=OneWay}"/>
+                                <Run Text="/"/>
+                                <Run Text="{Binding TotalTweaksAvailable, Mode=OneWay}"/>
+                                <Run Text=" tweaks applied"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </tb:TaskbarIcon.TrayToolTip>
+
+            <!-- Context Menu -->
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu Background="#2E3440" BorderBrush="#4C566A" Foreground="#ECEFF4">
+                    <ContextMenu.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="#D8DEE9"/>
+                            <Setter Property="Padding" Value="8,6"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#3B4252"/>
+                                    <Setter Property="Foreground" Value="#ECEFF4"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="Separator">
+                            <Setter Property="Background" Value="#4C566A"/>
+                            <Setter Property="Margin" Value="4,2"/>
+                        </Style>
+                    </ContextMenu.Resources>
+                    <MenuItem Header="📊  Dashboard" Click="MenuItem_Dashboard_Click"/>
+                    <MenuItem Header="⚙️  Tweaks" Click="MenuItem_Tweaks_Click"/>
+                    <MenuItem Header="📈  Monitor" Click="MenuItem_Monitor_Click"/>
+                    <Separator/>
+                    <MenuItem Header="🔍  Scan Now" Click="MenuItem_ScanNow_Click"/>
+                    <Separator/>
+                    <MenuItem Header="👁️  Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
+                    <MenuItem Header="❌  Exit" Click="MenuItem_Exit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="240" />
             <ColumnDefinition Width="*" />

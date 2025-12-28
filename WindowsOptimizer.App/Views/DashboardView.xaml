@@ -101,18 +101,67 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel>
-                    <TextBlock Text="Welcome back! 👋" 
-                               FontSize="14" 
+                    <TextBlock Text="Welcome back! 👋"
+                               FontSize="14"
                                Foreground="#88C0D0"
                                Margin="0,0,0,4"/>
-                    <TextBlock Text="{Binding Title}" 
-                               FontSize="32" 
-                               FontWeight="Bold" 
+                    <TextBlock Text="{Binding Title}"
+                               FontSize="32"
+                               FontWeight="Bold"
                                Foreground="#ECEFF4"/>
                     <TextBlock Margin="0,8,0,0"
                                Text="Monitor your system optimizations and track applied tweaks."
                                Foreground="#D8DEE9"
                                FontSize="14"/>
+                    <!-- Scan Now Button -->
+                    <Button Command="{Binding ScanAllCommand}"
+                            Margin="0,16,0,0"
+                            Padding="20,12"
+                            HorizontalAlignment="Left"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#5E81AC"/>
+                                <Setter Property="Foreground" Value="#ECEFF4"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="8"
+                                                    Padding="{TemplateBinding Padding}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#81A1C1"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#4C566A"/>
+                                        <Setter Property="Foreground" Value="#D8DEE9"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🔍" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                            <TextBlock VerticalAlignment="Center" FontWeight="SemiBold">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Scan Now"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsScanning}" Value="True">
+                                                <Setter Property="Text" Value="Scanning..."/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
 	                <!-- Circular Health Gauge -->

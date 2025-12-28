@@ -11,7 +11,7 @@ public sealed class FlushDnsCacheTweak : CommandTweak
 
     public FlushDnsCacheTweak(ICommandRunner commandRunner)
         : base(
-            id: "network-flush-dns-cache",
+            id: "network.flush-dns-cache",
             name: "Flush DNS Cache",
             description: "Clears the DNS resolver cache. Useful for resolving DNS issues or ensuring fresh DNS lookups. This is a one-time operation and cannot be rolled back.",
             risk: TweakRiskLevel.Safe,

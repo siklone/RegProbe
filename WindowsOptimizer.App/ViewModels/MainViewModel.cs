@@ -18,6 +18,11 @@ public sealed class MainViewModel : ViewModelBase
     private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
 
+    // Tray tooltip binding properties
+    private int _optimizationScore;
+    private int _tweaksApplied;
+    private int _totalTweaksAvailable;
+
     public MainViewModel()
     {
         LogToFile("========== APPLICATION STARTED ==========");
@@ -40,6 +45,7 @@ public sealed class MainViewModel : ViewModelBase
         };
 
         var tweaks = new TweaksViewModel(providers);
+        dashboard.SetTweaksViewModel(tweaks);
 
         MonitorViewModel monitor;
         try
@@ -75,6 +81,11 @@ public sealed class MainViewModel : ViewModelBase
             dashboard.HealthTweaksTotal = tweaks.ScorableTweaksMeasuredTotal;
             dashboard.HealthTweaksApplied = tweaks.ScorableTweaksApplied;
             dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+
+            // Sync for tray tooltip
+            OptimizationScore = tweaks.GlobalOptimizationScore;
+            TweaksApplied = tweaks.ScorableTweaksApplied;
+            TotalTweaksAvailable = tweaks.Tweaks.Count;
         }
 
         tweaks.PropertyChanged += (s, e) =>
@@ -122,6 +133,25 @@ public sealed class MainViewModel : ViewModelBase
     public string AppVersionLabel => AppInfo.VersionLabel;
 
     public string AppCopyrightLabel => AppInfo.CopyrightLabel;
+
+    // Tray tooltip properties
+    public int OptimizationScore
+    {
+        get => _optimizationScore;
+        private set => SetProperty(ref _optimizationScore, value);
+    }
+
+    public int TweaksApplied
+    {
+        get => _tweaksApplied;
+        private set => SetProperty(ref _tweaksApplied, value);
+    }
+
+    public int TotalTweaksAvailable
+    {
+        get => _totalTweaksAvailable;
+        private set => SetProperty(ref _totalTweaksAvailable, value);
+    }
 
     public NavigationItem? SelectedNavigationItem
     {

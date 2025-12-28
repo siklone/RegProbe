@@ -22,7 +22,7 @@ public static class AudioTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-audio-disable-ducking",
+            id: "peripheral.audio-disable-ducking",
             name: "Disable Audio Ducking",
             description: "Disables Windows automatic volume adjustment when making calls or using communication apps. Equivalent to 'Do nothing' in Sound settings.",
             risk: TweakRiskLevel.Safe,
@@ -48,7 +48,7 @@ public static class AudioTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-audio-disable-enhancements",
+            id: "peripheral.audio-disable-enhancements",
             name: "Disable Audio Enhancements",
             description: "Disables audio enhancements and exclusive mode for audio devices. Provides cleaner audio output without processing.",
             risk: TweakRiskLevel.Safe,

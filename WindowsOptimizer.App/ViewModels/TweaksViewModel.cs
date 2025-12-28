@@ -4365,4 +4365,55 @@ public sealed class TweaksViewModel : ViewModelBase
         var enabledIds = await _syncService.ImportProfileAsync(filePath, password);
         // Sync logic to match imported IDs with existing tweaks
     }
+
+    /// <summary>
+    /// Detects all tweaks in all categories. Used by Dashboard's Scan Now button.
+    /// </summary>
+    public async Task DetectAllTweaksAsync()
+    {
+        LogToFile("DetectAllTweaksAsync: Starting scan of all tweaks");
+
+        // Expand all categories to trigger their detection
+        foreach (var category in CategoryGroups)
+        {
+            if (!category.IsExpanded)
+            {
+                category.IsExpanded = true;
+            }
+
+            // Also expand sub-groups
+            foreach (var subGroup in category.SubGroups)
+            {
+                if (!subGroup.IsExpanded)
+                {
+                    subGroup.IsExpanded = true;
+                }
+            }
+        }
+
+        // Wait for all detection to complete by detecting each tweak directly
+        foreach (var tweak in Tweaks)
+        {
+            try
+            {
+                if (tweak.AppliedStatus == TweakAppliedStatus.Unknown)
+                {
+                    await tweak.DetectStatusAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"DetectAllTweaksAsync: Failed to detect '{tweak.Name}': {ex.Message}");
+            }
+        }
+
+        // Trigger health score recalculation
+        OnPropertyChanged(nameof(GlobalOptimizationScore));
+        OnPropertyChanged(nameof(ScorableTweaksMeasuredTotal));
+        OnPropertyChanged(nameof(ScorableTweaksApplied));
+        OnPropertyChanged(nameof(HealthCalculationSummary));
+        OnPropertyChanged(nameof(HealthStatusMessage));
+
+        LogToFile($"DetectAllTweaksAsync: Scan complete. {ScorableTweaksMeasuredTotal} tweaks detected.");
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 
@@ -17,11 +18,48 @@ public sealed class DashboardViewModel : ViewModelBase
     private long _logFileSizeBytes;
     private int _healthTweaksTotal;
     private int _healthTweaksApplied;
+    private bool _isScanning;
+    private TweaksViewModel? _tweaksViewModel;
 
     public DashboardViewModel()
     {
         _paths = AppPaths.FromEnvironment();
         LoadStatistics();
+        ScanAllCommand = new RelayCommand(_ => ScanAllTweaksAsync(), _ => !IsScanning);
+    }
+
+    public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
+    {
+        _tweaksViewModel = tweaksViewModel;
+    }
+
+    public ICommand ScanAllCommand { get; }
+
+    public bool IsScanning
+    {
+        get => _isScanning;
+        private set
+        {
+            if (SetProperty(ref _isScanning, value))
+            {
+                ((RelayCommand)ScanAllCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    private async void ScanAllTweaksAsync()
+    {
+        if (_tweaksViewModel == null || IsScanning) return;
+
+        IsScanning = true;
+        try
+        {
+            await _tweaksViewModel.DetectAllTweaksAsync();
+        }
+        finally
+        {
+            IsScanning = false;
+        }
     }
 
     public string Title => "Dashboard";

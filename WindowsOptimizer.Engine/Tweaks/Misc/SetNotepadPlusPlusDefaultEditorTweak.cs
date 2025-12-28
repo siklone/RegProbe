@@ -20,7 +20,7 @@ public static class SetNotepadPlusPlusDefaultEditorTweak
         };
 
         return new RegistryValueBatchTweak(
-            id: "misc-notepadplusplus-default-editor",
+            id: "misc.notepadplusplus-default-editor",
             name: "Set Notepad++ as Default Editor",
             description: "Sets Notepad++ as the default editor for batch files and text files. Requires Notepad++ to be installed.",
             risk: TweakRiskLevel.Safe,

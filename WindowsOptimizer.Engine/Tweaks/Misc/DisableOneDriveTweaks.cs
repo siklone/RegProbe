@@ -34,7 +34,7 @@ public static class DisableOneDriveTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "misc-disable-onedrive",
+            id: "misc.disable-onedrive",
             name: "Disable OneDrive",
             description: "Completely disables OneDrive sync, hides it from File Explorer, and prevents network traffic before user sign-in.",
             risk: TweakRiskLevel.Advanced,

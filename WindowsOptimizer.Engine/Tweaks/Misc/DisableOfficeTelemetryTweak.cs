@@ -49,7 +49,7 @@ public static class DisableOfficeTelemetryTweak
         }
 
         return new RegistryValueBatchTweak(
-            id: "misc-disable-office-telemetry",
+            id: "misc.disable-office-telemetry",
             name: "Disable Microsoft Office Telemetry",
             description: "Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications.",
             risk: TweakRiskLevel.Safe,

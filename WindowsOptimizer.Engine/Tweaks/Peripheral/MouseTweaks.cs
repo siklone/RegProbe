@@ -25,7 +25,7 @@ public static class MouseTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-mouse-disable-throttle",
+            id: "peripheral.mouse-disable-throttle",
             name: "Disable Mouse Throttling for Background Windows",
             description: "Disables raw mouse input throttling for background windows, improving mouse responsiveness. Useful for monitoring tools like MouseTester.",
             risk: TweakRiskLevel.Safe,
@@ -53,7 +53,7 @@ public static class MouseTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "peripheral-mouse-disable-acceleration",
+            id: "peripheral.mouse-disable-acceleration",
             name: "Disable Enhanced Pointer Precision (Mouse Acceleration)",
             description: "Disables mouse acceleration for 1:1 mouse movement. Preferred by gamers and precision users.",
             risk: TweakRiskLevel.Safe,
