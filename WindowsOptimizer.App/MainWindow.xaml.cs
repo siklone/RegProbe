@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using WindowsOptimizer.App.ViewModels;
@@ -17,11 +18,47 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = new MainViewModel();
 
+        // Create tray icon programmatically
+        TrayIcon.Icon = CreateTrayIcon();
+
         // Set tray tooltip data context to MainViewModel
         if (TrayIcon.TrayToolTip is FrameworkElement tooltip)
         {
             tooltip.DataContext = DataContext;
         }
+    }
+
+    private static Icon CreateTrayIcon()
+    {
+        // Create a simple 32x32 icon with a circle
+        using var bitmap = new Bitmap(32, 32);
+        using var g = Graphics.FromImage(bitmap);
+
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+        g.Clear(Color.Transparent);
+
+        // Draw filled circle with Nord theme colors
+        using var fillBrush = new SolidBrush(Color.FromArgb(94, 129, 172)); // #5E81AC
+        g.FillEllipse(fillBrush, 2, 2, 28, 28);
+
+        // Draw border
+        using var borderPen = new Pen(Color.FromArgb(136, 192, 208), 2); // #88C0D0
+        g.DrawEllipse(borderPen, 2, 2, 28, 28);
+
+        // Draw lightning bolt symbol in center
+        using var symbolBrush = new SolidBrush(Color.FromArgb(236, 239, 244)); // #ECEFF4
+        var lightning = new System.Drawing.Point[]
+        {
+            new(18, 6),
+            new(12, 15),
+            new(16, 15),
+            new(14, 26),
+            new(20, 14),
+            new(16, 14),
+        };
+        g.FillPolygon(symbolBrush, lightning);
+
+        return Icon.FromHandle(bitmap.GetHicon());
     }
 
     protected override void OnClosing(CancelEventArgs e)

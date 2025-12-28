@@ -194,20 +194,6 @@
                         ToolTipText="Windows Optimizer Suite"
                         Visibility="Visible"
                         TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
-            <tb:TaskbarIcon.IconSource>
-                <DrawingImage>
-                    <DrawingImage.Drawing>
-                        <GeometryDrawing Brush="#5E81AC">
-                            <GeometryDrawing.Geometry>
-                                <EllipseGeometry Center="16,16" RadiusX="14" RadiusY="14"/>
-                            </GeometryDrawing.Geometry>
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="#88C0D0" Thickness="2"/>
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingImage.Drawing>
-                </DrawingImage>
-            </tb:TaskbarIcon.IconSource>
 
             <tb:TaskbarIcon.TrayToolTip>
                 <Border Background="#2E3440"
