@@ -4371,8 +4371,6 @@ public sealed class TweaksViewModel : ViewModelBase
     /// </summary>
     public async Task DetectAllTweaksAsync()
     {
-        LogToFile("DetectAllTweaksAsync: Starting scan of all tweaks");
-
         // Expand all categories to trigger their detection
         foreach (var category in CategoryGroups)
         {
@@ -4401,9 +4399,9 @@ public sealed class TweaksViewModel : ViewModelBase
                     await tweak.DetectStatusAsync();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                LogToFile($"DetectAllTweaksAsync: Failed to detect '{tweak.Name}': {ex.Message}");
+                // Silently ignore detection failures for individual tweaks
             }
         }
 
@@ -4413,7 +4411,5 @@ public sealed class TweaksViewModel : ViewModelBase
         OnPropertyChanged(nameof(ScorableTweaksApplied));
         OnPropertyChanged(nameof(HealthCalculationSummary));
         OnPropertyChanged(nameof(HealthStatusMessage));
-
-        LogToFile($"DetectAllTweaksAsync: Scan complete. {ScorableTweaksMeasuredTotal} tweaks detected.");
     }
 }
