@@ -283,40 +283,90 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Features Card -->
+                <!-- Quick Categories Card -->
                 <Border Grid.Column="0" Style="{StaticResource InfoCardStyle}" Margin="0,0,8,0">
                     <StackPanel>
-                        <TextBlock Text="🎯 Features" FontSize="16" FontWeight="SemiBold" Foreground="#ECEFF4" Margin="0,0,0,16"/>
-                        
-                        <Border Background="#434C5E" CornerRadius="8" Padding="12" Margin="0,0,0,8">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="⚙️" FontSize="16" Margin="0,0,12,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="Registry Tweaks" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
-                                    <TextBlock Text="Modify Windows registry safely" Foreground="#88C0D0" FontSize="11"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                        
-                        <Border Background="#434C5E" CornerRadius="8" Padding="12" Margin="0,0,0,8">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="🔧" FontSize="16" Margin="0,0,12,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="Service Management" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
-                                    <TextBlock Text="Control Windows services" Foreground="#88C0D0" FontSize="11"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                        
-                        <Border Background="#434C5E" CornerRadius="8" Padding="12">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="💻" FontSize="16" Margin="0,0,12,0"/>
-                                <StackPanel>
-                                    <TextBlock Text="Command Execution" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
-                                    <TextBlock Text="Run system commands securely" Foreground="#88C0D0" FontSize="11"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
+                        <TextBlock Text="🎯 Quick Categories" FontSize="16" FontWeight="SemiBold" Foreground="#ECEFF4" Margin="0,0,0,16"/>
+
+                        <Button Command="{Binding NavigateToPrivacyCommand}" Cursor="Hand" Margin="0,0,0,8">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="#434C5E" CornerRadius="8" Padding="12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🔒" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Privacy Tweaks" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                                <TextBlock Text="Telemetry, tracking, data collection" Foreground="#88C0D0" FontSize="11"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#4C566A"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToPowerCommand}" Cursor="Hand" Margin="0,0,0,8">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="#434C5E" CornerRadius="8" Padding="12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="⚡" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Power &amp; Performance" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                                <TextBlock Text="CPU, power plans, services" Foreground="#88C0D0" FontSize="11"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#4C566A"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToSystemCommand}" Cursor="Hand" Margin="0,0,0,8">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="#434C5E" CornerRadius="8" Padding="12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🖥️" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="System Tweaks" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13"/>
+                                                <TextBlock Text="Windows settings, UI, explorer" Foreground="#88C0D0" FontSize="11"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#4C566A"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToAllTweaksCommand}" Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="#5E81AC" CornerRadius="8" Padding="12">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="View All Tweaks →" FontWeight="SemiBold" Foreground="#ECEFF4" FontSize="13" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#81A1C1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </StackPanel>
                 </Border>
 

@@ -101,6 +101,19 @@ public sealed class MainViewModel : ViewModelBase
 
         SelectedNavigationItem = NavigationItems[0];
 
+        // Set up navigation callback for Dashboard category links
+        dashboard.NavigateToCategoryRequested = (category) =>
+        {
+            // Navigate to Tweaks tab
+            var tweaksNav = NavigationItems.FirstOrDefault(n => n.Id == "tweaks");
+            if (tweaksNav != null)
+            {
+                SelectedNavigationItem = tweaksNav;
+                // Set search filter to the category
+                SearchText = category;
+            }
+        };
+
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
         // Initialize Intelligence

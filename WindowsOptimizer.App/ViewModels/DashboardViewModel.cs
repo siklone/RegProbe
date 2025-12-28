@@ -21,11 +21,22 @@ public sealed class DashboardViewModel : ViewModelBase
     private bool _isScanning;
     private TweaksViewModel? _tweaksViewModel;
 
+    // Navigation callback - set by MainViewModel
+    public Action<string>? NavigateToCategoryRequested { get; set; }
+
     public DashboardViewModel()
     {
         _paths = AppPaths.FromEnvironment();
         LoadStatistics();
         ScanAllCommand = new RelayCommand(_ => ScanAllTweaksAsync(), _ => !IsScanning);
+
+        // Category navigation commands
+        NavigateToPrivacyCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("privacy"));
+        NavigateToPowerCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("power"));
+        NavigateToSystemCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("system"));
+        NavigateToNetworkCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("network"));
+        NavigateToSecurityCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("security"));
+        NavigateToAllTweaksCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke(""));
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -34,6 +45,12 @@ public sealed class DashboardViewModel : ViewModelBase
     }
 
     public ICommand ScanAllCommand { get; }
+    public ICommand NavigateToPrivacyCommand { get; }
+    public ICommand NavigateToPowerCommand { get; }
+    public ICommand NavigateToSystemCommand { get; }
+    public ICommand NavigateToNetworkCommand { get; }
+    public ICommand NavigateToSecurityCommand { get; }
+    public ICommand NavigateToAllTweaksCommand { get; }
 
     public bool IsScanning
     {

@@ -1050,19 +1050,44 @@
         <!-- Main Content Area: Conditional between Hierarchical and Flat View -->
         <Grid Grid.Row="1">
             <!-- Hierarchical Category View -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                          HorizontalScrollBarVisibility="Disabled"
-                          Padding="24,0,24,24"
-                          Visibility="{Binding IsFlatView, Converter={StaticResource InverseBoolToVisibility}}">
-            <ItemsControl ItemsSource="{Binding CategoryGroups}"
-                          VirtualizingPanel.IsVirtualizing="True"
-                          VirtualizingPanel.VirtualizationMode="Recycling">
-                <ItemsControl.ItemsPanel>
+            <ListBox ItemsSource="{Binding CategoryGroups}"
+                     Visibility="{Binding IsFlatView, Converter={StaticResource InverseBoolToVisibility}}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="24,0,24,24"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.IsDeferredScrollingEnabled="True"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     VirtualizingPanel.ScrollUnit="Pixel"
+                     VirtualizingPanel.CacheLength="2,2"
+                     VirtualizingPanel.CacheLengthUnit="Page">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Margin="0,0,0,12">
                             <StackPanel>
@@ -1145,10 +1170,12 @@
 
                                 <!-- Tweaks List (uses VisibleTweaks for lazy loading - empty when collapsed) -->
                                 <ItemsControl ItemsSource="{Binding VisibleTweaks}"
-                                              Margin="16,0,0,0">
+                                              Margin="16,0,0,0"
+                                              VirtualizingPanel.IsVirtualizing="True"
+                                              VirtualizingPanel.VirtualizationMode="Recycling">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel/>
+                                            <VirtualizingStackPanel/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
@@ -1652,9 +1679,8 @@
                             </StackPanel>
                         </Border>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <!-- Flat High-Performance List View -->
             <ListBox ItemsSource="{Binding TweaksView}"
