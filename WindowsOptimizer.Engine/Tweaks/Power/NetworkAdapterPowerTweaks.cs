@@ -30,7 +30,7 @@ public static class NetworkAdapterPowerTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-network-power-saving",
+            id: "power.disable-network-power-saving",
             name: "Disable Network Adapter Power Saving",
             description: "Disables network throttling and optimizes multimedia/network responsiveness. Improves gaming and streaming performance.",
             risk: TweakRiskLevel.Safe,
@@ -59,7 +59,7 @@ public static class NetworkAdapterPowerTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-optimize-gaming-network",
+            id: "power.optimize-gaming-network",
             name: "Optimize Gaming Network Settings",
             description: "Boosts priority for gaming tasks, improving network latency and frame timing. Sets high priority for GPU, scheduling, and I/O.",
             risk: TweakRiskLevel.Safe,

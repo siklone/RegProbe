@@ -21,7 +21,7 @@ public static class PowerSettingsTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-modern-standby",
+            id: "power.disable-modern-standby",
             name: "Disable Modern Standby",
             description: "Disables Modern Standby (S0 Low Power Idle) and switches to traditional S3 sleep mode. Improves desktop power behavior.",
             risk: TweakRiskLevel.Advanced,
@@ -41,7 +41,7 @@ public static class PowerSettingsTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-fast-startup",
+            id: "power.disable-fast-startup",
             name: "Disable Fast Startup (Hiberboot)",
             description: "Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.",
             risk: TweakRiskLevel.Safe,
@@ -61,7 +61,7 @@ public static class PowerSettingsTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-power-throttling",
+            id: "power.disable-power-throttling",
             name: "Disable Power Throttling",
             description: "Disables Windows Power Throttling which limits background process performance. Improves overall system responsiveness.",
             risk: TweakRiskLevel.Safe,
@@ -96,7 +96,7 @@ public static class PowerSettingsTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-optimize-performance",
+            id: "power.optimize-performance",
             name: "Optimize Power Settings for Performance",
             description: "Applies multiple power optimizations: disables timer coalescing, deep IO coalescing, core parking latency, and energy estimation for maximum performance.",
             risk: TweakRiskLevel.Advanced,

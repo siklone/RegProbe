@@ -11,7 +11,7 @@ public sealed class DisableWindowsSearchTweak : CommandTweak
 
     public DisableWindowsSearchTweak(ICommandRunner commandRunner)
         : base(
-            id: "performance-disable-windows-search",
+            id: "power.disable-windows-search",
             name: "Disable Windows Search",
             description: "Disables the Windows Search indexing service. This can improve system performance but will slow down file searches. Useful for systems with SSDs where search performance is already fast.",
             risk: TweakRiskLevel.Advanced,

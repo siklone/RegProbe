@@ -27,7 +27,7 @@ public static class CPUPowerTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-cpu-parking",
+            id: "power.disable-cpu-parking",
             name: "Disable CPU Core Parking",
             description: "Prevents Windows from parking CPU cores, keeping all cores active. Reduces latency and improves responsiveness for gaming and real-time applications.",
             risk: TweakRiskLevel.Safe,
@@ -54,7 +54,7 @@ public static class CPUPowerTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-disable-cpu-idle-states",
+            id: "power.disable-cpu-idle-states",
             name: "Disable CPU Idle States (C-States)",
             description: "Disables CPU idle states and C-States for minimum latency. Increases power consumption but improves responsiveness. Recommended for gaming/audio production.",
             risk: TweakRiskLevel.Advanced,
@@ -84,7 +84,7 @@ public static class CPUPowerTweaks
         };
 
         return new RegistryValueBatchTweak(
-            id: "power-optimize-cpu-boost",
+            id: "power.optimize-cpu-boost",
             name: "Optimize CPU Performance Boost",
             description: "Optimizes CPU boost behavior for better performance. Enables boost at guaranteed frequency, extends high-performance duration, and minimizes latency tolerance.",
             risk: TweakRiskLevel.Safe,
