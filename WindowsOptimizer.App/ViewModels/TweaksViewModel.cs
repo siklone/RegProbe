@@ -79,6 +79,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private int _bulkProgressTotal;
     private int _selectedCount;
     private string _searchText = string.Empty;
+    private string _statusFilter = string.Empty; // "applied", "rolledback", or empty for all
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
@@ -3486,6 +3487,30 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    public string StatusFilter
+    {
+        get => _statusFilter;
+        set
+        {
+            if (SetProperty(ref _statusFilter, value))
+            {
+                OnPropertyChanged(nameof(StatusFilterLabel));
+                OnPropertyChanged(nameof(HasStatusFilter));
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public string StatusFilterLabel => _statusFilter switch
+    {
+        "applied" => "Applied Tweaks",
+        "rolledback" => "Rolled Back Tweaks",
+        _ => ""
+    };
+
+    public bool HasStatusFilter => !string.IsNullOrEmpty(_statusFilter);
+
     private void TriggerSearchUpdate()
     {
         _searchCts?.Cancel();
@@ -3949,6 +3974,19 @@ public sealed class TweaksViewModel : ViewModelBase
             return false;
         }
 
+        // Status filter (applied/rolled back)
+        if (!string.IsNullOrEmpty(_statusFilter))
+        {
+            if (_statusFilter == "applied" && !item.IsApplied)
+            {
+                return false;
+            }
+            if (_statusFilter == "rolledback" && item.IsApplied)
+            {
+                return false;
+            }
+        }
+
         if (item.Risk == TweakRiskLevel.Safe && !_showSafe)
         {
             return false;
@@ -4094,6 +4132,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private void ResetFilters()
     {
         SearchText = string.Empty;
+        StatusFilter = string.Empty;
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;

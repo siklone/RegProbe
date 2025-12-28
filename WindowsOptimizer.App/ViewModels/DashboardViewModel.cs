@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ public sealed class DashboardViewModel : ViewModelBase
     // Navigation callback - set by MainViewModel
     public Action<string>? NavigateToCategoryRequested { get; set; }
 
+    // Status filter callback - set by MainViewModel (for applied/rolled back filters)
+    public Action<string>? NavigateToStatusFilterRequested { get; set; }
+
     public DashboardViewModel()
     {
         _paths = AppPaths.FromEnvironment();
@@ -37,6 +41,13 @@ public sealed class DashboardViewModel : ViewModelBase
         NavigateToNetworkCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("network"));
         NavigateToSecurityCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("security"));
         NavigateToAllTweaksCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke(""));
+
+        // Stat card click commands
+        NavigateToTotalTweaksCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke(""));
+        NavigateToAppliedTweaksCommand = new RelayCommand(_ => NavigateToStatusFilterRequested?.Invoke("applied"));
+        NavigateToRolledBackTweaksCommand = new RelayCommand(_ => NavigateToStatusFilterRequested?.Invoke("rolledback"));
+        OpenLogFileCommand = new RelayCommand(_ => OpenLogFile(), _ => File.Exists(_paths.TweakLogFilePath));
+        OpenLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -51,6 +62,13 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand NavigateToNetworkCommand { get; }
     public ICommand NavigateToSecurityCommand { get; }
     public ICommand NavigateToAllTweaksCommand { get; }
+
+    // Stat card click commands
+    public ICommand NavigateToTotalTweaksCommand { get; }
+    public ICommand NavigateToAppliedTweaksCommand { get; }
+    public ICommand NavigateToRolledBackTweaksCommand { get; }
+    public ICommand OpenLogFileCommand { get; }
+    public ICommand OpenLogFolderCommand { get; }
 
     public bool IsScanning
     {
@@ -258,6 +276,50 @@ public sealed class DashboardViewModel : ViewModelBase
         result.Add(current.ToString());
         return result.ToArray();
     }
+
+    private void OpenLogFile()
+    {
+        try
+        {
+            if (File.Exists(_paths.TweakLogFilePath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = _paths.TweakLogFilePath,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // If we can't open the file directly, try opening the folder
+            OpenLogFolder();
+        }
+    }
+
+    private void OpenLogFolder()
+    {
+        try
+        {
+            var folder = Path.GetDirectoryName(_paths.TweakLogFilePath);
+            if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = folder,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
+    }
+
+    public string LogFilePath => _paths.TweakLogFilePath;
+
+    public string LogFolderPath => Path.GetDirectoryName(_paths.TweakLogFilePath) ?? "";
 
     private static string FormatBytes(long bytes)
     {

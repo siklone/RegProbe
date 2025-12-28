@@ -865,7 +865,21 @@
                 <TextBlock Text="{Binding FilterSummary}"
                            Foreground="#88C0D0"
                            FontSize="12"
-                           Margin="0,4,0,16"/>
+                           Margin="0,4,0,8"/>
+
+                <!-- Status Filter Badge (shown when filtering by applied/rolled back) -->
+                <Border Background="#5E81AC" CornerRadius="6" Padding="12,6" Margin="0,0,0,12"
+                        HorizontalAlignment="Left" Cursor="Hand"
+                        Visibility="{Binding HasStatusFilter, Converter={StaticResource BoolToVisibility}}">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ResetFiltersCommand}"/>
+                    </Border.InputBindings>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔍" FontSize="12" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding StatusFilterLabel}" Foreground="#ECEFF4" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="  ✕ Clear" Foreground="#D8DEE9" FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Border>
 
                 <!-- Filter Bar -->
                 <Border Background="#3B4252" CornerRadius="10" Padding="16,12">

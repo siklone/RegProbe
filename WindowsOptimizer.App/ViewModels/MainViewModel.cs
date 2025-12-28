@@ -109,8 +109,23 @@ public sealed class MainViewModel : ViewModelBase
             if (tweaksNav != null)
             {
                 SelectedNavigationItem = tweaksNav;
-                // Set search filter to the category
+                // Clear status filter and set search filter to the category
+                tweaks.StatusFilter = "";
                 SearchText = category;
+            }
+        };
+
+        // Set up status filter callback for Dashboard stat cards (applied/rolled back)
+        dashboard.NavigateToStatusFilterRequested = (status) =>
+        {
+            // Navigate to Tweaks tab
+            var tweaksNav = NavigationItems.FirstOrDefault(n => n.Id == "tweaks");
+            if (tweaksNav != null)
+            {
+                SelectedNavigationItem = tweaksNav;
+                // Clear search text and set status filter
+                SearchText = "";
+                tweaks.StatusFilter = status;
             }
         };
 
