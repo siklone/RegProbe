@@ -107,19 +107,119 @@ public sealed class SparklinePointsConverter : IValueConverter
 
             var pc = new System.Windows.Media.PointCollection(pointsList.Count);
             double x = 0;
-            double canvasWidth = 160.0;
-            double canvasHeight = 40.0;
+            double canvasWidth = 600.0;
+            double canvasHeight = 100.0;
             double xStep = pointsList.Count > 1 ? canvasWidth / (pointsList.Count - 1) : 0;
-            
+
             foreach (var p in pointsList)
             {
-                pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight))); 
+                pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight)));
                 x += xStep;
             }
             pc.Freeze();
             return pc;
         }
         return DependencyProperty.UnsetValue;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Converts a list of values to a closed polygon for area fill under the sparkline.
+/// Creates points along bottom edge to form a filled area shape.
+/// </summary>
+public sealed class SparklineAreaConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is System.Collections.Generic.IEnumerable<double> points)
+        {
+            var autoScale = parameter is string s && s.Contains("auto", StringComparison.OrdinalIgnoreCase);
+            var pointsList = System.Linq.Enumerable.ToList(points);
+            if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
+
+            // Guard against NaN/Infinity values
+            for (var i = 0; i < pointsList.Count; i++)
+            {
+                var v = pointsList[i];
+                if (!double.IsFinite(v) || v < 0)
+                {
+                    pointsList[i] = 0;
+                }
+            }
+
+            var maxValue = System.Linq.Enumerable.Max(pointsList);
+            var scaleMax = autoScale ? Math.Max(1.0, maxValue) : (maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue));
+
+            // Create closed polygon: line points + bottom edge
+            var pc = new System.Windows.Media.PointCollection(pointsList.Count + 2);
+            double x = 0;
+            double canvasWidth = 600.0;
+            double canvasHeight = 100.0;
+            double xStep = pointsList.Count > 1 ? canvasWidth / (pointsList.Count - 1) : 0;
+
+            // Add line points
+            foreach (var p in pointsList)
+            {
+                pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight)));
+                x += xStep;
+            }
+
+            // Close the polygon by adding bottom-right and bottom-left corners
+            pc.Add(new Point(canvasWidth, canvasHeight));
+            pc.Add(new Point(0, canvasHeight));
+
+            pc.Freeze();
+            return pc;
+        }
+        return DependencyProperty.UnsetValue;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// Gets the last value from a collection to position the current value indicator.
+/// </summary>
+public sealed class LastValueToYConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is System.Collections.Generic.IEnumerable<double> points)
+        {
+            var autoScale = parameter is string s && s.Contains("auto", StringComparison.OrdinalIgnoreCase);
+            var pointsList = System.Linq.Enumerable.ToList(points);
+            if (pointsList.Count == 0) return 50.0;
+
+            var lastValue = pointsList[pointsList.Count - 1];
+            if (!double.IsFinite(lastValue) || lastValue < 0)
+            {
+                lastValue = 0;
+            }
+
+            var maxValue = System.Linq.Enumerable.Max(pointsList);
+            for (var i = 0; i < pointsList.Count; i++)
+            {
+                var v = pointsList[i];
+                if (!double.IsFinite(v) || v < 0)
+                {
+                    pointsList[i] = 0;
+                }
+            }
+            maxValue = System.Linq.Enumerable.Max(pointsList);
+            var scaleMax = autoScale ? Math.Max(1.0, maxValue) : (maxValue <= 100 ? 100.0 : Math.Max(1.0, maxValue));
+
+            double canvasHeight = 100.0;
+            return canvasHeight - (lastValue / scaleMax * canvasHeight) - 5; // -5 to center the dot
+        }
+        return 50.0;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
