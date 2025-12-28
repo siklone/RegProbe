@@ -28,7 +28,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private static Icon CreateTrayIcon()
+    private static System.Drawing.Icon CreateTrayIcon()
     {
         // Create a simple 32x32 icon with a circle
         using var bitmap = new Bitmap(32, 32);
@@ -58,7 +58,7 @@ public partial class MainWindow : Window
         };
         g.FillPolygon(symbolBrush, lightning);
 
-        return Icon.FromHandle(bitmap.GetHicon());
+        return System.Drawing.Icon.FromHandle(bitmap.GetHicon());
     }
 
     protected override void OnClosing(CancelEventArgs e)
