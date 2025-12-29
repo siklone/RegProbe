@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Windows;
+using WindowsOptimizer.App.Diagnostics;
 
 namespace WindowsOptimizer.App.Services;
 
@@ -19,49 +21,69 @@ public static class ThemeManager
 
     public static void SetTheme(AppTheme theme, bool force = false)
     {
-        if (!force && _currentTheme == theme) return;
+        AppDiagnostics.Log($"SetTheme called: theme={theme}, force={force}, current={_currentTheme}");
+
+        if (!force && _currentTheme == theme)
+        {
+            AppDiagnostics.Log("SetTheme: skipped (same theme)");
+            return;
+        }
 
         _currentTheme = theme;
 
         var app = Application.Current;
-        if (app == null) return;
-
-        // Find and remove existing theme dictionary (Colors.xaml or Colors.Light.xaml)
-        ResourceDictionary? existingTheme = null;
-        foreach (var dict in app.Resources.MergedDictionaries)
+        if (app == null)
         {
-            if (dict.Source != null)
-            {
-                var source = dict.Source.OriginalString;
-                if (source.Contains("Colors.xaml") || source.Contains("Colors.Light.xaml"))
-                {
-                    existingTheme = dict;
-                    break;
-                }
-            }
+            AppDiagnostics.Log("SetTheme: Application.Current is null");
+            return;
         }
 
-        if (existingTheme != null)
+        // Log all merged dictionaries for debugging
+        AppDiagnostics.Log($"SetTheme: Found {app.Resources.MergedDictionaries.Count} merged dictionaries");
+        foreach (var d in app.Resources.MergedDictionaries)
         {
-            app.Resources.MergedDictionaries.Remove(existingTheme);
+            AppDiagnostics.Log($"  - {d.Source?.OriginalString ?? "(no source)"}");
         }
 
-        // Add new theme dictionary
+        // Find and remove existing theme dictionary
+        var existingThemes = app.Resources.MergedDictionaries
+            .Where(d => d.Source != null && d.Source.OriginalString.Contains("Colors"))
+            .ToList();
+
+        AppDiagnostics.Log($"SetTheme: Found {existingThemes.Count} color dictionaries to remove");
+
+        foreach (var existing in existingThemes)
+        {
+            AppDiagnostics.Log($"SetTheme: Removing {existing.Source?.OriginalString}");
+            app.Resources.MergedDictionaries.Remove(existing);
+        }
+
+        // Add new theme dictionary using pack URI
         var themePath = theme switch
         {
-            AppTheme.Light => "Resources/Colors.Light.xaml",
-            _ => "Resources/Colors.xaml"
+            AppTheme.Light => "pack://application:,,,/Resources/Colors.Light.xaml",
+            _ => "pack://application:,,,/Resources/Colors.xaml"
         };
 
-        var newTheme = new ResourceDictionary
+        AppDiagnostics.Log($"SetTheme: Loading new theme from {themePath}");
+
+        try
         {
-            Source = new Uri(themePath, UriKind.Relative)
-        };
+            var newTheme = new ResourceDictionary
+            {
+                Source = new Uri(themePath, UriKind.Absolute)
+            };
 
-        // Insert at beginning so it's loaded first
-        app.Resources.MergedDictionaries.Insert(0, newTheme);
+            // Insert at beginning so it's loaded first (before Styles.xaml etc.)
+            app.Resources.MergedDictionaries.Insert(0, newTheme);
 
-        ThemeChanged?.Invoke(theme);
+            AppDiagnostics.Log($"SetTheme: Successfully loaded {theme} theme");
+            ThemeChanged?.Invoke(theme);
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("SetTheme", ex);
+        }
     }
 
     public static void Initialize(AppTheme theme)
@@ -69,5 +91,6 @@ public static class ThemeManager
         // Just track the theme state without changing dictionaries
         // SetTheme with force=true will be called separately if needed
         _currentTheme = theme;
+        AppDiagnostics.Log($"ThemeManager.Initialize: {theme}");
     }
 }
