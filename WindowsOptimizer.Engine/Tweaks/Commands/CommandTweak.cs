@@ -74,8 +74,10 @@ public abstract class CommandTweak : ITweak
 
             _hasDetected = true;
 
+            // Check if the tweak is already in the desired (applied) state
+            var isApplied = VerifyApplied(result);
             return new TweakResult(
-                TweakStatus.Detected,
+                isApplied ? TweakStatus.Applied : TweakStatus.Detected,
                 $"Current state: {_detectedState}",
                 DateTimeOffset.UtcNow);
         }
