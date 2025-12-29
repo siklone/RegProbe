@@ -1,0 +1,76 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Nord Light Theme - Snow Storm as backgrounds, Polar Night as foregrounds -->
+
+    <!-- Snow Storm (Light Backgrounds - now used as backgrounds) -->
+    <Color x:Key="Nord0">#ECEFF4</Color>
+    <Color x:Key="Nord1">#E5E9F0</Color>
+    <Color x:Key="Nord2">#D8DEE9</Color>
+    <Color x:Key="Nord3">#C8CED9</Color>
+
+    <!-- Polar Night (Dark - now used as foregrounds) -->
+    <Color x:Key="Nord4">#4C566A</Color>
+    <Color x:Key="Nord5">#3B4252</Color>
+    <Color x:Key="Nord6">#2E3440</Color>
+
+    <!-- Frost (Accents - slightly darker for light theme) -->
+    <Color x:Key="Nord7">#7EADAC</Color>
+    <Color x:Key="Nord8">#79B1C1</Color>
+    <Color x:Key="Nord9">#6E8EAE</Color>
+    <Color x:Key="Nord10">#4C6E91</Color>
+
+    <!-- Aurora (Status Colors - same, good contrast on light) -->
+    <Color x:Key="Nord11">#BF616A</Color>
+    <Color x:Key="Nord12">#D08770</Color>
+    <Color x:Key="Nord13">#D9B263</Color>
+    <Color x:Key="Nord14">#8FAE7B</Color>
+    <Color x:Key="Nord15">#A67D9A</Color>
+
+    <!-- Solid Color Brushes -->
+    <SolidColorBrush x:Key="BackgroundDarkestBrush" Color="{StaticResource Nord0}"/>
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource Nord1}"/>
+    <SolidColorBrush x:Key="BackgroundMediumBrush" Color="{StaticResource Nord2}"/>
+    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource Nord3}"/>
+
+    <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource Nord4}"/>
+    <SolidColorBrush x:Key="ForegroundBrightBrush" Color="{StaticResource Nord5}"/>
+    <SolidColorBrush x:Key="ForegroundBrightestBrush" Color="{StaticResource Nord6}"/>
+
+    <SolidColorBrush x:Key="AccentCyanBrush" Color="{StaticResource Nord7}"/>
+    <SolidColorBrush x:Key="AccentBrightCyanBrush" Color="{StaticResource Nord8}"/>
+    <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource Nord9}"/>
+    <SolidColorBrush x:Key="AccentDarkBlueBrush" Color="{StaticResource Nord10}"/>
+
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource Nord11}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource Nord12}"/>
+    <SolidColorBrush x:Key="CautionBrush" Color="{StaticResource Nord13}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Nord14}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Nord15}"/>
+
+    <!-- Gradient Brushes -->
+    <LinearGradientBrush x:Key="BackgroundGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{StaticResource Nord0}" Offset="0"/>
+        <GradientStop Color="{StaticResource Nord1}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AccentGradientBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="{StaticResource Nord8}" Offset="0"/>
+        <GradientStop Color="{StaticResource Nord10}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Glassmorphism Effects (inverted for light theme) -->
+    <SolidColorBrush x:Key="GlassBrush" Color="#40000000" Opacity="0.05"/>
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="#30000000" Opacity="0.1"/>
+
+    <!-- Hover/Pressed States -->
+    <SolidColorBrush x:Key="HoverOverlayBrush" Color="#000000" Opacity="0.05"/>
+    <SolidColorBrush x:Key="PressedOverlayBrush" Color="#000000" Opacity="0.1"/>
+    <SolidColorBrush x:Key="DisabledOverlayBrush" Color="#FFFFFF" Opacity="0.4"/>
+
+    <!-- Shadows -->
+    <Color x:Key="ShadowColorSmall">#15000000</Color>
+    <Color x:Key="ShadowColorMedium">#25000000</Color>
+    <Color x:Key="ShadowColorLarge">#35000000</Color>
+
+</ResourceDictionary>

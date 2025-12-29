@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.Services;
+using WindowsOptimizer.Infrastructure;
 using System.Threading;
 
 namespace WindowsOptimizer.App;
@@ -17,7 +19,32 @@ public partial class App : Application
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
 
+        // Load saved theme preference
+        InitializeThemeAsync();
+
         base.OnStartup(e);
+    }
+
+    private static async void InitializeThemeAsync()
+    {
+        try
+        {
+            var paths = AppPaths.FromEnvironment();
+            var settingsStore = new SettingsStore(paths);
+            var settings = await settingsStore.LoadAsync(CancellationToken.None);
+
+            var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
+            ThemeManager.Initialize(theme);
+
+            if (theme == AppTheme.Light)
+            {
+                ThemeManager.SetTheme(AppTheme.Light);
+            }
+        }
+        catch
+        {
+            // Use default dark theme on failure
+        }
     }
 
     private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

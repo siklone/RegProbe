@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
 
@@ -19,6 +20,7 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _isSaving;
     private bool _isTesting;
     private readonly RelayCommand _openUrlCommand;
+    private bool _isDarkTheme = true;
 
     public SettingsViewModel()
     {
@@ -85,6 +87,19 @@ public sealed class SettingsViewModel : ViewModelBase
         set => SetProperty(ref _discordAutoPatchEnabled, value);
     }
 
+    public bool IsDarkTheme
+    {
+        get => _isDarkTheme;
+        set
+        {
+            if (SetProperty(ref _isDarkTheme, value))
+            {
+                ThemeManager.SetTheme(value ? AppTheme.Dark : AppTheme.Light);
+                _ = SaveSettingsAsync();
+            }
+        }
+    }
+
     public string StatusMessage
     {
         get => _statusMessage;
@@ -129,6 +144,8 @@ public sealed class SettingsViewModel : ViewModelBase
             DiscordWebhookUrl = settings.DiscordWebhookUrl ?? string.Empty;
             DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
             DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
+            _isDarkTheme = settings.Theme != "Light";
+            OnPropertyChanged(nameof(IsDarkTheme));
             StatusMessage = "Settings loaded successfully.";
         }
         catch (System.Exception ex)
@@ -148,7 +165,8 @@ public sealed class SettingsViewModel : ViewModelBase
             {
                 DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl,
                 DiscordNotificationsEnabled = DiscordNotificationsEnabled,
-                DiscordAutoPatchEnabled = DiscordAutoPatchEnabled
+                DiscordAutoPatchEnabled = DiscordAutoPatchEnabled,
+                Theme = IsDarkTheme ? "Dark" : "Light"
             };
 
             await _settingsStore.SaveAsync(settings, CancellationToken.None);

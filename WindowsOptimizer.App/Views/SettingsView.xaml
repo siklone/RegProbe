@@ -7,14 +7,14 @@
     <UserControl.Resources>
         <!-- Section Card Style -->
         <Style x:Key="SectionCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#3B4252"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="24"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
-        
+
         <!-- Modern Toggle Switch Style -->
         <Style x:Key="ToggleSwitchStyle" TargetType="CheckBox">
             <Setter Property="Template">
@@ -22,15 +22,15 @@
                     <ControlTemplate TargetType="CheckBox">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Grid Width="44" Height="24">
-                                <Border x:Name="Track" 
-                                        Background="#434C5E" 
+                                <Border x:Name="Track"
+                                        Background="{DynamicResource BackgroundMediumBrush}"
                                         CornerRadius="12"
-                                        BorderBrush="#4C566A"
+                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
                                         BorderThickness="1"/>
-                                <Border x:Name="Thumb" 
-                                        Width="18" Height="18" 
+                                <Border x:Name="Thumb"
+                                        Width="18" Height="18"
                                         CornerRadius="9"
-                                        Background="#D8DEE9"
+                                        Background="{DynamicResource ForegroundLightBrush}"
                                         HorizontalAlignment="Left"
                                         Margin="3,0,0,0"
                                         RenderTransformOrigin="0.5,0.5">
@@ -43,8 +43,8 @@
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Track" Property="Background" Value="#5E81AC"/>
-                                <Setter TargetName="Thumb" Property="Background" Value="#ECEFF4"/>
+                                <Setter TargetName="Track" Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
+                                <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource ForegroundBrightestBrush}"/>
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
@@ -77,17 +77,18 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="#D8DEE9"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
         </Style>
 
         <!-- Modern TextBox Style -->
         <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#434C5E"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="12,10"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -105,8 +106,8 @@
 
         <!-- Modern Button Style -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#5E81AC"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="20,12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -126,7 +127,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#81A1C1"/>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentBlueBrush}"/>
                             </Trigger>
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>
@@ -159,22 +160,48 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
-            <Setter Property="Background" Value="#434C5E"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#2E3440">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{DynamicResource BackgroundDarkestBrush}">
         <Grid Margin="32">
             <StackPanel MaxWidth="700" HorizontalAlignment="Left">
                 <!-- Header -->
-                <TextBlock Text="{Binding Title}" 
-                           FontSize="32" 
-                           FontWeight="Bold" 
-                           Foreground="#ECEFF4"/>
+                <TextBlock Text="{Binding Title}"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                 <TextBlock Margin="0,8,0,32"
                            Text="Configure application preferences and integration settings."
-                           Foreground="#88C0D0"
+                           Foreground="{DynamicResource AccentBrightCyanBrush}"
                            FontSize="14"/>
+
+                <!-- Appearance Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="{DynamicResource SuccessBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="🎨" FontSize="16"/>
+                            </Border>
+                            <TextBlock Text="Appearance"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <CheckBox Style="{StaticResource ToggleSwitchStyle}"
+                                  IsChecked="{Binding IsDarkTheme}"
+                                  Content="Dark Theme"
+                                  Margin="0,0,0,8"/>
+                        <TextBlock Margin="56,0,0,0"
+                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   FontSize="11">
+                            Switch between dark and light color schemes
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
 
                 <!-- Discord Integration Section -->
                 <Border Style="{StaticResource SectionCardStyle}">
@@ -183,22 +210,22 @@
                             <Border Background="#5865F2" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="💬" FontSize="16"/>
                             </Border>
-                            <TextBlock Text="Discord Integration" 
-                                       FontSize="18" 
-                                       FontWeight="SemiBold" 
-                                       Foreground="#ECEFF4"
+                            <TextBlock Text="Discord Integration"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <!-- Webhook URL -->
-                        <TextBlock Text="Webhook URL" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="#D8DEE9"
+                        <TextBlock Text="Webhook URL"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
                                    Margin="0,0,0,8"/>
                         <TextBox Text="{Binding DiscordWebhookUrl, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource ModernTextBoxStyle}"/>
                         <TextBlock Margin="0,6,0,16"
-                                   Foreground="#4C566A"
+                                   Foreground="{DynamicResource BackgroundLightBrush}"
                                    FontSize="11">
                             Create a webhook in Discord → Server Settings → Integrations → Webhooks
                         </TextBlock>
@@ -208,7 +235,7 @@
                                   IsChecked="{Binding DiscordNotificationsEnabled}"
                                   Content="Enable Discord Notifications"
                                   Margin="0,0,0,16"/>
-                        
+
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
                                   IsChecked="{Binding DiscordAutoPatchEnabled}"
                                   Content="Enable Automatic Patch Creation"
@@ -226,13 +253,13 @@
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                            <Border Background="#5E81AC" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                            <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="ℹ️" FontFamily="Segoe UI Emoji" FontSize="16"/>
                             </Border>
-                            <TextBlock Text="Application Information" 
-                                       FontSize="18" 
-                                       FontWeight="SemiBold" 
-                                       Foreground="#ECEFF4"
+                            <TextBlock Text="Application Information"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
 
@@ -242,25 +269,25 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Version" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding AppVersion}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="Version" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
-                            
+
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="Build" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding BuildConfiguration}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="Build" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
-                            
+
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Framework" Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding Framework}" Foreground="#88C0D0" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="Framework" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
                         </Grid>
 
-                        <Border Background="#434C5E" CornerRadius="8" Padding="16" Margin="0,20,0,0">
-                            <TextBlock Foreground="#D8DEE9" FontSize="12" TextWrapping="Wrap">
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16" Margin="0,20,0,0">
+                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="12" TextWrapping="Wrap">
                                 <Run Text="Windows Optimizer Suite" FontWeight="SemiBold"/>
                                 <Run Text="- A modern, safe, and reversible Windows optimization tool built with WPF and .NET 8."/>
                             </TextBlock>
@@ -269,16 +296,16 @@
                 </Border>
 
                 <!-- Status Message -->
-                <Border Background="#3B4252" 
-                        BorderBrush="#5E81AC" 
+                <Border Background="{DynamicResource BackgroundDarkBrush}"
+                        BorderBrush="{DynamicResource AccentDarkBlueBrush}"
                         BorderThickness="1"
-                        CornerRadius="8" 
+                        CornerRadius="8"
                         Padding="16"
                         Margin="0,0,0,20">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="💾" FontSize="16" Margin="0,0,12,0"/>
                         <TextBlock Text="{Binding StatusMessage}"
-                                   Foreground="#88C0D0"
+                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
                                    VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
