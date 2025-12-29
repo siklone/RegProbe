@@ -34,11 +34,15 @@ public partial class App : Application
             var settings = await settingsStore.LoadAsync(CancellationToken.None);
 
             var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
-            ThemeManager.Initialize(theme);
 
+            // Force apply theme on startup if not dark (default)
             if (theme == AppTheme.Light)
             {
-                ThemeManager.SetTheme(AppTheme.Light);
+                ThemeManager.SetTheme(AppTheme.Light, force: true);
+            }
+            else
+            {
+                ThemeManager.Initialize(theme);
             }
         }
         catch

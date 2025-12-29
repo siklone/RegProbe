@@ -17,23 +17,27 @@ public static class ThemeManager
 
     public static event Action<AppTheme>? ThemeChanged;
 
-    public static void SetTheme(AppTheme theme)
+    public static void SetTheme(AppTheme theme, bool force = false)
     {
-        if (_currentTheme == theme) return;
+        if (!force && _currentTheme == theme) return;
 
         _currentTheme = theme;
 
         var app = Application.Current;
         if (app == null) return;
 
-        // Find and remove existing theme dictionary
+        // Find and remove existing theme dictionary (Colors.xaml or Colors.Light.xaml)
         ResourceDictionary? existingTheme = null;
         foreach (var dict in app.Resources.MergedDictionaries)
         {
-            if (dict.Source != null && dict.Source.OriginalString.Contains("Colors"))
+            if (dict.Source != null)
             {
-                existingTheme = dict;
-                break;
+                var source = dict.Source.OriginalString;
+                if (source.Contains("Colors.xaml") || source.Contains("Colors.Light.xaml"))
+                {
+                    existingTheme = dict;
+                    break;
+                }
             }
         }
 
@@ -62,6 +66,8 @@ public static class ThemeManager
 
     public static void Initialize(AppTheme theme)
     {
+        // Just track the theme state without changing dictionaries
+        // SetTheme with force=true will be called separately if needed
         _currentTheme = theme;
     }
 }

@@ -105,6 +105,7 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _isCreatingRestorePoint, value))
             {
                 ((RelayCommand)CreateRestorePointCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
             }
         }
     }

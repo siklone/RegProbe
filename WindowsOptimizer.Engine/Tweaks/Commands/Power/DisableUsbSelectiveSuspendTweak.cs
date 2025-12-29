@@ -15,7 +15,7 @@ public sealed class DisableUsbSelectiveSuspendTweak : CommandTweak
 
     public DisableUsbSelectiveSuspendTweak(ICommandRunner commandRunner)
         : base(
-            id: "power-disable-usb-selective-suspend",
+            id: "power.disable-usb-selective-suspend",
             name: "Disable USB Selective Suspend",
             description: "Disables USB Selective Suspend to prevent USB devices from powering down unexpectedly. This can resolve issues with USB devices disconnecting or becoming unresponsive.",
             risk: TweakRiskLevel.Safe,

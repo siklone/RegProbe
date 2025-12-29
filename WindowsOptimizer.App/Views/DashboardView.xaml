@@ -231,7 +231,7 @@
                                 Margin="12,0,0,0"
                                 Cursor="Hand"
                                 Visibility="{Binding VssServiceNeedsEnable, Converter={StaticResource BoolToVisibility}}"
-                                ToolTip="Start the Volume Shadow Copy service (requires Admin)">
+                                ToolTip="Click to start the Volume Shadow Copy service. This requires administrator privileges and will prompt for elevation.">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#EBCB8B"/>
@@ -240,11 +240,17 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="Button">
-                                                <Border Background="{TemplateBinding Background}"
+                                                <Border x:Name="Bd" Background="{TemplateBinding Background}"
                                                         CornerRadius="4"
                                                         Padding="{TemplateBinding Padding}">
                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="Bd" Property="Background" Value="#4C566A"/>
+                                                        <Setter Property="Foreground" Value="#D8DEE9"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
