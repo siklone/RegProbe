@@ -32,6 +32,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
+    private bool _vssServiceNeedsEnable;
     private IReadOnlyList<ActivityTimelineItem> _recentActivity = Array.Empty<ActivityTimelineItem>();
     private TweaksViewModel? _tweaksViewModel;
 
@@ -69,6 +70,7 @@ public sealed class DashboardViewModel : ViewModelBase
         OpenLogFileCommand = new RelayCommand(_ => OpenLogFile(), _ => File.Exists(_paths.TweakLogFilePath));
         OpenLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         CreateRestorePointCommand = new RelayCommand(_ => CreateRestorePointAsync(), _ => !IsCreatingRestorePoint);
+        EnableVssCommand = new RelayCommand(_ => EnableVssServiceAsync(), _ => VssServiceNeedsEnable && !IsCreatingRestorePoint);
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -93,6 +95,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand OpenLogFileCommand { get; }
     public ICommand OpenLogFolderCommand { get; }
     public ICommand CreateRestorePointCommand { get; }
+    public ICommand EnableVssCommand { get; }
 
     public bool IsCreatingRestorePoint
     {
@@ -110,6 +113,18 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         get => _restorePointStatusMessage;
         private set => SetProperty(ref _restorePointStatusMessage, value);
+    }
+
+    public bool VssServiceNeedsEnable
+    {
+        get => _vssServiceNeedsEnable;
+        private set
+        {
+            if (SetProperty(ref _vssServiceNeedsEnable, value))
+            {
+                ((RelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
+            }
+        }
     }
 
     public bool IsScanning
@@ -154,15 +169,61 @@ public sealed class DashboardViewModel : ViewModelBase
             if (result.Success)
             {
                 RestorePointStatusMessage = $"Restore point created: {result.Description}";
+                VssServiceNeedsEnable = false;
             }
             else
             {
                 RestorePointStatusMessage = $"Failed: {result.ErrorMessage}";
+                // Check if VSS service needs to be enabled
+                VssServiceNeedsEnable = result.ErrorMessage?.Contains("not available or disabled") == true;
             }
         }
         catch (Exception ex)
         {
             RestorePointStatusMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            IsCreatingRestorePoint = false;
+        }
+    }
+
+    private async void EnableVssServiceAsync()
+    {
+        IsCreatingRestorePoint = true;
+        RestorePointStatusMessage = "Enabling Volume Shadow Copy service...";
+
+        try
+        {
+            // Start VSS service using sc.exe (requires admin)
+            using var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "sc.exe",
+                    Arguments = "start vss",
+                    UseShellExecute = true,
+                    Verb = "runas",
+                    CreateNoWindow = true
+                }
+            };
+
+            process.Start();
+            await process.WaitForExitAsync();
+
+            if (process.ExitCode == 0)
+            {
+                RestorePointStatusMessage = "VSS service started. Try creating restore point again.";
+                VssServiceNeedsEnable = false;
+            }
+            else
+            {
+                RestorePointStatusMessage = "Could not start VSS. Try: services.msc > Volume Shadow Copy > Start";
+            }
+        }
+        catch (Exception ex)
+        {
+            RestorePointStatusMessage = $"Enable VSS failed: {ex.Message}";
         }
         finally
         {
