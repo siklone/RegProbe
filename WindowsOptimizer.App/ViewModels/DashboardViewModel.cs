@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.Infrastructure.Metrics;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -15,6 +17,7 @@ public sealed class DashboardViewModel : ViewModelBase
 {
     private readonly AppPaths _paths;
     private readonly VssSnapshotService _vssService = new();
+    private readonly BootTimeTracker _bootTimeTracker;
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
     private int _tweaksRolledBack;
@@ -36,6 +39,8 @@ public sealed class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         _paths = AppPaths.FromEnvironment();
+        _bootTimeTracker = new BootTimeTracker(_paths);
+        _bootTimeTracker.RecordCurrentBoot();
         LoadStatistics();
         ScanAllCommand = new RelayCommand(_ => ScanAllTweaksAsync(), _ => !IsScanning);
 
@@ -243,6 +248,35 @@ public sealed class DashboardViewModel : ViewModelBase
     public bool IsElevated => ProcessElevation.IsElevated();
 
     public string ElevationStatus => IsElevated ? "Running as Administrator" : "Running as Standard User";
+
+    // Boot Time Tracking Properties
+    public DateTime? LastBootTime => _bootTimeTracker.GetLastBootTime();
+
+    public string LastBootTimeFormatted => LastBootTime?.ToString("MMM dd, yyyy HH:mm") ?? "Unknown";
+
+    public TimeSpan? LastBootDuration => _bootTimeTracker.GetLastBootDuration();
+
+    public string LastBootDurationFormatted => LastBootDuration.HasValue
+        ? $"{LastBootDuration.Value.TotalSeconds:F1}s"
+        : "Unknown";
+
+    public TimeSpan? AverageBootDuration => _bootTimeTracker.GetAverageBootDuration();
+
+    public string AverageBootDurationFormatted => AverageBootDuration.HasValue
+        ? $"{AverageBootDuration.Value.TotalSeconds:F1}s"
+        : "—";
+
+    public double? BootTimeImprovement => _bootTimeTracker.GetImprovementPercentage();
+
+    public string BootTimeImprovementFormatted => BootTimeImprovement.HasValue
+        ? $"{(BootTimeImprovement > 0 ? "+" : "")}{BootTimeImprovement:F1}%"
+        : "—";
+
+    public bool HasBootTimeImprovement => BootTimeImprovement.HasValue && BootTimeImprovement > 0;
+
+    public IReadOnlyList<double> RecentBootDurations => _bootTimeTracker.GetRecentBootDurations(10);
+
+    public bool HasBootTimeHistory => RecentBootDurations.Count > 1;
 
     private void LoadStatistics()
     {

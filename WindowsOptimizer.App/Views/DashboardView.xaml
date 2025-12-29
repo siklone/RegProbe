@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <viewModels:ScoreToOffsetConverter x:Key="ScoreToOffsetConverter"/>
         <converters:StringEmptyToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         
         <!-- Glassmorphism Stat Card -->
         <Style x:Key="GlassStatCardStyle" TargetType="Border">
@@ -342,21 +343,53 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="🖥️ System Status" FontSize="18" FontWeight="SemiBold" Foreground="#ECEFF4"/>
                         <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
                             <Border Background="#5E81AC" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
                                 <TextBlock Text="{Binding ElevationStatus}" Foreground="#ECEFF4" FontSize="11" FontWeight="Medium"/>
                             </Border>
+                            <!-- Boot Time Info -->
+                            <Border Background="#88C0D0" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                    ToolTip="{Binding LastBootTimeFormatted}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⏱️" Margin="0,0,4,0"/>
+                                    <TextBlock Text="Last Boot:" Foreground="#2E3440" FontSize="11"/>
+                                    <TextBlock Text="{Binding LastBootDurationFormatted}" Foreground="#2E3440" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="#A3BE8C" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                    ToolTip="Average boot time from history"
+                                    Visibility="{Binding HasBootTimeHistory, Converter={StaticResource BoolToVisibility}}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📊" Margin="0,0,4,0"/>
+                                    <TextBlock Text="Avg:" Foreground="#2E3440" FontSize="11"/>
+                                    <TextBlock Text="{Binding AverageBootDurationFormatted}" Foreground="#2E3440" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="4" Padding="8,4"
+                                    ToolTip="Boot time improvement since first measurement"
+                                    Visibility="{Binding HasBootTimeImprovement, Converter={StaticResource BoolToVisibility}}">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="#A3BE8C"/>
+                                    </Style>
+                                </Border.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🚀" Margin="0,0,4,0"/>
+                                    <TextBlock Text="{Binding BootTimeImprovementFormatted}" Foreground="#2E3440" FontSize="11" FontWeight="Bold"/>
+                                    <TextBlock Text=" faster" Foreground="#2E3440" FontSize="11"/>
+                                </StackPanel>
+                            </Border>
                         </StackPanel>
                     </StackPanel>
-                    
+
                     <Border Grid.Column="1" Background="#434C5E" CornerRadius="8" Padding="16,12" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="💡" FontSize="16" Margin="0,0,8,0"/>
-                            <TextBlock Text="Use Preview mode to test changes safely" 
-                                       Foreground="#D8DEE9" 
+                            <TextBlock Text="Use Preview mode to test changes safely"
+                                       Foreground="#D8DEE9"
                                        FontSize="12"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
