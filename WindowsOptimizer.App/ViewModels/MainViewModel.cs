@@ -131,6 +131,15 @@ public sealed class MainViewModel : ViewModelBase
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
+        // Keyboard navigation commands
+        NavigateToDashboardCommand = new RelayCommand(_ => NavigateToTab(0));
+        NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(1));
+        NavigateToMonitorCommand = new RelayCommand(_ => NavigateToTab(2));
+        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(3));
+        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(4));
+        FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
+        ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
+
         // Initialize Intelligence
         Task.Run(InitializeIntelligenceAsync);
     }
@@ -240,6 +249,42 @@ public sealed class MainViewModel : ViewModelBase
     }
 
     public RelayCommand ClearSearchCommand => _clearSearchCommand;
+
+    // Keyboard Navigation Commands
+    public RelayCommand NavigateToDashboardCommand { get; }
+    public RelayCommand NavigateToTweaksCommand { get; }
+    public RelayCommand NavigateToMonitorCommand { get; }
+    public RelayCommand NavigateToSettingsCommand { get; }
+    public RelayCommand NavigateToAboutCommand { get; }
+    public RelayCommand FocusSearchCommand { get; }
+    public RelayCommand ClearFiltersCommand { get; }
+
+    public event Action? FocusSearchRequested;
+
+    private void NavigateToTab(int index)
+    {
+        if (index >= 0 && index < NavigationItems.Count)
+        {
+            SelectedNavigationItem = NavigationItems[index];
+        }
+    }
+
+    private void OnFocusSearchRequested()
+    {
+        // Navigate to Tweaks tab where search is available
+        NavigateToTab(1);
+        FocusSearchRequested?.Invoke();
+    }
+
+    private void OnClearFilters()
+    {
+        SearchText = string.Empty;
+        if (_currentViewModel is TweaksViewModel tweaksViewModel)
+        {
+            tweaksViewModel.StatusFilter = string.Empty;
+            tweaksViewModel.ShowFavoritesOnly = false;
+        }
+    }
 
     private void SyncSearchText()
     {

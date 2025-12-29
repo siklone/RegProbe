@@ -15,6 +15,20 @@
         Background="#2E3440"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
+
+    <!-- Keyboard Shortcuts -->
+    <Window.InputBindings>
+        <!-- Navigation: Ctrl+1 to Ctrl+5 -->
+        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToDashboardCommand}"/>
+        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
+        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
+        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <!-- Search: Ctrl+F -->
+        <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
+        <!-- Clear filters: Escape -->
+        <KeyBinding Key="Escape" Command="{Binding ClearFiltersCommand}"/>
+    </Window.InputBindings>
     
     <Window.Resources>
         <!-- Sidebar ListBox Style -->
