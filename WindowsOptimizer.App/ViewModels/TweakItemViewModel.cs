@@ -153,9 +153,9 @@ public sealed class TweakItemViewModel : ViewModelBase
     private static string ExtractCategory(string id)
     {
         var dotIndex = id.IndexOf('.');
-        if (dotIndex <= 0) return "Other";
+        if (dotIndex <= 0) return Utilities.StringPool.Intern("Other");
         var cat = id.Substring(0, dotIndex);
-        return char.ToUpper(cat[0]) + cat.Substring(1).ToLowerInvariant();
+        return Utilities.StringPool.GetCategory(cat);
     }
 
     private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
@@ -177,13 +177,14 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private static string DetermineImpactAreaLabel(ITweak tweak)
     {
-        return tweak switch
+        var area = tweak switch
         {
             RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak => "Registry",
             ServiceStartModeBatchTweak => "Service",
             ScheduledTaskBatchTweak => "Task",
             _ => "Other"
         };
+        return Utilities.StringPool.GetImpactArea(area);
     }
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }

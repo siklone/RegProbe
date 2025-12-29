@@ -259,22 +259,54 @@
             </tb:TaskbarIcon.TrayToolTip>
 
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu Background="#2E3440" BorderBrush="#4C566A" Foreground="#ECEFF4">
+                <ContextMenu Background="#2E3440" BorderBrush="#4C566A" Foreground="#ECEFF4"
+                             HasDropShadow="True">
                     <ContextMenu.Resources>
+                        <!-- MenuItem template without icon column -->
                         <Style TargetType="MenuItem">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="#D8DEE9"/>
-                            <Setter Property="Padding" Value="8,6"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#3B4252"/>
-                                    <Setter Property="Foreground" Value="#ECEFF4"/>
-                                </Trigger>
-                            </Style.Triggers>
+                            <Setter Property="Padding" Value="12,8"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="MenuItem">
+                                        <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Padding="{TemplateBinding Padding}"
+                                                SnapsToDevicePixels="True">
+                                            <ContentPresenter ContentSource="Header"
+                                                              HorizontalAlignment="Left"
+                                                              VerticalAlignment="Center"
+                                                              RecognizesAccessKey="True"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsHighlighted" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#3B4252"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#3B4252"/>
+                                                <Setter Property="Foreground" Value="#ECEFF4"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                         <Style TargetType="Separator">
                             <Setter Property="Background" Value="#4C566A"/>
-                            <Setter Property="Margin" Value="4,2"/>
+                            <Setter Property="Margin" Value="8,4"/>
+                            <Setter Property="Height" Value="1"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Separator">
+                                        <Border Background="{TemplateBinding Background}"
+                                                Height="{TemplateBinding Height}"
+                                                Margin="{TemplateBinding Margin}"
+                                                SnapsToDevicePixels="True"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                     </ContextMenu.Resources>
                     <MenuItem Header="📊  Dashboard" Click="MenuItem_Dashboard_Click"/>

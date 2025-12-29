@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,6 +58,8 @@ public sealed class DashboardViewModel : ViewModelBase
         NavigateToSystemCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("system"));
         NavigateToNetworkCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("network"));
         NavigateToSecurityCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("security"));
+        NavigateToCleanupCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("cleanup"));
+        NavigateToExplorerCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("explorer"));
         NavigateToAllTweaksCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke(""));
 
         // Stat card click commands
@@ -78,6 +82,8 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand NavigateToSystemCommand { get; }
     public ICommand NavigateToNetworkCommand { get; }
     public ICommand NavigateToSecurityCommand { get; }
+    public ICommand NavigateToCleanupCommand { get; }
+    public ICommand NavigateToExplorerCommand { get; }
     public ICommand NavigateToAllTweaksCommand { get; }
 
     // Stat card click commands
@@ -283,6 +289,85 @@ public sealed class DashboardViewModel : ViewModelBase
     public IReadOnlyList<double> RecentBootDurations => _bootTimeTracker.GetRecentBootDurations(10);
 
     public bool HasBootTimeHistory => RecentBootDurations.Count > 1;
+
+    // System Information Properties
+    public string OsVersion => GetOsVersion();
+    public string OsBuild => Environment.OSVersion.Version.Build.ToString();
+    public string MachineName => Environment.MachineName;
+    public string UserName => Environment.UserName;
+    public int ProcessorCount => Environment.ProcessorCount;
+    public string SystemArchitecture => Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit";
+    public string TotalMemoryFormatted => GetTotalMemoryFormatted();
+    public string AvailableMemoryFormatted => GetAvailableMemoryFormatted();
+    public string SystemUptime => GetSystemUptime();
+    public string DotNetVersion => Environment.Version.ToString();
+
+    [SupportedOSPlatform("windows")]
+    private static string GetOsVersion()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+            foreach (var obj in searcher.Get())
+            {
+                var caption = obj["Caption"]?.ToString();
+                if (!string.IsNullOrEmpty(caption))
+                {
+                    // Remove "Microsoft " prefix for cleaner display
+                    return caption.Replace("Microsoft ", "");
+                }
+            }
+        }
+        catch { }
+        return $"Windows {Environment.OSVersion.Version.Major}";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetTotalMemoryFormatted()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
+            foreach (var obj in searcher.Get())
+            {
+                var totalBytes = Convert.ToUInt64(obj["TotalPhysicalMemory"]);
+                return FormatBytes((long)totalBytes);
+            }
+        }
+        catch { }
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetAvailableMemoryFormatted()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT FreePhysicalMemory FROM Win32_OperatingSystem");
+            foreach (var obj in searcher.Get())
+            {
+                var freeKb = Convert.ToUInt64(obj["FreePhysicalMemory"]);
+                return FormatBytes((long)(freeKb * 1024));
+            }
+        }
+        catch { }
+        return "Unknown";
+    }
+
+    private static string GetSystemUptime()
+    {
+        try
+        {
+            var uptime = TimeSpan.FromMilliseconds(Environment.TickCount64);
+            if (uptime.TotalDays >= 1)
+                return $"{(int)uptime.TotalDays}d {uptime.Hours}h";
+            if (uptime.TotalHours >= 1)
+                return $"{(int)uptime.TotalHours}h {uptime.Minutes}m";
+            return $"{uptime.Minutes}m";
+        }
+        catch { }
+        return "Unknown";
+    }
 
     // Recent Activity Timeline
     public ICommand RefreshActivityCommand { get; }
