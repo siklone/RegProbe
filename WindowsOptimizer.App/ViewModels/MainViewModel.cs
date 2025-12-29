@@ -1,8 +1,11 @@
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
+using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.App.Services.TweakProviders;
 using WindowsOptimizer.App.Utilities;
@@ -17,15 +20,31 @@ public sealed class MainViewModel : ViewModelBase
     private readonly RelayCommand _clearSearchCommand;
     private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
+    private readonly IRollbackStateStore _rollbackStore;
+    private TweaksViewModel? _tweaksViewModel;
 
     // Tray tooltip binding properties
     private int _optimizationScore;
     private int _tweaksApplied;
     private int _totalTweaksAvailable;
 
+    // Crash recovery properties
+    private bool _hasPendingRollbacks;
+    private int _pendingRollbackCount;
+    private string _pendingRollbackMessage = string.Empty;
+    private bool _isRecovering;
+
     public MainViewModel()
     {
         LogToFile("========== APPLICATION STARTED ==========");
+
+        // Initialize rollback store for crash recovery
+        var paths = AppPaths.FromEnvironment();
+        _rollbackStore = new RollbackStateStore(paths);
+
+        // Initialize crash recovery commands
+        RecoverPendingRollbacksCommand = new RelayCommand(_ => _ = RecoverPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
+        DismissPendingRollbacksCommand = new RelayCommand(_ => _ = DismissPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
 
         var dashboard = new DashboardViewModel();
 
@@ -45,6 +64,7 @@ public sealed class MainViewModel : ViewModelBase
         };
 
         var tweaks = new TweaksViewModel(providers);
+        _tweaksViewModel = tweaks;
         dashboard.SetTweaksViewModel(tweaks);
 
         MonitorViewModel monitor;
@@ -142,6 +162,9 @@ public sealed class MainViewModel : ViewModelBase
 
         // Initialize Intelligence
         Task.Run(InitializeIntelligenceAsync);
+
+        // Check for pending rollbacks from previous crashes
+        Task.Run(CheckPendingRollbacksAsync);
     }
 
     private async Task InitializeIntelligenceAsync()
@@ -189,6 +212,49 @@ public sealed class MainViewModel : ViewModelBase
         get => _totalTweaksAvailable;
         private set => SetProperty(ref _totalTweaksAvailable, value);
     }
+
+    // Crash recovery properties
+    public bool HasPendingRollbacks
+    {
+        get => _hasPendingRollbacks;
+        private set
+        {
+            if (SetProperty(ref _hasPendingRollbacks, value))
+            {
+                ((RelayCommand)RecoverPendingRollbacksCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)DismissPendingRollbacksCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public int PendingRollbackCount
+    {
+        get => _pendingRollbackCount;
+        private set => SetProperty(ref _pendingRollbackCount, value);
+    }
+
+    public string PendingRollbackMessage
+    {
+        get => _pendingRollbackMessage;
+        private set => SetProperty(ref _pendingRollbackMessage, value);
+    }
+
+    public bool IsRecovering
+    {
+        get => _isRecovering;
+        private set
+        {
+            if (SetProperty(ref _isRecovering, value))
+            {
+                ((RelayCommand)RecoverPendingRollbacksCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)DismissPendingRollbacksCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public ICommand RecoverPendingRollbacksCommand { get; }
+
+    public ICommand DismissPendingRollbacksCommand { get; }
 
     public NavigationItem? SelectedNavigationItem
     {
@@ -291,6 +357,105 @@ public sealed class MainViewModel : ViewModelBase
         if (_currentViewModel is TweaksViewModel tweaksViewModel)
         {
             tweaksViewModel.SearchText = _searchText;
+        }
+    }
+
+    private async Task CheckPendingRollbacksAsync()
+    {
+        try
+        {
+            var pending = await _rollbackStore.GetPendingRollbacksAsync(CancellationToken.None);
+            if (pending.Count > 0)
+            {
+                PendingRollbackCount = pending.Count;
+                PendingRollbackMessage = pending.Count == 1
+                    ? $"1 tweak was not properly rolled back after a crash: {pending[0].TweakId}"
+                    : $"{pending.Count} tweaks were not properly rolled back after a crash.";
+                HasPendingRollbacks = true;
+                LogToFile($"Crash recovery: Found {pending.Count} pending rollbacks");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToFile($"Crash recovery check failed: {ex.Message}");
+        }
+    }
+
+    private async Task RecoverPendingRollbacksAsync()
+    {
+        if (_tweaksViewModel == null) return;
+
+        IsRecovering = true;
+        LogToFile("Crash recovery: Starting rollback recovery...");
+
+        try
+        {
+            var pending = await _rollbackStore.GetPendingRollbacksAsync(CancellationToken.None);
+            var successCount = 0;
+
+            foreach (var entry in pending)
+            {
+                try
+                {
+                    // Find the tweak in the view model and trigger rollback
+                    var tweakVm = _tweaksViewModel.Tweaks.FirstOrDefault(t => t.Id == entry.TweakId);
+                    if (tweakVm != null && tweakVm.IsApplied)
+                    {
+                        await tweakVm.RunRollbackAsync(CancellationToken.None);
+                        successCount++;
+                        LogToFile($"Crash recovery: Rolled back {entry.TweakId}");
+                    }
+                    else
+                    {
+                        // Tweak not found or already rolled back, mark as recovered
+                        await _rollbackStore.MarkRolledBackAsync(entry.TweakId, CancellationToken.None);
+                        successCount++;
+                        LogToFile($"Crash recovery: Marked {entry.TweakId} as recovered (not found or already rolled back)");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogToFile($"Crash recovery: Failed to rollback {entry.TweakId}: {ex.Message}");
+                }
+            }
+
+            if (successCount == pending.Count)
+            {
+                HasPendingRollbacks = false;
+                PendingRollbackMessage = string.Empty;
+                PendingRollbackCount = 0;
+                LogToFile("Crash recovery: All rollbacks completed successfully");
+            }
+            else
+            {
+                PendingRollbackMessage = $"Recovery completed with {pending.Count - successCount} failures. Check logs for details.";
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToFile($"Crash recovery failed: {ex.Message}");
+            PendingRollbackMessage = $"Recovery failed: {ex.Message}";
+        }
+        finally
+        {
+            IsRecovering = false;
+        }
+    }
+
+    private async Task DismissPendingRollbacksAsync()
+    {
+        LogToFile("Crash recovery: User dismissed pending rollbacks");
+
+        try
+        {
+            await _rollbackStore.ClearAllAsync(CancellationToken.None);
+            HasPendingRollbacks = false;
+            PendingRollbackMessage = string.Empty;
+            PendingRollbackCount = 0;
+        }
+        catch (Exception ex)
+        {
+            LogToFile($"Failed to clear pending rollbacks: {ex.Message}");
         }
     }
 
