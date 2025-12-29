@@ -83,8 +83,10 @@ public sealed class TweaksViewModel : ViewModelBase
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
+    private bool _showFavoritesOnly = false;
     private bool _hasVisibleTweaks;
     private bool _isFlatView;
+    private readonly IFavoritesStore _favoritesStore;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _bulkCts;
     private readonly string _logFolderPath;
@@ -110,6 +112,7 @@ public sealed class TweaksViewModel : ViewModelBase
         _logStore = new FileTweakLogStore(paths);
         _profileManager = new ProfileManager(paths);
         _rollbackStore = new RollbackStateStore(paths);
+        _favoritesStore = new FavoritesStore(paths);
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
 		var settingsStore = new SettingsStore(paths);
 		_isElevated = ProcessElevation.IsElevated();
@@ -3080,6 +3083,8 @@ public sealed class TweaksViewModel : ViewModelBase
         foreach (var tweak in Tweaks)
         {
             tweak.PropertyChanged += OnTweakPropertyChanged;
+            tweak.FavoriteChanged += OnTweakFavoriteChanged;
+            tweak.IsFavorite = _favoritesStore.IsFavorite(tweak.Id);
         }
 
         Tweaks.CollectionChanged += OnTweaksCollectionChanged;
@@ -3569,6 +3574,21 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    public bool ShowFavoritesOnly
+    {
+        get => _showFavoritesOnly;
+        set
+        {
+            if (SetProperty(ref _showFavoritesOnly, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public int FavoritesCount => Tweaks.Count(t => t.IsFavorite);
+
     public string FilterSummary
     {
         get => _filterSummary;
@@ -3902,6 +3922,27 @@ public sealed class TweaksViewModel : ViewModelBase
         }
     }
 
+    private void OnTweakFavoriteChanged(TweakItemViewModel tweak, bool isFavorite)
+    {
+        if (isFavorite)
+        {
+            _favoritesStore.AddFavorite(tweak.Id);
+        }
+        else
+        {
+            _favoritesStore.RemoveFavorite(tweak.Id);
+        }
+
+        OnPropertyChanged(nameof(FavoritesCount));
+
+        // Refresh view if showing favorites only
+        if (_showFavoritesOnly)
+        {
+            TweaksView.Refresh();
+            UpdateFilterSummary();
+        }
+    }
+
     private void OnTweaksCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
@@ -3909,6 +3950,8 @@ public sealed class TweaksViewModel : ViewModelBase
             foreach (var item in e.NewItems.OfType<TweakItemViewModel>())
             {
                 item.PropertyChanged += OnTweakPropertyChanged;
+                item.FavoriteChanged += OnTweakFavoriteChanged;
+                item.IsFavorite = _favoritesStore.IsFavorite(item.Id);
             }
         }
 
@@ -3917,6 +3960,7 @@ public sealed class TweaksViewModel : ViewModelBase
             foreach (var item in e.OldItems.OfType<TweakItemViewModel>())
             {
                 item.PropertyChanged -= OnTweakPropertyChanged;
+                item.FavoriteChanged -= OnTweakFavoriteChanged;
             }
         }
 
@@ -3985,6 +4029,12 @@ public sealed class TweaksViewModel : ViewModelBase
             {
                 return false;
             }
+        }
+
+        // Favorites filter
+        if (_showFavoritesOnly && !item.IsFavorite)
+        {
+            return false;
         }
 
         if (item.Risk == TweakRiskLevel.Safe && !_showSafe)

@@ -665,6 +665,39 @@
 	                        </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+                             <!-- Favorite Button -->
+                             <Button Command="{Binding ToggleFavoriteCommand}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Cursor="Hand"
+                                     Padding="6,4"
+                                     ToolTip="Toggle favorite">
+                                 <Button.Style>
+                                     <Style TargetType="Button">
+                                         <Setter Property="Template">
+                                             <Setter.Value>
+                                                 <ControlTemplate TargetType="Button">
+                                                     <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                     </Border>
+                                                 </ControlTemplate>
+                                             </Setter.Value>
+                                         </Setter>
+                                     </Style>
+                                 </Button.Style>
+                                 <TextBlock Text="{Binding FavoriteIcon}" FontSize="18">
+                                     <TextBlock.Style>
+                                         <Style TargetType="TextBlock">
+                                             <Setter Property="Foreground" Value="#4C566A"/>
+                                             <Style.Triggers>
+                                                 <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                                     <Setter Property="Foreground" Value="#EBCB8B"/>
+                                                 </DataTrigger>
+                                             </Style.Triggers>
+                                         </Style>
+                                     </TextBlock.Style>
+                                 </TextBlock>
+                             </Button>
                              <ToggleButton IsChecked="{Binding IsDetailsExpanded}" Style="{StaticResource ExpanderButtonStyle}" Margin="8,0,0,0"/>
                         </StackPanel>
                     </Grid>
@@ -911,12 +944,23 @@
 	                                      IsChecked="{Binding ShowAdvanced}" 
 	                                      Margin="0,0,12,0"
 	                                      ToolTip="Show Advanced tweaks"/>
-	                            <CheckBox Content="Risky" 
+	                            <CheckBox Content="Risky"
 	                                      Style="{StaticResource FilterCheckbox}"
 	                                      IsChecked="{Binding ShowRisky}"
 	                                      Margin="0,0,12,0"
 	                                      ToolTip="Show Risky tweaks"/>
-	                            <CheckBox Content="Flat" 
+	                            <Border Width="1" Background="#4C566A" Margin="4,2,12,2"/>
+	                            <CheckBox Style="{StaticResource FilterCheckbox}"
+	                                      IsChecked="{Binding ShowFavoritesOnly}"
+	                                      Margin="0,0,12,0"
+	                                      ToolTip="Show only favorite tweaks">
+	                                <StackPanel Orientation="Horizontal">
+	                                    <TextBlock Text="★" Foreground="#EBCB8B" Margin="0,0,4,0"/>
+	                                    <TextBlock Text="Favorites"/>
+	                                    <TextBlock Text="{Binding FavoritesCount, StringFormat=' ({0})'}" Foreground="#88C0D0"/>
+	                                </StackPanel>
+	                            </CheckBox>
+	                            <CheckBox Content="Flat"
 	                                      Style="{StaticResource FilterCheckbox}"
 	                                      IsChecked="{Binding IsFlatView}"
 	                                      ToolTip="Flatten category hierarchy for maximum performance"/>

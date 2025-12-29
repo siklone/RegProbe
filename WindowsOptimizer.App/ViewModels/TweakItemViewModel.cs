@@ -67,6 +67,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _recommendationReason = string.Empty;
     private double _recommendationConfidence;
     private bool _isSelected;
+    private bool _isFavorite;
+    private readonly RelayCommand _toggleFavoriteCommand;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -98,6 +100,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
         _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
         _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
+        _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
 
         _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
 
@@ -471,6 +474,33 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         get => _isSelected;
         set => SetProperty(ref _isSelected, value);
+    }
+
+    public bool IsFavorite
+    {
+        get => _isFavorite;
+        set
+        {
+            if (SetProperty(ref _isFavorite, value))
+            {
+                OnPropertyChanged(nameof(FavoriteIcon));
+                FavoriteChanged?.Invoke(this, value);
+            }
+        }
+    }
+
+    public string FavoriteIcon => _isFavorite ? "★" : "☆";
+
+    public ICommand ToggleFavoriteCommand => _toggleFavoriteCommand;
+
+    /// <summary>
+    /// Event raised when favorite status changes. TweaksViewModel subscribes to persist changes.
+    /// </summary>
+    public event Action<TweakItemViewModel, bool>? FavoriteChanged;
+
+    private void ToggleFavorite()
+    {
+        IsFavorite = !IsFavorite;
     }
 
     public string StatusMessage
