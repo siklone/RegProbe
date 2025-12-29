@@ -93,6 +93,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -397,8 +398,94 @@
                 </Grid>
             </Border>
 
+            <!-- Recent Activity Timeline -->
+            <Border Grid.Row="3" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,16"
+                    Visibility="{Binding HasRecentActivity, Converter={StaticResource BoolToVisibility}}">
+                <StackPanel>
+                    <Grid Margin="0,0,0,12">
+                        <TextBlock Text="📋 Recent Activity" FontSize="16" FontWeight="SemiBold" Foreground="#ECEFF4"/>
+                        <Button Command="{Binding RefreshActivityCommand}"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="8,4"
+                                ToolTip="Refresh activity timeline">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                                        <TextBlock Text="🔄" FontSize="14"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#3B4252"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding RecentActivity}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#3B4252" CornerRadius="6" Padding="12,8" Margin="0,0,0,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Action Icon -->
+                                        <Border Grid.Column="0" Width="28" Height="28" CornerRadius="14" Margin="0,0,12,0"
+                                                Background="{Binding StatusColor}">
+                                            <TextBlock Text="{Binding ActionIcon}"
+                                                       FontSize="12"
+                                                       Foreground="#2E3440"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Tweak Info -->
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TweakName}"
+                                                       Foreground="#ECEFF4"
+                                                       FontSize="12"
+                                                       FontWeight="Medium"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                <TextBlock Text="{Binding Action}"
+                                                           Foreground="#88C0D0"
+                                                           FontSize="10"/>
+                                                <TextBlock Text=" • "
+                                                           Foreground="#4C566A"
+                                                           FontSize="10"/>
+                                                <TextBlock Text="{Binding Message}"
+                                                           Foreground="#D8DEE9"
+                                                           FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           MaxWidth="300"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Time -->
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{Binding TimeAgo}"
+                                                   Foreground="#4C566A"
+                                                   FontSize="10"
+                                                   VerticalAlignment="Center"
+                                                   ToolTip="{Binding TimestampFormatted}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
             <!-- Quick Actions Grid -->
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

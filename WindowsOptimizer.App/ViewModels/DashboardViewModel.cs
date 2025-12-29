@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Core.Security;
@@ -18,6 +19,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private readonly AppPaths _paths;
     private readonly VssSnapshotService _vssService = new();
     private readonly BootTimeTracker _bootTimeTracker;
+    private readonly ITweakLogStore _logStore;
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
     private int _tweaksRolledBack;
@@ -28,6 +30,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
+    private IReadOnlyList<ActivityTimelineItem> _recentActivity = Array.Empty<ActivityTimelineItem>();
     private TweaksViewModel? _tweaksViewModel;
 
     // Navigation callback - set by MainViewModel
@@ -41,8 +44,11 @@ public sealed class DashboardViewModel : ViewModelBase
         _paths = AppPaths.FromEnvironment();
         _bootTimeTracker = new BootTimeTracker(_paths);
         _bootTimeTracker.RecordCurrentBoot();
+        _logStore = new FileTweakLogStore(_paths);
         LoadStatistics();
+        _ = LoadRecentActivityAsync();
         ScanAllCommand = new RelayCommand(_ => ScanAllTweaksAsync(), _ => !IsScanning);
+        RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
 
         // Category navigation commands
         NavigateToPrivacyCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("privacy"));
@@ -278,6 +284,44 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public bool HasBootTimeHistory => RecentBootDurations.Count > 1;
 
+    // Recent Activity Timeline
+    public ICommand RefreshActivityCommand { get; }
+
+    public IReadOnlyList<ActivityTimelineItem> RecentActivity
+    {
+        get => _recentActivity;
+        private set
+        {
+            if (SetProperty(ref _recentActivity, value))
+            {
+                OnPropertyChanged(nameof(HasRecentActivity));
+            }
+        }
+    }
+
+    public bool HasRecentActivity => RecentActivity.Count > 0;
+
+    private async Task LoadRecentActivityAsync()
+    {
+        try
+        {
+            var entries = await _logStore.GetRecentHistoryAsync(10, CancellationToken.None);
+            RecentActivity = entries
+                .Select(e => new ActivityTimelineItem(
+                    e.Timestamp.LocalDateTime,
+                    e.TweakName,
+                    e.Action.ToString(),
+                    e.Status == Core.TweakStatus.Applied || e.Status == Core.TweakStatus.RolledBack,
+                    e.Message))
+                .ToList()
+                .AsReadOnly();
+        }
+        catch
+        {
+            RecentActivity = Array.Empty<ActivityTimelineItem>();
+        }
+    }
+
     private void LoadStatistics()
     {
         // These will be updated live by MainViewModel from TweaksViewModel.
@@ -420,5 +464,50 @@ public sealed class DashboardViewModel : ViewModelBase
         if (bytes < 1024 * 1024 * 1024)
             return $"{bytes / (1024.0 * 1024.0):F2} MB";
         return $"{bytes / (1024.0 * 1024.0 * 1024.0):F2} GB";
+    }
+}
+
+/// <summary>
+/// Represents a single activity item in the timeline.
+/// </summary>
+public sealed class ActivityTimelineItem
+{
+    public ActivityTimelineItem(DateTime timestamp, string tweakName, string action, bool success, string message)
+    {
+        Timestamp = timestamp;
+        TweakName = tweakName;
+        Action = action;
+        Success = success;
+        Message = message;
+    }
+
+    public DateTime Timestamp { get; }
+    public string TweakName { get; }
+    public string Action { get; }
+    public bool Success { get; }
+    public string Message { get; }
+
+    public string TimestampFormatted => Timestamp.ToString("MMM dd, HH:mm");
+    public string TimeAgo => FormatTimeAgo(DateTime.Now - Timestamp);
+
+    public string ActionIcon => Action.ToLowerInvariant() switch
+    {
+        "apply" => "✓",
+        "rollback" => "↩",
+        "detect" => "🔍",
+        "preview" => "👁",
+        "verify" => "✔",
+        _ => "•"
+    };
+
+    public string StatusColor => Success ? "#A3BE8C" : "#BF616A";
+
+    private static string FormatTimeAgo(TimeSpan span)
+    {
+        if (span.TotalMinutes < 1) return "just now";
+        if (span.TotalMinutes < 60) return $"{(int)span.TotalMinutes}m ago";
+        if (span.TotalHours < 24) return $"{(int)span.TotalHours}h ago";
+        if (span.TotalDays < 7) return $"{(int)span.TotalDays}d ago";
+        return $"{(int)(span.TotalDays / 7)}w ago";
     }
 }
