@@ -3,8 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Input;
 using WindowsOptimizer.App.Utilities;
+using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -12,6 +14,7 @@ namespace WindowsOptimizer.App.ViewModels;
 public sealed class DashboardViewModel : ViewModelBase
 {
     private readonly AppPaths _paths;
+    private readonly VssSnapshotService _vssService = new();
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
     private int _tweaksRolledBack;
@@ -20,6 +23,8 @@ public sealed class DashboardViewModel : ViewModelBase
     private int _healthTweaksTotal;
     private int _healthTweaksApplied;
     private bool _isScanning;
+    private bool _isCreatingRestorePoint;
+    private string _restorePointStatusMessage = string.Empty;
     private TweaksViewModel? _tweaksViewModel;
 
     // Navigation callback - set by MainViewModel
@@ -48,6 +53,7 @@ public sealed class DashboardViewModel : ViewModelBase
         NavigateToRolledBackTweaksCommand = new RelayCommand(_ => NavigateToStatusFilterRequested?.Invoke("rolledback"));
         OpenLogFileCommand = new RelayCommand(_ => OpenLogFile(), _ => File.Exists(_paths.TweakLogFilePath));
         OpenLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
+        CreateRestorePointCommand = new RelayCommand(_ => CreateRestorePointAsync(), _ => !IsCreatingRestorePoint);
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -69,6 +75,25 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand NavigateToRolledBackTweaksCommand { get; }
     public ICommand OpenLogFileCommand { get; }
     public ICommand OpenLogFolderCommand { get; }
+    public ICommand CreateRestorePointCommand { get; }
+
+    public bool IsCreatingRestorePoint
+    {
+        get => _isCreatingRestorePoint;
+        private set
+        {
+            if (SetProperty(ref _isCreatingRestorePoint, value))
+            {
+                ((RelayCommand)CreateRestorePointCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public string RestorePointStatusMessage
+    {
+        get => _restorePointStatusMessage;
+        private set => SetProperty(ref _restorePointStatusMessage, value);
+    }
 
     public bool IsScanning
     {
@@ -94,6 +119,37 @@ public sealed class DashboardViewModel : ViewModelBase
         finally
         {
             IsScanning = false;
+        }
+    }
+
+    private async void CreateRestorePointAsync()
+    {
+        if (IsCreatingRestorePoint) return;
+
+        IsCreatingRestorePoint = true;
+        RestorePointStatusMessage = "Creating system restore point...";
+
+        try
+        {
+            var description = $"Windows Optimizer - {DateTime.Now:yyyy-MM-dd HH:mm}";
+            var result = await _vssService.CreateSnapshotAsync(description, CancellationToken.None);
+
+            if (result.Success)
+            {
+                RestorePointStatusMessage = $"Restore point created: {result.Description}";
+            }
+            else
+            {
+                RestorePointStatusMessage = $"Failed: {result.ErrorMessage}";
+            }
+        }
+        catch (Exception ex)
+        {
+            RestorePointStatusMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            IsCreatingRestorePoint = false;
         }
     }
 
