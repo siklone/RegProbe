@@ -179,6 +179,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         LoadProviderTweaks();
         LoadPlugins();
+        ApplyTweakMetadata();
         UpdateFilterSummary();
         _ = InitializePresetsAsync();
 
@@ -238,6 +239,38 @@ public sealed class TweaksViewModel : ViewModelBase
 
     private void LoadProviderTweaks()
     {
+        if (_providerList != null)
+        {
+            var existingIds = new HashSet<string>(
+                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
+                StringComparer.OrdinalIgnoreCase);
+
+            var tweakContext = new TweakContext(
+                _localRegistryAccessor,
+                _elevatedRegistryAccessor,
+                _elevatedServiceManager,
+                _elevatedTaskManager,
+                _elevatedFileSystemAccessor,
+                _elevatedCommandRunner);
+
+            foreach (var provider in _providerList)
+            {
+                var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
+                foreach (var tweak in providerTweaks)
+                {
+                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
+                    {
+                        continue;
+                    }
+
+                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
+                }
+            }
+        }
+    }
+
+    private void ApplyTweakMetadata()
+    {
         var aeroShake = Tweaks.FirstOrDefault(t => t.Id == "system.aero-shake");
         if (aeroShake != null)
         {
@@ -285,50 +318,12 @@ public sealed class TweaksViewModel : ViewModelBase
         }
 
         var priority = Tweaks.FirstOrDefault(t => t.Id == "system.priority-control");
-        if (priority == null)
-        {
-            // If it doesn't exist in the core collection yet, we can create a dummy one for UI demo
-            // But ideally we should add it to the main Tweaks collection initialization.
-            // For now, let's assume it exists or we add it here if missing.
-        }
-        else
+        if (priority != null)
         {
             priority.RegistryPath = @"HKLM\System\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation";
             priority.CodeExample = "Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\PriorityControl' -Name Win32PrioritySeparation -Value 38";
             priority.PriorityCalculator = new PriorityCalculatorViewModel { Bitmask = 0x26 };
             priority.ReferenceLinks.Add(new ReferenceLink("MSDN PriorityControl", "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities"));
-        }
-
-        // Example nested tweaks registration (demonstrating the dot notation)
-        // IDs: explorer.context-menu.remove-cast, explorer.context-menu.remove-share, etc.
-
-        if (_providerList != null)
-        {
-            var existingIds = new HashSet<string>(
-                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
-                StringComparer.OrdinalIgnoreCase);
-
-            var tweakContext = new TweakContext(
-                _localRegistryAccessor,
-                _elevatedRegistryAccessor,
-                _elevatedServiceManager,
-                _elevatedTaskManager,
-                _elevatedFileSystemAccessor,
-                _elevatedCommandRunner);
-
-            foreach (var provider in _providerList)
-            {
-                var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
-                foreach (var tweak in providerTweaks)
-                {
-                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
-                    {
-                        continue;
-                    }
-
-                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
-                }
-            }
         }
     }
 

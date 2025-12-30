@@ -34,6 +34,18 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - `AudioTweakProvider` - 4+ audio tweaks
   - `MiscTweakProvider` - 8+ misc tweaks
 
+- **Legacy tweak catalog restored (2025-12-30)**
+  - Added `LegacyTweakProvider` to restore the 224-tweak catalog after the refactor.
+  - Providers load first; legacy provider fills missing IDs (deduped).
+  - Metadata enrichment now runs after all tweaks/plugins load.
+  - Files: `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs`,
+    `WindowsOptimizer.App/ViewModels/MainViewModel.cs`,
+    `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+
+- **Theme switching fix (runtime)**
+  - Styles now use `DynamicResource` for theme-bound brushes so Light/Dark updates propagate.
+  - Files: `WindowsOptimizer.App/Resources/Styles.xaml`
+
 - **Durable rollback state persistence**
   - `RollbackStateStore` persists original values to `%AppData%\WindowsOptimizerSuite\rollback-state.json`
 
@@ -67,6 +79,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 
 5) **Memory leak testing**
    - Monitor page should be stress-tested (1hr) to verify no memory leaks.
+
+6) **Legacy provider cleanup**
+   - `LegacyTweakProvider` is a bridge to restore missing tweaks.
+   - Remaining work: migrate leftover tweaks into category providers and remove legacy provider once parity is reached.
 
 ## Guardrails (Do Not Break)
 
@@ -117,3 +133,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs` - New
 - `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` - New
 - `WindowsOptimizer.App/Services/TweakProviders/MiscTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs` - Restored legacy tweak catalog
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Added legacy provider to load order
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Apply tweak metadata after load
+- `WindowsOptimizer.App/Resources/Styles.xaml` - Theme-bound resources switched to DynamicResource

@@ -33,6 +33,7 @@
 - **Phase 8: TweaksViewModel Refactoring (4500→1300 lines)**
 - **10 TweakProvider implementations (modular architecture)**
 - **Plugin SDK with HelloWorld example**
+- **Legacy tweak catalog restored (temporary bridge via LegacyTweakProvider)**
 
 ### What's NOT Working / Incomplete
 - Network Adapters monitoring (may show empty)
@@ -70,6 +71,7 @@
 | Memory leak testing | `MonitorViewModel.cs`, `*Monitor.cs` | Medium | 1hr stress test needed |
 | Log rotation | `ElevatedHostClient.cs`, others with logging | Low | Prevent huge log files |
 | Structured logging | Multiple files | Medium | JSON format with levels |
+| Legacy provider migration | `LegacyTweakProvider.cs`, `TweakProviders/*.cs` | Medium | Move remaining tweaks into category providers |
 
 ### LOW (Nice to Have)
 

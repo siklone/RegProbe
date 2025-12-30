@@ -5,6 +5,8 @@
 
 ---
 
+> Not (2025-12-30): `LegacyTweakProvider` geçici bir geri uyumluluk katmanı. Yeni tweakler doğrudan kategori provider'lara eklenmeli.
+
 ## 📋 İçindekiler
 
 1. [Güvenlik Kuralları](#güvenlik-kuralları)

@@ -1,4 +1,5 @@
 # Tweak Implementation Guide
+> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.

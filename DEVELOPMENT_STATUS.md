@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 27, 2025
+**Last Updated:** December 30, 2025
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -241,6 +241,25 @@
 
 ---
 
+### 12. Legacy Tweak Catalog Restore + Metadata Ordering (Commit: pending)
+**Problem:** Total tweak count dropped after provider refactor; several tweaks disappeared from the UI.
+
+**Solution:**
+- Added `LegacyTweakProvider` to restore the original 224-tweak catalog.
+- Providers load first; legacy provider fills missing IDs (deduped).
+- Tweak metadata enrichment (registry paths, references, sub-options) now runs **after** all tweaks/plugins load.
+- Theme switching fix: Styles now use `DynamicResource` for theme-bound brushes.
+
+**Files Changed:**
+- `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `WindowsOptimizer.App/Resources/Styles.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (tweak count + theme switch)
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
@@ -308,6 +327,21 @@
 **Workaround:** Accept UAC prompt quickly when it appears
 
 **Priority:** Low - expected Windows security behavior
+
+---
+
+### 4. **Legacy Provider Migration Needed**
+**Severity:** Medium
+**Status:** ⚠️ **PENDING**
+
+**Description:**
+- `LegacyTweakProvider` restores missing tweaks but duplicates the refactored provider catalog.
+- Long-term plan: migrate remaining tweaks into category providers and remove legacy provider.
+
+**Recommendation:**
+- Audit provider parity vs legacy list.
+- Move remaining tweaks into category providers.
+- Remove legacy provider once parity is verified.
 
 ---
 

@@ -196,6 +196,23 @@
 
 ---
 
+### 11. Legacy TweakProvider Migration (Parite Temizliği)
+**Dosyalar:**
+- `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs`
+- `WindowsOptimizer.App/Services/TweakProviders/*.cs`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Legacy tweak listesi ile provider paritesini karşılaştır
+- [ ] Eksik tweakleri kategori provider'lara taşı
+- [ ] Duplicate ID temizliği
+- [ ] Parite sağlandıktan sonra `LegacyTweakProvider` kaldır
+
+---
+
 ## 🟢 DÜŞÜK - Gelecek Versiyon
 
 ### 11. Platform Tespiti Başlangıç Uyarısı

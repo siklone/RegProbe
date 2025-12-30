@@ -17,7 +17,7 @@ Windows Optimizer, WPF ve .NET 8 ile geliştirilmiş, güvenli ve geri alınabil
 | Toplam Proje Sayısı | 6 |
 | C# Dosya Sayısı | 64+ |
 | XAML Dosya Sayısı | 12 |
-| TweakProvider Sayısı | 11 |
+| TweakProvider Sayısı | 12 |
 | Tweak Tip Sayısı | 50+ |
 | Kod Satırı (TweaksViewModel) | ~1,300 (4,500'den azaltıldı) |
 | Kod Satırı (Toplam Tahmini) | 15,000+ |
@@ -226,6 +226,7 @@ WindowsOptimizer.App/
 | `SecurityTweakProvider` | Security | Güvenlik ayarları |
 | `SystemTweakProvider` | System | Windows sistem ayarları |
 | `VisibilityTweakProvider` | Visibility | UI/UX görünürlük ayarları |
+| `LegacyTweakProvider` | Legacy | Refactor sonrası eksik tweakleri geçici olarak geri yükler |
 | `BaseTweakProvider` | (Abstract) | Ortak provider mantığı |
 
 ### Provider Mimarisi

@@ -95,6 +95,8 @@ Open `WindowsOptimizerSuite.slnx` in Visual Studio and press F5.
 
 Edit the appropriate provider in `WindowsOptimizer.App/Services/TweakProviders/`:
 
+> Note: `LegacyTweakProvider` is temporary to restore missing tweaks. Do not add new tweaks there.
+
 ```csharp
 public class PrivacyTweakProvider : BaseTweakProvider
 {

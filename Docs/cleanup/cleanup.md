@@ -1,4 +1,5 @@
 # WinSxS Folder
+> Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 > **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
 

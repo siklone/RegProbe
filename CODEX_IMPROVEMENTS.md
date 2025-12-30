@@ -5,6 +5,8 @@
 
 ---
 
+> Not (2025-12-30): `LegacyTweakProvider` geçici bir köprü olarak eklendi. Parite tamamlandıktan sonra kategori provider'lara taşınıp kaldırılmalı.
+
 ## 📋 İçindekiler
 
 1. [Kod Kalitesi İyileştirmeleri](#kod-kalitesi-iyileştirmeleri)

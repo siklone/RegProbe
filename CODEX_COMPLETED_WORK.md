@@ -74,7 +74,7 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] `FileRenameTweak` - Dosya yeniden adlandırma
 - [x] `CommandTweak` - Komut çalıştırma
 
-### TweakProvider'lar (11 Adet)
+### TweakProvider'lar (12 Adet)
 - [x] `AudioTweakProvider` - Ses ayarları
 - [x] `MiscTweakProvider` - Çeşitli tweakler
 - [x] `NetworkTweakProvider` - Ağ optimizasyonu
@@ -86,6 +86,7 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] `SystemTweakProvider` - Sistem ayarları
 - [x] `VisibilityTweakProvider` - Görünürlük
 - [x] `BaseTweakProvider` - Ortak temel sınıf
+- [x] `LegacyTweakProvider` - Geçici geri uyumluluk (eksik tweakleri geri getirir)
 
 ---
 

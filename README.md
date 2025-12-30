@@ -58,6 +58,7 @@ All tweaks are organized into modular `ITweakProvider` implementations:
 - **BaseTweakProvider**: Abstract base with helper methods
 - **Category-specific providers**: Each provider handles its domain
 - **Dependency Injection**: Providers injected into TweaksViewModel
+- **LegacyTweakProvider (temporary)**: Restores legacy tweaks pending full migration
 
 ### Plugin SDK
 ```csharp

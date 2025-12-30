@@ -53,7 +53,7 @@ Windows Optimizer follows a clean, layered architecture with clear separation of
 
 **Key Components**:
 - `TweakExecutionPipeline`: Orchestrates Detect → Apply → Verify → Rollback
-- `ITweakProvider` implementations (10 categories)
+- `ITweakProvider` implementations (11 categories + legacy bridge)
 - Concrete tweak types (RegistryValueTweak, ServiceTweak, CommandTweak, etc.)
 
 **Provider Pattern**:
@@ -127,6 +127,7 @@ Each tweak category has its own provider:
 - `SystemTweakProvider`
 - `PrivacyTweakProvider`
 - `SecurityTweakProvider`
+- `LegacyTweakProvider` (temporary parity layer)
 - etc.
 
 **Benefits**:

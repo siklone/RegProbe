@@ -1,12 +1,17 @@
 # Claude Notes (Windows Optimizer)
 
-**Last Updated:** 2025-12-27  
+**Last Updated:** 2025-12-30  
 **Branch:** `main`
 
 Start with:
 - `HANDOFF_REPORT.md` (what changed recently + what’s incomplete)
 - `DEVELOPMENT_STATUS.md` (known issues + recent fixes)
 - `AGENTS.md` (non-negotiable safety/architecture rules)
+
+Current focus (2025-12-30):
+- Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
+- Theme switching fix: Styles now use `DynamicResource` for theme-bound brushes.
+- Next: migrate remaining legacy tweaks into category providers and remove legacy provider.
 
 ## Quick Commands
 
@@ -27,4 +32,3 @@ Start with:
 - Do NOT add “disable Defender/Firewall/SmartScreen” under SAFE
 - Admin-required operations must run via ElevatedHost (separate process)
 - All actions must be logged; logs must be exportable
-
