@@ -155,11 +155,11 @@
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Beklemede
+**Durum:** 🧪 Uygulandı (test gerekli)
 
 **Yapılacaklar:**
-- [ ] Kart kapalıyken `Current → Target` satırı göster
-- [ ] Etki alanı (Registry/Service/Task) kısa etiketle
+- [x] Kart kapalıyken `Current → Target` satırı göster
+- [x] Etki alanı (Registry/Service/Task vb.) kısa etiketle
 - [ ] Durum ikonları netleştir (Applied/Mixed/Error)
 
 ---

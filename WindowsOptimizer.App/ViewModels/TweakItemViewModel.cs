@@ -14,6 +14,8 @@ using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Commands;
+using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -184,6 +186,10 @@ public sealed class TweakItemViewModel : ViewModelBase
             RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak => "Registry",
             ServiceStartModeBatchTweak => "Service",
             ScheduledTaskBatchTweak => "Task",
+            SettingsToggleTweak => "Settings",
+            FileCleanupTweak or FileRenameTweak => "File",
+            CommandTweak => "Command",
+            CompositeTweak => "Composite",
             _ => "Other"
         };
         return Utilities.StringPool.GetImpactArea(area);
@@ -285,6 +291,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasDiff));
                 OnPropertyChanged(nameof(CompactInfoLine));
+                OnPropertyChanged(nameof(CompactInfoTooltip));
             }
         }
     }
@@ -297,13 +304,14 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _targetValue, value))
             {
                 OnPropertyChanged(nameof(CompactInfoLine));
+                OnPropertyChanged(nameof(CompactInfoTooltip));
             }
         }
     }
 
     public string ImpactAreaLabel => _impactAreaLabel;
 
-    public bool HasCompactInfoLine => ImpactAreaLabel is "Registry" or "Service" or "Task";
+    public bool HasCompactInfoLine => !string.IsNullOrWhiteSpace(ImpactAreaLabel);
 
     public string CompactInfoLine
     {
@@ -316,9 +324,11 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
             var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
-            return $"{ImpactAreaLabel}: {current} → {target}";
+            return $"{current} → {target}";
         }
     }
+
+    public string CompactInfoTooltip => $"{ImpactAreaLabel}: {CompactInfoLine}";
 
     public bool IsRecommended
     {

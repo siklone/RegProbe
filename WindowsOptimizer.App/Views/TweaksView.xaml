@@ -664,15 +664,32 @@
 	                                </Border>
 	                            </StackPanel>
 	                            <TextBlock Text="{Binding Description}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10" TextTrimming="CharacterEllipsis"/>
-	                            <TextBlock Text="{Binding CompactInfoLine}"
-	                                       Foreground="{DynamicResource ForegroundLightBrush}"
-	                                       FontSize="10"
-	                                       FontFamily="Consolas"
-	                                       Margin="0,2,0,0"
-	                                       Opacity="0.85"
-	                                       TextTrimming="CharacterEllipsis"
-	                                       Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"
-	                                       ToolTip="{Binding CompactInfoLine}"/>
+	                            <Grid Margin="0,2,0,0"
+	                                  Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"
+	                                  ToolTip="{Binding CompactInfoTooltip}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{DynamicResource BackgroundMediumBrush}"
+                                            BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Padding="6,1"
+                                            Margin="0,0,6,0">
+                                        <TextBlock Text="{Binding ImpactAreaLabel}"
+                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                   FontSize="9"
+                                                   FontWeight="SemiBold"/>
+                                    </Border>
+	                                <TextBlock Grid.Column="1"
+	                                           Text="{Binding CompactInfoLine}"
+	                                           Foreground="{DynamicResource ForegroundLightBrush}"
+	                                           FontSize="10"
+	                                           FontFamily="Consolas"
+	                                           Opacity="0.85"
+	                                           TextTrimming="CharacterEllipsis"/>
+	                            </Grid>
 	                        </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">

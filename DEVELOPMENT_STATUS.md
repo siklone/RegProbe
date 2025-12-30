@@ -321,6 +321,21 @@
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
 
+---
+
+### 17. Tweak Card Compact Summary (Commit: pending)
+**Problem:** Collapsed tweak cards did not surface `Current → Target` + impact area.
+
+**Solution:**
+- Added an impact area badge (Registry/Service/Task/etc.).
+- One-line `Current → Target` summary shown on the card.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
 

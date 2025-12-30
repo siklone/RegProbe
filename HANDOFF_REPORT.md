@@ -93,6 +93,12 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`,
     `WindowsOptimizer.App/ViewModels/StartupScanProgress.cs`
 
+- **Tweak card compact summary (2025-12-30)**
+  - Collapsed cards now show an area badge (Registry/Service/Task/etc.)
+    plus `Current → Target` on a single line.
+  - Files: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
