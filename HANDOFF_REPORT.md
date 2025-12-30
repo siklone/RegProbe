@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2025-12-31
+**Last Updated:** 2025-12-30
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -66,6 +66,23 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Files: `scripts/generate_tweak_catalog.py`, `Docs/tweaks/tweak-catalog.html`,
     `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`, `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
 
+- **Startup scan + theme init ordering (2025-12-30)**
+  - Theme is applied before any window shows (reduces dark→light flicker).
+  - Splash renders first; scan runs before showing MainWindow.
+  - Files: `WindowsOptimizer.App/App.xaml.cs`, `WindowsOptimizer.App/StartupWindow.xaml`
+
+- **Detect runs off the UI thread (2025-12-30)**
+  - `DetectStatusAsync` now uses a background task to avoid UI stalls.
+  - File: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+- **Monitor card reveal/hover animation (safe transforms only) (2025-12-30)**
+  - Added fade + lift on load; subtle hover scale without Freezable animation.
+  - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+- **Tweak source links from catalog CSV (2025-12-30)**
+  - UI surfaces `Source file` links from `Docs/tweaks/tweak-catalog.csv`.
+  - File: `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -111,6 +128,17 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
    - `LegacyTweakProvider` is a bridge to restore missing tweaks.
    - Remaining work: migrate leftover tweaks into category providers and remove legacy provider once parity is reached.
 
+7) **Startup scan + theme flicker verification**
+   - Theme now applies before splash, but needs Windows verification.
+   - Verify no main-window flicker and no UI freeze during scan.
+
+8) **Tweak docs depth**
+   - Docs are linked, but per-tweak “what it changes / risk / source” content is still sparse.
+   - Add anchored sections per tweak or per subcategory where practical.
+
+9) **Monitor UX modernization**
+   - Animations added, but overall layout and charts still need a compact + modern pass.
+
 ## Guardrails (Do Not Break)
 
 - **SAFE tweaks must be reversible**: Detect → Apply → Verify → Rollback
@@ -143,9 +171,19 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 1. ~~TweaksViewModel Refactoring~~ ✅ DONE (Phase 8)
 2. ~~TweakProvider implementations~~ ✅ DONE
 3. **Windows 10/11 native testing** (PRIORITY)
-4. **WiX MSI Installer setup** (PRIORITY)
-5. Memory optimization / leak testing
-6. Optional: crash recovery modal + per-tweak selection
+4. **Startup scan/theme flicker verification** (PRIORITY)
+5. **Tweak card summary (Current → Target + Area)**
+6. **Docs depth pass (per-tweak summary + anchors)**
+7. **Monitor UX modernization (compact + smooth)**
+8. **WiX MSI Installer setup** (PRIORITY)
+9. Memory optimization / leak testing
+10. Optional: crash recovery modal + per-tweak selection
+
+## Agent Verification Checklist (Please Validate)
+- Confirm theme loads before splash (no dark→light flash).
+- Confirm startup scan doesn’t stall UI (splash stays responsive).
+- Confirm `Source file` links open the correct local file.
+- Confirm Monitor animations don’t trigger Freezable animation errors.
 
 ## Files Changed This Session (2025-12-30)
 
@@ -164,6 +202,16 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Added legacy provider to load order
 - `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Apply tweak metadata after load
 - `WindowsOptimizer.App/Resources/Styles.xaml` - Theme-bound resources switched to DynamicResource
+
+## Files Changed This Session (2025-12-30 - Latest)
+
+- `WindowsOptimizer.App/App.xaml.cs` - Theme init before splash + render yield
+- `WindowsOptimizer.App/StartupWindow.xaml` - Splash copy updated
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Detect runs off UI thread
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Monitor card reveal/hover animation
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Source file links from CSV
+- `Docs/tweaks/tweaks.md` - Docs note for catalog + source linking
+- `HANDOFF_REPORT.md`, `CODEX_PLAN.md`, `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `CLAUDE.md` - Roadmap + agent checklist updates
 
 ## Files Changed This Session (2025-12-31)
 

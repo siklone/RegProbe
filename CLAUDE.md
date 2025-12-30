@@ -1,6 +1,6 @@
 # Claude Notes (Windows Optimizer)
 
-**Last Updated:** 2025-12-31  
+**Last Updated:** 2025-12-30  
 **Branch:** `main`
 
 Start with:
@@ -12,7 +12,15 @@ Current focus (2025-12-31):
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
-- Next: verify light theme on Windows 10/11 and migrate remaining legacy tweaks into category providers.
+- Startup flow: theme applies before splash + scan runs before MainWindow.
+- Docs linking now also shows `Source file` from catalog CSV.
+- Next: verify light theme + startup flicker, improve tweak docs depth, and migrate remaining legacy tweaks into category providers.
+
+Agent checks requested:
+- Verify no dark→light flicker on startup (splash + main).
+- Confirm splash stays responsive while scan runs.
+- Validate `Source file` links open the correct local file.
+- Verify Monitor animations are smooth (no Freezable animation errors).
 
 ## Quick Commands
 

@@ -1,6 +1,6 @@
 # 📋 Windows Optimizer - Yapılacaklar Listesi (TODO)
 
-**Son Güncelleme:** 31 Aralık 2025  
+**Son Güncelleme:** 30 Aralık 2025  
 **Versiyon:** 1.0.0
 
 ---
@@ -125,6 +125,74 @@
 
 **Yapılanlar:**
 - [x] CPU Temp kartında tooltip açıklaması eklendi (N/A durumunu açıklar)
+
+---
+
+### 6.1 Splash + Tema Flicker / Scan Donması
+**Dosyalar:**
+- `WindowsOptimizer.App/App.xaml.cs`
+- `WindowsOptimizer.App/StartupWindow.xaml`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+
+**Çaba:** Orta  
+**Durum:** 🧪 Test gerekli
+
+**Yapılanlar:**
+- [x] Tema splash açılmadan önce uygulanıyor
+- [x] Splash render edilip sonra scan başlıyor
+- [x] Detect işlemleri UI thread’i daha az bloklar
+
+**Yapılacaklar:**
+- [ ] Windows 10/11’de flicker kalmadığını doğrula
+- [ ] Scan sırasında UI freeze olmadığını doğrula
+
+---
+
+### 6.2 Tweak Kartı Kısa Özet (Current → Target + Area)
+**Dosyalar:**
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Kart kapalıyken `Current → Target` satırı göster
+- [ ] Etki alanı (Registry/Service/Task) kısa etiketle
+- [ ] Durum ikonları netleştir (Applied/Mixed/Error)
+
+---
+
+### 6.3 Tweak Dokümantasyon Derinliği
+**Dosyalar:**
+- `Docs/tweaks/*.md`
+- `Docs/tweaks/tweak-catalog.csv`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Mevcut Durumlar:**
+- ✅ UI tarafında `Source file` linkleri CSV’den okunuyor
+
+**Yapılacaklar:**
+- [ ] Per‑tweak kısa açıklama (Changes / Risk / Source)
+- [ ] Docs içinde tweak başlıklarına anchor ekle
+
+---
+
+### 6.4 Monitor UI Modernizasyonu
+**Dosyalar:**
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Daha kompakt kart düzeni + okunabilir grafikler
+- [ ] Top 10 network process + disk IO per process
+- [ ] Save butonu ve toolbar’ı modernize et
 
 ---
 

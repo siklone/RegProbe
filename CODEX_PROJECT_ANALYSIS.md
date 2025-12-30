@@ -10,6 +10,12 @@
 
 Windows Optimizer, WPF ve .NET 8 ile geliştirilmiş, güvenli ve geri alınabilir Windows optimizasyon aracıdır. Temiz katmanlı mimari, MVVM deseni ve modüler yapıya sahiptir.
 
+### 🎯 Güncel Öncelikler (2025-12-30)
+- Startup akışı: tema flicker yok, splash render hızlı, scan UI’ı dondurmamalı.
+- Tweak kartı: kapalı halde `Current → Target` + etki alanı (Registry/Service/Task) görünmeli.
+- Dokümantasyon: per‑tweak kısa “ne değişir / risk / kaynak” satırları + anchor linkler.
+- Monitor UI: daha kompakt, modern ve bilgi yoğun (grafikler okunabilir).
+
 ### Proje İstatistikleri
 
 | Metrik | Değer |

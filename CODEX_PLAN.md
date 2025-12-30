@@ -62,6 +62,10 @@
 | Disk monitoring fallback | `DiskMonitor.cs` | Medium | LogicalDisk counters added, needs testing |
 | Monitor chart improvements | `MonitorView.xaml`, `MonitorViewModel.cs` | Medium | Add gridlines, min/max labels |
 | CPU temp tooltip | `MonitorViewModel.cs` | Low | Explain sensor availability |
+| Startup scan smoothness + theme flicker verification | `App.xaml.cs`, `StartupWindow.xaml`, `MainViewModel.cs` | Medium | Verify splash responsiveness + no dark→light flash |
+| Tweak card summary (Current → Target + Area) | `TweaksView.xaml`, `TweakItemViewModel.cs` | Medium | Show key info in collapsed state |
+| Tweak docs depth pass | `Docs/tweaks/*.md`, `TweakDocumentationLinker.cs` | Medium | Per-tweak anchors + short “what changes / risk / source” |
+| Monitor UX modernization | `MonitorView.xaml`, `MonitorViewModel.cs` | Medium | Compact layout, smoother visuals, more insight density |
 
 ### MEDIUM (Stability Improvements)
 
@@ -84,6 +88,59 @@
 ---
 
 ## Detailed Implementation Plan
+
+### Phase 0: UX & Documentation Polish (Start Here)
+
+#### 0.1 Startup Scan + Theme Smoothness
+**Goal:** Eliminate flicker + keep splash responsive while scanning
+
+**Steps:**
+1. Apply theme before showing splash (already implemented; verify on Windows)
+2. Ensure splash renders before scan begins (render yield)
+3. If scan still blocks: move DetectAllTweaksAsync to background with progress + cancellation
+4. Show a short “system scan may take a moment” note + progress text
+
+**Files to Review:**
+- `WindowsOptimizer.App/App.xaml.cs`
+- `WindowsOptimizer.App/StartupWindow.xaml`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+
+#### 0.2 Tweak Card Summary (Collapsed View)
+**Goal:** Make each tweak understandable without opening the card
+
+**Steps:**
+1. Add a 1-line summary: `Current → Target` + `Area (Registry/Service/Task)`
+2. Add tiny status badge (Applied/Not Applied/Mixed/Error)
+3. Ensure summary updates after Detect/Apply/Verify
+
+**Files to Review:**
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+#### 0.3 Tweak Documentation Depth
+**Goal:** Users can understand “what changes” + “why” quickly
+
+**Steps:**
+1. Add anchor sections per tweak/subcategory in `Docs/`
+2. Add short lines: `Changes:`, `Risk:`, `Source:`
+3. Keep “Catalog entry / Source file / Docs” links in the UI
+
+**Files to Review:**
+- `Docs/tweaks/*.md`
+- `Docs/tweaks/tweak-catalog.csv`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+
+#### 0.4 Monitor UX Modernization
+**Goal:** Compact + information-dense with smooth motion
+
+**Ideas:**
+1. Compact stat cards + clearer graphs (grid + min/max labels)
+2. Add top network processes and disk I/O per process
+3. Make Save button smaller, use inline toolbar
+
+**Files to Review:**
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
 
 ### Phase 1: Stabilization (Immediate)
 

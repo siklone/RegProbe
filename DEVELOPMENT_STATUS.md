@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 31, 2025
+**Last Updated:** December 30, 2025
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -260,6 +260,48 @@
 
 ---
 
+### 13. Startup Theme Flicker + Splash Render (Commit: `244f99d`)
+**Problem:** Splash could appear in dark theme then switch to light, and scanning could stall first render.
+
+**Solution:**
+- Apply theme before any window shows.
+- Yield to render before starting startup scan.
+- Keep splash visible while scan runs.
+
+**Files Changed:**
+- `WindowsOptimizer.App/App.xaml.cs`
+- `WindowsOptimizer.App/StartupWindow.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
+### 14. Detect Runs Off UI Thread (Commit: `244f99d`)
+**Problem:** Detect could stall the UI when many tweaks are scanned.
+
+**Solution:**
+- `DetectStatusAsync` executes pipeline work on a background task.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
+### 15. Monitor Card Reveal Animation + Source Links (Commits: `4b4a451`, `ce6def0`)
+**Problem:** Monitor visuals felt static and tweak sources were hard to find.
+
+**Solution:**
+- Monitor cards now animate with safe transform-based reveal + hover.
+- Tweak docs linker reads `tweak-catalog.csv` and adds `Source file` links.
+
+**Files Changed:**
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
 
@@ -458,6 +500,60 @@
 **Files to Review:**
 - `WindowsOptimizer.App/WindowsOptimizer.App.csproj`
 - Build scripts
+
+---
+
+### 4. **Startup Scan Still Feels Blocking**
+**Severity:** Medium
+**Status:** 🧪 **NEEDS VERIFICATION**
+
+**Description:**
+- Scan runs before MainWindow shows (by design).
+- If scan is heavy, splash may still feel “frozen”.
+
+**Recommendation:**
+- Verify on Windows 10/11 with full tweak catalog.
+- If still slow: move DetectAllTweaksAsync to background with progress + cancel.
+
+**Files to Review:**
+- `WindowsOptimizer.App/App.xaml.cs`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+
+---
+
+### 5. **Docs Linking: Template IDs**
+**Severity:** Low
+**Status:** ⚠️ **POSSIBLE**
+
+**Description:**
+- Some catalog entries use templated IDs (e.g., `cleanup.eventlog-{logName}`).
+- UI links may not match runtime IDs if templates aren’t expanded in CSV.
+
+**Recommendation:**
+- Ensure catalog generator expands template IDs or add runtime mapping.
+
+**Files to Review:**
+- `Docs/tweaks/tweak-catalog.csv`
+- `scripts/generate_tweak_catalog.py`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+
+---
+
+### 6. **Monitor Animations Regression Risk**
+**Severity:** Low
+**Status:** 🧪 **NEEDS VERIFICATION**
+
+**Description:**
+- New reveal/hover animations must avoid Freezable animation errors.
+- WPF can throw when animating shared/freezed objects.
+
+**Recommendation:**
+- Verify on Windows (dark/light themes).
+- Keep transforms `x:Shared="False"` and avoid animating brushes/effects.
+
+**Files to Review:**
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
 
 ---
 
