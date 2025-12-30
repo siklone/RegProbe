@@ -171,14 +171,15 @@
 - `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Beklemede
+**Durum:** 🧪 Kısmen uygulandı (test gerekli)
 
 **Mevcut Durumlar:**
 - ✅ UI tarafında `Source file` linkleri CSV’den okunuyor
+- ✅ Catalog artık `Description` + `Risk` içeriyor (CSV/MD/HTML)
 
 **Yapılacaklar:**
-- [ ] Per‑tweak kısa açıklama (Changes / Risk / Source)
-- [ ] Docs içinde tweak başlıklarına anchor ekle
+- [x] Per‑tweak kısa açıklama (Changes / Risk / Source) katalogda mevcut
+- [ ] Docs içinde tweak başlıklarına anchor ekle (kategori docs)
 
 ---
 

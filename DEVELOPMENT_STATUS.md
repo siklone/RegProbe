@@ -336,6 +336,26 @@
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
 
+---
+
+### 18. Tweak Catalog Changes/Risk Columns (Commit: pending)
+**Problem:** Docs did not provide per‑tweak “what changes” and risk at a glance.
+
+**Solution:**
+- Catalog generator now extracts description + risk for each tweak.
+- CSV/MD/HTML catalogs include `Changes` and `Risk` columns.
+- Docs linker now reads CSV headers instead of fixed indexes.
+
+**Files Changed:**
+- `scripts/generate_tweak_catalog.py`
+- `Docs/tweaks/tweak-catalog.md`
+- `Docs/tweaks/tweak-catalog.csv`
+- `Docs/tweaks/tweak-catalog.html`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `Docs/tweaks/tweaks.md`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
 

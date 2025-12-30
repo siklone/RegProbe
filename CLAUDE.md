@@ -16,6 +16,7 @@ Current focus (2025-12-31):
 - Splash shows scan progress (X/Y + current tweak).
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
+- Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
 - Next: verify light theme + startup flicker, improve tweak docs depth, and migrate remaining legacy tweaks into category providers.
 
 Agent checks requested:

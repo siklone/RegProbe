@@ -52,10 +52,19 @@ BASE_CALL_RE = re.compile(r":\s*base\s*\(")
 class TweakEntry:
     tweak_id: str
     name: str
+    description: str
+    risk: str
     category: str
     area: str
     source: str
     docs: str
+
+
+def shorten_description(text: str, limit: int = 140) -> str:
+    cleaned = " ".join(text.split())
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[: max(0, limit - 3)].rstrip() + "..."
 
 
 def find_matching_paren(text: str, start: int) -> int:
@@ -94,16 +103,20 @@ def find_matching_paren(text: str, start: int) -> int:
     return -1
 
 
-def extract_id_name(chunk: str) -> Tuple[Optional[str], Optional[str]]:
+def extract_metadata(chunk: str) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
     id_match = re.search(r"\bid\s*:\s*@?\"([^\"]+)\"", chunk)
     name_match = re.search(r"\bname\s*:\s*@?\"([^\"]+)\"", chunk)
-    if id_match and name_match:
-        return id_match.group(1), name_match.group(1)
+    desc_match = re.search(r"\bdescription\s*:\s*@?\"([^\"]+)\"", chunk)
+    risk_match = re.search(r"\brisk\s*:\s*TweakRiskLevel\.([A-Za-z]+)", chunk)
+    if not risk_match:
+        risk_match = re.search(r"\bTweakRiskLevel\.([A-Za-z]+)", chunk)
 
     strings = re.findall(r"@?\"([^\"]*)\"", chunk)
-    if len(strings) >= 2:
-        return strings[0], strings[1]
-    return None, None
+    tweak_id = id_match.group(1) if id_match else (strings[0] if len(strings) >= 1 else None)
+    name = name_match.group(1) if name_match else (strings[1] if len(strings) >= 2 else None)
+    description = desc_match.group(1) if desc_match else (strings[2] if len(strings) >= 3 else None)
+    risk = risk_match.group(1) if risk_match else None
+    return tweak_id, name, description, risk
 
 
 def infer_area(call_name: str, source_path: Path) -> str:
@@ -145,7 +158,7 @@ def doc_for_id(tweak_id: str) -> str:
     return DOC_MAP.get(prefix, DEFAULT_DOC)
 
 
-def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[Tuple[str, str, str]]:
+def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[Tuple[str, str, str, str, str]]:
     text = path.read_text(encoding="utf-8")
     for match in pattern.finditer(text):
         call_name = match.group("call")
@@ -156,16 +169,16 @@ def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[Tuple
         if close_paren == -1:
             continue
         chunk = text[open_paren + 1 : close_paren]
-        tweak_id, name = extract_id_name(chunk)
+        tweak_id, name, description, risk = extract_metadata(chunk)
         if not tweak_id or not name:
             continue
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         area = infer_area(call_name, path)
-        yield tweak_id, name, area, source
+        yield tweak_id, name, description or "", risk or "Unknown", area, source
 
 
-def extract_entries_from_base_call(path: Path) -> Iterable[Tuple[str, str, str]]:
+def extract_entries_from_base_call(path: Path) -> Iterable[Tuple[str, str, str, str, str]]:
     text = path.read_text(encoding="utf-8")
     for match in BASE_CALL_RE.finditer(text):
         open_paren = text.find("(", match.end() - 1)
@@ -175,13 +188,13 @@ def extract_entries_from_base_call(path: Path) -> Iterable[Tuple[str, str, str]]
         if close_paren == -1:
             continue
         chunk = text[open_paren + 1 : close_paren]
-        tweak_id, name = extract_id_name(chunk)
+        tweak_id, name, description, risk = extract_metadata(chunk)
         if not tweak_id or not name:
             continue
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         area = infer_area("base", path)
-        yield tweak_id, name, area, source
+        yield tweak_id, name, description or "", risk or "Unknown", area, source
 
 
 def collect_entries() -> List[TweakEntry]:
@@ -193,13 +206,15 @@ def collect_entries() -> List[TweakEntry]:
     for path in provider_paths:
         if path == legacy_path:
             continue
-        for tweak_id, name, area, source in extract_entries_from_file(path, CREATE_CALL_RE):
+        for tweak_id, name, description, risk, area, source in extract_entries_from_file(path, CREATE_CALL_RE):
             key = tweak_id.lower()
             if key in entries:
                 continue
             entries[key] = TweakEntry(
                 tweak_id=tweak_id,
                 name=name,
+                description=description,
+                risk=risk,
                 category=category_for_id(tweak_id),
                 area=area,
                 source=source,
@@ -207,25 +222,29 @@ def collect_entries() -> List[TweakEntry]:
             )
 
     for path in sorted(ENGINE_ROOT.rglob("*.cs")):
-        for tweak_id, name, area, source in extract_entries_from_file(path, NEW_CALL_RE):
+        for tweak_id, name, description, risk, area, source in extract_entries_from_file(path, NEW_CALL_RE):
             key = tweak_id.lower()
             if key in entries:
                 continue
             entries[key] = TweakEntry(
                 tweak_id=tweak_id,
                 name=name,
+                description=description,
+                risk=risk,
                 category=category_for_id(tweak_id),
                 area=area,
                 source=source,
                 docs=doc_for_id(tweak_id),
             )
-        for tweak_id, name, area, source in extract_entries_from_base_call(path):
+        for tweak_id, name, description, risk, area, source in extract_entries_from_base_call(path):
             key = tweak_id.lower()
             if key in entries:
                 continue
             entries[key] = TweakEntry(
                 tweak_id=tweak_id,
                 name=name,
+                description=description,
+                risk=risk,
                 category=category_for_id(tweak_id),
                 area=area,
                 source=source,
@@ -233,13 +252,15 @@ def collect_entries() -> List[TweakEntry]:
             )
 
     if legacy_path.exists():
-        for tweak_id, name, area, source in extract_entries_from_file(legacy_path, CREATE_CALL_RE):
+        for tweak_id, name, description, risk, area, source in extract_entries_from_file(legacy_path, CREATE_CALL_RE):
             key = tweak_id.lower()
             if key in entries:
                 continue
             entries[key] = TweakEntry(
                 tweak_id=tweak_id,
                 name=name,
+                description=description,
+                risk=risk,
                 category=category_for_id(tweak_id),
                 area=area,
                 source=source,
@@ -257,16 +278,17 @@ def write_markdown(entries: List[TweakEntry]) -> None:
         "",
         "Note: categories without a dedicated doc fall back to `Docs/tweaks/tweaks.md`.",
         "",
-        "| ID | Name | Category | Area | Source | Docs |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| ID | Name | Category | Area | Changes | Risk | Source | Docs |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for entry in entries:
         source = f"`{entry.source}`"
         docs = f"`{entry.docs}`"
         anchor = f"<a id=\"{html.escape(entry.tweak_id)}\"></a>"
+        changes = shorten_description(entry.description)
         lines.append(
-            f"| {anchor} `{entry.tweak_id}` | {entry.name} | {entry.category} | {entry.area} | {source} | {docs} |"
+            f"| {anchor} `{entry.tweak_id}` | {entry.name} | {entry.category} | {entry.area} | {changes} | {entry.risk} | {source} | {docs} |"
         )
 
     OUTPUT_MD.parent.mkdir(parents=True, exist_ok=True)
@@ -277,11 +299,13 @@ def write_csv(entries: List[TweakEntry]) -> None:
     OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["id", "name", "category", "area", "source", "docs"])
+        writer.writerow(["id", "name", "description", "risk", "category", "area", "source", "docs"])
         for entry in entries:
             writer.writerow([
                 entry.tweak_id,
                 entry.name,
+                entry.description,
+                entry.risk,
                 entry.category,
                 entry.area,
                 entry.source,
@@ -304,7 +328,8 @@ def write_html(entries: List[TweakEntry]) -> None:
         "    h1 { font-size: 22px; margin: 0 0 12px; }",
         "    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }",
         "    thead { background: #2f3a4a; color: #fff; }",
-        "    th, td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e8ef; }",
+        "    th, td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e8ef; vertical-align: top; }",
+        "    td.changes { max-width: 360px; }",
         "    tbody tr:nth-child(even) { background: #f9fafc; }",
         "    code { font-family: Consolas, monospace; font-size: 12px; }",
         "  </style>",
@@ -320,6 +345,8 @@ def write_html(entries: List[TweakEntry]) -> None:
         "          <th>Name</th>",
         "          <th>Category</th>",
         "          <th>Area</th>",
+        "          <th>Changes</th>",
+        "          <th>Risk</th>",
         "          <th>Source</th>",
         "          <th>Docs</th>",
         "        </tr>",
@@ -329,12 +356,15 @@ def write_html(entries: List[TweakEntry]) -> None:
 
     for entry in entries:
         tweak_id = html.escape(entry.tweak_id)
+        changes = html.escape(shorten_description(entry.description))
         lines.append(
             "        <tr id=\"{tweak_id}\">"
             "<td><code>{tweak_id}</code></td>"
             "<td>{name}</td>"
             "<td>{category}</td>"
             "<td>{area}</td>"
+            "<td class=\"changes\">{changes}</td>"
+            "<td>{risk}</td>"
             "<td><code>{source}</code></td>"
             "<td><code>{docs}</code></td>"
             "</tr>".format(
@@ -342,6 +372,8 @@ def write_html(entries: List[TweakEntry]) -> None:
                 name=html.escape(entry.name),
                 category=html.escape(entry.category),
                 area=html.escape(entry.area),
+                changes=changes,
+                risk=html.escape(entry.risk),
                 source=html.escape(entry.source),
                 docs=html.escape(entry.docs),
             )

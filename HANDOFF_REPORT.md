@@ -99,6 +99,14 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Files: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
     `WindowsOptimizer.App/Views/TweaksView.xaml`
 
+- **Tweak catalog now includes Changes + Risk (2025-12-30)**
+  - Catalog generator now extracts description + risk from tweak definitions.
+  - CSV/MD/HTML include new columns for quick per‑tweak summaries.
+  - Files: `scripts/generate_tweak_catalog.py`,
+    `Docs/tweaks/tweak-catalog.md`,
+    `Docs/tweaks/tweak-catalog.csv`,
+    `Docs/tweaks/tweak-catalog.html`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -234,6 +242,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Scan progress pipeline
 - `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Startup scan progress wiring
 - `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Progress reporting + cancellation
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - CSV header mapping for docs links
+- `scripts/generate_tweak_catalog.py` - Catalog now includes description + risk
+- `Docs/tweaks/tweak-catalog.md` - Changes/Risk columns
+- `Docs/tweaks/tweak-catalog.csv` - Description/Risk columns
+- `Docs/tweaks/tweak-catalog.html` - Changes/Risk columns
 
 ## Files Changed This Session (2025-12-31)
 

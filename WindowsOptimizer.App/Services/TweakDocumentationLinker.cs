@@ -257,6 +257,23 @@ public sealed class TweakDocumentationLinker
                 return new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
             }
 
+            var headerFields = SplitCsvLine(lines[0]);
+            var indexMap = BuildHeaderIndex(headerFields);
+            var idIndex = GetHeaderIndex(indexMap, "id");
+            var categoryIndex = GetHeaderIndex(indexMap, "category");
+            var sourceIndex = GetHeaderIndex(indexMap, "source");
+            var docsIndex = GetHeaderIndex(indexMap, "docs");
+
+            if (idIndex < 0 || categoryIndex < 0 || sourceIndex < 0 || docsIndex < 0)
+            {
+                idIndex = idIndex < 0 ? 0 : idIndex;
+                categoryIndex = categoryIndex < 0 ? 2 : categoryIndex;
+                sourceIndex = sourceIndex < 0 ? 4 : sourceIndex;
+                docsIndex = docsIndex < 0 ? 5 : docsIndex;
+            }
+
+            var maxIndex = new[] { idIndex, categoryIndex, sourceIndex, docsIndex }.Max();
+
             var map = new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
             for (var i = 1; i < lines.Length; i++)
             {
@@ -267,12 +284,12 @@ public sealed class TweakDocumentationLinker
                 }
 
                 var fields = SplitCsvLine(line);
-                if (fields.Count < 6)
+                if (fields.Count <= maxIndex)
                 {
                     continue;
                 }
 
-                var id = fields[0].Trim();
+                var id = fields[idIndex].Trim();
                 if (string.IsNullOrWhiteSpace(id))
                 {
                     continue;
@@ -280,9 +297,9 @@ public sealed class TweakDocumentationLinker
 
                 var entry = new CatalogEntry(
                     id,
-                    fields[2].Trim(),
-                    fields[4].Trim(),
-                    fields[5].Trim());
+                    fields[categoryIndex].Trim(),
+                    fields[sourceIndex].Trim(),
+                    fields[docsIndex].Trim());
 
                 map[id] = entry;
             }
@@ -337,6 +354,28 @@ public sealed class TweakDocumentationLinker
 
         results.Add(current.ToString());
         return results;
+    }
+
+    private static Dictionary<string, int> BuildHeaderIndex(IReadOnlyList<string> headers)
+    {
+        var map = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        for (var i = 0; i < headers.Count; i++)
+        {
+            var key = headers[i].Trim();
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                continue;
+            }
+
+            map[key] = i;
+        }
+
+        return map;
+    }
+
+    private static int GetHeaderIndex(IReadOnlyDictionary<string, int> map, string name)
+    {
+        return map.TryGetValue(name, out var index) ? index : -1;
     }
 
     private static string NormalizeRelativePath(string path)

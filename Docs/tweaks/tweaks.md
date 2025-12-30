@@ -13,12 +13,12 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Rollback runs automatically when Apply or Verify fails (default) or when the user requests it.
 
 ## Tweak catalog & sources
-- Generated catalog: `Docs/tweaks/tweak-catalog.md`
-- CSV export: `Docs/tweaks/tweak-catalog.csv`
-- HTML catalog: `Docs/tweaks/tweak-catalog.html` (supports anchor links)
+- Generated catalog: `Docs/tweaks/tweak-catalog.md` (now includes Changes + Risk)
+- CSV export: `Docs/tweaks/tweak-catalog.csv` (includes Description + Risk fields)
+- HTML catalog: `Docs/tweaks/tweak-catalog.html` (supports anchor links + Changes/Risk)
 - Test template: `Docs/tweaks/tweak-test-template.csv`
 - Regenerate: `python3 scripts/generate_tweak_catalog.py` (or `py -3` on Windows)
-- The catalog maps tweak IDs to their source files and the closest matching doc in `Docs/`.
+- The catalog maps tweak IDs to their source files, docs, and short change/risk summaries.
 - The UI reads the CSV to surface a `Catalog entry` anchor link plus a `Source file` link for each tweak.
 
 ## Manual testing checklist (Windows 10/11)
