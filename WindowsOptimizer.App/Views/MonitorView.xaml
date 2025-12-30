@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              xmlns:converters="clr-namespace:WindowsOptimizer.App.ViewModels"
              mc:Ignorable="d"
-             Background="#2E3440">
+             Background="{DynamicResource BackgroundDarkestBrush}">
 
     <UserControl.Resources>
         <converters:SparklinePointsConverter x:Key="SparklinePointsConverter"/>
@@ -60,8 +60,8 @@
         <DropShadowEffect x:Key="ChartGlowWrite" Color="#BF616A" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
 
         <Style x:Key="StatCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#3B4252"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="20"/>
@@ -71,13 +71,13 @@
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
         <Style x:Key="SectionCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#3B4252"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="20"/>
@@ -85,9 +85,9 @@
         </Style>
 
         <Style x:Key="HeaderActionButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#434C5E"/>
-            <Setter Property="Foreground" Value="#ECEFF4"/>
-            <Setter Property="BorderBrush" Value="#4C566A"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="14,7"/>
             <Setter Property="FontSize" Value="13"/>
@@ -119,8 +119,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="#ECEFF4"/>
-                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="#D8DEE9" Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
                 </StackPanel>
                 <Button Grid.Column="1"
                         Content="Save"
@@ -148,43 +148,43 @@
 
                         <!-- OS Name -->
                         <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
-                            <TextBlock Text="Operating System" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding SystemInfo.OsName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                            <TextBlock Text="Operating System" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.OsName}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!-- OS Version -->
                         <StackPanel Grid.Row="0" Grid.Column="1" Margin="16,0,0,12">
-                            <TextBlock Text="OS Version" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding SystemInfo.OsVersion}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                            <TextBlock Text="OS Version" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.OsVersion}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!-- CPU Name -->
                         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
-                            <TextBlock Text="Processor" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding SystemInfo.CpuName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
-	                            <TextBlock FontSize="12" Foreground="#D8DEE9" Margin="0,2,0,0">
+                            <TextBlock Text="Processor" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.CpuName}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
+	                            <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
 	                                <Run Text="{Binding SystemInfo.CpuCores, Mode=OneWay}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads, Mode=OneWay}"/><Run Text=" Threads"/>
 	                            </TextBlock>
                         </StackPanel>
 
                         <!-- GPU Name -->
                         <StackPanel Grid.Row="1" Grid.Column="1" Margin="16,0,0,12">
-                            <TextBlock Text="Graphics Card" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding SystemInfo.GpuName}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                            <TextBlock Text="Graphics Card" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.GpuName}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!-- Total RAM -->
                         <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
-                            <TextBlock Text="Total Memory" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-	                            <TextBlock FontSize="14" Foreground="#ECEFF4" FontWeight="Medium">
+                            <TextBlock Text="Total Memory" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+	                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium">
 	                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
 	                            </TextBlock>
                         </StackPanel>
 
                         <!-- Uptime -->
                         <StackPanel Grid.Row="2" Grid.Column="1" Margin="16,0,0,12">
-                            <TextBlock Text="System Uptime" FontSize="11" Foreground="#D8DEE9" Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding SystemInfo.UptimeFormatted}" FontSize="14" Foreground="#ECEFF4" FontWeight="Medium"/>
+                            <TextBlock Text="System Uptime" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding SystemInfo.UptimeFormatted}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -206,7 +206,7 @@
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCpuAlertActive}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#BF616A"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
                                     <Setter Property="BorderThickness" Value="2"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -214,11 +214,11 @@
                     </Border.Style>
                     <StackPanel>
                         <Grid>
-                            <TextBlock Text="CPU Usage" FontSize="12" Foreground="#D8DEE9"/>
-                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="#BF616A" FontWeight="Bold"
+                            <TextBlock Text="CPU Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold"
                                        HorizontalAlignment="Right" Visibility="{Binding IsCpuAlertActive, Converter={StaticResource BoolToVisibility}}"/>
                         </Grid>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#88C0D0" Margin="0,8,0,4">
+                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,8,0,4">
                             <Run Text="{Binding CpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
                         </TextBlock>
                     </StackPanel>
@@ -230,7 +230,7 @@
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsRamAlertActive}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#BF616A"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
                                     <Setter Property="BorderThickness" Value="2"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -238,14 +238,14 @@
                     </Border.Style>
                     <StackPanel>
                         <Grid>
-                            <TextBlock Text="RAM Usage" FontSize="12" Foreground="#D8DEE9"/>
-                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="#BF616A" FontWeight="Bold"
+                            <TextBlock Text="RAM Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold"
                                        HorizontalAlignment="Right" Visibility="{Binding IsRamAlertActive, Converter={StaticResource BoolToVisibility}}"/>
                         </Grid>
-                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="#A3BE8C" Margin="0,8,0,4">
-                            <Run Text="{Binding RamUsedGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" / " FontSize="16" Foreground="#D8DEE9"/><Run Text="{Binding RamTotalGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB" FontSize="16"/>
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" Margin="0,8,0,4">
+                            <Run Text="{Binding RamUsedGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" / " FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}"/><Run Text="{Binding RamTotalGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB" FontSize="16"/>
                         </TextBlock>
-                        <TextBlock FontSize="14" Foreground="#D8DEE9">
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}">
                             <Run Text="{Binding RamUsagePercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                         </TextBlock>
                     </StackPanel>
@@ -255,15 +255,15 @@
                 <Border Grid.Column="2" Style="{StaticResource StatCardStyle}"
                         ToolTip="CPU temperature sensor via LibreHardwareMonitor. Shows N/A if sensor data is unavailable (requires admin rights or hardware support).">
                     <StackPanel>
-                        <TextBlock Text="CPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
+                        <TextBlock Text="CPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock Text="{Binding CpuTempText}"
                                    FontSize="32"
                                    FontWeight="Bold"
-                                   Foreground="#EBCB8B"
+                                   Foreground="{DynamicResource CautionBrush}"
                                    Margin="0,0,0,4"/>
                         <TextBlock Text="Sensor: LibreHardwareMonitor"
                                    FontSize="9"
-                                   Foreground="#4C566A"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    Visibility="{Binding IsCpuTempAvailable, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
                 </Border>
@@ -271,8 +271,8 @@
                 <!-- GPU Usage Card -->
                 <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="GPU Usage" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#81A1C1" Margin="0,0,0,4">
+                        <TextBlock Text="GPU Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4">
                             <Run Text="{Binding GpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
                         </TextBlock>
                     </StackPanel>
@@ -281,11 +281,11 @@
                 <!-- GPU Temperature Card -->
                 <Border Grid.Column="4" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="GPU Temp" FontSize="12" Foreground="#D8DEE9" Margin="0,0,0,8"/>
+                        <TextBlock Text="GPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock Text="{Binding GpuTempText}"
                                    FontSize="32"
                                    FontWeight="Bold"
-                                   Foreground="#B48EAD"
+                                   Foreground="{DynamicResource InfoBrush}"
                                    Margin="0,0,0,4"/>
                     </StackPanel>
                 </Border>
@@ -304,33 +304,33 @@
                         <Grid>
                             <TextBlock Text="CPU History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                <TextBlock Text="Max: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding CpuHistoryMax, StringFormat={}{0:F0}%}" Foreground="#88C0D0" FontSize="11" FontWeight="SemiBold"/>
-                                <TextBlock Text="  Min: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding CpuHistoryMin, StringFormat={}{0:F0}%}" Foreground="#88C0D0" FontSize="11" FontWeight="SemiBold"/>
-                                <TextBlock Text="  Now: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding CpuUsage, StringFormat={}{0:F0}%}" Foreground="#88C0D0" FontSize="11" FontWeight="Bold"/>
+                                <TextBlock Text="Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding CpuHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding CpuHistoryMin, StringFormat={}{0:F0}%}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Now: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding CpuUsage, StringFormat={}{0:F0}%}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="Bold"/>
                             </StackPanel>
                         </Grid>
-                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10" ClipToBounds="True">
+                        <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="100%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="75%" Foreground="#3B4252" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="50%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="25%" Foreground="#3B4252" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
-                                    <TextBlock Text="0%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
+                                    <TextBlock Text="100%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="75%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="50%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="25%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
                                 <Border Margin="30,0,0,0" ClipToBounds="True">
                                     <Grid>
                                         <!-- Horizontal Gridlines -->
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                        <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                        <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
@@ -348,7 +348,7 @@
                                         </Viewbox>
                                         <!-- Current value indicator dot -->
                                         <Canvas ClipToBounds="False">
-                                            <Ellipse Width="10" Height="10" Fill="#88C0D0"
+                                            <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}"
                                                      Canvas.Right="0"
                                                      Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
                                                 <Ellipse.Effect>
@@ -369,33 +369,33 @@
                         <Grid>
                             <TextBlock Text="RAM History (60s)" Style="{StaticResource SectionHeaderStyle}"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                <TextBlock Text="Max: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding RamHistoryMax, StringFormat={}{0:F0}%}" Foreground="#A3BE8C" FontSize="11" FontWeight="SemiBold"/>
-                                <TextBlock Text="  Min: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding RamHistoryMin, StringFormat={}{0:F0}%}" Foreground="#A3BE8C" FontSize="11" FontWeight="SemiBold"/>
-                                <TextBlock Text="  Now: " Foreground="#4C566A" FontSize="11"/>
-                                <TextBlock Text="{Binding RamUsagePercent, StringFormat={}{0:F0}%}" Foreground="#A3BE8C" FontSize="11" FontWeight="Bold"/>
+                                <TextBlock Text="Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding RamHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding RamHistoryMin, StringFormat={}{0:F0}%}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                <TextBlock Text="  Now: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding RamUsagePercent, StringFormat={}{0:F0}%}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="Bold"/>
                             </StackPanel>
                         </Grid>
-                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10" ClipToBounds="True">
+                        <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="100%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="75%" Foreground="#3B4252" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="50%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="25%" Foreground="#3B4252" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
-                                    <TextBlock Text="0%" Foreground="#4C566A" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
+                                    <TextBlock Text="100%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="75%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="50%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="25%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
                                 <Border Margin="30,0,0,0" ClipToBounds="True">
                                     <Grid>
                                         <!-- Horizontal Gridlines -->
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                        <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                        <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
@@ -413,7 +413,7 @@
                                         </Viewbox>
                                         <!-- Current value indicator dot -->
                                         <Canvas ClipToBounds="False">
-                                            <Ellipse Width="10" Height="10" Fill="#A3BE8C"
+                                            <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}"
                                                      Canvas.Right="0"
                                                      Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
                                                 <Ellipse.Effect>
@@ -440,14 +440,14 @@
                 <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
                     <StackPanel>
                         <TextBlock Text="Network I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
-                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10" ClipToBounds="True">
+                        <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Horizontal Gridlines -->
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
                                 <!-- Download Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
@@ -482,20 +482,20 @@
                         </Border>
                         <Grid Margin="0,8,0,0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Border Width="12" Height="12" Background="#A3BE8C" CornerRadius="2" Margin="0,0,6,0">
+                                <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
                                         <DropShadowEffect Color="#A3BE8C" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
-                                <TextBlock Text="Download" Foreground="#D8DEE9" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Border Width="12" Height="12" Background="#88C0D0" CornerRadius="2" Margin="0,0,6,0">
+                                <Border Width="12" Height="12" Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
                                         <DropShadowEffect Color="#88C0D0" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
-                                <TextBlock Text="Upload" Foreground="#D8DEE9" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Upload" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -505,14 +505,14 @@
                 <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
                     <StackPanel>
                         <TextBlock Text="Disk I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
-                        <Border Height="120" Background="#2E3440" CornerRadius="8" Padding="10" ClipToBounds="True">
+                        <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Horizontal Gridlines -->
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                <Rectangle Height="1" Fill="#333A47" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#3B4252" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
+                                <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
                                 <!-- Read Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
@@ -547,20 +547,20 @@
                         </Border>
                         <Grid Margin="0,8,0,0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Border Width="12" Height="12" Background="#A3BE8C" CornerRadius="2" Margin="0,0,6,0">
+                                <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
                                         <DropShadowEffect Color="#A3BE8C" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
-                                <TextBlock Text="Read" Foreground="#D8DEE9" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Read" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Border Width="12" Height="12" Background="#BF616A" CornerRadius="2" Margin="0,0,6,0">
+                                <Border Width="12" Height="12" Background="{DynamicResource DangerBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
                                         <DropShadowEffect Color="#BF616A" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
-                                <TextBlock Text="Write" Foreground="#D8DEE9" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Write" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -581,7 +581,7 @@
                         <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*"/>
@@ -592,30 +592,30 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
-                                                <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
 	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
 	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
 	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
 	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                                             </TextBlock>
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                    Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
@@ -632,7 +632,7 @@
                         <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*"/>
@@ -643,30 +643,30 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
-                                                <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
 	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
 	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
 	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="#A3BE8C" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
 	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
                                             </TextBlock>
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                    Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
@@ -682,13 +682,13 @@
                 <StackPanel>
                     <TextBlock Text="Top 10 Processes by Network (Approx.)" Style="{StaticResource SectionHeaderStyle}"/>
                     <TextBlock Text="Based on total process I/O bytes. May include disk activity."
-                               Foreground="#4C566A"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
                                FontSize="11"
                                Margin="0,0,0,8"/>
                     <ItemsControl ItemsSource="{Binding TopProcessesByNetwork}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#2E3440" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -698,30 +698,30 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="Medium"/>
-                                            <TextBlock Foreground="#D8DEE9" FontSize="11" Margin="0,2,0,0">
+                                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
+                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
                                                 <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
                                                 <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
                                                 <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                             </TextBlock>
                                         </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="#88C0D0" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
                                             <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
                                         </TextBlock>
                                         <Button Grid.Column="2" Content="Kill"
                                                 Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="#BF616A" Foreground="White" BorderThickness="0"
+                                                Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         <Button Grid.Column="3" Content="Suspend"
                                                 Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="#EBCB8B" Foreground="#2E3440" BorderThickness="0"
+                                                Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         <Button Grid.Column="4" Content="Resume"
                                                 Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="#A3BE8C" Foreground="White" BorderThickness="0"
+                                                Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                     </Grid>
                                 </Border>
@@ -738,7 +738,7 @@
                     <ItemsControl ItemsSource="{Binding NetworkAdapters}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#2E3440" CornerRadius="6" Padding="12" Margin="0,0,0,8">
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,8">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -747,24 +747,24 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0">
-                                            <TextBlock Text="{Binding Name}" Foreground="#ECEFF4" FontWeight="SemiBold" FontSize="14"/>
-                                            <TextBlock Text="{Binding Type}" Foreground="#D8DEE9" FontSize="12" Margin="0,2,0,0"/>
+                                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="14"/>
+                                            <TextBlock Text="{Binding Type}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="12" Margin="0,2,0,0"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="16,0,0,0">
-                                            <TextBlock Text="Download" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
+                                            <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
 	                                                <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
 	                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" Margin="16,0,0,0">
-                                            <TextBlock Text="Upload" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#88C0D0" FontWeight="Bold" FontSize="14">
+                                            <TextBlock Text="Upload" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" FontSize="14">
 	                                                <Run Text="{Binding SendMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
 	                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="3" Margin="16,0,0,0">
-                                            <TextBlock Text="Total Received" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#EBCB8B" FontWeight="Medium" FontSize="12">
+                                            <TextBlock Text="Total Received" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Medium" FontSize="12">
 	                                                <Run Text="{Binding TotalBytesReceived, StringFormat={}{0:N0}, Mode=OneWay}"/><Run Text=" bytes"/>
 	                                            </TextBlock>
                                         </StackPanel>
@@ -783,7 +783,7 @@
                     <ItemsControl ItemsSource="{Binding Disks}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#2E3440" CornerRadius="6" Padding="12" Margin="0,0,0,8">
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,8">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -799,38 +799,38 @@
 
                                         <!-- Drive Letter -->
                                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding DriveLetter}"
-                                                   Foreground="#ECEFF4" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Margin="0,0,16,0"/>
 
                                         <!-- Disk Space Info -->
                                         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-	                                            <TextBlock FontSize="11" Foreground="#D8DEE9">
+	                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}">
 	                                                <Run Text="{Binding UsedSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB used of "/><Run Text="{Binding TotalSizeGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
 	                                            </TextBlock>
-	                                            <TextBlock FontSize="11" Foreground="#D8DEE9" Margin="0,2,0,0">
+	                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
 	                                                <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB free"/>
 	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Read Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="8,0">
-                                            <TextBlock Text="Read" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#A3BE8C" FontWeight="Bold" FontSize="14">
+                                            <TextBlock Text="Read" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
 	                                                <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
 	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Write Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="3" Margin="8,0">
-                                            <TextBlock Text="Write" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#BF616A" FontWeight="Bold" FontSize="14">
+                                            <TextBlock Text="Write" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" FontSize="14">
 	                                                <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
 	                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Usage Percent -->
                                         <StackPanel Grid.Row="0" Grid.Column="4" Margin="8,0,0,0">
-                                            <TextBlock Text="Usage" Foreground="#D8DEE9" FontSize="11"/>
-	                                            <TextBlock Foreground="#EBCB8B" FontWeight="Bold" FontSize="14">
+                                            <TextBlock Text="Usage" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+	                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Bold" FontSize="14">
 	                                                <Run Text="{Binding UsedPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
 	                                            </TextBlock>
                                         </StackPanel>

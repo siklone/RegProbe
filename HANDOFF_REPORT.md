@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -41,6 +41,13 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Files: `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs`,
     `WindowsOptimizer.App/ViewModels/MainViewModel.cs`,
     `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+
+- **Tweak catalog + docs linking (2025-12-31)**
+  - Added generator: `scripts/generate_tweak_catalog.py`
+  - Outputs: `Docs/tweaks/tweak-catalog.md`, `Docs/tweaks/tweak-catalog.csv`, `Docs/tweaks/tweak-test-template.csv`
+  - Added docs linker so tweaks show local doc links when `Docs/` is present
+  - Added docs copy to build/publish output
+  - New docs: `Docs/performance/performance.md`, `Docs/notifications/notifications.md`
 
 - **Theme switching fix (runtime)**
   - Styles now use `DynamicResource` for theme-bound brushes so Light/Dark updates propagate.

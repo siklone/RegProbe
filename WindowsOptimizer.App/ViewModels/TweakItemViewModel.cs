@@ -1234,7 +1234,38 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         if (TryExtractAfterPrefix(message, "Current state:", out var state))
         {
-            CurrentValue = state.Trim().TrimEnd('.');
+            var trimmed = state.Trim();
+            var newlineIndex = trimmed.IndexOfAny(new[] { '\r', '\n' });
+            if (newlineIndex >= 0)
+            {
+                trimmed = trimmed[..newlineIndex];
+            }
+
+            var detailsIndex = trimmed.IndexOf("Details", StringComparison.OrdinalIgnoreCase);
+            if (detailsIndex >= 0)
+            {
+                trimmed = trimmed[..detailsIndex];
+            }
+
+            var servicesIndex = trimmed.IndexOf("Services", StringComparison.OrdinalIgnoreCase);
+            if (servicesIndex >= 0)
+            {
+                trimmed = trimmed[..servicesIndex];
+            }
+
+            var tasksIndex = trimmed.IndexOf("Tasks", StringComparison.OrdinalIgnoreCase);
+            if (tasksIndex >= 0)
+            {
+                trimmed = trimmed[..tasksIndex];
+            }
+
+            var periodIndex = trimmed.IndexOf('.');
+            if (periodIndex >= 0)
+            {
+                trimmed = trimmed[..periodIndex];
+            }
+
+            CurrentValue = trimmed.Trim();
         }
     }
 

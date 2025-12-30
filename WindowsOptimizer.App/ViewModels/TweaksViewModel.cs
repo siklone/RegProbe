@@ -32,6 +32,7 @@ using WindowsOptimizer.Engine.Tweaks.Misc;
 using WindowsOptimizer.Engine.Tweaks.Peripheral;
 using WindowsOptimizer.Engine.Tweaks.Power;
 using WindowsOptimizer.App.Utilities;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Core.Files;
@@ -100,6 +101,7 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
+    private readonly TweakDocumentationLinker _documentationLinker = new();
 
     public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
     {
@@ -180,6 +182,7 @@ public sealed class TweaksViewModel : ViewModelBase
         LoadProviderTweaks();
         LoadPlugins();
         ApplyTweakMetadata();
+        _documentationLinker.Apply(Tweaks);
         UpdateFilterSummary();
         _ = InitializePresetsAsync();
 

@@ -68,4 +68,34 @@
       SkipUnchangedFiles="true" />
   </Target>
 
+  <Target Name="CopyDocsAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <DocsSourceDir>$(MSBuildProjectDirectory)\\..\\Docs\\</DocsSourceDir>
+      <DocsDestinationDir>$(TargetDir)Docs\\</DocsDestinationDir>
+    </PropertyGroup>
+    <ItemGroup Condition="Exists('$(DocsSourceDir)')">
+      <DocsFilesAfterBuild Include="$(DocsSourceDir)**\\*.*" />
+    </ItemGroup>
+    <Copy
+      Condition="Exists('$(DocsSourceDir)')"
+      SourceFiles="@(DocsFilesAfterBuild)"
+      DestinationFiles="@(DocsFilesAfterBuild->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyDocsAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <DocsSourceDir>$(MSBuildProjectDirectory)\\..\\Docs\\</DocsSourceDir>
+      <DocsDestinationDir>$(PublishDir)Docs\\</DocsDestinationDir>
+    </PropertyGroup>
+    <ItemGroup Condition="Exists('$(DocsSourceDir)')">
+      <DocsFilesAfterPublish Include="$(DocsSourceDir)**\\*.*" />
+    </ItemGroup>
+    <Copy
+      Condition="Exists('$(DocsSourceDir)')"
+      SourceFiles="@(DocsFilesAfterPublish)"
+      DestinationFiles="@(DocsFilesAfterPublish->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>

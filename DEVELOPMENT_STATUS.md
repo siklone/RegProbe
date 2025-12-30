@@ -542,6 +542,7 @@
 - [ ] Timeout occurs after 30 seconds if hung
 - [ ] Rollback restores original state
 - [ ] Batch operations work correctly
+- [ ] Use `Docs/tweaks/tweak-catalog.md` to validate every tweak ID at least once
 
 #### Platform-Specific
 - [ ] Test on **Windows 10** (native)
@@ -581,6 +582,8 @@ Key recent commits (not exhaustive):
 - [ARCHITECTURE.md](ARCHITECTURE.md) - System architecture
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 - [HANDOFF_REPORT.md](HANDOFF_REPORT.md) - Previous development handoff
+- [Docs/tweaks/tweak-catalog.md](Docs/tweaks/tweak-catalog.md) - Generated tweak catalog with source/doc links
+- [Docs/tweaks/tweak-test-template.csv](Docs/tweaks/tweak-test-template.csv) - Test checklist template for manual validation
 
 ---
 

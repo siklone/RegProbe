@@ -14,6 +14,7 @@ public sealed class ScheduledTaskBatchTweak : ITweak
     private readonly IReadOnlyList<string> _taskPaths;
     private readonly IScheduledTaskManager _taskManager;
     private readonly Dictionary<string, TaskSnapshot> _snapshots = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, string> _detectErrors = new(StringComparer.OrdinalIgnoreCase);
     private bool _hasDetected;
 
     public ScheduledTaskBatchTweak(
@@ -63,6 +64,7 @@ public sealed class ScheduledTaskBatchTweak : ITweak
         try
         {
             _snapshots.Clear();
+            _detectErrors.Clear();
             var errors = 0;
             var missing = 0;
             string? firstError = null;
@@ -87,6 +89,7 @@ public sealed class ScheduledTaskBatchTweak : ITweak
                     _snapshots[taskPath] = new TaskSnapshot(false, false);
                     errors++;
                     firstError ??= $"{taskPath}: {ex.Message}";
+                    _detectErrors[taskPath] = ex.Message;
                 }
             }
 
@@ -122,13 +125,17 @@ public sealed class ScheduledTaskBatchTweak : ITweak
                     : "Not present"
                 : errors > 0
                     ? "Unknown"
-                    : enabledCount == 0
-                        ? "Disabled"
-                        : enabledCount == detectedCount
-                            ? "Enabled"
-                            : $"{enabledCount} enabled";
+                : enabledCount == 0
+                    ? "Disabled"
+                    : enabledCount == detectedCount
+                        ? "Enabled"
+                        : $"{enabledCount} enabled";
 
-            return new TweakResult(status, $"{summary} Current state: {currentState}.", DateTimeOffset.UtcNow);
+            var details = BuildTaskDetails(_taskPaths, _snapshots, _detectErrors);
+            var message = string.IsNullOrWhiteSpace(details)
+                ? $"{summary} Current state: {currentState}."
+                : $"{summary} Current state: {currentState}.\nTasks:\n{details}";
+            return new TweakResult(status, message, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
@@ -287,6 +294,39 @@ public sealed class ScheduledTaskBatchTweak : ITweak
     }
 
     private sealed record TaskSnapshot(bool Exists, bool Enabled);
+
+    private static string BuildTaskDetails(
+        IReadOnlyList<string> taskPaths,
+        IReadOnlyDictionary<string, TaskSnapshot> snapshots,
+        IReadOnlyDictionary<string, string> errors)
+    {
+        var lines = new List<string>();
+
+        foreach (var taskPath in taskPaths.OrderBy(path => path))
+        {
+            if (errors.TryGetValue(taskPath, out var error))
+            {
+                lines.Add($"- {taskPath}: error ({error})");
+                continue;
+            }
+
+            if (!snapshots.TryGetValue(taskPath, out var snapshot))
+            {
+                lines.Add($"- {taskPath}: unknown");
+                continue;
+            }
+
+            if (!snapshot.Exists)
+            {
+                lines.Add($"- {taskPath}: missing");
+                continue;
+            }
+
+            lines.Add($"- {taskPath}: {(snapshot.Enabled ? "Enabled" : "Disabled")}");
+        }
+
+        return lines.Count == 0 ? string.Empty : string.Join("\n", lines);
+    }
 
     private static bool IsNotFound(Exception ex)
     {

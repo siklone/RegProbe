@@ -4,13 +4,25 @@
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.
 
-> **Note (2025-12-27):** Rollback currently relies on the last Detect snapshot within the same app session. Durable rollback across app restarts is not implemented yet.
+> **Note (2025-12-30):** Durable rollback state is persisted to `%AppData%\\WindowsOptimizerSuite\\rollback-state.json` for crash recovery and cross-session rollback.
 
 ## Safety guarantees (Detect -> Apply -> Verify -> Rollback)
 - Detect always runs first to capture current configuration.
 - Apply runs only when Detect succeeds and DryRun is false.
 - Verify runs after Apply when `VerifyAfterApply` is enabled.
 - Rollback runs automatically when Apply or Verify fails (default) or when the user requests it.
+
+## Tweak catalog & sources
+- Generated catalog: `Docs/tweaks/tweak-catalog.md`
+- CSV export: `Docs/tweaks/tweak-catalog.csv`
+- Test template: `Docs/tweaks/tweak-test-template.csv`
+- Regenerate: `python3 scripts/generate_tweak_catalog.py` (or `py -3` on Windows)
+- The catalog maps tweak IDs to their source files and the closest matching doc in `Docs/`.
+
+## Manual testing checklist (Windows 10/11)
+- Use the catalog to drive per-tweak verification on native Windows.
+- For each tweak: Detect -> Preview -> Apply -> Verify -> Rollback.
+- Capture results in your own checklist (CSV or spreadsheet).
 
 ## Elevation requirements
 - Tweaks that touch HKLM/HKCR, services, drivers, scheduled tasks, BCD, or system directories must run elevated.

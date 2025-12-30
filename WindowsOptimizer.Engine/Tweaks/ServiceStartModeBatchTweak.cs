@@ -112,7 +112,10 @@ public sealed class ServiceStartModeBatchTweak : ITweak
                 ? "Not present"
                 : GetStartModeSummary(_snapshots.Values.Where(snapshot => snapshot.Exists).Select(snapshot => snapshot.StartMode));
 
-            var message = $"{summary} Current state: {currentState}.";
+            var details = BuildServiceDetails(targets, _snapshots);
+            var message = string.IsNullOrWhiteSpace(details)
+                ? $"{summary} Current state: {currentState}."
+                : $"{summary} Current state: {currentState}.\nServices:\n{details}";
             return new TweakResult(status, message, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
@@ -329,6 +332,34 @@ public sealed class ServiceStartModeBatchTweak : ITweak
     private sealed record ServiceTarget(string ServiceName, ServiceStartMode TargetStartMode);
 
     private sealed record ServiceSnapshot(bool Exists, ServiceStartMode StartMode, ServiceStatus Status);
+
+    private static string BuildServiceDetails(
+        IReadOnlyList<ServiceTarget> targets,
+        IReadOnlyDictionary<string, ServiceSnapshot> snapshots)
+    {
+        var lines = new List<string>();
+
+        foreach (var target in targets.OrderBy(t => t.ServiceName))
+        {
+            if (!snapshots.TryGetValue(target.ServiceName, out var snapshot))
+            {
+                lines.Add($"- {target.ServiceName}: unknown");
+                continue;
+            }
+
+            if (!snapshot.Exists)
+            {
+                lines.Add($"- {target.ServiceName}: missing");
+                continue;
+            }
+
+            var startMode = snapshot.StartMode == ServiceStartMode.Unknown ? "Unknown" : snapshot.StartMode.ToString();
+            var status = snapshot.Status == ServiceStatus.Unknown ? "Unknown" : snapshot.Status.ToString();
+            lines.Add($"- {target.ServiceName}: {startMode} ({status}) → {target.TargetStartMode}");
+        }
+
+        return lines.Count == 0 ? string.Empty : string.Join("\n", lines);
+    }
 
     private static string GetStartModeSummary(IEnumerable<ServiceStartMode> startModes)
     {
