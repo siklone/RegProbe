@@ -1347,7 +1347,7 @@ public sealed class TweaksViewModel : ViewModelBase
     /// <summary>
     /// Detects all tweaks in all categories. Used by Dashboard's Scan Now button.
     /// </summary>
-    public async Task DetectAllTweaksAsync()
+    public async Task DetectAllTweaksAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
     {
         var expansionSnapshot = CategoryGroups
             .Select(group => new
@@ -1363,6 +1363,7 @@ public sealed class TweaksViewModel : ViewModelBase
         // Expand all categories to trigger their detection
         foreach (var category in CategoryGroups)
         {
+            ct.ThrowIfCancellationRequested();
             if (!category.IsExpanded)
             {
                 category.IsExpanded = true;
@@ -1371,6 +1372,7 @@ public sealed class TweaksViewModel : ViewModelBase
             // Also expand sub-groups
             foreach (var subGroup in category.SubGroups)
             {
+                ct.ThrowIfCancellationRequested();
                 if (!subGroup.IsExpanded)
                 {
                     subGroup.IsExpanded = true;
@@ -1379,10 +1381,17 @@ public sealed class TweaksViewModel : ViewModelBase
         }
 
         // Wait for all detection to complete by detecting each tweak directly
+        var totalTweaks = Tweaks.Count;
+        var currentIndex = 0;
+        progress?.Report(new StartupScanProgress(0, totalTweaks));
+
         foreach (var tweak in Tweaks)
         {
             try
             {
+                ct.ThrowIfCancellationRequested();
+                currentIndex++;
+                progress?.Report(new StartupScanProgress(currentIndex, totalTweaks, tweak.Name));
                 if (tweak.AppliedStatus == TweakAppliedStatus.Unknown)
                 {
                     await tweak.DetectStatusAsync();
@@ -1393,6 +1402,8 @@ public sealed class TweaksViewModel : ViewModelBase
                 // Silently ignore detection failures for individual tweaks
             }
         }
+
+        progress?.Report(new StartupScanProgress(totalTweaks, totalTweaks));
 
         // Trigger health score recalculation
         OnPropertyChanged(nameof(GlobalOptimizationScore));

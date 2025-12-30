@@ -302,6 +302,25 @@
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
 
+---
+
+### 16. Startup Scan Progress Wiring (Commit: pending)
+**Problem:** Splash didn’t convey scan progress; user perceived freezes.
+
+**Solution:**
+- Splash updates with `Scanning tweaks X/Y` and current tweak name.
+- Startup scan pipeline accepts progress + cancellation.
+
+**Files Changed:**
+- `WindowsOptimizer.App/StartupWindow.xaml`
+- `WindowsOptimizer.App/StartupWindow.xaml.cs`
+- `WindowsOptimizer.App/ViewModels/StartupScanProgress.cs`
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
 

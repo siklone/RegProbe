@@ -13,6 +13,7 @@ Current focus (2025-12-31):
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
 - Startup flow: theme applies before splash + scan runs before MainWindow.
+- Splash shows scan progress (X/Y + current tweak).
 - Docs linking now also shows `Source file` from catalog CSV.
 - Next: verify light theme + startup flicker, improve tweak docs depth, and migrate remaining legacy tweaks into category providers.
 

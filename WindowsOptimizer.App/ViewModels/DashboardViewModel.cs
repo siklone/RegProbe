@@ -142,7 +142,12 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
-    public async Task RunScanAsync()
+    public Task RunScanAsync()
+    {
+        return RunScanAsync(null, CancellationToken.None);
+    }
+
+    public async Task RunScanAsync(IProgress<StartupScanProgress>? progress, CancellationToken ct)
     {
         if (_tweaksViewModel == null || IsScanning)
         {
@@ -152,7 +157,7 @@ public sealed class DashboardViewModel : ViewModelBase
         IsScanning = true;
         try
         {
-            await _tweaksViewModel.DetectAllTweaksAsync();
+            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct);
             RefreshSystemSnapshot();
         }
         finally

@@ -40,7 +40,9 @@ public partial class App : Application
 
             if (mainWindow.DataContext is MainViewModel mainVm)
             {
-                await mainVm.RunStartupScanAsync();
+                var scanProgress = new Progress<StartupScanProgress>(progress => splash.UpdateScanProgress(progress));
+                scanProgress.Report(new StartupScanProgress(0, 0));
+                await mainVm.RunStartupScanAsync(scanProgress, CancellationToken.None);
             }
 
             splash.Close();

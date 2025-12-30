@@ -170,15 +170,15 @@ public sealed class MainViewModel : ViewModelBase
 
     }
 
-    public async Task RunStartupScanAsync()
+    public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
     {
         if (NavigationItems.FirstOrDefault(n => n.Id == "dashboard")?.ViewModel is DashboardViewModel dashboard)
         {
-            await RunStartupScanAsync(dashboard);
+            await RunStartupScanAsync(dashboard, progress, ct);
         }
     }
 
-    private async Task RunStartupScanAsync(DashboardViewModel dashboard)
+    private async Task RunStartupScanAsync(DashboardViewModel dashboard, IProgress<StartupScanProgress>? progress, CancellationToken ct)
     {
         if (_tweaksViewModel == null || IsStartupScanActive)
         {
@@ -188,7 +188,7 @@ public sealed class MainViewModel : ViewModelBase
         IsStartupScanActive = true;
         try
         {
-            await dashboard.RunScanAsync();
+            await dashboard.RunScanAsync(progress, ct);
         }
         catch (Exception ex)
         {

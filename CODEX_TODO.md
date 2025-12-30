@@ -141,6 +141,7 @@
 - [x] Tema splash açılmadan önce uygulanıyor
 - [x] Splash render edilip sonra scan başlıyor
 - [x] Detect işlemleri UI thread’i daha az bloklar
+- [x] Splash üzerinde tarama ilerlemesi gösteriliyor (X/Y)
 
 **Yapılacaklar:**
 - [ ] Windows 10/11’de flicker kalmadığını doğrula

@@ -83,6 +83,16 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - UI surfaces `Source file` links from `Docs/tweaks/tweak-catalog.csv`.
   - File: `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
 
+- **Startup scan progress surfaced in splash (2025-12-30)**
+  - Splash now updates with per‑tweak scan progress + current tweak name.
+  - `DetectAllTweaksAsync` accepts progress + cancellation.
+  - Files: `WindowsOptimizer.App/StartupWindow.xaml(.cs)`,
+    `WindowsOptimizer.App/App.xaml.cs`,
+    `WindowsOptimizer.App/ViewModels/MainViewModel.cs`,
+    `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`,
+    `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`,
+    `WindowsOptimizer.App/ViewModels/StartupScanProgress.cs`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -212,6 +222,12 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Source file links from CSV
 - `Docs/tweaks/tweaks.md` - Docs note for catalog + source linking
 - `HANDOFF_REPORT.md`, `CODEX_PLAN.md`, `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `CLAUDE.md` - Roadmap + agent checklist updates
+- `WindowsOptimizer.App/StartupWindow.xaml` - Progress text placeholders
+- `WindowsOptimizer.App/StartupWindow.xaml.cs` - Progress update method
+- `WindowsOptimizer.App/ViewModels/StartupScanProgress.cs` - Progress model
+- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Scan progress pipeline
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Startup scan progress wiring
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Progress reporting + cancellation
 
 ## Files Changed This Session (2025-12-31)
 
