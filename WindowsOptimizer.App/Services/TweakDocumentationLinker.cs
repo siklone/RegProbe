@@ -9,7 +9,7 @@ namespace WindowsOptimizer.App.Services;
 
 public sealed class TweakDocumentationLinker
 {
-    private const string DefaultDocPath = "tweaks" + Path.DirectorySeparatorChar + "tweaks.md";
+    private const string DefaultDocPath = "tweaks/tweaks.md";
     private readonly IReadOnlyDictionary<string, string> _categoryDocMap;
     private readonly string? _docsRoot;
 

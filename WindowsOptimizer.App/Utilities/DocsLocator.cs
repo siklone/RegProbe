@@ -6,7 +6,7 @@ namespace WindowsOptimizer.App.Utilities;
 public static class DocsLocator
 {
     private const string DocsFolderName = "Docs";
-    private const string DocsMarkerPath = "tweaks" + Path.DirectorySeparatorChar + "tweaks.md";
+    private const string DocsMarkerPath = "tweaks/tweaks.md";
 
     public static string? TryFindDocsRoot()
     {
