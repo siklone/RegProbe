@@ -48,7 +48,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         catch (Exception ex) when (IsConnectFailure(ex))
         {
             await EnsureHostStartedAsync(ct);
-            return await SendOnceAsync(request, _options.StartupConnectTimeout, ct);
+            return await SendWithRetryAsync(request, _options.InitialConnectTimeout, ct);
         }
     }
 
@@ -114,6 +114,47 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         return await PipeMessageSerializer.ReadAsync<ElevatedHostResponse>(pipe, ct);
     }
 
+    private async Task<ElevatedHostResponse> SendWithRetryAsync(
+        ElevatedHostRequest request,
+        TimeSpan timeout,
+        CancellationToken ct)
+    {
+        var attempts = Math.Max(1, _options.MaxConnectRetries);
+        Exception? lastException = null;
+
+        for (var attempt = 1; attempt <= attempts; attempt++)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            if (attempt > 1)
+            {
+                var delay = GetRetryDelay(attempt);
+                if (delay > TimeSpan.Zero)
+                {
+                    LogToFile($"ElevatedHostClient: Retry {attempt}/{attempts} in {delay.TotalMilliseconds:0}ms");
+                    await Task.Delay(delay, ct);
+                }
+            }
+
+            try
+            {
+                var response = await SendOnceAsync(request, timeout, ct);
+                _isReady = true;
+                return response;
+            }
+            catch (Exception ex) when (IsConnectFailure(ex))
+            {
+                lastException = ex;
+                LogToFile($"ElevatedHostClient: Connect attempt {attempt}/{attempts} failed: {ex.Message}");
+            }
+        }
+
+        throw new ElevatedHostException(
+            $"Failed to connect to the elevated host after {attempts} attempt(s). " +
+            "Check if UAC was cancelled or if the host executable is missing.",
+            lastException);
+    }
+
     private async Task<bool> TryConnectAsync(TimeSpan timeout, CancellationToken ct)
     {
         try
@@ -132,6 +173,24 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         {
             return false;
         }
+    }
+
+    private TimeSpan GetRetryDelay(int attempt)
+    {
+        if (attempt <= 1)
+        {
+            return TimeSpan.Zero;
+        }
+
+        var baseDelay = _options.RetryBaseDelay <= TimeSpan.Zero
+            ? TimeSpan.FromMilliseconds(200)
+            : _options.RetryBaseDelay;
+        var maxDelay = _options.MaxRetryDelay <= TimeSpan.Zero
+            ? TimeSpan.FromSeconds(2)
+            : _options.MaxRetryDelay;
+        var backoffMs = baseDelay.TotalMilliseconds * Math.Pow(2, attempt - 2);
+        var delayMs = Math.Min(backoffMs, maxDelay.TotalMilliseconds);
+        return TimeSpan.FromMilliseconds(delayMs);
     }
 
     private void StartHost()

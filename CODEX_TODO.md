@@ -184,13 +184,15 @@
 - `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Beklemede
+**Durum:** ✅ Kısmen tamamlandı (status göstergesi eksik)
 
-**Yapılacaklar:**
-- [ ] Exponential backoff retry
-- [ ] Maksimum retry sayısı (örn. 3)
-- [ ] Kullanıcı dostu hata mesajları
-- [ ] Bağlantı durumu göstergesi
+**Yapılanlar:**
+- [x] Exponential backoff retry
+- [x] Maksimum retry sayısı (varsayılan 3)
+- [x] Kullanıcı dostu hata mesajları
+
+**Kalan:**
+- [ ] Bağlantı durumu göstergesi (UI)
 
 ---
 
