@@ -15,6 +15,8 @@ OUTPUT_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.md"
 OUTPUT_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.csv"
 OUTPUT_TEST_TEMPLATE = REPO_ROOT / "Docs" / "tweaks" / "tweak-test-template.csv"
 OUTPUT_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.html"
+DOC_INDEX_START = "<!-- TWEAK INDEX START -->"
+DOC_INDEX_END = "<!-- TWEAK INDEX END -->"
 
 DOC_MAP = {
     "privacy": "Docs/privacy/privacy.md",
@@ -429,6 +431,56 @@ def write_test_template(entries: List[TweakEntry]) -> None:
             ])
 
 
+def render_doc_index(entries: List[TweakEntry]) -> str:
+    lines = [
+        DOC_INDEX_START,
+        "## Tweak Index (Generated)",
+        "",
+        "This section is generated from `Docs/tweaks/tweak-catalog.csv`.",
+        "Do not edit manually.",
+        "",
+        "| ID | Name | Changes | Risk | Source |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+
+    for entry in entries:
+        anchor = f"<a id=\"{html.escape(entry.tweak_id)}\"></a>"
+        changes = shorten_description(entry.description)
+        lines.append(
+            f"| {anchor} `{entry.tweak_id}` | {entry.name} | {changes} | {entry.risk} | `{entry.source}` |"
+        )
+
+    lines.append(DOC_INDEX_END)
+    return "\n".join(lines)
+
+
+def write_doc_indexes(entries: List[TweakEntry]) -> None:
+    entries_by_doc: Dict[str, List[TweakEntry]] = {}
+    for entry in entries:
+        entries_by_doc.setdefault(entry.docs, []).append(entry)
+
+    for doc_path, doc_entries in entries_by_doc.items():
+        full_path = REPO_ROOT / doc_path
+        if not full_path.exists():
+            continue
+
+        doc_entries = sorted(doc_entries, key=lambda item: item.tweak_id.lower())
+        generated = render_doc_index(doc_entries)
+        text = full_path.read_text(encoding="utf-8")
+
+        if DOC_INDEX_START in text and DOC_INDEX_END in text:
+            start = text.index(DOC_INDEX_START)
+            end = text.index(DOC_INDEX_END) + len(DOC_INDEX_END)
+            updated = text[:start].rstrip() + "\n\n" + generated + "\n"
+            remaining = text[end:].lstrip()
+            if remaining:
+                updated += "\n" + remaining
+        else:
+            updated = text.rstrip() + "\n\n" + generated + "\n"
+
+        full_path.write_text(updated, encoding="utf-8")
+
+
 def main() -> int:
     if not PROVIDER_ROOT.exists() or not ENGINE_ROOT.exists():
         print("Could not locate tweak sources. Run from repo root.")
@@ -443,6 +495,7 @@ def main() -> int:
     write_csv(entries)
     write_html(entries)
     write_test_template(entries)
+    write_doc_indexes(entries)
     print(f"Generated {len(entries)} tweaks -> {OUTPUT_MD}, {OUTPUT_CSV}, {OUTPUT_HTML}, {OUTPUT_TEST_TEMPLATE}")
     return 0
 

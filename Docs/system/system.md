@@ -2296,3 +2296,35 @@ Requires elevation: Yes (system features).
 |  | `vmicvmsession` | Provides a mechanism to manage virtual machine with PowerShell via VM session without a virtual network. |
 |  | `vmicvss` | Coordinates the communications that are required to use Volume Shadow Copy Service to back up applications and data on this virtual machine from the operating system on the physical computer. |
 |  | `vpci` | Microsoft Hyper-V Virtual PCI Bus |
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="system.aero-shake"></a> `system.aero-shake` | Disable Aero Shake | Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L40` |
+| <a id="system.disable-auto-maintenance"></a> `system.disable-auto-maintenance` | Disable Automatic Maintenance | Stops scheduled automatic maintenance tasks from running. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L105` |
+| <a id="system.disable-background-gp-updates"></a> `system.disable-background-gp-updates` | Disable Background Group Policy Updates | Prevents Group Policy from refreshing while users are active. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L95` |
+| <a id="system.disable-clipboard-history"></a> `system.disable-clipboard-history` | Disable Clipboard History & Sync | Turns off clipboard history and cross-device clipboard synchronization. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L73` |
+| <a id="system.disable-clipboard-redirection"></a> `system.disable-clipboard-redirection` | Disable Clipboard Redirection (RDP) | Prevents clipboard sharing between remote desktop sessions and the local machine. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L85` |
+| <a id="system.disable-jpeg-reduction"></a> `system.disable-jpeg-reduction` | Disable JPEG Reduction | Sets the desktop wallpaper JPEG import quality to 100% to avoid compression artifacts. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L51` |
+| <a id="system.disable-non-essential-services"></a> `system.disable-non-essential-services` | Disable Non-Essential Services | Disables various non-critical services (Print Spooler, Bluetooth if unused, etc.) to free up resources. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L103` |
+| <a id="system.disable-restartable-apps"></a> `system.disable-restartable-apps` | Disable Restartable Apps | Prevents apps from automatically restarting after sign-in. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L387` |
+| <a id="system.disable-scheduled-tasks"></a> `system.disable-scheduled-tasks` | Disable Telemetry & Maintenance Tasks | Disables dozens of scheduled tasks related to telemetry, data collection, and non-essential maintenance. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L86` |
+| <a id="system.disable-search-highlights"></a> `system.disable-search-highlights` | Disable Search Highlights | Turns off dynamic 'highlights' content in the Windows search box. | Safe | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L72` |
+| <a id="system.disable-search-highlights-policy"></a> `system.disable-search-highlights-policy` | Disable Search Highlights (Policy) | Disables search highlights via policy for all users. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L824` |
+| <a id="system.disable-service-splitting"></a> `system.disable-service-splitting` | Disable Service Splitting | Prevents services from being split into separate svchost processes. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L834` |
+| <a id="system.disable-services-drivers"></a> `system.disable-services-drivers` | Disable Services/Drivers | Disables selected services and drivers from starting automatically; running services may continue until restart. | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2062` |
+| <a id="system.disable-shortcut-arrow"></a> `system.disable-shortcut-arrow` | Remove Shortcut Arrow Overlay | Removes the small arrow icon that appears on desktop shortcuts. | Safe | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L60` |
+| <a id="system.disable-startup-delay"></a> `system.disable-startup-delay` | Disable Startup Program Delay | Removes the artificial 10-second delay for startup programs to make boot feel faster. | Safe | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L34` |
+| <a id="system.disable-storage-sense"></a> `system.disable-storage-sense` | Disable Storage Sense | Turns off Storage Sense automatic cleanup. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L804` |
+| <a id="system.disable-storage-sense-temp-cleanup"></a> `system.disable-storage-sense-temp-cleanup` | Disable Storage Sense Temporary Files Cleanup | Prevents Storage Sense from deleting temporary files. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L814` |
+| <a id="system.disable-store-open-with"></a> `system.disable-store-open-with` | Disable Store in Open With | Removes the \ | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L169` |
+| <a id="system.disable-windows-search-service"></a> `system.disable-windows-search-service` | Disable Windows Search Service | Disables Windows Search indexing service (WSearch). | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2214` |
+| <a id="system.enable-game-mode"></a> `system.enable-game-mode` | Enable Game Mode | Ensures Windows Game Mode is active for optimized resource allocation during gaming. | Safe | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L21` |
+| <a id="system.enable-hags"></a> `system.enable-hags` | Enable Hardware-Accelerated GPU Scheduling | Lets the GPU handle its own scheduling for improved responsiveness. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L794` |
+| <a id="system.verbose-status-messages"></a> `system.verbose-status-messages` | Enable Verbose Status Messages | Shows detailed status messages during startup, shutdown, logon, and logoff. | Safe | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L47` |
+<!-- TWEAK INDEX END -->

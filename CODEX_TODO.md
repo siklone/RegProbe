@@ -176,10 +176,11 @@
 **Mevcut Durumlar:**
 - ✅ UI tarafında `Source file` linkleri CSV’den okunuyor
 - ✅ Catalog artık `Description` + `Risk` içeriyor (CSV/MD/HTML)
+- ✅ Category docs içinde `Tweak Index` + anchor’lar otomatik yazılıyor
 
 **Yapılacaklar:**
 - [x] Per‑tweak kısa açıklama (Changes / Risk / Source) katalogda mevcut
-- [ ] Docs içinde tweak başlıklarına anchor ekle (kategori docs)
+- [x] Docs içinde tweak başlıklarına anchor ekle (kategori docs)
 
 ---
 

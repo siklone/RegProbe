@@ -79,7 +79,8 @@ public sealed class TweakDocumentationLinker
                 if (!string.IsNullOrWhiteSpace(entryDocPath))
                 {
                     var entryTitle = BuildDocsTitle(entry.Category, prefix);
-                    if (TryInsertReferenceLink(tweak, entryTitle, entryDocPath, insertIndex))
+                    var anchoredDocPath = AppendDocAnchor(entryDocPath, tweak.Id);
+                    if (TryInsertReferenceLink(tweak, entryTitle, anchoredDocPath, insertIndex))
                     {
                         insertIndex++;
                     }
@@ -168,6 +169,16 @@ public sealed class TweakDocumentationLinker
         }
 
         return $"Docs: {StringPool.GetCategory(prefix)}";
+    }
+
+    private static string AppendDocAnchor(string docPath, string tweakId)
+    {
+        if (string.IsNullOrWhiteSpace(docPath) || string.IsNullOrWhiteSpace(tweakId))
+        {
+            return docPath;
+        }
+
+        return docPath.Contains('#') ? docPath : $"{docPath}#{tweakId}";
     }
 
     private bool TryInsertReferenceLink(TweakItemViewModel tweak, string title, string url, int index)

@@ -225,3 +225,32 @@ Placeholder.
 Requires elevation: Yes.
 
 Placeholder.
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="cleanup.background-history"></a> `cleanup.background-history` | Clear Wallpaper History | Clears the personalization wallpaper history registry entries and cached background files. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearBackgroundHistoryTweak.cs#L14` |
+| <a id="cleanup.component-store"></a> `cleanup.component-store` | Cleanup Component Store | Cleans up the Windows component store (WinSxS folder) to free up disk space. This is a safe operation that removes superseded components... | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/CleanupComponentStoreTweak.cs#L14` |
+| <a id="cleanup.delivery-optimization"></a> `cleanup.delivery-optimization` | Clear Delivery Optimization Files | Deletes Delivery Optimization cache used for Windows Update P2P sharing. The DoSvc service will be stopped. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearDeliveryOptimizationFilesTweak.cs#L14` |
+| <a id="cleanup.directx-shader-cache"></a> `cleanup.directx-shader-cache` | Clear DirectX Shader Cache | Clears DirectX and vendor shader caches (NVIDIA, AMD, Intel). Shaders will be recompiled on next app launch. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs#L11` |
+| <a id="cleanup.disable-reserved-storage"></a> `cleanup.disable-reserved-storage` | Disable Reserved Storage | Disables Windows Reserved Storage, which reserves about 7GB of disk space for Windows updates and temporary files. Only recommended if yo... | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs#L14` |
+| <a id="cleanup.eventlog-{logName.ToLowerInvariant()}"></a> `cleanup.eventlog-{logName.ToLowerInvariant()}` | Clear {logName} Event Log | Clears the Windows {logName} event log. WARNING: Logs cannot be recovered after clearing. | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs#L15` |
+| <a id="cleanup.font-cache"></a> `cleanup.font-cache` | Clear Font Cache | Clears the Windows font cache. Use this if fonts are not rendering properly. The FontCache service will be stopped and restarted. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearFontCacheTweak.cs#L14` |
+| <a id="cleanup.internet-temp-files"></a> `cleanup.internet-temp-files` | Clear Temporary Internet Files | Clears legacy WinINet cache (INetCache, INetCookies, WebCache, History). Used by Explorer, old Control Panel, and some installers. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearTemporaryInternetFilesTweak.cs#L11` |
+| <a id="cleanup.memory-dumps"></a> `cleanup.memory-dumps` | Clear Memory Dump Files | Deletes BSoD memory dump files (MEMORY.DMP). These can be several GB in size. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs#L11` |
+| <a id="cleanup.prefetch-files"></a> `cleanup.prefetch-files` | Clear Prefetch Files | Clears Windows prefetch files used for application launch optimization. Files will be regenerated over time. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearPrefetchFilesTweak.cs#L11` |
+| <a id="cleanup.product-key"></a> `cleanup.product-key` | Remove Product Key from Registry | Removes the Windows product key from the registry to prevent theft by malicious code. The key can be reactivated if needed. | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/RemoveProductKeyTweak.cs#L14` |
+| <a id="cleanup.recycle-bin"></a> `cleanup.recycle-bin` | Empty Recycle Bin | Empties the Recycle Bin for all drives. Files cannot be recovered after deletion. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearRecycleBinTweak.cs#L14` |
+| <a id="cleanup.shadow-copies"></a> `cleanup.shadow-copies` | Clear Shadow Copies | Removes all shadow copies (volume backups) to free up disk space. WARNING: This permanently removes System Restore points and volume snap... | Risky | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearShadowCopiesTweak.cs#L14` |
+| <a id="cleanup.srum-data"></a> `cleanup.srum-data` | Clear SRUM Database | Deletes the System Resource Usage Monitor (SRUM) database which tracks app, service, and network usage. | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearSRUMDataTweak.cs#L11` |
+| <a id="cleanup.temp-files"></a> `cleanup.temp-files` | Clear Temporary Files | Deletes temporary files from user and system temp folders. Files in use will be skipped. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs#L11` |
+| <a id="cleanup.thumbnail-cache"></a> `cleanup.thumbnail-cache` | Clear Thumbnail Cache | Clears Explorer thumbnail cache files. Thumbnails will be regenerated when needed. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearThumbnailCacheTweak.cs#L11` |
+| <a id="cleanup.wer-files"></a> `cleanup.wer-files` | Clear Windows Error Reporting Files | Deletes Windows Error Reporting (WER) crash dumps and report metadata from system and user folders. | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs#L11` |
+| <a id="cleanup.windows-old"></a> `cleanup.windows-old` | Delete Windows.old Folder | Removes previous Windows installation files from Windows.old. WARNING: You will not be able to roll back to the previous Windows version... | Risky | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs#L11` |
+| <a id="cleanup.windows-update-cache"></a> `cleanup.windows-update-cache` | Clear Windows Update Cache | Resets Windows Update cache (SoftwareDistribution and catroot2). Use this to fix update loops. Update catalog metadata will be redownloaded. | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs#L11` |
+<!-- TWEAK INDEX END -->

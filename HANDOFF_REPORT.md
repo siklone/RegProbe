@@ -107,6 +107,14 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `Docs/tweaks/tweak-catalog.csv`,
     `Docs/tweaks/tweak-catalog.html`
 
+- **Category docs now include per‑tweak anchors (2025-12-30)**
+  - Each category doc gets a generated “Tweak Index” with anchors per tweak.
+  - UI doc links now jump to the specific tweak section (file URI anchor support).
+  - Files: `scripts/generate_tweak_catalog.py`,
+    `Docs/*/*.md`,
+    `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`,
+    `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -247,6 +255,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `Docs/tweaks/tweak-catalog.md` - Changes/Risk columns
 - `Docs/tweaks/tweak-catalog.csv` - Description/Risk columns
 - `Docs/tweaks/tweak-catalog.html` - Changes/Risk columns
+- `Docs/*/*.md` - Generated Tweak Index sections with anchors
 
 ## Files Changed This Session (2025-12-31)
 

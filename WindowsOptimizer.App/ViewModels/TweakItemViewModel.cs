@@ -992,7 +992,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             LogToFile($"OpenReferenceLink: {url}");
-            if (TryOpenCatalogAnchor(url))
+            if (TryOpenFileAnchor(url))
             {
                 StatusMessage = "Opening catalog entry...";
                 return;
@@ -1030,7 +1030,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private static bool TryOpenCatalogAnchor(string url)
+    private static bool TryOpenFileAnchor(string url)
     {
         var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
         if (hashIndex <= 0)
@@ -1046,13 +1046,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         if (!File.Exists(path))
-        {
-            return false;
-        }
-
-        var extension = Path.GetExtension(path);
-        if (!extension.Equals(".html", StringComparison.OrdinalIgnoreCase)
-            && !extension.Equals(".htm", StringComparison.OrdinalIgnoreCase))
         {
             return false;
         }

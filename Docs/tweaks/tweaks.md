@@ -20,6 +20,20 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Regenerate: `python3 scripts/generate_tweak_catalog.py` (or `py -3` on Windows)
 - The catalog maps tweak IDs to their source files, docs, and short change/risk summaries.
 - The UI reads the CSV to surface a `Catalog entry` anchor link plus a `Source file` link for each tweak.
+- Category docs now include an auto-generated **Tweak Index** section (between `
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="system-check-disk-health"></a> `system-check-disk-health` | Check Disk Health (C:) | Performs a read-only check of the C: drive for file system errors without making any changes. Provides information about disk health and... | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/System/CheckDiskHealthTweak.cs#L13` |
+<!-- TWEAK INDEX END -->
+
+`).
 
 ## Manual testing checklist (Windows 10/11)
 - Use the catalog to drive per-tweak verification on native Windows.

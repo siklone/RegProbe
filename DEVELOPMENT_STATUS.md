@@ -356,6 +356,23 @@
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
 
+---
+
+### 19. Category Docs Tweak Index Anchors (Commit: pending)
+**Problem:** Category docs were long and lacked per‑tweak anchors.
+
+**Solution:**
+- Generator now injects a `Tweak Index (Generated)` section per doc.
+- Anchors use tweak IDs so UI links can jump directly.
+
+**Files Changed:**
+- `scripts/generate_tweak_catalog.py`
+- `Docs/*/*.md`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
 

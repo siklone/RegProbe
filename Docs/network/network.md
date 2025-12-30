@@ -1663,3 +1663,44 @@ HKR, "", RecvCompletionMethod, 0, "1"
 ```
 
 > https://docs.nvidia.com/networking/display/winofv55053000/performance+registry+keys
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="network.disable-active-probing"></a> `network.disable-active-probing` | Disable Active Probing | Turns off NCSI active probing for internet connectivity tests. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L902` |
+| <a id="network.disable-default-shares"></a> `network.disable-default-shares` | Disable Default Shares | Disables automatic administrative shares on the SMB server. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L713` |
+| <a id="network.disable-ipv6"></a> `network.disable-ipv6` | Disable IPv6 | Disables IPv6 protocol system-wide. May cause issues with some modern network apps. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L64` |
+| <a id="network.disable-llmnr"></a> `network.disable-llmnr` | Disable LLMNR | Turns off multicast name resolution (LLMNR). | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L844` |
+| <a id="network.disable-lltd"></a> `network.disable-lltd` | Disable Network Discovery (LLTD) | Disables LLTD mapper and responder for network discovery. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L884` |
+| <a id="network.disable-mdns"></a> `network.disable-mdns` | Disable mDNS | Turns off multicast DNS name resolution. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L854` |
+| <a id="network.disable-netbios"></a> `network.disable-netbios` | Disable NetBIOS over TCP/IP | Disables the legacy NetBIOS protocol to modernize the network stack. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L76` |
+| <a id="network.disable-netbios-resolution"></a> `network.disable-netbios-resolution` | Disable NetBIOS Name Resolution | Disables NetBIOS name resolution on the DNS client. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L864` |
+| <a id="network.disable-plaintext-smb-passwords"></a> `network.disable-plaintext-smb-passwords` | Disable Plaintext SMB Passwords | Prevents sending unencrypted passwords to SMB servers. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L944` |
+| <a id="network.disable-smart-name-resolution"></a> `network.disable-smart-name-resolution` | Disable Smart Multi-Homed Name Resolution | Disables smart name resolution across multiple network interfaces. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L874` |
+| <a id="network.disable-smb1"></a> `network.disable-smb1` | Disable SMBv1 | Disables the legacy SMBv1 protocol on the server. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L723` |
+| <a id="network.disable-smb2"></a> `network.disable-smb2` | Disable SMBv2/SMBv3 | Disables the SMBv2/SMBv3 protocol on the server. | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L733` |
+| <a id="network.disable-wifi-sense"></a> `network.disable-wifi-sense` | Disable Wi-Fi Sense | Prevents Windows from automatically connecting to suggested open hotspots. | Safe | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L88` |
+| <a id="network.enable-lltd-responder"></a> `network.enable-lltd-responder` | Enable LLTD Responder | Enables the Link-Layer Topology Discovery Responder driver for discovery by other PCs. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L31` |
+| <a id="network.enable-lltdio"></a> `network.enable-lltdio` | Enable LLTD Mapper I/O | Enables the Link-Layer Topology Discovery Mapper I/O driver for network mapping. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L19` |
+| <a id="network.flush-dns-cache"></a> `network.flush-dns-cache` | Flush DNS Cache | Clears the DNS resolver cache. Useful for resolving DNS issues or ensuring fresh DNS lookups. This is a one-time operation and cannot be... | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs#L13` |
+| <a id="network.optimize-smb"></a> `network.optimize-smb` | Optimize SMB Performance | Enables SMB multichannel and optimizes cache lifetimes for network file sharing. | Safe | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L44` |
+| <a id="network.prefer-ipv4"></a> `network.prefer-ipv4` | Prefer IPv4 over IPv6 | Configures the IPv6 stack to prefer IPv4 without fully disabling IPv6. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L914` |
+| <a id="network.require-ntlmv2-session-security"></a> `network.require-ntlmv2-session-security` | Require NTLMv2 Session Security | Requires NTLMv2 session security and 128-bit encryption for SMB clients. | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L954` |
+| <a id="network.reset-winsock"></a> `network.reset-winsock` | Reset Winsock Catalog | Resets the Winsock catalog to default settings. Useful for fixing network connectivity issues. Requires system restart to take effect. | Advanced | `WindowsOptimizer.Engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs#L13` |
+| <a id="network.smb-disable-bandwidth-throttling"></a> `network.smb-disable-bandwidth-throttling` | SMB: Disable Bandwidth Throttling | Disables SMB client bandwidth throttling. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L587` |
+| <a id="network.smb-disable-leasing"></a> `network.smb-disable-leasing` | SMB: Disable Leasing | Disables SMB server leasing (read/write/handle caching). | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L651` |
+| <a id="network.smb-enable-large-mtu"></a> `network.smb-enable-large-mtu` | SMB: Enable Large MTU | Enables large MTU support for SMB client connections. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L597` |
+| <a id="network.smb-enable-multichannel"></a> `network.smb-enable-multichannel` | SMB: Enable Multichannel | Enables SMB multichannel for parallel network paths. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L661` |
+| <a id="network.smb-enable-quic"></a> `network.smb-enable-quic` | SMB: Enable QUIC | Enables SMB over QUIC for client and server. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L671` |
+| <a id="network.smb-encrypt-data"></a> `network.smb-encrypt-data` | SMB: Require Encryption | Requires SMB server encryption for shared data. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L631` |
+| <a id="network.smb-reject-unencrypted-access"></a> `network.smb-reject-unencrypted-access` | SMB: Reject Unencrypted Access | Rejects SMB clients that do not support encryption. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L641` |
+| <a id="network.smb-require-dialect-3_1_1"></a> `network.smb-require-dialect-3_1_1` | SMB: Require Dialect 3.1.1 | Restricts SMB client/server dialects to SMB 3.1.1 or newer. | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L681` |
+| <a id="network.smb-require-signing-client"></a> `network.smb-require-signing-client` | SMB: Require Client Signing | Requires SMB client signing for outbound connections. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L607` |
+| <a id="network.smb-require-signing-server"></a> `network.smb-require-signing-server` | SMB: Require Server Signing | Requires SMB server signing for inbound connections. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L619` |
+| <a id="network.smb-set-cipher-suite-order"></a> `network.smb-set-cipher-suite-order` | SMB: Set Cipher Suite Order | Sets the SMB encryption cipher suite order to AES-256 variants. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L693` |
+<!-- TWEAK INDEX END -->

@@ -1565,3 +1565,42 @@ Example value:
 hide:sync;signinoptions-launchfaceenrollment;signinoptions-launchfingerprintenrollment;maps;maps-downloadmaps;mobile-devices;family-group;deviceusage;findmydevice
 ```
 It depends on the user what he wants to see and what not, so I won't add a switch for it.
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="explorer.disable-compact-mode"></a> `explorer.disable-compact-mode` | Enable Compact View | Reduces the spacing between items in File Explorer for a more information-dense view. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L57` |
+| <a id="explorer.disable-taskbar-chat"></a> `explorer.disable-taskbar-chat` | Disable Taskbar Chat Icon | Removes the Microsoft Teams Chat icon from the taskbar. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L84` |
+| <a id="explorer.disable-taskbar-widgets"></a> `explorer.disable-taskbar-widgets` | Disable Taskbar Widgets Icon | Removes the Widgets/News and Interests icon from the taskbar. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L97` |
+| <a id="explorer.show-file-extensions"></a> `explorer.show-file-extensions` | Show File Extensions | Shows the file extension (e.g., .txt, .exe) for all known file types in File Explorer. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L31` |
+| <a id="explorer.show-full-path"></a> `explorer.show-full-path` | Show Full Path in Title Bar | Displays the complete directory path in the title bar of File Explorer windows. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L44` |
+| <a id="explorer.show-hidden-files"></a> `explorer.show-hidden-files` | Show Hidden Files and Folders | Configures File Explorer to show files and folders marked with the hidden attribute. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L18` |
+| <a id="explorer.taskbar-alignment-left"></a> `explorer.taskbar-alignment-left` | Align Taskbar to Left | Moves the Taskbar icons and Start button to the traditional left alignment (Windows 11). | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L71` |
+| <a id="visibility.default-account-picture"></a> `visibility.default-account-picture` | Use Default Account Picture | Forces the default account picture for all users on this device. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L200` |
+| <a id="visibility.disable-acrylic-logon"></a> `visibility.disable-acrylic-logon` | Disable Acrylic Logon Background | Disables the acrylic blur on the logon background image. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L356` |
+| <a id="visibility.disable-common-control-animations"></a> `visibility.disable-common-control-animations` | Disable Common Control Animations | Turns off common control and window animations for the current user. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L179` |
+| <a id="visibility.disable-first-signin-animation"></a> `visibility.disable-first-signin-animation` | Disable First Sign-In Animation | Skips the first sign-in animation and Microsoft account opt-in prompt. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L220` |
+| <a id="visibility.disable-lock-screen"></a> `visibility.disable-lock-screen` | Disable Lock Screen | Skips the lock screen and goes directly to the sign-in screen. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L306` |
+| <a id="visibility.disable-lock-screen-camera"></a> `visibility.disable-lock-screen-camera` | Disable Lock Screen Camera | Prevents the lock screen camera from being invoked. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L316` |
+| <a id="visibility.disable-lock-screen-changes"></a> `visibility.disable-lock-screen-changes` | Prevent Changing Lock Screen | Prevents users from changing the lock screen image. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L346` |
+| <a id="visibility.disable-lock-screen-motion"></a> `visibility.disable-lock-screen-motion` | Disable Lock Screen Background Motion | Stops the subtle motion effect on the lock screen background. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L336` |
+| <a id="visibility.disable-lock-screen-slideshow"></a> `visibility.disable-lock-screen-slideshow` | Disable Lock Screen Slideshow | Prevents lock screen slideshows from running. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L326` |
+| <a id="visibility.disable-spotlight-action-center"></a> `visibility.disable-spotlight-action-center` | Disable Windows Spotlight on Action Center | Stops Windows Spotlight notifications in Action Center. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L273` |
+| <a id="visibility.disable-spotlight-desktop-collection"></a> `visibility.disable-spotlight-desktop-collection` | Disable Spotlight Collection on Desktop | Removes the Spotlight collection option for desktop backgrounds. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L295` |
+| <a id="visibility.disable-spotlight-features"></a> `visibility.disable-spotlight-features` | Disable Windows Spotlight Features | Turns off Windows Spotlight features for the current user. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L251` |
+| <a id="visibility.disable-spotlight-settings"></a> `visibility.disable-spotlight-settings` | Disable Windows Spotlight on Settings | Stops Windows Spotlight suggestions in Settings. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L284` |
+| <a id="visibility.disable-spotlight-third-party"></a> `visibility.disable-spotlight-third-party` | Disable Spotlight Third-Party Suggestions | Stops Windows Spotlight from suggesting third-party content. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L366` |
+| <a id="visibility.disable-spotlight-welcome"></a> `visibility.disable-spotlight-welcome` | Disable Windows Spotlight Welcome Experience | Disables the Windows Spotlight welcome experience. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L262` |
+| <a id="visibility.disable-wcn-wizards"></a> `visibility.disable-wcn-wizards` | Disable Windows Connect Now Wizards | Disables Windows Connect Now setup wizards for wireless and device setup. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L210` |
+| <a id="visibility.disable-widgets"></a> `visibility.disable-widgets` | Disable Widgets | Disables the Widgets/News and Interests feature. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L241` |
+| <a id="visibility.disable-window-animations"></a> `visibility.disable-window-animations` | Disable Window Animations | Disables window animations like minimize and restore. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L190` |
+| <a id="visibility.force-classic-control-panel"></a> `visibility.force-classic-control-panel` | Force Classic Control Panel View | Always open Control Panel in the icon view. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L743` |
+| <a id="visibility.hide-language-bar"></a> `visibility.hide-language-bar` | Hide Language Bar | Hides the language bar UI for the current user. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L230` |
+| <a id="visibility.hide-most-used-apps"></a> `visibility.hide-most-used-apps` | Hide Most Used Apps | Forces the Start menu Most used list to stay hidden. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L377` |
+| <a id="visibility.hide-people-bar"></a> `visibility.hide-people-bar` | Hide People Bar | Removes the People Bar from the taskbar. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L528` |
+<!-- TWEAK INDEX END -->
