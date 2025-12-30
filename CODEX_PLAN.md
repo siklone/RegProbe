@@ -30,14 +30,16 @@
 - Comprehensive debug logging (`%TEMP%\WindowsOptimizer_Debug.log`)
 - Timeout protection (5s detection, 30s apply)
 - Animation crash fix (no Freezable animations)
+- **Phase 8: TweaksViewModel Refactoring (4500→1300 lines)**
+- **10 TweakProvider implementations (modular architecture)**
+- **Plugin SDK with HelloWorld example**
 
 ### What's NOT Working / Incomplete
 - Network Adapters monitoring (may show empty)
 - Disk Activity monitoring (may show empty)
-- Rollback persistence (session-scoped only)
 - ElevatedHost packaging (needs CI/build step)
-- Monitor charts readability (no gridlines/labels)
 - CPU temp often shows N/A
+- WiX MSI Installer (not started)
 
 ---
 

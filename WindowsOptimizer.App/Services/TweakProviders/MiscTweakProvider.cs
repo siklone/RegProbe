@@ -4,122 +4,53 @@ using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Misc;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
 public sealed class MiscTweakProvider : BaseTweakProvider
 {
-    public override string CategoryName => "Miscellaneous";
+    public override string CategoryName => "Tools & Cleanup";
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        return new List<ITweak>
-        {
-            // Security
-            CreateRegistryTweak(
-                context,
-                "security.enable-uac",
-                "Enable User Account Control",
-                "Ensures UAC is enabled for better security.",
-                TweakRiskLevel.Safe,
-                RegistryHive.LocalMachine,
-                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-                "EnableLUA",
-                RegistryValueKind.DWord,
-                1),
+        // Maintenance & Tools
+        yield return SetNotepadPlusPlusDefaultEditorTweak.CreateSetNotepadPlusPlusDefaultEditorTweak(context.ElevatedRegistry);
+        yield return SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak(context.LocalRegistry);
 
-            CreateRegistryTweak(
-                context,
-                "security.disable-autorun",
-                "Disable AutoRun",
-                "Prevents automatic execution of programs from removable drives.",
-                TweakRiskLevel.Safe,
-                RegistryHive.LocalMachine,
-                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-                "NoDriveTypeAutoRun",
-                RegistryValueKind.DWord,
-                0xFF),
+        // Command-based Cleanup
+        yield return new CleanupComponentStoreTweak(context.ElevatedCommandRunner);
+        yield return new DisableReservedStorageTweak(context.ElevatedCommandRunner);
+        yield return new ClearRecycleBinTweak(context.ElevatedCommandRunner);
+        yield return new ClearShadowCopiesTweak(context.ElevatedCommandRunner);
 
-            // Notifications
-            CreateRegistryTweak(
-                context,
-                "notifications.disable-action-center",
-                "Disable Action Center",
-                "Disables the Windows Action Center notification panel.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Policies\Microsoft\Windows\Explorer",
-                "DisableNotificationCenter",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false),
+        // File-based Cleanup
+        yield return new ClearTemporaryFilesTweak();
+        yield return new ClearDirectXShaderCacheTweak();
+        yield return new ClearThumbnailCacheTweak();
+        yield return new ClearWindowsUpdateCacheTweak();
+        yield return new ClearWERFilesTweak();
+        yield return new ClearPrefetchFilesTweak();
+        yield return new ClearFontCacheTweak();
+        yield return new ClearWindowsOldTweak();
+        yield return new ClearMemoryDumpFilesTweak();
 
-            CreateRegistryTweak(
-                context,
-                "notifications.disable-lockscreen-notifications",
-                "Disable Lock Screen Notifications",
-                "Prevents notifications from appearing on the lock screen.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings",
-                "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK",
-                RegistryValueKind.DWord,
-                0,
-                requiresElevation: false),
+        // Misc specialized
+        yield return new RemoveProductKeyTweak(context.ElevatedCommandRunner);
 
-            // Performance
-            CreateRegistryTweak(
-                context,
-                "performance.disable-animations",
-                "Disable Window Animations",
-                "Disables visual effects and animations for better performance.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Control Panel\Desktop\WindowMetrics",
-                "MinAnimate",
-                RegistryValueKind.String,
-                "0",
-                requiresElevation: false),
-
-            CreateRegistryTweak(
-                context,
-                "performance.disable-transparency",
-                "Disable Transparency Effects",
-                "Disables window transparency for improved performance.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize",
-                "EnableTransparency",
-                RegistryValueKind.DWord,
-                0,
-                requiresElevation: false),
-
-            // Explorer/Visibility
-            CreateRegistryTweak(
-                context,
-                "explorer.show-file-extensions",
-                "Show File Extensions",
-                "Shows file extensions for known file types in Explorer.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-                "HideFileExt",
-                RegistryValueKind.DWord,
-                0,
-                requiresElevation: false),
-
-            CreateRegistryTweak(
-                context,
-                "explorer.show-hidden-files",
-                "Show Hidden Files",
-                "Shows hidden files and folders in Explorer.",
-                TweakRiskLevel.Advanced,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-                "Hidden",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false)
-        };
+        // Search
+        yield return CreateRegistryTweak(
+            context,
+            "misc.disable-search-web-results",
+            "Disable Search Web Results",
+            "Prevents Windows Search from showing Bing web results in the Start menu.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.CurrentUser,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "DisableSearchBoxSuggestions",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
     }
 }

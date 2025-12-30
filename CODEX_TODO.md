@@ -1,0 +1,491 @@
+# 📋 Windows Optimizer - Yapılacaklar Listesi (TODO)
+
+**Son Güncelleme:** 30 Aralık 2025  
+**Versiyon:** 1.0.0
+
+---
+
+## 🎯 Öncelik Sistemi
+
+| Öncelik | Sembol | Açıklama |
+|---------|--------|----------|
+| KRİTİK | 🔴 | Release öncesi mutlaka yapılmalı |
+| YÜKSEK | 🟠 | UX için önemli |
+| ORTA | 🟡 | Stabilite iyileştirmesi |
+| DÜŞÜK | 🟢 | Gelecek versiyon için |
+| GELİŞTİRME | 🔵 | Yeni özellik |
+
+---
+
+## 🔴 KRİTİK - Release Öncesi Gerekli
+
+### 1. Windows 10/11 Native Test Doğrulaması
+**Dosyalar:** N/A (manuel test)  
+**Çaba:** Yüksek  
+**Durum:** ⏳ Beklemede
+
+**Test Kontrol Listesi:**
+- [ ] Windows 10 22H2 temiz kurulum testi
+- [ ] Windows 11 testi
+- [ ] Non-admin kullanıcı olarak uygulama çalıştırma
+- [ ] Tüm tweak kategorilerini genişletme
+- [ ] CurrentUser tweak uygulama (UAC yok)
+- [ ] LocalMachine tweak uygulama (UAC prompt)
+- [ ] Rollback çalışıyor mu doğrulama
+- [ ] Monitor sayfa metrik doğruluğu
+- [ ] 1 saat Monitor açık bırakma (bellek testi)
+- [ ] CSV log dışa aktarma
+- [ ] Profil import/export
+
+---
+
+### 2. ElevatedHost Paketleme Doğrulaması
+**Dosyalar:** 
+- `WindowsOptimizer.App/WindowsOptimizer.App.csproj`
+- Build/publish scripts
+
+**Çaba:** Orta  
+**Durum:** ⏳ Kısmen tamamlandı
+
+**Yapılacaklar:**
+- [ ] Post-build target ekleme/doğrulama:
+```xml
+<Target Name="CopyElevatedHost" AfterTargets="Build">
+  <Copy SourceFiles="$(SolutionDir)WindowsOptimizer.ElevatedHost\bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\WindowsOptimizer.ElevatedHost.exe"
+        DestinationFolder="$(OutputPath)ElevatedHost\" />
+</Target>
+```
+- [ ] CI check: dosya publish sonrası mevcut mu
+- [ ] README'de paketleme talimatları güncelleme
+
+---
+
+### 3. Kurtarma Diyaloğu Implementasyonu
+**Dosyalar:**
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.Infrastructure/RollbackStateStore.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Kod hazır, UI yok
+
+**Mevcut Durum:**
+- ✅ `RollbackStateStore.GetPendingRollbacksAsync()` hazır
+- ❌ Uygulama başlangıcında kontrol yok
+- ❌ Kullanıcıya kurtarma diyaloğu gösterilmiyor
+
+**Yapılacaklar:**
+- [ ] `MainViewModel` constructor'da pending rollback kontrolü
+- [ ] Pending varsa modal dialog göster
+- [ ] "Geri Al" veya "Görmezden Gel" seçenekleri
+- [ ] Toplu rollback işlemi
+
+---
+
+## 🟠 YÜKSEK - UX İyileştirmeleri
+
+### 4. Ağ İzleme Boş Liste Düzeltmesi
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
+
+**Çaba:** Orta  
+**Durum:** 🧪 Test gerekli
+
+**Mevcut Durumlar:**
+- ✅ Delta-based throughput fallback implementasyonu var
+- ⚠️ Windows 10/11 native ortamda test gerekli
+
+**Yapılacaklar:**
+- [ ] Windows 10/11'de adapter listesi kontrolü
+- [ ] Performance counter instance name eşleştirme
+- [ ] Fallback logic test
+
+---
+
+### 5. Disk İzleme Boş Liste Düzeltmesi
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
+
+**Çaba:** Orta  
+**Durum:** 🧪 Test gerekli
+
+**Mevcut Durumlar:**
+- ✅ LogicalDisk counter implementasyonu var
+- ⚠️ Windows 10/11 native ortamda test gerekli
+
+**Yapılacaklar:**
+- [ ] Windows 10/11'de disk listesi kontrolü
+- [ ] I/O rate doğruluğu kontrolü
+- [ ] WMI fallback (gerekirse)
+
+---
+
+### 6. CPU Sıcaklık Tooltip Açıklaması
+**Dosyalar:**
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Çaba:** Düşük  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] N/A göründüğünde tooltip ekleme
+- [ ] "Sıcaklık sensörü bulunamadı veya yönetici izni gerekiyor" açıklaması
+
+---
+
+## 🟡 ORTA - Stabilite İyileştirmeleri
+
+### 7. Bellek Sızıntısı Testi
+**Dosyalar:**
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/*.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] VS Diagnostic Tools ile profiling
+- [ ] 1 saat stress testi
+- [ ] PerformanceCounter dispose kontrolü
+- [ ] LibreHardwareMonitor temizlik kontrolü
+- [ ] ObservableCollection bounded kontrolü
+
+---
+
+### 8. Log Rotation Implementasyonu
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/FileAppLogger.cs`
+- Loglama yapan diğer dosyalar
+
+**Çaba:** Düşük  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Maksimum log dosya boyutu (örn. 10MB)
+- [ ] Eski logları arşivle veya sil
+- [ ] Konfigürasyon seçeneği
+
+---
+
+### 9. Yapılandırılmış Loglama (Structured Logging)
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/IAppLogger.cs`
+- `WindowsOptimizer.Infrastructure/FileAppLogger.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] JSON format desteği
+- [ ] Log level (Info, Debug, Warning, Error)
+- [ ] Timestamp + EventId
+- [ ] Konfigürasyondan log level seçimi
+
+---
+
+### 10. ElevatedHost Retry Logic
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Exponential backoff retry
+- [ ] Maksimum retry sayısı (örn. 3)
+- [ ] Kullanıcı dostu hata mesajları
+- [ ] Bağlantı durumu göstergesi
+
+---
+
+## 🟢 DÜŞÜK - Gelecek Versiyon
+
+### 11. Platform Tespiti Başlangıç Uyarısı
+**Dosyalar:**
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/App.xaml.cs`
+
+**Çaba:** Düşük  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] WSL2/Linux başlangıç tespiti
+- [ ] "Sınırlı fonksiyonellik" uyarı dialogi
+- [ ] Native Windows önerisi
+
+---
+
+### 12. Kritik Path Unit Testleri
+**Dosyalar:**
+- `WindowsOptimizer.Tests/`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Öncelikli Test Alanları:**
+- [ ] TweakExecutionPipeline timeout logic
+- [ ] Platform detection
+- [ ] Registry operations (mocked)
+- [ ] RollbackStateStore serialization
+- [ ] Provider instantiation
+
+---
+
+### 13. Telemetri Opt-In/Out UI
+**Dosyalar:**
+- `WindowsOptimizer.App/Views/SettingsView.xaml`
+- `WindowsOptimizer.App/ViewModels/SettingsViewModel.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Stub mevcut, UI yok
+
+**Yapılacaklar:**
+- [ ] Settings sayfasında toggle switch
+- [ ] Açıklama metni
+- [ ] AppSettings'e kayıt
+
+---
+
+### 14. Crash Reporting (Opsiyonel)
+**Dosyalar:**
+- Yeni dosya gerekli
+
+**Çaba:** Orta  
+**Durum:** ⏳ Beklemede
+
+**Yapılacaklar:**
+- [ ] Global exception handler
+- [ ] Anonymous crash data
+- [ ] Opt-in only
+
+---
+
+## 🔵 GELİŞTİRME - Yeni Özellikler
+
+### 15. WiX MSI Installer
+**Dosyalar:**
+- Yeni proje: WindowsOptimizer.Installer
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Başlanmadı
+
+**Yapılacaklar:**
+- [ ] WiX Toolset kurulumu
+- [ ] Product.wxs tanımlama
+- [ ] ElevatedHost entegrasyonu
+- [ ] Start menu/desktop shortcut
+- [ ] Uninstaller
+
+---
+
+### 16. Auto-Update Mekanizması
+**Dosyalar:**
+- Yeni servis/modül gerekli
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Başlanmadı
+
+**Yapılacaklar:**
+- [ ] Version check endpoint
+- [ ] Download manager
+- [ ] Silent install (restart gerekirse)
+- [ ] Update notification
+
+---
+
+### 17. CI/CD Pipeline (GitHub Actions)
+**Dosyalar:**
+- `.github/workflows/build.yml`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Temel mevcut
+
+**Yapılacaklar:**
+- [ ] PR build kontrolü
+- [ ] Release build + publish
+- [ ] ElevatedHost paketleme kontrolü
+- [ ] Artifact upload
+- [ ] Release notes generation
+
+---
+
+### 18. Çoklu Dil Desteği (i18n)
+**Dosyalar:**
+- `WindowsOptimizer.App/Resources/`
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Başlanmadı
+
+**Öncelikli Diller:**
+- [ ] Türkçe (TR)
+- [ ] İngilizce (EN) - mevcut
+- [ ] Almanca (DE)
+- [ ] Rusça (RU)
+
+**Yapılacaklar:**
+- [ ] Resource dictionary yapısı
+- [ ] Dil seçim UI
+- [ ] Tüm string'leri externalize et
+
+---
+
+### 19. Backend API Servisleri
+**Dosyalar:**
+- Yeni proje: WindowsOptimizer.API
+
+**Çaba:** Çok Yüksek  
+**Durum:** ⏳ Başlanmadı
+
+**Yapılacaklar:**
+- [ ] ASP.NET Core Web API
+- [ ] PostgreSQL/MySQL database
+- [ ] JWT authentication
+- [ ] Preset repository endpoints
+- [ ] Telemetry aggregation
+
+---
+
+### 20. Plugin Marketplace UI
+**Dosyalar:**
+- `WindowsOptimizer.App/Views/PluginsView.xaml`
+- `WindowsOptimizer.App/ViewModels/PluginsViewModel.cs`
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Stub mevcut
+
+**Yapılacaklar:**
+- [ ] Plugin listesi görünümü
+- [ ] Yükle/Kaldır butonları
+- [ ] Rating gösterimi
+- [ ] Backend entegrasyonu
+
+---
+
+### 21. Script Editor
+**Dosyalar:**
+- Yeni View/ViewModel gerekli
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Stub mevcut (ScriptApi.cs)
+
+**Yapılacaklar:**
+- [ ] Syntax highlighting (AvalonEdit?)
+- [ ] LUA/Python desteği
+- [ ] Script çalıştırma
+- [ ] Script kütüphanesi
+
+---
+
+### 22. Audit Log Viewer
+**Dosyalar:**
+- Yeni View/ViewModel gerekli
+
+**Çaba:** Orta  
+**Durum:** ⏳ Stub mevcut (CryptographicLogger)
+
+**Yapılacaklar:**
+- [ ] Log listesi görünümü
+- [ ] Filtreleme (tarih, tür)
+- [ ] Hash chain verification UI
+- [ ] Export seçenekleri
+
+---
+
+### 23. Dark/Light Theme Toggle
+**Dosyalar:**
+- `WindowsOptimizer.App/Resources/Colors.xaml`
+- `WindowsOptimizer.App/Resources/Colors.Light.xaml`
+- `WindowsOptimizer.App/Services/ThemeManager.cs`
+
+**Çaba:** Orta  
+**Durum:** ⏳ Kısmen mevcut
+
+**Yapılacaklar:**
+- [ ] Settings'de theme toggle
+- [ ] Canlı tema değişimi
+- [ ] Sistem temasını takip (opsiyonel)
+
+---
+
+### 24. AppDomain Plugin Isolation
+**Dosyalar:**
+- `WindowsOptimizer.Infrastructure/Plugins/PluginLoader.cs`
+
+**Çaba:** Yüksek  
+**Durum:** ⏳ Başlanmadı
+
+**Yapılacaklar:**
+- [ ] AssemblyLoadContext kullanımı
+- [ ] Güvenlik sandbox
+- [ ] Plugin izolasyonu
+
+---
+
+### 25. Remote Management Dashboard
+**Dosyalar:**
+- Yeni web projesi gerekli
+
+**Çaba:** Çok Yüksek  
+**Durum:** ⏳ Stub mevcut (Remote/ klasörü)
+
+**Yapılacaklar:**
+- [ ] WebSocket server (SignalR)
+- [ ] Agent registration
+- [ ] Fleet policy deployment
+- [ ] Web dashboard (React/Blazor)
+
+---
+
+## 📊 Özet Tablo
+
+| Kategori | Toplam | Tamamlandı | Beklemede |
+|----------|--------|------------|-----------|
+| Kritik | 3 | 0 | 3 |
+| Yüksek | 3 | 0 | 3 |
+| Orta | 4 | 0 | 4 |
+| Düşük | 4 | 0 | 4 |
+| Geliştirme | 11 | 0 | 11 |
+| **TOPLAM** | **25** | **0** | **25** |
+
+> **NOT:** Phase 8 TweaksViewModel Refactoring %100 tamamlandı. 4500 satır → 1300 satır.
+
+---
+
+## 🎯 Önerilen Sıralama
+
+### Faz 1: Stabilizasyon (1-2 Hafta)
+1. Windows 10/11 native test doğrulaması
+2. ElevatedHost paketleme doğrulaması
+3. Kurtarma diyaloğu implementasyonu
+
+### Faz 2: UX İyileştirmeleri (1 Hafta)
+4. Ağ izleme düzeltmesi
+5. Disk izleme düzeltmesi
+6. CPU sıcaklık tooltip
+
+### Faz 3: Stabilite (1 Hafta)
+7. Bellek sızıntısı testi
+8. Log rotation
+9. ElevatedHost retry logic
+
+### Faz 4: Kalite (2 Hafta)
+10. Unit testler
+11. CI/CD pipeline
+12. Structured logging
+
+### Faz 5: Yeni Özellikler (4+ Hafta)
+13. WiX MSI installer
+14. Auto-update
+15. i18n desteği
+16. Backend API
+
+---
+
+## 📝 Notlar
+
+> **ÖNEMLİ:** Tüm geliştirmeler `AGENTS.md` ve `CLAUDE.md` dosyalarındaki güvenlik kurallarına uymalıdır:
+> - SAFE tweakler GERİ ALINABILIR olmalı
+> - Varsayılan Preview/DryRun
+> - "Defender/Firewall/SmartScreen devre dışı" SAFE altında OLAMAZ
+> - Admin işlemleri ElevatedHost üzerinden
+> - Tüm aksiyonlar loglanmalı

@@ -1,67 +1,37 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Misc;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
 public sealed class PowerTweakProvider : BaseTweakProvider
 {
-    public override string CategoryName => "Power";
+    public override string CategoryName => "Power Management";
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        return new List<ITweak>
-        {
-            CreateRegistryTweak(
-                context,
-                "power.disable-fast-startup",
-                "Disable Fast Startup",
-                "Disables hybrid shutdown for a cleaner boot process.",
-                TweakRiskLevel.Safe,
-                RegistryHive.LocalMachine,
-                @"SYSTEM\CurrentControlSet\Control\Session Manager\Power",
-                "HiberbootEnabled",
-                RegistryValueKind.DWord,
-                0),
+        // Core Power Behavior
+        yield return new DisableHibernationTweak(context.ElevatedCommandRunner);
+        yield return new DisableUsbSelectiveSuspendTweak(context.ElevatedCommandRunner);
 
-            CreateRegistryTweak(
-                context,
-                "power.disable-hibernation",
-                "Disable Hibernation",
-                "Disables hibernation mode and deletes hiberfil.sys to save disk space.",
-                TweakRiskLevel.Advanced,
-                RegistryHive.LocalMachine,
-                @"SYSTEM\CurrentControlSet\Control\Power",
-                "HibernateEnabled",
-                RegistryValueKind.DWord,
-                0),
+        // Advanced Power Settings (via Registry Helpers)
+        yield return PowerSettingsTweaks.CreateDisableModernStandbyTweak(context.ElevatedRegistry);
+        yield return PowerSettingsTweaks.CreateDisableFastStartupTweak(context.ElevatedRegistry);
+        yield return PowerSettingsTweaks.CreateDisablePowerThrottlingTweak(context.ElevatedRegistry);
+        yield return PowerSettingsTweaks.CreateOptimizePowerSettingsTweak(context.ElevatedRegistry);
 
-            CreateRegistryTweak(
-                context,
-                "power.disable-usb-selective-suspend",
-                "Disable USB Selective Suspend",
-                "Prevents USB devices from entering power-saving mode.",
-                TweakRiskLevel.Safe,
-                RegistryHive.LocalMachine,
-                @"SYSTEM\CurrentControlSet\Services\USB",
-                "DisableSelectiveSuspend",
-                RegistryValueKind.DWord,
-                1),
+        // CPU Performance Management
+        yield return CPUPowerTweaks.CreateDisableCPUParkingTweak(context.ElevatedRegistry);
+        yield return CPUPowerTweaks.CreateDisableIdleStatesTweak(context.ElevatedRegistry);
+        yield return CPUPowerTweaks.CreateOptimizeCPUBoostTweak(context.ElevatedRegistry);
 
-            CreateRegistryTweak(
-                context,
-                "power.disable-display-timeout-lock",
-                "Disable Display Timeout Auto-Lock",
-                "Prevents automatic locking when display turns off.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Policies\Microsoft\Windows\Personalization",
-                "NoLockScreen",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false)
-        };
+        // Network Power Management
+        yield return NetworkAdapterPowerTweaks.CreateDisableNetworkAdapterPowerSavingTweak(context.ElevatedRegistry);
+        yield return NetworkAdapterPowerTweaks.CreateOptimizeGamingNetworkTweak(context.ElevatedRegistry);
     }
 }

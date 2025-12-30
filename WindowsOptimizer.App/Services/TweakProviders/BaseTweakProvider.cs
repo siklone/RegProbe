@@ -100,4 +100,81 @@ public abstract class BaseTweakProvider : ITweakProvider
             accessor,
             requiresElevation);
     }
+
+    protected CompositeTweak CreateCompositeTweak(
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<ITweak> tweaks)
+    {
+        return new CompositeTweak(id, name, description, risk, tweaks);
+    }
+
+    protected ServiceStartModeBatchTweak CreateServiceStartModeBatchTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<string> serviceNames,
+        ServiceStartMode targetStartMode,
+        bool stopRunning = true,
+        bool? requiresElevation = null)
+    {
+        if (serviceNames is null) throw new ArgumentNullException(nameof(serviceNames));
+
+        var entries = serviceNames.Select(serviceName => new ServiceStartModeEntry(serviceName, targetStartMode)).ToList();
+        return new ServiceStartModeBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            entries,
+            context.ElevatedServiceManager,
+            stopRunning,
+            requiresElevation);
+    }
+
+    protected ScheduledTaskBatchTweak CreateScheduledTaskBatchTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<string> taskPaths,
+        bool? requiresElevation = null)
+    {
+        if (taskPaths is null) throw new ArgumentNullException(nameof(taskPaths));
+
+        return new ScheduledTaskBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            taskPaths,
+            context.ElevatedTaskManager,
+            requiresElevation);
+    }
+
+    protected FileRenameTweak CreateFileRenameTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        string sourcePath,
+        string disabledPath,
+        bool? requiresElevation = null)
+    {
+        return new FileRenameTweak(
+            id,
+            name,
+            description,
+            risk,
+            sourcePath,
+            disabledPath,
+            context.ElevatedFileSystem,
+            requiresElevation);
+    }
 }

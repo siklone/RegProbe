@@ -1,70 +1,40 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
+using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
+using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Misc;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
 public sealed class PeripheralTweakProvider : BaseTweakProvider
 {
-    public override string CategoryName => "Peripherals";
+    public override string CategoryName => "Peripherals & Input";
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        return new List<ITweak>
-        {
-            CreateRegistryTweak(
-                context,
-                "peripheral.disable-autoplay",
-                "Disable AutoPlay",
-                "Prevents automatic actions when inserting removable media.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers",
-                "DisableAutoplay",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false),
+        // Mouse Optimization
+        yield return MouseTweaks.CreateDisableMouseThrottleTweak(context.LocalRegistry);
+        yield return MouseTweaks.CreateDisableMouseAccelerationTweak(context.LocalRegistry);
 
-            CreateRegistryTweak(
-                context,
-                "peripheral.disable-pointer-acceleration",
-                "Disable Pointer Acceleration",
-                "Disables enhance pointer precision for consistent mouse movement.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Control Panel\Mouse",
-                "MouseSpeed",
-                RegistryValueKind.String,
-                "0",
-                requiresElevation: false),
+        // Keyboard Optimization
+        yield return KeyboardTweaks.CreateOptimizeKeyboardRepeatTweak(context.LocalRegistry);
+        yield return KeyboardTweaks.CreateDisableLanguageSwitchHotkeyTweak(context.LocalRegistry);
 
-            CreateRegistryTweak(
-                context,
-                "peripheral.disable-keyboard-shortcuts",
-                "Disable Windows Key Shortcuts",
-                "Prevents accidental triggering of Windows key combinations.",
-                TweakRiskLevel.Advanced,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-                "NoWinKeys",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false),
-
-            CreateRegistryTweak(
-                context,
-                "audio.disable-exclusive-mode",
-                "Disable Audio Exclusive Mode",
-                "Prevents applications from taking exclusive control of audio devices.",
-                TweakRiskLevel.Safe,
-                RegistryHive.CurrentUser,
-                @"Software\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render",
-                "DisableExclusiveMode",
-                RegistryValueKind.DWord,
-                1,
-                requiresElevation: false)
-        };
+        // General Input
+        yield return CreateRegistryTweak(
+            context,
+            "peripheral.disable-sticky-keys-prompt",
+            "Disable Sticky Keys Prompt",
+            "Prevents the annoying prompt when pressing Shift multiple times.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Control Panel\Accessibility\StickyKeys",
+            "Flags",
+            RegistryValueKind.String,
+            "506",
+            requiresElevation: false);
     }
 }

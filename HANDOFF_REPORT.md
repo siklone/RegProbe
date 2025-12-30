@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2025-12-28
+**Last Updated:** 2025-12-30
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -15,41 +15,34 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 
 ## Recent High-Impact Changes (Good to Know)
 
-- **Durable rollback state persistence (NEW)**
-  - Implemented `IRollbackAwareTweak` interface for tweaks to expose rollback snapshots
+- **Phase 8: TweaksViewModel Refactoring (2025-12-30)**
+  - Reduced `TweaksViewModel.cs` from ~4500 lines to ~1300 lines
+  - Created 10 specialized TweakProvider classes
+  - All tweaks now loaded dynamically via `IEnumerable<ITweakProvider>` injection
+  - Removed legacy helper methods (`CreateRegistryTweak`, etc.)
+  - Files: `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`, `WindowsOptimizer.App/Services/TweakProviders/*.cs`
+
+- **TweakProvider Implementations (2025-12-30)**
+  - `PrivacyTweakProvider` - 25+ privacy tweaks
+  - `SecurityTweakProvider` - 20+ security tweaks
+  - `NetworkTweakProvider` - 15+ network tweaks
+  - `SystemTweakProvider` - 15+ system tweaks
+  - `PerformanceTweakProvider` - 10+ performance tweaks
+  - `PowerTweakProvider` - 8+ power management tweaks
+  - `VisibilityTweakProvider` - 12+ UI/UX tweaks
+  - `PeripheralTweakProvider` - 6+ peripheral tweaks
+  - `AudioTweakProvider` - 4+ audio tweaks
+  - `MiscTweakProvider` - 8+ misc tweaks
+
+- **Durable rollback state persistence**
   - `RollbackStateStore` persists original values to `%AppData%\WindowsOptimizerSuite\rollback-state.json`
-  - `TweakExecutionPipeline` now saves state before Apply, marks as applied/rolled back after
-  - Enables crash recovery: pending rollbacks can be restored on next app launch
-  - Files: `WindowsOptimizer.Core/TweakContracts.cs`, `WindowsOptimizer.Infrastructure/RollbackStateStore.cs`, `WindowsOptimizer.Engine/TweakExecutionPipeline.cs`, `WindowsOptimizer.Engine/Tweaks/RegistryValueTweak.cs`
 
-- **Category detection cancellation (NEW)**
+- **Category detection cancellation**
   - Categories now use CancellationTokenSource to cancel pending detection when collapsed
-  - Prevents race conditions from rapid expand/collapse cycles
-  - File: `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs`
 
-- **Monitor chart improvements (NEW)**
+- **Monitor chart improvements**
   - Added gridlines (25%, 50%, 75%, 100%) to CPU/RAM history charts
   - Added Min/Max value indicators to chart headers
-  - Added Y-axis scale labels
-  - File: `WindowsOptimizer.App/Views/MonitorView.xaml`, `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-
-- **ToolTip style fix (NEW)**
-  - Removed invalid `PopupAnimation` property from ToolTip style that caused build failure
-  - File: `WindowsOptimizer.App/Resources/Styles.xaml`
-
-- **Tweaks page crash fixes**
-  - Freezable animations were causing intermittent WPF crashes (`Cannot animate '(0).(1)'...`, `BorderThickness property...`).
-  - Fix: avoid animating template Freezables; use overlay opacity + transforms only.
-  - Commit: `fc21306`
-
-- **ElevatedHost discovery improvements**
-  - When running via `dotnet run`, the app can't rely on publish layout paths.
-  - Fix: robust path discovery + env var override + better error logging.
-  - Commits: `46abd80`, `969700f`
-
-- **Dashboard health score UX**
-  - Health now reflects *detected* tweak states only; shows `—` until at least one tweak has been detected.
-  - Commit: `7c66e13`
 
 ## Current Known Issues / Incomplete Work (Prioritized)
 
@@ -58,22 +51,19 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
    - Test checklist in `CODEX_PLAN.md` Phase 2.
    - Priority: HIGH
 
-2) **Network/Disk monitoring may show empty**
+2) **WiX MSI Installer not implemented**
+   - Professional installer needed for distribution
+   - Priority: HIGH
+
+3) **Network/Disk monitoring may show empty**
    - Delta-based throughput and LogicalDisk counters implemented but need real testing.
    - Relevant: `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`, `DiskMonitor.cs`
 
-3) **Crash recovery dialog not implemented**
+4) **Crash recovery dialog not implemented**
    - `RollbackStateStore.GetPendingRollbacksAsync()` is ready, but no UI prompts on app startup.
-   - Next: check for pending rollbacks on startup, show recovery dialog.
-   - Relevant: `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
 
-4) **Memory leak testing**
+5) **Memory leak testing**
    - Monitor page should be stress-tested (1hr) to verify no memory leaks.
-   - Relevant: `MonitorViewModel.cs`, `*Monitor.cs`
-
-5) **ElevatedHost packaging verification**
-   - csproj targets exist but need CI verification.
-   - Relevant: `WindowsOptimizer.App/WindowsOptimizer.App.csproj`
 
 ## Guardrails (Do Not Break)
 
@@ -82,7 +72,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - **Do not add "disable Defender/Firewall/SmartScreen" under SAFE**
 - **Admin operations must run via ElevatedHost** (separate process); app is not always-admin
 - **Always log actions**; logs must be exportable
-- **WPF animation rule**: do not animate Freezables created in templates/resources; prefer named transforms and overlay opacity
+- **WPF animation rule**: do not animate Freezables created in templates/resources
 
 ## Operational Notes
 
@@ -93,28 +83,34 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 
 - Tweaks UI: `WindowsOptimizer.App/Views/TweaksView.xaml`
 - Tweak VM logic: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- Tweaks aggregation/filtering: `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- Tweaks aggregation/filtering: `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` (~1300 lines)
+- **TweakProviders: `WindowsOptimizer.App/Services/TweakProviders/*.cs` (modular tweak definitions)**
 - Dashboard health: `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
 - ElevatedHost discovery: `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`
-- Monitor UI/VM: `WindowsOptimizer.App/Views/MonitorView.xaml`, `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- Monitor UI/VM: `WindowsOptimizer.App/Views/MonitorView.xaml`
 - Metrics sources: `WindowsOptimizer.Infrastructure/Metrics/*.cs`
 - Pipeline orchestration: `WindowsOptimizer.Engine/TweakExecutionPipeline.cs`
 - Rollback state: `WindowsOptimizer.Infrastructure/RollbackStateStore.cs`
 
 ## Suggested Next PRs (Order)
 
-1. ~~Improve Monitor charts readability + CPU temp tooltip~~ ✅ DONE
-2. ~~Add durable rollback state store (before Apply)~~ ✅ DONE
-3. ~~Category detection cancellation~~ ✅ DONE
-4. **Windows 10/11 native testing** (PRIORITY)
+1. ~~TweaksViewModel Refactoring~~ ✅ DONE (Phase 8)
+2. ~~TweakProvider implementations~~ ✅ DONE
+3. **Windows 10/11 native testing** (PRIORITY)
+4. **WiX MSI Installer setup** (PRIORITY)
 5. Crash recovery dialog on app startup
 6. Memory optimization / leak testing
 
-## Files Changed This Session
+## Files Changed This Session (2025-12-30)
 
-- `WindowsOptimizer.Core/TweakContracts.cs` - Added `IRollbackAwareTweak`, `TweakRollbackSnapshot`
-- `WindowsOptimizer.Infrastructure/RollbackStateStore.cs` - Added snapshot methods
-- `WindowsOptimizer.Engine/TweakExecutionPipeline.cs` - Integrated rollback store
-- `WindowsOptimizer.Engine/Tweaks/RegistryValueTweak.cs` - Implemented `IRollbackAwareTweak`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Wired up `RollbackStateStore`
-- `WindowsOptimizer.App/Resources/Styles.xaml` - Fixed ToolTip style build error
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Major refactoring (4500→1300 lines)
+- `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` - New
+- `WindowsOptimizer.App/Services/TweakProviders/MiscTweakProvider.cs` - New
