@@ -1,6 +1,6 @@
 using System;
 
-namespace WindowsOptimizer.Infrastructure.Commands;
+namespace WindowsOptimizer.Core.Commands;
 
 public sealed record CommandResult(
     int ExitCode,

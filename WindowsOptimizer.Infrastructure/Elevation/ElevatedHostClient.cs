@@ -149,10 +149,16 @@ public sealed class ElevatedHostClient : IElevatedHostClient
             }
         }
 
-        throw new ElevatedHostException(
+        var message =
             $"Failed to connect to the elevated host after {attempts} attempt(s). " +
-            "Check if UAC was cancelled or if the host executable is missing.",
-            lastException);
+            "Check if UAC was cancelled or if the host executable is missing.";
+
+        if (lastException is null)
+        {
+            throw new ElevatedHostException(message);
+        }
+
+        throw new ElevatedHostException(message, lastException);
     }
 
     private async Task<bool> TryConnectAsync(TimeSpan timeout, CancellationToken ct)

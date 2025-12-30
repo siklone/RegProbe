@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WindowsOptimizer.Infrastructure.Commands;
+namespace WindowsOptimizer.Core.Commands;
 
 public interface ICommandRunner
 {

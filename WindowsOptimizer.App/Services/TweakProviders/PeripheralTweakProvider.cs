@@ -5,7 +5,7 @@ using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
-using WindowsOptimizer.Engine.Tweaks.Misc;
+using WindowsOptimizer.Engine.Tweaks.Peripheral;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 

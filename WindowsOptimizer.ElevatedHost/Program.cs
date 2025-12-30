@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
+using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Infrastructure.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Registry;

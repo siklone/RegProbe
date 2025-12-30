@@ -33,7 +33,7 @@ using WindowsOptimizer.Engine.Tweaks.Peripheral;
 using WindowsOptimizer.Engine.Tweaks.Power;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Infrastructure;
-using WindowsOptimizer.Infrastructure.Commands;
+using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Core.Files;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Tasks;
@@ -313,7 +313,8 @@ public sealed class TweaksViewModel : ViewModelBase
                 _elevatedRegistryAccessor,
                 _elevatedServiceManager,
                 _elevatedTaskManager,
-                _elevatedFileSystemAccessor);
+                _elevatedFileSystemAccessor,
+                _elevatedCommandRunner);
 
             foreach (var provider in _providerList)
             {

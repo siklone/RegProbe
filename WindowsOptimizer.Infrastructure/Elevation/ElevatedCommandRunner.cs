@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using WindowsOptimizer.Infrastructure.Commands;
+using WindowsOptimizer.Core.Commands;
 
 namespace WindowsOptimizer.Infrastructure.Elevation;
 

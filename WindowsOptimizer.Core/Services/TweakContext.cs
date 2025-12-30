@@ -1,3 +1,4 @@
+using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Core.Files;
 using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Tasks;
@@ -9,5 +10,6 @@ public sealed record TweakContext(
     IRegistryAccessor ElevatedRegistry,
     IServiceManager ElevatedServiceManager,
     IScheduledTaskManager ElevatedTaskManager,
-    IFileSystemAccessor ElevatedFileSystem
+    IFileSystemAccessor ElevatedFileSystem,
+    ICommandRunner ElevatedCommandRunner
 );

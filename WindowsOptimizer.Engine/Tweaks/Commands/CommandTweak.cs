@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core;
-using WindowsOptimizer.Infrastructure.Commands;
+using WindowsOptimizer.Core.Commands;
 
 namespace WindowsOptimizer.Engine.Tweaks.Commands;
 

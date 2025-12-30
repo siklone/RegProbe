@@ -6,7 +6,7 @@ using Moq;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks.Commands.Power;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
-using WindowsOptimizer.Infrastructure.Commands;
+using WindowsOptimizer.Core.Commands;
 using Xunit;
 
 namespace WindowsOptimizer.Tests;

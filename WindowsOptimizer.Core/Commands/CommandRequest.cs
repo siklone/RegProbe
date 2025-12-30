@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WindowsOptimizer.Infrastructure.Commands;
+namespace WindowsOptimizer.Core.Commands;
 
 public sealed record CommandRequest(
     string Executable,
