@@ -37,6 +37,9 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - **Durable rollback state persistence**
   - `RollbackStateStore` persists original values to `%AppData%\WindowsOptimizerSuite\rollback-state.json`
 
+- **Crash recovery banner (Recover/Dismiss)**
+  - Startup checks for pending rollbacks and surfaces a banner in `MainWindow` with recovery actions.
+
 - **Category detection cancellation**
   - Categories now use CancellationTokenSource to cancel pending detection when collapsed
 
@@ -59,8 +62,8 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
    - Delta-based throughput and LogicalDisk counters implemented but need real testing.
    - Relevant: `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`, `DiskMonitor.cs`
 
-4) **Crash recovery dialog not implemented**
-   - `RollbackStateStore.GetPendingRollbacksAsync()` is ready, but no UI prompts on app startup.
+4) **Crash recovery UX could be improved (optional)**
+   - Banner exists, but a modal dialog + detailed list of affected tweaks might be clearer.
 
 5) **Memory leak testing**
    - Monitor page should be stress-tested (1hr) to verify no memory leaks.
@@ -98,8 +101,8 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 2. ~~TweakProvider implementations~~ ✅ DONE
 3. **Windows 10/11 native testing** (PRIORITY)
 4. **WiX MSI Installer setup** (PRIORITY)
-5. Crash recovery dialog on app startup
-6. Memory optimization / leak testing
+5. Memory optimization / leak testing
+6. Optional: crash recovery modal + per-tweak selection
 
 ## Files Changed This Session (2025-12-30)
 

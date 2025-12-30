@@ -45,18 +45,15 @@
 - Build/publish scripts
 
 **Çaba:** Orta  
-**Durum:** ⏳ Kısmen tamamlandı
+**Durum:** ✅ Uygulandı (doğrulama gerekli)
 
-**Yapılacaklar:**
-- [ ] Post-build target ekleme/doğrulama:
-```xml
-<Target Name="CopyElevatedHost" AfterTargets="Build">
-  <Copy SourceFiles="$(SolutionDir)WindowsOptimizer.ElevatedHost\bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\WindowsOptimizer.ElevatedHost.exe"
-        DestinationFolder="$(OutputPath)ElevatedHost\" />
-</Target>
-```
-- [ ] CI check: dosya publish sonrası mevcut mu
-- [ ] README'de paketleme talimatları güncelleme
+**Yapılanlar:**
+- [x] Build sonrası kopyalama (CopyElevatedHostAfterBuild)
+- [x] Publish sonrası kopyalama (CopyElevatedHostAfterPublish)
+
+**Kalan:**
+- [ ] CI check: publish çıktısında `ElevatedHost/WindowsOptimizer.ElevatedHost.exe` var mı?
+- [ ] Windows 10/11 üzerinde publish layout doğrulaması
 
 ---
 
@@ -66,18 +63,16 @@
 - `WindowsOptimizer.Infrastructure/RollbackStateStore.cs`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Kod hazır, UI yok
+**Durum:** ✅ Uygulandı (banner + aksiyonlar)
 
 **Mevcut Durum:**
 - ✅ `RollbackStateStore.GetPendingRollbacksAsync()` hazır
-- ❌ Uygulama başlangıcında kontrol yok
-- ❌ Kullanıcıya kurtarma diyaloğu gösterilmiyor
+- ✅ Uygulama başlangıcında pending rollback kontrolü var
+- ✅ MainWindow üst banner ile Recover/Dismiss aksiyonları var
 
-**Yapılacaklar:**
-- [ ] `MainViewModel` constructor'da pending rollback kontrolü
-- [ ] Pending varsa modal dialog göster
-- [ ] "Geri Al" veya "Görmezden Gel" seçenekleri
-- [ ] Toplu rollback işlemi
+**Kalan (opsiyonel):**
+- [ ] Modal dialog + detay liste (hangi tweakler etkilenmiş)
+- [ ] Kullanıcıya tek-tek geri alma seçeneği
 
 ---
 
@@ -125,11 +120,10 @@
 - `WindowsOptimizer.App/Views/MonitorView.xaml`
 
 **Çaba:** Düşük  
-**Durum:** ⏳ Beklemede
+**Durum:** ✅ Uygulandı
 
-**Yapılacaklar:**
-- [ ] N/A göründüğünde tooltip ekleme
-- [ ] "Sıcaklık sensörü bulunamadı veya yönetici izni gerekiyor" açıklaması
+**Yapılanlar:**
+- [x] CPU Temp kartında tooltip açıklaması eklendi (N/A durumunu açıklar)
 
 ---
 
@@ -158,12 +152,14 @@
 - Loglama yapan diğer dosyalar
 
 **Çaba:** Düşük  
-**Durum:** ⏳ Beklemede
+**Durum:** ✅ Uygulandı (test gerekli)
 
-**Yapılacaklar:**
-- [ ] Maksimum log dosya boyutu (örn. 10MB)
-- [ ] Eski logları arşivle veya sil
-- [ ] Konfigürasyon seçeneği
+**Yapılanlar:**
+- [x] Maksimum log dosya boyutu (10MB)
+- [x] Eski logları arşivle/sil (son 5 dosya tutulur)
+
+**Kalan:**
+- [ ] Konfigürasyon seçeneği (opsiyonel)
 
 ---
 
