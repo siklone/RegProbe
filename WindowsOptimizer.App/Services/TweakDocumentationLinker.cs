@@ -75,7 +75,7 @@ public sealed class TweakDocumentationLinker
                     insertIndex++;
                 }
 
-                var entryDocPath = ResolveDocPath(entry.DocsPath);
+                var entryDocPath = ResolveDocPathFromRelative(entry.DocsPath);
                 if (!string.IsNullOrWhiteSpace(entryDocPath))
                 {
                     var entryTitle = BuildDocsTitle(entry.Category, prefix);
@@ -111,10 +111,10 @@ public sealed class TweakDocumentationLinker
             ? mapped
             : DefaultDocPath;
 
-        return ResolveDocPath(relative);
+        return ResolveDocPathFromRelative(relative);
     }
 
-    private string ResolveDocPath(string? relativePath)
+    private string ResolveDocPathFromRelative(string? relativePath)
     {
         if (string.IsNullOrWhiteSpace(relativePath))
         {
