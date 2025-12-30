@@ -1,0 +1,34 @@
+<Window x:Class="WindowsOptimizer.App.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Windows Optimizer"
+        Width="420"
+        Height="220"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="{DynamicResource BackgroundDarkestBrush}"
+            BorderBrush="{DynamicResource BackgroundLightBrush}"
+            BorderThickness="1"
+            CornerRadius="12"
+            Padding="24">
+        <StackPanel>
+            <TextBlock Text="Opening..."
+                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="(System scan in progress; this may take a moment.)"
+                       Foreground="{DynamicResource ForegroundLightBrush}"
+                       FontSize="12"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       Margin="0,6,0,16"/>
+            <ProgressBar Height="6" IsIndeterminate="True"/>
+        </StackPanel>
+    </Border>
+</Window>

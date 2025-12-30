@@ -450,28 +450,223 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage");
-            scope.Connect();
-
-            var query = new ObjectQuery("SELECT MediaType, BusType FROM MSFT_PhysicalDisk WHERE IsBoot = True");
-            using var searcher = new ManagementObjectSearcher(scope, query);
-            foreach (var obj in searcher.Get())
+            var bootDiskNumber = TryGetBootDiskNumber();
+            var storageType = TryGetDiskTypeFromStorage(bootDiskNumber);
+            if (!string.IsNullOrWhiteSpace(storageType))
             {
-                var mediaType = Convert.ToInt32(obj["MediaType"] ?? 0);
-                var busType = Convert.ToInt32(obj["BusType"] ?? 0);
-                if (mediaType == 4)
-                {
-                    return busType == 17 ? "NVMe SSD" : "SSD";
-                }
-                if (mediaType == 3)
-                {
-                    return "HDD";
-                }
+                return storageType;
+            }
+
+            var legacyType = TryGetDiskTypeFromWin32(bootDiskNumber);
+            if (!string.IsNullOrWhiteSpace(legacyType))
+            {
+                return legacyType;
             }
         }
         catch { }
 
         return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static int? TryGetBootDiskNumber()
+    {
+        try
+        {
+            var systemDrive = Environment.GetEnvironmentVariable("SystemDrive") ?? "C:";
+            var driveId = systemDrive.TrimEnd('\\');
+            using var partitionSearcher = new ManagementObjectSearcher(
+                $"ASSOCIATORS OF {{Win32_LogicalDisk.DeviceID='{driveId}'}} WHERE AssocClass = Win32_LogicalDiskToPartition");
+            foreach (ManagementObject partition in partitionSearcher.Get())
+            {
+                var partitionId = partition["DeviceID"]?.ToString();
+                if (string.IsNullOrWhiteSpace(partitionId))
+                {
+                    continue;
+                }
+
+                using var diskSearcher = new ManagementObjectSearcher(
+                    $"ASSOCIATORS OF {{Win32_DiskPartition.DeviceID='{partitionId}'}} WHERE AssocClass = Win32_DiskDriveToDiskPartition");
+                foreach (ManagementObject disk in diskSearcher.Get())
+                {
+                    if (disk["Index"] is uint index)
+                    {
+                        return (int)index;
+                    }
+
+                    if (int.TryParse(disk["Index"]?.ToString(), out var parsed))
+                    {
+                        return parsed;
+                    }
+                }
+            }
+        }
+        catch { }
+
+        return null;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string? TryGetDiskTypeFromStorage(int? bootDiskNumber)
+    {
+        if (!bootDiskNumber.HasValue)
+        {
+            return null;
+        }
+
+        try
+        {
+            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage");
+            scope.Connect();
+
+            string? diskFriendlyName = null;
+            int? diskBusType = null;
+            using (var diskSearcher = new ManagementObjectSearcher(
+                       scope,
+                       new ObjectQuery($"SELECT Number, BusType, FriendlyName FROM MSFT_Disk WHERE Number = {bootDiskNumber.Value}")))
+            {
+                foreach (var obj in diskSearcher.Get())
+                {
+                    diskFriendlyName = obj["FriendlyName"]?.ToString();
+                    diskBusType = TryReadInt(obj, "BusType");
+                }
+            }
+
+            using var physicalSearcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT DeviceId, MediaType, BusType, FriendlyName FROM MSFT_PhysicalDisk"));
+            foreach (var obj in physicalSearcher.Get())
+            {
+                var deviceId = obj["DeviceId"]?.ToString();
+                var friendlyName = obj["FriendlyName"]?.ToString();
+                if (!string.Equals(deviceId, bootDiskNumber.Value.ToString(), StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(friendlyName, diskFriendlyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                var mediaType = TryReadInt(obj, "MediaType");
+                var busType = diskBusType ?? TryReadInt(obj, "BusType");
+                return FormatDiskType(mediaType, busType, friendlyName);
+            }
+
+            if (diskBusType.HasValue || !string.IsNullOrWhiteSpace(diskFriendlyName))
+            {
+                return FormatDiskType(null, diskBusType, diskFriendlyName);
+            }
+        }
+        catch { }
+
+        return null;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string? TryGetDiskTypeFromWin32(int? bootDiskNumber)
+    {
+        if (!bootDiskNumber.HasValue)
+        {
+            return null;
+        }
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                $"SELECT Model, MediaType, InterfaceType FROM Win32_DiskDrive WHERE Index = {bootDiskNumber.Value}");
+            foreach (var obj in searcher.Get())
+            {
+                var model = obj["Model"]?.ToString() ?? string.Empty;
+                var mediaType = obj["MediaType"]?.ToString() ?? string.Empty;
+                var interfaceType = obj["InterfaceType"]?.ToString() ?? string.Empty;
+                var fingerprint = $"{model} {mediaType} {interfaceType}".ToLowerInvariant();
+                if (fingerprint.Contains("nvme"))
+                {
+                    return "NVMe SSD";
+                }
+                if (fingerprint.Contains("ssd") || fingerprint.Contains("solid state"))
+                {
+                    return "SSD";
+                }
+                if (fingerprint.Contains("hdd") || fingerprint.Contains("hard disk"))
+                {
+                    return "HDD";
+                }
+                if (fingerprint.Contains("usb"))
+                {
+                    return "USB";
+                }
+            }
+        }
+        catch { }
+
+        return null;
+    }
+
+    private static string? FormatDiskType(int? mediaType, int? busType, string? friendlyName)
+    {
+        if (busType == 17)
+        {
+            return "NVMe SSD";
+        }
+
+        if (mediaType == 4)
+        {
+            return "SSD";
+        }
+
+        if (mediaType == 3)
+        {
+            return "HDD";
+        }
+
+        if (!string.IsNullOrWhiteSpace(friendlyName))
+        {
+            var name = friendlyName.ToLowerInvariant();
+            if (name.Contains("nvme"))
+            {
+                return "NVMe SSD";
+            }
+            if (name.Contains("ssd"))
+            {
+                return "SSD";
+            }
+        }
+
+        return null;
+    }
+
+    private static int? TryReadInt(ManagementBaseObject obj, string propertyName)
+    {
+        try
+        {
+            var value = obj[propertyName];
+            if (value == null)
+            {
+                return null;
+            }
+
+            if (value is int intValue)
+            {
+                return intValue;
+            }
+
+            if (value is uint uintValue)
+            {
+                return (int)uintValue;
+            }
+
+            if (value is ushort ushortValue)
+            {
+                return ushortValue;
+            }
+
+            if (int.TryParse(value.ToString(), out var parsed))
+            {
+                return parsed;
+            }
+        }
+        catch { }
+
+        return null;
     }
 
     [SupportedOSPlatform("windows")]
@@ -528,19 +723,82 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm");
-            scope.Connect();
-            using var searcher = new ManagementObjectSearcher(scope, new ObjectQuery("SELECT * FROM Win32_Tpm"));
-            foreach (var _ in searcher.Get())
+            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm")
             {
+                Options =
+                {
+                    EnablePrivileges = true,
+                    Impersonation = ImpersonationLevel.Impersonate
+                }
+            };
+            scope.Connect();
+            using var searcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT IsEnabled_InitialValue, IsActivated_InitialValue, SpecVersion FROM Win32_Tpm"));
+            foreach (var obj in searcher.Get())
+            {
+                var enabled = TryReadBool(obj, "IsEnabled_InitialValue");
+                var activated = TryReadBool(obj, "IsActivated_InitialValue");
+                if (enabled == true && activated == true)
+                {
+                    return "Enabled";
+                }
+                if (enabled == true)
+                {
+                    return "Present (Disabled)";
+                }
                 return "Present";
             }
 
             return "Not detected";
         }
+        catch (ManagementException ex) when (ex.ErrorCode == ManagementStatus.InvalidNamespace || ex.ErrorCode == ManagementStatus.InvalidClass)
+        {
+            return "Not detected";
+        }
         catch { }
 
         return "Unknown";
+    }
+
+    private static bool? TryReadBool(ManagementBaseObject obj, string propertyName)
+    {
+        try
+        {
+            var value = obj[propertyName];
+            if (value == null)
+            {
+                return null;
+            }
+
+            if (value is bool boolValue)
+            {
+                return boolValue;
+            }
+
+            if (value is int intValue)
+            {
+                return intValue != 0;
+            }
+
+            if (value is uint uintValue)
+            {
+                return uintValue != 0;
+            }
+
+            if (value is ushort ushortValue)
+            {
+                return ushortValue != 0;
+            }
+
+            if (bool.TryParse(value.ToString(), out var parsed))
+            {
+                return parsed;
+            }
+        }
+        catch { }
+
+        return null;
     }
 
     private static string GetSystemUptime()

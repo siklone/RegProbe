@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Threading;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
@@ -169,12 +168,17 @@ public sealed class MainViewModel : ViewModelBase
         // Check for pending rollbacks from previous crashes
         Task.Run(CheckPendingRollbacksAsync);
 
-        System.Windows.Application.Current?.Dispatcher?.BeginInvoke(
-            new Action(() => StartStartupScanAsync(dashboard)),
-            DispatcherPriority.Background);
     }
 
-    private async void StartStartupScanAsync(DashboardViewModel dashboard)
+    public async Task RunStartupScanAsync()
+    {
+        if (NavigationItems.FirstOrDefault(n => n.Id == "dashboard")?.ViewModel is DashboardViewModel dashboard)
+        {
+            await RunStartupScanAsync(dashboard);
+        }
+    }
+
+    private async Task RunStartupScanAsync(DashboardViewModel dashboard)
     {
         if (_tweaksViewModel == null || IsStartupScanActive)
         {

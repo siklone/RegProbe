@@ -6,6 +6,7 @@ using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.Services;
 using WindowsOptimizer.Infrastructure;
 using System.Threading;
+using WindowsOptimizer.App.ViewModels;
 
 namespace WindowsOptimizer.App;
 
@@ -13,7 +14,7 @@ public partial class App : Application
 {
     private static int _dispatcherErrorDialogShown;
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
@@ -23,6 +24,40 @@ public partial class App : Application
         InitializeThemeAsync();
 
         base.OnStartup(e);
+
+        StartupWindow? splash = null;
+        try
+        {
+            splash = new StartupWindow();
+            splash.Show();
+
+            var mainWindow = new MainWindow
+            {
+                Visibility = Visibility.Hidden
+            };
+            MainWindow = mainWindow;
+
+            if (mainWindow.DataContext is MainViewModel mainVm)
+            {
+                await mainVm.RunStartupScanAsync();
+            }
+
+            splash.Close();
+            mainWindow.Show();
+            mainWindow.Activate();
+        }
+        catch (Exception ex)
+        {
+            splash?.Close();
+            AppDiagnostics.LogException("Startup sequence failed", ex);
+
+            if (MainWindow == null)
+            {
+                MainWindow = new MainWindow();
+            }
+
+            MainWindow.Show();
+        }
     }
 
     private static async void InitializeThemeAsync()

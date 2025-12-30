@@ -351,12 +351,12 @@
               Visibility="{Binding IsStartupScanActive, Converter={StaticResource BoolToVisibility}}">
             <Border Background="{DynamicResource BackgroundDarkestBrush}" Opacity="0.92"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="360">
-                <TextBlock Text="Scanning system and tweaks..."
+                <TextBlock Text="Opening..."
                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                            FontSize="18"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"/>
-                <TextBlock Text="This runs Detect only (no changes)."
+                <TextBlock Text="(System scan in progress; this may take a moment.)"
                            Foreground="{DynamicResource ForegroundLightBrush}"
                            FontSize="12"
                            Margin="0,6,0,16"
