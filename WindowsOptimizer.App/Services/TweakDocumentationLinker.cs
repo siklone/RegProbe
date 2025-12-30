@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.App.ViewModels;
 
@@ -12,10 +13,15 @@ public sealed class TweakDocumentationLinker
     private const string DefaultDocPath = "tweaks/tweaks.md";
     private readonly IReadOnlyDictionary<string, string> _categoryDocMap;
     private readonly string? _docsRoot;
+    private readonly string? _repoRoot;
+    private readonly IReadOnlyDictionary<string, CatalogEntry> _catalogIndex;
 
     public TweakDocumentationLinker(string? docsRoot = null)
     {
         _docsRoot = docsRoot ?? DocsLocator.TryFindDocsRoot();
+        _repoRoot = string.IsNullOrWhiteSpace(_docsRoot)
+            ? null
+            : Directory.GetParent(_docsRoot)?.FullName;
         _categoryDocMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             ["privacy"] = Path.Combine("privacy", "privacy.md"),
@@ -32,6 +38,7 @@ public sealed class TweakDocumentationLinker
             ["notifications"] = Path.Combine("notifications", "notifications.md"),
             ["performance"] = Path.Combine("performance", "performance.md"),
         };
+        _catalogIndex = LoadCatalogIndex();
     }
 
     public void Apply(IEnumerable<TweakItemViewModel> tweaks)
@@ -49,32 +56,46 @@ public sealed class TweakDocumentationLinker
                 continue;
             }
 
-            var catalogInserted = false;
+            var insertIndex = 0;
             if (!string.IsNullOrWhiteSpace(catalogPath))
             {
                 var catalogUrl = $"{catalogPath}#{tweak.Id}";
-                if (!tweak.ReferenceLinks.Any(link => string.Equals(link.Url, catalogUrl, StringComparison.OrdinalIgnoreCase)))
+                if (TryInsertReferenceLink(tweak, "Catalog entry", catalogUrl, insertIndex))
                 {
-                    tweak.ReferenceLinks.Insert(0, new ReferenceLink("Catalog entry", catalogUrl));
-                    catalogInserted = true;
+                    insertIndex++;
                 }
             }
 
             var prefix = ExtractPrefix(tweak.Id);
+            if (_catalogIndex.TryGetValue(tweak.Id, out var entry))
+            {
+                if (TryBuildSourceLink(entry, out var sourceTitle, out var sourcePath)
+                    && TryInsertReferenceLink(tweak, sourceTitle, sourcePath, insertIndex))
+                {
+                    insertIndex++;
+                }
+
+                var entryDocPath = ResolveDocPath(entry.DocsPath);
+                if (!string.IsNullOrWhiteSpace(entryDocPath))
+                {
+                    var entryTitle = BuildDocsTitle(entry.Category, prefix);
+                    if (TryInsertReferenceLink(tweak, entryTitle, entryDocPath, insertIndex))
+                    {
+                        insertIndex++;
+                    }
+                }
+
+                continue;
+            }
+
             var docPath = ResolveDocPath(prefix);
             if (string.IsNullOrWhiteSpace(docPath))
             {
                 continue;
             }
 
-            if (tweak.ReferenceLinks.Any(link => string.Equals(link.Url, docPath, StringComparison.OrdinalIgnoreCase)))
-            {
-                continue;
-            }
-
-            var title = $"Docs: {StringPool.GetCategory(prefix)}";
-            var insertIndex = catalogInserted ? 1 : 0;
-            tweak.ReferenceLinks.Insert(insertIndex, new ReferenceLink(title, docPath));
+            var title = BuildDocsTitle(null, prefix);
+            TryInsertReferenceLink(tweak, title, docPath, insertIndex);
         }
     }
 
@@ -90,8 +111,42 @@ public sealed class TweakDocumentationLinker
             ? mapped
             : DefaultDocPath;
 
-        var fullPath = Path.Combine(_docsRoot ?? string.Empty, relative);
-        return File.Exists(fullPath) ? fullPath : string.Empty;
+        return ResolveDocPath(relative);
+    }
+
+    private string ResolveDocPath(string? relativePath)
+    {
+        if (string.IsNullOrWhiteSpace(relativePath))
+        {
+            return string.Empty;
+        }
+
+        var normalized = NormalizeRelativePath(relativePath);
+        if (Path.IsPathRooted(normalized))
+        {
+            return File.Exists(normalized) ? normalized : string.Empty;
+        }
+
+        if (!string.IsNullOrWhiteSpace(_repoRoot))
+        {
+            var rooted = Path.Combine(_repoRoot, normalized);
+            if (File.Exists(rooted))
+            {
+                return rooted;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(_docsRoot))
+        {
+            var trimmed = TrimDocsPrefix(normalized);
+            var rooted = Path.Combine(_docsRoot, trimmed);
+            if (File.Exists(rooted))
+            {
+                return rooted;
+            }
+        }
+
+        return string.Empty;
     }
 
     private static string ExtractPrefix(string tweakId)
@@ -104,4 +159,201 @@ public sealed class TweakDocumentationLinker
 
         return tweakId.Substring(0, dotIndex).ToLowerInvariant();
     }
+
+    private static string BuildDocsTitle(string? category, string prefix)
+    {
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            return $"Docs: {category}";
+        }
+
+        return $"Docs: {StringPool.GetCategory(prefix)}";
+    }
+
+    private bool TryInsertReferenceLink(TweakItemViewModel tweak, string title, string url, int index)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return false;
+        }
+
+        if (tweak.ReferenceLinks.Any(link => string.Equals(link.Url, url, StringComparison.OrdinalIgnoreCase)))
+        {
+            return false;
+        }
+
+        var safeIndex = Math.Clamp(index, 0, tweak.ReferenceLinks.Count);
+        tweak.ReferenceLinks.Insert(safeIndex, new ReferenceLink(title, url));
+        return true;
+    }
+
+    private bool TryBuildSourceLink(CatalogEntry entry, out string title, out string path)
+    {
+        title = string.Empty;
+        path = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(entry.SourcePath))
+        {
+            return false;
+        }
+
+        var (sourcePath, line) = SplitSourcePath(entry.SourcePath);
+        var normalized = NormalizeRelativePath(sourcePath);
+        if (string.IsNullOrWhiteSpace(normalized))
+        {
+            return false;
+        }
+
+        var fullPath = normalized;
+        if (!Path.IsPathRooted(normalized) && !string.IsNullOrWhiteSpace(_repoRoot))
+        {
+            fullPath = Path.Combine(_repoRoot, normalized);
+        }
+
+        if (string.IsNullOrWhiteSpace(fullPath) || !File.Exists(fullPath))
+        {
+            return false;
+        }
+
+        title = string.IsNullOrWhiteSpace(line) ? "Source file" : $"Source file (L{line})";
+        path = fullPath;
+        return true;
+    }
+
+    private static (string path, string? line) SplitSourcePath(string sourcePath)
+    {
+        if (string.IsNullOrWhiteSpace(sourcePath))
+        {
+            return (string.Empty, null);
+        }
+
+        var markerIndex = sourcePath.LastIndexOf("#L", StringComparison.OrdinalIgnoreCase);
+        if (markerIndex <= 0)
+        {
+            return (sourcePath, null);
+        }
+
+        var linePart = sourcePath[(markerIndex + 2)..];
+        var normalizedLine = int.TryParse(linePart, out var lineNumber)
+            ? lineNumber.ToString()
+            : linePart.Trim();
+
+        return (sourcePath[..markerIndex], normalizedLine);
+    }
+
+    private IReadOnlyDictionary<string, CatalogEntry> LoadCatalogIndex()
+    {
+        var catalogPath = ResolveCatalogCsvPath();
+        if (string.IsNullOrWhiteSpace(catalogPath) || !File.Exists(catalogPath))
+        {
+            return new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
+        }
+
+        try
+        {
+            var lines = File.ReadAllLines(catalogPath);
+            if (lines.Length <= 1)
+            {
+                return new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            var map = new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
+            for (var i = 1; i < lines.Length; i++)
+            {
+                var line = lines[i];
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    continue;
+                }
+
+                var fields = SplitCsvLine(line);
+                if (fields.Count < 6)
+                {
+                    continue;
+                }
+
+                var id = fields[0].Trim();
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    continue;
+                }
+
+                var entry = new CatalogEntry(
+                    id,
+                    fields[2].Trim(),
+                    fields[4].Trim(),
+                    fields[5].Trim());
+
+                map[id] = entry;
+            }
+
+            return map;
+        }
+        catch
+        {
+            return new Dictionary<string, CatalogEntry>(StringComparer.OrdinalIgnoreCase);
+        }
+    }
+
+    private string ResolveCatalogCsvPath()
+    {
+        var fullPath = Path.Combine(_docsRoot ?? string.Empty, "tweaks", "tweak-catalog.csv");
+        return File.Exists(fullPath) ? fullPath : string.Empty;
+    }
+
+    private static IReadOnlyList<string> SplitCsvLine(string line)
+    {
+        var results = new List<string>();
+        var current = new StringBuilder();
+        var inQuotes = false;
+
+        for (var i = 0; i < line.Length; i++)
+        {
+            var ch = line[i];
+            if (ch == '"')
+            {
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+
+                continue;
+            }
+
+            if (ch == ',' && !inQuotes)
+            {
+                results.Add(current.ToString());
+                current.Clear();
+                continue;
+            }
+
+            current.Append(ch);
+        }
+
+        results.Add(current.ToString());
+        return results;
+    }
+
+    private static string NormalizeRelativePath(string path)
+    {
+        return path.Replace('/', Path.DirectorySeparatorChar).Trim();
+    }
+
+    private static string TrimDocsPrefix(string path)
+    {
+        var trimmed = path.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
+        if (trimmed.StartsWith("Docs", StringComparison.OrdinalIgnoreCase))
+        {
+            trimmed = trimmed[4..].TrimStart(Path.DirectorySeparatorChar, '/', '\\');
+        }
+
+        return trimmed;
+    }
+
+    private sealed record CatalogEntry(string Id, string? Category, string? SourcePath, string? DocsPath);
 }

@@ -59,7 +59,60 @@
         <DropShadowEffect x:Key="ChartGlowRead" Color="{DynamicResource Nord14}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
         <DropShadowEffect x:Key="ChartGlowWrite" Color="{DynamicResource Nord11}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
 
-        <Style x:Key="StatCardStyle" TargetType="Border">
+        <TransformGroup x:Key="MonitorCardTransform" x:Shared="False">
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <TranslateTransform X="0" Y="12"/>
+        </TransformGroup>
+
+        <Style x:Key="MonitorCardRevealStyle" TargetType="Border">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="RenderTransform" Value="{StaticResource MonitorCardTransform}"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1"
+                                             Duration="0:0:0.35"
+                                             EasingFunction="{StaticResource CubicEaseOut}"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                             From="12" To="0"
+                                             Duration="0:0:0.35"
+                                             EasingFunction="{StaticResource CubicEaseOut}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1.015" Duration="0:0:0.12"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1.015" Duration="0:0:0.12"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                 To="1.0" Duration="0:0:0.12"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                 To="1.0" Duration="0:0:0.12"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StatCardStyle" TargetType="Border" BasedOn="{StaticResource MonitorCardRevealStyle}">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -75,7 +128,7 @@
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
-        <Style x:Key="SectionCardStyle" TargetType="Border">
+        <Style x:Key="SectionCardStyle" TargetType="Border" BasedOn="{StaticResource MonitorCardRevealStyle}">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
