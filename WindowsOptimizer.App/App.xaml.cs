@@ -20,16 +20,17 @@ public partial class App : Application
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
 
-        // Load saved theme preference
-        InitializeThemeAsync();
-
         base.OnStartup(e);
 
         StartupWindow? splash = null;
         try
         {
+            // Load saved theme preference before showing any windows.
+            await InitializeThemeAsync();
+
             splash = new StartupWindow();
             splash.Show();
+            await Dispatcher.Yield(DispatcherPriority.Render);
 
             var mainWindow = new MainWindow
             {
@@ -60,7 +61,7 @@ public partial class App : Application
         }
     }
 
-    private static async void InitializeThemeAsync()
+    private static async Task InitializeThemeAsync()
     {
         try
         {
@@ -69,16 +70,7 @@ public partial class App : Application
             var settings = await settingsStore.LoadAsync(CancellationToken.None);
 
             var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
-
-            // Force apply theme on startup if not dark (default)
-            if (theme == AppTheme.Light)
-            {
-                ThemeManager.SetTheme(AppTheme.Light, force: true);
-            }
-            else
-            {
-                ThemeManager.Initialize(theme);
-            }
+            ThemeManager.SetTheme(theme, force: true);
         }
         catch
         {

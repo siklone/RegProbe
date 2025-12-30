@@ -19,6 +19,7 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 - Test template: `Docs/tweaks/tweak-test-template.csv`
 - Regenerate: `python3 scripts/generate_tweak_catalog.py` (or `py -3` on Windows)
 - The catalog maps tweak IDs to their source files and the closest matching doc in `Docs/`.
+- The UI reads the CSV to surface a `Catalog entry` anchor link plus a `Source file` link for each tweak.
 
 ## Manual testing checklist (Windows 10/11)
 - Use the catalog to drive per-tweak verification on native Windows.

@@ -1244,7 +1244,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         try
         {
-            var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None);
+            var result = await Task.Run(() => _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None));
 
             AppliedStatus = result.Result.Status switch
             {
