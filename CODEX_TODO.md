@@ -1,6 +1,6 @@
 # 📋 Windows Optimizer - Yapılacaklar Listesi (TODO)
 
-**Son Güncelleme:** 30 Aralık 2025  
+**Son Güncelleme:** 31 Aralık 2025  
 **Versiyon:** 1.0.0
 
 ---
@@ -36,6 +36,7 @@
 - [ ] 1 saat Monitor açık bırakma (bellek testi)
 - [ ] CSV log dışa aktarma
 - [ ] Profil import/export
+- [ ] Light/Dark theme (Dashboard, Tweaks, Monitor, MainWindow)
 
 ---
 

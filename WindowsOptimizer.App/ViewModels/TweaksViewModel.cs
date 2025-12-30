@@ -914,7 +914,7 @@ public sealed class TweaksViewModel : ViewModelBase
             {
                 return false;
             }
-            if (_statusFilter == "rolledback" && item.IsApplied)
+            if (_statusFilter == "rolledback" && !item.WasRolledBack)
             {
                 return false;
             }
@@ -1349,6 +1349,17 @@ public sealed class TweaksViewModel : ViewModelBase
     /// </summary>
     public async Task DetectAllTweaksAsync()
     {
+        var expansionSnapshot = CategoryGroups
+            .Select(group => new
+            {
+                Group = group,
+                WasExpanded = group.IsExpanded,
+                SubGroups = group.SubGroups
+                    .Select(sub => new { SubGroup = sub, WasExpanded = sub.IsExpanded })
+                    .ToList()
+            })
+            .ToList();
+
         // Expand all categories to trigger their detection
         foreach (var category in CategoryGroups)
         {
@@ -1389,5 +1400,14 @@ public sealed class TweaksViewModel : ViewModelBase
         OnPropertyChanged(nameof(ScorableTweaksApplied));
         OnPropertyChanged(nameof(HealthCalculationSummary));
         OnPropertyChanged(nameof(HealthStatusMessage));
+
+        foreach (var snapshot in expansionSnapshot)
+        {
+            snapshot.Group.IsExpanded = snapshot.WasExpanded;
+            foreach (var subSnapshot in snapshot.SubGroups)
+            {
+                subSnapshot.SubGroup.IsExpanded = subSnapshot.WasExpanded;
+            }
+        }
     }
 }

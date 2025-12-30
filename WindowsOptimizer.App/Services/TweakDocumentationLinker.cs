@@ -41,11 +41,23 @@ public sealed class TweakDocumentationLinker
             return;
         }
 
+        var catalogPath = ResolveCatalogPath();
         foreach (var tweak in tweaks)
         {
             if (tweak is null || string.IsNullOrWhiteSpace(tweak.Id))
             {
                 continue;
+            }
+
+            var catalogInserted = false;
+            if (!string.IsNullOrWhiteSpace(catalogPath))
+            {
+                var catalogUrl = $"{catalogPath}#{tweak.Id}";
+                if (!tweak.ReferenceLinks.Any(link => string.Equals(link.Url, catalogUrl, StringComparison.OrdinalIgnoreCase)))
+                {
+                    tweak.ReferenceLinks.Insert(0, new ReferenceLink("Catalog entry", catalogUrl));
+                    catalogInserted = true;
+                }
             }
 
             var prefix = ExtractPrefix(tweak.Id);
@@ -61,8 +73,15 @@ public sealed class TweakDocumentationLinker
             }
 
             var title = $"Docs: {StringPool.GetCategory(prefix)}";
-            tweak.ReferenceLinks.Insert(0, new ReferenceLink(title, docPath));
+            var insertIndex = catalogInserted ? 1 : 0;
+            tweak.ReferenceLinks.Insert(insertIndex, new ReferenceLink(title, docPath));
         }
+    }
+
+    private string ResolveCatalogPath()
+    {
+        var fullPath = Path.Combine(_docsRoot ?? string.Empty, "tweaks", "tweak-catalog.html");
+        return File.Exists(fullPath) ? fullPath : string.Empty;
     }
 
     private string ResolveDocPath(string prefix)

@@ -1,6 +1,6 @@
 # ✅ Windows Optimizer - Tamamlanmış İşler
 
-**Son Güncelleme:** 30 Aralık 2025  
+**Son Güncelleme:** 31 Aralık 2025  
 **Versiyon:** 1.0.0
 
 ---
@@ -161,7 +161,7 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] **"—" Gösterimi** - Detect öncesi boş gösterim
 
 ### Settings
-- [x] **Tema Ayarları** - Dark/Light (kısmi)
+- [x] **Tema Ayarları** - Dark/Light (ana ekranlar güncellendi, Windows doğrulama gerekli)
 - [x] **Profil Yönetimi** - Export/Import
 - [x] **Hazır Presetler** - Gaming, Privacy, Workstation, Laptop
 

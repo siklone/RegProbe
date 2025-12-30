@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 30, 2025
+**Last Updated:** December 31, 2025
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -257,6 +257,61 @@
 - `WindowsOptimizer.App/Resources/Styles.xaml`
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (tweak count + theme switch)
+
+---
+
+### 13. Light Theme Parity Across Main Views (Commit: pending)
+**Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
+
+**Solution:**
+- Replaced hard-coded colors with theme-aware `DynamicResource` brushes.
+- Added caution/danger surface brushes and terminal surface brush.
+- Added chart gradient color tokens for Monitor charts.
+
+**Files Changed:**
+- `WindowsOptimizer.App/MainWindow.xaml`
+- `WindowsOptimizer.App/Views/DashboardView.xaml`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `WindowsOptimizer.App/Resources/Colors.xaml`
+- `WindowsOptimizer.App/Resources/Colors.Light.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (Light theme)
+
+---
+
+### 14. Tweak Docs Anchor Links (Commit: pending)
+**Problem:** Tweak docs links opened large markdown files at the top; users had to search manually.
+
+**Solution:**
+- Generated HTML catalog with per-tweak anchors.
+- Tweaks now include a direct “Catalog entry” link pointing to the anchor.
+
+**Files Changed:**
+- `scripts/generate_tweak_catalog.py`
+- `Docs/tweaks/tweak-catalog.html`
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Needs Windows verification
+
+---
+
+### 15. Startup Scan + RolledBack Filter Fix (Commit: pending)
+**Problem:** Users had to manually scan after launch; rolled-back filter was unreliable.
+
+**Solution:**
+- Auto Detect on app startup with a blocking overlay.
+- Rolled-back filter now uses explicit `WasRolledBack` state.
+- Detect-all preserves category expansion state.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
+- `WindowsOptimizer.App/MainWindow.xaml`
+- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+**Status:** ✅ **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -522,6 +577,9 @@
 
 ### Before Release
 
+#### UI Theme
+- [ ] Light/Dark theme swap updates Dashboard, Tweaks, Monitor, MainWindow
+
 #### Monitor Page
 - [ ] Monitor page loads without crashing
 - [ ] CPU usage displays correctly
@@ -583,6 +641,7 @@ Key recent commits (not exhaustive):
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 - [HANDOFF_REPORT.md](HANDOFF_REPORT.md) - Previous development handoff
 - [Docs/tweaks/tweak-catalog.md](Docs/tweaks/tweak-catalog.md) - Generated tweak catalog with source/doc links
+- [Docs/tweaks/tweak-catalog.html](Docs/tweaks/tweak-catalog.html) - Anchor-friendly catalog for per-tweak links
 - [Docs/tweaks/tweak-test-template.csv](Docs/tweaks/tweak-test-template.csv) - Test checklist template for manual validation
 
 ---

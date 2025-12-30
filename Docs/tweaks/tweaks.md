@@ -15,6 +15,7 @@ Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Ro
 ## Tweak catalog & sources
 - Generated catalog: `Docs/tweaks/tweak-catalog.md`
 - CSV export: `Docs/tweaks/tweak-catalog.csv`
+- HTML catalog: `Docs/tweaks/tweak-catalog.html` (supports anchor links)
 - Test template: `Docs/tweaks/tweak-test-template.csv`
 - Regenerate: `python3 scripts/generate_tweak_catalog.py` (or `py -3` on Windows)
 - The catalog maps tweak IDs to their source files and the closest matching doc in `Docs/`.

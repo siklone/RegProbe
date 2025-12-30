@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
@@ -50,7 +51,7 @@ public sealed class DashboardViewModel : ViewModelBase
         _logStore = new FileTweakLogStore(_paths);
         LoadStatistics();
         _ = LoadRecentActivityAsync();
-        ScanAllCommand = new RelayCommand(_ => ScanAllTweaksAsync(), _ => !IsScanning);
+        ScanAllCommand = new RelayCommand(_ => _ = RunScanAsync(), _ => !IsScanning);
         RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
 
         // Category navigation commands
@@ -140,14 +141,18 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
-    private async void ScanAllTweaksAsync()
+    public async Task RunScanAsync()
     {
-        if (_tweaksViewModel == null || IsScanning) return;
+        if (_tweaksViewModel == null || IsScanning)
+        {
+            return;
+        }
 
         IsScanning = true;
         try
         {
             await _tweaksViewModel.DetectAllTweaksAsync();
+            RefreshSystemSnapshot();
         }
         finally
         {
@@ -363,6 +368,11 @@ public sealed class DashboardViewModel : ViewModelBase
     public string AvailableMemoryFormatted => GetAvailableMemoryFormatted();
     public string SystemUptime => GetSystemUptime();
     public string DotNetVersion => Environment.Version.ToString();
+    public string GpuName => GetGpuName();
+    public string PrimaryDiskType => GetPrimaryDiskType();
+    public string SecureBootStatus => GetSecureBootStatus();
+    public string VirtualizationStatus => GetVirtualizationStatus();
+    public string TpmStatus => GetTpmStatus();
 
     [SupportedOSPlatform("windows")]
     private static string GetOsVersion()
@@ -416,6 +426,123 @@ public sealed class DashboardViewModel : ViewModelBase
         return "Unknown";
     }
 
+    [SupportedOSPlatform("windows")]
+    private static string GetGpuName()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Name FROM Win32_VideoController");
+            foreach (var obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    return name;
+                }
+            }
+        }
+        catch { }
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetPrimaryDiskType()
+    {
+        try
+        {
+            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage");
+            scope.Connect();
+
+            var query = new ObjectQuery("SELECT MediaType, BusType FROM MSFT_PhysicalDisk WHERE IsBoot = True");
+            using var searcher = new ManagementObjectSearcher(scope, query);
+            foreach (var obj in searcher.Get())
+            {
+                var mediaType = Convert.ToInt32(obj["MediaType"] ?? 0);
+                var busType = Convert.ToInt32(obj["BusType"] ?? 0);
+                if (mediaType == 4)
+                {
+                    return busType == 17 ? "NVMe SSD" : "SSD";
+                }
+                if (mediaType == 3)
+                {
+                    return "HDD";
+                }
+            }
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetSecureBootStatus()
+    {
+        try
+        {
+            using var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
+                .OpenSubKey(@"SYSTEM\\CurrentControlSet\\Control\\SecureBoot\\State");
+            if (key?.GetValue("UEFISecureBootEnabled") is int enabled)
+            {
+                return enabled == 1 ? "Enabled" : "Disabled";
+            }
+        }
+        catch { }
+
+        return "Unsupported";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetVirtualizationStatus()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT VirtualizationFirmwareEnabled FROM Win32_Processor");
+            foreach (var obj in searcher.Get())
+            {
+                if (obj["VirtualizationFirmwareEnabled"] is bool enabled)
+                {
+                    return enabled ? "Enabled" : "Disabled";
+                }
+            }
+        }
+        catch { }
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT HypervisorPresent FROM Win32_ComputerSystem");
+            foreach (var obj in searcher.Get())
+            {
+                if (obj["HypervisorPresent"] is bool present)
+                {
+                    return present ? "Enabled" : "Disabled";
+                }
+            }
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetTpmStatus()
+    {
+        try
+        {
+            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm");
+            scope.Connect();
+            using var searcher = new ManagementObjectSearcher(scope, new ObjectQuery("SELECT * FROM Win32_Tpm"));
+            foreach (var _ in searcher.Get())
+            {
+                return "Present";
+            }
+
+            return "Not detected";
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
     private static string GetSystemUptime()
     {
         try
@@ -429,6 +556,24 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch { }
         return "Unknown";
+    }
+
+    private void RefreshSystemSnapshot()
+    {
+        OnPropertyChanged(nameof(OsVersion));
+        OnPropertyChanged(nameof(OsBuild));
+        OnPropertyChanged(nameof(SystemArchitecture));
+        OnPropertyChanged(nameof(MachineName));
+        OnPropertyChanged(nameof(UserName));
+        OnPropertyChanged(nameof(ProcessorCount));
+        OnPropertyChanged(nameof(TotalMemoryFormatted));
+        OnPropertyChanged(nameof(AvailableMemoryFormatted));
+        OnPropertyChanged(nameof(SystemUptime));
+        OnPropertyChanged(nameof(GpuName));
+        OnPropertyChanged(nameof(PrimaryDiskType));
+        OnPropertyChanged(nameof(SecureBootStatus));
+        OnPropertyChanged(nameof(VirtualizationStatus));
+        OnPropertyChanged(nameof(TpmStatus));
     }
 
     // Recent Activity Timeline

@@ -1,6 +1,6 @@
 # Claude Notes (Windows Optimizer)
 
-**Last Updated:** 2025-12-30  
+**Last Updated:** 2025-12-31  
 **Branch:** `main`
 
 Start with:
@@ -8,10 +8,11 @@ Start with:
 - `DEVELOPMENT_STATUS.md` (known issues + recent fixes)
 - `AGENTS.md` (non-negotiable safety/architecture rules)
 
-Current focus (2025-12-30):
+Current focus (2025-12-31):
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
-- Theme switching fix: Styles now use `DynamicResource` for theme-bound brushes.
-- Next: migrate remaining legacy tweaks into category providers and remove legacy provider.
+- Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
+- Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
+- Next: verify light theme on Windows 10/11 and migrate remaining legacy tweaks into category providers.
 
 ## Quick Commands
 

@@ -48,6 +48,29 @@
     <SolidColorBrush x:Key="CautionBrush" Color="{StaticResource Nord13}"/>
     <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Nord14}"/>
     <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Nord15}"/>
+    <SolidColorBrush x:Key="ForegroundOnAccentBrush" Color="{StaticResource Nord0}"/>
+    <SolidColorBrush x:Key="ForegroundOnLightAccentBrush" Color="{StaticResource Nord6}"/>
+    <SolidColorBrush x:Key="SuccessSurfaceBrush" Color="#E5F1E5"/>
+    <SolidColorBrush x:Key="SuccessSurfaceAltBrush" Color="#D4E6D3"/>
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#7B9C68"/>
+    <SolidColorBrush x:Key="CautionSurfaceBrush" Color="#F3E6D4"/>
+    <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#F4DADA"/>
+    <SolidColorBrush x:Key="TerminalBackgroundBrush" Color="#F1F4F7"/>
+
+    <!-- Chart Gradient Colors -->
+    <Color x:Key="AccentBrightCyan40">#4079B1C1</Color>
+    <Color x:Key="AccentBrightCyan10">#1079B1C1</Color>
+    <Color x:Key="AccentBrightCyan00">#0079B1C1</Color>
+    <Color x:Key="AccentBrightCyan30">#3079B1C1</Color>
+    <Color x:Key="AccentBrightCyan08">#0879B1C1</Color>
+    <Color x:Key="Success40">#408FAE7B</Color>
+    <Color x:Key="Success10">#108FAE7B</Color>
+    <Color x:Key="Success00">#008FAE7B</Color>
+    <Color x:Key="Success30">#308FAE7B</Color>
+    <Color x:Key="Success08">#088FAE7B</Color>
+    <Color x:Key="Danger30">#30BF616A</Color>
+    <Color x:Key="Danger08">#08BF616A</Color>
+    <Color x:Key="Danger00">#00BF616A</Color>
 
     <!-- Gradient Brushes -->
     <LinearGradientBrush x:Key="BackgroundGradientBrush" StartPoint="0,0" EndPoint="0,1">

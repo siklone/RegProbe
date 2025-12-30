@@ -16,48 +16,48 @@
 
         <!-- Chart gradient brushes -->
         <LinearGradientBrush x:Key="CpuAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#4088C0D0" Offset="0"/>
-            <GradientStop Color="#1088C0D0" Offset="0.5"/>
-            <GradientStop Color="#0088C0D0" Offset="1"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan10}" Offset="0.5"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="RamAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#40A3BE8C" Offset="0"/>
-            <GradientStop Color="#10A3BE8C" Offset="0.5"/>
-            <GradientStop Color="#00A3BE8C" Offset="1"/>
+            <GradientStop Color="{DynamicResource Success40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Success10}" Offset="0.5"/>
+            <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DownloadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#30A3BE8C" Offset="0"/>
-            <GradientStop Color="#08A3BE8C" Offset="0.7"/>
-            <GradientStop Color="#00A3BE8C" Offset="1"/>
+            <GradientStop Color="{DynamicResource Success30}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Success08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="UploadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#3088C0D0" Offset="0"/>
-            <GradientStop Color="#0888C0D0" Offset="0.7"/>
-            <GradientStop Color="#0088C0D0" Offset="1"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan30}" Offset="0"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DiskReadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#30A3BE8C" Offset="0"/>
-            <GradientStop Color="#08A3BE8C" Offset="0.7"/>
-            <GradientStop Color="#00A3BE8C" Offset="1"/>
+            <GradientStop Color="{DynamicResource Success30}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Success08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DiskWriteAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#30BF616A" Offset="0"/>
-            <GradientStop Color="#08BF616A" Offset="0.7"/>
-            <GradientStop Color="#00BF616A" Offset="1"/>
+            <GradientStop Color="{DynamicResource Danger30}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Danger08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Danger00}" Offset="1"/>
         </LinearGradientBrush>
 
         <!-- Glow effect for chart lines -->
-        <DropShadowEffect x:Key="ChartGlowCpu" Color="#88C0D0" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowRam" Color="#A3BE8C" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowUpload" Color="#88C0D0" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowDownload" Color="#A3BE8C" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowRead" Color="#A3BE8C" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowWrite" Color="#BF616A" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
+        <DropShadowEffect x:Key="ChartGlowCpu" Color="{DynamicResource Nord8}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <DropShadowEffect x:Key="ChartGlowRam" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <DropShadowEffect x:Key="ChartGlowUpload" Color="{DynamicResource Nord8}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
+        <DropShadowEffect x:Key="ChartGlowDownload" Color="{DynamicResource Nord14}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
+        <DropShadowEffect x:Key="ChartGlowRead" Color="{DynamicResource Nord14}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
+        <DropShadowEffect x:Key="ChartGlowWrite" Color="{DynamicResource Nord11}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
 
         <Style x:Key="StatCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -342,7 +342,7 @@
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
                                                 <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                          Stroke="#88C0D0" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                          Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                           Effect="{StaticResource ChartGlowCpu}"/>
                                             </Canvas>
                                         </Viewbox>
@@ -352,7 +352,7 @@
                                                      Canvas.Right="0"
                                                      Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
                                                 <Ellipse.Effect>
-                                                    <DropShadowEffect Color="#88C0D0" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                                    <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                                 </Ellipse.Effect>
                                             </Ellipse>
                                         </Canvas>
@@ -407,7 +407,7 @@
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
                                                 <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                          Stroke="#A3BE8C" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                          Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                           Effect="{StaticResource ChartGlowRam}"/>
                                             </Canvas>
                                         </Viewbox>
@@ -417,7 +417,7 @@
                                                      Canvas.Right="0"
                                                      Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
                                                 <Ellipse.Effect>
-                                                    <DropShadowEffect Color="#A3BE8C" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                                    <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                                 </Ellipse.Effect>
                                             </Ellipse>
                                         </Canvas>
@@ -466,7 +466,7 @@
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
                                         <Polyline Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="#A3BE8C" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                   Effect="{StaticResource ChartGlowDownload}"/>
                                     </Canvas>
                                 </Viewbox>
@@ -474,7 +474,7 @@
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
                                         <Polyline Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="#88C0D0" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                   Effect="{StaticResource ChartGlowUpload}"/>
                                     </Canvas>
                                 </Viewbox>
@@ -484,7 +484,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#A3BE8C" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
+                                        <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
                                 <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
@@ -492,7 +492,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Border Width="12" Height="12" Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#88C0D0" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
+                                        <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
                                 <TextBlock Text="Upload" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
@@ -531,7 +531,7 @@
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
                                         <Polyline Points="{Binding DiskReadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="#A3BE8C" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                   Effect="{StaticResource ChartGlowRead}"/>
                                     </Canvas>
                                 </Viewbox>
@@ -539,7 +539,7 @@
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
                                         <Polyline Points="{Binding DiskWriteHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="#BF616A" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Stroke="{DynamicResource DangerBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                   Effect="{StaticResource ChartGlowWrite}"/>
                                     </Canvas>
                                 </Viewbox>
@@ -549,7 +549,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#A3BE8C" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
+                                        <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
                                 <TextBlock Text="Read" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
@@ -557,7 +557,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Border Width="12" Height="12" Background="{DynamicResource DangerBrush}" CornerRadius="2" Margin="0,0,6,0">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#BF616A" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
+                                        <DropShadowEffect Color="{DynamicResource Nord11}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
                                     </Border.Effect>
                                 </Border>
                                 <TextBlock Text="Write" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
@@ -605,17 +605,17 @@
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
+                                                    Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
@@ -656,17 +656,17 @@
                                             <Button Grid.Column="2" Content="Kill"
                                                     Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="3" Content="Suspend"
                                                     Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
+                                                    Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                             <Button Grid.Column="4" Content="Resume"
                                                     Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                     Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         </Grid>
                                     </Border>
@@ -711,17 +711,17 @@
                                         <Button Grid.Column="2" Content="Kill"
                                                 Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         <Button Grid.Column="3" Content="Suspend"
                                                 Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="{DynamicResource CautionBrush}" Foreground="#2E3440" BorderThickness="0"
+                                                Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                         <Button Grid.Column="4" Content="Resume"
                                                 Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding}"
-                                                Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundBrightestBrush}" BorderThickness="0"
+                                                Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
                                                 Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
                                     </Grid>
                                 </Border>

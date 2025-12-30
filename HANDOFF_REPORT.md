@@ -53,6 +53,25 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Styles now use `DynamicResource` for theme-bound brushes so Light/Dark updates propagate.
   - Files: `WindowsOptimizer.App/Resources/Styles.xaml`
 
+- **Light theme parity across main views (2025-12-31)**
+  - Removed hard-coded colors from MainWindow/Dashboard/Tweaks/Monitor.
+  - Added theme-aware brushes for caution/danger surfaces, terminal panels, and chart gradients.
+  - Files: `WindowsOptimizer.App/MainWindow.xaml`, `WindowsOptimizer.App/Views/DashboardView.xaml`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`, `WindowsOptimizer.App/Views/MonitorView.xaml`,
+    `WindowsOptimizer.App/Resources/Colors.xaml`, `WindowsOptimizer.App/Resources/Colors.Light.xaml`
+
+- **Docs linking + per-tweak anchors (2025-12-31)**
+  - `tweak-catalog.html` generated with per-ID anchors.
+  - Tweaks page now links directly to catalog entry anchors.
+  - Files: `scripts/generate_tweak_catalog.py`, `Docs/tweaks/tweak-catalog.html`,
+    `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`, `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
+- **Startup scan + rolled-back filter fix (2025-12-31)**
+  - Auto Detect on app launch with a blocking overlay.
+  - Rolled-back filter now uses `WasRolledBack` flag.
+  - Files: `WindowsOptimizer.App/ViewModels/MainViewModel.cs`, `WindowsOptimizer.App/MainWindow.xaml`,
+    `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`, `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+
 - **Durable rollback state persistence**
   - `RollbackStateStore` persists original values to `%AppData%\WindowsOptimizerSuite\rollback-state.json`
 
@@ -72,6 +91,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
    - All recent changes need verification on actual Windows (not WSL2).
    - Test checklist in `CODEX_PLAN.md` Phase 2.
    - Priority: HIGH
+   - Include: light theme parity, docs anchor links, startup scan overlay
 
 2) **WiX MSI Installer not implemented**
    - Professional installer needed for distribution
@@ -144,3 +164,13 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Added legacy provider to load order
 - `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Apply tweak metadata after load
 - `WindowsOptimizer.App/Resources/Styles.xaml` - Theme-bound resources switched to DynamicResource
+
+## Files Changed This Session (2025-12-31)
+
+- `WindowsOptimizer.App/MainWindow.xaml` - Theme parity + startup scan overlay
+- `WindowsOptimizer.App/Views/DashboardView.xaml` - Theme parity + system info panel updates
+- `WindowsOptimizer.App/Views/TweaksView.xaml` - Theme parity, caution/danger badges, terminal styling
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Theme-aware chart gradients and button text colors
+- `WindowsOptimizer.App/Resources/Colors.xaml` / `WindowsOptimizer.App/Resources/Colors.Light.xaml` - New theme tokens
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Catalog entry anchor links
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Rollback flag + docs anchor open

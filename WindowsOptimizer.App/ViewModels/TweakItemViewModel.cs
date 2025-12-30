@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private TweakRunOutcome _lastOutcome = TweakRunOutcome.None;
     private bool _isDetailsExpanded = false;
     private TweakAppliedStatus _appliedStatus = TweakAppliedStatus.Unknown;
+    private bool _wasRolledBack;
     private TweakActionType _actionType = TweakActionType.Toggle;
     private string _actionButtonText = "Apply";
     private string _registryPath = string.Empty;
@@ -407,6 +409,12 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsApplied => AppliedStatus == TweakAppliedStatus.Applied;
 
+    public bool WasRolledBack
+    {
+        get => _wasRolledBack;
+        private set => SetProperty(ref _wasRolledBack, value);
+    }
+
     public string StatusIcon => AppliedStatus switch
     {
         TweakAppliedStatus.Applied => "✓",
@@ -547,6 +555,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string OutcomeText => LastOutcome switch
     {
         TweakRunOutcome.InProgress => "Running",
+        TweakRunOutcome.RolledBack => "Rolled Back",
         TweakRunOutcome.Success => "Success",
         TweakRunOutcome.Failed => "Failed",
         TweakRunOutcome.Cancelled => "Cancelled",
@@ -616,7 +625,9 @@ public sealed class TweakItemViewModel : ViewModelBase
             LogToFile($"RunAsync: ExecuteAsync COMPLETED for '{Name}', Succeeded={report.Succeeded}");
             ApplyReport(report);
             UpdateAfterRun(report);
-            LastOutcome = report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
+            LastOutcome = report.RolledBack
+                ? TweakRunOutcome.RolledBack
+                : report.Succeeded ? TweakRunOutcome.Success : TweakRunOutcome.Failed;
             StatusMessage = report.Succeeded ? "Run completed." : "Run completed with errors.";
             LastUpdatedText = $"Last update: {report.CompletedAt.ToLocalTime():HH:mm:ss}";
         }
@@ -664,12 +675,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (report.RolledBack)
         {
             AppliedStatus = TweakAppliedStatus.NotApplied;
+            WasRolledBack = true;
             return;
         }
 
         if (report.Verified || report.Applied)
         {
             AppliedStatus = TweakAppliedStatus.Applied;
+            WasRolledBack = false;
             if (report.Verified)
             {
                 CurrentValue = TargetValue;
@@ -757,6 +770,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 {
                     AppliedStatus = TweakAppliedStatus.Applied;
                     CurrentValue = TargetValue;
+                    WasRolledBack = false;
                 }
                 else if (result.Status == TweakStatus.Failed)
                 {
@@ -769,6 +783,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 {
                     AppliedStatus = TweakAppliedStatus.Applied;
                     CurrentValue = TargetValue;
+                    WasRolledBack = false;
                 }
                 else if (result.Status == TweakStatus.Failed)
                 {
@@ -780,6 +795,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 if (result.Status == TweakStatus.RolledBack)
                 {
                     AppliedStatus = TweakAppliedStatus.NotApplied;
+                    WasRolledBack = true;
                 }
                 else if (result.Status == TweakStatus.Failed)
                 {
@@ -817,6 +833,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         return status switch
         {
+            TweakStatus.RolledBack => TweakRunOutcome.RolledBack,
             TweakStatus.Failed => TweakRunOutcome.Failed,
             TweakStatus.Skipped => TweakRunOutcome.Skipped,
             TweakStatus.NotApplicable => TweakRunOutcome.Skipped,
@@ -965,6 +982,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             LogToFile($"OpenReferenceLink: {url}");
+            if (TryOpenCatalogAnchor(url))
+            {
+                StatusMessage = "Opening catalog entry...";
+                return;
+            }
             var startInfo = new ProcessStartInfo
             {
                 FileName = url,
@@ -996,6 +1018,42 @@ public sealed class TweakItemViewModel : ViewModelBase
             StatusMessage = $"Could not open link: {ex.Message}";
             LogToFile($"OpenReferenceLink failed: {ex.Message} ({url})");
         }
+    }
+
+    private static bool TryOpenCatalogAnchor(string url)
+    {
+        var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
+        if (hashIndex <= 0)
+        {
+            return false;
+        }
+
+        var path = url.Substring(0, hashIndex);
+        var anchor = url.Substring(hashIndex + 1);
+        if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(anchor))
+        {
+            return false;
+        }
+
+        if (!File.Exists(path))
+        {
+            return false;
+        }
+
+        var extension = Path.GetExtension(path);
+        if (!extension.Equals(".html", StringComparison.OrdinalIgnoreCase)
+            && !extension.Equals(".htm", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var fileUri = new Uri(path).AbsoluteUri + "#" + Uri.EscapeDataString(anchor);
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = fileUri,
+            UseShellExecute = true
+        });
+        return true;
     }
 
     private void TryPopulateTechnicalInfo()

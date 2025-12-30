@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
@@ -33,6 +34,7 @@ public sealed class MainViewModel : ViewModelBase
     private int _pendingRollbackCount;
     private string _pendingRollbackMessage = string.Empty;
     private bool _isRecovering;
+    private bool _isStartupScanActive;
 
     public MainViewModel()
     {
@@ -166,6 +168,32 @@ public sealed class MainViewModel : ViewModelBase
 
         // Check for pending rollbacks from previous crashes
         Task.Run(CheckPendingRollbacksAsync);
+
+        System.Windows.Application.Current?.Dispatcher?.BeginInvoke(
+            new Action(() => StartStartupScanAsync(dashboard)),
+            DispatcherPriority.Background);
+    }
+
+    private async void StartStartupScanAsync(DashboardViewModel dashboard)
+    {
+        if (_tweaksViewModel == null || IsStartupScanActive)
+        {
+            return;
+        }
+
+        IsStartupScanActive = true;
+        try
+        {
+            await dashboard.RunScanAsync();
+        }
+        catch (Exception ex)
+        {
+            LogToFile($"Startup scan failed: {ex.Message}");
+        }
+        finally
+        {
+            IsStartupScanActive = false;
+        }
     }
 
     private async Task InitializeIntelligenceAsync()
@@ -251,6 +279,12 @@ public sealed class MainViewModel : ViewModelBase
                 ((RelayCommand)DismissPendingRollbacksCommand).RaiseCanExecuteChanged();
             }
         }
+    }
+
+    public bool IsStartupScanActive
+    {
+        get => _isStartupScanActive;
+        private set => SetProperty(ref _isStartupScanActive, value);
     }
 
     public ICommand RecoverPendingRollbacksCommand { get; }
