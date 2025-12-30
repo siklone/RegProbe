@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Win32;
+using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
@@ -450,7 +451,13 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
+            var systemDrive = Environment.GetEnvironmentVariable("SystemDrive") ?? "C:";
             var bootDiskNumber = TryGetBootDiskNumber();
+            if (!bootDiskNumber.HasValue)
+            {
+                LogProbe("BootDisk", $"Could not map SystemDrive='{systemDrive}' to a disk index.");
+            }
+
             var storageType = TryGetDiskTypeFromStorage(bootDiskNumber);
             if (!string.IsNullOrWhiteSpace(storageType))
             {
@@ -462,8 +469,13 @@ public sealed class DashboardViewModel : ViewModelBase
             {
                 return legacyType;
             }
+
+            LogProbe("BootDisk", $"Unknown. SystemDrive='{systemDrive}', DiskIndex='{bootDiskNumber?.ToString() ?? "null"}'.");
         }
-        catch { }
+        catch (Exception ex)
+        {
+            LogProbeException("BootDisk", ex);
+        }
 
         return "Unknown";
     }
@@ -501,7 +513,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 }
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            LogProbeException("BootDiskLookup", ex);
+        }
 
         return null;
     }
@@ -555,7 +570,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 return FormatDiskType(null, diskBusType, diskFriendlyName);
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            LogProbeException("BootDiskStorage", ex);
+        }
 
         return null;
     }
@@ -596,7 +614,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 }
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            LogProbeException("BootDiskWin32", ex);
+        }
 
         return null;
     }
@@ -754,9 +775,13 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch (ManagementException ex) when (ex.ErrorCode == ManagementStatus.InvalidNamespace || ex.ErrorCode == ManagementStatus.InvalidClass)
         {
+            LogProbeException("TPM", ex);
             return "Not detected";
         }
-        catch { }
+        catch (Exception ex)
+        {
+            LogProbeException("TPM", ex);
+        }
 
         return "Unknown";
     }
@@ -799,6 +824,16 @@ public sealed class DashboardViewModel : ViewModelBase
         catch { }
 
         return null;
+    }
+
+    private static void LogProbe(string label, string message)
+    {
+        AppDiagnostics.Log($"[SystemProbe:{label}] {message}");
+    }
+
+    private static void LogProbeException(string label, Exception exception)
+    {
+        AppDiagnostics.LogException($"SystemProbe:{label}", exception);
     }
 
     private static string GetSystemUptime()
