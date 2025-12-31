@@ -185,6 +185,139 @@ public sealed class SparklineAreaConverter : IValueConverter
     }
 }
 
+public sealed class SparklinePointsWithMaxConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values.Length < 2 || values[0] is not System.Collections.Generic.IEnumerable<double> points)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+
+        var pointsList = System.Linq.Enumerable.ToList(points);
+        if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
+
+        for (var i = 0; i < pointsList.Count; i++)
+        {
+            var v = pointsList[i];
+            if (!double.IsFinite(v) || v < 0)
+            {
+                pointsList[i] = 0;
+            }
+        }
+
+        var seriesMax = System.Linq.Enumerable.Max(pointsList);
+        var providedMax = values[1] is double max && double.IsFinite(max) ? max : 0;
+        var scaleMax = Math.Max(1.0, Math.Max(seriesMax, providedMax));
+
+        var pc = new System.Windows.Media.PointCollection(pointsList.Count);
+        double x = 0;
+        double canvasWidth = 600.0;
+        double canvasHeight = 100.0;
+        double xStep = pointsList.Count > 1 ? canvasWidth / (pointsList.Count - 1) : 0;
+
+        foreach (var p in pointsList)
+        {
+            pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight)));
+            x += xStep;
+        }
+
+        pc.Freeze();
+        return pc;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public sealed class SparklineAreaWithMaxConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values.Length < 2 || values[0] is not System.Collections.Generic.IEnumerable<double> points)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+
+        var pointsList = System.Linq.Enumerable.ToList(points);
+        if (pointsList.Count == 0) return DependencyProperty.UnsetValue;
+
+        for (var i = 0; i < pointsList.Count; i++)
+        {
+            var v = pointsList[i];
+            if (!double.IsFinite(v) || v < 0)
+            {
+                pointsList[i] = 0;
+            }
+        }
+
+        var seriesMax = System.Linq.Enumerable.Max(pointsList);
+        var providedMax = values[1] is double max && double.IsFinite(max) ? max : 0;
+        var scaleMax = Math.Max(1.0, Math.Max(seriesMax, providedMax));
+
+        var pc = new System.Windows.Media.PointCollection(pointsList.Count + 2);
+        double x = 0;
+        double canvasWidth = 600.0;
+        double canvasHeight = 100.0;
+        double xStep = pointsList.Count > 1 ? canvasWidth / (pointsList.Count - 1) : 0;
+
+        foreach (var p in pointsList)
+        {
+            pc.Add(new Point(x, canvasHeight - (p / scaleMax * canvasHeight)));
+            x += xStep;
+        }
+
+        pc.Add(new Point(canvasWidth, canvasHeight));
+        pc.Add(new Point(0, canvasHeight));
+
+        pc.Freeze();
+        return pc;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public sealed class LastValueToYWithMaxConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values.Length < 2 || values[0] is not System.Collections.Generic.IEnumerable<double> points)
+        {
+            return 50.0;
+        }
+
+        var pointsList = System.Linq.Enumerable.ToList(points);
+        if (pointsList.Count == 0) return 50.0;
+
+        for (var i = 0; i < pointsList.Count; i++)
+        {
+            var v = pointsList[i];
+            if (!double.IsFinite(v) || v < 0)
+            {
+                pointsList[i] = 0;
+            }
+        }
+
+        var lastValue = pointsList[pointsList.Count - 1];
+        var seriesMax = System.Linq.Enumerable.Max(pointsList);
+        var providedMax = values[1] is double max && double.IsFinite(max) ? max : 0;
+        var scaleMax = Math.Max(1.0, Math.Max(seriesMax, providedMax));
+
+        double canvasHeight = 100.0;
+        return canvasHeight - (lastValue / scaleMax * canvasHeight) - 5;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 /// <summary>
 /// Gets the last value from a collection to position the current value indicator.
 /// </summary>

@@ -12,6 +12,9 @@
         <converters:SparklinePointsConverter x:Key="SparklinePointsConverter"/>
         <converters:SparklineAreaConverter x:Key="SparklineAreaConverter"/>
         <converters:LastValueToYConverter x:Key="LastValueToYConverter"/>
+        <converters:SparklinePointsWithMaxConverter x:Key="SparklinePointsWithMaxConverter"/>
+        <converters:SparklineAreaWithMaxConverter x:Key="SparklineAreaWithMaxConverter"/>
+        <converters:LastValueToYWithMaxConverter x:Key="LastValueToYWithMaxConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
         <!-- Chart gradient brushes -->
@@ -524,33 +527,82 @@
                                 <!-- Download Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polygon Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
-                                                 Fill="{StaticResource DownloadAreaGradient}"/>
+                                        <Polygon Fill="{StaticResource DownloadAreaGradient}">
+                                            <Polygon.Points>
+                                                <MultiBinding Converter="{StaticResource SparklineAreaWithMaxConverter}">
+                                                    <Binding Path="NetworkDownloadHistory"/>
+                                                    <Binding Path="NetworkIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polygon.Points>
+                                        </Polygon>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Upload Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polygon Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
-                                                 Fill="{StaticResource UploadAreaGradient}"/>
+                                        <Polygon Fill="{StaticResource UploadAreaGradient}">
+                                            <Polygon.Points>
+                                                <MultiBinding Converter="{StaticResource SparklineAreaWithMaxConverter}">
+                                                    <Binding Path="NetworkUploadHistory"/>
+                                                    <Binding Path="NetworkIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polygon.Points>
+                                        </Polygon>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Download Line with glow -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polyline Points="{Binding NetworkDownloadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                  Effect="{StaticResource ChartGlowDownload}"/>
+                                        <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Effect="{StaticResource ChartGlowDownload}">
+                                            <Polyline.Points>
+                                                <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                    <Binding Path="NetworkDownloadHistory"/>
+                                                    <Binding Path="NetworkIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polyline.Points>
+                                        </Polyline>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Upload Line with glow -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polyline Points="{Binding NetworkUploadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                  Effect="{StaticResource ChartGlowUpload}"/>
+                                        <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Effect="{StaticResource ChartGlowUpload}">
+                                            <Polyline.Points>
+                                                <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                    <Binding Path="NetworkUploadHistory"/>
+                                                    <Binding Path="NetworkIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polyline.Points>
+                                        </Polyline>
                                     </Canvas>
                                 </Viewbox>
+                                <!-- Current value indicators -->
+                                <Canvas ClipToBounds="False">
+                                    <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}" Canvas.Right="0">
+                                        <Ellipse.Canvas.Top>
+                                            <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
+                                                <Binding Path="NetworkDownloadHistory"/>
+                                                <Binding Path="NetworkIoScaleMax"/>
+                                            </MultiBinding>
+                                        </Ellipse.Canvas.Top>
+                                        <Ellipse.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+                                    <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}" Canvas.Right="0">
+                                        <Ellipse.Canvas.Top>
+                                            <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
+                                                <Binding Path="NetworkUploadHistory"/>
+                                                <Binding Path="NetworkIoScaleMax"/>
+                                            </MultiBinding>
+                                        </Ellipse.Canvas.Top>
+                                        <Ellipse.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+                                </Canvas>
                             </Grid>
                         </Border>
                         <Grid Margin="0,8,0,0">
@@ -609,33 +661,82 @@
                                 <!-- Read Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polygon Points="{Binding DiskReadHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
-                                                 Fill="{StaticResource DiskReadAreaGradient}"/>
+                                        <Polygon Fill="{StaticResource DiskReadAreaGradient}">
+                                            <Polygon.Points>
+                                                <MultiBinding Converter="{StaticResource SparklineAreaWithMaxConverter}">
+                                                    <Binding Path="DiskReadHistory"/>
+                                                    <Binding Path="DiskIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polygon.Points>
+                                        </Polygon>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Write Area Fill -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polygon Points="{Binding DiskWriteHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
-                                                 Fill="{StaticResource DiskWriteAreaGradient}"/>
+                                        <Polygon Fill="{StaticResource DiskWriteAreaGradient}">
+                                            <Polygon.Points>
+                                                <MultiBinding Converter="{StaticResource SparklineAreaWithMaxConverter}">
+                                                    <Binding Path="DiskWriteHistory"/>
+                                                    <Binding Path="DiskIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polygon.Points>
+                                        </Polygon>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Read Line with glow -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polyline Points="{Binding DiskReadHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                  Effect="{StaticResource ChartGlowRead}"/>
+                                        <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Effect="{StaticResource ChartGlowRead}">
+                                            <Polyline.Points>
+                                                <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                    <Binding Path="DiskReadHistory"/>
+                                                    <Binding Path="DiskIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polyline.Points>
+                                        </Polyline>
                                     </Canvas>
                                 </Viewbox>
                                 <!-- Write Line with glow -->
                                 <Viewbox Stretch="Fill">
                                     <Canvas Width="600" Height="100">
-                                        <Polyline Points="{Binding DiskWriteHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
-                                                  Stroke="{DynamicResource DangerBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                  Effect="{StaticResource ChartGlowWrite}"/>
+                                        <Polyline Stroke="{DynamicResource DangerBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                  Effect="{StaticResource ChartGlowWrite}">
+                                            <Polyline.Points>
+                                                <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                    <Binding Path="DiskWriteHistory"/>
+                                                    <Binding Path="DiskIoScaleMax"/>
+                                                </MultiBinding>
+                                            </Polyline.Points>
+                                        </Polyline>
                                     </Canvas>
                                 </Viewbox>
+                                <!-- Current value indicators -->
+                                <Canvas ClipToBounds="False">
+                                    <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}" Canvas.Right="0">
+                                        <Ellipse.Canvas.Top>
+                                            <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
+                                                <Binding Path="DiskReadHistory"/>
+                                                <Binding Path="DiskIoScaleMax"/>
+                                            </MultiBinding>
+                                        </Ellipse.Canvas.Top>
+                                        <Ellipse.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+                                    <Ellipse Width="10" Height="10" Fill="{DynamicResource DangerBrush}" Canvas.Right="0">
+                                        <Ellipse.Canvas.Top>
+                                            <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
+                                                <Binding Path="DiskWriteHistory"/>
+                                                <Binding Path="DiskIoScaleMax"/>
+                                            </MultiBinding>
+                                        </Ellipse.Canvas.Top>
+                                        <Ellipse.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Nord11}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+                                </Canvas>
                             </Grid>
                         </Border>
                         <Grid Margin="0,8,0,0">

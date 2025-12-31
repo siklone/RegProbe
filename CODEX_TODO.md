@@ -195,7 +195,8 @@
 **Yapılacaklar:**
 - [x] Network/Disk chart header’larına Now/Peak/Low değerleri eklendi
 - [x] Kart padding/margin sıkılaştırıldı (daha kompakt görünüm)
-- [ ] Grafik okunabilirliği genel iyileştirmeler
+- [x] Network/Disk çizgileri ortak ölçek + anlık nokta göstergeleri
+- [ ] Grafik okunabilirliği genel iyileştirmeler (etiketler/ek eksen ipuçları)
 - [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
 - [ ] Save butonu ve toolbar’ı modernize et
 

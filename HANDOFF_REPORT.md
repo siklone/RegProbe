@@ -124,6 +124,13 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Reduced padding/margins for stat + section cards.
   - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`
 
+- **Monitor Network/Disk charts share scale + current dots (2025-12-31)**
+  - MultiBinding converters use a common max across series for accurate comparison.
+  - Added last-value markers for download/upload and read/write lines.
+  - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/ViewModels/ValueConverters.cs`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -279,4 +286,5 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Rollback flag + docs anchor open
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk Now/Peak/Low stats
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk header stats + tighter spacing
+- `WindowsOptimizer.App/ViewModels/ValueConverters.cs` - Shared-scale sparklines + last-value dots
 - `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `HANDOFF_REPORT.md` - Monitor UI status updates
