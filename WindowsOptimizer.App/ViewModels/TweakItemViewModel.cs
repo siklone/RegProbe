@@ -23,11 +23,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 {
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#EBCB8B");
+    private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
     private static readonly SolidColorBrush ErrorStatusBrush = CreateFrozenBrush("#BF616A");
     private static readonly SolidColorBrush UnknownStatusBrush = CreateFrozenBrush("#88C0D0");
 
     private static readonly SolidColorBrush AppliedStatusBackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
+    private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
     private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
     private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
 
@@ -141,6 +143,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string StatusTooltip => AppliedStatus switch
     {
+        _ when ShouldShowMixedStatus => "Mixed. Some sub-items match the desired configuration.",
         TweakAppliedStatus.Applied => "Applied. Current state matches the desired configuration.",
         TweakAppliedStatus.NotApplied => "Not applied. Detected state differs from the desired configuration.",
         TweakAppliedStatus.Error => "Error. Open Execution Log for details.",
@@ -292,6 +295,11 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasDiff));
                 OnPropertyChanged(nameof(CompactInfoLine));
                 OnPropertyChanged(nameof(CompactInfoTooltip));
+                OnPropertyChanged(nameof(StatusIcon));
+                OnPropertyChanged(nameof(StatusColor));
+                OnPropertyChanged(nameof(StatusBadgeBackground));
+                OnPropertyChanged(nameof(StatusText));
+                OnPropertyChanged(nameof(StatusTooltip));
             }
         }
     }
@@ -412,6 +420,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(StatusColor));
                 OnPropertyChanged(nameof(StatusBadgeBackground));
                 OnPropertyChanged(nameof(StatusText));
+                OnPropertyChanged(nameof(StatusTooltip));
                 _toggleCommand.RaiseCanExecuteChanged();
             }
         }
@@ -427,6 +436,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string StatusIcon => AppliedStatus switch
     {
+        _ when ShouldShowMixedStatus => "M",
         TweakAppliedStatus.Applied => "✓",
         TweakAppliedStatus.NotApplied => "○",
         TweakAppliedStatus.Error => "✕",
@@ -435,6 +445,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Brush StatusColor => AppliedStatus switch
     {
+        _ when ShouldShowMixedStatus => MixedStatusBrush,
         TweakAppliedStatus.Applied => AppliedStatusBrush,
         TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
         TweakAppliedStatus.Error => ErrorStatusBrush,
@@ -443,6 +454,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Brush StatusBadgeBackground => AppliedStatus switch
     {
+        _ when ShouldShowMixedStatus => MixedStatusBackgroundBrush,
         TweakAppliedStatus.Applied => AppliedStatusBackgroundBrush,
         TweakAppliedStatus.NotApplied => NotAppliedStatusBackgroundBrush,
         TweakAppliedStatus.Error => ErrorStatusBackgroundBrush,
@@ -451,11 +463,17 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string StatusText => AppliedStatus switch
     {
+        _ when ShouldShowMixedStatus => "Mixed",
         TweakAppliedStatus.Applied => "Applied",
         TweakAppliedStatus.NotApplied => "Not Applied",
         TweakAppliedStatus.Error => "Error",
         _ => "Unknown"
     };
+
+    private bool ShouldShowMixedStatus =>
+        AppliedStatus is not TweakAppliedStatus.Error
+        && !string.IsNullOrWhiteSpace(CurrentValue)
+        && CurrentValue.Contains("Mixed", StringComparison.OrdinalIgnoreCase);
 
     private static SolidColorBrush CreateFrozenBrush(string hex)
     {

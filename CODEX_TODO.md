@@ -160,7 +160,7 @@
 **Yapılacaklar:**
 - [x] Kart kapalıyken `Current → Target` satırı göster
 - [x] Etki alanı (Registry/Service/Task vb.) kısa etiketle
-- [ ] Durum ikonları netleştir (Applied/Mixed/Error)
+- [x] Durum ikonları/badge netleştir (Applied/Mixed/Error)
 
 ---
 

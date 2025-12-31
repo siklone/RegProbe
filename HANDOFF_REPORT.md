@@ -131,6 +131,12 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
     `WindowsOptimizer.App/ViewModels/ValueConverters.cs`
 
+- **Tweak status badges clarified (2025-12-31)**
+  - Status text badge added near tweak names (compact + expanded).
+  - Mixed state detected from current value and surfaced with icon/color.
+  - Files: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -288,3 +294,5 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk header stats + tighter spacing
 - `WindowsOptimizer.App/ViewModels/ValueConverters.cs` - Shared-scale sparklines + last-value dots
 - `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `HANDOFF_REPORT.md` - Monitor UI status updates
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Mixed status detection + status badges
+- `WindowsOptimizer.App/Views/TweaksView.xaml` - Status text badges near tweak names

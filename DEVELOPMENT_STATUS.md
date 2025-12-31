@@ -444,6 +444,22 @@
 
 ---
 
+### 17. Tweak Status Badge Clarity (Commit: pending)
+**Problem:** Status icons were ambiguous for Applied/Mixed/Error states.
+
+**Solution:**
+- Added a status text badge next to tweak names in both compact and expanded cards.
+- Added Mixed status detection (based on current value) with its own icon/color.
+- Status tooltips now reflect Mixed state.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
