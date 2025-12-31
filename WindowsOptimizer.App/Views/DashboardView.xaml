@@ -303,7 +303,7 @@
             </Grid>
 
             <!-- Statistics Grid -->
-            <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,-16,24">
+            <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,-16,24">
                 <!-- Total Tweaks Available (Clickable) -->
                 <Button Command="{Binding NavigateToTotalTweaksCommand}" Cursor="Hand" ToolTip="Click to view all tweaks">
                     <Button.Template>
@@ -370,6 +370,24 @@
                                     <TextBlock Text="{Binding LogFileSizeFormatted}" Style="{StaticResource StatValueStyle}" FontSize="32"/>
                                     <TextBlock Text="Log File Size" Style="{StaticResource StatLabelStyle}"/>
                                     <TextBlock Text="Click to open" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- Docs Coverage (Clickable) -->
+                <Button Command="{Binding OpenDocsCoverageReportCommand}" Cursor="Hand" ToolTip="{Binding DocsCoverageSummary}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
+                                <StackPanel>
+                                    <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
+                                        <TextBlock Text="📚" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource StatValueStyle}" FontSize="32" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                    <TextBlock Text="Docs Missing" Style="{StaticResource StatLabelStyle}"/>
+                                    <TextBlock Text="{Binding DocsCoverageSummary}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Border>
                         </ControlTemplate>

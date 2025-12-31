@@ -31,6 +31,9 @@ public sealed class DashboardViewModel : ViewModelBase
     private long _logFileSizeBytes;
     private int _healthTweaksTotal;
     private int _healthTweaksApplied;
+    private string _docsCoverageReportPath = string.Empty;
+    private int _docsMissingCount;
+    private string _docsCoverageSummary = "Docs report unavailable.";
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -73,6 +76,8 @@ public sealed class DashboardViewModel : ViewModelBase
         OpenLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         CreateRestorePointCommand = new RelayCommand(_ => CreateRestorePointAsync(), _ => !IsCreatingRestorePoint);
         EnableVssCommand = new RelayCommand(_ => EnableVssServiceAsync(), _ => VssServiceNeedsEnable && !IsCreatingRestorePoint);
+        OpenDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport(), _ => File.Exists(DocsCoverageReportPath));
+        LoadDocsCoverageReport();
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -98,6 +103,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand OpenLogFolderCommand { get; }
     public ICommand CreateRestorePointCommand { get; }
     public ICommand EnableVssCommand { get; }
+    public ICommand OpenDocsCoverageReportCommand { get; }
 
     public bool IsCreatingRestorePoint
     {
@@ -265,6 +271,30 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _tweaksApplied, value))
             {
                 OnPropertyChanged(nameof(OptimizationScoreDetails));
+            }
+        }
+    }
+
+    public int DocsMissingCount
+    {
+        get => _docsMissingCount;
+        private set => SetProperty(ref _docsMissingCount, value);
+    }
+
+    public string DocsCoverageSummary
+    {
+        get => _docsCoverageSummary;
+        private set => SetProperty(ref _docsCoverageSummary, value);
+    }
+
+    public string DocsCoverageReportPath
+    {
+        get => _docsCoverageReportPath;
+        private set
+        {
+            if (SetProperty(ref _docsCoverageReportPath, value))
+            {
+                ((RelayCommand)OpenDocsCoverageReportCommand).RaiseCanExecuteChanged();
             }
         }
     }
@@ -999,6 +1029,80 @@ public sealed class DashboardViewModel : ViewModelBase
 
         result.Add(current.ToString());
         return result.ToArray();
+    }
+
+    private void LoadDocsCoverageReport()
+    {
+        try
+        {
+            var docsRoot = DocsLocator.TryFindDocsRoot();
+            if (string.IsNullOrWhiteSpace(docsRoot))
+            {
+                DocsCoverageReportPath = string.Empty;
+                DocsMissingCount = 0;
+                DocsCoverageSummary = "Docs folder not found.";
+                return;
+            }
+
+            var priorityMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.md");
+            var priorityCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.csv");
+            var fallbackMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.md");
+            var fallbackCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.csv");
+
+            var reportPath = File.Exists(priorityMd)
+                ? priorityMd
+                : File.Exists(fallbackMd) ? fallbackMd : string.Empty;
+
+            DocsCoverageReportPath = reportPath;
+
+            var csvPath = File.Exists(priorityCsv)
+                ? priorityCsv
+                : File.Exists(fallbackCsv) ? fallbackCsv : string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(csvPath))
+            {
+                var lines = File.ReadAllLines(csvPath);
+                DocsMissingCount = Math.Max(0, lines.Length - 1);
+                DocsCoverageSummary = DocsMissingCount == 0 ? "All documented" : $"{DocsMissingCount} missing";
+            }
+            else
+            {
+                DocsMissingCount = 0;
+                DocsCoverageSummary = string.IsNullOrWhiteSpace(reportPath)
+                    ? "Docs report unavailable."
+                    : "Docs report ready.";
+            }
+        }
+        catch
+        {
+            DocsCoverageReportPath = string.Empty;
+            DocsMissingCount = 0;
+            DocsCoverageSummary = "Docs report unavailable.";
+        }
+    }
+
+    private void OpenDocsCoverageReport()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(DocsCoverageReportPath) || !File.Exists(DocsCoverageReportPath))
+            {
+                LoadDocsCoverageReport();
+            }
+
+            if (!string.IsNullOrWhiteSpace(DocsCoverageReportPath) && File.Exists(DocsCoverageReportPath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = DocsCoverageReportPath,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
     }
 
     private void OpenLogFile()
