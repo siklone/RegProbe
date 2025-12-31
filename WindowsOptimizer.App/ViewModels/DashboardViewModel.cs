@@ -34,6 +34,9 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _docsCoverageReportPath = string.Empty;
     private int _docsMissingCount;
     private string _docsCoverageSummary = "Docs report unavailable.";
+    private string _docsCoverageReportPath = string.Empty;
+    private int _docsMissingCount;
+    private string _docsCoverageSummary = "Docs report unavailable.";
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -274,6 +277,44 @@ public sealed class DashboardViewModel : ViewModelBase
             }
         }
     }
+
+    public int DocsMissingCount
+    {
+        get => _docsMissingCount;
+        private set
+        {
+            if (SetProperty(ref _docsMissingCount, value))
+            {
+                OnPropertyChanged(nameof(DocsCoverageOk));
+                OnPropertyChanged(nameof(DocsCoverageWarn));
+                OnPropertyChanged(nameof(DocsCoverageCritical));
+            }
+        }
+    }
+
+    public string DocsCoverageSummary
+    {
+        get => _docsCoverageSummary;
+        private set => SetProperty(ref _docsCoverageSummary, value);
+    }
+
+    public string DocsCoverageReportPath
+    {
+        get => _docsCoverageReportPath;
+        private set
+        {
+            if (SetProperty(ref _docsCoverageReportPath, value))
+            {
+                ((RelayCommand)OpenDocsCoverageReportCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool DocsCoverageOk => DocsMissingCount == 0;
+
+    public bool DocsCoverageWarn => DocsMissingCount > 0 && DocsMissingCount <= 10;
+
+    public bool DocsCoverageCritical => DocsMissingCount > 10;
 
     public int DocsMissingCount
     {

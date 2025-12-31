@@ -6,6 +6,8 @@ Missing docs anchors: 0
 Missing details anchors: 0
 Missing catalog anchors: 0
 
+Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog.html)
+
 | ID | Docs | Doc Exists | Doc Anchor | Details Anchor | Catalog Anchor |
 | --- | --- | --- | --- | --- | --- |
 | `audio.disable-beep` | `Docs/peripheral/peripheral.md` | yes | yes | yes | yes |

@@ -382,10 +382,43 @@
                         <ControlTemplate>
                             <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
                                 <StackPanel>
-                                    <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
+                                    <Border CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource CautionBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource ErrorBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
                                         <TextBlock Text="📚" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                    <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource StatValueStyle}" FontSize="32" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                    <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource StatValueStyle}" FontSize="32">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
+                                                        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
+                                                        <Setter Property="Foreground" Value="{DynamicResource CautionBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
+                                                        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                     <TextBlock Text="Docs Missing" Style="{StaticResource StatLabelStyle}"/>
                                     <TextBlock Text="{Binding DocsCoverageSummary}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
                                 </StackPanel>
