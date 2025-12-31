@@ -12,6 +12,7 @@ namespace WindowsOptimizer.App.Services;
 public sealed class TweakDocumentationLinker
 {
     private const string DefaultDocPath = "tweaks/tweaks.md";
+    private const string DetailsDocPath = "tweaks/tweak-details.html";
     private static readonly Regex AnchorRegex = new("id\\s*=\\s*\"([^\"]+)\"",
         RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private readonly IReadOnlyDictionary<string, string> _categoryDocMap;
@@ -67,6 +68,18 @@ public sealed class TweakDocumentationLinker
                 var catalogUrl = catalogHasAnchor ? $"{catalogPath}#{tweak.Id}" : catalogPath;
                 var catalogTitle = catalogHasAnchor ? "Catalog entry" : "Catalog entry (missing)";
                 if (TryInsertReferenceLink(tweak, catalogTitle, catalogUrl, insertIndex))
+                {
+                    insertIndex++;
+                }
+            }
+
+            var detailsPath = ResolveDetailsDocPath();
+            if (!string.IsNullOrWhiteSpace(detailsPath))
+            {
+                var detailsHasAnchor = HasDocAnchor(detailsPath, tweak.Id);
+                var detailsUrl = detailsHasAnchor ? $"{detailsPath}#{tweak.Id}" : detailsPath;
+                var detailsTitle = detailsHasAnchor ? "Docs: Details" : "Docs: Details (missing)";
+                if (TryInsertReferenceLink(tweak, detailsTitle, detailsUrl, insertIndex))
                 {
                     insertIndex++;
                 }
@@ -136,6 +149,12 @@ public sealed class TweakDocumentationLinker
     private string ResolveCatalogPath()
     {
         var fullPath = Path.Combine(_docsRoot ?? string.Empty, "tweaks", "tweak-catalog.html");
+        return File.Exists(fullPath) ? fullPath : string.Empty;
+    }
+
+    private string ResolveDetailsDocPath()
+    {
+        var fullPath = Path.Combine(_docsRoot ?? string.Empty, "tweaks", "tweak-details.html");
         return File.Exists(fullPath) ? fullPath : string.Empty;
     }
 

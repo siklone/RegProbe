@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import csv
+import re
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+CATALOG_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.csv"
+DETAILS_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-details.html"
+CATALOG_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.html"
+REPORT_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.md"
+REPORT_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.csv"
+
+ANCHOR_RE = re.compile(r"id\\s*=\\s*\"([^\"]+)\"", re.IGNORECASE)
+
+
+def load_catalog() -> list[dict[str, str]]:
+    if not CATALOG_CSV.exists():
+        raise FileNotFoundError(f"Missing catalog: {CATALOG_CSV}")
+
+    entries: list[dict[str, str]] = []
+    with CATALOG_CSV.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            entries.append({
+                "id": (row.get("id") or "").strip(),
+                "name": (row.get("name") or "").strip(),
+                "category": (row.get("category") or "").strip(),
+                "area": (row.get("area") or "").strip(),
+                "risk": (row.get("risk") or "").strip(),
+                "source": (row.get("source") or "").strip(),
+                "docs": (row.get("docs") or "").strip(),
+            })
+    return [entry for entry in entries if entry["id"]]
+
+
+def load_anchors(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception:
+        return set()
+    return {match.group(1).strip() for match in ANCHOR_RE.finditer(text) if match.group(1).strip()}
+
+
+def resolve_doc_path(doc_path: str) -> Path:
+    if not doc_path:
+        return REPO_ROOT / "Docs" / "tweaks" / "tweaks.md"
+    doc_path = doc_path.replace("\\", "/")
+    if doc_path.startswith("Docs/"):
+        return REPO_ROOT / doc_path
+    return REPO_ROOT / doc_path
+
+
+def main() -> int:
+    entries = load_catalog()
+
+    details_anchors = load_anchors(DETAILS_HTML)
+    catalog_anchors = load_anchors(CATALOG_HTML)
+
+    rows: list[dict[str, str]] = []
+    missing_docs = 0
+    missing_doc_anchor = 0
+    missing_details_anchor = 0
+    missing_catalog_anchor = 0
+
+    doc_anchor_cache: dict[str, set[str]] = {}
+
+    for entry in entries:
+        tweak_id = entry["id"]
+        doc_path = resolve_doc_path(entry["docs"])
+        doc_key = str(doc_path)
+
+        if doc_key not in doc_anchor_cache:
+            doc_anchor_cache[doc_key] = load_anchors(doc_path)
+
+        doc_exists = doc_path.exists()
+        doc_has_anchor = tweak_id in doc_anchor_cache[doc_key]
+        details_has_anchor = tweak_id in details_anchors
+        catalog_has_anchor = tweak_id in catalog_anchors
+
+        if not doc_exists:
+            missing_docs += 1
+        if doc_exists and not doc_has_anchor:
+            missing_doc_anchor += 1
+        if not details_has_anchor:
+            missing_details_anchor += 1
+        if not catalog_has_anchor:
+            missing_catalog_anchor += 1
+
+        rows.append({
+            "id": tweak_id,
+            "name": entry["name"],
+            "docs": str(doc_path.relative_to(REPO_ROOT)),
+            "docs_exists": "yes" if doc_exists else "no",
+            "docs_anchor": "yes" if doc_has_anchor else "no",
+            "details_anchor": "yes" if details_has_anchor else "no",
+            "catalog_anchor": "yes" if catalog_has_anchor else "no",
+            "source": entry["source"],
+        })
+
+    REPORT_CSV.parent.mkdir(parents=True, exist_ok=True)
+    with REPORT_CSV.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=[
+            "id",
+            "name",
+            "docs",
+            "docs_exists",
+            "docs_anchor",
+            "details_anchor",
+            "catalog_anchor",
+            "source",
+        ])
+        writer.writeheader()
+        writer.writerows(rows)
+
+    summary_lines = [
+        "# Tweak Docs Report (Generated)",
+        "",
+        f"Total tweaks: {len(entries)}",
+        f"Missing docs files: {missing_docs}",
+        f"Missing docs anchors: {missing_doc_anchor}",
+        f"Missing details anchors: {missing_details_anchor}",
+        f"Missing catalog anchors: {missing_catalog_anchor}",
+        "",
+        "| ID | Docs | Doc Exists | Doc Anchor | Details Anchor | Catalog Anchor |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+
+    for row in rows:
+        summary_lines.append(
+            f"| `{row['id']}` | `{row['docs']}` | {row['docs_exists']} | {row['docs_anchor']} | "
+            f"{row['details_anchor']} | {row['catalog_anchor']} |"
+        )
+
+    REPORT_MD.write_text("\n".join(summary_lines) + "\n", encoding="utf-8")
+    print(f"Wrote {REPORT_MD} and {REPORT_CSV}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
