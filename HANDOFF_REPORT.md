@@ -135,6 +135,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Added peak scale labels under chart headers for quick context.
   - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
 
+- **Monitor header toolbar modernized (2025-12-31)**
+  - Added Live (1s) pill + icon Save button with hover states.
+  - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
@@ -300,3 +304,4 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `HANDOFF_REPORT.md` - Monitor UI status updates
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Mixed status detection + status badges
 - `WindowsOptimizer.App/Views/TweaksView.xaml` - Status text badges near tweak names
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Header toolbar modernization (Live pill + Save)

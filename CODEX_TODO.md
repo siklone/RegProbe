@@ -199,7 +199,7 @@
 - [x] Grafik okunabilirliği: Network/Disk ölçek notu (peak) eklendi
 - [ ] Grafik okunabilirliği genel iyileştirmeler (ek eksen ipuçları)
 - [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
-- [ ] Save butonu ve toolbar’ı modernize et
+- [x] Save butonu ve toolbar’ı modernize et
 
 ---
 

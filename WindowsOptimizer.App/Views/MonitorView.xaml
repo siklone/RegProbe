@@ -162,6 +162,24 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HeaderPillStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
         </Style>
     </UserControl.Resources>
 
@@ -178,12 +196,23 @@
                     <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                     <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
                 </StackPanel>
-                <Button Grid.Column="1"
-                        Content="Save"
-                        ToolTip="Saves a CSV snapshot to your Desktop."
-                        Command="{Binding ExportMetricsCommand}"
-                        Style="{StaticResource HeaderActionButtonStyle}"
-                        VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
+                            <TextBlock Text="Live (1s)" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Command="{Binding ExportMetricsCommand}"
+                            Style="{StaticResource HeaderActionButtonStyle}"
+                            VerticalAlignment="Center"
+                            ToolTip="Save snapshot (CSV) to your Desktop.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
+                            <TextBlock Text="Save"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
 
             <!-- System Information Section -->

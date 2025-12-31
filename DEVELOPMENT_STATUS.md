@@ -436,6 +436,7 @@
 - Tightened card padding/margins to keep the Monitor layout denser without losing readability.
 - Network/Disk lines now share a common scale and show current-value dots for easier comparison.
 - Added scale hints for Network/Disk charts (peak value label).
+- Modernized Monitor header toolbar with Live pill and icon Save button.
 
 **Files Changed:**
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
