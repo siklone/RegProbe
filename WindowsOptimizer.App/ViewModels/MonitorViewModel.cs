@@ -29,7 +29,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private double _ramAlertThreshold = 90.0;
     private bool _isCpuAlertActive;
     private bool _isRamAlertActive;
-    private bool _isNetworkApproximate = true;
+    private ProcessMonitor.NetworkProcessMode _networkProcessMode = ProcessMonitor.NetworkProcessMode.ApproximateIo;
 
     public MonitorViewModel()
     {
@@ -231,12 +231,19 @@ public sealed class MonitorViewModel : ViewModelBase
     }
 
     public string Title => "Monitor";
-    public string NetworkProcessTitle => _isNetworkApproximate
-        ? "Top 10 Processes by Network (Approx.)"
-        : "Top 10 Processes by Network";
-    public string NetworkProcessSubtitle => _isNetworkApproximate
-        ? "Based on total process I/O bytes. May include disk activity."
-        : "Based on TCP data bytes (requires OS support).";
+    public string NetworkProcessTitle => _networkProcessMode switch
+    {
+        ProcessMonitor.NetworkProcessMode.TcpUdpEtw => "Top 10 Processes by Network",
+        ProcessMonitor.NetworkProcessMode.TcpOnly => "Top 10 Processes by Network (TCP only)",
+        _ => "Top 10 Processes by Network (Approx.)"
+    };
+
+    public string NetworkProcessSubtitle => _networkProcessMode switch
+    {
+        ProcessMonitor.NetworkProcessMode.TcpUdpEtw => "Based on TCP + UDP bytes via ETW.",
+        ProcessMonitor.NetworkProcessMode.TcpOnly => "Based on TCP EStats (UDP not included).",
+        _ => "Based on total process I/O bytes. May include disk activity."
+    };
 
     public ObservableCollection<double> CpuHistory { get; }
     public ObservableCollection<double> RamHistory { get; }
@@ -516,13 +523,13 @@ public sealed class MonitorViewModel : ViewModelBase
 
     private void UpdateNetworkProcessMode()
     {
-        var isApproximate = _processMonitor?.IsNetworkApproximate ?? true;
-        if (_isNetworkApproximate == isApproximate)
+        var mode = _processMonitor?.NetworkMode ?? ProcessMonitor.NetworkProcessMode.ApproximateIo;
+        if (_networkProcessMode == mode)
         {
             return;
         }
 
-        _isNetworkApproximate = isApproximate;
+        _networkProcessMode = mode;
         OnPropertyChanged(nameof(NetworkProcessTitle));
         OnPropertyChanged(nameof(NetworkProcessSubtitle));
     }

@@ -11,8 +11,16 @@ public sealed class ProcessMonitor
     private Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _previousCpuUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousIoUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousNetworkUsage = new();
+    private NetworkEtwSampler? _networkSampler;
 
-    public bool IsNetworkApproximate { get; private set; } = true;
+    public NetworkProcessMode NetworkMode { get; private set; } = NetworkProcessMode.ApproximateIo;
+
+    public enum NetworkProcessMode
+    {
+        ApproximateIo,
+        TcpOnly,
+        TcpUdpEtw
+    }
 
     public List<ProcessInfo> GetTopProcessesByCpu(int count = 10)
     {
@@ -109,40 +117,57 @@ public sealed class ProcessMonitor
     public List<ProcessInfo> GetTopProcessesByNetwork(int count = 10)
     {
         var currentTime = DateTime.UtcNow;
+        var bytesByPid = new Dictionary<int, ulong>();
+        var mode = NetworkProcessMode.ApproximateIo;
 
-        if (TryGetTcpBytesByPid(out var bytesByPid))
+        if (TryGetEtwBytesByPid(out var etwBytes))
         {
-            IsNetworkApproximate = false;
-            var processes = new List<ProcessInfo>();
-
-            foreach (var entry in bytesByPid)
-            {
-                try
-                {
-                    var process = Process.GetProcessById(entry.Key);
-                    var networkMbps = CalculateNetworkMbps(entry.Key, entry.Value, currentTime);
-
-                    processes.Add(new ProcessInfo
-                    {
-                        Name = process.ProcessName,
-                        Pid = process.Id,
-                        IoMbps = networkMbps,
-                        RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
-                        Threads = process.Threads.Count,
-                        Handles = process.HandleCount
-                    });
-                }
-                catch
-                {
-                    // Process may have exited or is not accessible
-                }
-            }
-
-            return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
+            bytesByPid = etwBytes;
+            mode = NetworkProcessMode.TcpUdpEtw;
+        }
+        else if (TryGetTcpBytesByPid(out var tcpBytes))
+        {
+            bytesByPid = tcpBytes;
+            mode = NetworkProcessMode.TcpOnly;
         }
 
-        IsNetworkApproximate = true;
-        return GetTopProcessesByIo(count);
+        if (NetworkMode != mode)
+        {
+            NetworkMode = mode;
+            _previousNetworkUsage.Clear();
+        }
+
+        if (mode == NetworkProcessMode.ApproximateIo)
+        {
+            return GetTopProcessesByIo(count);
+        }
+
+        var processes = new List<ProcessInfo>();
+
+        foreach (var entry in bytesByPid)
+        {
+            try
+            {
+                var process = Process.GetProcessById(entry.Key);
+                var networkMbps = CalculateNetworkMbps(entry.Key, entry.Value, currentTime);
+
+                processes.Add(new ProcessInfo
+                {
+                    Name = process.ProcessName,
+                    Pid = process.Id,
+                    IoMbps = networkMbps,
+                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
+                    Threads = process.Threads.Count,
+                    Handles = process.HandleCount
+                });
+            }
+            catch
+            {
+                // Process may have exited or is not accessible
+            }
+        }
+
+        return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
     }
 
     private double CalculateCpuUsage(Process process, DateTime currentTime)
@@ -250,6 +275,8 @@ public sealed class ProcessMonitor
         {
             _previousNetworkUsage.Remove(pid);
         }
+
+        _networkSampler?.PruneToAlivePids(currentPids);
     }
 
     public bool KillProcess(int pid)
@@ -505,6 +532,27 @@ public sealed class ProcessMonitor
         TryCollectTcp6Bytes(bytesByPid, ref anySuccess);
 
         return anySuccess;
+    }
+
+    private bool TryGetEtwBytesByPid(out Dictionary<int, ulong> bytesByPid)
+    {
+        bytesByPid = new Dictionary<int, ulong>();
+
+        try
+        {
+            _networkSampler ??= new NetworkEtwSampler();
+            if (!_networkSampler.TryStart())
+            {
+                return false;
+            }
+
+            bytesByPid = _networkSampler.SnapshotBytes();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static void TryCollectTcpBytes(Dictionary<int, ulong> bytesByPid, ref bool anySuccess)

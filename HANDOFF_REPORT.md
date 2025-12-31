@@ -156,10 +156,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/Resources/Colors.xaml`,
     `WindowsOptimizer.App/Resources/Colors.Light.xaml`
 
-- **Monitor per-process network via TCP EStats (2025-12-31)**
-  - Attempts real per-process TCP bytes (IPv4/IPv6); falls back to IO approx.
+- **Monitor per-process network via ETW + TCP EStats (2025-12-31)**
+  - Uses ETW (TCP + UDP) when available; falls back to TCP EStats, then IO approx.
   - Network section title/subtitle updates based on mode.
-  - Files: `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`,
+  - Files: `WindowsOptimizer.Infrastructure/Metrics/NetworkEtwSampler.cs`,
+    `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`,
     `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
     `WindowsOptimizer.App/Views/MonitorView.xaml`
 
@@ -336,6 +337,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - CPU/RAM axis labels + gridline contrast
 - `WindowsOptimizer.App/Resources/Colors.xaml` - Added 20/40 alpha chart colors
 - `WindowsOptimizer.App/Resources/Colors.Light.xaml` - Added 20/40 alpha chart colors
-- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs` - TCP EStats per-process network sampling
+- `WindowsOptimizer.Infrastructure/Metrics/NetworkEtwSampler.cs` - ETW per-process network sampling
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs` - Network mode selection + TCP EStats fallback
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network process mode title/subtitle
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Network section binds to mode labels

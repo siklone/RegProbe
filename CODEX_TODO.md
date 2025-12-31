@@ -201,7 +201,7 @@
 - [x] Grafik okunabilirliği: CPU/RAM dinamik eksen etiketleri (max/75/50/25/0)
 - [x] Grafik okunabilirliği: grid çizgileri kontrastı artırıldı
 - [x] Grafik okunabilirliği: area fill + glow kontrastı artırıldı
-- [x] Top 10 network process gerçek TCP EStats (fallback: IO approx)
+- [x] Top 10 network process: ETW (TCP+UDP) -> TCP EStats -> IO approx fallback
 - [x] Save butonu ve toolbar’ı modernize et
 - [x] Top process listelerini daha kompakt + kolon başlıklı hale getir
 
