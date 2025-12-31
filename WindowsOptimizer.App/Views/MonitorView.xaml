@@ -181,6 +181,47 @@
             <Setter Property="Padding" Value="10,4"/>
             <Setter Property="Margin" Value="0,0,10,0"/>
         </Style>
+
+        <Style x:Key="ProcessHeaderCellStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="ProcessCellStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style x:Key="ProcessActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -819,10 +860,24 @@
                 <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
                     <StackPanel>
                         <TextBlock Text="Top 10 Processes by CPU" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
+                            <TextBlock Grid.Column="1" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        </Grid>
                         <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*"/>
@@ -830,34 +885,51 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
-	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
-	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
+	                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+	                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
 	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                                             </TextBlock>
-                                            <Button Grid.Column="2" Content="Kill"
-                                                    Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                            <Button Grid.Column="3" Content="Suspend"
-                                                    Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                            <Button Grid.Column="4" Content="Resume"
-                                                    Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                            <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+	                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                            </TextBlock>
+                                            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Kill process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                        Margin="6,0,0,0">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                        Margin="6,0,0,0">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -870,10 +942,24 @@
                 <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
                     <StackPanel>
                         <TextBlock Text="Top 10 Processes by RAM" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
+                            <TextBlock Grid.Column="1" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="2" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                            <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        </Grid>
                         <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*"/>
@@ -881,34 +967,51 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
-	                                                    <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
-	                                                    <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-	                                                    <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
+	                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+	                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
 	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
                                             </TextBlock>
-                                            <Button Grid.Column="2" Content="Kill"
-                                                    Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                            <Button Grid.Column="3" Content="Suspend"
-                                                    Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                            <Button Grid.Column="4" Content="Resume"
-                                                    Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                    Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                            <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+	                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                            </TextBlock>
+                                            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Kill process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                        Margin="6,0,0,0">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource ProcessActionButtonStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                        Margin="6,0,0,0">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -926,10 +1029,24 @@
                                Foreground="{DynamicResource MutedForegroundBrush}"
                                FontSize="11"
                                Margin="0,0,0,8"/>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
+                        <TextBlock Grid.Column="1" Text="I/O" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                    </Grid>
                     <ItemsControl ItemsSource="{Binding TopProcessesByNetwork}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,4">
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -939,31 +1056,49 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
-                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" Margin="0,2,0,0">
-                                                <Run Text="PID: "/><Run Text="{Binding Pid, Mode=OneWay}"/>
-                                                <Run Text=" | Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                <Run Text=" | Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
+                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
+                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                             </TextBlock>
                                         </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0">
+                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
                                             <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
                                         </TextBlock>
-                                        <Button Grid.Column="2" Content="Kill"
-                                                Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding}"
-                                                Background="{DynamicResource DangerBrush}" Foreground="{DynamicResource ForegroundOnAccentBrush}" BorderThickness="0"
-                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                        <Button Grid.Column="3" Content="Suspend"
-                                                Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding}"
-                                                Background="{DynamicResource CautionBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
-                                        <Button Grid.Column="4" Content="Resume"
-                                                Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding}"
-                                                Background="{DynamicResource SuccessBrush}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" BorderThickness="0"
-                                                Padding="8,4" Margin="4,0" FontSize="11" Cursor="Hand"/>
+                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                        </TextBlock>
+                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
+                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Kill process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource DangerBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Suspend process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource CautionBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                    Margin="6,0,0,0">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Resume process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource SuccessBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                    Margin="6,0,0,0">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

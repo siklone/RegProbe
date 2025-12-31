@@ -200,6 +200,7 @@
 - [ ] Grafik okunabilirliği genel iyileştirmeler (ek eksen ipuçları)
 - [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
 - [x] Save butonu ve toolbar’ı modernize et
+- [x] Top process listelerini daha kompakt + kolon başlıklı hale getir
 
 ---
 

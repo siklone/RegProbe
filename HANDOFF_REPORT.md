@@ -139,6 +139,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Added Live (1s) pill + icon Save button with hover states.
   - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
 
+- **Monitor top process lists compacted (2025-12-31)**
+  - Added column headers and compact icon actions for CPU/RAM/Network lists.
+  - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
@@ -305,3 +309,4 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Mixed status detection + status badges
 - `WindowsOptimizer.App/Views/TweaksView.xaml` - Status text badges near tweak names
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Header toolbar modernization (Live pill + Save)
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Compact top process tables (headers + icon actions)

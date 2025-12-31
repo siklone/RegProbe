@@ -462,6 +462,21 @@
 
 ---
 
+### 18. Monitor Top Processes Compaction (Commit: pending)
+**Problem:** Top process lists were visually heavy and hard to scan.
+
+**Solution:**
+- Added column headers for CPU/RAM/IO/PID.
+- Switched action buttons to compact icon buttons with tooltips.
+- Reduced row padding for denser layout.
+
+**Files Changed:**
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
