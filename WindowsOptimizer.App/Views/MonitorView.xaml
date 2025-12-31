@@ -581,23 +581,23 @@
                                 <!-- Current value indicators -->
                                 <Canvas ClipToBounds="False">
                                     <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}" Canvas.Right="0">
-                                        <Ellipse.Canvas.Top>
+                                        <Canvas.Top>
                                             <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
                                                 <Binding Path="NetworkDownloadHistory"/>
                                                 <Binding Path="NetworkIoScaleMax"/>
                                             </MultiBinding>
-                                        </Ellipse.Canvas.Top>
+                                        </Canvas.Top>
                                         <Ellipse.Effect>
                                             <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                         </Ellipse.Effect>
                                     </Ellipse>
                                     <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}" Canvas.Right="0">
-                                        <Ellipse.Canvas.Top>
+                                        <Canvas.Top>
                                             <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
                                                 <Binding Path="NetworkUploadHistory"/>
                                                 <Binding Path="NetworkIoScaleMax"/>
                                             </MultiBinding>
-                                        </Ellipse.Canvas.Top>
+                                        </Canvas.Top>
                                         <Ellipse.Effect>
                                             <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                         </Ellipse.Effect>
@@ -715,23 +715,23 @@
                                 <!-- Current value indicators -->
                                 <Canvas ClipToBounds="False">
                                     <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}" Canvas.Right="0">
-                                        <Ellipse.Canvas.Top>
+                                        <Canvas.Top>
                                             <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
                                                 <Binding Path="DiskReadHistory"/>
                                                 <Binding Path="DiskIoScaleMax"/>
                                             </MultiBinding>
-                                        </Ellipse.Canvas.Top>
+                                        </Canvas.Top>
                                         <Ellipse.Effect>
                                             <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                         </Ellipse.Effect>
                                     </Ellipse>
                                     <Ellipse Width="10" Height="10" Fill="{DynamicResource DangerBrush}" Canvas.Right="0">
-                                        <Ellipse.Canvas.Top>
+                                        <Canvas.Top>
                                             <MultiBinding Converter="{StaticResource LastValueToYWithMaxConverter}">
                                                 <Binding Path="DiskWriteHistory"/>
                                                 <Binding Path="DiskIoScaleMax"/>
                                             </MultiBinding>
-                                        </Ellipse.Canvas.Top>
+                                        </Canvas.Top>
                                         <Ellipse.Effect>
                                             <DropShadowEffect Color="{DynamicResource Nord11}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                         </Ellipse.Effect>
