@@ -197,6 +197,7 @@
 - [x] Kart padding/margin sıkılaştırıldı (daha kompakt görünüm)
 - [x] Network/Disk çizgileri ortak ölçek + anlık nokta göstergeleri
 - [x] Grafik okunabilirliği: Network/Disk ölçek notu (peak) eklendi
+- [x] Grafik okunabilirliği: Network/Disk y‑axis etiketleri (max/mid/0)
 - [ ] Grafik okunabilirliği genel iyileştirmeler (ek eksen ipuçları)
 - [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
 - [x] Save butonu ve toolbar’ı modernize et

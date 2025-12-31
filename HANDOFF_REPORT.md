@@ -143,6 +143,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Added column headers and compact icon actions for CPU/RAM/Network lists.
   - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
 
+- **Monitor chart axis labels (2025-12-31)**
+  - Added left-axis labels (max/mid/0) for Network/Disk charts.
+  - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
@@ -310,3 +315,5 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Views/TweaksView.xaml` - Status text badges near tweak names
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Header toolbar modernization (Live pill + Save)
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Compact top process tables (headers + icon actions)
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk mid-scale values
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk y-axis labels

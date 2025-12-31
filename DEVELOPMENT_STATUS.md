@@ -436,6 +436,7 @@
 - Tightened card padding/margins to keep the Monitor layout denser without losing readability.
 - Network/Disk lines now share a common scale and show current-value dots for easier comparison.
 - Added scale hints for Network/Disk charts (peak value label).
+- Added left-axis labels for Network/Disk charts (max/mid/0).
 - Modernized Monitor header toolbar with Live pill and icon Save button.
 
 **Files Changed:**

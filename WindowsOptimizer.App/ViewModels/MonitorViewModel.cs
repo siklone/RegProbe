@@ -294,6 +294,7 @@ public sealed class MonitorViewModel : ViewModelBase
     public double NetworkUploadMin => GetHistoryMin(NetworkUploadHistory);
     public double NetworkUploadNow => GetHistoryNow(NetworkUploadHistory);
     public double NetworkIoScaleMax => Math.Max(NetworkDownloadMax, NetworkUploadMax);
+    public double NetworkIoScaleMid => NetworkIoScaleMax / 2.0;
     public double DiskReadMax => GetHistoryMax(DiskReadHistory);
     public double DiskReadMin => GetHistoryMin(DiskReadHistory);
     public double DiskReadNow => GetHistoryNow(DiskReadHistory);
@@ -301,6 +302,7 @@ public sealed class MonitorViewModel : ViewModelBase
     public double DiskWriteMin => GetHistoryMin(DiskWriteHistory);
     public double DiskWriteNow => GetHistoryNow(DiskWriteHistory);
     public double DiskIoScaleMax => Math.Max(DiskReadMax, DiskWriteMax);
+    public double DiskIoScaleMid => DiskIoScaleMax / 2.0;
 
     public double GpuTemp
     {
@@ -402,6 +404,7 @@ public sealed class MonitorViewModel : ViewModelBase
                 OnPropertyChanged(nameof(NetworkUploadMin));
                 OnPropertyChanged(nameof(NetworkUploadNow));
                 OnPropertyChanged(nameof(NetworkIoScaleMax));
+                OnPropertyChanged(nameof(NetworkIoScaleMid));
 
                 // Update network adapters list
                 UpdateCollection(NetworkAdapters, networkAdapters);
@@ -421,6 +424,7 @@ public sealed class MonitorViewModel : ViewModelBase
                 OnPropertyChanged(nameof(DiskWriteMin));
                 OnPropertyChanged(nameof(DiskWriteNow));
                 OnPropertyChanged(nameof(DiskIoScaleMax));
+                OnPropertyChanged(nameof(DiskIoScaleMid));
 
                 // Update disks list
                 UpdateCollection(Disks, disks);
