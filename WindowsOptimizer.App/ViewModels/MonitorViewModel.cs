@@ -287,6 +287,12 @@ public sealed class MonitorViewModel : ViewModelBase
     public double CpuHistoryMin => CpuHistory.Count > 0 ? CpuHistory.Min() : 0;
     public double RamHistoryMax => RamHistory.Count > 0 ? RamHistory.Max() : 0;
     public double RamHistoryMin => RamHistory.Count > 0 ? RamHistory.Min() : 0;
+    public double CpuHistoryMid => CpuHistoryMax / 2.0;
+    public double CpuHistoryQuarter => CpuHistoryMax * 0.25;
+    public double CpuHistoryThreeQuarter => CpuHistoryMax * 0.75;
+    public double RamHistoryMid => RamHistoryMax / 2.0;
+    public double RamHistoryQuarter => RamHistoryMax * 0.25;
+    public double RamHistoryThreeQuarter => RamHistoryMax * 0.75;
     public double NetworkDownloadMax => GetHistoryMax(NetworkDownloadHistory);
     public double NetworkDownloadMin => GetHistoryMin(NetworkDownloadHistory);
     public double NetworkDownloadNow => GetHistoryNow(NetworkDownloadHistory);
@@ -386,8 +392,14 @@ public sealed class MonitorViewModel : ViewModelBase
             // Notify Min/Max updates for chart labels
             OnPropertyChanged(nameof(CpuHistoryMax));
             OnPropertyChanged(nameof(CpuHistoryMin));
+            OnPropertyChanged(nameof(CpuHistoryMid));
+            OnPropertyChanged(nameof(CpuHistoryQuarter));
+            OnPropertyChanged(nameof(CpuHistoryThreeQuarter));
             OnPropertyChanged(nameof(RamHistoryMax));
             OnPropertyChanged(nameof(RamHistoryMin));
+            OnPropertyChanged(nameof(RamHistoryMid));
+            OnPropertyChanged(nameof(RamHistoryQuarter));
+            OnPropertyChanged(nameof(RamHistoryThreeQuarter));
 
             // Update network and disk I/O history
             if (_networkMonitor != null)

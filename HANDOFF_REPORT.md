@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2025-12-30
+**Last Updated:** 2025-12-31
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -147,6 +147,14 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Added left-axis labels (max/mid/0) for Network/Disk charts.
   - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`,
     `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+
+- **Monitor chart readability pass (2025-12-31)**
+  - CPU/RAM now use dynamic axis labels (max/75/50/25/0).
+  - Increased chart contrast via stronger area fills, glow, and gridlines.
+  - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/Resources/Colors.xaml`,
+    `WindowsOptimizer.App/Resources/Colors.Light.xaml`
 
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
@@ -317,3 +325,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Compact top process tables (headers + icon actions)
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk mid-scale values
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk y-axis labels
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - CPU/RAM axis scale values
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - CPU/RAM axis labels + gridline contrast
+- `WindowsOptimizer.App/Resources/Colors.xaml` - Added 20/40 alpha chart colors
+- `WindowsOptimizer.App/Resources/Colors.Light.xaml` - Added 20/40 alpha chart colors

@@ -20,47 +20,47 @@
         <!-- Chart gradient brushes -->
         <LinearGradientBrush x:Key="CpuAreaGradient" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="{DynamicResource AccentBrightCyan40}" Offset="0"/>
-            <GradientStop Color="{DynamicResource AccentBrightCyan10}" Offset="0.5"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan20}" Offset="0.5"/>
             <GradientStop Color="{DynamicResource AccentBrightCyan00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="RamAreaGradient" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="{DynamicResource Success40}" Offset="0"/>
-            <GradientStop Color="{DynamicResource Success10}" Offset="0.5"/>
+            <GradientStop Color="{DynamicResource Success20}" Offset="0.5"/>
             <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DownloadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="{DynamicResource Success30}" Offset="0"/>
-            <GradientStop Color="{DynamicResource Success08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Success40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Success20}" Offset="0.7"/>
             <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="UploadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="{DynamicResource AccentBrightCyan30}" Offset="0"/>
-            <GradientStop Color="{DynamicResource AccentBrightCyan08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource AccentBrightCyan20}" Offset="0.7"/>
             <GradientStop Color="{DynamicResource AccentBrightCyan00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DiskReadAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="{DynamicResource Success30}" Offset="0"/>
-            <GradientStop Color="{DynamicResource Success08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Success40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Success20}" Offset="0.7"/>
             <GradientStop Color="{DynamicResource Success00}" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="DiskWriteAreaGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="{DynamicResource Danger30}" Offset="0"/>
-            <GradientStop Color="{DynamicResource Danger08}" Offset="0.7"/>
+            <GradientStop Color="{DynamicResource Danger40}" Offset="0"/>
+            <GradientStop Color="{DynamicResource Danger20}" Offset="0.7"/>
             <GradientStop Color="{DynamicResource Danger00}" Offset="1"/>
         </LinearGradientBrush>
 
         <!-- Glow effect for chart lines -->
-        <DropShadowEffect x:Key="ChartGlowCpu" Color="{DynamicResource Nord8}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowRam" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowUpload" Color="{DynamicResource Nord8}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowDownload" Color="{DynamicResource Nord14}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowRead" Color="{DynamicResource Nord14}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
-        <DropShadowEffect x:Key="ChartGlowWrite" Color="{DynamicResource Nord11}" BlurRadius="6" ShadowDepth="0" Opacity="0.5"/>
+        <DropShadowEffect x:Key="ChartGlowCpu" Color="{DynamicResource Nord8}" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
+        <DropShadowEffect x:Key="ChartGlowRam" Color="{DynamicResource Nord14}" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
+        <DropShadowEffect x:Key="ChartGlowUpload" Color="{DynamicResource Nord8}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <DropShadowEffect x:Key="ChartGlowDownload" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <DropShadowEffect x:Key="ChartGlowRead" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <DropShadowEffect x:Key="ChartGlowWrite" Color="{DynamicResource Nord11}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
 
         <TransformGroup x:Key="MonitorCardTransform" x:Shared="False">
             <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -442,21 +442,21 @@
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="100%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="75%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="50%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="25%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding CpuHistoryThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
                                     <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
                                 <Border Margin="30,0,0,0" ClipToBounds="True">
                                     <Grid>
                                         <!-- Horizontal Gridlines -->
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Bottom"/>
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
@@ -507,21 +507,21 @@
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="100%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="75%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="50%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="25%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding RamHistoryThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
                                     <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
                                 <Border Margin="30,0,0,0" ClipToBounds="True">
                                     <Grid>
                                         <!-- Horizontal Gridlines -->
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Top"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                        <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Bottom"/>
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
@@ -608,11 +608,11 @@
                                 </StackPanel>
                                 <Grid Grid.Column="1" Margin="6,0,0,0">
                                     <!-- Horizontal Gridlines -->
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Top"/>
+                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Bottom"/>
                                     <!-- Download Area Fill -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">
@@ -762,11 +762,11 @@
                                 </StackPanel>
                                 <Grid Grid.Column="1" Margin="6,0,0,0">
                                     <!-- Horizontal Gridlines -->
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Top"/>
-                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Top" Margin="0,25,0,0"/>
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
-                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundDarkBrush}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
-                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Top"/>
+                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Center" StrokeDashArray="4,2"/>
+                                    <Rectangle Height="1" Fill="{DynamicResource BackgroundLightBrush}" Opacity="0.35" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                                    <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="1" Opacity="0.45" Stretch="Fill" VerticalAlignment="Bottom"/>
                                     <!-- Read Area Fill -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">

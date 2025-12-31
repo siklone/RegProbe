@@ -198,7 +198,9 @@
 - [x] Network/Disk çizgileri ortak ölçek + anlık nokta göstergeleri
 - [x] Grafik okunabilirliği: Network/Disk ölçek notu (peak) eklendi
 - [x] Grafik okunabilirliği: Network/Disk y‑axis etiketleri (max/mid/0)
-- [ ] Grafik okunabilirliği genel iyileştirmeler (ek eksen ipuçları)
+- [x] Grafik okunabilirliği: CPU/RAM dinamik eksen etiketleri (max/75/50/25/0)
+- [x] Grafik okunabilirliği: grid çizgileri kontrastı artırıldı
+- [x] Grafik okunabilirliği: area fill + glow kontrastı artırıldı
 - [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
 - [x] Save butonu ve toolbar’ı modernize et
 - [x] Top process listelerini daha kompakt + kolon başlıklı hale getir
