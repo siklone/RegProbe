@@ -1739,13 +1739,15 @@ public enum TweakActionType
 /// </summary>
 public sealed class ReferenceLink
 {
-    public ReferenceLink(string title, string url)
+    public ReferenceLink(string title, string url, string? tooltip = null)
     {
         Title = title;
         Url = url;
+        Tooltip = string.IsNullOrWhiteSpace(tooltip) ? url : tooltip;
     }
     public string Title { get; }
     public string Url { get; }
+    public string Tooltip { get; }
 }
 
 /// <summary>

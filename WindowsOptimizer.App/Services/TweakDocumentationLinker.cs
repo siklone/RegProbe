@@ -67,7 +67,8 @@ public sealed class TweakDocumentationLinker
                 var catalogHasAnchor = HasDocAnchor(catalogPath, tweak.Id);
                 var catalogUrl = catalogHasAnchor ? $"{catalogPath}#{tweak.Id}" : catalogPath;
                 var catalogTitle = catalogHasAnchor ? "Catalog entry" : "Catalog entry (missing)";
-                if (TryInsertReferenceLink(tweak, catalogTitle, catalogUrl, insertIndex))
+                if (TryInsertReferenceLink(tweak, catalogTitle, catalogUrl, insertIndex,
+                        "Full tweak catalog with all entries."))
                 {
                     insertIndex++;
                 }
@@ -79,7 +80,8 @@ public sealed class TweakDocumentationLinker
                 var detailsHasAnchor = HasDocAnchor(detailsPath, tweak.Id);
                 var detailsUrl = detailsHasAnchor ? $"{detailsPath}#{tweak.Id}" : detailsPath;
                 var detailsTitle = detailsHasAnchor ? "Docs: Details" : "Docs: Details (missing)";
-                if (TryInsertReferenceLink(tweak, detailsTitle, detailsUrl, insertIndex))
+                if (TryInsertReferenceLink(tweak, detailsTitle, detailsUrl, insertIndex,
+                        "Per-tweak summary (Changes, Risk, Source)."))
                 {
                     insertIndex++;
                 }
@@ -105,7 +107,8 @@ public sealed class TweakDocumentationLinker
                     }
 
                     var docUrl = hasAnchor ? AppendDocAnchor(entryDocPath, tweak.Id) : entryDocPath;
-                    if (TryInsertReferenceLink(tweak, entryTitle, docUrl, insertIndex))
+                    if (TryInsertReferenceLink(tweak, entryTitle, docUrl, insertIndex,
+                            "Category documentation for this tweak."))
                     {
                         insertIndex++;
                     }
@@ -118,7 +121,8 @@ public sealed class TweakDocumentationLinker
                         var fallbackTitle = BuildDocsTitle(entry.Category, prefix) + " (file missing)";
                         var hasAnchor = HasDocAnchor(fallbackDocPath, tweak.Id);
                         var fallbackUrl = hasAnchor ? AppendDocAnchor(fallbackDocPath, tweak.Id) : fallbackDocPath;
-                        if (TryInsertReferenceLink(tweak, fallbackTitle, fallbackUrl, insertIndex))
+                        if (TryInsertReferenceLink(tweak, fallbackTitle, fallbackUrl, insertIndex,
+                                "Category documentation for this tweak."))
                         {
                             insertIndex++;
                         }
@@ -142,7 +146,8 @@ public sealed class TweakDocumentationLinker
             }
 
             var fallbackUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, tweak.Id) : docPath;
-            TryInsertReferenceLink(tweak, title, fallbackUrl, insertIndex);
+            TryInsertReferenceLink(tweak, title, fallbackUrl, insertIndex,
+                "Category documentation for this tweak.");
         }
     }
 
@@ -277,7 +282,12 @@ public sealed class TweakDocumentationLinker
         return anchors;
     }
 
-    private bool TryInsertReferenceLink(TweakItemViewModel tweak, string title, string url, int index)
+    private bool TryInsertReferenceLink(
+        TweakItemViewModel tweak,
+        string title,
+        string url,
+        int index,
+        string? tooltip = null)
     {
         if (string.IsNullOrWhiteSpace(url))
         {
@@ -290,7 +300,7 @@ public sealed class TweakDocumentationLinker
         }
 
         var safeIndex = Math.Clamp(index, 0, tweak.ReferenceLinks.Count);
-        tweak.ReferenceLinks.Insert(safeIndex, new ReferenceLink(title, url));
+        tweak.ReferenceLinks.Insert(safeIndex, new ReferenceLink(title, url, tooltip));
         return true;
     }
 

@@ -865,7 +865,7 @@
 	                                         <Button Content="{Binding Title}"
 	                                                 Style="{StaticResource LinkButtonStyle}"
 	                                                 Margin="0,0,12,4"
-	                                                 ToolTip="{Binding Url}"
+	                                                 ToolTip="{Binding Tooltip}"
 	                                                 Command="{Binding DataContext.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 	                                                 CommandParameter="{Binding Url}"/>
 	                                     </DataTemplate>
@@ -1752,10 +1752,10 @@
                                                                         </ItemsControl.ItemsPanel>
 	                                                                        <ItemsControl.ItemTemplate>
 	                                                                            <DataTemplate>
-	                                                                                <Button Content="{Binding Title}" 
+	                                                                                    <Button Content="{Binding Title}"
 	                                                                                        Style="{StaticResource LinkButtonStyle}"
 	                                                                                        Margin="0,0,12,4"
-	                                                                                        ToolTip="{Binding Url}"
+	                                                                                        ToolTip="{Binding Tooltip}"
 	                                                                                        Command="{Binding DataContext.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 	                                                                                        CommandParameter="{Binding Url}"/>
 	                                                                            </DataTemplate>

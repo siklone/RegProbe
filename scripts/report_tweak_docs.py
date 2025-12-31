@@ -11,6 +11,8 @@ DETAILS_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-details.html"
 CATALOG_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.html"
 REPORT_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.md"
 REPORT_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.csv"
+REPORT_MISSING_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing.md"
+REPORT_MISSING_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing.csv"
 
 ANCHOR_RE = re.compile(r"id\\s*=\\s*\"([^\"]+)\"", re.IGNORECASE)
 
@@ -61,6 +63,7 @@ def main() -> int:
     catalog_anchors = load_anchors(CATALOG_HTML)
 
     rows: list[dict[str, str]] = []
+    missing_rows: list[dict[str, str]] = []
     missing_docs = 0
     missing_doc_anchor = 0
     missing_details_anchor = 0
@@ -90,7 +93,7 @@ def main() -> int:
         if not catalog_has_anchor:
             missing_catalog_anchor += 1
 
-        rows.append({
+        row = {
             "id": tweak_id,
             "name": entry["name"],
             "docs": str(doc_path.relative_to(REPO_ROOT)),
@@ -99,7 +102,11 @@ def main() -> int:
             "details_anchor": "yes" if details_has_anchor else "no",
             "catalog_anchor": "yes" if catalog_has_anchor else "no",
             "source": entry["source"],
-        })
+        }
+        rows.append(row)
+
+        if not doc_exists or not doc_has_anchor or not details_has_anchor or not catalog_has_anchor:
+            missing_rows.append(row)
 
     REPORT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with REPORT_CSV.open("w", encoding="utf-8", newline="") as handle:
@@ -115,6 +122,20 @@ def main() -> int:
         ])
         writer.writeheader()
         writer.writerows(rows)
+
+    with REPORT_MISSING_CSV.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=[
+            "id",
+            "name",
+            "docs",
+            "docs_exists",
+            "docs_anchor",
+            "details_anchor",
+            "catalog_anchor",
+            "source",
+        ])
+        writer.writeheader()
+        writer.writerows(missing_rows)
 
     summary_lines = [
         "# Tweak Docs Report (Generated)",
@@ -136,7 +157,25 @@ def main() -> int:
         )
 
     REPORT_MD.write_text("\n".join(summary_lines) + "\n", encoding="utf-8")
-    print(f"Wrote {REPORT_MD} and {REPORT_CSV}")
+    missing_lines = [
+        "# Tweak Docs Missing Report (Generated)",
+        "",
+        f"Total tweaks: {len(entries)}",
+        f"Missing entries: {len(missing_rows)}",
+        "",
+        "| ID | Docs | Doc Exists | Doc Anchor | Details Anchor | Catalog Anchor |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+
+    for row in missing_rows:
+        missing_lines.append(
+            f"| `{row['id']}` | `{row['docs']}` | {row['docs_exists']} | {row['docs_anchor']} | "
+            f"{row['details_anchor']} | {row['catalog_anchor']} |"
+        )
+
+    REPORT_MISSING_MD.write_text("\n".join(missing_lines) + "\n", encoding="utf-8")
+
+    print(f"Wrote {REPORT_MD}, {REPORT_CSV}, {REPORT_MISSING_MD}, {REPORT_MISSING_CSV}")
     return 0
 
 
