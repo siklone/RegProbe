@@ -805,9 +805,16 @@ public sealed class TweaksViewModel : ViewModelBase
             _verifyAllCommand.RaiseCanExecuteChanged();
             _rollbackAllCommand.RaiseCanExecuteChanged();
         }
-        else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied) or nameof(TweakItemViewModel.AppliedStatus))
+        else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied)
+                 or nameof(TweakItemViewModel.AppliedStatus)
+                 or nameof(TweakItemViewModel.WasRolledBack))
         {
             RaiseHealthMetricsChanged();
+            if (!string.IsNullOrEmpty(_statusFilter))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
         }
     }
 
