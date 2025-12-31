@@ -29,6 +29,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private double _ramAlertThreshold = 90.0;
     private bool _isCpuAlertActive;
     private bool _isRamAlertActive;
+    private bool _isNetworkApproximate = true;
 
     public MonitorViewModel()
     {
@@ -213,7 +214,7 @@ public sealed class MonitorViewModel : ViewModelBase
             }
 
             csv.AppendLine();
-            csv.AppendLine("Top Processes by Network (Approx.)");
+            csv.AppendLine(NetworkProcessTitle);
             csv.AppendLine("Name,PID,Mbps,Threads,Handles");
             foreach (var proc in TopProcessesByNetwork)
             {
@@ -230,6 +231,12 @@ public sealed class MonitorViewModel : ViewModelBase
     }
 
     public string Title => "Monitor";
+    public string NetworkProcessTitle => _isNetworkApproximate
+        ? "Top 10 Processes by Network (Approx.)"
+        : "Top 10 Processes by Network";
+    public string NetworkProcessSubtitle => _isNetworkApproximate
+        ? "Based on total process I/O bytes. May include disk activity."
+        : "Based on TCP data bytes (requires OS support).";
 
     public ObservableCollection<double> CpuHistory { get; }
     public ObservableCollection<double> RamHistory { get; }
@@ -447,7 +454,8 @@ public sealed class MonitorViewModel : ViewModelBase
             {
                 UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
                 UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
-                UpdateCollection(TopProcessesByNetwork, _processMonitor.GetTopProcessesByIo(10));
+                UpdateCollection(TopProcessesByNetwork, _processMonitor.GetTopProcessesByNetwork(10));
+                UpdateNetworkProcessMode();
 
                 // Cleanup dead process entries
                 _processMonitor.Cleanup();
@@ -504,6 +512,19 @@ public sealed class MonitorViewModel : ViewModelBase
         {
             collection.Add(item);
         }
+    }
+
+    private void UpdateNetworkProcessMode()
+    {
+        var isApproximate = _processMonitor?.IsNetworkApproximate ?? true;
+        if (_isNetworkApproximate == isApproximate)
+        {
+            return;
+        }
+
+        _isNetworkApproximate = isApproximate;
+        OnPropertyChanged(nameof(NetworkProcessTitle));
+        OnPropertyChanged(nameof(NetworkProcessSubtitle));
     }
 
     private static void LogToFile(string message)

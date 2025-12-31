@@ -480,6 +480,23 @@
 
 ---
 
+### 19. Monitor Per-Process Network (TCP EStats) (Commit: pending)
+**Problem:** Network process list used total I/O bytes (disk + network).
+
+**Solution:**
+- Added TCP EStats sampling per PID (IPv4/IPv6) to derive real network throughput.
+- Falls back to total process I/O when EStats are unavailable.
+- UI now switches title/description based on measurement mode.
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**

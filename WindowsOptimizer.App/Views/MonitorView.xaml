@@ -1046,8 +1046,8 @@
             <!-- Top Network Processes -->
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
-                    <TextBlock Text="Top 10 Processes by Network (Approx.)" Style="{StaticResource SectionHeaderStyle}"/>
-                    <TextBlock Text="Based on total process I/O bytes. May include disk activity."
+                    <TextBlock Text="{Binding NetworkProcessTitle}" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="{Binding NetworkProcessSubtitle}"
                                Foreground="{DynamicResource MutedForegroundBrush}"
                                FontSize="11"
                                Margin="0,0,0,8"/>

@@ -156,6 +156,13 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/Resources/Colors.xaml`,
     `WindowsOptimizer.App/Resources/Colors.Light.xaml`
 
+- **Monitor per-process network via TCP EStats (2025-12-31)**
+  - Attempts real per-process TCP bytes (IPv4/IPv6); falls back to IO approx.
+  - Network section title/subtitle updates based on mode.
+  - Files: `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
@@ -329,3 +336,6 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - CPU/RAM axis labels + gridline contrast
 - `WindowsOptimizer.App/Resources/Colors.xaml` - Added 20/40 alpha chart colors
 - `WindowsOptimizer.App/Resources/Colors.Light.xaml` - Added 20/40 alpha chart colors
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs` - TCP EStats per-process network sampling
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network process mode title/subtitle
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Network section binds to mode labels
