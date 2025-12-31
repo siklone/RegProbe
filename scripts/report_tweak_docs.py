@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import html
 import re
 from pathlib import Path
 
@@ -11,10 +12,13 @@ DETAILS_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-details.html"
 CATALOG_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.html"
 REPORT_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.md"
 REPORT_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.csv"
+REPORT_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-report.html"
 REPORT_MISSING_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing.md"
 REPORT_MISSING_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing.csv"
+REPORT_MISSING_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing.html"
 REPORT_MISSING_PRIORITY_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing-priority.md"
 REPORT_MISSING_PRIORITY_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing-priority.csv"
+REPORT_MISSING_PRIORITY_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-docs-missing-priority.html"
 
 ANCHOR_RE = re.compile(r"id\s*=\s*\"([^\"]+)\"", re.IGNORECASE)
 RISK_SCORE = {"Risky": 3, "Advanced": 2, "Safe": 1}
@@ -77,6 +81,72 @@ def priority_for(entry: dict[str, str]) -> tuple[int, str]:
         label = "P3"
 
     return score, label
+
+
+def build_html_report(
+    title: str,
+    entries: list[dict[str, str]],
+    table_headers: list[str],
+    table_rows: list[list[str]],
+    summary_lines: list[str],
+) -> str:
+    def escape(value: str) -> str:
+        return html.escape(str(value))
+
+    header_cells = "".join(f"<th>{escape(h)}</th>" for h in table_headers)
+    rows_html = []
+    for row in table_rows:
+        cells = "".join(f"<td><code>{escape(cell)}</code></td>" for cell in row)
+        rows_html.append(f"        <tr>{cells}</tr>")
+
+    summary_html = "".join(f"<li>{escape(line)}</li>" for line in summary_lines)
+    quick_links = (
+        "<div class=\"links\">"
+        "<a href=\"tweak-details.html\">Tweak Details</a>"
+        "<span>•</span>"
+        "<a href=\"tweak-catalog.html\">Tweak Catalog</a>"
+        "</div>"
+    )
+
+    return "\n".join([
+        "<!doctype html>",
+        "<html lang=\"en\">",
+        "<head>",
+        "  <meta charset=\"utf-8\">",
+        "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+        f"  <title>{escape(title)}</title>",
+        "  <style>",
+        "    body { font-family: Segoe UI, Arial, sans-serif; background: #f6f7fb; color: #1f2430; }",
+        "    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }",
+        "    h1 { font-size: 22px; margin: 0 0 8px; }",
+        "    ul { margin: 0 0 12px 18px; padding: 0; }",
+        "    .links { margin-bottom: 16px; font-size: 13px; color: #54606f; }",
+        "    .links a { color: #2f6f9b; text-decoration: none; }",
+        "    .links a:hover { text-decoration: underline; }",
+        "    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }",
+        "    thead { background: #2f3a4a; color: #fff; }",
+        "    th, td { padding: 8px 10px; font-size: 12px; border-bottom: 1px solid #e5e8ef; vertical-align: top; }",
+        "    tbody tr:nth-child(even) { background: #f9fafc; }",
+        "    code { font-family: Consolas, monospace; font-size: 11px; }",
+        "  </style>",
+        "</head>",
+        "<body>",
+        "  <div class=\"container\">",
+        f"    <h1>{escape(title)}</h1>",
+        f"    <ul>{summary_html}</ul>",
+        f"    {quick_links}",
+        "    <table>",
+        "      <thead>",
+        f"        <tr>{header_cells}</tr>",
+        "      </thead>",
+        "      <tbody>",
+        *rows_html,
+        "      </tbody>",
+        "    </table>",
+        "  </div>",
+        "</body>",
+        "</html>",
+    ]) + "\n"
 
 
 def main() -> int:
@@ -190,6 +260,25 @@ def main() -> int:
         )
 
     REPORT_MD.write_text("\n".join(summary_lines) + "\n", encoding="utf-8")
+    REPORT_HTML.write_text(
+        build_html_report(
+            "Tweak Docs Report",
+            entries=rows,
+            table_headers=["ID", "Docs", "Doc Exists", "Doc Anchor", "Details Anchor", "Catalog Anchor"],
+            table_rows=[
+                [row["id"], row["docs"], row["docs_exists"], row["docs_anchor"], row["details_anchor"], row["catalog_anchor"]]
+                for row in rows
+            ],
+            summary_lines=[
+                f"Total tweaks: {len(entries)}",
+                f"Missing docs files: {missing_docs}",
+                f"Missing docs anchors: {missing_doc_anchor}",
+                f"Missing details anchors: {missing_details_anchor}",
+                f"Missing catalog anchors: {missing_catalog_anchor}",
+            ],
+        ),
+        encoding="utf-8",
+    )
     missing_lines = [
         "# Tweak Docs Missing Report (Generated)",
         "",
@@ -209,6 +298,31 @@ def main() -> int:
         )
 
     REPORT_MISSING_MD.write_text("\n".join(missing_lines) + "\n", encoding="utf-8")
+    REPORT_MISSING_HTML.write_text(
+        build_html_report(
+            "Tweak Docs Missing Report",
+            entries=missing_rows,
+            table_headers=["ID", "Risk", "Area", "Docs", "Doc Exists", "Doc Anchor", "Details Anchor", "Catalog Anchor"],
+            table_rows=[
+                [
+                    row["id"],
+                    row["risk"],
+                    row["area"],
+                    row["docs"],
+                    row["docs_exists"],
+                    row["docs_anchor"],
+                    row["details_anchor"],
+                    row["catalog_anchor"],
+                ]
+                for row in missing_rows
+            ],
+            summary_lines=[
+                f"Total tweaks: {len(entries)}",
+                f"Missing entries: {len(missing_rows)}",
+            ],
+        ),
+        encoding="utf-8",
+    )
 
     missing_sorted = sorted(
         missing_rows,
@@ -270,11 +384,48 @@ def main() -> int:
         )
 
     REPORT_MISSING_PRIORITY_MD.write_text("\n".join(priority_lines) + "\n", encoding="utf-8")
+    REPORT_MISSING_PRIORITY_HTML.write_text(
+        build_html_report(
+            "Tweak Docs Missing Priority Report",
+            entries=missing_sorted,
+            table_headers=[
+                "Priority",
+                "ID",
+                "Risk",
+                "Area",
+                "Docs",
+                "Doc Exists",
+                "Doc Anchor",
+                "Details Anchor",
+                "Catalog Anchor",
+            ],
+            table_rows=[
+                [
+                    row["priority"],
+                    row["id"],
+                    row["risk"],
+                    row["area"],
+                    row["docs"],
+                    row["docs_exists"],
+                    row["docs_anchor"],
+                    row["details_anchor"],
+                    row["catalog_anchor"],
+                ]
+                for row in missing_sorted
+            ],
+            summary_lines=[
+                f"Total tweaks: {len(entries)}",
+                f"Missing entries: {len(missing_rows)}",
+            ],
+        ),
+        encoding="utf-8",
+    )
 
     print(
         "Wrote "
-        f"{REPORT_MD}, {REPORT_CSV}, {REPORT_MISSING_MD}, {REPORT_MISSING_CSV}, "
-        f"{REPORT_MISSING_PRIORITY_MD}, {REPORT_MISSING_PRIORITY_CSV}"
+        f"{REPORT_MD}, {REPORT_CSV}, {REPORT_HTML}, "
+        f"{REPORT_MISSING_MD}, {REPORT_MISSING_CSV}, {REPORT_MISSING_HTML}, "
+        f"{REPORT_MISSING_PRIORITY_MD}, {REPORT_MISSING_PRIORITY_CSV}, {REPORT_MISSING_PRIORITY_HTML}"
     )
     return 0
 

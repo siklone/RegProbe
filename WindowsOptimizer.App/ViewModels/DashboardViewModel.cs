@@ -1085,14 +1085,20 @@ public sealed class DashboardViewModel : ViewModelBase
                 return;
             }
 
+            var priorityHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.html");
             var priorityMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.md");
             var priorityCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.csv");
+            var fallbackHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.html");
             var fallbackMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.md");
             var fallbackCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.csv");
 
-            var reportPath = File.Exists(priorityMd)
-                ? priorityMd
-                : File.Exists(fallbackMd) ? fallbackMd : string.Empty;
+            var reportPath = File.Exists(priorityHtml)
+                ? priorityHtml
+                : File.Exists(priorityMd)
+                    ? priorityMd
+                    : File.Exists(fallbackHtml)
+                        ? fallbackHtml
+                        : File.Exists(fallbackMd) ? fallbackMd : string.Empty;
 
             DocsCoverageReportPath = reportPath;
 
