@@ -1113,28 +1113,66 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private static bool TryOpenFileAnchor(string url)
     {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return false;
+        }
+
+        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri))
+        {
+            if (!absoluteUri.IsFile)
+            {
+                return false;
+            }
+
+            return TryOpenLocalUri(absoluteUri);
+        }
+
         var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
-        if (hashIndex <= 0)
+        var path = hashIndex > 0 ? url.Substring(0, hashIndex) : url;
+        var anchor = hashIndex > 0 ? url.Substring(hashIndex + 1) : string.Empty;
+
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
         {
             return false;
         }
 
-        var path = url.Substring(0, hashIndex);
-        var anchor = url.Substring(hashIndex + 1);
-        if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(anchor))
+        var fileUri = new Uri(path, UriKind.Absolute);
+        return TryOpenLocalUri(fileUri, anchor);
+    }
+
+    private static bool TryOpenLocalUri(Uri fileUri, string? anchor = null)
+    {
+        if (!fileUri.IsFile)
         {
             return false;
         }
 
-        if (!File.Exists(path))
+        var localPath = fileUri.LocalPath;
+        if (string.IsNullOrWhiteSpace(localPath) || !File.Exists(localPath))
         {
             return false;
         }
 
-        var fileUri = new Uri(path).AbsoluteUri + "#" + Uri.EscapeDataString(anchor);
+        var extension = Path.GetExtension(localPath);
+        var allowAnchor = string.Equals(extension, ".html", StringComparison.OrdinalIgnoreCase)
+                          || string.Equals(extension, ".htm", StringComparison.OrdinalIgnoreCase);
+
+        if (allowAnchor && !string.IsNullOrWhiteSpace(anchor))
+        {
+            var escapedAnchor = Uri.EscapeDataString(anchor);
+            var anchoredUri = new Uri(fileUri.AbsoluteUri + "#" + escapedAnchor, UriKind.Absolute);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = anchoredUri.AbsoluteUri,
+                UseShellExecute = true
+            });
+            return true;
+        }
+
         Process.Start(new ProcessStartInfo
         {
-            FileName = fileUri,
+            FileName = localPath,
             UseShellExecute = true
         });
         return true;
