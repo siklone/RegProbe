@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Text;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.App.ViewModels;
@@ -11,10 +12,13 @@ namespace WindowsOptimizer.App.Services;
 public sealed class TweakDocumentationLinker
 {
     private const string DefaultDocPath = "tweaks/tweaks.md";
+    private static readonly Regex AnchorRegex = new("id\\s*=\\s*\"([^\"]+)\"",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private readonly IReadOnlyDictionary<string, string> _categoryDocMap;
     private readonly string? _docsRoot;
     private readonly string? _repoRoot;
     private readonly IReadOnlyDictionary<string, CatalogEntry> _catalogIndex;
+    private readonly Dictionary<string, HashSet<string>> _docAnchorCache = new(StringComparer.OrdinalIgnoreCase);
 
     public TweakDocumentationLinker(string? docsRoot = null)
     {
@@ -59,8 +63,10 @@ public sealed class TweakDocumentationLinker
             var insertIndex = 0;
             if (!string.IsNullOrWhiteSpace(catalogPath))
             {
-                var catalogUrl = $"{catalogPath}#{tweak.Id}";
-                if (TryInsertReferenceLink(tweak, "Catalog entry", catalogUrl, insertIndex))
+                var catalogHasAnchor = HasDocAnchor(catalogPath, tweak.Id);
+                var catalogUrl = catalogHasAnchor ? $"{catalogPath}#{tweak.Id}" : catalogPath;
+                var catalogTitle = catalogHasAnchor ? "Catalog entry" : "Catalog entry (missing)";
+                if (TryInsertReferenceLink(tweak, catalogTitle, catalogUrl, insertIndex))
                 {
                     insertIndex++;
                 }
@@ -79,10 +85,30 @@ public sealed class TweakDocumentationLinker
                 if (!string.IsNullOrWhiteSpace(entryDocPath))
                 {
                     var entryTitle = BuildDocsTitle(entry.Category, prefix);
-                    var anchoredDocPath = AppendDocAnchor(entryDocPath, tweak.Id);
-                    if (TryInsertReferenceLink(tweak, entryTitle, anchoredDocPath, insertIndex))
+                    var hasAnchor = HasDocAnchor(entryDocPath, tweak.Id);
+                    if (!hasAnchor)
+                    {
+                        entryTitle += " (section missing)";
+                    }
+
+                    var docUrl = hasAnchor ? AppendDocAnchor(entryDocPath, tweak.Id) : entryDocPath;
+                    if (TryInsertReferenceLink(tweak, entryTitle, docUrl, insertIndex))
                     {
                         insertIndex++;
+                    }
+                }
+                else
+                {
+                    var fallbackDocPath = ResolveDocPath(prefix);
+                    if (!string.IsNullOrWhiteSpace(fallbackDocPath))
+                    {
+                        var fallbackTitle = BuildDocsTitle(entry.Category, prefix) + " (file missing)";
+                        var hasAnchor = HasDocAnchor(fallbackDocPath, tweak.Id);
+                        var fallbackUrl = hasAnchor ? AppendDocAnchor(fallbackDocPath, tweak.Id) : fallbackDocPath;
+                        if (TryInsertReferenceLink(tweak, fallbackTitle, fallbackUrl, insertIndex))
+                        {
+                            insertIndex++;
+                        }
                     }
                 }
 
@@ -96,7 +122,14 @@ public sealed class TweakDocumentationLinker
             }
 
             var title = BuildDocsTitle(null, prefix);
-            TryInsertReferenceLink(tweak, title, docPath, insertIndex);
+            var hasFallbackAnchor = HasDocAnchor(docPath, tweak.Id);
+            if (!hasFallbackAnchor)
+            {
+                title += " (section missing)";
+            }
+
+            var fallbackUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, tweak.Id) : docPath;
+            TryInsertReferenceLink(tweak, title, fallbackUrl, insertIndex);
         }
     }
 
@@ -179,6 +212,50 @@ public sealed class TweakDocumentationLinker
         }
 
         return docPath.Contains('#') ? docPath : $"{docPath}#{tweakId}";
+    }
+
+    private bool HasDocAnchor(string docPath, string tweakId)
+    {
+        if (string.IsNullOrWhiteSpace(docPath) || string.IsNullOrWhiteSpace(tweakId))
+        {
+            return false;
+        }
+
+        if (!_docAnchorCache.TryGetValue(docPath, out var anchors))
+        {
+            anchors = LoadDocAnchors(docPath);
+            _docAnchorCache[docPath] = anchors;
+        }
+
+        return anchors.Contains(tweakId);
+    }
+
+    private static HashSet<string> LoadDocAnchors(string docPath)
+    {
+        var anchors = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            if (!File.Exists(docPath))
+            {
+                return anchors;
+            }
+
+            var text = File.ReadAllText(docPath);
+            foreach (Match match in AnchorRegex.Matches(text))
+            {
+                var id = match.Groups.Count > 1 ? match.Groups[1].Value : string.Empty;
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    anchors.Add(id.Trim());
+                }
+            }
+        }
+        catch
+        {
+            // Ignore doc parsing errors; treat as missing anchors.
+        }
+
+        return anchors;
     }
 
     private bool TryInsertReferenceLink(TweakItemViewModel tweak, string title, string url, int index)
