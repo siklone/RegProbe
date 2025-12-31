@@ -115,6 +115,15 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`,
     `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
 
+- **Monitor charts now show Now/Peak/Low for network/disk (2025-12-30)**
+  - Added live stats in the chart headers for better readability.
+  - Files: `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+- **Monitor layout tightened for denser cards (2025-12-31)**
+  - Reduced padding/margins for stat + section cards.
+  - Files: `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
   - Rolled-back filter now uses `WasRolledBack` flag.
@@ -235,7 +244,7 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Apply tweak metadata after load
 - `WindowsOptimizer.App/Resources/Styles.xaml` - Theme-bound resources switched to DynamicResource
 
-## Files Changed This Session (2025-12-30 - Latest)
+## Files Changed This Session (2025-12-30)
 
 - `WindowsOptimizer.App/App.xaml.cs` - Theme init before splash + render yield
 - `WindowsOptimizer.App/StartupWindow.xaml` - Splash copy updated
@@ -256,6 +265,8 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `Docs/tweaks/tweak-catalog.csv` - Description/Risk columns
 - `Docs/tweaks/tweak-catalog.html` - Changes/Risk columns
 - `Docs/*/*.md` - Generated Tweak Index sections with anchors
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk header stats
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk Now/Peak/Low properties
 
 ## Files Changed This Session (2025-12-31)
 
@@ -266,3 +277,6 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/Resources/Colors.xaml` / `WindowsOptimizer.App/Resources/Colors.Light.xaml` - New theme tokens
 - `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Catalog entry anchor links
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Rollback flag + docs anchor open
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk Now/Peak/Low stats
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Network/Disk header stats + tighter spacing
+- `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `HANDOFF_REPORT.md` - Monitor UI status updates

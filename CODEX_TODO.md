@@ -190,11 +190,13 @@
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Beklemede
+**Durum:** 🧪 Kısmen uygulandı (test gerekli)
 
 **Yapılacaklar:**
-- [ ] Daha kompakt kart düzeni + okunabilir grafikler
-- [ ] Top 10 network process + disk IO per process
+- [x] Network/Disk chart header’larına Now/Peak/Low değerleri eklendi
+- [x] Kart padding/margin sıkılaştırıldı (daha kompakt görünüm)
+- [ ] Grafik okunabilirliği genel iyileştirmeler
+- [ ] Top 10 network process + disk IO per process (gerçek network per‑process)
 - [ ] Save butonu ve toolbar’ı modernize et
 
 ---

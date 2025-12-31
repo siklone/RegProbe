@@ -117,15 +117,15 @@
             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="4"/>
         </Style>
 
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <Style x:Key="SectionCardStyle" TargetType="Border" BasedOn="{StaticResource MonitorCardRevealStyle}">
@@ -133,8 +133,8 @@
             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <Style x:Key="HeaderActionButtonStyle" TargetType="Button">
@@ -142,7 +142,7 @@
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="Padding" Value="12,6"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -492,7 +492,27 @@
                 <!-- Network I/O Chart -->
                 <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
                     <StackPanel>
-                        <TextBlock Text="Network I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid>
+                            <TextBlock Text="Network I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="Down: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkDownloadNow, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkDownloadMax, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkDownloadMin, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="Up: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkUploadNow, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkUploadMax, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding NetworkUploadMin, StringFormat={}{0:F1} Mbps}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
                         <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Horizontal Gridlines -->
@@ -557,7 +577,27 @@
                 <!-- Disk I/O Chart -->
                 <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
                     <StackPanel>
-                        <TextBlock Text="Disk I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Grid>
+                            <TextBlock Text="Disk I/O (60s)" Style="{StaticResource SectionHeaderStyle}"/>
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="Read: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskReadNow, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskReadMax, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskReadMin, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="Write: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskWriteNow, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource DangerBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Peak: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskWriteMax, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource DangerBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                    <TextBlock Text="  Low: " Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding DiskWriteMin, StringFormat={}{0:F1} MB/s}" Foreground="{DynamicResource DangerBrush}" FontSize="11" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
                         <Border Height="120" Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="8" Padding="10" ClipToBounds="True">
                             <Grid>
                                 <!-- Horizontal Gridlines -->

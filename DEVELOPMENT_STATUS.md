@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 30, 2025
+**Last Updated:** December 31, 2025
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -425,6 +425,21 @@
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
 
 **Status:** ✅ **IMPLEMENTED** - Needs Windows verification
+
+---
+
+### 16. Monitor Network/Disk Header Stats (Commit: pending)
+**Problem:** Network/Disk charts lacked quick context for current vs peak/low values.
+
+**Solution:**
+- Added live Now/Peak/Low metrics in Network I/O and Disk I/O chart headers (download/upload + read/write).
+- Tightened card padding/margins to keep the Monitor layout denser without losing readability.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
 
 ---
 

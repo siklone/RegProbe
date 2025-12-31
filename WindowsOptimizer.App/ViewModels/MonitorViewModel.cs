@@ -287,6 +287,18 @@ public sealed class MonitorViewModel : ViewModelBase
     public double CpuHistoryMin => CpuHistory.Count > 0 ? CpuHistory.Min() : 0;
     public double RamHistoryMax => RamHistory.Count > 0 ? RamHistory.Max() : 0;
     public double RamHistoryMin => RamHistory.Count > 0 ? RamHistory.Min() : 0;
+    public double NetworkDownloadMax => GetHistoryMax(NetworkDownloadHistory);
+    public double NetworkDownloadMin => GetHistoryMin(NetworkDownloadHistory);
+    public double NetworkDownloadNow => GetHistoryNow(NetworkDownloadHistory);
+    public double NetworkUploadMax => GetHistoryMax(NetworkUploadHistory);
+    public double NetworkUploadMin => GetHistoryMin(NetworkUploadHistory);
+    public double NetworkUploadNow => GetHistoryNow(NetworkUploadHistory);
+    public double DiskReadMax => GetHistoryMax(DiskReadHistory);
+    public double DiskReadMin => GetHistoryMin(DiskReadHistory);
+    public double DiskReadNow => GetHistoryNow(DiskReadHistory);
+    public double DiskWriteMax => GetHistoryMax(DiskWriteHistory);
+    public double DiskWriteMin => GetHistoryMin(DiskWriteHistory);
+    public double DiskWriteNow => GetHistoryNow(DiskWriteHistory);
 
     public double GpuTemp
     {
@@ -381,6 +393,12 @@ public sealed class MonitorViewModel : ViewModelBase
                 var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
                 UpdateHistory(NetworkUploadHistory, totalUpload);
                 UpdateHistory(NetworkDownloadHistory, totalDownload);
+                OnPropertyChanged(nameof(NetworkDownloadMax));
+                OnPropertyChanged(nameof(NetworkDownloadMin));
+                OnPropertyChanged(nameof(NetworkDownloadNow));
+                OnPropertyChanged(nameof(NetworkUploadMax));
+                OnPropertyChanged(nameof(NetworkUploadMin));
+                OnPropertyChanged(nameof(NetworkUploadNow));
 
                 // Update network adapters list
                 UpdateCollection(NetworkAdapters, networkAdapters);
@@ -393,6 +411,12 @@ public sealed class MonitorViewModel : ViewModelBase
                 var totalWrite = disks.Sum(d => d.WriteMBps);
                 UpdateHistory(DiskReadHistory, totalRead);
                 UpdateHistory(DiskWriteHistory, totalWrite);
+                OnPropertyChanged(nameof(DiskReadMax));
+                OnPropertyChanged(nameof(DiskReadMin));
+                OnPropertyChanged(nameof(DiskReadNow));
+                OnPropertyChanged(nameof(DiskWriteMax));
+                OnPropertyChanged(nameof(DiskWriteMin));
+                OnPropertyChanged(nameof(DiskWriteNow));
 
                 // Update disks list
                 UpdateCollection(Disks, disks);
@@ -427,6 +451,21 @@ public sealed class MonitorViewModel : ViewModelBase
     {
         history.RemoveAt(0);
         history.Add(newValue);
+    }
+
+    private static double GetHistoryMax(ObservableCollection<double> history)
+    {
+        return history.Count > 0 ? history.Max() : 0;
+    }
+
+    private static double GetHistoryMin(ObservableCollection<double> history)
+    {
+        return history.Count > 0 ? history.Min() : 0;
+    }
+
+    private static double GetHistoryNow(ObservableCollection<double> history)
+    {
+        return history.Count > 0 ? history[history.Count - 1] : 0;
     }
 
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
