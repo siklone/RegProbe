@@ -435,6 +435,7 @@
 - Added live Now/Peak/Low metrics in Network I/O and Disk I/O chart headers (download/upload + read/write).
 - Tightened card padding/margins to keep the Monitor layout denser without losing readability.
 - Network/Disk lines now share a common scale and show current-value dots for easier comparison.
+- Added scale hints for Network/Disk charts (peak value label).
 
 **Files Changed:**
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`

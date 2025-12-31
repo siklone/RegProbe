@@ -131,6 +131,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
     `WindowsOptimizer.App/ViewModels/ValueConverters.cs`
 
+- **Monitor Network/Disk scale hints (2025-12-31)**
+  - Added peak scale labels under chart headers for quick context.
+  - File: `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
