@@ -32,11 +32,6 @@ public sealed class InverseBoolToVisibilityConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public sealed class NestedMarginConverter : IValueConverter
@@ -48,11 +43,6 @@ public sealed class NestedMarginConverter : IValueConverter
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
@@ -70,11 +60,6 @@ public sealed class NestedBackgroundConverter : IValueConverter
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
@@ -241,7 +226,7 @@ public sealed class SparklinePointsWithMaxConverter : IMultiValueConverter
         return pc;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
@@ -291,7 +276,7 @@ public sealed class SparklineAreaWithMaxConverter : IMultiValueConverter
         return pc;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
@@ -327,7 +312,7 @@ public sealed class LastValueToYWithMaxConverter : IMultiValueConverter
         return canvasHeight - (lastValue / scaleMax * canvasHeight) - 5;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
