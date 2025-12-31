@@ -161,6 +161,8 @@
 - [x] Kart kapalıyken `Current → Target` satırı göster
 - [x] Etki alanı (Registry/Service/Task vb.) kısa etiketle
 - [x] Durum ikonları/badge netleştir (Applied/Mixed/Error)
+- [x] Batch tweaklerde (Service/Task) per-item breakdown Technical Info’da göster
+- [x] Registry batch tweaklerde per-entry breakdown + compact summary satırı
 
 ---
 
@@ -202,6 +204,8 @@
 - [x] Grafik okunabilirliği: grid çizgileri kontrastı artırıldı
 - [x] Grafik okunabilirliği: area fill + glow kontrastı artırıldı
 - [x] Top 10 network process: ETW (TCP+UDP) -> TCP EStats -> IO approx fallback
+- [x] Top 10 disk process: Read/Write I/O (MB/s) listesi eklendi
+- [x] CPU/RAM chart eksenleri 0-100% sabitlendi
 - [x] Save butonu ve toolbar’ı modernize et
 - [x] Top process listelerini daha kompakt + kolon başlıklı hale getir
 

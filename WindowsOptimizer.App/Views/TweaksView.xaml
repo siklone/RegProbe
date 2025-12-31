@@ -703,6 +703,12 @@
 	                                           Opacity="0.85"
 	                                           TextTrimming="CharacterEllipsis"/>
 	                            </Grid>
+                                <TextBlock Text="{Binding BatchSummaryLine}"
+                                           Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           FontSize="9"
+                                           Margin="0,2,0,0"
+                                           TextTrimming="CharacterEllipsis"/>
 	                        </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
@@ -789,6 +795,20 @@
                                          </StackPanel>
                                      </Border>
                                  </UniformGrid>
+                             </StackPanel>
+
+                             <!-- Batch Details -->
+                             <StackPanel Visibility="{Binding HasBatchDetails, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,12">
+                                 <TextBlock Text="{Binding BatchDetailsTitle, StringFormat={}{0} Breakdown}" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="4" Padding="10">
+                                     <ItemsControl ItemsSource="{Binding BatchDetails}">
+                                         <ItemsControl.ItemTemplate>
+                                             <DataTemplate>
+                                                 <TextBlock Text="{Binding}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                             </DataTemplate>
+                                         </ItemsControl.ItemTemplate>
+                                     </ItemsControl>
+                                 </Border>
                              </StackPanel>
 
                              <!-- Priority Calculator -->
@@ -1702,6 +1722,21 @@
                                                                                    FontSize="11" 
                                                                                    FontFamily="Consolas"
                                                                                    TextWrapping="Wrap"/>
+                                                                    </Border>
+                                                                </StackPanel>
+
+                                                                <!-- Batch Details -->
+                                                                <StackPanel Visibility="{Binding HasBatchDetails, Converter={StaticResource BoolToVisibility}}" 
+                                                                            Margin="0,0,0,12">
+                                                                    <TextBlock Text="{Binding BatchDetailsTitle, StringFormat={}{0} Breakdown}" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
+                                                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="4" Padding="10" BorderBrush="{DynamicResource BackgroundDarkBrush}" BorderThickness="1">
+                                                                        <ItemsControl ItemsSource="{Binding BatchDetails}">
+                                                                            <ItemsControl.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Text="{Binding}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                                                                </DataTemplate>
+                                                                            </ItemsControl.ItemTemplate>
+                                                                        </ItemsControl>
                                                                     </Border>
                                                                 </StackPanel>
 

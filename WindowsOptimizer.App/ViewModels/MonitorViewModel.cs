@@ -84,6 +84,7 @@ public sealed class MonitorViewModel : ViewModelBase
             TopProcessesByCpu = new ObservableCollection<ProcessInfo>();
             TopProcessesByRam = new ObservableCollection<ProcessInfo>();
             TopProcessesByNetwork = new ObservableCollection<ProcessInfo>();
+            TopProcessesByDisk = new ObservableCollection<ProcessInfo>();
             NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
             Disks = new ObservableCollection<DiskInfo>();
 
@@ -161,6 +162,7 @@ public sealed class MonitorViewModel : ViewModelBase
             TopProcessesByCpu ??= new ObservableCollection<ProcessInfo>();
             TopProcessesByRam ??= new ObservableCollection<ProcessInfo>();
             TopProcessesByNetwork ??= new ObservableCollection<ProcessInfo>();
+            TopProcessesByDisk ??= new ObservableCollection<ProcessInfo>();
             NetworkAdapters ??= new ObservableCollection<NetworkAdapterInfo>();
             Disks ??= new ObservableCollection<DiskInfo>();
 
@@ -221,6 +223,14 @@ public sealed class MonitorViewModel : ViewModelBase
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.IoMbps:F2},{proc.Threads},{proc.Handles}");
             }
 
+            csv.AppendLine();
+            csv.AppendLine("Top Processes by Disk I/O");
+            csv.AppendLine("Name,PID,MBps,Threads,Handles");
+            foreach (var proc in TopProcessesByDisk)
+            {
+                csv.AppendLine($"{proc.Name},{proc.Pid},{proc.DiskMBps:F2},{proc.Threads},{proc.Handles}");
+            }
+
             File.WriteAllText(filepath, csv.ToString());
             System.Diagnostics.Debug.WriteLine($"Metrics exported to: {filepath}");
         }
@@ -254,6 +264,7 @@ public sealed class MonitorViewModel : ViewModelBase
     public ObservableCollection<ProcessInfo> TopProcessesByCpu { get; }
     public ObservableCollection<ProcessInfo> TopProcessesByRam { get; }
     public ObservableCollection<ProcessInfo> TopProcessesByNetwork { get; }
+    public ObservableCollection<ProcessInfo> TopProcessesByDisk { get; }
     public ObservableCollection<NetworkAdapterInfo> NetworkAdapters { get; }
     public ObservableCollection<DiskInfo> Disks { get; }
 
@@ -301,12 +312,14 @@ public sealed class MonitorViewModel : ViewModelBase
     public double CpuHistoryMin => CpuHistory.Count > 0 ? CpuHistory.Min() : 0;
     public double RamHistoryMax => RamHistory.Count > 0 ? RamHistory.Max() : 0;
     public double RamHistoryMin => RamHistory.Count > 0 ? RamHistory.Min() : 0;
-    public double CpuHistoryMid => CpuHistoryMax / 2.0;
-    public double CpuHistoryQuarter => CpuHistoryMax * 0.25;
-    public double CpuHistoryThreeQuarter => CpuHistoryMax * 0.75;
-    public double RamHistoryMid => RamHistoryMax / 2.0;
-    public double RamHistoryQuarter => RamHistoryMax * 0.25;
-    public double RamHistoryThreeQuarter => RamHistoryMax * 0.75;
+    public double CpuHistoryScaleMax => 100.0;
+    public double CpuHistoryScaleThreeQuarter => 75.0;
+    public double CpuHistoryScaleMid => 50.0;
+    public double CpuHistoryScaleQuarter => 25.0;
+    public double RamHistoryScaleMax => 100.0;
+    public double RamHistoryScaleThreeQuarter => 75.0;
+    public double RamHistoryScaleMid => 50.0;
+    public double RamHistoryScaleQuarter => 25.0;
     public double NetworkDownloadMax => GetHistoryMax(NetworkDownloadHistory);
     public double NetworkDownloadMin => GetHistoryMin(NetworkDownloadHistory);
     public double NetworkDownloadNow => GetHistoryNow(NetworkDownloadHistory);
@@ -406,14 +419,8 @@ public sealed class MonitorViewModel : ViewModelBase
             // Notify Min/Max updates for chart labels
             OnPropertyChanged(nameof(CpuHistoryMax));
             OnPropertyChanged(nameof(CpuHistoryMin));
-            OnPropertyChanged(nameof(CpuHistoryMid));
-            OnPropertyChanged(nameof(CpuHistoryQuarter));
-            OnPropertyChanged(nameof(CpuHistoryThreeQuarter));
             OnPropertyChanged(nameof(RamHistoryMax));
             OnPropertyChanged(nameof(RamHistoryMin));
-            OnPropertyChanged(nameof(RamHistoryMid));
-            OnPropertyChanged(nameof(RamHistoryQuarter));
-            OnPropertyChanged(nameof(RamHistoryThreeQuarter));
 
             // Update network and disk I/O history
             if (_networkMonitor != null)
@@ -462,6 +469,7 @@ public sealed class MonitorViewModel : ViewModelBase
                 UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
                 UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
                 UpdateCollection(TopProcessesByNetwork, _processMonitor.GetTopProcessesByNetwork(10));
+                UpdateCollection(TopProcessesByDisk, _processMonitor.GetTopProcessesByDisk(10));
                 UpdateNetworkProcessMode();
 
                 // Cleanup dead process entries

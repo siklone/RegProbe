@@ -164,11 +164,36 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
     `WindowsOptimizer.App/Views/MonitorView.xaml`
 
+- **Monitor disk I/O process list + fixed CPU/RAM axis scaling (2025-12-31)**
+  - Added Top 10 processes by disk I/O (read + write bytes) with MB/s column.
+  - CPU/RAM charts now scale to 0-100% for clearer axis labels.
+  - Files: `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/Views/MonitorView.xaml`
+
 - **Tweak status badges clarified (2025-12-31)**
   - Status text badge added near tweak names (compact + expanded).
   - Mixed state detected from current value and surfaced with icon/color.
   - Files: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
     `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+- **Batch tweak breakdown in Technical Info (2025-12-31)**
+  - Detect messages with `Services:` or `Tasks:` now populate a per-item list in Technical Info.
+  - Helps explain Mixed states (which items are missing/enabled).
+  - Files: `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+- **Registry batch breakdown + compact summary (2025-12-31)**
+  - Registry batch tweaks now include per-entry details (`Entries:`) with current → target values.
+  - Collapsed cards show a compact "matched / missing" summary when batch details exist.
+  - Files: `WindowsOptimizer.Engine/Tweaks/RegistryValueBatchTweak.cs`,
+    `WindowsOptimizer.Engine/Tweaks/RegistryValueSetTweak.cs`,
+    `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+- **Non-essential services list expanded (2025-12-31)**
+  - Added Bluetooth + print-related services to the batch list so Mixed state is explicit.
+  - File: `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs`
 
 - **Startup scan + rolled-back filter fix (2025-12-31)**
   - Auto Detect on app launch with a blocking overlay.
@@ -329,6 +354,13 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `CODEX_TODO.md`, `DEVELOPMENT_STATUS.md`, `HANDOFF_REPORT.md` - Monitor UI status updates
 - `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Mixed status detection + status badges
 - `WindowsOptimizer.App/Views/TweaksView.xaml` - Status text badges near tweak names
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Batch detail extraction for services/tasks
+- `WindowsOptimizer.App/Views/TweaksView.xaml` - Batch breakdown section in Technical Info
+- `WindowsOptimizer.Engine/Tweaks/RegistryValueBatchTweak.cs` - Registry batch detail lines (Entries)
+- `WindowsOptimizer.Engine/Tweaks/RegistryValueSetTweak.cs` - Registry batch detail lines (Entries)
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs` - Batch summary line for collapsed cards
+- `WindowsOptimizer.App/Views/TweaksView.xaml` - Collapsed summary line + registry breakdown
+- `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` - Expanded non-essential services list
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Header toolbar modernization (Live pill + Save)
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Compact top process tables (headers + icon actions)
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network/Disk mid-scale values
@@ -341,3 +373,6 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs` - Network mode selection + TCP EStats fallback
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Network process mode title/subtitle
 - `WindowsOptimizer.App/Views/MonitorView.xaml` - Network section binds to mode labels
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs` - Disk I/O process list support (read/write MB/s)
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Disk process collection + export
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Disk process list + CPU/RAM fixed axis labels

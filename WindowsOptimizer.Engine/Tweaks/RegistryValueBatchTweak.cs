@@ -118,10 +118,15 @@ public sealed class RegistryValueBatchTweak : ITweak
 
             _hasDetected = true;
             var detectedCount = _snapshots.Values.Count(snapshot => snapshot.Exists);
+            var missingCount = _entries.Count - detectedCount;
             var status = matchingTargets == _entries.Count ? TweakStatus.Applied : TweakStatus.Detected;
-            var message = status == TweakStatus.Applied
+            var summary = status == TweakStatus.Applied
                 ? $"All {_entries.Count} values already match the desired configuration."
-                : $"Detected {detectedCount} of {_entries.Count} values (matches: {matchingTargets}).";
+                : $"Detected {detectedCount} of {_entries.Count} values (matches: {matchingTargets}, missing: {missingCount}).";
+            var details = BuildEntryDetails(_entries, _snapshots);
+            var message = string.IsNullOrWhiteSpace(details)
+                ? summary
+                : $"{summary}\nEntries:\n{details}";
             return new TweakResult(status, message, DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
@@ -295,6 +300,65 @@ public sealed class RegistryValueBatchTweak : ITweak
         }
 
         return value.ToString() ?? "<null>";
+    }
+
+    private static string BuildEntryDetails(
+        IReadOnlyList<EntryState> entries,
+        IReadOnlyDictionary<RegistryValueReference, RegistryValueSnapshot> snapshots)
+    {
+        var lines = new List<string>();
+
+        foreach (var entry in entries
+            .OrderBy(e => e.Reference.KeyPath, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(e => e.Reference.ValueName, StringComparer.OrdinalIgnoreCase))
+        {
+            var referenceLabel = FormatReference(entry.Reference);
+            if (!snapshots.TryGetValue(entry.Reference, out var snapshot))
+            {
+                lines.Add($"- {referenceLabel}: unknown");
+                continue;
+            }
+
+            if (!snapshot.Exists || snapshot.Value is null)
+            {
+                lines.Add($"- {referenceLabel}: missing");
+                continue;
+            }
+
+            var currentValue = snapshot.Value.ToObject();
+            lines.Add($"- {referenceLabel}: {FormatValue(currentValue)} -> {FormatValue(entry.TargetValue)}");
+        }
+
+        return lines.Count == 0 ? string.Empty : string.Join("\n", lines);
+    }
+
+    private static string FormatReference(RegistryValueReference reference)
+    {
+        var keyPath = (reference.KeyPath ?? string.Empty).Trim().TrimStart('\\').TrimEnd('\\');
+        var valueName = string.IsNullOrWhiteSpace(reference.ValueName) ? "(Default)" : reference.ValueName;
+
+        if (keyPath.StartsWith("HKEY_", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCR\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKU\\", StringComparison.OrdinalIgnoreCase)
+            || keyPath.StartsWith("HKCC\\", StringComparison.OrdinalIgnoreCase))
+        {
+            return string.IsNullOrEmpty(keyPath) ? valueName : $"{keyPath}\\{valueName}";
+        }
+
+        var hive = reference.Hive switch
+        {
+            RegistryHive.LocalMachine => "HKLM",
+            RegistryHive.CurrentUser => "HKCU",
+            RegistryHive.ClassesRoot => "HKCR",
+            RegistryHive.Users => "HKU",
+            RegistryHive.CurrentConfig => "HKCC",
+            _ => reference.Hive.ToString()
+        };
+
+        var fullPath = string.IsNullOrEmpty(keyPath) ? hive : $"{hive}\\{keyPath}";
+        return $"{fullPath}\\{valueName}";
     }
 
     private sealed record EntryState(

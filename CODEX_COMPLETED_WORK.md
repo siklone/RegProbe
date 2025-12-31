@@ -73,6 +73,7 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] `CompositeTweak` - Birleşik tweak
 - [x] `FileRenameTweak` - Dosya yeniden adlandırma
 - [x] `CommandTweak` - Komut çalıştırma
+- [x] **Non-essential services list expanded** - Bluetooth + print servisleri eklendi
 
 ### TweakProvider'lar (12 Adet)
 - [x] `AudioTweakProvider` - Ses ayarları
@@ -146,6 +147,8 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] **İşlem Butonları** - Detect/Apply/Verify/Rollback
 - [x] **Tooltip'ler** - Batch aksiyon açıklamaları
 - [x] **Link Açma** - Tweak bağlantıları
+- [x] **Batch Breakdown** - Service/Task listesi Technical Info'da görünür
+- [x] **Registry Breakdown** - Registry batch per-entry detay + özet satırı
 
 ### Monitor Sayfası
 - [x] **CPU Göstergesi** - Anlık yüzde

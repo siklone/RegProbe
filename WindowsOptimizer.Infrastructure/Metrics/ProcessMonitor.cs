@@ -11,6 +11,7 @@ public sealed class ProcessMonitor
     private Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _previousCpuUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousIoUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousNetworkUsage = new();
+    private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousDiskUsage = new();
     private NetworkEtwSampler? _networkSampler;
 
     public NetworkProcessMode NetworkMode { get; private set; } = NetworkProcessMode.ApproximateIo;
@@ -112,6 +113,41 @@ public sealed class ProcessMonitor
         }
 
         return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
+    }
+
+    public List<ProcessInfo> GetTopProcessesByDisk(int count = 10)
+    {
+        var processes = new List<ProcessInfo>();
+        var currentTime = DateTime.UtcNow;
+
+        foreach (var process in Process.GetProcesses())
+        {
+            try
+            {
+                if (!TryGetDiskBytes(process, out var totalBytes))
+                {
+                    continue;
+                }
+
+                var diskMBps = CalculateDiskMBps(process.Id, totalBytes, currentTime);
+
+                processes.Add(new ProcessInfo
+                {
+                    Name = process.ProcessName,
+                    Pid = process.Id,
+                    DiskMBps = diskMBps,
+                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
+                    Threads = process.Threads.Count,
+                    Handles = process.HandleCount
+                });
+            }
+            catch
+            {
+                // Process may have exited or is not accessible
+            }
+        }
+
+        return processes.OrderByDescending(p => p.DiskMBps).Take(count).ToList();
     }
 
     public List<ProcessInfo> GetTopProcessesByNetwork(int count = 10)
@@ -236,6 +272,27 @@ public sealed class ProcessMonitor
         return 0;
     }
 
+    private double CalculateDiskMBps(int pid, ulong currentTotalBytes, DateTime currentTime)
+    {
+        if (_previousDiskUsage.TryGetValue(pid, out var previous))
+        {
+            var seconds = (currentTime - previous.Time).TotalSeconds;
+            var diffBytes = currentTotalBytes >= previous.TotalBytes ? currentTotalBytes - previous.TotalBytes : 0;
+
+            _previousDiskUsage[pid] = (currentTime, currentTotalBytes);
+
+            if (seconds > 0)
+            {
+                return (diffBytes / seconds) / (1024.0 * 1024.0);
+            }
+
+            return 0;
+        }
+
+        _previousDiskUsage[pid] = (currentTime, currentTotalBytes);
+        return 0;
+    }
+
     private static bool TryGetIoBytes(Process process, out ulong totalBytes)
     {
         totalBytes = 0;
@@ -251,6 +308,24 @@ public sealed class ProcessMonitor
         }
 
         totalBytes = counters.ReadTransferCount + counters.WriteTransferCount + counters.OtherTransferCount;
+        return true;
+    }
+
+    private static bool TryGetDiskBytes(Process process, out ulong totalBytes)
+    {
+        totalBytes = 0;
+
+        if (process.HasExited)
+        {
+            return false;
+        }
+
+        if (!GetProcessIoCounters(process.Handle, out var counters))
+        {
+            return false;
+        }
+
+        totalBytes = counters.ReadTransferCount + counters.WriteTransferCount;
         return true;
     }
 
@@ -274,6 +349,12 @@ public sealed class ProcessMonitor
         foreach (var pid in deadNetworkPids)
         {
             _previousNetworkUsage.Remove(pid);
+        }
+
+        var deadDiskPids = _previousDiskUsage.Keys.Where(pid => !currentPids.Contains(pid)).ToList();
+        foreach (var pid in deadDiskPids)
+        {
+            _previousDiskUsage.Remove(pid);
         }
 
         _networkSampler?.PruneToAlivePids(currentPids);
@@ -717,10 +798,12 @@ public sealed class ProcessInfo
     public double CpuPercent { get; set; }
     public double RamMb { get; set; }
     public double IoMbps { get; set; }
+    public double DiskMBps { get; set; }
     public int Threads { get; set; }
     public int Handles { get; set; }
     public string Status { get; set; } = "Running";
 
     public string RamFormatted => $"{RamMb:F1} MB";
     public string IoFormatted => $"{IoMbps:F2} Mbps";
+    public string DiskFormatted => $"{DiskMBps:F2} MB/s";
 }

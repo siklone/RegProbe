@@ -223,7 +223,68 @@
 
 ---
 
-### 11. ElevatedHost Discovery + Missing Host Warning (Commits: `46abd80`, `969700f`)
+### 11. Monitor Disk I/O Process List + Fixed CPU/RAM Axis (Commit: TBD)
+**Problem:** Monitor lacked disk I/O per-process visibility, and CPU/RAM charts scaled to peak values (e.g., 68%) instead of a fixed 100% axis, confusing users.
+
+**Solution:**
+- Added Top 10 processes by disk I/O (read + write bytes) with MB/s display.
+- CPU/RAM chart axes now use a fixed 0-100% scale while keeping Peak/Low/Now for accuracy.
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Status:** ✅ **IMPLEMENTED**
+
+---
+
+### 12. Batch Tweak Breakdown in Technical Info (Commit: TBD)
+**Problem:** Mixed state was hard to interpret because batch tweaks only showed a summary without per-item status.
+
+**Solution:**
+- Parse Detect messages for `Services:` and `Tasks:` sections.
+- Surface per-item breakdown in the Technical Info tab for quick inspection.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+**Status:** ✅ **IMPLEMENTED**
+
+---
+
+### 13. Registry Batch Breakdown + Compact Summary (Commit: TBD)
+**Problem:** Registry batch tweaks did not expose per-entry status, and collapsed cards lacked a quick "matched/missing" hint.
+
+**Solution:**
+- Registry batch detect messages now include per-entry details with current → target values.
+- Collapsed tweak cards show a compact "matched / missing" summary when batch details are available.
+
+**Files Changed:**
+- `WindowsOptimizer.Engine/Tweaks/RegistryValueBatchTweak.cs`
+- `WindowsOptimizer.Engine/Tweaks/RegistryValueSetTweak.cs`
+- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+**Status:** ✅ **IMPLEMENTED**
+
+---
+
+### 14. Non-Essential Services List Expansion (Commit: TBD)
+**Problem:** The "Disable Non-Essential Services" tweak mentioned Print Spooler/Bluetooth but did not include those services, leading to confusing Mixed states.
+
+**Solution:**
+- Added Bluetooth and print-related service names (including per-user patterns) to the batch list.
+
+**Files Changed:**
+- `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs`
+
+**Status:** ✅ **IMPLEMENTED**
+
+---
+
+### 15. ElevatedHost Discovery + Missing Host Warning (Commits: `46abd80`, `969700f`)
 **Problem:** When running via `dotnet run`, the app could fail to find the ElevatedHost executable and all admin-required tweaks would fail.
 
 **Solution:**
@@ -241,7 +302,7 @@
 
 ---
 
-### 12. Legacy Tweak Catalog Restore + Metadata Ordering (Commit: pending)
+### 16. Legacy Tweak Catalog Restore + Metadata Ordering (Commit: pending)
 **Problem:** Total tweak count dropped after provider refactor; several tweaks disappeared from the UI.
 
 **Solution:**
@@ -260,7 +321,7 @@
 
 ---
 
-### 13. Startup Theme Flicker + Splash Render (Commit: `244f99d`)
+### 17. Startup Theme Flicker + Splash Render (Commit: `244f99d`)
 **Problem:** Splash could appear in dark theme then switch to light, and scanning could stall first render.
 
 **Solution:**
@@ -276,7 +337,7 @@
 
 ---
 
-### 14. Detect Runs Off UI Thread (Commit: `244f99d`)
+### 18. Detect Runs Off UI Thread (Commit: `244f99d`)
 **Problem:** Detect could stall the UI when many tweaks are scanned.
 
 **Solution:**
@@ -289,7 +350,7 @@
 
 ---
 
-### 15. Monitor Card Reveal Animation + Source Links (Commits: `4b4a451`, `ce6def0`)
+### 19. Monitor Card Reveal Animation + Source Links (Commits: `4b4a451`, `ce6def0`)
 **Problem:** Monitor visuals felt static and tweak sources were hard to find.
 
 **Solution:**

@@ -75,6 +75,9 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _isSelected;
     private bool _isFavorite;
     private readonly RelayCommand _toggleFavoriteCommand;
+    private readonly ObservableCollection<string> _batchDetails = new();
+    private string _batchDetailsTitle = "Details";
+    private string _batchSummaryLine = string.Empty;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -109,6 +112,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
 
         _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
+        _batchDetails.CollectionChanged += (_, __) => OnPropertyChanged(nameof(HasBatchDetails));
 
         TryPopulateTechnicalInfo();
     }
@@ -336,7 +340,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public string CompactInfoTooltip => $"{ImpactAreaLabel}: {CompactInfoLine}";
+    public string CompactInfoTooltip
+    {
+        get
+        {
+            var baseText = $"{ImpactAreaLabel}: {CompactInfoLine}";
+            if (HasBatchSummaryLine)
+            {
+                return $"{baseText}\n{BatchSummaryLine}";
+            }
+
+            return baseText;
+        }
+    }
 
     public bool IsRecommended
     {
@@ -363,6 +379,31 @@ public sealed class TweakItemViewModel : ViewModelBase
         get => _sparklinePoints;
         set => SetProperty(ref _sparklinePoints, value);
     }
+
+    public ObservableCollection<string> BatchDetails => _batchDetails;
+
+    public string BatchDetailsTitle
+    {
+        get => _batchDetailsTitle;
+        private set => SetProperty(ref _batchDetailsTitle, value);
+    }
+
+    public bool HasBatchDetails => _batchDetails.Count > 0;
+
+    public string BatchSummaryLine
+    {
+        get => _batchSummaryLine;
+        private set
+        {
+            if (SetProperty(ref _batchSummaryLine, value))
+            {
+                OnPropertyChanged(nameof(HasBatchSummaryLine));
+                OnPropertyChanged(nameof(CompactInfoTooltip));
+            }
+        }
+    }
+
+    public bool HasBatchSummaryLine => !string.IsNullOrWhiteSpace(_batchSummaryLine);
 
     public void UpdateMetric(double value)
     {
@@ -1297,8 +1338,11 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         if (string.IsNullOrWhiteSpace(message))
         {
+            ClearBatchDetails();
             return;
         }
+
+        TryUpdateBatchDetailsFromMessage(message);
 
         if (message.Contains("Value not set", StringComparison.OrdinalIgnoreCase))
         {
@@ -1339,6 +1383,18 @@ public sealed class TweakItemViewModel : ViewModelBase
                 trimmed = trimmed[..tasksIndex];
             }
 
+            var entriesIndex = trimmed.IndexOf("Entries", StringComparison.OrdinalIgnoreCase);
+            if (entriesIndex >= 0)
+            {
+                trimmed = trimmed[..entriesIndex];
+            }
+
+            var valuesIndex = trimmed.IndexOf("Values", StringComparison.OrdinalIgnoreCase);
+            if (valuesIndex >= 0)
+            {
+                trimmed = trimmed[..valuesIndex];
+            }
+
             var periodIndex = trimmed.IndexOf('.');
             if (periodIndex >= 0)
             {
@@ -1359,6 +1415,220 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         value = message[(index + prefix.Length)..];
+        return true;
+    }
+
+    private void TryUpdateBatchDetailsFromMessage(string message)
+    {
+        if (!TryExtractBatchDetails(message, out var title, out var lines))
+        {
+            ClearBatchDetails();
+            return;
+        }
+
+        BatchDetailsTitle = title;
+        _batchDetails.Clear();
+        foreach (var line in lines)
+        {
+            _batchDetails.Add(line);
+        }
+
+        BatchSummaryLine = BuildBatchSummary(title, lines);
+    }
+
+    private void ClearBatchDetails()
+    {
+        if (_batchDetails.Count == 0)
+        {
+            BatchSummaryLine = string.Empty;
+            return;
+        }
+
+        _batchDetails.Clear();
+        BatchSummaryLine = string.Empty;
+    }
+
+    private static bool TryExtractBatchDetails(string message, out string title, out List<string> lines)
+    {
+        lines = new List<string>();
+        title = string.Empty;
+
+        var markers = new[]
+        {
+            ("Services:", "Services"),
+            ("Tasks:", "Tasks"),
+            ("Entries:", "Registry Values"),
+            ("Values:", "Registry Values")
+        };
+
+        foreach (var (marker, markerTitle) in markers)
+        {
+            var index = message.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+            if (index < 0)
+            {
+                continue;
+            }
+
+            var start = index + marker.Length;
+            if (start >= message.Length)
+            {
+                continue;
+            }
+
+            var detailText = message[start..];
+            var parsedLines = detailText
+                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .Where(line => line.Length > 0)
+                .Select(line => line.StartsWith("-", StringComparison.Ordinal) ? line : $"- {line}")
+                .ToList();
+
+            if (parsedLines.Count == 0)
+            {
+                continue;
+            }
+
+            title = markerTitle;
+            lines = parsedLines;
+            return true;
+        }
+
+        return false;
+    }
+
+    private static string BuildBatchSummary(string title, IReadOnlyList<string> lines)
+    {
+        if (lines.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        var matched = 0;
+        var missing = 0;
+        var mismatched = 0;
+        var errors = 0;
+        var unknown = 0;
+
+        foreach (var line in lines)
+        {
+            var lower = line.ToLowerInvariant();
+            if (lower.Contains("missing"))
+            {
+                missing++;
+                continue;
+            }
+
+            if (lower.Contains("error"))
+            {
+                errors++;
+                continue;
+            }
+
+            if (lower.Contains("unknown"))
+            {
+                unknown++;
+                continue;
+            }
+
+            if (title.Equals("Tasks", StringComparison.OrdinalIgnoreCase))
+            {
+                if (lower.Contains("disabled"))
+                {
+                    matched++;
+                }
+                else if (lower.Contains("enabled"))
+                {
+                    mismatched++;
+                }
+                else
+                {
+                    unknown++;
+                }
+
+                continue;
+            }
+
+            if (TryEvaluateArrowMatch(line, out var isMatch))
+            {
+                if (isMatch)
+                {
+                    matched++;
+                }
+                else
+                {
+                    mismatched++;
+                }
+            }
+            else
+            {
+                unknown++;
+            }
+        }
+
+        var parts = new List<string>
+        {
+            $"{matched} matched",
+            $"{missing} missing"
+        };
+
+        if (mismatched > 0)
+        {
+            parts.Add($"{mismatched} mismatched");
+        }
+
+        if (errors > 0)
+        {
+            parts.Add($"{errors} error{(errors == 1 ? string.Empty : "s")}");
+        }
+
+        if (unknown > 0)
+        {
+            parts.Add($"{unknown} unknown");
+        }
+
+        return string.Join(" / ", parts);
+    }
+
+    private static bool TryEvaluateArrowMatch(string line, out bool isMatch)
+    {
+        isMatch = false;
+
+        var arrowIndex = line.IndexOf('→');
+        var arrowLength = 1;
+        if (arrowIndex < 0)
+        {
+            arrowIndex = line.IndexOf("->", StringComparison.Ordinal);
+            arrowLength = 2;
+        }
+
+        if (arrowIndex < 0)
+        {
+            return false;
+        }
+
+        var colonIndex = line.IndexOf(':');
+        var currentStart = colonIndex >= 0 ? colonIndex + 1 : 0;
+        if (currentStart >= arrowIndex)
+        {
+            return false;
+        }
+
+        var current = line[currentStart..arrowIndex].Trim();
+        var target = line[(arrowIndex + arrowLength)..].Trim();
+        if (string.IsNullOrWhiteSpace(current) || string.IsNullOrWhiteSpace(target))
+        {
+            return false;
+        }
+
+        var currentValue = current.Split('(')[0].Trim();
+        var targetValue = target.Split('(')[0].Trim();
+        if (string.IsNullOrWhiteSpace(currentValue) || string.IsNullOrWhiteSpace(targetValue))
+        {
+            return false;
+        }
+
+        isMatch = currentValue.Equals(targetValue, StringComparison.OrdinalIgnoreCase)
+            || currentValue.Contains(targetValue, StringComparison.OrdinalIgnoreCase);
         return true;
     }
 

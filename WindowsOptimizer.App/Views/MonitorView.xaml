@@ -442,10 +442,10 @@
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="{Binding CpuHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="{Binding CpuHistoryThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="{Binding CpuHistoryMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="{Binding CpuHistoryQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryScaleMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding CpuHistoryScaleThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryScaleMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="{Binding CpuHistoryScaleQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
                                     <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
@@ -460,14 +460,14 @@
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
-                                                <Polygon Points="{Binding CpuHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
+                                                <Polygon Points="{Binding CpuHistory, Converter={StaticResource SparklineAreaConverter}}"
                                                          Fill="{StaticResource CpuAreaGradient}"/>
                                             </Canvas>
                                         </Viewbox>
                                         <!-- Sparkline with glow -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
-                                                <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
+                                                <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}}"
                                                           Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                           Effect="{StaticResource ChartGlowCpu}"/>
                                             </Canvas>
@@ -476,7 +476,7 @@
                                         <Canvas ClipToBounds="False">
                                             <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}"
                                                      Canvas.Right="0"
-                                                     Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
+                                                     Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}}">
                                                 <Ellipse.Effect>
                                                     <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                                 </Ellipse.Effect>
@@ -507,10 +507,10 @@
                             <Grid>
                                 <!-- Y-Axis Labels -->
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="30" Margin="0,0,5,0">
-                                    <TextBlock Text="{Binding RamHistoryMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
-                                    <TextBlock Text="{Binding RamHistoryThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
-                                    <TextBlock Text="{Binding RamHistoryMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
-                                    <TextBlock Text="{Binding RamHistoryQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryScaleMax, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding RamHistoryScaleThreeQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Top" Margin="0,18,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryScaleMid, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Center" Margin="0,8,0,0"/>
+                                    <TextBlock Text="{Binding RamHistoryScaleQuarter, StringFormat={}{0:F0}%}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="8" VerticalAlignment="Center" Margin="0,16,0,0"/>
                                     <TextBlock Text="0%" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="9" VerticalAlignment="Bottom" Margin="0,8,0,0"/>
                                 </StackPanel>
                                 <!-- Chart Area with Gridlines -->
@@ -525,14 +525,14 @@
                                         <!-- Area Fill -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
-                                                <Polygon Points="{Binding RamHistory, Converter={StaticResource SparklineAreaConverter}, ConverterParameter=auto}"
+                                                <Polygon Points="{Binding RamHistory, Converter={StaticResource SparklineAreaConverter}}"
                                                          Fill="{StaticResource RamAreaGradient}"/>
                                             </Canvas>
                                         </Viewbox>
                                         <!-- Sparkline with glow -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
-                                                <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}, ConverterParameter=auto}"
+                                                <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}}"
                                                           Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                                           Effect="{StaticResource ChartGlowRam}"/>
                                             </Canvas>
@@ -541,7 +541,7 @@
                                         <Canvas ClipToBounds="False">
                                             <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}"
                                                      Canvas.Right="0"
-                                                     Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}, ConverterParameter=auto}">
+                                                     Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}}">
                                                 <Ellipse.Effect>
                                                     <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
                                                 </Ellipse.Effect>
@@ -1086,6 +1086,92 @@
                                         </StackPanel>
                                         <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
                                             <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
+                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                        </TextBlock>
+                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
+                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Kill process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource DangerBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Suspend process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource CautionBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                    Margin="6,0,0,0">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Resume process"
+                                                    Style="{StaticResource ProcessActionButtonStyle}"
+                                                    Background="{DynamicResource SuccessBrush}"
+                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                    Margin="6,0,0,0">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Top Disk Processes -->
+            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Top 10 Processes by Disk I/O" Style="{StaticResource SectionHeaderStyle}"/>
+                    <TextBlock Text="Read + write throughput from process I/O counters."
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               FontSize="11"
+                               Margin="0,0,0,8"/>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
+                        <TextBlock Grid.Column="1" Text="Disk I/O" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding TopProcessesByDisk}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
+                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
+                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource CautionBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
+                                            <Run Text="{Binding DiskMBps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" MB/s"/>
                                         </TextBlock>
                                         <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
                                             <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>

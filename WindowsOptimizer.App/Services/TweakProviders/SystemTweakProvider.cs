@@ -112,7 +112,15 @@ public sealed class SystemTweakProvider : BaseTweakProvider
                 "dmwappushservice", // WAP Push Message Routing Service
                 "SysMain",          // Superfetch/SysMain (can be risky on SSDs)
                 "WSearch",          // Windows Search
-                "WerSvc"            // Windows Error Reporting Service
+                "WerSvc",           // Windows Error Reporting Service
+                "Spooler",          // Print Spooler
+                "PrintNotify",      // Printer Notifications
+                "PrintWorkflowUserSvc_*", // Per-user print workflow
+                "PrintDeviceConfigurationService", // Printer device configuration
+                "PrintScanBrokerService", // Print/Scan broker
+                "bthserv",          // Bluetooth Support Service
+                "BluetoothUserService_*", // Per-user Bluetooth service
+                "BTAGService"       // Bluetooth Audio Gateway
             },
             ServiceStartMode.Disabled);
 
