@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -76,6 +77,10 @@ public partial class MainWindow : Window
         else
         {
             // Actually close - dispose tray icon
+            if (DataContext is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
             TrayIcon.Dispose();
         }
 

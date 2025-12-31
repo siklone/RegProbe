@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
 
-public sealed class MainViewModel : ViewModelBase
+public sealed class MainViewModel : ViewModelBase, IDisposable
 {
     private NavigationItem? _selectedNavigationItem;
     private ViewModelBase? _currentViewModel;
@@ -168,6 +169,17 @@ public sealed class MainViewModel : ViewModelBase
         // Check for pending rollbacks from previous crashes
         Task.Run(CheckPendingRollbacksAsync);
 
+    }
+
+    public void Dispose()
+    {
+        foreach (var item in NavigationItems)
+        {
+            if (item.ViewModel is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
     }
 
     public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)

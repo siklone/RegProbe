@@ -6,13 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
-public sealed class ProcessMonitor
+public sealed class ProcessMonitor : IDisposable
 {
     private Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _previousCpuUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousIoUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousNetworkUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousDiskUsage = new();
     private NetworkEtwSampler? _networkSampler;
+    private bool _disposed;
 
     public NetworkProcessMode NetworkMode { get; private set; } = NetworkProcessMode.ApproximateIo;
 
@@ -21,6 +22,22 @@ public sealed class ProcessMonitor
         ApproximateIo,
         TcpOnly,
         TcpUdpEtw
+    }
+
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        _disposed = true;
+        _networkSampler?.Dispose();
+        _networkSampler = null;
+        _previousCpuUsage.Clear();
+        _previousIoUsage.Clear();
+        _previousNetworkUsage.Clear();
+        _previousDiskUsage.Clear();
     }
 
     public List<ProcessInfo> GetTopProcessesByCpu(int count = 10)

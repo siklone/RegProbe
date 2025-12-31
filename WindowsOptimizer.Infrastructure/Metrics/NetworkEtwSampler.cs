@@ -8,7 +8,7 @@ using Microsoft.Diagnostics.Tracing.Session;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
-internal sealed class NetworkEtwSampler
+internal sealed class NetworkEtwSampler : IDisposable
 {
     private readonly ConcurrentDictionary<int, ulong> _bytesByPid = new();
     private readonly object _sync = new();
@@ -101,6 +101,32 @@ internal sealed class NetworkEtwSampler
             if (!alivePids.Contains(pid))
             {
                 _bytesByPid.TryRemove(pid, out _);
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        lock (_sync)
+        {
+            if (_session is null)
+            {
+                _isRunning = false;
+                return;
+            }
+
+            try
+            {
+                _session.Dispose();
+            }
+            catch
+            {
+                // Ignore shutdown errors.
+            }
+            finally
+            {
+                _session = null;
+                _isRunning = false;
             }
         }
     }

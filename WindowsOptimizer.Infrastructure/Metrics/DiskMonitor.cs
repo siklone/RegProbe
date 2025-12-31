@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
-public sealed class DiskMonitor
+public sealed class DiskMonitor : IDisposable
 {
     private readonly Dictionary<string, (PerformanceCounter Read, PerformanceCounter Write)> _counters = new();
 

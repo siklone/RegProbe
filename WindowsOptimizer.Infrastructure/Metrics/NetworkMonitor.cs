@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
-public sealed class NetworkMonitor
+public sealed class NetworkMonitor : IDisposable
 {
     private sealed record AdapterSample(long TotalBytesSent, long TotalBytesReceived, DateTimeOffset Timestamp);
 

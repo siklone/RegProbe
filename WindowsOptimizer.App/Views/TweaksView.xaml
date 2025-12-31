@@ -315,9 +315,9 @@
 	            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
 	            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
 	            <Setter Property="BorderThickness" Value="1"/>
-	            <Setter Property="Padding" Value="10,0"/>
-	            <Setter Property="FontSize" Value="13"/>
-	            <Setter Property="Height" Value="32"/>
+	            <Setter Property="Padding" Value="8,0"/>
+	            <Setter Property="FontSize" Value="12"/>
+	            <Setter Property="Height" Value="28"/>
 	            <Setter Property="VerticalContentAlignment" Value="Center"/>
 	            <Setter Property="CaretBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
 	            <Setter Property="Template">
@@ -330,7 +330,7 @@
                             <ScrollViewer x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Left"
-                                          Margin="10,0"/>
+                                          Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

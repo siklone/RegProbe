@@ -10,7 +10,7 @@ using WindowsOptimizer.Infrastructure.Metrics;
 
 namespace WindowsOptimizer.App.ViewModels;
 
-public sealed class MonitorViewModel : ViewModelBase
+public sealed class MonitorViewModel : ViewModelBase, IDisposable
 {
     private readonly MetricProvider? _metricProvider;
     private readonly ProcessMonitor? _processMonitor;
@@ -30,6 +30,7 @@ public sealed class MonitorViewModel : ViewModelBase
     private bool _isCpuAlertActive;
     private bool _isRamAlertActive;
     private ProcessMonitor.NetworkProcessMode _networkProcessMode = ProcessMonitor.NetworkProcessMode.ApproximateIo;
+    private bool _isDisposed;
 
     public MonitorViewModel()
     {
@@ -172,6 +173,27 @@ public sealed class MonitorViewModel : ViewModelBase
             ResumeProcessCommand ??= new RelayCommand(_ => { });
             ExportMetricsCommand ??= new RelayCommand(_ => { });
         }
+    }
+
+    public void Dispose()
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        _isDisposed = true;
+
+        if (_updateTimer != null)
+        {
+            _updateTimer.Stop();
+            _updateTimer.Tick -= OnUpdateTick;
+        }
+
+        _metricProvider?.Dispose();
+        _processMonitor?.Dispose();
+        _networkMonitor?.Dispose();
+        _diskMonitor?.Dispose();
     }
 
     private void ExportMetricsToCsv()
