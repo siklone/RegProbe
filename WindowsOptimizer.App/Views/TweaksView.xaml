@@ -862,12 +862,16 @@
 	                                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
 	                                 <ItemsControl.ItemTemplate>
 	                                     <DataTemplate>
-	                                         <Button Content="{Binding Title}"
-	                                                 Style="{StaticResource LinkButtonStyle}"
+	                                         <Button Style="{StaticResource LinkButtonStyle}"
 	                                                 Margin="0,0,12,4"
 	                                                 ToolTip="{Binding Tooltip}"
 	                                                 Command="{Binding DataContext.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-	                                                 CommandParameter="{Binding Url}"/>
+	                                                 CommandParameter="{Binding Url}">
+	                                            <StackPanel Orientation="Horizontal">
+	                                                <TextBlock Text="{Binding Icon}" FontSize="12" Margin="0,0,4,0"/>
+	                                                <TextBlock Text="{Binding Title}"/>
+	                                            </StackPanel>
+	                                         </Button>
 	                                     </DataTemplate>
 	                                 </ItemsControl.ItemTemplate>
 	                             </ItemsControl>
@@ -1752,12 +1756,16 @@
                                                                         </ItemsControl.ItemsPanel>
 	                                                                        <ItemsControl.ItemTemplate>
 	                                                                            <DataTemplate>
-	                                                                                    <Button Content="{Binding Title}"
-	                                                                                        Style="{StaticResource LinkButtonStyle}"
+	                                                                                    <Button Style="{StaticResource LinkButtonStyle}"
 	                                                                                        Margin="0,0,12,4"
 	                                                                                        ToolTip="{Binding Tooltip}"
 	                                                                                        Command="{Binding DataContext.OpenReferenceLinkCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-	                                                                                        CommandParameter="{Binding Url}"/>
+	                                                                                        CommandParameter="{Binding Url}">
+	                                                                                        <StackPanel Orientation="Horizontal">
+	                                                                                            <TextBlock Text="{Binding Icon}" FontSize="12" Margin="0,0,4,0"/>
+	                                                                                            <TextBlock Text="{Binding Title}"/>
+	                                                                                        </StackPanel>
+	                                                                                    </Button>
 	                                                                            </DataTemplate>
 	                                                                        </ItemsControl.ItemTemplate>
 	                                                                    </ItemsControl>

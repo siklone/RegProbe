@@ -1739,15 +1739,34 @@ public enum TweakActionType
 /// </summary>
 public sealed class ReferenceLink
 {
-    public ReferenceLink(string title, string url, string? tooltip = null)
+    public ReferenceLink(string title, string url, string? tooltip = null, ReferenceLinkKind kind = ReferenceLinkKind.Other)
     {
         Title = title;
         Url = url;
         Tooltip = string.IsNullOrWhiteSpace(tooltip) ? url : tooltip;
+        Kind = kind;
     }
     public string Title { get; }
     public string Url { get; }
     public string Tooltip { get; }
+    public ReferenceLinkKind Kind { get; }
+    public string Icon => Kind switch
+    {
+        ReferenceLinkKind.Catalog => "📚",
+        ReferenceLinkKind.Details => "🧩",
+        ReferenceLinkKind.Docs => "📘",
+        ReferenceLinkKind.Source => "📄",
+        _ => "🔗"
+    };
+}
+
+public enum ReferenceLinkKind
+{
+    Catalog,
+    Details,
+    Docs,
+    Source,
+    Other
 }
 
 /// <summary>
