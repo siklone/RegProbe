@@ -328,6 +328,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -426,30 +427,67 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Network Download Card -->
-                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                <!-- GPU VRAM Card -->
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}"
+                        ToolTip="GPU memory usage based on hardware sensors and adapter memory size.">
                     <StackPanel>
-                        <TextBlock Text="Network Down" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="26" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,0,0,4">
-                            <Run Text="{Binding NetworkDownloadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                            <Run Text=" Mbps" FontSize="12"/>
+                        <TextBlock Text="GPU VRAM" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="18" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,0,0,4"
+                                   Text="{Binding GpuMemoryUsageText}"/>
+                        <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"
+                                   Text="{Binding GpuMemoryPercentText}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Fan Speeds Card -->
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Fan Speeds" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                            <Run Text="CPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding CpuFanRpmText}"/>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                            <Run Text="GPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GpuFanRpmText}"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>
 
-                <!-- Network Upload Card -->
-                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                <!-- Disk Health Card -->
+                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="Network Up" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="26" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4">
+                        <TextBlock Text="Disk Health" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding DiskHealthText}"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource SuccessBrush}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding DiskHealthDetail}"
+                                   FontSize="10"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Network Throughput Card -->
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Network Throughput" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                            <Run Text="Down " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding NetworkDownloadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                            <Run Text=" Mbps" FontSize="10"/>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                            <Run Text="Up " Foreground="{DynamicResource MutedForegroundBrush}"/>
                             <Run Text="{Binding NetworkUploadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                            <Run Text=" Mbps" FontSize="12"/>
+                            <Run Text=" Mbps" FontSize="10"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>
 
                 <!-- Disk I/O Card -->
-                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="Disk I/O" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <StackPanel>
@@ -464,6 +502,37 @@
                                 <Run Text=" MB/s" FontSize="10"/>
                             </TextBlock>
                         </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Latency Card -->
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Latency" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding NetworkLatencyText}"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding NetworkLatencyDetail}"
+                                   FontSize="10"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Wi-Fi Signal Card -->
+                <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Wi-Fi Signal" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding WifiSignalText}"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource AccentBlueBrush}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding WifiSignalDetail}"
+                                   FontSize="10"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </Border>
             </Grid>

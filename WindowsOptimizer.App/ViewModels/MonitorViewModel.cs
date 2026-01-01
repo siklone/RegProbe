@@ -35,6 +35,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly ProcessMonitor? _processMonitor;
     private readonly NetworkMonitor? _networkMonitor;
     private readonly DiskMonitor? _diskMonitor;
+    private readonly NetworkLatencyMonitor? _latencyMonitor;
+    private readonly WifiSignalMonitor? _wifiSignalMonitor;
     private readonly DispatcherTimer? _updateTimer;
     private readonly SettingsStore _settingsStore;
 
@@ -44,6 +46,18 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private double _cpuTemp = double.NaN;
     private double _gpuTemp = double.NaN;
     private double _gpuUsage;
+    private double _gpuMemoryUsedMb;
+    private double _gpuMemoryTotalMb;
+    private double _gpuMemoryUsagePercent;
+    private bool _hasGpuMemory;
+    private double _cpuFanRpm = double.NaN;
+    private double _gpuFanRpm = double.NaN;
+    private double? _diskHealthPercent;
+    private bool? _diskPredictFailure;
+    private double? _networkLatencyMs;
+    private string _networkLatencyTarget = string.Empty;
+    private int? _wifiSignalQuality;
+    private string _wifiSsid = string.Empty;
     private SystemInfo? _systemInfo;
     private double _cpuAlertThreshold = 90.0;
     private double _ramAlertThreshold = 90.0;
@@ -53,6 +67,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isDisposed;
     private bool _isLayoutEditorVisible;
     private bool _isLayoutLoading;
+    private DateTime _nextAuxSampleUtc = DateTime.MinValue;
+    private bool _isAuxSampleInProgress;
+    private static readonly TimeSpan AuxSampleInterval = TimeSpan.FromSeconds(5);
 
     private readonly RelayCommand _toggleLayoutEditorCommand;
     private readonly RelayCommand _moveSectionUpCommand;
@@ -107,6 +124,24 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to create DiskMonitor: {ex.Message}");
+            }
+
+            try
+            {
+                _latencyMonitor = new NetworkLatencyMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create NetworkLatencyMonitor: {ex.Message}");
+            }
+
+            try
+            {
+                _wifiSignalMonitor = new WifiSignalMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create WifiSignalMonitor: {ex.Message}");
             }
 
             // Initialize collections
@@ -240,6 +275,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _processMonitor?.Dispose();
         _networkMonitor?.Dispose();
         _diskMonitor?.Dispose();
+        _latencyMonitor?.Dispose();
+        _wifiSignalMonitor?.Dispose();
     }
 
     private void ExportMetricsToCsv()
@@ -258,6 +295,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine($"CPU Temperature,{(HasCpuTemp ? $"{CpuTemp:F1}°C" : "N/A")}");
             csv.AppendLine($"GPU Usage,{GpuUsage:F2}%");
             csv.AppendLine($"GPU Temperature,{(HasGpuTemp ? $"{GpuTemp:F1}°C" : "N/A")}");
+            csv.AppendLine($"GPU VRAM,{(HasGpuMemory ? $"{GpuMemoryUsedGb:F1} GB / {GpuMemoryTotalGb:F1} GB ({GpuMemoryUsagePercent:F0}%)" : "N/A")}");
+            csv.AppendLine($"CPU Fan,{CpuFanRpmText}");
+            csv.AppendLine($"GPU Fan,{GpuFanRpmText}");
+            csv.AppendLine($"Disk Health,{DiskHealthText}");
+            csv.AppendLine($"Network Latency,{NetworkLatencyText}");
+            csv.AppendLine($"Wi-Fi Signal,{WifiSignalText} {WifiSignalDetail}".Trim());
             csv.AppendLine();
             csv.AppendLine("System Information");
             csv.AppendLine($"OS,{SystemInfo?.OsName}");
@@ -648,6 +691,130 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _gpuUsage, value);
     }
 
+    public double GpuMemoryUsedMb
+    {
+        get => _gpuMemoryUsedMb;
+        private set => SetProperty(ref _gpuMemoryUsedMb, value);
+    }
+
+    public double GpuMemoryTotalMb
+    {
+        get => _gpuMemoryTotalMb;
+        private set => SetProperty(ref _gpuMemoryTotalMb, value);
+    }
+
+    public double GpuMemoryUsagePercent
+    {
+        get => _gpuMemoryUsagePercent;
+        private set => SetProperty(ref _gpuMemoryUsagePercent, value);
+    }
+
+    public bool HasGpuMemory
+    {
+        get => _hasGpuMemory;
+        private set => SetProperty(ref _hasGpuMemory, value);
+    }
+
+    public double GpuMemoryUsedGb => GpuMemoryUsedMb / 1024.0;
+
+    public double GpuMemoryTotalGb => GpuMemoryTotalMb / 1024.0;
+
+    public string GpuMemoryUsageText => HasGpuMemory
+        ? $"{GpuMemoryUsedGb:F1} / {GpuMemoryTotalGb:F1} GB"
+        : "N/A";
+
+    public string GpuMemoryPercentText => HasGpuMemory
+        ? $"{GpuMemoryUsagePercent:F0}%"
+        : "N/A";
+
+    public double CpuFanRpm
+    {
+        get => _cpuFanRpm;
+        private set => SetProperty(ref _cpuFanRpm, value);
+    }
+
+    public double GpuFanRpm
+    {
+        get => _gpuFanRpm;
+        private set => SetProperty(ref _gpuFanRpm, value);
+    }
+
+    public bool HasCpuFan => double.IsFinite(CpuFanRpm) && CpuFanRpm > 0;
+
+    public bool HasGpuFan => double.IsFinite(GpuFanRpm) && GpuFanRpm > 0;
+
+    public string CpuFanRpmText => HasCpuFan ? $"{CpuFanRpm:F0} RPM" : "N/A";
+
+    public string GpuFanRpmText => HasGpuFan ? $"{GpuFanRpm:F0} RPM" : "N/A";
+
+    public double? DiskHealthPercent
+    {
+        get => _diskHealthPercent;
+        private set => SetProperty(ref _diskHealthPercent, value);
+    }
+
+    public bool? DiskPredictFailure
+    {
+        get => _diskPredictFailure;
+        private set => SetProperty(ref _diskPredictFailure, value);
+    }
+
+    public string DiskHealthText => DiskHealthPercent.HasValue
+        ? $"{DiskHealthPercent.Value:F0}%"
+        : DiskPredictFailure == true
+            ? "Warning"
+            : DiskPredictFailure == false
+                ? "OK"
+                : "N/A";
+
+    public string DiskHealthDetail => DiskHealthPercent.HasValue
+        ? "SMART remaining life"
+        : DiskPredictFailure == true
+            ? "SMART predicts failure"
+            : DiskPredictFailure == false
+                ? "SMART status OK"
+                : "SMART data unavailable";
+
+    public double? NetworkLatencyMs
+    {
+        get => _networkLatencyMs;
+        private set => SetProperty(ref _networkLatencyMs, value);
+    }
+
+    public string NetworkLatencyTarget
+    {
+        get => _networkLatencyTarget;
+        private set => SetProperty(ref _networkLatencyTarget, value);
+    }
+
+    public string NetworkLatencyText => NetworkLatencyMs.HasValue
+        ? $"{NetworkLatencyMs.Value:F0} ms"
+        : "N/A";
+
+    public string NetworkLatencyDetail => string.IsNullOrWhiteSpace(NetworkLatencyTarget)
+        ? "Gateway ping"
+        : $"Ping {NetworkLatencyTarget}";
+
+    public int? WifiSignalQuality
+    {
+        get => _wifiSignalQuality;
+        private set => SetProperty(ref _wifiSignalQuality, value);
+    }
+
+    public string WifiSsid
+    {
+        get => _wifiSsid;
+        private set => SetProperty(ref _wifiSsid, value);
+    }
+
+    public string WifiSignalText => WifiSignalQuality.HasValue
+        ? $"{WifiSignalQuality.Value}%"
+        : "N/A";
+
+    public string WifiSignalDetail => string.IsNullOrWhiteSpace(WifiSsid)
+        ? "Not connected"
+        : WifiSsid;
+
     public SystemInfo? SystemInfo
     {
         get => _systemInfo;
@@ -764,6 +931,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 _processMonitor.Cleanup();
             }
 
+            if (!_isAuxSampleInProgress && DateTime.UtcNow >= _nextAuxSampleUtc)
+            {
+                _nextAuxSampleUtc = DateTime.UtcNow.Add(AuxSampleInterval);
+                _ = SampleAuxMetricsAsync();
+            }
+
             // Check alert thresholds
             IsCpuAlertActive = CpuUsage >= CpuAlertThreshold;
             IsRamAlertActive = RamUsagePercent >= RamAlertThreshold;
@@ -828,6 +1001,84 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _networkProcessMode = mode;
         OnPropertyChanged(nameof(NetworkProcessTitle));
         OnPropertyChanged(nameof(NetworkProcessSubtitle));
+    }
+
+    private async Task SampleAuxMetricsAsync()
+    {
+        _isAuxSampleInProgress = true;
+        try
+        {
+            if (_metricProvider != null)
+            {
+                var gpuMemory = _metricProvider.GetGpuMemorySnapshot();
+                HasGpuMemory = gpuMemory.IsAvailable;
+                GpuMemoryUsedMb = gpuMemory.UsedMb;
+                GpuMemoryTotalMb = gpuMemory.TotalMb;
+                GpuMemoryUsagePercent = gpuMemory.UsagePercent;
+                OnPropertyChanged(nameof(GpuMemoryUsedGb));
+                OnPropertyChanged(nameof(GpuMemoryTotalGb));
+                OnPropertyChanged(nameof(GpuMemoryUsageText));
+                OnPropertyChanged(nameof(GpuMemoryPercentText));
+
+                var fans = _metricProvider.GetFanSpeedSnapshot();
+                CpuFanRpm = fans.CpuRpm;
+                GpuFanRpm = fans.GpuRpm;
+                OnPropertyChanged(nameof(CpuFanRpmText));
+                OnPropertyChanged(nameof(GpuFanRpmText));
+                OnPropertyChanged(nameof(HasCpuFan));
+                OnPropertyChanged(nameof(HasGpuFan));
+
+                var diskHealth = _metricProvider.GetDiskHealthSnapshot();
+                DiskHealthPercent = diskHealth.HealthPercent;
+                DiskPredictFailure = diskHealth.PredictFailure;
+                OnPropertyChanged(nameof(DiskHealthText));
+                OnPropertyChanged(nameof(DiskHealthDetail));
+            }
+
+            if (_latencyMonitor != null)
+            {
+                var latency = await _latencyMonitor.SampleAsync(CancellationToken.None);
+                if (latency.HasValue)
+                {
+                    NetworkLatencyMs = latency.Value.LatencyMs;
+                    NetworkLatencyTarget = latency.Value.Target;
+                }
+                else
+                {
+                    NetworkLatencyMs = null;
+                    NetworkLatencyTarget = string.Empty;
+                }
+
+                OnPropertyChanged(nameof(NetworkLatencyText));
+                OnPropertyChanged(nameof(NetworkLatencyDetail));
+            }
+
+            if (_wifiSignalMonitor != null)
+            {
+                var signal = _wifiSignalMonitor.TryGetSignal();
+                if (signal.HasValue)
+                {
+                    WifiSignalQuality = signal.Value.SignalQuality;
+                    WifiSsid = signal.Value.Ssid;
+                }
+                else
+                {
+                    WifiSignalQuality = null;
+                    WifiSsid = string.Empty;
+                }
+
+                OnPropertyChanged(nameof(WifiSignalText));
+                OnPropertyChanged(nameof(WifiSignalDetail));
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel aux sample error: {ex.Message}");
+        }
+        finally
+        {
+            _isAuxSampleInProgress = false;
+        }
     }
 
     private sealed record MonitorSectionDefinition(string Key, string Title, string Description);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
@@ -15,6 +16,7 @@ public sealed class MetricProvider : IDisposable
     private readonly PerformanceCounter? _diskReadCounter;
     private readonly PerformanceCounter? _diskWriteCounter;
     private readonly Computer? _computer;
+    private readonly double? _gpuMemoryTotalMb;
     private bool _disposed;
 
     public MetricProvider()
@@ -50,6 +52,8 @@ public sealed class MetricProvider : IDisposable
             Debug.WriteLine($"Failed to initialize LibreHardwareMonitor: {ex.Message}");
             _computer = null;
         }
+
+        _gpuMemoryTotalMb = TryGetGpuMemoryTotalMb();
     }
 
     public float GetCpuUsage() => _cpuCounter?.NextValue() ?? 0;
@@ -155,6 +159,201 @@ public sealed class MetricProvider : IDisposable
         return 0;
     }
 
+    public GpuMemorySnapshot GetGpuMemorySnapshot()
+    {
+        if (_computer == null)
+        {
+            return new GpuMemorySnapshot(0, _gpuMemoryTotalMb ?? 0, 0, false);
+        }
+
+        double? usedMb = null;
+        double? totalMb = null;
+        double? usagePercent = null;
+
+        foreach (var hardware in _computer.Hardware)
+        {
+            if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                hardware.HardwareType == HardwareType.GpuAmd ||
+                hardware.HardwareType == HardwareType.GpuIntel)
+            {
+                hardware.Update();
+
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (!sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var name = sensor.Name ?? string.Empty;
+
+                    if (sensor.SensorType == SensorType.Load &&
+                        name.Contains("Memory", StringComparison.OrdinalIgnoreCase))
+                    {
+                        usagePercent ??= sensor.Value.Value;
+                    }
+
+                    if (sensor.SensorType == SensorType.Data || sensor.SensorType == SensorType.SmallData)
+                    {
+                        if (name.Contains("Memory Used", StringComparison.OrdinalIgnoreCase) ||
+                            name.Contains("GPU Memory", StringComparison.OrdinalIgnoreCase) ||
+                            name.Contains("VRAM", StringComparison.OrdinalIgnoreCase))
+                        {
+                            usedMb ??= sensor.SensorType == SensorType.Data
+                                ? sensor.Value.Value * 1024
+                                : sensor.Value.Value;
+                        }
+
+                        if (name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) ||
+                            name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase))
+                        {
+                            totalMb ??= sensor.SensorType == SensorType.Data
+                                ? sensor.Value.Value * 1024
+                                : sensor.Value.Value;
+                        }
+                    }
+                }
+
+                break;
+            }
+        }
+
+        totalMb ??= _gpuMemoryTotalMb;
+
+        if (!usagePercent.HasValue && usedMb.HasValue && totalMb.HasValue && totalMb > 0)
+        {
+            usagePercent = usedMb.Value / totalMb.Value * 100.0;
+        }
+
+        if (!usedMb.HasValue && usagePercent.HasValue && totalMb.HasValue && totalMb > 0)
+        {
+            usedMb = totalMb.Value * usagePercent.Value / 100.0;
+        }
+
+        var isAvailable = usagePercent.HasValue || usedMb.HasValue;
+
+        return new GpuMemorySnapshot(
+            usedMb ?? 0,
+            totalMb ?? 0,
+            usagePercent ?? 0,
+            isAvailable);
+    }
+
+    public FanSpeedSnapshot GetFanSpeedSnapshot()
+    {
+        if (_computer == null)
+        {
+            return new FanSpeedSnapshot(double.NaN, double.NaN);
+        }
+
+        double? cpuRpm = null;
+        double? gpuRpm = null;
+
+        foreach (var hardware in _computer.Hardware)
+        {
+            if (hardware.HardwareType == HardwareType.Cpu ||
+                hardware.HardwareType == HardwareType.Motherboard)
+            {
+                hardware.Update();
+
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var name = sensor.Name ?? string.Empty;
+                    if (name.Contains("CPU", StringComparison.OrdinalIgnoreCase) ||
+                        name.Contains("Pump", StringComparison.OrdinalIgnoreCase))
+                    {
+                        cpuRpm = Math.Max(cpuRpm ?? 0, sensor.Value.Value);
+                    }
+                }
+            }
+
+            if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                hardware.HardwareType == HardwareType.GpuAmd ||
+                hardware.HardwareType == HardwareType.GpuIntel)
+            {
+                hardware.Update();
+
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    gpuRpm = Math.Max(gpuRpm ?? 0, sensor.Value.Value);
+                }
+            }
+        }
+
+        return new FanSpeedSnapshot(cpuRpm ?? double.NaN, gpuRpm ?? double.NaN);
+    }
+
+    public DiskHealthSnapshot GetDiskHealthSnapshot()
+    {
+        double? healthPercent = null;
+        bool? predictFailure = null;
+
+        if (_computer != null)
+        {
+            var values = new List<double>();
+            foreach (var hardware in _computer.Hardware)
+            {
+                if (hardware.HardwareType != HardwareType.Storage)
+                {
+                    continue;
+                }
+
+                hardware.Update();
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (!sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    if (sensor.SensorType == SensorType.Level &&
+                        (sensor.Name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
+                         sensor.Name.Contains("Remaining Life", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        values.Add(sensor.Value.Value);
+                    }
+                }
+            }
+
+            if (values.Count > 0)
+            {
+                healthPercent = values.Min();
+            }
+        }
+
+        if (!healthPercent.HasValue)
+        {
+            try
+            {
+                using var searcher = new ManagementObjectSearcher("root\\WMI", "SELECT PredictFailure FROM MSStorageDriver_FailurePredictStatus");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    if (obj["PredictFailure"] is bool predicted)
+                    {
+                        predictFailure = predicted;
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to read disk SMART status: {ex.Message}");
+            }
+        }
+
+        return new DiskHealthSnapshot(healthPercent, predictFailure);
+    }
+
     public SystemInfo GetSystemInfo()
     {
         var info = new SystemInfo();
@@ -256,6 +455,41 @@ public sealed class MetricProvider : IDisposable
             _disposed = true;
         }
     }
+
+    private static double? TryGetGpuMemoryTotalMb()
+    {
+        try
+        {
+            double? best = null;
+            using var searcher = new ManagementObjectSearcher("SELECT AdapterRAM FROM Win32_VideoController");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                if (obj["AdapterRAM"] == null)
+                {
+                    continue;
+                }
+
+                var bytes = Convert.ToDouble(obj["AdapterRAM"]);
+                if (bytes <= 0)
+                {
+                    continue;
+                }
+
+                var mb = bytes / (1024 * 1024);
+                if (!best.HasValue || mb > best.Value)
+                {
+                    best = mb;
+                }
+            }
+
+            return best;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read GPU memory total: {ex.Message}");
+            return null;
+        }
+    }
 }
 
 public sealed class SystemInfo
@@ -271,3 +505,9 @@ public sealed class SystemInfo
 
     public string UptimeFormatted => $"{(int)Uptime.TotalDays}d {Uptime.Hours}h {Uptime.Minutes}m";
 }
+
+public readonly record struct GpuMemorySnapshot(double UsedMb, double TotalMb, double UsagePercent, bool IsAvailable);
+
+public readonly record struct FanSpeedSnapshot(double CpuRpm, double GpuRpm);
+
+public readonly record struct DiskHealthSnapshot(double? HealthPercent, bool? PredictFailure);
