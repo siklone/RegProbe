@@ -614,6 +614,12 @@ public sealed class DashboardViewModel : ViewModelBase
         ? LastBootTimeFormatted
         : $"{LastBootTimeFormatted} • Boot duration unavailable (run as admin / enable Diagnostics-Performance log).";
 
+    public string LastBootBadgeLabel => IsBootDurationAvailable ? "Boot Duration:" : "Last Boot:";
+
+    public string LastBootBadgeValue => IsBootDurationAvailable
+        ? LastBootDurationFormatted
+        : LastBootTimeFormatted;
+
     public TimeSpan? AverageBootDuration => _bootTimeTracker.GetAverageBootDuration();
 
     public string AverageBootDurationFormatted => AverageBootDuration.HasValue
@@ -805,15 +811,18 @@ public sealed class DashboardViewModel : ViewModelBase
 
         try
         {
-            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage")
+            var scope = TryConnectScope(
+                @"\\.\root\Microsoft\Windows\Storage",
+                "BootDiskStorage",
+                logFailure: false)
+                ?? TryConnectScope(
+                    @"root\Microsoft\Windows\Storage",
+                    "BootDiskStorage",
+                    logFailure: true);
+            if (scope == null)
             {
-                Options =
-                {
-                    EnablePrivileges = true,
-                    Impersonation = ImpersonationLevel.Impersonate
-                }
-            };
-            scope.Connect();
+                return null;
+            }
 
             string? diskFriendlyName = null;
             int? diskBusType = null;
@@ -850,11 +859,6 @@ public sealed class DashboardViewModel : ViewModelBase
             {
                 return FormatDiskType(null, diskBusType, diskFriendlyName);
             }
-        }
-        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
-        {
-            LogProbeException("BootDiskStorage", ex);
-            return null;
         }
         catch (Exception ex)
         {
@@ -1030,15 +1034,18 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm")
+            var scope = TryConnectScope(
+                @"\\.\root\CIMV2\Security\MicrosoftTpm",
+                "TPM",
+                logFailure: false)
+                ?? TryConnectScope(
+                    @"root\CIMV2\Security\MicrosoftTpm",
+                    "TPM",
+                    logFailure: true);
+            if (scope == null)
             {
-                Options =
-                {
-                    EnablePrivileges = true,
-                    Impersonation = ImpersonationLevel.Impersonate
-                }
-            };
-            scope.Connect();
+                return "Not detected";
+            }
             using var searcher = new ManagementObjectSearcher(
                 scope,
                 new ObjectQuery("SELECT IsEnabled_InitialValue, IsActivated_InitialValue, SpecVersion FROM Win32_Tpm"));
@@ -1059,17 +1066,46 @@ public sealed class DashboardViewModel : ViewModelBase
 
             return "Not detected";
         }
-        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
-        {
-            LogProbeException("TPM", ex);
-            return "Not detected";
-        }
         catch (Exception ex)
         {
             LogProbeException("TPM", ex);
         }
 
         return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static ManagementScope? TryConnectScope(string scopePath, string label, bool logFailure)
+    {
+        try
+        {
+            var scope = new ManagementScope(scopePath)
+            {
+                Options =
+                {
+                    EnablePrivileges = true,
+                    Impersonation = ImpersonationLevel.Impersonate
+                }
+            };
+            scope.Connect();
+            return scope;
+        }
+        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
+        {
+            if (logFailure)
+            {
+                LogProbeException(label, ex);
+            }
+            return null;
+        }
+        catch (Exception ex)
+        {
+            if (logFailure)
+            {
+                LogProbeException(label, ex);
+            }
+            return null;
+        }
     }
 
     private static bool? TryReadBool(ManagementBaseObject obj, string propertyName)
@@ -1182,6 +1218,8 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(RecentBootDurations));
         OnPropertyChanged(nameof(IsBootDurationAvailable));
         OnPropertyChanged(nameof(BootTimeTooltip));
+        OnPropertyChanged(nameof(LastBootBadgeLabel));
+        OnPropertyChanged(nameof(LastBootBadgeValue));
     }
 
     // Recent Activity Timeline

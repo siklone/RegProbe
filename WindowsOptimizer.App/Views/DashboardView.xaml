@@ -500,8 +500,8 @@
                                     ToolTip="{Binding BootTimeTooltip}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="⏱️" Margin="0,0,4,0"/>
-                                    <TextBlock Text="Last Boot:" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
-                                    <TextBlock Text="{Binding LastBootDurationFormatted}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                                    <TextBlock Text="{Binding LastBootBadgeLabel}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding LastBootBadgeValue}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
                                 </StackPanel>
                             </Border>
                             <Border Background="{DynamicResource SuccessBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
