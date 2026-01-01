@@ -495,15 +495,34 @@
                             <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
                                 <TextBlock Text="{Binding ElevationStatus}" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11" FontWeight="Medium"/>
                             </Border>
-                            <!-- Boot Time Info -->
+                            <!-- Boot Duration Info -->
                             <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
-                                    ToolTip="{Binding BootTimeTooltip}">
+                                    ToolTip="{Binding BootMetricsStatusMessage}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="⏱️" Margin="0,0,4,0"/>
-                                    <TextBlock Text="{Binding LastBootBadgeLabel}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
-                                    <TextBlock Text="{Binding LastBootBadgeValue}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                                    <TextBlock Text="Boot Duration:" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding BootDurationBadgeValue}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
                                 </StackPanel>
                             </Border>
+                            <!-- Last Boot Time -->
+                            <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                    ToolTip="{Binding BootTimeTooltip}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🕒" Margin="0,0,4,0"/>
+                                    <TextBlock Text="Last Boot:" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11"/>
+                                    <TextBlock Text="{Binding LastBootTimeFormatted}" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Button Command="{Binding EnableBootMetricsCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource BackgroundLightBrush}"
+                                    Foreground="{DynamicResource ForegroundLightBrush}"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Visibility="{Binding CanEnableBootMetrics, Converter={StaticResource BoolToVisibility}}">
+                                <TextBlock Text="Enable Boot Metrics" FontSize="10" FontWeight="SemiBold"/>
+                            </Button>
                             <Border Background="{DynamicResource SuccessBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
                                     ToolTip="Average boot time from history"
                                     Visibility="{Binding HasBootTimeHistory, Converter={StaticResource BoolToVisibility}}">

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -12,8 +13,10 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.Utilities;
+using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Metrics;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -58,6 +61,9 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _secureBootStatus = "Unknown";
     private string _virtualizationStatus = "Unknown";
     private string _tpmStatus = "Unknown";
+    private BootMetricsState _bootMetricsState = BootMetricsState.Unknown;
+    private bool _isEnablingBootMetrics;
+    private string _bootMetricsStatusMessage = string.Empty;
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -81,6 +87,7 @@ public sealed class DashboardViewModel : ViewModelBase
         _ = LoadRecentActivityAsync();
         ScanAllCommand = new RelayCommand(_ => _ = RunScanAsync(), _ => !IsScanning);
         RunFullScanCommand = new RelayCommand(_ => RunFullScan(), _ => !IsScanning);
+        EnableBootMetricsCommand = new RelayCommand(_ => _ = EnableBootMetricsAsync(), _ => CanEnableBootMetrics && !IsEnablingBootMetrics);
         RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
 
         // Category navigation commands
@@ -113,6 +120,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public ICommand ScanAllCommand { get; }
     public ICommand RunFullScanCommand { get; }
+    public ICommand EnableBootMetricsCommand { get; }
     public ICommand NavigateToPrivacyCommand { get; }
     public ICommand NavigateToPowerCommand { get; }
     public ICommand NavigateToSystemCommand { get; }
@@ -614,11 +622,44 @@ public sealed class DashboardViewModel : ViewModelBase
         ? LastBootTimeFormatted
         : $"{LastBootTimeFormatted} • Boot duration unavailable (run as admin / enable Diagnostics-Performance log).";
 
-    public string LastBootBadgeLabel => IsBootDurationAvailable ? "Boot Duration:" : "Last Boot:";
-
-    public string LastBootBadgeValue => IsBootDurationAvailable
+    public string BootDurationBadgeValue => IsBootDurationAvailable
         ? LastBootDurationFormatted
-        : LastBootTimeFormatted;
+        : BootMetricsStatusMessage;
+
+    public bool IsEnablingBootMetrics
+    {
+        get => _isEnablingBootMetrics;
+        private set
+        {
+            if (SetProperty(ref _isEnablingBootMetrics, value))
+            {
+                ((RelayCommand)EnableBootMetricsCommand).RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool CanEnableBootMetrics => _bootMetricsState == BootMetricsState.Disabled;
+
+    public string BootMetricsStatusMessage
+    {
+        get => _bootMetricsStatusMessage;
+        private set
+        {
+            if (SetProperty(ref _bootMetricsStatusMessage, value))
+            {
+                OnPropertyChanged(nameof(BootDurationBadgeValue));
+            }
+        }
+    }
+
+    private enum BootMetricsState
+    {
+        Unknown,
+        Enabled,
+        Disabled,
+        NotAvailable,
+        RequiresAdmin
+    }
 
     public TimeSpan? AverageBootDuration => _bootTimeTracker.GetAverageBootDuration();
 
@@ -816,9 +857,9 @@ public sealed class DashboardViewModel : ViewModelBase
                 "BootDiskStorage",
                 logFailure: false)
                 ?? TryConnectScope(
-                    @"root\Microsoft\Windows\Storage",
-                    "BootDiskStorage",
-                    logFailure: true);
+                @"root\Microsoft\Windows\Storage",
+                "BootDiskStorage",
+                logFailure: true);
             if (scope == null)
             {
                 return null;
@@ -1173,6 +1214,39 @@ public sealed class DashboardViewModel : ViewModelBase
         return "Unknown";
     }
 
+    private static BootMetricsState GetBootMetricsState()
+    {
+        try
+        {
+            using var config = new EventLogConfiguration("Microsoft-Windows-Diagnostics-Performance/Operational");
+            return config.IsEnabled ? BootMetricsState.Enabled : BootMetricsState.Disabled;
+        }
+        catch (EventLogNotFoundException)
+        {
+            return BootMetricsState.NotAvailable;
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return BootMetricsState.RequiresAdmin;
+        }
+        catch
+        {
+            return BootMetricsState.Unknown;
+        }
+    }
+
+    private static string BuildBootMetricsStatusMessage(BootMetricsState state)
+    {
+        return state switch
+        {
+            BootMetricsState.Disabled => "Boot metrics disabled",
+            BootMetricsState.NotAvailable => "Boot metrics unavailable",
+            BootMetricsState.RequiresAdmin => "Run as admin for boot metrics",
+            BootMetricsState.Enabled => "Reboot to collect boot duration",
+            _ => "Boot duration unavailable"
+        };
+    }
+
     private void LoadSystemSnapshot()
     {
         _osVersion = GetOsVersion();
@@ -1190,6 +1264,8 @@ public sealed class DashboardViewModel : ViewModelBase
         _secureBootStatus = GetSecureBootStatus();
         _virtualizationStatus = GetVirtualizationStatus();
         _tpmStatus = GetTpmStatus();
+        _bootMetricsState = GetBootMetricsState();
+        BootMetricsStatusMessage = BuildBootMetricsStatusMessage(_bootMetricsState);
     }
 
     private void RefreshSystemSnapshot()
@@ -1218,8 +1294,60 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(RecentBootDurations));
         OnPropertyChanged(nameof(IsBootDurationAvailable));
         OnPropertyChanged(nameof(BootTimeTooltip));
-        OnPropertyChanged(nameof(LastBootBadgeLabel));
-        OnPropertyChanged(nameof(LastBootBadgeValue));
+        OnPropertyChanged(nameof(BootDurationBadgeValue));
+        OnPropertyChanged(nameof(CanEnableBootMetrics));
+        OnPropertyChanged(nameof(BootMetricsStatusMessage));
+    }
+
+    private async Task EnableBootMetricsAsync()
+    {
+        if (!CanEnableBootMetrics || IsEnablingBootMetrics)
+        {
+            return;
+        }
+
+        IsEnablingBootMetrics = true;
+        BootMetricsStatusMessage = "Enabling boot metrics...";
+
+        try
+        {
+            var runner = CreateElevatedCommandRunner();
+            var request = new CommandRequest(
+                "wevtutil.exe",
+                new[] { "sl", "Microsoft-Windows-Diagnostics-Performance/Operational", "/e:true" });
+            var result = await runner.RunAsync(request, CancellationToken.None);
+
+            if (result.ExitCode == 0)
+            {
+                _bootMetricsState = BootMetricsState.Enabled;
+                BootMetricsStatusMessage = "Boot metrics enabled (reboot to collect).";
+            }
+            else
+            {
+                BootMetricsStatusMessage = "Failed to enable boot metrics.";
+            }
+        }
+        catch (Exception ex)
+        {
+            BootMetricsStatusMessage = $"Enable failed: {ex.Message}";
+        }
+        finally
+        {
+            IsEnablingBootMetrics = false;
+            OnPropertyChanged(nameof(CanEnableBootMetrics));
+        }
+    }
+
+    private static ICommandRunner CreateElevatedCommandRunner()
+    {
+        var hostPath = ElevatedHostLocator.GetExecutablePath();
+        var client = new ElevatedHostClient(new ElevatedHostClientOptions
+        {
+            HostExecutablePath = hostPath,
+            PipeName = ElevatedHostDefaults.PipeName,
+            ParentProcessId = Process.GetCurrentProcess().Id
+        });
+        return new ElevatedCommandRunner(client);
     }
 
     // Recent Activity Timeline
