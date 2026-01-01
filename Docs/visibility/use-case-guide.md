@@ -1,8 +1,13 @@
 # Windows Visibility and Personalization Guide
-## Use-case focused settings (English)
+## Use-case based settings (English)
 
 This guide maps common visibility and personalization preferences to registry-backed settings.
 It is a companion to the main docs and is intentionally separated to preserve source provenance.
+
+Related docs:
+- [Visibility tweaks](visibility.md)
+- [Tweak catalog](../tweaks/tweak-catalog.html)
+- [Tweak details](../tweaks/tweak-details.html)
 
 ---
 
