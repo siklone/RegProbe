@@ -201,7 +201,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         IsStartupScanActive = true;
         try
         {
-            await dashboard.RunScanAsync(progress, ct);
+            await dashboard.RunScanAsync(progress, ct, true);
         }
         catch (Exception ex)
         {

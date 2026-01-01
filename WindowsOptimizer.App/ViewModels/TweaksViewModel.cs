@@ -1354,7 +1354,10 @@ public sealed class TweaksViewModel : ViewModelBase
     /// <summary>
     /// Detects all tweaks in all categories. Used by Dashboard's Scan Now button.
     /// </summary>
-    public async Task DetectAllTweaksAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
+    public async Task DetectAllTweaksAsync(
+        IProgress<StartupScanProgress>? progress = null,
+        CancellationToken ct = default,
+        bool isStartupScan = false)
     {
         var expansionSnapshot = CategoryGroups
             .Select(group => new
@@ -1387,12 +1390,16 @@ public sealed class TweaksViewModel : ViewModelBase
             }
         }
 
+        var tweaksToScan = isStartupScan
+            ? Tweaks.Where(t => t.IsStartupScanEligible).ToList()
+            : Tweaks.ToList();
+
         // Wait for all detection to complete by detecting each tweak directly
-        var totalTweaks = Tweaks.Count;
+        var totalTweaks = tweaksToScan.Count;
         var currentIndex = 0;
         progress?.Report(new StartupScanProgress(0, totalTweaks));
 
-        foreach (var tweak in Tweaks)
+        foreach (var tweak in tweaksToScan)
         {
             try
             {

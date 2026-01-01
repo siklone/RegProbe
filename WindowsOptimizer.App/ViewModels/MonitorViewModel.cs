@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WindowsOptimizer.Infrastructure;
@@ -312,9 +313,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _isLayoutLoading = true;
         MonitorSections.Clear();
 
-        var defaults = BuildDefaultSections();
-        var layout = ApplySavedLayout(defaults);
-        foreach (var section in layout)
+        foreach (var section in BuildDefaultSections())
         {
             section.PropertyChanged += OnSectionLayoutChanged;
             MonitorSections.Add(section);
@@ -322,6 +321,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         _isLayoutLoading = false;
         UpdateLayoutCommands();
+        _ = LoadSavedLayoutAsync();
     }
 
     private static List<MonitorSectionLayout> BuildDefaultSections()
@@ -331,55 +331,90 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             .ToList();
     }
 
-    private List<MonitorSectionLayout> ApplySavedLayout(IReadOnlyList<MonitorSectionLayout> defaults)
+    private async Task LoadSavedLayoutAsync()
     {
         try
         {
-            var settings = _settingsStore.LoadAsync(CancellationToken.None).GetAwaiter().GetResult();
+            var settings = await _settingsStore.LoadAsync(CancellationToken.None).ConfigureAwait(false);
             if (settings.MonitorSections.Count == 0)
             {
-                return defaults.ToList();
+                return;
             }
 
-            var defaultByKey = defaults.ToDictionary(section => section.Key, StringComparer.OrdinalIgnoreCase);
-            var usedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            var ordered = new List<MonitorSectionLayout>();
+            var defaults = BuildDefaultSections();
+            var layout = BuildLayoutFromSettings(defaults, settings.MonitorSections);
+            var dispatcher = Application.Current?.Dispatcher;
 
-            foreach (var state in settings.MonitorSections.OrderBy(state => state.Order))
+            if (dispatcher == null || dispatcher.CheckAccess())
             {
-                if (string.IsNullOrWhiteSpace(state.Key))
-                {
-                    continue;
-                }
-
-                if (!defaultByKey.TryGetValue(state.Key, out var definition))
-                {
-                    continue;
-                }
-
-                var section = new MonitorSectionLayout(definition.Key, definition.Title, definition.Description)
-                {
-                    IsVisible = state.IsVisible
-                };
-                ordered.Add(section);
-                usedKeys.Add(definition.Key);
+                ApplyLayout(layout);
+                return;
             }
 
-            foreach (var definition in defaults)
-            {
-                if (!usedKeys.Contains(definition.Key))
-                {
-                    ordered.Add(new MonitorSectionLayout(definition.Key, definition.Title, definition.Description));
-                }
-            }
-
-            return ordered;
+            await dispatcher.InvokeAsync(() => ApplyLayout(layout));
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Monitor layout load failed: {ex.Message}");
-            return defaults.ToList();
         }
+    }
+
+    private static List<MonitorSectionLayout> BuildLayoutFromSettings(
+        IReadOnlyList<MonitorSectionLayout> defaults,
+        IReadOnlyList<MonitorSectionState> saved)
+    {
+        var defaultByKey = defaults.ToDictionary(section => section.Key, StringComparer.OrdinalIgnoreCase);
+        var usedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var ordered = new List<MonitorSectionLayout>();
+
+        foreach (var state in saved.OrderBy(state => state.Order))
+        {
+            if (string.IsNullOrWhiteSpace(state.Key))
+            {
+                continue;
+            }
+
+            if (!defaultByKey.TryGetValue(state.Key, out var definition))
+            {
+                continue;
+            }
+
+            var section = new MonitorSectionLayout(definition.Key, definition.Title, definition.Description)
+            {
+                IsVisible = state.IsVisible
+            };
+            ordered.Add(section);
+            usedKeys.Add(definition.Key);
+        }
+
+        foreach (var definition in defaults)
+        {
+            if (!usedKeys.Contains(definition.Key))
+            {
+                ordered.Add(new MonitorSectionLayout(definition.Key, definition.Title, definition.Description));
+            }
+        }
+
+        return ordered;
+    }
+
+    private void ApplyLayout(IEnumerable<MonitorSectionLayout> layout)
+    {
+        _isLayoutLoading = true;
+        foreach (var section in MonitorSections)
+        {
+            section.PropertyChanged -= OnSectionLayoutChanged;
+        }
+
+        MonitorSections.Clear();
+        foreach (var section in layout)
+        {
+            section.PropertyChanged += OnSectionLayoutChanged;
+            MonitorSections.Add(section);
+        }
+
+        _isLayoutLoading = false;
+        UpdateLayoutCommands();
     }
 
     private void OnSectionLayoutChanged(object? sender, PropertyChangedEventArgs e)
@@ -450,21 +485,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private void ResetLayout()
     {
-        _isLayoutLoading = true;
-        foreach (var section in MonitorSections)
-        {
-            section.PropertyChanged -= OnSectionLayoutChanged;
-        }
-
-        MonitorSections.Clear();
-        foreach (var section in BuildDefaultSections())
-        {
-            section.PropertyChanged += OnSectionLayoutChanged;
-            MonitorSections.Add(section);
-        }
-
-        _isLayoutLoading = false;
-        UpdateLayoutCommands();
+        ApplyLayout(BuildDefaultSections());
         _ = SaveLayoutAsync();
     }
 

@@ -132,6 +132,11 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool WillPromptForElevation => RequiresElevation && !IsElevated;
 
+    public bool IsStartupScanEligible =>
+        !WillPromptForElevation
+        && _tweak is not CommandTweak
+        && _tweak is not FileCleanupTweak;
+
     public string ElevationBadgeText => "Admin";
 
     public string ElevationTooltip => IsElevated
