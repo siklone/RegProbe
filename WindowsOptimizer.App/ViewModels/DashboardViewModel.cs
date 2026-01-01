@@ -703,7 +703,14 @@ public sealed class DashboardViewModel : ViewModelBase
 
         try
         {
-            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage");
+            var scope = new ManagementScope(@"\\.\root\\Microsoft\\Windows\\Storage")
+            {
+                Options =
+                {
+                    EnablePrivileges = true,
+                    Impersonation = ImpersonationLevel.Impersonate
+                }
+            };
             scope.Connect();
 
             string? diskFriendlyName = null;
@@ -916,7 +923,7 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm")
+            var scope = new ManagementScope(@"\\.\root\\CIMV2\\Security\\MicrosoftTpm")
             {
                 Options =
                 {
