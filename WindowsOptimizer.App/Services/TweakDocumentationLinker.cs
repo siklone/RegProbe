@@ -13,6 +13,7 @@ public sealed class TweakDocumentationLinker
 {
     private const string DefaultDocPath = "tweaks/tweaks.md";
     private const string DetailsDocPath = "tweaks/tweak-details.html";
+    private const string WinConfigDocPath = "tweaks/win-config/batch-01.md";
     private static readonly Regex AnchorRegex = new("id\\s*=\\s*\"([^\"]+)\"",
         RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private readonly IReadOnlyDictionary<string, string> _categoryDocMap;
@@ -82,6 +83,17 @@ public sealed class TweakDocumentationLinker
                 var detailsTitle = detailsHasAnchor ? "Docs: Details" : "Docs: Details (missing)";
                 if (TryInsertReferenceLink(tweak, detailsTitle, detailsUrl, insertIndex,
                         "Per-tweak summary (Changes, Risk, Source).", ReferenceLinkKind.Details))
+                {
+                    insertIndex++;
+                }
+            }
+
+            var winConfigPath = ResolveDocPathFromRelative(WinConfigDocPath);
+            if (!string.IsNullOrWhiteSpace(winConfigPath) && HasDocAnchor(winConfigPath, tweak.Id))
+            {
+                var winConfigUrl = AppendDocAnchor(winConfigPath, tweak.Id);
+                if (TryInsertReferenceLink(tweak, "Docs: Win-Config", winConfigUrl, insertIndex,
+                        "Win-config batch documentation for this tweak.", ReferenceLinkKind.Docs))
                 {
                     insertIndex++;
                 }

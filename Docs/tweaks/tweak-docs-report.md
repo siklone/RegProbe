@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 242
+Total tweaks: 276
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -36,6 +36,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `cleanup.windows-old` | `Docs/cleanup/cleanup.md` | yes | yes | yes | yes |
 | `cleanup.windows-update-cache` | `Docs/cleanup/cleanup.md` | yes | yes | yes | yes |
 | `explorer.disable-compact-mode` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
+| `explorer.disable-low-disk-space-warning` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-chat` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-widgets` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
 | `explorer.show-file-extensions` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
@@ -209,16 +210,23 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `security.uac-never-notify` | `Docs/security/security.md` | yes | yes | yes | yes |
 | `system-check-disk-health` | `Docs/tweaks/tweaks.md` | yes | yes | yes | yes |
 | `system.aero-shake` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.bsod-disable-auto-reboot` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.bsod-display-parameters` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.disable-app-archiving` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-auto-maintenance` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-background-gp-updates` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-clipboard-history` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-clipboard-redirection` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.disable-fullscreen-optimizations` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.disable-game-dvr` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-jpeg-reduction` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-non-essential-services` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-restartable-apps` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-scheduled-tasks` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-search-highlights` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-search-highlights-policy` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.disable-search-remote-queries` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.disable-search-web-results` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-service-splitting` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-services-drivers` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-shortcut-arrow` | `Docs/system/system.md` | yes | yes | yes | yes |
@@ -227,8 +235,34 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.disable-storage-sense-temp-cleanup` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-store-open-with` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.disable-windows-search-service` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.dwm-disable-mpo` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.dwm-disable-overlay-min-fps` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.enable-game-mode` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.enable-hags` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.enable-indexing-encrypted-items` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-disable-overlays` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-tdr-ddi-delay` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-tdr-delay` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-tdr-level` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-tdr-limit-count` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.graphics-tdr-limit-time` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-adjust-dpc-threshold` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-disable-low-qos-timer-resolution` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-dpc-queue-depth` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-dpc-watchdog-period` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-ideal-dpc-rate` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-minimum-dpc-rate` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-serialize-timer-expiration` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.kernel-thread-dpc-enable` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.memory-clear-pagefile-at-shutdown` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.memory-disable-paging-executive` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.ntfs-disable-8dot3` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.ntfs-disable-last-access` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.ntfs-enable-long-paths` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.ntfs-reset-memory-usage` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.ntfs-reset-mft-zone` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.priority-control` | `Docs/system/system.md` | yes | yes | yes | yes |
+| `system.reduce-shutdown-timeouts` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `system.verbose-status-messages` | `Docs/system/system.md` | yes | yes | yes | yes |
 | `visibility.default-account-picture` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |
 | `visibility.disable-acrylic-logon` | `Docs/visibility/visibility.md` | yes | yes | yes | yes |

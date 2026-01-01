@@ -54,6 +54,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         var providers = new ITweakProvider[]
         {
             new SystemTweakProvider(),
+            new SystemRegistryTweakProvider(),
             new PrivacyTweakProvider(),
             new SecurityTweakProvider(),
             new NetworkTweakProvider(),

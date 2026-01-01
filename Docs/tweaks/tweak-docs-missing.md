@@ -1,6 +1,6 @@
 # Tweak Docs Missing Report (Generated)
 
-Total tweaks: 242
+Total tweaks: 276
 Missing entries: 0
 
 Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog.html)

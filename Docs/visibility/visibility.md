@@ -1575,6 +1575,7 @@ Do not edit manually.
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
 | <a id="explorer.disable-compact-mode"></a> `explorer.disable-compact-mode` | Enable Compact View | Reduces the spacing between items in File Explorer for a more information-dense view. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L57` |
+| <a id="explorer.disable-low-disk-space-warning"></a> `explorer.disable-low-disk-space-warning` | Disable Low Disk Space Warning | Turns off the low disk space warning notification. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L110` |
 | <a id="explorer.disable-taskbar-chat"></a> `explorer.disable-taskbar-chat` | Disable Taskbar Chat Icon | Removes the Microsoft Teams Chat icon from the taskbar. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L84` |
 | <a id="explorer.disable-taskbar-widgets"></a> `explorer.disable-taskbar-widgets` | Disable Taskbar Widgets Icon | Removes the Widgets/News and Interests icon from the taskbar. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L97` |
 | <a id="explorer.show-file-extensions"></a> `explorer.show-file-extensions` | Show File Extensions | Shows the file extension (e.g., .txt, .exe) for all known file types in File Explorer. | Safe | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L31` |

@@ -1,0 +1,874 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Windows Configuration Tool - Registry Database",
+    "source": "nohuto/win-config documentation with Microsoft verification",
+    "total_entries": 0,
+    "categories": []
+  },
+  "categories": {
+    "service_splitting": {
+      "name": "Service Host Splitting",
+      "description": "Controls how services running under svchost.exe are grouped or split into separate processes",
+      "risk_level": "low",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "svchost_split_threshold",
+          "name": "SvcHost Split Threshold",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+          "value_name": "SvcHostSplitThresholdInKB",
+          "type": "REG_DWORD",
+          "default_value": 380000,
+          "recommended_value": 4294967295,
+          "description": "Controls the RAM threshold above which services are split into separate svchost.exe processes. Setting to max DWORD (4294967295) disables splitting.",
+          "documentation": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "kernel_scheduler": {
+      "name": "Kernel Scheduler Settings",
+      "description": "Controls CPU scheduling, DPC handling, and thread priority settings",
+      "risk_level": "medium",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "adjust_dpc_threshold",
+          "name": "Adjust DPC Threshold",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "AdjustDpcThreshold",
+          "type": "REG_DWORD",
+          "default_value": 20,
+          "description": "Kernel variable KiAdjustDpcThreshold - controls DPC threshold adjustment",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "ideal_dpc_rate",
+          "name": "Ideal DPC Rate",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "IdealDpcRate",
+          "type": "REG_DWORD",
+          "default_value": 20,
+          "description": "Kernel variable KiIdealDpcRate - target DPC rate per second",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "minimum_dpc_rate",
+          "name": "Minimum DPC Rate",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "MinimumDpcRate",
+          "type": "REG_DWORD",
+          "default_value": 3,
+          "description": "Kernel variable KiMinimumDpcRate - minimum DPC rate threshold",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "dpc_queue_depth",
+          "name": "DPC Queue Depth",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcQueueDepth",
+          "type": "REG_DWORD",
+          "default_value": 4,
+          "description": "Kernel variable KiMaximumDpcQueueDepth - maximum depth of DPC queue",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "dpc_watchdog_period",
+          "name": "DPC Watchdog Period",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcWatchdogPeriod",
+          "type": "REG_DWORD",
+          "default_value": 120000,
+          "description": "Kernel variable KeDpcWatchdogPeriodMs - DPC watchdog timeout in milliseconds",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "serialize_timer_expiration",
+          "name": "Serialize Timer Expiration",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "SerializeTimerExpiration",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Controls timer serialization. 0=kernel decides based on Modern Standby, 1=enabled, 2+=disabled for timer distribution among processors",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "thread_dpc_enable",
+          "name": "Thread DPC Enable",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "ThreadDpcEnable",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Kernel variable KeThreadDpcEnable - enables/disables threaded DPCs",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "disable_low_qos_timer_resolution",
+          "name": "Disable Low QoS Timer Resolution",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DisableLowQosTimerResolution",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Kernel variable KeDisableLowQosTimerResolution",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "priority_control": {
+      "name": "Priority Control",
+      "description": "Controls CPU scheduling priorities between foreground and background processes",
+      "risk_level": "medium",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "win32_priority_separation",
+          "name": "Win32 Priority Separation",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+          "value_name": "Win32PrioritySeparation",
+          "type": "REG_DWORD",
+          "default_value": 38,
+          "options": {
+            "24": "Long, Fixed, no boost (0x18)",
+            "36": "Short, Variable, no boost (0x24)",
+            "38": "Short, Variable, 3:1 foreground boost (0x26) - Windows default",
+            "40": "Short, Fixed, no boost (0x28)"
+          },
+          "description": "Controls quantum length, variability, and foreground priority boost. 6-bit bitmask controlling CPU scheduling behavior.",
+          "documentation": "Windows Internals 7th Edition",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "mmcss": {
+      "name": "Multimedia Class Scheduler Service",
+      "description": "Controls CPU resource allocation for multimedia applications",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "system_responsiveness",
+          "name": "System Responsiveness",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SystemResponsiveness",
+          "type": "REG_DWORD",
+          "default_value": 20,
+          "valid_range": "10-100 (rounded to nearest 10, 100 disables MMCSS)",
+          "description": "Percentage of CPU guaranteed to low-priority tasks. Lower values = more CPU for multimedia. 100 disables MMCSS entirely.",
+          "documentation": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "network_throttling_index",
+          "name": "Network Throttling Index",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "NetworkThrottlingIndex",
+          "type": "REG_DWORD",
+          "default_value": 10,
+          "valid_range": "1-70, 0xFFFFFFFF disables",
+          "description": "Limits network packet processing. Values 1-70 valid, 0xFFFFFFFF disables throttling completely.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "no_lazy_mode",
+          "name": "No Lazy Mode",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "NoLazyMode",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables idle detection for MMCSS. May be more resource intensive but operates in more realtime mode.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "lazy_mode_timeout",
+          "name": "Lazy Mode Timeout",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "LazyModeTimeout",
+          "type": "REG_DWORD",
+          "default_value": 1000000,
+          "description": "100 nanosecond interval for lazy mode timeout. Default 1000000 = 100ms.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "scheduler_timer_resolution",
+          "name": "Scheduler Timer Resolution",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SchedulerTimerResolution",
+          "type": "REG_DWORD",
+          "default_value": 10000,
+          "description": "Timer resolution in 100ns units. Values >10000 clamped to 10000.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "scheduler_period",
+          "name": "Scheduler Period",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SchedulerPeriod",
+          "type": "REG_DWORD",
+          "default_value": 100000,
+          "valid_range": "50000-1000000",
+          "description": "Scheduler period in 100ns units. Valid range 50000-1000000, defaults to 100000 if invalid.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "graphics_drivers": {
+      "name": "Graphics Drivers (DXG Kernel)",
+      "description": "DirectX/WDDM graphics kernel driver settings",
+      "risk_level": "medium",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "hw_sch_mode",
+          "name": "Hardware Accelerated GPU Scheduling",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "HwSchMode",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "options": {
+            "1": "Disabled",
+            "2": "Enabled"
+          },
+          "description": "Enables Hardware Accelerated GPU Scheduling (HAGS). GPU handles its own scheduling instead of CPU.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "tdr_delay",
+          "name": "TDR Delay",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrDelay",
+          "type": "REG_DWORD",
+          "default_value": 2,
+          "description": "Timeout Detection and Recovery delay in seconds before GPU reset.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "tdr_ddi_delay",
+          "name": "TDR DDI Delay",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrDdiDelay",
+          "type": "REG_DWORD",
+          "default_value": 5,
+          "description": "TDR delay for DDI operations in seconds.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "tdr_level",
+          "name": "TDR Level",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrLevel",
+          "type": "REG_DWORD",
+          "default_value": 3,
+          "description": "TDR behavior level.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "tdr_limit_count",
+          "name": "TDR Limit Count",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrLimitCount",
+          "type": "REG_DWORD",
+          "default_value": 5,
+          "description": "Number of TDR events before system action.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "tdr_limit_time",
+          "name": "TDR Limit Time",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "TdrLimitTime",
+          "type": "REG_DWORD",
+          "default_value": 60,
+          "description": "Time window in seconds for TDR limit count.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "disable_overlays",
+          "name": "Disable Overlays",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "DisableOverlays",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables overlay planes.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "dwm": {
+      "name": "Desktop Window Manager",
+      "description": "DWM compositor and rendering settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "overlay_test_mode",
+          "name": "Overlay Test Mode",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+          "value_name": "OverlayTestMode",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "options": {
+            "0": "Normal",
+            "5": "MPO disabled"
+          },
+          "description": "Controls multiplane overlay behavior. 5 disables MPO.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "disable_overlays",
+          "name": "Disable Overlays",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+          "value_name": "DisableOverlays",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables overlay planes.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "overlay_min_fps",
+          "name": "Overlay Minimum FPS",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+          "value_name": "OverlayMinFPS",
+          "type": "REG_DWORD",
+          "default_value": 15,
+          "description": "Minimum frame rate for overlay assignment. 0 disables minimum requirement.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "file_system": {
+      "name": "File System",
+      "description": "NTFS and file system behavior settings",
+      "risk_level": "low",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "ntfs_disable_8dot3",
+          "name": "Disable 8.3 Name Creation",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "NtfsDisable8dot3NameCreation",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "options": {
+            "0": "Enable 8.3 for all volumes",
+            "1": "Disable 8.3 for all volumes",
+            "2": "Per volume setting",
+            "3": "Disable except system volume"
+          },
+          "description": "Controls creation of short 8.3 filenames. Disabling improves performance.",
+          "documentation": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "ntfs_disable_last_access_update",
+          "name": "Disable Last Access Update",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "NtfsDisableLastAccessUpdate",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Controls last access time updates on NTFS files. Disabling reduces disk I/O.",
+          "documentation": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "long_paths_enabled",
+          "name": "Long Paths Enabled",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "LongPathsEnabled",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Enables Win32 long paths (up to 32k characters) for apps that opt in.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "ntfs_memory_usage",
+          "name": "NTFS Memory Usage",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "NtfsMemoryUsage",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Configures internal cache levels of NTFS paged-pool and nonpaged-pool memory.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "ntfs_mft_zone_reservation",
+          "name": "NTFS MFT Zone Reservation",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "NtfsMftZoneReservation",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "valid_range": "1-4",
+          "description": "Reserved MFT zone size as 200MB x value. Larger values reduce MFT fragmentation.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "memory_management": {
+      "name": "Memory Management",
+      "description": "Virtual memory, paging, and memory optimization settings",
+      "risk_level": "medium",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "clear_pagefile_at_shutdown",
+          "name": "Clear Page File At Shutdown",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+          "value_name": "ClearPageFileAtShutdown",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Clears pagefile on shutdown for security. Increases shutdown time.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "disable_paging_executive",
+          "name": "Disable Paging Executive",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+          "value_name": "DisablePagingExecutive",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Keeps kernel and drivers in physical memory (not paged). Requires sufficient RAM.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "shutdown_timeouts": {
+      "name": "Shutdown Timeouts",
+      "description": "Controls how long Windows waits for applications/services to close",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "wait_to_kill_service_timeout",
+          "name": "Wait To Kill Service Timeout",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+          "value_name": "WaitToKillServiceTimeout",
+          "type": "REG_SZ",
+          "default_value": "5000",
+          "recommended_value": "2500",
+          "description": "Time in milliseconds to wait for services to terminate during shutdown.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "wait_to_kill_app_timeout",
+          "name": "Wait To Kill App Timeout",
+          "path": "HKCU\\Control Panel\\Desktop",
+          "value_name": "WaitToKillAppTimeout",
+          "type": "REG_SZ",
+          "default_value": "5000",
+          "recommended_value": "2500",
+          "description": "Time in milliseconds to wait for applications to terminate.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "hung_app_timeout",
+          "name": "Hung App Timeout",
+          "path": "HKCU\\Control Panel\\Desktop",
+          "value_name": "HungAppTimeout",
+          "type": "REG_SZ",
+          "default_value": "5000",
+          "recommended_value": "1500",
+          "description": "Time in milliseconds before an app is considered hung.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "auto_end_tasks",
+          "name": "Auto End Tasks",
+          "path": "HKCU\\Control Panel\\Desktop",
+          "value_name": "AutoEndTasks",
+          "type": "REG_SZ",
+          "default_value": "0",
+          "recommended_value": "1",
+          "description": "Automatically ends tasks on shutdown without prompting.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "game_mode": {
+      "name": "Game Mode",
+      "description": "Windows gaming optimization features",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "auto_game_mode_enabled",
+          "name": "Auto Game Mode Enabled",
+          "path": "HKCU\\Software\\Microsoft\\GameBar",
+          "value_name": "AutoGameModeEnabled",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables automatic Game Mode activation.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "game_dvr_enabled",
+          "name": "Game DVR Enabled",
+          "path": "HKCU\\System\\GameConfigStore",
+          "value_name": "GameDVR_Enabled",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables Game DVR recording features.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "game_dvr_fse_behavior",
+          "name": "Fullscreen Optimizations Behavior",
+          "path": "HKCU\\System\\GameConfigStore",
+          "value_name": "GameDVR_FSEBehavior",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "options": {
+            "0": "FSO enabled",
+            "2": "FSO disabled"
+          },
+          "description": "Controls Fullscreen Optimizations behavior.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "telemetry": {
+      "name": "Telemetry & Diagnostics",
+      "description": "Windows diagnostic and telemetry data collection settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "allow_telemetry",
+          "name": "Allow Telemetry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+          "value_name": "AllowTelemetry",
+          "type": "REG_DWORD",
+          "default_value": 3,
+          "options": {
+            "0": "Security (Enterprise only)",
+            "1": "Basic",
+            "2": "Enhanced",
+            "3": "Full"
+          },
+          "description": "Controls the level of diagnostic data sent to Microsoft.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "storage_sense": {
+      "name": "Storage Sense",
+      "description": "Automatic storage cleanup feature",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "allow_storage_sense_global",
+          "name": "Allow Storage Sense Global",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense",
+          "value_name": "AllowStorageSenseGlobal",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables/disables Storage Sense automatic cleanup.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "allow_storage_sense_temp_cleanup",
+          "name": "Allow Temporary Files Cleanup",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense",
+          "value_name": "AllowStorageSenseTemporaryFilesCleanup",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables/disables automatic temporary file cleanup.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "notifications": {
+      "name": "Notifications",
+      "description": "Windows notification system settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "no_toast_notification",
+          "name": "No Toast Notification",
+          "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+          "value_name": "NoToastApplicationNotification",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables toast notifications from applications.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "no_tile_notification",
+          "name": "No Tile Notification",
+          "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+          "value_name": "NoTileApplicationNotification",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables tile notifications in Start menu.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "no_lock_screen_toast",
+          "name": "No Lock Screen Toast",
+          "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+          "value_name": "NoToastApplicationNotificationOnLockScreen",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables toast notifications on lock screen.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "search": {
+      "name": "Windows Search",
+      "description": "Search indexing and web search settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "do_not_use_web_results",
+          "name": "Disable Web Search Results",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "DoNotUseWebResults",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables web results in Windows Search.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "prevent_remote_queries",
+          "name": "Prevent Remote Queries",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "PreventRemoteQueries",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Prevents clients from querying this computer's index remotely.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "allow_indexing_encrypted",
+          "name": "Allow Indexing Encrypted Items",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "AllowIndexingEncryptedStoresOrItems",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Allows encrypted items to be indexed.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "visual_effects": {
+      "name": "Visual Effects",
+      "description": "Desktop visual appearance settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "jpeg_import_quality",
+          "name": "JPEG Import Quality",
+          "path": "HKCU\\Control Panel\\Desktop",
+          "value_name": "JPEGImportQuality",
+          "type": "REG_DWORD",
+          "default_value": 85,
+          "valid_range": "60-100",
+          "description": "Quality of JPEG images used as desktop background. Default 85, max 100.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "no_window_minimizing_shortcuts",
+          "name": "Disable Aero Shake",
+          "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+          "value_name": "NoWindowMinimizingShortcuts",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables Aero Shake window minimizing gesture.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "explorer": {
+      "name": "Windows Explorer",
+      "description": "File Explorer behavior settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "no_low_disk_space_checks",
+          "name": "Disable Low Disk Space Warning",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "NoLowDiskSpaceChecks",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Disables the low disk space warning notification.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "verbose_status": {
+      "name": "Verbose Status Messages",
+      "description": "Detailed startup/shutdown status messages",
+      "risk_level": "low",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "verbose_status",
+          "name": "Verbose Status",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "value_name": "VerboseStatus",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Displays detailed status messages during startup, shutdown, logon, and logoff.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "bsod": {
+      "name": "Blue Screen Settings",
+      "description": "BSOD display and crash behavior settings",
+      "risk_level": "low",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "display_parameters",
+          "name": "Display Parameters",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+          "value_name": "DisplayParameters",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Shows detailed BSoD information (stop code, parameters).",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "auto_reboot",
+          "name": "Auto Reboot",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+          "value_name": "AutoReboot",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Automatically restarts after a crash. 0 to disable for debugging.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "segment_heap": {
+      "name": "Segment Heap",
+      "description": "Modern heap allocator settings",
+      "risk_level": "medium",
+      "requires_reboot": true,
+      "entries": [
+        {
+          "id": "segment_heap_enabled",
+          "name": "Segment Heap Enabled",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Segment Heap",
+          "value_name": "Enabled",
+          "type": "REG_DWORD",
+          "default_value": 0,
+          "description": "Enables Segment Heap globally. More efficient memory allocator for modern apps.",
+          "verified": true,
+          "safe": false,
+          "warning": "Enabling globally may cause issues with some applications"
+        }
+      ]
+    },
+    "app_archive": {
+      "name": "App Archive",
+      "description": "Automatic app archiving settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "allow_automatic_app_archiving",
+          "name": "Allow Automatic App Archiving",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Appx",
+          "value_name": "AllowAutomaticAppArchiving",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Controls whether infrequently used apps are automatically archived.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    },
+    "clipboard": {
+      "name": "Clipboard",
+      "description": "Clipboard history and sync settings",
+      "risk_level": "low",
+      "requires_reboot": false,
+      "entries": [
+        {
+          "id": "allow_clipboard_history",
+          "name": "Allow Clipboard History",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+          "value_name": "AllowClipboardHistory",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables/disables clipboard history feature.",
+          "verified": true,
+          "safe": true
+        },
+        {
+          "id": "allow_cross_device_clipboard",
+          "name": "Allow Cross Device Clipboard",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+          "value_name": "AllowCrossDeviceClipboard",
+          "type": "REG_DWORD",
+          "default_value": 1,
+          "description": "Enables/disables clipboard sync across devices.",
+          "verified": true,
+          "safe": true
+        }
+      ]
+    }
+  }
+}

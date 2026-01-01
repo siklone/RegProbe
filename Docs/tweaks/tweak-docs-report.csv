@@ -25,6 +25,7 @@ cleanup.wer-files,Clear Windows Error Reporting Files,Docs/cleanup/cleanup.md,ye
 cleanup.windows-old,Delete Windows.old Folder,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs#L11
 cleanup.windows-update-cache,Clear Windows Update Cache,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs#L11
 explorer.disable-compact-mode,Enable Compact View,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L57
+explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L110
 explorer.disable-taskbar-chat,Disable Taskbar Chat Icon,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L84
 explorer.disable-taskbar-widgets,Disable Taskbar Widgets Icon,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L97
 explorer.show-file-extensions,Show File Extensions,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L31
@@ -198,16 +199,23 @@ security.trusted-path-credential-prompting,Require Trusted Path for Credentials,
 security.uac-never-notify,Set UAC to Never Notify,Docs/security/security.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L18
 system-check-disk-health,Check Disk Health (C:),Docs/tweaks/tweaks.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/System/CheckDiskHealthTweak.cs#L13
 system.aero-shake,Disable Aero Shake,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L40
+system.bsod-disable-auto-reboot,Disable Auto Reboot on Crash,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L382
+system.bsod-display-parameters,Show BSOD Parameters,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L370
+system.disable-app-archiving,Disable Automatic App Archiving,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L420
 system.disable-auto-maintenance,Disable Automatic Maintenance,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L105
 system.disable-background-gp-updates,Disable Background Group Policy Updates,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L95
 system.disable-clipboard-history,Disable Clipboard History & Sync,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L73
 system.disable-clipboard-redirection,Disable Clipboard Redirection (RDP),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L85
+system.disable-fullscreen-optimizations,Disable Fullscreen Optimizations,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L315
+system.disable-game-dvr,Disable Game DVR,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L302
 system.disable-jpeg-reduction,Disable JPEG Reduction,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L51
 system.disable-non-essential-services,Disable Non-Essential Services,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L103
 system.disable-restartable-apps,Disable Restartable Apps,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L387
 system.disable-scheduled-tasks,Disable Telemetry & Maintenance Tasks,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L86
 system.disable-search-highlights,Disable Search Highlights,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L72
 system.disable-search-highlights-policy,Disable Search Highlights (Policy),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L824
+system.disable-search-remote-queries,Disable Remote Search Queries,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L345
+system.disable-search-web-results,Disable Web Search Results,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L333
 system.disable-service-splitting,Disable Service Splitting,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L834
 system.disable-services-drivers,Disable Services/Drivers,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2062
 system.disable-shortcut-arrow,Remove Shortcut Arrow Overlay,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L60
@@ -216,8 +224,34 @@ system.disable-storage-sense,Disable Storage Sense,Docs/system/system.md,yes,yes
 system.disable-storage-sense-temp-cleanup,Disable Storage Sense Temporary Files Cleanup,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L814
 system.disable-store-open-with,Disable Store in Open With,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L169
 system.disable-windows-search-service,Disable Windows Search Service,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2214
+system.dwm-disable-mpo,DWM: Disable Multiplane Overlay (MPO),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L200
+system.dwm-disable-overlay-min-fps,DWM: Disable Overlay Minimum FPS,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L212
 system.enable-game-mode,Enable Game Mode,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L21
 system.enable-hags,Enable Hardware-Accelerated GPU Scheduling,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L794
+system.enable-indexing-encrypted-items,Enable Indexing of Encrypted Items,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L357
+system.graphics-disable-overlays,Graphics: Disable Overlay Planes,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L187
+system.graphics-tdr-ddi-delay,Graphics: TDR DDI Delay (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L139
+system.graphics-tdr-delay,Graphics: TDR Delay (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L127
+system.graphics-tdr-level,Graphics: TDR Level (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L151
+system.graphics-tdr-limit-count,Graphics: TDR Limit Count (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L163
+system.graphics-tdr-limit-time,Graphics: TDR Limit Time (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L175
+system.kernel-adjust-dpc-threshold,Kernel: Adjust DPC Threshold,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L30
+system.kernel-disable-low-qos-timer-resolution,Kernel: Disable Low QoS Timer Resolution,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L114
+system.kernel-dpc-queue-depth,Kernel: DPC Queue Depth,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L66
+system.kernel-dpc-watchdog-period,Kernel: DPC Watchdog Period,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L78
+system.kernel-ideal-dpc-rate,Kernel: Ideal DPC Rate,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L42
+system.kernel-minimum-dpc-rate,Kernel: Minimum DPC Rate,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L54
+system.kernel-serialize-timer-expiration,Kernel: Serialize Timer Expiration,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L90
+system.kernel-thread-dpc-enable,Kernel: Threaded DPC Enable,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L102
+system.memory-clear-pagefile-at-shutdown,Clear Page File at Shutdown,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L395
+system.memory-disable-paging-executive,Disable Paging Executive,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L407
+system.ntfs-disable-8dot3,Disable 8.3 Name Creation,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L225
+system.ntfs-disable-last-access,Disable Last Access Updates,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L237
+system.ntfs-enable-long-paths,Enable Win32 Long Paths,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L249
+system.ntfs-reset-memory-usage,Reset NTFS Memory Usage,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L261
+system.ntfs-reset-mft-zone,Reset NTFS MFT Zone Reservation,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L273
+system.priority-control,Set Foreground Scheduling Priority,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L17
+system.reduce-shutdown-timeouts,Reduce Shutdown Timeouts,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L286
 system.verbose-status-messages,Enable Verbose Status Messages,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L47
 visibility.default-account-picture,Use Default Account Picture,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L200
 visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L356
