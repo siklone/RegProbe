@@ -20,8 +20,8 @@ DOC_INDEX_START = "<!-- TWEAK INDEX START -->"
 DOC_INDEX_END = "<!-- TWEAK INDEX END -->"
 
 DOC_MAP = {
-    "privacy": "Docs/privacy/privacy.md",
-    "security": "Docs/security/security.md",
+    "privacy": "Docs/privacy/privacy-verified.md",
+    "security": "Docs/security/security-verified.md",
     "network": "Docs/network/network.md",
     "power": "Docs/power/power.md",
     "system": "Docs/system/system.md",

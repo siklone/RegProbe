@@ -30,8 +30,8 @@ public sealed class TweakDocumentationLinker
             : Directory.GetParent(_docsRoot)?.FullName;
         _categoryDocMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            ["privacy"] = Path.Combine("privacy", "privacy.md"),
-            ["security"] = Path.Combine("security", "security.md"),
+            ["privacy"] = Path.Combine("privacy", "privacy-verified.md"),
+            ["security"] = Path.Combine("security", "security-verified.md"),
             ["network"] = Path.Combine("network", "network.md"),
             ["power"] = Path.Combine("power", "power.md"),
             ["system"] = Path.Combine("system", "system.md"),

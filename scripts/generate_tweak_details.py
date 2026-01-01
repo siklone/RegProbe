@@ -92,9 +92,10 @@ def build_html(entries: list[dict[str, str]]) -> str:
         ])
 
         if main_doc:
+            main_doc_url = f"{main_doc}#{entry['id']}" if entry["id"] else main_doc
             lines.append(
                 f"        <div class=\"label\">Main doc</div>"
-                f"<div><a href=\"{html.escape(main_doc)}\">{main_doc_label}</a></div>"
+                f"<div><a href=\"{html.escape(main_doc_url)}\">{main_doc_label}</a></div>"
             )
         else:
             lines.append(

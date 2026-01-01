@@ -433,3 +433,32 @@ Version:
 - Created: 2026-01
 - Source: nohuto/win-config (security/)
 - Status: Reference documentation
+
+<!-- TWEAK INDEX START -->
+## Tweak Index (Generated)
+
+This section is generated from `Docs/tweaks/tweak-catalog.csv`.
+Do not edit manually.
+
+| ID | Name | Changes | Risk | Source |
+| --- | --- | --- | --- | --- |
+| <a id="security.disable-downloads-blocking"></a> `security.disable-downloads-blocking` | Disable Downloads Blocking | Prevents Windows from marking downloads with zone information (MOTW). | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1461` |
+| <a id="security.disable-ntfs-encryption"></a> `security.disable-ntfs-encryption` | Disable NTFS Encryption (EFS) | Prevents EFS encryption on NTFS volumes to avoid accidental data lockouts. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L176` |
+| <a id="security.disable-p2p-updates"></a> `security.disable-p2p-updates` | Disable P2P Updates | Disables Delivery Optimization peer-to-peer caching for updates. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1400` |
+| <a id="security.disable-password-reveal"></a> `security.disable-password-reveal` | Disable Password Reveal Button | Hides the 'eye' icon button that reveals passwords in credential prompts. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L57` |
+| <a id="security.disable-picture-password"></a> `security.disable-picture-password` | Disable Picture Password Sign-In | Prevents domain users from using picture passwords for sign-in. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L69` |
+| <a id="security.disable-remote-assistance"></a> `security.disable-remote-assistance` | Disable Remote Assistance | Disables solicited Remote Assistance connections to reduce attack surface. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L164` |
+| <a id="security.disable-system-mitigations"></a> `security.disable-system-mitigations` | Disable System Mitigations | Turns off system-wide exploit mitigation settings (ASLR, DEP, etc.) for performance. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L95` |
+| <a id="security.disable-system-restore"></a> `security.disable-system-restore` | Disable System Restore | Disables System Restore by setting the restore session interval to zero. | Risky | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1451` |
+| <a id="security.disable-uac"></a> `security.disable-uac` | Disable UAC (Full) | Disables User Account Control entirely. Requires a reboot and severely lowers system security. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L33` |
+| <a id="security.disable-vbs"></a> `security.disable-vbs` | Disable VBS (HVCI) | Turns off virtualization-based security and memory integrity policies for lower latency. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L107` |
+| <a id="security.disable-windows-firewall"></a> `security.disable-windows-firewall` | Disable Windows Firewall | Turns off Windows Defender Firewall for Domain, Private, and Public profiles. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L82` |
+| <a id="security.disable-windows-update"></a> `security.disable-windows-update` | Disable Windows Update | Pauses updates and sets Windows Update policies to block access effectively till 2030. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L135` |
+| <a id="security.disable-wpbt"></a> `security.disable-wpbt` | Disable WPBT Execution | Blocks Windows Platform Binary Table (WPBT) programs from running at startup (prevents BIOS-injected bloatware). | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L122` |
+| <a id="security.disable-wu-driver-updates"></a> `security.disable-wu-driver-updates` | Disable WU Driver Updates | Stops Windows Update from offering driver updates and device metadata to prevent problematic driver overwrites. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L150` |
+| <a id="security.enable-dynamic-lock"></a> `security.enable-dynamic-lock` | Enable Dynamic Lock | Automatically locks the device when the paired Bluetooth device is away. | Safe | `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L62` |
+| <a id="security.enable-sudo"></a> `security.enable-sudo` | Enable Windows Sudo | Enables the sudo for Windows feature with in-place elevation behavior. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L201` |
+| <a id="security.powershell-unrestricted"></a> `security.powershell-unrestricted` | Set PowerShell Policy to Unrestricted | Allows all PowerShell scripts to run without signing requirements. Very risky for general use. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L189` |
+| <a id="security.trusted-path-credential-prompting"></a> `security.trusted-path-credential-prompting` | Require Trusted Path for Credentials | Forces credential prompts to use the Secure Desktop to prevent interception. | Advanced | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L45` |
+| <a id="security.uac-never-notify"></a> `security.uac-never-notify` | Set UAC to Never Notify | Lowers User Account Control prompts to the least restrictive setting. Risky for security but reduces interruptions. | Risky | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L18` |
+<!-- TWEAK INDEX END -->
