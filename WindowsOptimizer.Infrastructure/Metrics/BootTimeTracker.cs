@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Text.Json;
+using System.Xml.Linq;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
 
@@ -82,12 +83,11 @@ public sealed class BootTimeTracker
 
             if (latestEvent != null)
             {
-                // Property index 0 is BootTime in milliseconds
-                var bootTimeMs = latestEvent.Properties.Count > 0
-                    ? Convert.ToInt64(latestEvent.Properties[0].Value)
-                    : 0;
+                var bootTimeMs = TryGetBootTimeMs(latestEvent);
                 latestEvent.Dispose();
-                return bootTimeMs > 0 ? TimeSpan.FromMilliseconds(bootTimeMs) : null;
+                return bootTimeMs.HasValue && bootTimeMs.Value >= 1000
+                    ? TimeSpan.FromMilliseconds(bootTimeMs.Value)
+                    : null;
             }
         }
         catch (EventLogNotFoundException)
@@ -102,6 +102,66 @@ public sealed class BootTimeTracker
         {
             // Ignore other errors
         }
+        return null;
+    }
+
+    private static long? TryGetBootTimeMs(EventRecord record)
+    {
+        try
+        {
+            if (record.Properties.Count > 0)
+            {
+                var raw = record.Properties[0].Value;
+                if (raw != null && long.TryParse(raw.ToString(), out var parsed) && parsed > 0)
+                {
+                    return parsed;
+                }
+            }
+        }
+        catch
+        {
+        }
+
+        try
+        {
+            var xml = record.ToXml();
+            var doc = XDocument.Parse(xml);
+            var eventData = doc.Root?.Element("EventData");
+            if (eventData == null)
+            {
+                return null;
+            }
+
+            long? ReadNamedValue(string name)
+            {
+                var element = eventData.Elements("Data")
+                    .FirstOrDefault(e => string.Equals(e.Attribute("Name")?.Value, name, StringComparison.OrdinalIgnoreCase));
+                if (element == null)
+                {
+                    return null;
+                }
+
+                return long.TryParse(element.Value, out var value) ? value : null;
+            }
+
+            var bootTime = ReadNamedValue("BootTime") ?? ReadNamedValue("BootDuration");
+            if (bootTime.HasValue && bootTime.Value > 0)
+            {
+                return bootTime.Value;
+            }
+
+            var mainPath = ReadNamedValue("MainPathBootTime");
+            var postBoot = ReadNamedValue("BootPostBootTime");
+            if (mainPath.HasValue || postBoot.HasValue)
+            {
+                var total = (mainPath ?? 0) + (postBoot ?? 0);
+                return total > 0 ? total : null;
+            }
+        }
+        catch
+        {
+        }
+
         return null;
     }
 
@@ -126,7 +186,9 @@ public sealed class BootTimeTracker
             var record = new BootTimeRecord
             {
                 BootTime = bootTime.Value,
-                BootDurationMs = (long?)bootDuration?.TotalMilliseconds
+                BootDurationMs = bootDuration.HasValue && bootDuration.Value.TotalMilliseconds >= 1000
+                    ? (long?)bootDuration.Value.TotalMilliseconds
+                    : null
             };
 
             _history.Add(record);
@@ -160,7 +222,7 @@ public sealed class BootTimeTracker
         lock (_lock)
         {
             var validRecords = _history
-                .Where(h => h.BootDurationMs.HasValue && h.BootDurationMs > 0)
+                .Where(h => h.BootDurationMs.HasValue && h.BootDurationMs >= 1000)
                 .ToList();
 
             if (validRecords.Count == 0) return null;
@@ -178,7 +240,7 @@ public sealed class BootTimeTracker
         lock (_lock)
         {
             return _history
-                .Where(h => h.BootDurationMs.HasValue && h.BootDurationMs > 0)
+                .Where(h => h.BootDurationMs.HasValue && h.BootDurationMs >= 1000)
                 .OrderByDescending(h => h.BootTime)
                 .Take(count)
                 .OrderBy(h => h.BootTime)

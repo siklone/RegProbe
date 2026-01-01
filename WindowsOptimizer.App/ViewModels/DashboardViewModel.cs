@@ -43,6 +43,21 @@ public sealed class DashboardViewModel : ViewModelBase
     private bool _isFullScanEnabled;
     private int _scanSkippedCount;
     private string _scanSkippedSummary = string.Empty;
+    private string _osVersion = "Unknown";
+    private string _osBuild = "Unknown";
+    private string _machineName = "Unknown";
+    private string _userName = "Unknown";
+    private int _processorCount;
+    private string _systemArchitecture = "Unknown";
+    private string _totalMemoryFormatted = "Unknown";
+    private string _availableMemoryFormatted = "Unknown";
+    private string _systemUptime = "Unknown";
+    private string _dotNetVersion = "Unknown";
+    private string _gpuName = "Unknown";
+    private string _primaryDiskType = "Unknown";
+    private string _secureBootStatus = "Unknown";
+    private string _virtualizationStatus = "Unknown";
+    private string _tpmStatus = "Unknown";
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -88,6 +103,7 @@ public sealed class DashboardViewModel : ViewModelBase
         EnableVssCommand = new RelayCommand(_ => EnableVssServiceAsync(), _ => VssServiceNeedsEnable && !IsCreatingRestorePoint);
         OpenDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport(), _ => File.Exists(DocsCoverageReportPath));
         LoadDocsCoverageReport();
+        LoadSystemSnapshot();
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -617,21 +633,21 @@ public sealed class DashboardViewModel : ViewModelBase
     public bool HasBootTimeHistory => RecentBootDurations.Count > 1;
 
     // System Information Properties
-    public string OsVersion => GetOsVersion();
-    public string OsBuild => Environment.OSVersion.Version.Build.ToString();
-    public string MachineName => Environment.MachineName;
-    public string UserName => Environment.UserName;
-    public int ProcessorCount => Environment.ProcessorCount;
-    public string SystemArchitecture => Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit";
-    public string TotalMemoryFormatted => GetTotalMemoryFormatted();
-    public string AvailableMemoryFormatted => GetAvailableMemoryFormatted();
-    public string SystemUptime => GetSystemUptime();
-    public string DotNetVersion => Environment.Version.ToString();
-    public string GpuName => GetGpuName();
-    public string PrimaryDiskType => GetPrimaryDiskType();
-    public string SecureBootStatus => GetSecureBootStatus();
-    public string VirtualizationStatus => GetVirtualizationStatus();
-    public string TpmStatus => GetTpmStatus();
+    public string OsVersion => _osVersion;
+    public string OsBuild => _osBuild;
+    public string MachineName => _machineName;
+    public string UserName => _userName;
+    public int ProcessorCount => _processorCount;
+    public string SystemArchitecture => _systemArchitecture;
+    public string TotalMemoryFormatted => _totalMemoryFormatted;
+    public string AvailableMemoryFormatted => _availableMemoryFormatted;
+    public string SystemUptime => _systemUptime;
+    public string DotNetVersion => _dotNetVersion;
+    public string GpuName => _gpuName;
+    public string PrimaryDiskType => _primaryDiskType;
+    public string SecureBootStatus => _secureBootStatus;
+    public string VirtualizationStatus => _virtualizationStatus;
+    public string TpmStatus => _tpmStatus;
 
     [SupportedOSPlatform("windows")]
     private static string GetOsVersion()
@@ -789,7 +805,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
         try
         {
-            var scope = new ManagementScope(@"\\.\root\\Microsoft\\Windows\\Storage")
+            var scope = new ManagementScope(@"root\\Microsoft\\Windows\\Storage")
             {
                 Options =
                 {
@@ -834,6 +850,11 @@ public sealed class DashboardViewModel : ViewModelBase
             {
                 return FormatDiskType(null, diskBusType, diskFriendlyName);
             }
+        }
+        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
+        {
+            LogProbeException("BootDiskStorage", ex);
+            return null;
         }
         catch (Exception ex)
         {
@@ -1009,7 +1030,7 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var scope = new ManagementScope(@"\\.\root\\CIMV2\\Security\\MicrosoftTpm")
+            var scope = new ManagementScope(@"root\\CIMV2\\Security\\MicrosoftTpm")
             {
                 Options =
                 {
@@ -1038,7 +1059,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
             return "Not detected";
         }
-        catch (ManagementException ex) when (ex.ErrorCode == ManagementStatus.InvalidNamespace || ex.ErrorCode == ManagementStatus.InvalidClass)
+        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
         {
             LogProbeException("TPM", ex);
             return "Not detected";
@@ -1116,8 +1137,28 @@ public sealed class DashboardViewModel : ViewModelBase
         return "Unknown";
     }
 
+    private void LoadSystemSnapshot()
+    {
+        _osVersion = GetOsVersion();
+        _osBuild = Environment.OSVersion.Version.Build.ToString();
+        _machineName = Environment.MachineName;
+        _userName = Environment.UserName;
+        _processorCount = Environment.ProcessorCount;
+        _systemArchitecture = Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit";
+        _totalMemoryFormatted = GetTotalMemoryFormatted();
+        _availableMemoryFormatted = GetAvailableMemoryFormatted();
+        _systemUptime = GetSystemUptime();
+        _dotNetVersion = Environment.Version.ToString();
+        _gpuName = GetGpuName();
+        _primaryDiskType = GetPrimaryDiskType();
+        _secureBootStatus = GetSecureBootStatus();
+        _virtualizationStatus = GetVirtualizationStatus();
+        _tpmStatus = GetTpmStatus();
+    }
+
     private void RefreshSystemSnapshot()
     {
+        LoadSystemSnapshot();
         OnPropertyChanged(nameof(OsVersion));
         OnPropertyChanged(nameof(OsBuild));
         OnPropertyChanged(nameof(SystemArchitecture));
@@ -1132,6 +1173,15 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(SecureBootStatus));
         OnPropertyChanged(nameof(VirtualizationStatus));
         OnPropertyChanged(nameof(TpmStatus));
+        OnPropertyChanged(nameof(LastBootTimeFormatted));
+        OnPropertyChanged(nameof(LastBootDurationFormatted));
+        OnPropertyChanged(nameof(AverageBootDurationFormatted));
+        OnPropertyChanged(nameof(BootTimeImprovementFormatted));
+        OnPropertyChanged(nameof(HasBootTimeImprovement));
+        OnPropertyChanged(nameof(HasBootTimeHistory));
+        OnPropertyChanged(nameof(RecentBootDurations));
+        OnPropertyChanged(nameof(IsBootDurationAvailable));
+        OnPropertyChanged(nameof(BootTimeTooltip));
     }
 
     // Recent Activity Timeline
