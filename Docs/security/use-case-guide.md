@@ -5,6 +5,7 @@ This guide maps common security scenarios to registry-backed settings.
 It is a companion to the main docs and is intentionally separated to preserve source provenance.
 
 Related docs:
+- [Security verified documentation](security-verified.md)
 - [Security tweaks](security.md)
 - [Tweak catalog](../tweaks/tweak-catalog.html)
 - [Tweak details](../tweaks/tweak-details.html)

@@ -4,6 +4,7 @@
 > **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
 
 Related guides:
+- [Security verified documentation](security-verified.md)
 - [Security use-case guide](use-case-guide.md)
 - [Tweak catalog](../tweaks/tweak-catalog.html)
 - [Tweak details](../tweaks/tweak-details.html)
