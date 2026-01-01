@@ -21,6 +21,7 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _isTesting;
     private readonly RelayCommand _openUrlCommand;
     private bool _isDarkTheme = true;
+    private AppSettings _settings = new();
 
     public SettingsViewModel()
     {
@@ -141,6 +142,7 @@ public sealed class SettingsViewModel : ViewModelBase
         try
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
+            _settings = settings;
             DiscordWebhookUrl = settings.DiscordWebhookUrl ?? string.Empty;
             DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
             DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
@@ -161,15 +163,14 @@ public sealed class SettingsViewModel : ViewModelBase
 
         try
         {
-            var settings = new AppSettings
-            {
-                DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl,
-                DiscordNotificationsEnabled = DiscordNotificationsEnabled,
-                DiscordAutoPatchEnabled = DiscordAutoPatchEnabled,
-                Theme = IsDarkTheme ? "Dark" : "Light"
-            };
+            var settings = await _settingsStore.LoadAsync(CancellationToken.None);
+            settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
+            settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
+            settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
+            settings.Theme = IsDarkTheme ? "Dark" : "Light";
 
             await _settingsStore.SaveAsync(settings, CancellationToken.None);
+            _settings = settings;
             StatusMessage = "Settings saved successfully!";
         }
         catch (System.Exception ex)

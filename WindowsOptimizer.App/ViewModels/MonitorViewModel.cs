@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WindowsOptimizer.Infrastructure;
@@ -12,11 +16,25 @@ namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MonitorViewModel : ViewModelBase, IDisposable
 {
+    private static readonly MonitorSectionDefinition[] DefaultSections =
+    [
+        new("system-info", "System Information", "OS, CPU, GPU, RAM, uptime."),
+        new("stat-cards", "Usage Summary Cards", "CPU, RAM, GPU usage and temperatures."),
+        new("cpu-ram-history", "CPU & RAM History", "60-second usage history charts."),
+        new("network-disk-io", "Network & Disk I/O", "60-second throughput charts."),
+        new("top-cpu-ram", "Top CPU/RAM Processes", "Top processes by CPU and RAM usage."),
+        new("top-network", "Top Network Processes", "Top processes by network throughput."),
+        new("top-disk", "Top Disk Processes", "Top processes by disk I/O throughput."),
+        new("network-adapters", "Network Adapters", "Per-adapter throughput and totals."),
+        new("disk-activity", "Disk Activity", "Per-disk throughput and usage.")
+    ];
+
     private readonly MetricProvider? _metricProvider;
     private readonly ProcessMonitor? _processMonitor;
     private readonly NetworkMonitor? _networkMonitor;
     private readonly DiskMonitor? _diskMonitor;
     private readonly DispatcherTimer? _updateTimer;
+    private readonly SettingsStore _settingsStore;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -31,12 +49,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isRamAlertActive;
     private ProcessMonitor.NetworkProcessMode _networkProcessMode = ProcessMonitor.NetworkProcessMode.ApproximateIo;
     private bool _isDisposed;
+    private bool _isLayoutEditorVisible;
+    private bool _isLayoutLoading;
+
+    private readonly RelayCommand _toggleLayoutEditorCommand;
+    private readonly RelayCommand _moveSectionUpCommand;
+    private readonly RelayCommand _moveSectionDownCommand;
+    private readonly RelayCommand _resetLayoutCommand;
 
     public MonitorViewModel()
     {
         try
         {
             var paths = AppPaths.FromEnvironment();
+            _settingsStore = new SettingsStore(paths);
+            _toggleLayoutEditorCommand = new RelayCommand(_ => IsLayoutEditorVisible = !IsLayoutEditorVisible);
+            _moveSectionUpCommand = new RelayCommand(param => MoveSection(param, -1), param => CanMoveSection(param, -1));
+            _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
+            _resetLayoutCommand = new RelayCommand(_ => ResetLayout());
+            InitializeLayout();
 
             // Initialize monitors safely
             try
@@ -172,6 +203,18 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             SuspendProcessCommand ??= new RelayCommand(_ => { });
             ResumeProcessCommand ??= new RelayCommand(_ => { });
             ExportMetricsCommand ??= new RelayCommand(_ => { });
+            _toggleLayoutEditorCommand = new RelayCommand(_ => { });
+            _moveSectionUpCommand = new RelayCommand(_ => { });
+            _moveSectionDownCommand = new RelayCommand(_ => { });
+            _resetLayoutCommand = new RelayCommand(_ => { });
+
+            if (MonitorSections.Count == 0)
+            {
+                foreach (var section in BuildDefaultSections())
+                {
+                    MonitorSections.Add(section);
+                }
+            }
         }
     }
 
@@ -262,7 +305,196 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private void InitializeLayout()
+    {
+        _isLayoutLoading = true;
+        MonitorSections.Clear();
+
+        var defaults = BuildDefaultSections();
+        var layout = ApplySavedLayout(defaults);
+        foreach (var section in layout)
+        {
+            section.PropertyChanged += OnSectionLayoutChanged;
+            MonitorSections.Add(section);
+        }
+
+        _isLayoutLoading = false;
+        UpdateLayoutCommands();
+    }
+
+    private static List<MonitorSectionLayout> BuildDefaultSections()
+    {
+        return DefaultSections
+            .Select(def => new MonitorSectionLayout(def.Key, def.Title, def.Description))
+            .ToList();
+    }
+
+    private List<MonitorSectionLayout> ApplySavedLayout(IReadOnlyList<MonitorSectionLayout> defaults)
+    {
+        try
+        {
+            var settings = _settingsStore.LoadAsync(CancellationToken.None).GetAwaiter().GetResult();
+            if (settings.MonitorSections.Count == 0)
+            {
+                return defaults.ToList();
+            }
+
+            var defaultByKey = defaults.ToDictionary(section => section.Key, StringComparer.OrdinalIgnoreCase);
+            var usedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var ordered = new List<MonitorSectionLayout>();
+
+            foreach (var state in settings.MonitorSections.OrderBy(state => state.Order))
+            {
+                if (string.IsNullOrWhiteSpace(state.Key))
+                {
+                    continue;
+                }
+
+                if (!defaultByKey.TryGetValue(state.Key, out var definition))
+                {
+                    continue;
+                }
+
+                var section = new MonitorSectionLayout(definition.Key, definition.Title, definition.Description)
+                {
+                    IsVisible = state.IsVisible
+                };
+                ordered.Add(section);
+                usedKeys.Add(definition.Key);
+            }
+
+            foreach (var definition in defaults)
+            {
+                if (!usedKeys.Contains(definition.Key))
+                {
+                    ordered.Add(new MonitorSectionLayout(definition.Key, definition.Title, definition.Description));
+                }
+            }
+
+            return ordered;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Monitor layout load failed: {ex.Message}");
+            return defaults.ToList();
+        }
+    }
+
+    private void OnSectionLayoutChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (_isLayoutLoading)
+        {
+            return;
+        }
+
+        if (e.PropertyName == nameof(MonitorSectionLayout.IsVisible))
+        {
+            _ = SaveLayoutAsync();
+        }
+    }
+
+    private bool CanMoveSection(object? parameter, int direction)
+    {
+        if (parameter is not MonitorSectionLayout section)
+        {
+            return false;
+        }
+
+        var index = MonitorSections.IndexOf(section);
+        if (index < 0)
+        {
+            return false;
+        }
+
+        var nextIndex = index + direction;
+        return nextIndex >= 0 && nextIndex < MonitorSections.Count;
+    }
+
+    private void MoveSection(object? parameter, int direction)
+    {
+        if (parameter is not MonitorSectionLayout section)
+        {
+            return;
+        }
+
+        var index = MonitorSections.IndexOf(section);
+        var nextIndex = index + direction;
+        if (nextIndex < 0 || nextIndex >= MonitorSections.Count)
+        {
+            return;
+        }
+
+        MonitorSections.Move(index, nextIndex);
+        UpdateLayoutCommands();
+        _ = SaveLayoutAsync();
+    }
+
+    private void UpdateLayoutCommands()
+    {
+        _moveSectionUpCommand.RaiseCanExecuteChanged();
+        _moveSectionDownCommand.RaiseCanExecuteChanged();
+    }
+
+    private void ResetLayout()
+    {
+        _isLayoutLoading = true;
+        foreach (var section in MonitorSections)
+        {
+            section.PropertyChanged -= OnSectionLayoutChanged;
+        }
+
+        MonitorSections.Clear();
+        foreach (var section in BuildDefaultSections())
+        {
+            section.PropertyChanged += OnSectionLayoutChanged;
+            MonitorSections.Add(section);
+        }
+
+        _isLayoutLoading = false;
+        UpdateLayoutCommands();
+        _ = SaveLayoutAsync();
+    }
+
+    private async Task SaveLayoutAsync()
+    {
+        if (_isLayoutLoading)
+        {
+            return;
+        }
+
+        try
+        {
+            var settings = await _settingsStore.LoadAsync(CancellationToken.None);
+            settings.MonitorSections = MonitorSections
+                .Select((section, index) => new MonitorSectionState
+                {
+                    Key = section.Key,
+                    Order = index,
+                    IsVisible = section.IsVisible
+                })
+                .ToList();
+            await _settingsStore.SaveAsync(settings, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Monitor layout save failed: {ex.Message}");
+        }
+    }
+
     public string Title => "Monitor";
+
+    public ObservableCollection<MonitorSectionLayout> MonitorSections { get; } = new();
+
+    public bool IsLayoutEditorVisible
+    {
+        get => _isLayoutEditorVisible;
+        set => SetProperty(ref _isLayoutEditorVisible, value);
+    }
+
+    public ICommand ToggleLayoutEditorCommand => _toggleLayoutEditorCommand;
+    public ICommand MoveSectionUpCommand => _moveSectionUpCommand;
+    public ICommand MoveSectionDownCommand => _moveSectionDownCommand;
+    public ICommand ResetLayoutCommand => _resetLayoutCommand;
     public string NetworkProcessTitle => _networkProcessMode switch
     {
         ProcessMonitor.NetworkProcessMode.TcpUdpEtw => "Top 10 Processes by Network",
@@ -563,6 +795,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(NetworkProcessTitle));
         OnPropertyChanged(nameof(NetworkProcessSubtitle));
     }
+
+    private sealed record MonitorSectionDefinition(string Key, string Title, string Description);
 
     private static void LogToFile(string message)
     {

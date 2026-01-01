@@ -222,41 +222,47 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-    </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="20">
+        <Style x:Key="LayoutCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
 
-            <!-- Header -->
-            <Grid Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
-                            <TextBlock Text="Live (1s)" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
-                        </StackPanel>
-                    </Border>
-                    <Button Command="{Binding ExportMetricsCommand}"
-                            Style="{StaticResource HeaderActionButtonStyle}"
-                            VerticalAlignment="Center"
-                            ToolTip="Save snapshot (CSV) to your Desktop.">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
-                            <TextBlock Text="Save"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-            </Grid>
+        <Style x:Key="LayoutMoveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-            <!-- System Information Section -->
+        <DataTemplate x:Key="MonitorSystemInfoTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="System Information" Style="{StaticResource SectionHeaderStyle}"/>
@@ -288,9 +294,9 @@
                         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
                             <TextBlock Text="Processor" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding SystemInfo.CpuName}" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium"/>
-	                            <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
-	                                <Run Text="{Binding SystemInfo.CpuCores, Mode=OneWay}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads, Mode=OneWay}"/><Run Text=" Threads"/>
-	                            </TextBlock>
+                            <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
+                                <Run Text="{Binding SystemInfo.CpuCores, Mode=OneWay}"/><Run Text=" Cores, "/><Run Text="{Binding SystemInfo.CpuThreads, Mode=OneWay}"/><Run Text=" Threads"/>
+                            </TextBlock>
                         </StackPanel>
 
                         <!-- GPU Name -->
@@ -302,9 +308,9 @@
                         <!-- Total RAM -->
                         <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
                             <TextBlock Text="Total Memory" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,4"/>
-	                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium">
-	                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
-	                            </TextBlock>
+                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="Medium">
+                                <Run Text="{Binding SystemInfo.TotalRamGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
+                            </TextBlock>
                         </StackPanel>
 
                         <!-- Uptime -->
@@ -315,8 +321,9 @@
                     </Grid>
                 </StackPanel>
             </Border>
+        </DataTemplate>
 
-            <!-- Stats Cards Row -->
+        <DataTemplate x:Key="MonitorStatCardsTemplate">
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -416,8 +423,9 @@
                     </StackPanel>
                 </Border>
             </Grid>
+        </DataTemplate>
 
-            <!-- Charts Row -->
+        <DataTemplate x:Key="MonitorHistoryChartsTemplate">
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -554,8 +562,9 @@
                     </StackPanel>
                 </Border>
             </Grid>
+        </DataTemplate>
 
-            <!-- Network and Disk I/O Charts Row -->
+        <DataTemplate x:Key="MonitorIoChartsTemplate">
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -870,8 +879,9 @@
                     </StackPanel>
                 </Border>
             </Grid>
+        </DataTemplate>
 
-            <!-- Top Processes Row -->
+        <DataTemplate x:Key="MonitorTopCpuRamTemplate">
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -911,18 +921,18 @@
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
                                                 <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-	                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-	                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                    <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                    <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                             <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
+                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                                             </TextBlock>
                                             <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
+                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
                                             </TextBlock>
                                             <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
                                             </TextBlock>
                                             <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
                                                 <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -993,18 +1003,18 @@
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
                                                 <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-	                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-	                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                    <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                    <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
                                                 </TextBlock>
                                             </StackPanel>
                                             <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
+                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
                                             </TextBlock>
                                             <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
+                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
                                             </TextBlock>
                                             <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-	                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
                                             </TextBlock>
                                             <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
                                                 <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -1042,8 +1052,9 @@
                     </StackPanel>
                 </Border>
             </Grid>
+        </DataTemplate>
 
-            <!-- Top Network Processes -->
+        <DataTemplate x:Key="MonitorTopNetworkTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="{Binding NetworkProcessTitle}" Style="{StaticResource SectionHeaderStyle}"/>
@@ -1128,8 +1139,9 @@
                     </ItemsControl>
                 </StackPanel>
             </Border>
+        </DataTemplate>
 
-            <!-- Top Disk Processes -->
+        <DataTemplate x:Key="MonitorTopDiskTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="Top 10 Processes by Disk I/O" Style="{StaticResource SectionHeaderStyle}"/>
@@ -1214,8 +1226,9 @@
                     </ItemsControl>
                 </StackPanel>
             </Border>
+        </DataTemplate>
 
-            <!-- Network Adapters Section -->
+        <DataTemplate x:Key="MonitorNetworkAdaptersTemplate">
             <Border Style="{StaticResource SectionCardStyle}">
                 <StackPanel>
                     <TextBlock Text="Network Adapters" Style="{StaticResource SectionHeaderStyle}"/>
@@ -1236,21 +1249,21 @@
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="16,0,0,0">
                                             <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
-	                                                <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" Margin="16,0,0,0">
                                             <TextBlock Text="Upload" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" FontSize="14">
-	                                                <Run Text="{Binding SendMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding SendMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
+                                            </TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="3" Margin="16,0,0,0">
                                             <TextBlock Text="Total Received" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Medium" FontSize="12">
-	                                                <Run Text="{Binding TotalBytesReceived, StringFormat={}{0:N0}, Mode=OneWay}"/><Run Text=" bytes"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Medium" FontSize="12">
+                                                <Run Text="{Binding TotalBytesReceived, StringFormat={}{0:N0}, Mode=OneWay}"/><Run Text=" bytes"/>
+                                            </TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -1259,8 +1272,9 @@
                     </ItemsControl>
                 </StackPanel>
             </Border>
+        </DataTemplate>
 
-            <!-- Disks Section -->
+        <DataTemplate x:Key="MonitorDiskActivityTemplate">
             <Border Style="{StaticResource SectionCardStyle}">
                 <StackPanel>
                     <TextBlock Text="Disk Activity" Style="{StaticResource SectionHeaderStyle}"/>
@@ -1287,36 +1301,36 @@
 
                                         <!-- Disk Space Info -->
                                         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
-	                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}">
-	                                                <Run Text="{Binding UsedSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB used of "/><Run Text="{Binding TotalSizeGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
-	                                            </TextBlock>
-	                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
-	                                                <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB free"/>
-	                                            </TextBlock>
+                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}">
+                                                <Run Text="{Binding UsedSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB used of "/><Run Text="{Binding TotalSizeGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB"/>
+                                            </TextBlock>
+                                            <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
+                                                <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB free"/>
+                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Read Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="8,0">
                                             <TextBlock Text="Read" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
-	                                                <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
+                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Write Speed -->
                                         <StackPanel Grid.Row="0" Grid.Column="3" Margin="8,0">
                                             <TextBlock Text="Write" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" FontSize="14">
-	                                                <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource DangerBrush}" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" MB/s"/>
+                                            </TextBlock>
                                         </StackPanel>
 
                                         <!-- Usage Percent -->
                                         <StackPanel Grid.Row="0" Grid.Column="4" Margin="8,0,0,0">
                                             <TextBlock Text="Usage" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-	                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Bold" FontSize="14">
-	                                                <Run Text="{Binding UsedPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-	                                            </TextBlock>
+                                            <TextBlock Foreground="{DynamicResource CautionBrush}" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding UsedPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
+                                            </TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -1325,6 +1339,163 @@
                     </ItemsControl>
                 </StackPanel>
             </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+
+            <!-- Header -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
+                            <TextBlock Text="Live (1s)" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Command="{Binding ExportMetricsCommand}"
+                            Style="{StaticResource HeaderActionButtonStyle}"
+                            VerticalAlignment="Center"
+                            ToolTip="Save snapshot (CSV) to your Desktop.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
+                            <TextBlock Text="Save"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ToggleLayoutEditorCommand}"
+                            Style="{StaticResource HeaderActionButtonStyle}"
+                            VerticalAlignment="Center"
+                            Margin="8,0,0,0"
+                            ToolTip="Customize which sections are visible and their order.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8B7;" FontSize="12" Margin="0,0,6,0"/>
+                            <TextBlock Text="Customize"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Layout Editor -->
+            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16"
+                    Visibility="{Binding IsLayoutEditorVisible, Converter={StaticResource BoolToVisibility}}">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Customize Layout" Style="{StaticResource SectionHeaderStyle}"/>
+                            <TextBlock Text="Toggle sections or reorder them. Changes are saved automatically."
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="12"
+                                       Margin="0,0,0,12"/>
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Command="{Binding ResetLayoutCommand}"
+                                Style="{StaticResource HeaderActionButtonStyle}"
+                                Padding="10,6"
+                                VerticalAlignment="Top"
+                                ToolTip="Restore the default monitor layout.">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE777;" FontSize="12" Margin="0,0,6,0"/>
+                                <TextBlock Text="Reset"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <ItemsControl ItemsSource="{Binding MonitorSections}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <CheckBox Content="{Binding Title}"
+                                                  IsChecked="{Binding IsVisible}"
+                                                  Style="{StaticResource LayoutCheckBoxStyle}"
+                                                  ToolTip="{Binding Description}"/>
+                                        <TextBlock Text="{Binding Description}"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   FontSize="10"
+                                                   Margin="24,2,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Command="{Binding DataContext.MoveSectionUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                ToolTip="Move up"
+                                                Style="{StaticResource LayoutMoveButtonStyle}">
+                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70E;"/>
+                                        </Button>
+                                        <Button Command="{Binding DataContext.MoveSectionDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                ToolTip="Move down"
+                                                Style="{StaticResource LayoutMoveButtonStyle}"
+                                                Margin="6,0,0,0">
+                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70D;"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <ItemsControl ItemsSource="{Binding MonitorSections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
+                        <ContentControl Content="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource MonitorSystemInfoTemplate}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Key}" Value="system-info">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorSystemInfoTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="stat-cards">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorStatCardsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="cpu-ram-history">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorHistoryChartsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="network-disk-io">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorIoChartsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="top-cpu-ram">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopCpuRamTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="top-network">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopNetworkTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="top-disk">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopDiskTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="network-adapters">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorNetworkAdaptersTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="disk-activity">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorDiskActivityTemplate}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
         </StackPanel>
     </ScrollViewer>
