@@ -191,6 +191,12 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                 // Check cancellation before each tweak
                 ct.ThrowIfCancellationRequested();
 
+                if (!tweak.IsScanFriendly)
+                {
+                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' SKIPPED (expensive)");
+                    continue;
+                }
+
                 try
                 {
                     LogToFile($"DetectAllTweaksAsync: Detecting '{tweak.Name}'");

@@ -265,6 +265,18 @@
                         </Button>
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <CheckBox IsChecked="{Binding IsFullScanEnabled}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,12,0">
+                            <TextBlock Text="Full scan" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                        </CheckBox>
+                        <TextBlock Text="{Binding ScanModeHint}"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
                     <StackPanel Margin="0,12,0,0">
                         <TextBlock Text="{Binding ScanStatusText}"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
@@ -287,6 +299,23 @@
                         <TextBlock Text="{Binding LastScanTimestamp}"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
+                                    Visibility="{Binding HasScanSkipped, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="{Binding ScanSkippedSummary}"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="11"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"/>
+                            <Button Command="{Binding RunFullScanCommand}"
+                                    Margin="10,0,0,0"
+                                    Padding="12,6"
+                                    Background="{DynamicResource AccentDarkBlueBrush}"
+                                    Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                    BorderThickness="0"
+                                    Cursor="Hand">
+                                <TextBlock Text="Run Full Scan" FontSize="11" FontWeight="SemiBold"/>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
 
@@ -468,7 +497,7 @@
                             </Border>
                             <!-- Boot Time Info -->
                             <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
-                                    ToolTip="{Binding LastBootTimeFormatted}">
+                                    ToolTip="{Binding BootTimeTooltip}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="⏱️" Margin="0,0,4,0"/>
                                     <TextBlock Text="Last Boot:" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>

@@ -40,6 +40,9 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _scanDetailText = string.Empty;
     private string _lastScanSummary = "No scans yet.";
     private string _lastScanTimestamp = "Last scan: -";
+    private bool _isFullScanEnabled;
+    private int _scanSkippedCount;
+    private string _scanSkippedSummary = string.Empty;
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -62,6 +65,7 @@ public sealed class DashboardViewModel : ViewModelBase
         LoadStatistics();
         _ = LoadRecentActivityAsync();
         ScanAllCommand = new RelayCommand(_ => _ = RunScanAsync(), _ => !IsScanning);
+        RunFullScanCommand = new RelayCommand(_ => RunFullScan(), _ => !IsScanning);
         RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
 
         // Category navigation commands
@@ -92,6 +96,7 @@ public sealed class DashboardViewModel : ViewModelBase
     }
 
     public ICommand ScanAllCommand { get; }
+    public ICommand RunFullScanCommand { get; }
     public ICommand NavigateToPrivacyCommand { get; }
     public ICommand NavigateToPowerCommand { get; }
     public ICommand NavigateToSystemCommand { get; }
@@ -152,6 +157,45 @@ public sealed class DashboardViewModel : ViewModelBase
                 ((RelayCommand)ScanAllCommand).RaiseCanExecuteChanged();
             }
         }
+    }
+
+    public bool IsFullScanEnabled
+    {
+        get => _isFullScanEnabled;
+        set
+        {
+            if (SetProperty(ref _isFullScanEnabled, value))
+            {
+                OnPropertyChanged(nameof(ScanModeLabel));
+                OnPropertyChanged(nameof(ScanModeHint));
+            }
+        }
+    }
+
+    public string ScanModeLabel => IsFullScanEnabled ? "Full scan" : "Quick scan";
+
+    public string ScanModeHint => IsFullScanEnabled
+        ? "Includes admin and long-running checks. May show UAC prompts."
+        : "Skips admin prompts and heavy checks for speed.";
+
+    public int ScanSkippedCount
+    {
+        get => _scanSkippedCount;
+        private set
+        {
+            if (SetProperty(ref _scanSkippedCount, value))
+            {
+                OnPropertyChanged(nameof(HasScanSkipped));
+            }
+        }
+    }
+
+    public bool HasScanSkipped => ScanSkippedCount > 0;
+
+    public string ScanSkippedSummary
+    {
+        get => _scanSkippedSummary;
+        private set => SetProperty(ref _scanSkippedSummary, value);
     }
 
     public int ScanCurrent
@@ -227,23 +271,38 @@ public sealed class DashboardViewModel : ViewModelBase
         }
 
         IsScanning = true;
+        var useFullScan = IsFullScanEnabled && !isStartupScan;
         var scanStartedAt = DateTimeOffset.Now;
         ScanCurrent = 0;
         ScanTotal = 0;
-        ScanStatusText = isStartupScan ? "Running quick scan..." : "Scanning tweaks...";
+        ScanStatusText = isStartupScan
+            ? "Running quick scan..."
+            : useFullScan
+                ? "Running full scan..."
+                : "Running quick scan...";
         ScanDetailText = string.Empty;
+        ScanSkippedCount = 0;
+        ScanSkippedSummary = string.Empty;
 
-        var skipElevationPrompts = !_tweaksViewModel.IsElevated;
-        var skipExpensiveOperations = true;
+        var skipElevationPrompts = !useFullScan && !_tweaksViewModel.IsElevated;
+        var skipExpensiveOperations = !useFullScan;
         var scanCandidateCount = _tweaksViewModel.Tweaks.Count(t =>
             (!isStartupScan || t.IsStartupScanEligible)
             && (!skipElevationPrompts || !t.WillPromptForElevation)
             && (!skipExpensiveOperations || t.IsScanFriendly));
-        var skippedCount = _tweaksViewModel.Tweaks.Count - scanCandidateCount;
+        var skippedCount = Math.Max(0, _tweaksViewModel.Tweaks.Count - scanCandidateCount);
         try
         {
+            var lastUiUpdate = DateTimeOffset.MinValue;
             void UpdateProgress(StartupScanProgress snapshot)
             {
+                var now = DateTimeOffset.Now;
+                if (snapshot.Current != snapshot.Total && now - lastUiUpdate < TimeSpan.FromMilliseconds(120))
+                {
+                    return;
+                }
+
+                lastUiUpdate = now;
                 ScanCurrent = snapshot.Current;
                 ScanTotal = snapshot.Total;
                 ScanStatusText = snapshot.Total > 0
@@ -283,6 +342,14 @@ public sealed class DashboardViewModel : ViewModelBase
             LastScanTimestamp = $"Last scan: {DateTimeOffset.Now:HH:mm:ss}";
             ScanDetailText = string.Empty;
             ScanStatusText = "Scan complete.";
+
+            ScanSkippedCount = skippedCount;
+            if (skippedCount > 0)
+            {
+                ScanSkippedSummary = useFullScan
+                    ? $"{skippedCount} tweaks were skipped due to scan filters."
+                    : $"Skipped {skippedCount} admin/long tweaks. Enable Full scan to include them.";
+            }
         }
         catch (OperationCanceledException)
         {
@@ -293,6 +360,17 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             IsScanning = false;
         }
+    }
+
+    private void RunFullScan()
+    {
+        if (IsScanning)
+        {
+            return;
+        }
+
+        IsFullScanEnabled = true;
+        _ = RunScanAsync();
     }
 
     private async void CreateRestorePointAsync()
@@ -510,7 +588,15 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public string LastBootDurationFormatted => LastBootDuration.HasValue
         ? $"{LastBootDuration.Value.TotalSeconds:F1}s"
-        : "Unknown";
+        : ProcessElevation.IsElevated()
+            ? "Unavailable"
+            : "Requires admin";
+
+    public bool IsBootDurationAvailable => LastBootDuration.HasValue;
+
+    public string BootTimeTooltip => IsBootDurationAvailable
+        ? LastBootTimeFormatted
+        : $"{LastBootTimeFormatted} • Boot duration unavailable (run as admin / enable Diagnostics-Performance log).";
 
     public TimeSpan? AverageBootDuration => _bootTimeTracker.GetAverageBootDuration();
 
