@@ -48,9 +48,11 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _scanSkippedSummary = string.Empty;
     private string _osVersion = "Unknown";
     private string _osBuild = "Unknown";
+    private string _osDisplayVersion = "Unknown";
     private string _machineName = "Unknown";
     private string _userName = "Unknown";
     private int _processorCount;
+    private string _cpuName = "Unknown";
     private string _systemArchitecture = "Unknown";
     private string _totalMemoryFormatted = "Unknown";
     private string _availableMemoryFormatted = "Unknown";
@@ -58,12 +60,14 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _dotNetVersion = "Unknown";
     private string _gpuName = "Unknown";
     private string _primaryDiskType = "Unknown";
+    private string _firmwareType = "Unknown";
     private string _secureBootStatus = "Unknown";
     private string _virtualizationStatus = "Unknown";
     private string _tpmStatus = "Unknown";
     private BootMetricsState _bootMetricsState = BootMetricsState.Unknown;
     private bool _isEnablingBootMetrics;
     private string _bootMetricsStatusMessage = string.Empty;
+    private bool _showPreviewHint = true;
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -111,6 +115,7 @@ public sealed class DashboardViewModel : ViewModelBase
         OpenDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport(), _ => File.Exists(DocsCoverageReportPath));
         LoadDocsCoverageReport();
         LoadSystemSnapshot();
+        _ = LoadUiSettingsAsync();
     }
 
     public void SetTweaksViewModel(TweaksViewModel tweaksViewModel)
@@ -682,9 +687,11 @@ public sealed class DashboardViewModel : ViewModelBase
     // System Information Properties
     public string OsVersion => _osVersion;
     public string OsBuild => _osBuild;
+    public string OsDisplayVersion => _osDisplayVersion;
     public string MachineName => _machineName;
     public string UserName => _userName;
     public int ProcessorCount => _processorCount;
+    public string CpuName => _cpuName;
     public string SystemArchitecture => _systemArchitecture;
     public string TotalMemoryFormatted => _totalMemoryFormatted;
     public string AvailableMemoryFormatted => _availableMemoryFormatted;
@@ -692,9 +699,11 @@ public sealed class DashboardViewModel : ViewModelBase
     public string DotNetVersion => _dotNetVersion;
     public string GpuName => _gpuName;
     public string PrimaryDiskType => _primaryDiskType;
+    public string FirmwareType => _firmwareType;
     public string SecureBootStatus => _secureBootStatus;
     public string VirtualizationStatus => _virtualizationStatus;
     public string TpmStatus => _tpmStatus;
+    public bool ShowPreviewHint => _showPreviewHint;
 
     [SupportedOSPlatform("windows")]
     private static string GetOsVersion()
@@ -714,6 +723,28 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch { }
         return $"Windows {Environment.OSVersion.Version.Major}";
+    }
+
+    private static string GetOsDisplayVersion()
+    {
+        try
+        {
+            using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            var displayVersion = key?.GetValue("DisplayVersion")?.ToString();
+            if (!string.IsNullOrWhiteSpace(displayVersion))
+            {
+                return displayVersion;
+            }
+
+            var releaseId = key?.GetValue("ReleaseId")?.ToString();
+            if (!string.IsNullOrWhiteSpace(releaseId))
+            {
+                return releaseId;
+            }
+        }
+        catch { }
+
+        return "Unknown";
     }
 
     [SupportedOSPlatform("windows")]
@@ -764,6 +795,53 @@ public sealed class DashboardViewModel : ViewModelBase
             }
         }
         catch { }
+        return "Unknown";
+    }
+
+    private static string GetCpuName()
+    {
+        try
+        {
+            using var key = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DESCRIPTION\System\CentralProcessor\0");
+            var name = key?.GetValue("ProcessorNameString")?.ToString();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                return name.Trim();
+            }
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
+    private static string GetFirmwareType()
+    {
+        try
+        {
+            using var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control");
+            var value = key?.GetValue("PEFirmwareType");
+            if (value is int intValue)
+            {
+                return intValue switch
+                {
+                    1 => "Legacy BIOS",
+                    2 => "UEFI",
+                    _ => "Unknown"
+                };
+            }
+
+            if (int.TryParse(value?.ToString(), out var parsed))
+            {
+                return parsed switch
+                {
+                    1 => "Legacy BIOS",
+                    2 => "UEFI",
+                    _ => "Unknown"
+                };
+            }
+        }
+        catch { }
+
         return "Unknown";
     }
 
@@ -1251,9 +1329,11 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         _osVersion = GetOsVersion();
         _osBuild = Environment.OSVersion.Version.Build.ToString();
+        _osDisplayVersion = GetOsDisplayVersion();
         _machineName = Environment.MachineName;
         _userName = Environment.UserName;
         _processorCount = Environment.ProcessorCount;
+        _cpuName = GetCpuName();
         _systemArchitecture = Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit";
         _totalMemoryFormatted = GetTotalMemoryFormatted();
         _availableMemoryFormatted = GetAvailableMemoryFormatted();
@@ -1261,6 +1341,7 @@ public sealed class DashboardViewModel : ViewModelBase
         _dotNetVersion = Environment.Version.ToString();
         _gpuName = GetGpuName();
         _primaryDiskType = GetPrimaryDiskType();
+        _firmwareType = GetFirmwareType();
         _secureBootStatus = GetSecureBootStatus();
         _virtualizationStatus = GetVirtualizationStatus();
         _tpmStatus = GetTpmStatus();
@@ -1273,15 +1354,19 @@ public sealed class DashboardViewModel : ViewModelBase
         LoadSystemSnapshot();
         OnPropertyChanged(nameof(OsVersion));
         OnPropertyChanged(nameof(OsBuild));
+        OnPropertyChanged(nameof(OsDisplayVersion));
         OnPropertyChanged(nameof(SystemArchitecture));
         OnPropertyChanged(nameof(MachineName));
         OnPropertyChanged(nameof(UserName));
         OnPropertyChanged(nameof(ProcessorCount));
+        OnPropertyChanged(nameof(CpuName));
         OnPropertyChanged(nameof(TotalMemoryFormatted));
         OnPropertyChanged(nameof(AvailableMemoryFormatted));
         OnPropertyChanged(nameof(SystemUptime));
+        OnPropertyChanged(nameof(DotNetVersion));
         OnPropertyChanged(nameof(GpuName));
         OnPropertyChanged(nameof(PrimaryDiskType));
+        OnPropertyChanged(nameof(FirmwareType));
         OnPropertyChanged(nameof(SecureBootStatus));
         OnPropertyChanged(nameof(VirtualizationStatus));
         OnPropertyChanged(nameof(TpmStatus));
@@ -1297,6 +1382,21 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(BootDurationBadgeValue));
         OnPropertyChanged(nameof(CanEnableBootMetrics));
         OnPropertyChanged(nameof(BootMetricsStatusMessage));
+    }
+
+    private async Task LoadUiSettingsAsync()
+    {
+        try
+        {
+            var settingsStore = new SettingsStore(_paths);
+            var settings = await settingsStore.LoadAsync(CancellationToken.None);
+            _showPreviewHint = settings.ShowPreviewHint;
+            OnPropertyChanged(nameof(ShowPreviewHint));
+        }
+        catch
+        {
+            // Ignore settings load failures for UI hints
+        }
     }
 
     private async Task EnableBootMetricsAsync()

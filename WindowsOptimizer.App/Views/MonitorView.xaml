@@ -325,8 +325,11 @@
 
         <DataTemplate x:Key="MonitorStatCardsTemplate">
             <Grid Margin="0,0,0,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -334,7 +337,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- CPU Usage Card -->
-                <Border Grid.Column="0">
+                <Border Grid.Row="0" Grid.Column="0">
                     <Border.Style>
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
@@ -358,7 +361,7 @@
                 </Border>
 
                 <!-- RAM Usage Card -->
-                <Border Grid.Column="1">
+                <Border Grid.Row="0" Grid.Column="1">
                     <Border.Style>
                         <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
                             <Style.Triggers>
@@ -385,7 +388,7 @@
                 </Border>
 
                 <!-- CPU Temperature Card -->
-                <Border Grid.Column="2" Style="{StaticResource StatCardStyle}"
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StatCardStyle}"
                         ToolTip="CPU temperature sensor via LibreHardwareMonitor. Shows N/A if sensor data is unavailable (requires admin rights or hardware support).">
                     <StackPanel>
                         <TextBlock Text="CPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
@@ -402,7 +405,7 @@
                 </Border>
 
                 <!-- GPU Usage Card -->
-                <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="GPU Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4">
@@ -412,7 +415,7 @@
                 </Border>
 
                 <!-- GPU Temperature Card -->
-                <Border Grid.Column="4" Style="{StaticResource StatCardStyle}">
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="GPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock Text="{Binding GpuTempText}"
@@ -420,6 +423,47 @@
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource InfoBrush}"
                                    Margin="0,0,0,4"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Network Download Card -->
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Network Down" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="26" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,0,0,4">
+                            <Run Text="{Binding NetworkDownloadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                            <Run Text=" Mbps" FontSize="12"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Network Upload Card -->
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Network Up" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="26" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4">
+                            <Run Text="{Binding NetworkUploadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                            <Run Text=" Mbps" FontSize="12"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- Disk I/O Card -->
+                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Disk I/O" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <StackPanel>
+                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                <Run Text="Read " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <Run Text="{Binding DiskReadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                <Run Text=" MB/s" FontSize="10"/>
+                            </TextBlock>
+                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                                <Run Text="Write " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <Run Text="{Binding DiskWriteNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                <Run Text=" MB/s" FontSize="10"/>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>

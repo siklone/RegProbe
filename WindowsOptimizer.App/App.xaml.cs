@@ -25,12 +25,10 @@ public partial class App : Application
         StartupWindow? splash = null;
         try
         {
-            // Load saved theme preference before showing any windows.
-            await InitializeThemeAsync();
+            var settings = await LoadSettingsAsync();
 
-            splash = new StartupWindow();
-            splash.Show();
-            await Dispatcher.Yield(DispatcherPriority.Render);
+            // Load saved theme preference before showing any windows.
+            ApplyTheme(settings);
 
             var mainWindow = new MainWindow
             {
@@ -38,14 +36,22 @@ public partial class App : Application
             };
             MainWindow = mainWindow;
 
-            if (mainWindow.DataContext is MainViewModel mainVm)
+            if (settings.RunStartupScanOnLaunch)
             {
-                IProgress<StartupScanProgress> scanProgress = new Progress<StartupScanProgress>(progress => splash.UpdateScanProgress(progress));
-                scanProgress.Report(new StartupScanProgress(0, 0));
-                await mainVm.RunStartupScanAsync(scanProgress, CancellationToken.None);
+                splash = new StartupWindow();
+                splash.Show();
+                await Dispatcher.Yield(DispatcherPriority.Render);
+
+                if (mainWindow.DataContext is MainViewModel mainVm)
+                {
+                    IProgress<StartupScanProgress> scanProgress = new Progress<StartupScanProgress>(progress => splash.UpdateScanProgress(progress));
+                    scanProgress.Report(new StartupScanProgress(0, 0));
+                    await mainVm.RunStartupScanAsync(scanProgress, CancellationToken.None);
+                }
+
+                splash.Close();
             }
 
-            splash.Close();
             mainWindow.Show();
             mainWindow.Activate();
         }
@@ -63,21 +69,24 @@ public partial class App : Application
         }
     }
 
-    private static async Task InitializeThemeAsync()
+    private static async Task<AppSettings> LoadSettingsAsync()
     {
         try
         {
             var paths = AppPaths.FromEnvironment();
             var settingsStore = new SettingsStore(paths);
-            var settings = await settingsStore.LoadAsync(CancellationToken.None);
-
-            var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
-            ThemeManager.SetTheme(theme, force: true);
+            return await settingsStore.LoadAsync(CancellationToken.None);
         }
         catch
         {
-            // Use default dark theme on failure
+            return new AppSettings();
         }
+    }
+
+    private static void ApplyTheme(AppSettings settings)
+    {
+        var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
+        ThemeManager.SetTheme(theme, force: true);
     }
 
     private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
