@@ -152,7 +152,18 @@
                                 </Style>
                             </Button.Style>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="🔍" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="🔍"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsScanning}" Value="True">
+                                                    <Setter Property="Text" Value="⏳"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                                 <TextBlock VerticalAlignment="Center" FontWeight="SemiBold">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
@@ -290,7 +301,45 @@
                                      Minimum="0"
                                      Maximum="100"
                                      Value="{Binding ScanProgressPercent, Mode=OneWay}"
+                                     IsIndeterminate="{Binding IsScanIndeterminate}"
                                      Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
+                                    Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="Progress:"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="10"
+                                       Margin="0,0,6,0"/>
+                            <TextBlock Text="{Binding ScanProgressText}"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       FontSize="10"/>
+                        </StackPanel>
+                        <UniformGrid Columns="4" Margin="0,8,0,0"
+                                     Visibility="{Binding HasLastScanSummary, Converter={StaticResource BoolToVisibility}}">
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Detected" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanDetected}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Applied" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanApplied}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource SuccessBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Skipped" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanSkipped}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource WarningBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8">
+                                <StackPanel>
+                                    <TextBlock Text="Duration" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanDurationText}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                </StackPanel>
+                            </Border>
+                        </UniformGrid>
                         <TextBlock Text="{Binding LastScanSummary}"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
                                    FontSize="11"
@@ -299,6 +348,10 @@
                         <TextBlock Text="{Binding LastScanTimestamp}"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="10"/>
+                        <TextBlock Text="{Binding LastScanMode, StringFormat=Mode: {0}}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="10"
+                                   Visibility="{Binding HasLastScanSummary, Converter={StaticResource BoolToVisibility}}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
                                     Visibility="{Binding HasScanSkipped, Converter={StaticResource BoolToVisibility}}">
                             <TextBlock Text="{Binding ScanSkippedSummary}"
@@ -915,6 +968,37 @@
 
                                 <TextBlock Grid.Row="5" Grid.Column="0" Text="TPM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
                                 <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TpmStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,10,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="BIOS/UEFI:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding BiosVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Motherboard:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BaseboardModel}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="GPU Driver:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GpuDriverVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Windows Update:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding WindowsUpdateStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="BitLocker:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding BitLockerStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
                             </Grid>
                         </Border>
                     </StackPanel>

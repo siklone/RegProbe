@@ -43,6 +43,13 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _scanDetailText = string.Empty;
     private string _lastScanSummary = "No scans yet.";
     private string _lastScanTimestamp = "Last scan: -";
+    private DateTimeOffset? _lastScanAt;
+    private TimeSpan _lastScanDuration = TimeSpan.Zero;
+    private string _lastScanMode = "Quick scan";
+    private int _lastScanDetected;
+    private int _lastScanApplied;
+    private int _lastScanTotal;
+    private int _lastScanSkipped;
     private bool _isFullScanEnabled;
     private int _scanSkippedCount;
     private string _scanSkippedSummary = string.Empty;
@@ -59,11 +66,16 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _systemUptime = "Unknown";
     private string _dotNetVersion = "Unknown";
     private string _gpuName = "Unknown";
+    private string _gpuDriverVersion = "Unknown";
     private string _primaryDiskType = "Unknown";
+    private string _biosVersion = "Unknown";
+    private string _baseboardModel = "Unknown";
     private string _firmwareType = "Unknown";
     private string _secureBootStatus = "Unknown";
     private string _virtualizationStatus = "Unknown";
     private string _tpmStatus = "Unknown";
+    private string _windowsUpdateStatus = "Unknown";
+    private string _bitLockerStatus = "Unknown";
     private BootMetricsState _bootMetricsState = BootMetricsState.Unknown;
     private bool _isEnablingBootMetrics;
     private string _bootMetricsStatusMessage = string.Empty;
@@ -184,6 +196,7 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _isScanning, value))
             {
                 ((RelayCommand)ScanAllCommand).RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(IsScanIndeterminate));
             }
         }
     }
@@ -236,6 +249,7 @@ public sealed class DashboardViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(ScanProgressPercent));
                 OnPropertyChanged(nameof(HasScanProgress));
+                OnPropertyChanged(nameof(ScanProgressText));
             }
         }
     }
@@ -249,6 +263,8 @@ public sealed class DashboardViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(ScanProgressPercent));
                 OnPropertyChanged(nameof(HasScanProgress));
+                OnPropertyChanged(nameof(ScanProgressText));
+                OnPropertyChanged(nameof(IsScanIndeterminate));
             }
         }
     }
@@ -258,6 +274,12 @@ public sealed class DashboardViewModel : ViewModelBase
         : 0;
 
     public bool HasScanProgress => ScanTotal > 0;
+
+    public string ScanProgressText => ScanTotal > 0
+        ? $"{ScanProgressPercent:F0}% ({ScanCurrent}/{ScanTotal})"
+        : "Preparing...";
+
+    public bool IsScanIndeterminate => IsScanning && ScanTotal == 0;
 
     public string ScanStatusText
     {
@@ -282,6 +304,58 @@ public sealed class DashboardViewModel : ViewModelBase
         get => _lastScanTimestamp;
         private set => SetProperty(ref _lastScanTimestamp, value);
     }
+
+    public string LastScanMode
+    {
+        get => _lastScanMode;
+        private set => SetProperty(ref _lastScanMode, value);
+    }
+
+    public TimeSpan LastScanDuration
+    {
+        get => _lastScanDuration;
+        private set
+        {
+            if (SetProperty(ref _lastScanDuration, value))
+            {
+                OnPropertyChanged(nameof(LastScanDurationText));
+            }
+        }
+    }
+
+    public string LastScanDurationText => LastScanDuration == TimeSpan.Zero
+        ? "-"
+        : $"{LastScanDuration:mm\\:ss}";
+
+    public int LastScanDetected
+    {
+        get => _lastScanDetected;
+        private set => SetProperty(ref _lastScanDetected, value);
+    }
+
+    public int LastScanApplied
+    {
+        get => _lastScanApplied;
+        private set => SetProperty(ref _lastScanApplied, value);
+    }
+
+    public int LastScanTotal
+    {
+        get => _lastScanTotal;
+        private set => SetProperty(ref _lastScanTotal, value);
+    }
+
+    public int LastScanSkipped
+    {
+        get => _lastScanSkipped;
+        private set => SetProperty(ref _lastScanSkipped, value);
+    }
+
+    public bool HasLastScanSummary => _lastScanAt.HasValue;
+
+    public string LastScanTimeAgo => _lastScanAt.HasValue
+        ? $"{FormatRelativeTime(DateTimeOffset.Now - _lastScanAt.Value)} ago"
+        : string.Empty;
 
     public Task RunScanAsync()
     {
@@ -309,7 +383,7 @@ public sealed class DashboardViewModel : ViewModelBase
             : useFullScan
                 ? "Running full scan..."
                 : "Running quick scan...";
-        ScanDetailText = string.Empty;
+        ScanDetailText = "Preparing scan list...";
         ScanSkippedCount = 0;
         ScanSkippedSummary = string.Empty;
 
@@ -320,6 +394,14 @@ public sealed class DashboardViewModel : ViewModelBase
             && (!skipElevationPrompts || !t.WillPromptForElevation)
             && (!skipExpensiveOperations || t.IsScanFriendly));
         var skippedCount = Math.Max(0, _tweaksViewModel.Tweaks.Count - scanCandidateCount);
+        ScanTotal = scanCandidateCount;
+        ScanCurrent = 0;
+        ScanStatusText = scanCandidateCount > 0
+            ? $"Scanning {scanCandidateCount} tweaks..."
+            : "No eligible tweaks found.";
+        ScanDetailText = scanCandidateCount > 0
+            ? $"Queued {scanCandidateCount} tweaks."
+            : "Scan skipped.";
         try
         {
             var lastUiUpdate = DateTimeOffset.MinValue;
@@ -367,8 +449,21 @@ public sealed class DashboardViewModel : ViewModelBase
                 summary += $" Skipped {skippedCount} admin-required or long-running tweaks.";
             }
 
+            LastScanDuration = elapsed;
+            LastScanMode = useFullScan ? "Full scan" : "Quick scan";
+            LastScanDetected = detected;
+            LastScanApplied = applied;
+            LastScanTotal = totalScorable;
+            LastScanSkipped = skippedCount;
+
+            _lastScanAt = DateTimeOffset.Now;
+            OnPropertyChanged(nameof(HasLastScanSummary));
+            OnPropertyChanged(nameof(LastScanTimeAgo));
+
             LastScanSummary = summary;
-            LastScanTimestamp = $"Last scan: {DateTimeOffset.Now:HH:mm:ss}";
+            LastScanTimestamp = _lastScanAt.HasValue
+                ? $"Last scan: {_lastScanAt.Value:HH:mm:ss} ({LastScanTimeAgo})"
+                : "Last scan: -";
             ScanDetailText = string.Empty;
             ScanStatusText = "Scan complete.";
 
@@ -698,11 +793,16 @@ public sealed class DashboardViewModel : ViewModelBase
     public string SystemUptime => _systemUptime;
     public string DotNetVersion => _dotNetVersion;
     public string GpuName => _gpuName;
+    public string GpuDriverVersion => _gpuDriverVersion;
     public string PrimaryDiskType => _primaryDiskType;
+    public string BiosVersion => _biosVersion;
+    public string BaseboardModel => _baseboardModel;
     public string FirmwareType => _firmwareType;
     public string SecureBootStatus => _secureBootStatus;
     public string VirtualizationStatus => _virtualizationStatus;
     public string TpmStatus => _tpmStatus;
+    public string WindowsUpdateStatus => _windowsUpdateStatus;
+    public string BitLockerStatus => _bitLockerStatus;
     public bool ShowPreviewHint => _showPreviewHint;
 
     [SupportedOSPlatform("windows")]
@@ -795,6 +895,96 @@ public sealed class DashboardViewModel : ViewModelBase
             }
         }
         catch { }
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetGpuDriverVersion()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT DriverVersion, DriverDate FROM Win32_VideoController");
+            foreach (var obj in searcher.Get())
+            {
+                var version = obj["DriverVersion"]?.ToString();
+                if (string.IsNullOrWhiteSpace(version))
+                {
+                    continue;
+                }
+
+                var dateText = obj["DriverDate"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(dateText))
+                {
+                    try
+                    {
+                        var driverDate = ManagementDateTimeConverter.ToDateTime(dateText);
+                        return $"{version} ({driverDate:yyyy-MM-dd})";
+                    }
+                    catch
+                    {
+                        return version;
+                    }
+                }
+
+                return version;
+            }
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetBiosVersion()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT SMBIOSBIOSVersion, BIOSVersion, Version FROM Win32_BIOS");
+            foreach (var obj in searcher.Get())
+            {
+                var smbios = obj["SMBIOSBIOSVersion"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(smbios))
+                {
+                    return smbios;
+                }
+
+                if (obj["BIOSVersion"] is string[] versions && versions.Length > 0)
+                {
+                    return versions[0];
+                }
+
+                var version = obj["Version"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(version))
+                {
+                    return version;
+                }
+            }
+        }
+        catch { }
+
+        return "Unknown";
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetBaseboardModel()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Manufacturer, Product FROM Win32_BaseBoard");
+            foreach (var obj in searcher.Get())
+            {
+                var manufacturer = obj["Manufacturer"]?.ToString();
+                var product = obj["Product"]?.ToString();
+
+                var combined = $"{manufacturer} {product}".Trim();
+                if (!string.IsNullOrWhiteSpace(combined))
+                {
+                    return combined;
+                }
+            }
+        }
+        catch { }
+
         return "Unknown";
     }
 
@@ -1193,6 +1383,137 @@ public sealed class DashboardViewModel : ViewModelBase
         return "Unknown";
     }
 
+    private static string GetWindowsUpdateStatus()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return "Unavailable";
+        }
+
+        try
+        {
+            if (IsRebootPending())
+            {
+                return "Restart required";
+            }
+
+            var lastSuccess = GetWindowsUpdateLastSuccessTime();
+            if (lastSuccess.HasValue)
+            {
+                return $"Last update {lastSuccess.Value:yyyy-MM-dd}";
+            }
+        }
+        catch
+        {
+        }
+
+        return "No pending restart";
+    }
+
+    private static DateTimeOffset? GetWindowsUpdateLastSuccessTime()
+    {
+        using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\Results\Install");
+        var raw = key?.GetValue("LastSuccessTime");
+        if (raw is DateTime dateTime)
+        {
+            return new DateTimeOffset(dateTime);
+        }
+
+        if (raw is string text && DateTime.TryParse(text, out var parsed))
+        {
+            return new DateTimeOffset(parsed);
+        }
+
+        return null;
+    }
+
+    private static bool IsRebootPending()
+    {
+        try
+        {
+            using var wuKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired");
+            if (wuKey != null)
+            {
+                return true;
+            }
+
+            using var cbsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending");
+            if (cbsKey != null)
+            {
+                return true;
+            }
+
+            using var sessionManager = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager");
+            if (sessionManager?.GetValue("PendingFileRenameOperations") != null)
+            {
+                return true;
+            }
+        }
+        catch
+        {
+        }
+
+        return false;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string GetBitLockerStatus()
+    {
+        try
+        {
+            var systemDrive = (Environment.GetEnvironmentVariable("SystemDrive") ?? "C:").TrimEnd('\\');
+            var scope = new ManagementScope(@"\\.\root\CIMV2\Security\MicrosoftVolumeEncryption");
+            scope.Connect();
+            var query = new ObjectQuery("SELECT DriveLetter, ProtectionStatus FROM Win32_EncryptableVolume");
+            using var searcher = new ManagementObjectSearcher(scope, query);
+            foreach (ManagementObject volume in searcher.Get())
+            {
+                var drive = volume["DriveLetter"]?.ToString();
+                if (!string.Equals(drive, systemDrive, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                var statusValue = volume["ProtectionStatus"];
+                var status = Convert.ToInt32(statusValue ?? 2);
+                return status switch
+                {
+                    0 => "Off",
+                    1 => "On",
+                    _ => "Unknown"
+                };
+            }
+        }
+        catch
+        {
+            return "Unavailable";
+        }
+
+        return "Unknown";
+    }
+
+    private static string FormatRelativeTime(TimeSpan span)
+    {
+        if (span.TotalSeconds < 60)
+        {
+            return "just now";
+        }
+
+        if (span.TotalMinutes < 60)
+        {
+            return $"{(int)span.TotalMinutes}m";
+        }
+
+        if (span.TotalHours < 24)
+        {
+            var hours = (int)span.TotalHours;
+            var minutes = span.Minutes;
+            return minutes > 0 ? $"{hours}h {minutes}m" : $"{hours}h";
+        }
+
+        return $"{(int)span.TotalDays}d";
+    }
+
     [SupportedOSPlatform("windows")]
     private static ManagementScope? TryConnectScope(string scopePath, string label, bool logFailure)
     {
@@ -1340,11 +1661,16 @@ public sealed class DashboardViewModel : ViewModelBase
         _systemUptime = GetSystemUptime();
         _dotNetVersion = Environment.Version.ToString();
         _gpuName = GetGpuName();
+        _gpuDriverVersion = GetGpuDriverVersion();
         _primaryDiskType = GetPrimaryDiskType();
+        _biosVersion = GetBiosVersion();
+        _baseboardModel = GetBaseboardModel();
         _firmwareType = GetFirmwareType();
         _secureBootStatus = GetSecureBootStatus();
         _virtualizationStatus = GetVirtualizationStatus();
         _tpmStatus = GetTpmStatus();
+        _windowsUpdateStatus = GetWindowsUpdateStatus();
+        _bitLockerStatus = GetBitLockerStatus();
         _bootMetricsState = GetBootMetricsState();
         BootMetricsStatusMessage = BuildBootMetricsStatusMessage(_bootMetricsState);
     }
@@ -1365,11 +1691,16 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(SystemUptime));
         OnPropertyChanged(nameof(DotNetVersion));
         OnPropertyChanged(nameof(GpuName));
+        OnPropertyChanged(nameof(GpuDriverVersion));
         OnPropertyChanged(nameof(PrimaryDiskType));
+        OnPropertyChanged(nameof(BiosVersion));
+        OnPropertyChanged(nameof(BaseboardModel));
         OnPropertyChanged(nameof(FirmwareType));
         OnPropertyChanged(nameof(SecureBootStatus));
         OnPropertyChanged(nameof(VirtualizationStatus));
         OnPropertyChanged(nameof(TpmStatus));
+        OnPropertyChanged(nameof(WindowsUpdateStatus));
+        OnPropertyChanged(nameof(BitLockerStatus));
         OnPropertyChanged(nameof(LastBootTimeFormatted));
         OnPropertyChanged(nameof(LastBootDurationFormatted));
         OnPropertyChanged(nameof(AverageBootDurationFormatted));
