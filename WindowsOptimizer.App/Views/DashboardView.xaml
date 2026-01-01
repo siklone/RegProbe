@@ -401,9 +401,9 @@
                                         </Border.Style>
                                         <TextBlock Text="📚" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                    <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource StatValueStyle}" FontSize="32">
+                                    <TextBlock Text="{Binding DocsMissingCount}" FontSize="32">
                                         <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource StatValueStyle}">
                                                 <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
