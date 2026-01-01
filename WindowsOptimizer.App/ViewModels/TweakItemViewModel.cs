@@ -16,6 +16,7 @@ using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
+using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -1118,37 +1119,47 @@ public sealed class TweakItemViewModel : ViewModelBase
             return false;
         }
 
-        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri))
+        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri)
+            && (string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)))
+        {
+            return false;
+        }
+
+        var (rawPath, anchor) = SplitAnchor(url);
+        if (TryResolveLocalPath(rawPath, out var localPath))
+        {
+            return TryOpenLocalPath(localPath, anchor);
+        }
+
+        if (Uri.TryCreate(url, UriKind.Absolute, out absoluteUri))
         {
             if (!absoluteUri.IsFile)
             {
                 return false;
             }
 
-            return TryOpenLocalUri(absoluteUri);
+            var absoluteAnchor = absoluteUri.Fragment;
+            var trimmedAnchor = string.IsNullOrWhiteSpace(absoluteAnchor)
+                ? anchor
+                : absoluteAnchor.TrimStart('#');
+            return TryOpenLocalPath(absoluteUri.LocalPath, trimmedAnchor);
         }
 
         var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
         var path = hashIndex > 0 ? url.Substring(0, hashIndex) : url;
-        var anchor = hashIndex > 0 ? url.Substring(hashIndex + 1) : string.Empty;
+        var fallbackAnchor = hashIndex > 0 ? url.Substring(hashIndex + 1) : string.Empty;
 
         if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
         {
             return false;
         }
 
-        var fileUri = new Uri(path, UriKind.Absolute);
-        return TryOpenLocalUri(fileUri, anchor);
+        return TryOpenLocalPath(path, fallbackAnchor);
     }
 
-    private static bool TryOpenLocalUri(Uri fileUri, string? anchor = null)
+    private static bool TryOpenLocalPath(string localPath, string? anchor = null)
     {
-        if (!fileUri.IsFile)
-        {
-            return false;
-        }
-
-        var localPath = fileUri.LocalPath;
         if (string.IsNullOrWhiteSpace(localPath) || !File.Exists(localPath))
         {
             return false;
@@ -1161,6 +1172,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (allowAnchor && !string.IsNullOrWhiteSpace(anchor))
         {
             var escapedAnchor = Uri.EscapeDataString(anchor);
+            var fileUri = new Uri(localPath, UriKind.Absolute);
             var anchoredUri = new Uri(fileUri.AbsoluteUri + "#" + escapedAnchor, UriKind.Absolute);
             Process.Start(new ProcessStartInfo
             {
@@ -1176,6 +1188,66 @@ public sealed class TweakItemViewModel : ViewModelBase
             UseShellExecute = true
         });
         return true;
+    }
+
+    private static (string path, string? anchor) SplitAnchor(string url)
+    {
+        var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
+        if (hashIndex <= 0)
+        {
+            return (url, null);
+        }
+
+        return (url.Substring(0, hashIndex), url.Substring(hashIndex + 1));
+    }
+
+    private static bool TryResolveLocalPath(string path, out string localPath)
+    {
+        localPath = string.Empty;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return false;
+        }
+
+        if (Path.IsPathRooted(path) && File.Exists(path))
+        {
+            localPath = path;
+            return true;
+        }
+
+        var docsRoot = DocsLocator.TryFindDocsRoot();
+        var repoRoot = string.IsNullOrWhiteSpace(docsRoot)
+            ? string.Empty
+            : Directory.GetParent(docsRoot)?.FullName ?? string.Empty;
+        var normalized = path.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar);
+
+        if (!string.IsNullOrWhiteSpace(repoRoot))
+        {
+            var repoCandidate = Path.Combine(repoRoot, normalized);
+            if (File.Exists(repoCandidate))
+            {
+                localPath = repoCandidate;
+                return true;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(docsRoot))
+        {
+            var trimmed = normalized;
+            if (trimmed.StartsWith("Docs", StringComparison.OrdinalIgnoreCase))
+            {
+                trimmed = trimmed.Substring(4).TrimStart(Path.DirectorySeparatorChar);
+            }
+
+            var docsCandidate = Path.Combine(docsRoot, trimmed);
+            if (File.Exists(docsCandidate))
+            {
+                localPath = docsCandidate;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void TryPopulateTechnicalInfo()
