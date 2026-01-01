@@ -2297,6 +2297,23 @@ Requires elevation: Yes (system features).
 |  | `vmicvss` | Coordinates the communications that are required to use Volume Shadow Copy Service to back up applications and data on this virtual machine from the operating system on the physical computer. |
 |  | `vpci` | Microsoft Hyper-V Virtual PCI Bus |
 
+## App Coverage Notes (Startup + Maintenance)
+
+Automatic maintenance policy:
+
+Path: `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance`
+- `MaintenanceDisabled` (REG_DWORD) - disables automatic maintenance tasks.
+
+Restartable apps policy:
+
+Path: `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon`
+- `RestartApps` (REG_DWORD) - disables automatic app restart after sign-in when set to `0`.
+
+Startup program delay:
+
+Path: `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize`
+- `StartupDelayInMSec` (REG_DWORD) - removes the startup delay when set to `0`.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

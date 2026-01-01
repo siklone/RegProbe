@@ -19,6 +19,18 @@ This category targets UI responsiveness and background activity. Typical changes
 ## Verification
 Use `Docs/tweaks/tweak-catalog.md` for the exact source and per-tweak Detect/Apply/Verify/Rollback checks.
 
+## App Coverage Notes (Performance Toggles)
+
+Window animation toggle:
+
+Path: `HKCU\Control Panel\Desktop\WindowMetrics`
+- `MinAnimate` (REG_SZ) - disables minimize/restore animations when set to `0`.
+
+Power throttling policy:
+
+Path: `HKLM\System\CurrentControlSet\Control\Power`
+- `PowerThrottlingOff` (REG_DWORD) - disables power throttling for background apps.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

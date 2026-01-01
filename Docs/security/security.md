@@ -1355,6 +1355,13 @@ Note that sudo uses administrator previledges and doesn't include `TrustedInstal
 > https://learn.microsoft.com/en-us/windows/advanced-settings/sudo/  
 > https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/
 
+## App Coverage Notes (Remote Assistance)
+
+Remote Assistance policy:
+
+Path: `HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services`
+- `fAllowToGetHelp` (REG_DWORD) - disables solicited Remote Assistance when set to `0`.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

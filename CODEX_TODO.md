@@ -179,6 +179,7 @@
 - ✅ UI tarafında `Source file` linkleri CSV’den okunuyor
 - ✅ Catalog artık `Description` + `Risk` içeriyor (CSV/MD/HTML)
 - ✅ Category docs içinde `Tweak Index` + anchor’lar otomatik yazılıyor
+- ✅ Docs coverage audit added (`scripts/audit_tweak_sources.py`), category docs updated to keep Missing documentation: 0
 
 **Yapılacaklar:**
 - [x] Per‑tweak kısa açıklama (Changes / Risk / Source) katalogda mevcut

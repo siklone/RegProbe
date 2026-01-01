@@ -775,6 +775,11 @@ SHA512("")
 > [MD5 | wikipedia](https://en.wikipedia.org/wiki/MD5#MD5_hashes)  
 > [SHA-1 | wikipedia](https://en.wikipedia.org/wiki/SHA-1#Example_hashes)
 
+## App Coverage Notes (Search Suggestions)
+
+Path: `HKLM\Software\Policies\Microsoft\Windows\Explorer`
+- `DisableSearchBoxSuggestions` (REG_DWORD) - disables Bing/web suggestions in the Windows search box.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

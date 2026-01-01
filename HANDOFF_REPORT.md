@@ -83,6 +83,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - UI surfaces `Source file` links from `Docs/tweaks/tweak-catalog.csv`.
   - File: `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
 
+- **Tweak source audit + coverage notes (2025-12-31)**
+  - Added `scripts/audit_tweak_sources.py` to validate that each tweak’s registry/service tokens appear in the relevant docs folder.
+  - Inserted small “App Coverage Notes” sections in category docs to document policy/value paths used by app-only tweaks.
+  - Outputs: `Docs/tweaks/tweak-source-audit.md` + `.csv` (should show Missing documentation: 0 after updates).
+
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.
   - `DetectAllTweaksAsync` accepts progress + cancellation.

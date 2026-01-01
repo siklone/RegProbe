@@ -754,6 +754,14 @@ Depends on how much light there is in your room. If there's a lot of light, you'
 ## **Contrast** - `~60`  
 It shouldn't be set too high, otherwise you will [not be able to see any details](https://www.testufo.com/whitelevels) and not too low, or it will be too dark. You'll have to test it yourself and find the best value.
 
+## App Coverage Notes (Audio DeviceCpl)
+
+The app exposes the following audio control panel flags:
+
+Path: `HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl`
+- `ShowHiddenDevices` (REG_DWORD) - show hidden audio devices in the classic Sound panel.
+- `ShowDisconnectedDevices` (REG_DWORD) - show disconnected audio devices in the classic Sound panel.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

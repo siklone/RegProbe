@@ -239,6 +239,28 @@
 
 ---
 
+### 12. Tweak Documentation Coverage Audit (Commit: TBD)
+**Problem:** Several tweaks had no direct documentation of the underlying registry/value paths in the category docs, making it hard to validate whether a tweak was legitimate.
+
+**Solution:**
+- Added `scripts/audit_tweak_sources.py` to scan tweak definitions and confirm registry/service tokens exist in the relevant docs folder.
+- Inserted small "App Coverage Notes" sections into category docs so app-only registry values are explicitly documented.
+- Generated audit output in `Docs/tweaks/tweak-source-audit.md` + `.csv` (expected Missing documentation: 0 after updates).
+
+**Files Changed:**
+- `scripts/audit_tweak_sources.py`
+- `Docs/peripheral/peripheral.md`
+- `Docs/misc/misc.md`
+- `Docs/notifications/notifications.md`
+- `Docs/performance/performance.md`
+- `Docs/privacy/privacy.md`
+- `Docs/security/security.md`
+- `Docs/system/system.md`
+
+**Status:** ✅ **IMPLEMENTED** - Re-run audit after adding new tweaks
+
+---
+
 ### 12. Batch Tweak Breakdown in Technical Info (Commit: TBD)
 **Problem:** Mixed state was hard to interpret because batch tweaks only showed a summary without per-item status.
 

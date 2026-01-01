@@ -3733,6 +3733,23 @@ If the option is disabled, pressing `F1` on your desktop will take you to a sear
 https://www.bing.com/search?q=how+to+get+help+in+windows+11
 ```
 
+## App Coverage Notes (Content Delivery + Help)
+
+Content Delivery Manager suggestion toggles:
+
+Path: `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager`
+- `SystemPaneSuggestionsEnabled` (REG_DWORD) - disables Start menu app suggestions.
+- `SubscribedContent-338389Enabled` (REG_DWORD) - disables Windows tips.
+- `SubscribedContent-310093Enabled` (REG_DWORD) - disables suggested content.
+- `SubscribedContent-338393Enabled` (REG_DWORD) - disables suggested apps.
+- `SubscribedContent-353694Enabled` (REG_DWORD) - disables additional suggestions.
+- `SubscribedContent-353696Enabled` (REG_DWORD) - disables additional suggestions.
+
+Help pane suppression (Disable F1 Help):
+
+Path: `%SystemRoot%\System32\HelpPane.exe`
+- Renamed to `HelpPane.exe.disabled` to prevent F1 help from launching.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

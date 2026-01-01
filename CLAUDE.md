@@ -12,6 +12,7 @@ Current focus (2025-12-31):
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
+- Docs coverage audit: `scripts/audit_tweak_sources.py` validates registry/service tokens in category docs; audit report lives in `Docs/tweaks/tweak-source-audit.md`.
 - Startup flow: theme applies before splash + scan runs before MainWindow.
 - Splash shows scan progress (X/Y + current tweak).
 - Docs linking now also shows `Source file` from catalog CSV.

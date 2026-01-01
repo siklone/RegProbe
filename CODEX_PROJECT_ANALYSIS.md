@@ -15,6 +15,7 @@ Windows Optimizer, WPF ve .NET 8 ile geliştirilmiş, güvenli ve geri alınabil
 - Tweak kartı: kapalı halde `Current → Target` + etki alanı (Registry/Service/Task) görünmeli.
 - Dokümantasyon: per‑tweak kısa “ne değişir / risk / kaynak” satırları + anchor linkler.
 - Monitor UI: daha kompakt, modern ve bilgi yoğun (grafikler okunabilir).
+- Docs audit: run `python3 scripts/audit_tweak_sources.py` after adding tweaks; keep `Docs/tweaks/tweak-source-audit.md` at Missing documentation: 0 by updating category docs.
 
 ### Proje İstatistikleri
 

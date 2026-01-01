@@ -16,6 +16,21 @@ This category focuses on reducing suggestions, tips, and content delivery prompt
 ## Verification
 Use `Docs/tweaks/tweak-catalog.md` for the exact source and per-tweak Detect/Apply/Verify/Rollback checks.
 
+## App Coverage Notes (Notification Policies)
+
+Push notifications policy values used by the app:
+
+Path: `HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications`
+- `NoToastApplicationNotification` (REG_DWORD) - disables toast notifications.
+- `NoTileApplicationNotification` (REG_DWORD) - disables live tile updates.
+- `NoToastApplicationNotificationOnLockScreen` (REG_DWORD) - disables lock screen toasts.
+- `DisallowNotificationMirroring` (REG_DWORD) - prevents notification mirroring.
+
+Feedback frequency policy:
+
+Path: `HKCU\Software\Microsoft\Siuf\Rules`
+- `NumberOfSIUFInPeriod` (REG_DWORD) - controls feedback request frequency.
+
 <!-- TWEAK INDEX START -->
 ## Tweak Index (Generated)
 

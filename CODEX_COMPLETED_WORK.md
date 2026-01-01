@@ -74,6 +74,7 @@ Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düz
 - [x] `FileRenameTweak` - Dosya yeniden adlandırma
 - [x] `CommandTweak` - Komut çalıştırma
 - [x] **Non-essential services list expanded** - Bluetooth + print servisleri eklendi
+- [x] **Docs coverage audit** - `scripts/audit_tweak_sources.py` + category doc coverage notes
 
 ### TweakProvider'lar (12 Adet)
 - [x] `AudioTweakProvider` - Ses ayarları
