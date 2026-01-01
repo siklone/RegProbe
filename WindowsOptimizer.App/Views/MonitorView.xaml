@@ -1395,7 +1395,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <TextBlock Text="Customize Layout" Style="{StaticResource SectionHeaderStyle}"/>
-                            <TextBlock Text="Toggle sections or reorder them. Changes are saved automatically."
+                            <TextBlock Text="Drag sections to reorder or toggle them. Changes are saved automatically."
                                        Foreground="{DynamicResource MutedForegroundBrush}"
                                        FontSize="12"
                                        Margin="0,0,0,12"/>
@@ -1413,8 +1413,34 @@
                         </Button>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding MonitorSections}">
-                        <ItemsControl.ItemTemplate>
+                    <ListBox ItemsSource="{Binding MonitorSections}"
+                             AllowDrop="True"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             PreviewMouseLeftButtonDown="OnLayoutItemPreviewMouseLeftButtonDown"
+                             PreviewMouseMove="OnLayoutItemPreviewMouseMove"
+                             DragOver="OnLayoutItemDragOver"
+                             Drop="OnLayoutItemDrop">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="IsHitTestVisible" Value="True"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
                                 <Grid Margin="0,0,0,8">
                                     <Grid.ColumnDefinitions>
@@ -1448,8 +1474,8 @@
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </Border>
 

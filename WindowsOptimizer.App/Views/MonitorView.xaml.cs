@@ -1,13 +1,19 @@
 using System;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.ViewModels;
 
 namespace WindowsOptimizer.App.Views;
 
 public partial class MonitorView : UserControl
 {
+    private Point _layoutDragStart;
+    private MonitorSectionLayout? _draggedSection;
+
     public MonitorView()
     {
         try
@@ -38,6 +44,104 @@ public partial class MonitorView : UserControl
                 }
             };
         }
+    }
+
+    private void OnLayoutItemPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        _layoutDragStart = e.GetPosition(this);
+        _draggedSection = GetSectionFromOriginalSource(e.OriginalSource);
+    }
+
+    private void OnLayoutItemPreviewMouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed || _draggedSection is null)
+        {
+            return;
+        }
+
+        var position = e.GetPosition(this);
+        if (Math.Abs(position.X - _layoutDragStart.X) < SystemParameters.MinimumHorizontalDragDistance &&
+            Math.Abs(position.Y - _layoutDragStart.Y) < SystemParameters.MinimumVerticalDragDistance)
+        {
+            return;
+        }
+
+        DragDrop.DoDragDrop(this, _draggedSection, DragDropEffects.Move);
+    }
+
+    private void OnLayoutItemDragOver(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(typeof(MonitorSectionLayout)))
+        {
+            e.Effects = DragDropEffects.None;
+            e.Handled = true;
+            return;
+        }
+
+        e.Effects = DragDropEffects.Move;
+        e.Handled = true;
+    }
+
+    private void OnLayoutItemDrop(object sender, DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(typeof(MonitorSectionLayout)))
+        {
+            return;
+        }
+
+        var dropped = e.Data.GetData(typeof(MonitorSectionLayout)) as MonitorSectionLayout;
+        if (dropped is null)
+        {
+            return;
+        }
+
+        var viewModel = DataContext as MonitorViewModel;
+        if (viewModel is null)
+        {
+            return;
+        }
+
+        var target = GetSectionFromOriginalSource(e.OriginalSource);
+        var sections = viewModel.MonitorSections;
+        var oldIndex = sections.IndexOf(dropped);
+        if (oldIndex < 0)
+        {
+            return;
+        }
+
+        var newIndex = target is null ? sections.Count - 1 : sections.IndexOf(target);
+        if (newIndex < 0 || newIndex == oldIndex)
+        {
+            return;
+        }
+
+        sections.Move(oldIndex, newIndex);
+    }
+
+    private static MonitorSectionLayout? GetSectionFromOriginalSource(object? originalSource)
+    {
+        if (originalSource is not DependencyObject dependencyObject)
+        {
+            return null;
+        }
+
+        var container = FindAncestor<ListBoxItem>(dependencyObject);
+        return container?.DataContext as MonitorSectionLayout;
+    }
+
+    private static T? FindAncestor<T>(DependencyObject? current) where T : DependencyObject
+    {
+        while (current is not null)
+        {
+            if (current is T candidate)
+            {
+                return candidate;
+            }
+
+            current = VisualTreeHelper.GetParent(current);
+        }
+
+        return null;
     }
 
     private static void LogToFile(string message)

@@ -68,6 +68,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
             _resetLayoutCommand = new RelayCommand(_ => ResetLayout());
             InitializeLayout();
+            MonitorSections.CollectionChanged += OnMonitorSectionsChanged;
 
             // Initialize monitors safely
             try
@@ -433,6 +434,17 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         _moveSectionUpCommand.RaiseCanExecuteChanged();
         _moveSectionDownCommand.RaiseCanExecuteChanged();
+    }
+
+    private void OnMonitorSectionsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (_isLayoutLoading)
+        {
+            return;
+        }
+
+        UpdateLayoutCommands();
+        _ = SaveLayoutAsync();
     }
 
     private void ResetLayout()
