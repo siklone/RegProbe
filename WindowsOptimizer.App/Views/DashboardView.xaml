@@ -264,6 +264,30 @@
                             <TextBlock Text="Enable VSS" FontSize="11" FontWeight="SemiBold"/>
                         </Button>
                     </StackPanel>
+
+                    <StackPanel Margin="0,12,0,0">
+                        <TextBlock Text="{Binding ScanStatusText}"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="12"/>
+                        <TextBlock Text="{Binding ScanDetailText}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="11"
+                                   TextWrapping="Wrap"
+                                   Margin="0,2,0,6"/>
+                        <ProgressBar Height="6"
+                                     Minimum="0"
+                                     Maximum="100"
+                                     Value="{Binding ScanProgressPercent}"
+                                     Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}"/>
+                        <TextBlock Text="{Binding LastScanSummary}"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="11"
+                                   Margin="0,6,0,0"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding LastScanTimestamp}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="10"/>
+                    </StackPanel>
                 </StackPanel>
 
 	                <!-- Circular Health Gauge -->

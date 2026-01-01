@@ -112,6 +112,11 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         }
     }
 
+    public void MarkDetected()
+    {
+        _hasDetected = true;
+    }
+
     private async void ToggleExpand()
     {
         try
@@ -194,28 +199,16 @@ public sealed class CategoryGroupViewModel : ViewModelBase
                     using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
                     timeoutCts.CancelAfter(5000); // 5 second timeout
 
-                    var detectTask = tweak.DetectStatusAsync();
-                    var timeoutTask = Task.Delay(Timeout.Infinite, timeoutCts.Token);
-                    var completedTask = await Task.WhenAny(detectTask, timeoutTask);
-
-                    if (completedTask == detectTask)
-                    {
-                        await detectTask; // Ensure we await to catch any exceptions
-                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
-                    }
-                    else if (ct.IsCancellationRequested)
-                    {
-                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' CANCELLED");
-                        throw new System.OperationCanceledException(ct);
-                    }
-                    else
-                    {
-                        LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' TIMEOUT (5s)");
-                    }
+                    await tweak.DetectStatusAsync(timeoutCts.Token);
+                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' completed");
                 }
                 catch (System.OperationCanceledException) when (ct.IsCancellationRequested)
                 {
                     throw; // Re-throw cancellation
+                }
+                catch (System.OperationCanceledException)
+                {
+                    LogToFile($"DetectAllTweaksAsync: '{tweak.Name}' TIMEOUT (5s)");
                 }
                 catch (System.Exception ex)
                 {

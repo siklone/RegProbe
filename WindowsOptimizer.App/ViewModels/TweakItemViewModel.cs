@@ -132,10 +132,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool WillPromptForElevation => RequiresElevation && !IsElevated;
 
-    public bool IsStartupScanEligible =>
-        !WillPromptForElevation
-        && _tweak is not CommandTweak
+    public bool IsScanFriendly =>
+        _tweak is not CommandTweak
         && _tweak is not FileCleanupTweak;
+
+    public bool IsStartupScanEligible =>
+        IsScanFriendly
+        && !WillPromptForElevation;
 
     public string ElevationBadgeText => "Admin";
 
@@ -1437,14 +1440,22 @@ public sealed class TweakItemViewModel : ViewModelBase
     /// <summary>
     /// Detect if tweak is currently applied
     /// </summary>
-    public async Task DetectStatusAsync()
+    public Task DetectStatusAsync()
     {
-        if (IsRunning) return;
+        return DetectStatusAsync(CancellationToken.None);
+    }
+
+    public async Task DetectStatusAsync(CancellationToken ct)
+    {
+        if (IsRunning)
+        {
+            return;
+        }
 
         try
         {
-            var result = await Task.Run(async () =>
-                await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, CancellationToken.None));
+            ct.ThrowIfCancellationRequested();
+            var result = await _pipeline.ExecuteStepAsync(_tweak, TweakAction.Detect, null, ct);
 
             AppliedStatus = result.Result.Status switch
             {
@@ -1462,6 +1473,10 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 CurrentValue = TargetValue;
             }
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
         }
         catch (Exception ex)
         {

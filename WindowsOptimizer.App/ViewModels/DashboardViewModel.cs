@@ -34,6 +34,12 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _docsCoverageReportPath = string.Empty;
     private int _docsMissingCount;
     private string _docsCoverageSummary = "Docs report unavailable.";
+    private int _scanCurrent;
+    private int _scanTotal;
+    private string _scanStatusText = "Ready to scan.";
+    private string _scanDetailText = string.Empty;
+    private string _lastScanSummary = "No scans yet.";
+    private string _lastScanTimestamp = "Last scan: -";
     private bool _isScanning;
     private bool _isCreatingRestorePoint;
     private string _restorePointStatusMessage = string.Empty;
@@ -148,15 +154,72 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
+    public int ScanCurrent
+    {
+        get => _scanCurrent;
+        private set
+        {
+            if (SetProperty(ref _scanCurrent, value))
+            {
+                OnPropertyChanged(nameof(ScanProgressPercent));
+                OnPropertyChanged(nameof(HasScanProgress));
+            }
+        }
+    }
+
+    public int ScanTotal
+    {
+        get => _scanTotal;
+        private set
+        {
+            if (SetProperty(ref _scanTotal, value))
+            {
+                OnPropertyChanged(nameof(ScanProgressPercent));
+                OnPropertyChanged(nameof(HasScanProgress));
+            }
+        }
+    }
+
+    public double ScanProgressPercent => ScanTotal > 0
+        ? Math.Round((double)ScanCurrent / ScanTotal * 100, 1)
+        : 0;
+
+    public bool HasScanProgress => ScanTotal > 0;
+
+    public string ScanStatusText
+    {
+        get => _scanStatusText;
+        private set => SetProperty(ref _scanStatusText, value);
+    }
+
+    public string ScanDetailText
+    {
+        get => _scanDetailText;
+        private set => SetProperty(ref _scanDetailText, value);
+    }
+
+    public string LastScanSummary
+    {
+        get => _lastScanSummary;
+        private set => SetProperty(ref _lastScanSummary, value);
+    }
+
+    public string LastScanTimestamp
+    {
+        get => _lastScanTimestamp;
+        private set => SetProperty(ref _lastScanTimestamp, value);
+    }
+
     public Task RunScanAsync()
     {
-        return RunScanAsync(null, CancellationToken.None, false);
+        return RunScanAsync(null, CancellationToken.None, false, true);
     }
 
     public async Task RunScanAsync(
         IProgress<StartupScanProgress>? progress,
         CancellationToken ct,
-        bool isStartupScan)
+        bool isStartupScan,
+        bool forceRedetect)
     {
         if (_tweaksViewModel == null || IsScanning)
         {
@@ -164,10 +227,67 @@ public sealed class DashboardViewModel : ViewModelBase
         }
 
         IsScanning = true;
+        var scanStartedAt = DateTimeOffset.Now;
+        ScanCurrent = 0;
+        ScanTotal = 0;
+        ScanStatusText = isStartupScan ? "Running quick scan..." : "Scanning tweaks...";
+        ScanDetailText = string.Empty;
+
+        var skipElevationPrompts = !_tweaksViewModel.IsElevated;
+        var skipExpensiveOperations = true;
+        var scanCandidateCount = _tweaksViewModel.Tweaks.Count(t =>
+            (!isStartupScan || t.IsStartupScanEligible)
+            && (!skipElevationPrompts || !t.WillPromptForElevation)
+            && (!skipExpensiveOperations || t.IsScanFriendly));
+        var skippedCount = _tweaksViewModel.Tweaks.Count - scanCandidateCount;
         try
         {
-            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan);
+            void UpdateProgress(StartupScanProgress snapshot)
+            {
+                ScanCurrent = snapshot.Current;
+                ScanTotal = snapshot.Total;
+                ScanStatusText = snapshot.Total > 0
+                    ? $"Scanning tweaks {snapshot.Current}/{snapshot.Total}"
+                    : "Scanning tweaks...";
+
+                if (!string.IsNullOrWhiteSpace(snapshot.CurrentName))
+                {
+                    ScanDetailText = $"Checking: {snapshot.CurrentName}";
+                }
+
+                progress?.Report(snapshot);
+            }
+
+            var progressRelay = new Progress<StartupScanProgress>(UpdateProgress);
+            await _tweaksViewModel.DetectAllTweaksAsync(
+                progressRelay,
+                ct,
+                isStartupScan,
+                forceRedetect,
+                skipElevationPrompts,
+                skipExpensiveOperations);
+
             RefreshSystemSnapshot();
+
+            var elapsed = DateTimeOffset.Now - scanStartedAt;
+            var detected = _tweaksViewModel.ScorableTweaksMeasuredTotal;
+            var totalScorable = _tweaksViewModel.ScorableTweaksTotal;
+            var applied = _tweaksViewModel.ScorableTweaksApplied;
+            var summary = $"Scan complete in {elapsed:mm\\:ss}. Detected {detected}/{totalScorable} (Safe+Advanced). Applied: {applied}.";
+            if (skippedCount > 0)
+            {
+                summary += $" Skipped {skippedCount} admin-required or long-running tweaks.";
+            }
+
+            LastScanSummary = summary;
+            LastScanTimestamp = $"Last scan: {DateTimeOffset.Now:HH:mm:ss}";
+            ScanDetailText = string.Empty;
+            ScanStatusText = "Scan complete.";
+        }
+        catch (OperationCanceledException)
+        {
+            ScanDetailText = string.Empty;
+            ScanStatusText = "Scan cancelled.";
         }
         finally
         {

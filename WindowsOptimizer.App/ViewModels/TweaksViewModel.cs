@@ -1357,42 +1357,31 @@ public sealed class TweaksViewModel : ViewModelBase
     public async Task DetectAllTweaksAsync(
         IProgress<StartupScanProgress>? progress = null,
         CancellationToken ct = default,
-        bool isStartupScan = false)
+        bool isStartupScan = false,
+        bool forceRedetect = false,
+        bool skipElevationPrompts = false,
+        bool skipExpensiveOperations = false)
     {
-        var expansionSnapshot = CategoryGroups
-            .Select(group => new
-            {
-                Group = group,
-                WasExpanded = group.IsExpanded,
-                SubGroups = group.SubGroups
-                    .Select(sub => new { SubGroup = sub, WasExpanded = sub.IsExpanded })
-                    .ToList()
-            })
-            .ToList();
-
-        // Expand all categories to trigger their detection
-        foreach (var category in CategoryGroups)
+        IEnumerable<TweakItemViewModel> candidates = Tweaks;
+        if (isStartupScan)
         {
-            ct.ThrowIfCancellationRequested();
-            if (!category.IsExpanded)
-            {
-                category.IsExpanded = true;
-            }
-
-            // Also expand sub-groups
-            foreach (var subGroup in category.SubGroups)
-            {
-                ct.ThrowIfCancellationRequested();
-                if (!subGroup.IsExpanded)
-                {
-                    subGroup.IsExpanded = true;
-                }
-            }
+            candidates = candidates.Where(t => t.IsStartupScanEligible);
         }
 
-        var tweaksToScan = isStartupScan
-            ? Tweaks.Where(t => t.IsStartupScanEligible).ToList()
-            : Tweaks.ToList();
+        if (skipExpensiveOperations)
+        {
+            candidates = candidates.Where(t => t.IsScanFriendly);
+        }
+
+        if (skipElevationPrompts)
+        {
+            candidates = candidates.Where(t => !t.WillPromptForElevation);
+        }
+
+        var tweaksToScan = candidates.ToList();
+        var perTweakTimeout = isStartupScan
+            ? TimeSpan.FromSeconds(2)
+            : TimeSpan.FromSeconds(6);
 
         // Wait for all detection to complete by detecting each tweak directly
         var totalTweaks = tweaksToScan.Count;
@@ -1406,10 +1395,20 @@ public sealed class TweaksViewModel : ViewModelBase
                 ct.ThrowIfCancellationRequested();
                 currentIndex++;
                 progress?.Report(new StartupScanProgress(currentIndex, totalTweaks, tweak.Name));
-                if (tweak.AppliedStatus == TweakAppliedStatus.Unknown)
+                if (forceRedetect || tweak.AppliedStatus == TweakAppliedStatus.Unknown)
                 {
-                    await tweak.DetectStatusAsync();
+                    using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                    timeoutCts.CancelAfter(perTweakTimeout);
+                    await tweak.DetectStatusAsync(timeoutCts.Token);
                 }
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (OperationCanceledException)
+            {
+                // Timed out. Leave the previous state and continue.
             }
             catch
             {
@@ -1426,12 +1425,11 @@ public sealed class TweaksViewModel : ViewModelBase
         OnPropertyChanged(nameof(HealthCalculationSummary));
         OnPropertyChanged(nameof(HealthStatusMessage));
 
-        foreach (var snapshot in expansionSnapshot)
+        if (!isStartupScan && !skipElevationPrompts && !skipExpensiveOperations)
         {
-            snapshot.Group.IsExpanded = snapshot.WasExpanded;
-            foreach (var subSnapshot in snapshot.SubGroups)
+            foreach (var category in CategoryGroups)
             {
-                subSnapshot.SubGroup.IsExpanded = subSnapshot.WasExpanded;
+                category.MarkDetected();
             }
         }
     }
