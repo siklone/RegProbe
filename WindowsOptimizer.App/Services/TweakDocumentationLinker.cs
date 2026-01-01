@@ -158,8 +158,8 @@ public sealed class TweakDocumentationLinker
                 title += " (section missing)";
             }
 
-            var fallbackUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, tweak.Id) : docPath;
-            TryInsertReferenceLink(tweak, title, fallbackUrl, insertIndex,
+            var fallbackDocUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, tweak.Id) : docPath;
+            TryInsertReferenceLink(tweak, title, fallbackDocUrl, insertIndex,
                 "Category documentation for this tweak.", ReferenceLinkKind.Docs);
         }
     }
