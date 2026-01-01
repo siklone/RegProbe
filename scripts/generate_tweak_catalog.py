@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import html
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -160,6 +161,22 @@ def doc_for_id(tweak_id: str) -> str:
     return DOC_MAP.get(prefix, DEFAULT_DOC)
 
 
+def doc_href(doc_path: str, tweak_id: str) -> str:
+    if not doc_path:
+        return ""
+    path = Path(doc_path)
+    if not path.is_absolute():
+        path = (REPO_ROOT / path).resolve()
+    try:
+        relative = path.relative_to(OUTPUT_HTML.parent)
+    except ValueError:
+        relative = Path(os.path.relpath(path, OUTPUT_HTML.parent))
+    href = relative.as_posix()
+    if tweak_id:
+        href = f"{href}#{tweak_id}"
+    return href
+
+
 def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[Tuple[str, str, str, str, str]]:
     text = path.read_text(encoding="utf-8")
     for match in pattern.finditer(text):
@@ -286,7 +303,8 @@ def write_markdown(entries: List[TweakEntry]) -> None:
 
     for entry in entries:
         source = f"`{entry.source}`"
-        docs = f"`{entry.docs}`"
+        docs_link = doc_href(entry.docs, entry.tweak_id)
+        docs = f"[{entry.docs}]({docs_link})" if docs_link else f"`{entry.docs}`"
         anchor = f"<a id=\"{html.escape(entry.tweak_id)}\"></a>"
         changes = shorten_description(entry.description)
         lines.append(
@@ -359,6 +377,13 @@ def write_html(entries: List[TweakEntry]) -> None:
     for entry in entries:
         tweak_id = html.escape(entry.tweak_id)
         changes = html.escape(shorten_description(entry.description))
+        docs_href = doc_href(entry.docs, entry.tweak_id)
+        docs_label = html.escape(entry.docs)
+        docs_cell = (
+            f"<a href=\"{html.escape(docs_href)}\"><code>{docs_label}</code></a>"
+            if docs_href
+            else f"<code>{docs_label}</code>"
+        )
         lines.append(
             "        <tr id=\"{tweak_id}\">"
             "<td><code>{tweak_id}</code></td>"
@@ -368,7 +393,7 @@ def write_html(entries: List[TweakEntry]) -> None:
             "<td class=\"changes\">{changes}</td>"
             "<td>{risk}</td>"
             "<td><code>{source}</code></td>"
-            "<td><code>{docs}</code></td>"
+            "<td>{docs}</td>"
             "</tr>".format(
                 tweak_id=tweak_id,
                 name=html.escape(entry.name),
@@ -377,7 +402,7 @@ def write_html(entries: List[TweakEntry]) -> None:
                 changes=changes,
                 risk=html.escape(entry.risk),
                 source=html.escape(entry.source),
-                docs=html.escape(entry.docs),
+                docs=docs_cell,
             )
         )
 
