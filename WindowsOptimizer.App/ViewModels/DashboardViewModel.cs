@@ -1517,35 +1517,103 @@ public sealed class DashboardViewModel : ViewModelBase
     [SupportedOSPlatform("windows")]
     private static ManagementScope? TryConnectScope(string scopePath, string label, bool logFailure)
     {
-        try
+        Exception? lastError = null;
+        foreach (var candidate in BuildScopeCandidates(scopePath))
         {
-            var scope = new ManagementScope(scopePath)
+            try
             {
-                Options =
+                var scope = new ManagementScope(candidate)
                 {
-                    EnablePrivileges = true,
-                    Impersonation = ImpersonationLevel.Impersonate
-                }
-            };
-            scope.Connect();
-            return scope;
-        }
-        catch (ManagementException ex) when (ex.ErrorCode is ManagementStatus.InvalidNamespace or ManagementStatus.InvalidClass or ManagementStatus.InvalidParameter)
-        {
-            if (logFailure)
-            {
-                LogProbeException(label, ex);
+                    Options =
+                    {
+                        EnablePrivileges = true,
+                        Impersonation = ImpersonationLevel.Impersonate
+                    }
+                };
+                scope.Connect();
+                return scope;
             }
-            return null;
-        }
-        catch (Exception ex)
-        {
-            if (logFailure)
+            catch (ManagementException ex) when (IsScopeError(ex))
             {
-                LogProbeException(label, ex);
+                lastError = ex;
             }
-            return null;
+            catch (Exception ex)
+            {
+                lastError = ex;
+            }
         }
+
+        if (logFailure && lastError != null)
+        {
+            LogProbeException(label, lastError);
+        }
+
+        return null;
+    }
+
+    private static bool IsScopeError(ManagementException ex)
+        => ex.ErrorCode is ManagementStatus.InvalidNamespace
+            or ManagementStatus.InvalidClass
+            or ManagementStatus.InvalidParameter;
+
+    private static IEnumerable<string> BuildScopeCandidates(string scopePath)
+    {
+        var candidates = new List<string>();
+
+        void AddCandidate(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
+
+            if (candidates.Any(existing => string.Equals(existing, value, StringComparison.OrdinalIgnoreCase)))
+            {
+                return;
+            }
+
+            candidates.Add(value);
+        }
+
+        AddCandidate(scopePath);
+
+        if (TryExtractNamespace(scopePath, out var namespacePath))
+        {
+            AddCandidate($@"\\.\{namespacePath}");
+            AddCandidate($@"\\{Environment.MachineName}\{namespacePath}");
+            AddCandidate($@"\\localhost\{namespacePath}");
+            AddCandidate(namespacePath);
+        }
+
+        return candidates;
+    }
+
+    private static bool TryExtractNamespace(string scopePath, out string namespacePath)
+    {
+        namespacePath = string.Empty;
+        if (string.IsNullOrWhiteSpace(scopePath))
+        {
+            return false;
+        }
+
+        var trimmed = scopePath.Trim();
+        if (trimmed.StartsWith(@"\\", StringComparison.Ordinal))
+        {
+            var parts = trimmed.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length >= 2)
+            {
+                namespacePath = string.Join('\\', parts.Skip(1));
+                return true;
+            }
+        }
+
+        if (trimmed.StartsWith("root\\", StringComparison.OrdinalIgnoreCase))
+        {
+            namespacePath = trimmed;
+            return true;
+        }
+
+        return false;
     }
 
     private static bool? TryReadBool(ManagementBaseObject obj, string propertyName)

@@ -48,6 +48,15 @@ public sealed class BootTimeTracker
         {
             // Ignore WMI errors
         }
+        try
+        {
+            var uptime = TimeSpan.FromMilliseconds(Environment.TickCount64);
+            return DateTime.Now - uptime;
+        }
+        catch
+        {
+            // Ignore uptime fallback errors
+        }
         return null;
     }
 
@@ -62,29 +71,16 @@ public sealed class BootTimeTracker
             var query = new EventLogQuery(
                 "Microsoft-Windows-Diagnostics-Performance/Operational",
                 PathType.LogName,
-                "*[System[EventID=100]]");
+                "*[System[EventID=100]]")
+            {
+                ReverseDirection = true
+            };
 
             using var reader = new EventLogReader(query);
-            EventRecord? latestEvent = null;
-
-            // Find the most recent boot event
-            for (var evt = reader.ReadEvent(); evt != null; evt = reader.ReadEvent())
-            {
-                if (latestEvent == null || evt.TimeCreated > latestEvent.TimeCreated)
-                {
-                    latestEvent?.Dispose();
-                    latestEvent = evt;
-                }
-                else
-                {
-                    evt.Dispose();
-                }
-            }
-
+            using var latestEvent = reader.ReadEvent();
             if (latestEvent != null)
             {
                 var bootTimeMs = TryGetBootTimeMs(latestEvent);
-                latestEvent.Dispose();
                 return bootTimeMs.HasValue && bootTimeMs.Value >= 1000
                     ? TimeSpan.FromMilliseconds(bootTimeMs.Value)
                     : null;
