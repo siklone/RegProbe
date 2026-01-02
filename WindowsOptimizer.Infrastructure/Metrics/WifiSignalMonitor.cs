@@ -47,9 +47,10 @@ public sealed class WifiSignalMonitor : IDisposable
                     continue;
                 }
 
+                var interfaceGuid = iface.InterfaceGuid;
                 var queryResult = NativeMethods.WlanQueryInterface(
                     _clientHandle,
-                    ref iface.InterfaceGuid,
+                    ref interfaceGuid,
                     WLAN_INTF_OPCODE.wlan_intf_opcode_current_connection,
                     IntPtr.Zero,
                     out _,
