@@ -2,7 +2,8 @@ param(
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
     [switch]$SelfContained = $true,
-    [switch]$Clean
+    [switch]$Clean,
+    [switch]$ReadyToRun
 )
 
 $ErrorActionPreference = "Stop"
@@ -39,8 +40,11 @@ if (!(Test-Path $projectPath)) {
     throw "Project not found at $projectPath"
 }
 
+$readyToRunValue = if ($ReadyToRun.IsPresent) { "true" } else { "false" }
+
 Write-Host "Publishing WindowsOptimizer.App ($Configuration, $Runtime)..."
-dotnet publish $projectPath -c $Configuration -r $Runtime --self-contained:$SelfContained
+Write-Host "PublishReadyToRun=$readyToRunValue"
+dotnet publish $projectPath -c $Configuration -r $Runtime --self-contained:$SelfContained /p:PublishReadyToRun=$readyToRunValue
 
 if (!(Test-Path $publishDir)) {
     throw "Publish output not found at $publishDir"

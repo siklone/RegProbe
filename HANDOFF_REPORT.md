@@ -92,6 +92,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - `scripts/report_tweak_docs.py` validates per-tweak anchors across category docs, catalog, and details HTML.
   - Outputs: `Docs/tweaks/tweak-docs-report.md` + `.csv` + `.html` plus missing reports (should show 0 missing after updates).
 
+- **Packaging defaults (2026-01-02)**
+  - `scripts/package_windows.ps1` now forces `PublishReadyToRun=false` to avoid `crossgen2.exe` failures.
+  - Use `scripts/package_windows.cmd -ReadyToRun` if you want ReadyToRun output.
+
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.
   - `DetectAllTweaksAsync` accepts progress + cancellation.
