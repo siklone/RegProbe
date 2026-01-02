@@ -96,6 +96,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - `scripts/package_windows.ps1` now forces `PublishReadyToRun=false` to avoid `crossgen2.exe` failures.
   - Use `scripts/package_windows.cmd -ReadyToRun` if you want ReadyToRun output.
 
+- **Monitor sensor fallbacks + scroll cache (2026-01-02)**
+  - CPU temp now scans CPU/motherboard/SuperIO sensors and falls back to WMI thermal zones.
+  - Disk health uses SMART/WMI fallbacks (MSFT_Disk + Win32_DiskDrive) for wider coverage.
+  - Tweaks list cards now use bitmap caching to reduce scroll jank.
+
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.
   - `DetectAllTweaksAsync` accepts progress + cancellation.

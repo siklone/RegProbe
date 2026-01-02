@@ -1315,7 +1315,8 @@
 		                                                    Margin="0,0,0,6"
 		                                                    BorderThickness="2,0,0,0"
 		                                                    BorderBrush="{Binding StatusColor}"
-		                                                    Background="{DynamicResource BackgroundDarkBrush}">
+		                                                    Background="{DynamicResource BackgroundDarkBrush}"
+		                                                    CacheMode="BitmapCache">
 			                                                <Border.RenderTransform>
 			                                                    <TranslateTransform x:Name="TweakCardTranslate" Y="0"/>
 			                                                </Border.RenderTransform>

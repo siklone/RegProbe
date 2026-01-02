@@ -69,14 +69,19 @@ public sealed class MetricProvider : IDisposable
 
     public double GetCpuTemperature()
     {
-        if (_computer == null) return double.NaN;
+        if (_computer == null)
+        {
+            return TryGetCpuTemperatureFromWmi() ?? double.NaN;
+        }
 
         foreach (var hardware in _computer.Hardware)
         {
-            if (hardware.HardwareType == HardwareType.Cpu)
+            if (hardware.HardwareType == HardwareType.Cpu ||
+                hardware.HardwareType == HardwareType.Motherboard ||
+                hardware.HardwareType == HardwareType.SuperIO)
             {
-                hardware.Update();
-                var temps = hardware.Sensors
+                UpdateHardware(hardware);
+                var temps = EnumerateSensors(hardware)
                     .Where(s => s.SensorType == SensorType.Temperature && s.Value.HasValue)
                     .ToList();
 
@@ -85,11 +90,10 @@ public sealed class MetricProvider : IDisposable
                     continue;
                 }
 
-                var preferred = temps.FirstOrDefault(s => s.Name.Contains("Package", StringComparison.OrdinalIgnoreCase))
-                                ?? temps.FirstOrDefault(s => s.Name.Contains("Tctl", StringComparison.OrdinalIgnoreCase)
-                                                             || s.Name.Contains("Tdie", StringComparison.OrdinalIgnoreCase))
-                                ?? temps.FirstOrDefault(s => s.Name.Contains("Core Average", StringComparison.OrdinalIgnoreCase))
-                                ?? temps.FirstOrDefault(s => s.Name.Contains("CCD", StringComparison.OrdinalIgnoreCase));
+                var preferred = temps.FirstOrDefault(s => ContainsAny(s.Name, "Package", "CPU Package"))
+                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Tctl", "Tdie", "Die"))
+                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Core Average", "CCD", "SoC"))
+                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "CPU", "Core"));
 
                 if (preferred?.Value is { } preferredValue)
                 {
@@ -112,7 +116,7 @@ public sealed class MetricProvider : IDisposable
             }
         }
 
-        return double.NaN;
+        return TryGetCpuTemperatureFromWmi() ?? double.NaN;
     }
 
     public double GetGpuTemperature()
@@ -125,8 +129,8 @@ public sealed class MetricProvider : IDisposable
                 hardware.HardwareType == HardwareType.GpuAmd ||
                 hardware.HardwareType == HardwareType.GpuIntel)
             {
-                hardware.Update();
-                foreach (var sensor in hardware.Sensors)
+                UpdateHardware(hardware);
+                foreach (var sensor in EnumerateSensors(hardware))
                 {
                     if (sensor.SensorType == SensorType.Temperature &&
                         (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU")))
@@ -253,7 +257,8 @@ public sealed class MetricProvider : IDisposable
         foreach (var hardware in _computer.Hardware)
         {
             if (hardware.HardwareType == HardwareType.Cpu ||
-                hardware.HardwareType == HardwareType.Motherboard)
+                hardware.HardwareType == HardwareType.Motherboard ||
+                hardware.HardwareType == HardwareType.SuperIO)
             {
                 UpdateHardware(hardware);
 
@@ -343,27 +348,17 @@ public sealed class MetricProvider : IDisposable
 
         if (!healthPercent.HasValue)
         {
-            try
-            {
-                using var searcher = new ManagementObjectSearcher("root\\WMI", "SELECT PredictFailure FROM MSStorageDriver_FailurePredictStatus");
-                foreach (ManagementObject obj in searcher.Get())
-                {
-                    if (obj["PredictFailure"] is bool predicted)
-                    {
-                        predictFailure = predicted;
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to read disk SMART status: {ex.Message}");
-            }
+            predictFailure = TryGetSmartPredictFailure();
         }
 
         if (!predictFailure.HasValue)
         {
             predictFailure = TryGetStorageHealthStatus();
+        }
+
+        if (!predictFailure.HasValue)
+        {
+            predictFailure = TryGetDiskStatusFromWin32DiskDrive();
         }
 
         return new DiskHealthSnapshot(healthPercent, predictFailure);
@@ -496,6 +491,24 @@ public sealed class MetricProvider : IDisposable
                || name.Contains("Water", StringComparison.OrdinalIgnoreCase);
     }
 
+    private static bool ContainsAny(string? value, params string[] tokens)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        foreach (var token in tokens)
+        {
+            if (value.IndexOf(token, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     [SupportedOSPlatform("windows")]
     private static double? TryGetStorageReliabilityHealth()
     {
@@ -576,11 +589,165 @@ public sealed class MetricProvider : IDisposable
                 }
             }
 
+            if (anyHealthy.HasValue)
+            {
+                return false;
+            }
+
+            using var diskSearcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT HealthStatus FROM MSFT_Disk"));
+            foreach (ManagementObject obj in diskSearcher.Get())
+            {
+                var diskHealth = TryReadInt(obj, "HealthStatus");
+                if (!diskHealth.HasValue)
+                {
+                    continue;
+                }
+
+                switch (diskHealth.Value)
+                {
+                    case 1:
+                        anyHealthy = anyHealthy ?? true;
+                        break;
+                    case 2:
+                    case 3:
+                        return true;
+                }
+            }
+
             return anyHealthy.HasValue ? false : null;
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Failed to read physical disk health status: {ex.Message}");
+            return null;
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static bool? TryGetSmartPredictFailure()
+    {
+        try
+        {
+            var scope = new ManagementScope(@"\\.\root\WMI", new ConnectionOptions
+            {
+                EnablePrivileges = true,
+                Impersonation = ImpersonationLevel.Impersonate
+            });
+            scope.Connect();
+
+            using var searcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT PredictFailure FROM MSStorageDriver_FailurePredictStatus"));
+
+            bool? anyHealthy = null;
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                if (obj["PredictFailure"] is not bool predicted)
+                {
+                    continue;
+                }
+
+                if (predicted)
+                {
+                    return true;
+                }
+
+                anyHealthy = anyHealthy ?? true;
+            }
+
+            return anyHealthy.HasValue ? false : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read disk SMART status: {ex.Message}");
+            return null;
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static bool? TryGetDiskStatusFromWin32DiskDrive()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Status, StatusInfo FROM Win32_DiskDrive");
+            bool? anyHealthy = null;
+
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var status = obj["Status"]?.ToString() ?? string.Empty;
+                if (!string.IsNullOrWhiteSpace(status))
+                {
+                    if (status.Equals("OK", StringComparison.OrdinalIgnoreCase))
+                    {
+                        anyHealthy = anyHealthy ?? true;
+                        continue;
+                    }
+
+                    if (status.IndexOf("Pred", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        status.IndexOf("Degrad", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        status.IndexOf("Fail", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        return true;
+                    }
+                }
+
+                var statusInfo = TryReadInt(obj, "StatusInfo");
+                if (statusInfo.HasValue)
+                {
+                    switch (statusInfo.Value)
+                    {
+                        case 3: // enabled
+                            anyHealthy = anyHealthy ?? true;
+                            break;
+                        case 4: // disabled
+                        case 5: // not applicable
+                        case 6: // unknown
+                            break;
+                        default:
+                            return true;
+                    }
+                }
+            }
+
+            return anyHealthy.HasValue ? false : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read disk status from Win32_DiskDrive: {ex.Message}");
+            return null;
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetCpuTemperatureFromWmi()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(@"root\WMI", "SELECT CurrentTemperature FROM MSAcpi_ThermalZoneTemperature");
+            var values = new List<double>();
+
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                if (obj["CurrentTemperature"] == null)
+                {
+                    continue;
+                }
+
+                var raw = Convert.ToDouble(obj["CurrentTemperature"]);
+                var celsius = (raw / 10.0) - 273.15;
+                if (celsius > 0 && celsius < 150)
+                {
+                    values.Add(celsius);
+                }
+            }
+
+            return values.Count > 0 ? values.Max() : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read CPU temperature from WMI: {ex.Message}");
             return null;
         }
     }

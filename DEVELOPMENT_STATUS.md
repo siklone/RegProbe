@@ -615,6 +615,23 @@
 
 ---
 
+### 22. Monitor Sensor Coverage + Scroll Smoothing (Commit: pending)
+**Problem:** Some systems report missing CPU temp/fan, and disk health shows N/A. Scrolling could feel laggy.
+
+**Solution:**
+- CPU temp now scans CPU + motherboard + SuperIO sensors and falls back to WMI thermal zones.
+- CPU fan now includes SuperIO sensors, and SMART/health checks now use multiple WMI fallbacks.
+- Tweaks list cards are bitmap cached to reduce scroll jank.
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (varied hardware)
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**

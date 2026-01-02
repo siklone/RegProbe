@@ -21,6 +21,7 @@ Current focus (2026-01-02):
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
 - Category docs include generated Tweak Index anchors (links jump to tweak sections).
 - Monitor upgrades: multi-target latency (gateway + 1.1.1.1 + 8.8.8.8), disk health and fan RPM detection improvements, and layout reordering.
+- Sensor coverage: CPU temp/fan fallbacks and disk health WMI fallbacks; Tweaks list caching to reduce scroll lag.
 - Packaging: `scripts/package_windows.cmd` builds a self-contained zip for Windows testing (ReadyToRun disabled by default; pass `-ReadyToRun` if you want it).
 - Next: verify light theme + startup flicker, and migrate remaining legacy tweaks into category providers.
 

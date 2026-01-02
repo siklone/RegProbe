@@ -779,7 +779,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         : DiskPredictFailure == true
             ? "SMART predicts failure"
             : DiskPredictFailure == false
-                ? "SMART status OK"
+                ? "Drive health status OK"
                 : "SMART data unavailable";
 
     public double? NetworkLatencyMs
