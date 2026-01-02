@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2025-12-31
+**Last Updated:** 2026-01-02
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -87,6 +87,10 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - Added `scripts/audit_tweak_sources.py` to validate that each tweak’s registry/service tokens appear in the relevant docs folder.
   - Inserted small “App Coverage Notes” sections in category docs to document policy/value paths used by app-only tweaks.
   - Outputs: `Docs/tweaks/tweak-source-audit.md` + `.csv` (should show Missing documentation: 0 after updates).
+
+- **Tweak docs report refresh (2026-01-02)**
+  - `scripts/report_tweak_docs.py` validates per-tweak anchors across category docs, catalog, and details HTML.
+  - Outputs: `Docs/tweaks/tweak-docs-report.md` + `.csv` + `.html` plus missing reports (should show 0 missing after updates).
 
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.
