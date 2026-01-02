@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** December 31, 2025
+**Last Updated:** January 2, 2026
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -578,6 +578,40 @@
 - `WindowsOptimizer.App/Views/MonitorView.xaml`
 
 **Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+
+---
+
+### 20. Monitor Latency + Storage Health Improvements (Commit: pending)
+**Problem:** Single-target latency wasn't representative, and storage health often reported N/A for NVMe.
+
+**Solution:**
+- Latency card now measures gateway + Cloudflare (1.1.1.1) + Google (8.8.8.8).
+- Disk health now uses WMI storage reliability counters with MSFT_PhysicalDisk fallback.
+- CPU fan detection now walks sub-hardware sensors for better coverage.
+- CSV export includes the new latency targets.
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (NVMe + OEM drivers)
+
+---
+
+### 21. Windows Packaging Script (Commit: pending)
+**Problem:** Sharing builds with testers required manual publish steps.
+
+**Solution:**
+- Added `scripts/package_windows.cmd` + `scripts/package_windows.ps1` to build a self-contained zip.
+- Ensures `Docs/` and `ElevatedHost/` are copied into the publish output.
+
+**Files Changed:**
+- `scripts/package_windows.cmd`
+- `scripts/package_windows.ps1`
+
+**Status:** ✅ **IMPLEMENTED**
 
 ---
 
