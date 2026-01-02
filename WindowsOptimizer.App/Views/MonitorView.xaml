@@ -510,19 +510,19 @@
                     <StackPanel>
                         <TextBlock Text="Latency (ms)" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="{Binding GatewayLatencyLabel}" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GatewayLatencyLabel, Mode=OneWay}" Foreground="{DynamicResource MutedForegroundBrush}"/>
                             <Run Text=" " />
-                            <Run Text="{Binding GatewayLatencyText}"/>
+                            <Run Text="{Binding GatewayLatencyText, Mode=OneWay}"/>
                         </TextBlock>
                         <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
                             <Run Text="Cloudflare (1.1.1.1)" Foreground="{DynamicResource MutedForegroundBrush}"/>
                             <Run Text=" " />
-                            <Run Text="{Binding CloudflareLatencyText}"/>
+                            <Run Text="{Binding CloudflareLatencyText, Mode=OneWay}"/>
                         </TextBlock>
                         <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
                             <Run Text="Google (8.8.8.8)" Foreground="{DynamicResource MutedForegroundBrush}"/>
                             <Run Text=" " />
-                            <Run Text="{Binding GoogleLatencyText}"/>
+                            <Run Text="{Binding GoogleLatencyText, Mode=OneWay}"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>
