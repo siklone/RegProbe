@@ -247,6 +247,7 @@ public sealed class MetricProvider : IDisposable
         }
 
         double? cpuRpm = null;
+        double? cpuFallback = null;
         double? gpuRpm = null;
 
         foreach (var hardware in _computer.Hardware)
@@ -254,9 +255,9 @@ public sealed class MetricProvider : IDisposable
             if (hardware.HardwareType == HardwareType.Cpu ||
                 hardware.HardwareType == HardwareType.Motherboard)
             {
-                hardware.Update();
+                UpdateHardware(hardware);
 
-                foreach (var sensor in hardware.Sensors)
+                foreach (var sensor in EnumerateSensors(hardware))
                 {
                     if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
                     {
@@ -264,10 +265,13 @@ public sealed class MetricProvider : IDisposable
                     }
 
                     var name = sensor.Name ?? string.Empty;
-                    if (name.Contains("CPU", StringComparison.OrdinalIgnoreCase) ||
-                        name.Contains("Pump", StringComparison.OrdinalIgnoreCase))
+                    if (IsCpuFanName(name))
                     {
                         cpuRpm = Math.Max(cpuRpm ?? 0, sensor.Value.Value);
+                    }
+                    else
+                    {
+                        cpuFallback = Math.Max(cpuFallback ?? 0, sensor.Value.Value);
                     }
                 }
             }
@@ -276,9 +280,9 @@ public sealed class MetricProvider : IDisposable
                 hardware.HardwareType == HardwareType.GpuAmd ||
                 hardware.HardwareType == HardwareType.GpuIntel)
             {
-                hardware.Update();
+                UpdateHardware(hardware);
 
-                foreach (var sensor in hardware.Sensors)
+                foreach (var sensor in EnumerateSensors(hardware))
                 {
                     if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
                     {
@@ -290,6 +294,7 @@ public sealed class MetricProvider : IDisposable
             }
         }
 
+        cpuRpm ??= cpuFallback;
         return new FanSpeedSnapshot(cpuRpm ?? double.NaN, gpuRpm ?? double.NaN);
     }
 
@@ -333,6 +338,11 @@ public sealed class MetricProvider : IDisposable
 
         if (!healthPercent.HasValue)
         {
+            healthPercent = TryGetStorageReliabilityHealth();
+        }
+
+        if (!healthPercent.HasValue)
+        {
             try
             {
                 using var searcher = new ManagementObjectSearcher("root\\WMI", "SELECT PredictFailure FROM MSStorageDriver_FailurePredictStatus");
@@ -349,6 +359,11 @@ public sealed class MetricProvider : IDisposable
             {
                 Debug.WriteLine($"Failed to read disk SMART status: {ex.Message}");
             }
+        }
+
+        if (!predictFailure.HasValue)
+        {
+            predictFailure = TryGetStorageHealthStatus();
         }
 
         return new DiskHealthSnapshot(healthPercent, predictFailure);
@@ -441,6 +456,207 @@ public sealed class MetricProvider : IDisposable
         var availableMb = GetAvailableRamMb();
         var totalGb = GetTotalRamGb();
         return totalGb - (availableMb / 1024.0);
+    }
+
+    private static void UpdateHardware(IHardware hardware)
+    {
+        hardware.Update();
+        foreach (var sub in hardware.SubHardware)
+        {
+            sub.Update();
+        }
+    }
+
+    private static IEnumerable<ISensor> EnumerateSensors(IHardware hardware)
+    {
+        foreach (var sensor in hardware.Sensors)
+        {
+            yield return sensor;
+        }
+
+        foreach (var sub in hardware.SubHardware)
+        {
+            foreach (var sensor in sub.Sensors)
+            {
+                yield return sensor;
+            }
+        }
+    }
+
+    private static bool IsCpuFanName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return false;
+        }
+
+        return name.Contains("CPU", StringComparison.OrdinalIgnoreCase)
+               || name.Contains("Pump", StringComparison.OrdinalIgnoreCase)
+               || name.Contains("AIO", StringComparison.OrdinalIgnoreCase)
+               || name.Contains("Water", StringComparison.OrdinalIgnoreCase);
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetStorageReliabilityHealth()
+    {
+        try
+        {
+            using var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
+            scope.Connect();
+
+            using var searcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT PercentLifeUsed, RemainingLife, Wear FROM MSFT_StorageReliabilityCounter"));
+
+            var values = new List<double>();
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var percentUsed = NormalizePercent(TryReadDouble(obj, "PercentLifeUsed"), invert: true);
+                var remainingLife = NormalizePercent(TryReadDouble(obj, "RemainingLife"), invert: false);
+                var wear = NormalizePercent(TryReadDouble(obj, "Wear"), invert: true);
+
+                if (percentUsed.HasValue)
+                {
+                    values.Add(percentUsed.Value);
+                }
+                else if (remainingLife.HasValue)
+                {
+                    values.Add(remainingLife.Value);
+                }
+                else if (wear.HasValue)
+                {
+                    values.Add(wear.Value);
+                }
+            }
+
+            return values.Count > 0 ? values.Min() : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read storage reliability counters: {ex.Message}");
+            return null;
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static bool? TryGetStorageHealthStatus()
+    {
+        try
+        {
+            using var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
+            scope.Connect();
+
+            using var searcher = new ManagementObjectSearcher(
+                scope,
+                new ObjectQuery("SELECT HealthStatus FROM MSFT_PhysicalDisk"));
+
+            bool? anyHealthy = null;
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var healthStatus = TryReadInt(obj, "HealthStatus");
+                if (!healthStatus.HasValue)
+                {
+                    continue;
+                }
+
+                switch (healthStatus.Value)
+                {
+                    case 1:
+                        anyHealthy = anyHealthy ?? true;
+                        break;
+                    case 2:
+                    case 3:
+                        return true;
+                }
+            }
+
+            return anyHealthy.HasValue ? false : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read physical disk health status: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static double? NormalizePercent(double? value, bool invert)
+    {
+        if (!value.HasValue)
+        {
+            return null;
+        }
+
+        var raw = value.Value;
+        if (double.IsNaN(raw) || double.IsInfinity(raw) || raw < 0)
+        {
+            return null;
+        }
+
+        if (raw > 1000)
+        {
+            return null;
+        }
+
+        var normalized = invert ? 100.0 - raw : raw;
+        if (normalized < 0) normalized = 0;
+        if (normalized > 100) normalized = 100;
+        return normalized;
+    }
+
+    private static double? TryReadDouble(ManagementBaseObject obj, string propertyName)
+    {
+        try
+        {
+            var value = obj[propertyName];
+            if (value == null)
+            {
+                return null;
+            }
+
+            return value switch
+            {
+                double d => d,
+                float f => f,
+                decimal m => (double)m,
+                ushort us => us,
+                short s => s,
+                uint ui => ui,
+                int i => i,
+                long l => l,
+                _ => double.TryParse(value.ToString(), out var parsed) ? parsed : null
+            };
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static int? TryReadInt(ManagementBaseObject obj, string propertyName)
+    {
+        try
+        {
+            var value = obj[propertyName];
+            if (value == null)
+            {
+                return null;
+            }
+
+            return value switch
+            {
+                int i => i,
+                uint ui => (int)ui,
+                ushort us => us,
+                short s => s,
+                byte b => b,
+                long l => (int)l,
+                _ => int.TryParse(value.ToString(), out var parsed) ? parsed : null
+            };
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public void Dispose()
