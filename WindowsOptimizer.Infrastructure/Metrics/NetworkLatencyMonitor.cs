@@ -11,33 +11,31 @@ namespace WindowsOptimizer.Infrastructure.Metrics;
 [SupportedOSPlatform("windows")]
 public sealed class NetworkLatencyMonitor : IDisposable
 {
-    private readonly Ping _ping = new();
+    private static readonly IPAddress CloudflareDns = IPAddress.Parse("1.1.1.1");
+    private static readonly IPAddress GoogleDns = IPAddress.Parse("8.8.8.8");
+    private const int PingTimeoutMs = 1000;
+    private const int PingGuardMs = 1200;
 
     public async Task<NetworkLatencySample?> SampleAsync(CancellationToken cancellationToken)
     {
         var target = GetDefaultGateway();
-        if (target == null)
-        {
-            return null;
-        }
+        var gatewayTarget = target?.ToString() ?? string.Empty;
 
         try
         {
-            var pingTask = _ping.SendPingAsync(target, 1000);
-            var completed = await Task.WhenAny(pingTask, Task.Delay(1200, cancellationToken));
+            var gatewayTask = target == null
+                ? Task.FromResult<double?>(null)
+                : PingAsync(target, cancellationToken);
+            var cloudflareTask = PingAsync(CloudflareDns, cancellationToken);
+            var googleTask = PingAsync(GoogleDns, cancellationToken);
 
-            if (completed != pingTask)
-            {
-                return null;
-            }
+            await Task.WhenAll(gatewayTask, cloudflareTask, googleTask);
 
-            var reply = await pingTask;
-            if (reply.Status != IPStatus.Success)
-            {
-                return null;
-            }
-
-            return new NetworkLatencySample(reply.RoundtripTime, target.ToString());
+            return new NetworkLatencySample(
+                gatewayTarget,
+                gatewayTask.Result,
+                cloudflareTask.Result,
+                googleTask.Result);
         }
         catch
         {
@@ -47,7 +45,32 @@ public sealed class NetworkLatencyMonitor : IDisposable
 
     public void Dispose()
     {
-        _ping.Dispose();
+    }
+
+    private static async Task<double?> PingAsync(IPAddress target, CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var ping = new Ping();
+            var pingTask = ping.SendPingAsync(target, PingTimeoutMs);
+            var completed = await Task.WhenAny(pingTask, Task.Delay(PingGuardMs, cancellationToken));
+
+            if (completed != pingTask)
+            {
+                return null;
+            }
+
+            var reply = await pingTask;
+            return reply.Status == IPStatus.Success ? reply.RoundtripTime : null;
+        }
+        catch (OperationCanceledException)
+        {
+            return null;
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     private static IPAddress? GetDefaultGateway()
@@ -89,4 +112,8 @@ public sealed class NetworkLatencyMonitor : IDisposable
     }
 }
 
-public readonly record struct NetworkLatencySample(double LatencyMs, string Target);
+public readonly record struct NetworkLatencySample(
+    string GatewayTarget,
+    double? GatewayMs,
+    double? CloudflareMs,
+    double? GoogleMs);

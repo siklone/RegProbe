@@ -56,6 +56,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool? _diskPredictFailure;
     private double? _networkLatencyMs;
     private string _networkLatencyTarget = string.Empty;
+    private double? _cloudflareLatencyMs;
+    private double? _googleLatencyMs;
     private int? _wifiSignalQuality;
     private string _wifiSsid = string.Empty;
     private SystemInfo? _systemInfo;
@@ -299,7 +301,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine($"CPU Fan,{CpuFanRpmText}");
             csv.AppendLine($"GPU Fan,{GpuFanRpmText}");
             csv.AppendLine($"Disk Health,{DiskHealthText}");
-            csv.AppendLine($"Network Latency,{NetworkLatencyText}");
+            var gatewayLabel = string.IsNullOrWhiteSpace(NetworkLatencyTarget)
+                ? "Gateway"
+                : $"Gateway ({NetworkLatencyTarget})";
+            csv.AppendLine($"Latency {gatewayLabel},{GatewayLatencyText}");
+            csv.AppendLine($"Latency Cloudflare (1.1.1.1),{CloudflareLatencyText}");
+            csv.AppendLine($"Latency Google (8.8.8.8),{GoogleLatencyText}");
             csv.AppendLine($"Wi-Fi Signal,{WifiSignalText} {WifiSignalDetail}".Trim());
             csv.AppendLine();
             csv.AppendLine("System Information");
@@ -787,13 +794,39 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _networkLatencyTarget, value);
     }
 
+    public double? CloudflareLatencyMs
+    {
+        get => _cloudflareLatencyMs;
+        private set => SetProperty(ref _cloudflareLatencyMs, value);
+    }
+
+    public double? GoogleLatencyMs
+    {
+        get => _googleLatencyMs;
+        private set => SetProperty(ref _googleLatencyMs, value);
+    }
+
     public string NetworkLatencyText => NetworkLatencyMs.HasValue
         ? $"{NetworkLatencyMs.Value:F0} ms"
         : "N/A";
 
     public string NetworkLatencyDetail => string.IsNullOrWhiteSpace(NetworkLatencyTarget)
         ? "Gateway ping"
-        : $"Ping {NetworkLatencyTarget}";
+        : $"Gateway {NetworkLatencyTarget}";
+
+    public string GatewayLatencyText => NetworkLatencyText;
+
+    public string GatewayLatencyLabel => string.IsNullOrWhiteSpace(NetworkLatencyTarget)
+        ? "Gateway"
+        : $"Gateway ({NetworkLatencyTarget})";
+
+    public string CloudflareLatencyText => CloudflareLatencyMs.HasValue
+        ? $"{CloudflareLatencyMs.Value:F0} ms"
+        : "N/A";
+
+    public string GoogleLatencyText => GoogleLatencyMs.HasValue
+        ? $"{GoogleLatencyMs.Value:F0} ms"
+        : "N/A";
 
     public int? WifiSignalQuality
     {
@@ -1040,17 +1073,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 var latency = await _latencyMonitor.SampleAsync(CancellationToken.None);
                 if (latency.HasValue)
                 {
-                    NetworkLatencyMs = latency.Value.LatencyMs;
-                    NetworkLatencyTarget = latency.Value.Target;
+                    NetworkLatencyMs = latency.Value.GatewayMs;
+                    NetworkLatencyTarget = latency.Value.GatewayTarget;
+                    CloudflareLatencyMs = latency.Value.CloudflareMs;
+                    GoogleLatencyMs = latency.Value.GoogleMs;
                 }
                 else
                 {
                     NetworkLatencyMs = null;
                     NetworkLatencyTarget = string.Empty;
+                    CloudflareLatencyMs = null;
+                    GoogleLatencyMs = null;
                 }
 
                 OnPropertyChanged(nameof(NetworkLatencyText));
                 OnPropertyChanged(nameof(NetworkLatencyDetail));
+                OnPropertyChanged(nameof(GatewayLatencyText));
+                OnPropertyChanged(nameof(GatewayLatencyLabel));
+                OnPropertyChanged(nameof(CloudflareLatencyText));
+                OnPropertyChanged(nameof(GoogleLatencyText));
             }
 
             if (_wifiSignalMonitor != null)
