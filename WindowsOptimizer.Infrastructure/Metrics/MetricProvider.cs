@@ -501,8 +501,11 @@ public sealed class MetricProvider : IDisposable
     {
         try
         {
-            var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
-            scope.Connect();
+            var scope = TryConnectStorageScope();
+            if (scope == null)
+            {
+                return null;
+            }
 
             using var searcher = new ManagementObjectSearcher(
                 scope,
@@ -543,8 +546,11 @@ public sealed class MetricProvider : IDisposable
     {
         try
         {
-            var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
-            scope.Connect();
+            var scope = TryConnectStorageScope();
+            if (scope == null)
+            {
+                return null;
+            }
 
             using var searcher = new ManagementObjectSearcher(
                 scope,
@@ -657,6 +663,32 @@ public sealed class MetricProvider : IDisposable
         {
             return null;
         }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static ManagementScope? TryConnectStorageScope()
+    {
+        var options = new ConnectionOptions
+        {
+            EnablePrivileges = true,
+            Impersonation = ImpersonationLevel.Impersonate
+        };
+
+        foreach (var path in new[] { @"\\.\root\Microsoft\Windows\Storage", @"root\Microsoft\Windows\Storage" })
+        {
+            try
+            {
+                var scope = new ManagementScope(path, options);
+                scope.Connect();
+                return scope;
+            }
+            catch
+            {
+                // Try next candidate.
+            }
+        }
+
+        return null;
     }
 
     public void Dispose()
