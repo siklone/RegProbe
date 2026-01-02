@@ -445,11 +445,11 @@
                         <TextBlock Text="Fan Speeds" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
                         <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
                             <Run Text="CPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding CpuFanRpmText}"/>
+                            <Run Text="{Binding CpuFanRpmText, Mode=OneWay}"/>
                         </TextBlock>
                         <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
                             <Run Text="GPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuFanRpmText}"/>
+                            <Run Text="{Binding GpuFanRpmText, Mode=OneWay}"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>
