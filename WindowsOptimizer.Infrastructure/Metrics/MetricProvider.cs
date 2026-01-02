@@ -501,7 +501,7 @@ public sealed class MetricProvider : IDisposable
     {
         try
         {
-            using var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
+            var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
             scope.Connect();
 
             using var searcher = new ManagementObjectSearcher(
@@ -543,7 +543,7 @@ public sealed class MetricProvider : IDisposable
     {
         try
         {
-            using var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
+            var scope = new ManagementScope(@"\\.\root\Microsoft\Windows\Storage");
             scope.Connect();
 
             using var searcher = new ManagementObjectSearcher(
