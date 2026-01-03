@@ -326,136 +326,162 @@
 
         <DataTemplate x:Key="MonitorPerformanceTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Performance Insights"
+                                       Style="{StaticResource SectionHeaderStyle}"/>
+                            <TextBlock Text="Live breakdown across CPU, memory, disks, network, and GPU."
+                                       FontSize="12"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Grid>
 
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="Performance" Style="{StaticResource SectionHeaderStyle}"/>
-                        <ListBox ItemsSource="{Binding PerformanceItems}"
-                                 SelectedItem="{Binding SelectedPerformanceItem}"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 Margin="0,4,8,0">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Padding" Value="0"/>
-                                    <Setter Property="Margin" Value="0,0,0,6"/>
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Border CornerRadius="8"
-                                            Padding="10"
-                                            BorderThickness="1"
-                                            BorderBrush="{DynamicResource BackgroundLightBrush}">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                                 Value="True">
-                                                        <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Title}"
-                                                       FontSize="12"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                            <TextBlock Text="{Binding Subtitle}"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource MutedForegroundBrush}"
-                                                       Margin="0,4,0,0"/>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
+                    <ListBox ItemsSource="{Binding PerformanceItems}"
+                             SelectedItem="{Binding SelectedPerformanceItem}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Margin="0,12,0,16"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,0,10,10"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10"
+                                        Padding="12"
+                                        BorderThickness="1"
+                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        MinWidth="150">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                             Value="True">
+                                                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                        <TextBlock Text="{Binding Subtitle}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                    <StackPanel Grid.Column="1" Margin="8,0,0,0">
-                        <TextBlock Text="{Binding PerformanceChartTitle}"
-                                   Style="{StaticResource SectionHeaderStyle}"
-                                   Margin="0,0,0,6"/>
-                        <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
-                                   FontSize="12"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                   Margin="0,0,0,12"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                        <Grid Height="200" Margin="0,0,0,16">
-                            <Border Background="{DynamicResource BackgroundDarkestBrush}"
-                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="10"/>
-                            <Canvas Margin="12">
-                                <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}"
-                                          StrokeThickness="2">
-                                    <Polyline.Points>
-                                        <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
-                                            <Binding Path="PerformancePrimaryHistory"/>
-                                            <Binding Path="PerformanceHistoryScaleMax"/>
-                                        </MultiBinding>
-                                    </Polyline.Points>
-                                </Polyline>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding PerformanceChartTitle}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,4,0,12"/>
 
-                                <Polyline Stroke="{DynamicResource SuccessBrush}"
-                                          StrokeThickness="2"
-                                          Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}">
-                                    <Polyline.Points>
-                                        <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
-                                            <Binding Path="PerformanceSecondaryHistory"/>
-                                            <Binding Path="PerformanceHistoryScaleMax"/>
-                                        </MultiBinding>
-                                    </Polyline.Points>
-                                </Polyline>
-                            </Canvas>
-                        </Grid>
+                            <Grid Height="190" Margin="0,0,0,12">
+                                <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"/>
+                                <Canvas Margin="12">
+                                    <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}"
+                                              StrokeThickness="2">
+                                        <Polyline.Points>
+                                            <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                <Binding Path="PerformancePrimaryHistory"/>
+                                                <Binding Path="PerformanceHistoryScaleMax"/>
+                                            </MultiBinding>
+                                        </Polyline.Points>
+                                    </Polyline>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                            <TextBlock Text="{Binding PerformancePrimaryLabel}"
-                                       FontSize="11"
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            <TextBlock Text="{Binding PerformanceSecondaryLabel}"
-                                       FontSize="11"
-                                       Foreground="{DynamicResource SuccessBrush}"
-                                       Margin="12,0,0,0"
-                                       Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"/>
+                                    <Polyline Stroke="{DynamicResource SuccessBrush}"
+                                              StrokeThickness="2"
+                                              Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}">
+                                        <Polyline.Points>
+                                            <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                                <Binding Path="PerformanceSecondaryHistory"/>
+                                                <Binding Path="PerformanceHistoryScaleMax"/>
+                                            </MultiBinding>
+                                        </Polyline.Points>
+                                    </Polyline>
+                                </Canvas>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                <TextBlock Text="{Binding PerformancePrimaryLabel}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="{Binding PerformanceSecondaryLabel}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource SuccessBrush}"
+                                           Margin="12,0,0,0"
+                                           Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"/>
+                            </StackPanel>
                         </StackPanel>
 
-                        <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,0,0,6">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="220"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Label}"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding Value}"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Grid>
+                        <StackPanel Grid.Column="1" Margin="16,0,0,0">
+                            <TextBlock Text="Details"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       Margin="0,0,0,10"/>
+                            <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,0,0,6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="160"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Label}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding Value}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
             </Border>
         </DataTemplate>
 
@@ -777,19 +803,14 @@
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
                                                 <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}}"
-                                                          Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                          Effect="{StaticResource ChartGlowCpu}"/>
+                                                          Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                                             </Canvas>
                                         </Viewbox>
                                         <!-- Current value indicator dot -->
                                         <Canvas ClipToBounds="False">
                                             <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}"
                                                      Canvas.Right="0"
-                                                     Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}}">
-                                                <Ellipse.Effect>
-                                                    <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                                </Ellipse.Effect>
-                                            </Ellipse>
+                                                     Canvas.Top="{Binding CpuHistory, Converter={StaticResource LastValueToYConverter}}"/>
                                         </Canvas>
                                     </Grid>
                                 </Border>
@@ -842,19 +863,14 @@
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
                                                 <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}}"
-                                                          Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                          Effect="{StaticResource ChartGlowRam}"/>
+                                                          Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                                             </Canvas>
                                         </Viewbox>
                                         <!-- Current value indicator dot -->
                                         <Canvas ClipToBounds="False">
                                             <Ellipse Width="10" Height="10" Fill="{DynamicResource SuccessBrush}"
                                                      Canvas.Right="0"
-                                                     Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}}">
-                                                <Ellipse.Effect>
-                                                    <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                                </Ellipse.Effect>
-                                            </Ellipse>
+                                                     Canvas.Top="{Binding RamHistory, Converter={StaticResource LastValueToYConverter}}"/>
                                         </Canvas>
                                     </Grid>
                                 </Border>
@@ -952,8 +968,7 @@
                                     <!-- Download Line with glow -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">
-                                            <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                      Effect="{StaticResource ChartGlowDownload}">
+                                            <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                                 <Polyline.Points>
                                                     <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
                                                         <Binding Path="NetworkDownloadHistory"/>
@@ -966,8 +981,7 @@
                                     <!-- Upload Line with glow -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">
-                                            <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                      Effect="{StaticResource ChartGlowUpload}">
+                                            <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                                 <Polyline.Points>
                                                     <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
                                                         <Binding Path="NetworkUploadHistory"/>
@@ -986,9 +1000,6 @@
                                                     <Binding Path="NetworkIoScaleMax"/>
                                                 </MultiBinding>
                                             </Canvas.Top>
-                                            <Ellipse.Effect>
-                                                <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                            </Ellipse.Effect>
                                         </Ellipse>
                                         <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrightCyanBrush}" Canvas.Right="0">
                                             <Canvas.Top>
@@ -997,9 +1008,6 @@
                                                     <Binding Path="NetworkIoScaleMax"/>
                                                 </MultiBinding>
                                             </Canvas.Top>
-                                            <Ellipse.Effect>
-                                                <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                            </Ellipse.Effect>
                                         </Ellipse>
                                     </Canvas>
                                 </Grid>
@@ -1007,19 +1015,11 @@
                         </Border>
                         <Grid Margin="0,8,0,0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0">
-                                    <Border.Effect>
-                                        <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
-                                    </Border.Effect>
-                                </Border>
+                                <Border Width="12" Height="12" Background="{DynamicResource SuccessBrush}" CornerRadius="2" Margin="0,0,6,0"/>
                                 <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Border Width="12" Height="12" Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="2" Margin="0,0,6,0">
-                                    <Border.Effect>
-                                        <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="4" ShadowDepth="0" Opacity="0.5"/>
-                                    </Border.Effect>
-                                </Border>
+                                <Border Width="12" Height="12" Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="2" Margin="0,0,6,0"/>
                                 <TextBlock Text="Upload" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
@@ -1106,8 +1106,7 @@
                                     <!-- Read Line with glow -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">
-                                            <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                      Effect="{StaticResource ChartGlowRead}">
+                                            <Polyline Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                                 <Polyline.Points>
                                                     <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
                                                         <Binding Path="DiskReadHistory"/>
@@ -1120,8 +1119,7 @@
                                     <!-- Write Line with glow -->
                                     <Viewbox Stretch="Fill">
                                         <Canvas Width="600" Height="100">
-                                            <Polyline Stroke="{DynamicResource DangerBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                                      Effect="{StaticResource ChartGlowWrite}">
+                                            <Polyline Stroke="{DynamicResource DangerBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                                 <Polyline.Points>
                                                     <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
                                                         <Binding Path="DiskWriteHistory"/>
@@ -1140,9 +1138,6 @@
                                                     <Binding Path="DiskIoScaleMax"/>
                                                 </MultiBinding>
                                             </Canvas.Top>
-                                            <Ellipse.Effect>
-                                                <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                            </Ellipse.Effect>
                                         </Ellipse>
                                         <Ellipse Width="10" Height="10" Fill="{DynamicResource DangerBrush}" Canvas.Right="0">
                                             <Canvas.Top>
@@ -1151,9 +1146,6 @@
                                                     <Binding Path="DiskIoScaleMax"/>
                                                 </MultiBinding>
                                             </Canvas.Top>
-                                            <Ellipse.Effect>
-                                                <DropShadowEffect Color="{DynamicResource Nord11}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                            </Ellipse.Effect>
                                         </Ellipse>
                                     </Canvas>
                                 </Grid>
@@ -1643,7 +1635,9 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.IsDeferredScrollingEnabled="True"
+                  ScrollViewer.PanningMode="VerticalOnly">
         <StackPanel Margin="20">
 
             <!-- Header -->

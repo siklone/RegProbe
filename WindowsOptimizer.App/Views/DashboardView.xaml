@@ -91,7 +91,10 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{DynamicResource BackgroundDarkestBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.IsDeferredScrollingEnabled="True"
+                  ScrollViewer.PanningMode="VerticalOnly"
+                  Background="{DynamicResource BackgroundDarkestBrush}">
         <Grid Margin="32">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -719,14 +722,17 @@
 
             <!-- Quick Actions Grid -->
             <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Quick Categories Card -->
-                <Border Grid.Column="0" Style="{StaticResource InfoCardStyle}" Margin="0,0,8,0">
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource InfoCardStyle}" Margin="0,0,8,16">
                     <StackPanel>
                         <TextBlock Text="🎯 Quick Categories" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
 
@@ -855,7 +861,7 @@
                 </Border>
 
                 <!-- System Information Card -->
-                <Border Grid.Column="1" Style="{StaticResource InfoCardStyle}" Margin="8,0,8,0">
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,16">
                     <StackPanel>
                         <TextBlock Text="💻 System Information" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
 
@@ -1009,7 +1015,7 @@
                 </Border>
 
                 <!-- Safety & Shortcuts Card -->
-                <Border Grid.Column="2" Style="{StaticResource InfoCardStyle}" Margin="8,0,0,0">
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InfoCardStyle}" Margin="8,0,0,16">
                     <StackPanel>
                         <TextBlock Text="🛡️ Safety &amp; Shortcuts" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
 
