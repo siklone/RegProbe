@@ -112,6 +112,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _openServiceDocsCommand;
 
     private MonitorTabItem? _selectedTab;
+    private ProcessCategoryItem? _selectedProcessCategory;
     private bool _isStartupAppsLoading;
     private bool _isServicesLoading;
     private DateTime _startupAppsUpdatedAt;
@@ -294,6 +295,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             MonitorTabs.Add(new MonitorTabItem(MonitorTab.StartupApps, "Startup Apps", "Apps that launch with Windows"));
             MonitorTabs.Add(new MonitorTabItem(MonitorTab.Services, "Services", "Registry-backed services and drivers"));
             SelectedTab = MonitorTabs.FirstOrDefault();
+
+            ProcessCategories.Clear();
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU", "Top CPU usage"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "RAM", "Top memory usage"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Top network activity"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk I/O", "Top disk activity"));
+            SelectedProcessCategory = ProcessCategories.FirstOrDefault();
         }
         catch (Exception ex)
         {
@@ -354,6 +362,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             }
 
             SelectedTab ??= MonitorTabs.FirstOrDefault();
+
+            if (ProcessCategories.Count == 0)
+            {
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU", "Top CPU usage"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "RAM", "Top memory usage"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Top network activity"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk I/O", "Top disk activity"));
+            }
+
+            SelectedProcessCategory ??= ProcessCategories.FirstOrDefault();
         }
     }
 
@@ -1247,6 +1265,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public ObservableCollection<MonitorSectionLayout> MonitorSections { get; } = new();
     public ObservableCollection<MonitorTabItem> MonitorTabs { get; } = new();
+    public ObservableCollection<ProcessCategoryItem> ProcessCategories { get; } = new();
 
     public MonitorTabItem? SelectedTab
     {
@@ -1296,6 +1315,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public bool IsProcessesTab => SelectedTab?.Tab == MonitorTab.Processes;
     public bool IsStartupAppsTab => SelectedTab?.Tab == MonitorTab.StartupApps;
     public bool IsServicesTab => SelectedTab?.Tab == MonitorTab.Services;
+
+    public ProcessCategoryItem? SelectedProcessCategory
+    {
+        get => _selectedProcessCategory;
+        set => SetProperty(ref _selectedProcessCategory, value);
+    }
 
     public bool IsLayoutEditorVisible
     {
@@ -2678,6 +2703,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     }
 
     public sealed record MonitorTabItem(MonitorTab Tab, string Title, string Subtitle);
+
+    public enum ProcessCategory
+    {
+        Cpu,
+        Memory,
+        Network,
+        Disk
+    }
+
+    public sealed record ProcessCategoryItem(ProcessCategory Category, string Title, string Subtitle);
 
     public sealed record DiskHealthItemViewModel(
         string DisplayName,

@@ -907,7 +907,8 @@
                          <!-- Tab View 2: Execution Log -->
                          <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource BoolToVisibility}}">
                              <Border Background="{DynamicResource TerminalBackgroundBrush}" CornerRadius="4" Padding="12" Height="150">
-                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                 <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                                               HorizontalScrollBarVisibility="Disabled">
                                      <TextBlock Text="{Binding TerminalOutput}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontFamily="Consolas" TextWrapping="Wrap"/>
                                  </ScrollViewer>
                              </Border>
@@ -1332,7 +1333,7 @@
                      Padding="24,0,24,24"
                      HorizontalContentAlignment="Stretch"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ScrollViewer.CanContentScroll="True"
                      ScrollViewer.IsDeferredScrollingEnabled="True"
                      VirtualizingPanel.IsVirtualizing="True"
@@ -1941,7 +1942,8 @@
                                                             <!-- Tab View 2: Execution Log (Terminal) -->
                                                             <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource BoolToVisibility}}">
                                                                 <Border Background="{DynamicResource TerminalBackgroundBrush}" CornerRadius="4" Padding="12" Height="180">
-                                                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                                    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                                                                                  HorizontalScrollBarVisibility="Disabled">
                                                                         <TextBlock Text="{Binding TerminalOutput, FallbackValue='Execution logs will appear here...'}" 
                                                                                    Foreground="{DynamicResource ForegroundLightBrush}" 
                                                                                    FontSize="11" 

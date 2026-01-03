@@ -91,7 +91,8 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.IsDeferredScrollingEnabled="True"
                   ScrollViewer.PanningMode="VerticalOnly"
                   Background="{DynamicResource BackgroundDarkestBrush}">
