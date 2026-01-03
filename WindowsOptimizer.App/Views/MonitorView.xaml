@@ -1876,8 +1876,11 @@
                               SelectedItem="{Binding SelectedStartupApp}"
                               Background="Transparent"
                               BorderThickness="0"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualHeight}"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               ScrollViewer.IsDeferredScrollingEnabled="True"
+                              ScrollViewer.CanContentScroll="True"
                               VirtualizingStackPanel.IsVirtualizing="True"
                               VirtualizingStackPanel.VirtualizationMode="Recycling">
                         <ListView.Resources>
@@ -1971,7 +1974,8 @@
                               Background="Transparent"
                               BorderThickness="0"
                               MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualHeight}"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               ScrollViewer.IsDeferredScrollingEnabled="True"
                               ScrollViewer.CanContentScroll="True"
                               VirtualizingStackPanel.IsVirtualizing="True"
@@ -2061,18 +2065,19 @@
     </UserControl.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                      HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.IsDeferredScrollingEnabled="True"
                       ScrollViewer.PanningMode="VerticalOnly">
             <StackPanel Margin="20">
 
             <!-- Header -->
             <Grid Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
                     <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                     <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
                     <TextBlock Text="{Binding StatusMessage}"
@@ -2098,7 +2103,11 @@
                         </ListBox.ItemContainerStyle>
                     </ListBox>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,8,0,0">
                     <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second."
                             Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
