@@ -551,6 +551,14 @@ public sealed class MetricProvider : IDisposable
         }
 
         cpuRpm ??= cpuFallback;
+        if (!cpuRpm.HasValue || cpuRpm.Value <= 0)
+        {
+            var wmiCpuRpm = TryGetCpuFanSpeedFromWmi();
+            if (wmiCpuRpm.HasValue && wmiCpuRpm.Value > 0)
+            {
+                cpuRpm = wmiCpuRpm.Value;
+            }
+        }
         return new FanSpeedSnapshot(cpuRpm ?? double.NaN, gpuRpm ?? double.NaN);
     }
 
@@ -626,6 +634,7 @@ public sealed class MetricProvider : IDisposable
         var reliabilityByIndex = TryGetStorageReliabilityByIndex();
         var healthStatusByIndex = TryGetStorageHealthStatusByIndex();
         var smartPredictEntries = TryGetSmartPredictEntries();
+        var win32StatusByIndex = TryGetWin32DiskStatusByIndex();
 
         if (diskIdentities.Count == 0 && sensorHealth.Count > 0)
         {
@@ -640,14 +649,20 @@ public sealed class MetricProvider : IDisposable
         foreach (var disk in diskIdentities)
         {
             double? healthPercent = null;
+            string? source = null;
             if (disk.Index.HasValue && reliabilityByIndex.TryGetValue(disk.Index.Value, out var reliability))
             {
                 healthPercent = reliability;
+                source = "Storage reliability";
             }
 
             if (!healthPercent.HasValue)
             {
                 healthPercent = TryMatchSensorHealth(sensorHealth, disk);
+                if (healthPercent.HasValue)
+                {
+                    source = "LibreHardwareMonitor";
+                }
             }
 
             bool? predictFailure = null;
@@ -656,15 +671,21 @@ public sealed class MetricProvider : IDisposable
                 if (TryMatchSmartPredict(smartPredictEntries, disk, out var smartPredict))
                 {
                     predictFailure = smartPredict;
+                    source ??= "SMART status";
                 }
                 else if (healthStatusByIndex.TryGetValue(disk.Index.Value, out var healthStatus))
                 {
                     predictFailure = healthStatus;
+                    source ??= "Storage health status";
+                }
+                else if (win32StatusByIndex.TryGetValue(disk.Index.Value, out var win32Status))
+                {
+                    predictFailure = win32Status;
+                    source ??= "Device status";
                 }
             }
 
             var name = BuildDiskDisplayName(disk);
-            var source = healthPercent.HasValue ? "SMART life" : predictFailure.HasValue ? "SMART status" : null;
             items.Add(new DiskHealthInfo(disk.Index, name, disk.MediaTypeLabel, healthPercent, predictFailure, source));
         }
 
@@ -2092,6 +2113,72 @@ public sealed class MetricProvider : IDisposable
         }
     }
 
+    private static Dictionary<int, bool?> TryGetWin32DiskStatusByIndex()
+    {
+        var results = new Dictionary<int, bool?>();
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Index, Status, StatusInfo FROM Win32_DiskDrive");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var index = TryReadInt(obj, "Index");
+                if (!index.HasValue)
+                {
+                    continue;
+                }
+
+                bool? status = null;
+                var statusText = obj["Status"]?.ToString() ?? string.Empty;
+                if (!string.IsNullOrWhiteSpace(statusText))
+                {
+                    if (statusText.Equals("OK", StringComparison.OrdinalIgnoreCase))
+                    {
+                        status = false;
+                    }
+                    else if (statusText.IndexOf("Pred", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                             statusText.IndexOf("Degrad", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                             statusText.IndexOf("Fail", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        status = true;
+                    }
+                }
+
+                if (!status.HasValue)
+                {
+                    var statusInfo = TryReadInt(obj, "StatusInfo");
+                    if (statusInfo.HasValue)
+                    {
+                        switch (statusInfo.Value)
+                        {
+                            case 3:
+                                status = false;
+                                break;
+                            case 4:
+                            case 5:
+                            case 6:
+                                break;
+                            default:
+                                status = true;
+                                break;
+                        }
+                    }
+                }
+
+                if (status.HasValue)
+                {
+                    results[index.Value] = status.Value;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read disk status from Win32_DiskDrive: {ex.Message}");
+        }
+
+        return results;
+    }
+
     [SupportedOSPlatform("windows")]
     private static double? TryGetCpuTemperatureFromWmi()
     {
@@ -2120,6 +2207,38 @@ public sealed class MetricProvider : IDisposable
         catch (Exception ex)
         {
             Debug.WriteLine($"Failed to read CPU temperature from WMI: {ex.Message}");
+            return null;
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetCpuFanSpeedFromWmi()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT CurrentSpeed, DesiredSpeed FROM Win32_Fan");
+            double? best = null;
+
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var current = TryReadDouble(obj, "CurrentSpeed")
+                              ?? TryReadDouble(obj, "DesiredSpeed");
+                if (!current.HasValue || current.Value <= 0)
+                {
+                    continue;
+                }
+
+                if (!best.HasValue || current.Value > best.Value)
+                {
+                    best = current.Value;
+                }
+            }
+
+            return best;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to read fan speed from Win32_Fan: {ex.Message}");
             return null;
         }
     }

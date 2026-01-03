@@ -836,7 +836,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public ObservableCollection<DiskHealthItemViewModel> DiskHealthItems { get; }
 
-    public bool HasDiskHealthItems => DiskHealthItems.Count > 0;
+    public bool HasDiskHealthItems => DiskHealthItems.Any(item =>
+        !string.Equals(item.StatusText, "N/A", StringComparison.OrdinalIgnoreCase));
 
     public ObservableCollection<double> PerformancePrimaryHistory
     {
@@ -1779,9 +1780,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     var gpuPerformance = _metricProvider.GetGpuPerformanceSnapshot();
                     var fans = _metricProvider.GetFanSpeedSnapshot();
                     var diskItems = _metricProvider.GetDiskHealthItems().ToList();
-                    var diskHealthFallback = diskItems.Count == 0
-                        ? _metricProvider.GetDiskHealthSnapshot()
-                        : new DiskHealthSnapshot(null, null);
+                    var hasDiskHealthData = diskItems.Any(item => item.HealthPercent.HasValue || item.PredictFailure.HasValue);
+                    var diskHealthFallback = hasDiskHealthData
+                        ? new DiskHealthSnapshot(null, null)
+                        : _metricProvider.GetDiskHealthSnapshot();
                     return new AuxMetricsSnapshot(
                         cpuSnapshot,
                         memorySnapshot,
