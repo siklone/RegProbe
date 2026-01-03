@@ -3539,8 +3539,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     LinkSpeedMbps = linkSpeedMbps,
                     Ipv4Address = ipv4,
                     Ipv6Address = ipv6,
-                    SendBytesPerSec = sendMbps * 1024 * 1024 / 8,
-                    ReceiveBytesPerSec = receiveMbps * 1024 * 1024 / 8,
+                    SendBytesPerSec = (float)(sendMbps * 1024 * 1024 / 8),
+                    ReceiveBytesPerSec = (float)(receiveMbps * 1024 * 1024 / 8),
                     TotalBytesSent = totalSent,
                     TotalBytesReceived = totalReceived
                 });
