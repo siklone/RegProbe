@@ -2144,13 +2144,13 @@
                     <Style TargetType="ContentControl">
                         <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTabTemplate}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.Processes}">
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.Processes}">
                                 <Setter Property="ContentTemplate" Value="{StaticResource MonitorProcessesTabTemplate}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.StartupApps}">
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.StartupApps}">
                                 <Setter Property="ContentTemplate" Value="{StaticResource MonitorStartupAppsTemplate}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.Services}">
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.Services}">
                                 <Setter Property="ContentTemplate" Value="{StaticResource MonitorServicesTemplate}"/>
                             </DataTrigger>
                         </Style.Triggers>
