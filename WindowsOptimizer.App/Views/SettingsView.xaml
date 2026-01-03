@@ -196,7 +196,7 @@
                                   Content="Dark Theme"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,0"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Switch between dark and light color schemes
                         </TextBlock>
@@ -206,7 +206,7 @@
                                   Content="Card Shadows"
                                   Margin="0,16,0,8"/>
                         <TextBlock Margin="56,0,0,0"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Toggle drop shadows on cards and controls (default off for smoother scrolling).
                         </TextBlock>
@@ -232,7 +232,7 @@
                                   Content="Run startup scan on launch"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,16"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Performs a quick startup scan before the main window appears.
                         </TextBlock>
@@ -242,7 +242,7 @@
                                   Content="Show Preview mode hint on Dashboard"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,0"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Displays the Preview tip badge next to System Status.
                         </TextBlock>
@@ -263,7 +263,7 @@
                                        VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11" Margin="0,0,0,16">
+                        <TextBlock Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11" Margin="0,0,0,16">
                             Use Customize in Monitor to reorder or hide sections. Reset restores defaults.
                         </TextBlock>
 
@@ -296,7 +296,7 @@
                         <TextBox Text="{Binding DiscordWebhookUrl, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource ModernTextBoxStyle}"/>
                         <TextBlock Margin="0,6,0,16"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Create a webhook in Discord → Server Settings → Integrations → Webhooks
                         </TextBlock>
@@ -342,17 +342,17 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Version" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="Version" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
                                 <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="Build" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="Build" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
                                 <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Framework" Foreground="{DynamicResource BackgroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="Framework" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
                                 <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="SemiBold"/>
                             </StackPanel>
                         </Grid>
