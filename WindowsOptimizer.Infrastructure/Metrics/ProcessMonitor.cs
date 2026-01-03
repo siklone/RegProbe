@@ -381,36 +381,50 @@ public sealed class ProcessMonitor : IDisposable
     {
         totalBytes = 0;
 
-        if (process.HasExited)
+        try
+        {
+            if (process.HasExited)
+            {
+                return false;
+            }
+
+            if (!GetProcessIoCounters(process.Handle, out var counters))
+            {
+                return false;
+            }
+
+            totalBytes = counters.ReadTransferCount + counters.WriteTransferCount + counters.OtherTransferCount;
+            return true;
+        }
+        catch
         {
             return false;
         }
-
-        if (!GetProcessIoCounters(process.Handle, out var counters))
-        {
-            return false;
-        }
-
-        totalBytes = counters.ReadTransferCount + counters.WriteTransferCount + counters.OtherTransferCount;
-        return true;
     }
 
     private static bool TryGetDiskBytes(Process process, out ulong totalBytes)
     {
         totalBytes = 0;
 
-        if (process.HasExited)
+        try
+        {
+            if (process.HasExited)
+            {
+                return false;
+            }
+
+            if (!GetProcessIoCounters(process.Handle, out var counters))
+            {
+                return false;
+            }
+
+            totalBytes = counters.ReadTransferCount + counters.WriteTransferCount;
+            return true;
+        }
+        catch
         {
             return false;
         }
-
-        if (!GetProcessIoCounters(process.Handle, out var counters))
-        {
-            return false;
-        }
-
-        totalBytes = counters.ReadTransferCount + counters.WriteTransferCount;
-        return true;
     }
 
     public void Cleanup()

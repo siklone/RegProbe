@@ -453,7 +453,38 @@ public sealed class MetricProvider : IDisposable
             Debug.WriteLine($"Failed to read GPU performance info: {ex.Message}");
         }
 
+        if (name == null && _computer != null)
+        {
+            lock (_hardwareLock)
+            {
+                foreach (var hardware in _computer.Hardware)
+                {
+                    if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                        hardware.HardwareType == HardwareType.GpuAmd ||
+                        hardware.HardwareType == HardwareType.GpuIntel)
+                    {
+                        name = hardware.Name;
+                        break;
+                    }
+                }
+            }
+        }
+
         dedicatedMb ??= _gpuMemoryTotalMb;
+
+        var sensorTotalMb = TryGetGpuMemoryTotalFromSensors();
+        if (sensorTotalMb.HasValue && sensorTotalMb.Value > 0)
+        {
+            if (!dedicatedMb.HasValue || dedicatedMb.Value < sensorTotalMb.Value * 0.6)
+            {
+                dedicatedMb = sensorTotalMb.Value;
+            }
+
+            if (!totalMb.HasValue || totalMb.Value < sensorTotalMb.Value * 0.6)
+            {
+                totalMb = sensorTotalMb.Value;
+            }
+        }
 
         if (!totalMb.HasValue)
         {
@@ -2457,17 +2488,113 @@ public sealed class MetricProvider : IDisposable
         }
     }
 
-    private static string? TryGetDirectXVersion()
+    private double? TryGetGpuMemoryTotalFromSensors()
     {
-        try
-        {
-            using var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DirectX");
-            return key?.GetValue("Version")?.ToString();
-        }
-        catch
+        if (_computer == null)
         {
             return null;
         }
+
+        double? totalMb = null;
+
+        lock (_hardwareLock)
+        {
+            foreach (var hardware in _computer.Hardware)
+            {
+                if (hardware.HardwareType != HardwareType.GpuNvidia &&
+                    hardware.HardwareType != HardwareType.GpuAmd &&
+                    hardware.HardwareType != HardwareType.GpuIntel)
+                {
+                    continue;
+                }
+
+                UpdateHardware(hardware);
+
+                foreach (var sensor in EnumerateSensors(hardware))
+                {
+                    if (!sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    if (sensor.SensorType != SensorType.Data && sensor.SensorType != SensorType.SmallData)
+                    {
+                        continue;
+                    }
+
+                    var name = sensor.Name ?? string.Empty;
+                    if (!name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) &&
+                        !name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase) &&
+                        !name.Contains("Total VRAM", StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    var mb = sensor.SensorType == SensorType.Data
+                        ? sensor.Value.Value * 1024
+                        : sensor.Value.Value;
+
+                    if (mb > 0 && (!totalMb.HasValue || mb > totalMb.Value))
+                    {
+                        totalMb = mb;
+                    }
+                }
+
+                if (totalMb.HasValue)
+                {
+                    break;
+                }
+            }
+        }
+
+        return totalMb;
+    }
+
+    private static string? TryGetDirectXVersion()
+    {
+        string? registryVersion = null;
+        try
+        {
+            using var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DirectX");
+            registryVersion = key?.GetValue("Version")?.ToString();
+        }
+        catch
+        {
+            registryVersion = null;
+        }
+
+        try
+        {
+            var systemDir = Environment.SystemDirectory;
+            if (!string.IsNullOrWhiteSpace(systemDir))
+            {
+                if (File.Exists(Path.Combine(systemDir, "d3d12.dll")))
+                {
+                    return "DirectX 12";
+                }
+
+                if (File.Exists(Path.Combine(systemDir, "d3d11.dll")))
+                {
+                    return "DirectX 11";
+                }
+
+                if (File.Exists(Path.Combine(systemDir, "d3d10.dll")))
+                {
+                    return "DirectX 10";
+                }
+
+                if (File.Exists(Path.Combine(systemDir, "d3d9.dll")))
+                {
+                    return "DirectX 9";
+                }
+            }
+        }
+        catch
+        {
+            // Ignore and fall back to registry value.
+        }
+
+        return registryVersion;
     }
 }
 
