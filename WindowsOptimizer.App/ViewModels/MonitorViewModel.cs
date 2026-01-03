@@ -843,13 +843,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         var items = new List<StartupAppEntry>();
         var hkcuRunApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
-        var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Registry64, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
+        var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
         var hkcuFolderApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
-        var hklmFolderApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Registry64, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
+        var hklmFolderApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
 
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRunApproval);
-        AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry64, "All Users", "Registry Run (64-bit)",
+        AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
@@ -859,7 +859,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
             hkcuFolderApproval);
         AddStartupFolderEntries(items, Environment.SpecialFolder.CommonStartup, "All Users", "Startup Folder",
-            RegistryHive.LocalMachine, RegistryView.Registry64,
+            RegistryHive.LocalMachine, RegistryView.Default,
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
             hklmFolderApproval);
 
@@ -1033,7 +1033,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         try
         {
-            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
             using var servicesKey = baseKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Services");
             if (servicesKey == null)
             {
@@ -1042,49 +1042,56 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             foreach (var serviceName in servicesKey.GetSubKeyNames())
             {
-                using var serviceKey = servicesKey.OpenSubKey(serviceName);
-                if (serviceKey == null)
+                try
                 {
-                    continue;
+                    using var serviceKey = servicesKey.OpenSubKey(serviceName);
+                    if (serviceKey == null)
+                    {
+                        continue;
+                    }
+
+                    var displayName = serviceKey.GetValue("DisplayName") as string ?? serviceName;
+                    var description = serviceKey.GetValue("Description") as string ?? string.Empty;
+                    var imagePath = serviceKey.GetValue("ImagePath") as string ?? string.Empty;
+                    var objectName = serviceKey.GetValue("ObjectName") as string ?? string.Empty;
+                    var group = serviceKey.GetValue("Group") as string ?? string.Empty;
+                    var startValue = TryGetInt(serviceKey.GetValue("Start"));
+                    var delayedAuto = TryGetInt(serviceKey.GetValue("DelayedAutoStart"));
+                    var typeValue = TryGetInt(serviceKey.GetValue("Type"));
+                    var serviceDll = string.Empty;
+
+                    using (var parametersKey = serviceKey.OpenSubKey("Parameters"))
+                    {
+                        serviceDll = parametersKey?.GetValue("ServiceDll") as string ?? string.Empty;
+                    }
+
+                    var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
+                    var startMode = ResolveStartMode(startValue, startModeLookup, serviceName);
+                    var startType = DescribeStartType(startMode, delayedAuto);
+                    var serviceType = DescribeServiceType(typeValue);
+                    var isDriver = IsDriverType(typeValue);
+                    var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
+                    var docsLink = ResolveServiceDocsLink(serviceName);
+
+                    results.Add(new ServiceEntry(
+                        serviceName,
+                        displayName,
+                        description,
+                        serviceType,
+                        startMode,
+                        startType,
+                        statusText,
+                        objectName,
+                        group,
+                        binaryPath,
+                        servicesKey.Name + "\\" + serviceName,
+                        isDriver,
+                        docsLink));
                 }
-
-                var displayName = serviceKey.GetValue("DisplayName") as string ?? serviceName;
-                var description = serviceKey.GetValue("Description") as string ?? string.Empty;
-                var imagePath = serviceKey.GetValue("ImagePath") as string ?? string.Empty;
-                var objectName = serviceKey.GetValue("ObjectName") as string ?? string.Empty;
-                var group = serviceKey.GetValue("Group") as string ?? string.Empty;
-                var startValue = TryGetInt(serviceKey.GetValue("Start"));
-                var delayedAuto = TryGetInt(serviceKey.GetValue("DelayedAutoStart"));
-                var typeValue = TryGetInt(serviceKey.GetValue("Type"));
-                var serviceDll = string.Empty;
-
-                using (var parametersKey = serviceKey.OpenSubKey("Parameters"))
+                catch (Exception ex)
                 {
-                    serviceDll = parametersKey?.GetValue("ServiceDll") as string ?? string.Empty;
+                    Debug.WriteLine($"Service read failed for {serviceName}: {ex.Message}");
                 }
-
-                var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
-                var startMode = ResolveStartMode(startValue, startModeLookup, serviceName);
-                var startType = DescribeStartType(startMode, delayedAuto);
-                var serviceType = DescribeServiceType(typeValue);
-                var isDriver = IsDriverType(typeValue);
-                var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
-                var docsLink = ResolveServiceDocsLink(serviceName);
-
-                results.Add(new ServiceEntry(
-                    serviceName,
-                    displayName,
-                    description,
-                    serviceType,
-                    startMode,
-                    startType,
-                    statusText,
-                    objectName,
-                    group,
-                    binaryPath,
-                    servicesKey.Name + "\\" + serviceName,
-                    isDriver,
-                    docsLink));
             }
         }
         catch (Exception ex)

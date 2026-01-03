@@ -47,25 +47,17 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            try
+            var info = new ProcessInfo
             {
-                var cpuUsage = CalculateCpuUsage(process, currentTime);
-                var ramMb = process.WorkingSet64 / (1024.0 * 1024.0);
+                Name = process.ProcessName,
+                Pid = process.Id,
+                CpuPercent = SafeGetCpuUsage(process, currentTime),
+                RamMb = SafeGetWorkingSetMb(process),
+                Threads = SafeGetThreadCount(process),
+                Handles = SafeGetHandleCount(process)
+            };
 
-                processes.Add(new ProcessInfo
-                {
-                    Name = process.ProcessName,
-                    Pid = process.Id,
-                    CpuPercent = cpuUsage,
-                    RamMb = ramMb,
-                    Threads = process.Threads.Count,
-                    Handles = process.HandleCount
-                });
-            }
-            catch
-            {
-                // Process may have exited, skip
-            }
+            processes.Add(info);
         }
 
         return processes.OrderByDescending(p => p.CpuPercent).Take(count).ToList();
@@ -77,21 +69,15 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            try
+            processes.Add(new ProcessInfo
             {
-                var ramMb = process.WorkingSet64 / (1024.0 * 1024.0);
-
-                processes.Add(new ProcessInfo
-                {
-                    Name = process.ProcessName,
-                    Pid = process.Id,
-                    RamMb = ramMb,
-                    CpuPercent = 0, // Not needed for RAM sort
-                    Threads = process.Threads.Count,
-                    Handles = process.HandleCount
-                });
-            }
-            catch { }
+                Name = process.ProcessName,
+                Pid = process.Id,
+                RamMb = SafeGetWorkingSetMb(process),
+                CpuPercent = 0, // Not needed for RAM sort
+                Threads = SafeGetThreadCount(process),
+                Handles = SafeGetHandleCount(process)
+            });
         }
 
         return processes.OrderByDescending(p => p.RamMb).Take(count).ToList();
@@ -104,29 +90,22 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            try
+            if (!TryGetIoBytes(process, out var totalBytes))
             {
-                if (!TryGetIoBytes(process, out var totalBytes))
-                {
-                    continue;
-                }
-
-                var ioMbps = CalculateIoMbps(process.Id, totalBytes, currentTime);
-
-                processes.Add(new ProcessInfo
-                {
-                    Name = process.ProcessName,
-                    Pid = process.Id,
-                    IoMbps = ioMbps,
-                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
-                    Threads = process.Threads.Count,
-                    Handles = process.HandleCount
-                });
+                continue;
             }
-            catch
+
+            var ioMbps = CalculateIoMbps(process.Id, totalBytes, currentTime);
+
+            processes.Add(new ProcessInfo
             {
-                // Process may have exited or is not accessible
-            }
+                Name = process.ProcessName,
+                Pid = process.Id,
+                IoMbps = ioMbps,
+                RamMb = SafeGetWorkingSetMb(process),
+                Threads = SafeGetThreadCount(process),
+                Handles = SafeGetHandleCount(process)
+            });
         }
 
         return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
@@ -139,29 +118,22 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            try
+            if (!TryGetDiskBytes(process, out var totalBytes))
             {
-                if (!TryGetDiskBytes(process, out var totalBytes))
-                {
-                    continue;
-                }
-
-                var diskMBps = CalculateDiskMBps(process.Id, totalBytes, currentTime);
-
-                processes.Add(new ProcessInfo
-                {
-                    Name = process.ProcessName,
-                    Pid = process.Id,
-                    DiskMBps = diskMBps,
-                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
-                    Threads = process.Threads.Count,
-                    Handles = process.HandleCount
-                });
+                continue;
             }
-            catch
+
+            var diskMBps = CalculateDiskMBps(process.Id, totalBytes, currentTime);
+
+            processes.Add(new ProcessInfo
             {
-                // Process may have exited or is not accessible
-            }
+                Name = process.ProcessName,
+                Pid = process.Id,
+                DiskMBps = diskMBps,
+                RamMb = SafeGetWorkingSetMb(process),
+                Threads = SafeGetThreadCount(process),
+                Handles = SafeGetHandleCount(process)
+            });
         }
 
         return processes.OrderByDescending(p => p.DiskMBps).Take(count).ToList();
@@ -209,9 +181,9 @@ public sealed class ProcessMonitor : IDisposable
                     Name = process.ProcessName,
                     Pid = process.Id,
                     IoMbps = networkMbps,
-                    RamMb = process.WorkingSet64 / (1024.0 * 1024.0),
-                    Threads = process.Threads.Count,
-                    Handles = process.HandleCount
+                    RamMb = SafeGetWorkingSetMb(process),
+                    Threads = SafeGetThreadCount(process),
+                    Handles = SafeGetHandleCount(process)
                 });
             }
             catch
@@ -226,7 +198,15 @@ public sealed class ProcessMonitor : IDisposable
     private double CalculateCpuUsage(Process process, DateTime currentTime)
     {
         var pid = process.Id;
-        var currentTotalTime = process.TotalProcessorTime;
+        TimeSpan currentTotalTime;
+        try
+        {
+            currentTotalTime = process.TotalProcessorTime;
+        }
+        catch
+        {
+            return 0;
+        }
 
         if (_previousCpuUsage.TryGetValue(pid, out var previous))
         {
@@ -243,6 +223,54 @@ public sealed class ProcessMonitor : IDisposable
 
         _previousCpuUsage[pid] = (currentTime, currentTotalTime);
         return 0;
+    }
+
+    private double SafeGetCpuUsage(Process process, DateTime currentTime)
+    {
+        try
+        {
+            return CalculateCpuUsage(process, currentTime);
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private static double SafeGetWorkingSetMb(Process process)
+    {
+        try
+        {
+            return process.WorkingSet64 / (1024.0 * 1024.0);
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private static int SafeGetThreadCount(Process process)
+    {
+        try
+        {
+            return process.Threads.Count;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private static int SafeGetHandleCount(Process process)
+    {
+        try
+        {
+            return process.HandleCount;
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     private double CalculateIoMbps(int pid, ulong currentTotalBytes, DateTime currentTime)
