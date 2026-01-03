@@ -78,6 +78,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isDisposed;
     private bool _isLayoutEditorVisible;
     private bool _isLayoutLoading;
+    private DateTime _nextCoreSampleUtc = DateTime.MinValue;
+    private bool _isCoreSampleInProgress;
+    private static readonly TimeSpan CoreSampleInterval = TimeSpan.FromSeconds(1);
+    private DateTime _nextIoSampleUtc = DateTime.MinValue;
+    private bool _isIoSampleInProgress;
+    private static readonly TimeSpan IoSampleInterval = TimeSpan.FromSeconds(1);
+    private DateTime _nextProcessSampleUtc = DateTime.MinValue;
+    private bool _isProcessSampleInProgress;
+    private static readonly TimeSpan ProcessSampleInterval = TimeSpan.FromSeconds(2);
     private DateTime _nextAuxSampleUtc = DateTime.MinValue;
     private bool _isAuxSampleInProgress;
     private static readonly TimeSpan AuxSampleInterval = TimeSpan.FromSeconds(5);
@@ -245,7 +254,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             // Timer: 1 second refresh
             try
             {
-                _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+                _updateTimer = new DispatcherTimer(DispatcherPriority.Background)
+                {
+                    Interval = TimeSpan.FromSeconds(1)
+                };
                 _updateTimer.Tick += OnUpdateTick;
                 _updateTimer.Start();
             }
@@ -816,9 +828,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _gpuFanRpm, value);
     }
 
-    public bool HasCpuFan => double.IsFinite(CpuFanRpm) && CpuFanRpm > 0;
+    public bool HasCpuFan => double.IsFinite(CpuFanRpm);
 
-    public bool HasGpuFan => double.IsFinite(GpuFanRpm) && GpuFanRpm > 0;
+    public bool HasGpuFan => double.IsFinite(GpuFanRpm);
 
     public string CpuFanRpmText => HasCpuFan ? $"{CpuFanRpm:F0} RPM" : "N/A";
 
@@ -1014,133 +1026,49 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            // Update system metrics (with null checks)
-            if (_metricProvider != null)
-            {
-                CpuUsage = _metricProvider.GetCpuUsage();
-                RamUsedGb = _metricProvider.GetUsedRamGb();
-                var cpuTemp = _metricProvider.GetCpuTemperature();
-                CpuTemp = double.IsFinite(cpuTemp) && cpuTemp > 0 ? cpuTemp : double.NaN;
+            var now = DateTime.UtcNow;
 
-                var gpuTemp = _metricProvider.GetGpuTemperature();
-                GpuTemp = double.IsFinite(gpuTemp) && gpuTemp > 0 ? gpuTemp : double.NaN;
-                GpuUsage = _metricProvider.GetGpuUsage();
+            if (!_isCoreSampleInProgress && now >= _nextCoreSampleUtc)
+            {
+                _nextCoreSampleUtc = now.Add(CoreSampleInterval);
+                _ = SampleCoreMetricsAsync();
             }
 
-            // Update history (60 second sliding window)
-            UpdateHistory(CpuHistory, CpuUsage);
-            UpdateHistory(RamHistory, RamUsagePercent);
-            UpdateHistory(GpuHistory, GpuUsage);
-
-            // Notify Min/Max updates for chart labels
-            OnPropertyChanged(nameof(CpuHistoryMax));
-            OnPropertyChanged(nameof(CpuHistoryMin));
-            OnPropertyChanged(nameof(RamHistoryMax));
-            OnPropertyChanged(nameof(RamHistoryMin));
-
-            // Update network and disk I/O history
-            if (_networkMonitor != null)
+            if (!_isIoSampleInProgress && now >= _nextIoSampleUtc)
             {
-                var networkAdapters = _networkMonitor.GetActiveAdapters();
-                var totalUpload = networkAdapters.Sum(a => a.SendMbps);
-                var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
-                UpdateHistory(NetworkUploadHistory, totalUpload);
-                UpdateHistory(NetworkDownloadHistory, totalDownload);
-                OnPropertyChanged(nameof(NetworkDownloadMax));
-                OnPropertyChanged(nameof(NetworkDownloadMin));
-                OnPropertyChanged(nameof(NetworkDownloadNow));
-                OnPropertyChanged(nameof(NetworkUploadMax));
-                OnPropertyChanged(nameof(NetworkUploadMin));
-                OnPropertyChanged(nameof(NetworkUploadNow));
-                OnPropertyChanged(nameof(NetworkIoScaleMax));
-                OnPropertyChanged(nameof(NetworkIoScaleMid));
-
-                // Update network adapters list
-                UpdateCollection(NetworkAdapters, networkAdapters);
-
-                var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var adapter in networkAdapters)
-                {
-                    var key = string.IsNullOrWhiteSpace(adapter.AdapterId) ? adapter.Name : adapter.AdapterId;
-                    activeAdapters.Add(key);
-                    var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, key);
-                    var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, key);
-                    UpdateHistory(sendHistory, adapter.SendMbps);
-                    UpdateHistory(receiveHistory, adapter.ReceiveMbps);
-                }
-
-                CleanupHistory(_netSendHistoryByAdapter, activeAdapters);
-                CleanupHistory(_netReceiveHistoryByAdapter, activeAdapters);
+                _nextIoSampleUtc = now.Add(IoSampleInterval);
+                _ = SampleIoMetricsAsync();
             }
 
-            if (_diskMonitor != null)
+            if (!_isProcessSampleInProgress && now >= _nextProcessSampleUtc)
             {
-                var disks = _diskMonitor.GetDiskActivity();
-                var totalRead = disks.Sum(d => d.ReadMBps);
-                var totalWrite = disks.Sum(d => d.WriteMBps);
-                UpdateHistory(DiskReadHistory, totalRead);
-                UpdateHistory(DiskWriteHistory, totalWrite);
-                OnPropertyChanged(nameof(DiskReadMax));
-                OnPropertyChanged(nameof(DiskReadMin));
-                OnPropertyChanged(nameof(DiskReadNow));
-                OnPropertyChanged(nameof(DiskWriteMax));
-                OnPropertyChanged(nameof(DiskWriteMin));
-                OnPropertyChanged(nameof(DiskWriteNow));
-                OnPropertyChanged(nameof(DiskIoScaleMax));
-                OnPropertyChanged(nameof(DiskIoScaleMid));
-
-                // Update disks list
-                UpdateCollection(Disks, disks);
-
-                var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var disk in disks)
-                {
-                    var key = disk.DriveLetter;
-                    activeDisks.Add(key);
-                    var readHistory = GetOrCreateHistory(_diskReadHistoryByDrive, key);
-                    var writeHistory = GetOrCreateHistory(_diskWriteHistoryByDrive, key);
-                    UpdateHistory(readHistory, disk.ReadMBps);
-                    UpdateHistory(writeHistory, disk.WriteMBps);
-                }
-
-                CleanupHistory(_diskReadHistoryByDrive, activeDisks);
-                CleanupHistory(_diskWriteHistoryByDrive, activeDisks);
+                _nextProcessSampleUtc = now.Add(ProcessSampleInterval);
+                _ = SampleProcessMetricsAsync();
             }
 
-            // Update top processes
-            if (_processMonitor != null)
+            if (!_isAuxSampleInProgress && now >= _nextAuxSampleUtc)
             {
-                UpdateCollection(TopProcessesByCpu, _processMonitor.GetTopProcessesByCpu(10));
-                UpdateCollection(TopProcessesByRam, _processMonitor.GetTopProcessesByRam(10));
-                UpdateCollection(TopProcessesByNetwork, _processMonitor.GetTopProcessesByNetwork(10));
-                UpdateCollection(TopProcessesByDisk, _processMonitor.GetTopProcessesByDisk(10));
-                UpdateNetworkProcessMode();
-
-                // Cleanup dead process entries
-                _processMonitor.Cleanup();
-            }
-
-            if (!_isAuxSampleInProgress && DateTime.UtcNow >= _nextAuxSampleUtc)
-            {
-                _nextAuxSampleUtc = DateTime.UtcNow.Add(AuxSampleInterval);
+                _nextAuxSampleUtc = now.Add(AuxSampleInterval);
                 _ = SampleAuxMetricsAsync();
             }
-
-            // Check alert thresholds
-            IsCpuAlertActive = CpuUsage >= CpuAlertThreshold;
-            IsRamAlertActive = RamUsagePercent >= RamAlertThreshold;
-
-            // Trigger RamUsagePercent update
-            OnPropertyChanged(nameof(RamUsagePercent));
-
-            RefreshPerformanceItems();
-            UpdatePerformanceSelection();
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"MonitorViewModel update error: {ex.Message}");
             // Continue running - don't crash the app
         }
+    }
+
+    private Task DispatchAsync(Action action)
+    {
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher == null || dispatcher.CheckAccess())
+        {
+            action();
+            return Task.CompletedTask;
+        }
+
+        return dispatcher.InvokeAsync(action).Task;
     }
 
     private void UpdateHistory(ObservableCollection<double> history, double newValue)
@@ -1578,9 +1506,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private void UpdateNetworkProcessMode()
+    private void UpdateNetworkProcessMode(ProcessMonitor.NetworkProcessMode mode)
     {
-        var mode = _processMonitor?.NetworkMode ?? ProcessMonitor.NetworkProcessMode.ApproximateIo;
         if (_networkProcessMode == mode)
         {
             return;
@@ -1591,73 +1518,348 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(NetworkProcessSubtitle));
     }
 
+    private static double NormalizeTemperature(double value)
+    {
+        return double.IsFinite(value) && value > 0 ? value : double.NaN;
+    }
+
+    private void EnsurePerformanceItems()
+    {
+        if (PerformanceItems.Count == 0)
+        {
+            RefreshPerformanceItems();
+        }
+    }
+
+    private void UpdatePerformancePrimaryItems()
+    {
+        var cpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "cpu");
+        if (cpuItem != null)
+        {
+            var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
+            cpuItem.Subtitle = $"{CpuUsage:F0}% {cpuSpeedText}";
+        }
+
+        var memoryItem = PerformanceItems.FirstOrDefault(item => item.Key == "memory");
+        if (memoryItem != null)
+        {
+            memoryItem.Subtitle = $"{RamUsedGb:F1}/{RamTotalGb:F1} GB ({RamUsagePercent:F0}%)";
+        }
+
+        var gpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "gpu");
+        if (gpuItem != null)
+        {
+            gpuItem.Subtitle = $"{GpuUsage:F0}% {GpuTempText}";
+        }
+    }
+
+    private async Task SampleCoreMetricsAsync()
+    {
+        _isCoreSampleInProgress = true;
+        try
+        {
+            if (_metricProvider == null)
+            {
+                return;
+            }
+
+            var snapshot = await Task.Run(() =>
+            {
+                var cpuUsage = _metricProvider.GetCpuUsage();
+                var ramUsedGb = _metricProvider.GetUsedRamGb();
+                var cpuTemp = _metricProvider.GetCpuTemperature();
+                var gpuTemp = _metricProvider.GetGpuTemperature();
+                var gpuUsage = _metricProvider.GetGpuUsage();
+                return new CoreMetricsSnapshot(cpuUsage, ramUsedGb, cpuTemp, gpuTemp, gpuUsage);
+            }).ConfigureAwait(false);
+
+            await DispatchAsync(() =>
+            {
+                CpuUsage = snapshot.CpuUsage;
+                RamUsedGb = snapshot.RamUsedGb;
+                CpuTemp = NormalizeTemperature(snapshot.CpuTemp);
+                GpuTemp = NormalizeTemperature(snapshot.GpuTemp);
+                GpuUsage = snapshot.GpuUsage;
+
+                UpdateHistory(CpuHistory, CpuUsage);
+                UpdateHistory(RamHistory, RamUsagePercent);
+                UpdateHistory(GpuHistory, GpuUsage);
+
+                OnPropertyChanged(nameof(CpuHistoryMax));
+                OnPropertyChanged(nameof(CpuHistoryMin));
+                OnPropertyChanged(nameof(RamHistoryMax));
+                OnPropertyChanged(nameof(RamHistoryMin));
+                OnPropertyChanged(nameof(RamUsagePercent));
+
+                IsCpuAlertActive = CpuUsage >= CpuAlertThreshold;
+                IsRamAlertActive = RamUsagePercent >= RamAlertThreshold;
+
+                EnsurePerformanceItems();
+                UpdatePerformancePrimaryItems();
+
+                if (SelectedPerformanceItem?.Kind is PerformanceItemKind.Cpu
+                    or PerformanceItemKind.Memory
+                    or PerformanceItemKind.Gpu)
+                {
+                    UpdatePerformanceSelection();
+                }
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel core sample error: {ex.Message}");
+        }
+        finally
+        {
+            _isCoreSampleInProgress = false;
+        }
+    }
+
+    private async Task SampleIoMetricsAsync()
+    {
+        _isIoSampleInProgress = true;
+        try
+        {
+            if (_networkMonitor == null && _diskMonitor == null)
+            {
+                return;
+            }
+
+            var snapshot = await Task.Run(() =>
+            {
+                var adapters = _networkMonitor?.GetActiveAdapters() ?? new List<NetworkAdapterInfo>();
+                var disks = _diskMonitor?.GetDiskActivity() ?? new List<DiskInfo>();
+                return new IoMetricsSnapshot(adapters, disks);
+            }).ConfigureAwait(false);
+
+            await DispatchAsync(() =>
+            {
+                var refreshPerformance = false;
+
+                if (_networkMonitor != null)
+                {
+                    var networkAdapters = snapshot.NetworkAdapters;
+                    var totalUpload = networkAdapters.Sum(a => a.SendMbps);
+                    var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
+                    UpdateHistory(NetworkUploadHistory, totalUpload);
+                    UpdateHistory(NetworkDownloadHistory, totalDownload);
+                    OnPropertyChanged(nameof(NetworkDownloadMax));
+                    OnPropertyChanged(nameof(NetworkDownloadMin));
+                    OnPropertyChanged(nameof(NetworkDownloadNow));
+                    OnPropertyChanged(nameof(NetworkUploadMax));
+                    OnPropertyChanged(nameof(NetworkUploadMin));
+                    OnPropertyChanged(nameof(NetworkUploadNow));
+                    OnPropertyChanged(nameof(NetworkIoScaleMax));
+                    OnPropertyChanged(nameof(NetworkIoScaleMid));
+
+                    UpdateCollection(NetworkAdapters, networkAdapters);
+
+                    var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var adapter in networkAdapters)
+                    {
+                        var key = string.IsNullOrWhiteSpace(adapter.AdapterId) ? adapter.Name : adapter.AdapterId;
+                        activeAdapters.Add(key);
+                        var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, key);
+                        var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, key);
+                        UpdateHistory(sendHistory, adapter.SendMbps);
+                        UpdateHistory(receiveHistory, adapter.ReceiveMbps);
+                    }
+
+                    CleanupHistory(_netSendHistoryByAdapter, activeAdapters);
+                    CleanupHistory(_netReceiveHistoryByAdapter, activeAdapters);
+                    refreshPerformance = true;
+                }
+
+                if (_diskMonitor != null)
+                {
+                    var disks = snapshot.Disks;
+                    var totalRead = disks.Sum(d => d.ReadMBps);
+                    var totalWrite = disks.Sum(d => d.WriteMBps);
+                    UpdateHistory(DiskReadHistory, totalRead);
+                    UpdateHistory(DiskWriteHistory, totalWrite);
+                    OnPropertyChanged(nameof(DiskReadMax));
+                    OnPropertyChanged(nameof(DiskReadMin));
+                    OnPropertyChanged(nameof(DiskReadNow));
+                    OnPropertyChanged(nameof(DiskWriteMax));
+                    OnPropertyChanged(nameof(DiskWriteMin));
+                    OnPropertyChanged(nameof(DiskWriteNow));
+                    OnPropertyChanged(nameof(DiskIoScaleMax));
+                    OnPropertyChanged(nameof(DiskIoScaleMid));
+
+                    UpdateCollection(Disks, disks);
+
+                    var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var disk in disks)
+                    {
+                        var key = disk.DriveLetter;
+                        activeDisks.Add(key);
+                        var readHistory = GetOrCreateHistory(_diskReadHistoryByDrive, key);
+                        var writeHistory = GetOrCreateHistory(_diskWriteHistoryByDrive, key);
+                        UpdateHistory(readHistory, disk.ReadMBps);
+                        UpdateHistory(writeHistory, disk.WriteMBps);
+                    }
+
+                    CleanupHistory(_diskReadHistoryByDrive, activeDisks);
+                    CleanupHistory(_diskWriteHistoryByDrive, activeDisks);
+                    refreshPerformance = true;
+                }
+
+                if (refreshPerformance)
+                {
+                    RefreshPerformanceItems();
+                    if (SelectedPerformanceItem?.Kind is PerformanceItemKind.Network or PerformanceItemKind.Disk)
+                    {
+                        UpdatePerformanceSelection();
+                    }
+                }
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel I/O sample error: {ex.Message}");
+        }
+        finally
+        {
+            _isIoSampleInProgress = false;
+        }
+    }
+
+    private async Task SampleProcessMetricsAsync()
+    {
+        _isProcessSampleInProgress = true;
+        try
+        {
+            if (_processMonitor == null)
+            {
+                return;
+            }
+
+            var snapshot = await Task.Run(() =>
+            {
+                var topCpu = _processMonitor.GetTopProcessesByCpu(10);
+                var topRam = _processMonitor.GetTopProcessesByRam(10);
+                var topNetwork = _processMonitor.GetTopProcessesByNetwork(10);
+                var topDisk = _processMonitor.GetTopProcessesByDisk(10);
+                var mode = _processMonitor.NetworkMode;
+                _processMonitor.Cleanup();
+                return new ProcessMetricsSnapshot(topCpu, topRam, topNetwork, topDisk, mode);
+            }).ConfigureAwait(false);
+
+            await DispatchAsync(() =>
+            {
+                UpdateCollection(TopProcessesByCpu, snapshot.TopCpu);
+                UpdateCollection(TopProcessesByRam, snapshot.TopRam);
+                UpdateCollection(TopProcessesByNetwork, snapshot.TopNetwork);
+                UpdateCollection(TopProcessesByDisk, snapshot.TopDisk);
+                UpdateNetworkProcessMode(snapshot.NetworkMode);
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"MonitorViewModel process sample error: {ex.Message}");
+        }
+        finally
+        {
+            _isProcessSampleInProgress = false;
+        }
+    }
+
     private async Task SampleAuxMetricsAsync()
     {
         _isAuxSampleInProgress = true;
         try
         {
+            AuxMetricsSnapshot? metricsSnapshot = null;
             if (_metricProvider != null)
             {
-                _cpuPerformanceSnapshot = _metricProvider.GetCpuPerformanceSnapshot();
-                _memoryPerformanceSnapshot = _metricProvider.GetMemoryPerformanceSnapshot();
-                _diskPerformanceSnapshots = _metricProvider.GetDiskPerformanceSnapshots();
-
-                var gpuMemory = _metricProvider.GetGpuMemorySnapshot();
-                HasGpuMemory = gpuMemory.IsAvailable;
-                GpuMemoryUsedMb = gpuMemory.UsedMb;
-                GpuMemoryTotalMb = gpuMemory.TotalMb;
-                GpuMemoryUsagePercent = gpuMemory.UsagePercent;
-                OnPropertyChanged(nameof(GpuMemoryUsedGb));
-                OnPropertyChanged(nameof(GpuMemoryTotalGb));
-                OnPropertyChanged(nameof(GpuMemoryUsageText));
-                OnPropertyChanged(nameof(GpuMemoryPercentText));
-
-                _gpuPerformanceSnapshot = _metricProvider.GetGpuPerformanceSnapshot();
-
-                var fans = _metricProvider.GetFanSpeedSnapshot();
-                CpuFanRpm = fans.CpuRpm;
-                GpuFanRpm = fans.GpuRpm;
-                OnPropertyChanged(nameof(CpuFanRpmText));
-                OnPropertyChanged(nameof(GpuFanRpmText));
-                OnPropertyChanged(nameof(HasCpuFan));
-                OnPropertyChanged(nameof(HasGpuFan));
-
-                var diskItems = _metricProvider.GetDiskHealthItems();
-                UpdateCollection(DiskHealthItems, diskItems.Select(CreateDiskHealthItem).ToList());
-
-                var healthValues = diskItems
-                    .Select(item => item.HealthPercent)
-                    .Where(value => value.HasValue)
-                    .Select(value => value!.Value)
-                    .ToList();
-                DiskHealthPercent = healthValues.Count > 0 ? healthValues.Min() : null;
-
-                DiskPredictFailure = diskItems.Any(item => item.PredictFailure == true)
-                    ? true
-                    : diskItems.Any(item => item.PredictFailure == false)
-                        ? false
-                        : null;
-
-                if (!diskItems.Any())
+                metricsSnapshot = await Task.Run(() =>
                 {
-                    var diskHealth = _metricProvider.GetDiskHealthSnapshot();
-                    DiskHealthPercent = diskHealth.HealthPercent;
-                    DiskPredictFailure = diskHealth.PredictFailure;
-                }
-
-                OnPropertyChanged(nameof(DiskHealthText));
-                OnPropertyChanged(nameof(DiskHealthDetail));
-                OnPropertyChanged(nameof(HasDiskHealthItems));
+                    var cpuSnapshot = _metricProvider.GetCpuPerformanceSnapshot();
+                    var memorySnapshot = _metricProvider.GetMemoryPerformanceSnapshot();
+                    var diskSnapshots = _metricProvider.GetDiskPerformanceSnapshots();
+                    var gpuMemory = _metricProvider.GetGpuMemorySnapshot();
+                    var gpuPerformance = _metricProvider.GetGpuPerformanceSnapshot();
+                    var fans = _metricProvider.GetFanSpeedSnapshot();
+                    var diskItems = _metricProvider.GetDiskHealthItems().ToList();
+                    var diskHealthFallback = diskItems.Count == 0
+                        ? _metricProvider.GetDiskHealthSnapshot()
+                        : new DiskHealthSnapshot(null, null);
+                    return new AuxMetricsSnapshot(
+                        cpuSnapshot,
+                        memorySnapshot,
+                        diskSnapshots,
+                        gpuMemory,
+                        gpuPerformance,
+                        fans,
+                        diskItems,
+                        diskHealthFallback);
+                }).ConfigureAwait(false);
             }
 
-            if (_gpuEngineMonitor != null)
-            {
-                _gpuEngineUsageSnapshot = _gpuEngineMonitor.GetUsageSnapshot();
-            }
+            var gpuEngineSnapshot = _gpuEngineMonitor?.GetUsageSnapshot();
 
+            NetworkLatencySample? latency = null;
             if (_latencyMonitor != null)
             {
-                var latency = await _latencyMonitor.SampleAsync(CancellationToken.None);
+                latency = await _latencyMonitor.SampleAsync(CancellationToken.None).ConfigureAwait(false);
+            }
+
+            var wifiSignal = _wifiSignalMonitor?.TryGetSignal();
+
+            await DispatchAsync(() =>
+            {
+                if (metricsSnapshot != null)
+                {
+                    _cpuPerformanceSnapshot = metricsSnapshot.CpuSnapshot;
+                    _memoryPerformanceSnapshot = metricsSnapshot.MemorySnapshot;
+                    _diskPerformanceSnapshots = metricsSnapshot.DiskSnapshots;
+
+                    HasGpuMemory = metricsSnapshot.GpuMemory.IsAvailable;
+                    GpuMemoryUsedMb = metricsSnapshot.GpuMemory.UsedMb;
+                    GpuMemoryTotalMb = metricsSnapshot.GpuMemory.TotalMb;
+                    GpuMemoryUsagePercent = metricsSnapshot.GpuMemory.UsagePercent;
+                    OnPropertyChanged(nameof(GpuMemoryUsedGb));
+                    OnPropertyChanged(nameof(GpuMemoryTotalGb));
+                    OnPropertyChanged(nameof(GpuMemoryUsageText));
+                    OnPropertyChanged(nameof(GpuMemoryPercentText));
+
+                    _gpuPerformanceSnapshot = metricsSnapshot.GpuPerformance;
+
+                    CpuFanRpm = metricsSnapshot.Fans.CpuRpm;
+                    GpuFanRpm = metricsSnapshot.Fans.GpuRpm;
+                    OnPropertyChanged(nameof(CpuFanRpmText));
+                    OnPropertyChanged(nameof(GpuFanRpmText));
+                    OnPropertyChanged(nameof(HasCpuFan));
+                    OnPropertyChanged(nameof(HasGpuFan));
+
+                    UpdateCollection(DiskHealthItems, metricsSnapshot.DiskItems.Select(CreateDiskHealthItem).ToList());
+
+                    var healthValues = metricsSnapshot.DiskItems
+                        .Select(item => item.HealthPercent)
+                        .Where(value => value.HasValue)
+                        .Select(value => value!.Value)
+                        .ToList();
+                    DiskHealthPercent = healthValues.Count > 0 ? healthValues.Min() : metricsSnapshot.DiskHealthFallback.HealthPercent;
+
+                    DiskPredictFailure = metricsSnapshot.DiskItems.Any(item => item.PredictFailure == true)
+                        ? true
+                        : metricsSnapshot.DiskItems.Any(item => item.PredictFailure == false)
+                            ? false
+                            : metricsSnapshot.DiskHealthFallback.PredictFailure;
+
+                    OnPropertyChanged(nameof(DiskHealthText));
+                    OnPropertyChanged(nameof(DiskHealthDetail));
+                    OnPropertyChanged(nameof(HasDiskHealthItems));
+
+                    RefreshPerformanceItems();
+                    UpdatePerformancePrimaryItems();
+                }
+
+                if (gpuEngineSnapshot.HasValue)
+                {
+                    _gpuEngineUsageSnapshot = gpuEngineSnapshot.Value;
+                }
+
                 if (latency.HasValue)
                 {
                     NetworkLatencyMs = latency.Value.GatewayMs;
@@ -1679,15 +1881,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(GatewayLatencyLabel));
                 OnPropertyChanged(nameof(CloudflareLatencyText));
                 OnPropertyChanged(nameof(GoogleLatencyText));
-            }
 
-            if (_wifiSignalMonitor != null)
-            {
-                var signal = _wifiSignalMonitor.TryGetSignal();
-                if (signal.HasValue)
+                if (wifiSignal.HasValue)
                 {
-                    WifiSignalQuality = signal.Value.SignalQuality;
-                    WifiSsid = signal.Value.Ssid;
+                    WifiSignalQuality = wifiSignal.Value.SignalQuality;
+                    WifiSsid = wifiSignal.Value.Ssid;
                 }
                 else
                 {
@@ -1697,9 +1895,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
                 OnPropertyChanged(nameof(WifiSignalText));
                 OnPropertyChanged(nameof(WifiSignalDetail));
-            }
 
-            UpdatePerformanceSelection();
+                UpdatePerformanceSelection();
+            }).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -1710,6 +1908,34 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _isAuxSampleInProgress = false;
         }
     }
+
+    private sealed record CoreMetricsSnapshot(
+        double CpuUsage,
+        double RamUsedGb,
+        double CpuTemp,
+        double GpuTemp,
+        double GpuUsage);
+
+    private sealed record IoMetricsSnapshot(
+        List<NetworkAdapterInfo> NetworkAdapters,
+        List<DiskInfo> Disks);
+
+    private sealed record ProcessMetricsSnapshot(
+        List<ProcessInfo> TopCpu,
+        List<ProcessInfo> TopRam,
+        List<ProcessInfo> TopNetwork,
+        List<ProcessInfo> TopDisk,
+        ProcessMonitor.NetworkProcessMode NetworkMode);
+
+    private sealed record AuxMetricsSnapshot(
+        CpuPerformanceSnapshot CpuSnapshot,
+        MemoryPerformanceSnapshot MemorySnapshot,
+        IReadOnlyList<DiskPerformanceSnapshot> DiskSnapshots,
+        GpuMemorySnapshot GpuMemory,
+        GpuPerformanceSnapshot GpuPerformance,
+        FanSpeedSnapshot Fans,
+        List<DiskHealthInfo> DiskItems,
+        DiskHealthSnapshot DiskHealthFallback);
 
     private sealed record MonitorSectionDefinition(string Key, string Title, string Description);
 

@@ -26,7 +26,10 @@ public sealed class MetricProvider : IDisposable
     private readonly PerformanceCounter? _cacheBytesCounter;
     private readonly PerformanceCounter? _pagedPoolBytesCounter;
     private readonly PerformanceCounter? _nonPagedPoolBytesCounter;
+    private readonly PerformanceCounter? _cpuFrequencyCounter;
+    private readonly PerformanceCounter? _cpuPerformancePercentCounter;
     private readonly Computer? _computer;
+    private readonly object _hardwareLock = new();
     private readonly double? _gpuMemoryTotalMb;
     private readonly double? _cpuBaseSpeedMhz;
     private readonly int? _cpuSockets;
@@ -56,6 +59,8 @@ public sealed class MetricProvider : IDisposable
         _cacheBytesCounter = TryCreateCounter("Memory", "Cache Bytes");
         _pagedPoolBytesCounter = TryCreateCounter("Memory", "Pool Paged Bytes");
         _nonPagedPoolBytesCounter = TryCreateCounter("Memory", "Pool Nonpaged Bytes");
+        _cpuFrequencyCounter = TryCreateCounter("Processor Information", "Processor Frequency", "_Total");
+        _cpuPerformancePercentCounter = TryCreateCounter("Processor Information", "% Processor Performance", "_Total");
 
         // Initialize LibreHardwareMonitor for temperature sensors
         try
@@ -198,45 +203,48 @@ public sealed class MetricProvider : IDisposable
             return TryGetCpuTemperatureFromWmi() ?? double.NaN;
         }
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType == HardwareType.Cpu ||
-                hardware.HardwareType == HardwareType.Motherboard ||
-                hardware.HardwareType == HardwareType.SuperIO)
+            foreach (var hardware in _computer.Hardware)
             {
-                UpdateHardware(hardware);
-                var temps = EnumerateSensors(hardware)
-                    .Where(s => s.SensorType == SensorType.Temperature && s.Value.HasValue)
-                    .ToList();
-
-                if (temps.Count == 0)
+                if (hardware.HardwareType == HardwareType.Cpu ||
+                    hardware.HardwareType == HardwareType.Motherboard ||
+                    hardware.HardwareType == HardwareType.SuperIO)
                 {
-                    continue;
+                    UpdateHardware(hardware);
+                    var temps = EnumerateSensors(hardware)
+                        .Where(s => s.SensorType == SensorType.Temperature && s.Value.HasValue)
+                        .ToList();
+
+                    if (temps.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    var preferred = temps.FirstOrDefault(s => ContainsAny(s.Name, "Package", "CPU Package"))
+                                    ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Tctl", "Tdie", "Die"))
+                                    ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Core Average", "CCD", "SoC"))
+                                    ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "CPU", "Core"));
+
+                    if (preferred?.Value is { } preferredValue)
+                    {
+                        return preferredValue;
+                    }
+
+                    var coreTemps = temps
+                        .Where(s => s.Name.Contains("Core", StringComparison.OrdinalIgnoreCase)
+                                    && !s.Name.Contains("Max", StringComparison.OrdinalIgnoreCase)
+                                    && !s.Name.Contains("Package", StringComparison.OrdinalIgnoreCase))
+                        .Select(s => s.Value!.Value)
+                        .ToList();
+
+                    if (coreTemps.Count > 0)
+                    {
+                        return coreTemps.Average();
+                    }
+
+                    return temps.Max(s => s.Value!.Value);
                 }
-
-                var preferred = temps.FirstOrDefault(s => ContainsAny(s.Name, "Package", "CPU Package"))
-                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Tctl", "Tdie", "Die"))
-                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "Core Average", "CCD", "SoC"))
-                                ?? temps.FirstOrDefault(s => ContainsAny(s.Name, "CPU", "Core"));
-
-                if (preferred?.Value is { } preferredValue)
-                {
-                    return preferredValue;
-                }
-
-                var coreTemps = temps
-                    .Where(s => s.Name.Contains("Core", StringComparison.OrdinalIgnoreCase)
-                                && !s.Name.Contains("Max", StringComparison.OrdinalIgnoreCase)
-                                && !s.Name.Contains("Package", StringComparison.OrdinalIgnoreCase))
-                    .Select(s => s.Value!.Value)
-                    .ToList();
-
-                if (coreTemps.Count > 0)
-                {
-                    return coreTemps.Average();
-                }
-
-                return temps.Max(s => s.Value!.Value);
             }
         }
 
@@ -247,18 +255,23 @@ public sealed class MetricProvider : IDisposable
     {
         if (_computer == null) return double.NaN;
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType == HardwareType.GpuNvidia ||
-                hardware.HardwareType == HardwareType.GpuAmd ||
-                hardware.HardwareType == HardwareType.GpuIntel)
+            foreach (var hardware in _computer.Hardware)
             {
-                UpdateHardware(hardware);
-                foreach (var sensor in EnumerateSensors(hardware))
+                if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                    hardware.HardwareType == HardwareType.GpuAmd ||
+                    hardware.HardwareType == HardwareType.GpuIntel)
                 {
-                    if (sensor.SensorType == SensorType.Temperature &&
-                        (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU")))
-                        return sensor.Value ?? double.NaN;
+                    UpdateHardware(hardware);
+                    foreach (var sensor in EnumerateSensors(hardware))
+                    {
+                        if (sensor.SensorType == SensorType.Temperature &&
+                            (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU")))
+                        {
+                            return sensor.Value ?? double.NaN;
+                        }
+                    }
                 }
             }
         }
@@ -269,18 +282,23 @@ public sealed class MetricProvider : IDisposable
     {
         if (_computer == null) return 0;
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType == HardwareType.GpuNvidia ||
-                hardware.HardwareType == HardwareType.GpuAmd ||
-                hardware.HardwareType == HardwareType.GpuIntel)
+            foreach (var hardware in _computer.Hardware)
             {
-                hardware.Update();
-                foreach (var sensor in hardware.Sensors)
+                if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                    hardware.HardwareType == HardwareType.GpuAmd ||
+                    hardware.HardwareType == HardwareType.GpuIntel)
                 {
-                    if (sensor.SensorType == SensorType.Load &&
-                        (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU Core")))
-                        return sensor.Value ?? 0;
+                    hardware.Update();
+                    foreach (var sensor in hardware.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Load &&
+                            (sensor.Name.Contains("Core") || sensor.Name.Contains("GPU Core")))
+                        {
+                            return sensor.Value ?? 0;
+                        }
+                    }
                 }
             }
         }
@@ -298,51 +316,54 @@ public sealed class MetricProvider : IDisposable
         double? totalMb = null;
         double? usagePercent = null;
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType == HardwareType.GpuNvidia ||
-                hardware.HardwareType == HardwareType.GpuAmd ||
-                hardware.HardwareType == HardwareType.GpuIntel)
+            foreach (var hardware in _computer.Hardware)
             {
-                hardware.Update();
-
-                foreach (var sensor in hardware.Sensors)
+                if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                    hardware.HardwareType == HardwareType.GpuAmd ||
+                    hardware.HardwareType == HardwareType.GpuIntel)
                 {
-                    if (!sensor.Value.HasValue)
-                    {
-                        continue;
-                    }
+                    hardware.Update();
 
-                    var name = sensor.Name ?? string.Empty;
-
-                    if (sensor.SensorType == SensorType.Load &&
-                        name.Contains("Memory", StringComparison.OrdinalIgnoreCase))
+                    foreach (var sensor in hardware.Sensors)
                     {
-                        usagePercent ??= sensor.Value.Value;
-                    }
-
-                    if (sensor.SensorType == SensorType.Data || sensor.SensorType == SensorType.SmallData)
-                    {
-                        if (name.Contains("Memory Used", StringComparison.OrdinalIgnoreCase) ||
-                            name.Contains("GPU Memory", StringComparison.OrdinalIgnoreCase) ||
-                            name.Contains("VRAM", StringComparison.OrdinalIgnoreCase))
+                        if (!sensor.Value.HasValue)
                         {
-                            usedMb ??= sensor.SensorType == SensorType.Data
-                                ? sensor.Value.Value * 1024
-                                : sensor.Value.Value;
+                            continue;
                         }
 
-                        if (name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) ||
-                            name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase))
+                        var name = sensor.Name ?? string.Empty;
+
+                        if (sensor.SensorType == SensorType.Load &&
+                            name.Contains("Memory", StringComparison.OrdinalIgnoreCase))
                         {
-                            totalMb ??= sensor.SensorType == SensorType.Data
-                                ? sensor.Value.Value * 1024
-                                : sensor.Value.Value;
+                            usagePercent ??= sensor.Value.Value;
+                        }
+
+                        if (sensor.SensorType == SensorType.Data || sensor.SensorType == SensorType.SmallData)
+                        {
+                            if (name.Contains("Memory Used", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("GPU Memory", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("VRAM", StringComparison.OrdinalIgnoreCase))
+                            {
+                                usedMb ??= sensor.SensorType == SensorType.Data
+                                    ? sensor.Value.Value * 1024
+                                    : sensor.Value.Value;
+                            }
+
+                            if (name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase))
+                            {
+                                totalMb ??= sensor.SensorType == SensorType.Data
+                                    ? sensor.Value.Value * 1024
+                                    : sensor.Value.Value;
+                            }
                         }
                     }
+
+                    break;
                 }
-
-                break;
             }
         }
 
@@ -481,47 +502,50 @@ public sealed class MetricProvider : IDisposable
         double? cpuFallback = null;
         double? gpuRpm = null;
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType == HardwareType.Cpu ||
-                hardware.HardwareType == HardwareType.Motherboard ||
-                hardware.HardwareType == HardwareType.SuperIO)
+            foreach (var hardware in _computer.Hardware)
             {
-                UpdateHardware(hardware);
-
-                foreach (var sensor in EnumerateSensors(hardware))
+                if (hardware.HardwareType == HardwareType.Cpu ||
+                    hardware.HardwareType == HardwareType.Motherboard ||
+                    hardware.HardwareType == HardwareType.SuperIO)
                 {
-                    if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
-                    {
-                        continue;
-                    }
+                    UpdateHardware(hardware);
 
-                    var name = sensor.Name ?? string.Empty;
-                    if (IsCpuFanName(name))
+                    foreach (var sensor in EnumerateSensors(hardware))
                     {
-                        cpuRpm = Math.Max(cpuRpm ?? 0, sensor.Value.Value);
-                    }
-                    else
-                    {
-                        cpuFallback = Math.Max(cpuFallback ?? 0, sensor.Value.Value);
+                        if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
+                        {
+                            continue;
+                        }
+
+                        var name = sensor.Name ?? string.Empty;
+                        if (IsCpuFanName(name))
+                        {
+                            cpuRpm = Math.Max(cpuRpm ?? 0, sensor.Value.Value);
+                        }
+                        else
+                        {
+                            cpuFallback = Math.Max(cpuFallback ?? 0, sensor.Value.Value);
+                        }
                     }
                 }
-            }
 
-            if (hardware.HardwareType == HardwareType.GpuNvidia ||
-                hardware.HardwareType == HardwareType.GpuAmd ||
-                hardware.HardwareType == HardwareType.GpuIntel)
-            {
-                UpdateHardware(hardware);
-
-                foreach (var sensor in EnumerateSensors(hardware))
+                if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                    hardware.HardwareType == HardwareType.GpuAmd ||
+                    hardware.HardwareType == HardwareType.GpuIntel)
                 {
-                    if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
-                    {
-                        continue;
-                    }
+                    UpdateHardware(hardware);
 
-                    gpuRpm = Math.Max(gpuRpm ?? 0, sensor.Value.Value);
+                    foreach (var sensor in EnumerateSensors(hardware))
+                    {
+                        if (sensor.SensorType != SensorType.Fan || !sensor.Value.HasValue)
+                        {
+                            continue;
+                        }
+
+                        gpuRpm = Math.Max(gpuRpm ?? 0, sensor.Value.Value);
+                    }
                 }
             }
         }
@@ -538,26 +562,29 @@ public sealed class MetricProvider : IDisposable
         if (_computer != null)
         {
             var values = new List<double>();
-            foreach (var hardware in _computer.Hardware)
+            lock (_hardwareLock)
             {
-                if (hardware.HardwareType != HardwareType.Storage)
+                foreach (var hardware in _computer.Hardware)
                 {
-                    continue;
-                }
-
-                hardware.Update();
-                foreach (var sensor in hardware.Sensors)
-                {
-                    if (!sensor.Value.HasValue)
+                    if (hardware.HardwareType != HardwareType.Storage)
                     {
                         continue;
                     }
 
-                    if (sensor.SensorType == SensorType.Level &&
-                        (sensor.Name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
-                         sensor.Name.Contains("Remaining Life", StringComparison.OrdinalIgnoreCase)))
+                    hardware.Update();
+                    foreach (var sensor in hardware.Sensors)
                     {
-                        values.Add(sensor.Value.Value);
+                        if (!sensor.Value.HasValue)
+                        {
+                            continue;
+                        }
+
+                        if (sensor.SensorType == SensorType.Level &&
+                            (sensor.Name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
+                             sensor.Name.Contains("Remaining Life", StringComparison.OrdinalIgnoreCase)))
+                        {
+                            values.Add(sensor.Value.Value);
+                        }
                     }
                 }
             }
@@ -668,26 +695,29 @@ public sealed class MetricProvider : IDisposable
         }
         else
         {
-            foreach (var hardware in _computer.Hardware)
+            lock (_hardwareLock)
             {
-                UpdateHardware(hardware);
-                report.AppendLine($"- {hardware.HardwareType}: {hardware.Name}");
-                foreach (var sensor in EnumerateSensors(hardware))
+                foreach (var hardware in _computer.Hardware)
                 {
-                    var value = sensor.Value.HasValue ? $"{sensor.Value.Value:F2}" : "N/A";
-                    var unit = sensor.SensorType switch
+                    UpdateHardware(hardware);
+                    report.AppendLine($"- {hardware.HardwareType}: {hardware.Name}");
+                    foreach (var sensor in EnumerateSensors(hardware))
                     {
-                        SensorType.Temperature => "C",
-                        SensorType.Load => "%",
-                        SensorType.Fan => "RPM",
-                        SensorType.Clock => "MHz",
-                        SensorType.Power => "W",
-                        SensorType.Data => "GB",
-                        SensorType.SmallData => "MB",
-                        SensorType.Level => "%",
-                        _ => string.Empty
-                    };
-                    report.AppendLine($"  - {sensor.SensorType} {sensor.Name}: {value}{unit}");
+                        var value = sensor.Value.HasValue ? $"{sensor.Value.Value:F2}" : "N/A";
+                        var unit = sensor.SensorType switch
+                        {
+                            SensorType.Temperature => "C",
+                            SensorType.Load => "%",
+                            SensorType.Fan => "RPM",
+                            SensorType.Clock => "MHz",
+                            SensorType.Power => "W",
+                            SensorType.Data => "GB",
+                            SensorType.SmallData => "MB",
+                            SensorType.Level => "%",
+                            _ => string.Empty
+                        };
+                        report.AppendLine($"  - {sensor.SensorType} {sensor.Name}: {value}{unit}");
+                    }
                 }
             }
         }
@@ -705,34 +735,37 @@ public sealed class MetricProvider : IDisposable
             return values;
         }
 
-        foreach (var hardware in _computer.Hardware)
+        lock (_hardwareLock)
         {
-            if (hardware.HardwareType != HardwareType.Storage)
+            foreach (var hardware in _computer.Hardware)
             {
-                continue;
-            }
-
-            UpdateHardware(hardware);
-            var sensorValues = new List<double>();
-
-            foreach (var sensor in EnumerateSensors(hardware))
-            {
-                if (!sensor.Value.HasValue || sensor.SensorType != SensorType.Level)
+                if (hardware.HardwareType != HardwareType.Storage)
                 {
                     continue;
                 }
 
-                var name = sensor.Name ?? string.Empty;
-                if (name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
-                    name.Contains("Remaining Life", StringComparison.OrdinalIgnoreCase))
-                {
-                    sensorValues.Add(sensor.Value.Value);
-                }
-            }
+                UpdateHardware(hardware);
+                var sensorValues = new List<double>();
 
-            if (sensorValues.Count > 0)
-            {
-                values[hardware.Name] = sensorValues.Min();
+                foreach (var sensor in EnumerateSensors(hardware))
+                {
+                    if (!sensor.Value.HasValue || sensor.SensorType != SensorType.Level)
+                    {
+                        continue;
+                    }
+
+                    var name = sensor.Name ?? string.Empty;
+                    if (name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
+                        name.Contains("Remaining Life", StringComparison.OrdinalIgnoreCase))
+                    {
+                        sensorValues.Add(sensor.Value.Value);
+                    }
+                }
+
+                if (sensorValues.Count > 0)
+                {
+                    values[hardware.Name] = sensorValues.Min();
+                }
             }
         }
 
@@ -1289,14 +1322,17 @@ public sealed class MetricProvider : IDisposable
             // Get GPU name
             if (_computer != null)
             {
-                foreach (var hardware in _computer.Hardware)
+                lock (_hardwareLock)
                 {
-                    if (hardware.HardwareType == HardwareType.GpuNvidia ||
-                        hardware.HardwareType == HardwareType.GpuAmd ||
-                        hardware.HardwareType == HardwareType.GpuIntel)
+                    foreach (var hardware in _computer.Hardware)
                     {
-                        info.GpuName = hardware.Name;
-                        break;
+                        if (hardware.HardwareType == HardwareType.GpuNvidia ||
+                            hardware.HardwareType == HardwareType.GpuAmd ||
+                            hardware.HardwareType == HardwareType.GpuIntel)
+                        {
+                            info.GpuName = hardware.Name;
+                            break;
+                        }
                     }
                 }
             }
@@ -1408,6 +1444,23 @@ public sealed class MetricProvider : IDisposable
         }
     }
 
+    private static double? TryReadCounterValue(PerformanceCounter? counter)
+    {
+        if (counter == null)
+        {
+            return null;
+        }
+
+        try
+        {
+            return counter.NextValue();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     private static double? TryReadCounterGb(PerformanceCounter? counter)
     {
         if (counter == null)
@@ -1458,7 +1511,28 @@ public sealed class MetricProvider : IDisposable
         return (processes, threads, handles);
     }
 
-    private static double? TryGetCpuCurrentSpeedMhz()
+    private double? TryGetCpuCurrentSpeedMhz()
+    {
+        var frequency = TryReadCounterValue(_cpuFrequencyCounter);
+        if (frequency.HasValue && frequency.Value > 0)
+        {
+            return frequency.Value;
+        }
+
+        var performancePercent = TryReadCounterValue(_cpuPerformancePercentCounter);
+        if (performancePercent.HasValue && performancePercent.Value > 0 && _cpuBaseSpeedMhz.HasValue)
+        {
+            var estimated = _cpuBaseSpeedMhz.Value * (performancePercent.Value / 100.0);
+            if (estimated > 0)
+            {
+                return estimated;
+            }
+        }
+
+        return TryGetCpuCurrentSpeedMhzFromWmi();
+    }
+
+    private static double? TryGetCpuCurrentSpeedMhzFromWmi()
     {
         try
         {
@@ -2222,6 +2296,8 @@ public sealed class MetricProvider : IDisposable
             _cacheBytesCounter?.Dispose();
             _pagedPoolBytesCounter?.Dispose();
             _nonPagedPoolBytesCounter?.Dispose();
+            _cpuFrequencyCounter?.Dispose();
+            _cpuPerformancePercentCounter?.Dispose();
             _computer?.Close();
             _disposed = true;
         }
