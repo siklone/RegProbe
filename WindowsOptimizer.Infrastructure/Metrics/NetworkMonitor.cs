@@ -39,8 +39,6 @@ public sealed class NetworkMonitor : IDisposable
 
         foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
         {
-            if (nic.OperationalStatus != OperationalStatus.Up)
-                continue;
 
             var (totalBytesSent, totalBytesReceived) = GetTotalBytes(nic);
             var adapterName = nic.Name;

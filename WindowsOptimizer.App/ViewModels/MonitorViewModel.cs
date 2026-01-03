@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Management;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -863,9 +864,17 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
             hklmFolderApproval);
 
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var entry in items)
+        {
+            seen.Add(BuildStartupKey(entry.Name, entry.Command, entry.Location));
+        }
+
+        AddStartupAppsFromWmi(items, seen);
+
         return items
-            .OrderBy(item => item.Scope)
-            .ThenBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.Scope, StringComparer.OrdinalIgnoreCase)
             .ToList();
     }
 
@@ -1025,6 +1034,58 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         return space > 0 ? expanded[..space] : expanded;
     }
 
+    private static string BuildStartupKey(string name, string command, string location)
+    {
+        return $"{name}|{command}|{location}".ToLowerInvariant();
+    }
+
+    private static void AddStartupAppsFromWmi(List<StartupAppEntry> items, HashSet<string> seen)
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Name, Command, Location, User FROM Win32_StartupCommand");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString() ?? string.Empty;
+                var command = obj["Command"]?.ToString() ?? string.Empty;
+                var location = obj["Location"]?.ToString() ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(command))
+                {
+                    continue;
+                }
+
+                var key = BuildStartupKey(name, command, location);
+                if (!seen.Add(key))
+                {
+                    continue;
+                }
+
+                var scope = obj["User"]?.ToString();
+                if (string.IsNullOrWhiteSpace(scope))
+                {
+                    scope = "All Users";
+                }
+
+                items.Add(new StartupAppEntry(
+                    name,
+                    command,
+                    location,
+                    scope,
+                    "WMI",
+                    true,
+                    ExtractExecutablePath(command),
+                    null,
+                    RegistryView.Default,
+                    null,
+                    string.Empty));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Startup WMI fallback failed: {ex.Message}");
+        }
+    }
+
     private static List<ServiceEntry> CollectServices()
     {
         var results = new List<ServiceEntry>();
@@ -1099,10 +1160,150 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             Debug.WriteLine($"Services registry read failed: {ex.Message}");
         }
 
+        if (results.Count < 10)
+        {
+            AddFallbackServices(results, statusLookup, startModeLookup);
+        }
+
         return results
             .OrderBy(entry => entry.IsDriver)
             .ThenBy(entry => entry.DisplayName, StringComparer.OrdinalIgnoreCase)
             .ToList();
+    }
+
+    private static void AddFallbackServices(
+        List<ServiceEntry> results,
+        IReadOnlyDictionary<string, string> statusLookup,
+        IReadOnlyDictionary<string, CoreServiceStartMode> startModeLookup)
+    {
+        var known = new HashSet<string>(results.Select(entry => entry.Name), StringComparer.OrdinalIgnoreCase);
+
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
+            using var servicesKey = baseKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Services");
+
+            foreach (var service in ServiceController.GetServices())
+            {
+                AddFallbackServiceEntry(service, false, servicesKey, results, known, statusLookup, startModeLookup);
+            }
+
+            foreach (var device in ServiceController.GetDevices())
+            {
+                AddFallbackServiceEntry(device, true, servicesKey, results, known, statusLookup, startModeLookup);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Service fallback failed: {ex.Message}");
+        }
+    }
+
+    private static void AddFallbackServiceEntry(
+        ServiceController controller,
+        bool isDriverHint,
+        RegistryKey? servicesKey,
+        List<ServiceEntry> results,
+        HashSet<string> known,
+        IReadOnlyDictionary<string, string> statusLookup,
+        IReadOnlyDictionary<string, CoreServiceStartMode> startModeLookup)
+    {
+        var name = controller.ServiceName;
+        if (string.IsNullOrWhiteSpace(name) || !known.Add(name))
+        {
+            return;
+        }
+
+        if (servicesKey != null &&
+            TryCreateServiceEntryFromRegistry(servicesKey, name, isDriverHint, statusLookup, startModeLookup, out var entry))
+        {
+            results.Add(entry);
+            return;
+        }
+
+        var displayName = string.IsNullOrWhiteSpace(controller.DisplayName) ? name : controller.DisplayName;
+        var startMode = startModeLookup.TryGetValue(name, out var mode) ? mode : CoreServiceStartMode.Unknown;
+        var startType = DescribeStartType(startMode, null);
+        var statusText = statusLookup.TryGetValue(name, out var status) ? status : "Unknown";
+        var docsLink = ResolveServiceDocsLink(name);
+
+        results.Add(new ServiceEntry(
+            name,
+            displayName,
+            string.Empty,
+            isDriverHint ? "Driver" : "Service",
+            startMode,
+            startType,
+            statusText,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            servicesKey?.Name + "\\" + name ?? string.Empty,
+            isDriverHint,
+            docsLink));
+    }
+
+    private static bool TryCreateServiceEntryFromRegistry(
+        RegistryKey servicesKey,
+        string serviceName,
+        bool isDriverHint,
+        IReadOnlyDictionary<string, string> statusLookup,
+        IReadOnlyDictionary<string, CoreServiceStartMode> startModeLookup,
+        out ServiceEntry entry)
+    {
+        entry = null!;
+
+        try
+        {
+            using var serviceKey = servicesKey.OpenSubKey(serviceName);
+            if (serviceKey == null)
+            {
+                return false;
+            }
+
+            var displayName = serviceKey.GetValue("DisplayName") as string ?? serviceName;
+            var description = serviceKey.GetValue("Description") as string ?? string.Empty;
+            var imagePath = serviceKey.GetValue("ImagePath") as string ?? string.Empty;
+            var objectName = serviceKey.GetValue("ObjectName") as string ?? string.Empty;
+            var group = serviceKey.GetValue("Group") as string ?? string.Empty;
+            var startValue = TryGetInt(serviceKey.GetValue("Start"));
+            var delayedAuto = TryGetInt(serviceKey.GetValue("DelayedAutoStart"));
+            var typeValue = TryGetInt(serviceKey.GetValue("Type"));
+            var serviceDll = string.Empty;
+
+            using (var parametersKey = serviceKey.OpenSubKey("Parameters"))
+            {
+                serviceDll = parametersKey?.GetValue("ServiceDll") as string ?? string.Empty;
+            }
+
+            var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
+            var startMode = ResolveStartMode(startValue, startModeLookup, serviceName);
+            var startType = DescribeStartType(startMode, delayedAuto);
+            var isDriver = typeValue.HasValue ? IsDriverType(typeValue) : isDriverHint;
+            var serviceType = typeValue.HasValue ? DescribeServiceType(typeValue) : (isDriver ? "Driver" : "Service");
+            var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
+            var docsLink = ResolveServiceDocsLink(serviceName);
+
+            entry = new ServiceEntry(
+                serviceName,
+                displayName,
+                description,
+                serviceType,
+                startMode,
+                startType,
+                statusText,
+                objectName,
+                group,
+                binaryPath,
+                servicesKey.Name + "\\" + serviceName,
+                isDriver,
+                docsLink);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static Dictionary<string, string> BuildServiceStatusLookup()

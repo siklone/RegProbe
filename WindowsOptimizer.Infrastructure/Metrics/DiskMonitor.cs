@@ -34,8 +34,15 @@ public sealed class DiskMonitor : IDisposable
 
         foreach (var drive in DriveInfo.GetDrives())
         {
-            if (drive.DriveType != DriveType.Fixed || !drive.IsReady)
+            if (!drive.IsReady)
+            {
                 continue;
+            }
+
+            if (drive.DriveType == DriveType.CDRom || drive.DriveType == DriveType.NoRootDirectory)
+            {
+                continue;
+            }
 
             var driveName = drive.Name.TrimEnd('\\'); // "C:"
             activeDriveNames.Add(driveName);

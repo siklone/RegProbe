@@ -47,10 +47,15 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
+            if (!TryGetProcessBasics(process, out var name, out var pid))
+            {
+                continue;
+            }
+
             var info = new ProcessInfo
             {
-                Name = process.ProcessName,
-                Pid = process.Id,
+                Name = name,
+                Pid = pid,
                 CpuPercent = SafeGetCpuUsage(process, currentTime),
                 RamMb = SafeGetWorkingSetMb(process),
                 Threads = SafeGetThreadCount(process),
@@ -69,10 +74,15 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
+            if (!TryGetProcessBasics(process, out var name, out var pid))
+            {
+                continue;
+            }
+
             processes.Add(new ProcessInfo
             {
-                Name = process.ProcessName,
-                Pid = process.Id,
+                Name = name,
+                Pid = pid,
                 RamMb = SafeGetWorkingSetMb(process),
                 CpuPercent = 0, // Not needed for RAM sort
                 Threads = SafeGetThreadCount(process),
@@ -90,17 +100,21 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            if (!TryGetIoBytes(process, out var totalBytes))
+            if (!TryGetProcessBasics(process, out var name, out var pid))
             {
                 continue;
             }
 
-            var ioMbps = CalculateIoMbps(process.Id, totalBytes, currentTime);
+            var ioMbps = 0.0;
+            if (TryGetIoBytes(process, out var totalBytes))
+            {
+                ioMbps = CalculateIoMbps(pid, totalBytes, currentTime);
+            }
 
             processes.Add(new ProcessInfo
             {
-                Name = process.ProcessName,
-                Pid = process.Id,
+                Name = name,
+                Pid = pid,
                 IoMbps = ioMbps,
                 RamMb = SafeGetWorkingSetMb(process),
                 Threads = SafeGetThreadCount(process),
@@ -118,17 +132,21 @@ public sealed class ProcessMonitor : IDisposable
 
         foreach (var process in Process.GetProcesses())
         {
-            if (!TryGetDiskBytes(process, out var totalBytes))
+            if (!TryGetProcessBasics(process, out var name, out var pid))
             {
                 continue;
             }
 
-            var diskMBps = CalculateDiskMBps(process.Id, totalBytes, currentTime);
+            var diskMBps = 0.0;
+            if (TryGetDiskBytes(process, out var totalBytes))
+            {
+                diskMBps = CalculateDiskMBps(pid, totalBytes, currentTime);
+            }
 
             processes.Add(new ProcessInfo
             {
-                Name = process.ProcessName,
-                Pid = process.Id,
+                Name = name,
+                Pid = pid,
                 DiskMBps = diskMBps,
                 RamMb = SafeGetWorkingSetMb(process),
                 Threads = SafeGetThreadCount(process),
@@ -174,12 +192,16 @@ public sealed class ProcessMonitor : IDisposable
             try
             {
                 var process = Process.GetProcessById(entry.Key);
+                if (!TryGetProcessBasics(process, out var name, out var pid))
+                {
+                    continue;
+                }
                 var networkMbps = CalculateNetworkMbps(entry.Key, entry.Value, currentTime);
 
                 processes.Add(new ProcessInfo
                 {
-                    Name = process.ProcessName,
-                    Pid = process.Id,
+                    Name = name,
+                    Pid = pid,
                     IoMbps = networkMbps,
                     RamMb = SafeGetWorkingSetMb(process),
                     Threads = SafeGetThreadCount(process),
@@ -193,6 +215,23 @@ public sealed class ProcessMonitor : IDisposable
         }
 
         return processes.OrderByDescending(p => p.IoMbps).Take(count).ToList();
+    }
+
+    private static bool TryGetProcessBasics(Process process, out string name, out int pid)
+    {
+        name = string.Empty;
+        pid = 0;
+
+        try
+        {
+            pid = process.Id;
+            name = process.ProcessName;
+            return !string.IsNullOrWhiteSpace(name);
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private double CalculateCpuUsage(Process process, DateTime currentTime)
