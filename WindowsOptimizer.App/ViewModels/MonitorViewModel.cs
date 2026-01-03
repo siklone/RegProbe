@@ -971,6 +971,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         var results = new List<ServiceEntry>();
         var statusLookup = BuildServiceStatusLookup();
+        var startTypeLookup = BuildServiceStartTypeLookup();
 
         try
         {
@@ -995,6 +996,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 var objectName = serviceKey.GetValue("ObjectName") as string ?? string.Empty;
                 var group = serviceKey.GetValue("Group") as string ?? string.Empty;
                 var startValue = TryGetInt(serviceKey.GetValue("Start"));
+                var delayedAuto = TryGetInt(serviceKey.GetValue("DelayedAutoStart"));
                 var typeValue = TryGetInt(serviceKey.GetValue("Type"));
                 var serviceDll = string.Empty;
 
@@ -1004,7 +1006,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 }
 
                 var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
-                var startType = DescribeStartType(startValue);
+                var startType = DescribeStartType(startValue, delayedAuto, startTypeLookup, serviceName);
                 var serviceType = DescribeServiceType(typeValue);
                 var isDriver = IsDriverType(typeValue);
                 var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
@@ -1083,17 +1085,72 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private static string DescribeStartType(int? startValue)
+    private static Dictionary<string, string> BuildServiceStartTypeLookup()
     {
-        return startValue switch
+        var lookup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        try
         {
-            0 => "Boot",
-            1 => "System",
-            2 => "Automatic",
-            3 => "Manual",
-            4 => "Disabled",
+            foreach (var service in ServiceController.GetServices())
+            {
+                try
+                {
+                    lookup[service.ServiceName] = DescribeServiceStartMode(service.StartType);
+                }
+                catch
+                {
+                    // Ignore individual service errors.
+                }
+            }
+        }
+        catch
+        {
+            // Ignore lookup failures.
+        }
+
+        return lookup;
+    }
+
+    private static string DescribeServiceStartMode(ServiceStartMode startMode)
+    {
+        return startMode switch
+        {
+            ServiceStartMode.Boot => "Boot",
+            ServiceStartMode.System => "System",
+            ServiceStartMode.Automatic => "Automatic",
+            ServiceStartMode.Manual => "Manual",
+            ServiceStartMode.Disabled => "Disabled",
             _ => "Unknown"
         };
+    }
+
+    private static string DescribeStartType(int? startValue, int? delayedAuto, IReadOnlyDictionary<string, string> startLookup, string serviceName)
+    {
+        if (startValue.HasValue)
+        {
+            var startType = startValue switch
+            {
+                0 => "Boot",
+                1 => "System",
+                2 => "Automatic",
+                3 => "Manual",
+                4 => "Disabled",
+                _ => "Unknown"
+            };
+
+            if (startValue == 2 && delayedAuto.GetValueOrDefault() == 1)
+            {
+                return "Automatic (Delayed)";
+            }
+
+            return startType;
+        }
+
+        if (startLookup.TryGetValue(serviceName, out var fallback))
+        {
+            return fallback;
+        }
+
+        return "Unknown";
     }
 
     private static string DescribeServiceType(int? typeValue)

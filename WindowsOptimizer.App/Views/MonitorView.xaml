@@ -1970,8 +1970,10 @@
                               SelectedItem="{Binding SelectedService}"
                               Background="Transparent"
                               BorderThickness="0"
+                              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualHeight}"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
                               ScrollViewer.IsDeferredScrollingEnabled="True"
+                              ScrollViewer.CanContentScroll="True"
                               VirtualizingStackPanel.IsVirtualizing="True"
                               VirtualizingStackPanel.VirtualizationMode="Recycling">
                         <ListView.Resources>
