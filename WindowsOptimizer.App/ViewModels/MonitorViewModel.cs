@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -106,6 +107,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly Dictionary<string, ObservableCollection<double>> _diskWriteHistoryByDrive = new(StringComparer.OrdinalIgnoreCase);
     private readonly Dictionary<string, ObservableCollection<double>> _netSendHistoryByAdapter = new(StringComparer.OrdinalIgnoreCase);
     private readonly Dictionary<string, ObservableCollection<double>> _netReceiveHistoryByAdapter = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _fallbackCpuUsage = new();
+    private readonly Dictionary<string, (long Sent, long Received, DateTime Time)> _fallbackNetworkSamples = new(StringComparer.OrdinalIgnoreCase);
 
     private readonly RelayCommand _toggleLayoutEditorCommand;
     private readonly RelayCommand _moveSectionUpCommand;
@@ -127,6 +130,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isServiceActionInProgress;
     private DateTime _startupAppsUpdatedAt;
     private DateTime _servicesUpdatedAt;
+    private int _lastStartupCount = -1;
+    private int _lastServiceCount = -1;
+    private int _lastProcessCount = -1;
+    private int _lastNetworkAdapterCount = -1;
+    private int _lastDiskCount = -1;
     private StartupAppEntry? _selectedStartupApp;
     private ServiceEntry? _selectedService;
     private readonly string _elevatedHostExecutablePath;
@@ -769,7 +777,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             return;
         }
 
-        if (!force && StartupApps.Count > 0)
+        if (!force && StartupApps.Count >= 2 && _startupAppsUpdatedAt != DateTime.MinValue)
         {
             return;
         }
@@ -788,10 +796,27 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     SelectedStartupApp = StartupApps[0];
                 }
             }).ConfigureAwait(false);
+
+            if (_lastStartupCount != items.Count)
+            {
+                _lastStartupCount = items.Count;
+                LogMonitorInfo($"Monitor: Startup apps loaded ({items.Count} entries).");
+            }
+
+            if (items.Count < 2)
+            {
+                LogMonitorWarning($"Monitor: Startup apps list is unexpectedly small ({items.Count} entries).");
+            }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Startup apps load failed: {ex.Message}");
+            LogMonitorError("Monitor: Startup apps load failed", ex);
+            await DispatchAsync(() =>
+            {
+                _startupAppsUpdatedAt = DateTime.UtcNow;
+                OnPropertyChanged(nameof(StartupAppsUpdatedText));
+                StatusMessage = $"Startup apps load failed: {ex.Message}";
+            }).ConfigureAwait(false);
         }
         finally
         {
@@ -806,7 +831,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             return;
         }
 
-        if (!force && Services.Count > 0)
+        if (!force && Services.Count >= 10 && _servicesUpdatedAt != DateTime.MinValue)
         {
             return;
         }
@@ -829,10 +854,27 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     UpdateServiceDetails();
                 }
             }).ConfigureAwait(false);
+
+            if (_lastServiceCount != items.Count)
+            {
+                _lastServiceCount = items.Count;
+                LogMonitorInfo($"Monitor: Services loaded ({items.Count} entries).");
+            }
+
+            if (items.Count < 10)
+            {
+                LogMonitorWarning($"Monitor: Services list is unexpectedly small ({items.Count} entries).");
+            }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Services load failed: {ex.Message}");
+            LogMonitorError("Monitor: Services load failed", ex);
+            await DispatchAsync(() =>
+            {
+                _servicesUpdatedAt = DateTime.UtcNow;
+                OnPropertyChanged(nameof(ServicesUpdatedText));
+                StatusMessage = $"Services load failed: {ex.Message}";
+            }).ConfigureAwait(false);
         }
         finally
         {
@@ -845,15 +887,24 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var items = new List<StartupAppEntry>();
         var hkcuRunApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
         var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
+        var hkcuRun32Approval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
+        var hklmRun32Approval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
         var hkcuFolderApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
         var hklmFolderApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
 
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRunApproval);
+        AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Registry32, "Current User", "Registry Run (32-bit)",
+            @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRun32Approval.Count > 0 ? hkcuRun32Approval : hkcuRunApproval);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
-            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
+            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRun32Approval.Count > 0 ? hklmRun32Approval : hklmRunApproval);
+
+        AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry RunOnce",
+            @"Software\Microsoft\Windows\CurrentVersion\RunOnce", new Dictionary<string, bool?>());
+        AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry RunOnce",
+            @"Software\Microsoft\Windows\CurrentVersion\RunOnce", new Dictionary<string, bool?>());
 
         AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder",
             RegistryHive.CurrentUser, RegistryView.Default,
@@ -1096,20 +1147,17 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
             using var servicesKey = baseKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Services");
-            if (servicesKey == null)
+            if (servicesKey != null)
             {
-                return results;
-            }
-
-            foreach (var serviceName in servicesKey.GetSubKeyNames())
-            {
-                try
+                foreach (var serviceName in servicesKey.GetSubKeyNames())
                 {
-                    using var serviceKey = servicesKey.OpenSubKey(serviceName);
-                    if (serviceKey == null)
+                    try
                     {
-                        continue;
-                    }
+                        using var serviceKey = servicesKey.OpenSubKey(serviceName);
+                        if (serviceKey == null)
+                        {
+                            continue;
+                        }
 
                     var displayName = serviceKey.GetValue("DisplayName") as string ?? serviceName;
                     var description = serviceKey.GetValue("Description") as string ?? string.Empty;
@@ -1148,10 +1196,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                         servicesKey.Name + "\\" + serviceName,
                         isDriver,
                         docsLink));
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Service read failed for {serviceName}: {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Service read failed for {serviceName}: {ex.Message}");
+                    }
                 }
             }
         }
@@ -1160,9 +1209,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             Debug.WriteLine($"Services registry read failed: {ex.Message}");
         }
 
+        var known = new HashSet<string>(results.Select(entry => entry.Name), StringComparer.OrdinalIgnoreCase);
+
         if (results.Count < 10)
         {
-            AddFallbackServices(results, statusLookup, startModeLookup);
+            AddFallbackServices(results, known, statusLookup, startModeLookup);
+        }
+
+        if (results.Count < 10)
+        {
+            AddFallbackServicesFromWmi(results, known, statusLookup, startModeLookup);
         }
 
         return results
@@ -1173,11 +1229,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private static void AddFallbackServices(
         List<ServiceEntry> results,
+        HashSet<string> known,
         IReadOnlyDictionary<string, string> statusLookup,
         IReadOnlyDictionary<string, CoreServiceStartMode> startModeLookup)
     {
-        var known = new HashSet<string>(results.Select(entry => entry.Name), StringComparer.OrdinalIgnoreCase);
-
         try
         {
             using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Default);
@@ -1196,6 +1251,110 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         catch (Exception ex)
         {
             Debug.WriteLine($"Service fallback failed: {ex.Message}");
+        }
+    }
+
+    private static void AddFallbackServicesFromWmi(
+        List<ServiceEntry> results,
+        HashSet<string> known,
+        IReadOnlyDictionary<string, string> statusLookup,
+        IReadOnlyDictionary<string, CoreServiceStartMode> startModeLookup)
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT Name, DisplayName, Description, State, StartMode, PathName, StartName, ServiceType FROM Win32_Service");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString();
+                if (string.IsNullOrWhiteSpace(name) || !known.Add(name))
+                {
+                    continue;
+                }
+
+                var displayName = obj["DisplayName"]?.ToString() ?? name;
+                var description = obj["Description"]?.ToString() ?? string.Empty;
+                var state = obj["State"]?.ToString() ?? string.Empty;
+                var startModeText = obj["StartMode"]?.ToString();
+                var startMode = ParseWmiStartMode(startModeText, startModeLookup, name);
+                var startType = DescribeStartType(startMode, null);
+                var serviceType = obj["ServiceType"]?.ToString() ?? "Service";
+                var account = obj["StartName"]?.ToString() ?? string.Empty;
+                var binaryPath = obj["PathName"]?.ToString() ?? string.Empty;
+                var statusText = !string.IsNullOrWhiteSpace(state)
+                    ? state
+                    : statusLookup.TryGetValue(name, out var status)
+                        ? status
+                        : "Unknown";
+                var docsLink = ResolveServiceDocsLink(name);
+
+                results.Add(new ServiceEntry(
+                    name,
+                    displayName,
+                    description,
+                    serviceType,
+                    startMode,
+                    startType,
+                    statusText,
+                    account,
+                    string.Empty,
+                    binaryPath,
+                    string.Empty,
+                    false,
+                    docsLink));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Service WMI fallback failed: {ex.Message}");
+        }
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT Name, DisplayName, Description, State, StartMode, PathName, ServiceType FROM Win32_SystemDriver");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString();
+                if (string.IsNullOrWhiteSpace(name) || !known.Add(name))
+                {
+                    continue;
+                }
+
+                var displayName = obj["DisplayName"]?.ToString() ?? name;
+                var description = obj["Description"]?.ToString() ?? string.Empty;
+                var state = obj["State"]?.ToString() ?? string.Empty;
+                var startModeText = obj["StartMode"]?.ToString();
+                var startMode = ParseWmiStartMode(startModeText, startModeLookup, name);
+                var startType = DescribeStartType(startMode, null);
+                var serviceType = obj["ServiceType"]?.ToString() ?? "Driver";
+                var binaryPath = obj["PathName"]?.ToString() ?? string.Empty;
+                var statusText = !string.IsNullOrWhiteSpace(state)
+                    ? state
+                    : statusLookup.TryGetValue(name, out var status)
+                        ? status
+                        : "Unknown";
+                var docsLink = ResolveServiceDocsLink(name);
+
+                results.Add(new ServiceEntry(
+                    name,
+                    displayName,
+                    description,
+                    serviceType,
+                    startMode,
+                    startType,
+                    statusText,
+                    string.Empty,
+                    string.Empty,
+                    binaryPath,
+                    string.Empty,
+                    true,
+                    docsLink));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Driver WMI fallback failed: {ex.Message}");
         }
     }
 
@@ -1389,6 +1548,34 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             System.ServiceProcess.ServiceStartMode.Disabled => CoreServiceStartMode.Disabled,
             _ => CoreServiceStartMode.Unknown
         };
+    }
+
+    private static CoreServiceStartMode ParseWmiStartMode(
+        string? startMode,
+        IReadOnlyDictionary<string, CoreServiceStartMode> startLookup,
+        string serviceName)
+    {
+        if (!string.IsNullOrWhiteSpace(startMode))
+        {
+            switch (startMode.Trim())
+            {
+                case "Boot":
+                    return CoreServiceStartMode.Boot;
+                case "System":
+                    return CoreServiceStartMode.System;
+                case "Auto":
+                case "Automatic":
+                    return CoreServiceStartMode.Automatic;
+                case "Manual":
+                    return CoreServiceStartMode.Manual;
+                case "Disabled":
+                    return CoreServiceStartMode.Disabled;
+            }
+        }
+
+        return startLookup.TryGetValue(serviceName, out var fallback)
+            ? fallback
+            : CoreServiceStartMode.Unknown;
     }
 
     private static CoreServiceStartMode ResolveStartMode(int? startValue, IReadOnlyDictionary<string, CoreServiceStartMode> startLookup, string serviceName)
@@ -2789,6 +2976,24 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         return "N/A";
     }
 
+    private void LogMonitorInfo(string message)
+    {
+        _appLogger.Log(LogLevel.Info, message);
+        LogToFile(message);
+    }
+
+    private void LogMonitorWarning(string message)
+    {
+        _appLogger.Log(LogLevel.Warning, message);
+        LogToFile(message);
+    }
+
+    private void LogMonitorError(string message, Exception ex)
+    {
+        _appLogger.Log(LogLevel.Error, message, ex);
+        LogToFile($"{message} | {ex.GetType().Name}: {ex.Message}");
+    }
+
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
     {
         using var _ = CollectionViewSource.GetDefaultView(collection).DeferRefresh();
@@ -2930,8 +3135,50 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             var snapshot = await Task.Run(() =>
             {
-                var adapters = _networkMonitor?.GetActiveAdapters() ?? new List<NetworkAdapterInfo>();
-                var disks = _diskMonitor?.GetDiskActivity() ?? new List<DiskInfo>();
+                var adapters = new List<NetworkAdapterInfo>();
+                if (_networkMonitor != null)
+                {
+                    try
+                    {
+                        adapters = _networkMonitor.GetActiveAdapters();
+                    }
+                    catch (Exception ex)
+                    {
+                        LogMonitorWarning($"Monitor: Network adapter sampling failed: {ex.Message}");
+                    }
+                }
+
+                if (adapters.Count == 0)
+                {
+                    adapters = BuildFallbackNetworkAdapters();
+                    if (adapters.Count > 0)
+                    {
+                        LogMonitorWarning($"Monitor: Network adapters fallback used ({adapters.Count} entries).");
+                    }
+                }
+
+                var disks = new List<DiskInfo>();
+                if (_diskMonitor != null)
+                {
+                    try
+                    {
+                        disks = _diskMonitor.GetDiskActivity();
+                    }
+                    catch (Exception ex)
+                    {
+                        LogMonitorWarning($"Monitor: Disk activity sampling failed: {ex.Message}");
+                    }
+                }
+
+                if (disks.Count == 0)
+                {
+                    disks = BuildFallbackDisks();
+                    if (disks.Count > 0)
+                    {
+                        LogMonitorWarning($"Monitor: Disk activity fallback used ({disks.Count} drives).");
+                    }
+                }
+
                 return new IoMetricsSnapshot(adapters, disks);
             }).ConfigureAwait(false);
 
@@ -2956,6 +3203,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     OnPropertyChanged(nameof(NetworkIoScaleMid));
 
                     UpdateCollection(NetworkAdapters, networkAdapters);
+                    if (_lastNetworkAdapterCount != networkAdapters.Count)
+                    {
+                        _lastNetworkAdapterCount = networkAdapters.Count;
+                        LogMonitorInfo($"Monitor: Network adapters updated ({networkAdapters.Count} entries).");
+                    }
 
                     var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                     foreach (var adapter in networkAdapters)
@@ -2990,6 +3242,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     OnPropertyChanged(nameof(DiskIoScaleMid));
 
                     UpdateCollection(Disks, disks);
+                    if (_lastDiskCount != disks.Count)
+                    {
+                        _lastDiskCount = disks.Count;
+                        LogMonitorInfo($"Monitor: Disk activity updated ({disks.Count} drives).");
+                    }
 
                     var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                     foreach (var disk in disks)
@@ -3034,19 +3291,80 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             if (_processMonitor == null)
             {
+                var fallbackSnapshot = BuildFallbackProcessSnapshot();
+                await DispatchAsync(() =>
+                {
+                    UpdateCollection(TopProcessesByCpu, fallbackSnapshot.TopCpu);
+                    UpdateCollection(TopProcessesByRam, fallbackSnapshot.TopRam);
+                    UpdateCollection(TopProcessesByNetwork, fallbackSnapshot.TopNetwork);
+                    UpdateCollection(TopProcessesByDisk, fallbackSnapshot.TopDisk);
+                    UpdateNetworkProcessMode(fallbackSnapshot.NetworkMode);
+                }).ConfigureAwait(false);
                 return;
             }
 
             var snapshot = await Task.Run(() =>
             {
-                var topCpu = _processMonitor.GetTopProcessesByCpu(10);
-                var topRam = _processMonitor.GetTopProcessesByRam(10);
-                var topNetwork = _processMonitor.GetTopProcessesByNetwork(10);
-                var topDisk = _processMonitor.GetTopProcessesByDisk(10);
-                var mode = _processMonitor.NetworkMode;
+                List<ProcessInfo> topCpu;
+                List<ProcessInfo> topRam;
+                List<ProcessInfo> topNetwork;
+                List<ProcessInfo> topDisk;
+                ProcessMonitor.NetworkProcessMode mode;
+
+                try
+                {
+                    topCpu = _processMonitor.GetTopProcessesByCpu(10);
+                }
+                catch (Exception ex)
+                {
+                    LogMonitorWarning($"Monitor: CPU process sampling failed: {ex.Message}");
+                    topCpu = new List<ProcessInfo>();
+                }
+
+                try
+                {
+                    topRam = _processMonitor.GetTopProcessesByRam(10);
+                }
+                catch (Exception ex)
+                {
+                    LogMonitorWarning($"Monitor: RAM process sampling failed: {ex.Message}");
+                    topRam = new List<ProcessInfo>();
+                }
+
+                try
+                {
+                    topNetwork = _processMonitor.GetTopProcessesByNetwork(10);
+                }
+                catch (Exception ex)
+                {
+                    LogMonitorWarning($"Monitor: Network process sampling failed: {ex.Message}");
+                    topNetwork = new List<ProcessInfo>();
+                }
+
+                try
+                {
+                    topDisk = _processMonitor.GetTopProcessesByDisk(10);
+                }
+                catch (Exception ex)
+                {
+                    LogMonitorWarning($"Monitor: Disk process sampling failed: {ex.Message}");
+                    topDisk = new List<ProcessInfo>();
+                }
+
+                mode = _processMonitor.NetworkMode;
                 _processMonitor.Cleanup();
                 return new ProcessMetricsSnapshot(topCpu, topRam, topNetwork, topDisk, mode);
             }).ConfigureAwait(false);
+
+            if (snapshot.TopCpu.Count < 3 && snapshot.TopRam.Count < 3)
+            {
+                var fallbackSnapshot = BuildFallbackProcessSnapshot();
+                if (fallbackSnapshot.TopCpu.Count > snapshot.TopCpu.Count)
+                {
+                    snapshot = fallbackSnapshot;
+                    LogMonitorWarning("Monitor: Process fallback snapshot used (insufficient data).");
+                }
+            }
 
             await DispatchAsync(() =>
             {
@@ -3055,6 +3373,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 UpdateCollection(TopProcessesByNetwork, snapshot.TopNetwork);
                 UpdateCollection(TopProcessesByDisk, snapshot.TopDisk);
                 UpdateNetworkProcessMode(snapshot.NetworkMode);
+
+                var maxCount = Math.Max(
+                    Math.Max(snapshot.TopCpu.Count, snapshot.TopRam.Count),
+                    Math.Max(snapshot.TopNetwork.Count, snapshot.TopDisk.Count));
+                if (_lastProcessCount != maxCount)
+                {
+                    _lastProcessCount = maxCount;
+                    LogMonitorInfo($"Monitor: Processes updated (top lists {snapshot.TopCpu.Count}/{snapshot.TopRam.Count}/{snapshot.TopNetwork.Count}/{snapshot.TopDisk.Count}).");
+                }
             }).ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -3065,6 +3392,275 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             _isProcessSampleInProgress = false;
         }
+    }
+
+    private ProcessMetricsSnapshot BuildFallbackProcessSnapshot()
+    {
+        var processes = new List<ProcessInfo>();
+        var now = DateTime.UtcNow;
+
+        foreach (var process in Process.GetProcesses())
+        {
+            if (!TryGetFallbackProcessBasics(process, out var name, out var pid))
+            {
+                continue;
+            }
+
+            var cpuPercent = CalculateFallbackCpuUsage(process, pid, now);
+            processes.Add(new ProcessInfo
+            {
+                Name = name,
+                Pid = pid,
+                CpuPercent = cpuPercent,
+                RamMb = SafeGetWorkingSetMb(process),
+                Threads = SafeGetThreadCount(process),
+                Handles = SafeGetHandleCount(process),
+                IoMbps = 0,
+                DiskMBps = 0
+            });
+        }
+
+        var activePids = processes.Select(p => p.Pid).ToHashSet();
+        foreach (var pid in _fallbackCpuUsage.Keys.Where(pid => !activePids.Contains(pid)).ToList())
+        {
+            _fallbackCpuUsage.Remove(pid);
+        }
+
+        return new ProcessMetricsSnapshot(
+            processes.OrderByDescending(p => p.CpuPercent).Take(10).ToList(),
+            processes.OrderByDescending(p => p.RamMb).Take(10).ToList(),
+            processes.OrderByDescending(p => p.IoMbps).Take(10).ToList(),
+            processes.OrderByDescending(p => p.DiskMBps).Take(10).ToList(),
+            ProcessMonitor.NetworkProcessMode.ApproximateIo);
+    }
+
+    private static bool TryGetFallbackProcessBasics(Process process, out string name, out int pid)
+    {
+        name = string.Empty;
+        pid = 0;
+        try
+        {
+            pid = process.Id;
+            name = process.ProcessName;
+            return !string.IsNullOrWhiteSpace(name);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private double CalculateFallbackCpuUsage(Process process, int pid, DateTime now)
+    {
+        try
+        {
+            var totalTime = process.TotalProcessorTime;
+            if (_fallbackCpuUsage.TryGetValue(pid, out var previous))
+            {
+                var timeDiff = (now - previous.Time).TotalMilliseconds;
+                var cpuDiff = (totalTime - previous.TotalProcessorTime).TotalMilliseconds;
+                _fallbackCpuUsage[pid] = (now, totalTime);
+                if (timeDiff > 0)
+                {
+                    var cpuUsage = (cpuDiff / (timeDiff * Environment.ProcessorCount)) * 100.0;
+                    return Math.Min(cpuUsage, 100.0);
+                }
+
+                return 0;
+            }
+
+            _fallbackCpuUsage[pid] = (now, totalTime);
+        }
+        catch
+        {
+        }
+
+        return 0;
+    }
+
+    private static double SafeGetWorkingSetMb(Process process)
+    {
+        try
+        {
+            return process.WorkingSet64 / (1024.0 * 1024.0);
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private static int SafeGetThreadCount(Process process)
+    {
+        try
+        {
+            return process.Threads.Count;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private static int SafeGetHandleCount(Process process)
+    {
+        try
+        {
+            return process.HandleCount;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private List<NetworkAdapterInfo> BuildFallbackNetworkAdapters()
+    {
+        var adapters = new List<NetworkAdapterInfo>();
+        var now = DateTime.UtcNow;
+
+        try
+        {
+            foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                var adapterId = nic.Id;
+                var adapterName = nic.Name;
+                var (totalSent, totalReceived) = GetTotalsSafe(nic);
+                var (sendMbps, receiveMbps) = ComputeFallbackNetworkRates(adapterId, totalSent, totalReceived, now);
+                var (ipv4, ipv6) = TryGetIpAddressesSafe(nic);
+                var linkSpeedMbps = nic.Speed > 0 ? nic.Speed / (1000d * 1000d) : 0;
+
+                adapters.Add(new NetworkAdapterInfo
+                {
+                    AdapterId = adapterId,
+                    Name = adapterName,
+                    Description = nic.Description,
+                    Type = nic.NetworkInterfaceType.ToString(),
+                    LinkSpeedMbps = linkSpeedMbps,
+                    Ipv4Address = ipv4,
+                    Ipv6Address = ipv6,
+                    SendBytesPerSec = sendMbps * 1024 * 1024 / 8,
+                    ReceiveBytesPerSec = receiveMbps * 1024 * 1024 / 8,
+                    TotalBytesSent = totalSent,
+                    TotalBytesReceived = totalReceived
+                });
+            }
+        }
+        catch
+        {
+            return adapters;
+        }
+
+        var activeIds = adapters.Select(a => a.AdapterId).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var id in _fallbackNetworkSamples.Keys.Where(id => !activeIds.Contains(id)).ToList())
+        {
+            _fallbackNetworkSamples.Remove(id);
+        }
+
+        return adapters;
+    }
+
+    private static (long Sent, long Received) GetTotalsSafe(NetworkInterface nic)
+    {
+        try
+        {
+            var stats = nic.GetIPStatistics();
+            return (stats.BytesSent, stats.BytesReceived);
+        }
+        catch
+        {
+            try
+            {
+                var stats = nic.GetIPv4Statistics();
+                return (stats.BytesSent, stats.BytesReceived);
+            }
+            catch
+            {
+                return (0, 0);
+            }
+        }
+    }
+
+    private (double SendMbps, double ReceiveMbps) ComputeFallbackNetworkRates(
+        string adapterId,
+        long sentBytes,
+        long receivedBytes,
+        DateTime now)
+    {
+        if (_fallbackNetworkSamples.TryGetValue(adapterId, out var previous))
+        {
+            var seconds = (now - previous.Time).TotalSeconds;
+            var deltaSent = sentBytes >= previous.Sent ? sentBytes - previous.Sent : 0;
+            var deltaRecv = receivedBytes >= previous.Received ? receivedBytes - previous.Received : 0;
+            _fallbackNetworkSamples[adapterId] = (sentBytes, receivedBytes, now);
+
+            if (seconds > 0)
+            {
+                var sendMbps = (deltaSent * 8.0) / (seconds * 1024 * 1024);
+                var recvMbps = (deltaRecv * 8.0) / (seconds * 1024 * 1024);
+                return (sendMbps, recvMbps);
+            }
+
+            return (0, 0);
+        }
+
+        _fallbackNetworkSamples[adapterId] = (sentBytes, receivedBytes, now);
+        return (0, 0);
+    }
+
+    private static (string Ipv4, string Ipv6) TryGetIpAddressesSafe(NetworkInterface nic)
+    {
+        try
+        {
+            var props = nic.GetIPProperties();
+            var ipv4 = props.UnicastAddresses
+                .FirstOrDefault(addr => addr.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                ?.Address.ToString() ?? string.Empty;
+            var ipv6 = props.UnicastAddresses
+                .FirstOrDefault(addr => addr.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                ?.Address.ToString() ?? string.Empty;
+            return (ipv4, ipv6);
+        }
+        catch
+        {
+            return (string.Empty, string.Empty);
+        }
+    }
+
+    private static List<DiskInfo> BuildFallbackDisks()
+    {
+        var disks = new List<DiskInfo>();
+        try
+        {
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+                if (!drive.IsReady)
+                {
+                    continue;
+                }
+
+                if (drive.DriveType == DriveType.CDRom || drive.DriveType == DriveType.NoRootDirectory)
+                {
+                    continue;
+                }
+
+                var driveName = drive.Name.TrimEnd('\\');
+                disks.Add(new DiskInfo
+                {
+                    DriveLetter = driveName,
+                    TotalSizeGb = drive.TotalSize / (1024.0 * 1024 * 1024),
+                    FreeSpaceGb = drive.AvailableFreeSpace / (1024.0 * 1024 * 1024),
+                    ReadBytesPerSec = 0,
+                    WriteBytesPerSec = 0
+                });
+            }
+        }
+        catch
+        {
+            return disks;
+        }
+
+        return disks;
     }
 
     private async Task SampleAuxMetricsAsync()
