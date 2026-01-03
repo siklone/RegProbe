@@ -1086,7 +1086,7 @@
                                             </Border.Style>
                                             <TextBlock Text="📚" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
-                                        <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource TweakStatValueStyle}">
+                                        <TextBlock Text="{Binding DocsMissingCount}">
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock" BasedOn="{StaticResource TweakStatValueStyle}">
                                                     <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
