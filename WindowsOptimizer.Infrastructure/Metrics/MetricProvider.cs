@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
-using Microsoft.Win32;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Runtime.Versioning;
@@ -2267,7 +2266,7 @@ public sealed class MetricProvider : IDisposable
     {
         try
         {
-            using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DirectX");
+            using var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DirectX");
             return key?.GetValue("Version")?.ToString();
         }
         catch
