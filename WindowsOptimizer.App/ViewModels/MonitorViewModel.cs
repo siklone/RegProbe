@@ -10,10 +10,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using WindowsOptimizer.Core.Registry;
 using System.ServiceProcess;
+using CoreServiceStartMode = WindowsOptimizer.Core.Services.ServiceStartMode;
+using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.App.Utilities;
@@ -110,15 +114,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _refreshStartupAppsCommand;
     private readonly RelayCommand _refreshServicesCommand;
     private readonly RelayCommand _openServiceDocsCommand;
+    private readonly RelayCommand _toggleStartupAppCommand;
+    private readonly RelayCommand _enableServiceCommand;
+    private readonly RelayCommand _disableServiceCommand;
 
     private MonitorTabItem? _selectedTab;
     private ProcessCategoryItem? _selectedProcessCategory;
     private bool _isStartupAppsLoading;
     private bool _isServicesLoading;
+    private bool _isStartupActionInProgress;
+    private bool _isServiceActionInProgress;
     private DateTime _startupAppsUpdatedAt;
     private DateTime _servicesUpdatedAt;
     private StartupAppEntry? _selectedStartupApp;
     private ServiceEntry? _selectedService;
+    private readonly string _elevatedHostExecutablePath;
+    private readonly bool _isElevatedHostAvailable;
+    private ElevatedHostClient? _elevatedHostClient;
+    private ElevatedRegistryAccessor? _elevatedRegistryAccessor;
+    private ElevatedServiceManager? _elevatedServiceManager;
 
     public MonitorViewModel()
     {
@@ -127,6 +141,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         try
         {
+            _elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
+            _isElevatedHostAvailable = File.Exists(_elevatedHostExecutablePath);
+
             _toggleLayoutEditorCommand = new RelayCommand(_ => IsLayoutEditorVisible = !IsLayoutEditorVisible);
             _moveSectionUpCommand = new RelayCommand(param => MoveSection(param, -1), param => CanMoveSection(param, -1));
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
@@ -252,6 +269,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _refreshStartupAppsCommand = new RelayCommand(_ => _ = LoadStartupAppsAsync(true));
             _refreshServicesCommand = new RelayCommand(_ => _ = LoadServicesAsync(true));
             _openServiceDocsCommand = new RelayCommand(param => OpenServiceDocs(param as ServiceEntry));
+            _toggleStartupAppCommand = new RelayCommand(param => _ = ToggleStartupAppAsync(param as StartupAppEntry),
+                param => CanToggleStartupApp(param as StartupAppEntry));
+            _enableServiceCommand = new RelayCommand(_ => _ = SetServiceStartModeAsync(SelectedService, CoreServiceStartMode.Manual),
+                _ => CanEnableSelectedService);
+            _disableServiceCommand = new RelayCommand(_ => _ = SetServiceStartModeAsync(SelectedService, CoreServiceStartMode.Disabled),
+                _ => CanDisableSelectedService);
 
             // Get initial total RAM and system info (with error handling)
             try
@@ -831,8 +854,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
             @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
 
-        AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder", hkcuFolderApproval);
-        AddStartupFolderEntries(items, Environment.SpecialFolder.CommonStartup, "All Users", "Startup Folder", hklmFolderApproval);
+        AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder",
+            RegistryHive.CurrentUser, RegistryView.Default,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
+            hkcuFolderApproval);
+        AddStartupFolderEntries(items, Environment.SpecialFolder.CommonStartup, "All Users", "Startup Folder",
+            RegistryHive.LocalMachine, RegistryView.Registry64,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
+            hklmFolderApproval);
 
         return items
             .OrderBy(item => item.Scope)
@@ -878,7 +907,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     scope,
                     source,
                     enabled,
-                    executablePath));
+                    executablePath,
+                    hive,
+                    view,
+                    @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
+                    valueName));
             }
         }
         catch (Exception ex)
@@ -892,6 +925,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         Environment.SpecialFolder folder,
         string scope,
         string source,
+        RegistryHive hive,
+        RegistryView view,
+        string approvalKeyPath,
         IReadOnlyDictionary<string, bool?> approvals)
     {
         try
@@ -915,7 +951,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     scope,
                     source,
                     enabled,
-                    path));
+                    path,
+                    hive,
+                    view,
+                    approvalKeyPath,
+                    name));
             }
         }
         catch (Exception ex)
@@ -989,7 +1029,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         var results = new List<ServiceEntry>();
         var statusLookup = BuildServiceStatusLookup();
-        var startTypeLookup = BuildServiceStartTypeLookup();
+        var startModeLookup = BuildServiceStartModeLookup();
 
         try
         {
@@ -1024,7 +1064,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 }
 
                 var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
-                var startType = DescribeStartType(startValue, delayedAuto, startTypeLookup, serviceName);
+                var startMode = ResolveStartMode(startValue, startModeLookup, serviceName);
+                var startType = DescribeStartType(startMode, delayedAuto);
                 var serviceType = DescribeServiceType(typeValue);
                 var isDriver = IsDriverType(typeValue);
                 var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
@@ -1035,6 +1076,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     displayName,
                     description,
                     serviceType,
+                    startMode,
                     startType,
                     statusText,
                     objectName,
@@ -1103,16 +1145,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private static Dictionary<string, string> BuildServiceStartTypeLookup()
+    private static Dictionary<string, CoreServiceStartMode> BuildServiceStartModeLookup()
     {
-        var lookup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        var lookup = new Dictionary<string, CoreServiceStartMode>(StringComparer.OrdinalIgnoreCase);
         try
         {
             foreach (var service in ServiceController.GetServices())
             {
                 try
                 {
-                    lookup[service.ServiceName] = DescribeServiceStartMode(service.StartType);
+                    lookup[service.ServiceName] = MapServiceStartMode(service.StartType);
                 }
                 catch
                 {
@@ -1128,47 +1170,60 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         return lookup;
     }
 
-    private static string DescribeServiceStartMode(ServiceStartMode startMode)
+    private static CoreServiceStartMode MapServiceStartMode(System.ServiceProcess.ServiceStartMode startMode)
     {
         return startMode switch
         {
-            ServiceStartMode.Boot => "Boot",
-            ServiceStartMode.System => "System",
-            ServiceStartMode.Automatic => "Automatic",
-            ServiceStartMode.Manual => "Manual",
-            ServiceStartMode.Disabled => "Disabled",
-            _ => "Unknown"
+            System.ServiceProcess.ServiceStartMode.Boot => CoreServiceStartMode.Boot,
+            System.ServiceProcess.ServiceStartMode.System => CoreServiceStartMode.System,
+            System.ServiceProcess.ServiceStartMode.Automatic => CoreServiceStartMode.Automatic,
+            System.ServiceProcess.ServiceStartMode.Manual => CoreServiceStartMode.Manual,
+            System.ServiceProcess.ServiceStartMode.Disabled => CoreServiceStartMode.Disabled,
+            _ => CoreServiceStartMode.Unknown
         };
     }
 
-    private static string DescribeStartType(int? startValue, int? delayedAuto, IReadOnlyDictionary<string, string> startLookup, string serviceName)
+    private static CoreServiceStartMode ResolveStartMode(int? startValue, IReadOnlyDictionary<string, CoreServiceStartMode> startLookup, string serviceName)
     {
         if (startValue.HasValue)
         {
-            var startType = startValue switch
+            var mapped = startValue.Value switch
             {
-                0 => "Boot",
-                1 => "System",
-                2 => "Automatic",
-                3 => "Manual",
-                4 => "Disabled",
-                _ => "Unknown"
+                0 => CoreServiceStartMode.Boot,
+                1 => CoreServiceStartMode.System,
+                2 => CoreServiceStartMode.Automatic,
+                3 => CoreServiceStartMode.Manual,
+                4 => CoreServiceStartMode.Disabled,
+                _ => CoreServiceStartMode.Unknown
             };
 
-            if (startValue == 2 && delayedAuto.GetValueOrDefault() == 1)
+            if (mapped != CoreServiceStartMode.Unknown)
             {
-                return "Automatic (Delayed)";
+                return mapped;
             }
-
-            return startType;
         }
 
-        if (startLookup.TryGetValue(serviceName, out var fallback))
+        return startLookup.TryGetValue(serviceName, out var fallback)
+            ? fallback
+            : CoreServiceStartMode.Unknown;
+    }
+
+    private static string DescribeStartType(CoreServiceStartMode startMode, int? delayedAuto)
+    {
+        if (startMode == CoreServiceStartMode.Automatic && delayedAuto.GetValueOrDefault() == 1)
         {
-            return fallback;
+            return "Automatic (Delayed)";
         }
 
-        return "Unknown";
+        return startMode switch
+        {
+            CoreServiceStartMode.Boot => "Boot",
+            CoreServiceStartMode.System => "System",
+            CoreServiceStartMode.Automatic => "Automatic",
+            CoreServiceStartMode.Manual => "Manual",
+            CoreServiceStartMode.Disabled => "Disabled",
+            _ => "Unknown"
+        };
     }
 
     private static string DescribeServiceType(int? typeValue)
@@ -1261,6 +1316,241 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private async Task ToggleStartupAppAsync(StartupAppEntry? entry)
+    {
+        if (entry == null || !entry.CanToggle || IsStartupActionInProgress)
+        {
+            return;
+        }
+
+        var desiredEnabled = !entry.IsEnabled;
+        var actionText = desiredEnabled ? "Enable Startup App" : "Disable Startup App";
+        var warningText = desiredEnabled
+            ? $"Enable '{entry.Name}' at startup? This will allow it to run when Windows starts."
+            : $"Disable '{entry.Name}' from startup? This can prevent the app or driver from launching automatically.";
+
+        if (!ConfirmAction(actionText, warningText))
+        {
+            return;
+        }
+
+        IsStartupActionInProgress = true;
+        try
+        {
+            await SetStartupApprovedAsync(entry, desiredEnabled).ConfigureAwait(false);
+            _appLogger.Log(LogLevel.Info, $"{actionText}: {entry.Name}");
+            await LoadStartupAppsAsync(true).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            _appLogger.Log(LogLevel.Error, $"{actionText} failed for {entry.Name}", ex);
+            MessageBox.Show($"Failed to update startup entry.\n{ex.Message}", "Startup Apps", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            IsStartupActionInProgress = false;
+        }
+    }
+
+    private bool CanToggleStartupApp(StartupAppEntry? entry)
+    {
+        if (entry is null || !entry.CanToggle || IsStartupActionInProgress)
+        {
+            return false;
+        }
+
+        if (entry.ApprovalHive == RegistryHive.LocalMachine && !_isElevatedHostAvailable)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private async Task SetServiceStartModeAsync(ServiceEntry? entry, CoreServiceStartMode startMode)
+    {
+        if (entry == null || IsServiceActionInProgress)
+        {
+            return;
+        }
+
+        var actionText = startMode == CoreServiceStartMode.Disabled ? "Disable Service" : "Enable Service";
+        var warningText = startMode == CoreServiceStartMode.Disabled
+            ? $"Disable '{entry.DisplayName}'? This can affect Windows or installed apps."
+            : $"Enable '{entry.DisplayName}' (Manual start)? This allows the service to run when required.";
+
+        if (!ConfirmAction(actionText, warningText))
+        {
+            return;
+        }
+
+        var manager = EnsureElevatedServiceManager();
+        if (manager == null)
+        {
+            MessageBox.Show("ElevatedHost is not available. Build WindowsOptimizer.ElevatedHost first.", "Services", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        IsServiceActionInProgress = true;
+        try
+        {
+            await manager.SetStartModeAsync(entry.Name, startMode, CancellationToken.None).ConfigureAwait(false);
+            _appLogger.Log(LogLevel.Info, $"{actionText}: {entry.Name} -> {startMode}");
+            await LoadServicesAsync(true).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            _appLogger.Log(LogLevel.Error, $"{actionText} failed for {entry.Name}", ex);
+            MessageBox.Show($"Failed to update service start mode.\n{ex.Message}", "Services", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            IsServiceActionInProgress = false;
+        }
+    }
+
+    private ElevatedHostClient? EnsureElevatedHostClient()
+    {
+        if (!_isElevatedHostAvailable)
+        {
+            return null;
+        }
+
+        if (_elevatedHostClient != null)
+        {
+            return _elevatedHostClient;
+        }
+
+        _elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
+        {
+            HostExecutablePath = _elevatedHostExecutablePath,
+            PipeName = ElevatedHostDefaults.PipeName,
+            ParentProcessId = Process.GetCurrentProcess().Id
+        });
+
+        return _elevatedHostClient;
+    }
+
+    private ElevatedRegistryAccessor? EnsureElevatedRegistryAccessor()
+    {
+        if (_elevatedRegistryAccessor != null)
+        {
+            return _elevatedRegistryAccessor;
+        }
+
+        var client = EnsureElevatedHostClient();
+        if (client == null)
+        {
+            return null;
+        }
+
+        _elevatedRegistryAccessor = new ElevatedRegistryAccessor(client);
+        return _elevatedRegistryAccessor;
+    }
+
+    private ElevatedServiceManager? EnsureElevatedServiceManager()
+    {
+        if (_elevatedServiceManager != null)
+        {
+            return _elevatedServiceManager;
+        }
+
+        var client = EnsureElevatedHostClient();
+        if (client == null)
+        {
+            return null;
+        }
+
+        _elevatedServiceManager = new ElevatedServiceManager(client);
+        return _elevatedServiceManager;
+    }
+
+    private async Task SetStartupApprovedAsync(StartupAppEntry entry, bool enabled)
+    {
+        if (entry.ApprovalHive == null || string.IsNullOrWhiteSpace(entry.ApprovalKeyPath))
+        {
+            throw new InvalidOperationException("Startup entry does not expose approval metadata.");
+        }
+
+        var data = await ReadStartupApprovalValueAsync(entry).ConfigureAwait(false);
+        var updated = BuildStartupApprovalValue(enabled, data);
+
+        if (entry.ApprovalHive == RegistryHive.LocalMachine)
+        {
+            var accessor = EnsureElevatedRegistryAccessor();
+            if (accessor == null)
+            {
+                throw new InvalidOperationException("ElevatedHost is not available.");
+            }
+
+            var reference = new RegistryValueReference(
+                entry.ApprovalHive.Value,
+                entry.ApprovalView,
+                entry.ApprovalKeyPath,
+                entry.ApprovalValueName);
+            var value = RegistryValueData.FromObject(RegistryValueKind.Binary, updated);
+            await accessor.SetValueAsync(reference, value, CancellationToken.None).ConfigureAwait(false);
+        }
+        else
+        {
+            await Task.Run(() =>
+            {
+                using var baseKey = RegistryKey.OpenBaseKey(entry.ApprovalHive.Value, entry.ApprovalView);
+                using var key = baseKey.CreateSubKey(entry.ApprovalKeyPath);
+                key?.SetValue(entry.ApprovalValueName, updated, RegistryValueKind.Binary);
+            }).ConfigureAwait(false);
+        }
+    }
+
+    private async Task<byte[]?> ReadStartupApprovalValueAsync(StartupAppEntry entry)
+    {
+        if (entry.ApprovalHive == null || string.IsNullOrWhiteSpace(entry.ApprovalKeyPath))
+        {
+            return null;
+        }
+
+        if (entry.ApprovalHive == RegistryHive.LocalMachine)
+        {
+            var accessor = EnsureElevatedRegistryAccessor();
+            if (accessor == null)
+            {
+                return null;
+            }
+
+            var reference = new RegistryValueReference(
+                entry.ApprovalHive.Value,
+                entry.ApprovalView,
+                entry.ApprovalKeyPath,
+                entry.ApprovalValueName);
+            var result = await accessor.ReadValueAsync(reference, CancellationToken.None).ConfigureAwait(false);
+            return result.Value?.BinaryValue;
+        }
+
+        return await Task.Run(() =>
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(entry.ApprovalHive.Value, entry.ApprovalView);
+            using var key = baseKey.OpenSubKey(entry.ApprovalKeyPath);
+            return key?.GetValue(entry.ApprovalValueName) as byte[];
+        }).ConfigureAwait(false);
+    }
+
+    private static byte[] BuildStartupApprovalValue(bool enabled, byte[]? existing)
+    {
+        var data = existing?.ToArray() ?? new byte[12];
+        if (data.Length == 0)
+        {
+            data = new byte[12];
+        }
+
+        data[0] = enabled ? (byte)0x03 : (byte)0x02;
+        return data;
+    }
+
+    private bool ConfirmAction(string title, string message)
+    {
+        return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
+    }
+
     public string Title => "Monitor";
 
     public ObservableCollection<MonitorSectionLayout> MonitorSections { get; } = new();
@@ -1316,6 +1606,48 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public bool IsStartupAppsTab => SelectedTab?.Tab == MonitorTab.StartupApps;
     public bool IsServicesTab => SelectedTab?.Tab == MonitorTab.Services;
 
+    public bool IsStartupActionInProgress
+    {
+        get => _isStartupActionInProgress;
+        private set
+        {
+            if (SetProperty(ref _isStartupActionInProgress, value))
+            {
+                _toggleStartupAppCommand?.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsServiceActionInProgress
+    {
+        get => _isServiceActionInProgress;
+        private set
+        {
+            if (SetProperty(ref _isServiceActionInProgress, value))
+            {
+                _enableServiceCommand?.RaiseCanExecuteChanged();
+                _disableServiceCommand?.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(CanEnableSelectedService));
+                OnPropertyChanged(nameof(CanDisableSelectedService));
+            }
+        }
+    }
+
+    public bool IsElevatedHostAvailable => _isElevatedHostAvailable;
+
+    public bool CanEnableSelectedService =>
+        SelectedService is not null &&
+        SelectedService.StartMode == CoreServiceStartMode.Disabled &&
+        !_isServiceActionInProgress &&
+        _isElevatedHostAvailable;
+
+    public bool CanDisableSelectedService =>
+        SelectedService is not null &&
+        SelectedService.StartMode != CoreServiceStartMode.Disabled &&
+        SelectedService.StartMode != CoreServiceStartMode.Unknown &&
+        !_isServiceActionInProgress &&
+        _isElevatedHostAvailable;
+
     public ProcessCategoryItem? SelectedProcessCategory
     {
         get => _selectedProcessCategory;
@@ -1332,6 +1664,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ICommand MoveSectionUpCommand => _moveSectionUpCommand;
     public ICommand MoveSectionDownCommand => _moveSectionDownCommand;
     public ICommand ResetLayoutCommand => _resetLayoutCommand;
+    public ICommand ToggleStartupAppCommand => _toggleStartupAppCommand;
+    public ICommand EnableServiceCommand => _enableServiceCommand;
+    public ICommand DisableServiceCommand => _disableServiceCommand;
     public string NetworkProcessTitle => _networkProcessMode switch
     {
         ProcessMonitor.NetworkProcessMode.TcpUdpEtw => "Top 10 Processes by Network",
@@ -1723,6 +2058,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             if (SetProperty(ref _selectedService, value))
             {
                 UpdateServiceDetails();
+                OnPropertyChanged(nameof(CanEnableSelectedService));
+                OnPropertyChanged(nameof(CanDisableSelectedService));
+                _enableServiceCommand?.RaiseCanExecuteChanged();
+                _disableServiceCommand?.RaiseCanExecuteChanged();
             }
         }
     }
@@ -2244,6 +2583,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
     {
+        using var _ = CollectionViewSource.GetDefaultView(collection).DeferRefresh();
+
         if (collection.Count == newItems.Count)
         {
             for (var i = 0; i < newItems.Count; i++)
@@ -2775,7 +3116,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             string scope,
             string source,
             bool isEnabled,
-            string executablePath)
+            string executablePath,
+            RegistryHive? approvalHive,
+            RegistryView approvalView,
+            string? approvalKeyPath,
+            string approvalValueName)
         {
             Name = name;
             Command = command;
@@ -2784,6 +3129,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             Source = source;
             IsEnabled = isEnabled;
             ExecutablePath = executablePath;
+            ApprovalHive = approvalHive;
+            ApprovalView = approvalView;
+            ApprovalKeyPath = approvalKeyPath;
+            ApprovalValueName = approvalValueName;
         }
 
         public string Name { get; }
@@ -2793,6 +3142,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         public string Source { get; }
         public bool IsEnabled { get; }
         public string ExecutablePath { get; }
+        public RegistryHive? ApprovalHive { get; }
+        public RegistryView ApprovalView { get; }
+        public string? ApprovalKeyPath { get; }
+        public string ApprovalValueName { get; }
+        public bool CanToggle => ApprovalHive.HasValue && !string.IsNullOrWhiteSpace(ApprovalKeyPath);
         public string StatusText => IsEnabled ? "Enabled" : "Disabled";
     }
 
@@ -2803,6 +3157,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             string displayName,
             string description,
             string serviceType,
+            CoreServiceStartMode startMode,
             string startType,
             string status,
             string account,
@@ -2816,6 +3171,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             DisplayName = displayName;
             Description = description;
             ServiceType = serviceType;
+            StartMode = startMode;
             StartType = startType;
             Status = status;
             Account = account;
@@ -2830,6 +3186,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         public string DisplayName { get; }
         public string Description { get; }
         public string ServiceType { get; }
+        public CoreServiceStartMode StartMode { get; }
         public string StartType { get; }
         public string Status { get; }
         public string Account { get; }

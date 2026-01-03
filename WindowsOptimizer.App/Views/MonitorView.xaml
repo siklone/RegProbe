@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              xmlns:converters="clr-namespace:WindowsOptimizer.App.ViewModels"
+             xmlns:utils="clr-namespace:WindowsOptimizer.App.Utilities"
              mc:Ignorable="d"
              Background="{DynamicResource BackgroundDarkestBrush}">
 
@@ -2073,8 +2074,12 @@
 
         <DataTemplate x:Key="MonitorStartupAppsTemplate">
             <Border Style="{StaticResource SectionCardStyle}">
-                <StackPanel>
-                    <Grid Margin="0,0,0,12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -2111,11 +2116,13 @@
                         </Button>
                     </Grid>
 
-                    <ListView ItemsSource="{Binding StartupApps}"
+                    <ListView Grid.Row="1"
+                              ItemsSource="{Binding StartupApps}"
                               SelectedItem="{Binding SelectedStartupApp}"
                               Background="Transparent"
                               BorderThickness="0"
-                              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualHeight}"
+                              utils:ScrollViewerHelper.EnableMouseWheelScroll="True"
+                              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ViewportHeight}"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               ScrollViewer.IsDeferredScrollingEnabled="True"
@@ -2144,7 +2151,29 @@
                                 </GridViewColumn>
                                 <GridViewColumn Header="Scope" DisplayMemberBinding="{Binding Scope}" Width="110"/>
                                 <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Source}" Width="130"/>
-                                <GridViewColumn Header="Command" Width="380">
+                                <GridViewColumn Header="Action" Width="90">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.ToggleStartupAppCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Padding="8,4">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
+                                                        <Setter Property="Content" Value="Disable"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                                <Setter Property="Content" Value="Enable"/>
+                                                                <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
+                                                                <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Command" Width="360">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Command}"
@@ -2158,7 +2187,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                </StackPanel>
+                </Grid>
             </Border>
         </DataTemplate>
 
@@ -2170,8 +2199,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,12,0">
-                    <StackPanel>
-                        <Grid Margin="0,0,0,12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,0,0,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -2208,47 +2241,49 @@
                             </Button>
                         </Grid>
 
-                    <ListView ItemsSource="{Binding Services}"
-                              SelectedItem="{Binding SelectedService}"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ActualHeight}"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              ScrollViewer.IsDeferredScrollingEnabled="True"
-                              ScrollViewer.CanContentScroll="True"
-                              VirtualizingStackPanel.IsVirtualizing="True"
-                              VirtualizingStackPanel.VirtualizationMode="Recycling">
-                        <ListView.Resources>
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-                                <Setter Property="FontSize" Value="11"/>
-                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.View>
-                            <GridView>
-                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="160"/>
-                                    <GridViewColumn Header="Display" DisplayMemberBinding="{Binding DisplayName}" Width="220"/>
-                                    <GridViewColumn Header="Kind" DisplayMemberBinding="{Binding KindText}" Width="80"/>
-                                    <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartType}" Width="90"/>
-                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="90"/>
-                                    <GridViewColumn Header="Binary Path" Width="300">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding BinaryPath}"
-                                                           Foreground="{DynamicResource ForegroundLightBrush}"
-                                                           FontSize="11"
-                                                           TextTrimming="CharacterEllipsis"
-                                                           ToolTip="{Binding BinaryPath}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </StackPanel>
+                        <ListView Grid.Row="1"
+                                  ItemsSource="{Binding Services}"
+                                  SelectedItem="{Binding SelectedService}"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  utils:ScrollViewerHelper.EnableMouseWheelScroll="True"
+                                  MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ViewportHeight}"
+                                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.IsDeferredScrollingEnabled="True"
+                                  ScrollViewer.CanContentScroll="True"
+                                  VirtualizingStackPanel.IsVirtualizing="True"
+                                  VirtualizingStackPanel.VirtualizationMode="Recycling">
+                            <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                    <Setter Property="FontSize" Value="11"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View>
+                                <GridView>
+                                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="160"/>
+                                        <GridViewColumn Header="Display" DisplayMemberBinding="{Binding DisplayName}" Width="220"/>
+                                        <GridViewColumn Header="Kind" DisplayMemberBinding="{Binding KindText}" Width="80"/>
+                                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartType}" Width="90"/>
+                                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="90"/>
+                                        <GridViewColumn Header="Binary Path" Width="300">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding BinaryPath}"
+                                                               Foreground="{DynamicResource ForegroundLightBrush}"
+                                                               FontSize="11"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               ToolTip="{Binding BinaryPath}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                    </Grid>
                 </Border>
 
                 <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}">
@@ -2297,6 +2332,33 @@
                                 <TextBlock Text="Docs"/>
                             </StackPanel>
                         </Button>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Command="{Binding EnableServiceCommand}"
+                                    IsEnabled="{Binding CanEnableSelectedService}"
+                                    Style="{StaticResource HeaderActionButtonStyle}"
+                                    Padding="10,6"
+                                    ToolTip="Set startup type to Manual.">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8D4;" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Enable"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding DisableServiceCommand}"
+                                    IsEnabled="{Binding CanDisableSelectedService}"
+                                    Style="{StaticResource HeaderActionButtonStyle}"
+                                    Padding="10,6"
+                                    Margin="8,0,0,0"
+                                    ToolTip="Set startup type to Disabled.">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7E8;" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Disable"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Text="Changes are applied via ElevatedHost and may affect system stability."
+                                   FontSize="10"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   Margin="0,6,0,0"/>
                     </StackPanel>
                 </Border>
             </Grid>
