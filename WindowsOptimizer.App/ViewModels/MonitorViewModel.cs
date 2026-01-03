@@ -40,7 +40,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly WifiSignalMonitor? _wifiSignalMonitor;
     private readonly GpuEngineMonitor? _gpuEngineMonitor;
     private readonly DispatcherTimer? _updateTimer;
-    private readonly SettingsStore _settingsStore;
+    private readonly SettingsStore _settingsStore = new(AppPaths.FromEnvironment());
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -110,8 +110,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            var paths = AppPaths.FromEnvironment();
-            _settingsStore = new SettingsStore(paths);
             _toggleLayoutEditorCommand = new RelayCommand(_ => IsLayoutEditorVisible = !IsLayoutEditorVisible);
             _moveSectionUpCommand = new RelayCommand(param => MoveSection(param, -1), param => CanMoveSection(param, -1));
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
@@ -1855,9 +1853,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     UpdatePerformancePrimaryItems();
                 }
 
-                if (gpuEngineSnapshot.HasValue)
+                if (gpuEngineSnapshot != null)
                 {
-                    _gpuEngineUsageSnapshot = gpuEngineSnapshot.Value;
+                    _gpuEngineUsageSnapshot = gpuEngineSnapshot;
                 }
 
                 if (latency.HasValue)
