@@ -402,18 +402,24 @@
                                     CornerRadius="10"/>
                             <Canvas Margin="12">
                                 <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}"
-                                          StrokeThickness="2"
-                                          Points="{MultiBinding Converter={StaticResource SparklinePointsWithMaxConverter}}">
-                                    <Binding Path="PerformancePrimaryHistory"/>
-                                    <Binding Path="PerformanceHistoryScaleMax"/>
+                                          StrokeThickness="2">
+                                    <Polyline.Points>
+                                        <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                            <Binding Path="PerformancePrimaryHistory"/>
+                                            <Binding Path="PerformanceHistoryScaleMax"/>
+                                        </MultiBinding>
+                                    </Polyline.Points>
                                 </Polyline>
 
                                 <Polyline Stroke="{DynamicResource SuccessBrush}"
                                           StrokeThickness="2"
-                                          Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"
-                                          Points="{MultiBinding Converter={StaticResource SparklinePointsWithMaxConverter}}">
-                                    <Binding Path="PerformanceSecondaryHistory"/>
-                                    <Binding Path="PerformanceHistoryScaleMax"/>
+                                          Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}">
+                                    <Polyline.Points>
+                                        <MultiBinding Converter="{StaticResource SparklinePointsWithMaxConverter}">
+                                            <Binding Path="PerformanceSecondaryHistory"/>
+                                            <Binding Path="PerformanceHistoryScaleMax"/>
+                                        </MultiBinding>
+                                    </Polyline.Points>
                                 </Polyline>
                             </Canvas>
                         </Grid>
