@@ -112,13 +112,15 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
     private readonly TweakDocumentationLinker _documentationLinker = new();
+    private readonly IAppLogger _appLogger;
 
     public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
     {
         _providerList = providers;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
-        var logger = new FileAppLogger(paths);
+        _appLogger = new FileAppLogger(paths);
+        var logger = _appLogger;
         _logFolderPath = paths.LogDirectory;
         _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
@@ -758,6 +760,7 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             await _logStore.ExportCsvAsync(dialog.FileName, CancellationToken.None);
             ExportStatusMessage = $"Exported to {dialog.FileName}.";
+            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Tweak log exported ({dialog.FileName})");
         }
         catch (Exception ex)
         {
@@ -1283,6 +1286,7 @@ public sealed class TweaksViewModel : ViewModelBase
             });
 
             ExportStatusMessage = $"Opened log folder: {_logFolderPath}.";
+            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Log folder opened ({_logFolderPath})");
         }
         catch (Exception ex)
         {
@@ -1307,6 +1311,7 @@ public sealed class TweaksViewModel : ViewModelBase
             });
 
             ExportStatusMessage = $"Opened log file: {_tweakLogFilePath}.";
+            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Tweak log opened ({_tweakLogFilePath})");
         }
         catch (Exception ex)
         {

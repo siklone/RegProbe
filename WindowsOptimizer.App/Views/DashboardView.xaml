@@ -733,13 +733,24 @@
                                             </StackPanel>
                                         </StackPanel>
 
-                                        <!-- Time -->
-                                        <TextBlock Grid.Column="2"
-                                                   Text="{Binding TimeAgo}"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                                   FontSize="10"
-                                                   VerticalAlignment="Center"
-                                                   ToolTip="{Binding TimestampFormatted}"/>
+                                        <!-- Time + Link -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TimeAgo}"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       FontSize="10"
+                                                       VerticalAlignment="Center"
+                                                       ToolTip="{Binding TimestampFormatted}"/>
+                                            <Button Command="{Binding DataContext.OpenActivityLinkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Padding="6,2"
+                                                    Margin="6,0,0,0"
+                                                    ToolTip="Open linked file"
+                                                    Visibility="{Binding HasLink, Converter={StaticResource BoolToVisibility}}">
+                                                <TextBlock Text="↗" FontSize="12" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

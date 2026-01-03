@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Microsoft.Win32;
+using System.ServiceProcess;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Metrics;
+using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -24,9 +28,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         new("cpu-ram-history", "CPU & RAM History", "60-second usage history charts."),
         new("network-disk-io", "Network & Disk I/O", "60-second throughput charts."),
         new("performance-panel", "Performance Panel", "Task Manager-style performance breakdown."),
-        new("top-cpu-ram", "Top CPU/RAM Processes", "Top processes by CPU and RAM usage."),
-        new("top-network", "Top Network Processes", "Top processes by network throughput."),
-        new("top-disk", "Top Disk Processes", "Top processes by disk I/O throughput."),
         new("network-adapters", "Network Adapters", "Per-adapter throughput and totals."),
         new("disk-activity", "Disk Activity", "Per-disk throughput and usage.")
     ];
@@ -106,6 +107,17 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _moveSectionDownCommand;
     private readonly RelayCommand _resetLayoutCommand;
     private readonly RelayCommand _exportSensorDiagnosticsCommand;
+    private readonly RelayCommand _refreshStartupAppsCommand;
+    private readonly RelayCommand _refreshServicesCommand;
+    private readonly RelayCommand _openServiceDocsCommand;
+
+    private MonitorTabItem? _selectedTab;
+    private bool _isStartupAppsLoading;
+    private bool _isServicesLoading;
+    private DateTime _startupAppsUpdatedAt;
+    private DateTime _servicesUpdatedAt;
+    private StartupAppEntry? _selectedStartupApp;
+    private ServiceEntry? _selectedService;
 
     public MonitorViewModel()
     {
@@ -203,6 +215,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             PerformanceDetailItems = new ObservableCollection<PerformanceDetailItem>();
             DiskHealthItems = new ObservableCollection<DiskHealthItemViewModel>();
             DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
+            StartupApps = new ObservableCollection<StartupAppEntry>();
+            StartupApps.CollectionChanged += (_, _) => OnPropertyChanged(nameof(StartupAppsSummary));
+            Services = new ObservableCollection<ServiceEntry>();
+            Services.CollectionChanged += (_, _) => OnPropertyChanged(nameof(ServicesSummary));
+            ServiceDetailItems = new ObservableCollection<InfoDetailItem>();
 
             // Initialize process management commands
             KillProcessCommand = new RelayCommand(param =>
@@ -231,6 +248,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             ExportMetricsCommand = new RelayCommand(_ => ExportMetricsToCsv());
             _exportSensorDiagnosticsCommand = new RelayCommand(_ => ExportSensorDiagnostics());
+            _refreshStartupAppsCommand = new RelayCommand(_ => _ = LoadStartupAppsAsync(true));
+            _refreshServicesCommand = new RelayCommand(_ => _ = LoadServicesAsync(true));
+            _openServiceDocsCommand = new RelayCommand(param => OpenServiceDocs(param as ServiceEntry));
 
             // Get initial total RAM and system info (with error handling)
             try
@@ -267,6 +287,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to start timer: {ex.Message}");
             }
+
+            MonitorTabs.Clear();
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.StartupApps, "Startup Apps", "Apps that launch with Windows"));
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Services, "Services", "Registry-backed services and drivers"));
+            SelectedTab = MonitorTabs.FirstOrDefault();
         }
         catch (Exception ex)
         {
@@ -290,6 +317,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             PerformanceDetailItems ??= new ObservableCollection<PerformanceDetailItem>();
             DiskHealthItems ??= new ObservableCollection<DiskHealthItemViewModel>();
             DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
+            StartupApps ??= new ObservableCollection<StartupAppEntry>();
+            StartupApps.CollectionChanged += (_, _) => OnPropertyChanged(nameof(StartupAppsSummary));
+            Services ??= new ObservableCollection<ServiceEntry>();
+            Services.CollectionChanged += (_, _) => OnPropertyChanged(nameof(ServicesSummary));
+            ServiceDetailItems ??= new ObservableCollection<InfoDetailItem>();
 
             // Initialize commands if they weren't created
             KillProcessCommand ??= new RelayCommand(_ => { });
@@ -301,6 +333,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionDownCommand = new RelayCommand(_ => { });
             _resetLayoutCommand = new RelayCommand(_ => { });
             _exportSensorDiagnosticsCommand = new RelayCommand(_ => { });
+            _refreshStartupAppsCommand = new RelayCommand(_ => { });
+            _refreshServicesCommand = new RelayCommand(_ => { });
+            _openServiceDocsCommand = new RelayCommand(_ => { });
 
             if (MonitorSections.Count == 0)
             {
@@ -309,6 +344,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     MonitorSections.Add(section);
                 }
             }
+
+            if (MonitorTabs.Count == 0)
+            {
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.StartupApps, "Startup Apps", "Apps that launch with Windows"));
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Services, "Services", "Registry-backed services and drivers"));
+            }
+
+            SelectedTab ??= MonitorTabs.FirstOrDefault();
         }
     }
 
@@ -381,16 +426,37 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine($"Total RAM,{SystemInfo?.TotalRamGb:F2} GB");
             csv.AppendLine($"Uptime,{SystemInfo?.UptimeFormatted}");
             csv.AppendLine();
+
+            var topCpuSnapshot = TopProcessesByCpu.ToList();
+            var topRamSnapshot = TopProcessesByRam.ToList();
+            var topNetworkSnapshot = TopProcessesByNetwork.ToList();
+            var topDiskSnapshot = TopProcessesByDisk.ToList();
+
+            if (_processMonitor != null)
+            {
+                try
+                {
+                    topCpuSnapshot = _processMonitor.GetTopProcessesByCpu(10);
+                    topRamSnapshot = _processMonitor.GetTopProcessesByRam(10);
+                    topNetworkSnapshot = _processMonitor.GetTopProcessesByNetwork(10);
+                    topDiskSnapshot = _processMonitor.GetTopProcessesByDisk(10);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Process snapshot export failed: {ex.Message}");
+                }
+            }
+
             csv.AppendLine("Top Processes by CPU");
             csv.AppendLine("Name,PID,CPU %,RAM MB,Threads,Handles");
-            foreach (var proc in TopProcessesByCpu)
+            foreach (var proc in topCpuSnapshot)
             {
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.CpuPercent:F2},{proc.RamMb:F0},{proc.Threads},{proc.Handles}");
             }
             csv.AppendLine();
             csv.AppendLine("Top Processes by RAM");
             csv.AppendLine("Name,PID,RAM MB,Threads,Handles");
-            foreach (var proc in TopProcessesByRam)
+            foreach (var proc in topRamSnapshot)
             {
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.RamMb:F0},{proc.Threads},{proc.Handles}");
             }
@@ -398,7 +464,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine();
             csv.AppendLine(NetworkProcessTitle);
             csv.AppendLine("Name,PID,Mbps,Threads,Handles");
-            foreach (var proc in TopProcessesByNetwork)
+            foreach (var proc in topNetworkSnapshot)
             {
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.IoMbps:F2},{proc.Threads},{proc.Handles}");
             }
@@ -406,14 +472,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine();
             csv.AppendLine("Top Processes by Disk I/O");
             csv.AppendLine("Name,PID,MBps,Threads,Handles");
-            foreach (var proc in TopProcessesByDisk)
+            foreach (var proc in topDiskSnapshot)
             {
                 csv.AppendLine($"{proc.Name},{proc.Pid},{proc.DiskMBps:F2},{proc.Threads},{proc.Handles}");
             }
 
             File.WriteAllText(filepath, csv.ToString());
             StatusMessage = $"Metrics saved to Desktop: {filename}";
-            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Metrics CSV saved ({filename})");
+            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Metrics CSV saved ({filepath})");
             System.Diagnostics.Debug.WriteLine($"Metrics exported to: {filepath}");
         }
         catch (Exception ex)
@@ -436,7 +502,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                          ?? "Sensor diagnostics not available (MetricProvider not initialized).";
             File.WriteAllText(filepath, report);
             StatusMessage = $"Sensor report saved to Desktop: {filename}";
-            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Sensor report saved ({filename})");
+            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Sensor report saved ({filepath})");
             System.Diagnostics.Debug.WriteLine($"Sensor diagnostics exported to: {filepath}");
         }
         catch (Exception ex)
@@ -654,9 +720,525 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private async Task LoadStartupAppsAsync(bool force)
+    {
+        if (IsStartupAppsLoading)
+        {
+            return;
+        }
+
+        if (!force && StartupApps.Count > 0)
+        {
+            return;
+        }
+
+        IsStartupAppsLoading = true;
+        try
+        {
+            var items = await Task.Run(CollectStartupApps).ConfigureAwait(false);
+            await DispatchAsync(() =>
+            {
+                UpdateCollection(StartupApps, items);
+                _startupAppsUpdatedAt = DateTime.UtcNow;
+                OnPropertyChanged(nameof(StartupAppsUpdatedText));
+                if (SelectedStartupApp == null && StartupApps.Count > 0)
+                {
+                    SelectedStartupApp = StartupApps[0];
+                }
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Startup apps load failed: {ex.Message}");
+        }
+        finally
+        {
+            IsStartupAppsLoading = false;
+        }
+    }
+
+    private async Task LoadServicesAsync(bool force)
+    {
+        if (IsServicesLoading)
+        {
+            return;
+        }
+
+        if (!force && Services.Count > 0)
+        {
+            return;
+        }
+
+        IsServicesLoading = true;
+        try
+        {
+            var items = await Task.Run(CollectServices).ConfigureAwait(false);
+            await DispatchAsync(() =>
+            {
+                UpdateCollection(Services, items);
+                _servicesUpdatedAt = DateTime.UtcNow;
+                OnPropertyChanged(nameof(ServicesUpdatedText));
+                if (SelectedService == null && Services.Count > 0)
+                {
+                    SelectedService = Services[0];
+                }
+                else if (SelectedService != null)
+                {
+                    UpdateServiceDetails();
+                }
+            }).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Services load failed: {ex.Message}");
+        }
+        finally
+        {
+            IsServicesLoading = false;
+        }
+    }
+
+    private static List<StartupAppEntry> CollectStartupApps()
+    {
+        var items = new List<StartupAppEntry>();
+        var hkcuRunApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
+        var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Registry64, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
+        var hkcuFolderApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
+        var hklmFolderApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Registry64, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
+
+        AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry Run",
+            @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRunApproval);
+        AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry64, "All Users", "Registry Run (64-bit)",
+            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
+        AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
+            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
+
+        AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder", hkcuFolderApproval);
+        AddStartupFolderEntries(items, Environment.SpecialFolder.CommonStartup, "All Users", "Startup Folder", hklmFolderApproval);
+
+        return items
+            .OrderBy(item => item.Scope)
+            .ThenBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static void AddStartupRunEntries(
+        List<StartupAppEntry> items,
+        RegistryHive hive,
+        RegistryView view,
+        string scope,
+        string source,
+        string subKey,
+        IReadOnlyDictionary<string, bool?> approvals)
+    {
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(hive, view);
+            using var runKey = baseKey.OpenSubKey(subKey);
+            if (runKey == null)
+            {
+                return;
+            }
+
+            foreach (var valueName in runKey.GetValueNames())
+            {
+                var rawValue = runKey.GetValue(valueName)?.ToString() ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(rawValue))
+                {
+                    continue;
+                }
+
+                var enabled = approvals.TryGetValue(valueName, out var approval)
+                    ? approval.GetValueOrDefault(true)
+                    : true;
+
+                var executablePath = ExtractExecutablePath(rawValue);
+                items.Add(new StartupAppEntry(
+                    valueName,
+                    rawValue,
+                    $"{hive}\\{subKey}",
+                    scope,
+                    source,
+                    enabled,
+                    executablePath));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Startup run entries read failed: {ex.Message}");
+        }
+    }
+
+    private static void AddStartupFolderEntries(
+        List<StartupAppEntry> items,
+        Environment.SpecialFolder folder,
+        string scope,
+        string source,
+        IReadOnlyDictionary<string, bool?> approvals)
+    {
+        try
+        {
+            var folderPath = Environment.GetFolderPath(folder);
+            if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
+            {
+                return;
+            }
+
+            foreach (var path in Directory.GetFiles(folderPath))
+            {
+                var name = Path.GetFileName(path);
+                var enabled = approvals.TryGetValue(name, out var approval)
+                    ? approval.GetValueOrDefault(true)
+                    : true;
+                items.Add(new StartupAppEntry(
+                    name,
+                    path,
+                    folderPath,
+                    scope,
+                    source,
+                    enabled,
+                    path));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Startup folder read failed: {ex.Message}");
+        }
+    }
+
+    private static Dictionary<string, bool?> ReadStartupApproval(RegistryHive hive, RegistryView view, string subKey)
+    {
+        var approvals = new Dictionary<string, bool?>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(hive, view);
+            using var key = baseKey.OpenSubKey(subKey);
+            if (key == null)
+            {
+                return approvals;
+            }
+
+            foreach (var valueName in key.GetValueNames())
+            {
+                if (key.GetValue(valueName) is byte[] data)
+                {
+                    approvals[valueName] = ParseStartupApproval(data);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Startup approval read failed: {ex.Message}");
+        }
+
+        return approvals;
+    }
+
+    private static bool? ParseStartupApproval(byte[] data)
+    {
+        if (data.Length == 0)
+        {
+            return null;
+        }
+
+        return data[0] switch
+        {
+            0x02 => false,
+            0x03 => true,
+            _ => null
+        };
+    }
+
+    private static string ExtractExecutablePath(string command)
+    {
+        if (string.IsNullOrWhiteSpace(command))
+        {
+            return string.Empty;
+        }
+
+        var expanded = Environment.ExpandEnvironmentVariables(command).Trim();
+        if (expanded.StartsWith('"'))
+        {
+            var end = expanded.IndexOf('"', 1);
+            return end > 1 ? expanded[1..end] : expanded.Trim('"');
+        }
+
+        var space = expanded.IndexOf(' ');
+        return space > 0 ? expanded[..space] : expanded;
+    }
+
+    private static List<ServiceEntry> CollectServices()
+    {
+        var results = new List<ServiceEntry>();
+        var statusLookup = BuildServiceStatusLookup();
+
+        try
+        {
+            using var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            using var servicesKey = baseKey.OpenSubKey(@"SYSTEM\CurrentControlSet\Services");
+            if (servicesKey == null)
+            {
+                return results;
+            }
+
+            foreach (var serviceName in servicesKey.GetSubKeyNames())
+            {
+                using var serviceKey = servicesKey.OpenSubKey(serviceName);
+                if (serviceKey == null)
+                {
+                    continue;
+                }
+
+                var displayName = serviceKey.GetValue("DisplayName") as string ?? serviceName;
+                var description = serviceKey.GetValue("Description") as string ?? string.Empty;
+                var imagePath = serviceKey.GetValue("ImagePath") as string ?? string.Empty;
+                var objectName = serviceKey.GetValue("ObjectName") as string ?? string.Empty;
+                var group = serviceKey.GetValue("Group") as string ?? string.Empty;
+                var startValue = TryGetInt(serviceKey.GetValue("Start"));
+                var typeValue = TryGetInt(serviceKey.GetValue("Type"));
+                var serviceDll = string.Empty;
+
+                using (var parametersKey = serviceKey.OpenSubKey("Parameters"))
+                {
+                    serviceDll = parametersKey?.GetValue("ServiceDll") as string ?? string.Empty;
+                }
+
+                var binaryPath = !string.IsNullOrWhiteSpace(imagePath) ? imagePath : serviceDll;
+                var startType = DescribeStartType(startValue);
+                var serviceType = DescribeServiceType(typeValue);
+                var isDriver = IsDriverType(typeValue);
+                var statusText = statusLookup.TryGetValue(serviceName, out var status) ? status : "Unknown";
+                var docsLink = ResolveServiceDocsLink(serviceName);
+
+                results.Add(new ServiceEntry(
+                    serviceName,
+                    displayName,
+                    description,
+                    serviceType,
+                    startType,
+                    statusText,
+                    objectName,
+                    group,
+                    binaryPath,
+                    servicesKey.Name + "\\" + serviceName,
+                    isDriver,
+                    docsLink));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Services registry read failed: {ex.Message}");
+        }
+
+        return results
+            .OrderBy(entry => entry.IsDriver)
+            .ThenBy(entry => entry.DisplayName, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static Dictionary<string, string> BuildServiceStatusLookup()
+    {
+        var lookup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            foreach (var service in ServiceController.GetServices())
+            {
+                lookup[service.ServiceName] = service.Status.ToString();
+            }
+        }
+        catch
+        {
+            // Ignore status lookup failures.
+        }
+
+        try
+        {
+            foreach (var device in ServiceController.GetDevices())
+            {
+                lookup[device.ServiceName] = device.Status.ToString();
+            }
+        }
+        catch
+        {
+            // Ignore device lookup failures.
+        }
+
+        return lookup;
+    }
+
+    private static int? TryGetInt(object? value)
+    {
+        if (value == null)
+        {
+            return null;
+        }
+
+        try
+        {
+            return Convert.ToInt32(value);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string DescribeStartType(int? startValue)
+    {
+        return startValue switch
+        {
+            0 => "Boot",
+            1 => "System",
+            2 => "Automatic",
+            3 => "Manual",
+            4 => "Disabled",
+            _ => "Unknown"
+        };
+    }
+
+    private static string DescribeServiceType(int? typeValue)
+    {
+        if (!typeValue.HasValue)
+        {
+            return "Unknown";
+        }
+
+        var type = typeValue.Value;
+        var labels = new List<string>();
+        if ((type & 0x1) != 0) labels.Add("Kernel Driver");
+        if ((type & 0x2) != 0) labels.Add("File System Driver");
+        if ((type & 0x10) != 0) labels.Add("Win32 Own Process");
+        if ((type & 0x20) != 0) labels.Add("Win32 Shared Process");
+        if ((type & 0x100) != 0) labels.Add("Interactive");
+
+        return labels.Count > 0 ? string.Join(", ", labels) : $"0x{type:X}";
+    }
+
+    private static bool IsDriverType(int? typeValue)
+    {
+        if (!typeValue.HasValue)
+        {
+            return false;
+        }
+
+        var type = typeValue.Value;
+        return (type & 0x1) != 0 || (type & 0x2) != 0;
+    }
+
+    private static string ResolveServiceDocsLink(string serviceName)
+    {
+        var docsRoot = DocsLocator.TryFindDocsRoot();
+        if (!string.IsNullOrWhiteSpace(docsRoot))
+        {
+            var docsDir = Path.Combine(docsRoot, "services");
+            var localMd = Path.Combine(docsDir, $"{serviceName}.md");
+            var localHtml = Path.Combine(docsDir, $"{serviceName}.html");
+
+            if (File.Exists(localMd)) return localMd;
+            if (File.Exists(localHtml)) return localHtml;
+        }
+
+        var query = Uri.EscapeDataString($"{serviceName} windows service");
+        return $"https://learn.microsoft.com/en-us/search/?terms={query}";
+    }
+
+    private void UpdateServiceDetails()
+    {
+        ServiceDetailItems.Clear();
+        if (SelectedService == null)
+        {
+            return;
+        }
+
+        ServiceDetailItems.Add(new InfoDetailItem("Service name", SelectedService.Name));
+        ServiceDetailItems.Add(new InfoDetailItem("Display name", SelectedService.DisplayName));
+        ServiceDetailItems.Add(new InfoDetailItem("Status", SelectedService.Status));
+        ServiceDetailItems.Add(new InfoDetailItem("Start type", SelectedService.StartType));
+        ServiceDetailItems.Add(new InfoDetailItem("Service type", SelectedService.ServiceType));
+        ServiceDetailItems.Add(new InfoDetailItem("Account", SelectedService.Account));
+        ServiceDetailItems.Add(new InfoDetailItem("Group", SelectedService.Group));
+        ServiceDetailItems.Add(new InfoDetailItem("Image path", SelectedService.BinaryPath));
+        ServiceDetailItems.Add(new InfoDetailItem("Registry path", SelectedService.RegistryPath));
+        if (!string.IsNullOrWhiteSpace(SelectedService.Description))
+        {
+            ServiceDetailItems.Add(new InfoDetailItem("Description", SelectedService.Description));
+        }
+    }
+
+    private void OpenServiceDocs(ServiceEntry? entry)
+    {
+        if (entry == null || string.IsNullOrWhiteSpace(entry.DocsLink))
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = entry.DocsLink,
+                UseShellExecute = true
+            });
+        }
+        catch
+        {
+            // Ignore open failures.
+        }
+    }
+
     public string Title => "Monitor";
 
     public ObservableCollection<MonitorSectionLayout> MonitorSections { get; } = new();
+    public ObservableCollection<MonitorTabItem> MonitorTabs { get; } = new();
+
+    public MonitorTabItem? SelectedTab
+    {
+        get => _selectedTab;
+        set
+        {
+            if (SetProperty(ref _selectedTab, value))
+            {
+                OnPropertyChanged(nameof(IsPerformanceTab));
+                OnPropertyChanged(nameof(IsProcessesTab));
+                OnPropertyChanged(nameof(IsStartupAppsTab));
+                OnPropertyChanged(nameof(IsServicesTab));
+
+                if (!IsPerformanceTab)
+                {
+                    IsLayoutEditorVisible = false;
+                }
+
+                if (IsPerformanceTab)
+                {
+                    EnsurePerformanceItems();
+                    _nextCoreSampleUtc = DateTime.UtcNow;
+                    _nextIoSampleUtc = DateTime.UtcNow;
+                    _nextAuxSampleUtc = DateTime.UtcNow;
+                    _ = SampleCoreMetricsAsync();
+                    _ = SampleIoMetricsAsync();
+                    _ = SampleAuxMetricsAsync();
+                }
+                else if (IsStartupAppsTab)
+                {
+                    _ = LoadStartupAppsAsync(false);
+                }
+                else if (IsServicesTab)
+                {
+                    _ = LoadServicesAsync(false);
+                }
+                else if (IsProcessesTab && !_isProcessSampleInProgress)
+                {
+                    _nextProcessSampleUtc = DateTime.UtcNow;
+                    _ = SampleProcessMetricsAsync();
+                }
+            }
+        }
+    }
+
+    public bool IsPerformanceTab => SelectedTab?.Tab == MonitorTab.Performance;
+    public bool IsProcessesTab => SelectedTab?.Tab == MonitorTab.Processes;
+    public bool IsStartupAppsTab => SelectedTab?.Tab == MonitorTab.StartupApps;
+    public bool IsServicesTab => SelectedTab?.Tab == MonitorTab.Services;
 
     public bool IsLayoutEditorVisible
     {
@@ -697,6 +1279,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ObservableCollection<DiskInfo> Disks { get; }
     public ObservableCollection<PerformanceItemViewModel> PerformanceItems { get; }
     public ObservableCollection<PerformanceDetailItem> PerformanceDetailItems { get; }
+    public ObservableCollection<StartupAppEntry> StartupApps { get; }
+    public ObservableCollection<ServiceEntry> Services { get; }
+    public ObservableCollection<InfoDetailItem> ServiceDetailItems { get; }
 
     public double CpuUsage
     {
@@ -1038,6 +1623,67 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ICommand ResumeProcessCommand { get; }
     public ICommand ExportMetricsCommand { get; }
     public ICommand ExportSensorDiagnosticsCommand => _exportSensorDiagnosticsCommand;
+    public ICommand RefreshStartupAppsCommand => _refreshStartupAppsCommand;
+    public ICommand RefreshServicesCommand => _refreshServicesCommand;
+    public ICommand OpenServiceDocsCommand => _openServiceDocsCommand;
+
+    public StartupAppEntry? SelectedStartupApp
+    {
+        get => _selectedStartupApp;
+        set => SetProperty(ref _selectedStartupApp, value);
+    }
+
+    public ServiceEntry? SelectedService
+    {
+        get => _selectedService;
+        set
+        {
+            if (SetProperty(ref _selectedService, value))
+            {
+                UpdateServiceDetails();
+            }
+        }
+    }
+
+    public bool IsStartupAppsLoading
+    {
+        get => _isStartupAppsLoading;
+        private set
+        {
+            if (SetProperty(ref _isStartupAppsLoading, value))
+            {
+                OnPropertyChanged(nameof(StartupAppsSummary));
+            }
+        }
+    }
+
+    public bool IsServicesLoading
+    {
+        get => _isServicesLoading;
+        private set
+        {
+            if (SetProperty(ref _isServicesLoading, value))
+            {
+                OnPropertyChanged(nameof(ServicesSummary));
+            }
+        }
+    }
+
+    public string StartupAppsSummary => IsStartupAppsLoading
+        ? "Loading..."
+        : $"{StartupApps.Count} items";
+
+    public string ServicesSummary => IsServicesLoading
+        ? "Loading..."
+        : $"{Services.Count} entries";
+
+    public string StartupAppsUpdatedText => _startupAppsUpdatedAt == DateTime.MinValue
+        ? "Not loaded yet"
+        : $"Updated {FormatTimeAgo(DateTime.UtcNow - _startupAppsUpdatedAt)}";
+
+    public string ServicesUpdatedText => _servicesUpdatedAt == DateTime.MinValue
+        ? "Not loaded yet"
+        : $"Updated {FormatTimeAgo(DateTime.UtcNow - _servicesUpdatedAt)}";
 
     private void OnUpdateTick(object? sender, EventArgs e)
     {
@@ -1045,25 +1691,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             var now = DateTime.UtcNow;
 
-            if (!_isCoreSampleInProgress && now >= _nextCoreSampleUtc)
+            if (IsPerformanceTab && !_isCoreSampleInProgress && now >= _nextCoreSampleUtc)
             {
                 _nextCoreSampleUtc = now.Add(CoreSampleInterval);
                 _ = SampleCoreMetricsAsync();
             }
 
-            if (!_isIoSampleInProgress && now >= _nextIoSampleUtc)
+            if (IsPerformanceTab && !_isIoSampleInProgress && now >= _nextIoSampleUtc)
             {
                 _nextIoSampleUtc = now.Add(IoSampleInterval);
                 _ = SampleIoMetricsAsync();
             }
 
-            if (!_isProcessSampleInProgress && now >= _nextProcessSampleUtc)
+            if (IsProcessesTab && !_isProcessSampleInProgress && now >= _nextProcessSampleUtc)
             {
                 _nextProcessSampleUtc = now.Add(ProcessSampleInterval);
                 _ = SampleProcessMetricsAsync();
             }
 
-            if (!_isAuxSampleInProgress && now >= _nextAuxSampleUtc)
+            if (IsPerformanceTab && !_isAuxSampleInProgress && now >= _nextAuxSampleUtc)
             {
                 _nextAuxSampleUtc = now.Add(AuxSampleInterval);
                 _ = SampleAuxMetricsAsync();
@@ -1458,6 +2104,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private static string FormatText(string? value)
     {
         return string.IsNullOrWhiteSpace(value) ? "N/A" : value.Trim();
+    }
+
+    private static string FormatTimeAgo(TimeSpan span)
+    {
+        if (span.TotalMinutes < 1) return "just now";
+        if (span.TotalMinutes < 60) return $"{(int)span.TotalMinutes}m ago";
+        if (span.TotalHours < 24) return $"{(int)span.TotalHours}h ago";
+        if (span.TotalDays < 7) return $"{(int)span.TotalDays}d ago";
+        return $"{(int)(span.TotalDays / 7)}w ago";
     }
 
     private static string FormatPairGb(double? used, double? limit)
@@ -1957,6 +2612,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private sealed record MonitorSectionDefinition(string Key, string Title, string Description);
 
+    public enum MonitorTab
+    {
+        Performance,
+        Processes,
+        StartupApps,
+        Services
+    }
+
+    public sealed record MonitorTabItem(MonitorTab Tab, string Title, string Subtitle);
+
     public sealed record DiskHealthItemViewModel(
         string DisplayName,
         string StatusText,
@@ -2006,6 +2671,84 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     }
 
     public sealed record PerformanceDetailItem(string Label, string Value);
+
+    public sealed record InfoDetailItem(string Label, string Value);
+
+    public sealed class StartupAppEntry
+    {
+        public StartupAppEntry(
+            string name,
+            string command,
+            string location,
+            string scope,
+            string source,
+            bool isEnabled,
+            string executablePath)
+        {
+            Name = name;
+            Command = command;
+            Location = location;
+            Scope = scope;
+            Source = source;
+            IsEnabled = isEnabled;
+            ExecutablePath = executablePath;
+        }
+
+        public string Name { get; }
+        public string Command { get; }
+        public string Location { get; }
+        public string Scope { get; }
+        public string Source { get; }
+        public bool IsEnabled { get; }
+        public string ExecutablePath { get; }
+        public string StatusText => IsEnabled ? "Enabled" : "Disabled";
+    }
+
+    public sealed class ServiceEntry
+    {
+        public ServiceEntry(
+            string name,
+            string displayName,
+            string description,
+            string serviceType,
+            string startType,
+            string status,
+            string account,
+            string group,
+            string binaryPath,
+            string registryPath,
+            bool isDriver,
+            string docsLink)
+        {
+            Name = name;
+            DisplayName = displayName;
+            Description = description;
+            ServiceType = serviceType;
+            StartType = startType;
+            Status = status;
+            Account = account;
+            Group = group;
+            BinaryPath = binaryPath;
+            RegistryPath = registryPath;
+            IsDriver = isDriver;
+            DocsLink = docsLink;
+        }
+
+        public string Name { get; }
+        public string DisplayName { get; }
+        public string Description { get; }
+        public string ServiceType { get; }
+        public string StartType { get; }
+        public string Status { get; }
+        public string Account { get; }
+        public string Group { get; }
+        public string BinaryPath { get; }
+        public string RegistryPath { get; }
+        public bool IsDriver { get; }
+        public string DocsLink { get; }
+
+        public string KindText => IsDriver ? "Driver" : "Service";
+    }
 
     private static DiskHealthItemViewModel CreateDiskHealthItem(DiskHealthInfo info)
     {

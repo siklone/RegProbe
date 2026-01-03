@@ -105,6 +105,8 @@ public sealed class DashboardViewModel : ViewModelBase
         RunFullScanCommand = new RelayCommand(_ => RunFullScan(), _ => !IsScanning);
         EnableBootMetricsCommand = new RelayCommand(_ => _ = EnableBootMetricsAsync(), _ => CanEnableBootMetrics && !IsEnablingBootMetrics);
         RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
+        OpenActivityLinkCommand = new RelayCommand(param => OpenActivityLink(param as ActivityTimelineItem),
+            param => param is ActivityTimelineItem item && item.HasLink);
 
         // Category navigation commands
         NavigateToPrivacyCommand = new RelayCommand(_ => NavigateToCategoryRequested?.Invoke("privacy"));
@@ -1851,6 +1853,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
     // Recent Activity Timeline
     public ICommand RefreshActivityCommand { get; }
+    public ICommand OpenActivityLinkCommand { get; }
 
     public IReadOnlyList<ActivityTimelineItem> RecentActivity
     {
@@ -1958,10 +1961,94 @@ public sealed class DashboardViewModel : ViewModelBase
                     : source;
 
             var success = !level.Equals("ERROR", StringComparison.OrdinalIgnoreCase);
-            items.Add(new ActivityTimelineItem(timestamp.LocalDateTime, source, action, success, detail));
+            var linkPath = ResolveActivityLink(detail);
+            items.Add(new ActivityTimelineItem(timestamp.LocalDateTime, source, action, success, detail, linkPath));
         }
 
         return items;
+    }
+
+    private string? ResolveActivityLink(string detail)
+    {
+        if (string.IsNullOrWhiteSpace(detail))
+        {
+            return null;
+        }
+
+        var candidate = ExtractParenthetical(detail);
+        if (string.IsNullOrWhiteSpace(candidate))
+        {
+            candidate = ExtractPathToken(detail);
+        }
+
+        if (string.IsNullOrWhiteSpace(candidate))
+        {
+            return null;
+        }
+
+        candidate = Environment.ExpandEnvironmentVariables(candidate.Trim().Trim('"'));
+        if (Path.IsPathRooted(candidate))
+        {
+            return candidate;
+        }
+
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var desktopPath = Path.Combine(desktop, candidate);
+        if (File.Exists(desktopPath))
+        {
+            return desktopPath;
+        }
+
+        var logPath = Path.Combine(_paths.LogDirectory, candidate);
+        if (File.Exists(logPath))
+        {
+            return logPath;
+        }
+
+        return null;
+    }
+
+    private static string? ExtractParenthetical(string detail)
+    {
+        var start = detail.LastIndexOf('(');
+        var end = detail.LastIndexOf(')');
+        if (start >= 0 && end > start)
+        {
+            return detail.Substring(start + 1, end - start - 1).Trim();
+        }
+
+        return null;
+    }
+
+    private static string? ExtractPathToken(string detail)
+    {
+        var tokens = new[] { " to ", " at ", " opened ", " saved " };
+        foreach (var token in tokens)
+        {
+            var index = detail.IndexOf(token, StringComparison.OrdinalIgnoreCase);
+            if (index >= 0)
+            {
+                var candidate = detail[(index + token.Length)..].Trim();
+                if (!string.IsNullOrWhiteSpace(candidate))
+                {
+                    return candidate;
+                }
+            }
+        }
+
+        var driveIndex = detail.IndexOf(":\\", StringComparison.Ordinal);
+        if (driveIndex > 0)
+        {
+            var start = driveIndex - 1;
+            while (start > 0 && char.IsLetter(detail[start - 1]))
+            {
+                start--;
+            }
+
+            return detail[start..].Trim();
+        }
+
+        return null;
     }
 
     private static IEnumerable<string> ReadTailLines(string path, int maxLines)
@@ -2169,6 +2256,31 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
+    private void OpenActivityLink(ActivityTimelineItem? item)
+    {
+        if (item == null || string.IsNullOrWhiteSpace(item.LinkPath))
+        {
+            return;
+        }
+
+        try
+        {
+            var target = item.LinkPath;
+            if (File.Exists(target) || Directory.Exists(target) || Uri.IsWellFormedUriString(target, UriKind.Absolute))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = target,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // Ignore open failures
+        }
+    }
+
     private void OpenLogFolder()
     {
         try
@@ -2210,13 +2322,14 @@ public sealed class DashboardViewModel : ViewModelBase
 /// </summary>
 public sealed class ActivityTimelineItem
 {
-    public ActivityTimelineItem(DateTime timestamp, string tweakName, string action, bool success, string message)
+    public ActivityTimelineItem(DateTime timestamp, string tweakName, string action, bool success, string message, string? linkPath = null)
     {
         Timestamp = timestamp;
         TweakName = tweakName;
         Action = action;
         Success = success;
         Message = message;
+        LinkPath = linkPath ?? string.Empty;
     }
 
     public DateTime Timestamp { get; }
@@ -2224,6 +2337,8 @@ public sealed class ActivityTimelineItem
     public string Action { get; }
     public bool Success { get; }
     public string Message { get; }
+    public string LinkPath { get; }
+    public bool HasLink => !string.IsNullOrWhiteSpace(LinkPath);
 
     public string TimestampFormatted => Timestamp.ToString("MMM dd, HH:mm");
     public string TimeAgo => FormatTimeAgo(DateTime.Now - Timestamp);
@@ -2237,6 +2352,7 @@ public sealed class ActivityTimelineItem
         "verify" => "✔",
         "settings" => "⚙",
         "monitor" => "📈",
+        "logs" => "🧾",
         "warning" => "⚠",
         "error" => "✖",
         _ => "•"

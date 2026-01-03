@@ -183,6 +183,48 @@
             <Setter Property="Margin" Value="0,0,10,0"/>
         </Style>
 
+        <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           Margin="0,2,0,0"
+                                           TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ProcessHeaderCellStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
             <Setter Property="FontSize" Value="11"/>
@@ -1737,6 +1779,283 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
+
+        <DataTemplate x:Key="MonitorPerformanceTabTemplate">
+            <ItemsControl ItemsSource="{Binding MonitorSections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
+                        <ContentControl Content="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource MonitorStatCardsTemplate}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Key}" Value="stat-cards">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorStatCardsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="cpu-ram-history">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorHistoryChartsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="network-disk-io">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorIoChartsTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="performance-panel">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="network-adapters">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorNetworkAdaptersTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="disk-activity">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorDiskActivityTemplate}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorProcessesTabTemplate">
+            <StackPanel>
+                <TextBlock Text="Processes"
+                           Style="{StaticResource SectionHeaderStyle}"
+                           Margin="0,0,0,8"/>
+                <TextBlock Text="Live top processes by CPU, RAM, network, and disk activity."
+                           FontSize="12"
+                           Foreground="{DynamicResource MutedForegroundBrush}"
+                           Margin="0,0,0,12"/>
+                <ContentControl Content="{Binding}" ContentTemplate="{StaticResource MonitorTopCpuRamTemplate}"/>
+                <ContentControl Content="{Binding}" ContentTemplate="{StaticResource MonitorTopNetworkTemplate}"/>
+                <ContentControl Content="{Binding}" ContentTemplate="{StaticResource MonitorTopDiskTemplate}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorStartupAppsTemplate">
+            <Border Style="{StaticResource SectionCardStyle}">
+                <StackPanel>
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Startup Apps"
+                                       Style="{StaticResource SectionHeaderStyle}"
+                                       Margin="0,0,0,2"/>
+                            <TextBlock Text="Registry and Startup folder entries that launch with Windows."
+                                       FontSize="12"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <TextBlock Text="{Binding StartupAppsSummary}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=" • "
+                                           FontSize="11"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding StartupAppsUpdatedText}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Command="{Binding RefreshStartupAppsCommand}"
+                                Style="{StaticResource HeaderActionButtonStyle}"
+                                Padding="10,6"
+                                ToolTip="Refresh startup entries">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE72C;" FontSize="12" Margin="0,0,6,0"/>
+                                <TextBlock Text="Refresh"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <ListView ItemsSource="{Binding StartupApps}"
+                              SelectedItem="{Binding SelectedStartupApp}"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.IsDeferredScrollingEnabled="True"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                <Setter Property="FontSize" Value="11"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="200"/>
+                                <GridViewColumn Header="Status" Width="80">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding StatusText}"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       FontSize="12"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Scope" DisplayMemberBinding="{Binding Scope}" Width="110"/>
+                                <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Source}" Width="130"/>
+                                <GridViewColumn Header="Command" Width="380">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Command}"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       FontSize="11"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       ToolTip="{Binding Command}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorServicesTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,12,0">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Services & Drivers"
+                                           Style="{StaticResource SectionHeaderStyle}"
+                                           Margin="0,0,0,2"/>
+                                <TextBlock Text="Full registry-backed list including drivers and system components."
+                                           FontSize="12"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                    <TextBlock Text="{Binding ServicesSummary}"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               FontWeight="SemiBold"/>
+                                    <TextBlock Text=" • "
+                                               FontSize="11"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding ServicesUpdatedText}"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Button Grid.Column="1"
+                                    Command="{Binding RefreshServicesCommand}"
+                                    Style="{StaticResource HeaderActionButtonStyle}"
+                                    Padding="10,6"
+                                    ToolTip="Refresh services list">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE72C;" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Refresh"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+
+                    <ListView ItemsSource="{Binding Services}"
+                              SelectedItem="{Binding SelectedService}"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.IsDeferredScrollingEnabled="True"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                <Setter Property="FontSize" Value="11"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="160"/>
+                                    <GridViewColumn Header="Display" DisplayMemberBinding="{Binding DisplayName}" Width="220"/>
+                                    <GridViewColumn Header="Kind" DisplayMemberBinding="{Binding KindText}" Width="80"/>
+                                    <GridViewColumn Header="Start" DisplayMemberBinding="{Binding StartType}" Width="90"/>
+                                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="90"/>
+                                    <GridViewColumn Header="Binary Path" Width="300">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding BinaryPath}"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           FontSize="11"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           ToolTip="{Binding BinaryPath}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Details" Style="{StaticResource SectionHeaderStyle}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding SelectedService.DisplayName, TargetNullValue=Select a service}"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="{Binding SelectedService.Description}"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,12"/>
+                        <ItemsControl ItemsSource="{Binding ServiceDetailItems}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Value}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTip="{Binding Value}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button Command="{Binding OpenServiceDocsCommand}"
+                                CommandParameter="{Binding SelectedService}"
+                                Style="{StaticResource HeaderActionButtonStyle}"
+                                Margin="0,12,0,0"
+                                Padding="10,6"
+                                ToolTip="Open Microsoft Learn search for this service.">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE71B;" FontSize="12" Margin="0,0,6,0"/>
+                                <TextBlock Text="Docs"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid>
@@ -1760,9 +2079,26 @@
                                Foreground="{DynamicResource AccentBrightCyanBrush}"
                                Margin="0,6,0,0"
                                Visibility="{Binding StatusMessage, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
+                    <ListBox ItemsSource="{Binding MonitorTabs}"
+                             SelectedItem="{Binding SelectedTab}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Margin="0,12,0,0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource MonitorTabItemStyle}"/>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
+                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second."
+                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
                             <TextBlock Text="Live (1s)" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
@@ -1771,7 +2107,8 @@
                     <Button Command="{Binding ExportMetricsCommand}"
                             Style="{StaticResource HeaderActionButtonStyle}"
                             VerticalAlignment="Center"
-                            ToolTip="Save snapshot (CSV) to your Desktop.">
+                            ToolTip="Save snapshot (CSV) to your Desktop."
+                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
                             <TextBlock Text="Save"/>
@@ -1781,7 +2118,8 @@
                             Style="{StaticResource HeaderActionButtonStyle}"
                             VerticalAlignment="Center"
                             Margin="8,0,0,0"
-                            ToolTip="Export a sensor diagnostics report for troubleshooting.">
+                            ToolTip="Export a sensor diagnostics report for troubleshooting."
+                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE9D9;" FontSize="12" Margin="0,0,6,0"/>
                             <TextBlock Text="Sensors"/>
@@ -1791,7 +2129,8 @@
                             Style="{StaticResource HeaderActionButtonStyle}"
                             VerticalAlignment="Center"
                             Margin="8,0,0,0"
-                            ToolTip="Customize which sections are visible and their order.">
+                            ToolTip="Customize which sections are visible and their order."
+                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8B7;" FontSize="12" Margin="0,0,6,0"/>
                             <TextBlock Text="Customize"/>
@@ -1800,57 +2139,30 @@
                 </StackPanel>
             </Grid>
 
-            <ItemsControl ItemsSource="{Binding MonitorSections}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
-                        <ContentControl Content="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
-                            <ContentControl.Style>
-                                <Style TargetType="ContentControl">
-                                    <Setter Property="ContentTemplate" Value="{StaticResource MonitorSystemInfoTemplate}"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Key}" Value="system-info">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorSystemInfoTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="performance-panel">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="stat-cards">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorStatCardsTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="cpu-ram-history">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorHistoryChartsTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="network-disk-io">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorIoChartsTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="top-cpu-ram">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopCpuRamTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="top-network">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopNetworkTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="top-disk">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorTopDiskTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="network-adapters">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorNetworkAdaptersTemplate}"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="disk-activity">
-                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorDiskActivityTemplate}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                        </ContentControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ContentControl Content="{Binding}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTabTemplate}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.Processes}">
+                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorProcessesTabTemplate}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.StartupApps}">
+                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorStartupAppsTemplate}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorTab.Services}">
+                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorServicesTemplate}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
 
             </StackPanel>
         </ScrollViewer>
 
         <Grid IsHitTestVisible="{Binding IsLayoutEditorVisible}"
+              Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}"
               Panel.ZIndex="10">
             <Button x:Name="LayoutEditorScrim"
                     Style="{StaticResource LayoutScrimButtonStyle}"
