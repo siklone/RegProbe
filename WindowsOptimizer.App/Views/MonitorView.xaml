@@ -263,6 +263,107 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="LayoutOverlayStyle" TargetType="Grid">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsLayoutEditorVisible}" Value="True">
+                    <Setter Property="IsHitTestVisible" Value="True"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorScrim"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 From="0" To="1"
+                                                 Duration="0:0:0.14"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 From="0" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 From="0.96" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 From="0.96" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorScrim"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="0.98"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="0.98"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LayoutScrimButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#99000000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Opacity="{TemplateBinding Opacity}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LayoutDialogStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="{DynamicResource ShadowColorLarge}"
+                                      BlurRadius="26"
+                                      ShadowDepth="8"
+                                      Direction="270"
+                                      Opacity="0.35"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <DataTemplate x:Key="MonitorSystemInfoTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
@@ -1635,10 +1736,11 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.IsDeferredScrollingEnabled="True"
-                  ScrollViewer.PanningMode="VerticalOnly">
-        <StackPanel Margin="20">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.IsDeferredScrollingEnabled="True"
+                      ScrollViewer.PanningMode="VerticalOnly">
+            <StackPanel Margin="20">
 
             <!-- Header -->
             <Grid Margin="0,0,0,20">
@@ -1689,101 +1791,6 @@
                 </StackPanel>
             </Grid>
 
-            <!-- Layout Editor -->
-            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16"
-                    Visibility="{Binding IsLayoutEditorVisible, Converter={StaticResource BoolToVisibility}}">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Customize Layout" Style="{StaticResource SectionHeaderStyle}"/>
-                            <TextBlock Text="Drag sections to reorder or toggle them. Changes are saved automatically."
-                                       Foreground="{DynamicResource MutedForegroundBrush}"
-                                       FontSize="12"
-                                       Margin="0,0,0,12"/>
-                        </StackPanel>
-                        <Button Grid.Column="1"
-                                Command="{Binding ResetLayoutCommand}"
-                                Style="{StaticResource HeaderActionButtonStyle}"
-                                Padding="10,6"
-                                VerticalAlignment="Top"
-                                ToolTip="Restore the default monitor layout.">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE777;" FontSize="12" Margin="0,0,6,0"/>
-                                <TextBlock Text="Reset"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-
-                    <ListBox ItemsSource="{Binding MonitorSections}"
-                             AllowDrop="True"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             PreviewMouseLeftButtonDown="OnLayoutItemPreviewMouseLeftButtonDown"
-                             PreviewMouseMove="OnLayoutItemPreviewMouseMove"
-                             DragOver="OnLayoutItemDragOver"
-                             Drop="OnLayoutItemDrop">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                                <Setter Property="IsHitTestVisible" Value="True"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListBoxItem">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
-                                <Grid Margin="0,0,0,8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <CheckBox Content="{Binding Title}"
-                                                  IsChecked="{Binding IsVisible}"
-                                                  Style="{StaticResource LayoutCheckBoxStyle}"
-                                                  ToolTip="{Binding Description}"/>
-                                        <TextBlock Text="{Binding Description}"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                                   FontSize="10"
-                                                   Margin="24,2,0,0"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button Command="{Binding DataContext.MoveSectionUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding}"
-                                                ToolTip="Move up"
-                                                Style="{StaticResource LayoutMoveButtonStyle}">
-                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70E;"/>
-                                        </Button>
-                                        <Button Command="{Binding DataContext.MoveSectionDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding}"
-                                                ToolTip="Move down"
-                                                Style="{StaticResource LayoutMoveButtonStyle}"
-                                                Margin="6,0,0,0">
-                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70D;"/>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </StackPanel>
-            </Border>
-
             <ItemsControl ItemsSource="{Binding MonitorSections}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
@@ -1831,6 +1838,130 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-        </StackPanel>
-    </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Style="{StaticResource LayoutOverlayStyle}">
+            <Button x:Name="LayoutEditorScrim"
+                    Style="{StaticResource LayoutScrimButtonStyle}"
+                    Command="{Binding ToggleLayoutEditorCommand}"/>
+
+            <Border x:Name="LayoutEditorDialog"
+                    Style="{StaticResource LayoutDialogStyle}"
+                    Width="640"
+                    MaxWidth="720"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="24">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Customize Layout"
+                                       Style="{StaticResource SectionHeaderStyle}"
+                                       Margin="0,0,0,2"/>
+                            <TextBlock Text="Drag sections to reorder or toggle them. Changes are saved automatically."
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button Command="{Binding ResetLayoutCommand}"
+                                    Style="{StaticResource HeaderActionButtonStyle}"
+                                    Padding="10,6"
+                                    ToolTip="Restore the default monitor layout."
+                                    Margin="0,0,8,0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE777;" FontSize="12" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Reset"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Command="{Binding ToggleLayoutEditorCommand}"
+                                    Style="{StaticResource HeaderActionButtonStyle}"
+                                    Padding="8,6"
+                                    ToolTip="Close">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="12"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="2"
+                                  Margin="0,16,0,0"
+                                  VerticalScrollBarVisibility="Auto">
+                        <ListBox ItemsSource="{Binding MonitorSections}"
+                                 AllowDrop="True"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 PreviewMouseLeftButtonDown="OnLayoutItemPreviewMouseLeftButtonDown"
+                                 PreviewMouseMove="OnLayoutItemPreviewMouseMove"
+                                 DragOver="OnLayoutItemDragOver"
+                                 Drop="OnLayoutItemDrop">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                    <Setter Property="IsHitTestVisible" Value="True"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type viewModels:MonitorSectionLayout}">
+                                    <Grid Margin="0,0,0,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <CheckBox Content="{Binding Title}"
+                                                      IsChecked="{Binding IsVisible}"
+                                                      Style="{StaticResource LayoutCheckBoxStyle}"
+                                                      ToolTip="{Binding Description}"/>
+                                            <TextBlock Text="{Binding Description}"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       FontSize="10"
+                                                       Margin="24,2,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Command="{Binding DataContext.MoveSectionUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Move up"
+                                                    Style="{StaticResource LayoutMoveButtonStyle}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70E;"/>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.MoveSectionDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Move down"
+                                                    Style="{StaticResource LayoutMoveButtonStyle}"
+                                                    Margin="6,0,0,0">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70D;"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>
