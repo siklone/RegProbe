@@ -118,9 +118,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _refreshStartupAppsCommand;
     private readonly RelayCommand _refreshServicesCommand;
     private readonly RelayCommand _openServiceDocsCommand;
-    private readonly RelayCommand _toggleStartupAppCommand;
-    private readonly RelayCommand _enableServiceCommand;
-    private readonly RelayCommand _disableServiceCommand;
+    private readonly RelayCommand _toggleStartupAppCommand = new(_ => { });
+    private readonly RelayCommand _enableServiceCommand = new(_ => { });
+    private readonly RelayCommand _disableServiceCommand = new(_ => { });
 
     private MonitorTabItem? _selectedTab;
     private ProcessCategoryItem? _selectedProcessCategory;
@@ -137,7 +137,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private int _lastDiskCount = -1;
     private StartupAppEntry? _selectedStartupApp;
     private ServiceEntry? _selectedService;
-    private readonly string _elevatedHostExecutablePath;
+    private readonly string _elevatedHostExecutablePath = string.Empty;
     private readonly bool _isElevatedHostAvailable;
     private ElevatedHostClient? _elevatedHostClient;
     private ElevatedRegistryAccessor? _elevatedRegistryAccessor;
