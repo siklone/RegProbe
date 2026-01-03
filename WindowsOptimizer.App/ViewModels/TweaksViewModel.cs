@@ -60,6 +60,9 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
+    private readonly RelayCommand _openDocsCoverageReportCommand;
+    private readonly RelayCommand _filterAppliedCommand;
+    private readonly RelayCommand _filterRolledBackCommand;
 	private readonly RelayCommand _expandAllDetailsCommand;
 	private readonly RelayCommand _collapseAllDetailsCommand;
 	private readonly bool _isElevated;
@@ -97,6 +100,13 @@ public sealed class TweaksViewModel : ViewModelBase
     private readonly PluginLoader _pluginLoader = new();
     private readonly KernelImpactAnalyzer _kernelAnalyzer = new();
     private readonly string _tweakLogFilePath;
+    private int _totalTweaksAvailable;
+    private int _tweaksApplied;
+    private int _tweaksRolledBack;
+    private long _logFileSizeBytes;
+    private int _docsMissingCount;
+    private string _docsCoverageSummary = "Docs report unavailable.";
+    private string _docsCoverageReportPath = string.Empty;
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
@@ -173,6 +183,9 @@ public sealed class TweaksViewModel : ViewModelBase
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
+        _openDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport());
+        _filterAppliedCommand = new RelayCommand(_ => StatusFilter = "applied");
+        _filterRolledBackCommand = new RelayCommand(_ => StatusFilter = "rolledback");
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
         ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
@@ -184,6 +197,8 @@ public sealed class TweaksViewModel : ViewModelBase
         ApplyTweakMetadata();
         _documentationLinker.Apply(Tweaks);
         UpdateFilterSummary();
+        LoadDocsCoverageReport();
+        RefreshSummaryStats();
         _ = InitializePresetsAsync();
 
         _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -384,6 +399,12 @@ public sealed class TweaksViewModel : ViewModelBase
 
     public ICommand OpenCsvLogCommand => _openCsvLogCommand;
 
+    public ICommand OpenDocsCoverageReportCommand => _openDocsCoverageReportCommand;
+
+    public ICommand FilterAppliedCommand => _filterAppliedCommand;
+
+    public ICommand FilterRolledBackCommand => _filterRolledBackCommand;
+
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
     public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
@@ -392,6 +413,64 @@ public sealed class TweaksViewModel : ViewModelBase
     public ICommand CreateSnapshotCommand { get; }
 
     public int ScorableTweaksTotal => Tweaks.Count(IsScorableForHealth);
+
+    public int TotalTweaksAvailable
+    {
+        get => _totalTweaksAvailable;
+        private set => SetProperty(ref _totalTweaksAvailable, value);
+    }
+
+    public int TweaksApplied
+    {
+        get => _tweaksApplied;
+        private set => SetProperty(ref _tweaksApplied, value);
+    }
+
+    public int TweaksRolledBack
+    {
+        get => _tweaksRolledBack;
+        private set => SetProperty(ref _tweaksRolledBack, value);
+    }
+
+    public long LogFileSizeBytes
+    {
+        get => _logFileSizeBytes;
+        private set => SetProperty(ref _logFileSizeBytes, value);
+    }
+
+    public string LogFileSizeFormatted => FormatBytes(LogFileSizeBytes);
+
+    public int DocsMissingCount
+    {
+        get => _docsMissingCount;
+        private set
+        {
+            if (SetProperty(ref _docsMissingCount, value))
+            {
+                OnPropertyChanged(nameof(DocsCoverageOk));
+                OnPropertyChanged(nameof(DocsCoverageWarn));
+                OnPropertyChanged(nameof(DocsCoverageCritical));
+            }
+        }
+    }
+
+    public string DocsCoverageSummary
+    {
+        get => _docsCoverageSummary;
+        private set => SetProperty(ref _docsCoverageSummary, value);
+    }
+
+    public string DocsCoverageReportPath
+    {
+        get => _docsCoverageReportPath;
+        private set => SetProperty(ref _docsCoverageReportPath, value);
+    }
+
+    public bool DocsCoverageOk => DocsMissingCount == 0;
+
+    public bool DocsCoverageWarn => DocsMissingCount > 0 && DocsMissingCount <= 10;
+
+    public bool DocsCoverageCritical => DocsMissingCount > 10;
 
     public int ScorableTweaksMeasuredTotal => Tweaks.Count(t => IsScorableForHealth(t) && t.AppliedStatus != TweakAppliedStatus.Unknown);
 
@@ -763,6 +842,7 @@ public sealed class TweaksViewModel : ViewModelBase
             BulkProgressTotal = 0;
             OnPropertyChanged(nameof(BulkProgressText));
             ClearBulkCancellation();
+            RefreshSummaryStats();
         }
     }
 
@@ -810,6 +890,7 @@ public sealed class TweaksViewModel : ViewModelBase
                  or nameof(TweakItemViewModel.WasRolledBack))
         {
             RaiseHealthMetricsChanged();
+            RefreshSummaryStats();
             if (!string.IsNullOrEmpty(_statusFilter))
             {
                 TweaksView.Refresh();
@@ -862,6 +943,7 @@ public sealed class TweaksViewModel : ViewModelBase
 
         UpdateSelectionCount();
         RaiseHealthMetricsChanged();
+        RefreshSummaryStats();
     }
 
     private void RaiseHealthMetricsChanged()
@@ -1084,6 +1166,112 @@ public sealed class TweaksViewModel : ViewModelBase
         ShowRisky = true;
     }
 
+    private void RefreshSummaryStats()
+    {
+        TotalTweaksAvailable = Tweaks.Count;
+        TweaksApplied = Tweaks.Count(t => t.IsApplied);
+        TweaksRolledBack = Tweaks.Count(t => t.WasRolledBack);
+        RefreshLogFileSize();
+    }
+
+    private void RefreshLogFileSize()
+    {
+        if (!File.Exists(_tweakLogFilePath))
+        {
+            LogFileSizeBytes = 0;
+            return;
+        }
+
+        try
+        {
+            LogFileSizeBytes = new FileInfo(_tweakLogFilePath).Length;
+        }
+        catch
+        {
+            LogFileSizeBytes = 0;
+        }
+    }
+
+    private void LoadDocsCoverageReport()
+    {
+        try
+        {
+            var docsRoot = DocsLocator.TryFindDocsRoot();
+            if (string.IsNullOrWhiteSpace(docsRoot))
+            {
+                DocsCoverageReportPath = string.Empty;
+                DocsMissingCount = 0;
+                DocsCoverageSummary = "Docs folder not found.";
+                return;
+            }
+
+            var priorityHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.html");
+            var priorityMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.md");
+            var priorityCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.csv");
+            var fallbackHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.html");
+            var fallbackMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.md");
+            var fallbackCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.csv");
+
+            var reportPath = File.Exists(priorityHtml)
+                ? priorityHtml
+                : File.Exists(priorityMd)
+                    ? priorityMd
+                    : File.Exists(fallbackHtml)
+                        ? fallbackHtml
+                        : File.Exists(fallbackMd) ? fallbackMd : string.Empty;
+
+            DocsCoverageReportPath = reportPath;
+
+            var csvPath = File.Exists(priorityCsv)
+                ? priorityCsv
+                : File.Exists(fallbackCsv) ? fallbackCsv : string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(csvPath))
+            {
+                var lines = File.ReadAllLines(csvPath);
+                DocsMissingCount = Math.Max(0, lines.Length - 1);
+                DocsCoverageSummary = DocsMissingCount == 0 ? "All documented" : $"{DocsMissingCount} missing";
+            }
+            else
+            {
+                DocsMissingCount = 0;
+                DocsCoverageSummary = string.IsNullOrWhiteSpace(reportPath)
+                    ? "Docs report unavailable."
+                    : "Docs report ready.";
+            }
+        }
+        catch
+        {
+            DocsCoverageReportPath = string.Empty;
+            DocsMissingCount = 0;
+            DocsCoverageSummary = "Docs report unavailable.";
+        }
+    }
+
+    private void OpenDocsCoverageReport()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(DocsCoverageReportPath) || !File.Exists(DocsCoverageReportPath))
+            {
+                LoadDocsCoverageReport();
+            }
+
+            if (!string.IsNullOrWhiteSpace(DocsCoverageReportPath) && File.Exists(DocsCoverageReportPath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = DocsCoverageReportPath,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
+    }
+
     private void OpenLogFolder()
     {
         try
@@ -1132,6 +1320,17 @@ public sealed class TweaksViewModel : ViewModelBase
         {
             item.IsDetailsExpanded = isExpanded;
         }
+    }
+
+    private static string FormatBytes(long bytes)
+    {
+        if (bytes < 1024)
+            return $"{bytes} B";
+        if (bytes < 1024 * 1024)
+            return $"{bytes / 1024.0:F2} KB";
+        if (bytes < 1024 * 1024 * 1024)
+            return $"{bytes / (1024.0 * 1024.0):F2} MB";
+        return $"{bytes / (1024.0 * 1024.0 * 1024.0):F2} GB";
     }
 
     private async Task ExportPresetsAsync()

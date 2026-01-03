@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,12 +26,14 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _enableCardShadows;
     private bool _runStartupScanOnLaunch = true;
     private bool _showPreviewHint = true;
+    private readonly IAppLogger _appLogger;
     private AppSettings _settings = new();
 
     public SettingsViewModel()
     {
         var paths = AppPaths.FromEnvironment();
         _settingsStore = new SettingsStore(paths);
+        _appLogger = new FileAppLogger(paths);
 
         _saveCommand = new RelayCommand(_ => _ = SaveSettingsAsync(), _ => !IsSaving);
         _testWebhookCommand = new RelayCommand(_ => _ = TestWebhookAsync(), _ => !IsTesting && !string.IsNullOrWhiteSpace(DiscordWebhookUrl));
@@ -200,6 +203,16 @@ public sealed class SettingsViewModel : ViewModelBase
         try
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
+            var previous = new AppSettings
+            {
+                DiscordWebhookUrl = settings.DiscordWebhookUrl,
+                DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled,
+                DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled,
+                Theme = settings.Theme,
+                EnableCardShadows = settings.EnableCardShadows,
+                RunStartupScanOnLaunch = settings.RunStartupScanOnLaunch,
+                ShowPreviewHint = settings.ShowPreviewHint
+            };
             settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
             settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
             settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
@@ -210,6 +223,7 @@ public sealed class SettingsViewModel : ViewModelBase
 
             await _settingsStore.SaveAsync(settings, CancellationToken.None);
             _settings = settings;
+            LogSettingsChanges(previous, settings);
             StatusMessage = "Settings saved successfully!";
         }
         catch (System.Exception ex)
@@ -266,6 +280,7 @@ public sealed class SettingsViewModel : ViewModelBase
             await _settingsStore.SaveAsync(settings, CancellationToken.None);
             _settings = settings;
             StatusMessage = "Monitor layout reset. Reopen Monitor to reload defaults.";
+            _appLogger.Log(LogLevel.Info, "Activity: Settings - Monitor layout reset");
         }
         catch (System.Exception ex)
         {
@@ -275,5 +290,54 @@ public sealed class SettingsViewModel : ViewModelBase
         {
             IsSaving = false;
         }
+    }
+
+    private void LogSettingsChanges(AppSettings before, AppSettings after)
+    {
+        var changes = new List<string>();
+
+        if (!string.Equals(before.Theme, after.Theme, System.StringComparison.OrdinalIgnoreCase))
+        {
+            changes.Add($"Theme={after.Theme}");
+        }
+
+        if (before.EnableCardShadows != after.EnableCardShadows)
+        {
+            changes.Add($"CardShadows={(after.EnableCardShadows ? "On" : "Off")}");
+        }
+
+        if (before.RunStartupScanOnLaunch != after.RunStartupScanOnLaunch)
+        {
+            changes.Add($"StartupScan={(after.RunStartupScanOnLaunch ? "On" : "Off")}");
+        }
+
+        if (before.ShowPreviewHint != after.ShowPreviewHint)
+        {
+            changes.Add($"PreviewHint={(after.ShowPreviewHint ? "On" : "Off")}");
+        }
+
+        if (before.DiscordNotificationsEnabled != after.DiscordNotificationsEnabled)
+        {
+            changes.Add($"DiscordNotifications={(after.DiscordNotificationsEnabled ? "On" : "Off")}");
+        }
+
+        if (before.DiscordAutoPatchEnabled != after.DiscordAutoPatchEnabled)
+        {
+            changes.Add($"DiscordAutoPatch={(after.DiscordAutoPatchEnabled ? "On" : "Off")}");
+        }
+
+        var beforeWebhook = string.IsNullOrWhiteSpace(before.DiscordWebhookUrl) ? "Empty" : "Set";
+        var afterWebhook = string.IsNullOrWhiteSpace(after.DiscordWebhookUrl) ? "Empty" : "Set";
+        if (!string.Equals(beforeWebhook, afterWebhook, System.StringComparison.Ordinal))
+        {
+            changes.Add($"Webhook={afterWebhook}");
+        }
+
+        if (changes.Count == 0)
+        {
+            return;
+        }
+
+        _appLogger.Log(LogLevel.Info, $"Activity: Settings - {string.Join(", ", changes)}");
     }
 }

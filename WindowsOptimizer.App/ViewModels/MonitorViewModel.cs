@@ -20,11 +20,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 {
     private static readonly MonitorSectionDefinition[] DefaultSections =
     [
-        new("system-info", "System Information", "OS, CPU, GPU, RAM, uptime."),
-        new("performance-panel", "Performance Panel", "Task Manager-style performance breakdown."),
         new("stat-cards", "Usage Summary Cards", "CPU, RAM, GPU usage and temperatures."),
         new("cpu-ram-history", "CPU & RAM History", "60-second usage history charts."),
         new("network-disk-io", "Network & Disk I/O", "60-second throughput charts."),
+        new("performance-panel", "Performance Panel", "Task Manager-style performance breakdown."),
         new("top-cpu-ram", "Top CPU/RAM Processes", "Top processes by CPU and RAM usage."),
         new("top-network", "Top Network Processes", "Top processes by network throughput."),
         new("top-disk", "Top Disk Processes", "Top processes by disk I/O throughput."),
@@ -41,6 +40,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly GpuEngineMonitor? _gpuEngineMonitor;
     private readonly DispatcherTimer? _updateTimer;
     private readonly SettingsStore _settingsStore = new(AppPaths.FromEnvironment());
+    private readonly IAppLogger _appLogger;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -62,6 +62,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private double? _googleLatencyMs;
     private int? _wifiSignalQuality;
     private string _wifiSsid = string.Empty;
+    private string _statusMessage = string.Empty;
     private SystemInfo? _systemInfo;
     private double _cpuAlertThreshold = 90.0;
     private double _ramAlertThreshold = 90.0;
@@ -108,6 +109,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public MonitorViewModel()
     {
+        var paths = AppPaths.FromEnvironment();
+        _appLogger = new FileAppLogger(paths);
+
         try
         {
             _toggleLayoutEditorCommand = new RelayCommand(_ => IsLayoutEditorVisible = !IsLayoutEditorVisible);
@@ -408,10 +412,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             }
 
             File.WriteAllText(filepath, csv.ToString());
+            StatusMessage = $"Metrics saved to Desktop: {filename}";
+            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Metrics CSV saved ({filename})");
             System.Diagnostics.Debug.WriteLine($"Metrics exported to: {filepath}");
         }
         catch (Exception ex)
         {
+            StatusMessage = $"Metrics export failed: {ex.Message}";
+            _appLogger.Log(LogLevel.Error, "Activity: Monitor - Metrics export failed", ex);
             System.Diagnostics.Debug.WriteLine($"Export failed: {ex.Message}");
         }
     }
@@ -427,10 +435,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             var report = _metricProvider?.BuildSensorDiagnosticsReport()
                          ?? "Sensor diagnostics not available (MetricProvider not initialized).";
             File.WriteAllText(filepath, report);
+            StatusMessage = $"Sensor report saved to Desktop: {filename}";
+            _appLogger.Log(LogLevel.Info, $"Activity: Monitor - Sensor report saved ({filename})");
             System.Diagnostics.Debug.WriteLine($"Sensor diagnostics exported to: {filepath}");
         }
         catch (Exception ex)
         {
+            StatusMessage = $"Sensor export failed: {ex.Message}";
+            _appLogger.Log(LogLevel.Error, "Activity: Monitor - Sensor export failed", ex);
             System.Diagnostics.Debug.WriteLine($"Sensor diagnostics export failed: {ex.Message}");
         }
     }
@@ -975,6 +987,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         get => _wifiSsid;
         private set => SetProperty(ref _wifiSsid, value);
+    }
+
+    public string StatusMessage
+    {
+        get => _statusMessage;
+        private set => SetProperty(ref _statusMessage, value);
     }
 
     public string WifiSignalText => WifiSignalQuality.HasValue

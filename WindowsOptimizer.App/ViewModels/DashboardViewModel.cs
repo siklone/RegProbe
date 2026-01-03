@@ -1870,14 +1870,21 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         try
         {
-            var entries = await _logStore.GetRecentHistoryAsync(10, CancellationToken.None);
-            RecentActivity = entries
+            var entries = await _logStore.GetRecentHistoryAsync(20, CancellationToken.None);
+            var tweakItems = entries
                 .Select(e => new ActivityTimelineItem(
                     e.Timestamp.LocalDateTime,
                     e.TweakName,
                     e.Action.ToString(),
                     e.Status == Core.TweakStatus.Applied || e.Status == Core.TweakStatus.RolledBack,
                     e.Message))
+                .ToList();
+
+            var appItems = ReadRecentAppActivity(20);
+            RecentActivity = tweakItems
+                .Concat(appItems)
+                .OrderByDescending(item => item.Timestamp)
+                .Take(10)
                 .ToList()
                 .AsReadOnly();
         }
@@ -1885,6 +1892,92 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             RecentActivity = Array.Empty<ActivityTimelineItem>();
         }
+    }
+
+    private IEnumerable<ActivityTimelineItem> ReadRecentAppActivity(int maxItems)
+    {
+        var logPath = _paths.LogFilePath;
+        if (!File.Exists(logPath))
+        {
+            return Array.Empty<ActivityTimelineItem>();
+        }
+
+        var items = new List<ActivityTimelineItem>();
+        foreach (var line in ReadTailLines(logPath, Math.Max(50, maxItems * 5)))
+        {
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                continue;
+            }
+
+            var timestampEnd = line.IndexOf(' ');
+            if (timestampEnd <= 0)
+            {
+                continue;
+            }
+
+            var timestampText = line[..timestampEnd];
+            if (!DateTimeOffset.TryParse(timestampText, out var timestamp))
+            {
+                continue;
+            }
+
+            var levelStart = line.IndexOf('[', timestampEnd);
+            var levelEnd = levelStart >= 0 ? line.IndexOf(']', levelStart + 1) : -1;
+            if (levelStart < 0 || levelEnd < 0)
+            {
+                continue;
+            }
+
+            var level = line.Substring(levelStart + 1, levelEnd - levelStart - 1);
+            var message = line[(levelEnd + 1)..].Trim();
+            if (!message.StartsWith("Activity:", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var payload = message["Activity:".Length..].Trim();
+            if (string.IsNullOrWhiteSpace(payload))
+            {
+                continue;
+            }
+
+            var source = "App";
+            var detail = payload;
+            var splitIndex = payload.IndexOf(" - ", StringComparison.Ordinal);
+            if (splitIndex >= 0)
+            {
+                source = payload[..splitIndex].Trim();
+                detail = payload[(splitIndex + 3)..].Trim();
+            }
+
+            var action = level.Equals("WARN", StringComparison.OrdinalIgnoreCase)
+                ? "Warning"
+                : level.Equals("ERROR", StringComparison.OrdinalIgnoreCase)
+                    ? "Error"
+                    : source;
+
+            var success = !level.Equals("ERROR", StringComparison.OrdinalIgnoreCase);
+            items.Add(new ActivityTimelineItem(timestamp.LocalDateTime, source, action, success, detail));
+        }
+
+        return items;
+    }
+
+    private static IEnumerable<string> ReadTailLines(string path, int maxLines)
+    {
+        var queue = new Queue<string>(maxLines);
+        foreach (var line in File.ReadLines(path))
+        {
+            if (queue.Count >= maxLines)
+            {
+                queue.Dequeue();
+            }
+
+            queue.Enqueue(line);
+        }
+
+        return queue;
     }
 
     private void LoadStatistics()
@@ -2142,10 +2235,19 @@ public sealed class ActivityTimelineItem
         "detect" => "🔍",
         "preview" => "👁",
         "verify" => "✔",
+        "settings" => "⚙",
+        "monitor" => "📈",
+        "warning" => "⚠",
+        "error" => "✖",
         _ => "•"
     };
 
-    public string StatusColor => Success ? "#A3BE8C" : "#BF616A";
+    public string StatusColor => Action.ToLowerInvariant() switch
+    {
+        "warning" => "#EBCB8B",
+        "error" => "#BF616A",
+        _ => Success ? "#A3BE8C" : "#BF616A"
+    };
 
     private static string FormatTimeAgo(TimeSpan span)
     {

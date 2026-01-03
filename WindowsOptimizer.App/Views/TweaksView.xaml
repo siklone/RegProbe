@@ -38,6 +38,27 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="TweakStatCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Margin" Value="0,0,12,12"/>
+        </Style>
+
+        <Style x:Key="TweakStatValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+        </Style>
+
+        <Style x:Key="TweakStatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+            <Setter Property="Margin" Value="0,6,0,0"/>
+        </Style>
+
         <!-- Toggle Switch Style -->
         <Style x:Key="TweakToggleStyle" TargetType="CheckBox">
             <Setter Property="Template">
@@ -971,6 +992,126 @@
                            Foreground="{DynamicResource AccentBrightCyanBrush}"
                            FontSize="12"
                            Margin="0,4,0,8"/>
+
+                <UniformGrid Columns="5" Margin="0,0,-12,4">
+                    <Button Command="{Binding ResetFiltersCommand}" Cursor="Hand" ToolTip="Show all tweaks">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="10" Width="36" Height="36" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <TextBlock Text="📦" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding TotalTweaksAvailable}" Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Total Tweaks" Style="{StaticResource TweakStatLabelStyle}"/>
+                                        <TextBlock Text="Show all" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button Command="{Binding FilterAppliedCommand}" Cursor="Hand" ToolTip="Filter applied tweaks">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <Border Background="{DynamicResource SuccessBrush}" CornerRadius="10" Width="36" Height="36" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <TextBlock Text="✅" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding TweaksApplied}" Style="{StaticResource TweakStatValueStyle}" Foreground="{DynamicResource SuccessBrush}"/>
+                                        <TextBlock Text="Applied" Style="{StaticResource TweakStatLabelStyle}"/>
+                                        <TextBlock Text="Click to filter" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button Command="{Binding FilterRolledBackCommand}" Cursor="Hand" ToolTip="Filter rolled-back tweaks">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <Border Background="{DynamicResource CautionBrush}" CornerRadius="10" Width="36" Height="36" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <TextBlock Text="↩️" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding TweaksRolledBack}" Style="{StaticResource TweakStatValueStyle}" Foreground="{DynamicResource CautionBrush}"/>
+                                        <TextBlock Text="Rolled Back" Style="{StaticResource TweakStatLabelStyle}"/>
+                                        <TextBlock Text="Click to filter" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button Command="{Binding OpenCsvLogCommand}" Cursor="Hand" ToolTip="Open tweak log (CSV)">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <Border Background="{DynamicResource InfoBrush}" CornerRadius="10" Width="36" Height="36" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <TextBlock Text="📄" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding LogFileSizeFormatted}" Style="{StaticResource TweakStatValueStyle}" FontSize="22"/>
+                                        <TextBlock Text="Log File Size" Style="{StaticResource TweakStatLabelStyle}"/>
+                                        <TextBlock Text="Click to open" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button Command="{Binding OpenDocsCoverageReportCommand}" Cursor="Hand" ToolTip="{Binding DocsCoverageSummary}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <Border CornerRadius="10" Width="36" Height="36" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource CautionBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource ErrorBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="📚" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding DocsMissingCount}" Style="{StaticResource TweakStatValueStyle}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock" BasedOn="{StaticResource TweakStatValueStyle}">
+                                                    <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
+                                                            <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
+                                                            <Setter Property="Foreground" Value="{DynamicResource CautionBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
+                                                            <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Text="Docs Missing" Style="{StaticResource TweakStatLabelStyle}"/>
+                                        <TextBlock Text="{Binding DocsCoverageSummary}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </UniformGrid>
 
                 <!-- Status Filter Badge (shown when filtering by applied/rolled back) -->
                 <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="6" Padding="12,6" Margin="0,0,0,12"

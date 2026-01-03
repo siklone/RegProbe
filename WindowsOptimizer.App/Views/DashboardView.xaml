@@ -415,131 +415,159 @@
                 </StackPanel>
             </Grid>
 
-            <!-- Statistics Grid -->
-            <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,-16,24">
-                <!-- Total Tweaks Available (Clickable) -->
-                <Button Command="{Binding NavigateToTotalTweaksCommand}" Cursor="Hand" ToolTip="Click to view all tweaks">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
-                                <StackPanel>
-                                    <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
-                                        <TextBlock Text="📦" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding TotalTweaksAvailable}" Style="{StaticResource StatValueStyle}"/>
-                                    <TextBlock Text="Total Tweaks" Style="{StaticResource StatLabelStyle}"/>
-                                    <TextBlock Text="Click to view" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+            <!-- System Information Card -->
+            <Border Grid.Row="1" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Text="💻 System Information" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
 
-                <!-- Tweaks Applied (Clickable) -->
-                <Button Command="{Binding NavigateToAppliedTweaksCommand}" Cursor="Hand" ToolTip="Click to view applied tweaks">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
-                                <StackPanel>
-                                    <Border Background="{DynamicResource SuccessBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
-                                        <TextBlock Text="✅" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding TweaksApplied}" Style="{StaticResource StatValueStyle}" Foreground="{DynamicResource SuccessBrush}"/>
-                                    <TextBlock Text="Applied (Health)" Style="{StaticResource StatLabelStyle}"/>
-                                    <TextBlock Text="Click to filter" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                    <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                <!-- Tweaks Rolled Back (Clickable) -->
-                <Button Command="{Binding NavigateToRolledBackTweaksCommand}" Cursor="Hand" ToolTip="Click to view rolled back tweaks">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
-                                <StackPanel>
-                                    <Border Background="{DynamicResource CautionBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
-                                        <TextBlock Text="↩️" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding TweaksRolledBack}" Style="{StaticResource StatValueStyle}" Foreground="{DynamicResource CautionBrush}"/>
-                                    <TextBlock Text="Rolled Back" Style="{StaticResource StatLabelStyle}"/>
-                                    <TextBlock Text="Click to filter" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="OS:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding OsVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" FontWeight="Medium" TextTrimming="CharacterEllipsis"/>
 
-                <!-- Log File Size (Clickable) -->
-                <Button Command="{Binding OpenLogFileCommand}" Cursor="Hand" ToolTip="{Binding LogFilePath}">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
-                                <StackPanel>
-                                    <Border Background="{DynamicResource InfoBrush}" CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
-                                        <TextBlock Text="📄" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding LogFileSizeFormatted}" Style="{StaticResource StatValueStyle}" FontSize="32"/>
-                                    <TextBlock Text="Log File Size" Style="{StaticResource StatLabelStyle}"/>
-                                    <TextBlock Text="Click to open" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Display:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding OsDisplayVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
 
-                <!-- Docs Coverage (Clickable) -->
-                <Button Command="{Binding OpenDocsCoverageReportCommand}" Cursor="Hand" ToolTip="{Binding DocsCoverageSummary}">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border x:Name="CardBorder" Style="{StaticResource GlassStatCardStyle}">
-                                <StackPanel>
-                                    <Border CornerRadius="12" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,0,0,16">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
-                                                        <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
-                                                        <Setter Property="Background" Value="{DynamicResource CautionBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
-                                                        <Setter Property="Background" Value="{DynamicResource ErrorBrush}"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <TextBlock Text="📚" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding DocsMissingCount}" FontSize="32">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock" BasedOn="{StaticResource StatValueStyle}">
-                                                <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding DocsCoverageOk}" Value="True">
-                                                        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DocsCoverageWarn}" Value="True">
-                                                        <Setter Property="Foreground" Value="{DynamicResource CautionBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DocsCoverageCritical}" Value="True">
-                                                        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                    <TextBlock Text="Docs Missing" Style="{StaticResource StatLabelStyle}"/>
-                                    <TextBlock Text="{Binding DocsCoverageSummary}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </UniformGrid>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Build:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OsBuild}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Arch:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SystemArchitecture}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="CPU Model:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="CPU Threads:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProcessorCount}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Total RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TotalMemoryFormatted}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="Medium"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Free RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AvailableMemoryFormatted}" Foreground="{DynamicResource CautionBrush}" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Machine:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MachineName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="User:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding UserName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Uptime:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SystemUptime}" Foreground="{DynamicResource InfoBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text=".NET:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding DotNetVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="GPU:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Boot Disk:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PrimaryDiskType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Firmware:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding FirmwareType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Secure Boot:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SecureBootStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Virtualization:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VirtualizationStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="TPM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TpmStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="BIOS/UEFI:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding BiosVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Motherboard:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BaseboardModel}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="GPU Driver:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GpuDriverVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Windows Update:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding WindowsUpdateStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="BitLocker:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding BitLockerStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
 
             <!-- System Status -->
             <Border Grid.Row="2" Style="{StaticResource InfoCardStyle}">
@@ -724,7 +752,6 @@
             <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -857,160 +884,6 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                    </StackPanel>
-                </Border>
-
-                <!-- System Information Card -->
-                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,16">
-                    <StackPanel>
-                        <TextBlock Text="💻 System Information" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
-
-                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="OS:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding OsVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" FontWeight="Medium" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Display:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding OsDisplayVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Build:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OsBuild}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Arch:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SystemArchitecture}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-                            </Grid>
-                        </Border>
-
-                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="CPU Model:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="CPU Threads:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProcessorCount}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Total RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TotalMemoryFormatted}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="Medium"/>
-
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Free RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AvailableMemoryFormatted}" Foreground="{DynamicResource CautionBrush}" FontSize="11"/>
-                            </Grid>
-                        </Border>
-
-                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Machine:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MachineName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="User:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding UserName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Uptime:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SystemUptime}" Foreground="{DynamicResource InfoBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text=".NET:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding DotNetVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-                            </Grid>
-                        </Border>
-
-                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,10,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="GPU:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Boot Disk:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PrimaryDiskType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Firmware:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding FirmwareType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Secure Boot:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SecureBootStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Virtualization:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VirtualizationStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="5" Grid.Column="0" Text="TPM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
-                                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TpmStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-                            </Grid>
-                        </Border>
-
-                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,10,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="BIOS/UEFI:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding BiosVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Motherboard:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BaseboardModel}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="GPU Driver:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GpuDriverVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
-
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Windows Update:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding WindowsUpdateStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-
-                                <TextBlock Grid.Row="4" Grid.Column="0" Text="BitLocker:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
-                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding BitLockerStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
-                            </Grid>
-                        </Border>
                     </StackPanel>
                 </Border>
 
