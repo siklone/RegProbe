@@ -795,6 +795,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     SelectedStartupApp = StartupApps[0];
                 }
+                if (StatusMessage.StartsWith("Startup apps load failed", StringComparison.OrdinalIgnoreCase))
+                {
+                    StatusMessage = string.Empty;
+                }
             }).ConfigureAwait(false);
 
             if (_lastStartupCount != items.Count)
@@ -852,6 +856,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 else if (SelectedService != null)
                 {
                     UpdateServiceDetails();
+                }
+                if (StatusMessage.StartsWith("Services load failed", StringComparison.OrdinalIgnoreCase))
+                {
+                    StatusMessage = string.Empty;
                 }
             }).ConfigureAwait(false);
 
@@ -2996,8 +3004,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
     {
-        using var _ = CollectionViewSource.GetDefaultView(collection).DeferRefresh();
-
         if (collection.Count == newItems.Count)
         {
             for (var i = 0; i < newItems.Count; i++)
@@ -3128,11 +3134,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _isIoSampleInProgress = true;
         try
         {
-            if (_networkMonitor == null && _diskMonitor == null)
-            {
-                return;
-            }
-
             var snapshot = await Task.Run(() =>
             {
                 var adapters = new List<NetworkAdapterInfo>();
@@ -3186,83 +3187,77 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 var refreshPerformance = false;
 
-                if (_networkMonitor != null)
+                var networkAdapters = snapshot.NetworkAdapters;
+                var totalUpload = networkAdapters.Sum(a => a.SendMbps);
+                var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
+                UpdateHistory(NetworkUploadHistory, totalUpload);
+                UpdateHistory(NetworkDownloadHistory, totalDownload);
+                OnPropertyChanged(nameof(NetworkDownloadMax));
+                OnPropertyChanged(nameof(NetworkDownloadMin));
+                OnPropertyChanged(nameof(NetworkDownloadNow));
+                OnPropertyChanged(nameof(NetworkUploadMax));
+                OnPropertyChanged(nameof(NetworkUploadMin));
+                OnPropertyChanged(nameof(NetworkUploadNow));
+                OnPropertyChanged(nameof(NetworkIoScaleMax));
+                OnPropertyChanged(nameof(NetworkIoScaleMid));
+
+                UpdateCollection(NetworkAdapters, networkAdapters);
+                if (_lastNetworkAdapterCount != networkAdapters.Count)
                 {
-                    var networkAdapters = snapshot.NetworkAdapters;
-                    var totalUpload = networkAdapters.Sum(a => a.SendMbps);
-                    var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
-                    UpdateHistory(NetworkUploadHistory, totalUpload);
-                    UpdateHistory(NetworkDownloadHistory, totalDownload);
-                    OnPropertyChanged(nameof(NetworkDownloadMax));
-                    OnPropertyChanged(nameof(NetworkDownloadMin));
-                    OnPropertyChanged(nameof(NetworkDownloadNow));
-                    OnPropertyChanged(nameof(NetworkUploadMax));
-                    OnPropertyChanged(nameof(NetworkUploadMin));
-                    OnPropertyChanged(nameof(NetworkUploadNow));
-                    OnPropertyChanged(nameof(NetworkIoScaleMax));
-                    OnPropertyChanged(nameof(NetworkIoScaleMid));
-
-                    UpdateCollection(NetworkAdapters, networkAdapters);
-                    if (_lastNetworkAdapterCount != networkAdapters.Count)
-                    {
-                        _lastNetworkAdapterCount = networkAdapters.Count;
-                        LogMonitorInfo($"Monitor: Network adapters updated ({networkAdapters.Count} entries).");
-                    }
-
-                    var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                    foreach (var adapter in networkAdapters)
-                    {
-                        var key = string.IsNullOrWhiteSpace(adapter.AdapterId) ? adapter.Name : adapter.AdapterId;
-                        activeAdapters.Add(key);
-                        var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, key);
-                        var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, key);
-                        UpdateHistory(sendHistory, adapter.SendMbps);
-                        UpdateHistory(receiveHistory, adapter.ReceiveMbps);
-                    }
-
-                    CleanupHistory(_netSendHistoryByAdapter, activeAdapters);
-                    CleanupHistory(_netReceiveHistoryByAdapter, activeAdapters);
-                    refreshPerformance = true;
+                    _lastNetworkAdapterCount = networkAdapters.Count;
+                    LogMonitorInfo($"Monitor: Network adapters updated ({networkAdapters.Count} entries).");
                 }
 
-                if (_diskMonitor != null)
+                var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var adapter in networkAdapters)
                 {
-                    var disks = snapshot.Disks;
-                    var totalRead = disks.Sum(d => d.ReadMBps);
-                    var totalWrite = disks.Sum(d => d.WriteMBps);
-                    UpdateHistory(DiskReadHistory, totalRead);
-                    UpdateHistory(DiskWriteHistory, totalWrite);
-                    OnPropertyChanged(nameof(DiskReadMax));
-                    OnPropertyChanged(nameof(DiskReadMin));
-                    OnPropertyChanged(nameof(DiskReadNow));
-                    OnPropertyChanged(nameof(DiskWriteMax));
-                    OnPropertyChanged(nameof(DiskWriteMin));
-                    OnPropertyChanged(nameof(DiskWriteNow));
-                    OnPropertyChanged(nameof(DiskIoScaleMax));
-                    OnPropertyChanged(nameof(DiskIoScaleMid));
-
-                    UpdateCollection(Disks, disks);
-                    if (_lastDiskCount != disks.Count)
-                    {
-                        _lastDiskCount = disks.Count;
-                        LogMonitorInfo($"Monitor: Disk activity updated ({disks.Count} drives).");
-                    }
-
-                    var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                    foreach (var disk in disks)
-                    {
-                        var key = disk.DriveLetter;
-                        activeDisks.Add(key);
-                        var readHistory = GetOrCreateHistory(_diskReadHistoryByDrive, key);
-                        var writeHistory = GetOrCreateHistory(_diskWriteHistoryByDrive, key);
-                        UpdateHistory(readHistory, disk.ReadMBps);
-                        UpdateHistory(writeHistory, disk.WriteMBps);
-                    }
-
-                    CleanupHistory(_diskReadHistoryByDrive, activeDisks);
-                    CleanupHistory(_diskWriteHistoryByDrive, activeDisks);
-                    refreshPerformance = true;
+                    var key = string.IsNullOrWhiteSpace(adapter.AdapterId) ? adapter.Name : adapter.AdapterId;
+                    activeAdapters.Add(key);
+                    var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, key);
+                    var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, key);
+                    UpdateHistory(sendHistory, adapter.SendMbps);
+                    UpdateHistory(receiveHistory, adapter.ReceiveMbps);
                 }
+
+                CleanupHistory(_netSendHistoryByAdapter, activeAdapters);
+                CleanupHistory(_netReceiveHistoryByAdapter, activeAdapters);
+                refreshPerformance = true;
+
+                var disks = snapshot.Disks;
+                var totalRead = disks.Sum(d => d.ReadMBps);
+                var totalWrite = disks.Sum(d => d.WriteMBps);
+                UpdateHistory(DiskReadHistory, totalRead);
+                UpdateHistory(DiskWriteHistory, totalWrite);
+                OnPropertyChanged(nameof(DiskReadMax));
+                OnPropertyChanged(nameof(DiskReadMin));
+                OnPropertyChanged(nameof(DiskReadNow));
+                OnPropertyChanged(nameof(DiskWriteMax));
+                OnPropertyChanged(nameof(DiskWriteMin));
+                OnPropertyChanged(nameof(DiskWriteNow));
+                OnPropertyChanged(nameof(DiskIoScaleMax));
+                OnPropertyChanged(nameof(DiskIoScaleMid));
+
+                UpdateCollection(Disks, disks);
+                if (_lastDiskCount != disks.Count)
+                {
+                    _lastDiskCount = disks.Count;
+                    LogMonitorInfo($"Monitor: Disk activity updated ({disks.Count} drives).");
+                }
+
+                var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var disk in disks)
+                {
+                    var key = disk.DriveLetter;
+                    activeDisks.Add(key);
+                    var readHistory = GetOrCreateHistory(_diskReadHistoryByDrive, key);
+                    var writeHistory = GetOrCreateHistory(_diskWriteHistoryByDrive, key);
+                    UpdateHistory(readHistory, disk.ReadMBps);
+                    UpdateHistory(writeHistory, disk.WriteMBps);
+                }
+
+                CleanupHistory(_diskReadHistoryByDrive, activeDisks);
+                CleanupHistory(_diskWriteHistoryByDrive, activeDisks);
+                refreshPerformance = true;
 
                 if (refreshPerformance)
                 {
