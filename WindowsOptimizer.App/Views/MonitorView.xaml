@@ -263,67 +263,6 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="LayoutOverlayStyle" TargetType="Grid">
-            <Setter Property="IsHitTestVisible" Value="False"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsLayoutEditorVisible}" Value="True">
-                    <Setter Property="IsHitTestVisible" Value="True"/>
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorScrim"
-                                                 Storyboard.TargetProperty="Opacity"
-                                                 From="0" To="1"
-                                                 Duration="0:0:0.14"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="Opacity"
-                                                 From="0" To="1"
-                                                 Duration="0:0:0.16"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 From="0.96" To="1"
-                                                 Duration="0:0:0.16"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 From="0.96" To="1"
-                                                 Duration="0:0:0.16"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorScrim"
-                                                 Storyboard.TargetProperty="Opacity"
-                                                 To="0"
-                                                 Duration="0:0:0.1"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="Opacity"
-                                                 To="0"
-                                                 Duration="0:0:0.1"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="0.98"
-                                                 Duration="0:0:0.1"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                                <DoubleAnimation Storyboard.TargetName="LayoutEditorDialog"
-                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="0.98"
-                                                 Duration="0:0:0.1"
-                                                 EasingFunction="{StaticResource EaseOut}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
         <Style x:Key="LayoutScrimButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#99000000"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -338,6 +277,30 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsLayoutEditorVisible}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0" To="1"
+                                                 Duration="0:0:0.14"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 To="0"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="LayoutDialogStyle" TargetType="Border">
@@ -362,6 +325,46 @@
                                       Opacity="0.35"/>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsLayoutEditorVisible}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 From="0.96" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 From="0.96" To="1"
+                                                 Duration="0:0:0.16"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 To="0"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="0.98"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="0.98"
+                                                 Duration="0:0:0.1"
+                                                 EasingFunction="{StaticResource EaseOut}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <DataTemplate x:Key="MonitorSystemInfoTemplate">
@@ -1841,7 +1844,8 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Grid Style="{StaticResource LayoutOverlayStyle}">
+        <Grid IsHitTestVisible="{Binding IsLayoutEditorVisible}"
+              Panel.ZIndex="10">
             <Button x:Name="LayoutEditorScrim"
                     Style="{StaticResource LayoutScrimButtonStyle}"
                     Command="{Binding ToggleLayoutEditorCommand}"/>
