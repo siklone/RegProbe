@@ -103,10 +103,18 @@ public sealed class NetworkMonitor : IDisposable
                     ComputeRatesFromDeltas(adapterId, totalBytesSent, totalBytesReceived, now);
             }
 
+            var (ipv4, ipv6) = TryGetIpAddresses(nic);
+            var linkSpeedMbps = nic.Speed > 0 ? nic.Speed / (1000d * 1000d) : 0;
+
             adapters.Add(new NetworkAdapterInfo
             {
+                AdapterId = adapterId,
                 Name = adapterName,
+                Description = nic.Description,
                 Type = nic.NetworkInterfaceType.ToString(),
+                LinkSpeedMbps = linkSpeedMbps,
+                Ipv4Address = ipv4,
+                Ipv6Address = ipv6,
                 SendBytesPerSec = sendRateBytesPerSec,
                 ReceiveBytesPerSec = receiveRateBytesPerSec,
                 TotalBytesSent = totalBytesSent,
@@ -149,6 +157,25 @@ public sealed class NetworkMonitor : IDisposable
             {
                 return (0, 0);
             }
+        }
+    }
+
+    private static (string Ipv4, string Ipv6) TryGetIpAddresses(NetworkInterface nic)
+    {
+        try
+        {
+            var props = nic.GetIPProperties();
+            var ipv4 = props.UnicastAddresses
+                .FirstOrDefault(addr => addr.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                ?.Address.ToString() ?? string.Empty;
+            var ipv6 = props.UnicastAddresses
+                .FirstOrDefault(addr => addr.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                ?.Address.ToString() ?? string.Empty;
+            return (ipv4, ipv6);
+        }
+        catch
+        {
+            return (string.Empty, string.Empty);
         }
     }
 
@@ -252,8 +279,13 @@ public sealed class NetworkMonitor : IDisposable
 
 public sealed class NetworkAdapterInfo
 {
+    public string AdapterId { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
+    public double LinkSpeedMbps { get; set; }
+    public string Ipv4Address { get; set; } = string.Empty;
+    public string Ipv6Address { get; set; } = string.Empty;
     public float SendBytesPerSec { get; set; }
     public float ReceiveBytesPerSec { get; set; }
     public long TotalBytesSent { get; set; }

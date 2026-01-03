@@ -29,6 +29,7 @@ public partial class App : Application
 
             // Load saved theme preference before showing any windows.
             ApplyTheme(settings);
+            UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
 
             var mainWindow = new MainWindow
             {

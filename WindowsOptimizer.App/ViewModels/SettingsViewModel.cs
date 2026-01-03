@@ -22,6 +22,7 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _isTesting;
     private readonly RelayCommand _openUrlCommand;
     private bool _isDarkTheme = true;
+    private bool _enableCardShadows;
     private bool _runStartupScanOnLaunch = true;
     private bool _showPreviewHint = true;
     private AppSettings _settings = new();
@@ -105,6 +106,18 @@ public sealed class SettingsViewModel : ViewModelBase
         }
     }
 
+    public bool EnableCardShadows
+    {
+        get => _enableCardShadows;
+        set
+        {
+            if (SetProperty(ref _enableCardShadows, value))
+            {
+                UiPreferences.Current.EnableCardShadows = value;
+            }
+        }
+    }
+
     public bool RunStartupScanOnLaunch
     {
         get => _runStartupScanOnLaunch;
@@ -165,9 +178,12 @@ public sealed class SettingsViewModel : ViewModelBase
             DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
             DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
             _isDarkTheme = settings.Theme != "Light";
+            _enableCardShadows = settings.EnableCardShadows;
             RunStartupScanOnLaunch = settings.RunStartupScanOnLaunch;
             ShowPreviewHint = settings.ShowPreviewHint;
             OnPropertyChanged(nameof(IsDarkTheme));
+            OnPropertyChanged(nameof(EnableCardShadows));
+            UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
             StatusMessage = "Settings loaded successfully.";
         }
         catch (System.Exception ex)
@@ -188,6 +204,7 @@ public sealed class SettingsViewModel : ViewModelBase
             settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
             settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
             settings.Theme = IsDarkTheme ? "Dark" : "Light";
+            settings.EnableCardShadows = EnableCardShadows;
             settings.RunStartupScanOnLaunch = RunStartupScanOnLaunch;
             settings.ShowPreviewHint = ShowPreviewHint;
 

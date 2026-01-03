@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:WindowsOptimizer.Core;assembly=WindowsOptimizer.Core"
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
+             xmlns:services="clr-namespace:WindowsOptimizer.App.Services"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
@@ -590,12 +591,17 @@
                 <Border.RenderTransform>
                     <TranslateTransform Y="0"/>
                 </Border.RenderTransform>
-                <Border.Effect>
-                    <DropShadowEffect x:Name="CardShadow" Color="{DynamicResource ShadowColorSmall}" BlurRadius="8" ShadowDepth="2" Opacity="0.2"/>
-                </Border.Effect>
                 <Border.Style>
                     <Style TargetType="Border">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="{DynamicResource ShadowColorSmall}" BlurRadius="8" ShadowDepth="2" Opacity="0.2"/>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=EnableCardShadows}" Value="False">
+                                <Setter Property="Effect" Value="{x:Null}"/>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
                                 <Setter Property="BorderBrush" Value="{DynamicResource CautionBrush}"/>
                                 <Setter Property="BorderThickness" Value="2"/>
@@ -1314,21 +1320,32 @@
 		                                                    Padding="14,12"
 		                                                    Margin="0,0,0,6"
 		                                                    BorderThickness="2,0,0,0"
-		                                                    BorderBrush="{Binding StatusColor}"
-		                                                    Background="{DynamicResource BackgroundDarkBrush}"
-		                                                    CacheMode="BitmapCache">
-			                                                <Border.RenderTransform>
-			                                                    <TranslateTransform x:Name="TweakCardTranslate" Y="0"/>
-			                                                </Border.RenderTransform>
-		                                                <Border.Effect>
-		                                                    <DropShadowEffect Color="{DynamicResource ShadowColorSmall}"
-		                                                                      BlurRadius="8"
-		                                                                      ShadowDepth="2"
-		                                                                      Opacity="0.2"/>
-		                                                </Border.Effect>
-		                                                <Border.Triggers>
-		                                                    <EventTrigger RoutedEvent="MouseEnter">
-	                                                        <BeginStoryboard>
+                                                    BorderBrush="{Binding StatusColor}"
+                                                    Background="{DynamicResource BackgroundDarkBrush}"
+                                                    CacheMode="BitmapCache">
+                                                <Border.RenderTransform>
+                                                    <TranslateTransform x:Name="TweakCardTranslate" Y="0"/>
+                                                </Border.RenderTransform>
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect Color="{DynamicResource ShadowColorSmall}"
+                                                                                  BlurRadius="8"
+                                                                                  ShadowDepth="2"
+                                                                                  Opacity="0.2"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=EnableCardShadows}" Value="False">
+                                                                <Setter Property="Effect" Value="{x:Null}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Border.Triggers>
+                                                    <EventTrigger RoutedEvent="MouseEnter">
+                                                        <BeginStoryboard>
 	                                                            <Storyboard>
 			                                                                <DoubleAnimation Storyboard.TargetName="TweakCardTranslate"
 			                                                                               Storyboard.TargetProperty="Y"
@@ -1515,15 +1532,18 @@
                                                                                 Background="{DynamicResource ForegroundLightBrush}"
                                                                                 HorizontalAlignment="Left"
                                                                                 Margin="3,0,0,0">
-	                                                                            <Border.RenderTransform>
-	                                                                                <TranslateTransform x:Name="ThumbTranslate" X="0"/>
-	                                                                            </Border.RenderTransform>
+                                                                            <Border.RenderTransform>
+                                                                                <TranslateTransform x:Name="ThumbTranslate" X="0"/>
+                                                                            </Border.RenderTransform>
                                                                             <Border.Effect>
                                                                                 <DropShadowEffect Color="{DynamicResource ShadowColorSmall}" BlurRadius="8" ShadowDepth="2" Opacity="0.3"/>
                                                                             </Border.Effect>
                                                                         </Border>
                                                                     </Grid>
                                                                     <ControlTemplate.Triggers>
+                                                                        <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=EnableCardShadows}" Value="False">
+                                                                            <Setter TargetName="Thumb" Property="Effect" Value="{x:Null}"/>
+                                                                        </DataTrigger>
                                                                         <DataTrigger Binding="{Binding IsApplied}" Value="True">
                                                                             <Setter TargetName="Track" Property="Background" Value="{DynamicResource SuccessBrush}"/>
                                                                             <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource ForegroundOnAccentBrush}"/>

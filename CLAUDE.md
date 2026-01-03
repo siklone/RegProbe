@@ -1,6 +1,6 @@
 # Claude Notes (Windows Optimizer)
 
-**Last Updated:** 2026-01-02  
+**Last Updated:** 2026-01-03  
 **Branch:** `main`
 
 Start with:
@@ -8,7 +8,7 @@ Start with:
 - `DEVELOPMENT_STATUS.md` (known issues + recent fixes)
 - `AGENTS.md` (non-negotiable safety/architecture rules)
 
-Current focus (2026-01-02):
+Current focus (2026-01-03):
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
@@ -21,6 +21,7 @@ Current focus (2026-01-02):
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
 - Category docs include generated Tweak Index anchors (links jump to tweak sections).
 - Monitor upgrades: multi-target latency (gateway + 1.1.1.1 + 8.8.8.8), disk health and fan RPM detection improvements, and layout reordering.
+- Monitor disk health list + Sensor Diagnostics export + optional shadow toggle (default OFF) to help isolate missing SMART/fan data and reduce scroll jank.
 - Sensor coverage: CPU temp/fan fallbacks and disk health WMI fallbacks; Tweaks list caching to reduce scroll lag.
 - Packaging: `scripts/package_windows.cmd` builds a self-contained zip for Windows testing (ReadyToRun disabled by default; pass `-ReadyToRun` if you want it).
 - Next: verify light theme + startup flicker, and migrate remaining legacy tweaks into category providers.
@@ -31,6 +32,8 @@ Agent checks requested:
 - Validate `Source file` links open the correct local file.
 - Validate tweak docs anchors (catalog/details HTML) open at the correct section.
 - Verify Monitor animations are smooth (no Freezable animation errors).
+- Verify per-disk health list renders and Sensor Diagnostics export creates a report.
+- Validate Card Shadows toggle removes drop shadows across Dashboard/Tweaks/Monitor.
 
 ## Quick Commands
 

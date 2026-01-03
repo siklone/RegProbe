@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** January 2, 2026
+**Last Updated:** January 3, 2026
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -632,6 +632,29 @@
 
 ---
 
+### 23. Monitor Disk Health List + Sensor Diagnostics Export + Optional Shadows (Commit: pending)
+**Problem:** Disk health and fan sensors still report `N/A` on some hardware, and heavy shadow effects contributed to scroll jank.
+
+**Solution:**
+- Monitor now shows **per-physical-disk** health rows with SMART/WMI matching and source labels.
+- Added **Sensor Diagnostics** export to dump LHM + WMI storage data for hardware debugging.
+- Added **Card Shadows** toggle in Settings (default OFF) to reduce GPU load during scrolling.
+
+**Files Changed:**
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `WindowsOptimizer.App/Views/DashboardView.xaml`
+- `WindowsOptimizer.App/Resources/Styles.xaml`
+- `WindowsOptimizer.App/ViewModels/SettingsViewModel.cs`
+- `WindowsOptimizer.Infrastructure/AppSettings.cs`
+- `WindowsOptimizer.App/Services/UiPreferences.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs hardware verification on SATA/NVMe systems
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
@@ -657,7 +680,27 @@
 
 ---
 
-### 2. **Power Tweaks Not Functional on WSL2/Linux**
+### 2. **Disk Health / Fan Sensors Missing on Some Hardware**
+**Severity:** Medium
+**Status:** 🧪 **NEEDS HARDWARE VERIFICATION**
+
+**Description:**
+- Some NVMe/SATA devices still report `N/A` for disk health (SMART/WMI coverage varies by vendor).
+- CPU fan RPM may be missing on boards without exposed SuperIO sensors.
+
+**Notes:**
+- Use the **Sensor Diagnostics** export (Monitor header) to capture LHM + WMI data.
+- Check if LHM reports storage sensors and if WMI storage classes are accessible.
+
+**Files Affected:**
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+
+**Priority:** Medium - visible in UI but does not crash
+
+---
+
+### 3. **Power Tweaks Not Functional on WSL2/Linux**
 **Severity:** High (if running on WSL2), Low (if running on Windows)
 **Status:** ✅ **BY DESIGN**
 
@@ -682,7 +725,7 @@
 
 ---
 
-### 3. **Elevated Host Launch on First Tweak Apply**
+### 4. **Elevated Host Launch on First Tweak Apply**
 **Severity:** Low
 **Status:** ⚠️ **KNOWN BEHAVIOR**
 
@@ -702,7 +745,7 @@
 
 ---
 
-### 4. **Legacy Provider Migration Needed**
+### 5. **Legacy Provider Migration Needed**
 **Severity:** Medium
 **Status:** ⚠️ **PENDING**
 

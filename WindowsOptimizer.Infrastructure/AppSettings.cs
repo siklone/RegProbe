@@ -11,6 +11,7 @@ public sealed class AppSettings
     public bool DiscordNotificationsEnabled { get; set; }
     public bool DiscordAutoPatchEnabled { get; set; }
     public string Theme { get; set; } = "Dark";
+    public bool EnableCardShadows { get; set; }
     public bool RunStartupScanOnLaunch { get; set; } = true;
     public bool ShowPreviewHint { get; set; } = true;
     public List<MonitorSectionState> MonitorSections { get; set; } = new();

@@ -200,6 +200,16 @@
                                    FontSize="11">
                             Switch between dark and light color schemes
                         </TextBlock>
+
+                        <CheckBox Style="{StaticResource ToggleSwitchStyle}"
+                                  IsChecked="{Binding EnableCardShadows}"
+                                  Content="Card Shadows"
+                                  Margin="0,16,0,8"/>
+                        <TextBlock Margin="56,0,0,0"
+                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   FontSize="11">
+                            Toggle drop shadows on cards and controls (default off for smoother scrolling).
+                        </TextBlock>
                     </StackPanel>
                 </Border>
 

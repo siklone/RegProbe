@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2026-01-02
+**Last Updated:** 2026-01-03
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -100,6 +100,20 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
   - CPU temp now scans CPU/motherboard/SuperIO sensors and falls back to WMI thermal zones.
   - Disk health uses SMART/WMI fallbacks (MSFT_Disk + Win32_DiskDrive) for wider coverage.
   - Tweaks list cards now use bitmap caching to reduce scroll jank.
+
+- **Per-disk health list + sensor diagnostics export + optional shadows (2026-01-03)**
+  - Monitor now shows disk health per physical disk (name + media + status) with SMART/WMI mapping.
+  - Added a Sensor Diagnostics export button to dump hardware/WMI sensors to a text report.
+  - New Settings toggle disables card/control shadows (default off for smoother scrolling).
+  - Files: `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`,
+    `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.App/Views/MonitorView.xaml`,
+    `WindowsOptimizer.App/Views/TweaksView.xaml`,
+    `WindowsOptimizer.App/Views/DashboardView.xaml`,
+    `WindowsOptimizer.App/Resources/Styles.xaml`,
+    `WindowsOptimizer.App/ViewModels/SettingsViewModel.cs`,
+    `WindowsOptimizer.Infrastructure/AppSettings.cs`,
+    `WindowsOptimizer.App/Services/UiPreferences.cs`
 
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.

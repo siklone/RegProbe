@@ -16,6 +16,7 @@
         <converters:SparklineAreaWithMaxConverter x:Key="SparklineAreaWithMaxConverter"/>
         <converters:LastValueToYWithMaxConverter x:Key="LastValueToYWithMaxConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibility"/>
 
         <!-- Chart gradient brushes -->
         <LinearGradientBrush x:Key="CpuAreaGradient" StartPoint="0,0" EndPoint="0,1">
@@ -323,6 +324,135 @@
             </Border>
         </DataTemplate>
 
+        <DataTemplate x:Key="MonitorPerformanceTemplate">
+            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Performance" Style="{StaticResource SectionHeaderStyle}"/>
+                        <ListBox ItemsSource="{Binding PerformanceItems}"
+                                 SelectedItem="{Binding SelectedPerformanceItem}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 Margin="0,4,8,0">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0,0,0,6"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="8"
+                                            Padding="10"
+                                            BorderThickness="1"
+                                            BorderBrush="{DynamicResource BackgroundLightBrush}">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                                                 Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Title}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                            <TextBlock Text="{Binding Subtitle}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       Margin="0,4,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                        <TextBlock Text="{Binding PerformanceChartTitle}"
+                                   Style="{StaticResource SectionHeaderStyle}"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   Margin="0,0,0,12"/>
+
+                        <Grid Height="200" Margin="0,0,0,16">
+                            <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="10"/>
+                            <Canvas Margin="12">
+                                <Polyline Stroke="{DynamicResource AccentBrightCyanBrush}"
+                                          StrokeThickness="2"
+                                          Points="{MultiBinding Converter={StaticResource SparklinePointsWithMaxConverter}}">
+                                    <Binding Path="PerformancePrimaryHistory"/>
+                                    <Binding Path="PerformanceHistoryScaleMax"/>
+                                </Polyline>
+
+                                <Polyline Stroke="{DynamicResource SuccessBrush}"
+                                          StrokeThickness="2"
+                                          Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"
+                                          Points="{MultiBinding Converter={StaticResource SparklinePointsWithMaxConverter}}">
+                                    <Binding Path="PerformanceSecondaryHistory"/>
+                                    <Binding Path="PerformanceHistoryScaleMax"/>
+                                </Polyline>
+                            </Canvas>
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="{Binding PerformancePrimaryLabel}"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                            <TextBlock Text="{Binding PerformanceSecondaryLabel}"
+                                       FontSize="11"
+                                       Foreground="{DynamicResource SuccessBrush}"
+                                       Margin="12,0,0,0"
+                                       Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"/>
+                        </StackPanel>
+
+                        <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="220"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Value}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
         <DataTemplate x:Key="MonitorStatCardsTemplate">
             <Grid Margin="0,0,0,16">
                 <Grid.RowDefinitions>
@@ -458,14 +588,59 @@
                 <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource StatCardStyle}">
                     <StackPanel>
                         <TextBlock Text="Disk Health" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="{Binding DiskHealthText}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource SuccessBrush}"
-                                   Margin="0,0,0,4"/>
-                        <TextBlock Text="{Binding DiskHealthDetail}"
-                                   FontSize="10"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+
+                        <ItemsControl ItemsSource="{Binding DiskHealthItems}"
+                                      Visibility="{Binding HasDiskHealthItems, Converter={StaticResource BoolToVisibility}}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,0,6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding DisplayName}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding StatusText}"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsWarning}" Value="True">
+                                                                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding StatusText}" Value="N/A">
+                                                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                                                <Setter Property="FontWeight" Value="Normal"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock Text="{Binding DetailText}"
+                                                   FontSize="9"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <StackPanel Visibility="{Binding HasDiskHealthItems, Converter={StaticResource InverseBoolToVisibility}}">
+                            <TextBlock Text="{Binding DiskHealthText}"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuccessBrush}"
+                                       Margin="0,0,0,4"/>
+                            <TextBlock Text="{Binding DiskHealthDetail}"
+                                       FontSize="10"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
@@ -1491,6 +1666,16 @@
                             <TextBlock Text="Save"/>
                         </StackPanel>
                     </Button>
+                    <Button Command="{Binding ExportSensorDiagnosticsCommand}"
+                            Style="{StaticResource HeaderActionButtonStyle}"
+                            VerticalAlignment="Center"
+                            Margin="8,0,0,0"
+                            ToolTip="Export a sensor diagnostics report for troubleshooting.">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE9D9;" FontSize="12" Margin="0,0,6,0"/>
+                            <TextBlock Text="Sensors"/>
+                        </StackPanel>
+                    </Button>
                     <Button Command="{Binding ToggleLayoutEditorCommand}"
                             Style="{StaticResource HeaderActionButtonStyle}"
                             VerticalAlignment="Center"
@@ -1610,6 +1795,9 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Key}" Value="system-info">
                                             <Setter Property="ContentTemplate" Value="{StaticResource MonitorSystemInfoTemplate}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Key}" Value="performance-panel">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTemplate}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Key}" Value="stat-cards">
                                             <Setter Property="ContentTemplate" Value="{StaticResource MonitorStatCardsTemplate}"/>

@@ -21,6 +21,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private static readonly MonitorSectionDefinition[] DefaultSections =
     [
         new("system-info", "System Information", "OS, CPU, GPU, RAM, uptime."),
+        new("performance-panel", "Performance Panel", "Task Manager-style performance breakdown."),
         new("stat-cards", "Usage Summary Cards", "CPU, RAM, GPU usage and temperatures."),
         new("cpu-ram-history", "CPU & RAM History", "60-second usage history charts."),
         new("network-disk-io", "Network & Disk I/O", "60-second throughput charts."),
@@ -37,6 +38,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly DiskMonitor? _diskMonitor;
     private readonly NetworkLatencyMonitor? _latencyMonitor;
     private readonly WifiSignalMonitor? _wifiSignalMonitor;
+    private readonly GpuEngineMonitor? _gpuEngineMonitor;
     private readonly DispatcherTimer? _updateTimer;
     private readonly SettingsStore _settingsStore;
 
@@ -66,17 +68,34 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isCpuAlertActive;
     private bool _isRamAlertActive;
     private ProcessMonitor.NetworkProcessMode _networkProcessMode = ProcessMonitor.NetworkProcessMode.ApproximateIo;
+    private PerformanceItemViewModel? _selectedPerformanceItem;
+    private ObservableCollection<double> _performancePrimaryHistory = new(Enumerable.Repeat(0.0, 60));
+    private ObservableCollection<double> _performanceSecondaryHistory = new(Enumerable.Repeat(0.0, 60));
+    private string _performanceChartTitle = "Performance";
+    private string _performancePrimaryLabel = "Usage";
+    private string _performanceSecondaryLabel = string.Empty;
+    private double _performanceHistoryScaleMax = 100;
     private bool _isDisposed;
     private bool _isLayoutEditorVisible;
     private bool _isLayoutLoading;
     private DateTime _nextAuxSampleUtc = DateTime.MinValue;
     private bool _isAuxSampleInProgress;
     private static readonly TimeSpan AuxSampleInterval = TimeSpan.FromSeconds(5);
+    private CpuPerformanceSnapshot _cpuPerformanceSnapshot = new(0, null, null, null, null, null, null, null, null, null, null, null);
+    private MemoryPerformanceSnapshot _memoryPerformanceSnapshot = new(0, 0, 0, null, null, null, null, null, null, null, null, null, null);
+    private IReadOnlyList<DiskPerformanceSnapshot> _diskPerformanceSnapshots = Array.Empty<DiskPerformanceSnapshot>();
+    private GpuEngineUsageSnapshot _gpuEngineUsageSnapshot = new(0, 0, 0, 0, 0, false);
+    private GpuPerformanceSnapshot _gpuPerformanceSnapshot = new(null, null, null, null, null, null, null, null, null, null, false);
+    private readonly Dictionary<string, ObservableCollection<double>> _diskReadHistoryByDrive = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, ObservableCollection<double>> _diskWriteHistoryByDrive = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, ObservableCollection<double>> _netSendHistoryByAdapter = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, ObservableCollection<double>> _netReceiveHistoryByAdapter = new(StringComparer.OrdinalIgnoreCase);
 
     private readonly RelayCommand _toggleLayoutEditorCommand;
     private readonly RelayCommand _moveSectionUpCommand;
     private readonly RelayCommand _moveSectionDownCommand;
     private readonly RelayCommand _resetLayoutCommand;
+    private readonly RelayCommand _exportSensorDiagnosticsCommand;
 
     public MonitorViewModel()
     {
@@ -146,9 +165,19 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 System.Diagnostics.Debug.WriteLine($"Failed to create WifiSignalMonitor: {ex.Message}");
             }
 
+            try
+            {
+                _gpuEngineMonitor = new GpuEngineMonitor();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create GpuEngineMonitor: {ex.Message}");
+            }
+
             // Initialize collections
             CpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             RamHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            GpuHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             NetworkUploadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             NetworkDownloadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             DiskReadHistory = new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
@@ -159,6 +188,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             TopProcessesByDisk = new ObservableCollection<ProcessInfo>();
             NetworkAdapters = new ObservableCollection<NetworkAdapterInfo>();
             Disks = new ObservableCollection<DiskInfo>();
+            PerformanceItems = new ObservableCollection<PerformanceItemViewModel>();
+            PerformanceDetailItems = new ObservableCollection<PerformanceDetailItem>();
+            DiskHealthItems = new ObservableCollection<DiskHealthItemViewModel>();
+            DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
 
             // Initialize process management commands
             KillProcessCommand = new RelayCommand(param =>
@@ -186,6 +219,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             });
 
             ExportMetricsCommand = new RelayCommand(_ => ExportMetricsToCsv());
+            _exportSensorDiagnosticsCommand = new RelayCommand(_ => ExportSensorDiagnostics());
 
             // Get initial total RAM and system info (with error handling)
             try
@@ -227,6 +261,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             // Ensure collections are initialized even if other initialization fails
             CpuHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             RamHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+            GpuHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             NetworkUploadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             NetworkDownloadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
             DiskReadHistory ??= new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
@@ -237,6 +272,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             TopProcessesByDisk ??= new ObservableCollection<ProcessInfo>();
             NetworkAdapters ??= new ObservableCollection<NetworkAdapterInfo>();
             Disks ??= new ObservableCollection<DiskInfo>();
+            PerformanceItems ??= new ObservableCollection<PerformanceItemViewModel>();
+            PerformanceDetailItems ??= new ObservableCollection<PerformanceDetailItem>();
+            DiskHealthItems ??= new ObservableCollection<DiskHealthItemViewModel>();
+            DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
 
             // Initialize commands if they weren't created
             KillProcessCommand ??= new RelayCommand(_ => { });
@@ -247,6 +286,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionUpCommand = new RelayCommand(_ => { });
             _moveSectionDownCommand = new RelayCommand(_ => { });
             _resetLayoutCommand = new RelayCommand(_ => { });
+            _exportSensorDiagnosticsCommand = new RelayCommand(_ => { });
 
             if (MonitorSections.Count == 0)
             {
@@ -279,6 +319,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _diskMonitor?.Dispose();
         _latencyMonitor?.Dispose();
         _wifiSignalMonitor?.Dispose();
+        _gpuEngineMonitor?.Dispose();
     }
 
     private void ExportMetricsToCsv()
@@ -301,6 +342,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine($"CPU Fan,{CpuFanRpmText}");
             csv.AppendLine($"GPU Fan,{GpuFanRpmText}");
             csv.AppendLine($"Disk Health,{DiskHealthText}");
+            if (DiskHealthItems.Count > 0)
+            {
+                foreach (var item in DiskHealthItems)
+                {
+                    csv.AppendLine($"Disk Health - {item.DisplayName},{item.StatusText}");
+                }
+            }
             var gatewayLabel = string.IsNullOrWhiteSpace(NetworkLatencyTarget)
                 ? "Gateway"
                 : $"Gateway ({NetworkLatencyTarget})";
@@ -355,6 +403,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Export failed: {ex.Message}");
+        }
+    }
+
+    private void ExportSensorDiagnostics()
+    {
+        try
+        {
+            var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            var filename = $"SensorDiagnostics_{timestamp}.txt";
+            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var filepath = Path.Combine(desktop, filename);
+            var report = _metricProvider?.BuildSensorDiagnosticsReport()
+                         ?? "Sensor diagnostics not available (MetricProvider not initialized).";
+            File.WriteAllText(filepath, report);
+            System.Diagnostics.Debug.WriteLine($"Sensor diagnostics exported to: {filepath}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Sensor diagnostics export failed: {ex.Message}");
         }
     }
 
@@ -595,6 +662,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public ObservableCollection<double> CpuHistory { get; }
     public ObservableCollection<double> RamHistory { get; }
+    public ObservableCollection<double> GpuHistory { get; }
     public ObservableCollection<double> NetworkUploadHistory { get; }
     public ObservableCollection<double> NetworkDownloadHistory { get; }
     public ObservableCollection<double> DiskReadHistory { get; }
@@ -605,6 +673,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ObservableCollection<ProcessInfo> TopProcessesByDisk { get; }
     public ObservableCollection<NetworkAdapterInfo> NetworkAdapters { get; }
     public ObservableCollection<DiskInfo> Disks { get; }
+    public ObservableCollection<PerformanceItemViewModel> PerformanceItems { get; }
+    public ObservableCollection<PerformanceDetailItem> PerformanceDetailItems { get; }
 
     public double CpuUsage
     {
@@ -754,6 +824,62 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string GpuFanRpmText => HasGpuFan ? $"{GpuFanRpm:F0} RPM" : "N/A";
 
+    public ObservableCollection<DiskHealthItemViewModel> DiskHealthItems { get; }
+
+    public bool HasDiskHealthItems => DiskHealthItems.Count > 0;
+
+    public ObservableCollection<double> PerformancePrimaryHistory
+    {
+        get => _performancePrimaryHistory;
+        private set => SetProperty(ref _performancePrimaryHistory, value);
+    }
+
+    public ObservableCollection<double> PerformanceSecondaryHistory
+    {
+        get => _performanceSecondaryHistory;
+        private set => SetProperty(ref _performanceSecondaryHistory, value);
+    }
+
+    public PerformanceItemViewModel? SelectedPerformanceItem
+    {
+        get => _selectedPerformanceItem;
+        set
+        {
+            if (SetProperty(ref _selectedPerformanceItem, value))
+            {
+                UpdatePerformanceSelection();
+            }
+        }
+    }
+
+    public string PerformanceChartTitle
+    {
+        get => _performanceChartTitle;
+        private set => SetProperty(ref _performanceChartTitle, value);
+    }
+
+    public string PerformancePrimaryLabel
+    {
+        get => _performancePrimaryLabel;
+        private set => SetProperty(ref _performancePrimaryLabel, value);
+    }
+
+    public string PerformanceSecondaryLabel
+    {
+        get => _performanceSecondaryLabel;
+        private set => SetProperty(ref _performanceSecondaryLabel, value);
+    }
+
+    public bool HasPerformanceSecondary => PerformanceSecondaryHistory.Count > 0;
+
+    public double PerformanceHistoryScaleMax
+    {
+        get => _performanceHistoryScaleMax;
+        private set => SetProperty(ref _performanceHistoryScaleMax, value);
+    }
+
+    public double PerformanceHistoryScaleMid => PerformanceHistoryScaleMax / 2.0;
+
     public double? DiskHealthPercent
     {
         get => _diskHealthPercent;
@@ -882,6 +1008,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ICommand SuspendProcessCommand { get; }
     public ICommand ResumeProcessCommand { get; }
     public ICommand ExportMetricsCommand { get; }
+    public ICommand ExportSensorDiagnosticsCommand => _exportSensorDiagnosticsCommand;
 
     private void OnUpdateTick(object? sender, EventArgs e)
     {
@@ -903,6 +1030,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             // Update history (60 second sliding window)
             UpdateHistory(CpuHistory, CpuUsage);
             UpdateHistory(RamHistory, RamUsagePercent);
+            UpdateHistory(GpuHistory, GpuUsage);
 
             // Notify Min/Max updates for chart labels
             OnPropertyChanged(nameof(CpuHistoryMax));
@@ -929,6 +1057,20 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
                 // Update network adapters list
                 UpdateCollection(NetworkAdapters, networkAdapters);
+
+                var activeAdapters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var adapter in networkAdapters)
+                {
+                    var key = string.IsNullOrWhiteSpace(adapter.AdapterId) ? adapter.Name : adapter.AdapterId;
+                    activeAdapters.Add(key);
+                    var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, key);
+                    var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, key);
+                    UpdateHistory(sendHistory, adapter.SendMbps);
+                    UpdateHistory(receiveHistory, adapter.ReceiveMbps);
+                }
+
+                CleanupHistory(_netSendHistoryByAdapter, activeAdapters);
+                CleanupHistory(_netReceiveHistoryByAdapter, activeAdapters);
             }
 
             if (_diskMonitor != null)
@@ -949,6 +1091,20 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
                 // Update disks list
                 UpdateCollection(Disks, disks);
+
+                var activeDisks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var disk in disks)
+                {
+                    var key = disk.DriveLetter;
+                    activeDisks.Add(key);
+                    var readHistory = GetOrCreateHistory(_diskReadHistoryByDrive, key);
+                    var writeHistory = GetOrCreateHistory(_diskWriteHistoryByDrive, key);
+                    UpdateHistory(readHistory, disk.ReadMBps);
+                    UpdateHistory(writeHistory, disk.WriteMBps);
+                }
+
+                CleanupHistory(_diskReadHistoryByDrive, activeDisks);
+                CleanupHistory(_diskWriteHistoryByDrive, activeDisks);
             }
 
             // Update top processes
@@ -976,6 +1132,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             // Trigger RamUsagePercent update
             OnPropertyChanged(nameof(RamUsagePercent));
+
+            RefreshPerformanceItems();
+            UpdatePerformanceSelection();
         }
         catch (Exception ex)
         {
@@ -1003,6 +1162,402 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private static double GetHistoryNow(ObservableCollection<double> history)
     {
         return history.Count > 0 ? history[history.Count - 1] : 0;
+    }
+
+    private static ObservableCollection<double> CreateHistoryBuffer()
+    {
+        return new ObservableCollection<double>(Enumerable.Repeat(0.0, 60));
+    }
+
+    private static ObservableCollection<double> GetOrCreateHistory(
+        Dictionary<string, ObservableCollection<double>> cache,
+        string key)
+    {
+        if (!cache.TryGetValue(key, out var history))
+        {
+            history = CreateHistoryBuffer();
+            cache[key] = history;
+        }
+
+        return history;
+    }
+
+    private static void CleanupHistory(Dictionary<string, ObservableCollection<double>> cache, HashSet<string> activeKeys)
+    {
+        foreach (var key in cache.Keys.Where(k => !activeKeys.Contains(k)).ToList())
+        {
+            cache.Remove(key);
+        }
+    }
+
+    private void RefreshPerformanceItems()
+    {
+        var selectedKey = SelectedPerformanceItem?.Key;
+        var items = new List<PerformanceItemViewModel>();
+        var existing = PerformanceItems.ToDictionary(item => item.Key, item => item, StringComparer.OrdinalIgnoreCase);
+
+        var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
+        items.Add(new PerformanceItemViewModel(
+            "cpu",
+            PerformanceItemKind.Cpu,
+            "CPU",
+            $"{CpuUsage:F0}% {cpuSpeedText}",
+            null));
+
+        items.Add(new PerformanceItemViewModel(
+            "memory",
+            PerformanceItemKind.Memory,
+            "Memory",
+            $"{RamUsedGb:F1}/{RamTotalGb:F1} GB ({RamUsagePercent:F0}%)",
+            null));
+
+        var diskSnapshots = _diskPerformanceSnapshots.Count > 0
+            ? _diskPerformanceSnapshots
+            : Disks.Select(disk => new DiskPerformanceSnapshot(
+                disk.DriveLetter,
+                null,
+                null,
+                null,
+                null,
+                disk.TotalSizeGb,
+                disk.FreeSpaceGb,
+                null,
+                disk.ReadMBps,
+                disk.WriteMBps,
+                null,
+                null,
+                false,
+                false)).ToList();
+
+        foreach (var disk in diskSnapshots)
+        {
+            var indexLabel = disk.DiskIndex.HasValue ? $"Disk {disk.DiskIndex.Value}" : "Disk";
+            var subtitle = disk.ActiveTimePercent.HasValue
+                ? $"{disk.ActiveTimePercent.Value:F0}% active"
+                : $"{disk.ReadMbps.GetValueOrDefault():F1}/{disk.WriteMbps.GetValueOrDefault():F1} MB/s";
+
+            items.Add(new PerformanceItemViewModel(
+                $"disk:{disk.DriveLetter}",
+                PerformanceItemKind.Disk,
+                $"{indexLabel} ({disk.DriveLetter})",
+                subtitle,
+                disk.DriveLetter));
+        }
+
+        foreach (var adapter in NetworkAdapters)
+        {
+            var subtitle = $"{adapter.SendMbps:F1}↑ {adapter.ReceiveMbps:F1}↓ Mbps";
+            items.Add(new PerformanceItemViewModel(
+                $"net:{adapter.AdapterId}",
+                PerformanceItemKind.Network,
+                adapter.Name,
+                subtitle,
+                adapter.AdapterId));
+        }
+
+        items.Add(new PerformanceItemViewModel(
+            "gpu",
+            PerformanceItemKind.Gpu,
+            "GPU",
+            $"{GpuUsage:F0}% {GpuTempText}",
+            null));
+
+        PerformanceItems.Clear();
+        foreach (var item in items)
+        {
+            if (existing.TryGetValue(item.Key, out var cached))
+            {
+                cached.Title = item.Title;
+                cached.Subtitle = item.Subtitle;
+                PerformanceItems.Add(cached);
+            }
+            else
+            {
+                PerformanceItems.Add(item);
+            }
+        }
+
+        var nextSelection = PerformanceItems.FirstOrDefault(i => i.Key == selectedKey)
+                             ?? PerformanceItems.FirstOrDefault();
+        if (nextSelection != SelectedPerformanceItem)
+        {
+            SelectedPerformanceItem = nextSelection;
+        }
+    }
+
+    private void UpdatePerformanceSelection()
+    {
+        var selection = SelectedPerformanceItem ?? PerformanceItems.FirstOrDefault();
+        if (selection == null)
+        {
+            return;
+        }
+
+        PerformanceDetailItems.Clear();
+
+        switch (selection.Kind)
+        {
+            case PerformanceItemKind.Cpu:
+                PerformanceChartTitle = "CPU Utilization";
+                PerformancePrimaryHistory = CpuHistory;
+                PerformanceSecondaryHistory = new ObservableCollection<double>();
+                PerformancePrimaryLabel = "Usage %";
+                PerformanceSecondaryLabel = string.Empty;
+                PerformanceHistoryScaleMax = 100;
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Speed", FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Base speed", FormatSpeedGHz(_cpuPerformanceSnapshot.BaseSpeedMhz)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Processes", FormatCount(_cpuPerformanceSnapshot.ProcessCount)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Threads", FormatCount(_cpuPerformanceSnapshot.ThreadCount)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Handles", FormatCount(_cpuPerformanceSnapshot.HandleCount)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Sockets", FormatCount(_cpuPerformanceSnapshot.Sockets)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Cores", FormatCount(_cpuPerformanceSnapshot.Cores)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Logical processors", FormatCount(_cpuPerformanceSnapshot.LogicalProcessors)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Virtualization", FormatBool(_cpuPerformanceSnapshot.VirtualizationEnabled)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("L2 cache", FormatCacheKb(_cpuPerformanceSnapshot.L2CacheKb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("L3 cache", FormatCacheKb(_cpuPerformanceSnapshot.L3CacheKb)));
+                break;
+
+            case PerformanceItemKind.Memory:
+                PerformanceChartTitle = "Memory Usage";
+                PerformancePrimaryHistory = RamHistory;
+                PerformanceSecondaryHistory = new ObservableCollection<double>();
+                PerformancePrimaryLabel = "Usage %";
+                PerformanceSecondaryLabel = string.Empty;
+                PerformanceHistoryScaleMax = 100;
+                PerformanceDetailItems.Add(new PerformanceDetailItem("In use", $"{_memoryPerformanceSnapshot.UsedGb:F1} GB"));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Available", $"{_memoryPerformanceSnapshot.AvailableGb:F1} GB"));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Committed", FormatPairGb(_memoryPerformanceSnapshot.CommittedGb, _memoryPerformanceSnapshot.CommitLimitGb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Cached", FormatGb(_memoryPerformanceSnapshot.CachedGb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Paged pool", FormatGb(_memoryPerformanceSnapshot.PagedPoolGb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Non-paged pool", FormatGb(_memoryPerformanceSnapshot.NonPagedPoolGb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Speed", FormatSpeedMhz(_memoryPerformanceSnapshot.SpeedMhz)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Slots used", FormatSlotUsage(_memoryPerformanceSnapshot.SlotsUsed, _memoryPerformanceSnapshot.SlotsTotal)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Form factor", _memoryPerformanceSnapshot.FormFactor ?? "N/A"));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Hardware reserved", FormatMb(_memoryPerformanceSnapshot.HardwareReservedMb)));
+                break;
+
+            case PerformanceItemKind.Disk:
+            {
+                var drive = selection.Identifier;
+                var perf = _diskPerformanceSnapshots.FirstOrDefault(d => d.DriveLetter.Equals(drive, StringComparison.OrdinalIgnoreCase));
+                var readHistory = !string.IsNullOrWhiteSpace(drive) ? GetOrCreateHistory(_diskReadHistoryByDrive, drive) : DiskReadHistory;
+                var writeHistory = !string.IsNullOrWhiteSpace(drive) ? GetOrCreateHistory(_diskWriteHistoryByDrive, drive) : DiskWriteHistory;
+
+                PerformanceChartTitle = $"Disk {drive}";
+                PerformancePrimaryHistory = readHistory;
+                PerformanceSecondaryHistory = writeHistory;
+                PerformancePrimaryLabel = "Read MB/s";
+                PerformanceSecondaryLabel = "Write MB/s";
+                PerformanceHistoryScaleMax = GetCombinedHistoryMax(readHistory, writeHistory);
+
+                if (perf != null)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Active time", FormatPercent(perf.ActiveTimePercent)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Average response", FormatMs(perf.AvgResponseMs)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Queue length", FormatNumber(perf.QueueLength)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Read", FormatMbps(perf.ReadMbps)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Write", FormatMbps(perf.WriteMbps)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Capacity", $"{perf.TotalSizeGb:F1} GB"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("System disk", perf.IsSystemDisk ? "Yes" : "No"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Page file", perf.HasPageFile ? "Yes" : "No"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Type", perf.MediaType ?? "Unknown"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Model", FormatText(perf.Model)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Bus", FormatText(perf.InterfaceType)));
+                }
+                else
+                {
+                    var fallback = Disks.FirstOrDefault(d => d.DriveLetter.Equals(drive, StringComparison.OrdinalIgnoreCase));
+                    if (fallback != null)
+                    {
+                        PerformanceDetailItems.Add(new PerformanceDetailItem("Read", $"{fallback.ReadMBps:F1} MB/s"));
+                        PerformanceDetailItems.Add(new PerformanceDetailItem("Write", $"{fallback.WriteMBps:F1} MB/s"));
+                        PerformanceDetailItems.Add(new PerformanceDetailItem("Capacity", $"{fallback.TotalSizeGb:F1} GB"));
+                        PerformanceDetailItems.Add(new PerformanceDetailItem("Free space", $"{fallback.FreeSpaceGb:F1} GB"));
+                    }
+                }
+                break;
+            }
+
+            case PerformanceItemKind.Network:
+            {
+                var adapter = NetworkAdapters.FirstOrDefault(a => a.AdapterId == selection.Identifier)
+                              ?? NetworkAdapters.FirstOrDefault(a => a.Name == selection.Title);
+
+                var adapterId = adapter?.AdapterId ?? selection.Identifier ?? selection.Title;
+                var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, adapterId);
+                var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, adapterId);
+
+                PerformanceChartTitle = adapter?.Name ?? "Network";
+                PerformancePrimaryHistory = receiveHistory;
+                PerformanceSecondaryHistory = sendHistory;
+                PerformancePrimaryLabel = "Receive Mbps";
+                PerformanceSecondaryLabel = "Send Mbps";
+                PerformanceHistoryScaleMax = GetCombinedHistoryMax(receiveHistory, sendHistory);
+
+                if (adapter != null)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Send", $"{adapter.SendMbps:F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Receive", $"{adapter.ReceiveMbps:F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Link speed", adapter.LinkSpeedMbps > 0 ? $"{adapter.LinkSpeedMbps:F0} Mbps" : "N/A"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("IPv4 address", string.IsNullOrWhiteSpace(adapter.Ipv4Address) ? "N/A" : adapter.Ipv4Address));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("IPv6 address", string.IsNullOrWhiteSpace(adapter.Ipv6Address) ? "N/A" : adapter.Ipv6Address));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter type", adapter.Type));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter", FormatText(string.IsNullOrWhiteSpace(adapter.Description) ? adapter.Name : adapter.Description)));
+                }
+                break;
+            }
+
+            case PerformanceItemKind.Gpu:
+                PerformanceChartTitle = "GPU Utilization";
+                PerformancePrimaryHistory = GpuHistory;
+                PerformanceSecondaryHistory = new ObservableCollection<double>();
+                PerformancePrimaryLabel = "Usage %";
+                PerformanceSecondaryLabel = string.Empty;
+                PerformanceHistoryScaleMax = 100;
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Usage", $"{GpuUsage:F0}%"));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Temperature", GpuTempText));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Memory", GpuMemoryUsageText));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Dedicated memory", FormatMemoryMb(_gpuPerformanceSnapshot.DedicatedMemoryMb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Shared memory", FormatMemoryMb(_gpuPerformanceSnapshot.SharedMemoryMb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Driver version", FormatText(_gpuPerformanceSnapshot.DriverVersion)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Driver date", FormatDate(_gpuPerformanceSnapshot.DriverDate)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("DirectX version", FormatText(_gpuPerformanceSnapshot.DirectXVersion)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Location", FormatText(_gpuPerformanceSnapshot.LocationInfo)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter", FormatText(_gpuPerformanceSnapshot.AdapterCompatibility)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Video processor", FormatText(_gpuPerformanceSnapshot.VideoProcessor)));
+                if (_gpuEngineUsageSnapshot.IsAvailable)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("3D", $"{_gpuEngineUsageSnapshot.Engine3DPercent:F0}%"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Copy", $"{_gpuEngineUsageSnapshot.CopyPercent:F0}%"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Video Encode", $"{_gpuEngineUsageSnapshot.VideoEncodePercent:F0}%"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Video Decode", $"{_gpuEngineUsageSnapshot.VideoDecodePercent:F0}%"));
+                }
+                break;
+        }
+
+        OnPropertyChanged(nameof(HasPerformanceSecondary));
+        OnPropertyChanged(nameof(PerformanceHistoryScaleMid));
+    }
+
+    private static double GetCombinedHistoryMax(ObservableCollection<double> primary, ObservableCollection<double> secondary)
+    {
+        var max = Math.Max(GetHistoryMax(primary), GetHistoryMax(secondary));
+        return max > 0 ? max : 100;
+    }
+
+    private static string FormatSpeedGHz(double? mhz)
+    {
+        if (!mhz.HasValue || mhz.Value <= 0)
+        {
+            return "N/A";
+        }
+
+        return mhz.Value >= 1000 ? $"{mhz.Value / 1000:F2} GHz" : $"{mhz.Value:F0} MHz";
+    }
+
+    private static string FormatSpeedMhz(double? mhz)
+    {
+        if (!mhz.HasValue || mhz.Value <= 0)
+        {
+            return "N/A";
+        }
+
+        return $"{mhz.Value:F0} MHz";
+    }
+
+    private static string FormatCount(int? value)
+    {
+        return value.HasValue && value.Value > 0 ? value.Value.ToString() : "N/A";
+    }
+
+    private static string FormatBool(bool? value)
+    {
+        if (!value.HasValue)
+        {
+            return "N/A";
+        }
+
+        return value.Value ? "Enabled" : "Disabled";
+    }
+
+    private static string FormatCacheKb(int? value)
+    {
+        return value.HasValue && value.Value > 0 ? $"{value.Value} KB" : "N/A";
+    }
+
+    private static string FormatGb(double? value)
+    {
+        return value.HasValue && value.Value > 0 ? $"{value.Value:F1} GB" : "N/A";
+    }
+
+    private static string FormatMb(double? value)
+    {
+        return value.HasValue && value.Value > 0 ? $"{value.Value:F0} MB" : "N/A";
+    }
+
+    private static string FormatMemoryMb(double? value)
+    {
+        if (!value.HasValue || value.Value <= 0)
+        {
+            return "N/A";
+        }
+
+        return value.Value >= 1024 ? $"{value.Value / 1024:F1} GB" : $"{value.Value:F0} MB";
+    }
+
+    private static string FormatDate(DateTime? value)
+    {
+        return value.HasValue ? value.Value.ToString("yyyy-MM-dd") : "N/A";
+    }
+
+    private static string FormatText(string? value)
+    {
+        return string.IsNullOrWhiteSpace(value) ? "N/A" : value.Trim();
+    }
+
+    private static string FormatPairGb(double? used, double? limit)
+    {
+        if (used.HasValue && limit.HasValue)
+        {
+            return $"{used.Value:F1}/{limit.Value:F1} GB";
+        }
+
+        return "N/A";
+    }
+
+    private static string FormatPercent(double? value)
+    {
+        return value.HasValue ? $"{value.Value:F0}%" : "N/A";
+    }
+
+    private static string FormatMs(double? value)
+    {
+        return value.HasValue ? $"{value.Value:F1} ms" : "N/A";
+    }
+
+    private static string FormatNumber(double? value)
+    {
+        return value.HasValue ? $"{value.Value:F1}" : "N/A";
+    }
+
+    private static string FormatMbps(double? value)
+    {
+        return value.HasValue ? $"{value.Value:F1} MB/s" : "N/A";
+    }
+
+    private static string FormatSlotUsage(int? used, int? total)
+    {
+        if (used.HasValue && total.HasValue && total.Value > 0)
+        {
+            return $"{used.Value} of {total.Value}";
+        }
+
+        if (used.HasValue)
+        {
+            return $"{used.Value}";
+        }
+
+        return "N/A";
     }
 
     private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
@@ -1043,6 +1598,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             if (_metricProvider != null)
             {
+                _cpuPerformanceSnapshot = _metricProvider.GetCpuPerformanceSnapshot();
+                _memoryPerformanceSnapshot = _metricProvider.GetMemoryPerformanceSnapshot();
+                _diskPerformanceSnapshots = _metricProvider.GetDiskPerformanceSnapshots();
+
                 var gpuMemory = _metricProvider.GetGpuMemorySnapshot();
                 HasGpuMemory = gpuMemory.IsAvailable;
                 GpuMemoryUsedMb = gpuMemory.UsedMb;
@@ -1053,6 +1612,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(GpuMemoryUsageText));
                 OnPropertyChanged(nameof(GpuMemoryPercentText));
 
+                _gpuPerformanceSnapshot = _metricProvider.GetGpuPerformanceSnapshot();
+
                 var fans = _metricProvider.GetFanSpeedSnapshot();
                 CpuFanRpm = fans.CpuRpm;
                 GpuFanRpm = fans.GpuRpm;
@@ -1061,11 +1622,37 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(HasCpuFan));
                 OnPropertyChanged(nameof(HasGpuFan));
 
-                var diskHealth = _metricProvider.GetDiskHealthSnapshot();
-                DiskHealthPercent = diskHealth.HealthPercent;
-                DiskPredictFailure = diskHealth.PredictFailure;
+                var diskItems = _metricProvider.GetDiskHealthItems();
+                UpdateCollection(DiskHealthItems, diskItems.Select(CreateDiskHealthItem).ToList());
+
+                var healthValues = diskItems
+                    .Select(item => item.HealthPercent)
+                    .Where(value => value.HasValue)
+                    .Select(value => value!.Value)
+                    .ToList();
+                DiskHealthPercent = healthValues.Count > 0 ? healthValues.Min() : null;
+
+                DiskPredictFailure = diskItems.Any(item => item.PredictFailure == true)
+                    ? true
+                    : diskItems.Any(item => item.PredictFailure == false)
+                        ? false
+                        : null;
+
+                if (!diskItems.Any())
+                {
+                    var diskHealth = _metricProvider.GetDiskHealthSnapshot();
+                    DiskHealthPercent = diskHealth.HealthPercent;
+                    DiskPredictFailure = diskHealth.PredictFailure;
+                }
+
                 OnPropertyChanged(nameof(DiskHealthText));
                 OnPropertyChanged(nameof(DiskHealthDetail));
+                OnPropertyChanged(nameof(HasDiskHealthItems));
+            }
+
+            if (_gpuEngineMonitor != null)
+            {
+                _gpuEngineUsageSnapshot = _gpuEngineMonitor.GetUsageSnapshot();
             }
 
             if (_latencyMonitor != null)
@@ -1111,6 +1698,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(WifiSignalText));
                 OnPropertyChanged(nameof(WifiSignalDetail));
             }
+
+            UpdatePerformanceSelection();
         }
         catch (Exception ex)
         {
@@ -1123,6 +1712,81 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     }
 
     private sealed record MonitorSectionDefinition(string Key, string Title, string Description);
+
+    public sealed record DiskHealthItemViewModel(
+        string DisplayName,
+        string StatusText,
+        string DetailText,
+        bool IsWarning);
+
+    public sealed class PerformanceItemViewModel : ViewModelBase
+    {
+        private string _title;
+        private string _subtitle;
+
+        public PerformanceItemViewModel(string key, PerformanceItemKind kind, string title, string subtitle, string? identifier)
+        {
+            Key = key;
+            Kind = kind;
+            _title = title;
+            _subtitle = subtitle;
+            Identifier = identifier ?? string.Empty;
+        }
+
+        public string Key { get; }
+
+        public PerformanceItemKind Kind { get; }
+
+        public string Identifier { get; }
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+
+        public string Subtitle
+        {
+            get => _subtitle;
+            set => SetProperty(ref _subtitle, value);
+        }
+    }
+
+    public enum PerformanceItemKind
+    {
+        Cpu,
+        Memory,
+        Disk,
+        Network,
+        Gpu
+    }
+
+    public sealed record PerformanceDetailItem(string Label, string Value);
+
+    private static DiskHealthItemViewModel CreateDiskHealthItem(DiskHealthInfo info)
+    {
+        var statusText = info.HealthPercent.HasValue
+            ? $"{info.HealthPercent.Value:F0}%"
+            : info.PredictFailure == true
+                ? "Warning"
+                : info.PredictFailure == false
+                    ? "OK"
+                    : "N/A";
+
+        var detailText = info.HealthPercent.HasValue
+            ? info.Source ?? "SMART life"
+            : info.PredictFailure == true
+                ? "SMART predicts failure"
+                : info.PredictFailure == false
+                    ? info.Source ?? "SMART status OK"
+                    : "SMART data unavailable";
+
+        return new DiskHealthItemViewModel(
+            info.Name,
+            statusText,
+            detailText,
+            info.PredictFailure == true);
+    }
 
     private static void LogToFile(string message)
     {
