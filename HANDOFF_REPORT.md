@@ -376,6 +376,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 
 - `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Defer list updates to UI idle; retry collection updates on refresh deferral.
 - `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs` - CPU speed via perf WMI; GPU memory total via perf counters; DirectX registry trim.
+- `.github/workflows/dotnet.yml` - Comprehensive CI/CD pipeline with build, test, publish, release, code-quality jobs.
+- `WindowsOptimizer.Tests/RollbackStateStoreTests.cs` - 13 new tests for rollback state persistence.
+- `WindowsOptimizer.Tests/PlatformAndProviderTests.cs` - 14 new tests for platform detection and ITweak contract.
+- `CODEX_TODO.md` - Updated CI/CD status to completed.
+
 
 ## Files Changed This Session (2025-12-30)
 

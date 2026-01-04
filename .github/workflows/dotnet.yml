@@ -1,17 +1,208 @@
-name: dotnet
+# Windows Optimizer CI/CD Pipeline
+# Comprehensive build, test, and publish workflow
+# Source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: CI/CD
 
 on:
   push:
+    branches: [main, develop]
   pull_request:
+    branches: [main]
+  release:
+    types: [published]
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  CONFIGURATION: Release
+  RUNTIME: win-x64
 
 jobs:
-  build_test:
+  # ============================================
+  # BUILD AND TEST
+  # ============================================
+  build:
+    name: Build & Test
     runs-on: windows-latest
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet restore
-      - run: dotnet build -c Release --no-restore
-      - run: dotnet test -c Release --no-build
+          fetch-depth: 0  # Full history for versioning
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore
+
+      - name: Run tests
+        run: dotnet test -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults/*.trx
+
+  # ============================================
+  # PUBLISH
+  # ============================================
+  publish:
+    name: Publish Application
+    needs: build
+    runs-on: windows-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build ElevatedHost first
+      - name: Build ElevatedHost
+        run: dotnet publish WindowsOptimizer.ElevatedHost -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o publish/ElevatedHost
+
+      # Build main application
+      - name: Publish main application
+        run: dotnet publish WindowsOptimizer.App -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o publish
+
+      # Copy ElevatedHost to correct location
+      - name: Copy ElevatedHost to publish output
+        run: |
+          if (!(Test-Path "publish/ElevatedHost")) {
+            New-Item -ItemType Directory -Path "publish/ElevatedHost" -Force
+          }
+          Copy-Item "publish/ElevatedHost/*" -Destination "publish/ElevatedHost/" -Recurse -Force
+
+      # Copy Docs folder
+      - name: Copy documentation
+        run: |
+          if (Test-Path "Docs") {
+            Copy-Item -Path "Docs" -Destination "publish/Docs" -Recurse -Force
+          }
+
+      # Verify ElevatedHost exists
+      - name: Verify ElevatedHost packaging
+        run: |
+          $hostPath = "publish/ElevatedHost/WindowsOptimizer.ElevatedHost.exe"
+          if (!(Test-Path $hostPath)) {
+            Write-Error "CRITICAL: ElevatedHost.exe not found at $hostPath"
+            exit 1
+          }
+          Write-Host "✓ ElevatedHost.exe verified at $hostPath"
+
+      # Verify main executable exists
+      - name: Verify main application
+        run: |
+          $appPath = "publish/WindowsOptimizer.App.exe"
+          if (!(Test-Path $appPath)) {
+            Write-Error "CRITICAL: Main application not found at $appPath"
+            exit 1
+          }
+          Write-Host "✓ WindowsOptimizer.App.exe verified at $appPath"
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WindowsOptimizer-${{ github.sha }}
+          path: publish/
+          retention-days: 30
+
+  # ============================================
+  # RELEASE
+  # ============================================
+  release:
+    name: Create Release
+    needs: build
+    runs-on: windows-latest
+    if: github.event_name == 'release'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build ElevatedHost
+      - name: Build ElevatedHost
+        run: dotnet publish WindowsOptimizer.ElevatedHost -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o release/ElevatedHost
+
+      # Build main application
+      - name: Publish main application
+        run: dotnet publish WindowsOptimizer.App -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o release
+
+      # Copy Docs
+      - name: Copy documentation
+        run: |
+          if (Test-Path "Docs") {
+            Copy-Item -Path "Docs" -Destination "release/Docs" -Recurse -Force
+          }
+
+      # Create ZIP archive
+      - name: Create release archive
+        run: |
+          Compress-Archive -Path release/* -DestinationPath WindowsOptimizer-${{ github.event.release.tag_name }}.zip
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: WindowsOptimizer-${{ github.event.release.tag_name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================
+  # CODE QUALITY (Optional - on PR)
+  # ============================================
+  code-quality:
+    name: Code Quality Check
+    runs-on: windows-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build with warnings as errors
+        run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore /p:TreatWarningsAsErrors=true
+        continue-on-error: true
+
+      - name: Run code analysis
+        run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore /p:RunAnalyzers=true
+        continue-on-error: true

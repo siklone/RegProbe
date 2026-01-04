@@ -401,16 +401,22 @@
 
 ### 17. CI/CD Pipeline (GitHub Actions)
 **Dosyalar:**
-- `.github/workflows/build.yml`
+- `.github/workflows/dotnet.yml`
 
 **Çaba:** Orta  
-**Durum:** ⏳ Temel mevcut
+**Durum:** ✅ Tamamlandı (2026-01-04)
 
-**Yapılacaklar:**
-- [ ] PR build kontrolü
-- [ ] Release build + publish
-- [ ] ElevatedHost paketleme kontrolü
-- [ ] Artifact upload
+**Yapılanlar:**
+- [x] Build + Test jobs
+- [x] NuGet paket önbellekleme
+- [x] Test sonuçları artifact upload
+- [x] ElevatedHost paketleme doğrulaması
+- [x] Docs klasörü kopyalama
+- [x] Release workflow (tag bazlı)
+- [x] Code quality check (PR'larda)
+
+**Kalan:**
+- [ ] PR build kontrolü (otomatik tetikleme)
 - [ ] Release notes generation
 
 ---
