@@ -668,11 +668,15 @@
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                            <Setter Property="Opacity" Value="1"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                                              Value="True">
                                                     <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
                                                     <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                    <Setter Property="Opacity" Value="0.55"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -1990,6 +1994,19 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,8">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Opacity" Value="1"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                                                    <Setter Property="Opacity" Value="0.6"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsUp}" Value="False">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -2000,6 +2017,7 @@
                                         <StackPanel Grid.Column="0">
                                             <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="14"/>
                                             <TextBlock Text="{Binding Type}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="12" Margin="0,2,0,0"/>
+                                            <TextBlock Text="{Binding StatusText}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11" Margin="0,2,0,0"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="16,0,0,0">
                                             <TextBlock Text="Download" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
@@ -2061,6 +2079,8 @@
                                             <TextBlock FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
                                                 <Run Text="{Binding FreeSpaceGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB free"/>
                                             </TextBlock>
+                                            <TextBlock FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,2,0,0"
+                                                       Text="{Binding DescriptorText}"/>
                                         </StackPanel>
 
                                         <!-- Read Speed -->

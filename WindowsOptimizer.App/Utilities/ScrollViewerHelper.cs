@@ -52,6 +52,11 @@ public static class ScrollViewerHelper
         var scrollViewer = FindScrollViewer(source);
         if (scrollViewer == null || scrollViewer.ScrollableHeight <= 0)
         {
+            scrollViewer = FindAncestorScrollViewer(source);
+        }
+
+        if (scrollViewer == null || scrollViewer.ScrollableHeight <= 0)
+        {
             return;
         }
 
@@ -84,6 +89,22 @@ public static class ScrollViewerHelper
             {
                 return found;
             }
+        }
+
+        return null;
+    }
+
+    private static ScrollViewer? FindAncestorScrollViewer(DependencyObject element)
+    {
+        var parent = VisualTreeHelper.GetParent(element);
+        while (parent != null)
+        {
+            if (parent is ScrollViewer viewer)
+            {
+                return viewer;
+            }
+
+            parent = VisualTreeHelper.GetParent(parent);
         }
 
         return null;

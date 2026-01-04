@@ -788,12 +788,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             var items = await Task.Run(CollectStartupApps).ConfigureAwait(false);
             await DispatchAsync(() =>
             {
-                UpdateCollection(StartupApps, items);
+                var updated = UpdateCollection(StartupApps, items);
                 _startupAppsUpdatedAt = DateTime.UtcNow;
                 OnPropertyChanged(nameof(StartupAppsUpdatedText));
-                if (SelectedStartupApp == null && StartupApps.Count > 0)
+                if (updated)
                 {
-                    SelectedStartupApp = StartupApps[0];
+                    EnsureStartupSelection();
+                }
+                else
+                {
+                    _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
                 }
                 if (StatusMessage.StartsWith("Startup apps load failed", StringComparison.OrdinalIgnoreCase))
                 {
@@ -846,16 +850,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             var items = await Task.Run(CollectServices).ConfigureAwait(false);
             await DispatchAsync(() =>
             {
-                UpdateCollection(Services, items);
+                var updated = UpdateCollection(Services, items);
                 _servicesUpdatedAt = DateTime.UtcNow;
                 OnPropertyChanged(nameof(ServicesUpdatedText));
-                if (SelectedService == null && Services.Count > 0)
+                if (updated)
                 {
-                    SelectedService = Services[0];
+                    EnsureServiceSelection();
                 }
-                else if (SelectedService != null)
+                else
                 {
-                    UpdateServiceDetails();
+                    _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
                 }
                 if (StatusMessage.StartsWith("Services load failed", StringComparison.OrdinalIgnoreCase))
                 {
@@ -895,24 +899,36 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var items = new List<StartupAppEntry>();
         var hkcuRunApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
         var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
-        var hkcuRun32Approval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
-        var hklmRun32Approval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
+        var hkcuRun32Approval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Registry32, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
+        var hklmRun32Approval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Registry32, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
         var hkcuFolderApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
         var hklmFolderApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder");
 
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry Run",
-            @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRunApproval);
+            @"Software\Microsoft\Windows\CurrentVersion\Run",
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
+            hkcuRunApproval);
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Registry32, "Current User", "Registry Run (32-bit)",
-            @"Software\Microsoft\Windows\CurrentVersion\Run", hkcuRun32Approval.Count > 0 ? hkcuRun32Approval : hkcuRunApproval);
+            @"Software\Microsoft\Windows\CurrentVersion\Run",
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32",
+            hkcuRun32Approval.Count > 0 ? hkcuRun32Approval : hkcuRunApproval);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry Run",
-            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRunApproval);
+            @"Software\Microsoft\Windows\CurrentVersion\Run",
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
+            hklmRunApproval);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
-            @"Software\Microsoft\Windows\CurrentVersion\Run", hklmRun32Approval.Count > 0 ? hklmRun32Approval : hklmRunApproval);
+            @"Software\Microsoft\Windows\CurrentVersion\Run",
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32",
+            hklmRun32Approval.Count > 0 ? hklmRun32Approval : hklmRunApproval);
 
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry RunOnce",
-            @"Software\Microsoft\Windows\CurrentVersion\RunOnce", new Dictionary<string, bool?>());
+            @"Software\Microsoft\Windows\CurrentVersion\RunOnce",
+            null,
+            new Dictionary<string, bool?>());
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry RunOnce",
-            @"Software\Microsoft\Windows\CurrentVersion\RunOnce", new Dictionary<string, bool?>());
+            @"Software\Microsoft\Windows\CurrentVersion\RunOnce",
+            null,
+            new Dictionary<string, bool?>());
 
         AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder",
             RegistryHive.CurrentUser, RegistryView.Default,
@@ -944,6 +960,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         string scope,
         string source,
         string subKey,
+        string? approvalKeyPath,
         IReadOnlyDictionary<string, bool?> approvals)
     {
         try
@@ -978,7 +995,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     executablePath,
                     hive,
                     view,
-                    @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
+                    approvalKeyPath,
                     valueName));
             }
         }
@@ -2575,7 +2592,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private Task DispatchAsync(Action action)
+    private Task DispatchAsync(Action action, DispatcherPriority priority = DispatcherPriority.Background)
     {
         var dispatcher = Application.Current?.Dispatcher;
         if (dispatcher == null || dispatcher.CheckAccess())
@@ -2584,7 +2601,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             return Task.CompletedTask;
         }
 
-        return dispatcher.InvokeAsync(action).Task;
+        return dispatcher.InvokeAsync(action, priority).Task;
     }
 
     private void UpdateHistory(ObservableCollection<double> history, double newValue)
@@ -2641,19 +2658,27 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var existing = PerformanceItems.ToDictionary(item => item.Key, item => item, StringComparer.OrdinalIgnoreCase);
 
         var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
-        items.Add(new PerformanceItemViewModel(
+        var cpuItem = new PerformanceItemViewModel(
             "cpu",
             PerformanceItemKind.Cpu,
             "CPU",
             $"{CpuUsage:F0}% {cpuSpeedText}",
-            null));
+            null)
+        {
+            IsActive = true
+        };
+        items.Add(cpuItem);
 
-        items.Add(new PerformanceItemViewModel(
+        var memoryItem = new PerformanceItemViewModel(
             "memory",
             PerformanceItemKind.Memory,
             "Memory",
             $"{RamUsedGb:F1}/{RamTotalGb:F1} GB ({RamUsagePercent:F0}%)",
-            null));
+            null)
+        {
+            IsActive = true
+        };
+        items.Add(memoryItem);
 
         var diskSnapshots = _diskPerformanceSnapshots.Count > 0
             ? _diskPerformanceSnapshots
@@ -2676,35 +2701,60 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         foreach (var disk in diskSnapshots)
         {
             var indexLabel = disk.DiskIndex.HasValue ? $"Disk {disk.DiskIndex.Value}" : "Disk";
-            var subtitle = disk.ActiveTimePercent.HasValue
+            var activityText = disk.ActiveTimePercent.HasValue
                 ? $"{disk.ActiveTimePercent.Value:F0}% active"
                 : $"{disk.ReadMbps.GetValueOrDefault():F1}/{disk.WriteMbps.GetValueOrDefault():F1} MB/s";
+            var typeText = string.Join(" · ",
+                new[]
+                {
+                    disk.MediaType,
+                    disk.BusType,
+                    disk.IsExternal == true ? "External" : null
+                }.Where(text => !string.IsNullOrWhiteSpace(text)));
+            var subtitle = string.IsNullOrWhiteSpace(typeText) ? activityText : $"{activityText} · {typeText}";
+            var isActive = (disk.ActiveTimePercent ?? 0) > 0.5
+                           || disk.ReadMbps.GetValueOrDefault() > 0.1
+                           || disk.WriteMbps.GetValueOrDefault() > 0.1;
 
             items.Add(new PerformanceItemViewModel(
                 $"disk:{disk.DriveLetter}",
                 PerformanceItemKind.Disk,
                 $"{indexLabel} ({disk.DriveLetter})",
                 subtitle,
-                disk.DriveLetter));
+                disk.DriveLetter)
+            {
+                IsActive = isActive
+            });
         }
 
         foreach (var adapter in NetworkAdapters)
         {
-            var subtitle = $"{adapter.SendMbps:F1}↑ {adapter.ReceiveMbps:F1}↓ Mbps";
+            var speedText = $"{adapter.SendMbps:F1}↑ {adapter.ReceiveMbps:F1}↓ Mbps";
+            var statusText = string.IsNullOrWhiteSpace(adapter.StatusText)
+                ? adapter.IsUp ? "Connected" : "Disconnected"
+                : adapter.StatusText;
+            var subtitle = adapter.IsActive ? speedText : $"{statusText} · {speedText}";
             items.Add(new PerformanceItemViewModel(
                 $"net:{adapter.AdapterId}",
                 PerformanceItemKind.Network,
                 adapter.Name,
                 subtitle,
-                adapter.AdapterId));
+                adapter.AdapterId)
+            {
+                IsActive = adapter.IsActive
+            });
         }
 
-        items.Add(new PerformanceItemViewModel(
+        var gpuItem = new PerformanceItemViewModel(
             "gpu",
             PerformanceItemKind.Gpu,
             "GPU",
             $"{GpuUsage:F0}% {GpuTempText}",
-            null));
+            null)
+        {
+            IsActive = true
+        };
+        items.Add(gpuItem);
 
         PerformanceItems.Clear();
         foreach (var item in items)
@@ -2806,7 +2856,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Page file", perf.HasPageFile ? "Yes" : "No"));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Type", perf.MediaType ?? "Unknown"));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Model", FormatText(perf.Model)));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Bus", FormatText(perf.InterfaceType)));
+                    var busText = !string.IsNullOrWhiteSpace(perf.BusType) ? perf.BusType : perf.InterfaceType;
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Bus", FormatText(busText)));
+                    if (perf.IsExternal.HasValue)
+                    {
+                        PerformanceDetailItems.Add(new PerformanceDetailItem("Location", perf.IsExternal.Value ? "External" : "Internal"));
+                    }
                 }
                 else
                 {
@@ -2861,7 +2916,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Usage", $"{GpuUsage:F0}%"));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Temperature", GpuTempText));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Memory", GpuMemoryUsageText));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Dedicated memory", FormatMemoryMb(_gpuPerformanceSnapshot.DedicatedMemoryMb)));
+                var dedicatedMb = _gpuPerformanceSnapshot.DedicatedMemoryMb;
+                if (GpuMemoryTotalMb > 0 && (!dedicatedMb.HasValue || dedicatedMb.Value < GpuMemoryTotalMb * 0.8))
+                {
+                    dedicatedMb = GpuMemoryTotalMb;
+                }
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Dedicated memory", FormatMemoryMb(dedicatedMb)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Shared memory", FormatMemoryMb(_gpuPerformanceSnapshot.SharedMemoryMb)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Driver version", FormatText(_gpuPerformanceSnapshot.DriverVersion)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Driver date", FormatDate(_gpuPerformanceSnapshot.DriverDate)));
@@ -3031,21 +3091,100 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         LogToFile($"{message} | {ex.GetType().Name}: {ex.Message}");
     }
 
-    private void UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
+    private bool UpdateCollection<T>(ObservableCollection<T> collection, List<T> newItems)
     {
-        if (collection.Count == newItems.Count)
+        try
         {
-            for (var i = 0; i < newItems.Count; i++)
+            var view = CollectionViewSource.GetDefaultView(collection);
+            if (view != null && view.IsRefreshDeferred)
             {
-                collection[i] = newItems[i];
+                var snapshot = newItems.ToList();
+                _ = DispatchAsync(() => UpdateCollection(collection, snapshot), DispatcherPriority.ContextIdle);
+                return false;
             }
-            return;
-        }
 
-        collection.Clear();
-        foreach (var item in newItems)
+            if (collection.Count == newItems.Count)
+            {
+                for (var i = 0; i < newItems.Count; i++)
+                {
+                    collection[i] = newItems[i];
+                }
+                return true;
+            }
+
+            collection.Clear();
+            foreach (var item in newItems)
+            {
+                collection.Add(item);
+            }
+
+            return true;
+        }
+        catch (InvalidOperationException)
         {
-            collection.Add(item);
+            var snapshot = newItems.ToList();
+            _ = DispatchAsync(() => UpdateCollection(collection, snapshot), DispatcherPriority.ContextIdle);
+            return false;
+        }
+    }
+
+    private void EnsureStartupSelection()
+    {
+        try
+        {
+            var view = CollectionViewSource.GetDefaultView(StartupApps);
+            if (view != null && view.IsRefreshDeferred)
+            {
+                _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
+                return;
+            }
+
+            if (StartupApps.Count == 0)
+            {
+                SelectedStartupApp = null;
+                return;
+            }
+
+            if (SelectedStartupApp == null || !StartupApps.Contains(SelectedStartupApp))
+            {
+                SelectedStartupApp = StartupApps[0];
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
+        }
+    }
+
+    private void EnsureServiceSelection()
+    {
+        try
+        {
+            var view = CollectionViewSource.GetDefaultView(Services);
+            if (view != null && view.IsRefreshDeferred)
+            {
+                _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
+                return;
+            }
+
+            if (Services.Count == 0)
+            {
+                SelectedService = null;
+                return;
+            }
+
+            if (SelectedService == null || !Services.Contains(SelectedService))
+            {
+                SelectedService = Services[0];
+            }
+            else
+            {
+                UpdateServiceDetails();
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
         }
     }
 
@@ -3216,7 +3355,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 var refreshPerformance = false;
 
-                var networkAdapters = snapshot.NetworkAdapters;
+                var networkAdapters = snapshot.NetworkAdapters
+                    .OrderByDescending(adapter => adapter.IsActive)
+                    .ThenByDescending(adapter => adapter.IsUp)
+                    .ThenBy(adapter => adapter.IsVirtual)
+                    .ThenBy(adapter => adapter.Name, StringComparer.OrdinalIgnoreCase)
+                    .ToList();
                 var totalUpload = networkAdapters.Sum(a => a.SendMbps);
                 var totalDownload = networkAdapters.Sum(a => a.ReceiveMbps);
                 UpdateHistory(NetworkUploadHistory, totalUpload);
@@ -3253,6 +3397,65 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 refreshPerformance = true;
 
                 var disks = snapshot.Disks;
+                if (_diskPerformanceSnapshots.Count > 0)
+                {
+                    var metaByLetter = _diskPerformanceSnapshots.ToDictionary(
+                        disk => disk.DriveLetter,
+                        disk => disk,
+                        StringComparer.OrdinalIgnoreCase);
+
+                    foreach (var disk in disks)
+                    {
+                        if (metaByLetter.TryGetValue(disk.DriveLetter, out var meta))
+                        {
+                            disk.DiskIndex = meta.DiskIndex;
+                            disk.Model = meta.Model;
+                            disk.MediaType = meta.MediaType;
+                            disk.InterfaceType = meta.InterfaceType;
+                            disk.BusType = meta.BusType;
+                            disk.IsExternal = meta.IsExternal;
+                            disk.IsSystemDisk = meta.IsSystemDisk;
+                            disk.HasPageFile = meta.HasPageFile;
+                        }
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        var driveTypes = DriveInfo.GetDrives()
+                            .Where(d => d.IsReady)
+                            .ToDictionary(d => d.Name.TrimEnd('\\'), d => d.DriveType, StringComparer.OrdinalIgnoreCase);
+
+                        foreach (var disk in disks)
+                        {
+                            if (!driveTypes.TryGetValue(disk.DriveLetter, out var driveType))
+                            {
+                                continue;
+                            }
+
+                            if (string.IsNullOrWhiteSpace(disk.MediaType))
+                            {
+                                disk.MediaType = driveType switch
+                                {
+                                    DriveType.Fixed => "Fixed",
+                                    DriveType.Removable => "Removable",
+                                    DriveType.CDRom => "Optical",
+                                    _ => driveType.ToString()
+                                };
+                            }
+
+                            if (!disk.IsExternal.HasValue && driveType == DriveType.Removable)
+                            {
+                                disk.IsExternal = true;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // Ignore drive type fallback failures.
+                    }
+                }
                 var totalRead = disks.Sum(d => d.ReadMBps);
                 var totalWrite = disks.Sum(d => d.WriteMBps);
                 UpdateHistory(DiskReadHistory, totalRead);
@@ -3380,14 +3583,30 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 return new ProcessMetricsSnapshot(topCpu, topRam, topNetwork, topDisk, mode);
             }).ConfigureAwait(false);
 
-            if (snapshot.TopCpu.Count < 3 && snapshot.TopRam.Count < 3)
+            var needCpuFallback = snapshot.TopCpu.Count < 3;
+            var needRamFallback = snapshot.TopRam.Count < 3;
+            var needNetworkFallback = snapshot.TopNetwork.Count < 2;
+            var needDiskFallback = snapshot.TopDisk.Count < 2;
+
+            if (needCpuFallback || needRamFallback || needNetworkFallback || needDiskFallback)
             {
                 var fallbackSnapshot = BuildFallbackProcessSnapshot();
-                if (fallbackSnapshot.TopCpu.Count > snapshot.TopCpu.Count)
-                {
-                    snapshot = fallbackSnapshot;
-                    LogMonitorWarning("Monitor: Process fallback snapshot used (insufficient data).");
-                }
+                var topCpu = needCpuFallback && fallbackSnapshot.TopCpu.Count > snapshot.TopCpu.Count
+                    ? fallbackSnapshot.TopCpu
+                    : snapshot.TopCpu;
+                var topRam = needRamFallback && fallbackSnapshot.TopRam.Count > snapshot.TopRam.Count
+                    ? fallbackSnapshot.TopRam
+                    : snapshot.TopRam;
+                var topNetwork = needNetworkFallback && fallbackSnapshot.TopNetwork.Count > snapshot.TopNetwork.Count
+                    ? fallbackSnapshot.TopNetwork
+                    : snapshot.TopNetwork;
+                var topDisk = needDiskFallback && fallbackSnapshot.TopDisk.Count > snapshot.TopDisk.Count
+                    ? fallbackSnapshot.TopDisk
+                    : snapshot.TopDisk;
+                var networkMode = needNetworkFallback ? fallbackSnapshot.NetworkMode : snapshot.NetworkMode;
+
+                snapshot = new ProcessMetricsSnapshot(topCpu, topRam, topNetwork, topDisk, networkMode);
+                LogMonitorWarning("Monitor: Process fallback snapshot used (insufficient data).");
             }
 
             await DispatchAsync(() =>
@@ -3553,6 +3772,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 var (sendMbps, receiveMbps) = ComputeFallbackNetworkRates(adapterId, totalSent, totalReceived, now);
                 var (ipv4, ipv6) = TryGetIpAddressesSafe(nic);
                 var linkSpeedMbps = nic.Speed > 0 ? nic.Speed / (1000d * 1000d) : 0;
+                var isUp = nic.OperationalStatus == OperationalStatus.Up;
+                var isLoopback = nic.NetworkInterfaceType == NetworkInterfaceType.Loopback;
+                var isVirtual = IsVirtualAdapter(nic);
+                var isActive = isUp && (sendMbps + receiveMbps) > 0.01;
+                var statusText = isUp ? (isActive ? "Active" : "Connected") : "Disconnected";
 
                 adapters.Add(new NetworkAdapterInfo
                 {
@@ -3566,7 +3790,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     SendBytesPerSec = (float)(sendMbps * 1024 * 1024 / 8),
                     ReceiveBytesPerSec = (float)(receiveMbps * 1024 * 1024 / 8),
                     TotalBytesSent = totalSent,
-                    TotalBytesReceived = totalReceived
+                    TotalBytesReceived = totalReceived,
+                    IsUp = isUp,
+                    IsLoopback = isLoopback,
+                    IsVirtual = isVirtual,
+                    IsActive = isActive,
+                    StatusText = statusText
                 });
             }
         }
@@ -3649,6 +3878,27 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             return (string.Empty, string.Empty);
         }
+    }
+
+    private static bool IsVirtualAdapter(NetworkInterface nic)
+    {
+        var type = nic.NetworkInterfaceType;
+        if (type == NetworkInterfaceType.Loopback || type == NetworkInterfaceType.Tunnel)
+        {
+            return true;
+        }
+
+        var name = nic.Name ?? string.Empty;
+        var description = nic.Description ?? string.Empty;
+        return name.Contains("virtual", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("virtual", StringComparison.OrdinalIgnoreCase)
+               || name.Contains("vEthernet", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("hyper-v", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("vmware", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("virtualbox", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("loopback", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("tunnel", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("pseudo", StringComparison.OrdinalIgnoreCase);
     }
 
     private static List<DiskInfo> BuildFallbackDisks()
@@ -3738,16 +3988,43 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     _memoryPerformanceSnapshot = metricsSnapshot.MemorySnapshot;
                     _diskPerformanceSnapshots = metricsSnapshot.DiskSnapshots;
 
-                    HasGpuMemory = metricsSnapshot.GpuMemory.IsAvailable;
+                    var gpuTotalMb = metricsSnapshot.GpuMemory.TotalMb;
+                    if (gpuTotalMb <= 0 && metricsSnapshot.GpuPerformance.TotalMemoryMb.HasValue)
+                    {
+                        gpuTotalMb = metricsSnapshot.GpuPerformance.TotalMemoryMb.Value;
+                    }
+
+                    HasGpuMemory = metricsSnapshot.GpuMemory.IsAvailable || gpuTotalMb > 0;
                     GpuMemoryUsedMb = metricsSnapshot.GpuMemory.UsedMb;
-                    GpuMemoryTotalMb = metricsSnapshot.GpuMemory.TotalMb;
-                    GpuMemoryUsagePercent = metricsSnapshot.GpuMemory.UsagePercent;
+                    GpuMemoryTotalMb = gpuTotalMb;
+                    GpuMemoryUsagePercent = gpuTotalMb > 0
+                        ? (metricsSnapshot.GpuMemory.UsedMb / gpuTotalMb) * 100.0
+                        : metricsSnapshot.GpuMemory.UsagePercent;
                     OnPropertyChanged(nameof(GpuMemoryUsedGb));
                     OnPropertyChanged(nameof(GpuMemoryTotalGb));
                     OnPropertyChanged(nameof(GpuMemoryUsageText));
                     OnPropertyChanged(nameof(GpuMemoryPercentText));
 
-                    _gpuPerformanceSnapshot = metricsSnapshot.GpuPerformance;
+                    var adjustedDedicated = metricsSnapshot.GpuPerformance.DedicatedMemoryMb;
+                    var adjustedTotal = metricsSnapshot.GpuPerformance.TotalMemoryMb;
+                    if (gpuTotalMb > 0)
+                    {
+                        if (!adjustedDedicated.HasValue || adjustedDedicated.Value < gpuTotalMb * 0.8)
+                        {
+                            adjustedDedicated = gpuTotalMb;
+                        }
+
+                        if (!adjustedTotal.HasValue || adjustedTotal.Value < gpuTotalMb)
+                        {
+                            adjustedTotal = gpuTotalMb;
+                        }
+                    }
+
+                    _gpuPerformanceSnapshot = metricsSnapshot.GpuPerformance with
+                    {
+                        DedicatedMemoryMb = adjustedDedicated,
+                        TotalMemoryMb = adjustedTotal
+                    };
 
                     CpuFanRpm = metricsSnapshot.Fans.CpuRpm;
                     GpuFanRpm = metricsSnapshot.Fans.GpuRpm;
@@ -3893,6 +4170,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         private string _title;
         private string _subtitle;
+        private bool _isActive;
 
         public PerformanceItemViewModel(string key, PerformanceItemKind kind, string title, string subtitle, string? identifier)
         {
@@ -3901,6 +4179,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _title = title;
             _subtitle = subtitle;
             Identifier = identifier ?? string.Empty;
+            _isActive = true;
         }
 
         public string Key { get; }
@@ -3919,6 +4198,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             get => _subtitle;
             set => SetProperty(ref _subtitle, value);
+        }
+
+        public bool IsActive
+        {
+            get => _isActive;
+            set => SetProperty(ref _isActive, value);
         }
     }
 

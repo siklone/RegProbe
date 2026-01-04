@@ -45,7 +45,11 @@ public sealed record DiskPerformanceSnapshot(
     double? AvgResponseMs,
     double? QueueLength,
     bool IsSystemDisk,
-    bool HasPageFile);
+    bool HasPageFile)
+{
+    public string? BusType { get; init; }
+    public bool? IsExternal { get; init; }
+}
 
 public sealed record GpuEngineUsageSnapshot(
     double TotalPercent,

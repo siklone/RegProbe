@@ -128,6 +128,14 @@ public sealed class DiskMonitor : IDisposable
 public sealed class DiskInfo
 {
     public string DriveLetter { get; set; } = string.Empty;
+    public int? DiskIndex { get; set; }
+    public string? Model { get; set; }
+    public string? MediaType { get; set; }
+    public string? InterfaceType { get; set; }
+    public string? BusType { get; set; }
+    public bool? IsExternal { get; set; }
+    public bool? IsSystemDisk { get; set; }
+    public bool? HasPageFile { get; set; }
     public double TotalSizeGb { get; set; }
     public double FreeSpaceGb { get; set; }
     public float ReadBytesPerSec { get; set; }
@@ -137,4 +145,31 @@ public sealed class DiskInfo
     public double UsedPercent => (UsedSpaceGb / TotalSizeGb) * 100.0;
     public double ReadMBps => ReadBytesPerSec / (1024 * 1024);
     public double WriteMBps => WriteBytesPerSec / (1024 * 1024);
+    public string DescriptorText
+    {
+        get
+        {
+            var parts = new List<string>();
+            if (!string.IsNullOrWhiteSpace(MediaType))
+            {
+                parts.Add(MediaType);
+            }
+
+            if (!string.IsNullOrWhiteSpace(BusType))
+            {
+                parts.Add(BusType);
+            }
+
+            if (IsExternal == true)
+            {
+                parts.Add("External");
+            }
+            else if (IsExternal == false)
+            {
+                parts.Add("Internal");
+            }
+
+            return parts.Count > 0 ? string.Join(" · ", parts) : "Unknown";
+        }
+    }
 }

@@ -103,6 +103,10 @@ public sealed class NetworkMonitor : IDisposable
 
             var (ipv4, ipv6) = TryGetIpAddresses(nic);
             var linkSpeedMbps = nic.Speed > 0 ? nic.Speed / (1000d * 1000d) : 0;
+            var isUp = nic.OperationalStatus == OperationalStatus.Up;
+            var isLoopback = nic.NetworkInterfaceType == NetworkInterfaceType.Loopback;
+            var isVirtual = IsVirtualAdapter(nic);
+            var isActive = isUp && (sendRateBytesPerSec + receiveRateBytesPerSec) > 1024;
 
             adapters.Add(new NetworkAdapterInfo
             {
@@ -116,7 +120,12 @@ public sealed class NetworkMonitor : IDisposable
                 SendBytesPerSec = sendRateBytesPerSec,
                 ReceiveBytesPerSec = receiveRateBytesPerSec,
                 TotalBytesSent = totalBytesSent,
-                TotalBytesReceived = totalBytesReceived
+                TotalBytesReceived = totalBytesReceived,
+                IsUp = isUp,
+                IsLoopback = isLoopback,
+                IsVirtual = isVirtual,
+                IsActive = isActive,
+                StatusText = BuildStatusText(isUp, isActive)
             });
         }
 
@@ -215,6 +224,37 @@ public sealed class NetworkMonitor : IDisposable
         return null;
     }
 
+    private static bool IsVirtualAdapter(NetworkInterface nic)
+    {
+        var type = nic.NetworkInterfaceType;
+        if (type == NetworkInterfaceType.Loopback || type == NetworkInterfaceType.Tunnel)
+        {
+            return true;
+        }
+
+        var name = nic.Name ?? string.Empty;
+        var description = nic.Description ?? string.Empty;
+        return name.Contains("virtual", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("virtual", StringComparison.OrdinalIgnoreCase)
+               || name.Contains("vEthernet", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("hyper-v", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("vmware", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("virtualbox", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("loopback", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("tunnel", StringComparison.OrdinalIgnoreCase)
+               || description.Contains("pseudo", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string BuildStatusText(bool isUp, bool isActive)
+    {
+        if (!isUp)
+        {
+            return "Disconnected";
+        }
+
+        return isActive ? "Active" : "Connected";
+    }
+
     private (float SendBytesPerSec, float ReceiveBytesPerSec) ComputeRatesFromDeltas(
         string adapterId,
         long totalBytesSent,
@@ -281,6 +321,7 @@ public sealed class NetworkAdapterInfo
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
+    public string StatusText { get; set; } = string.Empty;
     public double LinkSpeedMbps { get; set; }
     public string Ipv4Address { get; set; } = string.Empty;
     public string Ipv6Address { get; set; } = string.Empty;
@@ -288,6 +329,10 @@ public sealed class NetworkAdapterInfo
     public float ReceiveBytesPerSec { get; set; }
     public long TotalBytesSent { get; set; }
     public long TotalBytesReceived { get; set; }
+    public bool IsUp { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsVirtual { get; set; }
+    public bool IsLoopback { get; set; }
 
     public double SendMbps => (SendBytesPerSec * 8) / (1024 * 1024);
     public double ReceiveMbps => (ReceiveBytesPerSec * 8) / (1024 * 1024);

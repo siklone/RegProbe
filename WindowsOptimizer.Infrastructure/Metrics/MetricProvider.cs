@@ -127,6 +127,7 @@ public sealed class MetricProvider : IDisposable
         var cacheGb = TryReadCounterGb(_cacheBytesCounter);
         var pagedPoolGb = TryReadCounterGb(_pagedPoolBytesCounter);
         var nonPagedPoolGb = TryReadCounterGb(_nonPagedPoolBytesCounter);
+        var hardwareReserved = _memoryHardwareReservedMb ?? TryGetHardwareReservedMemoryMb();
 
         return new MemoryPerformanceSnapshot(
             totalGb,
@@ -141,7 +142,7 @@ public sealed class MetricProvider : IDisposable
             _memorySlotsUsed,
             _memorySlotsTotal,
             _memoryFormFactor,
-            _memoryHardwareReservedMb);
+            hardwareReserved);
     }
 
     public IReadOnlyList<DiskPerformanceSnapshot> GetDiskPerformanceSnapshots()
@@ -176,6 +177,12 @@ public sealed class MetricProvider : IDisposable
                 identity = found;
             }
 
+            var isExternal = identity?.IsExternal;
+            if (!isExternal.HasValue && drive.DriveType == DriveType.Removable)
+            {
+                isExternal = true;
+            }
+
             results.Add(new DiskPerformanceSnapshot(
                 driveLetter,
                 diskIndex,
@@ -190,7 +197,11 @@ public sealed class MetricProvider : IDisposable
                 perf?.AvgResponseMs,
                 perf?.QueueLength,
                 systemDrive != null && driveLetter.Equals(systemDrive, StringComparison.OrdinalIgnoreCase),
-                pageFileDrives.Contains(driveLetter)));
+                pageFileDrives.Contains(driveLetter))
+            {
+                BusType = identity?.BusTypeLabel,
+                IsExternal = isExternal
+            });
         }
 
         return results;
@@ -344,8 +355,12 @@ public sealed class MetricProvider : IDisposable
                         if (sensor.SensorType == SensorType.Data || sensor.SensorType == SensorType.SmallData)
                         {
                             if (name.Contains("Memory Used", StringComparison.OrdinalIgnoreCase) ||
-                                name.Contains("GPU Memory", StringComparison.OrdinalIgnoreCase) ||
-                                name.Contains("VRAM", StringComparison.OrdinalIgnoreCase))
+                                name.Contains("GPU Memory Used", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Dedicated Memory Used", StringComparison.OrdinalIgnoreCase) ||
+                                (name.Contains("GPU Memory", StringComparison.OrdinalIgnoreCase) &&
+                                 name.Contains("Used", StringComparison.OrdinalIgnoreCase)) ||
+                                (name.Contains("VRAM", StringComparison.OrdinalIgnoreCase) &&
+                                 name.Contains("Used", StringComparison.OrdinalIgnoreCase)))
                             {
                                 usedMb ??= sensor.SensorType == SensorType.Data
                                     ? sensor.Value.Value * 1024
@@ -353,7 +368,10 @@ public sealed class MetricProvider : IDisposable
                             }
 
                             if (name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) ||
-                                name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase))
+                                name.Contains("GPU Memory Total", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Total VRAM", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("VRAM Total", StringComparison.OrdinalIgnoreCase))
                             {
                                 totalMb ??= sensor.SensorType == SensorType.Data
                                     ? sensor.Value.Value * 1024
@@ -400,12 +418,13 @@ public sealed class MetricProvider : IDisposable
         string? locationInfo = null;
         string? adapterCompatibility = null;
         string? videoProcessor = null;
+        string? pnpDeviceId = null;
 
         try
         {
             using var searcher = new ManagementObjectSearcher(
                 "SELECT Name, AdapterRAM, DedicatedVideoMemory, DedicatedSystemMemory, SharedSystemMemory, " +
-                "DriverVersion, DriverDate, CurrentBitsPerPixel, LocationInformation, AdapterCompatibility, VideoProcessor " +
+                "DriverVersion, DriverDate, CurrentBitsPerPixel, LocationInformation, AdapterCompatibility, VideoProcessor, PNPDeviceID " +
                 "FROM Win32_VideoController");
 
             foreach (ManagementObject obj in searcher.Get())
@@ -420,6 +439,7 @@ public sealed class MetricProvider : IDisposable
                 var candidateLocation = obj["LocationInformation"]?.ToString();
                 var candidateCompatibility = obj["AdapterCompatibility"]?.ToString();
                 var candidateProcessor = obj["VideoProcessor"]?.ToString();
+                var candidatePnpId = obj["PNPDeviceID"]?.ToString();
                 var bitsPerPixel = TryReadInt(obj, "CurrentBitsPerPixel") ?? 0;
 
                 var candidateDedicatedMb = NormalizeMemoryMb(candidateDedicated);
@@ -441,6 +461,7 @@ public sealed class MetricProvider : IDisposable
                 locationInfo = candidateLocation ?? locationInfo;
                 adapterCompatibility = candidateCompatibility ?? adapterCompatibility;
                 videoProcessor = candidateProcessor ?? videoProcessor;
+                pnpDeviceId = candidatePnpId ?? pnpDeviceId;
 
                 if (isActive)
                 {
@@ -472,6 +493,20 @@ public sealed class MetricProvider : IDisposable
 
         dedicatedMb ??= _gpuMemoryTotalMb;
 
+        var memorySnapshot = GetGpuMemorySnapshot();
+        if (memorySnapshot.TotalMb > 0)
+        {
+            if (!dedicatedMb.HasValue || dedicatedMb.Value < memorySnapshot.TotalMb * 0.8)
+            {
+                dedicatedMb = memorySnapshot.TotalMb;
+            }
+
+            if (!totalMb.HasValue || totalMb.Value < memorySnapshot.TotalMb)
+            {
+                totalMb = memorySnapshot.TotalMb;
+            }
+        }
+
         var sensorTotalMb = TryGetGpuMemoryTotalFromSensors();
         if (sensorTotalMb.HasValue && sensorTotalMb.Value > 0)
         {
@@ -499,6 +534,23 @@ public sealed class MetricProvider : IDisposable
             else if (sharedMb.HasValue)
             {
                 totalMb = sharedMb.Value;
+            }
+        }
+
+        if (driverVersion == null || driverDate == null)
+        {
+            if (!string.IsNullOrWhiteSpace(pnpDeviceId))
+            {
+                var (fallbackVersion, fallbackDate) = TryGetGpuDriverFromPnP(pnpDeviceId);
+                driverVersion ??= fallbackVersion;
+                driverDate ??= fallbackDate;
+            }
+
+            if (driverVersion == null || driverDate == null)
+            {
+                var (fallbackVersion, fallbackDate) = TryGetAnyDisplayDriver();
+                driverVersion ??= fallbackVersion;
+                driverDate ??= fallbackDate;
             }
         }
 
@@ -532,6 +584,7 @@ public sealed class MetricProvider : IDisposable
         double? cpuRpm = null;
         double? cpuFallback = null;
         double? gpuRpm = null;
+        double? gpuFallback = null;
 
         lock (_hardwareLock)
         {
@@ -554,6 +607,10 @@ public sealed class MetricProvider : IDisposable
                         if (IsCpuFanName(name))
                         {
                             cpuRpm = Math.Max(cpuRpm ?? 0, sensor.Value.Value);
+                        }
+                        else if (name.Contains("GPU", StringComparison.OrdinalIgnoreCase))
+                        {
+                            gpuFallback = Math.Max(gpuFallback ?? 0, sensor.Value.Value);
                         }
                         else
                         {
@@ -590,6 +647,7 @@ public sealed class MetricProvider : IDisposable
                 cpuRpm = wmiCpuRpm.Value;
             }
         }
+        gpuRpm ??= gpuFallback;
         return new FanSpeedSnapshot(cpuRpm ?? double.NaN, gpuRpm ?? double.NaN);
     }
 
@@ -885,13 +943,16 @@ public sealed class MetricProvider : IDisposable
             {
                 using var searcher = new ManagementObjectSearcher(
                     scope,
-                    new ObjectQuery("SELECT DeviceId, FriendlyName, MediaType FROM MSFT_PhysicalDisk"));
+                    new ObjectQuery("SELECT DeviceId, FriendlyName, MediaType, BusType FROM MSFT_PhysicalDisk"));
 
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     var index = TryReadInt(obj, "DeviceId");
                     var friendlyName = obj["FriendlyName"]?.ToString()?.Trim();
                     var mediaLabel = NormalizeStorageMediaType(TryReadInt(obj, "MediaType"));
+                    var busType = TryReadInt(obj, "BusType");
+                    var busLabel = NormalizeBusTypeLabel(busType);
+                    var isExternal = IsExternalBusType(busType);
 
                     if (index.HasValue)
                     {
@@ -901,13 +962,21 @@ public sealed class MetricProvider : IDisposable
                             var updated = disks[existingIndex] with
                             {
                                 FriendlyName = friendlyName ?? disks[existingIndex].FriendlyName,
-                                MediaTypeLabel = mediaLabel ?? disks[existingIndex].MediaTypeLabel
+                                MediaTypeLabel = mediaLabel ?? disks[existingIndex].MediaTypeLabel,
+                                BusType = busType ?? disks[existingIndex].BusType,
+                                BusTypeLabel = busLabel ?? disks[existingIndex].BusTypeLabel,
+                                IsExternal = isExternal ?? disks[existingIndex].IsExternal
                             };
                             disks[existingIndex] = updated;
                         }
                         else
                         {
-                            disks.Add(new DiskIdentity(index, null, friendlyName, mediaLabel, null, null, null));
+                            disks.Add(new DiskIdentity(index, null, friendlyName, mediaLabel, null, null, null)
+                            {
+                                BusType = busType,
+                                BusTypeLabel = busLabel,
+                                IsExternal = isExternal
+                            });
                         }
                     }
                 }
@@ -1146,6 +1215,49 @@ public sealed class MetricProvider : IDisposable
             4 => "SSD",
             5 => "SCM",
             _ => null
+        };
+    }
+
+    private static string? NormalizeBusTypeLabel(int? busType)
+    {
+        return busType switch
+        {
+            0 => "Unknown",
+            1 => "SCSI",
+            2 => "ATAPI",
+            3 => "ATA",
+            4 => "IEEE 1394",
+            5 => "SSA",
+            6 => "Fibre",
+            7 => "USB",
+            8 => "RAID",
+            9 => "iSCSI",
+            10 => "SAS",
+            11 => "SATA",
+            12 => "SD",
+            13 => "MMC",
+            14 => "Virtual",
+            15 => "File-backed",
+            16 => "Spaces",
+            17 => "NVMe",
+            18 => "SCM",
+            _ => null
+        };
+    }
+
+    private static bool? IsExternalBusType(int? busType)
+    {
+        if (!busType.HasValue)
+        {
+            return null;
+        }
+
+        return busType.Value switch
+        {
+            7 => true,  // USB
+            12 => true, // SD
+            13 => true, // MMC
+            _ => false
         };
     }
 
@@ -1581,7 +1693,56 @@ public sealed class MetricProvider : IDisposable
             }
         }
 
+        var sensorSpeed = TryGetCpuCurrentSpeedFromSensors();
+        if (sensorSpeed.HasValue && sensorSpeed.Value > 0)
+        {
+            return sensorSpeed.Value;
+        }
+
         return TryGetCpuCurrentSpeedMhzFromWmi();
+    }
+
+    private double? TryGetCpuCurrentSpeedFromSensors()
+    {
+        if (_computer == null)
+        {
+            return null;
+        }
+
+        double? maxClock = null;
+        lock (_hardwareLock)
+        {
+            foreach (var hardware in _computer.Hardware)
+            {
+                if (hardware.HardwareType != HardwareType.Cpu)
+                {
+                    continue;
+                }
+
+                UpdateHardware(hardware);
+
+                foreach (var sensor in EnumerateSensors(hardware))
+                {
+                    if (sensor.SensorType != SensorType.Clock || !sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var clock = sensor.Value.Value;
+                    if (clock > 0 && clock < 100)
+                    {
+                        clock *= 1000;
+                    }
+
+                    if (clock > 0 && (!maxClock.HasValue || clock > maxClock.Value))
+                    {
+                        maxClock = clock;
+                    }
+                }
+            }
+        }
+
+        return maxClock;
     }
 
     private static double? TryGetCpuCurrentSpeedMhzFromWmi()
@@ -1783,6 +1944,45 @@ public sealed class MetricProvider : IDisposable
         }
 
         return (speedMhz, slotsUsed > 0 ? slotsUsed : null, slotsTotal, formFactor, hardwareReserved);
+    }
+
+    private static double? TryGetHardwareReservedMemoryMb()
+    {
+        try
+        {
+            using var csSearcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
+            using var osSearcher = new ManagementObjectSearcher("SELECT TotalVisibleMemorySize FROM Win32_OperatingSystem");
+            double? totalBytes = null;
+            double? visibleBytes = null;
+
+            foreach (ManagementObject obj in csSearcher.Get())
+            {
+                if (obj["TotalPhysicalMemory"] != null)
+                {
+                    totalBytes = Convert.ToDouble(obj["TotalPhysicalMemory"]);
+                    break;
+                }
+            }
+
+            foreach (ManagementObject obj in osSearcher.Get())
+            {
+                if (obj["TotalVisibleMemorySize"] != null)
+                {
+                    visibleBytes = Convert.ToDouble(obj["TotalVisibleMemorySize"]) * 1024.0;
+                    break;
+                }
+            }
+
+            if (totalBytes.HasValue && visibleBytes.HasValue && totalBytes.Value > visibleBytes.Value)
+            {
+                return (totalBytes.Value - visibleBytes.Value) / (1024 * 1024);
+            }
+        }
+        catch
+        {
+        }
+
+        return null;
     }
 
     private static string? TryGetSystemDriveLetter()
@@ -2419,7 +2619,12 @@ public sealed class MetricProvider : IDisposable
         string? MediaTypeLabel,
         string? DeviceId,
         string? PnpDeviceId,
-        string? InterfaceType);
+        string? InterfaceType)
+    {
+        public int? BusType { get; init; }
+        public string? BusTypeLabel { get; init; }
+        public bool? IsExternal { get; init; }
+    }
 
     private sealed record DiskPerfData(
         double? ActiveTimePercent,
@@ -2458,21 +2663,25 @@ public sealed class MetricProvider : IDisposable
         try
         {
             double? best = null;
-            using var searcher = new ManagementObjectSearcher("SELECT AdapterRAM FROM Win32_VideoController");
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT AdapterRAM, DedicatedVideoMemory, DedicatedSystemMemory FROM Win32_VideoController");
             foreach (ManagementObject obj in searcher.Get())
             {
-                if (obj["AdapterRAM"] == null)
+                var bytes = TryReadDouble(obj, "DedicatedVideoMemory")
+                            ?? TryReadDouble(obj, "DedicatedSystemMemory")
+                            ?? TryReadDouble(obj, "AdapterRAM");
+                if (!bytes.HasValue)
                 {
                     continue;
                 }
 
-                var bytes = Convert.ToDouble(obj["AdapterRAM"]);
-                if (bytes <= 0)
+                var value = bytes.Value;
+                if (value <= 0)
                 {
                     continue;
                 }
 
-                var mb = bytes / (1024 * 1024);
+                var mb = value / (1024 * 1024);
                 if (!best.HasValue || mb > best.Value)
                 {
                     best = mb;
@@ -2524,8 +2733,10 @@ public sealed class MetricProvider : IDisposable
 
                     var name = sensor.Name ?? string.Empty;
                     if (!name.Contains("Memory Total", StringComparison.OrdinalIgnoreCase) &&
+                        !name.Contains("GPU Memory Total", StringComparison.OrdinalIgnoreCase) &&
                         !name.Contains("Total Memory", StringComparison.OrdinalIgnoreCase) &&
-                        !name.Contains("Total VRAM", StringComparison.OrdinalIgnoreCase))
+                        !name.Contains("Total VRAM", StringComparison.OrdinalIgnoreCase) &&
+                        !name.Contains("VRAM Total", StringComparison.OrdinalIgnoreCase))
                     {
                         continue;
                     }
@@ -2565,25 +2776,32 @@ public sealed class MetricProvider : IDisposable
 
         try
         {
-            var systemDir = Environment.SystemDirectory;
-            if (!string.IsNullOrWhiteSpace(systemDir))
+            var windowsDir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+            var candidates = new[]
             {
-                if (File.Exists(Path.Combine(systemDir, "d3d12.dll")))
+                Environment.SystemDirectory,
+                string.IsNullOrWhiteSpace(windowsDir) ? null : Path.Combine(windowsDir, "System32"),
+                string.IsNullOrWhiteSpace(windowsDir) ? null : Path.Combine(windowsDir, "SysWOW64")
+            }.Where(path => !string.IsNullOrWhiteSpace(path)).Distinct();
+
+            foreach (var systemDir in candidates)
+            {
+                if (File.Exists(Path.Combine(systemDir!, "d3d12.dll")))
                 {
                     return "DirectX 12";
                 }
 
-                if (File.Exists(Path.Combine(systemDir, "d3d11.dll")))
+                if (File.Exists(Path.Combine(systemDir!, "d3d11.dll")))
                 {
                     return "DirectX 11";
                 }
 
-                if (File.Exists(Path.Combine(systemDir, "d3d10.dll")))
+                if (File.Exists(Path.Combine(systemDir!, "d3d10.dll")))
                 {
                     return "DirectX 10";
                 }
 
-                if (File.Exists(Path.Combine(systemDir, "d3d9.dll")))
+                if (File.Exists(Path.Combine(systemDir!, "d3d9.dll")))
                 {
                     return "DirectX 9";
                 }
@@ -2594,7 +2812,110 @@ public sealed class MetricProvider : IDisposable
             // Ignore and fall back to registry value.
         }
 
-        return registryVersion;
+        var mapped = MapDirectXRegistryVersion(registryVersion) ?? registryVersion;
+        if (string.IsNullOrWhiteSpace(mapped) && Environment.OSVersion.Version.Major >= 10)
+        {
+            return "DirectX 12";
+        }
+
+        if (!string.IsNullOrWhiteSpace(mapped) &&
+            mapped.StartsWith("DirectX 9", StringComparison.OrdinalIgnoreCase) &&
+            Environment.OSVersion.Version.Major >= 10)
+        {
+            return "DirectX 12";
+        }
+
+        return mapped;
+    }
+
+    private static string? MapDirectXRegistryVersion(string? version)
+    {
+        if (string.IsNullOrWhiteSpace(version))
+        {
+            return null;
+        }
+
+        if (version.StartsWith("4.09", StringComparison.OrdinalIgnoreCase))
+        {
+            return "DirectX 9.0c";
+        }
+
+        if (version.StartsWith("4.10", StringComparison.OrdinalIgnoreCase))
+        {
+            return "DirectX 10";
+        }
+
+        if (version.StartsWith("4.11", StringComparison.OrdinalIgnoreCase))
+        {
+            return "DirectX 11";
+        }
+
+        return null;
+    }
+
+    private static (string? Version, DateTime? Date) TryGetGpuDriverFromPnP(string pnpDeviceId)
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT DeviceID, DriverVersion, DriverDate FROM Win32_PnPSignedDriver WHERE DeviceClass='DISPLAY'");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var deviceId = obj["DeviceID"]?.ToString();
+                if (string.IsNullOrWhiteSpace(deviceId))
+                {
+                    continue;
+                }
+
+                if (pnpDeviceId.IndexOf(deviceId, StringComparison.OrdinalIgnoreCase) < 0 &&
+                    deviceId.IndexOf(pnpDeviceId, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    continue;
+                }
+
+                var version = obj["DriverVersion"]?.ToString();
+                var date = TryReadWmiDateTime(obj["DriverDate"]);
+                return (version, date);
+            }
+        }
+        catch
+        {
+        }
+
+        return (null, null);
+    }
+
+    private static (string? Version, DateTime? Date) TryGetAnyDisplayDriver()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT DriverVersion, DriverDate FROM Win32_PnPSignedDriver WHERE DeviceClass='DISPLAY'");
+
+            string? bestVersion = null;
+            DateTime? bestDate = null;
+
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var version = obj["DriverVersion"]?.ToString();
+                var date = TryReadWmiDateTime(obj["DriverDate"]);
+                if (date.HasValue && (!bestDate.HasValue || date.Value > bestDate.Value))
+                {
+                    bestDate = date;
+                    bestVersion = version ?? bestVersion;
+                }
+                else if (bestVersion == null && !string.IsNullOrWhiteSpace(version))
+                {
+                    bestVersion = version;
+                }
+            }
+
+            return (bestVersion, bestDate);
+        }
+        catch
+        {
+            return (null, null);
+        }
     }
 }
 
