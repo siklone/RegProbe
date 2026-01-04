@@ -803,7 +803,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     StatusMessage = string.Empty;
                 }
-            }).ConfigureAwait(false);
+            }, DispatcherPriority.ContextIdle).ConfigureAwait(false);
 
             if (_lastStartupCount != items.Count)
             {
@@ -824,11 +824,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 _startupAppsUpdatedAt = DateTime.UtcNow;
                 OnPropertyChanged(nameof(StartupAppsUpdatedText));
                 StatusMessage = $"Startup apps load failed: {ex.Message}";
-            }).ConfigureAwait(false);
+            }, DispatcherPriority.ContextIdle).ConfigureAwait(false);
         }
         finally
         {
-            IsStartupAppsLoading = false;
+            await DispatchAsync(() => IsStartupAppsLoading = false, DispatcherPriority.ContextIdle).ConfigureAwait(false);
         }
     }
 
@@ -865,7 +865,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     StatusMessage = string.Empty;
                 }
-            }).ConfigureAwait(false);
+            }, DispatcherPriority.ContextIdle).ConfigureAwait(false);
 
             if (_lastServiceCount != items.Count)
             {
@@ -886,11 +886,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 _servicesUpdatedAt = DateTime.UtcNow;
                 OnPropertyChanged(nameof(ServicesUpdatedText));
                 StatusMessage = $"Services load failed: {ex.Message}";
-            }).ConfigureAwait(false);
+            }, DispatcherPriority.ContextIdle).ConfigureAwait(false);
         }
         finally
         {
-            IsServicesLoading = false;
+            await DispatchAsync(() => IsServicesLoading = false, DispatcherPriority.ContextIdle).ConfigureAwait(false);
         }
     }
 
@@ -3095,14 +3095,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            var view = CollectionViewSource.GetDefaultView(collection);
-            if (view != null && view.IsRefreshDeferred)
-            {
-                var snapshot = newItems.ToList();
-                _ = DispatchAsync(() => UpdateCollection(collection, snapshot), DispatcherPriority.ContextIdle);
-                return false;
-            }
-
             if (collection.Count == newItems.Count)
             {
                 for (var i = 0; i < newItems.Count; i++)
@@ -3126,19 +3118,18 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _ = DispatchAsync(() => UpdateCollection(collection, snapshot), DispatcherPriority.ContextIdle);
             return false;
         }
+        catch (NotSupportedException)
+        {
+            var snapshot = newItems.ToList();
+            _ = DispatchAsync(() => UpdateCollection(collection, snapshot), DispatcherPriority.ContextIdle);
+            return false;
+        }
     }
 
     private void EnsureStartupSelection()
     {
         try
         {
-            var view = CollectionViewSource.GetDefaultView(StartupApps);
-            if (view != null && view.IsRefreshDeferred)
-            {
-                _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
-                return;
-            }
-
             if (StartupApps.Count == 0)
             {
                 SelectedStartupApp = null;
@@ -3154,19 +3145,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
         }
+        catch (NotSupportedException)
+        {
+            _ = DispatchAsync(EnsureStartupSelection, DispatcherPriority.ContextIdle);
+        }
     }
 
     private void EnsureServiceSelection()
     {
         try
         {
-            var view = CollectionViewSource.GetDefaultView(Services);
-            if (view != null && view.IsRefreshDeferred)
-            {
-                _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
-                return;
-            }
-
             if (Services.Count == 0)
             {
                 SelectedService = null;
@@ -3183,6 +3171,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             }
         }
         catch (InvalidOperationException)
+        {
+            _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
+        }
+        catch (NotSupportedException)
         {
             _ = DispatchAsync(EnsureServiceSelection, DispatcherPriority.ContextIdle);
         }

@@ -1747,6 +1747,12 @@ public sealed class MetricProvider : IDisposable
 
     private static double? TryGetCpuCurrentSpeedMhzFromWmi()
     {
+        var perfSpeed = TryGetCpuCurrentSpeedFromPerfWmi();
+        if (perfSpeed.HasValue && perfSpeed.Value > 0)
+        {
+            return perfSpeed.Value;
+        }
+
         try
         {
             double? best = null;
@@ -1759,6 +1765,47 @@ public sealed class MetricProvider : IDisposable
                 }
 
                 var speed = Convert.ToDouble(obj["CurrentClockSpeed"]);
+                if (speed <= 0)
+                {
+                    continue;
+                }
+
+                if (!best.HasValue || speed > best.Value)
+                {
+                    best = speed;
+                }
+            }
+
+            return best;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static double? TryGetCpuCurrentSpeedFromPerfWmi()
+    {
+        try
+        {
+            double? best = null;
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT Name, ProcessorFrequency FROM Win32_PerfFormattedData_Counters_ProcessorInformation");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                if (obj["ProcessorFrequency"] == null)
+                {
+                    continue;
+                }
+
+                var name = obj["Name"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(name) &&
+                    name.Equals("_Total", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                var speed = Convert.ToDouble(obj["ProcessorFrequency"]);
                 if (speed <= 0)
                 {
                     continue;
@@ -2688,6 +2735,13 @@ public sealed class MetricProvider : IDisposable
                 }
             }
 
+            var perfTotal = TryGetGpuMemoryTotalFromPerfCounters();
+            if (perfTotal.HasValue && perfTotal.Value > 0 &&
+                (!best.HasValue || perfTotal.Value > best.Value))
+            {
+                best = perfTotal.Value;
+            }
+
             return best;
         }
         catch (Exception ex)
@@ -2761,6 +2815,54 @@ public sealed class MetricProvider : IDisposable
         return totalMb;
     }
 
+    private static double? TryGetGpuMemoryTotalFromPerfCounters()
+    {
+        try
+        {
+            var category = new PerformanceCounterCategory("GPU Adapter Memory");
+            var instances = category.GetInstanceNames();
+            double? best = null;
+
+            foreach (var instance in instances)
+            {
+                if (string.IsNullOrWhiteSpace(instance))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    using var counter = new PerformanceCounter(
+                        "GPU Adapter Memory",
+                        "Dedicated Limit",
+                        instance,
+                        true);
+                    var value = counter.NextValue();
+                    if (value <= 0)
+                    {
+                        continue;
+                    }
+
+                    var mb = value / (1024 * 1024);
+                    if (!best.HasValue || mb > best.Value)
+                    {
+                        best = mb;
+                    }
+                }
+                catch
+                {
+                    // Ignore per-instance counter failures.
+                }
+            }
+
+            return best;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     private static string? TryGetDirectXVersion()
     {
         string? registryVersion = null;
@@ -2773,6 +2875,8 @@ public sealed class MetricProvider : IDisposable
         {
             registryVersion = null;
         }
+
+        registryVersion = registryVersion?.Trim();
 
         try
         {
