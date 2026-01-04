@@ -10,12 +10,21 @@
 
 Windows Optimizer, WPF ve .NET 8 ile geliştirilmiş, güvenli ve geri alınabilir Windows optimizasyon aracıdır. Temiz katmanlı mimari, MVVM deseni ve modüler yapıya sahiptir.
 
+### 2026-01-04 Update (English)
+- Monitor reliability is the current priority: Startup Apps / Services / Processes lists were sometimes empty due to CollectionView refresh deferral. Updates are now dispatched at UI idle with retry logic.
+- CPU current speed now reads `Win32_PerfFormattedData_Counters_ProcessorInformation` before falling back to `Win32_Processor`.
+- GPU total memory now prefers `GPU Adapter Memory` performance counters to avoid the 4 GB `AdapterRAM` cap.
+- DirectX registry value is trimmed before mapping (reduces incorrect "4.09" display).
+- Remaining risks: list population still needs native Windows verification; GPU driver/version/fan data still varies by hardware and WMI provider.
+
 ### 🎯 Güncel Öncelikler (2025-12-30)
 - Startup akışı: tema flicker yok, splash render hızlı, scan UI’ı dondurmamalı.
 - Tweak kartı: kapalı halde `Current → Target` + etki alanı (Registry/Service/Task) görünmeli.
 - Dokümantasyon: per‑tweak kısa “ne değişir / risk / kaynak” satırları + anchor linkler.
 - Monitor UI: daha kompakt, modern ve bilgi yoğun (grafikler okunabilir).
 - Docs audit: run `python3 scripts/audit_tweak_sources.py` after adding tweaks; keep `Docs/tweaks/tweak-source-audit.md` at Missing documentation: 0 by updating category docs.
+- Monitor list population reliability (Startup Apps / Services / Processes) on Windows 10/11.
+- CPU/GPU detail accuracy (current speed, GPU memory totals, driver info, fan data).
 
 ### Proje İstatistikleri
 

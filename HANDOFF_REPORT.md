@@ -1,6 +1,6 @@
 # Windows Optimizer — Handoff (for Claude/Agents)
 
-**Last Updated:** 2026-01-03
+**Last Updated:** 2026-01-04
 **Branch:** `main`
 
 This doc is a practical handoff for the next agent (Claude or others): what changed recently, what is still broken/unfinished, and where to look.
@@ -114,6 +114,14 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
     `WindowsOptimizer.App/ViewModels/SettingsViewModel.cs`,
     `WindowsOptimizer.Infrastructure/AppSettings.cs`,
     `WindowsOptimizer.App/Services/UiPreferences.cs`
+
+- **Monitor collection updates + CPU/GPU metric fallbacks (2026-01-04)**
+  - List updates (Startup Apps / Services) now run at `DispatcherPriority.ContextIdle` and retry on deferral exceptions.
+  - Selection updates no longer read `CollectionViewSource.IsRefreshDeferred` directly.
+  - CPU current speed reads `Win32_PerfFormattedData_Counters_ProcessorInformation.ProcessorFrequency` first.
+  - GPU total memory uses `GPU Adapter Memory` perf counters when available; DirectX registry value trimmed before mapping.
+  - Files: `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`,
+    `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
 
 - **Startup scan progress surfaced in splash (2025-12-30)**
   - Splash now updates with per‑tweak scan progress + current tweak name.
@@ -262,25 +270,35 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
    - Delta-based throughput and LogicalDisk counters implemented but need real testing.
    - Relevant: `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`, `DiskMonitor.cs`
 
-4) **Crash recovery UX could be improved (optional)**
+4) **Monitor tabs sometimes show empty lists or 1 item**
+   - Startup Apps / Services / Processes can appear empty after refresh or tab switching.
+   - UI can show `CollectionView ... Refresh is being deferred` in the status banner.
+   - A ContextIdle update + retry fix was added in `1a16a95` but needs Windows verification.
+
+5) **GPU details and CPU speed accuracy**
+   - GPU total memory, driver version/date, and fan RPM can still show `N/A` on some hardware.
+   - CPU current speed may still show base speed if perf WMI classes are unavailable.
+   - Requires native Windows 10/11 coverage across NVIDIA + AMD + Intel.
+
+6) **Crash recovery UX could be improved (optional)**
    - Banner exists, but a modal dialog + detailed list of affected tweaks might be clearer.
 
-5) **Memory leak testing**
+7) **Memory leak testing**
    - Monitor page should be stress-tested (1hr) to verify no memory leaks.
 
-6) **Legacy provider cleanup**
+8) **Legacy provider cleanup**
    - `LegacyTweakProvider` is a bridge to restore missing tweaks.
    - Remaining work: migrate leftover tweaks into category providers and remove legacy provider once parity is reached.
 
-7) **Startup scan + theme flicker verification**
+9) **Startup scan + theme flicker verification**
    - Theme now applies before splash, but needs Windows verification.
    - Verify no main-window flicker and no UI freeze during scan.
 
-8) **Tweak docs depth**
+10) **Tweak docs depth**
    - Docs are linked, but per-tweak “what it changes / risk / source” content is still sparse.
    - Add anchored sections per tweak or per subcategory where practical.
 
-9) **Monitor UX modernization**
+11) **Monitor UX modernization**
    - Animations added, but overall layout and charts still need a compact + modern pass.
 
 ## Guardrails (Do Not Break)
@@ -314,20 +332,27 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 
 1. ~~TweaksViewModel Refactoring~~ ✅ DONE (Phase 8)
 2. ~~TweakProvider implementations~~ ✅ DONE
-3. **Windows 10/11 native testing** (PRIORITY)
-4. **Startup scan/theme flicker verification** (PRIORITY)
-5. **Tweak card summary (Current → Target + Area)**
-6. **Docs depth pass (per-tweak summary + anchors)**
-7. **Monitor UX modernization (compact + smooth)**
-8. **WiX MSI Installer setup** (PRIORITY)
-9. Memory optimization / leak testing
-10. Optional: crash recovery modal + per-tweak selection
+3. **Monitor list population stability** (Startup Apps / Services / Processes) (PRIORITY)
+4. **GPU/CPU detail accuracy** (speed, memory totals, driver info) (PRIORITY)
+5. **Windows 10/11 native testing** (PRIORITY)
+6. **Startup scan/theme flicker verification** (PRIORITY)
+7. **Tweak card summary (Current → Target + Area)**
+8. **Docs depth pass (per-tweak summary + anchors)**
+9. **Monitor UX modernization (compact + smooth)**
+10. **WiX MSI Installer setup** (PRIORITY)
+11. Memory optimization / leak testing
+12. Optional: crash recovery modal + per-tweak selection
 
 ## Agent Verification Checklist (Please Validate)
 - Confirm theme loads before splash (no dark→light flash).
 - Confirm startup scan doesn’t stall UI (splash stays responsive).
 - Confirm `Source file` links open the correct local file.
 - Confirm Monitor animations don’t trigger Freezable animation errors.
+- Confirm Startup Apps list populates after refresh and tab switches.
+- Confirm Services list populates (registry + drivers), not just 1 item.
+- Confirm Processes lists show Top 10 for CPU/RAM/Network/Disk.
+- Confirm CPU current speed > base when boosting.
+- Confirm GPU memory totals and DirectX version are correct.
 
 ## Files Changed This Session (2025-12-30)
 
@@ -346,6 +371,11 @@ This doc is a practical handoff for the next agent (Claude or others): what chan
 - `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Added legacy provider to load order
 - `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs` - Apply tweak metadata after load
 - `WindowsOptimizer.App/Resources/Styles.xaml` - Theme-bound resources switched to DynamicResource
+
+## Files Changed This Session (2026-01-04)
+
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Defer list updates to UI idle; retry collection updates on refresh deferral.
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs` - CPU speed via perf WMI; GPU memory total via perf counters; DirectX registry trim.
 
 ## Files Changed This Session (2025-12-30)
 

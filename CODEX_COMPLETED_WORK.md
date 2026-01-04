@@ -9,6 +9,12 @@
 
 Bu dokümanda, Windows Optimizer projesinde tamamlanmış tüm özellikler, düzeltmeler ve geliştirmeler listelenmiştir.
 
+### 2026-01-04 Addendum (English)
+- Monitor list updates (Startup Apps / Services) now dispatch at UI idle and retry on CollectionView deferral errors.
+- CPU current speed uses PerfFormattedData (ProcessorFrequency) before Win32_Processor fallback.
+- GPU total memory prefers `GPU Adapter Memory` performance counters to avoid 4 GB caps.
+- DirectX registry value is trimmed before version mapping.
+
 ---
 
 ## 🏗️ Temel Mimari (100% Tamamlandı)

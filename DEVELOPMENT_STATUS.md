@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** January 3, 2026
+**Last Updated:** January 4, 2026
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -655,6 +655,32 @@
 
 ---
 
+### 20. Monitor Collections + CPU/GPU Metrics Reliability (Commit: `1a16a95`)
+**Problem:** Startup Apps / Services / Processes lists sometimes showed 0-1 items with errors like
+`Cannot change or check the contents or Current position of CollectionView while Refresh is being deferred.`.
+CPU speed and GPU memory totals were also inaccurate on some systems.
+
+**Root Cause:**
+- UI updates were applied while the CollectionView was in a deferred refresh state, leading to re-entrancy issues.
+- CPU speed fell back to `Win32_Processor.CurrentClockSpeed` (often base speed).
+- GPU total memory fell back to `Win32_VideoController.AdapterRAM` (can cap at 4 GB).
+
+**Solution:**
+- Dispatch list updates and selection updates at `DispatcherPriority.ContextIdle`.
+- Simplified UpdateCollection logic and added retry on `InvalidOperationException` / `NotSupportedException`.
+- Ensure loading flags are set on the UI thread.
+- CPU speed now reads `Win32_PerfFormattedData_Counters_ProcessorInformation.ProcessorFrequency` first.
+- GPU total memory now uses `GPU Adapter Memory` perf counters when available.
+- DirectX registry value is trimmed before mapping.
+
+**Files Changed:**
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+
+**Status:** 🧪 **IMPLEMENTED** - Needs verification on Windows 10/11
+
+---
+
 ## 🐛 Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
@@ -664,17 +690,22 @@
 **Description:**
 - Network Adapters and/or Disk Activity may show empty (or show 0 I/O) on some environments
 - Other monitoring metrics (CPU, RAM, Processes) work correctly
+- Startup Apps / Services / Processes lists may show 0-1 entries after tab switches or refreshes
+- Status banner may show: `CollectionView ... Refresh is being deferred`
 
 **Possible Causes:**
 - Performance counter availability / mapping differences across environments
 - Platform limitations (WSL2/Linux)
+- UI updates applied while CollectionView is deferring refresh (re-entrancy)
 
 **Notes:**
 - Fallbacks were added (see commits `b047e4c`, `c2e8520`) but still need broad validation on Windows 10/11.
+- A UI update deferral fix was added in `1a16a95` (ContextIdle updates + retry), still needs verification on native Windows.
 
 **Files Affected:**
 - `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
 - `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
 
 **Priority:** Medium - affects monitoring functionality but doesn't crash
 
@@ -687,10 +718,13 @@
 **Description:**
 - Some NVMe/SATA devices still report `N/A` for disk health (SMART/WMI coverage varies by vendor).
 - CPU fan RPM may be missing on boards without exposed SuperIO sensors.
+- GPU fan RPM, driver version, and memory totals can be `N/A` depending on vendor/WMI coverage.
+- CPU current speed can still show base speed if perf counters or WMI perf classes are unavailable.
 
 **Notes:**
 - Use the **Sensor Diagnostics** export (Monitor header) to capture LHM + WMI data.
 - Check if LHM reports storage sensors and if WMI storage classes are accessible.
+- New CPU/GPU fallbacks were added in `1a16a95` (perf WMI + GPU adapter memory counters) and need hardware validation.
 
 **Files Affected:**
 - `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
@@ -999,10 +1033,16 @@
 - [ ] CPU usage displays correctly
 - [ ] RAM usage displays correctly
 - [ ] Top processes list updates
+- [ ] Processes tab shows Top 10 for CPU/RAM/Network/Disk (not empty)
 - [ ] Temperature sensors work (if available)
 - [ ] 60-second history graphs render
 - [ ] Network adapters display (check empty issue)
 - [ ] Disk activity displays (check empty issue)
+- [ ] Startup Apps list populates and refreshes without CollectionView errors
+- [ ] Services list populates and refreshes without CollectionView errors
+- [ ] CPU current speed shows boosted value under load (not always base speed)
+- [ ] GPU memory total + DirectX version display correctly
+- [ ] GPU fan RPM appears when supported
 
 #### Tweaks Page
 - [ ] All categories expand/collapse without crashing
@@ -1045,6 +1085,7 @@ Key recent commits (not exhaustive):
 - `7a5ed0c` Tweaks link opening + compact search
 - `fc21306` Tweaks crash fix (avoid Freezable animations)
 - `969700f` Tweaks warning when ElevatedHost missing
+- `1a16a95` Monitor collection update stability + CPU/GPU metric fallbacks
 
 ---
 

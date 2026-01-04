@@ -1,6 +1,6 @@
 # 📋 Windows Optimizer - Yapılacaklar Listesi (TODO)
 
-**Son Güncelleme:** 30 Aralık 2025  
+**Son Güncelleme:** 4 Ocak 2026  
 **Versiyon:** 1.0.0
 
 ---
@@ -18,6 +18,12 @@
 ---
 
 ## 🔴 KRİTİK - Release Öncesi Gerekli
+
+### 0. 2026-01-04 Update (English)
+- Verify Monitor list population (Startup Apps / Services / Processes) across repeated tab switches and refresh.
+- Validate CPU current speed (boosted values) and GPU details (memory totals, driver info, fan RPM).
+- Confirm no CollectionView deferral errors appear in Monitor status banner.
+- Re-check Network Adapters and Disk Activity lists for empty/zero regressions.
 
 ### 1. Windows 10/11 Native Test Doğrulaması
 **Dosyalar:** N/A (manuel test)  
