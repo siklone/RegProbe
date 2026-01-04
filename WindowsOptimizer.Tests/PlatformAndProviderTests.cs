@@ -183,7 +183,7 @@ public sealed class TweakProviderTests
         // Arrange
         var expectedValues = new[]
         {
-            TweakStatus.Unknown,
+            TweakStatus.NotApplicable,
             TweakStatus.Detected,
             TweakStatus.Applied,
             TweakStatus.Verified,
