@@ -406,6 +406,104 @@ public sealed class MetricProvider : IDisposable
             isAvailable);
     }
 
+    /// <summary>
+    /// Gets extended GPU metrics: power consumption, clock speeds, hotspot temperature, and fan percentage.
+    /// </summary>
+    public GpuExtendedSnapshot GetGpuExtendedSnapshot()
+    {
+        if (_computer == null)
+        {
+            return new GpuExtendedSnapshot(null, null, null, null, null, false);
+        }
+
+        double? powerWatts = null;
+        double? coreClockMhz = null;
+        double? memoryClockMhz = null;
+        double? hotspotTemp = null;
+        double? fanPercent = null;
+
+        lock (_hardwareLock)
+        {
+            foreach (var hardware in _computer.Hardware)
+            {
+                if (hardware.HardwareType != HardwareType.GpuNvidia &&
+                    hardware.HardwareType != HardwareType.GpuAmd &&
+                    hardware.HardwareType != HardwareType.GpuIntel)
+                {
+                    continue;
+                }
+
+                hardware.Update();
+
+                foreach (var sensor in hardware.Sensors)
+                {
+                    if (!sensor.Value.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var name = sensor.Name ?? string.Empty;
+                    var value = sensor.Value.Value;
+
+                    switch (sensor.SensorType)
+                    {
+                        case SensorType.Power:
+                            if (name.Contains("GPU", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Package", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Total", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Board", StringComparison.OrdinalIgnoreCase))
+                            {
+                                powerWatts ??= value;
+                            }
+                            break;
+
+                        case SensorType.Clock:
+                            if (name.Contains("Core", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("GPU", StringComparison.OrdinalIgnoreCase))
+                            {
+                                coreClockMhz ??= value;
+                            }
+                            else if (name.Contains("Memory", StringComparison.OrdinalIgnoreCase))
+                            {
+                                memoryClockMhz ??= value;
+                            }
+                            break;
+
+                        case SensorType.Temperature:
+                            if (name.Contains("Hot Spot", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Hotspot", StringComparison.OrdinalIgnoreCase) ||
+                                name.Contains("Junction", StringComparison.OrdinalIgnoreCase))
+                            {
+                                hotspotTemp ??= value;
+                            }
+                            break;
+
+                        case SensorType.Control:
+                            if (name.Contains("Fan", StringComparison.OrdinalIgnoreCase))
+                            {
+                                fanPercent ??= value;
+                            }
+                            break;
+                    }
+                }
+
+                // Only process first GPU found
+                break;
+            }
+        }
+
+        var isAvailable = powerWatts.HasValue || coreClockMhz.HasValue || 
+                          hotspotTemp.HasValue || fanPercent.HasValue;
+
+        return new GpuExtendedSnapshot(
+            powerWatts,
+            coreClockMhz,
+            memoryClockMhz,
+            hotspotTemp,
+            fanPercent,
+            isAvailable);
+    }
+
     public GpuPerformanceSnapshot GetGpuPerformanceSnapshot()
     {
         string? name = null;
@@ -648,6 +746,17 @@ public sealed class MetricProvider : IDisposable
             }
         }
         gpuRpm ??= gpuFallback;
+        
+        // GPU fan WMI fallback if LHM didn't find it
+        if (!gpuRpm.HasValue || gpuRpm.Value <= 0)
+        {
+            var wmiGpuRpm = TryGetGpuFanSpeedFromWmi();
+            if (wmiGpuRpm.HasValue && wmiGpuRpm.Value > 0)
+            {
+                gpuRpm = wmiGpuRpm.Value;
+            }
+        }
+        
         return new FanSpeedSnapshot(cpuRpm ?? double.NaN, gpuRpm ?? double.NaN);
     }
 
@@ -2521,6 +2630,116 @@ public sealed class MetricProvider : IDisposable
         }
     }
 
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetGpuFanSpeedFromWmi()
+    {
+        // Try NVIDIA WMI first (root\CIMV2\NV namespace)
+        var nvidiaRpm = TryGetNvidiaGpuFanSpeed();
+        if (nvidiaRpm.HasValue && nvidiaRpm.Value > 0)
+        {
+            return nvidiaRpm.Value;
+        }
+
+        // Try AMD WMI (root\WMI namespace)
+        var amdRpm = TryGetAmdGpuFanSpeed();
+        if (amdRpm.HasValue && amdRpm.Value > 0)
+        {
+            return amdRpm.Value;
+        }
+
+        // Try generic Win32_Fan for GPU-labeled fans
+        return TryGetGenericGpuFanSpeed();
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetNvidiaGpuFanSpeed()
+    {
+        try
+        {
+            // NVIDIA exposes fan data through root\CIMV2\NV namespace
+            using var searcher = new ManagementObjectSearcher(
+                @"root\CIMV2\NV",
+                "SELECT FanSpeed FROM Fan");
+            
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var speed = TryReadDouble(obj, "FanSpeed");
+                if (speed.HasValue && speed.Value > 0)
+                {
+                    return speed.Value;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"NVIDIA WMI fan query failed: {ex.Message}");
+        }
+
+        return null;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetAmdGpuFanSpeed()
+    {
+        try
+        {
+            // AMD GPU info through WMI
+            using var searcher = new ManagementObjectSearcher(
+                @"root\WMI",
+                "SELECT * FROM AMD_Mobility_FanInfo");
+            
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var speed = TryReadDouble(obj, "CurrentFanSpeed")
+                            ?? TryReadDouble(obj, "FanSpeed");
+                if (speed.HasValue && speed.Value > 0)
+                {
+                    return speed.Value;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"AMD WMI fan query failed: {ex.Message}");
+        }
+
+        return null;
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static double? TryGetGenericGpuFanSpeed()
+    {
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT Name, CurrentSpeed, DesiredSpeed FROM Win32_Fan");
+            
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString() ?? string.Empty;
+                
+                // Look for GPU-related fan names
+                if (name.Contains("GPU", StringComparison.OrdinalIgnoreCase) ||
+                    name.Contains("Video", StringComparison.OrdinalIgnoreCase) ||
+                    name.Contains("Graphics", StringComparison.OrdinalIgnoreCase))
+                {
+                    var speed = TryReadDouble(obj, "CurrentSpeed")
+                                ?? TryReadDouble(obj, "DesiredSpeed");
+                    if (speed.HasValue && speed.Value > 0)
+                    {
+                        return speed.Value;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Generic GPU fan query failed: {ex.Message}");
+        }
+
+        return null;
+    }
+
     private static double? NormalizePercent(double? value, bool invert)
     {
         if (!value.HasValue)
@@ -3050,3 +3269,14 @@ public sealed record DiskHealthInfo(
     double? HealthPercent,
     bool? PredictFailure,
     string? Source);
+
+/// <summary>
+/// Extended GPU metrics including power, clock speeds, and hotspot temperature.
+/// </summary>
+public readonly record struct GpuExtendedSnapshot(
+    double? PowerWatts,
+    double? CoreClockMhz,
+    double? MemoryClockMhz,
+    double? HotspotTemp,
+    double? FanPercent,
+    bool IsAvailable);

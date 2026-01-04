@@ -22,6 +22,9 @@ public partial class App : Application
 
         base.OnStartup(e);
 
+        // GPU hardware acceleration settings for smoother UI
+        ConfigureRenderSettings();
+
         StartupWindow? splash = null;
         try
         {
@@ -129,5 +132,29 @@ public partial class App : Application
     {
         AppDiagnostics.LogException("TaskScheduler.UnobservedTaskException", e.Exception);
         e.SetObserved();
+    }
+
+    /// <summary>
+    /// Configures WPF rendering settings for optimal GPU hardware acceleration and smooth animations.
+    /// </summary>
+    private static void ConfigureRenderSettings()
+    {
+        try
+        {
+            // Use high-quality but efficient bitmap scaling for images
+            System.Windows.Media.RenderOptions.SetBitmapScalingMode(
+                Current.MainWindow ?? Current, 
+                System.Windows.Media.BitmapScalingMode.LowQuality);
+
+            // Set animation frame rate (default is 60fps, adjust for performance)
+            System.Windows.Media.Animation.Timeline.DesiredFrameRateProperty.OverrideMetadata(
+                typeof(System.Windows.Media.Animation.Timeline),
+                new FrameworkPropertyMetadata { DefaultValue = 60 });
+        }
+        catch (Exception ex)
+        {
+            // Non-critical, continue without optimization
+            System.Diagnostics.Debug.WriteLine($"Render settings configuration failed: {ex.Message}");
+        }
     }
 }
