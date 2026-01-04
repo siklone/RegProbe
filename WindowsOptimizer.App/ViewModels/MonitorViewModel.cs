@@ -1095,7 +1095,36 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private static string BuildStartupKey(string name, string command, string location)
     {
-        return $"{name}|{command}|{location}".ToLowerInvariant();
+        var normalizedLocation = NormalizeStartupLocation(location);
+        return $"{name}|{command}|{normalizedLocation}".ToLowerInvariant();
+    }
+
+    private static string NormalizeStartupLocation(string location)
+    {
+        if (string.IsNullOrWhiteSpace(location))
+        {
+            return string.Empty;
+        }
+
+        var normalized = location.Trim();
+        if (normalized.StartsWith("HKEY_CURRENT_USER\\", StringComparison.OrdinalIgnoreCase))
+        {
+            normalized = "HKCU\\" + normalized["HKEY_CURRENT_USER\\".Length..];
+        }
+        else if (normalized.StartsWith("HKEY_LOCAL_MACHINE\\", StringComparison.OrdinalIgnoreCase))
+        {
+            normalized = "HKLM\\" + normalized["HKEY_LOCAL_MACHINE\\".Length..];
+        }
+        else if (normalized.StartsWith("CurrentUser\\", StringComparison.OrdinalIgnoreCase))
+        {
+            normalized = "HKCU\\" + normalized["CurrentUser\\".Length..];
+        }
+        else if (normalized.StartsWith("LocalMachine\\", StringComparison.OrdinalIgnoreCase))
+        {
+            normalized = "HKLM\\" + normalized["LocalMachine\\".Length..];
+        }
+
+        return normalized;
     }
 
     private static void AddStartupAppsFromWmi(List<StartupAppEntry> items, HashSet<string> seen)

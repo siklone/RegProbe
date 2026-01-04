@@ -2262,7 +2262,8 @@
                                         <DataTemplate>
                                             <Button Command="{Binding DataContext.ToggleStartupAppCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
-                                                    Padding="8,4">
+                                                    Padding="8,4"
+                                                    IsEnabled="{Binding CanToggle}">
                                                 <Button.Style>
                                                     <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
                                                         <Setter Property="Content" Value="Disable"/>
@@ -2271,6 +2272,11 @@
                                                                 <Setter Property="Content" Value="Enable"/>
                                                                 <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
                                                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding CanToggle}" Value="False">
+                                                                <Setter Property="Content" Value="Managed"/>
+                                                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
