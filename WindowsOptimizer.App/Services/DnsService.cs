@@ -112,7 +112,7 @@ public class DnsService
                     // If provider is "Automatic", set to DHCP
                     if (string.IsNullOrEmpty(provider.PrimaryDns))
                     {
-                        adapter.InvokeMethod("SetDNSServerSearchOrder", new object[] { null });
+                        adapter.InvokeMethod("SetDNSServerSearchOrder", new object[] { null! });
                     }
                     else
                     {

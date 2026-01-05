@@ -520,7 +520,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="{Binding CategoryIcon}" FontFamily="Segoe UI Emoji" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <TextBlock Grid.Column="1" Text="{Binding CategoryName}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding CategoryName}" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" VerticalAlignment="Center"/>
                         
                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                             <Border Background="{DynamicResource BackgroundLightBrush}" CornerRadius="10" Padding="8,2" Margin="0,0,10,0">

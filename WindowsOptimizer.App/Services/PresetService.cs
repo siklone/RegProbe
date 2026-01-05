@@ -63,7 +63,7 @@ public class PresetService
                     failedTweaks.Add(tweakId);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 failedTweaks.Add(tweakId);
             }
@@ -102,8 +102,9 @@ public class PresetService
             {
                 await RevertTweakByIdAsync(tweakId);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                // Silently ignore revert failures
             }
         }
 

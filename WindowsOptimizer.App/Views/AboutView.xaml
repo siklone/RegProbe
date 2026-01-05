@@ -15,7 +15,7 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{DynamicResource BackgroundDarkestBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="{DynamicResource BackgroundDarkestBrush}">
         <Grid Margin="32">
             <StackPanel MaxWidth="800" HorizontalAlignment="Left">
                 <!-- Header with Logo -->
