@@ -45,6 +45,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly NetworkLatencyMonitor? _latencyMonitor;
     private readonly WifiSignalMonitor? _wifiSignalMonitor;
     private readonly GpuEngineMonitor? _gpuEngineMonitor;
+    private readonly Services.HardwareSensorService? _hardwareSensorService;
     private readonly DispatcherTimer? _updateTimer;
     private readonly SettingsStore _settingsStore = new(AppPaths.FromEnvironment());
     private readonly IAppLogger _appLogger;
@@ -222,6 +223,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to create GpuEngineMonitor: {ex.Message}");
+            }
+
+            try
+            {
+                _hardwareSensorService = new Services.HardwareSensorService();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to create HardwareSensorService: {ex.Message}");
             }
 
             // Initialize collections
@@ -429,6 +439,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _latencyMonitor?.Dispose();
         _wifiSignalMonitor?.Dispose();
         _gpuEngineMonitor?.Dispose();
+        _hardwareSensorService?.Dispose();
     }
 
     private void ExportMetricsToCsv()
@@ -2277,6 +2288,129 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         ? $"{GpuMemoryUsagePercent:F0}%"
         : "N/A";
 
+    // ========== NEW: Hardware Sensor Properties (LibreHardwareMonitor) ==========
+    
+    // CPU Voltage
+    private float _cpuVoltage;
+    public float CpuVoltage
+    {
+        get => _cpuVoltage;
+        private set
+        {
+            if (SetProperty(ref _cpuVoltage, value))
+            {
+                OnPropertyChanged(nameof(HasCpuVoltage));
+                OnPropertyChanged(nameof(CpuVoltageText));
+            }
+        }
+    }
+    public bool HasCpuVoltage => CpuVoltage > 0;
+    public string CpuVoltageText => HasCpuVoltage ? $"{CpuVoltage:F3} V" : "N/A";
+
+    // CPU Power
+    private float _cpuPower;
+    public float CpuPower
+    {
+        get => _cpuPower;
+        private set
+        {
+            if (SetProperty(ref _cpuPower, value))
+            {
+                OnPropertyChanged(nameof(HasCpuPower));
+                OnPropertyChanged(nameof(CpuPowerText));
+            }
+        }
+    }
+    public bool HasCpuPower => CpuPower > 0;
+    public string CpuPowerText => HasCpuPower ? $"{CpuPower:F1} W" : "N/A";
+
+    // GPU Voltage
+    private float _gpuVoltage;
+    public float GpuVoltage
+    {
+        get => _gpuVoltage;
+        private set
+        {
+            if (SetProperty(ref _gpuVoltage, value))
+            {
+                OnPropertyChanged(nameof(HasGpuVoltage));
+                OnPropertyChanged(nameof(GpuVoltageText));
+            }
+        }
+    }
+    public bool HasGpuVoltage => GpuVoltage > 0;
+    public string GpuVoltageText => HasGpuVoltage ? $"{GpuVoltage:F3} V" : "N/A";
+
+    // GPU Power
+    private float _gpuPower;
+    public float GpuPower
+    {
+        get => _gpuPower;
+        private set
+        {
+            if (SetProperty(ref _gpuPower, value))
+            {
+                OnPropertyChanged(nameof(HasGpuPower));
+                OnPropertyChanged(nameof(GpuPowerText));
+            }
+        }
+    }
+    public bool HasGpuPower => GpuPower > 0;
+    public string GpuPowerText => HasGpuPower ? $"{GpuPower:F1} W" : "N/A";
+
+    // GPU Hotspot Temperature
+    private float _gpuHotspotTemp;
+    public float GpuHotspotTemp
+    {
+        get => _gpuHotspotTemp;
+        private set
+        {
+            if (SetProperty(ref _gpuHotspotTemp, value))
+            {
+                OnPropertyChanged(nameof(HasGpuHotspotTemp));
+                OnPropertyChanged(nameof(GpuHotspotTempText));
+            }
+        }
+    }
+    public bool HasGpuHotspotTemp => GpuHotspotTemp > 0;
+    public string GpuHotspotTempText => HasGpuHotspotTemp ? $"{GpuHotspotTemp:F0}°C" : "N/A";
+
+    // GPU Core Clock
+    private float _gpuCoreClock;
+    public float GpuCoreClock
+    {
+        get => _gpuCoreClock;
+        private set
+        {
+            if (SetProperty(ref _gpuCoreClock, value))
+            {
+                OnPropertyChanged(nameof(HasGpuCoreClock));
+                OnPropertyChanged(nameof(GpuCoreClockText));
+            }
+        }
+    }
+    public bool HasGpuCoreClock => GpuCoreClock > 0;
+    public string GpuCoreClockText => HasGpuCoreClock ? $"{GpuCoreClock:F0} MHz" : "N/A";
+
+    // GPU Memory Clock
+    private float _gpuMemoryClock;
+    public float GpuMemoryClock
+    {
+        get => _gpuMemoryClock;
+        private set
+        {
+            if (SetProperty(ref _gpuMemoryClock, value))
+            {
+                OnPropertyChanged(nameof(HasGpuMemoryClock));
+                OnPropertyChanged(nameof(GpuMemoryClockText));
+            }
+        }
+    }
+    public bool HasGpuMemoryClock => GpuMemoryClock > 0;
+    public string GpuMemoryClockText => HasGpuMemoryClock ? $"{GpuMemoryClock:F0} MHz" : "N/A";
+
+    // ========== END: Hardware Sensor Properties ==========
+
     public double CpuFanRpm
     {
         get => _cpuFanRpm;
@@ -3278,6 +3412,29 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     UpdatePerformanceSelection();
                 }
             }).ConfigureAwait(false);
+
+            // Collect hardware sensor data (voltages, power, clocks) in parallel
+            if (_hardwareSensorService != null)
+            {
+                try
+                {
+                    var hwSnapshot = await _hardwareSensorService.GetSnapshotAsync().ConfigureAwait(false);
+                    await DispatchAsync(() =>
+                    {
+                        CpuVoltage = hwSnapshot.CpuVoltage;
+                        CpuPower = hwSnapshot.CpuPower;
+                        GpuVoltage = hwSnapshot.GpuCoreVoltage;
+                        GpuPower = hwSnapshot.GpuPower;
+                        GpuHotspotTemp = hwSnapshot.GpuHotspotTemp;
+                        GpuCoreClock = hwSnapshot.GpuCoreClock;
+                        GpuMemoryClock = hwSnapshot.GpuMemoryClock;
+                    }).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Hardware sensor sample error: {ex.Message}");
+                }
+            }
         }
         catch (Exception ex)
         {
