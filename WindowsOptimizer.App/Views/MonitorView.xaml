@@ -130,6 +130,25 @@
                     <BitmapCache EnableClearType="True" RenderAtScale="1"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <!-- Hover highlight effect -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                    <Setter Property="BorderThickness" Value="1.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Expandable card style with detail section -->
+        <Style x:Key="ExpandableStatCardStyle" TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
+            <Setter Property="Tag" Value="Collapsed"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Tag" Value="Expanded"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
