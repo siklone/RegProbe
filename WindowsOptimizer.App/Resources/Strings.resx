@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  
+  <!-- Navigation -->
+  <data name="Nav_Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Nav_Tweaks" xml:space="preserve"><value>Tweaks</value></data>
+  <data name="Nav_Monitor" xml:space="preserve"><value>Monitor</value></data>
+  <data name="Nav_Presets" xml:space="preserve"><value>Presets</value></data>
+  <data name="Nav_Startup" xml:space="preserve"><value>Startup Apps</value></data>
+  <data name="Nav_Bloatware" xml:space="preserve"><value>Bloatware</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Settings</value></data>
+  
+  <!-- Dashboard -->
+  <data name="Dashboard_Title" xml:space="preserve"><value>System Overview</value></data>
+  <data name="Dashboard_Health" xml:space="preserve"><value>System Health</value></data>
+  <data name="Dashboard_Optimized" xml:space="preserve"><value>Optimized</value></data>
+  <data name="Dashboard_NeedsAttention" xml:space="preserve"><value>Needs Attention</value></data>
+  
+  <!-- Tweaks -->
+  <data name="Tweaks_Title" xml:space="preserve"><value>System Tweaks</value></data>
+  <data name="Tweaks_Apply" xml:space="preserve"><value>Apply</value></data>
+  <data name="Tweaks_Revert" xml:space="preserve"><value>Revert</value></data>
+  <data name="Tweaks_Applied" xml:space="preserve"><value>Applied</value></data>
+  <data name="Tweaks_NotApplied" xml:space="preserve"><value>Not Applied</value></data>
+  <data name="Tweaks_ApplyAll" xml:space="preserve"><value>Apply All</value></data>
+  <data name="Tweaks_RevertAll" xml:space="preserve"><value>Revert All</value></data>
+  
+  <!-- Monitor -->
+  <data name="Monitor_Title" xml:space="preserve"><value>Performance Monitor</value></data>
+  <data name="Monitor_CPU" xml:space="preserve"><value>CPU Usage</value></data>
+  <data name="Monitor_RAM" xml:space="preserve"><value>RAM Usage</value></data>
+  <data name="Monitor_GPU" xml:space="preserve"><value>GPU Usage</value></data>
+  <data name="Monitor_Disk" xml:space="preserve"><value>Disk Activity</value></data>
+  <data name="Monitor_Network" xml:space="preserve"><value>Network</value></data>
+  <data name="Monitor_Temperature" xml:space="preserve"><value>Temperature</value></data>
+  
+  <!-- Presets -->
+  <data name="Presets_Title" xml:space="preserve"><value>Smart Presets</value></data>
+  <data name="Presets_Gaming" xml:space="preserve"><value>Gaming</value></data>
+  <data name="Presets_Privacy" xml:space="preserve"><value>Privacy</value></data>
+  <data name="Presets_Minimal" xml:space="preserve"><value>Minimalist</value></data>
+  <data name="Presets_ApplyPreset" xml:space="preserve"><value>Apply Preset</value></data>
+  
+  <!-- Settings -->
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_Theme" xml:space="preserve"><value>Theme</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_CompactMode" xml:space="preserve"><value>Compact Mode</value></data>
+  <data name="Settings_AutoUpdate" xml:space="preserve"><value>Auto Update</value></data>
+  <data name="Settings_CheckUpdates" xml:space="preserve"><value>Check for Updates</value></data>
+  
+  <!-- Common -->
+  <data name="Common_Yes" xml:space="preserve"><value>Yes</value></data>
+  <data name="Common_No" xml:space="preserve"><value>No</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Common_Loading" xml:space="preserve"><value>Loading...</value></data>
+  <data name="Common_Error" xml:space="preserve"><value>Error</value></data>
+  <data name="Common_Success" xml:space="preserve"><value>Success</value></data>
+  <data name="Common_Warning" xml:space="preserve"><value>Warning</value></data>
+</root>
