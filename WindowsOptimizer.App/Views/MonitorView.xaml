@@ -802,6 +802,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -1058,6 +1059,70 @@
                                    FontSize="10"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- CPU Power & Voltage Card -->
+                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StatCardStyle}"
+                        ToolTip="CPU power consumption and voltage from LibreHardwareMonitor sensors.">
+                    <StackPanel>
+                        <TextBlock Text="CPU Power / Voltage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                            <Run Text="Power " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding CpuPowerText, Mode=OneWay}"/>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                            <Run Text="Voltage " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding CpuVoltageText, Mode=OneWay}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- GPU Power & Voltage Card -->
+                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StatCardStyle}"
+                        ToolTip="GPU power consumption and voltage from LibreHardwareMonitor sensors.">
+                    <StackPanel>
+                        <TextBlock Text="GPU Power / Voltage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                            <Run Text="Power " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GpuPowerText, Mode=OneWay}"/>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                            <Run Text="Voltage " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GpuVoltageText, Mode=OneWay}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- GPU Hotspot Temperature Card -->
+                <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource StatCardStyle}"
+                        ToolTip="GPU hotspot (junction) temperature - the hottest point on the GPU die.">
+                    <StackPanel>
+                        <TextBlock Text="GPU Hotspot" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding GpuHotspotTempText}"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource DangerBrush}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Junction Temperature"
+                                   FontSize="10"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- GPU Clocks Card -->
+                <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource StatCardStyle}"
+                        ToolTip="GPU core and memory clock speeds from LibreHardwareMonitor sensors.">
+                    <StackPanel>
+                        <TextBlock Text="GPU Clocks" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                            <Run Text="Core " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GpuCoreClockText, Mode=OneWay}"/>
+                        </TextBlock>
+                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
+                            <Run Text="Memory " Foreground="{DynamicResource MutedForegroundBrush}"/>
+                            <Run Text="{Binding GpuMemoryClockText, Mode=OneWay}"/>
+                        </TextBlock>
                     </StackPanel>
                 </Border>
             </Grid>
