@@ -4313,7 +4313,23 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         string DisplayName,
         string StatusText,
         string DetailText,
-        bool IsWarning);
+        bool IsWarning,
+        int PowerOnHours = 0,
+        float TotalReadsGB = 0,
+        float TotalWritesGB = 0,
+        float Temperature = 0,
+        float ReadMBps = 0,
+        float WriteMBps = 0)
+    {
+        public bool HasSmartData => PowerOnHours > 0 || TotalReadsGB > 0 || TotalWritesGB > 0;
+        public string PowerOnText => PowerOnHours > 0 ? $"{PowerOnHours:N0} hours" : "N/A";
+        public string TotalReadsText => TotalReadsGB > 0 ? $"{TotalReadsGB:F1} GB" : "N/A";
+        public string TotalWritesText => TotalWritesGB > 0 ? $"{TotalWritesGB:F1} GB" : "N/A";
+        public string TemperatureText => Temperature > 0 ? $"{Temperature:F0}°C" : "N/A";
+        public string ThroughputText => (ReadMBps > 0 || WriteMBps > 0) 
+            ? $"R: {ReadMBps:F1} / W: {WriteMBps:F1} MB/s" 
+            : "";
+    }
 
     public sealed class PerformanceItemViewModel : ViewModelBase
     {
