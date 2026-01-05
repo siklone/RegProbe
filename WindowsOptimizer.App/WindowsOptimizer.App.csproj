@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
@@ -45,10 +46,7 @@
       <ElevatedHostFilesAfterBuild Include="$(ElevatedHostOutputDir)**\\*.*" />
     </ItemGroup>
 
-    <Copy
-      SourceFiles="@(ElevatedHostFilesAfterBuild)"
-      DestinationFiles="@(ElevatedHostFilesAfterBuild->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
-      SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ElevatedHostFilesAfterBuild)" DestinationFiles="@(ElevatedHostFilesAfterBuild->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 
   <Target Name="CopyElevatedHostAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
@@ -63,10 +61,7 @@
       <ElevatedHostFilesAfterPublish Include="$(ElevatedHostOutputDir)**\\*.*" />
     </ItemGroup>
 
-    <Copy
-      SourceFiles="@(ElevatedHostFilesAfterPublish)"
-      DestinationFiles="@(ElevatedHostFilesAfterPublish->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
-      SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ElevatedHostFilesAfterPublish)" DestinationFiles="@(ElevatedHostFilesAfterPublish->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 
   <Target Name="CopyDocsAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
@@ -77,11 +72,7 @@
     <ItemGroup Condition="Exists('$(DocsSourceDir)')">
       <DocsFilesAfterBuild Include="$(DocsSourceDir)**\\*.*" />
     </ItemGroup>
-    <Copy
-      Condition="Exists('$(DocsSourceDir)')"
-      SourceFiles="@(DocsFilesAfterBuild)"
-      DestinationFiles="@(DocsFilesAfterBuild->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
-      SkipUnchangedFiles="true" />
+    <Copy Condition="Exists('$(DocsSourceDir)')" SourceFiles="@(DocsFilesAfterBuild)" DestinationFiles="@(DocsFilesAfterBuild->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 
   <Target Name="CopyDocsAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
@@ -92,11 +83,7 @@
     <ItemGroup Condition="Exists('$(DocsSourceDir)')">
       <DocsFilesAfterPublish Include="$(DocsSourceDir)**\\*.*" />
     </ItemGroup>
-    <Copy
-      Condition="Exists('$(DocsSourceDir)')"
-      SourceFiles="@(DocsFilesAfterPublish)"
-      DestinationFiles="@(DocsFilesAfterPublish->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')"
-      SkipUnchangedFiles="true" />
+    <Copy Condition="Exists('$(DocsSourceDir)')" SourceFiles="@(DocsFilesAfterPublish)" DestinationFiles="@(DocsFilesAfterPublish->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>
