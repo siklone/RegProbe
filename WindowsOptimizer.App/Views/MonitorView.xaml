@@ -1175,9 +1175,12 @@
                                                          Fill="{StaticResource CpuAreaGradient}"/>
                                             </Canvas>
                                         </Viewbox>
-                                        <!-- Sparkline with glow -->
+                                        <!-- Sparkline with glow (GPU-accelerated) -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
+                                                <Canvas.CacheMode>
+                                                    <BitmapCache EnableClearType="True" RenderAtScale="1"/>
+                                                </Canvas.CacheMode>
                                                 <Polyline Points="{Binding CpuHistory, Converter={StaticResource SparklinePointsConverter}}"
                                                           Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                                             </Canvas>
@@ -1235,9 +1238,12 @@
                                                          Fill="{StaticResource RamAreaGradient}"/>
                                             </Canvas>
                                         </Viewbox>
-                                        <!-- Sparkline with glow -->
+                                        <!-- Sparkline with glow (GPU-accelerated) -->
                                         <Viewbox Stretch="Fill">
                                             <Canvas Width="600" Height="100">
+                                                <Canvas.CacheMode>
+                                                    <BitmapCache EnableClearType="True" RenderAtScale="1"/>
+                                                </Canvas.CacheMode>
                                                 <Polyline Points="{Binding RamHistory, Converter={StaticResource SparklinePointsConverter}}"
                                                           Stroke="{DynamicResource SuccessBrush}" StrokeThickness="2.5" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                                             </Canvas>
