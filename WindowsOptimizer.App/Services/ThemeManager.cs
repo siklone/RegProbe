@@ -17,7 +17,7 @@ public class ThemeManager
     private static readonly ResourceDictionary _resources = Application.Current.Resources;
 
     public static readonly ThemePalette Nord = new(
-        "Nord (Default)",
+        "Nord",
         (Color)ColorConverter.ConvertFromString("#88C0D0"), // Nord8
         (Color)ColorConverter.ConvertFromString("#5E81AC"), // Nord10
         (Color)ColorConverter.ConvertFromString("#8FBCBB"), // Nord7
@@ -25,7 +25,7 @@ public class ThemeManager
     );
 
     public static readonly ThemePalette ElectricPurple = new(
-        "Electric Purple",
+        "Electric",
         (Color)ColorConverter.ConvertFromString("#BD93F9"), // Dracula Purple
         (Color)ColorConverter.ConvertFromString("#6272A4"), // Dracula Comment
         (Color)ColorConverter.ConvertFromString("#FF79C6"), // Dracula Pink
@@ -33,7 +33,7 @@ public class ThemeManager
     );
 
     public static readonly ThemePalette SunsetOrange = new(
-        "Sunset Orange",
+        "Sunset",
         (Color)ColorConverter.ConvertFromString("#D08770"), // Nord12
         (Color)ColorConverter.ConvertFromString("#BF616A"), // Nord11
         (Color)ColorConverter.ConvertFromString("#EBCB8B"), // Nord13
@@ -41,7 +41,7 @@ public class ThemeManager
     );
 
     public static readonly ThemePalette CyberGreen = new(
-        "Cyber Green",
+        "Cyber",
         (Color)ColorConverter.ConvertFromString("#50FA7B"), // Bright Green
         (Color)ColorConverter.ConvertFromString("#008F39"), // Dark Green
         (Color)ColorConverter.ConvertFromString("#8AFF80"), // Light Green

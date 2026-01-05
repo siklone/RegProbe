@@ -384,7 +384,7 @@
 	                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="24,0,0,0" HorizontalAlignment="Right">
                         
                         <!-- Health Gauge -->
-	                    <Grid Width="140" Height="140" ToolTip="{Binding OptimizationScoreDetails}">
+	                    <Grid Width="140" Height="140" VerticalAlignment="Center" ToolTip="{Binding OptimizationScoreDetails}">
                             <!-- Background Track -->
                             <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                 <Path.Data>
@@ -418,7 +418,7 @@
 	                    </Grid>
 
                         <!-- Tweaks Applied Gauge -->
-	                    <Grid Width="140" Height="140" Margin="24,0,0,0" ToolTip="Total verified tweaks applied vs available">
+	                    <Grid Width="140" Height="140" Margin="24,0,0,0" VerticalAlignment="Center" ToolTip="Total verified tweaks applied vs available">
                             <!-- Background Track -->
                             <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                 <Path.Data>
