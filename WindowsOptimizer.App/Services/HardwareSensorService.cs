@@ -192,6 +192,33 @@ public class HardwareSensorService : IDisposable
                     if (sensor.Name.Contains("Used Space", StringComparison.OrdinalIgnoreCase))
                         diskInfo.UsedSpacePercent = sensor.Value ?? 0;
                     break;
+                case SensorType.Throughput:
+                    if (sensor.Name.Contains("Read", StringComparison.OrdinalIgnoreCase))
+                        diskInfo.ReadMBps = (sensor.Value ?? 0) / 1024 / 1024; // bytes to MB
+                    else if (sensor.Name.Contains("Write", StringComparison.OrdinalIgnoreCase))
+                        diskInfo.WriteMBps = (sensor.Value ?? 0) / 1024 / 1024;
+                    break;
+                case SensorType.Data:
+                    if (sensor.Name.Contains("Total Read", StringComparison.OrdinalIgnoreCase) ||
+                        sensor.Name.Contains("Host Read", StringComparison.OrdinalIgnoreCase))
+                        diskInfo.TotalReadsGB = sensor.Value ?? 0;
+                    else if (sensor.Name.Contains("Total Write", StringComparison.OrdinalIgnoreCase) ||
+                             sensor.Name.Contains("Host Write", StringComparison.OrdinalIgnoreCase))
+                        diskInfo.TotalWritesGB = sensor.Value ?? 0;
+                    break;
+                case SensorType.Level:
+                    if (sensor.Name.Contains("Life", StringComparison.OrdinalIgnoreCase) ||
+                        sensor.Name.Contains("Health", StringComparison.OrdinalIgnoreCase) ||
+                        sensor.Name.Contains("Wear", StringComparison.OrdinalIgnoreCase))
+                    {
+                        diskInfo.HealthPercent = (int)(sensor.Value ?? 0);
+                        diskInfo.HasSmartData = true;
+                    }
+                    break;
+                case SensorType.TimeSpan:
+                    if (sensor.Name.Contains("Power-On", StringComparison.OrdinalIgnoreCase))
+                        diskInfo.PowerOnHours = (int)(sensor.Value ?? 0);
+                    break;
             }
         }
 
@@ -252,10 +279,13 @@ public class HardwareSnapshot
     public float GpuMemoryUsedMB { get; set; }
     public float GpuFanSpeed { get; set; }
 
-    // Memory
+    // Memory (Enhanced)
     public float MemoryUsagePercent { get; set; }
+    public float MemoryUsedGB { get; set; }
+    public float MemoryTotalGB { get; set; }
+    public float MemoryAvailableGB { get; set; }
 
-    // Storage
+    // Storage (Enhanced with SMART)
     public List<DiskInfo> Disks { get; set; } = new();
 
     // Motherboard
@@ -265,8 +295,35 @@ public class HardwareSnapshot
 public class DiskInfo
 {
     public string Name { get; set; } = string.Empty;
+    public string DriveLetter { get; set; } = string.Empty;
     public float Temperature { get; set; }
     public float UsedSpacePercent { get; set; }
+    public float ReadMBps { get; set; }
+    public float WriteMBps { get; set; }
+    
+    // SMART Data
+    public int HealthPercent { get; set; } = -1; // -1 = unavailable
+    public int PowerOnHours { get; set; }
+    public int PowerCycles { get; set; }
+    public float TotalReadsGB { get; set; }
+    public float TotalWritesGB { get; set; }
+    public bool HasSmartData { get; set; }
 }
 
 public record struct VoltageInfo(string Name, float Value);
+
+public class NetworkInterfaceInfo
+{
+    public string Name { get; set; } = string.Empty;
+    public string MacAddress { get; set; } = string.Empty;
+    public float UploadMbps { get; set; }
+    public float DownloadMbps { get; set; }
+    public long TotalBytesSent { get; set; }
+    public long TotalBytesReceived { get; set; }
+    public long PacketsSent { get; set; }
+    public long PacketsReceived { get; set; }
+    public long PacketErrors { get; set; }
+    public long PacketDropped { get; set; }
+    public bool IsUp { get; set; }
+}
+
