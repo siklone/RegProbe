@@ -63,8 +63,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             new VisibilityTweakProvider(),
             new PerformanceTweakProvider(),
             new AudioTweakProvider(),
-            new MiscTweakProvider(),
-            new LegacyTweakProvider()
+            new MiscTweakProvider()
         };
 
         var tweaks = new TweaksViewModel(providers);

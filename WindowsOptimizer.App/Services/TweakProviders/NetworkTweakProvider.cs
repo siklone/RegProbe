@@ -96,5 +96,262 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             "AutoConnectAllowedOEM",
             RegistryValueKind.DWord,
             0);
+
+
+        // Usage and Connectivity
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-llmnr",
+            "Disable LLMNR",
+            "Turns off multicast name resolution (LLMNR).",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows NT\DNSClient",
+            "EnableMulticast",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-mdns",
+            "Disable mDNS",
+            "Turns off multicast DNS name resolution.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows NT\DNSClient",
+            "EnableMDNS",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-netbios-resolution",
+            "Disable NetBIOS Name Resolution",
+            "Disables NetBIOS name resolution on the DNS client.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows NT\DNSClient",
+            "EnableNetbios",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-smart-name-resolution",
+            "Disable Smart Multi-Homed Name Resolution",
+            "Disables smart name resolution across multiple network interfaces.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows NT\DNSClient",
+            "DisableSmartNameResolution",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryValueSetTweak(
+            context,
+            "network.disable-lltd",
+            "Disable Network Discovery (LLTD)",
+            "Disables LLTD mapper and responder for network discovery.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\LLTD",
+            new[]
+            {
+                new RegistryValueSetEntry("EnableLLTDIO", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("AllowLLTDIOOnDomain", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("AllowLLTDIOOnPublicNet", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("ProhibitLLTDIOOnPrivateNet", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("EnableRspndr", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("AllowRspndrOnDomain", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("AllowRspndrOnPublicNet", RegistryValueKind.DWord, 0),
+                new RegistryValueSetEntry("ProhibitRspndrOnPrivateNet", RegistryValueKind.DWord, 0)
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "network.disable-active-probing",
+            "Disable Active Probing",
+            "Turns off NCSI active probing for internet connectivity tests.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\default\Connectivity", "DisallowNetworkConnectivityActiveTests", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "EnableUserActiveProbing", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "MaxActiveProbes", RegistryValueKind.DWord, 1)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.prefer-ipv4",
+            "Prefer IPv4 over IPv6",
+            "Configures the IPv6 stack to prefer IPv4 without fully disabling IPv6.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters",
+            "DisabledComponents",
+            RegistryValueKind.DWord,
+            32);
+
+        // SMB Security & Features
+        yield return CreateRegistryValueSetTweak(
+            context,
+            "network.smb-require-signing-server",
+            "SMB: Require Signing (Server)",
+            "Requires SMB server signing for inbound connections.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            new[]
+            {
+                new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
+                new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.smb-encrypt-data",
+            "SMB: Require Encryption",
+            "Requires SMB server encryption for shared data.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            "EncryptData",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.smb-reject-unencrypted-access",
+            "SMB: Reject Unencrypted Access",
+            "Rejects SMB clients that do not support encryption.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            "RejectUnencryptedAccess",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.smb-disable-leasing",
+            "SMB: Disable Leasing",
+            "Disables SMB server leasing (read/write/handle caching).",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            "DisableLeasing",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.smb-enable-multichannel",
+            "SMB: Enable Multichannel",
+            "Enables SMB multichannel for parallel network paths.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
+            "DisableMultiChannel",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "network.smb-enable-quic",
+            "SMB: Enable QUIC",
+            "Enables SMB over QUIC for client and server.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1)
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "network.smb-require-dialect-3_1_1",
+            "SMB: Require Dialect 3.1.1",
+            "Restricts SMB client/server dialects to SMB 3.1.1 or newer.",
+            TweakRiskLevel.Risky,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MaxSmb2Dialect", RegistryValueKind.DWord, 65536),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MaxSmb2Dialect", RegistryValueKind.DWord, 65536)
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "network.smb-set-cipher-suite-order",
+            "SMB: Set Cipher Suite Order",
+            "Sets the SMB encryption cipher suite order to AES-256 variants.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "CipherSuiteOrder", RegistryValueKind.MultiString, new[] { "AES_256_GCM", "AES_256_CCM" }),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "CipherSuiteOrder", RegistryValueKind.MultiString, new[] { "AES_256_GCM", "AES_256_CCM" })
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "network.disable-default-shares",
+            "Disable Default Shares",
+            "Disables automatic administrative shares on the SMB server.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareServer", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks", RegistryValueKind.DWord, 0)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-smb1",
+            "Disable SMBv1",
+            "Disables the legacy SMBv1 protocol on the server.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            "SMB1",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-smb2",
+            "Disable SMBv2/SMBv3",
+            "Disables the SMBv2/SMBv3 protocol on the server.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
+            "SMB2",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.disable-plaintext-smb-passwords",
+            "Disable Plaintext SMB Passwords",
+            "Prevents sending unencrypted passwords to SMB servers.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
+            "EnablePlainTextPassword",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "network.require-ntlmv2-session-security",
+            "Require NTLMv2 Session Security",
+            "Requires NTLMv2 session security and 128-bit encryption for SMB clients.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Control\Lsa\MSV1_0",
+            "NTLMMinClientSec",
+            RegistryValueKind.DWord,
+            537395200);
     }
 }

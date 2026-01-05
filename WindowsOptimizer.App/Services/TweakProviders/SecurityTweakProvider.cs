@@ -78,6 +78,19 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
+        yield return CreateRegistryTweak(
+            context,
+            "security.enable-dynamic-lock",
+            "Enable Dynamic Lock",
+            "Automatically locks the device when the paired Bluetooth device is away.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows NT\CurrentVersion\Winlogon",
+            "EnableGoodbye",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
         // System Defense
         yield return CreateRegistryValueBatchTweak(
             context,
@@ -209,5 +222,42 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             "Enabled",
             RegistryValueKind.DWord,
             3);
+
+        yield return CreateRegistryTweak(
+            context,
+            "security.disable-p2p-updates",
+            "Disable P2P Updates",
+            "Disables Delivery Optimization peer-to-peer caching for updates.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Microsoft\PolicyManager\default\DeliveryOptimization",
+            "DODownloadMode",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "security.disable-system-restore",
+            "Disable System Restore",
+            "Disables System Restore by setting the restore session interval to zero.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore",
+            "RPSessionInterval",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "security.disable-downloads-blocking",
+            "Disable Downloads Blocking",
+            "Prevents Windows from marking downloads with zone information (MOTW).",
+            TweakRiskLevel.Risky,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Policies\Attachments",
+            "SaveZoneInformation",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
     }
 }

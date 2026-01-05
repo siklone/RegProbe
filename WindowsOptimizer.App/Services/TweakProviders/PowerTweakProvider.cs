@@ -34,5 +34,54 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         // Network Power Management
         yield return NetworkAdapterPowerTweaks.CreateDisableNetworkAdapterPowerSavingTweak(context.ElevatedRegistry);
         yield return NetworkAdapterPowerTweaks.CreateOptimizeGamingNetworkTweak(context.ElevatedRegistry);
+
+        // UI Power Options
+        yield return CreateRegistryTweak(
+            context,
+            "power.hide-lock-option",
+            "Hide Lock Power Option",
+            "Hides the Lock option from the power menu.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "ShowLockOption",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "power.hide-sleep-option",
+            "Hide Sleep Power Option",
+            "Hides the Sleep option from the power menu.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "ShowSleepOption",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "power.hide-hibernate-option",
+            "Hide Hibernate Power Option",
+            "Hides the Hibernate option from the power menu.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "ShowHibernateOption",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "power.disable-fast-startup",
+            "Disable Fast Startup",
+            "Disables fast startup (hiberboot) via policy.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\System",
+            "HiberbootEnabled",
+            RegistryValueKind.DWord,
+            0);
     }
 }

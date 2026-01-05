@@ -23,7 +23,7 @@ public partial class App : Application
         base.OnStartup(e);
 
         // GPU hardware acceleration settings for smoother UI
-        ConfigureRenderSettings();
+        // Render settings configured later after MainWindow is created
 
         StartupWindow? splash = null;
         try
@@ -39,6 +39,9 @@ public partial class App : Application
                 Visibility = Visibility.Hidden
             };
             MainWindow = mainWindow;
+            
+            // GPU hardware acceleration settings
+            ConfigureRenderSettings();
 
             if (settings.RunStartupScanOnLaunch)
             {
@@ -142,9 +145,12 @@ public partial class App : Application
         try
         {
             // Use high-quality but efficient bitmap scaling for images
-            System.Windows.Media.RenderOptions.SetBitmapScalingMode(
-                Current.MainWindow ?? Current, 
-                System.Windows.Media.BitmapScalingMode.LowQuality);
+            if (Current.MainWindow != null)
+            {
+                System.Windows.Media.RenderOptions.SetBitmapScalingMode(
+                    Current.MainWindow, 
+                    System.Windows.Media.BitmapScalingMode.LowQuality);
+            }
 
             // Set animation frame rate (default is 60fps, adjust for performance)
             System.Windows.Media.Animation.Timeline.DesiredFrameRateProperty.OverrideMetadata(
