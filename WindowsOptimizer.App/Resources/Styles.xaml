@@ -336,4 +336,175 @@
         </Setter>
     </Style>
 
+    <!-- Modern Toggle Switch Style (CheckBox styled as switch) -->
+    <Style x:Key="ToggleSwitchStyle" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Grid Width="48" Height="26">
+                            <Border x:Name="Track"
+                                    Background="{DynamicResource BackgroundMediumBrush}"
+                                    CornerRadius="13"
+                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                    BorderThickness="1.5"/>
+                            <Border x:Name="Thumb"
+                                    Width="20" Height="20"
+                                    CornerRadius="10"
+                                    Background="{DynamicResource ForegroundBrightestBrush}"
+                                    HorizontalAlignment="Left"
+                                    Margin="3,0,0,0"
+                                    RenderTransformOrigin="0.5,0.5">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.3"/>
+                                </Border.Effect>
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="0"/>
+                                </Border.RenderTransform>
+                            </Border>
+                        </Grid>
+                        <ContentPresenter Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Thumb"
+                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                       To="22" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Thumb"
+                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                       To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Track" Property="BorderBrush" Value="{DynamicResource AccentCyanBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Track" Property="Opacity" Value="0.5"/>
+                            <Setter TargetName="Thumb" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <!-- Modern Slider Style -->
+    <Style x:Key="ModernSliderStyle" TargetType="Slider">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="TrackBackground"
+                                Grid.Row="1"
+                                Height="4"
+                                Background="{DynamicResource BackgroundMediumBrush}"
+                                CornerRadius="2"
+                                VerticalAlignment="Center">
+                            <Border x:Name="PART_SelectionRange"
+                                    Background="{DynamicResource AccentBrightCyanBrush}"
+                                    CornerRadius="2"
+                                    HorizontalAlignment="Left"/>
+                        </Border>
+                        <Track x:Name="PART_Track" Grid.Row="1">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}"/>
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb" Width="18" Height="18">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border Background="{DynamicResource AccentBrightCyanBrush}"
+                                                    CornerRadius="9"
+                                                    RenderTransformOrigin="0.5,0.5">
+                                                <Border.Effect>
+                                                    <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="8" ShadowDepth="0" Opacity="0.4"/>
+                                                </Border.Effect>
+                                                <Border.RenderTransform>
+                                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                                </Border.RenderTransform>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                               To="1.2" Duration="0:0:0.1"/>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                               To="1.2" Duration="0:0:0.1"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                               To="1.0" Duration="0:0:0.1"/>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                               To="1.0" Duration="0:0:0.1"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+        <Setter Property="MinHeight" Value="24"/>
+    </Style>
+
+    <!-- Hidden RepeatButton for Slider Track -->
+    <Style x:Key="SliderRepeatButtonStyle" TargetType="RepeatButton">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border Background="Transparent"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

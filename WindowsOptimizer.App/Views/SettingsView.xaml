@@ -16,70 +16,6 @@
         </Style>
 
         <!-- Modern Toggle Switch Style -->
-        <Style x:Key="ToggleSwitchStyle" TargetType="CheckBox">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CheckBox">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Grid Width="44" Height="24">
-                                <Border x:Name="Track"
-                                        Background="{DynamicResource BackgroundMediumBrush}"
-                                        CornerRadius="12"
-                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
-                                        BorderThickness="1"/>
-                                <Border x:Name="Thumb"
-                                        Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{DynamicResource ForegroundLightBrush}"
-                                        HorizontalAlignment="Left"
-                                        Margin="3,0,0,0"
-                                        RenderTransformOrigin="0.5,0.5">
-                                    <Border.RenderTransform>
-                                        <TranslateTransform X="0"/>
-                                    </Border.RenderTransform>
-                                </Border>
-                            </Grid>
-                            <ContentPresenter Margin="12,0,0,0" VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Track" Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
-                                <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource ForegroundBrightestBrush}"/>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Thumb"
-                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                           To="20" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Thumb"
-                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                                           To="0" Duration="0:0:0.15">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <QuadraticEase EasingMode="EaseOut"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-        </Style>
-
         <!-- Modern TextBox Style -->
         <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
@@ -162,6 +98,65 @@
         <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
         </Style>
+
+        <!-- Modern ComboBox Style -->
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" 
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="Left">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter Content="{TemplateBinding Content}" 
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  Margin="{TemplateBinding Padding}" 
+                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  VerticalAlignment="Center"/>
+                                                <Path Grid.Column="1" Data="M0,0 L4,4 L8,0" Stroke="{DynamicResource ForegroundLightBrush}" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="{DynamicResource BackgroundDarkBrush}" BorderThickness="1" BorderBrush="{DynamicResource BackgroundLightBrush}" CornerRadius="8" Margin="0,4,0,0">
+                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{DynamicResource BackgroundDarkestBrush}">
@@ -191,24 +186,46 @@
                                        VerticalAlignment="Center"/>
                         </StackPanel>
 
+                        <TextBlock Text="Accent Theme" Margin="0,0,0,8" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="13" FontWeight="SemiBold"/>
+                        <ComboBox ItemsSource="{Binding AvailableThemes}" 
+                                  SelectedItem="{Binding CurrentThemePalette}"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource ModernComboBoxStyle}"
+                                  Margin="0,0,0,8"/>
+                        <TextBlock Margin="0,0,0,24"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="11">
+                            Choose the primary accent color.
+                        </TextBlock>
+
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
                                   IsChecked="{Binding IsDarkTheme}"
-                                  Content="Dark Theme"
+                                  Content="Dark Mode Base"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,0"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
-                            Switch between dark and light color schemes
+                            Use dark background colors (currently main supported mode).
                         </TextBlock>
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
                                   IsChecked="{Binding EnableCardShadows}"
                                   Content="Card Shadows"
                                   Margin="0,16,0,8"/>
-                        <TextBlock Margin="56,0,0,0"
+                        <TextBlock Margin="56,0,0,16"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
                             Toggle drop shadows on cards and controls (default off for smoother scrolling).
+                        </TextBlock>
+
+                        <CheckBox Style="{StaticResource ToggleSwitchStyle}"
+                                  IsChecked="{Binding IsCompactMode}"
+                                  Content="Compact &quot;Pro&quot; Mode"
+                                  Margin="0,0,0,8"/>
+                        <TextBlock Margin="56,0,0,0"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="11">
+                            Reduce density of lists for power users to see more items at once.
                         </TextBlock>
                     </StackPanel>
                 </Border>

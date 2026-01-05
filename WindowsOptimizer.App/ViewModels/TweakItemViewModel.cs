@@ -124,6 +124,16 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string Description => _tweak.Description;
 
+    /// <summary>
+    /// Rich tooltip explaining implications of this tweak.
+    /// </summary>
+    public string HelpTooltip => GenerateHelpTooltip();
+
+    /// <summary>
+    /// Implications of enabling/disabling this tweak.
+    /// </summary>
+    public string Implications => GenerateImplications();
+
     public TweakRiskLevel Risk => _tweak.Risk;
 
     public bool RequiresElevation => _tweak.RequiresElevation;
@@ -329,6 +339,32 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
         }
     }
+
+    /// <summary>
+    /// Before state for snapshot comparison (same as CurrentValue).
+    /// </summary>
+    public string BeforeState => CurrentValue;
+
+    /// <summary>
+    /// After state for snapshot comparison (same as TargetValue).
+    /// </summary>
+    public string AfterState => TargetValue;
+
+    /// <summary>
+    /// Whether there's a meaningful state change to show.
+    /// </summary>
+    public bool HasStateChange => 
+        !string.IsNullOrWhiteSpace(CurrentValue) && 
+        !string.IsNullOrWhiteSpace(TargetValue) &&
+        CurrentValue != "Unknown" &&
+        !CurrentValue.Equals(TargetValue, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Formatted comparison text for UI display.
+    /// </summary>
+    public string ComparisonText => HasStateChange 
+        ? $"Before: {BeforeState} → After: {AfterState}"
+        : "No changes detected";
 
     public string ImpactAreaLabel => _impactAreaLabel;
 
@@ -1797,18 +1833,86 @@ public sealed class TweakItemViewModel : ViewModelBase
         await RunApplyAsync(CancellationToken.None);
     }
 
-    private static void LogToFile(string message)
+    private void LogToFile(string message)
     {
         try
         {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
-            var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
-            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
+            var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "WindowsOptimizer", "Logs", "tweak-vm.log");
+            Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
+            File.AppendAllText(logPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
         }
         catch
         {
-            // Ignore logging errors
+            // Ignore logging failures
         }
+    }
+
+    /// <summary>
+    /// Generates a rich tooltip for contextual help.
+    /// </summary>
+    private string GenerateHelpTooltip()
+    {
+        var tooltip = Description;
+        var implications = GenerateImplications();
+        
+        if (!string.IsNullOrEmpty(implications))
+        {
+            tooltip += $"\n\n{implications}";
+        }
+
+        return tooltip;
+    }
+
+    /// <summary>
+    /// Generates implications text based on tweak category and risk.
+    /// </summary>
+    private string GenerateImplications()
+    {
+        var implications = new List<string>();
+
+        // Risk-based implications
+        switch (Risk)
+        {
+            case TweakRiskLevel.Safe:
+                implications.Add("✓ Safe to apply - minimal system impact");
+                break;
+            case TweakRiskLevel.Advanced:
+                implications.Add("⚠ Advanced - may affect some features");
+                break;
+            case TweakRiskLevel.Risky:
+                implications.Add("⚠️ Risky - could impact system stability");
+                break;
+        }
+
+        // Category-based implications
+        var category = Category.ToLowerInvariant();
+        switch (category)
+        {
+            case "privacy":
+                implications.Add("🔒 Affects: Privacy & data collection");
+                break;
+            case "performance":
+                implications.Add("🚀 Affects: System responsiveness");
+                break;
+            case "security":
+                implications.Add("🛡️ Affects: System security posture");
+                break;
+            case "network":
+                implications.Add("🌐 Affects: Network connectivity");
+                break;
+            case "visibility":
+                implications.Add("👀 Affects: UI elements & visual features");
+                break;
+        }
+
+        // Elevation implications
+        if (RequiresElevation)
+        {
+            implications.Add("🔑 Requires administrator privileges");
+        }
+
+        return string.Join("\n", implications);
     }
 }
 

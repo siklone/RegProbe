@@ -380,40 +380,81 @@
                     </StackPanel>
                 </StackPanel>
 
-	                <!-- Circular Health Gauge -->
-	                <StackPanel Grid.Column="1" Margin="24,0,0,0" HorizontalAlignment="Right">
+	                <!-- Circular Gauges Stack -->
+	                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="24,0,0,0" HorizontalAlignment="Right">
+                        
+                        <!-- Health Gauge -->
 	                    <Grid Width="140" Height="140" ToolTip="{Binding OptimizationScoreDetails}">
-	                        <Ellipse Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="12" Fill="Transparent"/>
-	                        <Ellipse x:Name="ScoreRing" Stroke="{DynamicResource AccentDarkBlueBrush}" StrokeThickness="12" Fill="Transparent" 
-	                                 StrokeDashArray="100, 100"
-	                                 StrokeDashOffset="{Binding OptimizationScore, ConverterParameter=314, Converter={StaticResource ScoreToOffsetConverter}}">
-	                            <Ellipse.Style>
-	                                <Style TargetType="Ellipse">
-	                                    <Setter Property="Opacity" Value="1"/>
-	                                    <Style.Triggers>
-	                                        <DataTrigger Binding="{Binding HasHealthData}" Value="False">
-	                                            <Setter Property="Opacity" Value="0.25"/>
-	                                        </DataTrigger>
-	                                    </Style.Triggers>
-	                                </Style>
-	                            </Ellipse.Style>
-	                        </Ellipse>
+                            <!-- Background Track -->
+                            <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Source="100" /> 
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            
+                            <!-- Optimization Score Progress -->
+	                        <Path Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Path="OptimizationScore" />
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                                <Path.Effect>
+                                    <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.3"/>
+                                </Path.Effect>
+                            </Path>
                         
 	                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-	                            <TextBlock Text="{Binding OptimizationScoreDisplayText}" 
+	                            <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}" 
 	                                       FontSize="28" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}" HorizontalAlignment="Center"/>
-	                            <TextBlock Text="Health" FontSize="11" Foreground="{DynamicResource AccentBrightCyanBrush}" HorizontalAlignment="Center"/>
+	                            <TextBlock Text="Health" FontSize="11" Foreground="{DynamicResource AccentBrightCyanBrush}" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
 	                        </StackPanel>
 	                    </Grid>
 
-                    <TextBlock Text="{Binding OptimizationScoreDetails}"
-                               Foreground="{DynamicResource MutedForegroundBrush}"
-                               FontSize="11"
-                               TextAlignment="Center"
-                               TextWrapping="Wrap"
-                               Width="180"
-                               Margin="0,8,0,0"/>
-                </StackPanel>
+                        <!-- Tweaks Applied Gauge -->
+	                    <Grid Width="140" Height="140" Margin="24,0,0,0" ToolTip="Total verified tweaks applied vs available">
+                            <!-- Background Track -->
+                            <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Source="100" /> 
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            
+                            <!-- Applied Progress -->
+	                        <Path Stroke="{DynamicResource SuccessBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Path="TweaksApplied" />
+                                        <Binding Path="TotalTweaksAvailable" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                                <Path.Effect>
+                                    <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.3"/>
+                                </Path.Effect>
+                            </Path>
+                        
+	                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding TweaksApplied}" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <TextBlock Text="/" FontSize="16" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,2,5"/>
+                                    <TextBlock Text="{Binding TotalTweaksAvailable}" FontSize="16" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                                </StackPanel>
+	                            <TextBlock Text="Tweaks Applied" FontSize="11" Foreground="{DynamicResource SuccessBrush}" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+	                        </StackPanel>
+	                    </Grid>
+	                    
+	                </StackPanel>
             </Grid>
 
             <!-- System Information Card -->

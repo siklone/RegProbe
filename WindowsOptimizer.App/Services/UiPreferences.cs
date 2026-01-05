@@ -15,6 +15,13 @@ public sealed class UiPreferences : ViewModelBase
         set => SetProperty(ref _enableCardShadows, value);
     }
 
+    private bool _isCompactMode;
+    public bool IsCompactMode
+    {
+        get => _isCompactMode;
+        set => SetProperty(ref _isCompactMode, value);
+    }
+
     private UiPreferences()
     {
     }

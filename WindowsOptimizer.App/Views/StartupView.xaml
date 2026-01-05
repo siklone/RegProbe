@@ -1,0 +1,160 @@
+<UserControl x:Class="WindowsOptimizer.App.Views.StartupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
+             mc:Ignorable="d">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <DockPanel>
+                <TextBlock Text="{Binding Title}"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                           DockPanel.Dock="Left"/>
+                
+                <Button Content="🔄 Refresh"
+                        Command="{Binding RefreshCommand}"
+                        Style="{StaticResource ModernButtonStyle}"
+                        Padding="12,6"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right"/>
+            </DockPanel>
+            
+            <TextBlock Text="Manage programs that run automatically when Windows starts"
+                       FontSize="14"
+                       Foreground="{DynamicResource MutedForegroundBrush}"
+                       Margin="0,8,0,0"/>
+        </StackPanel>
+
+        <!-- Startup Items List -->
+        <Border Grid.Row="1"
+                Background="{DynamicResource BackgroundDarkBrush}"
+                BorderBrush="{DynamicResource GlassBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="0">
+            
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding StartupItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:StartupItemViewModel}">
+                            <Border BorderBrush="{DynamicResource GlassBorderBrush}"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="20,16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Info Section -->
+                                    <StackPanel Grid.Column="0">
+                                        <!-- Name and Publisher -->
+                                        <DockPanel Margin="0,0,0,8">
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       DockPanel.Dock="Left"/>
+                                            
+                                            <TextBlock Text="{Binding Publisher}"
+                                                       FontSize="12"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       Margin="12,0,0,0"
+                                                       VerticalAlignment="Center"
+                                                       DockPanel.Dock="Left"/>
+                                        </DockPanel>
+
+                                        <!-- Command -->
+                                        <TextBlock Text="{Binding Command}"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Margin="0,0,0,8"/>
+
+                                        <!-- Metadata -->
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Background="{Binding ImpactColor}"
+                                                    CornerRadius="4"
+                                                    Padding="8,2"
+                                                    Margin="0,0,8,0">
+                                                <TextBlock Text="{Binding ImpactText}"
+                                                           FontSize="10"
+                                                           FontWeight="Medium"
+                                                           Foreground="White"/>
+                                            </Border>
+
+                                            <Border Background="{Binding StatusColor}"
+                                                    CornerRadius="4"
+                                                    Padding="8,2"
+                                                    Margin="0,0,8,0">
+                                                <TextBlock Text="{Binding StatusText}"
+                                                           FontSize="10"
+                                                           FontWeight="Medium"
+                                                           Foreground="White"/>
+                                            </Border>
+
+                                            <TextBlock Text="{Binding Location}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- Toggle Button -->
+                                    <Button Grid.Column="1"
+                                            Command="{Binding ToggleCommand}"
+                                            Style="{StaticResource ModernButtonStyle}"
+                                            Padding="16,8"
+                                            VerticalAlignment="Center"
+                                            Margin="16,0,0,0"
+                                            Content="{Binding ButtonText}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource BackgroundMediumBrush}"
+                BorderBrush="{DynamicResource GlassBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="16,12"
+                Margin="0,16,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Status Icon -->
+                <Ellipse Grid.Column="0"
+                         Width="12" Height="12"
+                         Fill="{DynamicResource AccentBrightCyanBrush}"
+                         Margin="0,0,12,0"
+                         VerticalAlignment="Center"/>
+
+                <!-- Status Message -->
+                <TextBlock Grid.Column="1"
+                           Text="{Binding StatusMessage}"
+                           FontSize="13"
+                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

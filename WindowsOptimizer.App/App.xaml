@@ -29,6 +29,15 @@
             <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
                 <views:AboutView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PresetsViewModel}">
+                <views:PresetsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:StartupViewModel}">
+                <views:StartupView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BloatwareViewModel}">
+                <views:BloatwareView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

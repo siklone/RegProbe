@@ -1,96 +1,83 @@
 using System;
-using System.Linq;
 using System.Windows;
-using WindowsOptimizer.App.Diagnostics;
+using System.Windows.Media;
 
 namespace WindowsOptimizer.App.Services;
 
-public enum AppTheme
+public record ThemePalette(
+    string Name,
+    Color AccentPrimary,    // Nord8
+    Color AccentDark,       // Nord10
+    Color AccentLight,      // Nord7
+    Color AccentSecondary   // Nord9
+);
+
+public class ThemeManager
 {
-    Dark,
-    Light
-}
+    private static readonly ResourceDictionary _resources = Application.Current.Resources;
 
-public static class ThemeManager
-{
-    private static AppTheme _currentTheme = AppTheme.Dark;
+    public static readonly ThemePalette Nord = new(
+        "Nord (Default)",
+        (Color)ColorConverter.ConvertFromString("#88C0D0"), // Nord8
+        (Color)ColorConverter.ConvertFromString("#5E81AC"), // Nord10
+        (Color)ColorConverter.ConvertFromString("#8FBCBB"), // Nord7
+        (Color)ColorConverter.ConvertFromString("#81A1C1")  // Nord9
+    );
 
-    public static AppTheme CurrentTheme => _currentTheme;
+    public static readonly ThemePalette ElectricPurple = new(
+        "Electric Purple",
+        (Color)ColorConverter.ConvertFromString("#BD93F9"), // Dracula Purple
+        (Color)ColorConverter.ConvertFromString("#6272A4"), // Dracula Comment
+        (Color)ColorConverter.ConvertFromString("#FF79C6"), // Dracula Pink
+        (Color)ColorConverter.ConvertFromString("#8BE9FD")  // Dracula Cyan
+    );
 
-    public static event Action<AppTheme>? ThemeChanged;
+    public static readonly ThemePalette SunsetOrange = new(
+        "Sunset Orange",
+        (Color)ColorConverter.ConvertFromString("#D08770"), // Nord12
+        (Color)ColorConverter.ConvertFromString("#BF616A"), // Nord11
+        (Color)ColorConverter.ConvertFromString("#EBCB8B"), // Nord13
+        (Color)ColorConverter.ConvertFromString("#D08770")  // Nord12
+    );
 
-    public static void SetTheme(AppTheme theme, bool force = false)
+    public static readonly ThemePalette CyberGreen = new(
+        "Cyber Green",
+        (Color)ColorConverter.ConvertFromString("#50FA7B"), // Bright Green
+        (Color)ColorConverter.ConvertFromString("#008F39"), // Dark Green
+        (Color)ColorConverter.ConvertFromString("#8AFF80"), // Light Green
+        (Color)ColorConverter.ConvertFromString("#00D15B")  // Mid Green
+    );
+
+    public void ApplyTheme(ThemePalette palette)
     {
-        AppDiagnostics.Log($"SetTheme called: theme={theme}, force={force}, current={_currentTheme}");
+        // Update Colors
+        UpdateColor("AccentBrightCyanBrush", palette.AccentPrimary); // Main Accent
+        UpdateColor("AccentDarkBlueBrush", palette.AccentDark);      // Darker Accent
+        UpdateColor("AccentCyanBrush", palette.AccentLight);         // Light Accent
+        UpdateColor("AccentBlueBrush", palette.AccentSecondary);     // Secondary Accent
 
-        if (!force && _currentTheme == theme)
-        {
-            AppDiagnostics.Log("SetTheme: skipped (same theme)");
-            return;
-        }
-
-        _currentTheme = theme;
-
-        var app = Application.Current;
-        if (app == null)
-        {
-            AppDiagnostics.Log("SetTheme: Application.Current is null");
-            return;
-        }
-
-        // Log all merged dictionaries for debugging
-        AppDiagnostics.Log($"SetTheme: Found {app.Resources.MergedDictionaries.Count} merged dictionaries");
-        foreach (var d in app.Resources.MergedDictionaries)
-        {
-            AppDiagnostics.Log($"  - {d.Source?.OriginalString ?? "(no source)"}");
-        }
-
-        // Find and remove existing theme dictionary
-        var existingThemes = app.Resources.MergedDictionaries
-            .Where(d => d.Source != null && d.Source.OriginalString.Contains("Colors"))
-            .ToList();
-
-        AppDiagnostics.Log($"SetTheme: Found {existingThemes.Count} color dictionaries to remove");
-
-        foreach (var existing in existingThemes)
-        {
-            AppDiagnostics.Log($"SetTheme: Removing {existing.Source?.OriginalString}");
-            app.Resources.MergedDictionaries.Remove(existing);
-        }
-
-        // Add new theme dictionary using pack URI
-        var themePath = theme switch
-        {
-            AppTheme.Light => "pack://application:,,,/Resources/Colors.Light.xaml",
-            _ => "pack://application:,,,/Resources/Colors.xaml"
-        };
-
-        AppDiagnostics.Log($"SetTheme: Loading new theme from {themePath}");
-
-        try
-        {
-            var newTheme = new ResourceDictionary
-            {
-                Source = new Uri(themePath, UriKind.Absolute)
-            };
-
-            // Insert at beginning so it's loaded first (before Styles.xaml etc.)
-            app.Resources.MergedDictionaries.Insert(0, newTheme);
-
-            AppDiagnostics.Log($"SetTheme: Successfully loaded {theme} theme");
-            ThemeChanged?.Invoke(theme);
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.LogException("SetTheme", ex);
-        }
+        // Re-construct Gradient
+        var gradient = new LinearGradientBrush();
+        gradient.StartPoint = new Point(0, 0);
+        gradient.EndPoint = new Point(1, 0);
+        gradient.GradientStops.Add(new GradientStop(palette.AccentPrimary, 0));
+        gradient.GradientStops.Add(new GradientStop(palette.AccentDark, 1));
+        
+        if (_resources.Contains("AccentGradientBrush"))
+            _resources["AccentGradientBrush"] = gradient;
+        else
+            _resources.Add("AccentGradientBrush", gradient);
     }
 
-    public static void Initialize(AppTheme theme)
+    private void UpdateColor(string resourceKey, Color newColor)
     {
-        // Just track the theme state without changing dictionaries
-        // SetTheme with force=true will be called separately if needed
-        _currentTheme = theme;
-        AppDiagnostics.Log($"ThemeManager.Initialize: {theme}");
+        var brush = new SolidColorBrush(newColor);
+        // Freezable for performance since we might swap it
+        if (brush.CanFreeze) brush.Freeze();
+
+        if (_resources.Contains(resourceKey))
+            _resources[resourceKey] = brush;
+        else
+            _resources.Add(resourceKey, brush);
     }
 }

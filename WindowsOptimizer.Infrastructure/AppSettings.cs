@@ -14,6 +14,7 @@ public sealed class AppSettings
     public bool EnableCardShadows { get; set; }
     public bool RunStartupScanOnLaunch { get; set; } = true;
     public bool ShowPreviewHint { get; set; } = true;
+    public bool IsCompactMode { get; set; }
     public List<MonitorSectionState> MonitorSections { get; set; } = new();
 }
 

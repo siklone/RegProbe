@@ -505,6 +505,10 @@
                                 <DataTrigger Binding="{Binding IsNested}" Value="True">
                                     <Setter Property="Background" Value="Transparent"/>
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=IsCompactMode}" Value="True">
+                                    <Setter Property="Padding" Value="12,6"/>
+                                    <Setter Property="Margin" Value="0,0,0,4"/>
+                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
@@ -623,6 +627,10 @@
                             <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=EnableCardShadows}" Value="False">
                                 <Setter Property="Effect" Value="{x:Null}"/>
                             </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=IsCompactMode}" Value="True">
+                                <Setter Property="Padding" Value="12,6"/>
+                                <Setter Property="Margin" Value="0,0,0,6"/>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
                                 <Setter Property="BorderBrush" Value="{DynamicResource CautionBrush}"/>
                                 <Setter Property="BorderThickness" Value="2"/>
@@ -736,6 +744,61 @@
                                            FontSize="9"
                                            Margin="0,2,0,0"
                                            TextTrimming="CharacterEllipsis"/>
+                                
+                                <!-- Before/After Snapshot Comparison -->
+                                <Border Visibility="{Binding HasStateChange, Converter={StaticResource BoolToVisibility}}"
+                                        Background="{DynamicResource BackgroundMediumBrush}"
+                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="8,4"
+                                        Margin="0,6,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Snapshot Comparison"
+                                                   FontSize="9"
+                                                   FontWeight="Bold"
+                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                   Margin="0,0,0,4"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Before -->
+                                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                                       Text="Before:"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource DangerBrush}"
+                                                       Margin="0,0,8,2"/>
+                                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                                       Text="{Binding BeforeState}"
+                                                       FontSize="10"
+                                                       FontFamily="Consolas"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       TextTrimming="CharacterEllipsis"/>
+
+                                            <!-- After -->
+                                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                                       Text="After:"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource SuccessBrush}"
+                                                       Margin="0,0,8,0"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                                       Text="{Binding AfterState}"
+                                                       FontSize="10"
+                                                       FontFamily="Consolas"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
 	                        </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
@@ -1425,10 +1488,12 @@
 
                                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding CategoryIcon}" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,8,0"/>
-                                            <TextBlock Text="{Binding CategoryName}" 
-                                                       FontSize="14" 
-                                                       FontWeight="SemiBold" 
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                            <TextBlock Text="{Binding Name}" 
+                                                       FontSize="15" 
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       Margin="0,0,6,0"
+                                                       ToolTip="{Binding HelpTooltip}"/>
                                         </StackPanel>
 
                                         <Border Grid.Column="2" 

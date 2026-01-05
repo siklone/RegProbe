@@ -92,8 +92,19 @@ public partial class App : Application
 
     private static void ApplyTheme(AppSettings settings)
     {
-        var theme = settings.Theme == "Light" ? AppTheme.Light : AppTheme.Dark;
-        ThemeManager.SetTheme(theme, force: true);
+        var themeManager = new ThemeManager();
+        var palettes = new[]
+        {
+            ThemeManager.Nord,
+            ThemeManager.ElectricPurple,
+            ThemeManager.SunsetOrange,
+            ThemeManager.CyberGreen
+        };
+
+        var selectedPalette = System.Linq.Enumerable.FirstOrDefault(palettes, p => p.Name == settings.Theme) 
+                              ?? ThemeManager.Nord;
+
+        themeManager.ApplyTheme(selectedPalette);
     }
 
     private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

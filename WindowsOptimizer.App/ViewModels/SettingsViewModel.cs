@@ -27,7 +27,9 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _runStartupScanOnLaunch = true;
     private bool _showPreviewHint = true;
     private readonly IAppLogger _appLogger;
+    private readonly ThemeManager _themeManager = new();
     private AppSettings _settings = new();
+    private ThemePalette _currentThemePalette = ThemeManager.Nord;
 
     public SettingsViewModel()
     {
@@ -96,6 +98,27 @@ public sealed class SettingsViewModel : ViewModelBase
         set => SetProperty(ref _discordAutoPatchEnabled, value);
     }
 
+    public IEnumerable<ThemePalette> AvailableThemes => new[]
+    {
+        ThemeManager.Nord,
+        ThemeManager.ElectricPurple,
+        ThemeManager.SunsetOrange,
+        ThemeManager.CyberGreen
+    };
+
+    public ThemePalette CurrentThemePalette
+    {
+        get => _currentThemePalette;
+        set
+        {
+            if (SetProperty(ref _currentThemePalette, value))
+            {
+                _themeManager.ApplyTheme(value);
+                _ = SaveSettingsAsync();
+            }
+        }
+    }
+
     public bool IsDarkTheme
     {
         get => _isDarkTheme;
@@ -103,7 +126,24 @@ public sealed class SettingsViewModel : ViewModelBase
         {
             if (SetProperty(ref _isDarkTheme, value))
             {
-                ThemeManager.SetTheme(value ? AppTheme.Dark : AppTheme.Light);
+                // Legacy: We might want to keep this or merge it with palettes.
+                // For now, let's assume Palettes define the "accent" and IsDarkTheme defines the base.
+                // But my ThemeManager currently only swaps accents.
+                // Let's keep IsDarkTheme separate for now, assuming base colors are static or handled elsewhere.
+                _ = SaveSettingsAsync();
+            }
+        }
+    }
+
+    public bool IsCompactMode
+    {
+        get => UiPreferences.Current.IsCompactMode;
+        set
+        {
+            if (UiPreferences.Current.IsCompactMode != value)
+            {
+                UiPreferences.Current.IsCompactMode = value;
+                OnPropertyChanged();
                 _ = SaveSettingsAsync();
             }
         }
@@ -117,10 +157,10 @@ public sealed class SettingsViewModel : ViewModelBase
             if (SetProperty(ref _enableCardShadows, value))
             {
                 UiPreferences.Current.EnableCardShadows = value;
+                _ = SaveSettingsAsync();
             }
         }
     }
-
     public bool RunStartupScanOnLaunch
     {
         get => _runStartupScanOnLaunch;
@@ -184,9 +224,20 @@ public sealed class SettingsViewModel : ViewModelBase
             _enableCardShadows = settings.EnableCardShadows;
             RunStartupScanOnLaunch = settings.RunStartupScanOnLaunch;
             ShowPreviewHint = settings.ShowPreviewHint;
+            
+            // Map saved theme name to palette
+            var savedThemeName = settings.Theme; // "Nord (Default)" or "Dark"
+            var matchedTheme = System.Linq.Enumerable.FirstOrDefault(AvailableThemes, t => t.Name == savedThemeName) ?? ThemeManager.Nord;
+            _currentThemePalette = matchedTheme;
+            _themeManager.ApplyTheme(_currentThemePalette);
+            
+            OnPropertyChanged(nameof(CurrentThemePalette));
+            OnPropertyChanged(nameof(CurrentThemePalette));
             OnPropertyChanged(nameof(IsDarkTheme));
             OnPropertyChanged(nameof(EnableCardShadows));
+            OnPropertyChanged(nameof(IsCompactMode));
             UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
+            UiPreferences.Current.IsCompactMode = settings.IsCompactMode;
             StatusMessage = "Settings loaded successfully.";
         }
         catch (System.Exception ex)
@@ -216,8 +267,12 @@ public sealed class SettingsViewModel : ViewModelBase
             settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
             settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
             settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
-            settings.Theme = IsDarkTheme ? "Dark" : "Light";
+            settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
+            settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
+            settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
+            settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
             settings.EnableCardShadows = EnableCardShadows;
+            settings.IsCompactMode = IsCompactMode;
             settings.RunStartupScanOnLaunch = RunStartupScanOnLaunch;
             settings.ShowPreviewHint = ShowPreviewHint;
 
@@ -304,6 +359,11 @@ public sealed class SettingsViewModel : ViewModelBase
         if (before.EnableCardShadows != after.EnableCardShadows)
         {
             changes.Add($"CardShadows={(after.EnableCardShadows ? "On" : "Off")}");
+        }
+
+        if (before.IsCompactMode != after.IsCompactMode)
+        {
+            changes.Add($"CompactMode={(after.IsCompactMode ? "On" : "Off")}");
         }
 
         if (before.RunStartupScanOnLaunch != after.RunStartupScanOnLaunch)

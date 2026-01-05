@@ -586,6 +586,7 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _totalTweaksAvailable, value))
             {
                 OnPropertyChanged(nameof(OptimizationScoreDetails));
+                OnPropertyChanged(nameof(AppliedTweaksAngle));
             }
         }
     }
@@ -598,9 +599,14 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _tweaksApplied, value))
             {
                 OnPropertyChanged(nameof(OptimizationScoreDetails));
+                OnPropertyChanged(nameof(AppliedTweaksAngle));
             }
         }
     }
+
+    public double AppliedTweaksAngle => TotalTweaksAvailable > 0 
+        ? (double)TweaksApplied / TotalTweaksAvailable * 360.0 
+        : 0;
 
     public int DocsMissingCount
     {
@@ -680,9 +686,12 @@ public sealed class DashboardViewModel : ViewModelBase
             if (SetProperty(ref _optimizationScore, value))
             {
                 OnPropertyChanged(nameof(OptimizationScoreDisplayText));
+                OnPropertyChanged(nameof(OptimizationScoreAngle));
             }
         }
     }
+
+    public double OptimizationScoreAngle => (double)OptimizationScore / 100.0 * 360.0;
 
     public string OptimizationScoreDetails =>
         HealthTweaksTotal <= 0

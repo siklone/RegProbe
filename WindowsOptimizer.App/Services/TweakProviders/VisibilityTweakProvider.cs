@@ -386,6 +386,19 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "visibility.restore-classic-context-menu",
+            "Restore Classic Context Menu",
+            "Restores the Windows 10 style context menu on Windows 11.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32",
+            "",
+            RegistryValueKind.String,
+            "",
+            requiresElevation: false);
+            
+        yield return CreateRegistryTweak(
+            context,
             "visibility.force-classic-control-panel",
             "Force Classic Control Panel View",
             "Always open Control Panel in the icon view.",

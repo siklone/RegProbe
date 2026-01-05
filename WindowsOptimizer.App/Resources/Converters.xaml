@@ -14,4 +14,10 @@
     <!-- String Empty to Visibility Converter -->
     <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter"/>
 
+    <!-- Arc Converter for Circular Charts -->
+    <converters:ArcConverter x:Key="ArcConverter"/>
+
+    <!-- First Character Converter -->
+    <converters:FirstCharConverter x:Key="FirstCharConverter"/>
+
 </ResourceDictionary>
