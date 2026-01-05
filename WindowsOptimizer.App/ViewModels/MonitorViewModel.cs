@@ -3694,7 +3694,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 catch (Exception ex)
                 {
                     LogMonitorWarning($"Monitor: CPU process sampling failed: {ex.Message}");
-                    topCpu = new List<ProcessInfo>();
+                    topCpu = new List<ProcessInfo>(0);
                 }
 
                 try
@@ -3704,7 +3704,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 catch (Exception ex)
                 {
                     LogMonitorWarning($"Monitor: RAM process sampling failed: {ex.Message}");
-                    topRam = new List<ProcessInfo>();
+                    topRam = new List<ProcessInfo>(0);
                 }
 
                 try
@@ -3714,7 +3714,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 catch (Exception ex)
                 {
                     LogMonitorWarning($"Monitor: Network process sampling failed: {ex.Message}");
-                    topNetwork = new List<ProcessInfo>();
+                    topNetwork = new List<ProcessInfo>(0);
                 }
 
                 try
@@ -3724,7 +3724,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 catch (Exception ex)
                 {
                     LogMonitorWarning($"Monitor: Disk process sampling failed: {ex.Message}");
-                    topDisk = new List<ProcessInfo>();
+                    topDisk = new List<ProcessInfo>(0);
                 }
 
                 mode = _processMonitor.NetworkMode;
