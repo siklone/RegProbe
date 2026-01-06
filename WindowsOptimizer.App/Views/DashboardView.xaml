@@ -387,6 +387,9 @@
 	                    <Grid Width="140" Height="140" VerticalAlignment="Center" ToolTip="{Binding OptimizationScoreDetails}">
                             <!-- Background Track -->
                             <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
                                 <Path.Data>
                                     <MultiBinding Converter="{StaticResource ArcConverter}">
                                         <Binding Source="100" /> 
@@ -398,6 +401,9 @@
                             
                             <!-- Optimization Score Progress -->
 	                        <Path Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
                                 <Path.Data>
                                     <MultiBinding Converter="{StaticResource ArcConverter}">
                                         <Binding Path="OptimizationScore" />
@@ -421,6 +427,9 @@
 	                    <Grid Width="140" Height="140" Margin="24,0,0,0" VerticalAlignment="Center" ToolTip="Total verified tweaks applied vs available">
                             <!-- Background Track -->
                             <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
                                 <Path.Data>
                                     <MultiBinding Converter="{StaticResource ArcConverter}">
                                         <Binding Source="100" /> 
@@ -432,6 +441,9 @@
                             
                             <!-- Applied Progress -->
 	                        <Path Stroke="{DynamicResource SuccessBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
                                 <Path.Data>
                                     <MultiBinding Converter="{StaticResource ArcConverter}">
                                         <Binding Path="TweaksApplied" />
