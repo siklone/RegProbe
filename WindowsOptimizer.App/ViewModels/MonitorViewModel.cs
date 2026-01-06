@@ -649,10 +649,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 IsVisible = state.IsVisible
             };
-            ordered.Add(section);
             usedKeys.Add(definition.Key);
+            ordered.Add(section);
         }
 
+        // Add any new sections that weren't in the saved settings (e.g. after app update)
         foreach (var definition in defaults)
         {
             if (!usedKeys.Contains(definition.Key))
