@@ -146,9 +146,9 @@
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
                                                  To="1.02" Duration="0:0:0.1"/>
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                  To="1.02" Duration="0:0:0.1"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -156,9 +156,9 @@
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
                                                  To="1" Duration="0:0:0.1"/>
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                                                  To="1" Duration="0:0:0.1"/>
                             </Storyboard>
                         </BeginStoryboard>
