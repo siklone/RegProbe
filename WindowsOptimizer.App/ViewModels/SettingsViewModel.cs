@@ -28,6 +28,8 @@ public sealed class SettingsViewModel : ViewModelBase
     private bool _showPreviewHint = true;
     private readonly IAppLogger _appLogger;
     private readonly ThemeManager _themeManager = new();
+    private readonly AutoUpdateService _autoUpdateService = new();
+    private readonly ConfigExportService _configService = new();
     private AppSettings _settings = new();
     private ThemePalette _currentThemePalette = ThemeManager.Nord;
 
@@ -60,6 +62,10 @@ public sealed class SettingsViewModel : ViewModelBase
                 // Ignore link launch failures
             }
         });
+
+        CheckUpdatesCommand = new RelayCommand(async _ => await CheckUpdatesAsync());
+        ExportConfigCommand = new RelayCommand(async _ => await ExportConfigAsync());
+        ImportConfigCommand = new RelayCommand(async _ => await ImportConfigAsync());
 
         _ = LoadSettingsAsync();
     }
@@ -126,10 +132,7 @@ public sealed class SettingsViewModel : ViewModelBase
         {
             if (SetProperty(ref _isDarkTheme, value))
             {
-                // Legacy: We might want to keep this or merge it with palettes.
-                // For now, let's assume Palettes define the "accent" and IsDarkTheme defines the base.
-                // But my ThemeManager currently only swaps accents.
-                // Let's keep IsDarkTheme separate for now, assuming base colors are static or handled elsewhere.
+                _themeManager.SetBaseTheme(value);
                 _ = SaveSettingsAsync();
             }
         }
@@ -401,5 +404,72 @@ public sealed class SettingsViewModel : ViewModelBase
         }
 
         _appLogger.Log(LogLevel.Info, $"Activity: Settings - {string.Join(", ", changes)}");
+    }
+    public ICommand CheckUpdatesCommand { get; }
+    public ICommand ExportConfigCommand { get; }
+    public ICommand ImportConfigCommand { get; }
+
+    private async Task CheckUpdatesAsync()
+    {
+        try
+        {
+            StatusMessage = "Checking for updates...";
+            var update = await _autoUpdateService.CheckForUpdateAsync();
+            
+            if (update != null && update.IsUpdateAvailable)
+            {
+                StatusMessage = $"Update available: {update.ReleaseName}";
+                if (System.Windows.MessageBox.Show($"New version {update.LatestVersion} is available.\n\n{update.ReleaseNotes}\n\nDownload now?", 
+                    "Update Available", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Information) == System.Windows.MessageBoxResult.Yes)
+                {
+                    StatusMessage = "Downloading update...";
+                    await _autoUpdateService.DownloadAndInstallAsync(update);
+                }
+            }
+            else
+            {
+                StatusMessage = "You are up to date.";
+            }
+        }
+        catch (System.Exception ex)
+        {
+            StatusMessage = $"Update check failed: {ex.Message}";
+        }
+    }
+
+    private async Task ExportConfigAsync()
+    {
+        var dialog = new Microsoft.Win32.SaveFileDialog
+        {
+            Filter = "JSON Config (*.json)|*.json",
+            FileName = $"WindowsOptimizer_Config_{System.DateTime.Now:yyyyMMdd}.json"
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            StatusMessage = "Exporting configuration...";
+            var success = await _configService.ExportAsync(dialog.FileName, new ExportOptions());
+            StatusMessage = success ? "Configuration exported successfully." : "Export failed.";
+        }
+    }
+
+    private async Task ImportConfigAsync()
+    {
+        var dialog = new Microsoft.Win32.OpenFileDialog
+        {
+            Filter = "JSON Config (*.json)|*.json"
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            StatusMessage = "Importing configuration...";
+            var result = await _configService.ImportAsync(dialog.FileName);
+            StatusMessage = result.Success ? $"Import successful: {result.Message}" : $"Import failed: {result.Message}";
+            
+            if (result.Success)
+            {
+                await LoadSettingsAsync();
+            }
+        }
     }
 }

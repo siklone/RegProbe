@@ -116,6 +116,48 @@ public class ThemeManager
             _resources.Add("CompactFontSize", fontSize);
     }
 
+    /// <summary>
+    /// Set the base theme (Dark or Light) by swapping ResourceDictionaries.
+    /// </summary>
+    public void SetBaseTheme(bool isDark)
+    {
+        try
+        {
+            var dictName = isDark ? "Colors.xaml" : "Colors.Light.xaml";
+            var uri = new Uri($"/WindowsOptimizer.App;component/Resources/{dictName}", UriKind.Relative);
+            
+            var newDict = new ResourceDictionary { Source = uri };
+
+            // Find and replace the existing Colors dictionary
+            // We identify it by checking a known key like "BackgroundDarkestBrush" or simply by its Source URI if possible
+            // But MergedDictionaries access by Source can be tricky if not absolute.
+            // Safer strategy: Remove any dictionary that contains "BackgroundDarkestBrush" and add the new one.
+            
+            var mergedDicts = Application.Current.Resources.MergedDictionaries;
+            ResourceDictionary? oldDict = null;
+
+            foreach (var dict in mergedDicts)
+            {
+                if (dict.Contains("BackgroundDarkestBrush"))
+                {
+                    oldDict = dict;
+                    break;
+                }
+            }
+
+            if (oldDict != null)
+            {
+                mergedDicts.Remove(oldDict);
+            }
+            
+            mergedDicts.Add(newDict);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error setting base theme: {ex.Message}");
+        }
+    }
+
     private void UpdateColor(string resourceKey, Color newColor)
     {
         var brush = new SolidColorBrush(newColor);

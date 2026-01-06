@@ -296,6 +296,61 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Backup & Restore Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="" FontSize="16" Foreground="{DynamicResource BackgroundDarkestBrush}"/>
+                            </Border>
+                            <TextBlock Text="Backup &amp; Restore"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Configuration Management"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11" Margin="0,0,0,16">
+                            Export your settings and tweak states to a JSON file, or restore from a backup.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Export Config"
+                                    Command="{Binding ExportConfigCommand}"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="0,0,12,0"/>
+                            <Button Content="Import Config"
+                                    Command="{Binding ImportConfigCommand}"
+                                    Style="{StaticResource SecondaryButtonStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Updates Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="#2ecc71" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="🔄" FontSize="16" Foreground="{DynamicResource BackgroundDarkestBrush}"/>
+                            </Border>
+                            <TextBlock Text="Updates"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <Button Content="Check for Updates"
+                                Command="{Binding CheckUpdatesCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
                 <!-- Discord Integration Section -->
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
