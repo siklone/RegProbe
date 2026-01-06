@@ -188,10 +188,15 @@
 
                         <TextBlock Text="Accent Theme" Margin="0,0,0,8" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="13" FontWeight="SemiBold"/>
                         <ComboBox ItemsSource="{Binding AvailableThemes}" 
-                                  SelectedItem="{Binding CurrentThemePalette}"
-                                  DisplayMemberPath="Name"
+                                  SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
                                   Style="{StaticResource ModernComboBoxStyle}"
-                                  Margin="0,0,0,8"/>
+                                  Margin="0,0,0,8">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <TextBlock Margin="0,0,0,24"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
@@ -199,7 +204,7 @@
                         </TextBlock>
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
-                                  IsChecked="{Binding IsDarkTheme}"
+                                  IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
                                   Content="Dark Mode Base"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,0"
@@ -209,7 +214,7 @@
                         </TextBlock>
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
-                                  IsChecked="{Binding EnableCardShadows}"
+                                  IsChecked="{Binding EnableCardShadows, Mode=TwoWay}"
                                   Content="Card Shadows"
                                   Margin="0,16,0,8"/>
                         <TextBlock Margin="56,0,0,16"
@@ -219,7 +224,7 @@
                         </TextBlock>
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
-                                  IsChecked="{Binding IsCompactMode}"
+                                  IsChecked="{Binding IsCompactMode, Mode=TwoWay}"
                                   Content="Compact &quot;Pro&quot; Mode"
                                   Margin="0,0,0,8"/>
                         <TextBlock Margin="56,0,0,0"
