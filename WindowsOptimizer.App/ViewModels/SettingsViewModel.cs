@@ -143,6 +143,7 @@ public sealed class SettingsViewModel : ViewModelBase
             if (UiPreferences.Current.IsCompactMode != value)
             {
                 UiPreferences.Current.IsCompactMode = value;
+                _themeManager.SetCompactMode(value);
                 OnPropertyChanged();
                 _ = SaveSettingsAsync();
             }
@@ -157,6 +158,7 @@ public sealed class SettingsViewModel : ViewModelBase
             if (SetProperty(ref _enableCardShadows, value))
             {
                 UiPreferences.Current.EnableCardShadows = value;
+                _themeManager.SetCardShadows(value);
                 _ = SaveSettingsAsync();
             }
         }

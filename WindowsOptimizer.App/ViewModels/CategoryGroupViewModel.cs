@@ -27,6 +27,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         CategoryIcon = categoryIcon;
         _tweaks = new ObservableCollection<TweakItemViewModel>();
         ToggleExpandCommand = new RelayCommand(_ => ToggleExpand());
+        LogToFile($"CategoryGroupViewModel created: Name='{CategoryName}', Icon='{CategoryIcon}'");
     }
 
     public string CategoryName { get; }
