@@ -152,6 +152,26 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.6 Performance & Stability Pack (Commit: pending)
+**Improvement:** Implemented Async/Await best practices and verified UI virtualization.
+
+**New Files:**
+- `WindowsOptimizer.App/ViewModels/AsyncRelayCommand.cs` - Safe async command implementation
+- `WindowsOptimizer.App/Utilities/TaskExtensions.cs` - SafeFireAndForget extension
+
+**Modified Files:**
+- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Replaced `async void` with safe commands
+- `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs` - Stabilized expand/collapse logic
+
+**Features:**
+- **Crash Prevention:** Replaced dangerous `async void` patterns with `AsyncRelayCommand` that handles exceptions safely.
+- **UI Responsiveness:** Verified `VirtualizingStackPanel` and Recycling mode in `TweaksView` to handle large lists efficiently.
+- **Safe Fire-and-Forget:** Added robust error logging for background tasks.
+
+**Status:** ✅ **OPTIMIZED** - Stability improved
+
+---
+
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
 

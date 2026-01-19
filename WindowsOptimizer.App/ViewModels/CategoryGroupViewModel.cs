@@ -26,7 +26,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         CategoryName = categoryName;
         CategoryIcon = categoryIcon;
         _tweaks = new ObservableCollection<TweakItemViewModel>();
-        ToggleExpandCommand = new RelayCommand(_ => ToggleExpand());
+        ToggleExpandCommand = new AsyncRelayCommand(ToggleExpand);
         LogToFile($"CategoryGroupViewModel created: Name='{CategoryName}', Icon='{CategoryIcon}'");
     }
 
@@ -118,7 +118,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         _hasDetected = true;
     }
 
-    private async void ToggleExpand()
+    private async Task ToggleExpand()
     {
         try
         {

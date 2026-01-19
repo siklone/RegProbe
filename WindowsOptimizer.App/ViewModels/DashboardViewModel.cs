@@ -101,10 +101,10 @@ public sealed class DashboardViewModel : ViewModelBase
         _logStore = new FileTweakLogStore(_paths);
         LoadStatistics();
         _ = LoadRecentActivityAsync();
-        ScanAllCommand = new RelayCommand(_ => _ = RunScanAsync(), _ => !IsScanning);
-        RunFullScanCommand = new RelayCommand(_ => RunFullScan(), _ => !IsScanning);
-        EnableBootMetricsCommand = new RelayCommand(_ => _ = EnableBootMetricsAsync(), _ => CanEnableBootMetrics && !IsEnablingBootMetrics);
-        RefreshActivityCommand = new RelayCommand(_ => _ = LoadRecentActivityAsync());
+        ScanAllCommand = new AsyncRelayCommand(RunScanAsync, () => !IsScanning);
+        RunFullScanCommand = new RelayCommand(_ => RunFullScan(), _ => !IsScanning); // Keep as RelayCommand as it calls RunScanAsync internally
+        EnableBootMetricsCommand = new AsyncRelayCommand(EnableBootMetricsAsync, () => CanEnableBootMetrics && !IsEnablingBootMetrics);
+        RefreshActivityCommand = new AsyncRelayCommand(LoadRecentActivityAsync);
         OpenActivityLinkCommand = new RelayCommand(param => OpenActivityLink(param as ActivityTimelineItem),
             param => param is ActivityTimelineItem item && item.HasLink);
 
@@ -124,8 +124,8 @@ public sealed class DashboardViewModel : ViewModelBase
         NavigateToRolledBackTweaksCommand = new RelayCommand(_ => NavigateToStatusFilterRequested?.Invoke("rolledback"));
         OpenLogFileCommand = new RelayCommand(_ => OpenLogFile(), _ => File.Exists(_paths.TweakLogFilePath));
         OpenLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
-        CreateRestorePointCommand = new RelayCommand(_ => CreateRestorePointAsync(), _ => !IsCreatingRestorePoint);
-        EnableVssCommand = new RelayCommand(_ => EnableVssServiceAsync(), _ => VssServiceNeedsEnable && !IsCreatingRestorePoint);
+        CreateRestorePointCommand = new AsyncRelayCommand(CreateRestorePointAsync, () => !IsCreatingRestorePoint);
+        EnableVssCommand = new AsyncRelayCommand(EnableVssServiceAsync, () => VssServiceNeedsEnable && !IsCreatingRestorePoint);
         OpenDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport(), _ => File.Exists(DocsCoverageReportPath));
         LoadDocsCoverageReport();
         LoadSystemSnapshot();
@@ -499,7 +499,7 @@ public sealed class DashboardViewModel : ViewModelBase
         _ = RunScanAsync();
     }
 
-    private async void CreateRestorePointAsync()
+    private async Task CreateRestorePointAsync()
     {
         if (IsCreatingRestorePoint) return;
 
@@ -533,7 +533,7 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
-    private async void EnableVssServiceAsync()
+    private async Task EnableVssServiceAsync()
     {
         IsCreatingRestorePoint = true;
         RestorePointStatusMessage = "Enabling Volume Shadow Copy service...";
