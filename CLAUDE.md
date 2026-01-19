@@ -1,5 +1,14 @@
 # Claude Notes (Windows Optimizer)
 
+> **⚠️ AI AGENT: STOP! Before doing ANY work, you MUST read these files:**
+> 1. **`DEVELOPMENT_ROADMAP.md`** - Implementation plan with code examples
+> 2. **`AGENTS.md`** - Safety rules (BREAKING THESE = REJECTED CODE)
+> 3. **`DEVELOPMENT_STATUS.md`** - Known issues to avoid duplicating work
+>
+> **Skip this and your work will be rejected.**
+
+---
+
 **Last Updated:** 2026-01-19
 **Branch:** `main`
 
