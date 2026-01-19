@@ -324,9 +324,16 @@ await _mediator.SendAsync(new RefreshHealthScoreRequest());
 
 ---
 
-### 13. Toast Notifications
+### 13. Toast Notifications ✅ TAMAMLANDI
 
-**Mevcut:** MessageBox veya inline mesajlar
+**Önceki:** MessageBox veya inline mesajlar
+
+**Şimdi:** INotificationService interface ve NotificationService implementasyonu:
+- Success/Warning/Error/Info notification tipleri
+- Auto-dismiss timer
+- NotificationHost XAML control
+- Slide-in animasyon
+- MainWindow.Notifications.ShowSuccess("mesaj") ile erişim
 
 **Önerilen:**
 ```csharp
@@ -374,9 +381,14 @@ public class UndoRedoStack
 
 ---
 
-### 15. Keyboard Shortcuts
+### 15. Keyboard Shortcuts ✅ TAMAMLANDI
 
-**Mevcut:** Sadece fare navigasyonu
+**Önceki:** Sadece fare navigasyonu
+
+**Şimdi:** MainWindow.xaml'da InputBindings:
+- Ctrl+1-5: Tab navigation
+- Ctrl+F: Search focus
+- Escape: Clear filters
 
 **Önerilen:**
 ```csharp

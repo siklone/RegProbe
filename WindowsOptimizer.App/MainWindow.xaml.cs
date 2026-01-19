@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.ViewModels;
 
 namespace WindowsOptimizer.App;
@@ -14,10 +15,24 @@ public partial class MainWindow : Window
 {
     private bool _forceClose;
 
+    /// <summary>
+    /// Singleton instance of MainWindow (for notification access).
+    /// </summary>
+    public static MainWindow? Instance { get; private set; }
+
+    /// <summary>
+    /// Global notification service.
+    /// </summary>
+    public NotificationService Notifications { get; } = new();
+
     public MainWindow()
     {
+        Instance = this;
         InitializeComponent();
         DataContext = new MainViewModel();
+
+        // Wire up notification host
+        NotificationHost.NotificationService = Notifications;
 
         // Create tray icon programmatically
         TrayIcon.Icon = CreateTrayIcon();
@@ -27,6 +42,9 @@ public partial class MainWindow : Window
         {
             tooltip.DataContext = DataContext;
         }
+
+        // Show welcome notification
+        Notifications.ShowInfo("Windows Optimizer is ready", "Welcome");
     }
 
     private static System.Drawing.Icon CreateTrayIcon()

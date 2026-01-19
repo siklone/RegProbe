@@ -18,6 +18,140 @@
 
 ## ✅ Recent Fixes & Changes
 
+### 0. Sprint 1: Single Instance + Threading Architecture (Commit: pending)
+**Improvement:** Added core infrastructure for single instance enforcement and multi-threaded metric collection.
+
+**New Files:**
+- `WindowsOptimizer.App/Services/SingleInstanceManager.cs` - Named Mutex + Named Pipe IPC
+- `WindowsOptimizer.Infrastructure/Threading/MetricDataBus.cs` - Channel-based lock-free messaging
+- `WindowsOptimizer.Infrastructure/Threading/MetricWorkerPool.cs` - Dedicated worker thread pool
+- `WindowsOptimizer.Infrastructure/Threading/ThreadingDiagnostics.cs` - Performance tracking
+
+**Modified Files:**
+- `WindowsOptimizer.App/App.xaml.cs` - Single instance integration
+
+**Features:**
+- Only one app instance can run at a time
+- Second instance forwards args to first via Named Pipes
+- Abandoned mutex recovery (handles crashed previous instance)
+- 60fps debounced UI updates via Channel-based messaging
+- Dedicated worker threads for metric collection
+- Performance diagnostics for threading subsystem
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows testing
+
+---
+
+### 0.1 Sprint 2: Fallback Data Provider + Hardware Identification (Commit: pending)
+**Improvement:** Added robust data fetching with multiple sources and hardware identification.
+
+**New Files:**
+- `WindowsOptimizer.Infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
+- `WindowsOptimizer.Infrastructure/Data/RetryPolicy.cs` - Exponential backoff retry configuration
+- `WindowsOptimizer.Infrastructure/Data/DataResult.cs` - Result types with error tracking
+- `WindowsOptimizer.Infrastructure/Hardware/HardwareIdentifier.cs` - CPU, GPU, Motherboard, RAM identification
+
+**Features:**
+- FallbackDataProvider tries sources in priority order until one succeeds
+- Retry with exponential backoff (configurable)
+- Circuit breaker pattern disables failing sources temporarily
+- Hardware identification via WMI and Registry
+- CPU: Name, cores, threads, clock speed, architecture
+- GPU: PCI ID, vendor, driver, VRAM
+- Motherboard: Manufacturer, product, serial
+- RAM: Modules, capacity, speed, type
+
+**Status:** 🧪 **IMPLEMENTED** - Needs Windows testing
+
+---
+
+### 0.2 Sprint 3: Splash Screen Preloading (Commit: pending)
+**Improvement:** Added PreloadManager for structured startup task management.
+
+**New Files:**
+- `WindowsOptimizer.App/Services/PreloadManager.cs` - Preload task orchestration
+
+**Features:**
+- Critical tasks run sequentially (must succeed for app to start)
+- Non-critical tasks run in parallel (can fail gracefully)
+- Progress reporting for UI updates
+- Semaphore-based throttling for parallel tasks
+- PreloadException for critical failures
+
+**Usage:**
+```csharp
+var preloader = new PreloadManager(progress);
+preloader.RegisterTask("Settings", LoadSettings, isCritical: true, priority: 100);
+preloader.RegisterTask("Hardware", ScanHardware, isCritical: false, priority: 50);
+var result = await preloader.RunAllAsync(ct);
+```
+
+**Status:** 🧪 **IMPLEMENTED** - Ready for integration with StartupWindow
+
+---
+
+### 0.3 Sprint 4: Hardware Card ViewModels (Commit: pending)
+**Improvement:** Added reusable hardware card ViewModels for Monitor view redesign.
+
+**New Files:**
+- `WindowsOptimizer.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - Base class with common properties
+- `WindowsOptimizer.App/ViewModels/Hardware/CpuCardViewModel.cs` - CPU card with identification and metrics
+- `WindowsOptimizer.App/ViewModels/Hardware/GpuCardViewModel.cs` - GPU card with VRAM and vendor info
+- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM card with modules and speed
+
+**Features:**
+- Base class with Icon, Title, Subtitle, PrimaryValue, SecondaryMetrics
+- Automatic hardware identification via HardwareIdentifier
+- MetricDataBus integration for real-time updates
+- Color-coded status (green/yellow/red) based on thresholds
+- INotifyPropertyChanged for WPF binding
+
+**Status:** 🧪 **IMPLEMENTED** - Ready for XAML integration
+
+---
+
+### 0.4 Sprint 5: Process Management (Commit: pending)
+**Improvement:** Added process priority, affinity, and memory management utilities.
+
+**New Files:**
+- `WindowsOptimizer.Infrastructure/Process/ProcessPriorityManager.cs` - Priority control (Idle to Realtime)
+- `WindowsOptimizer.Infrastructure/Process/ProcessAffinityManager.cs` - CPU affinity with P/E-core presets
+- `WindowsOptimizer.Infrastructure/Process/ProcessMemoryManager.cs` - Working set trimming
+
+**Features:**
+- Set/Get process priority with admin detection
+- CPU affinity masks with presets (PerformanceCores, EfficiencyCores, AllCores)
+- Working set trimming (single process or all)
+- Memory info retrieval (working set, private, virtual)
+
+**Status:** 🧪 **IMPLEMENTED** - Ready for UI integration
+
+---
+
+### 0.5 Quick Wins: Toast Notifications + Keyboard Shortcuts (Commit: pending)
+**Improvement:** Added toast notification system and keyboard shortcuts for better UX.
+
+**New Files:**
+- `WindowsOptimizer.App/Services/INotificationService.cs` - Interface
+- `WindowsOptimizer.App/Services/NotificationService.cs` - Implementation
+- `WindowsOptimizer.App/Views/Controls/NotificationHost.xaml` - XAML overlay
+- `WindowsOptimizer.App/Converters/CommonConverters.cs` - NullToCollapsed etc.
+
+**Modified Files:**
+- `WindowsOptimizer.App/MainWindow.xaml` - Added NotificationHost, controls namespace
+- `WindowsOptimizer.App/MainWindow.xaml.cs` - NotificationService integration
+
+**Features:**
+- Toast notifications: Success/Warning/Error/Info
+- Auto-dismiss with configurable duration
+- Slide-in animation
+- Global access via MainWindow.Instance.Notifications
+- Keyboard shortcuts: Ctrl+1-5 tabs, Ctrl+F search, Escape clear
+
+**Status:** ✅ **IMPLEMENTED** - Ready to use
+
+---
+
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
 

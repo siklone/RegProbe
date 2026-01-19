@@ -13,9 +13,20 @@ namespace WindowsOptimizer.App;
 public partial class App : Application
 {
     private static int _dispatcherErrorDialogShown;
+    private SingleInstanceManager? _singleInstance;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+        // 1. Single instance check (before anything else)
+        _singleInstance = new SingleInstanceManager();
+        if (!_singleInstance.TryAcquire())
+        {
+            // Another instance is running - exit immediately
+            Shutdown(0);
+            return;
+        }
+        _singleInstance.ArgumentsReceived += OnArgumentsReceived;
+
         CrashReportService.Initialize(); // Initialize crash reporter first
         
         DispatcherUnhandledException += OnDispatcherUnhandledException;
@@ -178,5 +189,37 @@ public partial class App : Application
             // Non-critical, continue without optimization
             System.Diagnostics.Debug.WriteLine($"Render settings configuration failed: {ex.Message}");
         }
+    }
+
+    /// <summary>
+    /// Handles command-line arguments received from a second instance via IPC.
+    /// </summary>
+    private void OnArgumentsReceived(object? sender, string[] args)
+    {
+        System.Diagnostics.Debug.WriteLine($"[App] Received args from second instance: {string.Join(" ", args)}");
+
+        // Example: Navigate to specific tab based on args
+        if (MainWindow?.DataContext is MainViewModel mainVm)
+        {
+            foreach (var arg in args)
+            {
+                if (arg.Equals("--monitor", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Navigate to Monitor tab
+                    System.Diagnostics.Debug.WriteLine("[App] Navigating to Monitor via IPC arg");
+                }
+                else if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Navigate to Tweaks tab
+                    System.Diagnostics.Debug.WriteLine("[App] Navigating to Tweaks via IPC arg");
+                }
+            }
+        }
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _singleInstance?.Dispose();
+        base.OnExit(e);
     }
 }
