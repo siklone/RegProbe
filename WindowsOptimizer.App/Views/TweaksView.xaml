@@ -1487,7 +1487,7 @@
 
                                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding CategoryIcon}" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,8,0"/>
-                                            <TextBlock Text="{Binding Name}" 
+                                            <TextBlock Text="{Binding CategoryName}" 
                                                        FontSize="15" 
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"

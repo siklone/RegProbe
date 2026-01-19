@@ -215,12 +215,12 @@
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
                                   IsChecked="{Binding EnableCardShadows, Mode=TwoWay}"
-                                  Content="Card Shadows"
+                                  Content="Card Shadows (OFF = faster scrolling)"
                                   Margin="0,16,0,8"/>
                         <TextBlock Margin="56,0,0,16"
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    FontSize="11">
-                            Toggle drop shadows on cards and controls (default off for smoother scrolling).
+                            ON: Cards have drop shadows for depth. OFF: No shadows, smoother scrolling performance.
                         </TextBlock>
 
                         <CheckBox Style="{StaticResource ToggleSwitchStyle}"
@@ -296,6 +296,42 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Network & DNS Section -->
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                                <TextBlock Text="🌐" FontSize="16"/>
+                            </Border>
+                            <TextBlock Text="Network &amp; DNS"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Current Configuration" Margin="0,0,0,8" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="13" FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding CurrentDnsInfo}" Margin="0,0,0,16" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="12" TextWrapping="Wrap"/>
+
+                        <TextBlock Text="DNS Provider" Margin="0,0,0,8" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="13" FontWeight="SemiBold"/>
+                        <ComboBox ItemsSource="{Binding DnsProviders}" 
+                                  SelectedItem="{Binding SelectedDnsProvider, Mode=TwoWay}"
+                                  Style="{StaticResource ModernComboBoxStyle}"
+                                  DisplayMemberPath="Name"
+                                  Margin="0,0,0,16"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Apply DNS"
+                                    Command="{Binding ApplyDnsCommand}"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="0,0,12,0"/>
+                            <Button Content="Flush Cache"
+                                    Command="{Binding FlushDnsCommand}"
+                                    Style="{StaticResource SecondaryButtonStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
                 <!-- Backup & Restore Section -->
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
@@ -334,7 +370,7 @@
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                            <Border Background="#2ecc71" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                            <Border Background="{DynamicResource SuccessBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="🔄" FontSize="16" Foreground="{DynamicResource BackgroundDarkestBrush}"/>
                             </Border>
                             <TextBlock Text="Updates"
@@ -355,7 +391,7 @@
                 <Border Style="{StaticResource SectionCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                            <Border Background="#5865F2" CornerRadius="8" Padding="8" Margin="0,0,12,0">
+                            <Border Background="{DynamicResource InfoBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="💬" FontSize="16"/>
                             </Border>
                             <TextBlock Text="Discord Integration"

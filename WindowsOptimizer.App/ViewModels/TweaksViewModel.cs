@@ -41,8 +41,9 @@ using WindowsOptimizer.Core.Tasks;
 
 namespace WindowsOptimizer.App.ViewModels;
 
-public sealed class TweaksViewModel : ViewModelBase
+public sealed class TweaksViewModel : ViewModelBase, IDisposable
 {
+    private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
     private readonly RelayCommand _exportLogsCommand;
     private readonly RelayCommand _previewAllCommand;
@@ -1636,5 +1637,41 @@ public sealed class TweaksViewModel : ViewModelBase
                 category.MarkDetected();
             }
         }
+    }
+
+    public void Dispose()
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        _isDisposed = true;
+
+        // Stop and unsubscribe timer
+        if (_metricsTimer != null)
+        {
+            _metricsTimer.Stop();
+            _metricsTimer.Tick -= OnMetricsTick;
+        }
+
+        // Dispose CancellationTokenSources
+        _searchCts?.Cancel();
+        _searchCts?.Dispose();
+        _bulkCts?.Cancel();
+        _bulkCts?.Dispose();
+
+        // Unsubscribe collection changed events
+        Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
+
+        // Unsubscribe tweak property changed events
+        foreach (var tweak in Tweaks)
+        {
+            tweak.PropertyChanged -= OnTweakPropertyChanged;
+            tweak.FavoriteChanged -= OnTweakFavoriteChanged;
+        }
+
+        // Dispose metric provider
+        _metricProvider?.Dispose();
     }
 }

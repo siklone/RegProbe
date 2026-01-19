@@ -9,12 +9,15 @@ using WindowsOptimizer.Infrastructure;
 
 namespace WindowsOptimizer.App.ViewModels;
 
-public sealed class SettingsViewModel : ViewModelBase
+public sealed class SettingsViewModel : ViewModelBase, IDisposable
 {
+    private bool _isDisposed;
     private readonly ISettingsStore _settingsStore;
     private readonly RelayCommand _saveCommand;
     private readonly RelayCommand _testWebhookCommand;
     private readonly RelayCommand _resetMonitorLayoutCommand;
+    private readonly RelayCommand _applyDnsCommand;
+    private readonly RelayCommand _flushDnsCommand;
     private string _discordWebhookUrl = string.Empty;
     private bool _discordNotificationsEnabled;
     private bool _discordAutoPatchEnabled;
@@ -30,6 +33,7 @@ public sealed class SettingsViewModel : ViewModelBase
     private readonly ThemeManager _themeManager = new();
     private readonly AutoUpdateService _autoUpdateService = new();
     private readonly ConfigExportService _configService = new();
+    private readonly DnsService _dnsService = new();
     private AppSettings _settings = new();
     private ThemePalette _currentThemePalette = ThemeManager.Nord;
 
@@ -66,8 +70,13 @@ public sealed class SettingsViewModel : ViewModelBase
         CheckUpdatesCommand = new RelayCommand(async _ => await CheckUpdatesAsync());
         ExportConfigCommand = new RelayCommand(async _ => await ExportConfigAsync());
         ImportConfigCommand = new RelayCommand(async _ => await ImportConfigAsync());
-
+        
+        _applyDnsCommand = new RelayCommand(async _ => await ApplyDnsAsync(), _ => SelectedDnsProvider != null && !IsSaving);
+        _flushDnsCommand = new RelayCommand(async _ => await FlushDnsAsync(), _ => !IsSaving);
+        
+        DnsProviders = new System.Collections.ObjectModel.ObservableCollection<Models.DnsProvider>(DnsService.GetProviders());
         _ = LoadSettingsAsync();
+        _ = LoadDnsInfoAsync();
     }
 
     public string Title => "Settings";
@@ -408,6 +417,108 @@ public sealed class SettingsViewModel : ViewModelBase
     public ICommand CheckUpdatesCommand { get; }
     public ICommand ExportConfigCommand { get; }
     public ICommand ImportConfigCommand { get; }
+    public ICommand ApplyDnsCommand => _applyDnsCommand;
+    public ICommand FlushDnsCommand => _flushDnsCommand;
+
+    public System.Collections.ObjectModel.ObservableCollection<Models.DnsProvider> DnsProviders { get; }
+
+    private Models.DnsProvider? _selectedDnsProvider;
+    public Models.DnsProvider? SelectedDnsProvider
+    {
+        get => _selectedDnsProvider;
+        set
+        {
+            if (SetProperty(ref _selectedDnsProvider, value))
+            {
+                _applyDnsCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    private string _currentDnsInfo = "Loading...";
+    public string CurrentDnsInfo
+    {
+        get => _currentDnsInfo;
+        set => SetProperty(ref _currentDnsInfo, value);
+    }
+    
+    private async Task LoadDnsInfoAsync()
+    {
+        try
+        {
+            var config = await _dnsService.GetCurrentDnsAsync();
+            if (config != null)
+            {
+                CurrentDnsInfo = config.IsDhcp 
+                    ? $"Automatic (DHCP) - {config.AdapterName}"
+                    : $"{config.PrimaryDns}, {config.SecondaryDns} - {config.AdapterName}";
+                
+                var matched = _dnsService.DetectCurrentProvider(config);
+                if (matched != null)
+                {
+                    SelectedDnsProvider = matched;
+                }
+            }
+            else
+            {
+                CurrentDnsInfo = "Unknown or No Connection";
+            }
+        }
+        catch
+        {
+            CurrentDnsInfo = "Error detecting DNS";
+        }
+    }
+
+    private async Task ApplyDnsAsync()
+    {
+        if (SelectedDnsProvider == null) return;
+        
+        IsSaving = true;
+        StatusMessage = $"Applying DNS ({SelectedDnsProvider.Name})...";
+        
+        try
+        {
+            var success = await _dnsService.SetDnsAsync(SelectedDnsProvider);
+            if (success)
+            {
+                StatusMessage = "DNS settings applied successfully.";
+                await LoadDnsInfoAsync();
+            }
+            else
+            {
+                StatusMessage = "Failed to apply DNS settings.";
+            }
+        }
+        catch (System.Exception ex)
+        {
+            StatusMessage = $"DNS apply error: {ex.Message}";
+        }
+        finally
+        {
+            IsSaving = false;
+        }
+    }
+
+    private async Task FlushDnsAsync()
+    {
+        IsSaving = true;
+        StatusMessage = "Flushing DNS cache...";
+        
+        try
+        {
+            var success = await _dnsService.FlushDnsCacheAsync();
+            StatusMessage = success ? "DNS cache flushed." : "Failed to flush DNS cache.";
+        }
+        catch (System.Exception ex)
+        {
+            StatusMessage = $"Flush error: {ex.Message}";
+        }
+        finally
+        {
+            IsSaving = false;
+        }
+    }
 
     private async Task CheckUpdatesAsync()
     {
@@ -471,5 +582,20 @@ public sealed class SettingsViewModel : ViewModelBase
                 await LoadSettingsAsync();
             }
         }
+    }
+
+    public void Dispose()
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        _isDisposed = true;
+
+        // Dispose services if they implement IDisposable
+        (_autoUpdateService as System.IDisposable)?.Dispose();
+        (_configService as System.IDisposable)?.Dispose();
+        (_dnsService as System.IDisposable)?.Dispose();
     }
 }

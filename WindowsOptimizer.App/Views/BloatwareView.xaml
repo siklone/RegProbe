@@ -39,8 +39,8 @@
 
         <!-- Warning Banner -->
         <Border Grid.Row="1"
-                Background="#33FF9800"
-                BorderBrush="#FF9800"
+                Background="{DynamicResource WarningSurfaceBrush}"
+                BorderBrush="{DynamicResource WarningBrush}"
                 BorderThickness="1"
                 CornerRadius="8"
                 Padding="16,12"
@@ -111,7 +111,7 @@
                 </Border>
 
                 <!-- Apps List -->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
                     <ItemsControl ItemsSource="{Binding Apps}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type viewModels:AppxPackageViewModel}">
@@ -165,7 +165,7 @@
                                                 <TextBlock Text="{Binding SafetyText}"
                                                            FontSize="10"
                                                            FontWeight="Medium"
-                                                           Foreground="White"/>
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             </Border>
                                         </StackPanel>
 
@@ -174,7 +174,7 @@
                                                 Command="{Binding UninstallCommand}"
                                                 Content="🗑️ Uninstall"
                                                 Style="{StaticResource ModernButtonStyle}"
-                                                Background="#F44336"
+                                                Background="{DynamicResource DangerBrush}"
                                                 Padding="16,8"
                                                 VerticalAlignment="Center"
                                                 Margin="16,0,0,0"/>

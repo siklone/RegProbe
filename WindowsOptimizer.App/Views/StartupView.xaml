@@ -44,7 +44,7 @@
                 CornerRadius="12"
                 Padding="0">
             
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl ItemsSource="{Binding StartupItems}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:StartupItemViewModel}">
@@ -91,7 +91,7 @@
                                                 <TextBlock Text="{Binding ImpactText}"
                                                            FontSize="10"
                                                            FontWeight="Medium"
-                                                           Foreground="White"/>
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             </Border>
 
                                             <Border Background="{Binding StatusColor}"
@@ -101,7 +101,7 @@
                                                 <TextBlock Text="{Binding StatusText}"
                                                            FontSize="10"
                                                            FontWeight="Medium"
-                                                           Foreground="White"/>
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             </Border>
 
                                             <TextBlock Text="{Binding Location}"

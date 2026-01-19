@@ -144,6 +144,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private ElevatedRegistryAccessor? _elevatedRegistryAccessor;
     private ElevatedServiceManager? _elevatedServiceManager;
 
+    // Named event handlers for proper unsubscription
+    private void OnDiskHealthItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        => OnPropertyChanged(nameof(HasDiskHealthItems));
+
+    private void OnStartupAppsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        => OnPropertyChanged(nameof(StartupAppsSummary));
+
+    private void OnServicesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        => OnPropertyChanged(nameof(ServicesSummary));
+
     public MonitorViewModel()
     {
         var paths = AppPaths.FromEnvironment();
@@ -251,11 +261,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             PerformanceItems = new ObservableCollection<PerformanceItemViewModel>();
             PerformanceDetailItems = new ObservableCollection<PerformanceDetailItem>();
             DiskHealthItems = new ObservableCollection<DiskHealthItemViewModel>();
-            DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
+            DiskHealthItems.CollectionChanged += OnDiskHealthItemsCollectionChanged;
             StartupApps = new ObservableCollection<StartupAppEntry>();
-            StartupApps.CollectionChanged += (_, _) => OnPropertyChanged(nameof(StartupAppsSummary));
+            StartupApps.CollectionChanged += OnStartupAppsCollectionChanged;
             Services = new ObservableCollection<ServiceEntry>();
-            Services.CollectionChanged += (_, _) => OnPropertyChanged(nameof(ServicesSummary));
+            Services.CollectionChanged += OnServicesCollectionChanged;
             ServiceDetailItems = new ObservableCollection<InfoDetailItem>();
 
             // Initialize process management commands
@@ -334,8 +344,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             MonitorTabs.Clear();
             MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
             MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
-            MonitorTabs.Add(new MonitorTabItem(MonitorTab.StartupApps, "Startup Apps", "Apps that launch with Windows"));
-            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Services, "Services", "Registry-backed services and drivers"));
+            // StartupApps and Services removed - they have their own dedicated views in the sidebar
             SelectedTab = MonitorTabs.FirstOrDefault();
 
             ProcessCategories.Clear();
@@ -366,11 +375,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             PerformanceItems ??= new ObservableCollection<PerformanceItemViewModel>();
             PerformanceDetailItems ??= new ObservableCollection<PerformanceDetailItem>();
             DiskHealthItems ??= new ObservableCollection<DiskHealthItemViewModel>();
-            DiskHealthItems.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasDiskHealthItems));
+            DiskHealthItems.CollectionChanged += OnDiskHealthItemsCollectionChanged;
             StartupApps ??= new ObservableCollection<StartupAppEntry>();
-            StartupApps.CollectionChanged += (_, _) => OnPropertyChanged(nameof(StartupAppsSummary));
+            StartupApps.CollectionChanged += OnStartupAppsCollectionChanged;
             Services ??= new ObservableCollection<ServiceEntry>();
-            Services.CollectionChanged += (_, _) => OnPropertyChanged(nameof(ServicesSummary));
+            Services.CollectionChanged += OnServicesCollectionChanged;
             ServiceDetailItems ??= new ObservableCollection<InfoDetailItem>();
 
             // Initialize commands if they weren't created
@@ -399,8 +408,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
                 MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
-                MonitorTabs.Add(new MonitorTabItem(MonitorTab.StartupApps, "Startup Apps", "Apps that launch with Windows"));
-                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Services, "Services", "Registry-backed services and drivers"));
+                // StartupApps and Services removed - they have their own dedicated views
             }
 
             SelectedTab ??= MonitorTabs.FirstOrDefault();
@@ -426,12 +434,29 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         _isDisposed = true;
 
+        // Stop and unsubscribe timer
         if (_updateTimer != null)
         {
             _updateTimer.Stop();
             _updateTimer.Tick -= OnUpdateTick;
         }
 
+        // Unsubscribe collection changed events to prevent memory leaks
+        if (DiskHealthItems != null)
+            DiskHealthItems.CollectionChanged -= OnDiskHealthItemsCollectionChanged;
+        if (StartupApps != null)
+            StartupApps.CollectionChanged -= OnStartupAppsCollectionChanged;
+        if (Services != null)
+            Services.CollectionChanged -= OnServicesCollectionChanged;
+        MonitorSections.CollectionChanged -= OnMonitorSectionsChanged;
+
+        // Unsubscribe section property changed events
+        foreach (var section in MonitorSections)
+        {
+            section.PropertyChanged -= OnSectionLayoutChanged;
+        }
+
+        // Dispose monitors
         _metricProvider?.Dispose();
         _processMonitor?.Dispose();
         _networkMonitor?.Dispose();
@@ -909,6 +934,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private static List<StartupAppEntry> CollectStartupApps()
     {
         var items = new List<StartupAppEntry>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         var hkcuRunApproval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
         var hklmRunApproval = ReadStartupApproval(RegistryHive.LocalMachine, RegistryView.Default, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run");
         var hkcuRun32Approval = ReadStartupApproval(RegistryHive.CurrentUser, RegistryView.Registry32, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32");
@@ -919,43 +946,37 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run",
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
-            hkcuRunApproval);
+            hkcuRunApproval, seen);
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Registry32, "Current User", "Registry Run (32-bit)",
             @"Software\Microsoft\Windows\CurrentVersion\Run",
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32",
-            hkcuRun32Approval.Count > 0 ? hkcuRun32Approval : hkcuRunApproval);
+            hkcuRun32Approval.Count > 0 ? hkcuRun32Approval : hkcuRunApproval, seen);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry Run",
             @"Software\Microsoft\Windows\CurrentVersion\Run",
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run",
-            hklmRunApproval);
+            hklmRunApproval, seen);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Registry32, "All Users", "Registry Run (32-bit)",
             @"Software\Microsoft\Windows\CurrentVersion\Run",
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32",
-            hklmRun32Approval.Count > 0 ? hklmRun32Approval : hklmRunApproval);
+            hklmRun32Approval.Count > 0 ? hklmRun32Approval : hklmRunApproval, seen);
 
         AddStartupRunEntries(items, RegistryHive.CurrentUser, RegistryView.Default, "Current User", "Registry RunOnce",
             @"Software\Microsoft\Windows\CurrentVersion\RunOnce",
             null,
-            new Dictionary<string, bool?>());
+            new Dictionary<string, bool?>(), seen);
         AddStartupRunEntries(items, RegistryHive.LocalMachine, RegistryView.Default, "All Users", "Registry RunOnce",
             @"Software\Microsoft\Windows\CurrentVersion\RunOnce",
             null,
-            new Dictionary<string, bool?>());
+            new Dictionary<string, bool?>(), seen);
 
         AddStartupFolderEntries(items, Environment.SpecialFolder.Startup, "Current User", "Startup Folder",
             RegistryHive.CurrentUser, RegistryView.Default,
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
-            hkcuFolderApproval);
+            hkcuFolderApproval, seen);
         AddStartupFolderEntries(items, Environment.SpecialFolder.CommonStartup, "All Users", "Startup Folder",
             RegistryHive.LocalMachine, RegistryView.Default,
             @"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder",
-            hklmFolderApproval);
-
-        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var entry in items)
-        {
-            seen.Add(BuildStartupKey(entry.Name, entry.Command, entry.Location));
-        }
+            hklmFolderApproval, seen);
 
         AddStartupAppsFromWmi(items, seen);
 
@@ -973,7 +994,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         string source,
         string subKey,
         string? approvalKeyPath,
-        IReadOnlyDictionary<string, bool?> approvals)
+        IReadOnlyDictionary<string, bool?> approvals,
+        HashSet<string> seen)
     {
         try
         {
@@ -997,6 +1019,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     : true;
 
                 var executablePath = ExtractExecutablePath(rawValue);
+                var key = BuildStartupKey(valueName, rawValue, $"{hive}\\{subKey}");
+                if (!seen.Add(key))
+                {
+                    continue;
+                }
+
                 items.Add(new StartupAppEntry(
                     valueName,
                     rawValue,
@@ -1025,7 +1053,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         RegistryHive hive,
         RegistryView view,
         string approvalKeyPath,
-        IReadOnlyDictionary<string, bool?> approvals)
+        IReadOnlyDictionary<string, bool?> approvals,
+        HashSet<string> seen)
     {
         try
         {
@@ -1041,6 +1070,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 var enabled = approvals.TryGetValue(name, out var approval)
                     ? approval.GetValueOrDefault(true)
                     : true;
+                
+                var key = BuildStartupKey(name, path, folderPath);
+                if (!seen.Add(key))
+                {
+                    continue;
+                }
+
                 items.Add(new StartupAppEntry(
                     name,
                     path,
@@ -2792,105 +2828,79 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var items = new List<PerformanceItemViewModel>();
         var existing = PerformanceItems.ToDictionary(item => item.Key, item => item, StringComparer.OrdinalIgnoreCase);
 
+        // 1. CPU
         var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
-        var cpuItem = new PerformanceItemViewModel(
+        var cpuSubtitle = $"{CpuUsage:F0}% · {CpuTempText}";
+        // Simplified subtitle, detail panel has the rest.
+        
+        items.Add(new PerformanceItemViewModel(
             "cpu",
             PerformanceItemKind.Cpu,
             "CPU",
-            $"{CpuUsage:F0}% {cpuSpeedText}",
+            cpuSubtitle,
             null)
-        {
-            IsActive = true
-        };
-        items.Add(cpuItem);
+        { IsActive = true });
 
-        var memoryItem = new PerformanceItemViewModel(
+        // 2. Memory
+        items.Add(new PerformanceItemViewModel(
             "memory",
             PerformanceItemKind.Memory,
             "Memory",
-            $"{RamUsedGb:F1}/{RamTotalGb:F1} GB ({RamUsagePercent:F0}%)",
+            $"{RamUsagePercent:F0}% ({RamUsedGb:F1} GB)",
             null)
-        {
-            IsActive = true
-        };
-        items.Add(memoryItem);
+        { IsActive = true });
 
-        var diskSnapshots = _diskPerformanceSnapshots.Count > 0
-            ? _diskPerformanceSnapshots
-            : Disks.Select(disk => new DiskPerformanceSnapshot(
-                disk.DriveLetter,
-                null,
-                null,
-                null,
-                null,
-                disk.TotalSizeGb,
-                disk.FreeSpaceGb,
-                null,
-                disk.ReadMBps,
-                disk.WriteMBps,
-                null,
-                null,
-                false,
-                false)).ToList();
-
-        foreach (var disk in diskSnapshots)
-        {
-            var indexLabel = disk.DiskIndex.HasValue ? $"Disk {disk.DiskIndex.Value}" : "Disk";
-            var activityText = disk.ActiveTimePercent.HasValue
-                ? $"{disk.ActiveTimePercent.Value:F0}% active"
-                : $"{disk.ReadMbps.GetValueOrDefault():F1}/{disk.WriteMbps.GetValueOrDefault():F1} MB/s";
-            var typeText = string.Join(" · ",
-                new[]
-                {
-                    disk.MediaType,
-                    disk.BusType,
-                    disk.IsExternal == true ? "External" : null
-                }.Where(text => !string.IsNullOrWhiteSpace(text)));
-            var subtitle = string.IsNullOrWhiteSpace(typeText) ? activityText : $"{activityText} · {typeText}";
-            var isActive = (disk.ActiveTimePercent ?? 0) > 0.5
-                           || disk.ReadMbps.GetValueOrDefault() > 0.1
-                           || disk.WriteMbps.GetValueOrDefault() > 0.1;
-
-            items.Add(new PerformanceItemViewModel(
-                $"disk:{disk.DriveLetter}",
-                PerformanceItemKind.Disk,
-                $"{indexLabel} ({disk.DriveLetter})",
-                subtitle,
-                disk.DriveLetter)
-            {
-                IsActive = isActive
-            });
-        }
-
-        foreach (var adapter in NetworkAdapters)
-        {
-            var speedText = $"{adapter.SendMbps:F1}↑ {adapter.ReceiveMbps:F1}↓ Mbps";
-            var statusText = string.IsNullOrWhiteSpace(adapter.StatusText)
-                ? adapter.IsUp ? "Connected" : "Disconnected"
-                : adapter.StatusText;
-            var subtitle = adapter.IsActive ? speedText : $"{statusText} · {speedText}";
-            items.Add(new PerformanceItemViewModel(
-                $"net:{adapter.AdapterId}",
-                PerformanceItemKind.Network,
-                adapter.Name,
-                subtitle,
-                adapter.AdapterId)
-            {
-                IsActive = adapter.IsActive
-            });
-        }
-
-        var gpuItem = new PerformanceItemViewModel(
+        // 3. GPU
+        var gpuSubtitle = $"{GpuUsage:F0}% · {GpuTempText}";
+        
+        items.Add(new PerformanceItemViewModel(
             "gpu",
             PerformanceItemKind.Gpu,
             "GPU",
-            $"{GpuUsage:F0}% {GpuTempText}",
+            gpuSubtitle,
             null)
-        {
-            IsActive = true
-        };
-        items.Add(gpuItem);
+        { IsActive = true });
 
+        // 4. Storage (Summary)
+        // Find most active disk for subtitle
+        var maxActiveDisk = _diskPerformanceSnapshots.OrderByDescending(d => d.ActiveTimePercent ?? 0).FirstOrDefault();
+        var storageSubtitle = "Idle";
+        if (maxActiveDisk != null && maxActiveDisk.ActiveTimePercent > 0)
+        {
+             storageSubtitle = $"{maxActiveDisk.ActiveTimePercent:F0}% ({maxActiveDisk.DriveLetter})";
+        }
+        else if (_diskPerformanceSnapshots.Count > 0)
+        {
+            var totalRead = _diskPerformanceSnapshots.Sum(d => d.ReadMbps ?? 0);
+            var totalWrite = _diskPerformanceSnapshots.Sum(d => d.WriteMbps ?? 0);
+            if (totalRead > 0.1 || totalWrite > 0.1)
+            {
+               storageSubtitle = $"{totalRead:F1}/{totalWrite:F1} MB/s";
+            }
+        }
+            
+        items.Add(new PerformanceItemViewModel(
+            "disk",
+            PerformanceItemKind.Disk,
+            "Storage",
+            storageSubtitle,
+            null) 
+        { IsActive = true });
+
+        // 5. Network (Summary)
+        var totalDown = NetworkAdapters.Sum(a => a.ReceiveMbps);
+        var totalUp = NetworkAdapters.Sum(a => a.SendMbps);
+        var netSubtitle = $"{totalDown:F1} ↓ / {totalUp:F1} ↑ Mbps";
+
+        items.Add(new PerformanceItemViewModel(
+            "net",
+            PerformanceItemKind.Network,
+            "Network",
+            netSubtitle,
+            null) 
+        { IsActive = true });
+
+        // Sync Collection
         PerformanceItems.Clear();
         foreach (var item in items)
         {
@@ -2898,6 +2908,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 cached.Title = item.Title;
                 cached.Subtitle = item.Subtitle;
+                cached.IsActive = item.IsActive; 
                 PerformanceItems.Add(cached);
             }
             else
@@ -2911,6 +2922,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         if (nextSelection != SelectedPerformanceItem)
         {
             SelectedPerformanceItem = nextSelection;
+        }
+        
+        // Ensure valid selection if none
+        if (SelectedPerformanceItem == null && PerformanceItems.Count > 0)
+        {
+            SelectedPerformanceItem = PerformanceItems[0];
         }
     }
 
@@ -2983,31 +3000,26 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Active time", FormatPercent(perf.ActiveTimePercent)));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Average response", FormatMs(perf.AvgResponseMs)));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Queue length", FormatNumber(perf.QueueLength)));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Read", FormatMbps(perf.ReadMbps)));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Write", FormatMbps(perf.WriteMbps)));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Capacity", $"{perf.TotalSizeGb:F1} GB"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("System disk", perf.IsSystemDisk ? "Yes" : "No"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Page file", perf.HasPageFile ? "Yes" : "No"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Type", perf.MediaType ?? "Unknown"));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Model", FormatText(perf.Model)));
-                    var busText = !string.IsNullOrWhiteSpace(perf.BusType) ? perf.BusType : perf.InterfaceType;
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Bus", FormatText(busText)));
-                    if (perf.IsExternal.HasValue)
-                    {
-                        PerformanceDetailItems.Add(new PerformanceDetailItem("Location", perf.IsExternal.Value ? "External" : "Internal"));
-                    }
                 }
-                else
+                
+                // General Disk Health (if available) - showing global status for now as per previous UI
+                if (!string.IsNullOrWhiteSpace(DiskHealthText) && DiskHealthText != "N/A")
                 {
-                    var fallback = Disks.FirstOrDefault(d => d.DriveLetter.Equals(drive, StringComparison.OrdinalIgnoreCase));
-                    if (fallback != null)
-                    {
-                        PerformanceDetailItems.Add(new PerformanceDetailItem("Read", $"{fallback.ReadMBps:F1} MB/s"));
-                        PerformanceDetailItems.Add(new PerformanceDetailItem("Write", $"{fallback.WriteMBps:F1} MB/s"));
-                        PerformanceDetailItems.Add(new PerformanceDetailItem("Capacity", $"{fallback.TotalSizeGb:F1} GB"));
-                        PerformanceDetailItems.Add(new PerformanceDetailItem("Free space", $"{fallback.FreeSpaceGb:F1} GB"));
-                    }
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Overall Health", DiskHealthText));
+                }
+                
+                // Compact list of all disks
+                PerformanceDetailItems.Add(new PerformanceDetailItem("", "")); // Spacer
+                PerformanceDetailItems.Add(new PerformanceDetailItem("All Disks", "Activity"));
+                foreach (var d in _diskPerformanceSnapshots)
+                {
+                   var activity = d.ActiveTimePercent.HasValue ? $"{d.ActiveTimePercent:F0}%" : "0%";
+                   var rw = $"{d.ReadMbps.GetValueOrDefault():F1}/{d.WriteMbps.GetValueOrDefault():F1} MB/s";
+                   PerformanceDetailItems.Add(new PerformanceDetailItem($"{d.DriveLetter} ({d.DriveLetter})", $"{activity} · {rw}"));
                 }
                 break;
             }
@@ -3032,11 +3044,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Send", $"{adapter.SendMbps:F1} Mbps"));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Receive", $"{adapter.ReceiveMbps:F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("IPv4", string.IsNullOrWhiteSpace(adapter.Ipv4Address) ? "N/A" : adapter.Ipv4Address));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Link speed", adapter.LinkSpeedMbps > 0 ? $"{adapter.LinkSpeedMbps:F0} Mbps" : "N/A"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("IPv4 address", string.IsNullOrWhiteSpace(adapter.Ipv4Address) ? "N/A" : adapter.Ipv4Address));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("IPv6 address", string.IsNullOrWhiteSpace(adapter.Ipv6Address) ? "N/A" : adapter.Ipv6Address));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter type", adapter.Type));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter", FormatText(string.IsNullOrWhiteSpace(adapter.Description) ? adapter.Name : adapter.Description)));
+                }
+                
+                // Compact list of all adapters
+                PerformanceDetailItems.Add(new PerformanceDetailItem("", "")); // Spacer
+                PerformanceDetailItems.Add(new PerformanceDetailItem("All Adapters", "D/U Mbps"));
+                foreach (var a in NetworkAdapters)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem(a.Name, $"{a.ReceiveMbps:F1} ↓ / {a.SendMbps:F1} ↑"));
                 }
                 break;
             }
@@ -3048,8 +3065,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformancePrimaryLabel = "Usage %";
                 PerformanceSecondaryLabel = string.Empty;
                 PerformanceHistoryScaleMax = 100;
+                
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Usage", $"{GpuUsage:F0}%"));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Temperature", GpuTempText));
+                if (HasGpuPower) PerformanceDetailItems.Add(new PerformanceDetailItem("Power", GpuPowerText));
+                if (HasGpuVoltage) PerformanceDetailItems.Add(new PerformanceDetailItem("Voltage", GpuVoltageText));
+                if (HasGpuFan) PerformanceDetailItems.Add(new PerformanceDetailItem("Fan speed", GpuFanRpmText));
+                if (HasGpuHotspotTemp) PerformanceDetailItems.Add(new PerformanceDetailItem("Hotspot", GpuHotspotTempText));
+                if (HasGpuCoreClock) PerformanceDetailItems.Add(new PerformanceDetailItem("Core Clock", GpuCoreClockText));
+                if (HasGpuMemoryClock) PerformanceDetailItems.Add(new PerformanceDetailItem("Memory Clock", GpuMemoryClockText));
+
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Memory", GpuMemoryUsageText));
                 var dedicatedMb = _gpuPerformanceSnapshot.DedicatedMemoryMb;
                 if (GpuMemoryTotalMb > 0 && (!dedicatedMb.HasValue || dedicatedMb.Value < GpuMemoryTotalMb * 0.8))
@@ -3342,23 +3367,56 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private void UpdatePerformancePrimaryItems()
     {
+        // 1. CPU
         var cpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "cpu");
         if (cpuItem != null)
         {
-            var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
-            cpuItem.Subtitle = $"{CpuUsage:F0}% {cpuSpeedText}";
+            cpuItem.Subtitle = $"{CpuUsage:F0}% · {CpuTempText}";
         }
 
+        // 2. Memory
         var memoryItem = PerformanceItems.FirstOrDefault(item => item.Key == "memory");
         if (memoryItem != null)
         {
-            memoryItem.Subtitle = $"{RamUsedGb:F1}/{RamTotalGb:F1} GB ({RamUsagePercent:F0}%)";
+            memoryItem.Subtitle = $"{RamUsagePercent:F0}% ({RamUsedGb:F1} GB)";
         }
 
+        // 3. GPU
         var gpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "gpu");
         if (gpuItem != null)
         {
-            gpuItem.Subtitle = $"{GpuUsage:F0}% {GpuTempText}";
+             gpuItem.Subtitle = $"{GpuUsage:F0}% · {GpuTempText}";
+        }
+
+        // 4. Storage (Summary)
+        var diskItem = PerformanceItems.FirstOrDefault(item => item.Key == "disk");
+        if (diskItem != null)
+        {
+            var maxActiveDisk = _diskPerformanceSnapshots.OrderByDescending(d => d.ActiveTimePercent ?? 0).FirstOrDefault();
+            var storageSubtitle = "Idle";
+            if (maxActiveDisk != null && maxActiveDisk.ActiveTimePercent > 0)
+            {
+                 storageSubtitle = $"{maxActiveDisk.ActiveTimePercent:F0}% ({maxActiveDisk.DriveLetter})";
+            }
+            else if (_diskPerformanceSnapshots.Count > 0)
+            {
+                var totalRead = _diskPerformanceSnapshots.Sum(d => d.ReadMbps ?? 0);
+                var totalWrite = _diskPerformanceSnapshots.Sum(d => d.WriteMbps ?? 0);
+                if (totalRead > 0.1 || totalWrite > 0.1)
+                {
+                   storageSubtitle = $"{totalRead:F1}/{totalWrite:F1} MB/s";
+                }
+            }
+            diskItem.Subtitle = storageSubtitle;
+        }
+
+        // 5. Network (Summary)
+        var netItem = PerformanceItems.FirstOrDefault(item => item.Key == "net");
+        if (netItem != null)
+        {
+            var totalDown = NetworkAdapters.Sum(a => a.ReceiveMbps);
+            var totalUp = NetworkAdapters.Sum(a => a.SendMbps);
+            netItem.Subtitle = $"{totalDown:F1} ↓ / {totalUp:F1} ↑ Mbps";
         }
     }
 

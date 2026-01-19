@@ -75,7 +75,7 @@
                                         <TextBlock Text="{Binding Name, Converter={StaticResource FirstCharConverter}}"
                                                    FontSize="24"
                                                    FontWeight="Bold"
-                                                   Foreground="White"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                    HorizontalAlignment="Center"
                                                    VerticalAlignment="Center"/>
                                     </Border>
@@ -93,7 +93,7 @@
                                                 <TextBlock Text="{Binding Level}"
                                                            FontSize="10"
                                                            FontWeight="Medium"
-                                                           Foreground="White"/>
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             </Border>
                                             <TextBlock Text="{Binding Category}"
                                                        FontSize="11"

@@ -16,6 +16,8 @@ public partial class App : Application
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+        CrashReportService.Initialize(); // Initialize crash reporter first
+        
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
@@ -66,6 +68,8 @@ public partial class App : Application
         {
             splash?.Close();
             AppDiagnostics.LogException("Startup sequence failed", ex);
+            _ = CrashReportService.LogCrashAsync(ex, "Startup", true);
+
 
             if (MainWindow == null)
             {
@@ -110,13 +114,14 @@ public partial class App : Application
     private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         AppDiagnostics.LogException("DispatcherUnhandledException", e.Exception);
+        _ = CrashReportService.LogCrashAsync(e.Exception, "DispatcherUnhandledException", false);
 
         if (Interlocked.Exchange(ref _dispatcherErrorDialogShown, 1) == 0)
         {
             try
             {
                 MessageBox.Show(
-                    $"Unexpected error: {e.Exception.Message}\n\nDetails were written to %TEMP%\\WindowsOptimizer_Debug.log",
+                    $"Unexpected error: {e.Exception.Message}\n\nDetails were written to %TEMP%\\WindowsOptimizer_Debug.log and CrashLogs.",
                     "Windows Optimizer",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);

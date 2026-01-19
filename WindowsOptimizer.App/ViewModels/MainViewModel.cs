@@ -23,6 +23,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
     private readonly IRollbackStateStore _rollbackStore;
     private TweaksViewModel? _tweaksViewModel;
+    private DashboardViewModel? _dashboardViewModel;
+    private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
 
     // Tray tooltip binding properties
     private int _optimizationScore;
@@ -86,32 +88,32 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
+        
+        var bloatware = new BloatwareViewModel();
+        var startup = new StartupViewModel();
+        var presets = new PresetsViewModel();
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
             new("dashboard", "Dashboard", "📊", dashboard),
             new("tweaks", "Tweaks", "⚙️", tweaks),
             new("monitor", "Monitor", "📈", monitor),
+            new("apps", "Apps", "📦", bloatware),
+            new("startup", "Startup", "🚀", startup),
+            // new("presets", "Presets", "📑", presets), // Keeping presets hidden for now as it duplicates Tweaks logic maybe? No, let's add it.
+            new("presets", "Presets", "📑", presets),
             new("settings", "Settings", "⚡", settings),
             new("about", "About", "ℹ️", about)
         };
 
+        // Store reference for disposal
+        _dashboardViewModel = dashboard;
+
         // Link Health Score + Counts (live from Tweaks)
-        void SyncDashboardHealth()
-        {
-            dashboard.TotalTweaksAvailable = tweaks.Tweaks.Count;
-            dashboard.TweaksApplied = tweaks.ScorableTweaksApplied;
-            dashboard.HealthTweaksTotal = tweaks.ScorableTweaksMeasuredTotal;
-            dashboard.HealthTweaksApplied = tweaks.ScorableTweaksApplied;
-            dashboard.OptimizationScore = tweaks.GlobalOptimizationScore;
+        SyncDashboardHealth();
 
-            // Sync for tray tooltip
-            OptimizationScore = tweaks.GlobalOptimizationScore;
-            TweaksApplied = tweaks.ScorableTweaksApplied;
-            TotalTweaksAvailable = tweaks.Tweaks.Count;
-        }
-
-        tweaks.PropertyChanged += (s, e) =>
+        // Named handler for proper unsubscription
+        _tweaksPropertyChangedHandler = (s, e) =>
         {
             if (e.PropertyName is nameof(TweaksViewModel.GlobalOptimizationScore)
                 or nameof(TweaksViewModel.ScorableTweaksMeasuredTotal)
@@ -120,7 +122,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                 SyncDashboardHealth();
             }
         };
-        SyncDashboardHealth();
+        tweaks.PropertyChanged += _tweaksPropertyChangedHandler;
 
         SelectedNavigationItem = NavigationItems[0];
 
@@ -163,16 +165,60 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
 
-        // Initialize Intelligence
-        Task.Run(InitializeIntelligenceAsync);
+        // Initialize Intelligence with error handling
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await InitializeIntelligenceAsync();
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"Intelligence initialization failed: {ex.Message}");
+            }
+        });
 
-        // Check for pending rollbacks from previous crashes
-        Task.Run(CheckPendingRollbacksAsync);
+        // Check for pending rollbacks from previous crashes with error handling
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await CheckPendingRollbacksAsync();
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"Pending rollback check failed: {ex.Message}");
+            }
+        });
 
+    }
+
+    private void SyncDashboardHealth()
+    {
+        if (_tweaksViewModel == null || _dashboardViewModel == null)
+            return;
+
+        _dashboardViewModel.TotalTweaksAvailable = _tweaksViewModel.Tweaks.Count;
+        _dashboardViewModel.TweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
+        _dashboardViewModel.HealthTweaksTotal = _tweaksViewModel.ScorableTweaksMeasuredTotal;
+        _dashboardViewModel.HealthTweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
+        _dashboardViewModel.OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
+
+        // Sync for tray tooltip
+        OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
+        TweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
+        TotalTweaksAvailable = _tweaksViewModel.Tweaks.Count;
     }
 
     public void Dispose()
     {
+        // Unsubscribe event handlers to prevent memory leaks
+        if (_tweaksViewModel != null && _tweaksPropertyChangedHandler != null)
+        {
+            _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
+        }
+
+        // Dispose all view models
         foreach (var item in NavigationItems)
         {
             if (item.ViewModel is IDisposable disposable)

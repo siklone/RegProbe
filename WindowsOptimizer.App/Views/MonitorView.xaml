@@ -507,7 +507,7 @@
         </Style>
 
         <Style x:Key="LayoutScrimButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#99000000"/>
+            <Setter Property="Background" Value="{DynamicResource ScrimOverlayBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Opacity" Value="0"/>
             <Setter Property="Focusable" Value="False"/>
@@ -698,7 +698,7 @@
                              ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal"/>
+                                <UniformGrid Columns="2"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemContainerStyle>
@@ -811,25 +811,27 @@
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        Margin="0,0,0,10"/>
-                            <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Margin="0,0,0,6">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="160"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding Label}"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                            <TextBlock Grid.Column="1"
-                                                       Text="{Binding Value}"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="300">
+                                <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,0,0,6">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="160"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Label}"
+                                                           FontSize="11"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding Value}"
+                                                           FontSize="11"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -1028,127 +1030,7 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Network Throughput Card -->
-                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Network Throughput" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="Down " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding NetworkDownloadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                            <Run Text=" Mbps" FontSize="10"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Up " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding NetworkUploadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                            <Run Text=" Mbps" FontSize="10"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- Disk I/O Card -->
-                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Disk I/O" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <StackPanel>
-                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                                <Run Text="Read " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                <Run Text="{Binding DiskReadNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                                <Run Text=" MB/s" FontSize="10"/>
-                            </TextBlock>
-                            <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                                <Run Text="Write " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                <Run Text="{Binding DiskWriteNow, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                                <Run Text=" MB/s" FontSize="10"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-
-                <!-- Latency Card -->
-                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Latency (ms)" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="{Binding GatewayLatencyLabel, Mode=OneWay}" Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text=" " />
-                            <Run Text="{Binding GatewayLatencyText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Cloudflare (1.1.1.1)" Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text=" " />
-                            <Run Text="{Binding CloudflareLatencyText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Google (8.8.8.8)" Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text=" " />
-                            <Run Text="{Binding GoogleLatencyText, Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- Wi-Fi Signal Card -->
-                <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Wi-Fi Signal" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="{Binding WifiSignalText}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource AccentBlueBrush}"
-                                   Margin="0,0,0,4"/>
-                        <TextBlock Text="{Binding WifiSignalDetail}"
-                                   FontSize="10"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                   TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- CPU Power & Voltage Card -->
-                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StatCardStyle}"
-                        ToolTip="CPU power consumption and voltage from LibreHardwareMonitor sensors.">
-                    <StackPanel>
-                        <TextBlock Text="CPU Power / Voltage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="Power " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding CpuPowerText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Voltage " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding CpuVoltageText, Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- GPU Power & Voltage Card -->
-                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StatCardStyle}"
-                        ToolTip="GPU power consumption and voltage from LibreHardwareMonitor sensors.">
-                    <StackPanel>
-                        <TextBlock Text="GPU Power / Voltage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="Power " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuPowerText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Voltage " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuVoltageText, Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- GPU Hotspot Temperature Card -->
-                <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource StatCardStyle}"
-                        ToolTip="GPU hotspot (junction) temperature - the hottest point on the GPU die.">
-                    <StackPanel>
-                        <TextBlock Text="GPU Hotspot" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="{Binding GpuHotspotTempText}"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource DangerBrush}"
-                                   Margin="0,0,0,4"/>
-                        <TextBlock Text="Junction Temperature"
-                                   FontSize="10"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
-                    </StackPanel>
-                </Border>
+                <!-- Duplicate cards removed (consolidated into Details panel) -->
 
                 <!-- GPU Clocks Card -->
                 <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource StatCardStyle}"
