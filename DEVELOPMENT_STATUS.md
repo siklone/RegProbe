@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** January 4, 2026
+**Last Updated:** January 19, 2026
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -959,6 +959,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ## 📝 Todo & Roadmap
 
+> **Note:** A comprehensive development roadmap (v2.1) has been approved and documented in [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md). The roadmap covers major architectural improvements including Single Instance enforcement, Multi-threaded architecture, Hardware Database, Monitor View redesign, and Process Management enhancements.
+
 ### High Priority (Critical for Stability)
 
 - [ ] **Fix Network Adapter Monitoring**
@@ -1093,6 +1095,7 @@ Key recent commits (not exhaustive):
 
 - [README.md](README.md) - Project overview and features
 - [ARCHITECTURE.md](ARCHITECTURE.md) - System architecture
+- [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md) - **NEW** Approved v2.1 roadmap for major features
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 - [HANDOFF_REPORT.md](HANDOFF_REPORT.md) - Previous development handoff
 - [Docs/tweaks/tweak-catalog.md](Docs/tweaks/tweak-catalog.md) - Generated tweak catalog with source/doc links

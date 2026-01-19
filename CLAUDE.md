@@ -1,14 +1,17 @@
 # Claude Notes (Windows Optimizer)
 
-**Last Updated:** 2026-01-03  
+**Last Updated:** 2026-01-19
 **Branch:** `main`
 
 Start with:
-- `HANDOFF_REPORT.md` (what changed recently + what’s incomplete)
+- `HANDOFF_REPORT.md` (what changed recently + what's incomplete)
 - `DEVELOPMENT_STATUS.md` (known issues + recent fixes)
+- `DEVELOPMENT_ROADMAP.md` (approved v2.1 roadmap for major features)
 - `AGENTS.md` (non-negotiable safety/architecture rules)
 
-Current focus (2026-01-03):
+Current focus (2026-01-19):
+- **NEW: Development Roadmap v2.1** approved and documented in `DEVELOPMENT_ROADMAP.md`
+- Roadmap includes: Single Instance, Multi-threading, Splash Preloading, Hardware Database, Monitor Redesign, Process Management
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
@@ -24,7 +27,14 @@ Current focus (2026-01-03):
 - Monitor disk health list + Sensor Diagnostics export + optional shadow toggle (default OFF) to help isolate missing SMART/fan data and reduce scroll jank.
 - Sensor coverage: CPU temp/fan fallbacks and disk health WMI fallbacks; Tweaks list caching to reduce scroll lag.
 - Packaging: `scripts/package_windows.cmd` builds a self-contained zip for Windows testing (ReadyToRun disabled by default; pass `-ReadyToRun` if you want it).
-- Next: verify light theme + startup flicker, and migrate remaining legacy tweaks into category providers.
+
+Next Steps (from Roadmap):
+- Sprint 1: Single Instance Manager + MetricDataBus + Threading Architecture
+- Sprint 2: Hardware Database (SQLite) + Fallback Data Providers
+- Sprint 3: Splash Screen Preloading improvements
+- Sprint 4: Monitor View Redesign with Hardware Cards
+- Sprint 5: Process Management (Priority, Affinity, Memory Trim)
+- Sprint 6: Polish and Testing
 
 Agent checks requested:
 - Verify no dark→light flicker on startup (splash + main).
