@@ -61,6 +61,116 @@ Agent checks requested:
 
 - SAFE tweaks must be reversible: Detect → Apply → Verify → Rollback
 - Default behavior is Preview/DryRun; never apply changes automatically
-- Do NOT add “disable Defender/Firewall/SmartScreen” under SAFE
+- Do NOT add "disable Defender/Firewall/SmartScreen" under SAFE
 - Admin-required operations must run via ElevatedHost (separate process)
 - All actions must be logged; logs must be exportable
+
+---
+
+## Agent Collaboration Rules
+
+**IMPORTANT: All AI agents (Claude, Copilot, Codex, Cursor, etc.) MUST follow these rules.**
+
+### 1. Before Starting Work
+1. Read `DEVELOPMENT_ROADMAP.md` for the implementation plan
+2. Read `AGENTS.md` for safety rules (DO NOT BREAK!)
+3. Check `DEVELOPMENT_STATUS.md` for known issues
+
+### 2. Commit Rules (MANDATORY)
+
+Every commit MUST include `Co-Authored-By` with your agent name:
+
+```bash
+git commit -m "feat/fix/refactor(scope): Description
+
+Co-Authored-By: [YOUR_AGENT_NAME] <email>"
+```
+
+**Agent Names to Use:**
+| Agent | Co-Authored-By Line |
+|-------|---------------------|
+| Claude Opus | `Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>` |
+| Claude Sonnet | `Co-Authored-By: Claude Sonnet <noreply@anthropic.com>` |
+| GitHub Copilot | `Co-Authored-By: GitHub Copilot <noreply@github.com>` |
+| OpenAI Codex | `Co-Authored-By: OpenAI Codex <noreply@openai.com>` |
+| Cursor AI | `Co-Authored-By: Cursor AI <noreply@cursor.com>` |
+| Other | `Co-Authored-By: [Agent Name] <noreply@example.com>` |
+
+### 3. After Each Progress
+
+1. **Commit your code changes:**
+   ```bash
+   git add [changed files]
+   git commit -m "feat(scope): What you did
+
+   Co-Authored-By: [Your Agent] <email>"
+   ```
+
+2. **Update documentation:**
+   - Add your changes to `DEVELOPMENT_STATUS.md` under "Recent Fixes & Changes"
+   - Update `CLAUDE.md` "Current focus" if needed
+
+3. **Commit documentation:**
+   ```bash
+   git add DEVELOPMENT_STATUS.md CLAUDE.md
+   git commit -m "docs: Update status with [feature/fix]
+
+   Co-Authored-By: [Your Agent] <email>"
+   ```
+
+4. **Push to remote:**
+   ```bash
+   git push origin [branch-name]
+   ```
+
+### 4. If You Find a Bug
+
+1. Document it in `DEVELOPMENT_STATUS.md` under "Known Issues"
+2. Include severity, affected files, and reproduction steps
+3. Commit with your agent name
+
+### 5. Sprint Assignment
+
+Work on sprints from `DEVELOPMENT_ROADMAP.md`:
+- **Sprint 1:** Single Instance + MetricDataBus + Threading
+- **Sprint 2:** Hardware Database (SQLite) + Fallback Providers
+- **Sprint 3:** Splash Screen Preloading
+- **Sprint 4:** Monitor View Redesign
+- **Sprint 5:** Process Management
+- **Sprint 6:** Polish & Testing
+
+### 6. Code Quality
+
+- Run `dotnet build` before committing - don't break the build!
+- Follow existing code patterns in the codebase
+- Use roadmap code examples as reference, not copy-paste
+- Write testable code
+
+---
+
+**Example Workflow:**
+```bash
+# 1. Implement SingleInstanceManager
+# ... write code ...
+
+# 2. Commit code
+git add WindowsOptimizer.App/Services/SingleInstanceManager.cs
+git commit -m "feat(app): Add SingleInstanceManager with Mutex + IPC
+
+- Implement named mutex for single instance enforcement
+- Add Named Pipe IPC for argument forwarding
+- Handle abandoned mutex edge case
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+
+# 3. Update docs
+# ... edit DEVELOPMENT_STATUS.md ...
+
+git add DEVELOPMENT_STATUS.md
+git commit -m "docs: Add SingleInstanceManager to recent changes
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+
+# 4. Push
+git push origin sprint0/solution-skeleton
+```
