@@ -263,6 +263,18 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.12 Monitor Motherboard Card (Commit: pending)
+**Improvement:** Added a motherboard hardware card to the Monitor page.
+
+**Modified Files:**
+- `WindowsOptimizer.App/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Card initialization and disposal.
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Motherboard card UI.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
