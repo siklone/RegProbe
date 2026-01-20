@@ -205,6 +205,7 @@ var result = await preloader.RunAllAsync(ct);
 - `WindowsOptimizer.Infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
 - `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecs.cs` - Specs models
 - `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
+- `WindowsOptimizer.Infrastructure/Hardware/hardware-seed.json` - Seed data (embedded)
 
 **Modified Files:**
 - `WindowsOptimizer.Infrastructure/AppPaths.cs` - Hardware DB path
@@ -217,6 +218,7 @@ var result = await preloader.RunAllAsync(ct);
 - Hardware DB schema created on startup under app data
 - Fallback specs resolution (DB -> identity) for CPU/GPU cards
 - Cards show DB-backed subtitles and mark `HasSpecs` when matched
+- Seed data importer with versioned updates via embedded JSON
 
 **Status:** ?. **IMPLEMENTED** - DB population/update pending
 
