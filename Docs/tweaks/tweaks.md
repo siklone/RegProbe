@@ -30,7 +30,7 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="system-check-disk-health"></a> `system-check-disk-health` | Check Disk Health (C:) | Performs a read-only check of the C: drive for file system errors without making any changes. Provides information about disk health and... | Safe | `WindowsOptimizer.Engine/Tweaks/Commands/System/CheckDiskHealthTweak.cs#L13` |
+| <a id="system-check-disk-health"></a> `system-check-disk-health` | Check Disk Health (C:) | Performs a read-only check of the C: drive for file system errors without making any changes. Provides information about disk health and... | Safe | `WindowsOptimizer.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L13` |
 <!-- TWEAK INDEX END -->
 
 `).

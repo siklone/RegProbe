@@ -35,6 +35,7 @@ Current focus (2026-01-20):
 - Monitor cards now surface live RAM used/free and storage read/write summary lines under the primary value.
 - Motherboard detail window now loads specs and can be opened from the Dashboard.
 - Monitor now includes a Motherboard hardware card with optional PCIe/M.2/SATA/USB/LAN/WiFi details when available.
+- Tweak catalog/details and doc indexes regenerated; source links validated against current providers.
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.

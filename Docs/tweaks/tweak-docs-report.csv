@@ -1,277 +1,240 @@
 id,name,docs,docs_exists,docs_anchor,details_anchor,catalog_anchor,source
-audio.disable-beep,Disable System Beep,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs#L22
-audio.disable-ducking,Disable Audio Ducking,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L398
-audio.disable-spatial-audio,Disable Spatial Audio,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L431
-audio.disable-system-sounds,Disable System Sounds,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L441
-audio.show-disconnected-devices,Show Disconnected Audio Devices,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L420
-audio.show-hidden-devices,Show Hidden Audio Devices,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L409
-cleanup.background-history,Clear Wallpaper History,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearBackgroundHistoryTweak.cs#L14
-cleanup.component-store,Cleanup Component Store,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/CleanupComponentStoreTweak.cs#L14
-cleanup.delivery-optimization,Clear Delivery Optimization Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearDeliveryOptimizationFilesTweak.cs#L14
-cleanup.directx-shader-cache,Clear DirectX Shader Cache,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs#L11
-cleanup.disable-reserved-storage,Disable Reserved Storage,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs#L14
-cleanup.eventlog-{logName.ToLowerInvariant()},Clear {logName} Event Log,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs#L15
-cleanup.font-cache,Clear Font Cache,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearFontCacheTweak.cs#L14
-cleanup.internet-temp-files,Clear Temporary Internet Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearTemporaryInternetFilesTweak.cs#L11
-cleanup.memory-dumps,Clear Memory Dump Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs#L11
-cleanup.prefetch-files,Clear Prefetch Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearPrefetchFilesTweak.cs#L11
-cleanup.product-key,Remove Product Key from Registry,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/RemoveProductKeyTweak.cs#L14
-cleanup.recycle-bin,Empty Recycle Bin,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearRecycleBinTweak.cs#L14
-cleanup.shadow-copies,Clear Shadow Copies,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearShadowCopiesTweak.cs#L14
-cleanup.srum-data,Clear SRUM Database,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearSRUMDataTweak.cs#L11
-cleanup.temp-files,Clear Temporary Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs#L11
-cleanup.thumbnail-cache,Clear Thumbnail Cache,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearThumbnailCacheTweak.cs#L11
-cleanup.wer-files,Clear Windows Error Reporting Files,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs#L11
-cleanup.windows-old,Delete Windows.old Folder,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs#L11
-cleanup.windows-update-cache,Clear Windows Update Cache,Docs/cleanup/cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs#L11
-explorer.disable-compact-mode,Enable Compact View,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L57
-explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L110
-explorer.disable-taskbar-chat,Disable Taskbar Chat Icon,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L84
-explorer.disable-taskbar-widgets,Disable Taskbar Widgets Icon,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L97
-explorer.show-file-extensions,Show File Extensions,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L31
-explorer.show-full-path,Show Full Path in Title Bar,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L44
-explorer.show-hidden-files,Show Hidden Files and Folders,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L18
-explorer.taskbar-alignment-left,Align Taskbar to Left,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs#L71
-misc.disable-edge-features,Disable Microsoft Edge Features,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs#L88
-misc.disable-office-telemetry,Disable Microsoft Office Telemetry,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs#L51
-misc.disable-onedrive,Disable OneDrive,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/DisableOneDriveTweaks.cs#L36
-misc.disable-search-web-results,Disable Search Web Results,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/MiscTweakProvider.cs#L44
-misc.disable-visual-studio-telemetry,Disable Visual Studio Telemetry,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs#L37
-misc.notepadplusplus-default-editor,Set Notepad++ as Default Editor,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/SetNotepadPlusPlusDefaultEditorTweak.cs#L22
-misc.optimize-7zip-settings,Optimize 7-Zip Context Menu Settings,Docs/misc/misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Misc/SevenZipSettingsTweak.cs#L54
-network.disable-active-probing,Disable Active Probing,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L902
-network.disable-default-shares,Disable Default Shares,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L713
-network.disable-ipv6,Disable IPv6,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L64
-network.disable-llmnr,Disable LLMNR,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L844
-network.disable-lltd,Disable Network Discovery (LLTD),Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L884
-network.disable-mdns,Disable mDNS,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L854
-network.disable-netbios,Disable NetBIOS over TCP/IP,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L76
-network.disable-netbios-resolution,Disable NetBIOS Name Resolution,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L864
-network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L944
-network.disable-smart-name-resolution,Disable Smart Multi-Homed Name Resolution,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L874
-network.disable-smb1,Disable SMBv1,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L723
-network.disable-smb2,Disable SMBv2/SMBv3,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L733
-network.disable-wifi-sense,Disable Wi-Fi Sense,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L88
-network.enable-lltd-responder,Enable LLTD Responder,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L31
-network.enable-lltdio,Enable LLTD Mapper I/O,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L19
-network.flush-dns-cache,Flush DNS Cache,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Network/FlushDnsCacheTweak.cs#L13
-network.optimize-smb,Optimize SMB Performance,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs#L44
-network.prefer-ipv4,Prefer IPv4 over IPv6,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L914
-network.require-ntlmv2-session-security,Require NTLMv2 Session Security,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L954
-network.reset-winsock,Reset Winsock Catalog,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs#L13
-network.smb-disable-bandwidth-throttling,SMB: Disable Bandwidth Throttling,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L587
-network.smb-disable-leasing,SMB: Disable Leasing,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L651
-network.smb-enable-large-mtu,SMB: Enable Large MTU,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L597
-network.smb-enable-multichannel,SMB: Enable Multichannel,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L661
-network.smb-enable-quic,SMB: Enable QUIC,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L671
-network.smb-encrypt-data,SMB: Require Encryption,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L631
-network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L641
-network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L681
-network.smb-require-signing-client,SMB: Require Client Signing,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L607
-network.smb-require-signing-server,SMB: Require Server Signing,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L619
-network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs/network/network.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L693
-notifications.disable-feedback-frequency,Disable Feedback Requests,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L218
-notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L205
-notifications.disable-lockscreen-toast,Disable Lock Screen Toast Notifications,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L126
-notifications.disable-mirroring,Disable Notification Mirroring,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L148
-notifications.disable-tile,Disable Tile Notifications,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L137
-notifications.disable-toast,Disable Toast Notifications,Docs/notifications/notifications.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L192
-performance.disable-animations,Disable Window Animations,Docs/performance/performance.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs#L19
-performance.disable-background-apps,Disable Power Throttling,Docs/performance/performance.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs#L62
-performance.disable-menu-show-delay,Remove Menu Show Delay,Docs/performance/performance.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs#L32
-performance.disable-taskbar-animations,Disable Taskbar Animations,Docs/performance/performance.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs#L45
-peripheral.audio-disable-ducking,Disable Audio Ducking,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/AudioTweaks.cs#L24
-peripheral.audio-disable-enhancements,Disable Audio Enhancements,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/AudioTweaks.cs#L50
-peripheral.autoplay-take-no-action,AutoPlay: Take No Action,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L550
-peripheral.disable-autoplay,Disable AutoPlay,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L539
-peripheral.disable-language-switch-hotkey,Disable Language Switch Hotkey,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L498
-peripheral.disable-pointer-precision,Disable Enhance Pointer Precision,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L512
-peripheral.disable-sticky-keys-prompt,Disable Sticky Keys Prompt,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs#L27
-peripheral.keyboard-disable-language-hotkey,Disable Language Switch Hotkey,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/KeyboardTweaks.cs#L52
-peripheral.keyboard-optimize-repeat,Optimize Keyboard Repeat Rate,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/KeyboardTweaks.cs#L27
-peripheral.mouse-disable-acceleration,Disable Enhanced Pointer Precision (Mouse Acceleration),Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/MouseTweaks.cs#L55
-peripheral.mouse-disable-throttle,Disable Mouse Throttling for Background Windows,Docs/peripheral/peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Peripheral/MouseTweaks.cs#L27
-power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/CPUPowerTweaks.cs#L56
-power.disable-cpu-parking,Disable CPU Core Parking,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/CPUPowerTweaks.cs#L29
-power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs#L43
-power.disable-hibernation,Disable Hibernation,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Power/DisableHibernationTweak.cs#L13
-power.disable-modern-standby,Disable Modern Standby,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs#L23
-power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs#L32
-power.disable-power-throttling,Disable Power Throttling,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs#L63
-power.disable-superfetch,Disable Superfetch (SysMain),Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs#L13
-power.disable-usb-selective-suspend,Disable USB Selective Suspend,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs#L17
-power.disable-windows-search,Disable Windows Search,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/Performance/DisableWindowsSearchTweak.cs#L13
-power.hide-hibernate-option,Hide Hibernate Power Option,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L774
-power.hide-lock-option,Hide Lock Power Option,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L754
-power.hide-sleep-option,Hide Sleep Power Option,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L764
-power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/CPUPowerTweaks.cs#L86
-power.optimize-gaming-network,Optimize Gaming Network Settings,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs#L61
-power.optimize-performance,Optimize Power Settings for Performance,Docs/power/power.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs#L98
-privacy.block-microsoft-accounts,Block Microsoft Accounts,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1773
-privacy.deny-app-access,Deny App Access (Except Microphone),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1646
-privacy.disable-activity-history,Disable Activity History,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L45
-privacy.disable-advertising-id,Disable Advertising ID,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L32
-privacy.disable-app-diagnostics,Disable App Diagnostics,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2282
-privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1305
-privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L98
-privacy.disable-application-compatibility,Disable Application Compatibility,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1813
-privacy.disable-application-telemetry,Disable Application Telemetry,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L60
-privacy.disable-background-apps,Disable Background Apps,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L179
-privacy.disable-biometrics,Disable Biometrics,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1326
-privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1346
-privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1336
-privacy.disable-camera,Disable Camera Access (Policy),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L167
-privacy.disable-ceip,Disable CEIP,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1635
-privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1019
-privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1172
-privacy.disable-copilot,Disable Windows Copilot,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L128
-privacy.disable-cross-device-experiences,Disable Cross-Device Experiences,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L988
-privacy.disable-device-name-telemetry,Disable Device Name in Diagnostics,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1595
-privacy.disable-diagnostic-data,Disable Diagnostic Data (Policy),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L20
-privacy.disable-diagnostic-data-delete,Disable Diagnostic Data Deletion,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1545
-privacy.disable-diagnostic-data-viewer,Disable Diagnostic Data Viewer,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1535
-privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1192
-privacy.disable-f1-help,Disable F1 Help,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2222
-privacy.disable-feedback-notifications,Disable Feedback Notifications,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1625
-privacy.disable-file-history,Disable File History,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1605
-privacy.disable-font-providers,Disable Font Providers,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1793
-privacy.disable-inking-typing-personalization,Disable Inking & Typing Personalization,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1852
-privacy.disable-kms-activation-telemetry,Disable KMS Activation Telemetry,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1783
-privacy.disable-language-list-access,Disable Website Access to Language List,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1032
-privacy.disable-local-security-questions,Disable Local Security Questions,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1803
-privacy.disable-location,Disable Location Services,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1203
-privacy.disable-location-consent,Disable Location Consent (User),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1213
-privacy.disable-location-consent-system,Disable Location Consent (System),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1240
-privacy.disable-location-scripting,Disable Location Scripting,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1250
-privacy.disable-location-services,Disable Location Services,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L155
-privacy.disable-location-tracking,Disable Location Tracking,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2292
-privacy.disable-mdm-enrollment,Disable MDM Enrollment,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1615
-privacy.disable-message-sync,Disable Message Sync,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1720
-privacy.disable-offline-files,Disable Offline Files,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L233
-privacy.disable-onesettings-downloads,Disable OneSettings Downloads,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1555
-privacy.disable-online-tips,Disable Online Tips,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1182
-privacy.disable-phone-linking,Disable Phone Linking,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L998
-privacy.disable-recall,Disable Windows Recall,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L141
-privacy.disable-reserved-storage,Disable Reserved Storage,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1316
-privacy.disable-resume,Disable Resume Experiences,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1008
-privacy.disable-rsop-logging,Disable RSoP Logging,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1700
-privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1103
-privacy.disable-search-history,Disable Search History,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1092
-privacy.disable-sensors,Disable Sensors,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1270
-privacy.disable-sleep-study-diagnostics,Disable Sleep Study Diagnostics,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1895
-privacy.disable-steps-recorder,Disable Steps Recorder,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1280
-privacy.disable-suggestions,Disable Suggestions & Tips,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1156
-privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L111
-privacy.disable-sync-settings,Disable Settings Sync,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1063
-privacy.disable-telemetry-change-notifications,Disable Diagnostic Data Change Notifications,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1585
-privacy.disable-telemetry-optin-ui,Disable Diagnostic Data Opt-in UI,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1575
-privacy.disable-wer,Disable Windows Error Reporting,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L72
-privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1260
-privacy.disable-windows-tips,Disable Windows Tips & Tricks,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs#L85
-privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1043
-privacy.hide-last-logged-in-user,Hide Last Logged-In User,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1921
-privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1135
-privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1145
-privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1114
-privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1124
-privacy.hide-username-at-signin,Hide Username at Sign-In,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1931
-privacy.limit-diagnostic-log-collection,Limit Diagnostic Log Collection,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1525
-privacy.limit-dump-collection,Limit Dump Collection,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1565
-privacy.troubleshooter-dont-run,Troubleshooter: Don't Run Any,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1710
-security.disable-downloads-blocking,Disable Downloads Blocking,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1461
-security.disable-ntfs-encryption,Disable NTFS Encryption (EFS),Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L176
-security.disable-p2p-updates,Disable P2P Updates,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1400
-security.disable-password-reveal,Disable Password Reveal Button,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L57
-security.disable-picture-password,Disable Picture Password Sign-In,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L69
-security.disable-remote-assistance,Disable Remote Assistance,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L164
-security.disable-system-mitigations,Disable System Mitigations,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L95
-security.disable-system-restore,Disable System Restore,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L1451
-security.disable-uac,Disable UAC (Full),Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L33
-security.disable-vbs,Disable VBS (HVCI),Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L107
-security.disable-windows-firewall,Disable Windows Firewall,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L82
-security.disable-windows-update,Disable Windows Update,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L135
-security.disable-wpbt,Disable WPBT Execution,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L122
-security.disable-wu-driver-updates,Disable WU Driver Updates,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L150
-security.enable-dynamic-lock,Enable Dynamic Lock,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L62
-security.enable-sudo,Enable Windows Sudo,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L201
-security.powershell-unrestricted,Set PowerShell Policy to Unrestricted,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L189
-security.trusted-path-credential-prompting,Require Trusted Path for Credentials,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L45
-security.uac-never-notify,Set UAC to Never Notify,Docs/security/security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs#L18
-system-check-disk-health,Check Disk Health (C:),Docs/tweaks/tweaks.md,yes,yes,yes,yes,WindowsOptimizer.Engine/Tweaks/Commands/System/CheckDiskHealthTweak.cs#L13
-system.aero-shake,Disable Aero Shake,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L40
-system.bsod-disable-auto-reboot,Disable Auto Reboot on Crash,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L383
-system.bsod-display-parameters,Show BSOD Parameters,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L371
-system.disable-app-archiving,Disable Automatic App Archiving,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L421
-system.disable-auto-maintenance,Disable Automatic Maintenance,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L105
-system.disable-background-gp-updates,Disable Background Group Policy Updates,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L95
-system.disable-clipboard-history,Disable Clipboard History & Sync,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L73
-system.disable-clipboard-redirection,Disable Clipboard Redirection (RDP),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L85
-system.disable-fullscreen-optimizations,Disable Fullscreen Optimizations,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L316
-system.disable-game-dvr,Disable Game DVR,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L303
-system.disable-jpeg-reduction,Disable JPEG Reduction,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L51
-system.disable-non-essential-services,Disable Non-Essential Services,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L103
-system.disable-restartable-apps,Disable Restartable Apps,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L387
-system.disable-scheduled-tasks,Disable Telemetry & Maintenance Tasks,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L86
-system.disable-search-highlights,Disable Search Highlights,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L72
-system.disable-search-highlights-policy,Disable Search Highlights (Policy),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L824
-system.disable-search-remote-queries,Disable Remote Search Queries,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L346
-system.disable-search-web-results,Disable Web Search Results,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L334
-system.disable-service-splitting,Disable Service Splitting,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L834
-system.disable-services-drivers,Disable Services/Drivers,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2062
-system.disable-shortcut-arrow,Remove Shortcut Arrow Overlay,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L60
-system.disable-startup-delay,Disable Startup Program Delay,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L34
-system.disable-storage-sense,Disable Storage Sense,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L804
-system.disable-storage-sense-temp-cleanup,Disable Storage Sense Temporary Files Cleanup,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L814
-system.disable-store-open-with,Disable Store in Open With,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L169
-system.disable-windows-search-service,Disable Windows Search Service,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L2214
-system.dwm-disable-mpo,DWM: Disable Multiplane Overlay (MPO),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L201
-system.dwm-disable-overlay-min-fps,DWM: Disable Overlay Minimum FPS,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L213
-system.enable-game-mode,Enable Game Mode,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L21
-system.enable-hags,Enable Hardware-Accelerated GPU Scheduling,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L794
-system.enable-indexing-encrypted-items,Enable Indexing of Encrypted Items,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L358
-system.graphics-disable-overlays,Graphics: Disable Overlay Planes,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L188
-system.graphics-tdr-ddi-delay,Graphics: TDR DDI Delay (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L140
-system.graphics-tdr-delay,Graphics: TDR Delay (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L128
-system.graphics-tdr-level,Graphics: TDR Level (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L152
-system.graphics-tdr-limit-count,Graphics: TDR Limit Count (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L164
-system.graphics-tdr-limit-time,Graphics: TDR Limit Time (Default),Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L176
-system.kernel-adjust-dpc-threshold,Kernel: Adjust DPC Threshold,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L31
-system.kernel-disable-low-qos-timer-resolution,Kernel: Disable Low QoS Timer Resolution,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L115
-system.kernel-dpc-queue-depth,Kernel: DPC Queue Depth,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L67
-system.kernel-dpc-watchdog-period,Kernel: DPC Watchdog Period,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L79
-system.kernel-ideal-dpc-rate,Kernel: Ideal DPC Rate,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L43
-system.kernel-minimum-dpc-rate,Kernel: Minimum DPC Rate,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L55
-system.kernel-serialize-timer-expiration,Kernel: Serialize Timer Expiration,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L91
-system.kernel-thread-dpc-enable,Kernel: Threaded DPC Enable,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L103
-system.memory-clear-pagefile-at-shutdown,Clear Page File at Shutdown,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L396
-system.memory-disable-paging-executive,Disable Paging Executive,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L408
-system.ntfs-disable-8dot3,Disable 8.3 Name Creation,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L226
-system.ntfs-disable-last-access,Disable Last Access Updates,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L238
-system.ntfs-enable-long-paths,Enable Win32 Long Paths,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L250
-system.ntfs-reset-memory-usage,Reset NTFS Memory Usage,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L262
-system.ntfs-reset-mft-zone,Reset NTFS MFT Zone Reservation,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L274
-system.priority-control,Set Foreground Scheduling Priority,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L18
-system.reduce-shutdown-timeouts,Reduce Shutdown Timeouts,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs#L287
-system.verbose-status-messages,Enable Verbose Status Messages,Docs/system/system.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs#L47
-visibility.default-account-picture,Use Default Account Picture,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L200
-visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L356
-visibility.disable-common-control-animations,Disable Common Control Animations,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L179
-visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L220
-visibility.disable-lock-screen,Disable Lock Screen,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L306
-visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L316
-visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L346
-visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L336
-visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L326
-visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L273
-visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L295
-visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L251
-visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L284
-visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L366
-visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L262
-visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L210
-visibility.disable-widgets,Disable Widgets,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L241
-visibility.disable-window-animations,Disable Window Animations,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L190
-visibility.force-classic-control-panel,Force Classic Control Panel View,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L743
-visibility.hide-language-bar,Hide Language Bar,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L230
-visibility.hide-most-used-apps,Hide Most Used Apps,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L377
-visibility.hide-people-bar,Hide People Bar,Docs/visibility/visibility.md,yes,yes,yes,yes,WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs#L528
+audio.disable-beep,Disable System Beep,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L22
+audio.disable-spatial-audio,Disable Spatial Audio,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L60
+audio.disable-system-sounds,Disable System Sounds,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L72
+audio.show-disconnected-devices,Show Disconnected Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L47
+audio.show-hidden-devices,Show Hidden Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L34
+cleanup.background-history,Clear Wallpaper History,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearBackgroundHistoryTweak.cs#L14
+cleanup.component-store,Cleanup Component Store,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\CleanupComponentStoreTweak.cs#L14
+cleanup.delivery-optimization,Clear Delivery Optimization Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearDeliveryOptimizationFilesTweak.cs#L14
+cleanup.directx-shader-cache,Clear DirectX Shader Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearDirectXShaderCacheTweak.cs#L11
+cleanup.disable-reserved-storage,Disable Reserved Storage,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\DisableReservedStorageTweak.cs#L14
+cleanup.eventlog-{logName.ToLowerInvariant()},Clear {logName} Event Log,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearEventLogsTweak.cs#L15
+cleanup.font-cache,Clear Font Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearFontCacheTweak.cs#L14
+cleanup.internet-temp-files,Clear Temporary Internet Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearTemporaryInternetFilesTweak.cs#L11
+cleanup.memory-dumps,Clear Memory Dump Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearMemoryDumpFilesTweak.cs#L11
+cleanup.prefetch-files,Clear Prefetch Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearPrefetchFilesTweak.cs#L11
+cleanup.product-key,Remove Product Key from Registry,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\RemoveProductKeyTweak.cs#L14
+cleanup.recycle-bin,Empty Recycle Bin,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearRecycleBinTweak.cs#L14
+cleanup.shadow-copies,Clear Shadow Copies,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearShadowCopiesTweak.cs#L14
+cleanup.srum-data,Clear SRUM Database,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearSRUMDataTweak.cs#L11
+cleanup.temp-files,Clear Temporary Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearTemporaryFilesTweak.cs#L11
+cleanup.thumbnail-cache,Clear Thumbnail Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearThumbnailCacheTweak.cs#L11
+cleanup.wer-files,Clear Windows Error Reporting Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearWERFilesTweak.cs#L11
+cleanup.windows-old,Delete Windows.old Folder,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearWindowsOldTweak.cs#L11
+cleanup.windows-update-cache,Clear Windows Update Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Cleanup\ClearWindowsUpdateCacheTweak.cs#L11
+explorer.disable-compact-mode,Enable Compact View,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L57
+explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L110
+explorer.disable-taskbar-chat,Disable Taskbar Chat Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L84
+explorer.disable-taskbar-widgets,Disable Taskbar Widgets Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L97
+explorer.show-file-extensions,Show File Extensions,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L31
+explorer.show-full-path,Show Full Path in Title Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L44
+explorer.show-hidden-files,Show Hidden Files and Folders,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L18
+explorer.taskbar-alignment-left,Align Taskbar to Left,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L71
+misc.disable-edge-features,Disable Microsoft Edge Features,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableEdgeFeaturesTweaks.cs#L88
+misc.disable-office-telemetry,Disable Microsoft Office Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableOfficeTelemetryTweak.cs#L51
+misc.disable-onedrive,Disable OneDrive,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableOneDriveTweaks.cs#L36
+misc.disable-search-web-results,Disable Search Web Results,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\MiscTweakProvider.cs#L44
+misc.disable-visual-studio-telemetry,Disable Visual Studio Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableVisualStudioTelemetryTweak.cs#L37
+misc.notepadplusplus-default-editor,Set Notepad++ as Default Editor,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\SetNotepadPlusPlusDefaultEditorTweak.cs#L22
+misc.optimize-7zip-settings,Optimize 7-Zip Context Menu Settings,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\SevenZipSettingsTweak.cs#L54
+network.disable-active-probing,Disable Active Probing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L170
+network.disable-default-shares,Disable Default Shares,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L297
+network.disable-ipv6,Disable IPv6,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L64
+network.disable-llmnr,Disable LLMNR,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L102
+network.disable-lltd,Disable Network Discovery (LLTD),Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L150
+network.disable-mdns,Disable mDNS,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L114
+network.disable-netbios,Disable NetBIOS over TCP/IP,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L76
+network.disable-netbios-resolution,Disable NetBIOS Name Resolution,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L126
+network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L333
+network.disable-smart-name-resolution,Disable Smart Multi-Homed Name Resolution,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L138
+network.disable-smb1,Disable SMBv1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L309
+network.disable-smb2,Disable SMBv2/SMBv3,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L321
+network.disable-wifi-sense,Disable Wi-Fi Sense,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L88
+network.enable-lltd-responder,Enable LLTD Responder,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L31
+network.enable-lltdio,Enable LLTD Mapper I/O,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L19
+network.flush-dns-cache,Flush DNS Cache,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Network\FlushDnsCacheTweak.cs#L13
+network.optimize-smb,Optimize SMB Performance,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L44
+network.prefer-ipv4,Prefer IPv4 over IPv6,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L184
+network.require-ntlmv2-session-security,Require NTLMv2 Session Security,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L345
+network.reset-winsock,Reset Winsock Catalog,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Network\ResetNetworkStackTweak.cs#L13
+network.smb-disable-leasing,SMB: Disable Leasing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L235
+network.smb-enable-multichannel,SMB: Enable Multichannel,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L247
+network.smb-enable-quic,SMB: Enable QUIC,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L259
+network.smb-encrypt-data,SMB: Require Encryption,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L211
+network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L223
+network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L271
+network.smb-require-signing-server,SMB: Require Signing (Server),Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L197
+network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L285
+notifications.disable-feedback-frequency,Disable Feedback Requests,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L219
+notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L206
+notifications.disable-mirroring,Disable Notification Mirroring,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L245
+notifications.disable-tile,Disable Tile Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L232
+notifications.disable-toast,Disable Toast Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L193
+performance.disable-animations,Disable Window Animations,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L19
+performance.disable-background-apps,Disable Power Throttling,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L62
+performance.disable-menu-show-delay,Remove Menu Show Delay,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L32
+performance.disable-taskbar-animations,Disable Taskbar Animations,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L45
+peripheral.audio-disable-ducking,Disable Audio Ducking,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L24
+peripheral.audio-disable-enhancements,Disable Audio Enhancements,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L50
+peripheral.autoplay-take-no-action,AutoPlay: Take No Action,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L53
+peripheral.disable-autoplay,Disable AutoPlay,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40
+peripheral.disable-sticky-keys-prompt,Disable Sticky Keys Prompt,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L27
+peripheral.keyboard-disable-language-hotkey,Disable Language Switch Hotkey,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52
+peripheral.keyboard-optimize-repeat,Optimize Keyboard Repeat Rate,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27
+peripheral.mouse-disable-acceleration,Disable Enhanced Pointer Precision (Mouse Acceleration),Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55
+peripheral.mouse-disable-throttle,Disable Mouse Throttling for Background Windows,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27
+power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L56
+power.disable-cpu-parking,Disable CPU Core Parking,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L29
+power.disable-fast-startup,Disable Fast Startup,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L75
+power.disable-hibernation,Disable Hibernation,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Power\DisableHibernationTweak.cs#L13
+power.disable-modern-standby,Disable Modern Standby,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L23
+power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\NetworkAdapterPowerTweaks.cs#L32
+power.disable-power-throttling,Disable Power Throttling,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L63
+power.disable-superfetch,Disable Superfetch (SysMain),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Performance\DisableSuperfetchTweak.cs#L13
+power.disable-usb-selective-suspend,Disable USB Selective Suspend,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Power\DisableUsbSelectiveSuspendTweak.cs#L17
+power.disable-windows-search,Disable Windows Search,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Performance\DisableWindowsSearchTweak.cs#L13
+power.hide-hibernate-option,Hide Hibernate Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L63
+power.hide-lock-option,Hide Lock Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L39
+power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L51
+power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L86
+power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\NetworkAdapterPowerTweaks.cs#L61
+power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L98
+privacy.disable-activity-history,Disable Activity History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L46
+privacy.disable-advertising-id,Disable Advertising ID,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L33
+privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L604
+privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L99
+privacy.disable-application-telemetry,Disable Application Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L61
+privacy.disable-background-apps,Disable Background Apps,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L180
+privacy.disable-biometrics,Disable Biometrics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L629
+privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L653
+privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L641
+privacy.disable-camera,Disable Camera Access (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L168
+privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L318
+privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L493
+privacy.disable-copilot,Disable Windows Copilot,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L129
+privacy.disable-cross-device-experiences,Disable Cross-Device Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L281
+privacy.disable-diagnostic-data,Disable Diagnostic Data (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L21
+privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L517
+privacy.disable-language-list-access,Disable Website Access to Language List,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L333
+privacy.disable-location-consent,Disable Location Consent (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L530
+privacy.disable-location-consent-system,Disable Location Consent (System),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L544
+privacy.disable-location-scripting,Disable Location Scripting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L556
+privacy.disable-location-services,Disable Location Services,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L156
+privacy.disable-offline-files,Disable Offline Files,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L260
+privacy.disable-online-tips,Disable Online Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L505
+privacy.disable-phone-linking,Disable Phone Linking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L293
+privacy.disable-recall,Disable Windows Recall,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L142
+privacy.disable-reserved-storage,Disable Reserved Storage,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L617
+privacy.disable-resume,Disable Resume Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L305
+privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L412
+privacy.disable-search-history,Disable Search History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L399
+privacy.disable-sensors,Disable Sensors,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L580
+privacy.disable-steps-recorder,Disable Steps Recorder,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L593
+privacy.disable-suggestions,Disable Suggestions & Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L475
+privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L112
+privacy.disable-sync-settings,Disable Settings Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L368
+privacy.disable-wer,Disable Windows Error Reporting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L73
+privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L568
+privacy.disable-windows-tips,Disable Windows Tips & Tricks,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L86
+privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L346
+privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L450
+privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L462
+privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L425
+privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L437
+security.disable-downloads-blocking,Disable Downloads Blocking,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L250
+security.disable-ntfs-encryption,Disable NTFS Encryption (EFS),Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L189
+security.disable-p2p-updates,Disable P2P Updates,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L226
+security.disable-password-reveal,Disable Password Reveal Button,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L57
+security.disable-picture-password,Disable Picture Password Sign-In,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L69
+security.disable-remote-assistance,Disable Remote Assistance,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L177
+security.disable-system-mitigations,Disable System Mitigations,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L108
+security.disable-system-restore,Disable System Restore,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L238
+security.disable-uac,Disable UAC (Full),Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L33
+security.disable-vbs,Disable VBS (HVCI),Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L120
+security.disable-windows-firewall,Disable Windows Firewall,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L95
+security.disable-windows-update,Disable Windows Update,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L148
+security.disable-wpbt,Disable WPBT Execution,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L135
+security.disable-wu-driver-updates,Disable WU Driver Updates,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L163
+security.enable-dynamic-lock,Enable Dynamic Lock,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L81
+security.enable-sudo,Enable Windows Sudo,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L214
+security.powershell-unrestricted,Set PowerShell Policy to Unrestricted,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L202
+security.trusted-path-credential-prompting,Require Trusted Path for Credentials,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L45
+security.uac-never-notify,Set UAC to Never Notify,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L18
+system-check-disk-health,Check Disk Health (C:),Docs\tweaks\tweaks.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L13
+system.aero-shake,Disable Aero Shake,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L127
+system.bsod-disable-auto-reboot,Disable Auto Reboot on Crash,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L383
+system.bsod-display-parameters,Show BSOD Parameters,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L371
+system.disable-app-archiving,Disable Automatic App Archiving,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L421
+system.disable-auto-maintenance,Disable Automatic Maintenance,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L191
+system.disable-background-gp-updates,Disable Background Group Policy Updates,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L179
+system.disable-clipboard-history,Disable Clipboard History & Sync,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L153
+system.disable-clipboard-redirection,Disable Clipboard Redirection (RDP),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L167
+system.disable-fullscreen-optimizations,Disable Fullscreen Optimizations,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L316
+system.disable-game-dvr,Disable Game DVR,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L303
+system.disable-jpeg-reduction,Disable JPEG Reduction,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L140
+system.disable-non-essential-services,Disable Non-Essential Services,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L103
+system.disable-restartable-apps,Disable Restartable Apps,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L215
+system.disable-scheduled-tasks,Disable Telemetry & Maintenance Tasks,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L86
+system.disable-search-highlights,Disable Search Highlights,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L72
+system.disable-search-highlights-policy,Disable Search Highlights (Policy),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L266
+system.disable-search-remote-queries,Disable Remote Search Queries,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L346
+system.disable-search-web-results,Disable Web Search Results,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L334
+system.disable-service-splitting,Disable Service Splitting,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L278
+system.disable-shortcut-arrow,Remove Shortcut Arrow Overlay,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L60
+system.disable-startup-delay,Disable Startup Program Delay,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L34
+system.disable-storage-sense,Disable Storage Sense,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L242
+system.disable-storage-sense-temp-cleanup,Disable Storage Sense Temporary Files Cleanup,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L254
+system.disable-store-open-with,Disable Store in Open With,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L203
+system.dwm-disable-mpo,DWM: Disable Multiplane Overlay (MPO),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L201
+system.dwm-disable-overlay-min-fps,DWM: Disable Overlay Minimum FPS,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L213
+system.enable-game-mode,Enable Game Mode,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L21
+system.enable-hags,Enable Hardware-Accelerated GPU Scheduling,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L230
+system.enable-indexing-encrypted-items,Enable Indexing of Encrypted Items,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L358
+system.graphics-disable-overlays,Graphics: Disable Overlay Planes,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L188
+system.graphics-tdr-ddi-delay,Graphics: TDR DDI Delay (Default),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L140
+system.graphics-tdr-delay,Graphics: TDR Delay (Default),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L128
+system.graphics-tdr-level,Graphics: TDR Level (Default),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152
+system.graphics-tdr-limit-count,Graphics: TDR Limit Count (Default),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164
+system.graphics-tdr-limit-time,Graphics: TDR Limit Time (Default),Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176
+system.kernel-adjust-dpc-threshold,Kernel: Adjust DPC Threshold,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L31
+system.kernel-disable-low-qos-timer-resolution,Kernel: Disable Low QoS Timer Resolution,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115
+system.kernel-dpc-queue-depth,Kernel: DPC Queue Depth,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L67
+system.kernel-dpc-watchdog-period,Kernel: DPC Watchdog Period,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L79
+system.kernel-ideal-dpc-rate,Kernel: Ideal DPC Rate,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L43
+system.kernel-minimum-dpc-rate,Kernel: Minimum DPC Rate,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L55
+system.kernel-serialize-timer-expiration,Kernel: Serialize Timer Expiration,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L91
+system.kernel-thread-dpc-enable,Kernel: Threaded DPC Enable,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103
+system.memory-clear-pagefile-at-shutdown,Clear Page File at Shutdown,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L396
+system.memory-disable-paging-executive,Disable Paging Executive,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L408
+system.ntfs-disable-8dot3,Disable 8.3 Name Creation,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L226
+system.ntfs-disable-last-access,Disable Last Access Updates,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L238
+system.ntfs-enable-long-paths,Enable Win32 Long Paths,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250
+system.ntfs-reset-memory-usage,Reset NTFS Memory Usage,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262
+system.ntfs-reset-mft-zone,Reset NTFS MFT Zone Reservation,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274
+system.priority-control,Set Foreground Scheduling Priority,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L18
+system.reduce-shutdown-timeouts,Reduce Shutdown Timeouts,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L287
+system.verbose-status-messages,Enable Verbose Status Messages,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L47
+visibility.default-account-picture,Use Default Account Picture,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L149
+visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L375
+visibility.disable-common-control-animations,Disable Common Control Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L124
+visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L173
+visibility.disable-lock-screen,Disable Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L315
+visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L327
+visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L363
+visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L351
+visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L339
+visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L262
+visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L288
+visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L236
+visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L275
+visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L301
+visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L249
+visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L161
+visibility.disable-widgets,Disable Widgets (Policy),Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L198
+visibility.disable-window-animations,Disable Window Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L137
+visibility.force-classic-control-panel,Force Classic Control Panel View,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L400
+visibility.hide-language-bar,Hide Language Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L185
+visibility.hide-most-used-apps,Hide Most Used Apps,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L210
+visibility.hide-people-bar,Hide People Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L222
+visibility.restore-classic-context-menu,Restore Classic Context Menu,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L387

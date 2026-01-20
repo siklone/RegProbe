@@ -275,6 +275,20 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.13 Tweak Docs & Source Links Refresh (Commit: pending)
+**Improvement:** Regenerated tweak catalog/details and docs indexes to ensure source links and anchors are up to date.
+
+**Modified Files:**
+- `Docs/tweaks/tweak-catalog.*` - Updated sources and metadata from current providers.
+- `Docs/tweaks/tweak-details.html` - Regenerated detail anchors.
+- `Docs/tweaks/tweak-docs-*` - Updated coverage reports (missing = 0).
+- `Docs/tweaks/tweak-source-audit.*` - Updated audit report.
+- `Docs/*/*.md` - Regenerated Tweak Index sections.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
