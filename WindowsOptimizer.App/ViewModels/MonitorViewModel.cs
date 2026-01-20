@@ -2299,6 +2299,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             "gpu" => HardwareType.Gpu,
             "ram" => HardwareType.Ram,
             "disk" or "storage" => HardwareType.Disk,
+            "motherboard" or "mobo" or "board" => HardwareType.Motherboard,
             _ => HardwareType.Cpu
         };
 

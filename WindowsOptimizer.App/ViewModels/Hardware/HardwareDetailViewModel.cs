@@ -19,7 +19,8 @@ public enum HardwareType
     Cpu,
     Gpu,
     Ram,
-    Disk
+    Disk,
+    Motherboard
 }
 
 public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposable
@@ -249,6 +250,14 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 PrimaryUnit = "% used";
                 StatusText = "Healthy";
                 break;
+            case HardwareType.Motherboard:
+                WindowTitle = "Motherboard Details";
+                Icon = "\uD83D\uDEE0\uFE0F";
+                IconBackground = new SolidColorBrush(Color.FromRgb(236, 72, 153));
+                Title = "Motherboard";
+                PrimaryUnit = "";
+                StatusText = "Detected";
+                break;
         }
     }
 
@@ -267,6 +276,9 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Disk:
                 await LoadDiskDetailsAsync();
+                break;
+            case HardwareType.Motherboard:
+                await LoadMotherboardDetailsAsync();
                 break;
         }
 
@@ -506,6 +518,97 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 SubItems.Add(subItem);
             }
 
+            OnPropertyChanged(nameof(HasDetails));
+            OnPropertyChanged(nameof(HasSubItems));
+        });
+    }
+
+    private async Task LoadMotherboardDetailsAsync()
+    {
+        MotherboardIdentity board;
+        try
+        {
+            board = await Task.Run(HardwareIdentifier.GetMotherboardId).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            await DispatchAsync(() =>
+            {
+                Subtitle = "Failed to load motherboard information";
+                StatusText = "Unavailable";
+            });
+            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] Motherboard load failed: {ex.Message}");
+            return;
+        }
+
+        MotherboardSpecs specs;
+        try
+        {
+            specs = await _specsService.GetMotherboardSpecsAsync(board, CancellationToken.None).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            await DispatchAsync(() =>
+            {
+                Subtitle = "Failed to load motherboard specifications";
+                StatusText = "Unavailable";
+            });
+            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] Motherboard specs failed: {ex.Message}");
+            return;
+        }
+
+        static string ValueOrNa(string? value)
+            => string.IsNullOrWhiteSpace(value) ? "N/A" : value.Trim();
+
+        await DispatchAsync(() =>
+        {
+            var modelText = !string.IsNullOrWhiteSpace(specs.Model)
+                ? specs.Model
+                : (board.Product ?? "Unknown");
+
+            Subtitle = modelText;
+            PrimaryValue = specs.MemorySlots?.ToString() ?? "--";
+            PrimaryUnit = specs.MemorySlots.HasValue ? "slots" : "";
+            StatusText = specs.IsFromDatabase ? "DB match" : "Detected";
+
+            Stat1Label = "Chipset";
+            Stat1Value = ValueOrNa(specs.Chipset);
+            Stat2Label = "Socket";
+            Stat2Value = ValueOrNa(specs.Socket);
+            Stat3Label = "Memory";
+            Stat3Value = specs.MaxMemoryGb is { } maxMem && maxMem > 0 ? $"{maxMem} GB" : "N/A";
+            Stat4Label = "Form";
+            Stat4Value = ValueOrNa(specs.FormFactor);
+
+            Specifications.Clear();
+            Details.Clear();
+            SubItems.Clear();
+
+            Specifications.Add(new("Manufacturer", ValueOrNa(specs.Manufacturer)));
+            Specifications.Add(new("Model", ValueOrNa(specs.Model)));
+            Specifications.Add(new("Chipset", ValueOrNa(specs.Chipset)));
+            Specifications.Add(new("Socket", ValueOrNa(specs.Socket)));
+            Specifications.Add(new("Form Factor", ValueOrNa(specs.FormFactor)));
+            Specifications.Add(new("Memory Slots", specs.MemorySlots?.ToString() ?? "N/A"));
+            Specifications.Add(new("Max Memory", specs.MaxMemoryGb is { } maxGb && maxGb > 0 ? $"{maxGb} GB" : "N/A"));
+            Specifications.Add(new("Memory Type", ValueOrNa(specs.MemoryType)));
+            Specifications.Add(new("Max Memory Speed", specs.MaxMemorySpeedMhz is { } speed && speed > 0 ? $"{speed} MHz" : "N/A"));
+            Specifications.Add(new("PCIe Slots", ValueOrNa(specs.PcieSlots)));
+            Specifications.Add(new("SATA Ports", specs.SataPorts?.ToString() ?? "N/A"));
+            Specifications.Add(new("M.2 Slots", specs.M2Slots?.ToString() ?? "N/A"));
+            Specifications.Add(new("USB Ports", ValueOrNa(specs.UsbPorts)));
+            Specifications.Add(new("Audio Codec", ValueOrNa(specs.AudioCodec)));
+            Specifications.Add(new("Network Chip", ValueOrNa(specs.NetworkChip)));
+            Specifications.Add(new("WiFi Chip", ValueOrNa(specs.WifiChip)));
+            Specifications.Add(new("BIOS Type", ValueOrNa(specs.BiosType)));
+            Specifications.Add(new("Release Date", ValueOrNa(specs.ReleaseDate)));
+
+            Details.Add(new("Serial Number", ValueOrNa(board.SerialNumber)));
+            Details.Add(new("Version", ValueOrNa(board.Version)));
+            Details.Add(new("Lookup Key", ValueOrNa(board.LookupKey)));
+            Details.Add(new("Specs Source", specs.IsFromDatabase ? "Database" : "Identity"));
+
+            SubItemsHeader = string.Empty;
             OnPropertyChanged(nameof(HasDetails));
             OnPropertyChanged(nameof(HasSubItems));
         });
@@ -793,6 +896,8 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 {
                     StatusColor = GetHealthBrush(health);
                 }
+                break;
+            case HardwareType.Motherboard:
                 break;
         }
     }

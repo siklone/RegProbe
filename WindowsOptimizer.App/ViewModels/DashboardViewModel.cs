@@ -9,10 +9,13 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.Utilities;
+using WindowsOptimizer.App.ViewModels.Hardware;
+using WindowsOptimizer.App.Views;
 using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
@@ -132,6 +135,7 @@ public sealed class DashboardViewModel : ViewModelBase
         CreateRestorePointCommand = new AsyncRelayCommand(CreateRestorePointAsync, () => !IsCreatingRestorePoint);
         EnableVssCommand = new AsyncRelayCommand(EnableVssServiceAsync, () => VssServiceNeedsEnable && !IsCreatingRestorePoint);
         OpenDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport(), _ => File.Exists(DocsCoverageReportPath));
+        OpenMotherboardDetailCommand = new RelayCommand(_ => OpenMotherboardDetail());
         LoadDocsCoverageReport();
         LoadSystemSnapshot();
         _ = LoadUiSettingsAsync();
@@ -163,6 +167,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public ICommand CreateRestorePointCommand { get; }
     public ICommand EnableVssCommand { get; }
     public ICommand OpenDocsCoverageReportCommand { get; }
+    public ICommand OpenMotherboardDetailCommand { get; }
 
     public bool IsCreatingRestorePoint
     {
@@ -2317,6 +2322,17 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             // Ignore errors
         }
+    }
+
+    private void OpenMotherboardDetail()
+    {
+        var viewModel = new HardwareDetailViewModel(HardwareType.Motherboard, AppServices.MetricBus);
+        var window = new HardwareDetailWindow
+        {
+            DataContext = viewModel,
+            Owner = Application.Current?.MainWindow
+        };
+        window.Show();
     }
 
     public string LogFilePath => _paths.TweakLogFilePath;
