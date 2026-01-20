@@ -1,5 +1,5 @@
 {
-  "version": "2026.01",
+  "version": "2026.02",
   "cpu": [
     {
       "cpuid": "GenuineIntel-000906EA",
@@ -82,6 +82,99 @@
       "openglVersion": "4.6",
       "vulkanVersion": "1.2",
       "features": "[\"RayTracing\"]"
+    }
+  ],
+  "motherboard": [
+    {
+      "boardId": "ASUSTeK COMPUTER INC. ROG STRIX Z390-F",
+      "manufacturer": "ASUSTeK COMPUTER INC.",
+      "model": "ROG STRIX Z390-F",
+      "chipset": "Intel Z390",
+      "socket": "LGA1151",
+      "formFactor": "ATX",
+      "memorySlots": 4,
+      "maxMemoryGb": 64,
+      "memoryType": "DDR4",
+      "maxMemorySpeedMhz": 4266,
+      "pcieSlots": "x16:2,x1:3",
+      "sataPorts": 6,
+      "m2Slots": 2,
+      "usbPorts": "USB3.1:4,USB3.0:2,USB2.0:4",
+      "audioCodec": "SupremeFX S1220A",
+      "networkChip": "Intel I219-V",
+      "wifiChip": "",
+      "biosType": "UEFI",
+      "releaseDate": "2018"
+    }
+  ],
+  "storage": [
+    {
+      "modelId": "Samsung SSD 970 EVO Plus 1TB",
+      "manufacturer": "Samsung",
+      "model": "970 EVO Plus",
+      "type": "NVMe SSD",
+      "capacityGb": 1000,
+      "interface": "PCIe 3.0 x4",
+      "formFactor": "M.2 2280",
+      "seqReadMbps": 3500,
+      "seqWriteMbps": 3300,
+      "randomReadIops": 620000,
+      "randomWriteIops": 560000,
+      "nandType": "V-NAND TLC",
+      "controller": "Samsung Phoenix",
+      "dramCacheMb": 1024,
+      "tbwTb": 600,
+      "releaseDate": "2019"
+    },
+    {
+      "modelId": "WD Blue 1TB",
+      "manufacturer": "Western Digital",
+      "model": "WD Blue",
+      "type": "HDD",
+      "capacityGb": 1000,
+      "interface": "SATA III",
+      "formFactor": "3.5 inch",
+      "seqReadMbps": 150,
+      "seqWriteMbps": 150,
+      "randomReadIops": 100,
+      "randomWriteIops": 100,
+      "nandType": "",
+      "controller": "",
+      "dramCacheMb": 0,
+      "tbwTb": 0,
+      "releaseDate": "2015"
+    }
+  ],
+  "ram": [
+    {
+      "partNumber": "CMK16GX4M2B3200C16",
+      "manufacturer": "Corsair",
+      "model": "Vengeance LPX",
+      "type": "DDR4",
+      "speedMhz": 3200,
+      "capacityGb": 16,
+      "modules": 2,
+      "casLatency": 16,
+      "timings": "16-18-18-36",
+      "voltage": 1.35,
+      "ecc": false,
+      "xmpProfiles": "[\"3200 CL16\"]",
+      "releaseDate": "2016"
+    },
+    {
+      "partNumber": "F4-3200C16D-32GVK",
+      "manufacturer": "G.Skill",
+      "model": "Ripjaws V",
+      "type": "DDR4",
+      "speedMhz": 3200,
+      "capacityGb": 32,
+      "modules": 2,
+      "casLatency": 16,
+      "timings": "16-18-18-38",
+      "voltage": 1.35,
+      "ecc": false,
+      "xmpProfiles": "[\"3200 CL16\"]",
+      "releaseDate": "2018"
     }
   ]
 }

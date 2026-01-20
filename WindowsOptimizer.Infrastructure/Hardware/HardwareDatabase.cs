@@ -122,6 +122,83 @@ public sealed class HardwareDatabase
         return null;
     }
 
+    public async Task<MotherboardSpecs?> LookupMotherboardAsync(MotherboardIdentity identity, CancellationToken ct)
+    {
+        if (identity == null) throw new ArgumentNullException(nameof(identity));
+
+        if (!string.IsNullOrWhiteSpace(identity.LookupKey))
+        {
+            var byId = await QueryMotherboardAsync(
+                "SELECT * FROM motherboard_specs WHERE board_id = @board LIMIT 1",
+                ct,
+                new SqliteParameter("@board", identity.LookupKey)).ConfigureAwait(false);
+            if (byId != null) return byId;
+        }
+
+        if (!string.IsNullOrWhiteSpace(identity.Manufacturer) && !string.IsNullOrWhiteSpace(identity.Product))
+        {
+            var byModel = await QueryMotherboardAsync(
+                "SELECT * FROM motherboard_specs WHERE manufacturer LIKE @manufacturer AND model LIKE @model LIMIT 1",
+                ct,
+                new SqliteParameter("@manufacturer", $"%{identity.Manufacturer}%"),
+                new SqliteParameter("@model", $"%{identity.Product}%")).ConfigureAwait(false);
+            if (byModel != null) return byModel;
+        }
+
+        return null;
+    }
+
+    public async Task<StorageSpecs?> LookupStorageAsync(string model, CancellationToken ct)
+    {
+        var trimmed = (model ?? string.Empty).Trim();
+        if (string.IsNullOrWhiteSpace(trimmed))
+        {
+            return null;
+        }
+
+        var byId = await QueryStorageAsync(
+            "SELECT * FROM storage_specs WHERE model_id = @model LIMIT 1",
+            ct,
+            new SqliteParameter("@model", trimmed)).ConfigureAwait(false);
+        if (byId != null) return byId;
+
+        var byModel = await QueryStorageAsync(
+            "SELECT * FROM storage_specs WHERE model LIKE @model LIMIT 1",
+            ct,
+            new SqliteParameter("@model", $"%{trimmed}%")).ConfigureAwait(false);
+        if (byModel != null) return byModel;
+
+        return null;
+    }
+
+    public async Task<RamSpecs?> LookupRamAsync(RamModule module, CancellationToken ct)
+    {
+        if (module == null) throw new ArgumentNullException(nameof(module));
+
+        var partNumber = (module.PartNumber ?? string.Empty).Trim();
+        if (!string.IsNullOrWhiteSpace(partNumber))
+        {
+            var byPart = await QueryRamAsync(
+                "SELECT * FROM ram_specs WHERE part_number = @part LIMIT 1",
+                ct,
+                new SqliteParameter("@part", partNumber)).ConfigureAwait(false);
+            if (byPart != null) return byPart;
+        }
+
+        if (!string.IsNullOrWhiteSpace(module.Manufacturer) && module.CapacityGB > 0)
+        {
+            var bySignature = await QueryRamAsync(
+                "SELECT * FROM ram_specs WHERE manufacturer LIKE @manufacturer AND capacity_gb = @capacity AND speed_mhz = @speed LIMIT 1",
+                ct,
+                new SqliteParameter("@manufacturer", $"%{module.Manufacturer}%"),
+                new SqliteParameter("@capacity", (int)Math.Round(module.CapacityGB)),
+                new SqliteParameter("@speed", module.SpeedMHz)).ConfigureAwait(false);
+            if (bySignature != null) return bySignature;
+        }
+
+        return null;
+    }
+
     public async Task<bool> CheckForUpdatesAsync(CancellationToken ct)
     {
         await EnsureSchemaAsync(ct).ConfigureAwait(false);
@@ -323,6 +400,118 @@ INSERT OR REPLACE INTO gpu_specs (
             await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
         }
 
+        foreach (var board in seed.Motherboard ?? new List<MotherboardSpecs>())
+        {
+            if (string.IsNullOrWhiteSpace(board.BoardId) || string.IsNullOrWhiteSpace(board.Model))
+            {
+                continue;
+            }
+
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = @"
+INSERT OR REPLACE INTO motherboard_specs (
+    board_id, manufacturer, model, chipset, socket, form_factor, memory_slots, max_memory_gb,
+    memory_type, max_memory_speed_mhz, pcie_slots, sata_ports, m2_slots, usb_ports, audio_codec,
+    network_chip, wifi_chip, bios_type, release_date, updated_at
+) VALUES (
+    @board_id, @manufacturer, @model, @chipset, @socket, @form_factor, @memory_slots, @max_memory_gb,
+    @memory_type, @max_memory_speed_mhz, @pcie_slots, @sata_ports, @m2_slots, @usb_ports, @audio_codec,
+    @network_chip, @wifi_chip, @bios_type, @release_date, datetime('now')
+)";
+            AddParameter(command, "@board_id", board.BoardId);
+            AddParameter(command, "@manufacturer", board.Manufacturer);
+            AddParameter(command, "@model", board.Model);
+            AddParameter(command, "@chipset", board.Chipset);
+            AddParameter(command, "@socket", board.Socket);
+            AddParameter(command, "@form_factor", board.FormFactor);
+            AddParameter(command, "@memory_slots", board.MemorySlots);
+            AddParameter(command, "@max_memory_gb", board.MaxMemoryGb);
+            AddParameter(command, "@memory_type", board.MemoryType);
+            AddParameter(command, "@max_memory_speed_mhz", board.MaxMemorySpeedMhz);
+            AddParameter(command, "@pcie_slots", board.PcieSlots);
+            AddParameter(command, "@sata_ports", board.SataPorts);
+            AddParameter(command, "@m2_slots", board.M2Slots);
+            AddParameter(command, "@usb_ports", board.UsbPorts);
+            AddParameter(command, "@audio_codec", board.AudioCodec);
+            AddParameter(command, "@network_chip", board.NetworkChip);
+            AddParameter(command, "@wifi_chip", board.WifiChip);
+            AddParameter(command, "@bios_type", board.BiosType);
+            AddParameter(command, "@release_date", board.ReleaseDate);
+            await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+        }
+
+        foreach (var storage in seed.Storage ?? new List<StorageSpecs>())
+        {
+            if (string.IsNullOrWhiteSpace(storage.ModelId) || string.IsNullOrWhiteSpace(storage.Model))
+            {
+                continue;
+            }
+
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = @"
+INSERT OR REPLACE INTO storage_specs (
+    model_id, manufacturer, model, type, capacity_gb, interface, form_factor, seq_read_mbps,
+    seq_write_mbps, random_read_iops, random_write_iops, nand_type, controller, dram_cache_mb,
+    tbw_tb, release_date, updated_at
+) VALUES (
+    @model_id, @manufacturer, @model, @type, @capacity_gb, @interface, @form_factor, @seq_read_mbps,
+    @seq_write_mbps, @random_read_iops, @random_write_iops, @nand_type, @controller, @dram_cache_mb,
+    @tbw_tb, @release_date, datetime('now')
+)";
+            AddParameter(command, "@model_id", storage.ModelId);
+            AddParameter(command, "@manufacturer", storage.Manufacturer);
+            AddParameter(command, "@model", storage.Model);
+            AddParameter(command, "@type", storage.Type);
+            AddParameter(command, "@capacity_gb", storage.CapacityGb);
+            AddParameter(command, "@interface", storage.Interface);
+            AddParameter(command, "@form_factor", storage.FormFactor);
+            AddParameter(command, "@seq_read_mbps", storage.SeqReadMbps);
+            AddParameter(command, "@seq_write_mbps", storage.SeqWriteMbps);
+            AddParameter(command, "@random_read_iops", storage.RandomReadIops);
+            AddParameter(command, "@random_write_iops", storage.RandomWriteIops);
+            AddParameter(command, "@nand_type", storage.NandType);
+            AddParameter(command, "@controller", storage.Controller);
+            AddParameter(command, "@dram_cache_mb", storage.DramCacheMb);
+            AddParameter(command, "@tbw_tb", storage.TbwTb);
+            AddParameter(command, "@release_date", storage.ReleaseDate);
+            await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+        }
+
+        foreach (var ram in seed.Ram ?? new List<RamSpecs>())
+        {
+            if (string.IsNullOrWhiteSpace(ram.PartNumber) || string.IsNullOrWhiteSpace(ram.Model))
+            {
+                continue;
+            }
+
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = @"
+INSERT OR REPLACE INTO ram_specs (
+    part_number, manufacturer, model, type, speed_mhz, capacity_gb, modules, cas_latency,
+    timings, voltage, ecc, xmp_profiles, release_date, updated_at
+) VALUES (
+    @part_number, @manufacturer, @model, @type, @speed_mhz, @capacity_gb, @modules, @cas_latency,
+    @timings, @voltage, @ecc, @xmp_profiles, @release_date, datetime('now')
+)";
+            AddParameter(command, "@part_number", ram.PartNumber);
+            AddParameter(command, "@manufacturer", ram.Manufacturer);
+            AddParameter(command, "@model", ram.Model);
+            AddParameter(command, "@type", ram.Type);
+            AddParameter(command, "@speed_mhz", ram.SpeedMhz);
+            AddParameter(command, "@capacity_gb", ram.CapacityGb);
+            AddParameter(command, "@modules", ram.Modules);
+            AddParameter(command, "@cas_latency", ram.CasLatency);
+            AddParameter(command, "@timings", ram.Timings);
+            AddParameter(command, "@voltage", ram.Voltage);
+            AddParameter(command, "@ecc", ram.Ecc.HasValue ? (ram.Ecc.Value ? 1 : 0) : null);
+            AddParameter(command, "@xmp_profiles", ram.XmpProfiles);
+            AddParameter(command, "@release_date", ram.ReleaseDate);
+            await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+        }
+
         await transaction.CommitAsync(ct).ConfigureAwait(false);
     }
 
@@ -412,6 +601,126 @@ INSERT OR REPLACE INTO gpu_specs (
             OpenglVersion = ReadNullableString(reader, "opengl_version"),
             VulkanVersion = ReadNullableString(reader, "vulkan_version"),
             Features = ReadNullableString(reader, "features"),
+            IsFromDatabase = true
+        };
+    }
+
+    private async Task<MotherboardSpecs?> QueryMotherboardAsync(string sql, CancellationToken ct, params SqliteParameter[] parameters)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+        foreach (var parameter in parameters)
+        {
+            command.Parameters.Add(parameter);
+        }
+
+        await using var reader = await command.ExecuteReaderAsync(ct).ConfigureAwait(false);
+        if (!await reader.ReadAsync(ct).ConfigureAwait(false))
+        {
+            return null;
+        }
+
+        return new MotherboardSpecs
+        {
+            BoardId = ReadString(reader, "board_id"),
+            Manufacturer = ReadString(reader, "manufacturer"),
+            Model = ReadString(reader, "model"),
+            Chipset = ReadNullableString(reader, "chipset"),
+            Socket = ReadNullableString(reader, "socket"),
+            FormFactor = ReadNullableString(reader, "form_factor"),
+            MemorySlots = ReadNullableInt(reader, "memory_slots"),
+            MaxMemoryGb = ReadNullableInt(reader, "max_memory_gb"),
+            MemoryType = ReadNullableString(reader, "memory_type"),
+            MaxMemorySpeedMhz = ReadNullableInt(reader, "max_memory_speed_mhz"),
+            PcieSlots = ReadNullableString(reader, "pcie_slots"),
+            SataPorts = ReadNullableInt(reader, "sata_ports"),
+            M2Slots = ReadNullableInt(reader, "m2_slots"),
+            UsbPorts = ReadNullableString(reader, "usb_ports"),
+            AudioCodec = ReadNullableString(reader, "audio_codec"),
+            NetworkChip = ReadNullableString(reader, "network_chip"),
+            WifiChip = ReadNullableString(reader, "wifi_chip"),
+            BiosType = ReadNullableString(reader, "bios_type"),
+            ReleaseDate = ReadNullableString(reader, "release_date"),
+            IsFromDatabase = true
+        };
+    }
+
+    private async Task<StorageSpecs?> QueryStorageAsync(string sql, CancellationToken ct, params SqliteParameter[] parameters)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+        foreach (var parameter in parameters)
+        {
+            command.Parameters.Add(parameter);
+        }
+
+        await using var reader = await command.ExecuteReaderAsync(ct).ConfigureAwait(false);
+        if (!await reader.ReadAsync(ct).ConfigureAwait(false))
+        {
+            return null;
+        }
+
+        return new StorageSpecs
+        {
+            ModelId = ReadString(reader, "model_id"),
+            Manufacturer = ReadString(reader, "manufacturer"),
+            Model = ReadString(reader, "model"),
+            Type = ReadString(reader, "type"),
+            CapacityGb = ReadNullableInt(reader, "capacity_gb"),
+            Interface = ReadNullableString(reader, "interface"),
+            FormFactor = ReadNullableString(reader, "form_factor"),
+            SeqReadMbps = ReadNullableInt(reader, "seq_read_mbps"),
+            SeqWriteMbps = ReadNullableInt(reader, "seq_write_mbps"),
+            RandomReadIops = ReadNullableInt(reader, "random_read_iops"),
+            RandomWriteIops = ReadNullableInt(reader, "random_write_iops"),
+            NandType = ReadNullableString(reader, "nand_type"),
+            Controller = ReadNullableString(reader, "controller"),
+            DramCacheMb = ReadNullableInt(reader, "dram_cache_mb"),
+            TbwTb = ReadNullableInt(reader, "tbw_tb"),
+            ReleaseDate = ReadNullableString(reader, "release_date"),
+            IsFromDatabase = true
+        };
+    }
+
+    private async Task<RamSpecs?> QueryRamAsync(string sql, CancellationToken ct, params SqliteParameter[] parameters)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+        foreach (var parameter in parameters)
+        {
+            command.Parameters.Add(parameter);
+        }
+
+        await using var reader = await command.ExecuteReaderAsync(ct).ConfigureAwait(false);
+        if (!await reader.ReadAsync(ct).ConfigureAwait(false))
+        {
+            return null;
+        }
+
+        return new RamSpecs
+        {
+            PartNumber = ReadString(reader, "part_number"),
+            Manufacturer = ReadString(reader, "manufacturer"),
+            Model = ReadString(reader, "model"),
+            Type = ReadString(reader, "type"),
+            SpeedMhz = ReadNullableInt(reader, "speed_mhz"),
+            CapacityGb = ReadNullableInt(reader, "capacity_gb"),
+            Modules = ReadNullableInt(reader, "modules"),
+            CasLatency = ReadNullableInt(reader, "cas_latency"),
+            Timings = ReadNullableString(reader, "timings"),
+            Voltage = ReadNullableDouble(reader, "voltage"),
+            Ecc = ReadNullableInt(reader, "ecc") is { } ecc ? ecc == 1 : null,
+            XmpProfiles = ReadNullableString(reader, "xmp_profiles"),
+            ReleaseDate = ReadNullableString(reader, "release_date"),
             IsFromDatabase = true
         };
     }
@@ -605,5 +914,8 @@ INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('last_update', datetime(
         public string Version { get; set; } = "";
         public List<CpuSpecs>? Cpu { get; set; }
         public List<GpuSpecs>? Gpu { get; set; }
+        public List<MotherboardSpecs>? Motherboard { get; set; }
+        public List<StorageSpecs>? Storage { get; set; }
+        public List<RamSpecs>? Ram { get; set; }
     }
 }

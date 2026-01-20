@@ -102,6 +102,24 @@ public sealed record MotherboardSpecs
     public string? BiosType { get; init; }
     public string? ReleaseDate { get; init; }
     public bool IsFromDatabase { get; init; }
+
+    public static MotherboardSpecs FromIdentity(MotherboardIdentity identity)
+    {
+        if (identity == null) throw new ArgumentNullException(nameof(identity));
+
+        var manufacturer = identity.Manufacturer ?? "Unknown";
+        var model = identity.Product ?? identity.LookupKey;
+        var boardId = identity.LookupKey;
+        return new MotherboardSpecs
+        {
+            BoardId = string.IsNullOrWhiteSpace(boardId)
+                ? $"{manufacturer} {model}".Trim()
+                : boardId,
+            Manufacturer = manufacturer,
+            Model = string.IsNullOrWhiteSpace(model) ? "Unknown" : model,
+            IsFromDatabase = false
+        };
+    }
 }
 
 public sealed record StorageSpecs
@@ -123,6 +141,19 @@ public sealed record StorageSpecs
     public int? TbwTb { get; init; }
     public string? ReleaseDate { get; init; }
     public bool IsFromDatabase { get; init; }
+
+    public static StorageSpecs FromModel(string model)
+    {
+        var normalized = (model ?? string.Empty).Trim();
+        return new StorageSpecs
+        {
+            ModelId = string.IsNullOrWhiteSpace(normalized) ? "Unknown" : normalized,
+            Manufacturer = "Unknown",
+            Model = string.IsNullOrWhiteSpace(normalized) ? "Unknown" : normalized,
+            Type = "Unknown",
+            IsFromDatabase = false
+        };
+    }
 }
 
 public sealed record RamSpecs
@@ -141,4 +172,24 @@ public sealed record RamSpecs
     public string? XmpProfiles { get; init; }
     public string? ReleaseDate { get; init; }
     public bool IsFromDatabase { get; init; }
+
+    public static RamSpecs FromModule(RamModule module)
+    {
+        if (module == null) throw new ArgumentNullException(nameof(module));
+
+        var partNumber = (module.PartNumber ?? string.Empty).Trim();
+        var manufacturer = module.Manufacturer ?? "Unknown";
+        var model = string.IsNullOrWhiteSpace(partNumber) ? manufacturer : partNumber;
+        return new RamSpecs
+        {
+            PartNumber = string.IsNullOrWhiteSpace(partNumber) ? model : partNumber,
+            Manufacturer = manufacturer,
+            Model = model,
+            Type = module.MemoryType ?? "Unknown",
+            SpeedMhz = module.SpeedMHz > 0 ? module.SpeedMHz : null,
+            CapacityGb = module.CapacityGB > 0 ? (int)Math.Round(module.CapacityGB) : null,
+            Modules = 1,
+            IsFromDatabase = false
+        };
+    }
 }
