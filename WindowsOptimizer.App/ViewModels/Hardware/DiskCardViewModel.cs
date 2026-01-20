@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using WindowsOptimizer.Infrastructure.Hardware;
 using WindowsOptimizer.Infrastructure.Threading;
 
 namespace WindowsOptimizer.App.ViewModels.Hardware;
@@ -16,6 +18,7 @@ namespace WindowsOptimizer.App.ViewModels.Hardware;
 public class DiskCardViewModel : HardwareCardViewModelBase
 {
     private readonly MetricDataBus? _bus;
+    private readonly HardwareSpecsService _specsService = new();
     private List<StorageDriveInfo> _disks = new();
 
     public DiskCardViewModel(MetricDataBus? bus = null)
@@ -103,6 +106,7 @@ public class DiskCardViewModel : HardwareCardViewModelBase
                 }
             });
 
+            await PopulateStorageSpecsAsync(disks);
             _disks = disks;
 
             await Application.Current.Dispatcher.InvokeAsync(() =>
@@ -135,9 +139,23 @@ public class DiskCardViewModel : HardwareCardViewModelBase
 
                 if (disks.Count > 0)
                 {
-                    var types = disks.Select(d => d.IsSsd ? "SSD" : "HDD").Distinct();
+                    var types = disks.Select(d => d.Specs?.Type ?? (d.IsSsd ? "SSD" : "HDD")).Distinct();
                     SecondaryMetrics.Add(new MetricItem("Type", string.Join("/", types), ""));
                 }
+
+                var ratedRead = disks.Select(d => d.Specs?.SeqReadMbps ?? 0).Max();
+                if (ratedRead > 0)
+                {
+                    SecondaryMetrics.Add(new MetricItem("Rated Read", ratedRead.ToString("F0"), "MB/s"));
+                }
+
+                var ratedWrite = disks.Select(d => d.Specs?.SeqWriteMbps ?? 0).Max();
+                if (ratedWrite > 0)
+                {
+                    SecondaryMetrics.Add(new MetricItem("Rated Write", ratedWrite.ToString("F0"), "MB/s"));
+                }
+
+                HasSpecs = disks.Any(d => d.Specs?.IsFromDatabase == true);
 
                 IsLoading = false;
             });
@@ -150,6 +168,27 @@ public class DiskCardViewModel : HardwareCardViewModelBase
                 Subtitle = "Disk Info Unavailable";
                 IsLoading = false;
             });
+        }
+    }
+
+    private async Task PopulateStorageSpecsAsync(List<StorageDriveInfo> disks)
+    {
+        var specsByModel = new Dictionary<string, StorageSpecs>(StringComparer.OrdinalIgnoreCase);
+        foreach (var disk in disks)
+        {
+            var model = disk.Model ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(model))
+            {
+                continue;
+            }
+
+            if (!specsByModel.TryGetValue(model, out var specs))
+            {
+                specs = await _specsService.GetStorageSpecsAsync(model, CancellationToken.None);
+                specsByModel[model] = specs;
+            }
+
+            disk.Specs = specs;
         }
     }
 
@@ -215,6 +254,7 @@ public class StorageDriveInfo
     public int Partitions { get; set; }
     public string DeviceId { get; set; } = "";
     public bool IsSsd { get; set; }
+    public StorageSpecs? Specs { get; set; }
     public List<LogicalStorageDriveInfo> LogicalDisks { get; } = new();
 
     public double SizeGB => SizeBytes / 1_000_000_000.0;

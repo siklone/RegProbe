@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -24,6 +26,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
 {
     private readonly MetricDataBus? _bus;
     private readonly HardwareType _type;
+    private readonly HardwareSpecsService _specsService = new();
     private bool _isDisposed;
     private double? _ramTotalGb;
     private double? _ramUsedGb;
@@ -395,10 +398,22 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             return;
         }
 
+        var moduleSpecs = new List<RamSpecs>();
+        RamSpecs? primarySpec = null;
+        foreach (var module in ram.Modules)
+        {
+            var spec = await _specsService.GetRamSpecsAsync(module, CancellationToken.None).ConfigureAwait(false);
+            moduleSpecs.Add(spec);
+            if (primarySpec == null || (!primarySpec.IsFromDatabase && spec.IsFromDatabase))
+            {
+                primarySpec = spec;
+            }
+        }
+
         await DispatchAsync(() =>
         {
             _ramTotalGb = ram.TotalCapacityGB;
-            Subtitle = ram.LookupKey;
+            Subtitle = primarySpec?.Model ?? ram.LookupKey;
             Stat1Label = "Total";
             Stat1Value = $"{ram.TotalCapacityGB:F0} GB";
             Stat2Label = "Used";
@@ -406,7 +421,8 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             Stat3Label = "Free";
             Stat3Value = "N/A";
             Stat4Label = "Speed";
-            Stat4Value = ram.Modules.Count > 0 ? $"{ram.Modules[0].SpeedMHz} MHz" : "N/A";
+            var speedValue = primarySpec?.SpeedMhz ?? (ram.Modules.Count > 0 ? ram.Modules[0].SpeedMHz : 0);
+            Stat4Value = speedValue > 0 ? $"{speedValue} MHz" : "N/A";
 
             Specifications.Clear();
             Details.Clear();
@@ -418,15 +434,44 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             if (ram.Modules.Count > 0)
             {
                 var first = ram.Modules[0];
-                Specifications.Add(new("Memory Type", first.MemoryType ?? "N/A"));
-                Specifications.Add(new("Speed", $"{first.SpeedMHz} MHz"));
+                Specifications.Add(new("Memory Type", primarySpec?.Type ?? first.MemoryType ?? "N/A"));
+                Specifications.Add(new("Speed", speedValue > 0 ? $"{speedValue} MHz" : "N/A"));
                 Specifications.Add(new("Form Factor", first.FormFactor ?? "DIMM"));
+            }
+
+            if (primarySpec?.CasLatency is { } casLatency)
+            {
+                Specifications.Add(new("CAS Latency", $"CL{casLatency}"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(primarySpec?.Timings))
+            {
+                Specifications.Add(new("Timings", primarySpec.Timings));
+            }
+
+            if (primarySpec?.Voltage is { } voltage)
+            {
+                Specifications.Add(new("Voltage", $"{voltage:0.00} V"));
+            }
+
+            if (primarySpec?.Ecc is { } ecc)
+            {
+                Specifications.Add(new("ECC", ecc ? "Yes" : "No"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(primarySpec?.XmpProfiles))
+            {
+                Specifications.Add(new("XMP Profiles", primarySpec.XmpProfiles));
             }
 
             SubItemsHeader = "Memory Modules";
             var slot = 1;
+            var moduleIndex = 0;
             foreach (var module in ram.Modules)
             {
+                RamSpecs? moduleSpec = moduleIndex < moduleSpecs.Count ? moduleSpecs[moduleIndex] : null;
+                moduleIndex++;
+
                 var subItem = new SubItemViewModel
                 {
                     Icon = "\uD83D\uDCBF",
@@ -434,7 +479,27 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 };
                 subItem.Properties.Add(new("Manufacturer", module.Manufacturer ?? "Unknown"));
                 subItem.Properties.Add(new("Part Number", module.PartNumber ?? "N/A"));
+                if (!string.IsNullOrWhiteSpace(moduleSpec?.Model))
+                {
+                    subItem.Properties.Add(new("Model", moduleSpec.Model));
+                }
                 subItem.Properties.Add(new("Speed", $"{module.SpeedMHz} MHz"));
+                if (moduleSpec?.CasLatency is { } moduleCas)
+                {
+                    subItem.Properties.Add(new("CAS", $"CL{moduleCas}"));
+                }
+                if (!string.IsNullOrWhiteSpace(moduleSpec?.Timings))
+                {
+                    subItem.Properties.Add(new("Timings", moduleSpec.Timings));
+                }
+                if (moduleSpec?.Voltage is { } moduleVoltage)
+                {
+                    subItem.Properties.Add(new("Voltage", $"{moduleVoltage:0.00} V"));
+                }
+                if (moduleSpec?.Ecc is { } moduleEcc)
+                {
+                    subItem.Properties.Add(new("ECC", moduleEcc ? "Yes" : "No"));
+                }
                 subItem.Properties.Add(new("Capacity", $"{module.CapacityGB:F0} GB"));
                 subItem.Properties.Add(new("Bank Label", module.BankLabel ?? "N/A"));
                 subItem.Properties.Add(new("Device Locator", module.DeviceLocator ?? "N/A"));
@@ -504,6 +569,24 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             return;
         }
 
+        var specsByModel = new Dictionary<string, StorageSpecs>(StringComparer.OrdinalIgnoreCase);
+        foreach (var disk in disks)
+        {
+            var model = disk.Model ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(model))
+            {
+                continue;
+            }
+
+            if (!specsByModel.TryGetValue(model, out var specs))
+            {
+                specs = await _specsService.GetStorageSpecsAsync(model, CancellationToken.None).ConfigureAwait(false);
+                specsByModel[model] = specs;
+            }
+
+            disk.Specs = specs;
+        }
+
         await DispatchAsync(() =>
         {
             Subtitle = disks.Count == 1 ? disks[0].Model : $"{disks.Count} Drives";
@@ -530,6 +613,11 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             Specifications.Add(new("Used Space", FormatSize(totalUsed)));
             Specifications.Add(new("Free Space", FormatSize(totalSize - totalUsed)));
             Specifications.Add(new("Physical Drives", disks.Count.ToString()));
+            var specMatches = disks.Count(d => d.Specs?.IsFromDatabase == true);
+            if (specMatches > 0)
+            {
+                Specifications.Add(new("Specs Matches", $"{specMatches}/{disks.Count}"));
+            }
 
             SubItemsHeader = "Drives";
             foreach (var disk in disks)
@@ -539,10 +627,31 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                     Icon = disk.IsSsd ? "\u26A1" : "\uD83D\uDCBF",
                     Name = disk.Model
                 };
-                subItem.Properties.Add(new("Type", disk.IsSsd ? "SSD" : "HDD"));
-                subItem.Properties.Add(new("Interface", disk.InterfaceType));
+                var specType = disk.Specs?.Type ?? (disk.IsSsd ? "SSD" : "HDD");
+                subItem.Properties.Add(new("Type", specType));
+                var interfaceLabel = disk.Specs?.Interface ?? disk.InterfaceType;
+                if (!string.IsNullOrWhiteSpace(interfaceLabel))
+                {
+                    subItem.Properties.Add(new("Interface", interfaceLabel));
+                }
+                if (!string.IsNullOrWhiteSpace(disk.Specs?.FormFactor))
+                {
+                    subItem.Properties.Add(new("Form Factor", disk.Specs.FormFactor));
+                }
                 subItem.Properties.Add(new("Size", FormatSize(disk.SizeBytes)));
                 subItem.Properties.Add(new("Partitions", disk.Partitions.ToString()));
+                if (disk.Specs?.SeqReadMbps is { } seqRead && seqRead > 0)
+                {
+                    subItem.Properties.Add(new("Seq Read", $"{seqRead} MB/s"));
+                }
+                if (disk.Specs?.SeqWriteMbps is { } seqWrite && seqWrite > 0)
+                {
+                    subItem.Properties.Add(new("Seq Write", $"{seqWrite} MB/s"));
+                }
+                if (disk.Specs?.TbwTb is { } tbw && tbw > 0)
+                {
+                    subItem.Properties.Add(new("TBW", $"{tbw} TB"));
+                }
                 SubItems.Add(subItem);
             }
 
