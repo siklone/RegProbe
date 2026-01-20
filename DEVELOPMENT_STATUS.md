@@ -250,6 +250,19 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.11 Motherboard Detail View (Commit: pending)
+**Improvement:** Added motherboard hardware detail view with DB-backed specs and a dashboard entry point.
+
+**Modified Files:**
+- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Motherboard detail loader and view config.
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Motherboard type routing in detail navigation.
+- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Command to open motherboard detail window.
+- `WindowsOptimizer.App/Views/DashboardView.xaml` - Motherboard details button.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.

@@ -33,6 +33,7 @@ Current focus (2026-01-20):
 - Hardware detail windows load async and show live metrics (quick stats use clock/power, RAM used/free, disk read/write); MetricDataBus emits CPU clock/power, GPU clock/power/memory, RAM available, disk read/write/health.
 - Storage card/detail size and speed formatting now uses 1024-based units for consistent MB/GB values.
 - Monitor cards now surface live RAM used/free and storage read/write summary lines under the primary value.
+- Motherboard detail window now loads specs and can be opened from the Dashboard.
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
