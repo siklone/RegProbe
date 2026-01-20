@@ -1,6 +1,6 @@
 # Development Status & Known Issues
 
-**Last Updated:** January 19, 2026
+**Last Updated:** January 20, 2026
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
@@ -223,6 +223,17 @@ var result = await preloader.RunAllAsync(ct);
 - RAM/Storage cards and detail views now surface DB specs (rated speeds, timings, form factor)
 
 **Status:** ?. **IMPLEMENTED** - DB population/update pending
+
+---
+
+### 0.9 Storage Unit Alignment (Commit: pending)
+**Improvement:** Aligned storage size/speed formatting to binary (1024-based) units for consistent disk card and detail metrics.
+
+**Modified Files:**
+- `WindowsOptimizer.App/ViewModels/Hardware/DiskCardViewModel.cs` - 1024-based size/speed formatting and GB conversions.
+- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - 1024-based size/speed formatting for disk details.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
 ---
 

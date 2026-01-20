@@ -9,7 +9,7 @@
 
 ---
 
-**Last Updated:** 2026-01-19
+**Last Updated:** 2026-01-20
 **Branch:** `main`
 
 Start with:
@@ -18,7 +18,7 @@ Start with:
 - `DEVELOPMENT_ROADMAP.md` (approved v2.1 roadmap for major features)
 - `AGENTS.md` (non-negotiable safety/architecture rules)
 
-Current focus (2026-01-19):
+Current focus (2026-01-20):
 - **NEW: Development Roadmap v2.1** approved and documented in `DEVELOPMENT_ROADMAP.md`
 - Roadmap includes: Single Instance, Multi-threading, Splash Preloading, Hardware Database, Monitor Redesign, Process Management
 - Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
@@ -31,6 +31,7 @@ Current focus (2026-01-19):
 - Startup preload now initializes metric threading and warms hardware identifiers via `PreloadManager`.
 - Hardware database scaffolding (SQLite) is in place; embedded seed/import + update check added, CPU/GPU/RAM/Storage/Motherboard tables seeded, RAM/Storage cards + detail views now surface DB specs, CPU/GPU cards resolve specs via fallback (DB -> identity).
 - Hardware detail windows load async and show live metrics (quick stats use clock/power, RAM used/free, disk read/write); MetricDataBus emits CPU clock/power, GPU clock/power/memory, RAM available, disk read/write/health.
+- Storage card/detail size and speed formatting now uses 1024-based units for consistent MB/GB values.
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
