@@ -214,23 +214,32 @@ public class DiskCardViewModel : HardwareCardViewModelBase
 
     private static string FormatSize(long bytes)
     {
-        if (bytes >= 1_000_000_000_000)
-            return $"{bytes / 1_000_000_000_000.0:F1} TB";
-        if (bytes >= 1_000_000_000)
-            return $"{bytes / 1_000_000_000.0:F0} GB";
-        if (bytes >= 1_000_000)
-            return $"{bytes / 1_000_000.0:F0} MB";
-        return $"{bytes / 1_000.0:F0} KB";
+        const long kilo = 1024;
+        const long mega = kilo * 1024;
+        const long giga = mega * 1024;
+        const long tera = giga * 1024;
+
+        if (bytes >= tera)
+            return $"{bytes / (double)tera:F1} TB";
+        if (bytes >= giga)
+            return $"{bytes / (double)giga:F0} GB";
+        if (bytes >= mega)
+            return $"{bytes / (double)mega:F0} MB";
+        return $"{bytes / (double)kilo:F0} KB";
     }
 
     private static string FormatSpeed(double bytesPerSec)
     {
-        if (bytesPerSec >= 1_000_000_000)
-            return $"{bytesPerSec / 1_000_000_000.0:F1} GB";
-        if (bytesPerSec >= 1_000_000)
-            return $"{bytesPerSec / 1_000_000.0:F0} MB";
-        if (bytesPerSec >= 1_000)
-            return $"{bytesPerSec / 1_000.0:F0} KB";
+        const double kilo = 1024.0;
+        const double mega = kilo * 1024.0;
+        const double giga = mega * 1024.0;
+
+        if (bytesPerSec >= giga)
+            return $"{bytesPerSec / giga:F1} GB";
+        if (bytesPerSec >= mega)
+            return $"{bytesPerSec / mega:F0} MB";
+        if (bytesPerSec >= kilo)
+            return $"{bytesPerSec / kilo:F0} KB";
         return $"{bytesPerSec:F0} B";
     }
 
@@ -257,7 +266,7 @@ public class StorageDriveInfo
     public StorageSpecs? Specs { get; set; }
     public List<LogicalStorageDriveInfo> LogicalDisks { get; } = new();
 
-    public double SizeGB => SizeBytes / 1_000_000_000.0;
+    public double SizeGB => SizeBytes / (1024.0 * 1024 * 1024);
 }
 
 public class LogicalStorageDriveInfo
@@ -270,7 +279,7 @@ public class LogicalStorageDriveInfo
     public long UsedBytes { get; set; }
 
     public double UsagePercent => TotalBytes > 0 ? (double)UsedBytes / TotalBytes * 100 : 0;
-    public double TotalGB => TotalBytes / 1_000_000_000.0;
-    public double FreeGB => FreeBytes / 1_000_000_000.0;
-    public double UsedGB => UsedBytes / 1_000_000_000.0;
+    public double TotalGB => TotalBytes / (1024.0 * 1024 * 1024);
+    public double FreeGB => FreeBytes / (1024.0 * 1024 * 1024);
+    public double UsedGB => UsedBytes / (1024.0 * 1024 * 1024);
 }

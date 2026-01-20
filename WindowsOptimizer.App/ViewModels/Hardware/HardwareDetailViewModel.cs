@@ -857,23 +857,32 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
 
     private static string FormatSize(long bytes)
     {
-        if (bytes >= 1_000_000_000_000)
-            return $"{bytes / 1_000_000_000_000.0:F1} TB";
-        if (bytes >= 1_000_000_000)
-            return $"{bytes / 1_000_000_000.0:F0} GB";
-        if (bytes >= 1_000_000)
-            return $"{bytes / 1_000_000.0:F0} MB";
-        return $"{bytes / 1_000.0:F0} KB";
+        const long kilo = 1024;
+        const long mega = kilo * 1024;
+        const long giga = mega * 1024;
+        const long tera = giga * 1024;
+
+        if (bytes >= tera)
+            return $"{bytes / (double)tera:F1} TB";
+        if (bytes >= giga)
+            return $"{bytes / (double)giga:F0} GB";
+        if (bytes >= mega)
+            return $"{bytes / (double)mega:F0} MB";
+        return $"{bytes / (double)kilo:F0} KB";
     }
 
     private static string FormatSpeed(double bytesPerSec)
     {
-        if (bytesPerSec >= 1_000_000_000)
-            return $"{bytesPerSec / 1_000_000_000.0:F1} GB/s";
-        if (bytesPerSec >= 1_000_000)
-            return $"{bytesPerSec / 1_000_000.0:F0} MB/s";
-        if (bytesPerSec >= 1_000)
-            return $"{bytesPerSec / 1_000.0:F0} KB/s";
+        const double kilo = 1024.0;
+        const double mega = kilo * 1024.0;
+        const double giga = mega * 1024.0;
+
+        if (bytesPerSec >= giga)
+            return $"{bytesPerSec / giga:F1} GB/s";
+        if (bytesPerSec >= mega)
+            return $"{bytesPerSec / mega:F0} MB/s";
+        if (bytesPerSec >= kilo)
+            return $"{bytesPerSec / kilo:F0} KB/s";
         return $"{bytesPerSec:F0} B/s";
     }
 
