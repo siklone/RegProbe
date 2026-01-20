@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,10 @@ public sealed class HardwareDatabase
     private static readonly SemaphoreSlim SchemaLock = new(1, 1);
     private static bool _schemaReady;
     private static HardwareDatabase? _instance;
+    private static readonly JsonSerializerOptions SeedJsonOptions = new() { PropertyNameCaseInsensitive = true };
+    private const string SeedResourceName = "WindowsOptimizer.Infrastructure.Hardware.hardware-seed.json";
+    private const string SeedVersionKey = "seed_version";
+    private const string SeedAppliedKey = "seed_applied";
 
     private readonly string _dbPath;
 
@@ -50,6 +55,7 @@ public sealed class HardwareDatabase
 
         var database = new HardwareDatabase(dbPath);
         await database.EnsureSchemaAsync(ct).ConfigureAwait(false);
+        await database.EnsureSeedDataAsync(ct).ConfigureAwait(false);
         _instance = database;
         return database;
     }
@@ -116,10 +122,10 @@ public sealed class HardwareDatabase
         return null;
     }
 
-    public Task<bool> CheckForUpdatesAsync(CancellationToken ct)
+    public async Task<bool> CheckForUpdatesAsync(CancellationToken ct)
     {
-        _ = ct;
-        return Task.FromResult(false);
+        await EnsureSchemaAsync(ct).ConfigureAwait(false);
+        return await EnsureSeedDataAsync(ct).ConfigureAwait(false);
     }
 
     private async Task EnsureSchemaAsync(CancellationToken ct)
@@ -150,6 +156,179 @@ public sealed class HardwareDatabase
         {
             SchemaLock.Release();
         }
+    }
+
+    private async Task<bool> EnsureSeedDataAsync(CancellationToken ct)
+    {
+        var seed = await LoadSeedAsync(ct).ConfigureAwait(false);
+        if (seed == null || string.IsNullOrWhiteSpace(seed.Version))
+        {
+            return false;
+        }
+
+        var currentVersion = await GetMetadataValueAsync(SeedVersionKey, ct).ConfigureAwait(false);
+        var hasData = await HasSeedDataAsync(ct).ConfigureAwait(false);
+        if (hasData && string.Equals(currentVersion, seed.Version, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        await ApplySeedAsync(seed, ct).ConfigureAwait(false);
+        await SetMetadataValueAsync(SeedVersionKey, seed.Version, ct).ConfigureAwait(false);
+        await SetMetadataValueAsync(SeedAppliedKey, DateTime.UtcNow.ToString("O"), ct).ConfigureAwait(false);
+        await SetMetadataValueAsync("last_update", DateTime.UtcNow.ToString("O"), ct).ConfigureAwait(false);
+        return true;
+    }
+
+    private async Task<HardwareDatabaseSeed?> LoadSeedAsync(CancellationToken ct)
+    {
+        var assembly = typeof(HardwareDatabase).Assembly;
+        await using var stream = assembly.GetManifestResourceStream(SeedResourceName);
+        if (stream == null)
+        {
+            return null;
+        }
+
+        return await JsonSerializer.DeserializeAsync<HardwareDatabaseSeed>(stream, SeedJsonOptions, ct)
+            .ConfigureAwait(false);
+    }
+
+    private async Task<bool> HasSeedDataAsync(CancellationToken ct)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var cpuCommand = connection.CreateCommand();
+        cpuCommand.CommandText = "SELECT COUNT(1) FROM cpu_specs";
+        var cpuCount = Convert.ToInt32(await cpuCommand.ExecuteScalarAsync(ct).ConfigureAwait(false));
+        if (cpuCount > 0)
+        {
+            return true;
+        }
+
+        await using var gpuCommand = connection.CreateCommand();
+        gpuCommand.CommandText = "SELECT COUNT(1) FROM gpu_specs";
+        var gpuCount = Convert.ToInt32(await gpuCommand.ExecuteScalarAsync(ct).ConfigureAwait(false));
+        return gpuCount > 0;
+    }
+
+    private async Task<string?> GetMetadataValueAsync(string key, CancellationToken ct)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT value FROM db_metadata WHERE key = @key LIMIT 1";
+        command.Parameters.Add(new SqliteParameter("@key", key));
+        var result = await command.ExecuteScalarAsync(ct).ConfigureAwait(false);
+        return result?.ToString();
+    }
+
+    private async Task SetMetadataValueAsync(string key, string value, CancellationToken ct)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = "INSERT OR REPLACE INTO db_metadata (key, value) VALUES (@key, @value)";
+        command.Parameters.Add(new SqliteParameter("@key", key));
+        command.Parameters.Add(new SqliteParameter("@value", value));
+        await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+    }
+
+    private async Task ApplySeedAsync(HardwareDatabaseSeed seed, CancellationToken ct)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(ct).ConfigureAwait(false);
+
+        using var transaction = connection.BeginTransaction();
+        foreach (var cpu in seed.Cpu ?? new List<CpuSpecs>())
+        {
+            if (string.IsNullOrWhiteSpace(cpu.Cpuid) || string.IsNullOrWhiteSpace(cpu.Brand))
+            {
+                continue;
+            }
+
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = @"
+INSERT OR REPLACE INTO cpu_specs (
+    cpuid, brand, codename, cores, threads, base_clock_mhz, boost_clock_mhz, tdp_watts,
+    cache_l2_kb, cache_l3_kb, lithography_nm, release_date, socket, architecture, features,
+    max_memory_gb, memory_channels, pcie_lanes, integrated_gpu, updated_at
+) VALUES (
+    @cpuid, @brand, @codename, @cores, @threads, @base_clock_mhz, @boost_clock_mhz, @tdp_watts,
+    @cache_l2_kb, @cache_l3_kb, @lithography_nm, @release_date, @socket, @architecture, @features,
+    @max_memory_gb, @memory_channels, @pcie_lanes, @integrated_gpu, datetime('now')
+)";
+            AddParameter(command, "@cpuid", cpu.Cpuid);
+            AddParameter(command, "@brand", cpu.Brand);
+            AddParameter(command, "@codename", cpu.Codename);
+            AddParameter(command, "@cores", cpu.Cores);
+            AddParameter(command, "@threads", cpu.Threads);
+            AddParameter(command, "@base_clock_mhz", cpu.BaseClockMhz);
+            AddParameter(command, "@boost_clock_mhz", cpu.BoostClockMhz);
+            AddParameter(command, "@tdp_watts", cpu.TdpWatts);
+            AddParameter(command, "@cache_l2_kb", cpu.CacheL2Kb);
+            AddParameter(command, "@cache_l3_kb", cpu.CacheL3Kb);
+            AddParameter(command, "@lithography_nm", cpu.LithographyNm);
+            AddParameter(command, "@release_date", cpu.ReleaseDate);
+            AddParameter(command, "@socket", cpu.Socket);
+            AddParameter(command, "@architecture", cpu.Architecture);
+            AddParameter(command, "@features", cpu.Features);
+            AddParameter(command, "@max_memory_gb", cpu.MaxMemoryGb);
+            AddParameter(command, "@memory_channels", cpu.MemoryChannels);
+            AddParameter(command, "@pcie_lanes", cpu.PcieLanes);
+            AddParameter(command, "@integrated_gpu", cpu.IntegratedGpu);
+            await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+        }
+
+        foreach (var gpu in seed.Gpu ?? new List<GpuSpecs>())
+        {
+            if (string.IsNullOrWhiteSpace(gpu.DeviceId) || string.IsNullOrWhiteSpace(gpu.Brand))
+            {
+                continue;
+            }
+
+            await using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = @"
+INSERT OR REPLACE INTO gpu_specs (
+    device_id, brand, codename, cuda_cores, stream_processors, base_clock_mhz, boost_clock_mhz,
+    memory_size_mb, memory_type, memory_bus_bits, memory_bandwidth_gbps, tdp_watts, release_date,
+    architecture, directx_version, opengl_version, vulkan_version, features, updated_at
+) VALUES (
+    @device_id, @brand, @codename, @cuda_cores, @stream_processors, @base_clock_mhz, @boost_clock_mhz,
+    @memory_size_mb, @memory_type, @memory_bus_bits, @memory_bandwidth_gbps, @tdp_watts, @release_date,
+    @architecture, @directx_version, @opengl_version, @vulkan_version, @features, datetime('now')
+)";
+            AddParameter(command, "@device_id", gpu.DeviceId);
+            AddParameter(command, "@brand", gpu.Brand);
+            AddParameter(command, "@codename", gpu.Codename);
+            AddParameter(command, "@cuda_cores", gpu.CudaCores);
+            AddParameter(command, "@stream_processors", gpu.StreamProcessors);
+            AddParameter(command, "@base_clock_mhz", gpu.BaseClockMhz);
+            AddParameter(command, "@boost_clock_mhz", gpu.BoostClockMhz);
+            AddParameter(command, "@memory_size_mb", gpu.MemorySizeMb);
+            AddParameter(command, "@memory_type", gpu.MemoryType);
+            AddParameter(command, "@memory_bus_bits", gpu.MemoryBusBits);
+            AddParameter(command, "@memory_bandwidth_gbps", gpu.MemoryBandwidthGbps);
+            AddParameter(command, "@tdp_watts", gpu.TdpWatts);
+            AddParameter(command, "@release_date", gpu.ReleaseDate);
+            AddParameter(command, "@architecture", gpu.Architecture);
+            AddParameter(command, "@directx_version", gpu.DirectxVersion);
+            AddParameter(command, "@opengl_version", gpu.OpenglVersion);
+            AddParameter(command, "@vulkan_version", gpu.VulkanVersion);
+            AddParameter(command, "@features", gpu.Features);
+            await command.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+        }
+
+        await transaction.CommitAsync(ct).ConfigureAwait(false);
+    }
+
+    private static void AddParameter(SqliteCommand command, string name, object? value)
+    {
+        command.Parameters.Add(new SqliteParameter(name, value ?? DBNull.Value));
     }
 
     private async Task<CpuSpecs?> QueryCpuAsync(string sql, CancellationToken ct, params SqliteParameter[] parameters)
@@ -420,4 +599,11 @@ CREATE TABLE IF NOT EXISTS db_metadata (
 INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('version', '1.0.0');
 INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('last_update', datetime('now'));
 ";
+
+    private sealed class HardwareDatabaseSeed
+    {
+        public string Version { get; set; } = "";
+        public List<CpuSpecs>? Cpu { get; set; }
+        public List<GpuSpecs>? Gpu { get; set; }
+    }
 }

@@ -88,6 +88,14 @@ public partial class App : Application
                 _ = HardwareIdentifier.GetRamId();
             }, ct), isCritical: false, priority: 50);
 
+            preloader.RegisterTask("Hardware database update", async ct =>
+            {
+                if (HardwareDatabase.TryGetInstance(out var database) && database != null)
+                {
+                    await database.CheckForUpdatesAsync(ct);
+                }
+            }, isCritical: false, priority: 20);
+
             await preloader.RunAllAsync(CancellationToken.None);
 
             var mainWindow = new MainWindow
