@@ -171,6 +171,33 @@ var result = await preloader.RunAllAsync(ct);
 **Status:** ✅ **OPTIMIZED** - Stability improved
 
 ---
+### 0.7 Startup Preload + Hardware Detail Live Metrics (Commit: pending)
+**Improvement:** Integrated PreloadManager and metric threading into startup; hardware detail windows now load async with live metrics.
+
+**New Files:**
+- `WindowsOptimizer.App/Services/AppServices.cs` - Shared MetricWorkerPool + MetricDataBus initialization
+- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Async hardware detail loader with live metric updates
+
+**Modified Files:**
+- `WindowsOptimizer.App/App.xaml.cs` - PreloadManager tasks + threading initialization before MainWindow
+- `WindowsOptimizer.App/StartupWindow.xaml.cs` - Splash progress updates for preload tasks
+- `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Pass MetricWorkerPool into MonitorViewModel
+- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Publish missing metric keys, disk bytes/sec, worker pool sampling
+- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM GB unit fix for live values
+- `WindowsOptimizer.App/Views/HardwareDetailWindow.xaml.cs` - Dispose view model on close
+
+**Features:**
+- Startup preloads threading + hardware identifiers on splash (non-blocking)
+- MetricWorkerPool backs monitor sampling for core/io/process/aux metrics
+- Hardware detail window updates CPU/GPU/RAM/Disk stats live
+- Hardware detail quick stats now update with live clock/power, RAM used/free, and disk read/write speeds
+- MetricDataBus now emits CPU clock/power, GPU clock/power/memory, RAM available, disk read/write, disk health
+- RAM + disk card units aligned (GB + bytes/sec)
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.

@@ -28,6 +28,8 @@ Current focus (2026-01-19):
 - Docs coverage report: `scripts/report_tweak_docs.py` checks per-tweak anchors across category docs, catalog, and details HTML (see `Docs/tweaks/tweak-docs-report.*`).
 - Startup flow: theme applies before splash + scan runs before MainWindow.
 - Splash shows scan progress (X/Y + current tweak).
+- Startup preload now initializes metric threading and warms hardware identifiers via `PreloadManager`.
+- Hardware detail windows load async and show live metrics (quick stats use clock/power, RAM used/free, disk read/write); MetricDataBus emits CPU clock/power, GPU clock/power/memory, RAM available, disk read/write/health.
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
 - Tweak catalog (CSV/MD/HTML) now includes Changes + Risk columns.
