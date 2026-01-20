@@ -62,6 +62,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly GpuCardViewModel _gpuCard;
     private readonly RamCardViewModel _ramCard;
     private readonly DiskCardViewModel _diskCard;
+    private readonly MotherboardCardViewModel _motherboardCard;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -194,6 +195,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _gpuCard = new GpuCardViewModel(_metricBus);
         _ramCard = new RamCardViewModel(_metricBus);
         _diskCard = new DiskCardViewModel(_metricBus);
+        _motherboardCard = new MotherboardCardViewModel(_metricBus);
 
         try
         {
@@ -509,6 +511,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _gpuCard.Dispose();
         _ramCard.Dispose();
         _diskCard.Dispose();
+        _motherboardCard.Dispose();
         if (_ownsMetricBus)
         {
             _metricBus.Dispose();
@@ -2285,6 +2288,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public GpuCardViewModel GpuCard => _gpuCard;
     public RamCardViewModel RamCard => _ramCard;
     public DiskCardViewModel DiskCard => _diskCard;
+    public MotherboardCardViewModel MotherboardCard => _motherboardCard;
 
     // Command to open hardware detail window
     public ICommand OpenHardwareDetailCommand => _openHardwareDetailCommand;

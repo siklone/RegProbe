@@ -839,9 +839,9 @@
             </Border>
         </DataTemplate>
 
-        <!-- Hardware Cards Template - Only CPU, GPU, RAM, Disk -->
+        <!-- Hardware Cards Template - CPU, GPU, RAM, Disk, Motherboard -->
         <DataTemplate x:Key="MonitorStatCardsTemplate">
-            <UniformGrid Rows="1" Columns="4" Margin="0,0,0,16">
+            <UniformGrid Rows="1" Columns="5" Margin="0,0,0,16">
                 <!-- CPU Card -->
                 <Border Style="{StaticResource StatCardStyle}" Margin="0,0,6,0" Cursor="Hand"
                         ToolTip="Click for detailed CPU information">
@@ -1041,7 +1041,7 @@
                 </Border>
 
                 <!-- Disk Card -->
-                <Border Style="{StaticResource StatCardStyle}" Margin="6,0,0,0" Cursor="Hand"
+                <Border Style="{StaticResource StatCardStyle}" Margin="3,0,3,0" Cursor="Hand"
                         ToolTip="Click for detailed Storage information">
                     <Border.InputBindings>
                         <MouseBinding MouseAction="LeftClick"
@@ -1049,6 +1049,70 @@
                                       CommandParameter="disk"/>
                     </Border.InputBindings>
                     <Grid DataContext="{Binding DiskCard}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{Binding IconBackground}" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="18"/>
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                            </StackPanel>
+                            <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                                <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                           VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
+                        </StackPanel>
+
+                        <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
+
+                        <ItemsControl Grid.Row="3" ItemsSource="{Binding SecondaryMetrics}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,2">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
+                <!-- Motherboard Card -->
+                <Border Style="{StaticResource StatCardStyle}" Margin="6,0,0,0" Cursor="Hand"
+                        ToolTip="Click for detailed Motherboard information">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OpenHardwareDetailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="motherboard"/>
+                    </Border.InputBindings>
+                    <Grid DataContext="{Binding MotherboardCard}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
