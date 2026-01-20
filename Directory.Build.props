@@ -5,6 +5,20 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
     <InformationalVersion>0.1.0</InformationalVersion>
+    
+    <!-- Null Safety: Enable across all projects -->
+    <Nullable>enable</Nullable>
+    
+    <!-- Analysis Settings -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    
+    <!-- 
+      Note: Null warnings (CS8600-CS8609) are enabled but NOT treated as errors.
+      This allows gradual null safety adoption. 
+      To enforce strict null safety later, uncomment:
+      <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604;CS8625</WarningsAsErrors>
+    -->
   </PropertyGroup>
 </Project>
 

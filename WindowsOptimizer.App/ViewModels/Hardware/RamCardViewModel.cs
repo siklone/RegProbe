@@ -76,12 +76,12 @@ public class RamCardViewModel : HardwareCardViewModelBase
 
         if (e.TryGetValue<double>("ram.used", out var used))
         {
-            UpdateSecondaryMetric("Used", $"{used / 1024:F1}", "GB");
+            UpdateSecondaryMetric("Used", $"{used:F1}", "GB");
         }
 
         if (e.TryGetValue<double>("ram.available", out var available))
         {
-            UpdateSecondaryMetric("Free", $"{available / 1024:F1}", "GB");
+            UpdateSecondaryMetric("Free", $"{available:F1}", "GB");
         }
     }
 

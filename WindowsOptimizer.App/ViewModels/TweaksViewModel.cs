@@ -114,9 +114,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IRollbackStateStore _rollbackStore;
     private readonly TweakDocumentationLinker _documentationLinker = new();
     private readonly IAppLogger _appLogger;
+    private readonly IBusyService _busyService;
 
-    public TweaksViewModel(IEnumerable<ITweakProvider>? providers = null)
+    public TweaksViewModel(IEnumerable<ITweakProvider>? providers, IBusyService busyService)
     {
+        _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _providerList = providers;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
@@ -816,6 +818,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
             BulkProgressTotal = items.Count;
             BulkProgressCurrent = 0;
+            BulkStatusMessage = $"{label} in progress ({items.Count} items)..."; 
+            using var busy = _busyService.Busy(BulkStatusMessage);
+
             OnPropertyChanged(nameof(BulkProgressText));
 
             foreach (var item in items)

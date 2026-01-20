@@ -51,7 +51,7 @@ jobs:
         run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore
 
       - name: Run tests
-        run: dotnet test -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults
+        run: dotnet test -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -59,6 +59,13 @@ jobs:
         with:
           name: test-results
           path: TestResults/*.trx
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: TestResults/**/coverage.cobertura.xml
 
   # ============================================
   # PUBLISH

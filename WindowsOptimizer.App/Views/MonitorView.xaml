@@ -839,234 +839,66 @@
             </Border>
         </DataTemplate>
 
+        <!-- Hardware Cards Template - Only CPU, GPU, RAM, Disk -->
         <DataTemplate x:Key="MonitorStatCardsTemplate">
-            <Grid Margin="0,0,0,16">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- CPU Usage Card -->
-                <Border Grid.Row="0" Grid.Column="0">
-                    <Border.Style>
-                        <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsCpuAlertActive}" Value="True">
-                                    <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <StackPanel>
-                        <Grid>
-                            <TextBlock Text="CPU Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold"
-                                       HorizontalAlignment="Right" Visibility="{Binding IsCpuAlertActive, Converter={StaticResource BoolToVisibility}}"/>
-                        </Grid>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,8,0,4">
-                            <Run Text="{Binding CpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- RAM Usage Card -->
-                <Border Grid.Row="0" Grid.Column="1">
-                    <Border.Style>
-                        <Style TargetType="Border" BasedOn="{StaticResource StatCardStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsRamAlertActive}" Value="True">
-                                    <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <StackPanel>
-                        <Grid>
-                            <TextBlock Text="RAM Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="⚠ HIGH" FontSize="11" Foreground="{DynamicResource DangerBrush}" FontWeight="Bold"
-                                       HorizontalAlignment="Right" Visibility="{Binding IsRamAlertActive, Converter={StaticResource BoolToVisibility}}"/>
-                        </Grid>
-                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" Margin="0,8,0,4">
-                            <Run Text="{Binding RamUsedGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" / " FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}"/><Run Text="{Binding RamTotalGb, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text=" GB" FontSize="16"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}">
-                            <Run Text="{Binding RamUsagePercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- CPU Temperature Card -->
-                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StatCardStyle}"
-                        ToolTip="CPU temperature sensor via LibreHardwareMonitor. Shows N/A if sensor data is unavailable (requires admin rights or hardware support).">
-                    <StackPanel>
-                        <TextBlock Text="CPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="{Binding CpuTempText}"
-                                   FontSize="32"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource CautionBrush}"
-                                   Margin="0,0,0,4"/>
-                        <TextBlock Text="Sensor: LibreHardwareMonitor"
-                                   FontSize="9"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                   Visibility="{Binding IsCpuTempAvailable, Converter={StaticResource BoolToVisibility}}"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- GPU Usage Card -->
-                <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="GPU Usage" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4">
-                            <Run Text="{Binding GpuUsage, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%" FontSize="20"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- GPU Temperature Card -->
-                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="GPU Temp" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock Text="{Binding GpuTempText}"
-                                   FontSize="32"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource InfoBrush}"
-                                   Margin="0,0,0,4"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- GPU VRAM Card -->
-                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}"
-                        ToolTip="GPU memory usage based on hardware sensors and adapter memory size.">
-                    <StackPanel>
-                        <TextBlock Text="GPU VRAM" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="18" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,0,0,4"
-                                   Text="{Binding GpuMemoryUsageText}"/>
-                        <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"
-                                   Text="{Binding GpuMemoryPercentText}"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Fan Speeds Card -->
-                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Fan Speeds" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="CPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding CpuFanRpmText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="GPU " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuFanRpmText, Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
-                </Border>
-
-                <!-- Disk Health Card -->
-                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource StatCardStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Disk Health" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-
-                        <ItemsControl ItemsSource="{Binding DiskHealthItems}"
-                                      Visibility="{Binding HasDiskHealthItems, Converter={StaticResource BoolToVisibility}}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="0,0,0,6">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding DisplayName}"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                       TextTrimming="CharacterEllipsis"/>
-                                            <TextBlock Grid.Column="1"
-                                                       Text="{Binding StatusText}"
-                                                       FontSize="11"
-                                                       FontWeight="SemiBold">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
-                                                        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsWarning}" Value="True">
-                                                                <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding StatusText}" Value="N/A">
-                                                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-                                                                <Setter Property="FontWeight" Value="Normal"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                        </Grid>
-                                        <TextBlock Text="{Binding DetailText}"
-                                                   FontSize="9"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-
-                        <StackPanel Visibility="{Binding HasDiskHealthItems, Converter={StaticResource InverseBoolToVisibility}}">
-                            <TextBlock Text="{Binding DiskHealthText}"
-                                       FontSize="28"
-                                       FontWeight="Bold"
-                                       Foreground="{DynamicResource SuccessBrush}"
-                                       Margin="0,0,0,4"/>
-                            <TextBlock Text="{Binding DiskHealthDetail}"
-                                       FontSize="10"
-                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-
-                <!-- Hardware Info Cards (Real-time specs from HardwareIdentifier) -->
-                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatCardStyle}">
+            <UniformGrid Rows="1" Columns="4" Margin="0,0,0,16">
+                <!-- CPU Card -->
+                <Border Style="{StaticResource StatCardStyle}" Margin="0,0,6,0" Cursor="Hand"
+                        ToolTip="Click for detailed CPU information">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OpenHardwareDetailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="cpu"/>
+                    </Border.InputBindings>
                     <Grid DataContext="{Binding CpuCard}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <!-- Header -->
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
-                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+
+                        <!-- Header with Icon -->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{Binding IconBackground}" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="18"/>
                             </Border>
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                             </StackPanel>
+                            <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <!-- Primary Value (Large) -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                         </StackPanel>
-                        <!-- Primary Value -->
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
-                        </StackPanel>
-                        <!-- Secondary Metrics -->
-                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+
+                        <!-- Separator -->
+                        <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
+
+                        <!-- Secondary Metrics Grid -->
+                        <ItemsControl Grid.Row="3" ItemsSource="{Binding SecondaryMetrics}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel/>
+                                    <UniformGrid Columns="2"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
-                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                    <StackPanel Margin="0,2">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
@@ -1075,36 +907,57 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                <!-- GPU Card -->
+                <Border Style="{StaticResource StatCardStyle}" Margin="3,0,3,0" Cursor="Hand"
+                        ToolTip="Click for detailed GPU information">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OpenHardwareDetailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="gpu"/>
+                    </Border.InputBindings>
                     <Grid DataContext="{Binding GpuCard}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
-                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{Binding IconBackground}" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="18"/>
                             </Border>
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                             </StackPanel>
+                            <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
-                        </StackPanel>
-                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+
+                        <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
+
+                        <ItemsControl Grid.Row="3" ItemsSource="{Binding SecondaryMetrics}">
                             <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                                <ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
-                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                    <StackPanel Margin="0,2">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
@@ -1113,36 +966,57 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                <!-- RAM Card -->
+                <Border Style="{StaticResource StatCardStyle}" Margin="3,0,3,0" Cursor="Hand"
+                        ToolTip="Click for detailed RAM information">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OpenHardwareDetailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="ram"/>
+                    </Border.InputBindings>
                     <Grid DataContext="{Binding RamCard}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
-                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{Binding IconBackground}" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="18"/>
                             </Border>
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                             </StackPanel>
+                            <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
-                        </StackPanel>
-                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+
+                        <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
+
+                        <ItemsControl Grid.Row="3" ItemsSource="{Binding SecondaryMetrics}">
                             <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                                <ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
-                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
-                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                    <StackPanel Margin="0,2">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
@@ -1151,22 +1025,65 @@
                     </Grid>
                 </Border>
 
-                <!-- GPU Clocks Card -->
-                <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource StatCardStyle}"
-                        ToolTip="GPU core and memory clock speeds from LibreHardwareMonitor sensors.">
-                    <StackPanel>
-                        <TextBlock Text="GPU Clocks" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,0,0,8"/>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}">
-                            <Run Text="Core " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuCoreClockText, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,2,0,0">
-                            <Run Text="Memory " Foreground="{DynamicResource MutedForegroundBrush}"/>
-                            <Run Text="{Binding GpuMemoryClockText, Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
+                <!-- Disk Card -->
+                <Border Style="{StaticResource StatCardStyle}" Margin="6,0,0,0" Cursor="Hand"
+                        ToolTip="Click for detailed Storage information">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding DataContext.OpenHardwareDetailCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      CommandParameter="disk"/>
+                    </Border.InputBindings>
+                    <Grid DataContext="{Binding DiskCard}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{Binding IconBackground}" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="18"/>
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                            </StackPanel>
+                            <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                        </StackPanel>
+
+                        <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
+
+                        <ItemsControl Grid.Row="3" ItemsSource="{Binding SecondaryMetrics}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,2">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
                 </Border>
-            </Grid>
+            </UniformGrid>
         </DataTemplate>
 
         <DataTemplate x:Key="MonitorHistoryChartsTemplate">

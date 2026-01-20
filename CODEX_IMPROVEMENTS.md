@@ -58,11 +58,15 @@ public class PrivacyTweakProvider : BaseTweakProvider
 
 ---
 
-### 2. Null Safety İyileştirmeleri
+### 2. Null Safety İyileştirmeleri ✅ TAMAMLANDI
 
-**Mevcut Durum:**
-- Nullable reference types kısmen kullanılıyor
-- Bazı potansiyel null dereference
+**Önceki:** Nullable reference types kısmen kullanılıyor
+
+**Şimdi:** `Directory.Build.props` ile tüm projelerde:
+- `<Nullable>enable</Nullable>`
+- `<EnableNETAnalyzers>true</EnableNETAnalyzers>`
+- `<AnalysisLevel>latest</AnalysisLevel>`
+- Null warnings aktif (gradual adoption için error değil warning)
 
 **Önerilen:**
 ```csharp
@@ -316,9 +320,11 @@ await _mediator.SendAsync(new RefreshHealthScoreRequest());
 
 ## 🎨 Kullanıcı Deneyimi
 
-### 12. Progress İndikatörleri
+### 12. Progress İndikatörleri ✅ TAMAMLANDI
 
-**Mevcut:** Bazı işlemler sırasında feedback eksik
+**Önceki:** Bazı işlemler sırasında feedback eksik
+
+**Şimdi:** `IBusyService` + `BusyService` (reference-counted), `LoadingOverlay` XAML control, DashboardViewModel ve TweaksViewModel'da entegrasyon.
 
 **Önerilen:**
 ```xml
@@ -613,7 +619,15 @@ public class FakeRegistryAccessor : IRegistryAccessor
 
 ## 🚀 DevOps & Altyapı
 
-### 23. GitHub Actions Workflow
+### 23. GitHub Actions Workflow ✅ TAMAMLANDI
+
+**Şimdi:** `.github/workflows/dotnet.yml` dosyası mevcut:
+- Build + Test (push/PR)
+- Code Coverage (Coverlet)
+- Publish (main branch)
+- Release (tag publish)
+- Code Quality check (PR only)
+- Dependabot konfigürasyonu (`.github/dependabot.yml`)
 
 ```yaml
 # .github/workflows/ci.yml

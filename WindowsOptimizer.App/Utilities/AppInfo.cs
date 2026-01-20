@@ -85,4 +85,3 @@ public static class AppInfo
         return framework;
     }
 }
-

@@ -7,6 +7,7 @@ using WindowsOptimizer.App.Services;
 using WindowsOptimizer.Infrastructure;
 using System.Threading;
 using WindowsOptimizer.App.ViewModels;
+using WindowsOptimizer.Infrastructure.Hardware;
 
 namespace WindowsOptimizer.App;
 
@@ -47,30 +48,65 @@ public partial class App : Application
             ApplyTheme(settings);
             UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
 
+            var showSplash = settings.RunStartupScanOnLaunch;
+            if (showSplash)
+            {
+                splash = new StartupWindow();
+                splash.Show();
+                await Dispatcher.Yield(DispatcherPriority.Render);
+            }
+
+            var preloadProgress = showSplash
+                ? new Progress<PreloadProgress>(progress => splash?.UpdatePreloadProgress(progress))
+                : new Progress<PreloadProgress>(_ => { });
+
+            var preloader = new PreloadManager(preloadProgress);
+            preloader.RegisterTask("Initialize threading", _ =>
+            {
+                AppServices.InitializeMetricThreading(action =>
+                {
+                    var dispatcher = Current?.Dispatcher;
+                    if (dispatcher == null)
+                    {
+                        action();
+                    }
+                    else
+                    {
+                        dispatcher.InvokeAsync(action, DispatcherPriority.DataBind);
+                    }
+                });
+                return Task.CompletedTask;
+            }, isCritical: true, priority: 100);
+
+            preloader.RegisterTask("Warm hardware inventory", ct => Task.Run(() =>
+            {
+                _ = HardwareIdentifier.GetCpuId();
+                _ = HardwareIdentifier.GetGpuId();
+                _ = HardwareIdentifier.GetRamId();
+            }, ct), isCritical: false, priority: 50);
+
+            await preloader.RunAllAsync(CancellationToken.None);
+
             var mainWindow = new MainWindow
             {
                 Visibility = Visibility.Hidden
             };
             MainWindow = mainWindow;
-            
+
             // GPU hardware acceleration settings
             ConfigureRenderSettings();
 
             if (settings.RunStartupScanOnLaunch)
             {
-                splash = new StartupWindow();
-                splash.Show();
-                await Dispatcher.Yield(DispatcherPriority.Render);
-
                 if (mainWindow.DataContext is MainViewModel mainVm)
                 {
-                    IProgress<StartupScanProgress> scanProgress = new Progress<StartupScanProgress>(progress => splash.UpdateScanProgress(progress));
+                    IProgress<StartupScanProgress> scanProgress = new Progress<StartupScanProgress>(progress => splash?.UpdateScanProgress(progress));
                     scanProgress.Report(new StartupScanProgress(0, 0));
                     await mainVm.RunStartupScanAsync(scanProgress, CancellationToken.None);
                 }
-
-                splash.Close();
             }
+
+            splash?.Close();
 
             mainWindow.Show();
             mainWindow.Activate();
@@ -220,6 +256,7 @@ public partial class App : Application
     protected override void OnExit(ExitEventArgs e)
     {
         _singleInstance?.Dispose();
+        AppServices.Dispose();
         base.OnExit(e);
     }
 }

@@ -11,6 +11,8 @@ using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.App.Services.TweakProviders;
 using WindowsOptimizer.App.Utilities;
 
+using WindowsOptimizer.App.Services;
+
 namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
@@ -22,6 +24,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
     private readonly IRollbackStateStore _rollbackStore;
+    private readonly IBusyService _busyService = new BusyService();
     private TweaksViewModel? _tweaksViewModel;
     private DashboardViewModel? _dashboardViewModel;
     private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
@@ -50,7 +53,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         RecoverPendingRollbacksCommand = new RelayCommand(_ => _ = RecoverPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
         DismissPendingRollbacksCommand = new RelayCommand(_ => _ = DismissPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
 
-        var dashboard = new DashboardViewModel();
+        var dashboard = new DashboardViewModel(_busyService);
 
         // Initialize all tweak providers
         var providers = new ITweakProvider[]
@@ -68,14 +71,14 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             new MiscTweakProvider()
         };
 
-        var tweaks = new TweaksViewModel(providers);
+        var tweaks = new TweaksViewModel(providers, _busyService);
         _tweaksViewModel = tweaks;
         dashboard.SetTweaksViewModel(tweaks);
 
         MonitorViewModel monitor;
         try
         {
-            monitor = new MonitorViewModel();
+            monitor = new MonitorViewModel(AppServices.MetricWorkerPool);
             System.Diagnostics.Debug.WriteLine("MonitorViewModel created successfully");
         }
         catch (Exception ex)
@@ -227,6 +230,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             }
         }
     }
+
+    public IBusyService BusyService => _busyService;
 
     public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
     {

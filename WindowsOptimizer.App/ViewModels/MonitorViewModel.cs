@@ -54,11 +54,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     // MetricDataBus for real-time metric distribution to hardware cards
     private readonly MetricDataBus _metricBus;
+    private readonly MetricWorkerPool? _metricWorkerPool;
+    private readonly bool _ownsMetricBus;
 
     // Hardware Card ViewModels
     private readonly CpuCardViewModel _cpuCard;
     private readonly GpuCardViewModel _gpuCard;
     private readonly RamCardViewModel _ramCard;
+    private readonly DiskCardViewModel _diskCard;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -154,6 +157,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private ElevatedRegistryAccessor? _elevatedRegistryAccessor;
     private ElevatedServiceManager? _elevatedServiceManager;
 
+    // Command for opening hardware detail windows
+    private readonly RelayCommand _openHardwareDetailCommand;
+
     // Named event handlers for proper unsubscription
     private void OnDiskHealthItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         => OnPropertyChanged(nameof(HasDiskHealthItems));
@@ -164,19 +170,30 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private void OnServicesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         => OnPropertyChanged(nameof(ServicesSummary));
 
-    public MonitorViewModel()
+    public MonitorViewModel(MetricWorkerPool? workerPool = null)
     {
         var paths = AppPaths.FromEnvironment();
         _appLogger = new FileAppLogger(paths);
 
         // Initialize MetricDataBus for real-time metric distribution
-        _metricBus = new MetricDataBus(action =>
-            Application.Current?.Dispatcher.InvokeAsync(action, DispatcherPriority.DataBind));
+        _metricWorkerPool = workerPool;
+        if (_metricWorkerPool != null)
+        {
+            _metricBus = _metricWorkerPool.Bus;
+            _ownsMetricBus = false;
+        }
+        else
+        {
+            _metricBus = new MetricDataBus(action =>
+                Application.Current?.Dispatcher.InvokeAsync(action, DispatcherPriority.DataBind));
+            _ownsMetricBus = true;
+        }
 
         // Initialize Hardware Card ViewModels
         _cpuCard = new CpuCardViewModel(_metricBus);
         _gpuCard = new GpuCardViewModel(_metricBus);
         _ramCard = new RamCardViewModel(_metricBus);
+        _diskCard = new DiskCardViewModel(_metricBus);
 
         try
         {
@@ -187,6 +204,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionUpCommand = new RelayCommand(param => MoveSection(param, -1), param => CanMoveSection(param, -1));
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
             _resetLayoutCommand = new RelayCommand(_ => ResetLayout());
+            _openHardwareDetailCommand = new RelayCommand(OpenHardwareDetail);
             InitializeLayout();
             MonitorSections.CollectionChanged += OnMonitorSectionsChanged;
 
@@ -414,6 +432,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _refreshStartupAppsCommand = new RelayCommand(_ => { });
             _refreshServicesCommand = new RelayCommand(_ => { });
             _openServiceDocsCommand = new RelayCommand(_ => { });
+            _openHardwareDetailCommand = new RelayCommand(_ => { });
 
             if (MonitorSections.Count == 0)
             {
@@ -489,7 +508,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _cpuCard.Dispose();
         _gpuCard.Dispose();
         _ramCard.Dispose();
-        _metricBus.Dispose();
+        _diskCard.Dispose();
+        if (_ownsMetricBus)
+        {
+            _metricBus.Dispose();
+        }
     }
 
     private void ExportMetricsToCsv()
@@ -2261,6 +2284,32 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public CpuCardViewModel CpuCard => _cpuCard;
     public GpuCardViewModel GpuCard => _gpuCard;
     public RamCardViewModel RamCard => _ramCard;
+    public DiskCardViewModel DiskCard => _diskCard;
+
+    // Command to open hardware detail window
+    public ICommand OpenHardwareDetailCommand => _openHardwareDetailCommand;
+
+    private void OpenHardwareDetail(object? parameter)
+    {
+        if (parameter is not string hardwareType) return;
+
+        var type = hardwareType.ToLowerInvariant() switch
+        {
+            "cpu" => HardwareType.Cpu,
+            "gpu" => HardwareType.Gpu,
+            "ram" => HardwareType.Ram,
+            "disk" or "storage" => HardwareType.Disk,
+            _ => HardwareType.Cpu
+        };
+
+        var viewModel = new HardwareDetailViewModel(type, _metricBus);
+        var window = new Views.HardwareDetailWindow
+        {
+            DataContext = viewModel,
+            Owner = Application.Current.MainWindow
+        };
+        window.ShowDialog();
+    }
 
     public double RamUsagePercent => RamTotalGb > 0 ? (RamUsedGb / RamTotalGb) * 100 : 0;
 
@@ -2347,7 +2396,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public double GpuMemoryUsedMb
     {
         get => _gpuMemoryUsedMb;
-        private set => SetProperty(ref _gpuMemoryUsedMb, value);
+        private set
+        {
+            if (SetProperty(ref _gpuMemoryUsedMb, value))
+            {
+                _metricBus.Publish("gpu.memory.used", value);
+            }
+        }
     }
 
     public double GpuMemoryTotalMb
@@ -2410,6 +2465,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasCpuPower));
                 OnPropertyChanged(nameof(CpuPowerText));
+                _metricBus.Publish("cpu.power", (double)value);
             }
         }
     }
@@ -2444,6 +2500,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasGpuPower));
                 OnPropertyChanged(nameof(GpuPowerText));
+                _metricBus.Publish("gpu.power", (double)value);
             }
         }
     }
@@ -2478,6 +2535,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasGpuCoreClock));
                 OnPropertyChanged(nameof(GpuCoreClockText));
+                _metricBus.Publish("gpu.clock", (double)value);
             }
         }
     }
@@ -2583,7 +2641,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public double? DiskHealthPercent
     {
         get => _diskHealthPercent;
-        private set => SetProperty(ref _diskHealthPercent, value);
+        private set
+        {
+            if (SetProperty(ref _diskHealthPercent, value) && value.HasValue)
+            {
+                _metricBus.Publish("disk.health", value.Value);
+            }
+        }
     }
 
     public bool? DiskPredictFailure
@@ -2828,6 +2892,35 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
 
         return dispatcher.InvokeAsync(action, priority).Task;
+    }
+
+    private Task<T> RunMetricWorkAsync<T>(string name, Func<T> work)
+    {
+        if (_metricWorkerPool == null)
+        {
+            return Task.Run(work);
+        }
+
+        var tcs = new TaskCompletionSource<T>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _metricWorkerPool.QueueWork(name, ct =>
+        {
+            if (ct.IsCancellationRequested)
+            {
+                tcs.TrySetCanceled(ct);
+                return;
+            }
+
+            try
+            {
+                tcs.TrySetResult(work());
+            }
+            catch (Exception ex)
+            {
+                tcs.TrySetException(ex);
+            }
+        });
+
+        return tcs.Task;
     }
 
     private void UpdateHistory(ObservableCollection<double> history, double newValue)
@@ -3485,7 +3578,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 return;
             }
 
-            var snapshot = await Task.Run(() =>
+            var snapshot = await RunMetricWorkAsync("monitor.core", () =>
             {
                 var cpuUsage = _metricProvider.GetCpuUsage();
                 var ramUsedGb = _metricProvider.GetUsedRamGb();
@@ -3565,7 +3658,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _isIoSampleInProgress = true;
         try
         {
-            var snapshot = await Task.Run(() =>
+            var snapshot = await RunMetricWorkAsync("monitor.io", () =>
             {
                 var adapters = new List<NetworkAdapterInfo>();
                 if (_networkMonitor != null)
@@ -3721,6 +3814,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 }
                 var totalRead = disks.Sum(d => d.ReadMBps);
                 var totalWrite = disks.Sum(d => d.WriteMBps);
+                var totalReadBytes = disks.Sum(d => (double)d.ReadBytesPerSec);
+                var totalWriteBytes = disks.Sum(d => (double)d.WriteBytesPerSec);
                 UpdateHistory(DiskReadHistory, totalRead);
                 UpdateHistory(DiskWriteHistory, totalWrite);
                 OnPropertyChanged(nameof(DiskReadMax));
@@ -3731,6 +3826,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(DiskWriteNow));
                 OnPropertyChanged(nameof(DiskIoScaleMax));
                 OnPropertyChanged(nameof(DiskIoScaleMid));
+
+                _metricBus.Publish("disk.read.speed", totalReadBytes);
+                _metricBus.Publish("disk.write.speed", totalWriteBytes);
 
                 UpdateCollection(Disks, disks);
                 if (_lastDiskCount != disks.Count)
@@ -3793,7 +3891,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 return;
             }
 
-            var snapshot = await Task.Run(() =>
+            var snapshot = await RunMetricWorkAsync("monitor.process", () =>
             {
                 List<ProcessInfo> topCpu;
                 List<ProcessInfo> topRam;
@@ -4208,7 +4306,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             AuxMetricsSnapshot? metricsSnapshot = null;
             if (_metricProvider != null)
             {
-                metricsSnapshot = await Task.Run(() =>
+                metricsSnapshot = await RunMetricWorkAsync("monitor.aux", () =>
                 {
                     var cpuSnapshot = _metricProvider.GetCpuPerformanceSnapshot();
                     var memorySnapshot = _metricProvider.GetMemoryPerformanceSnapshot();
@@ -4250,6 +4348,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     _cpuPerformanceSnapshot = metricsSnapshot.CpuSnapshot;
                     _memoryPerformanceSnapshot = metricsSnapshot.MemorySnapshot;
                     _diskPerformanceSnapshots = metricsSnapshot.DiskSnapshots;
+
+                    if (metricsSnapshot.CpuSnapshot.CurrentSpeedMhz.HasValue)
+                    {
+                        _metricBus.Publish("cpu.clock", metricsSnapshot.CpuSnapshot.CurrentSpeedMhz.Value);
+                    }
+
+                    _metricBus.Publish("ram.available", metricsSnapshot.MemorySnapshot.AvailableGb);
 
                     var gpuTotalMb = metricsSnapshot.GpuMemory.TotalMb;
                     if (gpuTotalMb <= 0 && metricsSnapshot.GpuPerformance.TotalMemoryMb.HasValue)

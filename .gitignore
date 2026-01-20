@@ -420,3 +420,8 @@ FodyWeavers.xsd
 *.exe
 dist/
 
+# Local build logs (project root)
+/nul
+/build_*.txt
+/errors*.txt
+
