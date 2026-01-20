@@ -70,6 +70,48 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             0);
 
+        yield return CreateCompositeTweak(
+            "privacy.disable-application-compatibility",
+            "Disable Application Compatibility",
+            "Turns off Windows application compatibility components, telemetry, and related tasks.",
+            TweakRiskLevel.Risky,
+            new ITweak[]
+            {
+                CreateRegistryValueSetTweak(
+                    context,
+                    "privacy.disable-application-compatibility.policy",
+                    "Disable Application Compatibility (Policy)",
+                    "Turns off application compatibility policies.",
+                    TweakRiskLevel.Risky,
+                    RegistryHive.LocalMachine,
+                    @"Software\Policies\Microsoft\Windows\AppCompat",
+                    new[]
+                    {
+                        new RegistryValueSetEntry("DisableEngine", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisableAPISamping", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisableApplicationFootprint", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisableInstallTracing", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisableWin32AppBackup", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisablePcaUI", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("SbEnable", RegistryValueKind.DWord, 0)
+                    }),
+                CreateScheduledTaskBatchTweak(
+                    context,
+                    "privacy.disable-application-compatibility.tasks",
+                    "Disable Application Compatibility (Tasks)",
+                    "Disables Application Experience scheduled tasks.",
+                    TweakRiskLevel.Risky,
+                    new[]
+                    {
+                        @"\Microsoft\Windows\Application Experience\MareBackup",
+                        @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
+                        @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp",
+                        @"\Microsoft\Windows\Application Experience\PcaPatchDbTask",
+                        @"\Microsoft\Windows\Application Experience\SdbinstMergeDbTask",
+                        @"\Microsoft\Windows\Application Experience\StartupAppTask"
+                    })
+            });
+
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-wer",
@@ -81,6 +123,179 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "Disabled",
             RegistryValueKind.DWord,
             1);
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.disable-ceip",
+            "Disable CEIP",
+            "Opts out of Customer Experience Improvement Program data collection.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\AppV\CEIP", "CEIPEnable", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Messenger\Client", "CEIP", RegistryValueKind.DWord, 2)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-device-name-telemetry",
+            "Disable Device Name in Diagnostics",
+            "Prevents the device name from being included in diagnostic data.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "AllowDeviceNameInTelemetry",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-diagnostic-data-viewer",
+            "Disable Diagnostic Data Viewer",
+            "Blocks access to the Diagnostic Data Viewer in Settings.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DisableDiagnosticDataViewer",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-diagnostic-data-delete",
+            "Disable Diagnostic Data Deletion",
+            "Disables the ability to delete diagnostic data in Settings.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DisableDeviceDelete",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-telemetry-change-notifications",
+            "Disable Diagnostic Data Change Notifications",
+            "Stops opt-in change notifications for diagnostic data.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DisableTelemetryOptInChangeNotification",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-telemetry-optin-ui",
+            "Disable Diagnostic Data Opt-in UI",
+            "Disables the diagnostic data opt-in settings UI in Settings.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DisableTelemetryOptInSettingsUx",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.limit-diagnostic-log-collection",
+            "Limit Diagnostic Log Collection",
+            "Prevents additional diagnostic logs from being collected.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "LimitDiagnosticLogCollection",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.limit-dump-collection",
+            "Limit Dump Collection",
+            "Limits diagnostic dumps to reduce the data sent in diagnostics.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "LimitDumpCollection",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-onesettings-downloads",
+            "Disable OneSettings Downloads",
+            "Stops Windows from downloading configuration settings from OneSettings.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DisableOneSettingsDownloads",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-kms-activation-telemetry",
+            "Disable KMS Activation Telemetry",
+            "Stops KMS client activation data from being sent to Microsoft.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform",
+            "NoGenTicket",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.disable-rsop-logging",
+            "Disable RSoP Logging",
+            "Turns off Resultant Set of Policy logging on this device.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "RsopLogging", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\SYSTEM", "RsopLogging", RegistryValueKind.DWord, 0)
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.disable-sleep-study-diagnostics",
+            "Disable Sleep Study Diagnostics",
+            "Disables sleep study diagnostic event channels.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-SleepStudy/Diagnostic",
+                    "Enabled",
+                    RegistryValueKind.DWord,
+                    0),
+                new RegistryValueBatchEntry(
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Kernel-Processor-Power/Diagnostic",
+                    "Enabled",
+                    RegistryValueKind.DWord,
+                    0),
+                new RegistryValueBatchEntry(
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-UserModePowerService/Diagnostic",
+                    "Enabled",
+                    RegistryValueKind.DWord,
+                    0)
+            });
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.troubleshooter-dont-run",
+            "Troubleshooter: Don't Run Any",
+            "Prevents recommended troubleshooters from running automatically.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\WindowsMitigation", "UserPreference", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations", "TroubleshootingAllowRecommendations", RegistryValueKind.DWord, 0)
+            });
 
         // Experience & Personalization
         yield return CreateRegistryTweak(
@@ -128,6 +343,31 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "privacy.disable-font-providers",
+            "Disable Font Providers",
+            "Prevents Windows from downloading fonts from online providers.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\System",
+            "EnableFontProviders",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.disable-inking-typing-personalization",
+            "Disable Inking & Typing Personalization",
+            "Stops sending inking and typing data to Microsoft.",
+            TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Policies\TextInput", "AllowLinguisticDataCollection", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowSuggestedAppsInWindowsInkWorkspace", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\WindowsInkWorkspace", "AllowWindowsInkWorkspace", RegistryValueKind.DWord, 0)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
             "privacy.disable-copilot",
             "Disable Windows Copilot",
             "Turns off the Windows Copilot AI experience for the current user.",
@@ -153,6 +393,54 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             requiresElevation: false);
 
         // Hardware & Capability Access
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "privacy.deny-app-access",
+            "Deny App Access (Except Microphone)",
+            "Forces Windows apps to be denied access to sensitive capabilities.",
+            TweakRiskLevel.Risky,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\System", "AllowUserInfoAccess", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessAccountInfo", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCalendar", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCallHistory", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCamera", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessContacts", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessEmail", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessGraphicsCaptureProgrammatic", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessGraphicsCaptureWithoutBorder", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessHumanPresence", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessLocation", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessMessaging", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessMicrophone", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessMotion", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessNotifications", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessPhone", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessRadios", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsSyncWithDevices", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessTasks", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessTrustedDevices", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsRunInBackground", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsGetDiagnosticInfo", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessGazeInput", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsActivateWithVoice", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsActivateWithVoiceAboveLock", RegistryValueKind.DWord, 2),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, 2)
+            });
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-app-diagnostics",
+            "Disable App Diagnostics",
+            "Prevents apps from accessing diagnostic information.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy",
+            "LetAppsAccessDiagnosticInfo",
+            RegistryValueKind.DWord,
+            2);
+
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-location-services",
@@ -231,6 +519,18 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "privacy.disable-feedback-notifications",
+            "Disable Feedback Notifications",
+            "Stops Windows Feedback prompts from appearing.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\DataCollection",
+            "DoNotShowFeedbackNotifications",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
             "notifications.disable-tile",
             "Disable Tile Notifications",
             "Prevents apps from updating tiles and tile badges.",
@@ -256,6 +556,18 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             requiresElevation: false);
 
         // Complex/Composite Tweaks
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-file-history",
+            "Disable File History",
+            "Turns off File History backups.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\FileHistory",
+            "Disabled",
+            RegistryValueKind.DWord,
+            1);
+
         var MobSyncPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "mobsync.exe");
         yield return CreateCompositeTweak(
             "privacy.disable-offline-files",
@@ -314,6 +626,30 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             0,
             requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-message-sync",
+            "Disable Message Sync",
+            "Stops SMS/MMS cloud sync for this device.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\Messaging",
+            "AllowMessageSync",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-mdm-enrollment",
+            "Disable MDM Enrollment",
+            "Prevents new MDM enrollments for this device.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\CurrentVersion\MDM",
+            "DisableRegistration",
+            RegistryValueKind.DWord,
+            1);
 
         yield return CreateRegistryValueSetTweak(
             context,
@@ -395,6 +731,54 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("DisableWindowsSettingSync", RegistryValueKind.DWord, 2),
                 new RegistryValueSetEntry("DisableWindowsSettingSyncUserOverride", RegistryValueKind.DWord, 0)
             });
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.block-microsoft-accounts",
+            "Block Microsoft Accounts",
+            "Prevents adding or signing in with Microsoft accounts.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
+            "NoConnectedUser",
+            RegistryValueKind.DWord,
+            3);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-local-security-questions",
+            "Disable Local Security Questions",
+            "Prevents setting security questions for local accounts.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\System",
+            "NoLocalPasswordResetQuestions",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.hide-last-logged-in-user",
+            "Hide Last Logged-In User",
+            "Removes the last signed-in username from the sign-in screen.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
+            "DontDisplayLastUserName",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.hide-username-at-signin",
+            "Hide Username at Sign-In",
+            "Hides the username after credentials are entered at sign-in.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
+            "DontDisplayUserName",
+            RegistryValueKind.DWord,
+            1);
 
         yield return CreateRegistryTweak(
             context,
@@ -513,6 +897,17 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "AllowOnlineTips",
             RegistryValueKind.DWord,
             0);
+
+        var helpPanePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "HelpPane.exe");
+        var helpPaneDisabledPath = helpPanePath + ".disabled";
+        yield return CreateFileRenameTweak(
+            context,
+            "privacy.disable-f1-help",
+            "Disable F1 Help",
+            "Disables F1 help by renaming HelpPane.exe.",
+            TweakRiskLevel.Advanced,
+            helpPanePath,
+            helpPaneDisabledPath);
 
         yield return CreateRegistryValueBatchTweak(
             context,

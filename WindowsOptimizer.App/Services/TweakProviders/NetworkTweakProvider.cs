@@ -194,6 +194,31 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             32);
 
         // SMB Security & Features
+        yield return CreateRegistryTweak(
+            context,
+            "network.smb-enable-large-mtu",
+            "SMB: Enable Large MTU",
+            "Enables large MTU support for SMB client connections.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
+            "DisableLargeMtu",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryValueSetTweak(
+            context,
+            "network.smb-require-signing-client",
+            "SMB: Require Client Signing",
+            "Requires SMB client signing for outbound connections.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
+            new[]
+            {
+                new RegistryValueSetEntry("RequireSecuritySignature", RegistryValueKind.DWord, 1),
+                new RegistryValueSetEntry("EnableSecuritySignature", RegistryValueKind.DWord, 1)
+            });
         yield return CreateRegistryValueSetTweak(
             context,
             "network.smb-require-signing-server",
