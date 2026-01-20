@@ -20,6 +20,7 @@ public abstract class HardwareCardViewModelBase : INotifyPropertyChanged, IDispo
     private string _primaryValue = "--";
     private string _primaryUnit = "";
     private Brush _primaryValueColor = Brushes.White;
+    private string _liveSummary = "";
     private bool _hasSpecs;
     private object? _chartContent;
     private bool _isLoading = true;
@@ -94,6 +95,15 @@ public abstract class HardwareCardViewModelBase : INotifyPropertyChanged, IDispo
     {
         get => _primaryValueColor;
         set => SetProperty(ref _primaryValueColor, value);
+    }
+
+    /// <summary>
+    /// Live summary text for real-time metrics (optional).
+    /// </summary>
+    public string LiveSummary
+    {
+        get => _liveSummary;
+        set => SetProperty(ref _liveSummary, value);
     }
 
     /// <summary>

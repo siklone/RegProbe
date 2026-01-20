@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +18,8 @@ public class RamCardViewModel : HardwareCardViewModelBase
     private readonly MetricDataBus? _bus;
     private readonly HardwareSpecsService _specsService = new();
     private RamIdentity? _ramIdentity;
+    private double? _usedGb;
+    private double? _availableGb;
 
     public RamCardViewModel(MetricDataBus? bus = null)
     {
@@ -118,13 +121,33 @@ public class RamCardViewModel : HardwareCardViewModelBase
 
         if (e.TryGetValue<double>("ram.used", out var used))
         {
+            _usedGb = used;
             UpdateSecondaryMetric("Used", $"{used:F1}", "GB");
+            UpdateLiveSummary();
         }
 
         if (e.TryGetValue<double>("ram.available", out var available))
         {
+            _availableGb = available;
             UpdateSecondaryMetric("Free", $"{available:F1}", "GB");
+            UpdateLiveSummary();
         }
+    }
+
+    private void UpdateLiveSummary()
+    {
+        var parts = new List<string>();
+        if (_usedGb.HasValue)
+        {
+            parts.Add($"{_usedGb.Value:F1} GB used");
+        }
+
+        if (_availableGb.HasValue)
+        {
+            parts.Add($"{_availableGb.Value:F1} GB free");
+        }
+
+        LiveSummary = parts.Count > 0 ? string.Join(" | ", parts) : string.Empty;
     }
 
     public override void Dispose()

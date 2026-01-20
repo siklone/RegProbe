@@ -20,6 +20,8 @@ public class DiskCardViewModel : HardwareCardViewModelBase
     private readonly MetricDataBus? _bus;
     private readonly HardwareSpecsService _specsService = new();
     private List<StorageDriveInfo> _disks = new();
+    private double? _readBytesPerSec;
+    private double? _writeBytesPerSec;
 
     public DiskCardViewModel(MetricDataBus? bus = null)
     {
@@ -196,12 +198,16 @@ public class DiskCardViewModel : HardwareCardViewModelBase
     {
         if (e.TryGetValue<double>("disk.read.speed", out var readSpeed))
         {
+            _readBytesPerSec = readSpeed;
             UpdateSecondaryMetric("Read", FormatSpeed(readSpeed), "/s");
+            UpdateLiveSummary();
         }
 
         if (e.TryGetValue<double>("disk.write.speed", out var writeSpeed))
         {
+            _writeBytesPerSec = writeSpeed;
             UpdateSecondaryMetric("Write", FormatSpeed(writeSpeed), "/s");
+            UpdateLiveSummary();
         }
 
         if (e.TryGetValue<double>("disk.health", out var health))
@@ -210,6 +216,22 @@ public class DiskCardViewModel : HardwareCardViewModelBase
                           health >= 70 ? Brushes.Yellow :
                           health >= 50 ? Brushes.Orange : Brushes.Red;
         }
+    }
+
+    private void UpdateLiveSummary()
+    {
+        var parts = new List<string>();
+        if (_readBytesPerSec.HasValue)
+        {
+            parts.Add($"Read {FormatSpeed(_readBytesPerSec.Value)}/s");
+        }
+
+        if (_writeBytesPerSec.HasValue)
+        {
+            parts.Add($"Write {FormatSpeed(_writeBytesPerSec.Value)}/s");
+        }
+
+        LiveSummary = parts.Count > 0 ? string.Join(" | ", parts) : string.Empty;
     }
 
     private static string FormatSize(long bytes)

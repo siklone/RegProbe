@@ -877,10 +877,15 @@
                         </Grid>
 
                         <!-- Primary Value (Large) -->
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
-                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                        <StackPanel Grid.Row="1" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                                <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                           VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
                         <!-- Separator -->
@@ -940,10 +945,15 @@
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
-                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                        <StackPanel Grid.Row="1" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                                <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                           VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
                         <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
@@ -999,10 +1009,15 @@
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
-                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                        <StackPanel Grid.Row="1" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                                <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                           VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
                         <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
@@ -1058,10 +1073,15 @@
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,8" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
-                                       VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                        <StackPanel Grid.Row="1" Margin="0,12,0,8" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding PrimaryValue}" FontSize="42" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                                <TextBlock Text="{Binding PrimaryUnit}" FontSize="20" Foreground="{DynamicResource ForegroundLightBrush}"
+                                           VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
                         <Border Grid.Row="2" Height="1" Background="{DynamicResource BackgroundLightBrush}" Margin="0,4,0,8"/>
