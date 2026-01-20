@@ -198,6 +198,30 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.8 Hardware Database Scaffolding (Commit: pending)
+**Improvement:** Added SQLite-backed hardware specs database with fallback resolver for CPU/GPU cards.
+
+**New Files:**
+- `WindowsOptimizer.Infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
+- `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecs.cs` - Specs models
+- `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
+
+**Modified Files:**
+- `WindowsOptimizer.Infrastructure/AppPaths.cs` - Hardware DB path
+- `WindowsOptimizer.Infrastructure/WindowsOptimizer.Infrastructure.csproj` - Microsoft.Data.Sqlite reference
+- `WindowsOptimizer.App/App.xaml.cs` - Preload database init
+- `WindowsOptimizer.App/ViewModels/Hardware/CpuCardViewModel.cs` - Use specs resolver
+- `WindowsOptimizer.App/ViewModels/Hardware/GpuCardViewModel.cs` - Use specs resolver
+
+**Features:**
+- Hardware DB schema created on startup under app data
+- Fallback specs resolution (DB -> identity) for CPU/GPU cards
+- Cards show DB-backed subtitles and mark `HasSpecs` when matched
+
+**Status:** ?. **IMPLEMENTED** - DB population/update pending
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
