@@ -219,6 +219,7 @@ var result = await preloader.RunAllAsync(ct);
 - Fallback specs resolution (DB -> identity) for CPU/GPU cards
 - Cards show DB-backed subtitles and mark `HasSpecs` when matched
 - Seed data importer with versioned updates via embedded JSON
+- Seeded RAM, Storage, and Motherboard tables + lookup helpers
 
 **Status:** ?. **IMPLEMENTED** - DB population/update pending
 
