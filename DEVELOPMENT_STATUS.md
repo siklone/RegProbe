@@ -289,6 +289,21 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.14 Legacy Tweak Parity (Targeted Restore) (Commit: pending)
+**Improvement:** Restored missing legacy privacy and SMB tweaks in category providers while avoiding renamed/overlapping entries.
+
+**Modified Files:**
+- `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` - Added missing privacy, diagnostics, and account policy tweaks.
+- `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` - Added SMB client signing + large MTU toggles.
+
+**Notes:**
+- Skipped legacy IDs already covered by newer IDs (e.g., `audio.disable-ducking`, `notifications.disable-lockscreen-toast`, `privacy.disable-location`).
+- Remaining candidate not reintroduced yet: `system.disable-services-drivers` (very aggressive) and `network.smb-disable-bandwidth-throttling` (already in `network.optimize-smb`).
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.

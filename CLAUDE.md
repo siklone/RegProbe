@@ -21,7 +21,7 @@ Start with:
 Current focus (2026-01-20):
 - **NEW: Development Roadmap v2.1** approved and documented in `DEVELOPMENT_ROADMAP.md`
 - Roadmap includes: Single Instance, Multi-threading, Splash Preloading, Hardware Database, Monitor Redesign, Process Management
-- Legacy tweak catalog restored via `LegacyTweakProvider` (temporary bridge).
+- Legacy tweak parity: missing privacy + SMB tweaks migrated into category providers; legacy-only IDs left are renamed/overlapping.
 - Theme coverage: MainWindow/Dashboard/Tweaks/Monitor now use `DynamicResource` for theme-bound brushes (light theme parity update).
 - Docs linking: tweak catalog HTML anchors + per-tweak "Catalog entry" links.
 - Docs coverage audit: `scripts/audit_tweak_sources.py` validates registry/service tokens in category docs; audit report lives in `Docs/tweaks/tweak-source-audit.md`.

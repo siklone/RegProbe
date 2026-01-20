@@ -39,38 +39,40 @@ misc.disable-visual-studio-telemetry,Disable Visual Studio Telemetry,Docs\misc\m
 misc.notepadplusplus-default-editor,Set Notepad++ as Default Editor,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\SetNotepadPlusPlusDefaultEditorTweak.cs#L22
 misc.optimize-7zip-settings,Optimize 7-Zip Context Menu Settings,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\SevenZipSettingsTweak.cs#L54
 network.disable-active-probing,Disable Active Probing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L170
-network.disable-default-shares,Disable Default Shares,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L297
+network.disable-default-shares,Disable Default Shares,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L322
 network.disable-ipv6,Disable IPv6,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L64
 network.disable-llmnr,Disable LLMNR,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L102
 network.disable-lltd,Disable Network Discovery (LLTD),Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L150
 network.disable-mdns,Disable mDNS,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L114
 network.disable-netbios,Disable NetBIOS over TCP/IP,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L76
 network.disable-netbios-resolution,Disable NetBIOS Name Resolution,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L126
-network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L333
+network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L358
 network.disable-smart-name-resolution,Disable Smart Multi-Homed Name Resolution,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L138
-network.disable-smb1,Disable SMBv1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L309
-network.disable-smb2,Disable SMBv2/SMBv3,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L321
+network.disable-smb1,Disable SMBv1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L334
+network.disable-smb2,Disable SMBv2/SMBv3,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L346
 network.disable-wifi-sense,Disable Wi-Fi Sense,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L88
 network.enable-lltd-responder,Enable LLTD Responder,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L31
 network.enable-lltdio,Enable LLTD Mapper I/O,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L19
 network.flush-dns-cache,Flush DNS Cache,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Network\FlushDnsCacheTweak.cs#L13
 network.optimize-smb,Optimize SMB Performance,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L44
 network.prefer-ipv4,Prefer IPv4 over IPv6,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L184
-network.require-ntlmv2-session-security,Require NTLMv2 Session Security,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L345
+network.require-ntlmv2-session-security,Require NTLMv2 Session Security,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L370
 network.reset-winsock,Reset Winsock Catalog,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Network\ResetNetworkStackTweak.cs#L13
-network.smb-disable-leasing,SMB: Disable Leasing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L235
-network.smb-enable-multichannel,SMB: Enable Multichannel,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L247
-network.smb-enable-quic,SMB: Enable QUIC,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L259
-network.smb-encrypt-data,SMB: Require Encryption,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L211
-network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L223
-network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L271
-network.smb-require-signing-server,SMB: Require Signing (Server),Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L197
-network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L285
-notifications.disable-feedback-frequency,Disable Feedback Requests,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L219
-notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L206
-notifications.disable-mirroring,Disable Notification Mirroring,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L245
-notifications.disable-tile,Disable Tile Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L232
-notifications.disable-toast,Disable Toast Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L193
+network.smb-disable-leasing,SMB: Disable Leasing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L260
+network.smb-enable-large-mtu,SMB: Enable Large MTU,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L197
+network.smb-enable-multichannel,SMB: Enable Multichannel,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L272
+network.smb-enable-quic,SMB: Enable QUIC,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L284
+network.smb-encrypt-data,SMB: Require Encryption,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L236
+network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L248
+network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L296
+network.smb-require-signing-client,SMB: Require Client Signing,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L209
+network.smb-require-signing-server,SMB: Require Signing (Server),Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L222
+network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs\network\network.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L310
+notifications.disable-feedback-frequency,Disable Feedback Requests,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L507
+notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L494
+notifications.disable-mirroring,Disable Notification Mirroring,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L545
+notifications.disable-tile,Disable Tile Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L532
+notifications.disable-toast,Disable Toast Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L481
 performance.disable-animations,Disable Window Animations,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L19
 performance.disable-background-apps,Disable Power Throttling,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L62
 performance.disable-menu-show-delay,Remove Menu Show Delay,Docs\performance\performance.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L32
@@ -100,48 +102,75 @@ power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,
 power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L86
 power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\NetworkAdapterPowerTweaks.cs#L61
 power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L98
+privacy.block-microsoft-accounts,Block Microsoft Accounts,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L735
+privacy.deny-app-access,Deny App Access (Except Microphone),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L396
 privacy.disable-activity-history,Disable Activity History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L46
 privacy.disable-advertising-id,Disable Advertising ID,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L33
-privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L604
-privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L99
+privacy.disable-app-diagnostics,Disable App Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L432
+privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L999
+privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L314
+privacy.disable-application-compatibility,Disable Application Compatibility,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L73
 privacy.disable-application-telemetry,Disable Application Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L61
-privacy.disable-background-apps,Disable Background Apps,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L180
-privacy.disable-biometrics,Disable Biometrics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L629
-privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L653
-privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L641
-privacy.disable-camera,Disable Camera Access (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L168
-privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L318
-privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L493
-privacy.disable-copilot,Disable Windows Copilot,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L129
-privacy.disable-cross-device-experiences,Disable Cross-Device Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L281
+privacy.disable-background-apps,Disable Background Apps,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L468
+privacy.disable-biometrics,Disable Biometrics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1024
+privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1048
+privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1036
+privacy.disable-camera,Disable Camera Access (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L456
+privacy.disable-ceip,Disable CEIP,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L127
+privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L654
+privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L877
+privacy.disable-copilot,Disable Windows Copilot,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L369
+privacy.disable-cross-device-experiences,Disable Cross-Device Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L593
+privacy.disable-device-name-telemetry,Disable Device Name in Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L140
 privacy.disable-diagnostic-data,Disable Diagnostic Data (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L21
-privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L517
-privacy.disable-language-list-access,Disable Website Access to Language List,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L333
-privacy.disable-location-consent,Disable Location Consent (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L530
-privacy.disable-location-consent-system,Disable Location Consent (System),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L544
-privacy.disable-location-scripting,Disable Location Scripting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L556
-privacy.disable-location-services,Disable Location Services,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L156
-privacy.disable-offline-files,Disable Offline Files,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L260
-privacy.disable-online-tips,Disable Online Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L505
-privacy.disable-phone-linking,Disable Phone Linking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L293
-privacy.disable-recall,Disable Windows Recall,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L142
-privacy.disable-reserved-storage,Disable Reserved Storage,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L617
-privacy.disable-resume,Disable Resume Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L305
-privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L412
-privacy.disable-search-history,Disable Search History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L399
-privacy.disable-sensors,Disable Sensors,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L580
-privacy.disable-steps-recorder,Disable Steps Recorder,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L593
-privacy.disable-suggestions,Disable Suggestions & Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L475
-privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L112
-privacy.disable-sync-settings,Disable Settings Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L368
-privacy.disable-wer,Disable Windows Error Reporting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L73
-privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L568
-privacy.disable-windows-tips,Disable Windows Tips & Tricks,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L86
-privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L346
-privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L450
-privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L462
-privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L425
-privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L437
+privacy.disable-diagnostic-data-delete,Disable Diagnostic Data Deletion,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L164
+privacy.disable-diagnostic-data-viewer,Disable Diagnostic Data Viewer,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L152
+privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L912
+privacy.disable-f1-help,Disable F1 Help,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L903
+privacy.disable-feedback-notifications,Disable Feedback Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L520
+privacy.disable-file-history,Disable File History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L559
+privacy.disable-font-providers,Disable Font Providers,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L344
+privacy.disable-inking-typing-personalization,Disable Inking & Typing Personalization,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L356
+privacy.disable-kms-activation-telemetry,Disable KMS Activation Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L236
+privacy.disable-language-list-access,Disable Website Access to Language List,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L669
+privacy.disable-local-security-questions,Disable Local Security Questions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L747
+privacy.disable-location-consent,Disable Location Consent (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L925
+privacy.disable-location-consent-system,Disable Location Consent (System),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L939
+privacy.disable-location-scripting,Disable Location Scripting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L951
+privacy.disable-location-services,Disable Location Services,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L444
+privacy.disable-mdm-enrollment,Disable MDM Enrollment,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L642
+privacy.disable-message-sync,Disable Message Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L630
+privacy.disable-offline-files,Disable Offline Files,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L572
+privacy.disable-onesettings-downloads,Disable OneSettings Downloads,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L224
+privacy.disable-online-tips,Disable Online Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L889
+privacy.disable-phone-linking,Disable Phone Linking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L605
+privacy.disable-recall,Disable Windows Recall,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L382
+privacy.disable-reserved-storage,Disable Reserved Storage,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1012
+privacy.disable-resume,Disable Resume Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L617
+privacy.disable-rsop-logging,Disable RSoP Logging,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L248
+privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L796
+privacy.disable-search-history,Disable Search History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L783
+privacy.disable-sensors,Disable Sensors,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L975
+privacy.disable-sleep-study-diagnostics,Disable Sleep Study Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L260
+privacy.disable-steps-recorder,Disable Steps Recorder,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L988
+privacy.disable-suggestions,Disable Suggestions & Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L859
+privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L327
+privacy.disable-sync-settings,Disable Settings Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L704
+privacy.disable-telemetry-change-notifications,Disable Diagnostic Data Change Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L176
+privacy.disable-telemetry-optin-ui,Disable Diagnostic Data Opt-in UI,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L188
+privacy.disable-wer,Disable Windows Error Reporting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L115
+privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L963
+privacy.disable-windows-tips,Disable Windows Tips & Tricks,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L301
+privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L682
+privacy.hide-last-logged-in-user,Hide Last Logged-In User,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L759
+privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L834
+privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L846
+privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L809
+privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L821
+privacy.hide-username-at-signin,Hide Username at Sign-In,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L771
+privacy.limit-diagnostic-log-collection,Limit Diagnostic Log Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L200
+privacy.limit-dump-collection,Limit Dump Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L212
+privacy.troubleshooter-dont-run,Troubleshooter: Don't Run Any,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L288
 security.disable-downloads-blocking,Disable Downloads Blocking,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L250
 security.disable-ntfs-encryption,Disable NTFS Encryption (EFS),Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L189
 security.disable-p2p-updates,Disable P2P Updates,Docs\security\security-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L226

@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 239
+Total tweaks: 268
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -70,11 +70,13 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `network.require-ntlmv2-session-security` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.reset-winsock` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-disable-leasing` | `Docs\network\network.md` | yes | yes | yes | yes |
+| `network.smb-enable-large-mtu` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-enable-multichannel` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-enable-quic` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-encrypt-data` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-reject-unencrypted-access` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-require-dialect-3_1_1` | `Docs\network\network.md` | yes | yes | yes | yes |
+| `network.smb-require-signing-client` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-require-signing-server` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-set-cipher-suite-order` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `notifications.disable-feedback-frequency` | `Docs\notifications\notifications.md` | yes | yes | yes | yes |
@@ -111,48 +113,75 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `power.optimize-cpu-boost` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.optimize-gaming-network` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.optimize-performance` | `Docs\power\power.md` | yes | yes | yes | yes |
+| `privacy.block-microsoft-accounts` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.deny-app-access` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-activity-history` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-advertising-id` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-app-diagnostics` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-app-launch-tracking` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-app-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-application-compatibility` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-application-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-background-apps` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-biometrics` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-biometrics-domain-logon` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-biometrics-logon` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-camera` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-ceip` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-cli-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-consumer-account-content` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-copilot` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-cross-device-experiences` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-device-name-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-diagnostic-data` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-diagnostic-data-delete` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-diagnostic-data-viewer` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-edge-search-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-f1-help` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-feedback-notifications` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-file-history` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-font-providers` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-inking-typing-personalization` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-kms-activation-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-language-list-access` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-local-security-questions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-location-consent` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-location-consent-system` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-location-scripting` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-location-services` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-mdm-enrollment` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-message-sync` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-offline-files` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-onesettings-downloads` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-online-tips` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-phone-linking` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-recall` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-reserved-storage` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-resume` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-rsop-logging` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-search-box-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-search-history` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-sensors` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-sleep-study-diagnostics` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-steps-recorder` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-suggestions-cdm` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-sync-settings` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-telemetry-change-notifications` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-telemetry-optin-ui` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-wer` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-windows-location-provider` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-windows-tips` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-wmplayer-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.hide-last-logged-in-user` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.hide-recommended-personalized-sites` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.hide-recommended-personalized-sites-user` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.hide-recommended-section` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.hide-recommended-section-user` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.hide-username-at-signin` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.limit-diagnostic-log-collection` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.limit-dump-collection` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.troubleshooter-dont-run` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `security.disable-downloads-blocking` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-ntfs-encryption` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-p2p-updates` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
