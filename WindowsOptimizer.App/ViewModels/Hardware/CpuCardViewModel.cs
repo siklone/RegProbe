@@ -15,6 +15,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
 {
     private readonly MetricDataBus? _bus;
     private CpuIdentity? _cpuIdentity;
+    private readonly HardwareSpecsService _specsService = new();
 
     public CpuCardViewModel(MetricDataBus? bus = null)
     {
@@ -39,15 +40,19 @@ public class CpuCardViewModel : HardwareCardViewModelBase
         try
         {
             _cpuIdentity = await Task.Run(() => HardwareIdentifier.GetCpuId());
+            var specs = await _specsService.GetCpuSpecsAsync(_cpuIdentity, CancellationToken.None);
 
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                Subtitle = _cpuIdentity.WmiName ?? "Unknown CPU";
+                Subtitle = specs.Brand;
+                HasSpecs = specs.IsFromDatabase;
 
                 // Add static metrics
-                SecondaryMetrics.Add(new MetricItem("Cores", _cpuIdentity.Cores.ToString(), ""));
-                SecondaryMetrics.Add(new MetricItem("Threads", _cpuIdentity.Threads.ToString(), ""));
-                SecondaryMetrics.Add(new MetricItem("Base", (_cpuIdentity.MaxClockSpeed).ToString(), "MHz"));
+                SecondaryMetrics.Clear();
+                SecondaryMetrics.Add(new MetricItem("Cores", (specs.Cores ?? _cpuIdentity.Cores).ToString(), ""));
+                SecondaryMetrics.Add(new MetricItem("Threads", (specs.Threads ?? _cpuIdentity.Threads).ToString(), ""));
+                var baseClock = specs.BaseClockMhz ?? _cpuIdentity.MaxClockSpeed;
+                SecondaryMetrics.Add(new MetricItem("Base", baseClock > 0 ? baseClock.ToString() : "N/A", "MHz"));
 
                 IsLoading = false;
             });

@@ -78,6 +78,9 @@ public partial class App : Application
                 return Task.CompletedTask;
             }, isCritical: true, priority: 100);
 
+            preloader.RegisterTask("Hardware database", ct =>
+                HardwareDatabase.InitializeAsync(ct), isCritical: false, priority: 90);
+
             preloader.RegisterTask("Warm hardware inventory", ct => Task.Run(() =>
             {
                 _ = HardwareIdentifier.GetCpuId();

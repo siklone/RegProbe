@@ -33,6 +33,8 @@ public sealed class AppPaths
 
     public string PresetsDirectory => Path.Combine(AppDataRoot, "presets");
 
+    public string HardwareDatabasePath => Path.Combine(AppDataRoot, "hardware.db");
+
     public void EnsureDirectories()
     {
         Directory.CreateDirectory(AppDataRoot);

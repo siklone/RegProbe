@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -14,6 +15,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 {
     private readonly MetricDataBus? _bus;
     private GpuIdentity? _gpuIdentity;
+    private readonly HardwareSpecsService _specsService = new();
 
     public GpuCardViewModel(MetricDataBus? bus = null)
     {
@@ -37,15 +39,21 @@ public class GpuCardViewModel : HardwareCardViewModelBase
         try
         {
             _gpuIdentity = await Task.Run(() => HardwareIdentifier.GetGpuId());
+            var specs = await _specsService.GetGpuSpecsAsync(_gpuIdentity, CancellationToken.None);
 
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                Subtitle = _gpuIdentity.WmiName ?? _gpuIdentity.DriverDesc ?? "Unknown GPU";
+                Subtitle = specs.Brand;
+                HasSpecs = specs.IsFromDatabase;
 
                 // Add static metrics
-                if (_gpuIdentity.AdapterRamGB > 0)
+                SecondaryMetrics.Clear();
+                var vramMb = specs.MemorySizeMb ?? (_gpuIdentity.AdapterRam > 0
+                    ? (int)(_gpuIdentity.AdapterRam / (1024 * 1024))
+                    : 0);
+                if (vramMb > 0)
                 {
-                    SecondaryMetrics.Add(new MetricItem("VRAM", $"{_gpuIdentity.AdapterRamGB:F1}", "GB"));
+                    SecondaryMetrics.Add(new MetricItem("VRAM", $"{vramMb / 1024.0:F1}", "GB"));
                 }
                 SecondaryMetrics.Add(new MetricItem("Vendor", _gpuIdentity.VendorName ?? "Unknown", ""));
 
