@@ -22,7 +22,9 @@ using CoreServiceStartMode = WindowsOptimizer.Core.Services.ServiceStartMode;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Metrics;
+using WindowsOptimizer.Infrastructure.Threading;
 using WindowsOptimizer.App.Utilities;
+using WindowsOptimizer.App.ViewModels.Hardware;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -49,6 +51,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly DispatcherTimer? _updateTimer;
     private readonly SettingsStore _settingsStore = new(AppPaths.FromEnvironment());
     private readonly IAppLogger _appLogger;
+
+    // MetricDataBus for real-time metric distribution to hardware cards
+    private readonly MetricDataBus _metricBus;
+
+    // Hardware Card ViewModels
+    private readonly CpuCardViewModel _cpuCard;
+    private readonly GpuCardViewModel _gpuCard;
+    private readonly RamCardViewModel _ramCard;
 
     private double _cpuUsage;
     private double _ramUsedGb;
@@ -158,6 +168,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         var paths = AppPaths.FromEnvironment();
         _appLogger = new FileAppLogger(paths);
+
+        // Initialize MetricDataBus for real-time metric distribution
+        _metricBus = new MetricDataBus(action =>
+            Application.Current?.Dispatcher.InvokeAsync(action, DispatcherPriority.DataBind));
+
+        // Initialize Hardware Card ViewModels
+        _cpuCard = new CpuCardViewModel(_metricBus);
+        _gpuCard = new GpuCardViewModel(_metricBus);
+        _ramCard = new RamCardViewModel(_metricBus);
 
         try
         {
@@ -465,6 +484,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _wifiSignalMonitor?.Dispose();
         _gpuEngineMonitor?.Dispose();
         _hardwareSensorService?.Dispose();
+
+        // Dispose Hardware Card ViewModels and MetricDataBus
+        _cpuCard.Dispose();
+        _gpuCard.Dispose();
+        _ramCard.Dispose();
+        _metricBus.Dispose();
     }
 
     private void ExportMetricsToCsv()
@@ -2200,20 +2225,42 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public double CpuUsage
     {
         get => _cpuUsage;
-        private set => SetProperty(ref _cpuUsage, value);
+        private set
+        {
+            if (SetProperty(ref _cpuUsage, value))
+                _metricBus.Publish("cpu.usage", value);
+        }
     }
 
     public double RamUsedGb
     {
         get => _ramUsedGb;
-        private set => SetProperty(ref _ramUsedGb, value);
+        private set
+        {
+            if (SetProperty(ref _ramUsedGb, value))
+            {
+                _metricBus.Publish("ram.used", value);
+                // Also publish usage percentage for Hardware Cards
+                if (_ramTotalGb > 0)
+                    _metricBus.Publish("ram.usage", (value / _ramTotalGb) * 100);
+            }
+        }
     }
 
     public double RamTotalGb
     {
         get => _ramTotalGb;
-        private set => SetProperty(ref _ramTotalGb, value);
+        private set
+        {
+            if (SetProperty(ref _ramTotalGb, value))
+                _metricBus.Publish("ram.total", value);
+        }
     }
+
+    // Hardware Card ViewModels for new Monitor UI
+    public CpuCardViewModel CpuCard => _cpuCard;
+    public GpuCardViewModel GpuCard => _gpuCard;
+    public RamCardViewModel RamCard => _ramCard;
 
     public double RamUsagePercent => RamTotalGb > 0 ? (RamUsedGb / RamTotalGb) * 100 : 0;
 
@@ -2226,6 +2273,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasCpuTemp));
                 OnPropertyChanged(nameof(CpuTempText));
+                if (double.IsFinite(value))
+                    _metricBus.Publish("cpu.temp", value);
             }
         }
     }
@@ -2275,6 +2324,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasGpuTemp));
                 OnPropertyChanged(nameof(GpuTempText));
+                if (double.IsFinite(value))
+                    _metricBus.Publish("gpu.temp", value);
             }
         }
     }
@@ -2286,7 +2337,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public double GpuUsage
     {
         get => _gpuUsage;
-        private set => SetProperty(ref _gpuUsage, value);
+        private set
+        {
+            if (SetProperty(ref _gpuUsage, value))
+                _metricBus.Publish("gpu.usage", value);
+        }
     }
 
     public double GpuMemoryUsedMb

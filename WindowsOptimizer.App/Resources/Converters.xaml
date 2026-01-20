@@ -11,6 +11,9 @@
     <!-- Null to Visibility Converter -->
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
+    <!-- Null to Collapsed Converter (null → Collapsed, non-null → Visible) -->
+    <converters:NullToCollapsedConverter x:Key="NullToCollapsedConverter"/>
+
     <!-- String Empty to Visibility Converter -->
     <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter"/>
 

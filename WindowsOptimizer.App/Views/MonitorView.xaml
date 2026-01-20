@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              xmlns:converters="clr-namespace:WindowsOptimizer.App.ViewModels"
+             xmlns:hardware="clr-namespace:WindowsOptimizer.App.ViewModels.Hardware"
              xmlns:utils="clr-namespace:WindowsOptimizer.App.Utilities"
              mc:Ignorable="d"
              Background="{DynamicResource BackgroundDarkestBrush}">
@@ -1030,7 +1031,125 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Duplicate cards removed (consolidated into Details panel) -->
+                <!-- Hardware Info Cards (Real-time specs from HardwareIdentifier) -->
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                    <Grid DataContext="{Binding CpuCard}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Header -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Primary Value -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
+                        </StackPanel>
+                        <!-- Secondary Metrics -->
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
+                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                    <Grid DataContext="{Binding GpuCard}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
+                        </StackPanel>
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
+                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                    <Grid DataContext="{Binding RamCard}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Border Background="{Binding IconBackground}" CornerRadius="6" Padding="6" Margin="0,0,8,0">
+                                <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="14"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" TextTrimming="CharacterEllipsis" MaxWidth="150"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,4">
+                            <TextBlock Text="{Binding PrimaryValue}" FontSize="28" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
+                            <TextBlock Text="{Binding PrimaryUnit}" FontSize="16" Foreground="{DynamicResource ForegroundLightBrush}" VerticalAlignment="Bottom" Margin="2,0,0,4"/>
+                        </StackPanel>
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding SecondaryMetrics}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding Label}" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,4,0"/>
+                                        <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                            <Run Text="{Binding Value}"/><Run Text="{Binding Unit}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
 
                 <!-- GPU Clocks Card -->
                 <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource StatCardStyle}"

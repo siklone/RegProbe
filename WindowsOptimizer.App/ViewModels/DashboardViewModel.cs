@@ -18,6 +18,7 @@ using WindowsOptimizer.Core.Security;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure.Metrics;
+using WindowsOptimizer.App.Services;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -87,14 +88,18 @@ public sealed class DashboardViewModel : ViewModelBase
     private IReadOnlyList<ActivityTimelineItem> _recentActivity = Array.Empty<ActivityTimelineItem>();
     private TweaksViewModel? _tweaksViewModel;
 
+
+    private readonly IBusyService _busyService;
+    
     // Navigation callback - set by MainViewModel
     public Action<string>? NavigateToCategoryRequested { get; set; }
 
     // Status filter callback - set by MainViewModel (for applied/rolled back filters)
     public Action<string>? NavigateToStatusFilterRequested { get; set; }
 
-    public DashboardViewModel()
+    public DashboardViewModel(IBusyService busyService)
     {
+        _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _paths = AppPaths.FromEnvironment();
         _bootTimeTracker = new BootTimeTracker(_paths);
         _bootTimeTracker.RecordCurrentBoot();
@@ -166,8 +171,8 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             if (SetProperty(ref _isCreatingRestorePoint, value))
             {
-                ((RelayCommand)CreateRestorePointCommand).RaiseCanExecuteChanged();
-                ((RelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
+                ((AsyncRelayCommand)CreateRestorePointCommand).RaiseCanExecuteChanged();
+                ((AsyncRelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
             }
         }
     }
@@ -185,7 +190,7 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             if (SetProperty(ref _vssServiceNeedsEnable, value))
             {
-                ((RelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
+                ((AsyncRelayCommand)EnableVssCommand).RaiseCanExecuteChanged();
             }
         }
     }
@@ -197,7 +202,7 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             if (SetProperty(ref _isScanning, value))
             {
-                ((RelayCommand)ScanAllCommand).RaiseCanExecuteChanged();
+                ((AsyncRelayCommand)ScanAllCommand).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(IsScanIndeterminate));
             }
         }
@@ -376,6 +381,8 @@ public sealed class DashboardViewModel : ViewModelBase
         }
 
         IsScanning = true;
+        using var busy = _busyService.Busy(isStartupScan ? "Running quick scan..." : "Running full scan...");
+        
         var useFullScan = IsFullScanEnabled && !isStartupScan;
         var scanStartedAt = DateTimeOffset.Now;
         ScanCurrent = 0;
@@ -509,6 +516,8 @@ public sealed class DashboardViewModel : ViewModelBase
         try
         {
             var description = $"Windows Optimizer - {DateTime.Now:yyyy-MM-dd HH:mm}";
+            using var busy = _busyService.Busy("Creating system restore point...");
+            
             var result = await _vssService.CreateSnapshotAsync(description, CancellationToken.None);
 
             if (result.Success)
@@ -744,7 +753,7 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             if (SetProperty(ref _isEnablingBootMetrics, value))
             {
-                ((RelayCommand)EnableBootMetricsCommand).RaiseCanExecuteChanged();
+                ((AsyncRelayCommand)EnableBootMetricsCommand).RaiseCanExecuteChanged();
             }
         }
     }

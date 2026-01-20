@@ -7,7 +7,6 @@
         xmlns:behaviors="clr-namespace:WindowsOptimizer.App.Behaviors"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:controls="clr-namespace:WindowsOptimizer.App.Views.Controls"
-        xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
         Width="1280"
@@ -38,7 +37,6 @@
     <Window.Resources>
         <!-- Converters -->
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-        <converters:NullToCollapsedConverter x:Key="NullToCollapsedConverter"/>
 
         <!-- Sidebar ListBox Style -->
         <Style TargetType="ListBox">
@@ -500,5 +498,10 @@
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Bottom"
                                    IsHitTestVisible="True"/>
+
+        <!-- Busy Indicator Overlay -->
+        <controls:LoadingOverlay DataContext="{Binding BusyService}" 
+                                Panel.ZIndex="300"
+                                d:IsHidden="True"/>
     </Grid>
 </Window>
