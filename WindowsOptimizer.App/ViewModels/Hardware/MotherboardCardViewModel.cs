@@ -38,6 +38,32 @@ public sealed class MotherboardCardViewModel : HardwareCardViewModelBase
 
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
+                void AddMetricText(string label, string? value, string unit = "")
+                {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return;
+                    }
+
+                    var trimmed = value.Trim();
+                    if (string.Equals(trimmed, "N/A", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return;
+                    }
+
+                    SecondaryMetrics.Add(new MetricItem(label, trimmed, unit));
+                }
+
+                void AddMetricNumber(string label, int? value, string unit = "")
+                {
+                    if (!value.HasValue || value.Value <= 0)
+                    {
+                        return;
+                    }
+
+                    SecondaryMetrics.Add(new MetricItem(label, value.Value.ToString(), unit));
+                }
+
                 var model = !string.IsNullOrWhiteSpace(specs.Model) ? specs.Model : _identity.Product;
                 Subtitle = string.IsNullOrWhiteSpace(model) ? "Unknown Motherboard" : model;
                 HasSpecs = specs.IsFromDatabase;
@@ -55,20 +81,27 @@ public sealed class MotherboardCardViewModel : HardwareCardViewModelBase
                     PrimaryUnit = "GB";
                 }
 
-                SecondaryMetrics.Add(new MetricItem("Chipset", !string.IsNullOrWhiteSpace(specs.Chipset) ? specs.Chipset : "N/A", ""));
-                SecondaryMetrics.Add(new MetricItem("Socket", !string.IsNullOrWhiteSpace(specs.Socket) ? specs.Socket : "N/A", ""));
-                SecondaryMetrics.Add(new MetricItem("Form", !string.IsNullOrWhiteSpace(specs.FormFactor) ? specs.FormFactor : "N/A", ""));
-                SecondaryMetrics.Add(new MetricItem("Memory", !string.IsNullOrWhiteSpace(specs.MemoryType) ? specs.MemoryType : "N/A", ""));
-
-                if (specs.MaxMemoryGb is { } maxGb && maxGb > 0)
+                var manufacturer = !string.IsNullOrWhiteSpace(specs.Manufacturer)
+                    ? specs.Manufacturer
+                    : _identity.Manufacturer;
+                if (string.IsNullOrWhiteSpace(manufacturer))
                 {
-                    SecondaryMetrics.Add(new MetricItem("Max RAM", maxGb.ToString(), "GB"));
+                    manufacturer = "Unknown";
                 }
 
-                if (specs.MaxMemorySpeedMhz is { } speed && speed > 0)
-                {
-                    SecondaryMetrics.Add(new MetricItem("Max Speed", speed.ToString(), "MHz"));
-                }
+                AddMetricText("Vendor", manufacturer);
+                AddMetricText("Chipset", specs.Chipset);
+                AddMetricText("Socket", specs.Socket);
+                AddMetricText("Form", specs.FormFactor);
+                AddMetricText("Memory", specs.MemoryType);
+                AddMetricNumber("Max RAM", specs.MaxMemoryGb, "GB");
+                AddMetricNumber("Max Speed", specs.MaxMemorySpeedMhz, "MHz");
+                AddMetricText("PCIe", specs.PcieSlots);
+                AddMetricNumber("M.2", specs.M2Slots, "slots");
+                AddMetricNumber("SATA", specs.SataPorts, "ports");
+                AddMetricText("USB", specs.UsbPorts);
+                AddMetricText("LAN", specs.NetworkChip);
+                AddMetricText("WiFi", specs.WifiChip);
 
                 IsLoading = false;
             });
