@@ -264,7 +264,7 @@ var result = await preloader.RunAllAsync(ct);
 ---
 
 ### 0.12 Monitor Motherboard Card (Commit: pending)
-**Improvement:** Added a motherboard hardware card to the Monitor page.
+**Improvement:** Added a motherboard hardware card to the Monitor page with optional PCIe/M.2/SATA/USB/LAN/WiFi details.
 
 **Modified Files:**
 - `WindowsOptimizer.App/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
