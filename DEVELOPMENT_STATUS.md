@@ -220,6 +220,7 @@ var result = await preloader.RunAllAsync(ct);
 - Cards show DB-backed subtitles and mark `HasSpecs` when matched
 - Seed data importer with versioned updates via embedded JSON
 - Seeded RAM, Storage, and Motherboard tables + lookup helpers
+- RAM/Storage cards and detail views now surface DB specs (rated speeds, timings, form factor)
 
 **Status:** ?. **IMPLEMENTED** - DB population/update pending
 

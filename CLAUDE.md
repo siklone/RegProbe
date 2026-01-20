@@ -29,7 +29,7 @@ Current focus (2026-01-19):
 - Startup flow: theme applies before splash + scan runs before MainWindow.
 - Splash shows scan progress (X/Y + current tweak).
 - Startup preload now initializes metric threading and warms hardware identifiers via `PreloadManager`.
-- Hardware database scaffolding (SQLite) is in place; embedded seed/import + update check added, CPU/GPU/RAM/Storage/Motherboard tables seeded, CPU/GPU cards resolve specs via fallback (DB -> identity).
+- Hardware database scaffolding (SQLite) is in place; embedded seed/import + update check added, CPU/GPU/RAM/Storage/Motherboard tables seeded, RAM/Storage cards + detail views now surface DB specs, CPU/GPU cards resolve specs via fallback (DB -> identity).
 - Hardware detail windows load async and show live metrics (quick stats use clock/power, RAM used/free, disk read/write); MetricDataBus emits CPU clock/power, GPU clock/power/memory, RAM available, disk read/write/health.
 - Docs linking now also shows `Source file` from catalog CSV.
 - Tweak cards show compact area badge + `Current → Target` on collapsed view.
