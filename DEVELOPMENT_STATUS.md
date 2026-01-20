@@ -237,6 +237,19 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.10 Monitor Card Live Summary (Commit: pending)
+**Improvement:** Surfaced live RAM and storage metrics under the primary value for quick visibility.
+
+**Modified Files:**
+- `WindowsOptimizer.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - LiveSummary support for cards.
+- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - Live used/free summary updates.
+- `WindowsOptimizer.App/ViewModels/Hardware/DiskCardViewModel.cs` - Live read/write summary updates.
+- `WindowsOptimizer.App/Views/MonitorView.xaml` - Live summary line under primary metric.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
