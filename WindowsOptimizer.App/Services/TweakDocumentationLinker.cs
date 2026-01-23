@@ -20,6 +20,7 @@ public sealed class TweakDocumentationLinker
     private readonly string? _docsRoot;
     private readonly string? _repoRoot;
     private readonly IReadOnlyDictionary<string, CatalogEntry> _catalogIndex;
+    private readonly IReadOnlyList<TemplateCatalogEntry> _templatedCatalogEntries;
     private readonly Dictionary<string, HashSet<string>> _docAnchorCache = new(StringComparer.OrdinalIgnoreCase);
 
     public TweakDocumentationLinker(string? docsRoot = null)
@@ -45,6 +46,7 @@ public sealed class TweakDocumentationLinker
             ["performance"] = Path.Combine("performance", "performance.md"),
         };
         _catalogIndex = LoadCatalogIndex();
+        _templatedCatalogEntries = BuildTemplateCatalogEntries(_catalogIndex);
     }
 
     public void Apply(IEnumerable<TweakItemViewModel> tweaks)
@@ -63,10 +65,11 @@ public sealed class TweakDocumentationLinker
             }
 
             var insertIndex = 0;
+            var hasCatalogEntry = TryResolveCatalogEntry(tweak.Id, out var catalogEntry, out var anchorId);
             if (!string.IsNullOrWhiteSpace(catalogPath))
             {
-                var catalogHasAnchor = HasDocAnchor(catalogPath, tweak.Id);
-                var catalogUrl = catalogHasAnchor ? $"{catalogPath}#{tweak.Id}" : catalogPath;
+                var catalogHasAnchor = HasDocAnchor(catalogPath, anchorId);
+                var catalogUrl = catalogHasAnchor ? $"{catalogPath}#{anchorId}" : catalogPath;
                 var catalogTitle = catalogHasAnchor ? "Catalog entry" : "Catalog entry (missing)";
                 if (TryInsertReferenceLink(tweak, catalogTitle, catalogUrl, insertIndex,
                         "Full tweak catalog with all entries.", ReferenceLinkKind.Catalog))
@@ -78,8 +81,8 @@ public sealed class TweakDocumentationLinker
             var detailsPath = ResolveDetailsDocPath();
             if (!string.IsNullOrWhiteSpace(detailsPath))
             {
-                var detailsHasAnchor = HasDocAnchor(detailsPath, tweak.Id);
-                var detailsUrl = detailsHasAnchor ? $"{detailsPath}#{tweak.Id}" : detailsPath;
+                var detailsHasAnchor = HasDocAnchor(detailsPath, anchorId);
+                var detailsUrl = detailsHasAnchor ? $"{detailsPath}#{anchorId}" : detailsPath;
                 var detailsTitle = detailsHasAnchor ? "Docs: Details" : "Docs: Details (missing)";
                 if (TryInsertReferenceLink(tweak, detailsTitle, detailsUrl, insertIndex,
                         "Per-tweak summary (Changes, Risk, Source).", ReferenceLinkKind.Details))
@@ -89,9 +92,9 @@ public sealed class TweakDocumentationLinker
             }
 
             var winConfigPath = ResolveDocPathFromRelative(WinConfigDocPath);
-            if (!string.IsNullOrWhiteSpace(winConfigPath) && HasDocAnchor(winConfigPath, tweak.Id))
+            if (!string.IsNullOrWhiteSpace(winConfigPath) && HasDocAnchor(winConfigPath, anchorId))
             {
-                var winConfigUrl = AppendDocAnchor(winConfigPath, tweak.Id);
+                var winConfigUrl = AppendDocAnchor(winConfigPath, anchorId);
                 if (TryInsertReferenceLink(tweak, "Docs: Win-Config", winConfigUrl, insertIndex,
                         "Win-config batch documentation for this tweak.", ReferenceLinkKind.Docs))
                 {
@@ -100,26 +103,26 @@ public sealed class TweakDocumentationLinker
             }
 
             var prefix = ExtractPrefix(tweak.Id);
-            if (_catalogIndex.TryGetValue(tweak.Id, out var entry))
+            if (hasCatalogEntry)
             {
-                if (TryBuildSourceLink(entry, out var sourceTitle, out var sourcePath)
+                if (TryBuildSourceLink(catalogEntry, out var sourceTitle, out var sourcePath)
                     && TryInsertReferenceLink(tweak, sourceTitle, sourcePath, insertIndex,
                         "Open the source definition for this tweak.", ReferenceLinkKind.Source))
                 {
                     insertIndex++;
                 }
 
-                var entryDocPath = ResolveDocPathFromRelative(entry.DocsPath);
+                var entryDocPath = ResolveDocPathFromRelative(catalogEntry.DocsPath);
                 if (!string.IsNullOrWhiteSpace(entryDocPath))
                 {
-                    var entryTitle = BuildDocsTitle(entry.Category, prefix);
-                    var hasAnchor = HasDocAnchor(entryDocPath, tweak.Id);
+                    var entryTitle = BuildDocsTitle(catalogEntry.Category, prefix);
+                    var hasAnchor = HasDocAnchor(entryDocPath, anchorId);
                     if (!hasAnchor)
                     {
                         entryTitle += " (section missing)";
                     }
 
-                    var docUrl = hasAnchor ? AppendDocAnchor(entryDocPath, tweak.Id) : entryDocPath;
+                    var docUrl = hasAnchor ? AppendDocAnchor(entryDocPath, anchorId) : entryDocPath;
                     if (TryInsertReferenceLink(tweak, entryTitle, docUrl, insertIndex,
                             "Category documentation for this tweak.", ReferenceLinkKind.Docs))
                     {
@@ -131,9 +134,9 @@ public sealed class TweakDocumentationLinker
                     var fallbackDocPath = ResolveDocPath(prefix);
                     if (!string.IsNullOrWhiteSpace(fallbackDocPath))
                     {
-                        var fallbackTitle = BuildDocsTitle(entry.Category, prefix) + " (file missing)";
-                        var hasAnchor = HasDocAnchor(fallbackDocPath, tweak.Id);
-                        var fallbackUrl = hasAnchor ? AppendDocAnchor(fallbackDocPath, tweak.Id) : fallbackDocPath;
+                        var fallbackTitle = BuildDocsTitle(catalogEntry.Category, prefix) + " (file missing)";
+                        var hasAnchor = HasDocAnchor(fallbackDocPath, anchorId);
+                        var fallbackUrl = hasAnchor ? AppendDocAnchor(fallbackDocPath, anchorId) : fallbackDocPath;
                         if (TryInsertReferenceLink(tweak, fallbackTitle, fallbackUrl, insertIndex,
                                 "Category documentation for this tweak.", ReferenceLinkKind.Docs))
                         {
@@ -152,16 +155,39 @@ public sealed class TweakDocumentationLinker
             }
 
             var title = BuildDocsTitle(null, prefix);
-            var hasFallbackAnchor = HasDocAnchor(docPath, tweak.Id);
+            var hasFallbackAnchor = HasDocAnchor(docPath, anchorId);
             if (!hasFallbackAnchor)
             {
                 title += " (section missing)";
             }
 
-            var fallbackDocUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, tweak.Id) : docPath;
+            var fallbackDocUrl = hasFallbackAnchor ? AppendDocAnchor(docPath, anchorId) : docPath;
             TryInsertReferenceLink(tweak, title, fallbackDocUrl, insertIndex,
                 "Category documentation for this tweak.", ReferenceLinkKind.Docs);
         }
+    }
+
+    private bool TryResolveCatalogEntry(string tweakId, out CatalogEntry entry, out string anchorId)
+    {
+        anchorId = tweakId;
+        if (_catalogIndex.TryGetValue(tweakId, out var found) && found is not null)
+        {
+            entry = found;
+            return true;
+        }
+
+        foreach (var templatedEntry in _templatedCatalogEntries)
+        {
+            if (templatedEntry.Pattern.IsMatch(tweakId))
+            {
+                entry = templatedEntry.Entry;
+                anchorId = templatedEntry.TemplateId;
+                return true;
+            }
+        }
+
+        entry = default!;
+        return false;
     }
 
     private string ResolveCatalogPath()
@@ -514,6 +540,41 @@ public sealed class TweakDocumentationLinker
         return path.Replace('/', Path.DirectorySeparatorChar).Trim();
     }
 
+    private static IReadOnlyList<TemplateCatalogEntry> BuildTemplateCatalogEntries(
+        IReadOnlyDictionary<string, CatalogEntry> catalogIndex)
+    {
+        var entries = new List<TemplateCatalogEntry>();
+        foreach (var entry in catalogIndex.Values.OrderBy(value => value.Id, StringComparer.OrdinalIgnoreCase))
+        {
+            if (string.IsNullOrWhiteSpace(entry.Id) || !entry.Id.Contains('{'))
+            {
+                continue;
+            }
+
+            var pattern = BuildTemplateRegex(entry.Id);
+            if (pattern is null)
+            {
+                continue;
+            }
+
+            entries.Add(new TemplateCatalogEntry(entry.Id, pattern, entry));
+        }
+
+        return entries;
+    }
+
+    private static Regex? BuildTemplateRegex(string templateId)
+    {
+        if (string.IsNullOrWhiteSpace(templateId) || !templateId.Contains('{'))
+        {
+            return null;
+        }
+
+        var escaped = Regex.Escape(templateId);
+        var pattern = Regex.Replace(escaped, @"\\\{[^}]+\\\}", @"[^\s]+");
+        return new Regex($"^{pattern}$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    }
+
     private static string TrimDocsPrefix(string path)
     {
         var trimmed = path.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
@@ -526,4 +587,5 @@ public sealed class TweakDocumentationLinker
     }
 
     private sealed record CatalogEntry(string Id, string? Category, string? SourcePath, string? DocsPath);
+    private sealed record TemplateCatalogEntry(string TemplateId, Regex Pattern, CatalogEntry Entry);
 }
