@@ -304,6 +304,16 @@ var result = await preloader.RunAllAsync(ct);
 
 ---
 
+### 0.15 Tweak Docs Template Anchor Mapping (Commit: pending)
+**Improvement:** Resolved template tweak IDs to their catalog/docs anchors so dynamic IDs still get links.
+
+**Modified Files:**
+- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Match template IDs to anchors for Catalog/Details/Docs links.
+
+**Status:** ?. **IMPLEMENTED** - Needs Windows verification
+
+---
+
 
 ### 1. Monitor Page Crash Fix (Commit: `0082b11`, `158b5b8`)
 **Problem:** Application crashed when clicking the Monitor tab.
