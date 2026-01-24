@@ -151,6 +151,40 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Research Credits -->
+                <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="🔬" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,12,0"/>
+                            <TextBlock Text="Research Credits" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrush}"/>
+                        </StackPanel>
+                        
+                        <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="12">
+                            <StackPanel>
+                                <TextBlock Text="Windows Registry Research" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrush}"/>
+                                <TextBlock Text="Reverse engineering and documentation by nohuto" 
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,4,0,8"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="win-config" 
+                                            Command="{Binding OpenUrlCommand}"
+                                            CommandParameter="https://github.com/nohuto/win-config"
+                                            Background="Transparent" BorderThickness="0"
+                                            Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                            Padding="0" Margin="0,0,16,0" Cursor="Hand"/>
+                                    <Button Content="win-registry" 
+                                            Command="{Binding OpenUrlCommand}"
+                                            CommandParameter="https://github.com/nohuto/win-registry"
+                                            Background="Transparent" BorderThickness="0"
+                                            Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                            Padding="0" Cursor="Hand"/>
+                                </StackPanel>
+                                <TextBlock Text="Methods: IDA Pro, WinDbg, WPR, Procmon" 
+                                           FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
                 <!-- Project Info -->
                 <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16">
                     <StackPanel Orientation="Horizontal">

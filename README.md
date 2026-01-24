@@ -196,9 +196,13 @@ TBD (no LICENSE file committed yet).
 
 ## 🙏 Acknowledgments
 
+- **[nohuto/win-config](https://github.com/nohuto/win-config)** - Windows registry research and documentation (AGPL-3.0)
+- **[nohuto/win-registry](https://github.com/nohuto/win-registry)** - Registry value documentation with traces (GPL-3.0)
 - **LibreHardwareMonitor** - Hardware sensor data
 - **Nord Theme** - UI color palette
 - **WPF Community** - Framework and patterns
+
+> See [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md) for detailed attribution and links to source documentation.
 
 ## 📞 Support
 

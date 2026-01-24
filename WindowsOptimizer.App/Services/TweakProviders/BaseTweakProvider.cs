@@ -11,6 +11,32 @@ using Microsoft.Win32;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
+/// <summary>
+/// Wrapper that adds documentation metadata to any ITweak.
+/// </summary>
+public sealed class DocumentedTweak : ITweak, ITweakWithDocumentation
+{
+    private readonly ITweak _innerTweak;
+    
+    public DocumentedTweak(ITweak innerTweak, TweakDocumentation documentation)
+    {
+        _innerTweak = innerTweak ?? throw new ArgumentNullException(nameof(innerTweak));
+        Documentation = documentation ?? throw new ArgumentNullException(nameof(documentation));
+    }
+    
+    public string Id => _innerTweak.Id;
+    public string Name => _innerTweak.Name;
+    public string Description => _innerTweak.Description;
+    public TweakRiskLevel Risk => _innerTweak.Risk;
+    public bool RequiresElevation => _innerTweak.RequiresElevation;
+    public TweakDocumentation Documentation { get; }
+    
+    public System.Threading.Tasks.Task<TweakResult> DetectAsync(System.Threading.CancellationToken ct) => _innerTweak.DetectAsync(ct);
+    public System.Threading.Tasks.Task<TweakResult> ApplyAsync(System.Threading.CancellationToken ct) => _innerTweak.ApplyAsync(ct);
+    public System.Threading.Tasks.Task<TweakResult> VerifyAsync(System.Threading.CancellationToken ct) => _innerTweak.VerifyAsync(ct);
+    public System.Threading.Tasks.Task<TweakResult> RollbackAsync(System.Threading.CancellationToken ct) => _innerTweak.RollbackAsync(ct);
+}
+
 public abstract class BaseTweakProvider : ITweakProvider
 {
     public abstract string CategoryName { get; }
@@ -177,4 +203,27 @@ public abstract class BaseTweakProvider : ITweakProvider
             context.ElevatedFileSystem,
             requiresElevation);
     }
+    
+    /// <summary>
+    /// Wraps a tweak with documentation metadata.
+    /// </summary>
+    protected DocumentedTweak WithDocumentation(ITweak tweak, TweakDocumentation documentation)
+        => new DocumentedTweak(tweak, documentation);
+    
+    /// <summary>
+    /// Wraps a tweak with nohuto documentation.
+    /// </summary>
+    /// <param name="tweak">The tweak to wrap</param>
+    /// <param name="category">Category folder name (e.g., "kernel", "graphics")</param>
+    /// <param name="anchor">Optional anchor in the markdown file</param>
+    protected DocumentedTweak WithNohutoDoc(ITweak tweak, string category, string anchor = "")
+        => new DocumentedTweak(tweak, TweakDocumentation.FromNohuto(category, anchor));
+    
+    /// <summary>
+    /// Wraps a tweak with Microsoft documentation.
+    /// </summary>
+    /// <param name="tweak">The tweak to wrap</param>
+    /// <param name="url">Full URL to Microsoft Learn documentation</param>
+    protected DocumentedTweak WithMicrosoftDoc(ITweak tweak, string url)
+        => new DocumentedTweak(tweak, TweakDocumentation.FromMicrosoft(url));
 }
