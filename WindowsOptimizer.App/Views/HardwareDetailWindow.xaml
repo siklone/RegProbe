@@ -11,9 +11,34 @@
         Background="{DynamicResource BackgroundDarkestBrush}"
         FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
         FontSize="12"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        Opacity="0">
+
+    <!-- Entrance Animation: Fade-in + Slide-up -->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <!-- Fade in -->
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                     From="0" To="1" Duration="0:0:0.35"
+                                     EasingFunction="{StaticResource EntranceEase}"/>
+                    <!-- Slide up -->
+                    <DoubleAnimation Storyboard.TargetName="RootTransform"
+                                     Storyboard.TargetProperty="Y"
+                                     From="30" To="0" Duration="0:0:0.35"
+                                     EasingFunction="{StaticResource EntranceEase}"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Window.RenderTransform>
+        <TranslateTransform x:Name="RootTransform" Y="30"/>
+    </Window.RenderTransform>
 
     <Window.Resources>
+        <CubicEase x:Key="EntranceEase" EasingMode="EaseOut"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         <Style x:Key="DetailLabelStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="12"/>

@@ -20,7 +20,11 @@ public enum HardwareType
     Gpu,
     Ram,
     Disk,
-    Motherboard
+    Motherboard,
+    OperatingSystem,
+    SystemBios,
+    Network,
+    Usb
 }
 
 public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposable
@@ -79,6 +83,60 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
         }
 
         _ = LoadHardwareDetailsAsync(type);
+    }
+
+    /// <summary>
+    /// Creates a pre-populated detail view (used by Dashboard where WMI data is already loaded).
+    /// Pass specs directly instead of re-querying WMI.
+    /// </summary>
+    public HardwareDetailViewModel(
+        HardwareType type,
+        string subtitle,
+        IEnumerable<KeyValuePair<string, string>> specifications,
+        IEnumerable<KeyValuePair<string, string>>? details = null,
+        IEnumerable<SubItemViewModel>? subItems = null,
+        string? subItemsHeader = null,
+        string? primaryValue = null,
+        string? primaryUnit = null)
+    {
+        _type = type;
+
+        CloseCommand = new RelayCommand(param =>
+        {
+            if (param is Window window)
+            {
+                window.Close();
+            }
+        });
+
+        InitializeView(type);
+
+        Subtitle = subtitle;
+        if (primaryValue != null) PrimaryValue = primaryValue;
+        if (primaryUnit != null) PrimaryUnit = primaryUnit;
+
+        Specifications.Clear();
+        foreach (var kvp in specifications)
+            Specifications.Add(kvp);
+
+        if (details != null)
+        {
+            Details.Clear();
+            foreach (var kvp in details)
+                Details.Add(kvp);
+        }
+
+        if (subItems != null)
+        {
+            SubItems.Clear();
+            foreach (var item in subItems)
+                SubItems.Add(item);
+        }
+
+        SubItemsHeader = subItemsHeader ?? string.Empty;
+        OnPropertyChanged(nameof(HasDetails));
+        OnPropertyChanged(nameof(HasSubItems));
+        FooterText = $"Data collected at {DateTime.Now:HH:mm:ss}";
     }
 
     #region Properties
@@ -258,6 +316,38 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 PrimaryUnit = "";
                 StatusText = "Detected";
                 break;
+            case HardwareType.OperatingSystem:
+                WindowTitle = "Operating System";
+                Icon = "\uE770"; // MDL2: Laptop
+                IconBackground = new SolidColorBrush(Color.FromRgb(136, 192, 208)); // Nord8 Cyan
+                Title = "Operating System";
+                PrimaryUnit = "";
+                StatusText = "Running";
+                break;
+            case HardwareType.SystemBios:
+                WindowTitle = "System & BIOS";
+                Icon = "\uE7F8"; // MDL2: Settings
+                IconBackground = new SolidColorBrush(Color.FromRgb(129, 161, 193)); // Nord9
+                Title = "System & BIOS";
+                PrimaryUnit = "";
+                StatusText = "Detected";
+                break;
+            case HardwareType.Network:
+                WindowTitle = "Network Adapters";
+                Icon = "\uE968"; // MDL2: Network
+                IconBackground = new SolidColorBrush(Color.FromRgb(94, 129, 172)); // Nord10
+                Title = "Network";
+                PrimaryUnit = "";
+                StatusText = "Connected";
+                break;
+            case HardwareType.Usb:
+                WindowTitle = "USB Devices";
+                Icon = "\uE88E"; // MDL2: USB
+                IconBackground = new SolidColorBrush(Color.FromRgb(136, 192, 208)); // Nord8
+                Title = "USB Devices";
+                PrimaryUnit = "";
+                StatusText = "Detected";
+                break;
         }
     }
 
@@ -279,6 +369,12 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Motherboard:
                 await LoadMotherboardDetailsAsync();
+                break;
+            // OS, SystemBios, Network, Usb use the pre-populated constructor
+            case HardwareType.OperatingSystem:
+            case HardwareType.SystemBios:
+            case HardwareType.Network:
+            case HardwareType.Usb:
                 break;
         }
 
@@ -898,6 +994,12 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 }
                 break;
             case HardwareType.Motherboard:
+                break;
+            // No live metrics for dashboard-only types
+            case HardwareType.OperatingSystem:
+            case HardwareType.SystemBios:
+            case HardwareType.Network:
+            case HardwareType.Usb:
                 break;
         }
     }

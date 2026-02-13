@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using WindowsOptimizer.App.Models;
 using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.ViewModels.Hardware;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -128,10 +129,12 @@ public sealed class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         OpenUrlCommand = new RelayCommand(OpenUrl);
+        OpenDetailCommand = new RelayCommand(OpenDetail);
         _ = LoadSystemInfoAsync();
     }
 
     public ICommand OpenUrlCommand { get; }
+    public ICommand OpenDetailCommand { get; }
 
     public bool IsLoading { get => _isLoading; private set => SetProperty(ref _isLoading, value); }
 
@@ -258,6 +261,169 @@ public sealed class DashboardViewModel : ViewModelBase
             }
             catch { }
         }
+    }
+
+    private void OpenDetail(object? parameter)
+    {
+        if (parameter is not string section) return;
+
+        try
+        {
+            HardwareDetailViewModel? viewModel = section.ToLowerInvariant() switch
+            {
+                "os" => BuildOsDetailViewModel(),
+                "cpu" => new HardwareDetailViewModel(HardwareType.Cpu),
+                "memory" or "ram" => new HardwareDetailViewModel(HardwareType.Ram),
+                "gpu" => new HardwareDetailViewModel(HardwareType.Gpu),
+                "motherboard" or "mobo" => new HardwareDetailViewModel(HardwareType.Motherboard),
+                "disk" or "storage" => new HardwareDetailViewModel(HardwareType.Disk),
+                "system" => BuildSystemBiosDetailViewModel(),
+                "network" => BuildNetworkDetailViewModel(),
+                "usb" => BuildUsbDetailViewModel(),
+                _ => null
+            };
+
+            if (viewModel == null) return;
+
+            var window = new Views.HardwareDetailWindow
+            {
+                DataContext = viewModel,
+                Owner = System.Windows.Application.Current?.MainWindow
+            };
+            window.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"OpenDetail error: {ex.Message}");
+        }
+    }
+
+    private HardwareDetailViewModel BuildOsDetailViewModel()
+    {
+        var specs = new List<KeyValuePair<string, string>>
+        {
+            new("OS Name", OsName),
+            new("Version", OsVersion),
+            new("Build Number", OsBuild),
+            new("Architecture", OsArchitecture),
+            new("Install Date", OsInstallDate),
+            new("Windows Directory", WindowsDirectory),
+            new("System Directory", SystemDirectory),
+            new("Boot Device", BootDevice),
+            new("Time Zone", TimeZone),
+            new("User Name", UserName),
+            new("System Uptime", Uptime)
+        };
+
+        return new HardwareDetailViewModel(
+            HardwareType.OperatingSystem,
+            subtitle: OsName,
+            specifications: specs,
+            primaryValue: OsBuild,
+            primaryUnit: "");
+    }
+
+    private HardwareDetailViewModel BuildSystemBiosDetailViewModel()
+    {
+        var specs = new List<KeyValuePair<string, string>>
+        {
+            new("Computer Name", SystemName),
+            new("Manufacturer", SystemManufacturer),
+            new("Model", SystemModel),
+            new("SKU", SystemSku),
+            new("System Type", SystemType)
+        };
+
+        var details = new List<KeyValuePair<string, string>>
+        {
+            new("BIOS Mode", BiosMode),
+            new("BIOS Version", BiosVersion),
+            new("BIOS Date", BiosDate),
+            new("SMBIOS Version", SmbiosVersion),
+            new("Secure Boot", SecureBootState),
+            new("Kernel DMA Protection", KernelDmaProtection),
+            new("Virtualization Security", VirtualizationSecurity),
+            new("Device Guard", DeviceGuard),
+            new("Hypervisor Enforced", HypervisorEnforced),
+            new("Credential Guard", CredentialGuard)
+        };
+
+        return new HardwareDetailViewModel(
+            HardwareType.SystemBios,
+            subtitle: $"{SystemManufacturer} {SystemModel}",
+            specifications: specs,
+            details: details,
+            primaryValue: BiosMode,
+            primaryUnit: "");
+    }
+
+    private HardwareDetailViewModel BuildNetworkDetailViewModel()
+    {
+        var specs = new List<KeyValuePair<string, string>>
+        {
+            new("Adapters Found", NetworkAdapters.Count.ToString())
+        };
+
+        var subItems = new List<SubItemViewModel>();
+        foreach (var adapter in NetworkAdapters)
+        {
+            var sub = new SubItemViewModel
+            {
+                Icon = "\uE968",
+                Name = adapter.Name
+            };
+            sub.Properties.Add(new("Status", adapter.Status));
+            if (!string.IsNullOrWhiteSpace(adapter.IpAddress))
+                sub.Properties.Add(new("IP", adapter.IpAddress));
+            if (!string.IsNullOrWhiteSpace(adapter.MacAddress))
+                sub.Properties.Add(new("MAC", adapter.MacAddress));
+            if (!string.IsNullOrWhiteSpace(adapter.Speed))
+                sub.Properties.Add(new("Speed", adapter.Speed));
+            if (!string.IsNullOrWhiteSpace(adapter.DnsServers))
+                sub.Properties.Add(new("DNS", adapter.DnsServers));
+            subItems.Add(sub);
+        }
+
+        return new HardwareDetailViewModel(
+            HardwareType.Network,
+            subtitle: $"{NetworkAdapters.Count} Adapter(s)",
+            specifications: specs,
+            subItems: subItems,
+            subItemsHeader: "Network Adapters",
+            primaryValue: NetworkAdapters.Count.ToString(),
+            primaryUnit: "adapters");
+    }
+
+    private HardwareDetailViewModel BuildUsbDetailViewModel()
+    {
+        var specs = new List<KeyValuePair<string, string>>
+        {
+            new("Devices Found", UsbDevices.Count.ToString())
+        };
+
+        var subItems = new List<SubItemViewModel>();
+        foreach (var usb in UsbDevices)
+        {
+            var sub = new SubItemViewModel
+            {
+                Icon = "\uE88E",
+                Name = usb.Name
+            };
+            if (!string.IsNullOrWhiteSpace(usb.VendorId))
+                sub.Properties.Add(new("VID", usb.VendorId));
+            if (!string.IsNullOrWhiteSpace(usb.ProductId))
+                sub.Properties.Add(new("PID", usb.ProductId));
+            subItems.Add(sub);
+        }
+
+        return new HardwareDetailViewModel(
+            HardwareType.Usb,
+            subtitle: $"{UsbDevices.Count} Device(s)",
+            specifications: specs,
+            subItems: subItems,
+            subItemsHeader: "USB Devices",
+            primaryValue: UsbDevices.Count.ToString(),
+            primaryUnit: "devices");
     }
 
     private async Task LoadSystemInfoAsync()
