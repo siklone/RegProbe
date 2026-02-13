@@ -202,8 +202,25 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,8">
                     <!-- OS - Shows OS Name like "Windows 11" -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="os">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -216,11 +233,28 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- CPU - Shows CPU Name like "AMD Ryzen 9..." -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -234,11 +268,28 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis" 
                                        ToolTip="{Binding ProcessorName}"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- Memory - Shows Size -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="memory">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -251,11 +302,28 @@
                                        Foreground="{DynamicResource AccentPurpleBrush}" 
                                        FontSize="16" FontWeight="Bold"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- GPU - Shows GPU Name like "GeForce RTX 5070" -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -269,11 +337,28 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding GpuDetails.Name}"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- Motherboard - Shows Board Name -->
-                    <Border Style="{StaticResource MetricCardStyle}"
-                            MouseLeftButtonDown="OnCardClick" Tag="motherboard">
+                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="motherboard">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -287,7 +372,7 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding BaseboardProduct}"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -296,8 +381,25 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,8">
                     <!-- Computer Name -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="system">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -310,11 +412,28 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- OS Build -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="os">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -327,11 +446,28 @@
                                        Foreground="{DynamicResource AccentBlueBrush}" 
                                        FontSize="16" FontWeight="Bold"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- System Model -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="system">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -345,11 +481,28 @@
                                        FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding SystemModel}"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- BIOS Mode -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="system">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -362,11 +515,28 @@
                                        Foreground="{DynamicResource SuccessBrush}" 
                                        FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- Uptime -->
-                    <Border Style="{StaticResource MetricCardStyle}"
-                            MouseLeftButtonDown="OnCardClick" Tag="os">
+                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -379,7 +549,7 @@
                                        Foreground="{DynamicResource WarningBrush}" 
                                        FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -388,8 +558,25 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="3" Columns="5" Margin="0,0,0,8">
                     <!-- CPU Speed -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -402,11 +589,28 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- CPU Cores/Threads -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -424,11 +628,28 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- RAM Type & Channels -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="memory">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -441,11 +662,28 @@
                                        Foreground="{DynamicResource AccentPurpleBrush}" 
                                        FontSize="13" FontWeight="Bold"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- GPU Memory -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -458,11 +696,28 @@
                                        Foreground="{DynamicResource SuccessBrush}" 
                                        FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- RAM Speed -->
-                    <Border Style="{StaticResource MetricCardStyle}"
-                            MouseLeftButtonDown="OnCardClick" Tag="memory">
+                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -475,7 +730,7 @@
                                        Foreground="{DynamicResource WarningBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -483,8 +738,25 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="4" Columns="4" Margin="0,0,0,8">
                     <!-- Drives -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="disk">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="disk">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -499,11 +771,28 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- Network -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="network">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="network">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -518,11 +807,28 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- USB -->
-                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
-                            MouseLeftButtonDown="OnCardClick" Tag="usb">
+                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="usb">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -537,11 +843,28 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                     <!-- Monitors -->
-                    <Border Style="{StaticResource MetricCardStyle}"
-                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
+                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -556,7 +879,7 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Border>
+                    </Button>
                 </UniformGrid>
             </Grid>
         </ScrollViewer>
