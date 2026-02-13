@@ -263,7 +263,7 @@ public sealed class DashboardViewModel : ViewModelBase
         }
     }
 
-    private void OpenDetail(object? parameter)
+    public void OpenDetail(object? parameter)
     {
         if (parameter is not string section) return;
 

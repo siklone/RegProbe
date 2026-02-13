@@ -21,8 +21,20 @@ public partial class DashboardView : UserControl
         {
             if (DataContext is ViewModels.DashboardViewModel vm)
             {
-                // Call the OpenDetailCommand directly through the ViewModel
-                vm.OpenDetailCommand.Execute(parameter);
+                System.Diagnostics.Debug.WriteLine($"[DashboardView] Card clicked with parameter: {parameter}");
+                try
+                {
+                    vm.OpenDetail(parameter);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[DashboardView] Error calling OpenDetail: {ex.Message}");
+                    MessageBox.Show($"Error opening details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("[DashboardView] DataContext is not DashboardViewModel");
             }
         }
     }
