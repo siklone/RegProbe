@@ -12,7 +12,7 @@ namespace WindowsOptimizer.App.ViewModels.Hardware;
 /// </summary>
 public abstract class HardwareCardViewModelBase : INotifyPropertyChanged, IDisposable
 {
-    private string _icon = "📊";
+    private string _icon = "\uE9D9"; // MDL2: BarChart
     private string _title = "";
     private string _subtitle = "";
     private Brush _iconBackground = Brushes.Gray;

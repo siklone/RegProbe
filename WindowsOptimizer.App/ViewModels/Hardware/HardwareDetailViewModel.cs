@@ -220,7 +220,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
         {
             case HardwareType.Cpu:
                 WindowTitle = "CPU Details";
-                Icon = "\uD83D\uDCBB";
+                Icon = "\uE950"; // MDL2: Processor
                 IconBackground = new SolidColorBrush(Color.FromRgb(59, 130, 246));
                 Title = "CPU";
                 PrimaryUnit = "%";
@@ -228,7 +228,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Gpu:
                 WindowTitle = "GPU Details";
-                Icon = "\uD83C\uDFAE";
+                Icon = "\uE7FC"; // MDL2: Game
                 IconBackground = new SolidColorBrush(Color.FromRgb(34, 197, 94));
                 Title = "GPU";
                 PrimaryUnit = "%";
@@ -236,7 +236,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Ram:
                 WindowTitle = "RAM Details";
-                Icon = "\uD83D\uDCBE";
+                Icon = "\uE964"; // MDL2: Memory
                 IconBackground = new SolidColorBrush(Color.FromRgb(168, 85, 247));
                 Title = "Memory";
                 PrimaryUnit = "%";
@@ -244,7 +244,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Disk:
                 WindowTitle = "Storage Details";
-                Icon = "\uD83D\uDCBE";
+                Icon = "\uEDA2"; // MDL2: HardDrive
                 IconBackground = new SolidColorBrush(Color.FromRgb(249, 115, 22));
                 Title = "Storage";
                 PrimaryUnit = "% used";
@@ -252,7 +252,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 break;
             case HardwareType.Motherboard:
                 WindowTitle = "Motherboard Details";
-                Icon = "\uD83D\uDEE0\uFE0F";
+                Icon = "\uEC7A"; // MDL2: DeveloperTools
                 IconBackground = new SolidColorBrush(Color.FromRgb(236, 72, 153));
                 Title = "Motherboard";
                 PrimaryUnit = "";
@@ -486,7 +486,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
 
                 var subItem = new SubItemViewModel
                 {
-                    Icon = "\uD83D\uDCBF",
+                    Icon = "\uE964", // MDL2: Memory
                     Name = $"Slot {slot++}: {module.CapacityGB:F0} GB {module.MemoryType ?? "DDR4"}"
                 };
                 subItem.Properties.Add(new("Manufacturer", module.Manufacturer ?? "Unknown"));
@@ -727,7 +727,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
             {
                 var subItem = new SubItemViewModel
                 {
-                    Icon = disk.IsSsd ? "\u26A1" : "\uD83D\uDCBF",
+                    Icon = disk.IsSsd ? "\uEC4A" : "\uEDA2", // MDL2: Speed / HardDrive
                     Name = disk.Model
                 };
                 var specType = disk.Specs?.Type ?? (disk.IsSsd ? "SSD" : "HDD");
@@ -764,7 +764,7 @@ public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposabl
                 {
                     var subItem = new SubItemViewModel
                     {
-                        Icon = "\uD83D\uDCC1",
+                        Icon = "\uE838", // MDL2: FolderOpen
                         Name = $"{drive.Name} {drive.VolumeLabel}"
                     };
                     subItem.Properties.Add(new("File System", drive.DriveFormat));

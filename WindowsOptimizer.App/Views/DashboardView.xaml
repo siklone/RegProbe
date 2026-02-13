@@ -99,7 +99,8 @@
                 Panel.ZIndex="10"
                 Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="🔄" FontFamily="Segoe UI Emoji" FontSize="32" HorizontalAlignment="Center"/>
+                <TextBlock Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="28" HorizontalAlignment="Center"
+                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
                 <TextBlock Text="Loading System Information..."
                            Foreground="{DynamicResource ForegroundLightBrush}"
                            FontSize="14" Margin="0,16,0,0"/>

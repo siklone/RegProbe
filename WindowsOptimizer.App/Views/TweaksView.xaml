@@ -979,61 +979,7 @@
                                 </DoubleAnimation>
                                 <DoubleAnimation Storyboard.TargetName="CardTranslate"
                                                  Storyboard.TargetProperty="Y"
-                                                 From="6" To="0" Duration="0:0:0.2">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                 Storyboard.TargetProperty="ScaleX"
-                                                 To="1.02" Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                 Storyboard.TargetProperty="ScaleY"
-                                                 To="1.02" Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CardTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 To="-2" Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                 Storyboard.TargetProperty="ScaleX"
-                                                 To="1" Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                 Storyboard.TargetProperty="ScaleY"
-                                                 To="1" Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CardTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 To="0" Duration="0:0:0.12">
+                                                 From="4" To="0" Duration="0:0:0.2">
                                     <DoubleAnimation.EasingFunction>
                                         <CubicEase EasingMode="EaseOut"/>
                                     </DoubleAnimation.EasingFunction>
@@ -2215,8 +2161,5 @@
         </Grid>
     </Grid>
 </UserControl>
-
-
-
 
 

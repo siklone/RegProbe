@@ -21,7 +21,7 @@ public sealed class MotherboardCardViewModel : HardwareCardViewModelBase
     {
         _bus = bus;
 
-        Icon = "\uD83D\uDEE0\uFE0F";
+        Icon = "\uEC7A"; // MDL2: DeveloperTools
         Title = "Motherboard";
         IconBackground = new SolidColorBrush(Color.FromRgb(236, 72, 153)); // Pink
         PrimaryUnit = "";

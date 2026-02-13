@@ -21,7 +21,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
     {
         _bus = bus;
 
-        Icon = "🔲";
+        Icon = "\uE950"; // MDL2: Processor
         Title = "CPU";
         IconBackground = new SolidColorBrush(Color.FromRgb(59, 130, 246)); // Blue
         PrimaryUnit = "%";

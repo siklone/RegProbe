@@ -408,7 +408,8 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                             <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
-                                <TextBlock Text="ℹ️" FontFamily="Segoe UI Emoji" FontSize="16"/>
+                                <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
                             </Border>
                             <TextBlock Text="Application Information"
                                        FontSize="18"

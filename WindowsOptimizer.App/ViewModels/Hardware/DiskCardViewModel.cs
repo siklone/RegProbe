@@ -27,7 +27,7 @@ public class DiskCardViewModel : HardwareCardViewModelBase
     {
         _bus = bus;
 
-        Icon = "\uD83D\uDCBE"; // Floppy disk emoji
+        Icon = "\uEDA2"; // MDL2: HardDrive
         Title = "Storage";
         IconBackground = new SolidColorBrush(Color.FromRgb(249, 115, 22)); // Orange
         PrimaryUnit = "";

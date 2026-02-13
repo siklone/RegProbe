@@ -59,11 +59,11 @@
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         </Style>
         
-        <!-- Navigation Item Style with Icons and Glow -->
+        <!-- Navigation Item Style with MDL2 Icons -->
         <Style TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
             <Setter Property="FontSize" Value="13" />
-            <Setter Property="Padding" Value="16,12" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="8,2" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -71,22 +71,23 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Grid>
-                            <!-- Selection Indicator -->
+                            <!-- Selection Indicator Bar -->
                             <Border x:Name="SelectionIndicator"
                                     Width="3"
                                     HorizontalAlignment="Left"
                                     CornerRadius="0,2,2,0"
                                     Background="Transparent"
-                                    Margin="-8,4,0,4"/>
+                                    Margin="-8,6,0,6"/>
+                            <!-- Hover Glow (behind content) -->
+                            <Border x:Name="GlowBorder"
+                                    Background="Transparent"
+                                    CornerRadius="8"
+                                    Opacity="0"/>
                             <!-- Main Border -->
                             <Border x:Name="Border"
                                     Background="Transparent"
                                     CornerRadius="8"
-                                    Padding="{TemplateBinding Padding}"
-                                    RenderTransformOrigin="0.5,0.5">
-                                <Border.RenderTransform>
-                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                </Border.RenderTransform>
+                                    Padding="12,10">
                                 <ContentPresenter />
                             </Border>
                         </Grid>
@@ -101,30 +102,6 @@
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Trigger>
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="Border"
-                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                       To="1.02" Duration="0:0:0.1"/>
-                                        <DoubleAnimation Storyboard.TargetName="Border"
-                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                       To="1.02" Duration="0:0:0.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="Border"
-                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                       To="1.0" Duration="0:0:0.1"/>
-                                        <DoubleAnimation Storyboard.TargetName="Border"
-                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                       To="1.0" Duration="0:0:0.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -149,15 +126,15 @@
                 </Grid.ColumnDefinitions>
                 
                 <!-- Title and Icon (Draggable area) -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0"
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0"
                             MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                             MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
-                    <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="14" 
+                    <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
                                Foreground="{DynamicResource AccentBrightCyanBrush}"
-                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+                               VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock Text="Windows Optimizer Suite" 
                                Foreground="{DynamicResource ForegroundLightBrush}"
-                               FontSize="12" VerticalAlignment="Center"/>
+                               FontSize="12" FontWeight="Medium" VerticalAlignment="Center"/>
                 </StackPanel>
                 
                 <!-- Window Controls -->
@@ -280,7 +257,8 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="10" Padding="8" Margin="0,0,12,0">
-                                <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="18"/>
+                                <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="18"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
                             </Border>
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="Optimizer"
@@ -290,6 +268,7 @@
                                 <TextBlock Text="Suite"
                                            Foreground="{DynamicResource AccentBrightCyanBrush}"
                                            FontSize="12"
+                                           FontWeight="Medium"
                                            Margin="0,-2,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -309,22 +288,24 @@
                          Margin="0,8,0,0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="40">
+                            <Grid Height="36">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 
                                 <TextBlock Grid.Column="0" 
-                                           Text="{Binding Icon}" 
-                                           FontFamily="Segoe UI Emoji"
-                                           FontSize="16" 
+                                           Text="{Binding IconGlyph}" 
+                                           FontFamily="Segoe MDL2 Assets"
+                                           FontSize="15" 
                                            HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center"
+                                           Opacity="0.85"/>
                                            
                                 <TextBlock Grid.Column="1" 
                                            Text="{Binding Title}" 
                                            VerticalAlignment="Center"
+                                           FontSize="13"
                                            Margin="8,0,0,0"/>
                             </Grid>
                         </DataTemplate>
@@ -349,7 +330,7 @@
         </Border>
 
         <!-- Main Content Area -->
-        <Border Grid.Column="1" Background="{DynamicResource BackgroundDarkestBrush}" Padding="0,60,0,0">
+        <Border Grid.Column="1" Background="{DynamicResource BackgroundDarkestBrush}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -370,10 +351,11 @@
 
                         <!-- Warning Icon -->
                         <TextBlock Grid.Column="0"
-                                   Text="⚠️"
-                                   FontFamily="Segoe UI Emoji"
+                                   Text="&#xE7BA;"
+                                   FontFamily="Segoe MDL2 Assets"
                                    FontSize="18"
                                    VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundOnAccentBrush}"
                                    Margin="0,0,12,0"/>
 
                         <!-- Message -->
@@ -473,10 +455,11 @@
                         Padding="16,12"
                         Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="🔄"
-                                   FontFamily="Segoe UI Emoji"
+                        <TextBlock Text="&#xE72C;"
+                                   FontFamily="Segoe MDL2 Assets"
                                    FontSize="16"
                                    VerticalAlignment="Center"
+                                   Foreground="{DynamicResource ForegroundOnAccentBrush}"
                                    Margin="0,0,12,0"/>
                         <TextBlock Text="Recovering pending rollbacks..."
                                    Foreground="{DynamicResource ForegroundOnAccentBrush}"
@@ -537,7 +520,8 @@
                     </Border.Effect>
                     <StackPanel DataContext="{Binding TrayViewModel}">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                            <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
                             <TextBlock Text="Windows Optimizer Suite"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        FontWeight="Bold"
@@ -634,12 +618,12 @@
                             </Setter>
                         </Style>
                     </ContextMenu.Resources>
-                    <MenuItem Header="📊  Dashboard" Click="MenuItem_Dashboard_Click"/>
-                    <MenuItem Header="⚙️  Configuration" Click="MenuItem_Tweaks_Click"/>
-                    <MenuItem Header="📈  Monitor" Click="MenuItem_Monitor_Click"/>
+                    <MenuItem Header="Dashboard" Click="MenuItem_Dashboard_Click"/>
+                    <MenuItem Header="Configuration" Click="MenuItem_Tweaks_Click"/>
+                    <MenuItem Header="Monitor" Click="MenuItem_Monitor_Click"/>
                     <Separator/>
-                    <MenuItem Header="👁️  Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
-                    <MenuItem Header="❌  Exit" Click="MenuItem_Exit_Click"/>
+                    <MenuItem Header="Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
+                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>

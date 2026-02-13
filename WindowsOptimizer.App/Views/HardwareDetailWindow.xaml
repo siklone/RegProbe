@@ -58,7 +58,7 @@
 
                 <!-- Icon -->
                 <Border Grid.Column="0" Background="{Binding IconBackground}" CornerRadius="12" Padding="16" Margin="0,0,20,0">
-                    <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="32"/>
+                    <TextBlock Text="{Binding Icon}" FontFamily="Segoe MDL2 Assets" FontSize="32"/>
                 </Border>
 
                 <!-- Title & Subtitle -->
@@ -175,7 +175,7 @@
 
                                     <Border Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}"
                                             CornerRadius="8" Padding="12" Margin="0,0,16,0" VerticalAlignment="Top">
-                                        <TextBlock Text="{Binding Icon}" FontFamily="Segoe UI Emoji" FontSize="20"/>
+                                        <TextBlock Text="{Binding Icon}" FontFamily="Segoe MDL2 Assets" FontSize="20"/>
                                     </Border>
 
                                     <StackPanel Grid.Column="1">

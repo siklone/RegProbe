@@ -21,7 +21,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
     {
         _bus = bus;
 
-        Icon = "🎮";
+        Icon = "\uE7FC"; // MDL2: Game
         Title = "GPU";
         IconBackground = new SolidColorBrush(Color.FromRgb(34, 197, 94)); // Green
         PrimaryUnit = "%";

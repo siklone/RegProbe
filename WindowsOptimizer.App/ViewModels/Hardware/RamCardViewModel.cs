@@ -25,7 +25,7 @@ public class RamCardViewModel : HardwareCardViewModelBase
     {
         _bus = bus;
 
-        Icon = "💾";
+        Icon = "\uE964"; // MDL2: Memory
         Title = "RAM";
         IconBackground = new SolidColorBrush(Color.FromRgb(168, 85, 247)); // Purple
         PrimaryUnit = "%";
