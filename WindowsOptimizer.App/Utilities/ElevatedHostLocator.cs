@@ -106,6 +106,7 @@ public static class ElevatedHostLocator
             while (current is not null)
             {
                 if (File.Exists(Path.Combine(current.FullName, "WindowsOptimizerSuite.slnx"))
+                    || File.Exists(Path.Combine(current.FullName, "WindowsOptimizerSuite.sln"))
                     || Directory.Exists(Path.Combine(current.FullName, ".git")))
                 {
                     return current.FullName;

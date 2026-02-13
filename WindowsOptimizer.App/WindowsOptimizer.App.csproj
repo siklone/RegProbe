@@ -9,11 +9,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     
     <!-- Quantum Optimizations -->
-    <PublishReadyToRun>true</PublishReadyToRun>
+    <!-- NOTE: ReadyToRun publish can fail on duplicate simple-name inputs (e.g., Dia2Lib.dll). -->
+    <PublishReadyToRun>false</PublishReadyToRun>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>WindowsOptimizer.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
@@ -33,6 +40,7 @@
     <ProjectReference Include="..\\WindowsOptimizer.Engine\\WindowsOptimizer.Engine.csproj" />
     <ProjectReference Include="..\\WindowsOptimizer.Infrastructure\\WindowsOptimizer.Infrastructure.csproj" />
     <ProjectReference Include="..\\WindowsOptimizer.ElevatedHost\\WindowsOptimizer.ElevatedHost.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\\WindowsOptimizer.Plugins.DevTools\\WindowsOptimizer.Plugins.DevTools.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <Target Name="CopyElevatedHostAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
@@ -85,6 +93,32 @@
       <DocsFilesAfterPublish Include="$(DocsSourceDir)**\\*.*" />
     </ItemGroup>
     <Copy Condition="Exists('$(DocsSourceDir)')" SourceFiles="@(DocsFilesAfterPublish)" DestinationFiles="@(DocsFilesAfterPublish->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyBundledPluginsAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <BundledPluginsDestinationDir>$(PublishDir)Plugins\</BundledPluginsDestinationDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\WindowsOptimizer.Plugins.DevTools\bin\$(Configuration)\$(TargetFramework)\WindowsOptimizer.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\WindowsOptimizer.Plugins.DevTools\bin\$(Configuration)\$(TargetFramework)\WindowsOptimizer.Plugins.DevTools.dll')" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(BundledPluginsDestinationDir)" />
+    <Copy SourceFiles="@(BundledPluginAssemblies)" DestinationFolder="$(BundledPluginsDestinationDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyBundledPluginsAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
+    <PropertyGroup>
+      <BundledPluginsDestinationDir>$(TargetDir)Plugins\</BundledPluginsDestinationDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\WindowsOptimizer.Plugins.DevTools\bin\$(Configuration)\$(TargetFramework)\WindowsOptimizer.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\WindowsOptimizer.Plugins.DevTools\bin\$(Configuration)\$(TargetFramework)\WindowsOptimizer.Plugins.DevTools.dll')" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(BundledPluginsDestinationDir)" />
+    <Copy SourceFiles="@(BundledPluginAssemblies)" DestinationFolder="$(BundledPluginsDestinationDir)" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

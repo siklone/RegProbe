@@ -14,7 +14,7 @@ public static class StringPool
     {
         "System", "Security", "Privacy", "Network", "Visibility",
         "Audio", "Peripheral", "Power", "Performance", "Cleanup",
-        "Explorer", "Notifications", "Other", "Misc"
+        "Explorer", "Notifications", "Other", "Misc", "Plugin", "Devtools"
     };
 
     // Pre-interned common status strings

@@ -84,7 +84,7 @@ dotnet run --project WindowsOptimizer.App
 
 ### Debug
 
-Open `WindowsOptimizerSuite.slnx` in Visual Studio and press F5.
+Open `WindowsOptimizerSuite.sln` in Visual Studio and press F5.
 
 > Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
 > `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`

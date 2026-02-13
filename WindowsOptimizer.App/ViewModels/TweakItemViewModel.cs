@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
+using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -69,7 +71,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _currentValue = "Unknown";
     private string _targetValue = "Optimized";
     private readonly string _impactAreaLabel;
-    private ObservableCollection<double> _sparklinePoints = new();
+    private DateTimeOffset? _lastDetectedAtUtc;
+    private bool _isStateFromCache;
     private bool _isRecommended;
     private string _recommendationReason = string.Empty;
     private double _recommendationConfidence;
@@ -142,13 +145,20 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool WillPromptForElevation => RequiresElevation && !IsElevated;
 
+    public bool WillPromptForDetect =>
+        RequiresElevation
+        && !IsElevated
+        && _tweak is not RegistryValueTweak
+        && _tweak is not RegistryValueBatchTweak
+        && _tweak is not RegistryValueSetTweak;
+
     public bool IsScanFriendly =>
         _tweak is not CommandTweak
         && _tweak is not FileCleanupTweak;
 
     public bool IsStartupScanEligible =>
         IsScanFriendly
-        && !WillPromptForElevation;
+        && !WillPromptForDetect;
 
     public string ElevationBadgeText => "Admin";
 
@@ -170,6 +180,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Applied => "Applied. Current state matches the desired configuration.",
         TweakAppliedStatus.NotApplied => "Not applied. Detected state differs from the desired configuration.",
         TweakAppliedStatus.Error => "Error. Open Execution Log for details.",
+        _ when RequiresAdminScan => "Unknown. Run an admin detect to read current state.",
         _ => "Unknown. Click Detect to read current state."
     };
 
@@ -182,8 +193,28 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private static string ExtractCategory(string id)
     {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return Utilities.StringPool.Intern("Other");
+        }
+
+        // Plugins follow: plugin.<pluginId>.<tweakId>...
+        // Group plugin tweaks by pluginId in the UI (e.g. DevTools).
+        if (id.StartsWith("plugin.", StringComparison.OrdinalIgnoreCase))
+        {
+            var parts = id.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (parts.Length >= 2)
+            {
+                return Utilities.StringPool.GetCategory(parts[1]);
+            }
+        }
+
         var dotIndex = id.IndexOf('.');
-        if (dotIndex <= 0) return Utilities.StringPool.Intern("Other");
+        if (dotIndex <= 0)
+        {
+            return Utilities.StringPool.Intern("Other");
+        }
+
         var cat = id.Substring(0, dotIndex);
         return Utilities.StringPool.GetCategory(cat);
     }
@@ -202,6 +233,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         "cleanup" => "🧹",
         "explorer" => "📁",
         "notifications" => "🔔",
+        "devtools" => "🧰",
         _ => "📦"
     };
 
@@ -340,6 +372,71 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    public DateTimeOffset? LastDetectedAtUtc
+    {
+        get => _lastDetectedAtUtc;
+        private set
+        {
+            if (SetProperty(ref _lastDetectedAtUtc, value))
+            {
+                OnPropertyChanged(nameof(HasDetectedState));
+                OnPropertyChanged(nameof(InventoryFreshnessText));
+            }
+        }
+    }
+
+    public bool IsStateFromCache
+    {
+        get => _isStateFromCache;
+        private set
+        {
+            if (SetProperty(ref _isStateFromCache, value))
+            {
+                OnPropertyChanged(nameof(InventoryFreshnessText));
+            }
+        }
+    }
+
+    public bool HasDetectedState => LastDetectedAtUtc.HasValue;
+
+    public string InventoryFreshnessText
+    {
+        get
+        {
+            if (!LastDetectedAtUtc.HasValue)
+            {
+                return "Not scanned yet";
+            }
+
+            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
+            if (elapsed < TimeSpan.Zero)
+            {
+                elapsed = TimeSpan.Zero;
+            }
+
+            string ageText;
+            if (elapsed.TotalMinutes < 1)
+            {
+                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
+            }
+            else if (elapsed.TotalHours < 1)
+            {
+                ageText = $"{(int)elapsed.TotalMinutes}m ago";
+            }
+            else if (elapsed.TotalDays < 1)
+            {
+                ageText = $"{(int)elapsed.TotalHours}h ago";
+            }
+            else
+            {
+                ageText = $"{(int)elapsed.TotalDays}d ago";
+            }
+
+            var source = IsStateFromCache ? "Cached" : "Live";
+            return $"{source} {ageText}";
+        }
+    }
+
     /// <summary>
     /// Before state for snapshot comparison (same as CurrentValue).
     /// </summary>
@@ -419,12 +516,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";
 
-    public ObservableCollection<double> SparklinePoints
-    {
-        get => _sparklinePoints;
-        set => SetProperty(ref _sparklinePoints, value);
-    }
-
     public ObservableCollection<string> BatchDetails => _batchDetails;
 
     public string BatchDetailsTitle
@@ -449,25 +540,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     }
 
     public bool HasBatchSummaryLine => !string.IsNullOrWhiteSpace(_batchSummaryLine);
-
-    public void UpdateMetric(double value)
-    {
-        _sparklinePoints.Add(value);
-        if (_sparklinePoints.Count > 20)
-        {
-            _sparklinePoints.RemoveAt(0);
-        }
-    }
-
-    private void GenerateMockSparkline()
-    {
-        if (_sparklinePoints.Any()) return;
-        var r = new Random(Id.GetHashCode());
-        for (int i = 0; i < 15; i++)
-        {
-            _sparklinePoints.Add(r.Next(20, 80));
-        }
-    }
 
     public string TerminalOutput
     {
@@ -549,9 +621,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string StatusIcon => AppliedStatus switch
     {
         _ when ShouldShowMixedStatus => "M",
-        TweakAppliedStatus.Applied => "✓",
-        TweakAppliedStatus.NotApplied => "○",
-        TweakAppliedStatus.Error => "✕",
+        TweakAppliedStatus.Applied => "+",
+        TweakAppliedStatus.NotApplied => "o",
+        TweakAppliedStatus.Error => "x",
+        _ when RequiresAdminScan => "!",
         _ => "?"
     };
 
@@ -561,6 +634,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Applied => AppliedStatusBrush,
         TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
         TweakAppliedStatus.Error => ErrorStatusBrush,
+        _ when RequiresAdminScan => NotAppliedStatusBrush,
         _ => UnknownStatusBrush
     };
 
@@ -570,6 +644,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Applied => AppliedStatusBackgroundBrush,
         TweakAppliedStatus.NotApplied => NotAppliedStatusBackgroundBrush,
         TweakAppliedStatus.Error => ErrorStatusBackgroundBrush,
+        _ when RequiresAdminScan => NotAppliedStatusBackgroundBrush,
         _ => UnknownStatusBackgroundBrush
     };
 
@@ -579,6 +654,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Applied => "Applied",
         TweakAppliedStatus.NotApplied => "Not Applied",
         TweakAppliedStatus.Error => "Error",
+        _ when RequiresAdminScan => "Needs Admin",
         _ => "Unknown"
     };
 
@@ -586,6 +662,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         AppliedStatus is not TweakAppliedStatus.Error
         && !string.IsNullOrWhiteSpace(CurrentValue)
         && CurrentValue.Contains("Mixed", StringComparison.OrdinalIgnoreCase);
+
+    private bool RequiresAdminScan =>
+        AppliedStatus == TweakAppliedStatus.Unknown
+        && WillPromptForDetect;
 
     private static SolidColorBrush CreateFrozenBrush(string hex)
     {
@@ -712,10 +792,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         get => _isDetailsExpanded;
         set
         {
-            if (SetProperty(ref _isDetailsExpanded, value) && value)
-            {
-                GenerateMockSparkline();
-            }
+            SetProperty(ref _isDetailsExpanded, value);
         }
     }
 
@@ -897,6 +974,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 };
 
                 TryUpdateCurrentValueFromMessage(result.Message);
+                SetDetectionTimestamp(result.Timestamp, fromCache: false);
                 if (CurrentValue == "Unknown" && result.Status is TweakStatus.Applied or TweakStatus.Verified)
                 {
                     CurrentValue = TargetValue;
@@ -992,6 +1070,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (update.Action == TweakAction.Detect)
         {
             TryUpdateCurrentValueFromMessage(update.Message);
+            SetDetectionTimestamp(update.Timestamp, fromCache: false);
         }
 
         var nextStep = GetNextStep(update.Action);
@@ -1039,15 +1118,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyId()
     {
-        try
+        if (TrySetClipboardText(Id, out var error))
         {
-            Clipboard.SetText(Id);
             StatusMessage = "Tweak ID copied to clipboard.";
+            return;
         }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Copy failed: {ex.Message}";
-        }
+
+        StatusMessage = $"Copy failed: {error}";
     }
 
     private bool CanRun()
@@ -1097,15 +1174,59 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyRegistryPath()
     {
-        try
+        if (TrySetClipboardText(RegistryPath, out var error))
         {
-            Clipboard.SetText(RegistryPath);
             StatusMessage = "Registry path copied to clipboard.";
+            return;
         }
-        catch (Exception ex)
+
+        StatusMessage = $"Copy failed: {error}";
+    }
+
+    private static bool TrySetClipboardText(string text, out string? errorMessage)
+    {
+        const int ClipboardBusy = unchecked((int)0x800401D0);
+        const int ClipboardCantEmpty = unchecked((int)0x800401D1);
+        errorMessage = null;
+
+        if (string.IsNullOrWhiteSpace(text))
         {
-            StatusMessage = $"Copy failed: {ex.Message}";
+            errorMessage = "Nothing to copy.";
+            return false;
         }
+
+        for (var attempt = 0; attempt < 4; attempt++)
+        {
+            try
+            {
+                if (Application.Current?.Dispatcher?.CheckAccess() == true)
+                {
+                    Clipboard.SetText(text);
+                }
+                else if (Application.Current?.Dispatcher != null)
+                {
+                    Application.Current.Dispatcher.Invoke(() => Clipboard.SetText(text));
+                }
+                else
+                {
+                    Clipboard.SetText(text);
+                }
+
+                return true;
+            }
+            catch (COMException ex) when (ex.HResult == ClipboardBusy || ex.HResult == ClipboardCantEmpty)
+            {
+                Thread.Sleep(30 * (attempt + 1));
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+        }
+
+        errorMessage = "Clipboard is busy. Try again.";
+        return false;
     }
 
     private void OpenReferenceLink(object? parameter)
@@ -1473,6 +1594,69 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    public TweakInventoryState ExportInventoryState()
+    {
+        return new TweakInventoryState
+        {
+            Id = Id,
+            AppliedStatus = AppliedStatus.ToString(),
+            CurrentValue = CurrentValue,
+            TargetValue = TargetValue,
+            LastDetectedAtUtc = LastDetectedAtUtc,
+            ImpactArea = ImpactAreaLabel
+        };
+    }
+
+    public void ApplyCachedInventoryState(TweakInventoryState cachedState)
+    {
+        if (cachedState is null)
+        {
+            return;
+        }
+
+        if (!string.Equals(cachedState.Id, Id, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        AppliedStatus = ParseAppliedStatus(cachedState.AppliedStatus);
+
+        if (!string.IsNullOrWhiteSpace(cachedState.CurrentValue))
+        {
+            CurrentValue = cachedState.CurrentValue;
+        }
+
+        if (!string.IsNullOrWhiteSpace(cachedState.TargetValue))
+        {
+            TargetValue = cachedState.TargetValue;
+        }
+
+        if (cachedState.LastDetectedAtUtc.HasValue)
+        {
+            SetDetectionTimestamp(cachedState.LastDetectedAtUtc.Value, fromCache: true);
+            LastUpdatedText = $"Last update: {cachedState.LastDetectedAtUtc.Value.ToLocalTime():HH:mm:ss}";
+        }
+    }
+
+    private static TweakAppliedStatus ParseAppliedStatus(string? statusText)
+    {
+        if (string.IsNullOrWhiteSpace(statusText))
+        {
+            return TweakAppliedStatus.Unknown;
+        }
+
+        return Enum.TryParse<TweakAppliedStatus>(statusText, ignoreCase: true, out var parsed)
+            ? parsed
+            : TweakAppliedStatus.Unknown;
+    }
+
+    private void SetDetectionTimestamp(DateTimeOffset timestamp, bool fromCache)
+    {
+        var normalized = timestamp == default ? DateTimeOffset.UtcNow : timestamp.ToUniversalTime();
+        LastDetectedAtUtc = normalized;
+        IsStateFromCache = fromCache;
+    }
+
     /// <summary>
     /// Detect if tweak is currently applied
     /// </summary>
@@ -1504,6 +1688,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             };
 
             TryUpdateCurrentValueFromMessage(result.Result.Message);
+            SetDetectionTimestamp(result.Result.Timestamp, fromCache: false);
 
             if (CurrentValue == "Unknown" && result.Result.Status is TweakStatus.Applied or TweakStatus.Verified)
             {
@@ -2012,3 +2197,4 @@ public enum TweakAppliedStatus
     NotApplied,
     Error
 }
+

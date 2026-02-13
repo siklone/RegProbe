@@ -48,6 +48,8 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     public bool HasSubGroups => SubGroups.Any();
 
+    public CategoryGroupViewModel? Parent { get; set; }
+
     public bool IsNested
     {
         get => _isNested;
@@ -62,9 +64,11 @@ public sealed class CategoryGroupViewModel : ViewModelBase
 
     public int TweakCount => _tweaks.Count;
 
+    public int AggregateTweakCount => _tweaks.Count + _subGroups.Sum(g => g.AggregateTweakCount);
+
     public int VisibleTweakCount => _tweaks.Count(t => true); // Can add filter logic
 
-    public string CountBadge => $"{TweakCount}";
+    public string CountBadge => $"{AggregateTweakCount}";
 
     public bool IsExpanded
     {
@@ -89,13 +93,22 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         {
             _tweaks.Add(tweak);
             OnPropertyChanged(nameof(TweakCount));
+            OnPropertyChanged(nameof(AggregateTweakCount));
             OnPropertyChanged(nameof(CountBadge));
             OnPropertyChanged(nameof(VisibleTweakCount));
+            Parent?.NotifyAggregateCountsChanged();
         }
         else
         {
             System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() => AddTweak(tweak));
         }
+    }
+
+    public void NotifyAggregateCountsChanged()
+    {
+        OnPropertyChanged(nameof(AggregateTweakCount));
+        OnPropertyChanged(nameof(CountBadge));
+        Parent?.NotifyAggregateCountsChanged();
     }
 
     public void ClearTweaks()
@@ -104,8 +117,10 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         {
             _tweaks.Clear();
             OnPropertyChanged(nameof(TweakCount));
+            OnPropertyChanged(nameof(AggregateTweakCount));
             OnPropertyChanged(nameof(CountBadge));
             OnPropertyChanged(nameof(VisibleTweakCount));
+            Parent?.NotifyAggregateCountsChanged();
         }
         else
         {

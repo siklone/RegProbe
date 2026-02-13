@@ -10,14 +10,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Microsoft.Win32;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Core.Intelligence;
 using WindowsOptimizer.Core.Models;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Infrastructure.Elevation;
-using WindowsOptimizer.Infrastructure.Metrics;
 using WindowsOptimizer.Infrastructure.Registry;
 using WindowsOptimizer.Infrastructure.Services;
 using WindowsOptimizer.Engine;
@@ -59,6 +57,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _rollbackSelectedCommand;
     private readonly RelayCommand _loadPresetCommand;
     private readonly RelayCommand _resetFiltersCommand;
+    private readonly RelayCommand _clearCategorySelectionCommand;
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
     private readonly RelayCommand _openDocsCoverageReportCommand;
@@ -71,13 +70,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 	private readonly bool _isElevatedHostAvailable;
 	private readonly IRegistryAccessor _localRegistryAccessor;
 	private readonly IRegistryAccessor _elevatedRegistryAccessor;
+    private readonly IRegistryAccessor _scanAwareElevatedRegistryAccessor;
 	private readonly IServiceManager _elevatedServiceManager;
 	private readonly IScheduledTaskManager _elevatedTaskManager;
     private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
     private readonly ICommandRunner _elevatedCommandRunner;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
-    private string _filterSummary = "Showing 0 of 0 tweaks.";
+    private string _filterSummary = "Showing 0 of 0 policies.";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -89,17 +89,20 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private bool _showFavoritesOnly = false;
+    private string _selectedCategoryName = string.Empty;
     private bool _hasVisibleTweaks;
     private bool _isFlatView;
     private readonly IFavoritesStore _favoritesStore;
+    private readonly ITweakInventoryStateStore _inventoryStateStore;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _bulkCts;
+    private CancellationTokenSource? _inventorySaveCts;
+    private bool _isApplyingCachedInventory;
+    private bool _isBackgroundRefreshRunning;
+    private string _inventoryStatusMessage = "Inventory snapshot not available yet.";
     private readonly string _logFolderPath;
-    private readonly MetricProvider _metricProvider = new();
-    private readonly DispatcherTimer _metricsTimer;
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly PluginLoader _pluginLoader = new();
-    private readonly KernelImpactAnalyzer _kernelAnalyzer = new();
     private readonly string _tweakLogFilePath;
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
@@ -116,8 +119,32 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
-    public TweaksViewModel(IEnumerable<ITweakProvider>? providers, IBusyService busyService)
+    public PresetsViewModel? Presets { get; set; }
+    /// <summary>
+    /// DNS configuration panel ViewModel for Network category.
+    /// </summary>
+    public DnsConfigurationViewModel DnsConfiguration { get; } = new();
+
+    public BloatwareViewModel Bloatware { get; }
+    public StartupViewModel Startup { get; }
+
+    private string _currentTab = "Policies";
+    public string CurrentTab
     {
+        get => _currentTab;
+        set => SetProperty(ref _currentTab, value);
+    }
+    
+    public RelayCommand SetTabCommand { get; }
+
+    public TweaksViewModel(
+        IEnumerable<ITweakProvider>? providers, 
+        IBusyService busyService,
+        BloatwareViewModel bloatware,
+        StartupViewModel startup)
+    {
+        Bloatware = bloatware ?? throw new ArgumentNullException(nameof(bloatware));
+        Startup = startup ?? throw new ArgumentNullException(nameof(startup));
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _providerList = providers;
         var paths = AppPaths.FromEnvironment();
@@ -130,6 +157,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _profileManager = new ProfileManager(paths);
         _rollbackStore = new RollbackStateStore(paths);
         _favoritesStore = new FavoritesStore(paths);
+        _inventoryStateStore = new TweakInventoryStateStore(paths);
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
 		var settingsStore = new SettingsStore(paths);
 		_isElevated = ProcessElevation.IsElevated();
@@ -143,6 +171,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 		});
         _localRegistryAccessor = new LocalRegistryAccessor();
         _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
+        var hybridRegistryAccessor = new HybridRegistryAccessor(_localRegistryAccessor, _elevatedRegistryAccessor);
+        _scanAwareElevatedRegistryAccessor = _isElevated ? _elevatedRegistryAccessor : hybridRegistryAccessor;
         _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
         _elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
         _elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
@@ -186,6 +216,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             _ => CanRunBulkOnSelected());
         _loadPresetCommand = new RelayCommand(async parameter => await LoadPresetAsync(parameter));
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
+        _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _openDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport());
@@ -196,68 +227,22 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
         ImportPresetCommand = new RelayCommand(async _ => await ImportPresetsAsync());
         CreateSnapshotCommand = new RelayCommand(_ => CreateSnapshot());
+        SetTabCommand = new RelayCommand(param => 
+        {
+            if (param is string tabName)
+                CurrentTab = tabName;
+        });
 
         LoadProviderTweaks();
         LoadPlugins();
         ApplyTweakMetadata();
+        LoadCachedInventoryState();
         _documentationLinker.Apply(Tweaks);
         UpdateFilterSummary();
         LoadDocsCoverageReport();
         RefreshSummaryStats();
         _ = InitializePresetsAsync();
 
-        _metricsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        _metricsTimer.Tick += OnMetricsTick;
-        _metricsTimer.Start();
-    }
-
-    private void OnMetricsTick(object? sender, EventArgs e)
-    {
-        try
-        {
-            var cpu = _metricProvider.GetCpuUsage();
-            var kernelEfficiency = _kernelAnalyzer.GetKernelEfficiencyScore() * 100.0;
-
-            // Combine CPU usage and Kernel Efficiency for a more "God-Tier" impact metric
-            var combinedImpact = (cpu + kernelEfficiency) / 2.0;
-
-            if (IsFlatView)
-            {
-                // Update all tweaks (filtered) in flat view
-                foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
-                {
-                    tweak.UpdateMetric(combinedImpact);
-                }
-            }
-            else
-            {
-                // Update hierarchical view
-                foreach (var category in CategoryGroups)
-                {
-                    UpdateMetricsRecursive(category, (float)combinedImpact);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"TweaksViewModel metrics update error: {ex.Message}");
-            // Continue running - don't crash the app
-        }
-    }
-
-    private void UpdateMetricsRecursive(CategoryGroupViewModel category, float value)
-    {
-        if (!category.IsExpanded) return;
-
-        foreach (var tweak in category.Tweaks)
-        {
-            tweak.UpdateMetric(value);
-        }
-
-        foreach (var sub in category.SubGroups)
-        {
-            UpdateMetricsRecursive(sub, value);
-        }
     }
 
     private void LoadProviderTweaks()
@@ -270,7 +255,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
             var tweakContext = new TweakContext(
                 _localRegistryAccessor,
-                _elevatedRegistryAccessor,
+                _scanAwareElevatedRegistryAccessor,
                 _elevatedServiceManager,
                 _elevatedTaskManager,
                 _elevatedFileSystemAccessor,
@@ -350,7 +335,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public string Title => "Tweaks";
+    public string Title => "Configuration";
 
 	public bool IsElevated => _isElevated;
 
@@ -399,6 +384,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public ICommand LoadPresetCommand => _loadPresetCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
+
+    public ICommand ClearCategorySelectionCommand => _clearCategorySelectionCommand;
 
     public ICommand OpenLogFolderCommand => _openLogFolderCommand;
 
@@ -498,7 +485,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string HealthCalculationSummary => ScorableTweaksMeasuredTotal == 0
         ? "Health is calculated from detected states. Run Detect to refresh current states."
-        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected tweaks applied (Safe+Advanced; excludes Demo/Risky).";
+        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected policies applied (Safe+Advanced; excludes Demo/Risky).";
 
     public string HealthStatusMessage => GlobalOptimizationScore switch
     {
@@ -522,6 +509,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         get => _bulkStatusMessage;
         private set => SetProperty(ref _bulkStatusMessage, value);
+    }
+
+    public string InventoryStatusMessage
+    {
+        get => _inventoryStatusMessage;
+        private set => SetProperty(ref _inventoryStatusMessage, value);
     }
 
     public bool IsExporting
@@ -599,8 +592,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     public string SelectionSummary => SelectedCount == 0
-        ? "No tweaks selected"
-        : $"{SelectedCount} tweak{(SelectedCount == 1 ? "" : "s")} selected";
+        ? "No policies selected"
+        : $"{SelectedCount} polic{(SelectedCount == 1 ? "y" : "ies")} selected";
 
     public bool HasSelection => SelectedCount > 0;
 
@@ -645,8 +638,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string StatusFilterLabel => _statusFilter switch
     {
-        "applied" => "Applied Tweaks",
-        "rolledback" => "Rolled Back Tweaks",
+        "applied" => "Applied Policies",
+        "rolledback" => "Rolled Back Policies",
         _ => ""
     };
 
@@ -723,6 +716,26 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    public string SelectedCategoryName
+    {
+        get => _selectedCategoryName;
+        set
+        {
+            if (SetProperty(ref _selectedCategoryName, value))
+            {
+                OnPropertyChanged(nameof(IsAllCategoriesSelected));
+                OnPropertyChanged(nameof(SelectedCategoryLabel));
+                TweaksView.Refresh();
+                // Keep sidebar scroll/selection stable when only switching category.
+                UpdateFilterSummary(rebuildCategoryGroups: false);
+            }
+        }
+    }
+
+    public bool IsAllCategoriesSelected => string.IsNullOrWhiteSpace(_selectedCategoryName);
+
+    public string SelectedCategoryLabel => IsAllCategoriesSelected ? "All Policies" : _selectedCategoryName;
+
     public int FavoritesCount => Tweaks.Count(t => t.IsFavorite);
 
     public string FilterSummary
@@ -748,8 +761,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         var dialog = new SaveFileDialog
         {
             Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-            FileName = "tweak-log.csv",
-            Title = "Export tweak logs"
+            FileName = "configuration-log.csv",
+            Title = "Export activity logs"
         };
 
         if (dialog.ShowDialog() != true)
@@ -896,10 +909,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
         else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied)
                  or nameof(TweakItemViewModel.AppliedStatus)
-                 or nameof(TweakItemViewModel.WasRolledBack))
+                 or nameof(TweakItemViewModel.WasRolledBack)
+                 or nameof(TweakItemViewModel.CurrentValue)
+                 or nameof(TweakItemViewModel.TargetValue)
+                 or nameof(TweakItemViewModel.LastDetectedAtUtc))
         {
             RaiseHealthMetricsChanged();
             RefreshSummaryStats();
+            ScheduleInventorySnapshotSave();
             if (!string.IsNullOrEmpty(_statusFilter))
             {
                 TweaksView.Refresh();
@@ -1005,6 +1022,19 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             return false;
         }
 
+        return FilterTweaksInternal(item, includeCategoryFilter: true);
+    }
+
+    private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
+    {
+        if (includeCategoryFilter && !IsAllCategoriesSelected)
+        {
+            if (!string.Equals(item.Category, _selectedCategoryName, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+        }
+
         // Status filter (applied/rolled back)
         if (!string.IsNullOrEmpty(_statusFilter))
         {
@@ -1054,17 +1084,20 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         return matches;
     }
 
-    private void UpdateFilterSummary()
+    private void UpdateFilterSummary(bool rebuildCategoryGroups = true)
     {
         var total = Tweaks.Count;
         var visible = TweaksView.Cast<object>().Count();
-        FilterSummary = $"Showing {visible} of {total} tweaks.";
+        FilterSummary = $"Showing {visible} of {total} policies.";
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
-        BuildCategoryGroups();
-        HasVisibleTweaks = visible > 0 && (IsFlatView || CategoryGroups.Count > 0);
+        if (rebuildCategoryGroups)
+        {
+            BuildCategoryGroups();
+        }
+        HasVisibleTweaks = visible > 0;
     }
 
     private void BuildCategoryGroups()
@@ -1088,10 +1121,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 : char.ToUpperInvariant(segment[0]) + segment[1..].ToLowerInvariant();
         }
 
-        var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications" };
+        var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications", "Devtools" };
         var rootGroups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
 
-        foreach (var tweak in Tweaks.Where(t => FilterTweaks(t)))
+        foreach (var tweak in Tweaks.Where(t => FilterTweaksInternal(t, includeCategoryFilter: false)))
         {
             var parts = (tweak.Id ?? string.Empty)
                 .Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
@@ -1119,7 +1152,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
                 if (subGroup == null)
                 {
-                    subGroup = new CategoryGroupViewModel(subName, "└──") { IsNested = true, IsExpanded = true };
+                    subGroup = new CategoryGroupViewModel(subName, "└──") { IsNested = true, IsExpanded = true, Parent = parent };
                     parent.SubGroups.Add(subGroup);
                 }
                 parent = subGroup;
@@ -1173,6 +1206,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        SelectedCategoryName = string.Empty;
     }
 
     private void RefreshSummaryStats()
@@ -1181,6 +1215,107 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         TweaksApplied = Tweaks.Count(t => t.IsApplied);
         TweaksRolledBack = Tweaks.Count(t => t.WasRolledBack);
         RefreshLogFileSize();
+        UpdateInventoryStatusMessage();
+    }
+
+    private void LoadCachedInventoryState()
+    {
+        var cachedStates = _inventoryStateStore.Load();
+        if (cachedStates.Count == 0)
+        {
+            UpdateInventoryStatusMessage();
+            return;
+        }
+
+        _isApplyingCachedInventory = true;
+        try
+        {
+            var appliedCount = 0;
+            DateTimeOffset? latestTimestamp = null;
+
+            foreach (var tweak in Tweaks)
+            {
+                if (!cachedStates.TryGetValue(tweak.Id, out var cachedState))
+                {
+                    continue;
+                }
+
+                tweak.ApplyCachedInventoryState(cachedState);
+                appliedCount++;
+
+                if (cachedState.LastDetectedAtUtc.HasValue)
+                {
+                    if (!latestTimestamp.HasValue || cachedState.LastDetectedAtUtc > latestTimestamp)
+                    {
+                        latestTimestamp = cachedState.LastDetectedAtUtc;
+                    }
+                }
+            }
+
+            if (appliedCount > 0)
+            {
+                var latestText = latestTimestamp.HasValue
+                    ? latestTimestamp.Value.ToLocalTime().ToString("HH:mm:ss")
+                    : "unknown time";
+                InventoryStatusMessage = $"Loaded cached inventory for {appliedCount} policies (last: {latestText}).";
+            }
+        }
+        finally
+        {
+            _isApplyingCachedInventory = false;
+        }
+    }
+
+    private void UpdateInventoryStatusMessage()
+    {
+        var total = Tweaks.Count;
+        var detected = Tweaks.Count(t => t.AppliedStatus != TweakAppliedStatus.Unknown);
+        var requiresPrompt = Tweaks.Count(t => t.WillPromptForDetect);
+
+        var suffix = _isBackgroundRefreshRunning
+            ? " Refreshing in background..."
+            : string.Empty;
+
+        InventoryStatusMessage = requiresPrompt > 0
+            ? $"Inventory: {detected}/{total} live. {requiresPrompt} require admin prompt.{suffix}"
+            : $"Inventory: {detected}/{total} live.{suffix}";
+    }
+
+    private async void ScheduleInventorySnapshotSave()
+    {
+        if (_isApplyingCachedInventory)
+        {
+            return;
+        }
+
+        _inventorySaveCts?.Cancel();
+        _inventorySaveCts?.Dispose();
+        _inventorySaveCts = new CancellationTokenSource();
+        var token = _inventorySaveCts.Token;
+
+        try
+        {
+            await Task.Delay(400, token);
+            token.ThrowIfCancellationRequested();
+            SaveInventorySnapshot();
+        }
+        catch (OperationCanceledException)
+        {
+            // Debounced by a newer save request.
+        }
+        catch
+        {
+            // Best-effort cache write.
+        }
+    }
+
+    private void SaveInventorySnapshot()
+    {
+        var snapshot = Tweaks
+            .Select(t => t.ExportInventoryState())
+            .ToList();
+
+        _inventoryStateStore.Save(snapshot);
     }
 
     private void RefreshLogFileSize()
@@ -1503,20 +1638,35 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         try
         {
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            _appLogger.Log(LogLevel.Info, $"Plugin discovery: baseDir='{baseDir}'");
+
             var existingIds = new HashSet<string>(
                 Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
                 StringComparer.OrdinalIgnoreCase);
 
-            var pluginsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
-            if (!Directory.Exists(pluginsPath)) Directory.CreateDirectory(pluginsPath);
-            
-            var plugins = _pluginLoader.LoadPlugins(pluginsPath);
-            foreach (var plugin in plugins)
+            var pluginsPath = Path.Combine(baseDir, "Plugins");
+            if (!Directory.Exists(pluginsPath))
             {
-                Debug.WriteLine($"God-Tier Plugin Loaded: {plugin.PluginName} v{plugin.Version}");
-                
+                Directory.CreateDirectory(pluginsPath);
+            }
+
+            _appLogger.Log(LogLevel.Info, $"Plugin discovery: pluginsPath='{pluginsPath}'");
+             
+            var plugins = _pluginLoader.LoadPlugins(pluginsPath);
+
+            var pluginList = plugins.ToList();
+            _appLogger.Log(LogLevel.Info, $"Plugin discovery: loadedPlugins={pluginList.Count}");
+
+            foreach (var plugin in pluginList)
+            {
+                _appLogger.Log(LogLevel.Info, $"Plugin loaded: name='{plugin.PluginName}' version='{plugin.Version}'");
+                 
                 var pluginTweaks = plugin.GetTweaks();
-                foreach (var tweak in pluginTweaks)
+                var pluginTweaksList = pluginTweaks?.ToList() ?? new List<ITweak>();
+                _appLogger.Log(LogLevel.Info, $"Plugin tweaks: plugin='{plugin.PluginName}' count={pluginTweaksList.Count}");
+
+                foreach (var tweak in pluginTweaksList)
                 {
                     if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
                     {
@@ -1529,7 +1679,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Plugin system error: {ex.Message}");
+            _appLogger.Log(LogLevel.Error, "Plugin system error", ex);
         }
     }
 
@@ -1585,7 +1735,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         if (skipElevationPrompts)
         {
-            candidates = candidates.Where(t => !t.WillPromptForElevation);
+            candidates = candidates.Where(t => !t.WillPromptForDetect);
         }
 
         var tweaksToScan = candidates.ToList();
@@ -1627,6 +1777,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
 
         progress?.Report(new StartupScanProgress(totalTweaks, totalTweaks));
+        SaveInventorySnapshot();
+        UpdateInventoryStatusMessage();
 
         // Trigger health score recalculation
         OnPropertyChanged(nameof(GlobalOptimizationScore));
@@ -1644,6 +1796,32 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    public async Task RefreshInventoryInBackgroundAsync(CancellationToken ct = default)
+    {
+        if (_isBackgroundRefreshRunning)
+        {
+            return;
+        }
+
+        _isBackgroundRefreshRunning = true;
+        UpdateInventoryStatusMessage();
+        try
+        {
+            await DetectAllTweaksAsync(
+                progress: null,
+                ct: ct,
+                isStartupScan: false,
+                forceRedetect: true,
+                skipElevationPrompts: true,
+                skipExpensiveOperations: false);
+        }
+        finally
+        {
+            _isBackgroundRefreshRunning = false;
+            UpdateInventoryStatusMessage();
+        }
+    }
+
     public void Dispose()
     {
         if (_isDisposed)
@@ -1653,18 +1831,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         _isDisposed = true;
 
-        // Stop and unsubscribe timer
-        if (_metricsTimer != null)
-        {
-            _metricsTimer.Stop();
-            _metricsTimer.Tick -= OnMetricsTick;
-        }
-
         // Dispose CancellationTokenSources
         _searchCts?.Cancel();
         _searchCts?.Dispose();
         _bulkCts?.Cancel();
         _bulkCts?.Dispose();
+        _inventorySaveCts?.Cancel();
+        _inventorySaveCts?.Dispose();
 
         // Unsubscribe collection changed events
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
@@ -1676,7 +1849,5 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             tweak.FavoriteChanged -= OnTweakFavoriteChanged;
         }
 
-        // Dispose metric provider
-        _metricProvider?.Dispose();
     }
 }
