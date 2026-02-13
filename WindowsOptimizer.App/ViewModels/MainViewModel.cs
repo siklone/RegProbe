@@ -75,7 +75,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         var startup = new StartupViewModel();
         var tweaks = new TweaksViewModel(providers, _busyService, bloatware, startup);
         _tweaksViewModel = tweaks;
-        Presets = new PresetsViewModel(tweaks);
 
         MonitorViewModel monitor;
         try
@@ -194,7 +193,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     }
 
     public IBusyService BusyService => _busyService;
-    public PresetsViewModel Presets { get; private set; }
 
     public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
     {

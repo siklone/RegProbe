@@ -119,7 +119,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
-    public PresetsViewModel? Presets { get; set; }
     /// <summary>
     /// DNS configuration panel ViewModel for Network category.
     /// </summary>

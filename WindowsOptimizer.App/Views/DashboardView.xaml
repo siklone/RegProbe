@@ -25,8 +25,8 @@
         <!-- Info Card Style with inner scroll -->
         <Style x:Key="InfoCardStyle" TargetType="ContentControl">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
-            <Setter Property="Height" Value="280"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Height" Value="240"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -37,7 +37,7 @@
                                 CornerRadius="12">
                             <ScrollViewer VerticalScrollBarVisibility="Hidden" 
                                           HorizontalScrollBarVisibility="Disabled"
-                                          Padding="10"
+                                          Padding="8"
                                           PreviewMouseWheel="InnerScrollViewer_PreviewMouseWheel">
                                 <ContentPresenter />
                             </ScrollViewer>
@@ -94,10 +94,10 @@
 
         <!-- Section Icon Badge -->
         <Style x:Key="SectionIconStyle" TargetType="Border">
-            <Setter Property="Width" Value="32"/>
-            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="28"/>
             <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
         </Style>
     </UserControl.Resources>
     
@@ -146,7 +146,7 @@
         
         <!-- Main Content -->
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-            <Grid Margin="8,8">
+            <Grid Margin="6,4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/> <!-- Hero Section -->
                     <RowDefinition Height="Auto"/> <!-- Quick Stats -->
@@ -159,7 +159,7 @@
                 <!-- ============================================== -->
                 <Border Grid.Row="0" Background="{DynamicResource CardSurfaceGradientBrush}"
                         BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                        CornerRadius="16" Padding="28,24" Margin="0,0,0,16">
+                        CornerRadius="16" Padding="20,14" Margin="0,0,0,10">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -169,7 +169,7 @@
                         <!-- Left: System Info Summary -->
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="System Overview"
-                                       FontSize="24" FontWeight="Bold"
+                                       FontSize="20" FontWeight="Bold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                             <TextBlock Text="{Binding OsName}" 
                                        FontSize="14" Foreground="{DynamicResource AccentBrightCyanBrush}"
@@ -182,7 +182,7 @@
                             </TextBlock>
                             
                             <!-- Security badges row -->
-                            <WrapPanel Orientation="Horizontal" Margin="0,14,0,0">
+                            <WrapPanel Orientation="Horizontal" Margin="0,10,0,0">
                                 <Border CornerRadius="6" Padding="8,4" Margin="0,0,8,0" BorderThickness="1">
                                     <Border.Style>
                                         <Style TargetType="Border">
@@ -234,16 +234,16 @@
                         </StackPanel>
 
                         <!-- Right: Circular Gauge -->
-                        <Grid Grid.Column="1" Width="140" Height="140" Margin="20,0,0,0">
+                        <Grid Grid.Column="1" Width="120" Height="120" Margin="16,0,0,0">
                             <!-- Outer glow ring -->
-                            <Ellipse Width="140" Height="140" StrokeThickness="2" 
+                            <Ellipse Width="120" Height="120" StrokeThickness="2" 
                                      Stroke="{DynamicResource GlowCyanSubtleBrush}"/>
                             <!-- Background ring -->
-                            <Ellipse Width="120" Height="120" StrokeThickness="6" 
+                            <Ellipse Width="100" Height="100" StrokeThickness="5" 
                                      Stroke="{DynamicResource BackgroundLightBrush}"
                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <!-- Active ring arc (simulated with DashArray) -->
-                            <Ellipse Width="120" Height="120" StrokeThickness="6" 
+                            <Ellipse Width="100" Height="100" StrokeThickness="5" 
                                      Stroke="{DynamicResource AccentBrightCyanBrush}"
                                      StrokeDashArray="2.4 0.75" StrokeDashCap="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                                      HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -254,7 +254,7 @@
                             </Ellipse>
                             <!-- Center content -->
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="22"
+                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="18"
                                            Foreground="{DynamicResource AccentBrightCyanBrush}"
                                            HorizontalAlignment="Center"/>
                                 <TextBlock Text="READY" FontSize="12" FontWeight="Bold"
@@ -268,20 +268,20 @@
                 <!-- ============================================== -->
                 <!-- QUICK STATS ROW (5 metric cards)               -->
                 <!-- ============================================== -->
-                <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,16">
+                <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,10">
                     <!-- OS Card -->
                     <Border Background="{DynamicResource BackgroundDarkBrush}" 
                             BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                            CornerRadius="12" Padding="14" Margin="0,0,8,0">
+                            CornerRadius="12" Padding="10" Margin="0,0,8,0">
                         <StackPanel>
-                            <Grid Margin="0,0,0,10">
+                            <Grid Margin="0,0,0,6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Width="28" Height="28" CornerRadius="6" 
+                                <Border Width="24" Height="24" CornerRadius="6" 
                                         Background="{DynamicResource MetricCyanSurfaceBrush}">
-                                    <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                    <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
                                                Foreground="{DynamicResource AccentBrightCyanBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -296,12 +296,12 @@
                     <!-- CPU Card -->
                     <Border Background="{DynamicResource BackgroundDarkBrush}" 
                             BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                            CornerRadius="12" Padding="14" Margin="0,0,8,0">
+                            CornerRadius="12" Padding="10" Margin="0,0,8,0">
                         <StackPanel>
-                            <Grid Margin="0,0,0,10">
-                                <Border Width="28" Height="28" CornerRadius="6" 
+                            <Grid Margin="0,0,0,6">
+                                <Border Width="24" Height="24" CornerRadius="6" 
                                         Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left">
-                                    <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                    <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
                                                Foreground="{DynamicResource AccentBlueBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -316,12 +316,12 @@
                     <!-- Memory Card -->
                     <Border Background="{DynamicResource BackgroundDarkBrush}" 
                             BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                            CornerRadius="12" Padding="14" Margin="0,0,8,0">
+                            CornerRadius="12" Padding="10" Margin="0,0,8,0">
                         <StackPanel>
-                            <Grid Margin="0,0,0,10">
-                                <Border Width="28" Height="28" CornerRadius="6" 
+                            <Grid Margin="0,0,0,6">
+                                <Border Width="24" Height="24" CornerRadius="6" 
                                         Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left">
-                                    <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                    <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
                                                Foreground="{DynamicResource AccentPurpleBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -336,12 +336,12 @@
                     <!-- GPU Card -->
                     <Border Background="{DynamicResource BackgroundDarkBrush}" 
                             BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                            CornerRadius="12" Padding="14" Margin="0,0,8,0">
+                            CornerRadius="12" Padding="10" Margin="0,0,8,0">
                         <StackPanel>
-                            <Grid Margin="0,0,0,10">
-                                <Border Width="28" Height="28" CornerRadius="6" 
+                            <Grid Margin="0,0,0,6">
+                                <Border Width="24" Height="24" CornerRadius="6" 
                                         Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left">
-                                    <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                    <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
                                                Foreground="{DynamicResource SuccessBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -356,12 +356,12 @@
                     <!-- Uptime Card -->
                     <Border Background="{DynamicResource BackgroundDarkBrush}" 
                             BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                            CornerRadius="12" Padding="14">
+                            CornerRadius="12" Padding="10">
                         <StackPanel>
-                            <Grid Margin="0,0,0,10">
-                                <Border Width="28" Height="28" CornerRadius="6" 
+                            <Grid Margin="0,0,0,6">
+                                <Border Width="24" Height="24" CornerRadius="6" 
                                         Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left">
-                                    <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                    <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
                                                Foreground="{DynamicResource WarningBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -389,7 +389,7 @@
                         <!-- 1. Operating System -->
                         <ContentControl Style="{StaticResource InfoCardStyle}">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
                                     <Border Style="{StaticResource SectionIconStyle}" Background="{DynamicResource MetricCyanSurfaceBrush}">
                                         <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="14"
                                                    Foreground="{DynamicResource AccentBrightCyanBrush}"
@@ -457,7 +457,7 @@
                         <!-- 2. Processor (CPU-Z Style) -->
                         <ContentControl Style="{StaticResource InfoCardStyle}">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                     <Border Style="{StaticResource SectionIconStyle}" Background="{DynamicResource MetricBlueSurfaceBrush}">
                                         <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="14"
                                                    Foreground="{DynamicResource AccentBlueBrush}"
@@ -473,10 +473,10 @@
                                 </StackPanel>
                                 
                                 <!-- Top Info -->
-                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12" Background="#0AFFFFFF">
+                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8" Background="#0AFFFFFF">
                                     <Grid>
                                         <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                                        <Border Width="44" Height="44" Background="{DynamicResource MetricBlueSurfaceBrush}" CornerRadius="8" VerticalAlignment="Top">
+                                        <Border Width="36" Height="36" Background="{DynamicResource MetricBlueSurfaceBrush}" CornerRadius="8" VerticalAlignment="Top">
                                             <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="18"
                                                        HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                        Foreground="{DynamicResource AccentBlueBrush}"/>
@@ -491,7 +491,7 @@
                                 </Border>
 
                                 <!-- Technical Details Grid -->
-                                <Grid Margin="0,0,0,12">
+                                <Grid Margin="0,0,0,8">
                                      <Grid.ColumnDefinitions>
                                          <ColumnDefinition Width="*"/>
                                          <ColumnDefinition Width="12"/>
@@ -559,7 +559,7 @@
                         <!-- 3. Motherboard (CPU-Z Style) -->
                         <ContentControl Style="{StaticResource InfoCardStyle}">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                     <Border Style="{StaticResource SectionIconStyle}" Background="{DynamicResource MetricOrangeSurfaceBrush}">
                                         <TextBlock Text="&#xEC7A;" FontFamily="Segoe MDL2 Assets" FontSize="14"
                                                    Foreground="{DynamicResource WarningBrush}"
@@ -582,10 +582,10 @@
                                 </StackPanel>
 
                                 <!-- Board Model Box -->
-                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12" Background="#0AFFFFFF">
+                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8" Background="#0AFFFFFF">
                                     <StackPanel>
                                         <TextBlock Text="{Binding BaseboardManufacturer}" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                        <TextBlock Text="{Binding BaseboardProduct}" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,2,0,4"/>
+                                        <TextBlock Text="{Binding BaseboardProduct}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,2,0,4"/>
                                         <Grid>
                                             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
                                             <TextBlock Text="Chipset" Style="{StaticResource LabelStyle}" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -617,7 +617,7 @@
                         <!-- 4. Memory (CPU-Z Style) -->
                         <ContentControl Style="{StaticResource InfoCardStyle}">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                     <Border Style="{StaticResource SectionIconStyle}" Background="{DynamicResource MetricPurpleSurfaceBrush}">
                                         <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="14"
                                                    Foreground="{DynamicResource AccentPurpleBrush}"
@@ -627,7 +627,7 @@
                                 </StackPanel>
                                 
                                 <!-- General Box -->
-                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12" Background="#0AFFFFFF">
+                                <Border BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,8" Background="#0AFFFFFF">
                                     <Grid>
                                          <Grid.RowDefinitions><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
                                          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
