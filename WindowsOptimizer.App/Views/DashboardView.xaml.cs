@@ -15,11 +15,12 @@ public partial class DashboardView : UserControl
         InitializeComponent();
     }
 
-    private void OnCardClick(object sender, MouseButtonEventArgs e)
+    private void OnCardClick(object sender, RoutedEventArgs e)
     {
-        if (sender is Border border && border.Tag is string parameter)
+        if (sender is Button button)
         {
-            if (DataContext is ViewModels.DashboardViewModel vm)
+            var parameter = button.CommandParameter as string;
+            if (!string.IsNullOrEmpty(parameter) && DataContext is ViewModels.DashboardViewModel vm)
             {
                 try
                 {

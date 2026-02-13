@@ -188,7 +188,7 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,8">
                     <!-- OS - Shows OS Name like "Windows 11" -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="os" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -236,7 +236,7 @@
                     </Button>
 
                     <!-- CPU - Shows CPU Name like "AMD Ryzen 9..." -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -285,7 +285,7 @@
                     </Button>
 
                     <!-- Memory - Shows Size -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="memory" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -333,7 +333,7 @@
                     </Button>
 
                     <!-- GPU - Shows GPU Name like "GeForce RTX 5070" -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -382,7 +382,7 @@
                     </Button>
 
                     <!-- Motherboard - Shows Board Name -->
-                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="motherboard">
+                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="motherboard" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -437,7 +437,7 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,8">
                     <!-- Computer Name -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -485,7 +485,7 @@
                     </Button>
 
                     <!-- OS Build -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="os" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -533,7 +533,7 @@
                     </Button>
 
                     <!-- System Model -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -582,7 +582,7 @@
                     </Button>
 
                     <!-- BIOS Mode -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="system" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -630,7 +630,7 @@
                     </Button>
 
                     <!-- Uptime -->
-                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="os" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -684,7 +684,7 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="3" Columns="5" Margin="0,0,0,8">
                     <!-- CPU Speed -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -732,7 +732,7 @@
                     </Button>
 
                     <!-- CPU Cores/Threads -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -785,7 +785,7 @@
                     </Button>
 
                     <!-- RAM Type & Channels -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="memory" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -833,7 +833,7 @@
                     </Button>
 
                     <!-- GPU Memory -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -881,7 +881,7 @@
                     </Button>
 
                     <!-- RAM Speed -->
-                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="memory" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -934,7 +934,7 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="4" Columns="4" Margin="0,0,0,8">
                     <!-- Drives -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="disk">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="disk" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -984,7 +984,7 @@
                     </Button>
 
                     <!-- Network -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="network">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="network" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -1034,7 +1034,7 @@
                     </Button>
 
                     <!-- USB -->
-                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="usb">
+                    <Button Margin="0,0,6,0" Command="{Binding OpenDetailCommand}" CommandParameter="usb" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
@@ -1084,7 +1084,7 @@
                     </Button>
 
                     <!-- Monitors -->
-                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                    <Button Command="{Binding OpenDetailCommand}" CommandParameter="gpu" Click="OnCardClick">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
