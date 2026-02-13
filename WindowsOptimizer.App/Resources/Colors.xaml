@@ -133,6 +133,42 @@
     <Color x:Key="ShadowColorMedium">#40000000</Color>
     <Color x:Key="ShadowColorLarge">#66000000</Color>
     
+    <!-- ============================================== -->
+    <!-- GLOW / NEON EFFECTS                            -->
+    <!-- ============================================== -->
+
+    <!-- Cyan glow for active elements (like Ashampoo/DefenceByte style) -->
+    <Color x:Key="GlowCyanColor">#88C0D0</Color>
+    <SolidColorBrush x:Key="GlowCyanBrush" Color="#4488C0D0"/>           <!-- 27% opacity -->
+    <SolidColorBrush x:Key="GlowCyanSubtleBrush" Color="#2288C0D0"/>     <!-- 13% -->
+    <SolidColorBrush x:Key="GlowCyanBorderBrush" Color="#5588C0D0"/>     <!-- 33% -->
+
+    <!-- Gauge ring gradients -->
+    <LinearGradientBrush x:Key="GaugeRingBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#88C0D0" Offset="0"/>
+        <GradientStop Color="#5E81AC" Offset="0.5"/>
+        <GradientStop Color="#A3BE8C" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Card surface with subtle gradient -->
+    <LinearGradientBrush x:Key="CardSurfaceGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#242A36" Offset="0"/>
+        <GradientStop Color="#1F2530" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Hero section radial glow -->
+    <RadialGradientBrush x:Key="HeroGlowBrush" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6">
+        <GradientStop Color="#1588C0D0" Offset="0"/>
+        <GradientStop Color="#00171B22" Offset="1"/>
+    </RadialGradientBrush>
+
+    <!-- Metric card accents -->
+    <SolidColorBrush x:Key="MetricCyanSurfaceBrush" Color="#1A88C0D0"/>
+    <SolidColorBrush x:Key="MetricBlueSurfaceBrush" Color="#1A5E81AC"/>
+    <SolidColorBrush x:Key="MetricPurpleSurfaceBrush" Color="#1AB48EAD"/>
+    <SolidColorBrush x:Key="MetricGreenSurfaceBrush" Color="#1AA3BE8C"/>
+    <SolidColorBrush x:Key="MetricOrangeSurfaceBrush" Color="#1AD08770"/>
+
     <!-- Chart Colors Compatibility -->
     <Color x:Key="AccentBrightCyan40">#4086BBD6</Color>
     <Color x:Key="AccentBrightCyan30">#3086BBD6</Color>
