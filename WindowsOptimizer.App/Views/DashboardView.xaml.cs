@@ -15,9 +15,9 @@ public partial class DashboardView : UserControl
         InitializeComponent();
     }
 
-    private void OnCardClick(object sender, RoutedEventArgs e)
+    private void OnCardClick(object sender, MouseButtonEventArgs e)
     {
-        if (sender is Button button && button.Tag is string parameter)
+        if (sender is Border border && border.Tag is string parameter)
         {
             if (DataContext is ViewModels.DashboardViewModel vm)
             {
@@ -30,14 +30,6 @@ public partial class DashboardView : UserControl
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("DataContext is not DashboardViewModel", "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-        else
-        {
-            MessageBox.Show($"Sender type: {sender?.GetType().Name}, Tag: {((sender as Button)?.Tag)}" , "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 
