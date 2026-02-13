@@ -15,6 +15,18 @@ public partial class DashboardView : UserControl
         InitializeComponent();
     }
 
+    private void OnCardClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.Tag is string parameter)
+        {
+            if (DataContext is ViewModels.DashboardViewModel vm)
+            {
+                // Call the OpenDetailCommand directly through the ViewModel
+                vm.OpenDetailCommand.Execute(parameter);
+            }
+        }
+    }
+
     private void InnerScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
         var scv = sender as ScrollViewer;
