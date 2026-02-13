@@ -17,10 +17,9 @@ public partial class DashboardView : UserControl
 
     private void OnCardClick(object sender, RoutedEventArgs e)
     {
-        if (sender is Button button)
+        if (sender is Button button && button.Tag is string parameter)
         {
-            var parameter = button.CommandParameter as string;
-            if (!string.IsNullOrEmpty(parameter) && DataContext is ViewModels.DashboardViewModel vm)
+            if (DataContext is ViewModels.DashboardViewModel vm)
             {
                 try
                 {
@@ -28,9 +27,17 @@ public partial class DashboardView : UserControl
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error opening details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("DataContext is not DashboardViewModel", "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        else
+        {
+            MessageBox.Show($"Sender type: {sender?.GetType().Name}, Tag: {((sender as Button)?.Tag)}" , "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 
