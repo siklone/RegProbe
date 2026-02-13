@@ -202,177 +202,172 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,8">
                     <!-- OS - Shows OS Name like "Windows 11" -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Operating System" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding OsName}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Operating System" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding OsName}" 
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}" 
+                                           FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- CPU - Shows CPU Name like "AMD Ryzen 9..." -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Processor" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding ProcessorName}" 
-                                       Foreground="{DynamicResource AccentBlueBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis" 
-                                       ToolTip="{Binding ProcessorName}"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBlueBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Processor" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding ProcessorName}" 
+                                           Foreground="{DynamicResource AccentBlueBrush}" 
+                                           FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis" 
+                                           ToolTip="{Binding ProcessorName}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- Memory - Shows Size -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.Size}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentPurpleBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding MemoryDetails.Size}" 
+                                           Foreground="{DynamicResource AccentPurpleBrush}" 
+                                           FontSize="16" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- GPU - Shows GPU Name like "GeForce RTX 5070" -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Graphics Card" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding GpuDetails.Name}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding GpuDetails.Name}"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource SuccessBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Graphics Card" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding GpuDetails.Name}" 
+                                           Foreground="{DynamicResource SuccessBrush}" 
+                                           FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
+                                           ToolTip="{Binding GpuDetails.Name}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- Motherboard - Shows Board Name -->
-                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="motherboard">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xEC7A;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Motherboard" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding BaseboardProduct}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding BaseboardProduct}"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid>
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xEC7A;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource WarningBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Motherboard" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding BaseboardProduct}" 
+                                           Foreground="{DynamicResource WarningBrush}" 
+                                           FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
+                                           ToolTip="{Binding BaseboardProduct}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="motherboard">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -381,175 +376,170 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,8">
                     <!-- Computer Name -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Computer Name" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding SystemName}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Computer Name" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding SystemName}" 
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}" 
+                                           FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- OS Build -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="OS Build" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding OsBuild}" 
-                                       Foreground="{DynamicResource AccentBlueBrush}" 
-                                       FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBlueBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="OS Build" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding OsBuild}" 
+                                           Foreground="{DynamicResource AccentBlueBrush}" 
+                                           FontSize="16" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- System Model -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="System Model" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding SystemModel}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding SystemModel}"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentPurpleBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="System Model" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding SystemModel}" 
+                                           Foreground="{DynamicResource AccentPurpleBrush}" 
+                                           FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"
+                                           ToolTip="{Binding SystemModel}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- BIOS Mode -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="system">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="BIOS Mode" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding BiosMode}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="14" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource SuccessBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="BIOS Mode" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding BiosMode}" 
+                                           Foreground="{DynamicResource SuccessBrush}" 
+                                           FontSize="14" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="system">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- Uptime -->
-                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="os">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Uptime" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding Uptime}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid>
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource WarningBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Uptime" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding Uptime}" 
+                                           Foreground="{DynamicResource WarningBrush}" 
+                                           FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="os">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -558,179 +548,174 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="3" Columns="5" Margin="0,0,0,8">
                     <!-- CPU Speed -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="CPU Speed" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding ProcessorSpeed}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="CPU Speed" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding ProcessorSpeed}" 
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}" 
+                                           FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- CPU Cores/Threads -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Cores / Threads" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="12" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} / {1}">
-                                        <Binding Path="ProcessorCores"/>
-                                        <Binding Path="ProcessorThreads"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBlueBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Cores / Threads" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="12" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} / {1}">
+                                            <Binding Path="ProcessorCores"/>
+                                            <Binding Path="ProcessorThreads"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="cpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- RAM Type & Channels -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="RAM Type" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.Type}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="13" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentPurpleBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="RAM Type" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding MemoryDetails.Type}" 
+                                           Foreground="{DynamicResource AccentPurpleBrush}" 
+                                           FontSize="13" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- GPU Memory -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="GPU Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding GpuDetails.MemorySize}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="14" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource SuccessBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="GPU Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding GpuDetails.MemorySize}" 
+                                           Foreground="{DynamicResource SuccessBrush}" 
+                                           FontSize="14" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- RAM Speed -->
-                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="RAM Frequency" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.DRAMFrequency}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Button>
+                    <Grid>
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource WarningBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="RAM Frequency" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding MemoryDetails.DRAMFrequency}" 
+                                           Foreground="{DynamicResource WarningBrush}" 
+                                           FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="memory">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -738,148 +723,144 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="4" Columns="4" Margin="0,0,0,8">
                     <!-- Drives -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="disk">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xEDA2;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Storage Drives" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="DiskDrives.Count" StringFormat="{}{0} Drives"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xEDA2;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Storage Drives" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <Binding Path="DiskDrives.Count" StringFormat="{}{0} Drives"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="disk">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- Network -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="network">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE968;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Network" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="NetworkAdapters.Count" StringFormat="{}{0} Adapters"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE968;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentBlueBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Network" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="16" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <Binding Path="NetworkAdapters.Count" StringFormat="{}{0} Adapters"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="network">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- USB -->
-                    <Button Margin="0,0,6,0" Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="usb">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE88E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="USB Devices" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentPurpleBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="UsbDevices.Count" StringFormat="{}{0} Devices"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid Margin="0,0,6,0">
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE88E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource AccentPurpleBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="USB Devices" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Foreground="{DynamicResource AccentPurpleBrush}" FontSize="16" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <Binding Path="UsbDevices.Count" StringFormat="{}{0} Devices"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="usb">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
 
                     <!-- Monitors -->
-                    <Button Background="{DynamicResource BackgroundDarkBrush}" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1" Padding="10" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-
-                                <Setter Property="Padding" Value="10"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Displays" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="Monitors.Count" StringFormat="{}{0} Monitors"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
+                    <Grid>
+                        <Border Style="{StaticResource MetricCardStyle}">
+                            <StackPanel>
+                                <Border Width="24" Height="24" CornerRadius="6" 
+                                        Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                    <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
+                                               Foreground="{DynamicResource SuccessBrush}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Displays" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
+                                <TextBlock Foreground="{DynamicResource SuccessBrush}" FontSize="16" FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <Binding Path="Monitors.Count" StringFormat="{}{0} Monitors"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Button Background="Transparent" BorderThickness="0" Command="{Binding OpenDetailCommand}" CommandParameter="gpu">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
                 </UniformGrid>
             </Grid>
         </ScrollViewer>
