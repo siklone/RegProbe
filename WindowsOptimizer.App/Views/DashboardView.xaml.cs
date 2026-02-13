@@ -15,26 +15,20 @@ public partial class DashboardView : UserControl
         InitializeComponent();
     }
 
-    private void OnCardClick(object sender, RoutedEventArgs e)
+    private void OnCardClick(object sender, MouseButtonEventArgs e)
     {
-        if (sender is Button button && button.Tag is string parameter)
+        if (sender is Border border && border.Tag is string parameter)
         {
             if (DataContext is ViewModels.DashboardViewModel vm)
             {
-                System.Diagnostics.Debug.WriteLine($"[DashboardView] Card clicked with parameter: {parameter}");
                 try
                 {
                     vm.OpenDetail(parameter);
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"[DashboardView] Error calling OpenDetail: {ex.Message}");
                     MessageBox.Show($"Error opening details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("[DashboardView] DataContext is not DashboardViewModel");
             }
         }
     }

@@ -15,37 +15,19 @@
         <local:StringToVisibilityConverter x:Key="StringToVisibility"/>
         
         <!-- Compact Metric Card Button Style -->
-        <Style x:Key="MetricCardButtonStyle" TargetType="Button">
+        <Style x:Key="MetricCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="10"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="CardBorder"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="12" Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource PressedOverlayBrush}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     
@@ -220,8 +202,8 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,8">
                     <!-- OS - Shows OS Name like "Windows 11" -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="os">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="os">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -234,11 +216,11 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- CPU - Shows CPU Name like "AMD Ryzen 9..." -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="cpu">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -252,11 +234,11 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis" 
                                        ToolTip="{Binding ProcessorName}"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- Memory - Shows Size -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="memory">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="memory">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -269,11 +251,11 @@
                                        Foreground="{DynamicResource AccentPurpleBrush}" 
                                        FontSize="16" FontWeight="Bold"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- GPU - Shows GPU Name like "GeForce RTX 5070" -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="gpu">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -287,11 +269,11 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding GpuDetails.Name}"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- Motherboard - Shows Board Name -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}"
-                            Click="OnCardClick" Tag="motherboard">
+                    <Border Style="{StaticResource MetricCardStyle}"
+                            MouseLeftButtonDown="OnCardClick" Tag="motherboard">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -305,7 +287,7 @@
                                        FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding BaseboardProduct}"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -314,8 +296,8 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,8">
                     <!-- Computer Name -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="system">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="system">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -328,11 +310,11 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- OS Build -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="os">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="os">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -345,11 +327,11 @@
                                        Foreground="{DynamicResource AccentBlueBrush}" 
                                        FontSize="16" FontWeight="Bold"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- System Model -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="system">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="system">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -363,11 +345,11 @@
                                        FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding SystemModel}"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- BIOS Mode -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="system">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="system">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -380,11 +362,11 @@
                                        Foreground="{DynamicResource SuccessBrush}" 
                                        FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- Uptime -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}"
-                            Click="OnCardClick" Tag="os">
+                    <Border Style="{StaticResource MetricCardStyle}"
+                            MouseLeftButtonDown="OnCardClick" Tag="os">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -397,7 +379,7 @@
                                        Foreground="{DynamicResource WarningBrush}" 
                                        FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -406,8 +388,8 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="3" Columns="5" Margin="0,0,0,8">
                     <!-- CPU Speed -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="cpu">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -420,11 +402,11 @@
                                        Foreground="{DynamicResource AccentBrightCyanBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- CPU Cores/Threads -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="cpu">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="cpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -442,11 +424,11 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- RAM Type & Channels -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="memory">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="memory">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -459,11 +441,11 @@
                                        Foreground="{DynamicResource AccentPurpleBrush}" 
                                        FontSize="13" FontWeight="Bold"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- GPU Memory -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="gpu">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -476,11 +458,11 @@
                                        Foreground="{DynamicResource SuccessBrush}" 
                                        FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- RAM Speed -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}"
-                            Click="OnCardClick" Tag="memory">
+                    <Border Style="{StaticResource MetricCardStyle}"
+                            MouseLeftButtonDown="OnCardClick" Tag="memory">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -493,7 +475,7 @@
                                        Foreground="{DynamicResource WarningBrush}" 
                                        FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </Button>
+                    </Border>
                 </UniformGrid>
 
                 <!-- ============================================== -->
@@ -501,8 +483,8 @@
                 <!-- ============================================== -->
                 <UniformGrid Grid.Row="4" Columns="4" Margin="0,0,0,8">
                     <!-- Drives -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="disk">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="disk">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -517,11 +499,11 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- Network -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="network">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="network">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -536,11 +518,11 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- USB -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}" Margin="0,0,6,0"
-                            Click="OnCardClick" Tag="usb">
+                    <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,6,0"
+                            MouseLeftButtonDown="OnCardClick" Tag="usb">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -555,11 +537,11 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Border>
 
                     <!-- Monitors -->
-                    <Button Style="{StaticResource MetricCardButtonStyle}"
-                            Click="OnCardClick" Tag="gpu">
+                    <Border Style="{StaticResource MetricCardStyle}"
+                            MouseLeftButtonDown="OnCardClick" Tag="gpu">
                         <StackPanel>
                             <Border Width="24" Height="24" CornerRadius="6" 
                                     Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
@@ -574,7 +556,7 @@
                                 </TextBlock.Text>
                             </TextBlock>
                         </StackPanel>
-                    </Button>
+                    </Border>
                 </UniformGrid>
             </Grid>
         </ScrollViewer>
