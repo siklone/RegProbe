@@ -69,41 +69,44 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Grid>
-                            <!-- Selection Indicator Bar -->
-                            <Border x:Name="SelectionIndicator"
-                                    Width="3"
-                                    HorizontalAlignment="Left"
-                                    CornerRadius="0,2,2,0"
-                                    Background="Transparent"
-                                    Margin="-8,6,0,6"/>
-                            <!-- Hover Glow (behind content) -->
-                            <Border x:Name="GlowBorder"
-                                    Background="Transparent"
-                                    CornerRadius="8"
-                                    Opacity="0"/>
-                            <!-- Main Border -->
-                            <Border x:Name="Border"
-                                    Background="Transparent"
-                                    CornerRadius="8"
-                                    Padding="12,10">
-                                <ContentPresenter />
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}" />
-                                <Setter TargetName="SelectionIndicator" Property="Background" Value="{DynamicResource AccentBrightCyanBrush}" />
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                                <Setter Property="FontWeight" Value="Medium" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Grid>
+                                <!-- Selection Indicator Bar -->
+                                <Border x:Name="SelectionIndicator"
+                                        Width="3"
+                                        HorizontalAlignment="Left"
+                                        CornerRadius="0,2,2,0"
+                                        Background="Transparent"
+                                        Margin="-8,6,0,6"/>
+                                <!-- Main Border -->
+                                <Border x:Name="Border"
+                                        Background="Transparent"
+                                        CornerRadius="8"
+                                        BorderThickness="1"
+                                        BorderBrush="Transparent"
+                                        Padding="12,10">
+                                    <ContentPresenter />
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}" />
+                                    <Setter TargetName="SelectionIndicator" Property="Background" Value="{DynamicResource AccentBrightCyanBrush}" />
+                                    <Setter TargetName="SelectionIndicator" Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>

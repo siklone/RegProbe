@@ -59,13 +59,8 @@
             <GradientStop Color="{DynamicResource Danger00}" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Glow effect for chart lines -->
-        <DropShadowEffect x:Key="ChartGlowCpu" Color="{DynamicResource Nord8}" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
-        <DropShadowEffect x:Key="ChartGlowRam" Color="{DynamicResource Nord14}" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
-        <DropShadowEffect x:Key="ChartGlowUpload" Color="{DynamicResource Nord8}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowDownload" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowRead" Color="{DynamicResource Nord14}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
-        <DropShadowEffect x:Key="ChartGlowWrite" Color="{DynamicResource Nord11}" BlurRadius="8" ShadowDepth="0" Opacity="0.6"/>
+        <!-- Glow effects reserved for future chart line use -->
+
 
         <TransformGroup x:Key="MonitorCardTransform" x:Shared="False">
             <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -122,7 +117,7 @@
 
         <Style x:Key="StatCardStyle" TargetType="Border" BasedOn="{StaticResource MonitorCardRevealStyle}">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Padding" Value="12"/>
@@ -184,7 +179,7 @@
 
         <Style x:Key="SectionCardStyle" TargetType="Border" BasedOn="{StaticResource MonitorCardRevealStyle}">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Padding" Value="12"/>
@@ -200,7 +195,7 @@
         <Style x:Key="HeaderActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="12,6"/>
             <Setter Property="FontSize" Value="13"/>
@@ -232,7 +227,7 @@
 
         <Style x:Key="HeaderPillStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="999"/>
             <Setter Property="Padding" Value="10,4"/>
@@ -242,7 +237,7 @@
         <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="0,0,10,0"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="12,8"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -284,7 +279,7 @@
         <Style x:Key="ProcessCategoryTabStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="0,0,8,0"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="10,6"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -337,7 +332,7 @@
         <Style x:Key="ProcessActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="6"/>
             <Setter Property="FontSize" Value="12"/>
@@ -479,7 +474,7 @@
         <Style x:Key="LayoutMoveButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="6,4"/>
             <Setter Property="FontSize" Value="11"/>
@@ -551,7 +546,7 @@
 
         <Style x:Key="LayoutDialogStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="Padding" Value="20"/>
@@ -719,7 +714,7 @@
                                 <Border CornerRadius="10"
                                         Padding="12"
                                         BorderThickness="1"
-                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        BorderBrush="{DynamicResource GlassBorderBrush}"
                                         MinWidth="150">
                                     <Border.Style>
                                         <Style TargetType="Border">
@@ -770,7 +765,7 @@
 
                             <Grid Height="190" Margin="0,0,0,12">
                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
-                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        BorderBrush="{DynamicResource GlassBorderBrush}"
                                         BorderThickness="1"
                                         CornerRadius="10"/>
                                 <Canvas Margin="12">

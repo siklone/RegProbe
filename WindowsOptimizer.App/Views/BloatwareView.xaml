@@ -36,6 +36,12 @@
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="12,10"/>
             <Setter Property="Margin" Value="0,0,0,8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="BloatwareMetaTextStyle" TargetType="TextBlock">

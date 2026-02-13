@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <Style x:Key="SectionCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="24"/>
@@ -188,13 +188,13 @@
                 <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                            <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,12,0"/>
-                            <TextBlock Text="Research Credits" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrush}"/>
+                            <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,12,0"/>
+                            <TextBlock Text="Research Credits" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
                         
                         <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="Windows Registry Research" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrush}"/>
+                                <TextBlock Text="Windows Registry Research" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="Reverse engineering and documentation by nohuto" 
                                            Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,4,0,8"/>
                                 <StackPanel Orientation="Horizontal">
@@ -221,7 +221,7 @@
                 <!-- Project Info -->
                 <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="&#xE71B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,12,0"/>
+                        <TextBlock Text="&#xE71B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,12,0"/>
                         <StackPanel>
                             <TextBlock Text="Repository" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
                             <Button Content="{Binding RepositoryUrl}"
