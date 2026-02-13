@@ -118,7 +118,8 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         ThemeManager.Nord,
         ThemeManager.ElectricPurple,
         ThemeManager.SunsetOrange,
-        ThemeManager.CyberGreen
+        ThemeManager.CyberGreen,
+        ThemeManager.RubyRed
     };
 
     public ThemePalette CurrentThemePalette

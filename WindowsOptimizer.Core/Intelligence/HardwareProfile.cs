@@ -1,7 +1,21 @@
-using System;
-
 namespace WindowsOptimizer.Core.Intelligence;
 
+/// <summary>
+/// Represents hardware profile information for recommendation engine.
+/// </summary>
+public record HardwareProfile(
+    string ProcessorName,
+    int CoreCount,
+    bool HasHyperThreading,
+    long TotalMemoryBytes,
+    StorageType PrimaryDiskType,
+    string GpuName,
+    bool HasAvx512
+);
+
+/// <summary>
+/// Type of primary storage device.
+/// </summary>
 public enum StorageType
 {
     Unknown,
@@ -10,18 +24,11 @@ public enum StorageType
     NVMe
 }
 
-public sealed record HardwareProfile(
-    string ProcessorName,
-    int CoreCount,
-    bool IsHyperThreadingEnabled,
-    long TotalMemoryBytes,
-    StorageType PrimaryDiskType,
-    string GpuName,
-    bool IsAVX512Supported
-);
-
-public sealed record TweakRecommendation(
+/// <summary>
+/// Recommendation for a specific tweak based on hardware profile.
+/// </summary>
+public record TweakRecommendation(
     string TweakId,
-    double ConfidenceScore, // 0.0 to 1.0
+    double ConfidenceScore,
     string Reason
 );

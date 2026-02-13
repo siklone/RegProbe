@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using System.Windows.Input;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine.Intelligence;
@@ -21,12 +23,12 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
+    public TrayViewModel TrayViewModel { get; } = new TrayViewModel();
     private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
     private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
     private TweaksViewModel? _tweaksViewModel;
-    private DashboardViewModel? _dashboardViewModel;
     private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
 
     // Tray tooltip binding properties
@@ -53,8 +55,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         RecoverPendingRollbacksCommand = new RelayCommand(_ => _ = RecoverPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
         DismissPendingRollbacksCommand = new RelayCommand(_ => _ = DismissPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
 
-        var dashboard = new DashboardViewModel(_busyService);
-
         // Initialize all tweak providers
         var providers = new ITweakProvider[]
         {
@@ -71,9 +71,11 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             new MiscTweakProvider()
         };
 
-        var tweaks = new TweaksViewModel(providers, _busyService);
+        var bloatware = new BloatwareViewModel();
+        var startup = new StartupViewModel();
+        var tweaks = new TweaksViewModel(providers, _busyService, bloatware, startup);
         _tweaksViewModel = tweaks;
-        dashboard.SetTweaksViewModel(tweaks);
+        Presets = new PresetsViewModel(tweaks);
 
         MonitorViewModel monitor;
         try
@@ -91,29 +93,19 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
-        
-        var bloatware = new BloatwareViewModel();
-        var startup = new StartupViewModel();
-        var presets = new PresetsViewModel();
+        var dashboard = new DashboardViewModel();
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
-            new("dashboard", "Dashboard", "📊", dashboard),
-            new("tweaks", "Tweaks", "⚙️", tweaks),
-            new("monitor", "Monitor", "📈", monitor),
-            new("apps", "Apps", "📦", bloatware),
-            new("startup", "Startup", "🚀", startup),
-            // new("presets", "Presets", "📑", presets), // Keeping presets hidden for now as it duplicates Tweaks logic maybe? No, let's add it.
-            new("presets", "Presets", "📑", presets),
-            new("settings", "Settings", "⚡", settings),
-            new("about", "About", "ℹ️", about)
+            new NavigationItem("dashboard", "Dashboard", "📊", dashboard),
+            new NavigationItem("tweaks", "Configuration", "🛠️", tweaks),
+            new NavigationItem("monitor", "Monitor", "📈", monitor),
+            new NavigationItem("settings", "Settings", "⚙️", settings),
+            new NavigationItem("about", "About", "ℹ️", about)
         };
-
-        // Store reference for disposal
-        _dashboardViewModel = dashboard;
-
-        // Link Health Score + Counts (live from Tweaks)
-        SyncDashboardHealth();
+        
+        // Sync tray tooltip values from tweaks
+        SyncTrayTooltipValues();
 
         // Named handler for proper unsubscription
         _tweaksPropertyChangedHandler = (s, e) =>
@@ -122,46 +114,20 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                 or nameof(TweaksViewModel.ScorableTweaksMeasuredTotal)
                 or nameof(TweaksViewModel.ScorableTweaksApplied))
             {
-                SyncDashboardHealth();
+                SyncTrayTooltipValues();
             }
         };
         tweaks.PropertyChanged += _tweaksPropertyChangedHandler;
 
         SelectedNavigationItem = NavigationItems[0];
 
-        // Set up navigation callback for Dashboard category links
-        dashboard.NavigateToCategoryRequested = (category) =>
-        {
-            // Navigate to Tweaks tab
-            var tweaksNav = NavigationItems.FirstOrDefault(n => n.Id == "tweaks");
-            if (tweaksNav != null)
-            {
-                SelectedNavigationItem = tweaksNav;
-                // Clear status filter and set search filter to the category
-                tweaks.StatusFilter = "";
-                SearchText = category;
-            }
-        };
-
-        // Set up status filter callback for Dashboard stat cards (applied/rolled back)
-        dashboard.NavigateToStatusFilterRequested = (status) =>
-        {
-            // Navigate to Tweaks tab
-            var tweaksNav = NavigationItems.FirstOrDefault(n => n.Id == "tweaks");
-            if (tweaksNav != null)
-            {
-                SelectedNavigationItem = tweaksNav;
-                // Clear search text and set status filter
-                SearchText = "";
-                tweaks.StatusFilter = status;
-            }
-        };
-
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
         // Keyboard navigation commands
         NavigateToDashboardCommand = new RelayCommand(_ => NavigateToTab(0));
         NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(1));
+        NavigateToBloatwareCommand = new RelayCommand(_ => NavigateToTab(1)); // Redirect to Configuration
+        NavigateToStartupCommand = new RelayCommand(_ => NavigateToTab(1));   // Redirect to Configuration
         NavigateToMonitorCommand = new RelayCommand(_ => NavigateToTab(2));
         NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(3));
         NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(4));
@@ -196,16 +162,10 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     }
 
-    private void SyncDashboardHealth()
+    private void SyncTrayTooltipValues()
     {
-        if (_tweaksViewModel == null || _dashboardViewModel == null)
+        if (_tweaksViewModel == null)
             return;
-
-        _dashboardViewModel.TotalTweaksAvailable = _tweaksViewModel.Tweaks.Count;
-        _dashboardViewModel.TweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
-        _dashboardViewModel.HealthTweaksTotal = _tweaksViewModel.ScorableTweaksMeasuredTotal;
-        _dashboardViewModel.HealthTweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
-        _dashboardViewModel.OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
 
         // Sync for tray tooltip
         OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
@@ -221,6 +181,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
         }
 
+        TrayViewModel.Dispose();
+
         // Dispose all view models
         foreach (var item in NavigationItems)
         {
@@ -232,16 +194,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     }
 
     public IBusyService BusyService => _busyService;
+    public PresetsViewModel Presets { get; private set; }
 
     public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
-    {
-        if (NavigationItems.FirstOrDefault(n => n.Id == "dashboard")?.ViewModel is DashboardViewModel dashboard)
-        {
-            await RunStartupScanAsync(dashboard, progress, ct);
-        }
-    }
-
-    private async Task RunStartupScanAsync(DashboardViewModel dashboard, IProgress<StartupScanProgress>? progress, CancellationToken ct)
     {
         if (_tweaksViewModel == null || IsStartupScanActive)
         {
@@ -251,7 +206,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         IsStartupScanActive = true;
         try
         {
-            await dashboard.RunScanAsync(progress, ct, true, false);
+            // Perform initial status check for all tweaks
+            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
+            QueueBackgroundInventoryRefresh();
         }
         catch (Exception ex)
         {
@@ -262,6 +219,35 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             IsStartupScanActive = false;
         }
     }
+
+    private void QueueBackgroundInventoryRefresh()
+    {
+        if (_tweaksViewModel == null)
+        {
+            return;
+        }
+
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher == null)
+        {
+            _ = _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+            return;
+        }
+
+        _ = dispatcher.InvokeAsync(async () =>
+        {
+            try
+            {
+                await Task.Delay(250);
+                await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"Background inventory refresh failed: {ex.Message}");
+            }
+        }, DispatcherPriority.ContextIdle);
+    }
+
 
     private async Task InitializeIntelligenceAsync()
     {
@@ -421,6 +407,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     // Keyboard Navigation Commands
     public RelayCommand NavigateToDashboardCommand { get; }
     public RelayCommand NavigateToTweaksCommand { get; }
+    public RelayCommand NavigateToBloatwareCommand { get; }
+    public RelayCommand NavigateToStartupCommand { get; }
     public RelayCommand NavigateToMonitorCommand { get; }
     public RelayCommand NavigateToSettingsCommand { get; }
     public RelayCommand NavigateToAboutCommand { get; }

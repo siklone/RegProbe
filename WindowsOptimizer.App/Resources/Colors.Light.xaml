@@ -4,28 +4,28 @@
     <!-- Nord Light Theme - Snow Storm as backgrounds, Polar Night as foregrounds -->
 
     <!-- Snow Storm (Light Backgrounds - now used as backgrounds) -->
-    <Color x:Key="Nord0">#ECEFF4</Color>
-    <Color x:Key="Nord1">#E5E9F0</Color>
-    <Color x:Key="Nord2">#D8DEE9</Color>
-    <Color x:Key="Nord3">#C8CED9</Color>
+    <Color x:Key="Nord0">#F4F6FA</Color>
+    <Color x:Key="Nord1">#EDF1F7</Color>
+    <Color x:Key="Nord2">#E5EAF2</Color>
+    <Color x:Key="Nord3">#D7DDE8</Color>
 
     <!-- Polar Night (Dark - now used as foregrounds) -->
-    <Color x:Key="Nord4">#4C566A</Color>
-    <Color x:Key="Nord5">#3B4252</Color>
-    <Color x:Key="Nord6">#2E3440</Color>
+    <Color x:Key="Nord4">#4A5263</Color>
+    <Color x:Key="Nord5">#3E4658</Color>
+    <Color x:Key="Nord6">#2F3545</Color>
 
     <!-- Frost (Accents - slightly darker for light theme) -->
-    <Color x:Key="Nord7">#7EADAC</Color>
-    <Color x:Key="Nord8">#79B1C1</Color>
-    <Color x:Key="Nord9">#6E8EAE</Color>
-    <Color x:Key="Nord10">#4C6E91</Color>
+    <Color x:Key="Nord7">#7FB4AE</Color>
+    <Color x:Key="Nord8">#78AFC8</Color>
+    <Color x:Key="Nord9">#6F94CA</Color>
+    <Color x:Key="Nord10">#5678B5</Color>
 
     <!-- Aurora (Status Colors - same, good contrast on light) -->
-    <Color x:Key="Nord11">#BF616A</Color>
-    <Color x:Key="Nord12">#D08770</Color>
-    <Color x:Key="Nord13">#D9B263</Color>
-    <Color x:Key="Nord14">#8FAE7B</Color>
-    <Color x:Key="Nord15">#A67D9A</Color>
+    <Color x:Key="Nord11">#D86A6A</Color>
+    <Color x:Key="Nord12">#D8916A</Color>
+    <Color x:Key="Nord13">#D9B56D</Color>
+    <Color x:Key="Nord14">#8FBC91</Color>
+    <Color x:Key="Nord15">#B689C8</Color>
 
     <!-- Solid Color Brushes -->
     <SolidColorBrush x:Key="BackgroundDarkestBrush" Color="{StaticResource Nord0}"/>
@@ -36,7 +36,7 @@
     <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource Nord4}"/>
     <SolidColorBrush x:Key="ForegroundBrightBrush" Color="{StaticResource Nord5}"/>
     <SolidColorBrush x:Key="ForegroundBrightestBrush" Color="{StaticResource Nord6}"/>
-    <SolidColorBrush x:Key="MutedForegroundBrush" Color="{StaticResource Nord4}"/>
+    <SolidColorBrush x:Key="MutedForegroundBrush" Color="#667085"/>
 
     <SolidColorBrush x:Key="AccentCyanBrush" Color="{StaticResource Nord7}"/>
     <SolidColorBrush x:Key="AccentBrightCyanBrush" Color="{StaticResource Nord8}"/>
@@ -50,36 +50,36 @@
     <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Nord15}"/>
     <SolidColorBrush x:Key="ForegroundOnAccentBrush" Color="{StaticResource Nord0}"/>
     <SolidColorBrush x:Key="ForegroundOnLightAccentBrush" Color="{StaticResource Nord6}"/>
-    <SolidColorBrush x:Key="SuccessSurfaceBrush" Color="#E5F1E5"/>
-    <SolidColorBrush x:Key="SuccessSurfaceAltBrush" Color="#D4E6D3"/>
-    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#7B9C68"/>
-    <SolidColorBrush x:Key="CautionSurfaceBrush" Color="#F3E6D4"/>
-    <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#F4DADA"/>
-    <SolidColorBrush x:Key="TerminalBackgroundBrush" Color="#F1F4F7"/>
+    <SolidColorBrush x:Key="SuccessSurfaceBrush" Color="#E7F2E8"/>
+    <SolidColorBrush x:Key="SuccessSurfaceAltBrush" Color="#DDEBDC"/>
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#6FAF74"/>
+    <SolidColorBrush x:Key="CautionSurfaceBrush" Color="#F6EEDB"/>
+    <SolidColorBrush x:Key="DangerSurfaceBrush" Color="#F3DEDE"/>
+    <SolidColorBrush x:Key="TerminalBackgroundBrush" Color="#F4F6FA"/>
 
     <!-- Chart Gradient Colors -->
-    <Color x:Key="AccentBrightCyan40">#4079B1C1</Color>
-    <Color x:Key="AccentBrightCyan30">#3079B1C1</Color>
-    <Color x:Key="AccentBrightCyan20">#2079B1C1</Color>
-    <Color x:Key="AccentBrightCyan10">#1079B1C1</Color>
-    <Color x:Key="AccentBrightCyan08">#0879B1C1</Color>
-    <Color x:Key="AccentBrightCyan00">#0079B1C1</Color>
-    <Color x:Key="Success40">#408FAE7B</Color>
-    <Color x:Key="Success30">#308FAE7B</Color>
-    <Color x:Key="Success20">#208FAE7B</Color>
-    <Color x:Key="Success10">#108FAE7B</Color>
-    <Color x:Key="Success08">#088FAE7B</Color>
-    <Color x:Key="Success00">#008FAE7B</Color>
-    <Color x:Key="Danger40">#40BF616A</Color>
-    <Color x:Key="Danger30">#30BF616A</Color>
-    <Color x:Key="Danger20">#20BF616A</Color>
-    <Color x:Key="Danger08">#08BF616A</Color>
-    <Color x:Key="Danger00">#00BF616A</Color>
+    <Color x:Key="AccentBrightCyan40">#4078AFC8</Color>
+    <Color x:Key="AccentBrightCyan30">#3078AFC8</Color>
+    <Color x:Key="AccentBrightCyan20">#2078AFC8</Color>
+    <Color x:Key="AccentBrightCyan10">#1078AFC8</Color>
+    <Color x:Key="AccentBrightCyan08">#0878AFC8</Color>
+    <Color x:Key="AccentBrightCyan00">#0078AFC8</Color>
+    <Color x:Key="Success40">#408FBC91</Color>
+    <Color x:Key="Success30">#308FBC91</Color>
+    <Color x:Key="Success20">#208FBC91</Color>
+    <Color x:Key="Success10">#108FBC91</Color>
+    <Color x:Key="Success08">#088FBC91</Color>
+    <Color x:Key="Success00">#008FBC91</Color>
+    <Color x:Key="Danger40">#40D86A6A</Color>
+    <Color x:Key="Danger30">#30D86A6A</Color>
+    <Color x:Key="Danger20">#20D86A6A</Color>
+    <Color x:Key="Danger08">#08D86A6A</Color>
+    <Color x:Key="Danger00">#00D86A6A</Color>
 
     <!-- Gradient Brushes -->
     <LinearGradientBrush x:Key="BackgroundGradientBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="{StaticResource Nord0}" Offset="0"/>
-        <GradientStop Color="{StaticResource Nord1}" Offset="1"/>
+        <GradientStop Color="{StaticResource Nord2}" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="AccentGradientBrush" StartPoint="0,0" EndPoint="1,0">
@@ -88,18 +88,18 @@
     </LinearGradientBrush>
 
     <!-- Glassmorphism Effects (inverted for light theme) -->
-    <SolidColorBrush x:Key="GlassBrush" Color="#40000000" Opacity="0.05"/>
-    <SolidColorBrush x:Key="GlassBorderBrush" Color="#30000000" Opacity="0.1"/>
+    <SolidColorBrush x:Key="GlassBrush" Color="#000000" Opacity="0.03"/>
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="#000000" Opacity="0.08"/>
 
     <!-- Hover/Pressed States -->
-    <SolidColorBrush x:Key="HoverOverlayBrush" Color="#000000" Opacity="0.05"/>
-    <SolidColorBrush x:Key="PressedOverlayBrush" Color="#000000" Opacity="0.1"/>
-    <SolidColorBrush x:Key="DisabledOverlayBrush" Color="#FFFFFF" Opacity="0.4"/>
+    <SolidColorBrush x:Key="HoverOverlayBrush" Color="#000000" Opacity="0.04"/>
+    <SolidColorBrush x:Key="PressedOverlayBrush" Color="#000000" Opacity="0.12"/>
+    <SolidColorBrush x:Key="DisabledOverlayBrush" Color="#FFFFFF" Opacity="0.45"/>
     <SolidColorBrush x:Key="ScrimOverlayBrush" Color="#000000" Opacity="0.5"/>
 
     <!-- Shadows -->
-    <Color x:Key="ShadowColorSmall">#15000000</Color>
-    <Color x:Key="ShadowColorMedium">#25000000</Color>
-    <Color x:Key="ShadowColorLarge">#35000000</Color>
+    <Color x:Key="ShadowColorSmall">#12000000</Color>
+    <Color x:Key="ShadowColorMedium">#20000000</Color>
+    <Color x:Key="ShadowColorLarge">#2E000000</Color>
 
 </ResourceDictionary>

@@ -35,6 +35,10 @@ public sealed class AppPaths
 
     public string HardwareDatabasePath => Path.Combine(AppDataRoot, "hardware.db");
 
+    public string NohutoScanStateFilePath => Path.Combine(AppDataRoot, "nohuto-scan-state.json");
+
+    public string NohutoAnalysisReportPath => Path.Combine(LogDirectory, "nohuto-analysis.json");
+
     public void EnsureDirectories()
     {
         Directory.CreateDirectory(AppDataRoot);

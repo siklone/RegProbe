@@ -1,4 +1,4 @@
-﻿<Window x:Class="WindowsOptimizer.App.MainWindow"
+<Window x:Class="WindowsOptimizer.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         xmlns:behaviors="clr-namespace:WindowsOptimizer.App.Behaviors"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:controls="clr-namespace:WindowsOptimizer.App.Views.Controls"
+        xmlns:views="clr-namespace:WindowsOptimizer.App.Views"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
         Width="1280"
@@ -15,19 +16,32 @@
         MinHeight="600"
         Background="{DynamicResource BackgroundDarkestBrush}"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResizeWithGrip"
         FontFamily="Segoe UI Variable Display, Segoe UI, Segoe UI Emoji, sans-serif"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextRenderingMode="ClearType">
 
+    <!-- WindowChrome for resize borders -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="48"
+                      ResizeBorderThickness="6"
+                      GlassFrameThickness="0"
+                      CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+
+
     <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation: Ctrl+1 to Ctrl+5 -->
+        <!-- Navigation: Ctrl+1 to Ctrl+7 -->
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToDashboardCommand}"/>
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
-        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
-        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
-        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToBloatwareCommand}"/>
+        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToStartupCommand}"/>
+        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
+        <KeyBinding Key="D6" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
+        <KeyBinding Key="D7" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
         <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <!-- Clear filters: Escape -->
@@ -119,15 +133,138 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Custom Title Bar -->
+        <Border Grid.Row="0" 
+                Panel.ZIndex="100"
+                Background="{DynamicResource BackgroundDarkBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Title and Icon (Draggable area) -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0"
+                            MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                            MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
+                    <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="14" 
+                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Windows Optimizer Suite" 
+                               Foreground="{DynamicResource ForegroundLightBrush}"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <!-- Window Controls -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <!-- Minimize -->
+                    <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
+                            Width="46" Height="48" 
+                            Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            ToolTip="Minimize"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                                <Path Data="M 0,5 H 10" 
+                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
+                                                      StrokeThickness="1"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    <!-- Maximize/Restore -->
+                    <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
+                            Width="46" Height="48"
+                            Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            ToolTip="Maximize"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                                <Path x:Name="MaxIcon" 
+                                                      Data="M 0,0 H 10 V 10 H 0 Z" 
+                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
+                                                      StrokeThickness="1" Fill="Transparent"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    <!-- Close -->
+                    <Button x:Name="CloseButton" Click="CloseButton_Click"
+                            Width="46" Height="48"
+                            Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            ToolTip="Close"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                                <Path Data="M 0,0 L 10,10 M 10,0 L 0,10" 
+                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
+                                                      StrokeThickness="1"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource DangerBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
         <!-- Main Layout Grid -->
-        <Grid>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="240" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Enhanced Sidebar -->
-        <Border Grid.Column="0" Background="{DynamicResource BackgroundDarkestBrush}">
+            <!-- Enhanced Sidebar (Glass Effect) -->
+        <Border Grid.Column="0" 
+                Background="{DynamicResource BackgroundDarkBrush}"
+                BorderBrush="{DynamicResource GlassBorderBrush}"
+                BorderThickness="0,0,1,0">
             <Border.Effect>
                 <DropShadowEffect Color="{DynamicResource ShadowColorLarge}" BlurRadius="20" ShadowDepth="0" Opacity="0.3" Direction="0"/>
             </Border.Effect>
@@ -172,15 +309,24 @@
                          Margin="0,8,0,0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Icon}" 
+                            <Grid Height="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" 
+                                           Text="{Binding Icon}" 
                                            FontFamily="Segoe UI Emoji"
                                            FontSize="16" 
-                                           Margin="0,0,12,0"
+                                           HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Title}" 
-                                           VerticalAlignment="Center"/>
-                            </StackPanel>
+                                           
+                                <TextBlock Grid.Column="1" 
+                                           Text="{Binding Title}" 
+                                           VerticalAlignment="Center"
+                                           Margin="8,0,0,0"/>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -203,7 +349,7 @@
         </Border>
 
         <!-- Main Content Area -->
-        <Border Grid.Column="1" Background="{DynamicResource BackgroundDarkestBrush}">
+        <Border Grid.Column="1" Background="{DynamicResource BackgroundDarkestBrush}" Padding="0,60,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -373,7 +519,12 @@
         <tb:TaskbarIcon x:Name="TrayIcon"
                         ToolTipText="Windows Optimizer Suite"
                         Visibility="Visible"
+                        PopupActivation="LeftClick"
                         TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
+
+            <tb:TaskbarIcon.TrayPopup>
+                <views:TrayPopupView DataContext="{Binding TrayViewModel, Mode=OneWay}"/>
+            </tb:TaskbarIcon.TrayPopup>
 
             <tb:TaskbarIcon.TrayToolTip>
                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
@@ -384,7 +535,7 @@
                     <Border.Effect>
                         <DropShadowEffect Color="{DynamicResource ShadowColorMedium}" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                     </Border.Effect>
-                    <StackPanel>
+                    <StackPanel DataContext="{Binding TrayViewModel}">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="⚡" FontFamily="Segoe UI Emoji" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
                             <TextBlock Text="Windows Optimizer Suite"
@@ -392,31 +543,34 @@
                                        FontWeight="Bold"
                                        FontSize="13"/>
                         </StackPanel>
-                        <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="4" Padding="8" Margin="0,0,0,6">
+                        
+                        <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="4" Padding="8">
                             <StackPanel>
-                                <TextBlock Text="Health Score" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10" Margin="0,0,0,2"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}"
-                                               Foreground="{DynamicResource SuccessBrush}"
-                                               FontSize="20"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text=" optimized"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="11"
-                                               VerticalAlignment="Bottom"
-                                               Margin="0,0,0,3"/>
-                                </StackPanel>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="CPU" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Column="1" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Right">
+                                        <Run Text="{Binding CpuUsage, StringFormat={}{0:F0}%}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding CpuTemp}" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    </TextBlock>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="RAM" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Column="1" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource AccentPurpleBrush}" HorizontalAlignment="Right">
+                                        <Run Text="{Binding RamUsagePercent, StringFormat={}{0:F0}%}"/>
+                                    </TextBlock>
+                                </Grid>
+                                
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="GPU" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding GpuTemp}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" HorizontalAlignment="Right"/>
+                                </Grid>
                             </StackPanel>
                         </Border>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="📊" FontFamily="Segoe UI Emoji" FontSize="11" Margin="0,0,4,0"/>
-                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11">
-                                <Run Text="{Binding TweaksApplied, Mode=OneWay}"/>
-                                <Run Text="/"/>
-                                <Run Text="{Binding TotalTweaksAvailable, Mode=OneWay}"/>
-                                <Run Text=" tweaks applied"/>
-                            </TextBlock>
-                        </StackPanel>
                     </StackPanel>
                 </Border>
             </tb:TaskbarIcon.TrayToolTip>
@@ -481,10 +635,8 @@
                         </Style>
                     </ContextMenu.Resources>
                     <MenuItem Header="📊  Dashboard" Click="MenuItem_Dashboard_Click"/>
-                    <MenuItem Header="⚙️  Tweaks" Click="MenuItem_Tweaks_Click"/>
+                    <MenuItem Header="⚙️  Configuration" Click="MenuItem_Tweaks_Click"/>
                     <MenuItem Header="📈  Monitor" Click="MenuItem_Monitor_Click"/>
-                    <Separator/>
-                    <MenuItem Header="🔍  Scan Now" Click="MenuItem_ScanNow_Click"/>
                     <Separator/>
                     <MenuItem Header="👁️  Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
                     <MenuItem Header="❌  Exit" Click="MenuItem_Exit_Click"/>

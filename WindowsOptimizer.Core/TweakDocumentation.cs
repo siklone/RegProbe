@@ -40,13 +40,28 @@ public sealed record TweakDocumentation
         new()
         {
             Source = "nohuto",
-            DocumentationUrl = string.IsNullOrEmpty(anchor) 
-                ? $"https://github.com/nohuto/win-config/blob/main/{category}/{category}.md"
-                : $"https://github.com/nohuto/win-config/blob/main/{category}/{category}.md#{anchor}",
+            DocumentationUrl = BuildLocalNohutoPath(category, anchor),
             VerificationMethod = "IDA + WPR",
             Verified = true,
             LastVerified = DateTimeOffset.UtcNow
         };
+
+    private static string BuildLocalNohutoPath(string category, string anchor)
+    {
+        const string basePath = "docs/tweaks/win-config/batch-01.md";
+        var section = string.IsNullOrWhiteSpace(anchor) ? category : anchor;
+        if (string.IsNullOrWhiteSpace(section))
+        {
+            return basePath;
+        }
+
+        var slug = section
+            .Trim()
+            .ToLowerInvariant()
+            .Replace(" ", "-");
+
+        return $"{basePath}#{slug}";
+    }
     
     /// <summary>
     /// Creates a TweakDocumentation for Microsoft Docs sourced tweaks.

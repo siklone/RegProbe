@@ -47,6 +47,49 @@ public partial class MainWindow : Window
         Notifications.ShowInfo("Windows Optimizer is ready", "Welcome");
     }
 
+    #region Custom Title Bar Handlers
+    
+    private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2)
+        {
+            MaximizeRestore();
+        }
+        else
+        {
+            DragMove();
+        }
+    }
+    
+    private void TitleBar_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        // Required for DragMove to work properly
+    }
+    
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
+    
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        MaximizeRestore();
+    }
+    
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+    
+    private void MaximizeRestore()
+    {
+        WindowState = WindowState == WindowState.Maximized 
+            ? WindowState.Normal 
+            : WindowState.Maximized;
+    }
+    
+    #endregion
+
     private static System.Drawing.Icon CreateTrayIcon()
     {
         // Create a simple 32x32 icon with a circle
@@ -134,21 +177,6 @@ public partial class MainWindow : Window
     private void MenuItem_Monitor_Click(object sender, RoutedEventArgs e)
     {
         NavigateToTab("monitor");
-    }
-
-    private void MenuItem_ScanNow_Click(object sender, RoutedEventArgs e)
-    {
-        // Navigate to dashboard and trigger scan
-        NavigateToTab("dashboard");
-
-        if (DataContext is MainViewModel mainVm)
-        {
-            var dashboardNav = mainVm.NavigationItems.FirstOrDefault(n => n.Id == "dashboard");
-            if (dashboardNav?.ViewModel is DashboardViewModel dashboard && dashboard.ScanAllCommand.CanExecute(null))
-            {
-                dashboard.ScanAllCommand.Execute(null);
-            }
-        }
     }
 
     private void ShowAndActivate()

@@ -1,0 +1,51 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ============================================== -->
+    <!-- SPACING SYSTEM - 8px Grid Base                 -->
+    <!-- ============================================== -->
+
+    <!-- Base Unit: 8px -->
+    <sys:Double x:Key="SpaceUnit">8</sys:Double>
+
+    <!-- Spacing Scale -->
+    <sys:Double x:Key="Space0">0</sys:Double>
+    <sys:Double x:Key="SpaceXS">4</sys:Double>      <!-- 0.5x -->
+    <sys:Double x:Key="SpaceS">8</sys:Double>       <!-- 1x -->
+    <sys:Double x:Key="SpaceM">12</sys:Double>      <!-- 1.5x -->
+    <sys:Double x:Key="SpaceL">16</sys:Double>      <!-- 2x -->
+    <sys:Double x:Key="SpaceXL">24</sys:Double>     <!-- 3x -->
+    <sys:Double x:Key="SpaceXXL">32</sys:Double>    <!-- 4x -->
+    <sys:Double x:Key="SpaceXXXL">48</sys:Double>   <!-- 6x -->
+
+    <!-- Layout Constants -->
+    <sys:Double x:Key="SidebarWidth">200</sys:Double>
+    <sys:Double x:Key="SidebarWidthCollapsed">56</sys:Double>
+    <sys:Double x:Key="TitleBarHeight">40</sys:Double>
+    <sys:Double x:Key="TabHeight">36</sys:Double>
+    <sys:Double x:Key="ButtonHeight">36</sys:Double>
+    <sys:Double x:Key="InputHeight">40</sys:Double>
+    <sys:Double x:Key="CardRadius">8</sys:Double>
+    <sys:Double x:Key="ButtonRadius">6</sys:Double>
+    <sys:Double x:Key="SmallRadius">4</sys:Double>
+
+    <!-- Thickness Resources (Margin/Padding) -->
+    <Thickness x:Key="ThicknessZero">0</Thickness>
+    <Thickness x:Key="ThicknessXS">4</Thickness>
+    <Thickness x:Key="ThicknessS">8</Thickness>
+    <Thickness x:Key="ThicknessM">12</Thickness>
+    <Thickness x:Key="ThicknessL">16</Thickness>
+    <Thickness x:Key="ThicknessXL">24</Thickness>
+    <Thickness x:Key="ThicknessXXL">32</Thickness>
+
+    <!-- Common Layout Thicknesses -->
+    <Thickness x:Key="PageMargin">16</Thickness>
+    <Thickness x:Key="CardPadding">16</Thickness>
+    <Thickness x:Key="CardMargin">0,0,0,12</Thickness>
+    <Thickness x:Key="SectionMargin">0,0,0,24</Thickness>
+    <Thickness x:Key="ElementSpacing">0,0,0,8</Thickness>
+    <Thickness x:Key="ButtonPadding">16,0</Thickness>
+    <Thickness x:Key="InputPadding">12,0</Thickness>
+
+</ResourceDictionary>

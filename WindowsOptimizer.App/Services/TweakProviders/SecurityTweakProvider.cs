@@ -8,6 +8,14 @@ using WindowsOptimizer.Engine.Tweaks;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
+/// <summary>
+/// Security tweaks provider with references to trusted sources.
+/// Sources:
+/// - Microsoft Security Baselines: https://aka.ms/baselines
+/// - ASD Windows Hardening: https://www.cyber.gov.au/hardening-guides
+/// - Microsoft Learn Security: https://learn.microsoft.com/en-us/windows/security/
+/// - CIS Benchmarks: https://www.cisecurity.org/cis-benchmarks
+/// </summary>
 public sealed class SecurityTweakProvider : BaseTweakProvider
 {
     public override string CategoryName => "Security";
@@ -15,11 +23,13 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // UAC and Auth
+        // Source: Microsoft Security Baselines - User Account Control
+        // https://learn.microsoft.com/en-us/windows/security/identity-protection/user-account-control/how-user-account-control-works
         yield return CreateRegistryValueSetTweak(
             context,
             "security.uac-never-notify",
             "Set UAC to Never Notify",
-            "Lowers User Account Control prompts to the least restrictive setting. Risky for security but reduces interruptions.",
+            "Lowers User Account Control prompts to the least restrictive setting. Risky for security but reduces interruptions. Reference: Microsoft Security Baselines",
             TweakRiskLevel.Risky,
             RegistryHive.LocalMachine,
             @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
@@ -92,11 +102,14 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             requiresElevation: false);
 
         // System Defense
+        // Windows Firewall Configuration
+        // Source: Microsoft Defender Firewall Documentation
+        // https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/
         yield return CreateRegistryValueBatchTweak(
             context,
             "security.disable-windows-firewall",
             "Disable Windows Firewall",
-            "Turns off Windows Defender Firewall for Domain, Private, and Public profiles.",
+            "Turns off Windows Defender Firewall for Domain, Private, and Public profiles. Reference: Microsoft Defender Firewall Docs",
             TweakRiskLevel.Risky,
             new[]
             {

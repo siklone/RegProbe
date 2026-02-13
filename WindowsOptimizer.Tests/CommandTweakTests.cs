@@ -38,7 +38,7 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
-    public async Task DisableHibernationTweak_DetectAsync_WhenHibernationDisabled_ReturnsDetectedStatus()
+    public async Task DisableHibernationTweak_DetectAsync_WhenHibernationDisabled_ReturnsAppliedStatus()
     {
         // Arrange
         var mockRunner = new Mock<ICommandRunner>();
@@ -57,7 +57,7 @@ public sealed class CommandTweakTests
         var result = await tweak.DetectAsync(CancellationToken.None);
 
         // Assert
-        Assert.Equal(TweakStatus.Detected, result.Status);
+        Assert.Equal(TweakStatus.Applied, result.Status);
         Assert.Contains("Hibernation disabled", result.Message);
     }
 
@@ -171,7 +171,7 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
-    public async Task DisableUsbSelectiveSuspendTweak_DetectAsync_WhenDisabled_ReturnsDetectedStatus()
+    public async Task DisableUsbSelectiveSuspendTweak_DetectAsync_WhenDisabled_ReturnsAppliedStatus()
     {
         // Arrange
         var mockRunner = new Mock<ICommandRunner>();
@@ -190,7 +190,7 @@ public sealed class CommandTweakTests
         var result = await tweak.DetectAsync(CancellationToken.None);
 
         // Assert
-        Assert.Equal(TweakStatus.Detected, result.Status);
+        Assert.Equal(TweakStatus.Applied, result.Status);
         Assert.Contains("USB Selective Suspend: Disabled", result.Message);
     }
 

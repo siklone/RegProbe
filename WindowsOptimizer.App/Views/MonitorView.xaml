@@ -8,7 +8,9 @@
              xmlns:hardware="clr-namespace:WindowsOptimizer.App.ViewModels.Hardware"
              xmlns:utils="clr-namespace:WindowsOptimizer.App.Utilities"
              mc:Ignorable="d"
-             Background="{DynamicResource BackgroundDarkestBrush}">
+             Background="{DynamicResource BackgroundDarkestBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+             FontSize="12">
 
     <UserControl.Resources>
         <converters:SparklinePointsConverter x:Key="SparklinePointsConverter"/>
@@ -696,7 +698,8 @@
                              BorderThickness="0"
                              Margin="0,12,0,16"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             PreviewMouseWheel="ListBox_PreviewMouseWheel">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="2"/>
@@ -812,7 +815,7 @@
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        Margin="0,0,0,10"/>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="300">
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" MaxHeight="300">
                                 <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -2786,7 +2789,7 @@
 
                     <ScrollViewer Grid.Row="2"
                                   Margin="0,16,0,0"
-                                  VerticalScrollBarVisibility="Auto">
+                                  VerticalScrollBarVisibility="Hidden">
                         <ListBox ItemsSource="{Binding MonitorSections}"
                                  AllowDrop="True"
                                  Background="Transparent"
@@ -2856,3 +2859,4 @@
         </Grid>
     </Grid>
 </UserControl>
+

@@ -88,6 +88,17 @@ public partial class App : Application
                 _ = HardwareIdentifier.GetRamId();
             }, ct), isCritical: false, priority: 50);
 
+            preloader.RegisterTask("Analyze nohuto updates", async ct =>
+            {
+                using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                timeoutCts.CancelAfter(TimeSpan.FromSeconds(6));
+
+                var scanPaths = AppPaths.FromEnvironment();
+                using var scanService = new NohutoRepoScanService(scanPaths);
+                var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token);
+                AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
+            }, isCritical: false, priority: 40);
+
             preloader.RegisterTask("Hardware database update", async ct =>
             {
                 if (HardwareDatabase.TryGetInstance(out var database) && database != null)

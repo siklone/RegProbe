@@ -9,6 +9,8 @@
         MinHeight="400" MinWidth="600"
         WindowStartupLocation="CenterOwner"
         Background="{DynamicResource BackgroundDarkestBrush}"
+        FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+        FontSize="12"
         ResizeMode="CanResize">
 
     <Window.Resources>
@@ -81,7 +83,7 @@
         </Border>
 
         <!-- Content Area -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24,12">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Padding="24,12">
             <StackPanel>
                 <!-- Quick Stats Row -->
                 <UniformGrid Rows="1" Columns="4" Margin="0,0,0,16">
@@ -217,3 +219,4 @@
         </Border>
     </Grid>
 </Window>
+

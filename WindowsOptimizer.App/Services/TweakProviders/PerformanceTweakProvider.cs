@@ -9,6 +9,13 @@ using WindowsOptimizer.Engine.Tweaks.Commands.Performance;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
+/// <summary>
+/// Performance optimization tweaks provider.
+/// Sources:
+/// - Microsoft PC Performance Tips: https://support.microsoft.com/en-us/windows/tips-to-improve-pc-performance-in-windows-b3b3ef5b-5953-fb6a-2528-4bbed82fba96
+/// - Windows 11 Performance Improvements: https://techcommunity.microsoft.com/blog/microsoftmechanicsblog/windows-11-the-optimization-and-performance-improvements/2733299
+/// - MMCSS Documentation: https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service
+/// </summary>
 public sealed class PerformanceTweakProvider : BaseTweakProvider
 {
     public override string CategoryName => "Performance";
@@ -16,11 +23,12 @@ public sealed class PerformanceTweakProvider : BaseTweakProvider
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // Visual Effects for Performance
+        // Source: Microsoft Support - Tips to improve PC performance
         yield return CreateRegistryTweak(
             context,
             "performance.disable-animations",
             "Disable Window Animations",
-            "Disables window animations to make the UI feel snappier and improve responsiveness on lower-end hardware.",
+            "Disables window animations to make the UI feel snappier. Reference: Microsoft PC Performance Guidelines",
             TweakRiskLevel.Safe,
             RegistryHive.CurrentUser,
             @"Control Panel\Desktop\WindowMetrics",

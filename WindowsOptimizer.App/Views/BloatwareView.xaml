@@ -4,9 +4,124 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+             FontSize="12">
 
-    <Grid Margin="24">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BloatwareSearchBorderSoftBrush" Color="{StaticResource AccentBrightCyan10}"/>
+
+        <Style x:Key="BloatwareTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+        </Style>
+
+        <Style x:Key="BloatwareSubtitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+        </Style>
+
+        <Style x:Key="BloatwareSectionCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+        </Style>
+
+        <Style x:Key="BloatwareItemCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style x:Key="BloatwareMetaTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+
+        <Style x:Key="BloatwareBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="6,1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="BloatwareDangerButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButtonStyle}">
+            <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="MinWidth" Value="90"/>
+        </Style>
+
+        <Style x:Key="BloatwareSearchBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="32,0,12,0"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="14">
+                            <Grid>
+                                <TextBlock x:Name="Icon"
+                                           Text="&#xE721;"
+                                           FontFamily="Segoe MDL2 Assets"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"
+                                           IsHitTestVisible="False"/>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Margin="{TemplateBinding Padding}"/>
+                                <TextBlock x:Name="Placeholder"
+                                           Text="{TemplateBinding Tag}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           VerticalAlignment="Center"
+                                           Margin="32,0,12,0"
+                                           Opacity="0.7"
+                                           Visibility="Collapsed"
+                                           IsHitTestVisible="False"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{StaticResource BloatwareSearchBorderSoftBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="18">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -14,47 +129,64 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <DockPanel>
-                <TextBlock Text="{Binding Title}"
-                           FontSize="32"
-                           FontWeight="Bold"
-                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                           DockPanel.Dock="Left"/>
-                
-                <Button Content="🔄 Refresh"
-                        Command="{Binding RefreshCommand}"
-                        Style="{StaticResource ModernButtonStyle}"
-                        Padding="12,6"
-                        HorizontalAlignment="Right"
-                        DockPanel.Dock="Right"/>
-            </DockPanel>
-            
-            <TextBlock Text="Remove pre-installed bloatware and unnecessary UWP apps"
-                       FontSize="14"
-                       Foreground="{DynamicResource MutedForegroundBrush}"
-                       Margin="0,8,0,0"/>
-        </StackPanel>
+                <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Warning Banner -->
+            <StackPanel>
+                <TextBlock Text="{Binding Title}" Style="{StaticResource BloatwareTitleStyle}"/>
+                <TextBlock Text="Remove pre-installed bloatware and unnecessary UWP apps"
+                           Style="{StaticResource BloatwareSubtitleStyle}"
+                           Margin="0,6,0,0"/>
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                    Command="{Binding RefreshCommand}"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Padding="14,6"
+                    Margin="12,0,0,0"
+                    HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE72C;"
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Margin="0,0,8,0"/>
+                    <TextBlock Text="Refresh"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+                <!-- Warning Banner -->
         <Border Grid.Row="1"
                 Background="{DynamicResource WarningSurfaceBrush}"
                 BorderBrush="{DynamicResource WarningBrush}"
                 BorderThickness="1"
-                CornerRadius="8"
-                Padding="16,12"
-                Margin="0,0,0,16">
+                CornerRadius="10"
+                Padding="14,10"
+                Margin="0,0,0,12">
             <DockPanel>
-                <TextBlock Text="⚠️"
-                           FontSize="20"
-                           Margin="0,0,12,0"
-                           DockPanel.Dock="Left"
-                           VerticalAlignment="Center"/>
+                <Border Width="28"
+                        Height="28"
+                        Background="{DynamicResource WarningBrush}"
+                        CornerRadius="14"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="&#xE7BA;"
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
                 <StackPanel>
                     <TextBlock Text="Safety Notice"
-                               FontSize="14"
-                               FontWeight="Bold"
+                               FontSize="13"
+                               FontWeight="SemiBold"
                                Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                     <TextBlock Text="Critical system apps are protected. Only apps marked as 'Safe' or 'Caution' can be removed. Apps can be reinstalled from Microsoft Store."
                                FontSize="12"
@@ -65,14 +197,10 @@
             </DockPanel>
         </Border>
 
-        <!-- Apps List -->
+                <!-- Apps List -->
         <Border Grid.Row="2"
-                Background="{DynamicResource BackgroundDarkBrush}"
-                BorderBrush="{DynamicResource GlassBorderBrush}"
-                BorderThickness="1"
-                CornerRadius="12"
+                Style="{StaticResource BloatwareSectionCardStyle}"
                 Padding="0">
-            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -83,43 +211,25 @@
                 <Border Grid.Row="0"
                         BorderBrush="{DynamicResource GlassBorderBrush}"
                         BorderThickness="0,0,0,1"
-                        Padding="16,12">
+                        Padding="12,10"
+                        Background="{DynamicResource BackgroundDarkBrush}"
+                        CornerRadius="14,14,0,0">
                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="14"
-                             Background="Transparent"
-                             Foreground="{DynamicResource ForegroundBrightestBrush}"
-                             BorderThickness="0"
-                             Padding="8,4">
-                        <TextBox.Resources>
-                            <Style TargetType="TextBox">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="TextBox">
-                                            <Border Background="{TemplateBinding Background}"
-                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
-                                                    BorderThickness="1"
-                                                    CornerRadius="6"
-                                                    Padding="{TemplateBinding Padding}">
-                                                <ScrollViewer x:Name="PART_ContentHost"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </TextBox.Resources>
-                    </TextBox>
+                             Style="{StaticResource BloatwareSearchBoxStyle}"
+                             Tag="Search apps, publisher, or package ID..."/>
                 </Border>
 
                 <!-- Apps List -->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Hidden"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Padding="12,10,12,4">
                     <ItemsControl ItemsSource="{Binding Apps}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type viewModels:AppxPackageViewModel}">
-                                <Border BorderBrush="{DynamicResource GlassBorderBrush}"
-                                        BorderThickness="0,0,0,1"
-                                        Padding="20,16">
+                                <Border>
                                     <Border.Style>
-                                        <Style TargetType="Border">
+                                        <Style TargetType="Border" BasedOn="{StaticResource BloatwareItemCardStyle}">
                                             <Setter Property="Visibility" Value="Visible"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsVisible}" Value="False">
@@ -128,7 +238,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
-                                    
+
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -138,33 +248,29 @@
                                         <!-- App Info -->
                                         <StackPanel Grid.Column="0">
                                             <TextBlock Text="{Binding DisplayName}"
-                                                       FontSize="16"
+                                                       FontSize="15"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                       Margin="0,0,0,6"/>
-                                            
-                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                                       TextTrimming="CharacterEllipsis"/>
+
+                                            <WrapPanel Margin="0,6,0,8">
                                                 <TextBlock Text="{Binding Publisher}"
-                                                           FontSize="12"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"
-                                                           Margin="0,0,16,0"/>
+                                                           Style="{StaticResource BloatwareMetaTextStyle}"
+                                                           MaxWidth="280"/>
                                                 <TextBlock Text="{Binding Version}"
-                                                           FontSize="12"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"
-                                                           Margin="0,0,16,0"/>
+                                                           Style="{StaticResource BloatwareMetaTextStyle}"/>
                                                 <TextBlock Text="{Binding SizeFormatted}"
-                                                           FontSize="12"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                            </StackPanel>
+                                                           Style="{StaticResource BloatwareMetaTextStyle}"
+                                                           Margin="0"/>
+                                            </WrapPanel>
 
                                             <!-- Safety Badge -->
                                             <Border Background="{Binding SafetyColor}"
-                                                    CornerRadius="4"
-                                                    Padding="8,2"
+                                                    Style="{StaticResource BloatwareBadgeStyle}"
                                                     HorizontalAlignment="Left">
                                                 <TextBlock Text="{Binding SafetyText}"
                                                            FontSize="10"
-                                                           FontWeight="Medium"
+                                                           FontWeight="SemiBold"
                                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             </Border>
                                         </StackPanel>
@@ -172,12 +278,17 @@
                                         <!-- Uninstall Button -->
                                         <Button Grid.Column="1"
                                                 Command="{Binding UninstallCommand}"
-                                                Content="🗑️ Uninstall"
-                                                Style="{StaticResource ModernButtonStyle}"
-                                                Background="{DynamicResource DangerBrush}"
-                                                Padding="16,8"
+                                                Style="{StaticResource BloatwareDangerButtonStyle}"
                                                 VerticalAlignment="Center"
-                                                Margin="16,0,0,0"/>
+                                                Margin="16,0,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xE74D;"
+                                                           FontFamily="Segoe MDL2 Assets"
+                                                           FontSize="13"
+                                                           Margin="0,0,6,0"/>
+                                                <TextBlock Text="Uninstall"/>
+                                            </StackPanel>
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -187,14 +298,14 @@
             </Grid>
         </Border>
 
-        <!-- Status Bar -->
+                <!-- Status Bar -->
         <Border Grid.Row="3"
-                Background="{DynamicResource BackgroundMediumBrush}"
+                Background="{DynamicResource BackgroundDarkBrush}"
                 BorderBrush="{DynamicResource GlassBorderBrush}"
                 BorderThickness="1"
-                CornerRadius="8"
-                Padding="16,12"
-                Margin="0,16,0,0">
+                CornerRadius="10"
+                Padding="12,10"
+                Margin="0,12,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -203,18 +314,23 @@
 
                 <!-- Status Icon -->
                 <Ellipse Grid.Column="0"
-                         Width="12" Height="12"
+                         Width="10" Height="10"
                          Fill="{DynamicResource AccentBrightCyanBrush}"
-                         Margin="0,0,12,0"
+                         Margin="0,0,10,0"
                          VerticalAlignment="Center"/>
 
                 <!-- Status Message -->
                 <TextBlock Grid.Column="1"
                            Text="{Binding StatusMessage}"
-                           FontSize="13"
+                           FontSize="12"
                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                            VerticalAlignment="Center"/>
             </Grid>
         </Border>
     </Grid>
 </UserControl>
+
+
+
+
+

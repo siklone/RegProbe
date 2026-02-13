@@ -1,4 +1,6 @@
 using WindowsOptimizer.App.Models;
+using WindowsOptimizer.Core;
+using WindowsOptimizer.Engine;
 
 namespace WindowsOptimizer.App.Services;
 
@@ -7,8 +9,11 @@ namespace WindowsOptimizer.App.Services;
 /// </summary>
 public class PresetService
 {
-    public PresetService()
+    private readonly ITweakCatalog _tweakCatalog;
+
+    public PresetService(ITweakCatalog? tweakCatalog = null)
     {
+        _tweakCatalog = tweakCatalog ?? new TweakCatalogService();
     }
 
     /// <summary>
@@ -27,7 +32,7 @@ public class PresetService
     /// <summary>
     /// Applies a preset with progress reporting.
     /// </summary>
-    public async Task<ApplyPresetResult> ApplyPresetAsync(string presetId, IProgress<int>? progress)
+    public async Task<ApplyPresetResult> ApplyPresetAsync(string presetId, IProgress<int>? progress, bool dryRun = false)
     {
         var preset = GetAllPresets().FirstOrDefault(p => p.Id == presetId);
         if (preset == null)
@@ -53,7 +58,7 @@ public class PresetService
             try
             {
                 // Apply tweak through existing TweakService
-                var success = await ApplyTweakByIdAsync(tweakId);
+                var success = await ApplyTweakByIdAsync(tweakId, dryRun);
                 if (success)
                 {
                     appliedCount++;
@@ -90,17 +95,16 @@ public class PresetService
     /// <summary>
     /// Reverts all tweaks in a preset.
     /// </summary>
-    public async Task<bool> RevertPresetAsync(string presetId)
+    public async Task<bool> RevertPresetAsync(string presetId, bool dryRun = false)
     {
         var preset = GetAllPresets().FirstOrDefault(p => p.Id == presetId);
         if (preset == null) return false;
-
 
         foreach (var tweakId in preset.TweakIds)
         {
             try
             {
-                await RevertTweakByIdAsync(tweakId);
+                await RevertTweakByIdAsync(tweakId, dryRun);
             }
             catch (Exception)
             {
@@ -197,17 +201,49 @@ public class PresetService
 
     // Helper methods to integrate with existing TweakService
 
-    private async Task<bool> ApplyTweakByIdAsync(string tweakId)
+    private async Task<bool> ApplyTweakByIdAsync(string tweakId, bool dryRun)
     {
-        // TODO: Implement integration with TweakService
-        // This will need to find the tweak by ID and apply it
-        await Task.Delay(100); // Simulate work
-        return true;
+        var tweak = _tweakCatalog.FindById(tweakId);
+        if (tweak is null)
+        {
+            return false;
+        }
+
+        var options = new TweakExecutionOptions
+        {
+            DryRun = dryRun,
+            VerifyAfterApply = true,
+            RollbackOnFailure = true
+        };
+
+        var report = await _tweakCatalog.ExecuteAsync(tweak, options);
+        if (options.DryRun)
+        {
+            return report.Succeeded;
+        }
+
+        return report.Succeeded && report.Applied;
     }
 
-    private async Task RevertTweakByIdAsync(string tweakId)
+    private async Task RevertTweakByIdAsync(string tweakId, bool dryRun)
     {
-        // TODO: Implement integration with TweakService
-        await Task.Delay(100); // Simulate work
+        var tweak = _tweakCatalog.FindById(tweakId);
+        if (tweak is null)
+        {
+            return;
+        }
+
+        var detectStep = await _tweakCatalog.ExecuteStepAsync(tweak, TweakAction.Detect);
+        if (detectStep.Result.Status is TweakStatus.Failed or TweakStatus.NotApplicable)
+        {
+            return;
+        }
+
+        if (dryRun)
+        {
+            return;
+        }
+
+        await _tweakCatalog.ExecuteStepAsync(tweak, TweakAction.Rollback);
     }
 }

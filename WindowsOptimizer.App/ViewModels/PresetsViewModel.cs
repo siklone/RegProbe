@@ -13,9 +13,11 @@ public sealed class PresetsViewModel : ViewModelBase
     private bool _isApplying;
     private PresetCardViewModel? _selectedPreset;
 
-    public PresetsViewModel()
+    private readonly TweaksViewModel _tweaksViewModel;
+
+    public PresetsViewModel(TweaksViewModel tweaks)
     {
-        // TODO: Integrate with existing TweakService in future
+        _tweaksViewModel = tweaks;
         _presetService = new PresetService();
 
         LoadPresets();

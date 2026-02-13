@@ -18,10 +18,10 @@ public class ThemeManager
 
     public static readonly ThemePalette Nord = new(
         "Nord",
-        (Color)ColorConverter.ConvertFromString("#88C0D0"), // Nord8
-        (Color)ColorConverter.ConvertFromString("#5E81AC"), // Nord10
-        (Color)ColorConverter.ConvertFromString("#8FBCBB"), // Nord7
-        (Color)ColorConverter.ConvertFromString("#81A1C1")  // Nord9
+        (Color)ColorConverter.ConvertFromString("#86BBD6"), // Nord8
+        (Color)ColorConverter.ConvertFromString("#6F88C7"), // Nord10
+        (Color)ColorConverter.ConvertFromString("#8ECAC3"), // Nord7
+        (Color)ColorConverter.ConvertFromString("#8AA6E0")  // Nord9
     );
 
     public static readonly ThemePalette ElectricPurple = new(
@@ -46,6 +46,14 @@ public class ThemeManager
         (Color)ColorConverter.ConvertFromString("#008F39"), // Dark Green
         (Color)ColorConverter.ConvertFromString("#8AFF80"), // Light Green
         (Color)ColorConverter.ConvertFromString("#00D15B")  // Mid Green
+    );
+
+    public static readonly ThemePalette RubyRed = new(
+        "Ruby",
+        (Color)ColorConverter.ConvertFromString("#FF6B6B"), // Coral Red
+        (Color)ColorConverter.ConvertFromString("#C92A2A"), // Deep Red
+        (Color)ColorConverter.ConvertFromString("#FFA8A8"), // Light Pink-Red
+        (Color)ColorConverter.ConvertFromString("#E03131")  // Medium Red
     );
 
     public void ApplyTheme(ThemePalette palette)

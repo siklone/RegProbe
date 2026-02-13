@@ -37,13 +37,17 @@ public sealed class MetricWorkerPool : IDisposable
         _workQueue = new BlockingCollection<WorkItem>(
             new ConcurrentQueue<WorkItem>());
 
-        _workers = Enumerable.Range(0, workerCount)
-            .Select(i => Task.Factory.StartNew(
-                async () => await WorkerLoop(i, _cts.Token),
+        _workers = new List<Task>();
+        for (int i = 0; i < workerCount; i++)
+        {
+            int workerId = i; // Capture for closure
+            var task = Task.Factory.StartNew(
+                () => WorkerLoop(workerId, _cts.Token),
                 _cts.Token,
                 TaskCreationOptions.LongRunning,
-                TaskScheduler.Default).Unwrap())
-            .ToList();
+                TaskScheduler.Default).Unwrap();
+            _workers.Add(task);
+        }
 
         Debug.WriteLine($"[MetricWorkerPool] Started with {workerCount} workers");
     }
