@@ -113,7 +113,7 @@
                             <Border x:Name="Track" 
                                     Background="{DynamicResource BackgroundMediumBrush}" 
                                     CornerRadius="13"
-                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                    BorderBrush="{DynamicResource GlassBorderBrush}"
                                     BorderThickness="1"/>
 	                            <Border x:Name="Thumb" 
 	                                    Width="20" Height="20" 
@@ -207,20 +207,6 @@
 		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 		                                                           Storyboard.TargetProperty="Opacity"
 		                                                           To="1" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.05" Duration="0:0:0.15">
-		                                                <DoubleAnimation.EasingFunction>
-		                                                    <QuadraticEase EasingMode="EaseOut"/>
-		                                                </DoubleAnimation.EasingFunction>
-		                                            </DoubleAnimation>
-			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-			                                                           Storyboard.TargetProperty="ScaleY"
-			                                                           To="1.05" Duration="0:0:0.15">
-			                                                <DoubleAnimation.EasingFunction>
-			                                                    <QuadraticEase EasingMode="EaseOut"/>
-			                                                </DoubleAnimation.EasingFunction>
-			                                            </DoubleAnimation>
 	                                        </Storyboard>
 	                                    </BeginStoryboard>
 	                                </Trigger.EnterActions>
@@ -230,12 +216,6 @@
 		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 		                                                           Storyboard.TargetProperty="Opacity"
 		                                                           To="0" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.0" Duration="0:0:0.15"/>
-			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-			                                                           Storyboard.TargetProperty="ScaleY"
-			                                                           To="1.0" Duration="0:0:0.15"/>
 	                                        </Storyboard>
 	                                    </BeginStoryboard>
 	                                </Trigger.ExitActions>
@@ -268,7 +248,7 @@
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -338,20 +318,6 @@
 		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 		                                                           Storyboard.TargetProperty="Opacity"
 		                                                           To="1" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.05" Duration="0:0:0.15">
-		                                                <DoubleAnimation.EasingFunction>
-		                                                    <QuadraticEase EasingMode="EaseOut"/>
-		                                                </DoubleAnimation.EasingFunction>
-		                                            </DoubleAnimation>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.05" Duration="0:0:0.15">
-			                                                <DoubleAnimation.EasingFunction>
-			                                                    <QuadraticEase EasingMode="EaseOut"/>
-			                                                </DoubleAnimation.EasingFunction>
-		                                            </DoubleAnimation>
 	                                        </Storyboard>
 	                                    </BeginStoryboard>
 	                                </Trigger.EnterActions>
@@ -361,12 +327,6 @@
 		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
 		                                                           Storyboard.TargetProperty="Opacity"
 		                                                           To="0" Duration="0:0:0.15"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.0" Duration="0:0:0.15"/>
-			                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-			                                                           Storyboard.TargetProperty="ScaleY"
-			                                                           To="1.0" Duration="0:0:0.15"/>
 	                                        </Storyboard>
 	                                    </BeginStoryboard>
 	                                </Trigger.ExitActions>
@@ -462,7 +422,7 @@
                         <ControlTemplate TargetType="CheckBox">
                             <Border x:Name="Pill"
                                     Background="{DynamicResource BackgroundDarkBrush}"
-                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                    BorderBrush="{DynamicResource GlassBorderBrush}"
                                     BorderThickness="1"
                                     CornerRadius="10"
                                     Padding="9,4">
@@ -709,7 +669,7 @@
         <Style x:Key="RoundedComboBox" TargetType="ComboBox">
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="4,2"/>
             <Setter Property="Template">
@@ -745,7 +705,7 @@
                                        PopupAnimation="Slide">
                                     <Border Name="DropDownBorder" 
                                             Background="{DynamicResource BackgroundDarkBrush}" 
-                                            BorderBrush="{DynamicResource BackgroundLightBrush}" 
+                                            BorderBrush="{DynamicResource GlassBorderBrush}"
                                             BorderThickness="1" 
                                             CornerRadius="4">
                                         <ScrollViewer SnapsToDevicePixels="True">
@@ -1092,7 +1052,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Border Background="{DynamicResource BackgroundMediumBrush}"
-                                            BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                            BorderBrush="{DynamicResource GlassBorderBrush}"
                                             BorderThickness="1"
                                             CornerRadius="3"
                                             Padding="4,0"
@@ -1125,7 +1085,7 @@
                                 <!-- Before/After Snapshot Comparison - Compact -->
                                 <Border Visibility="{Binding HasStateChange, Converter={StaticResource BoolToVisibility}}"
                                         Background="{DynamicResource BackgroundMediumBrush}"
-                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                        BorderBrush="{DynamicResource GlassBorderBrush}"
                                         BorderThickness="1"
                                         CornerRadius="4"
                                         Padding="6,2"
@@ -1298,13 +1258,13 @@
                              <StackPanel Visibility="{Binding HasDiff, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
                                  <TextBlock Text="Registry Value Comparison" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
                                  <UniformGrid Columns="2">
-                                     <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="4,0,0,4" Padding="8,6" BorderBrush="{DynamicResource BackgroundLightBrush}" BorderThickness="1,1,0,1">
+                                     <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="4,0,0,4" Padding="8,6" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1,1,0,1">
                                          <StackPanel>
                                               <TextBlock Text="CURRENT" FontSize="10" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" Margin="0,0,0,2"/>
                                               <TextBlock Text="{Binding CurrentValue}" Foreground="{DynamicResource CautionBrush}" FontSize="11" FontFamily="Consolas"/>
                                          </StackPanel>
                                      </Border>
-                                     <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="0,4,4,0" Padding="8,6" BorderBrush="{DynamicResource BackgroundLightBrush}" BorderThickness="1">
+                                     <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="0,4,4,0" Padding="8,6" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1">
                                          <StackPanel>
                                               <TextBlock Text="TARGET" FontSize="10" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" Margin="0,0,0,2"/>
                                               <TextBlock Text="{Binding TargetValue}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontFamily="Consolas"/>
@@ -1411,38 +1371,7 @@
                     </Border>
 	                            </StackPanel>
 	                        </Border>
-	                        <DataTemplate.Triggers>
-	                            <DataTrigger Binding="{Binding IsExpanded}" Value="True">
-	                                <DataTrigger.EnterActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-	                                            <DoubleAnimation Storyboard.TargetName="ExpanderIconRotate"
-	                                                             Storyboard.TargetProperty="Angle"
-	                                                             To="90"
-	                                                             Duration="0:0:0.2">
-	                                                <DoubleAnimation.EasingFunction>
-	                                                    <CubicEase EasingMode="EaseOut"/>
-	                                                </DoubleAnimation.EasingFunction>
-	                                            </DoubleAnimation>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </DataTrigger.EnterActions>
-	                                <DataTrigger.ExitActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-	                                            <DoubleAnimation Storyboard.TargetName="ExpanderIconRotate"
-	                                                             Storyboard.TargetProperty="Angle"
-	                                                             To="0"
-	                                                             Duration="0:0:0.2">
-	                                                <DoubleAnimation.EasingFunction>
-	                                                    <CubicEase EasingMode="EaseOut"/>
-	                                                </DoubleAnimation.EasingFunction>
-	                                            </DoubleAnimation>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </DataTrigger.ExitActions>
-	                            </DataTrigger>
-	                        </DataTemplate.Triggers>
+                        <!-- ExpanderIconRotate animation removed: rotation is handled inside ExpanderButtonStyle's own ControlTemplate via IsChecked trigger -->
                     </DataTemplate>
 
         <DataTemplate x:Key="TweakItemCompactTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
@@ -1591,7 +1520,7 @@
                                            FontWeight="SemiBold"/>
                             </Border>
                             <Border Background="{DynamicResource BackgroundMediumBrush}"
-                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                    BorderBrush="{DynamicResource GlassBorderBrush}"
                                     BorderThickness="1"
                                     CornerRadius="4"
                                     Padding="6,2"
@@ -1808,7 +1737,7 @@
                                                 <TextBlock Text="&#xE734;" FontFamily="Segoe MDL2 Assets" FontSize="13" Margin="0,0,8,0"/>
                                                 <TextBlock Text="Favorites"/>
                                                 <Border Background="{DynamicResource BackgroundMediumBrush}"
-                                                        BorderBrush="{DynamicResource BackgroundLightBrush}"
+                                                        BorderBrush="{DynamicResource GlassBorderBrush}"
                                                         BorderThickness="1"
                                                         CornerRadius="8"
                                                         Padding="6,1"
