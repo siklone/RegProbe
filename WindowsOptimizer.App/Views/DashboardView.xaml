@@ -3,867 +3,1067 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:WindowsOptimizer.App.Views"
-             mc:Ignorable="d"
-             d:DesignHeight="1200" d:DesignWidth="1100"
-             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
-             FontSize="12">
-    
+             xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
+             xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters"
+             xmlns:services="clr-namespace:WindowsOptimizer.App.Services"
+             mc:Ignorable="d">
     <UserControl.Resources>
+        <viewModels:ScoreToOffsetConverter x:Key="ScoreToOffsetConverter"/>
+        <converters:StringEmptyToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-        <local:PercentToWidthConverter x:Key="PercentToWidth"/>
-        <local:StringToVisibilityConverter x:Key="StringToVisibility"/>
         
-
+        <!-- Glassmorphism Stat Card -->
+        <Style x:Key="GlassStatCardStyle" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{DynamicResource Nord1}" Offset="0"/>
+                        <GradientStop Color="{DynamicResource Nord2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="0,0,16,16"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="{DynamicResource ShadowColorLarge}" BlurRadius="20" ShadowDepth="4" Opacity="0.3" Direction="270"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransform" Value="{StaticResource UiScaleTransform}"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=EnableCardShadows}" Value="False">
+                    <Setter Property="Effect" Value="{x:Null}"/>
+                </DataTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                           To="1.03" Duration="0:0:0.15">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                           To="1.03" Duration="0:0:0.15">
+                                <DoubleAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                           To="1.0" Duration="0:0:0.15"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                           To="1.0" Duration="0:0:0.15"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="StatValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="42"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+        </Style>
+        
+        <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+            <Setter Property="Margin" Value="0,6,0,0"/>
+        </Style>
+        
+        <Style x:Key="InfoCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BackgroundLightBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
     </UserControl.Resources>
-    
-    <Grid>
-        <!-- Loading Overlay -->
-        <Border Background="{DynamicResource BackgroundDarkestBrush}"
-                Panel.ZIndex="10"
-                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!-- Circular loading spinner ring -->
-                <Grid Width="80" Height="80" Margin="0,0,0,20">
-                    <!-- Background ring -->
-                    <Ellipse Stroke="{DynamicResource BackgroundLightBrush}" StrokeThickness="4"/>
-                    <!-- Animated arc ring -->
-                    <Ellipse Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="4"
-                             StrokeDashArray="3 5" StrokeDashCap="Round"
-                             RenderTransformOrigin="0.5,0.5">
-                        <Ellipse.RenderTransform>
-                            <RotateTransform x:Name="LoadingRotation" Angle="0"/>
-                        </Ellipse.RenderTransform>
-                        <Ellipse.Triggers>
-                            <EventTrigger RoutedEvent="Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimation Storyboard.TargetName="LoadingRotation"
-                                                         Storyboard.TargetProperty="Angle"
-                                                         From="0" To="360" Duration="0:0:1.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Ellipse.Triggers>
-                    </Ellipse>
-                    <!-- Center icon -->
-                    <TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="24"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                </Grid>
-                <TextBlock Text="Scanning Hardware..."
-                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                           FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                <TextBlock Text="Collecting system information"
-                           Foreground="{DynamicResource ForegroundLightBrush}"
-                           FontSize="12" Margin="0,6,0,0" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Border>
-        
-        <!-- Main Content -->
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-            <Grid Margin="6,4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/> <!-- Hero Section -->
-                    <RowDefinition Height="Auto"/> <!-- Primary Hardware Cards -->
-                    <RowDefinition Height="Auto"/> <!-- System & Board Info -->
-                    <RowDefinition Height="Auto"/> <!-- CPU, GPU & Memory Details -->
-                    <RowDefinition Height="Auto"/> <!-- Storage, Network, USB, Monitors -->
-                </Grid.RowDefinitions>
-                
-                <!-- ============================================== -->
-                <!-- HERO SECTION with System Overview Gauge         -->
-                <!-- ============================================== -->
-                <Border Grid.Row="0" Background="{DynamicResource CardSurfaceGradientBrush}"
-                        BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1"
-                        CornerRadius="16" Padding="20,14" Margin="0,0,0,10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
 
-                        <!-- Left: System Info Summary -->
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="System Overview"
-                                       FontSize="20" FontWeight="Bold"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                            <TextBlock Text="{Binding OsName}" 
-                                       FontSize="14" Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       Margin="0,6,0,0"/>
-                            <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0">
-                                <Run Text="{Binding ProcessorName, Mode=OneWay}"/>
-                            </TextBlock>
-                            <TextBlock FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,2,0,0">
-                                <Run Text="{Binding GpuDetails.Name, Mode=OneWay}"/>
-                            </TextBlock>
-                            
-                            <!-- Security badges row -->
-                            <WrapPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                <Border CornerRadius="6" Padding="8,4" Margin="0,0,8,0" BorderThickness="1">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="#1AF44336"/>
-                                            <Setter Property="BorderBrush" Value="#44F44336"/>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.IsDeferredScrollingEnabled="True"
+                  ScrollViewer.PanningMode="VerticalOnly"
+                  Background="{DynamicResource BackgroundDarkestBrush}">
+        <Grid Margin="32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header with Health Gauge -->
+            <Grid Grid.Row="0" Margin="0,0,0,32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Welcome back! 👋"
+                               FontSize="14"
+                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                               Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding Title}"
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                    <TextBlock Margin="0,8,0,0"
+                               Text="Monitor your system optimizations and track applied tweaks."
+                               Foreground="{DynamicResource ForegroundLightBrush}"
+                               FontSize="14"/>
+                    <!-- Action Buttons Row -->
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <!-- Scan Now Button -->
+                        <Button Command="{Binding ScanAllCommand}"
+                                Padding="20,12"
+                                Cursor="Hand"
+                                Margin="0,0,12,0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        CornerRadius="8"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource AccentBlueBrush}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="🔍"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding SecureBootState}" Value="On">
-                                                    <Setter Property="Background" Value="{DynamicResource SuccessSurfaceBrush}"/>
-                                                    <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding SecureBootState}" Value="True">
-                                                    <Setter Property="Background" Value="{DynamicResource SuccessSurfaceBrush}"/>
-                                                    <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                                                <DataTrigger Binding="{Binding IsScanning}" Value="True">
+                                                    <Setter Property="Text" Value="⏳"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Border.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="11" 
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Secure Boot" FontSize="11" FontWeight="SemiBold" 
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                    </StackPanel>
-                                </Border>
-
-                                <Border CornerRadius="6" Padding="8,4" Margin="0,0,8,0" 
-                                        Background="{DynamicResource SuccessSurfaceBrush}" 
-                                        BorderBrush="{DynamicResource SuccessBrush}" BorderThickness="1" 
-                                        Visibility="{Binding BiosMode, Converter={StaticResource StringToVisibility}}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="11" 
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                        <TextBlock Text="UEFI" FontSize="11" FontWeight="SemiBold" 
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                    </StackPanel>
-                                </Border>
-                                
-                                <Border CornerRadius="6" Padding="8,4" Margin="0,0,8,0"
-                                        Background="{DynamicResource SuccessSurfaceBrush}" 
-                                        BorderBrush="{DynamicResource SuccessBrush}" BorderThickness="1">
-                                    <TextBlock Text="TPM 2.0" FontSize="11" FontWeight="SemiBold" 
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                </Border>
-
-                                <Border CornerRadius="6" Padding="8,4" Background="#11FFFFFF" BorderBrush="#33FFFFFF" BorderThickness="1">
-                                    <TextBlock Text="HVCI" FontSize="11" FontWeight="SemiBold" Foreground="#AAA"/>
-                                </Border>
-                            </WrapPanel>
-                        </StackPanel>
-
-                        <!-- Right: Circular Gauge -->
-                        <Grid Grid.Column="1" Width="120" Height="120" Margin="16,0,0,0">
-                            <!-- Outer glow ring -->
-                            <Ellipse Width="120" Height="120" StrokeThickness="2" 
-                                     Stroke="{DynamicResource GlowCyanSubtleBrush}"/>
-                            <!-- Background ring -->
-                            <Ellipse Width="100" Height="100" StrokeThickness="5" 
-                                     Stroke="{DynamicResource BackgroundLightBrush}"
-                                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <!-- Active ring arc (simulated with DashArray) -->
-                            <Ellipse Width="100" Height="100" StrokeThickness="5" 
-                                     Stroke="{DynamicResource AccentBrightCyanBrush}"
-                                     StrokeDashArray="2.4 0.75" StrokeDashCap="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                                     RenderTransformOrigin="0.5,0.5">
-                                <Ellipse.RenderTransform>
-                                    <RotateTransform Angle="-90"/>
-                                </Ellipse.RenderTransform>
-                            </Ellipse>
-                            <!-- Center content -->
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="18"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center"/>
-                                <TextBlock Text="READY" FontSize="12" FontWeight="Bold"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center" FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Scan Now"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsScanning}" Value="True">
+                                                    <Setter Property="Text" Value="Scanning..."/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
-                        </Grid>
+                        </Button>
+
+                        <!-- Create Restore Point Button -->
+                        <Button Command="{Binding CreateRestorePointCommand}"
+                                Padding="20,12"
+                                Cursor="Hand"
+                                ToolTip="Create a system restore point before applying tweaks">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundOnLightAccentBrush}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        CornerRadius="8"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="💾" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="Create Restore Point"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsCreatingRestorePoint}" Value="True">
+                                                    <Setter Property="Text" Value="Creating..."/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- Restore Point Status Message -->
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0"
+                                Visibility="{Binding RestorePointStatusMessage, Converter={StaticResource StringToVisibilityConverter}}">
+                        <TextBlock Text="{Binding RestorePointStatusMessage}"
+                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"/>
+                        <!-- Enable VSS Button -->
+                        <Button Command="{Binding EnableVssCommand}"
+                                Padding="8,4"
+                                Margin="12,0,0,0"
+                                Cursor="Hand"
+                                Visibility="{Binding VssServiceNeedsEnable, Converter={StaticResource BoolToVisibility}}"
+                                ToolTip="Click to start the Volume Shadow Copy service. This requires administrator privileges and will prompt for elevation.">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="{DynamicResource CautionBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundOnLightAccentBrush}"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                                                        CornerRadius="4"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource WarningBrush}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <TextBlock Text="Enable VSS" FontSize="11" FontWeight="SemiBold"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <CheckBox IsChecked="{Binding IsFullScanEnabled}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,12,0">
+                            <TextBlock Text="Full scan" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}"/>
+                        </CheckBox>
+                        <TextBlock Text="{Binding ScanModeHint}"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,12,0,0">
+                        <TextBlock Text="{Binding ScanStatusText}"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="12"/>
+                        <TextBlock Text="{Binding ScanDetailText}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="11"
+                                   TextWrapping="Wrap"
+                                   Margin="0,2,0,6"/>
+                        <ProgressBar Height="6"
+                                     Minimum="0"
+                                     Maximum="100"
+                                     Value="{Binding ScanProgressPercent, Mode=OneWay}"
+                                     IsIndeterminate="{Binding IsScanIndeterminate}"
+                                     Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
+                                    Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="Progress:"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="10"
+                                       Margin="0,0,6,0"/>
+                            <TextBlock Text="{Binding ScanProgressText}"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       FontSize="10"/>
+                        </StackPanel>
+                        <UniformGrid Columns="4" Margin="0,8,0,0"
+                                     Visibility="{Binding HasLastScanSummary, Converter={StaticResource BoolToVisibility}}">
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Detected" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanDetected}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Applied" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanApplied}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource SuccessBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8" Margin="0,0,6,0">
+                                <StackPanel>
+                                    <TextBlock Text="Skipped" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanSkipped}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource WarningBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="8">
+                                <StackPanel>
+                                    <TextBlock Text="Duration" FontSize="9" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding LastScanDurationText}" FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                </StackPanel>
+                            </Border>
+                        </UniformGrid>
+                        <TextBlock Text="{Binding LastScanSummary}"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="11"
+                                   Margin="0,6,0,0"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding LastScanTimestamp}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding LastScanMode, StringFormat=Mode: {0}}"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="10"
+                                   Visibility="{Binding HasLastScanSummary, Converter={StaticResource BoolToVisibility}}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
+                                    Visibility="{Binding HasScanSkipped, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="{Binding ScanSkippedSummary}"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       FontSize="11"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"/>
+                            <Button Command="{Binding RunFullScanCommand}"
+                                    Margin="10,0,0,0"
+                                    Padding="12,6"
+                                    Background="{DynamicResource AccentDarkBlueBrush}"
+                                    Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                    BorderThickness="0"
+                                    Cursor="Hand">
+                                <TextBlock Text="Run Full Scan" FontSize="11" FontWeight="SemiBold"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+	                <!-- Circular Gauges Stack -->
+	                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="24,0,0,0" HorizontalAlignment="Right">
+                        
+                        <!-- Health Gauge -->
+	                    <Grid Width="140" Height="140" VerticalAlignment="Center" ToolTip="{Binding OptimizationScoreDetails}">
+                            <!-- Background Track -->
+                            <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Source="100" /> 
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            
+                            <!-- Optimization Score Progress -->
+	                        <Path Stroke="{DynamicResource AccentBrightCyanBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Path="OptimizationScore" />
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                                <Path.Effect>
+                                    <DropShadowEffect Color="{DynamicResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.3"/>
+                                </Path.Effect>
+                            </Path>
+                        
+	                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+	                            <TextBlock Text="{Binding OptimizationScore, StringFormat={}{0}%}" 
+	                                       FontSize="28" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}" HorizontalAlignment="Center"/>
+	                            <TextBlock Text="Health" FontSize="11" Foreground="{DynamicResource AccentBrightCyanBrush}" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+	                        </StackPanel>
+	                    </Grid>
+
+                        <!-- Tweaks Applied Gauge -->
+	                    <Grid Width="140" Height="140" Margin="24,0,0,0" VerticalAlignment="Center" ToolTip="Total verified tweaks applied vs available">
+                            <!-- Background Track -->
+                            <Path Stroke="{DynamicResource BackgroundDarkBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Source="100" /> 
+                                        <Binding Source="100" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                            </Path>
+                            
+                            <!-- Applied Progress -->
+	                        <Path Stroke="{DynamicResource SuccessBrush}" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                <Path.RenderTransform>
+                                    <TranslateTransform X="10" Y="10"/>
+                                </Path.RenderTransform>
+                                <Path.Data>
+                                    <MultiBinding Converter="{StaticResource ArcConverter}">
+                                        <Binding Path="TweaksApplied" />
+                                        <Binding Path="TotalTweaksAvailable" />
+                                        <Binding Source="60" />
+                                    </MultiBinding>
+                                </Path.Data>
+                                <Path.Effect>
+                                    <DropShadowEffect Color="{DynamicResource Nord14}" BlurRadius="12" ShadowDepth="0" Opacity="0.3"/>
+                                </Path.Effect>
+                            </Path>
+                        
+	                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding TweaksApplied}" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <TextBlock Text="/" FontSize="16" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="2,0,2,5"/>
+                                    <TextBlock Text="{Binding TotalTweaksAvailable}" FontSize="16" Foreground="{DynamicResource MutedForegroundBrush}" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                                </StackPanel>
+	                            <TextBlock Text="Tweaks Applied" FontSize="11" Foreground="{DynamicResource SuccessBrush}" HorizontalAlignment="Center" Margin="0,-2,0,0"/>
+	                        </StackPanel>
+	                    </Grid>
+	                    
+	                </StackPanel>
+            </Grid>
+
+            <!-- System Information Card -->
+            <Border Grid.Row="1" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,24">
+                <StackPanel>
+                    <TextBlock Text="💻 System Information" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
+
+                    <UniformGrid Columns="3">
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,10,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="OS:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding OsVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" FontWeight="Medium" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Display:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding OsDisplayVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Build:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OsBuild}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Arch:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SystemArchitecture}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,10,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="CPU Model:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="CPU Threads:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProcessorCount}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Total RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TotalMemoryFormatted}" Foreground="{DynamicResource SuccessBrush}" FontSize="11" FontWeight="Medium"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Free RAM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AvailableMemoryFormatted}" Foreground="{DynamicResource CautionBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Machine:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MachineName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="User:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding UserName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Uptime:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SystemUptime}" Foreground="{DynamicResource InfoBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text=".NET:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding DotNetVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+                    
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,10,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="GPU:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GpuName}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Boot Disk:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PrimaryDiskType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Firmware:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding FirmwareType}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Secure Boot:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SecureBootStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Virtualization:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VirtualizationStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="TPM:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TpmStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="0,0,10,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="BIOS/UEFI:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding BiosVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Motherboard:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding BaseboardModel}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+                                <Button Grid.Row="1" Grid.Column="2"
+                                        Command="{Binding OpenMotherboardDetailCommand}"
+                                        Padding="8,2"
+                                        Margin="8,0,0,4"
+                                        Background="{DynamicResource BackgroundLightBrush}"
+                                        Foreground="{DynamicResource ForegroundLightBrush}"
+                                        BorderThickness="0"
+                                        Cursor="Hand">
+                                    <TextBlock Text="Details" FontSize="10" FontWeight="SemiBold"/>
+                                </Button>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="GPU Driver:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GpuDriverVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11" TextTrimming="CharacterEllipsis"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Windows Update:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,4"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding WindowsUpdateStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="BitLocker:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,0,12,0"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding BitLockerStatus}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="11"/>
+                            </Grid>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- System Status -->
+            <Border Grid.Row="2" Style="{StaticResource InfoCardStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="🖥️ System Status"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,12,0,0">
+                        <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0">
+                            <TextBlock Text="{Binding ElevationStatus}" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11" FontWeight="Medium"/>
+                        </Border>
+                        <!-- Boot Duration Info -->
+                        <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                ToolTip="{Binding BootMetricsStatusMessage}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⏱️" Margin="0,0,4,0"/>
+                                <TextBlock Text="Boot Duration:" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding BootDurationBadgeValue}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <!-- Last Boot Time -->
+                        <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                ToolTip="{Binding BootTimeTooltip}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🕒" Margin="0,0,4,0"/>
+                                <TextBlock Text="Last Boot:" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding LastBootTimeFormatted}" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Command="{Binding EnableBootMetricsCommand}"
+                                Padding="10,4"
+                                Margin="0,0,8,0"
+                                Background="{DynamicResource BackgroundLightBrush}"
+                                Foreground="{DynamicResource ForegroundLightBrush}"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Visibility="{Binding CanEnableBootMetrics, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock Text="Enable Boot Metrics" FontSize="10" FontWeight="SemiBold"/>
+                        </Button>
+                        <Border Background="{DynamicResource SuccessBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0"
+                                ToolTip="Average boot time from history"
+                                Visibility="{Binding HasBootTimeHistory, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📊" Margin="0,0,4,0"/>
+                                <TextBlock Text="Avg:" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
+                                <TextBlock Text="{Binding AverageBootDurationFormatted}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold" Margin="4,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <Border CornerRadius="4" Padding="8,4"
+                                ToolTip="Boot time improvement since first measurement"
+                                Visibility="{Binding HasBootTimeImprovement, Converter={StaticResource BoolToVisibility}}">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🚀" Margin="0,0,4,0"/>
+                                <TextBlock Text="{Binding BootTimeImprovementFormatted}" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11" FontWeight="Bold"/>
+                                <TextBlock Text=" faster" Foreground="{DynamicResource ForegroundOnLightAccentBrush}" FontSize="11"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <Border Grid.Row="1" Grid.Column="1"
+                            Background="{DynamicResource BackgroundMediumBrush}"
+                            CornerRadius="6"
+                            Padding="12,8"
+                            Margin="12,12,0,0"
+                            VerticalAlignment="Top"
+                            Visibility="{Binding ShowPreviewHint, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="💡" FontSize="16" Margin="0,0,8,0"/>
+                            <TextBlock Text="Use Preview mode to test changes safely"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Recent Activity Timeline -->
+            <Border Grid.Row="3" Style="{StaticResource InfoCardStyle}" Margin="0,0,0,16"
+                    Visibility="{Binding HasRecentActivity, Converter={StaticResource BoolToVisibility}}">
+                <StackPanel>
+                    <Grid Margin="0,0,0,12">
+                        <TextBlock Text="📋 Recent Activity" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                        <Button Command="{Binding RefreshActivityCommand}"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="8,4"
+                                ToolTip="Refresh activity timeline">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                                        <TextBlock Text="🔄" FontSize="14"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </Grid>
+
+                    <ScrollViewer MaxHeight="300"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.IsDeferredScrollingEnabled="True"
+                                  ScrollViewer.CanContentScroll="True">
+                        <ItemsControl ItemsSource="{Binding RecentActivity}"
+                                      VirtualizingStackPanel.IsVirtualizing="True"
+                                      VirtualizingStackPanel.VirtualizationMode="Recycling">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="12,8" Margin="0,0,0,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Action Icon -->
+                                        <Border Grid.Column="0" Width="28" Height="28" CornerRadius="14" Margin="0,0,12,0"
+                                                Background="{Binding StatusColor}">
+                                            <TextBlock Text="{Binding ActionIcon}"
+                                                       FontSize="12"
+                                                       Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Tweak Info -->
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TweakName}"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       FontSize="12"
+                                                       FontWeight="Medium"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                <TextBlock Text="{Binding Action}"
+                                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                           FontSize="10"/>
+                                                <TextBlock Text=" • "
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                                           FontSize="10"/>
+                                                <TextBlock Text="{Binding Message}"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           MaxWidth="300"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Time + Link -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TimeAgo}"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       FontSize="10"
+                                                       VerticalAlignment="Center"
+                                                       ToolTip="{Binding TimestampFormatted}"/>
+                                            <Button Command="{Binding DataContext.OpenActivityLinkCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Padding="6,2"
+                                                    Margin="6,0,0,0"
+                                                    ToolTip="Open linked file"
+                                                    Visibility="{Binding HasLink, Converter={StaticResource BoolToVisibility}}">
+                                                <TextBlock Text="↗" FontSize="12" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+
+            <!-- Quick Actions Grid -->
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Quick Categories Card -->
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource InfoCardStyle}" Margin="0,0,8,16">
+                    <StackPanel>
+                        <TextBlock Text="🎯 Quick Categories" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
+
+                        <Button Command="{Binding NavigateToPrivacyCommand}" Cursor="Hand" Margin="0,0,0,6">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🔒" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Privacy" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="12"/>
+                                                <TextBlock Text="Telemetry, tracking" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToPowerCommand}" Cursor="Hand" Margin="0,0,0,6">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="⚡" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Performance" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="12"/>
+                                                <TextBlock Text="Power, CPU, services" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToNetworkCommand}" Cursor="Hand" Margin="0,0,0,6">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🌐" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Network" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="12"/>
+                                                <TextBlock Text="DNS, TCP/IP, Wi-Fi" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToSecurityCommand}" Cursor="Hand" Margin="0,0,0,6">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🛡️" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Security" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="12"/>
+                                                <TextBlock Text="UAC, Firewall, updates" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToExplorerCommand}" Cursor="Hand" Margin="0,0,0,6">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="📁" FontSize="14" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Explorer" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="12"/>
+                                                <TextBlock Text="File manager, shell" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="10"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Command="{Binding NavigateToAllTweaksCommand}" Cursor="Hand" Margin="0,4,0,0">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="Bd" Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="6" Padding="10">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="View All Tweaks →" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundOnAccentBrush}" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource AccentBlueBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
                 </Border>
 
-                <!-- ============================================== -->
-                <!-- ROW 1: PRIMARY HARDWARE CARDS (5 clickable)    -->
-                <!-- Shows MAIN names: OS Name, CPU Name, etc.      -->
-                <!-- ============================================== -->
-                <UniformGrid Grid.Row="1" Columns="5" Margin="0,0,0,8">
-                    <!-- OS - Shows OS Name like "Windows 11" -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="os">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Operating System" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding OsName}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Border>
+                <!-- Safety & Shortcuts Card -->
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InfoCardStyle}" Margin="8,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="🛡️ Safety &amp; Shortcuts" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,12"/>
 
-                    <!-- CPU - Shows CPU Name like "AMD Ryzen 9..." -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="cpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Processor" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding ProcessorName}" 
-                                       Foreground="{DynamicResource AccentBlueBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis" 
-                                       ToolTip="{Binding ProcessorName}"/>
-                        </StackPanel>
-                    </Border>
+                        <!-- Tweak Lifecycle -->
+                        <Border Background="{DynamicResource SuccessSurfaceBrush}" CornerRadius="8" Padding="12" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Tweak Lifecycle:" Foreground="{DynamicResource SuccessBrush}" FontWeight="SemiBold" FontSize="11"/>
+                                <WrapPanel Margin="0,6,0,0">
+                                    <Border Background="{DynamicResource SuccessSurfaceAltBrush}" CornerRadius="4" Padding="6,3" Margin="0,0,4,4">
+                                        <TextBlock Text="Preview" Foreground="{DynamicResource SuccessBrush}" FontSize="10"/>
+                                    </Border>
+                                    <Border Background="{DynamicResource SuccessSurfaceAltBrush}" CornerRadius="4" Padding="6,3" Margin="0,0,4,4">
+                                        <TextBlock Text="Apply" Foreground="{DynamicResource SuccessBrush}" FontSize="10"/>
+                                    </Border>
+                                    <Border Background="{DynamicResource SuccessSurfaceAltBrush}" CornerRadius="4" Padding="6,3" Margin="0,0,4,4">
+                                        <TextBlock Text="Verify" Foreground="{DynamicResource SuccessBrush}" FontSize="10"/>
+                                    </Border>
+                                    <Border Background="{DynamicResource SuccessSurfaceAltBrush}" CornerRadius="4" Padding="6,3" Margin="0,0,0,4">
+                                        <TextBlock Text="Rollback" Foreground="{DynamicResource SuccessBrush}" FontSize="10"/>
+                                    </Border>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
 
-                    <!-- Memory - Shows Size -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="memory">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.Size}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Border>
+                        <!-- Keyboard Shortcuts -->
+                        <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="8" Padding="12" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="⌨️ Keyboard Shortcuts:" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="SemiBold" FontSize="11" Margin="0,0,0,6"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                    <!-- GPU - Shows GPU Name like "GeForce RTX 5070" -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="gpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Graphics Card" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding GpuDetails.Name}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding GpuDetails.Name}"/>
-                        </StackPanel>
-                    </Border>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="3" Padding="4,2" Margin="0,0,8,3">
+                                        <TextBlock Text="Ctrl+Z" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="9" FontFamily="Consolas"/>
+                                    </Border>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Undo last action" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" VerticalAlignment="Center"/>
 
-                    <!-- Motherboard - Shows Board Name -->
-                    <Border Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="motherboard">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xEC7A;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Motherboard" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding BaseboardProduct}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="11" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding BaseboardProduct}"/>
-                        </StackPanel>
-                    </Border>
-                </UniformGrid>
+                                    <Border Grid.Row="1" Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="3" Padding="4,2" Margin="0,0,8,3">
+                                        <TextBlock Text="Ctrl+F" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="9" FontFamily="Consolas"/>
+                                    </Border>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Search tweaks" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" VerticalAlignment="Center"/>
 
-                <!-- ============================================== -->
-                <!-- ROW 2: SYSTEM INFO (5 clickable)               -->
-                <!-- Shows: PC Name, OS Build, System Type, etc.    -->
-                <!-- ============================================== -->
-                <UniformGrid Grid.Row="2" Columns="5" Margin="0,0,0,8">
-                    <!-- Computer Name -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="system">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Computer Name" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding SystemName}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="14" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Border>
+                                    <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="3" Padding="4,2" Margin="0,0,8,3">
+                                        <TextBlock Text="Ctrl+A" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="9" FontFamily="Consolas"/>
+                                    </Border>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Select all visible" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" VerticalAlignment="Center"/>
 
-                    <!-- OS Build -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="os">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="OS Build" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding OsBuild}" 
-                                       Foreground="{DynamicResource AccentBlueBrush}" 
-                                       FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Border>
+                                    <Border Grid.Row="3" Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="3" Padding="4,2" Margin="0,0,8,3">
+                                        <TextBlock Text="Ctrl+D" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="9" FontFamily="Consolas"/>
+                                    </Border>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Detect selected" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" VerticalAlignment="Center"/>
 
-                    <!-- System Model -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="system">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7F4;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="System Model" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding SystemModel}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"
-                                       ToolTip="{Binding SystemModel}"/>
-                        </StackPanel>
-                    </Border>
+                                    <Border Grid.Row="4" Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="3" Padding="4,2" Margin="0,0,8,0">
+                                        <TextBlock Text="F5" Foreground="{DynamicResource ForegroundBrightestBrush}" FontSize="9" FontFamily="Consolas"/>
+                                    </Border>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="Refresh view" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
 
-                    <!-- BIOS Mode -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="system">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
+                        <!-- Safety Points -->
                         <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="BIOS Mode" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding BiosMode}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="14" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Uptime -->
-                    <Border Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="os">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Uptime" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding Uptime}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="12" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Border>
-                </UniformGrid>
-
-                <!-- ============================================== -->
-                <!-- ROW 3: SPECS & PERFORMANCE (5 clickable)       -->
-                <!-- Shows: CPU Speed, Cores, RAM Type/Speed, etc.  -->
-                <!-- ============================================== -->
-                <UniformGrid Grid.Row="3" Columns="5" Margin="0,0,0,8">
-                    <!-- CPU Speed -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="cpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="CPU Speed" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding ProcessorSpeed}" 
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- CPU Cores/Threads -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="cpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE950;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Cores / Threads" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="12" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} / {1}">
-                                        <Binding Path="ProcessorCores"/>
-                                        <Binding Path="ProcessorThreads"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
+                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap">
+                                <Run Text="✓" Foreground="{DynamicResource SuccessBrush}"/> Logged &amp; reversible
+                            </TextBlock>
+                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap" Margin="0,3,0,0">
+                                <Run Text="✓" Foreground="{DynamicResource SuccessBrush}"/> Elevated via ElevatedHost
+                            </TextBlock>
+                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap" Margin="0,3,0,0">
+                                <Run Text="✓" Foreground="{DynamicResource SuccessBrush}"/> Command allowlist
                             </TextBlock>
                         </StackPanel>
-                    </Border>
-
-                    <!-- RAM Type & Channels -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="memory">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE964;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="RAM Type" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.Type}" 
-                                       Foreground="{DynamicResource AccentPurpleBrush}" 
-                                       FontSize="13" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- GPU Memory -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="gpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="GPU Memory" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding GpuDetails.MemorySize}" 
-                                       Foreground="{DynamicResource SuccessBrush}" 
-                                       FontSize="14" FontWeight="Bold"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- RAM Speed -->
-                    <Border Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="memory">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricOrangeSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource WarningBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="RAM Frequency" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Text="{Binding MemoryDetails.DRAMFrequency}" 
-                                       Foreground="{DynamicResource WarningBrush}" 
-                                       FontSize="13" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
-                    </Border>
-                </UniformGrid>
-
-                <!-- ============================================== -->
-                <!-- ROW 4: STORAGE, NETWORK, USB, MONITORS         -->
-                <!-- ============================================== -->
-                <UniformGrid Grid.Row="4" Columns="4" Margin="0,0,0,8">
-                    <!-- Drives -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="disk">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricCyanSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xEDA2;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Storage Drives" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="DiskDrives.Count" StringFormat="{}{0} Drives"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Network -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="network">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricBlueSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE968;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentBlueBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Network" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentBlueBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="NetworkAdapters.Count" StringFormat="{}{0} Adapters"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- USB -->
-                    <Border Margin="0,0,6,0"
-                            Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="usb">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricPurpleSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE88E;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource AccentPurpleBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="USB Devices" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource AccentPurpleBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="UsbDevices.Count" StringFormat="{}{0} Devices"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Monitors -->
-                    <Border Background="{DynamicResource BackgroundDarkBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="12"
-                            Padding="10"
-                            Cursor="Hand"
-                            MouseLeftButtonDown="OnCardClick"
-                            Tag="gpu">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource GlowCyanSubtleBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <Border Width="24" Height="24" CornerRadius="6" 
-                                    Background="{DynamicResource MetricGreenSurfaceBrush}" HorizontalAlignment="Left" Margin="0,0,0,6">
-                                <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="12"
-                                           Foreground="{DynamicResource SuccessBrush}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Displays" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11"/>
-                            <TextBlock Foreground="{DynamicResource SuccessBrush}" FontSize="16" FontWeight="Bold">
-                                <TextBlock.Text>
-                                    <Binding Path="Monitors.Count" StringFormat="{}{0} Monitors"/>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Border>
-                </UniformGrid>
+                    </StackPanel>
+                </Border>
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
