@@ -54,14 +54,14 @@ jobs:
         run: dotnet test -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: test-results
           path: TestResults/*.trx
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: coverage-report
@@ -132,7 +132,7 @@ jobs:
           Write-Host "✓ WindowsOptimizer.App.exe verified at $appPath"
 
       - name: Upload publish artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: WindowsOptimizer-${{ github.sha }}
           path: publish/
