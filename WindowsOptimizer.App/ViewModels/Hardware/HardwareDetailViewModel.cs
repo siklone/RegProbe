@@ -1,1153 +1,762 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using WindowsOptimizer.Infrastructure.Hardware;
-using WindowsOptimizer.Infrastructure.Threading;
+using WindowsOptimizer.App.HardwareDb;
+using WindowsOptimizer.App.Services;
+using WindowsOptimizer.App.ViewModels;
 
 namespace WindowsOptimizer.App.ViewModels.Hardware;
 
 public enum HardwareType
 {
+    Os,
     Cpu,
     Gpu,
-    Ram,
-    Disk,
     Motherboard,
-    OperatingSystem,
-    SystemBios,
+    Memory,
+    Storage,
+    Displays,
     Network,
     Usb
 }
 
-public sealed class HardwareDetailViewModel : INotifyPropertyChanged, IDisposable
+public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 {
-    private readonly MetricDataBus? _bus;
-    private readonly HardwareType _type;
-    private readonly HardwareSpecsService _specsService = new();
-    private bool _isDisposed;
-    private double? _ramTotalGb;
-    private double? _ramUsedGb;
-    private double? _ramAvailableGb;
-    private double? _diskReadBytes;
-    private double? _diskWriteBytes;
+    private string _title = string.Empty;
+    private string _subtitle = string.Empty;
+    private string _iconKey = string.Empty;
+    private ImageSource _iconSource = HardwareIconResolver.ResolveIcon("display_generic", "display_generic");
+    private bool _isLoading;
+    private string _loadingStatus = "Loading system data...";
+    private Func<HardwareDetailSnapshot, HardwareDetailPayload>? _collector;
+    private bool _subscribedToUpdates;
 
-    private string _windowTitle = "Hardware Details";
-    private string _icon = "";
-    private Brush _iconBackground = Brushes.Gray;
-    private string _title = "";
-    private string _subtitle = "";
-    private string _primaryValue = "--";
-    private string _primaryUnit = "";
-    private Brush _primaryValueColor = Brushes.White;
-    private Brush _statusColor = Brushes.LimeGreen;
-    private string _statusText = "OK";
-
-    private string _stat1Label = "";
-    private string _stat1Value = "";
-    private string _stat2Label = "";
-    private string _stat2Value = "";
-    private string _stat3Label = "";
-    private string _stat3Value = "";
-    private string _stat4Label = "";
-    private string _stat4Value = "";
-
-    private string _subItemsHeader = "";
-    private string _footerText = "";
-
-    public HardwareDetailViewModel(HardwareType type, MetricDataBus? bus = null)
+    protected HardwareDetailViewModelBase(HardwareType hardwareType)
     {
-        _type = type;
-        _bus = bus;
-
-        CloseCommand = new RelayCommand(param =>
+        HardwareType = hardwareType;
+        CloseCommand = new RelayCommand(parameter =>
         {
-            if (param is Window window)
+            if (parameter is Window window)
             {
                 window.Close();
             }
         });
-
-        InitializeView(type);
-
-        if (_bus != null)
-        {
-            _bus.MetricsUpdated += OnMetricsUpdated;
-        }
-
-        _ = LoadHardwareDetailsAsync(type);
     }
 
-    /// <summary>
-    /// Creates a pre-populated detail view (used by Dashboard where WMI data is already loaded).
-    /// Pass specs directly instead of re-querying WMI.
-    /// </summary>
-    public HardwareDetailViewModel(
-        HardwareType type,
-        string subtitle,
-        IEnumerable<KeyValuePair<string, string>> specifications,
-        IEnumerable<KeyValuePair<string, string>>? details = null,
-        IEnumerable<SubItemViewModel>? subItems = null,
-        string? subItemsHeader = null,
-        string? primaryValue = null,
-        string? primaryUnit = null)
-    {
-        _type = type;
-
-        CloseCommand = new RelayCommand(param =>
-        {
-            if (param is Window window)
-            {
-                window.Close();
-            }
-        });
-
-        InitializeView(type);
-
-        Subtitle = subtitle;
-        if (primaryValue != null) PrimaryValue = primaryValue;
-        if (primaryUnit != null) PrimaryUnit = primaryUnit;
-
-        Specifications.Clear();
-        foreach (var kvp in specifications)
-            Specifications.Add(kvp);
-
-        if (details != null)
-        {
-            Details.Clear();
-            foreach (var kvp in details)
-                Details.Add(kvp);
-        }
-
-        if (subItems != null)
-        {
-            SubItems.Clear();
-            foreach (var item in subItems)
-                SubItems.Add(item);
-        }
-
-        SubItemsHeader = subItemsHeader ?? string.Empty;
-        OnPropertyChanged(nameof(HasDetails));
-        OnPropertyChanged(nameof(HasSubItems));
-        FooterText = $"Data collected at {DateTime.Now:HH:mm:ss}";
-    }
-
-    #region Properties
-
-    public string WindowTitle
-    {
-        get => _windowTitle;
-        private set => SetProperty(ref _windowTitle, value);
-    }
-
-    public string Icon
-    {
-        get => _icon;
-        private set => SetProperty(ref _icon, value);
-    }
-
-    public Brush IconBackground
-    {
-        get => _iconBackground;
-        private set => SetProperty(ref _iconBackground, value);
-    }
+    public HardwareType HardwareType { get; }
 
     public string Title
     {
         get => _title;
-        private set => SetProperty(ref _title, value);
+        protected set => SetProperty(ref _title, value);
     }
 
     public string Subtitle
     {
         get => _subtitle;
-        private set => SetProperty(ref _subtitle, value);
+        protected set => SetProperty(ref _subtitle, value);
     }
 
-    public string PrimaryValue
+    public ImageSource IconSource
     {
-        get => _primaryValue;
-        private set => SetProperty(ref _primaryValue, value);
+        get => _iconSource;
+        protected set => SetProperty(ref _iconSource, value);
     }
 
-    public string PrimaryUnit
+    public string IconKey
     {
-        get => _primaryUnit;
-        private set => SetProperty(ref _primaryUnit, value);
+        get => _iconKey;
+        protected set => SetProperty(ref _iconKey, value);
     }
 
-    public Brush PrimaryValueColor
+    public ObservableCollection<KeyValuePair<string, string>> SpecsCollection { get; } = new();
+
+    public ObservableCollection<int> SkeletonRows { get; } = new() { 1, 2, 3, 4, 5, 6 };
+
+    public bool IsLoading
     {
-        get => _primaryValueColor;
-        private set => SetProperty(ref _primaryValueColor, value);
+        get => _isLoading;
+        protected set => SetProperty(ref _isLoading, value);
     }
 
-    public Brush StatusColor
+    public string LoadingStatus
     {
-        get => _statusColor;
-        private set => SetProperty(ref _statusColor, value);
-    }
-
-    public string StatusText
-    {
-        get => _statusText;
-        private set => SetProperty(ref _statusText, value);
-    }
-
-    public string Stat1Label
-    {
-        get => _stat1Label;
-        private set => SetProperty(ref _stat1Label, value);
-    }
-
-    public string Stat1Value
-    {
-        get => _stat1Value;
-        private set => SetProperty(ref _stat1Value, value);
-    }
-
-    public string Stat2Label
-    {
-        get => _stat2Label;
-        private set => SetProperty(ref _stat2Label, value);
-    }
-
-    public string Stat2Value
-    {
-        get => _stat2Value;
-        private set => SetProperty(ref _stat2Value, value);
-    }
-
-    public string Stat3Label
-    {
-        get => _stat3Label;
-        private set => SetProperty(ref _stat3Label, value);
-    }
-
-    public string Stat3Value
-    {
-        get => _stat3Value;
-        private set => SetProperty(ref _stat3Value, value);
-    }
-
-    public string Stat4Label
-    {
-        get => _stat4Label;
-        private set => SetProperty(ref _stat4Label, value);
-    }
-
-    public string Stat4Value
-    {
-        get => _stat4Value;
-        private set => SetProperty(ref _stat4Value, value);
-    }
-
-    public ObservableCollection<KeyValuePair<string, string>> Specifications { get; } = new();
-    public ObservableCollection<KeyValuePair<string, string>> Details { get; } = new();
-    public ObservableCollection<SubItemViewModel> SubItems { get; } = new();
-
-    public bool HasDetails => Details.Count > 0;
-    public bool HasSubItems => SubItems.Count > 0;
-
-    public string SubItemsHeader
-    {
-        get => _subItemsHeader;
-        private set => SetProperty(ref _subItemsHeader, value);
-    }
-
-    public string FooterText
-    {
-        get => _footerText;
-        private set => SetProperty(ref _footerText, value);
+        get => _loadingStatus;
+        protected set => SetProperty(ref _loadingStatus, value);
     }
 
     public ICommand CloseCommand { get; }
 
-    #endregion
-
-    private void InitializeView(HardwareType type)
+    protected void SetSpecs(IEnumerable<KeyValuePair<string, string>> specs)
     {
-        switch (type)
+        SpecsCollection.Clear();
+        foreach (var item in specs)
         {
-            case HardwareType.Cpu:
-                WindowTitle = "CPU Details";
-                Icon = "\uE950"; // MDL2: Processor
-                IconBackground = new SolidColorBrush(Color.FromRgb(59, 130, 246));
-                Title = "CPU";
-                PrimaryUnit = "%";
-                StatusText = "Active";
-                break;
-            case HardwareType.Gpu:
-                WindowTitle = "GPU Details";
-                Icon = "\uE7FC"; // MDL2: Game
-                IconBackground = new SolidColorBrush(Color.FromRgb(34, 197, 94));
-                Title = "GPU";
-                PrimaryUnit = "%";
-                StatusText = "Active";
-                break;
-            case HardwareType.Ram:
-                WindowTitle = "RAM Details";
-                Icon = "\uE964"; // MDL2: Memory
-                IconBackground = new SolidColorBrush(Color.FromRgb(168, 85, 247));
-                Title = "Memory";
-                PrimaryUnit = "%";
-                StatusText = "Active";
-                break;
-            case HardwareType.Disk:
-                WindowTitle = "Storage Details";
-                Icon = "\uEDA2"; // MDL2: HardDrive
-                IconBackground = new SolidColorBrush(Color.FromRgb(249, 115, 22));
-                Title = "Storage";
-                PrimaryUnit = "% used";
-                StatusText = "Healthy";
-                break;
-            case HardwareType.Motherboard:
-                WindowTitle = "Motherboard Details";
-                Icon = "\uEC7A"; // MDL2: DeveloperTools
-                IconBackground = new SolidColorBrush(Color.FromRgb(236, 72, 153));
-                Title = "Motherboard";
-                PrimaryUnit = "";
-                StatusText = "Detected";
-                break;
-            case HardwareType.OperatingSystem:
-                WindowTitle = "Operating System";
-                Icon = "\uE770"; // MDL2: Laptop
-                IconBackground = new SolidColorBrush(Color.FromRgb(136, 192, 208)); // Nord8 Cyan
-                Title = "Operating System";
-                PrimaryUnit = "";
-                StatusText = "Running";
-                break;
-            case HardwareType.SystemBios:
-                WindowTitle = "System & BIOS";
-                Icon = "\uE7F8"; // MDL2: Settings
-                IconBackground = new SolidColorBrush(Color.FromRgb(129, 161, 193)); // Nord9
-                Title = "System & BIOS";
-                PrimaryUnit = "";
-                StatusText = "Detected";
-                break;
-            case HardwareType.Network:
-                WindowTitle = "Network Adapters";
-                Icon = "\uE968"; // MDL2: Network
-                IconBackground = new SolidColorBrush(Color.FromRgb(94, 129, 172)); // Nord10
-                Title = "Network";
-                PrimaryUnit = "";
-                StatusText = "Connected";
-                break;
-            case HardwareType.Usb:
-                WindowTitle = "USB Devices";
-                Icon = "\uE88E"; // MDL2: USB
-                IconBackground = new SolidColorBrush(Color.FromRgb(136, 192, 208)); // Nord8
-                Title = "USB Devices";
-                PrimaryUnit = "";
-                StatusText = "Detected";
-                break;
-        }
-    }
-
-    private async Task LoadHardwareDetailsAsync(HardwareType type)
-    {
-        switch (type)
-        {
-            case HardwareType.Cpu:
-                await LoadCpuDetailsAsync();
-                break;
-            case HardwareType.Gpu:
-                await LoadGpuDetailsAsync();
-                break;
-            case HardwareType.Ram:
-                await LoadRamDetailsAsync();
-                break;
-            case HardwareType.Disk:
-                await LoadDiskDetailsAsync();
-                break;
-            case HardwareType.Motherboard:
-                await LoadMotherboardDetailsAsync();
-                break;
-            // OS, SystemBios, Network, Usb use the pre-populated constructor
-            case HardwareType.OperatingSystem:
-            case HardwareType.SystemBios:
-            case HardwareType.Network:
-            case HardwareType.Usb:
-                break;
-        }
-
-        await DispatchAsync(() =>
-        {
-            FooterText = $"Data collected at {DateTime.Now:HH:mm:ss}";
-        });
-    }
-
-    private async Task LoadCpuDetailsAsync()
-    {
-        CpuIdentity cpu;
-        try
-        {
-            cpu = await Task.Run(HardwareIdentifier.GetCpuId).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load CPU information";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] CPU load failed: {ex.Message}");
-            return;
-        }
-
-        await DispatchAsync(() =>
-        {
-            Subtitle = cpu.WmiName ?? "Unknown CPU";
-            Stat1Label = "Cores";
-            Stat1Value = cpu.Cores.ToString();
-            Stat2Label = "Threads";
-            Stat2Value = cpu.Threads.ToString();
-            Stat3Label = "Clock";
-            Stat3Value = cpu.MaxClockSpeed > 0 ? $"{cpu.MaxClockSpeed} MHz" : "N/A";
-            Stat4Label = "Power";
-            Stat4Value = "N/A";
-
-            Specifications.Clear();
-            Details.Clear();
-            SubItems.Clear();
-
-            Specifications.Add(new("Processor Name", cpu.WmiName ?? "N/A"));
-            Specifications.Add(new("Manufacturer", cpu.Manufacturer ?? "N/A"));
-            Specifications.Add(new("Physical Cores", cpu.Cores.ToString()));
-            Specifications.Add(new("Logical Processors", cpu.Threads.ToString()));
-            Specifications.Add(new("Max Clock Speed", cpu.MaxClockSpeed > 0 ? $"{cpu.MaxClockSpeed} MHz" : "N/A"));
-            Specifications.Add(new("Architecture", cpu.Architecture ?? "N/A"));
-            Specifications.Add(new("Family", cpu.Family > 0 ? cpu.Family.ToString() : "N/A"));
-
-            Details.Add(new("Processor ID", cpu.ProcessorId ?? "N/A"));
-            Details.Add(new("Lookup Key", cpu.LookupKey));
-
-            SubItemsHeader = string.Empty;
-            OnPropertyChanged(nameof(HasDetails));
-            OnPropertyChanged(nameof(HasSubItems));
-        });
-    }
-
-    private async Task LoadGpuDetailsAsync()
-    {
-        GpuIdentity gpu;
-        try
-        {
-            gpu = await Task.Run(HardwareIdentifier.GetGpuId).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load GPU information";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] GPU load failed: {ex.Message}");
-            return;
-        }
-
-        await DispatchAsync(() =>
-        {
-            Subtitle = gpu.WmiName ?? gpu.DriverDesc ?? "Unknown GPU";
-            Stat1Label = "VRAM";
-            Stat1Value = gpu.AdapterRamGB > 0 ? $"{gpu.AdapterRamGB:F0} GB" : "N/A";
-            Stat2Label = "Memory Used";
-            Stat2Value = "N/A";
-            Stat3Label = "Clock";
-            Stat3Value = "N/A";
-            Stat4Label = "Power";
-            Stat4Value = "N/A";
-
-            Specifications.Clear();
-            Details.Clear();
-            SubItems.Clear();
-
-            Specifications.Add(new("Graphics Card", gpu.WmiName ?? "N/A"));
-            Specifications.Add(new("Vendor", gpu.VendorName ?? "N/A"));
-            Specifications.Add(new("Vendor ID", gpu.VendorId ?? "N/A"));
-            Specifications.Add(new("Device ID", gpu.DeviceId ?? "N/A"));
-            Specifications.Add(new("PCI ID", gpu.PciId ?? "N/A"));
-            Specifications.Add(new("Adapter RAM", gpu.AdapterRamGB > 0 ? $"{gpu.AdapterRamGB:F1} GB" : "N/A"));
-            Specifications.Add(new("Driver Version", gpu.DriverVersion ?? "N/A"));
-            Specifications.Add(new("Video Processor", gpu.VideoProcessor ?? "N/A"));
-
-            Details.Add(new("Driver Description", gpu.DriverDesc ?? "N/A"));
-            Details.Add(new("PnP Device ID", gpu.PnpDeviceId ?? "N/A"));
-            Details.Add(new("Lookup Key", gpu.LookupKey));
-
-            SubItemsHeader = string.Empty;
-            OnPropertyChanged(nameof(HasDetails));
-            OnPropertyChanged(nameof(HasSubItems));
-        });
-    }
-
-    private async Task LoadRamDetailsAsync()
-    {
-        RamIdentity ram;
-        try
-        {
-            ram = await Task.Run(HardwareIdentifier.GetRamId).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load RAM information";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] RAM load failed: {ex.Message}");
-            return;
-        }
-
-        var moduleSpecs = new List<RamSpecs>();
-        RamSpecs? primarySpec = null;
-        foreach (var module in ram.Modules)
-        {
-            var spec = await _specsService.GetRamSpecsAsync(module, CancellationToken.None).ConfigureAwait(false);
-            moduleSpecs.Add(spec);
-            if (primarySpec == null || (!primarySpec.IsFromDatabase && spec.IsFromDatabase))
-            {
-                primarySpec = spec;
-            }
-        }
-
-        await DispatchAsync(() =>
-        {
-            _ramTotalGb = ram.TotalCapacityGB;
-            Subtitle = primarySpec?.Model ?? ram.LookupKey;
-            Stat1Label = "Total";
-            Stat1Value = $"{ram.TotalCapacityGB:F0} GB";
-            Stat2Label = "Used";
-            Stat2Value = "N/A";
-            Stat3Label = "Free";
-            Stat3Value = "N/A";
-            Stat4Label = "Speed";
-            var speedValue = primarySpec?.SpeedMhz ?? (ram.Modules.Count > 0 ? ram.Modules[0].SpeedMHz : 0);
-            Stat4Value = speedValue > 0 ? $"{speedValue} MHz" : "N/A";
-
-            Specifications.Clear();
-            Details.Clear();
-            SubItems.Clear();
-
-            Specifications.Add(new("Total Capacity", $"{ram.TotalCapacityGB:F1} GB"));
-            Specifications.Add(new("Installed Modules", ram.Modules.Count.ToString()));
-
-            if (ram.Modules.Count > 0)
-            {
-                var first = ram.Modules[0];
-                Specifications.Add(new("Memory Type", primarySpec?.Type ?? first.MemoryType ?? "N/A"));
-                Specifications.Add(new("Speed", speedValue > 0 ? $"{speedValue} MHz" : "N/A"));
-                Specifications.Add(new("Form Factor", first.FormFactor ?? "DIMM"));
-            }
-
-            if (primarySpec?.CasLatency is { } casLatency)
-            {
-                Specifications.Add(new("CAS Latency", $"CL{casLatency}"));
-            }
-
-            if (!string.IsNullOrWhiteSpace(primarySpec?.Timings))
-            {
-                Specifications.Add(new("Timings", primarySpec.Timings));
-            }
-
-            if (primarySpec?.Voltage is { } voltage)
-            {
-                Specifications.Add(new("Voltage", $"{voltage:0.00} V"));
-            }
-
-            if (primarySpec?.Ecc is { } ecc)
-            {
-                Specifications.Add(new("ECC", ecc ? "Yes" : "No"));
-            }
-
-            if (!string.IsNullOrWhiteSpace(primarySpec?.XmpProfiles))
-            {
-                Specifications.Add(new("XMP Profiles", primarySpec.XmpProfiles));
-            }
-
-            SubItemsHeader = "Memory Modules";
-            var slot = 1;
-            var moduleIndex = 0;
-            foreach (var module in ram.Modules)
-            {
-                RamSpecs? moduleSpec = moduleIndex < moduleSpecs.Count ? moduleSpecs[moduleIndex] : null;
-                moduleIndex++;
-
-                var subItem = new SubItemViewModel
-                {
-                    Icon = "\uE964", // MDL2: Memory
-                    Name = $"Slot {slot++}: {module.CapacityGB:F0} GB {module.MemoryType ?? "DDR4"}"
-                };
-                subItem.Properties.Add(new("Manufacturer", module.Manufacturer ?? "Unknown"));
-                subItem.Properties.Add(new("Part Number", module.PartNumber ?? "N/A"));
-                if (!string.IsNullOrWhiteSpace(moduleSpec?.Model))
-                {
-                    subItem.Properties.Add(new("Model", moduleSpec.Model));
-                }
-                subItem.Properties.Add(new("Speed", $"{module.SpeedMHz} MHz"));
-                if (moduleSpec?.CasLatency is { } moduleCas)
-                {
-                    subItem.Properties.Add(new("CAS", $"CL{moduleCas}"));
-                }
-                if (!string.IsNullOrWhiteSpace(moduleSpec?.Timings))
-                {
-                    subItem.Properties.Add(new("Timings", moduleSpec.Timings));
-                }
-                if (moduleSpec?.Voltage is { } moduleVoltage)
-                {
-                    subItem.Properties.Add(new("Voltage", $"{moduleVoltage:0.00} V"));
-                }
-                if (moduleSpec?.Ecc is { } moduleEcc)
-                {
-                    subItem.Properties.Add(new("ECC", moduleEcc ? "Yes" : "No"));
-                }
-                subItem.Properties.Add(new("Capacity", $"{module.CapacityGB:F0} GB"));
-                subItem.Properties.Add(new("Bank Label", module.BankLabel ?? "N/A"));
-                subItem.Properties.Add(new("Device Locator", module.DeviceLocator ?? "N/A"));
-                SubItems.Add(subItem);
-            }
-
-            OnPropertyChanged(nameof(HasDetails));
-            OnPropertyChanged(nameof(HasSubItems));
-        });
-    }
-
-    private async Task LoadMotherboardDetailsAsync()
-    {
-        MotherboardIdentity board;
-        try
-        {
-            board = await Task.Run(HardwareIdentifier.GetMotherboardId).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load motherboard information";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] Motherboard load failed: {ex.Message}");
-            return;
-        }
-
-        MotherboardSpecs specs;
-        try
-        {
-            specs = await _specsService.GetMotherboardSpecsAsync(board, CancellationToken.None).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load motherboard specifications";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] Motherboard specs failed: {ex.Message}");
-            return;
-        }
-
-        static string ValueOrNa(string? value)
-            => string.IsNullOrWhiteSpace(value) ? "N/A" : value.Trim();
-
-        await DispatchAsync(() =>
-        {
-            var modelText = !string.IsNullOrWhiteSpace(specs.Model)
-                ? specs.Model
-                : (board.Product ?? "Unknown");
-
-            Subtitle = modelText;
-            PrimaryValue = specs.MemorySlots?.ToString() ?? "--";
-            PrimaryUnit = specs.MemorySlots.HasValue ? "slots" : "";
-            StatusText = specs.IsFromDatabase ? "DB match" : "Detected";
-
-            Stat1Label = "Chipset";
-            Stat1Value = ValueOrNa(specs.Chipset);
-            Stat2Label = "Socket";
-            Stat2Value = ValueOrNa(specs.Socket);
-            Stat3Label = "Memory";
-            Stat3Value = specs.MaxMemoryGb is { } maxMem && maxMem > 0 ? $"{maxMem} GB" : "N/A";
-            Stat4Label = "Form";
-            Stat4Value = ValueOrNa(specs.FormFactor);
-
-            Specifications.Clear();
-            Details.Clear();
-            SubItems.Clear();
-
-            Specifications.Add(new("Manufacturer", ValueOrNa(specs.Manufacturer)));
-            Specifications.Add(new("Model", ValueOrNa(specs.Model)));
-            Specifications.Add(new("Chipset", ValueOrNa(specs.Chipset)));
-            Specifications.Add(new("Socket", ValueOrNa(specs.Socket)));
-            Specifications.Add(new("Form Factor", ValueOrNa(specs.FormFactor)));
-            Specifications.Add(new("Memory Slots", specs.MemorySlots?.ToString() ?? "N/A"));
-            Specifications.Add(new("Max Memory", specs.MaxMemoryGb is { } maxGb && maxGb > 0 ? $"{maxGb} GB" : "N/A"));
-            Specifications.Add(new("Memory Type", ValueOrNa(specs.MemoryType)));
-            Specifications.Add(new("Max Memory Speed", specs.MaxMemorySpeedMhz is { } speed && speed > 0 ? $"{speed} MHz" : "N/A"));
-            Specifications.Add(new("PCIe Slots", ValueOrNa(specs.PcieSlots)));
-            Specifications.Add(new("SATA Ports", specs.SataPorts?.ToString() ?? "N/A"));
-            Specifications.Add(new("M.2 Slots", specs.M2Slots?.ToString() ?? "N/A"));
-            Specifications.Add(new("USB Ports", ValueOrNa(specs.UsbPorts)));
-            Specifications.Add(new("Audio Codec", ValueOrNa(specs.AudioCodec)));
-            Specifications.Add(new("Network Chip", ValueOrNa(specs.NetworkChip)));
-            Specifications.Add(new("WiFi Chip", ValueOrNa(specs.WifiChip)));
-            Specifications.Add(new("BIOS Type", ValueOrNa(specs.BiosType)));
-            Specifications.Add(new("Release Date", ValueOrNa(specs.ReleaseDate)));
-
-            Details.Add(new("Serial Number", ValueOrNa(board.SerialNumber)));
-            Details.Add(new("Version", ValueOrNa(board.Version)));
-            Details.Add(new("Lookup Key", ValueOrNa(board.LookupKey)));
-            Details.Add(new("Specs Source", specs.IsFromDatabase ? "Database" : "Identity"));
-
-            SubItemsHeader = string.Empty;
-            OnPropertyChanged(nameof(HasDetails));
-            OnPropertyChanged(nameof(HasSubItems));
-        });
-    }
-
-    private async Task LoadDiskDetailsAsync()
-    {
-        List<StorageDriveInfo> disks;
-        long totalSize;
-        long totalUsed;
-
-        try
-        {
-            var result = await Task.Run(() =>
-            {
-                var driveList = new List<StorageDriveInfo>();
-                long size = 0;
-                long used = 0;
-
-                using var diskSearcher = new System.Management.ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-                foreach (var disk in diskSearcher.Get())
-                {
-                    var info = new StorageDriveInfo
-                    {
-                        Model = disk["Model"]?.ToString() ?? "Unknown",
-                        InterfaceType = disk["InterfaceType"]?.ToString() ?? "Unknown",
-                        MediaType = disk["MediaType"]?.ToString() ?? "Unknown",
-                        SizeBytes = Convert.ToInt64(disk["Size"]),
-                        Partitions = Convert.ToInt32(disk["Partitions"])
-                    };
-                    info.IsSsd = info.Model.Contains("SSD", StringComparison.OrdinalIgnoreCase) ||
-                                 info.Model.Contains("NVMe", StringComparison.OrdinalIgnoreCase) ||
-                                 info.InterfaceType.Contains("NVMe", StringComparison.OrdinalIgnoreCase);
-                    size += info.SizeBytes;
-                    driveList.Add(info);
-                }
-
-                foreach (var drive in System.IO.DriveInfo.GetDrives())
-                {
-                    if (drive.IsReady && drive.DriveType == System.IO.DriveType.Fixed)
-                    {
-                        used += drive.TotalSize - drive.AvailableFreeSpace;
-                    }
-                }
-
-                return (driveList, size, used);
-            }).ConfigureAwait(false);
-
-            disks = result.driveList;
-            totalSize = result.size;
-            totalUsed = result.used;
-        }
-        catch (Exception ex)
-        {
-            await DispatchAsync(() =>
-            {
-                Subtitle = "Failed to load storage information";
-                StatusText = "Unavailable";
-            });
-            System.Diagnostics.Debug.WriteLine($"[HardwareDetailViewModel] Disk load failed: {ex.Message}");
-            return;
-        }
-
-        var specsByModel = new Dictionary<string, StorageSpecs>(StringComparer.OrdinalIgnoreCase);
-        foreach (var disk in disks)
-        {
-            var model = disk.Model ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(model))
+            if (string.IsNullOrWhiteSpace(item.Key) || string.IsNullOrWhiteSpace(item.Value))
             {
                 continue;
             }
 
-            if (!specsByModel.TryGetValue(model, out var specs))
-            {
-                specs = await _specsService.GetStorageSpecsAsync(model, CancellationToken.None).ConfigureAwait(false);
-                specsByModel[model] = specs;
-            }
+            SpecsCollection.Add(item);
+        }
+    }
 
-            disk.Specs = specs;
+    public virtual void Dispose()
+    {
+        if (_subscribedToUpdates)
+        {
+            HardwarePreloadService.Instance.SnapshotUpdated -= OnSnapshotUpdated;
+            _subscribedToUpdates = false;
+        }
+    }
+
+    protected void BeginLoad(HardwareDetailSnapshot? snapshot, Func<HardwareDetailSnapshot, HardwareDetailPayload> collector)
+    {
+        IsLoading = true;
+        LoadingStatus = "Loading system data...";
+        SetSpecs(new[]
+        {
+            new KeyValuePair<string, string>("Loading", "Collecting system info..."),
+            new KeyValuePair<string, string>("Loading", "Collecting system info..."),
+            new KeyValuePair<string, string>("Loading", "Collecting system info...")
+        });
+
+        _ = LoadAsync(snapshot, collector);
+    }
+
+    private void OnSnapshotUpdated(int tier)
+    {
+        if (_collector == null)
+        {
+            return;
         }
 
-        await DispatchAsync(() =>
+        var snapshot = HardwarePreloadService.Instance.GetSnapshot();
+        var payload = _collector(snapshot);
+        Application.Current?.Dispatcher?.Invoke(() =>
         {
-            Subtitle = disks.Count == 1 ? disks[0].Model : $"{disks.Count} Drives";
-            var usagePercent = totalSize > 0 ? (double)totalUsed / totalSize * 100 : 0;
-            PrimaryValue = $"{usagePercent:F0}";
-            PrimaryUnit = "% used";
-            PrimaryValueColor = GetUsageBrush(usagePercent);
-            StatusText = "Healthy";
-
-            Stat1Label = "Total";
-            Stat1Value = FormatSize(totalSize);
-            Stat2Label = "Used";
-            Stat2Value = FormatSize(totalUsed);
-            Stat3Label = "Read";
-            Stat3Value = "0 B/s";
-            Stat4Label = "Write";
-            Stat4Value = "0 B/s";
-
-            Specifications.Clear();
-            Details.Clear();
-            SubItems.Clear();
-
-            Specifications.Add(new("Total Storage", FormatSize(totalSize)));
-            Specifications.Add(new("Used Space", FormatSize(totalUsed)));
-            Specifications.Add(new("Free Space", FormatSize(totalSize - totalUsed)));
-            Specifications.Add(new("Physical Drives", disks.Count.ToString()));
-            var specMatches = disks.Count(d => d.Specs?.IsFromDatabase == true);
-            if (specMatches > 0)
+            Title = payload.Title;
+            Subtitle = payload.Subtitle;
+            IconKey = payload.IconKey;
+            IconSource = HardwareIconResolver.ResolveIcon(payload.IconKey, payload.FallbackIconKey);
+            SetSpecs(payload.Specs);
+            IsLoading = tier < 3;
+            LoadingStatus = tier switch
             {
-                Specifications.Add(new("Specs Matches", $"{specMatches}/{disks.Count}"));
-            }
-
-            SubItemsHeader = "Drives";
-            foreach (var disk in disks)
-            {
-                var subItem = new SubItemViewModel
-                {
-                    Icon = disk.IsSsd ? "\uEC4A" : "\uEDA2", // MDL2: Speed / HardDrive
-                    Name = disk.Model
-                };
-                var specType = disk.Specs?.Type ?? (disk.IsSsd ? "SSD" : "HDD");
-                subItem.Properties.Add(new("Type", specType));
-                var interfaceLabel = disk.Specs?.Interface ?? disk.InterfaceType;
-                if (!string.IsNullOrWhiteSpace(interfaceLabel))
-                {
-                    subItem.Properties.Add(new("Interface", interfaceLabel));
-                }
-                if (!string.IsNullOrWhiteSpace(disk.Specs?.FormFactor))
-                {
-                    subItem.Properties.Add(new("Form Factor", disk.Specs.FormFactor));
-                }
-                subItem.Properties.Add(new("Size", FormatSize(disk.SizeBytes)));
-                subItem.Properties.Add(new("Partitions", disk.Partitions.ToString()));
-                if (disk.Specs?.SeqReadMbps is { } seqRead && seqRead > 0)
-                {
-                    subItem.Properties.Add(new("Seq Read", $"{seqRead} MB/s"));
-                }
-                if (disk.Specs?.SeqWriteMbps is { } seqWrite && seqWrite > 0)
-                {
-                    subItem.Properties.Add(new("Seq Write", $"{seqWrite} MB/s"));
-                }
-                if (disk.Specs?.TbwTb is { } tbw && tbw > 0)
-                {
-                    subItem.Properties.Add(new("TBW", $"{tbw} TB"));
-                }
-                SubItems.Add(subItem);
-            }
-
-            foreach (var drive in System.IO.DriveInfo.GetDrives())
-            {
-                if (drive.IsReady && drive.DriveType == System.IO.DriveType.Fixed)
-                {
-                    var subItem = new SubItemViewModel
-                    {
-                        Icon = "\uE838", // MDL2: FolderOpen
-                        Name = $"{drive.Name} {drive.VolumeLabel}"
-                    };
-                    subItem.Properties.Add(new("File System", drive.DriveFormat));
-                    subItem.Properties.Add(new("Total", FormatSize(drive.TotalSize)));
-                    subItem.Properties.Add(new("Free", FormatSize(drive.AvailableFreeSpace)));
-                    subItem.Properties.Add(new("Used", $"{(drive.TotalSize - drive.AvailableFreeSpace) * 100.0 / drive.TotalSize:F0}%"));
-                    SubItems.Add(subItem);
-                }
-            }
-
-            OnPropertyChanged(nameof(HasDetails));
-            OnPropertyChanged(nameof(HasSubItems));
+                1 => "Collecting security metrics...",
+                2 => "Collecting firmware and board data...",
+                _ => "Ready"
+            };
         });
     }
 
-    private void OnMetricsUpdated(object? sender, MetricBatchEventArgs e)
+    private async Task LoadAsync(HardwareDetailSnapshot? snapshot, Func<HardwareDetailSnapshot, HardwareDetailPayload> collector)
     {
-        if (_isDisposed)
+        try
         {
-            return;
+            _collector = collector;
+            if (!_subscribedToUpdates)
+            {
+                HardwarePreloadService.Instance.SnapshotUpdated += OnSnapshotUpdated;
+                _subscribedToUpdates = true;
+            }
+
+            var payload = await Task.Run(() =>
+            {
+                var cache = snapshot ?? HardwarePreloadService.Instance.GetSnapshot();
+                return collector(cache);
+            });
+
+            Title = payload.Title;
+            Subtitle = payload.Subtitle;
+            IconKey = payload.IconKey;
+            IconSource = HardwareIconResolver.ResolveIcon(payload.IconKey, payload.FallbackIconKey);
+            SetSpecs(payload.Specs);
+            IsLoading = HardwarePreloadService.Instance.CurrentTier < 3;
+            LoadingStatus = HardwarePreloadService.Instance.CurrentTier switch
+            {
+                1 => "Collecting security metrics...",
+                2 => "Collecting firmware and board data...",
+                _ => "Ready"
+            };
         }
-
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher != null && !dispatcher.CheckAccess())
+        finally
         {
-            dispatcher.InvokeAsync(() => HandleMetricsUpdated(e));
-            return;
-        }
-
-        HandleMetricsUpdated(e);
-    }
-
-    private void HandleMetricsUpdated(MetricBatchEventArgs e)
-    {
-        switch (_type)
-        {
-            case HardwareType.Cpu:
-                if (e.TryGetValue<double>("cpu.usage", out var cpuUsage))
-                {
-                    PrimaryValue = $"{cpuUsage:F0}";
-                    PrimaryValueColor = GetUsageBrush(cpuUsage);
-                }
-
-                if (e.TryGetValue<double>("cpu.temp", out var cpuTemp))
-                {
-                    StatusText = $"{cpuTemp:F0}\u00B0C";
-                    StatusColor = GetTempBrush(cpuTemp);
-                }
-
-                if (e.TryGetValue<double>("cpu.clock", out var cpuClock))
-                {
-                    Stat3Value = $"{cpuClock:F0} MHz";
-                }
-
-                if (e.TryGetValue<double>("cpu.power", out var cpuPower))
-                {
-                    Stat4Value = $"{cpuPower:F0} W";
-                }
-                break;
-            case HardwareType.Gpu:
-                if (e.TryGetValue<double>("gpu.usage", out var gpuUsage))
-                {
-                    PrimaryValue = $"{gpuUsage:F0}";
-                    PrimaryValueColor = GetUsageBrush(gpuUsage);
-                }
-
-                if (e.TryGetValue<double>("gpu.temp", out var gpuTemp))
-                {
-                    StatusText = $"{gpuTemp:F0}\u00B0C";
-                    StatusColor = GetTempBrush(gpuTemp);
-                }
-
-                if (e.TryGetValue<double>("gpu.memory.used", out var memUsedMb))
-                {
-                    var memUsedGb = memUsedMb / 1024.0;
-                    Stat2Value = $"{memUsedGb:F1} GB";
-                }
-
-                if (e.TryGetValue<double>("gpu.clock", out var gpuClock))
-                {
-                    Stat3Value = $"{gpuClock:F0} MHz";
-                }
-
-                if (e.TryGetValue<double>("gpu.power", out var gpuPower))
-                {
-                    Stat4Value = $"{gpuPower:F0} W";
-                }
-                break;
-            case HardwareType.Ram:
-                if (e.TryGetValue<double>("ram.total", out var totalGb))
-                {
-                    _ramTotalGb = totalGb;
-                    Stat1Value = $"{totalGb:F0} GB";
-                }
-
-                if (e.TryGetValue<double>("ram.used", out var usedGb))
-                {
-                    _ramUsedGb = usedGb;
-                    UpdateRamStatusText();
-                    UpdateRamStats();
-                }
-
-                if (e.TryGetValue<double>("ram.usage", out var ramUsage))
-                {
-                    PrimaryValue = $"{ramUsage:F0}";
-                    PrimaryValueColor = GetUsageBrush(ramUsage);
-                }
-
-                if (e.TryGetValue<double>("ram.available", out var availableGb))
-                {
-                    _ramAvailableGb = availableGb;
-                    UpdateRamStats();
-                }
-                break;
-            case HardwareType.Disk:
-                if (e.TryGetValue<double>("disk.read.speed", out var readBytes))
-                {
-                    _diskReadBytes = readBytes;
-                    UpdateDiskStatusText();
-                }
-
-                if (e.TryGetValue<double>("disk.write.speed", out var writeBytes))
-                {
-                    _diskWriteBytes = writeBytes;
-                    UpdateDiskStatusText();
-                }
-
-                if (e.TryGetValue<double>("disk.health", out var health))
-                {
-                    StatusColor = GetHealthBrush(health);
-                }
-                break;
-            case HardwareType.Motherboard:
-                break;
-            // No live metrics for dashboard-only types
-            case HardwareType.OperatingSystem:
-            case HardwareType.SystemBios:
-            case HardwareType.Network:
-            case HardwareType.Usb:
-                break;
+            if (HardwarePreloadService.Instance.CurrentTier >= 3)
+            {
+                IsLoading = false;
+            }
         }
     }
 
-    private void UpdateRamStatusText()
+    protected sealed record HardwareDetailPayload(
+        string Title,
+        string Subtitle,
+        string IconKey,
+        string FallbackIconKey,
+        IEnumerable<KeyValuePair<string, string>> Specs);
+
+    protected static T ResolveCached<T>(string key, T fallback) where T : class
     {
-        if (_ramTotalGb.HasValue && _ramUsedGb.HasValue)
-        {
-            StatusText = $"{_ramUsedGb.Value:F1} / {_ramTotalGb.Value:F1} GB";
-        }
+        return MetricCacheService.Instance.Get<T>(key) ?? fallback;
     }
-
-    private void UpdateRamStats()
-    {
-        if (_ramUsedGb.HasValue)
-        {
-            Stat2Value = $"{_ramUsedGb.Value:F1} GB";
-        }
-
-        if (_ramAvailableGb.HasValue)
-        {
-            Stat3Value = $"{_ramAvailableGb.Value:F1} GB";
-        }
-    }
-
-    private void UpdateDiskStatusText()
-    {
-        if (_diskReadBytes.HasValue || _diskWriteBytes.HasValue)
-        {
-            var readText = _diskReadBytes.HasValue ? FormatSpeed(_diskReadBytes.Value) : "0 B/s";
-            var writeText = _diskWriteBytes.HasValue ? FormatSpeed(_diskWriteBytes.Value) : "0 B/s";
-            StatusText = $"R: {readText} / W: {writeText}";
-            Stat3Value = readText;
-            Stat4Value = writeText;
-        }
-    }
-
-    private static Brush GetUsageBrush(double value) => value switch
-    {
-        >= 90 => Brushes.Red,
-        >= 70 => Brushes.OrangeRed,
-        >= 50 => Brushes.Orange,
-        _ => Brushes.LimeGreen
-    };
-
-    private static Brush GetTempBrush(double temp) => temp switch
-    {
-        >= 90 => Brushes.Red,
-        >= 80 => Brushes.OrangeRed,
-        >= 70 => Brushes.Orange,
-        >= 60 => Brushes.Yellow,
-        _ => Brushes.LimeGreen
-    };
-
-    private static Brush GetHealthBrush(double health) => health switch
-    {
-        >= 90 => Brushes.LimeGreen,
-        >= 70 => Brushes.YellowGreen,
-        >= 50 => Brushes.Orange,
-        _ => Brushes.Red
-    };
-
-    private static string FormatSize(long bytes)
-    {
-        const long kilo = 1024;
-        const long mega = kilo * 1024;
-        const long giga = mega * 1024;
-        const long tera = giga * 1024;
-
-        if (bytes >= tera)
-            return $"{bytes / (double)tera:F1} TB";
-        if (bytes >= giga)
-            return $"{bytes / (double)giga:F0} GB";
-        if (bytes >= mega)
-            return $"{bytes / (double)mega:F0} MB";
-        return $"{bytes / (double)kilo:F0} KB";
-    }
-
-    private static string FormatSpeed(double bytesPerSec)
-    {
-        const double kilo = 1024.0;
-        const double mega = kilo * 1024.0;
-        const double giga = mega * 1024.0;
-
-        if (bytesPerSec >= giga)
-            return $"{bytesPerSec / giga:F1} GB/s";
-        if (bytesPerSec >= mega)
-            return $"{bytesPerSec / mega:F0} MB/s";
-        if (bytesPerSec >= kilo)
-            return $"{bytesPerSec / kilo:F0} KB/s";
-        return $"{bytesPerSec:F0} B/s";
-    }
-
-    private Task DispatchAsync(Action action)
-    {
-        if (_isDisposed)
-        {
-            return Task.CompletedTask;
-        }
-
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher == null || dispatcher.CheckAccess())
-        {
-            action();
-            return Task.CompletedTask;
-        }
-
-        return dispatcher.InvokeAsync(action).Task;
-    }
-
-    #region INotifyPropertyChanged
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (Equals(field, value)) return false;
-        field = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        return true;
-    }
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    #endregion
-
-    #region IDisposable
-
-    public void Dispose()
-    {
-        if (_isDisposed) return;
-        _isDisposed = true;
-
-        if (_bus != null)
-        {
-            _bus.MetricsUpdated -= OnMetricsUpdated;
-        }
-    }
-
-    #endregion
 }
 
-public class SubItemViewModel
+public sealed class OsDetailVM : HardwareDetailViewModelBase
 {
-    public string Icon { get; set; } = "";
-    public string Name { get; set; } = "";
-    public ObservableCollection<KeyValuePair<string, string>> Properties { get; } = new();
+    public OsDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Os)
+    {
+        Title = "Operating System";
+        Subtitle = "Loading system data...";
+        IconKey = "os/windows10";
+        IconSource = HardwareIconResolver.ResolveOsIcon("Windows 10");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var os = ResolveCached("OS", cache.Os);
+            var osName = ValueOrUnknown(os.NormalizedName);
+            var subtitle = ValueOrUnknown(os.ProductName);
+            var normalized = !string.IsNullOrWhiteSpace(os.NormalizedName)
+                ? os.NormalizedName
+                : BuildNormalizedOsName(os.BuildNumber, os.Edition, os.DisplayVersion, os.ReleaseId);
+            var iconKey = normalized.Contains("Windows 11", StringComparison.OrdinalIgnoreCase)
+                ? "os/windows11"
+                : "os/windows10";
+
+            var specs = new[]
+            {
+                new KeyValuePair<string, string>("Edition", ValueOrUnknown(os.Edition)),
+                new KeyValuePair<string, string>("Product Name", ValueOrUnknown(os.ProductName)),
+                new KeyValuePair<string, string>("Normalized OS", ValueOrUnknown(normalized)),
+                new KeyValuePair<string, string>("Display Version", ValueOrUnknown(os.DisplayVersion)),
+                new KeyValuePair<string, string>("Release ID", ValueOrUnknown(os.ReleaseId)),
+                new KeyValuePair<string, string>("UBR", os.Ubr > 0 ? os.Ubr.ToString() : "Unknown"),
+                new KeyValuePair<string, string>("Install Type", ValueOrUnknown(os.InstallType)),
+                new KeyValuePair<string, string>("Registered Owner", ValueOrUnknown(os.RegisteredOwner)),
+                new KeyValuePair<string, string>("Registered Organization", ValueOrUnknown(os.RegisteredOrganization)),
+                new KeyValuePair<string, string>("Windows Experience Index", ValueOrUnknown(os.WindowsExperienceIndex)),
+                new KeyValuePair<string, string>("Last Boot Time", ValueOrUnknown(os.LastBootTime)),
+                new KeyValuePair<string, string>("Uptime", ValueOrUnknown(os.Uptime)),
+                new KeyValuePair<string, string>("BIOS Mode", ValueOrUnknown(os.BiosMode)),
+                new KeyValuePair<string, string>("Secure Boot State", ValueOrUnknown(os.SecureBootState)),
+                new KeyValuePair<string, string>("TPM Version", ValueOrUnknown(os.TpmVersion)),
+                new KeyValuePair<string, string>("BitLocker Status", ValueOrUnknown(os.BitLockerStatus)),
+                new KeyValuePair<string, string>("Device Guard", ValueOrUnknown(os.DeviceGuardStatus)),
+                new KeyValuePair<string, string>("Credential Guard", ValueOrUnknown(os.CredentialGuardStatus)),
+                new KeyValuePair<string, string>("Virtualization Enabled", ValueOrUnknown(os.VirtualizationEnabled)),
+                new KeyValuePair<string, string>("Hyper-V Installed", ValueOrUnknown(os.HyperVInstalled)),
+                new KeyValuePair<string, string>("Windows Defender Status", ValueOrUnknown(os.DefenderStatus)),
+                new KeyValuePair<string, string>("Firewall Status", ValueOrUnknown(os.FirewallStatus)),
+                new KeyValuePair<string, string>("Build", os.BuildNumber > 0 ? os.BuildNumber.ToString() : "Unknown"),
+                new KeyValuePair<string, string>("Architecture", ValueOrUnknown(os.Architecture)),
+                new KeyValuePair<string, string>("Username", ValueOrUnknown(os.Username)),
+                new KeyValuePair<string, string>("Install Date", ValueOrUnknown(os.InstallDate)),
+                new KeyValuePair<string, string>("Version", ValueOrUnknown(os.Version))
+            };
+
+            LogSpecSource("Edition", os.EditionSource);
+            LogSpecSource("Product Name", os.ProductNameSource);
+            LogSpecSource("Display Version", os.DisplayVersionSource);
+            LogSpecSource("Release ID", os.ReleaseIdSource);
+            LogSpecSource("Install Type", os.InstallTypeSource);
+            LogSpecSource("Registered Owner", os.RegisteredOwnerSource);
+            LogSpecSource("Registered Organization", os.RegisteredOrganizationSource);
+            LogSpecSource("Windows Experience Index", os.WindowsExperienceIndexSource);
+            LogSpecSource("Last Boot Time", os.LastBootTimeSource);
+            LogSpecSource("Uptime", os.UptimeSource);
+            LogSpecSource("BIOS Mode", os.BiosModeSource);
+            LogSpecSource("Secure Boot State", os.SecureBootStateSource);
+            LogSpecSource("TPM Version", os.TpmVersionSource);
+            LogSpecSource("BitLocker Status", os.BitLockerStatusSource);
+            LogSpecSource("Device Guard", os.DeviceGuardStatusSource);
+            LogSpecSource("Credential Guard", os.CredentialGuardStatusSource);
+            LogSpecSource("Virtualization Enabled", os.VirtualizationEnabledSource);
+            LogSpecSource("Hyper-V Installed", os.HyperVInstalledSource);
+            LogSpecSource("Windows Defender Status", os.DefenderStatusSource);
+            LogSpecSource("Firewall Status", os.FirewallStatusSource);
+            LogSpecSource("Build", os.BuildNumberSource);
+            LogSpecSource("Architecture", os.ArchitectureSource);
+            LogSpecSource("Username", os.UsernameSource);
+            LogSpecSource("Install Date", os.InstallDateSource);
+            LogSpecSource("Version", os.VersionSource);
+
+            return new HardwareDetailPayload("Operating System", subtitle, iconKey, "os/windows10", specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+
+    private static void LogSpecSource(string name, string? source)
+    {
+        Debug.WriteLine($"[OS Detail] {name} source={ValueOrUnknown(source)}");
+    }
+
+    private static string BuildNormalizedOsName(int buildNumber, string? edition, string? displayVersion, string? releaseId)
+    {
+        var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
+        var normalized = string.IsNullOrWhiteSpace(edition) ? osBase : $"{osBase} {edition}";
+        var version = !string.IsNullOrWhiteSpace(displayVersion) ? displayVersion : releaseId;
+        return string.IsNullOrWhiteSpace(version) ? normalized : $"{normalized} ({version})";
+    }
+}
+
+public sealed class CpuDetailVM : HardwareDetailViewModelBase
+{
+    public CpuDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Cpu)
+    {
+        Title = "CPU";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("cpu");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "cpu_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var cpu = ResolveCached("CPU", cache.Cpu);
+            var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpu(cpu.Name ?? string.Empty);
+            var specs = new List<KeyValuePair<string, string>>
+            {
+                new("Name", ValueOrUnknown(cpu.Name)),
+                new("Manufacturer", ValueOrUnknown(cpu.Manufacturer)),
+                new("Architecture", ValueOrUnknown(cpu.Architecture)),
+                new("Max Clock", cpu.MaxClockMhz > 0 ? $"{cpu.MaxClockMhz} MHz" : "Unknown")
+            };
+
+            if (cpu.Cores > 0) specs.Add(new("Cores", cpu.Cores.ToString()));
+            if (cpu.Threads > 0) specs.Add(new("Threads", cpu.Threads.ToString()));
+            if (!string.IsNullOrWhiteSpace(cpu.Description)) specs.Add(new("Description", cpu.Description));
+            if (cpu.L2CacheKB > 0) specs.Add(new("L2 Cache", $"{cpu.L2CacheKB} KB"));
+            if (cpu.L3CacheKB > 0) specs.Add(new("L3 Cache", $"{cpu.L3CacheKB} KB"));
+            if (matchedCpu != null)
+            {
+                specs.Add(new("DB Match", $"{matchedCpu.Brand} {matchedCpu.ModelName}".Trim()));
+                specs.Add(new("Performance Tier", matchedCpu.GetTier()));
+            }
+
+            var iconKey = matchedCpu != null
+                ? matchedCpu.IconKey
+                : HardwareIconResolver.ResolveIconKey("cpu", cpu.Name, HardwareIconResolver.GetFallbackKey("cpu"));
+
+            return new HardwareDetailPayload(
+                ValueOrUnknown(cpu.Name),
+                ValueOrUnknown(cpu.Manufacturer),
+                iconKey,
+                HardwareIconResolver.GetFallbackKey("cpu"),
+                specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+}
+
+public sealed class GpuDetailVM : HardwareDetailViewModelBase
+{
+    public GpuDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Gpu)
+    {
+        Title = "GPU";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("gpu");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "gpu_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var gpu = ResolveCached("GPU", cache.Gpu);
+            var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpu(gpu.Name ?? string.Empty);
+            var specs = new List<KeyValuePair<string, string>>
+            {
+                new("Name", ValueOrUnknown(gpu.Name)),
+                new("Vendor", ValueOrUnknown(gpu.Vendor)),
+                new("Vendor ID", ValueOrUnknown(gpu.VendorId)),
+                new("Device ID", ValueOrUnknown(gpu.DeviceId)),
+                new("Driver Version", ValueOrUnknown(gpu.DriverVersion)),
+                new("Memory", gpu.AdapterRamBytes > 0 ? FormatBytes(gpu.AdapterRamBytes) : "Unknown")
+            };
+
+            if (!string.IsNullOrWhiteSpace(gpu.DriverDate)) specs.Add(new("Driver Date", ValueOrUnknown(gpu.DriverDate)));
+            if (gpu.CurrentHorizontalResolution > 0 && gpu.CurrentVerticalResolution > 0) specs.Add(new("Current Resolution", $"{gpu.CurrentHorizontalResolution}x{gpu.CurrentVerticalResolution}"));
+            if (gpu.RefreshRateHz > 0) specs.Add(new("Refresh Rate", $"{gpu.RefreshRateHz} Hz"));
+            if (!string.IsNullOrWhiteSpace(gpu.VideoProcessor)) specs.Add(new("GPU Processor", ValueOrUnknown(gpu.VideoProcessor)));
+            if (!string.IsNullOrWhiteSpace(gpu.AdapterDacType)) specs.Add(new("Adapter DAC", ValueOrUnknown(gpu.AdapterDacType)));
+
+            if (matchedGpu != null)
+            {
+                specs.Add(new("DB Match", $"{matchedGpu.Brand} {matchedGpu.ModelName}".Trim()));
+                specs.Add(new("Performance Tier", matchedGpu.GetTier()));
+            }
+
+            return new HardwareDetailPayload(
+                ValueOrUnknown(gpu.Name),
+                ValueOrUnknown(gpu.Vendor),
+                matchedGpu != null
+                    ? matchedGpu.IconKey
+                    : HardwareIconResolver.GetFallbackKey("gpu"),
+                HardwareIconResolver.GetFallbackKey("gpu"),
+                specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+
+    private static string FormatBytes(long bytes)
+    {
+        const long giga = 1024L * 1024L * 1024L;
+        return bytes <= 0 ? "Unknown" : $"{bytes / (double)giga:F1} GB";
+    }
+}
+
+public sealed class MotherboardDetailVM : HardwareDetailViewModelBase
+{
+    public MotherboardDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Motherboard)
+    {
+        Title = "Motherboard";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("chipset");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "chipset_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var board = ResolveCached("Motherboard", cache.Motherboard);
+            var boardQuery = $"{board.Manufacturer} {board.Model} {board.Product}";
+            var matchedBoard = HardwareKnowledgeDbService.Instance.MatchMotherboard(boardQuery);
+            var matchedChipset = HardwareKnowledgeDbService.Instance.MatchChipset(board.Chipset ?? string.Empty);
+            var specs = new[]
+            {
+                new KeyValuePair<string, string>("Manufacturer", ValueOrUnknown(board.Manufacturer)),
+                new KeyValuePair<string, string>("Model", ValueOrUnknown(board.Model)),
+                new KeyValuePair<string, string>("Product", ValueOrUnknown(board.Product)),
+                new KeyValuePair<string, string>("Serial", ValueOrUnknown(board.Serial)),
+                new KeyValuePair<string, string>("Version", ValueOrUnknown(board.Version)),
+                new KeyValuePair<string, string>("BIOS Vendor", ValueOrUnknown(board.BiosVendor)),
+                new KeyValuePair<string, string>("BIOS Version", ValueOrUnknown(board.BiosVersion)),
+                new KeyValuePair<string, string>("BIOS Date", ValueOrUnknown(board.BiosDate)),
+                new KeyValuePair<string, string>("Chipset", ValueOrUnknown(board.Chipset)),
+                new KeyValuePair<string, string>("System Slots", board.SystemSlotCount > 0 ? board.SystemSlotCount.ToString() : "Unknown")
+            };
+
+            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
+            if (matchedBoard != null)
+            {
+                enrichedSpecs.Add(new("DB Match", $"{matchedBoard.Brand} {matchedBoard.ModelName}".Trim()));
+            }
+
+            if (matchedChipset != null)
+            {
+                enrichedSpecs.Add(new("Chipset Family", $"{matchedChipset.Brand} {matchedChipset.ModelName}".Trim()));
+            }
+
+            var iconKey = matchedBoard?.IconKey ?? HardwareIconResolver.GetFallbackKey("chipset");
+
+            return new HardwareDetailPayload(
+                BuildTitle(board),
+                ValueOrUnknown(board.Product),
+                iconKey,
+                HardwareIconResolver.GetFallbackKey("chipset"),
+                enrichedSpecs);
+        });
+    }
+
+    private static string BuildTitle(MotherboardHardwareData board)
+    {
+        var manufacturer = ValueOrUnknown(board.Manufacturer);
+        var model = ValueOrUnknown(board.Model);
+        return $"{manufacturer} {model}".Trim();
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+}
+
+public sealed class MemoryDetailVM : HardwareDetailViewModelBase
+{
+    public MemoryDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Memory)
+    {
+        Title = "Memory";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("memory");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "memory_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var memory = ResolveCached("Memory", cache.Memory);
+            var memoryQuery = $"{memory.PrimaryManufacturer} {memory.PrimaryModel} {memory.MemoryType} {memory.SpeedMhz}";
+            var matchedMemory = HardwareKnowledgeDbService.Instance.MatchMemory(memoryQuery);
+            var matchedChip = HardwareKnowledgeDbService.Instance.MatchMemoryChip(memory.PrimaryModel ?? string.Empty);
+            var specs = new[]
+            {
+                new KeyValuePair<string, string>("Total", memory.TotalBytes > 0 ? FormatBytes(memory.TotalBytes) : "Unknown"),
+                new KeyValuePair<string, string>("Modules", memory.ModuleCount > 0 ? memory.ModuleCount.ToString() : "Unknown"),
+                new KeyValuePair<string, string>("Type", ValueOrUnknown(memory.MemoryType)),
+                new KeyValuePair<string, string>("Speed", memory.SpeedMhz > 0 ? $"{memory.SpeedMhz} MHz" : "Unknown"),
+                new KeyValuePair<string, string>("Primary Manufacturer", ValueOrUnknown(memory.PrimaryManufacturer)),
+                new KeyValuePair<string, string>("Primary Model", ValueOrUnknown(memory.PrimaryModel))
+            };
+
+            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
+            if (matchedMemory != null)
+            {
+                enrichedSpecs.Add(new("DB Match", $"{matchedMemory.Brand} {matchedMemory.ModelName}".Trim()));
+            }
+
+            if (matchedChip != null)
+            {
+                enrichedSpecs.Add(new("Memory IC", $"{matchedChip.Brand} {matchedChip.ModelName}".Trim()));
+            }
+
+            return new HardwareDetailPayload(
+                "Memory",
+                memory.ModuleCount > 0 ? $"{memory.ModuleCount} module(s)" : "No module data",
+                matchedMemory != null
+                    ? matchedMemory.IconKey
+                    : HardwareIconResolver.GetFallbackKey("memory"),
+                HardwareIconResolver.GetFallbackKey("memory"),
+                enrichedSpecs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+
+    private static string FormatBytes(long bytes)
+    {
+        const long giga = 1024L * 1024L * 1024L;
+        return bytes <= 0 ? "Unknown" : $"{bytes / (double)giga:F1} GB";
+    }
+}
+
+public sealed class StorageDetailVM : HardwareDetailViewModelBase
+{
+    public StorageDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Storage)
+    {
+        Title = "Storage";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("storage");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "storage_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var storage = ResolveCached("Storage", cache.Storage);
+            var matchedStorage = HardwareKnowledgeDbService.Instance.MatchStorage(storage.PrimaryModel ?? string.Empty);
+            var specs = new[]
+            {
+                new KeyValuePair<string, string>("Drives", storage.DeviceCount > 0 ? storage.DeviceCount.ToString() : "Unknown"),
+                new KeyValuePair<string, string>("Total Capacity", storage.TotalSizeBytes > 0 ? FormatBytes(storage.TotalSizeBytes) : "Unknown"),
+                new KeyValuePair<string, string>("Primary Model", ValueOrUnknown(storage.PrimaryModel)),
+                new KeyValuePair<string, string>("Primary Interface", ValueOrUnknown(storage.PrimaryInterface))
+            };
+
+            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
+            if (matchedStorage != null)
+            {
+                enrichedSpecs.Add(new("DB Match", $"{matchedStorage.Brand} {matchedStorage.ModelName}".Trim()));
+            }
+
+            return new HardwareDetailPayload(
+                "Storage",
+                storage.DeviceCount > 0 ? $"{storage.DeviceCount} drive(s)" : "No drive data",
+                matchedStorage != null
+                    ? matchedStorage.IconKey
+                    : HardwareIconResolver.GetFallbackKey("storage"),
+                HardwareIconResolver.GetFallbackKey("storage"),
+                enrichedSpecs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+
+    private static string FormatBytes(long bytes)
+    {
+        const long giga = 1024L * 1024L * 1024L;
+        const long tera = giga * 1024L;
+        if (bytes <= 0)
+        {
+            return "Unknown";
+        }
+
+        return bytes >= tera
+            ? $"{bytes / (double)tera:F2} TB"
+            : $"{bytes / (double)giga:F1} GB";
+    }
+}
+
+public sealed class DisplaysDetailVM : HardwareDetailViewModelBase
+{
+    public DisplaysDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Displays)
+    {
+        Title = "Displays";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("display");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "display_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var displays = ResolveCached("Displays", cache.Displays);
+            var gpu = ResolveCached("GPU", cache.Gpu);
+            var specs = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("Primary Resolution", displays.PrimaryWidth > 0 && displays.PrimaryHeight > 0 ? $"{displays.PrimaryWidth}x{displays.PrimaryHeight}" : "Unknown"),
+                new KeyValuePair<string, string>("Display Count", displays.DisplayCount > 0 ? displays.DisplayCount.ToString() : "Unknown"),
+                new KeyValuePair<string, string>("Graphics Adapter", ValueOrUnknown(gpu.Name)),
+                new KeyValuePair<string, string>("Adapter Vendor", ValueOrUnknown(gpu.Vendor))
+            };
+
+            if (displays.PrimaryRefreshRateHz > 0) specs.Add(new("Primary Refresh Rate", $"{displays.PrimaryRefreshRateHz} Hz"));
+            if (displays.PrimaryBitsPerPixel > 0) specs.Add(new("Color Depth", $"{displays.PrimaryBitsPerPixel}-bit"));
+            if (displays.VirtualWidth > 0 && displays.VirtualHeight > 0) specs.Add(new("Virtual Desktop", $"{displays.VirtualWidth}x{displays.VirtualHeight}"));
+            if (!string.IsNullOrWhiteSpace(displays.PrimaryMonitorName)) specs.Add(new("Primary Monitor", ValueOrUnknown(displays.PrimaryMonitorName)));
+            if (!string.IsNullOrWhiteSpace(displays.MonitorManufacturer)) specs.Add(new("Monitor Manufacturer", ValueOrUnknown(displays.MonitorManufacturer)));
+            if (!string.IsNullOrWhiteSpace(displays.MonitorModel)) specs.Add(new("Monitor Model", ValueOrUnknown(displays.MonitorModel)));
+            if (!string.IsNullOrWhiteSpace(displays.GpuOutput)) specs.Add(new("GPU Output", ValueOrUnknown(displays.GpuOutput)));
+
+            return new HardwareDetailPayload(
+                "Displays",
+                ValueOrUnknown(gpu.Name),
+                HardwareIconResolver.ResolveIconKey(
+                    "display",
+                    $"{displays.PrimaryMonitorName} {displays.MonitorManufacturer} {displays.MonitorModel}",
+                    HardwareIconResolver.GetFallbackKey("display")),
+                HardwareIconResolver.GetFallbackKey("display"),
+                specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+}
+
+public sealed class NetworkDetailVM : HardwareDetailViewModelBase
+{
+    public NetworkDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Network)
+    {
+        Title = "Network";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("network");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "network_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var network = ResolveCached("Network", cache.Network);
+            var matchQuery = !string.IsNullOrWhiteSpace(network.PrimaryAdapterDescription)
+                ? network.PrimaryAdapterDescription
+                : network.PrimaryAdapterName;
+            var matchedNetwork = HardwareKnowledgeDbService.Instance.MatchNetworkAdapter(matchQuery ?? string.Empty);
+
+            var specs = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("Adapters Detected", network.AdapterCount.ToString()),
+                new KeyValuePair<string, string>("Adapters Up", network.AdapterUpCount.ToString()),
+                new KeyValuePair<string, string>("Wireless Adapters", network.WirelessAdapterCount.ToString()),
+                new KeyValuePair<string, string>("Primary Adapter", ValueOrUnknown(network.PrimaryAdapterName)),
+                new KeyValuePair<string, string>("Description", ValueOrUnknown(network.PrimaryAdapterDescription)),
+                new KeyValuePair<string, string>("Adapter Type", ValueOrUnknown(network.PrimaryAdapterType)),
+                new KeyValuePair<string, string>("Link Speed", ValueOrUnknown(network.PrimaryLinkSpeed)),
+                new KeyValuePair<string, string>("IPv4", ValueOrUnknown(network.PrimaryIpv4)),
+                new KeyValuePair<string, string>("Gateway", ValueOrUnknown(network.PrimaryGateway)),
+                new KeyValuePair<string, string>("DNS", ValueOrUnknown(network.PrimaryDns)),
+                new KeyValuePair<string, string>("MAC Address", ValueOrUnknown(network.PrimaryMacAddress)),
+                new KeyValuePair<string, string>("Source", "Startup cache")
+            };
+
+            if (matchedNetwork != null)
+            {
+                specs.Add(new("DB Match", $"{matchedNetwork.Brand} {matchedNetwork.ModelName}".Trim()));
+            }
+
+            return new HardwareDetailPayload(
+                "Network",
+                ValueOrUnknown(network.PrimaryAdapterName),
+                matchedNetwork != null
+                    ? matchedNetwork.IconKey
+                    : HardwareIconResolver.ResolveIconKey(
+                        "network",
+                        $"{network.PrimaryAdapterDescription} {network.PrimaryAdapterName}",
+                        HardwareIconResolver.GetFallbackKey("network")),
+                HardwareIconResolver.GetFallbackKey("network"),
+                specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+}
+
+public sealed class UsbDetailVM : HardwareDetailViewModelBase
+{
+    public UsbDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Usb)
+    {
+        Title = "USB";
+        Subtitle = "Loading system data...";
+        IconKey = HardwareIconResolver.GetFallbackKey("usb");
+        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "usb_generic");
+
+        BeginLoad(snapshot, cache =>
+        {
+            var usb = ResolveCached("USB", cache.Usb);
+            var matchQuery = !string.IsNullOrWhiteSpace(usb.PrimaryControllerName)
+                ? usb.PrimaryControllerName
+                : usb.PrimaryUsbDeviceName;
+            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsbController(matchQuery ?? string.Empty);
+
+            var specs = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("Removable Drives", usb.RemovableDriveCount.ToString()),
+                new KeyValuePair<string, string>("USB Controllers", usb.UsbControllerCount.ToString()),
+                new KeyValuePair<string, string>("USB Devices", usb.UsbDeviceCount.ToString()),
+                new KeyValuePair<string, string>("Primary Controller", ValueOrUnknown(usb.PrimaryControllerName)),
+                new KeyValuePair<string, string>("Primary Device", ValueOrUnknown(usb.PrimaryUsbDeviceName)),
+                new KeyValuePair<string, string>("Vendor ID", ValueOrUnknown(usb.PrimaryVendorId)),
+                new KeyValuePair<string, string>("Product ID", ValueOrUnknown(usb.PrimaryProductId)),
+                new KeyValuePair<string, string>("Source", "Startup cache"),
+                new KeyValuePair<string, string>("Tip", "Use Monitor tab for detailed USB inventory")
+            };
+
+            if (matchedUsb != null)
+            {
+                specs.Add(new("DB Match", $"{matchedUsb.Brand} {matchedUsb.ModelName}".Trim()));
+            }
+
+            return new HardwareDetailPayload(
+                "USB",
+                ValueOrUnknown(usb.PrimaryControllerName),
+                matchedUsb != null
+                    ? matchedUsb.IconKey
+                    : HardwareIconResolver.ResolveIconKey(
+                        "usb",
+                        $"{usb.PrimaryControllerName} {usb.PrimaryUsbDeviceName}",
+                        HardwareIconResolver.GetFallbackKey("usb")),
+                HardwareIconResolver.GetFallbackKey("usb"),
+                specs);
+        });
+    }
+
+    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+}
+
+public static class HardwareDetailViewModelFactory
+{
+    public static HardwareDetailViewModelBase? Create(HardwareType type, HardwareDetailSnapshot? snapshot = null)
+    {
+        return type switch
+        {
+            HardwareType.Os => new OsDetailVM(snapshot),
+            HardwareType.Cpu => new CpuDetailVM(snapshot),
+            HardwareType.Gpu => new GpuDetailVM(snapshot),
+            HardwareType.Motherboard => new MotherboardDetailVM(snapshot),
+            HardwareType.Memory => new MemoryDetailVM(snapshot),
+            HardwareType.Storage => new StorageDetailVM(snapshot),
+            HardwareType.Displays => new DisplaysDetailVM(snapshot),
+            HardwareType.Network => new NetworkDetailVM(snapshot),
+            HardwareType.Usb => new UsbDetailVM(snapshot),
+            _ => null
+        };
+    }
 }
