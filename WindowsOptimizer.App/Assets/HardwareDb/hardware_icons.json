@@ -1,0 +1,66 @@
+{
+  "os": [
+    { "match": "windows 11", "icon": "os/windows11" },
+    { "match": "windows 10", "icon": "os/windows10" }
+  ],
+  "cpu": [
+    { "match": "ryzen 9", "icon": "cpu_ryzen9" },
+    { "match": "ryzen 7", "icon": "cpu_ryzen7" },
+    { "match": "ryzen 5", "icon": "cpu_ryzen5" },
+    { "match": "phenom", "icon": "cpu_amd_phenom" },
+    { "match": "core i9", "icon": "cpu_i9" },
+    { "match": "core i7", "icon": "cpu_i7" },
+    { "match": "core i5", "icon": "cpu_i5" },
+    { "match": "intel", "icon": "cpu_intel" },
+    { "match": "amd", "icon": "cpu_amd" }
+  ],
+  "gpu": [
+    { "match": "rtx 50", "icon": "gpu_rtx" },
+    { "match": "rtx", "icon": "gpu_rtx" },
+    { "match": "gtx", "icon": "gpu_gtx" },
+    { "match": "rx 9", "icon": "gpu_rx9000" },
+    { "match": "radeon", "icon": "gpu_radeon" },
+    { "match": "nvidia", "icon": "gpu_nvidia" }
+  ],
+  "motherboard": [
+    { "match": "asus", "icon": "mb_asus" },
+    { "match": "asrock", "icon": "mb_asrock" },
+    { "match": "msi", "icon": "mb_msi" },
+    { "match": "gigabyte", "icon": "mb_gigabyte" }
+  ],
+  "chipset": [
+    { "match": "z790", "icon": "mb_asus" },
+    { "match": "x670", "icon": "mb_msi" }
+  ],
+  "memory": [
+    { "match": "corsair", "icon": "memory_corsair" },
+    { "match": "kingston", "icon": "memory_kingston" }
+  ],
+  "storage": [
+    { "match": "corsair", "icon": "storage_ssd" },
+    { "match": "samsung", "icon": "storage_ssd" },
+    { "match": "nvme", "icon": "storage_nvme" },
+    { "match": "pcie", "icon": "storage_nvme" },
+    { "match": "ssd", "icon": "storage_ssd" },
+    { "match": "hdd", "icon": "storage_hdd" },
+    { "match": "sata", "icon": "storage_hdd" }
+  ],
+  "display": [
+    { "match": "asus", "icon": "asus" },
+    { "match": "acer", "icon": "display_default" },
+    { "match": "lg", "icon": "display_default" },
+    { "match": "samsung", "icon": "display_default" },
+    { "match": "dell", "icon": "display_default" }
+  ],
+  "network": [
+    { "match": "intel", "icon": "network_default" },
+    { "match": "realtek", "icon": "network_default" },
+    { "match": "killer", "icon": "network_default" },
+    { "match": "broadcom", "icon": "network_default" }
+  ],
+  "usb": [
+    { "match": "asmedia", "icon": "usb_default" },
+    { "match": "renesas", "icon": "usb_default" },
+    { "match": "intel", "icon": "usb_default" }
+  ]
+}
