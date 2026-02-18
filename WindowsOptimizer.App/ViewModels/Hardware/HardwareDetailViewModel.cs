@@ -340,9 +340,20 @@ public sealed class CpuDetailVM : HardwareDetailViewModelBase
                 specs.Add(new("Performance Tier", matchedCpu.GetTier()));
             }
 
-            var iconKey = matchedCpu != null
-                ? matchedCpu.IconKey
-                : HardwareIconResolver.ResolveIconKey("cpu", cpu.Name, HardwareIconResolver.GetFallbackKey("cpu"));
+            string iconKey;
+            if (matchedCpu != null)
+            {
+                iconKey = matchedCpu.IconKey ?? HardwareIconResolver.GetFallbackKey("cpu");
+                // Normalize any legacy per-series Ryzen keys to the new universal key
+                if (iconKey.IndexOf("ryzen", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    iconKey = "amd_ryzen_cpu";
+                }
+            }
+            else
+            {
+                iconKey = HardwareIconResolver.ResolveIconKey("cpu", cpu.Name, HardwareIconResolver.GetFallbackKey("cpu"));
+            }
 
             return new HardwareDetailPayload(
                 ValueOrUnknown(cpu.Name),
