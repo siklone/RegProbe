@@ -122,7 +122,8 @@ public sealed class HardwareAuditService
             AuditStorage(snapshot.Storage),
             AuditDisplays(snapshot.Displays),
             AuditNetwork(snapshot.Network),
-            AuditUsb(snapshot.Usb)
+            AuditUsb(snapshot.Usb),
+            AuditAudio(snapshot.Audio)
         };
 
         var issues = components.SelectMany(static component => component.Issues).ToList();
@@ -180,10 +181,17 @@ public sealed class HardwareAuditService
     {
         var raw = FirstNonEmpty(os.NormalizedName, os.ProductName);
         var component = CreateComponent("OS", HardwareType.Os, raw, raw);
+        var isWindows11 = raw.Contains("Windows 11", StringComparison.OrdinalIgnoreCase);
 
         AddIf(component, string.IsNullOrWhiteSpace(os.ProductName), "ProductName", "OS product name was not resolved.", HardwareAuditSeverity.Error, os.ProductName);
         AddIf(component, os.BuildNumber <= 0, "BuildNumber", "OS build number is missing.", HardwareAuditSeverity.Warning, os.BuildNumber.ToString());
         AddIf(component, string.IsNullOrWhiteSpace(os.Architecture), "Architecture", "OS architecture is missing.", HardwareAuditSeverity.Warning, os.Architecture);
+        AddIf(component, string.IsNullOrWhiteSpace(os.BiosMode), "BiosMode", "OS BIOS mode is missing.", HardwareAuditSeverity.Info, os.BiosMode);
+        AddIf(component, string.IsNullOrWhiteSpace(os.SecureBootState), "SecureBootState", "Secure Boot state is missing.", isWindows11 ? HardwareAuditSeverity.Warning : HardwareAuditSeverity.Info, os.SecureBootState);
+        AddIf(component, isWindows11 && string.IsNullOrWhiteSpace(os.TpmVersion), "TpmVersion", "TPM version is missing on a Windows 11 install.", HardwareAuditSeverity.Warning, os.TpmVersion);
+        AddIf(component, string.IsNullOrWhiteSpace(os.BitLockerStatus), "BitLockerStatus", "BitLocker status is missing.", HardwareAuditSeverity.Info, os.BitLockerStatus);
+        AddIf(component, string.IsNullOrWhiteSpace(os.DefenderStatus), "DefenderStatus", "Defender service status is missing.", HardwareAuditSeverity.Info, os.DefenderStatus);
+        AddIf(component, string.IsNullOrWhiteSpace(os.FirewallStatus), "FirewallStatus", "Firewall service status is missing.", HardwareAuditSeverity.Info, os.FirewallStatus);
 
         return component;
     }
@@ -310,6 +318,27 @@ public sealed class HardwareAuditService
         return component;
     }
 
+    private static HardwareAuditComponent AuditAudio(AudioHardwareData audio)
+    {
+        var raw = audio.PrimaryDeviceName ?? string.Empty;
+        var component = CreateComponent("Audio", HardwareType.Audio, raw, raw);
+
+        AddIf(component, audio.DeviceCount <= 0, "DeviceCount", "No audio devices were resolved.", HardwareAuditSeverity.Info, audio.DeviceCount.ToString());
+        AddIf(component, audio.DeviceCount > 0 && HardwareAuditHeuristics.IsPlaceholderValue(audio.PrimaryDeviceName), "PrimaryDeviceName", "Primary audio device name is missing.", HardwareAuditSeverity.Info, audio.PrimaryDeviceName);
+        AddIf(component, audio.DeviceCount > 0 && string.IsNullOrWhiteSpace(audio.PrimaryStatus), "PrimaryStatus", "Primary audio device status is missing.", HardwareAuditSeverity.Info, audio.PrimaryStatus);
+        AddIf(
+            component,
+            audio.DeviceCount > 1 &&
+            AudioDetectionHelpers.IsLikelyVirtualDevice(audio.PrimaryDeviceName, audio.PrimaryManufacturer) &&
+            audio.AllDevices.Any(static deviceName => !AudioDetectionHelpers.IsLikelyVirtualDevice(deviceName)),
+            "PrimaryDeviceName",
+            "Primary audio device resolved to a virtual endpoint while physical devices are available.",
+            HardwareAuditSeverity.Warning,
+            audio.PrimaryDeviceName);
+
+        return component;
+    }
+
     private static HardwareAuditComponent CreateComponent(string section, HardwareType type, string? rawValue, string? lookupValue)
     {
         var raw = rawValue?.Trim() ?? string.Empty;
@@ -328,7 +357,7 @@ public sealed class HardwareAuditService
             ConfidenceScore = GetConfidenceScore(resolution)
         };
 
-        if (resolution.Source == HardwareIconResolutionSource.Fallback)
+        if (resolution.Source == HardwareIconResolutionSource.Fallback && type != HardwareType.Audio)
         {
             component.Issues.Add(new HardwareAuditIssue
             {

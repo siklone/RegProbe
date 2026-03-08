@@ -1508,9 +1508,10 @@ public sealed class HardwarePreloadService
     private static AudioHardwareData LoadAudioData()
     {
         var data = new AudioHardwareData();
+        var bestScore = int.MinValue;
         try
         {
-            using var searcher = new ManagementObjectSearcher("SELECT Name, Manufacturer, Status FROM Win32_SoundDevice");
+            using var searcher = new ManagementObjectSearcher("SELECT Name, Manufacturer, Status, DeviceID FROM Win32_SoundDevice");
             foreach (ManagementObject obj in searcher.Get())
             {
                 var name = obj["Name"]?.ToString();
@@ -1518,12 +1519,17 @@ public sealed class HardwarePreloadService
 
                 data.DeviceCount++;
                 data.AllDevices.Add(name);
+                var manufacturer = obj["Manufacturer"]?.ToString();
+                var status = obj["Status"]?.ToString();
+                var deviceId = obj["DeviceID"]?.ToString();
+                var score = AudioDetectionHelpers.ScoreDevice(name, manufacturer, status, deviceId);
 
-                if (string.IsNullOrWhiteSpace(data.PrimaryDeviceName))
+                if (score > bestScore)
                 {
+                    bestScore = score;
                     data.PrimaryDeviceName = name;
-                    data.PrimaryManufacturer = obj["Manufacturer"]?.ToString();
-                    data.PrimaryStatus = obj["Status"]?.ToString();
+                    data.PrimaryManufacturer = manufacturer;
+                    data.PrimaryStatus = status;
                 }
             }
         }

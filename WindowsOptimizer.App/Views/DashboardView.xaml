@@ -408,6 +408,8 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -487,6 +489,32 @@
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                TextWrapping="Wrap"
                                                MaxWidth="180"/>
+
+                                    <TextBlock Grid.Row="6"
+                                               Margin="0,10,0,0"
+                                               Text="Security"
+                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Row="6"
+                                               Grid.Column="1"
+                                               Margin="0,10,0,0"
+                                               Text="{Binding SecurityCompactSummary}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="180"/>
+
+                                    <TextBlock Grid.Row="7"
+                                               Margin="0,10,0,0"
+                                               Text="Audio"
+                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Row="7"
+                                               Grid.Column="1"
+                                               Margin="0,10,0,0"
+                                               Text="{Binding AudioCompactSummary}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="180"/>
                                 </Grid>
                             </StackPanel>
                         </Border>
@@ -516,7 +544,7 @@
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding MotherboardCompactSummary}"
+                            <TextBlock Text="{Binding FirmwarePlatformSummary}"
                                        Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        TextWrapping="Wrap"/>
@@ -537,6 +565,10 @@
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding SecurityPlatformSummary}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding SecurityServiceSummary}"
                                        Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        TextWrapping="Wrap"/>
@@ -581,9 +613,17 @@
                                        Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundBrightBrush}"
                                        TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding NetworkIdentitySummary}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding StorageCapacitySummary}"
                                        Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundBrightBrush}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding StorageIdentitySummary}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
                                        TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>

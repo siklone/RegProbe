@@ -158,4 +158,89 @@ public sealed class HardwareAuditServiceTests
                      issue.Field == "PrimaryAdapter" &&
                      issue.Message.Contains("virtual", System.StringComparison.OrdinalIgnoreCase));
     }
+
+    [Fact]
+    public void CreateReport_FlagsMissingWindows11SecuritySignalsAndAudioInventory()
+    {
+        var snapshot = new HardwareDetailSnapshot
+        {
+            Os = new OsHardwareData
+            {
+                NormalizedName = "Windows 11 Pro",
+                ProductName = "Windows 11 Pro",
+                BuildNumber = 26100,
+                Architecture = "64-bit"
+            },
+            Audio = new AudioHardwareData()
+        };
+
+        var report = HardwareAuditService.Instance.CreateReport(snapshot);
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Section == "OS" &&
+                     issue.Field == "TpmVersion" &&
+                     issue.Severity == HardwareAuditSeverity.Warning);
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Section == "OS" &&
+                     issue.Field == "SecureBootState");
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Section == "Audio" &&
+                     issue.Field == "DeviceCount" &&
+                     issue.Severity == HardwareAuditSeverity.Info);
+    }
+
+    [Fact]
+    public void CreateReport_DoesNotTreatAudioCategoryFallbackAsAuditProblem()
+    {
+        var snapshot = new HardwareDetailSnapshot
+        {
+            Audio = new AudioHardwareData
+            {
+                DeviceCount = 1,
+                PrimaryDeviceName = "NVIDIA High Definition Audio",
+                PrimaryManufacturer = "NVIDIA",
+                PrimaryStatus = "OK"
+            }
+        };
+
+        var report = HardwareAuditService.Instance.CreateReport(snapshot);
+        var audioComponent = report.Components.Single(component => component.Section == "Audio");
+
+        Assert.DoesNotContain(
+            audioComponent.Issues,
+            issue => issue.Field == "IconKey" &&
+                     issue.Message.Contains("fell back", System.StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void CreateReport_FlagsVirtualPrimaryAudioWhenPhysicalDeviceExists()
+    {
+        var snapshot = new HardwareDetailSnapshot
+        {
+            Audio = new AudioHardwareData
+            {
+                DeviceCount = 3,
+                PrimaryDeviceName = "NVIDIA Virtual Audio Device (Wave Extensible) (WDM)",
+                PrimaryManufacturer = "NVIDIA",
+                PrimaryStatus = "OK",
+                AllDevices =
+                {
+                    "NVIDIA Virtual Audio Device (Wave Extensible) (WDM)",
+                    "High Definition Audio Device",
+                    "Sound Blaster Audigy Fx V2"
+                }
+            }
+        };
+
+        var report = HardwareAuditService.Instance.CreateReport(snapshot);
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Section == "Audio" &&
+                     issue.Field == "PrimaryDeviceName" &&
+                     issue.Message.Contains("virtual endpoint", System.StringComparison.OrdinalIgnoreCase));
+    }
 }

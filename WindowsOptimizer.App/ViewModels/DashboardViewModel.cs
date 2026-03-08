@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ServiceProcess;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -50,6 +51,8 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _biosDate = "Loading...";
     private string _smbiosVersion = "Loading...";
     private string _secureBootState = "Loading...";
+    private string _tpmVersion = "Loading...";
+    private string _bitLockerStatus = "Loading...";
 
     // Motherboard
     // Motherboard
@@ -140,6 +143,12 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _deviceGuard = "Loading...";
     private string _hypervisorEnforced = "Loading...";
     private string _credentialGuard = "Loading...";
+    private string _defenderStatus = "Loading...";
+    private string _firewallStatus = "Loading...";
+    private string _primaryAudioDevice = "Loading...";
+    private string _primaryAudioManufacturer = "Loading...";
+    private string _primaryAudioStatus = "Loading...";
+    private int _audioDeviceCount;
 
     // Collections
     private ObservableCollection<RamModuleModel> _ramModules = new();
@@ -191,6 +200,8 @@ public sealed class DashboardViewModel : ViewModelBase
     public string BiosDate { get => _biosDate; private set => SetProperty(ref _biosDate, value); }
     public string SmbiosVersion { get => _smbiosVersion; private set => SetProperty(ref _smbiosVersion, value); }
     public string SecureBootState { get => _secureBootState; private set => SetProperty(ref _secureBootState, value); }
+    public string TpmVersion { get => _tpmVersion; private set => SetProperty(ref _tpmVersion, value); }
+    public string BitLockerStatus { get => _bitLockerStatus; private set => SetProperty(ref _bitLockerStatus, value); }
 
     // Motherboard
     // Motherboard (Mapped to MotherboardDetails now)
@@ -294,6 +305,12 @@ public sealed class DashboardViewModel : ViewModelBase
     public string DeviceGuard { get => _deviceGuard; private set => SetProperty(ref _deviceGuard, value); }
     public string HypervisorEnforced { get => _hypervisorEnforced; private set => SetProperty(ref _hypervisorEnforced, value); }
     public string CredentialGuard { get => _credentialGuard; private set => SetProperty(ref _credentialGuard, value); }
+    public string DefenderStatus { get => _defenderStatus; private set => SetProperty(ref _defenderStatus, value); }
+    public string FirewallStatus { get => _firewallStatus; private set => SetProperty(ref _firewallStatus, value); }
+    public string PrimaryAudioDevice { get => _primaryAudioDevice; private set => SetProperty(ref _primaryAudioDevice, value); }
+    public string PrimaryAudioManufacturer { get => _primaryAudioManufacturer; private set => SetProperty(ref _primaryAudioManufacturer, value); }
+    public string PrimaryAudioStatus { get => _primaryAudioStatus; private set => SetProperty(ref _primaryAudioStatus, value); }
+    public int AudioDeviceCount { get => _audioDeviceCount; private set => SetProperty(ref _audioDeviceCount, value); }
 
 
     // Collections
@@ -327,6 +344,10 @@ public sealed class DashboardViewModel : ViewModelBase
         HasValue(PageFileSpace) ? $"Page {PageFileSpace}" : null);
     public string GraphicsCompactSummary => JoinNonEmpty(GpuVideoMemory, GpuResolution, GpuRefreshRate);
     public string FirmwareCompactSummary => JoinNonEmpty(BiosVersion, BiosDate, BiosMode);
+    public string FirmwarePlatformSummary => JoinNonEmpty(
+        MotherboardDetails.BiosVendor,
+        HasValue(SmbiosVersion) ? $"SMBIOS {SmbiosVersion}" : null,
+        MotherboardDetails.Chipset);
     public string MotherboardCompactSummary => JoinNonEmpty(
         BaseboardManufacturer,
         MotherboardDetails.Chipset,
@@ -352,7 +373,18 @@ public sealed class DashboardViewModel : ViewModelBase
             return JoinNonEmpty(
                 totalBytes > 0 ? $"{FormatBytes(totalBytes)} total" : null,
                 primaryDisk?.LogicalDrives,
-                BootDevice);
+                primaryDisk?.Model);
+        }
+    }
+    public string StorageIdentitySummary
+    {
+        get
+        {
+            var primaryDisk = GetPrimaryDiskDrive();
+            return JoinNonEmpty(
+                primaryDisk?.InterfacePretty,
+                primaryDisk?.LogicalDrives,
+                HasValue(primaryDisk?.FirmwareRevision) ? $"FW {primaryDisk!.FirmwareRevision}" : null);
         }
     }
     public string PrimaryDisplaySummary
@@ -401,6 +433,17 @@ public sealed class DashboardViewModel : ViewModelBase
                 PrefixValue(FirstDnsServer(primaryNetwork), "DNS "));
         }
     }
+    public string NetworkIdentitySummary
+    {
+        get
+        {
+            var primaryNetwork = GetPrimaryNetworkAdapter();
+            return JoinNonEmpty(
+                PrefixValue(CleanNetworkValue(primaryNetwork?.MacAddress), "MAC "),
+                HasValue(primaryNetwork?.DhcpEnabled) ? $"DHCP {primaryNetwork!.DhcpEnabled}" : null,
+                primaryNetwork?.Type);
+        }
+    }
     public string UsbCompactSummary
     {
         get
@@ -414,14 +457,23 @@ public sealed class DashboardViewModel : ViewModelBase
                 primaryDevice?.Name);
         }
     }
+    public string AudioCompactSummary => JoinNonEmpty(
+        AudioDeviceCount > 0 ? $"{AudioDeviceCount} devices" : null,
+        PrimaryAudioManufacturer,
+        PrimaryAudioDevice);
     public string SecurityCompactSummary => JoinNonEmpty(
         HasValue(SecureBootState) ? $"Secure Boot {SecureBootState}" : null,
-        HasValue(KernelDmaProtection) && !KernelDmaProtection.Equals("Off", StringComparison.OrdinalIgnoreCase) ? $"DMA {KernelDmaProtection}" : null,
-        HasValue(CredentialGuard) && !CredentialGuard.Equals("Not enabled", StringComparison.OrdinalIgnoreCase) ? $"CG {CredentialGuard}" : null);
+        HasValue(TpmVersion) ? $"TPM {TpmVersion}" : null,
+        HasValue(BitLockerStatus) ? $"BitLocker {BitLockerStatus}" : null);
     public string SecurityPlatformSummary => JoinNonEmpty(
         HasValue(VirtualizationSecurity) && !VirtualizationSecurity.StartsWith("Not", StringComparison.OrdinalIgnoreCase) ? $"VBS {VirtualizationSecurity}" : null,
         HasValue(DeviceGuard) && !DeviceGuard.StartsWith("Not", StringComparison.OrdinalIgnoreCase) ? $"DG {DeviceGuard}" : null,
+        HasValue(CredentialGuard) && !CredentialGuard.StartsWith("Not", StringComparison.OrdinalIgnoreCase) ? $"CG {CredentialGuard}" : null,
         string.Equals(HypervisorEnforced, "Yes", StringComparison.OrdinalIgnoreCase) ? "HVCI" : null);
+    public string SecurityServiceSummary => JoinNonEmpty(
+        HasValue(DefenderStatus) ? $"Defender {DefenderStatus}" : null,
+        HasValue(FirewallStatus) ? $"Firewall {FirewallStatus}" : null,
+        HasValue(KernelDmaProtection) && !KernelDmaProtection.Equals("Off", StringComparison.OrdinalIgnoreCase) ? $"DMA {KernelDmaProtection}" : null);
     public string AuditCompactSummary => JoinNonEmpty(
         AuditScore,
         AuditErrorCount > 0 ? $"{AuditErrorCount} errors" : null,
@@ -532,6 +584,7 @@ public sealed class DashboardViewModel : ViewModelBase
                 TryLoadDashboardSection("Storage", LoadDiskDrivesInfo);
                 TryLoadDashboardSection("USB", LoadUsbDevicesInfo);
                 TryLoadDashboardSection("Network", LoadNetworkInfo);
+                TryLoadDashboardSection("Audio", LoadAudioInfo);
                 TryLoadDashboardSection("Security", LoadSecurityInfo);
             });
 
@@ -575,9 +628,13 @@ public sealed class DashboardViewModel : ViewModelBase
         Uptime = PreferBetter(Uptime, snapshot.Os.Uptime);
         UserName = PreferBetter(UserName, snapshot.Os.Username);
         SecureBootState = PreferBetter(SecureBootState, snapshot.Os.SecureBootState);
+        TpmVersion = PreferBetter(TpmVersion, snapshot.Os.TpmVersion);
+        BitLockerStatus = PreferBetter(BitLockerStatus, snapshot.Os.BitLockerStatus);
         BiosMode = PreferBetter(BiosMode, snapshot.Os.BiosMode);
         CredentialGuard = PreferBetter(CredentialGuard, snapshot.Os.CredentialGuardStatus);
         DeviceGuard = PreferBetter(DeviceGuard, snapshot.Os.DeviceGuardStatus);
+        DefenderStatus = PreferBetter(DefenderStatus, snapshot.Os.DefenderStatus);
+        FirewallStatus = PreferBetter(FirewallStatus, snapshot.Os.FirewallStatus);
         if (!string.IsNullOrWhiteSpace(snapshot.Os.VirtualizationEnabled))
         {
             VirtualizationSecurity = PreferBetter(VirtualizationSecurity, snapshot.Os.VirtualizationEnabled);
@@ -789,11 +846,12 @@ public sealed class DashboardViewModel : ViewModelBase
                 Type = adapter.AdapterType ?? string.Empty,
                 Status = adapter.Status ?? string.Empty,
                 Speed = adapter.LinkSpeed ?? string.Empty,
-                MacAddress = adapter.MacAddress ?? string.Empty,
+                MacAddress = FormatMacAddress(adapter.MacAddress ?? string.Empty),
                 IpAddress = adapter.Ipv4 ?? string.Empty,
                 SubnetMask = string.Empty,
                 DefaultGateway = adapter.Gateway ?? string.Empty,
                 DnsServers = adapter.Dns ?? string.Empty,
+                DhcpEnabled = adapter.DhcpEnabled ?? string.Empty,
                 DriverUrl = GenerateNetworkDriverUrl(adapter.Description ?? adapter.Name ?? string.Empty)
             }));
         }
@@ -811,6 +869,14 @@ public sealed class DashboardViewModel : ViewModelBase
             UsbIconKey = usbResolution.IconKey;
             UsbIconSource = HardwareIconService.Resolve(usbResolution);
         }
+
+        if (snapshot.Audio.DeviceCount > 0)
+        {
+            AudioDeviceCount = Math.Max(AudioDeviceCount, snapshot.Audio.DeviceCount);
+        }
+        PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, snapshot.Audio.PrimaryDeviceName);
+        PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, snapshot.Audio.PrimaryManufacturer);
+        PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, snapshot.Audio.PrimaryStatus);
 
         NotifyCompactSummaryPropertiesChanged();
     }
@@ -993,16 +1059,21 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(MemoryRuntimeSummary));
         OnPropertyChanged(nameof(GraphicsCompactSummary));
         OnPropertyChanged(nameof(FirmwareCompactSummary));
+        OnPropertyChanged(nameof(FirmwarePlatformSummary));
         OnPropertyChanged(nameof(MotherboardCompactSummary));
         OnPropertyChanged(nameof(StorageCompactSummary));
         OnPropertyChanged(nameof(StorageCapacitySummary));
+        OnPropertyChanged(nameof(StorageIdentitySummary));
         OnPropertyChanged(nameof(PrimaryDisplaySummary));
         OnPropertyChanged(nameof(PrimaryDisplayTechSummary));
         OnPropertyChanged(nameof(PrimaryNetworkSummary));
         OnPropertyChanged(nameof(NetworkEndpointSummary));
+        OnPropertyChanged(nameof(NetworkIdentitySummary));
         OnPropertyChanged(nameof(UsbCompactSummary));
+        OnPropertyChanged(nameof(AudioCompactSummary));
         OnPropertyChanged(nameof(SecurityCompactSummary));
         OnPropertyChanged(nameof(SecurityPlatformSummary));
+        OnPropertyChanged(nameof(SecurityServiceSummary));
         OnPropertyChanged(nameof(AuditCompactSummary));
     }
 
@@ -2184,6 +2255,7 @@ public sealed class DashboardViewModel : ViewModelBase
                     SubnetMask = ipv4?.IPv4Mask?.ToString() ?? "N/A",
                     DefaultGateway = ipProps.GatewayAddresses.FirstOrDefault()?.Address?.ToString() ?? "N/A",
                     DnsServers = string.Join(", ", ipProps.DnsAddresses.Where(a => a.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).Select(a => a.ToString())),
+                    DhcpEnabled = ipProps.GetIPv4Properties()?.IsDhcpEnabled == true ? "On" : "Off",
                     DriverUrl = GenerateNetworkDriverUrl(nic.Description)
                 });
             }
@@ -2203,6 +2275,49 @@ public sealed class DashboardViewModel : ViewModelBase
         });
     }
 
+    private void LoadAudioInfo()
+    {
+        var deviceCount = 0;
+        var primaryDevice = string.Empty;
+        var primaryManufacturer = string.Empty;
+        var primaryStatus = string.Empty;
+        var bestScore = int.MinValue;
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Name, Manufacturer, Status, DeviceID FROM Win32_SoundDevice");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                var name = obj["Name"]?.ToString();
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    continue;
+                }
+
+                deviceCount++;
+                var manufacturer = obj["Manufacturer"]?.ToString() ?? string.Empty;
+                var status = obj["Status"]?.ToString() ?? string.Empty;
+                var deviceId = obj["DeviceID"]?.ToString();
+                var score = AudioDetectionHelpers.ScoreDevice(name, manufacturer, status, deviceId);
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    primaryDevice = name;
+                    primaryManufacturer = manufacturer;
+                    primaryStatus = status;
+                }
+            }
+        }
+        catch
+        {
+        }
+
+        AudioDeviceCount = Math.Max(AudioDeviceCount, deviceCount);
+        PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, primaryDevice);
+        PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, primaryManufacturer);
+        PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, primaryStatus);
+    }
+
     private static string GenerateNetworkDriverUrl(string description)
     {
         // Universal search - works for ALL network adapters (Realtek, Intel, Broadcom, Marvell, Aquantia, etc.)
@@ -2220,6 +2335,8 @@ public sealed class DashboardViewModel : ViewModelBase
         
         // Credential Guard
         CredentialGuard = GetCredentialGuardStatus();
+        DefenderStatus = GetServiceStatus("WinDefend");
+        FirewallStatus = GetServiceStatus("MpsSvc");
     }
 
     private string GetKernelDmaProtectionStatus()
@@ -2352,6 +2469,19 @@ public sealed class DashboardViewModel : ViewModelBase
         catch { }
 
         return "Not enabled";
+    }
+
+    private static string GetServiceStatus(string serviceName)
+    {
+        try
+        {
+            using var service = new ServiceController(serviceName);
+            return service.Status == ServiceControllerStatus.Running ? "Running" : "Stopped";
+        }
+        catch
+        {
+            return "Unknown";
+        }
     }
 
     private static string GetChipsetName()
@@ -2567,6 +2697,7 @@ public class NetworkAdapterModel
     public string SubnetMask { get; set; } = "";
     public string DefaultGateway { get; set; } = "";
     public string DnsServers { get; set; } = "";
+    public string DhcpEnabled { get; set; } = "";
     public string DriverUrl { get; set; } = "";
 }
 
