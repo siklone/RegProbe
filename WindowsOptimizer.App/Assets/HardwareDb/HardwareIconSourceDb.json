@@ -5,6 +5,7 @@
     "manifestVersion":  "2026.02.18",
     "provider":  "google_favicon",
     "categoryFallbacks":  {
+                              "audio":  "audio_default",
                               "chipset":  "chipset_default",
                               "cpu":  "cpu_default",
                               "display":  "display_default",
@@ -16,8 +17,20 @@
                               "storage":  "storage_default",
                               "usb":  "usb_default"
                           },
-    "itemCount":  189,
+    "itemCount":  190,
     "items":  [
+                  {
+                      "key":  "audio_default",
+                      "category":  "audio",
+                      "description":  "Generic audio device",
+                      "provider":  "local_asset",
+                      "preferredDomain":  "",
+                      "domainCount":  0,
+                      "domains":  [
+                                      
+                                  ],
+                      "urlTemplate":  ""
+                  },
                   {
                       "key":  "amd_ryzen",
                       "category":  "brand",

@@ -58,6 +58,14 @@ public sealed class UsbDetailWindow : HardwareDetailWindow
     }
 }
 
+public sealed class AudioDetailWindow : HardwareDetailWindow
+{
+    public AudioDetailWindow()
+    {
+        DataContext = new AudioDetailVM();
+    }
+}
+
 public sealed class MotherboardDetailWindow : HardwareDetailWindow
 {
     public MotherboardDetailWindow()

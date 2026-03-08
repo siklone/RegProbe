@@ -19,7 +19,7 @@ public static class HardwareIconResolver
         ["network"] = "network_default",
         ["usb"] = "usb_default",
         ["display"] = "display_default",
-        ["audio"] = "cpu_default"
+        ["audio"] = "audio_default"
     };
 
     private static readonly Dictionary<string, HardwareType> CategoryToType = new(StringComparer.OrdinalIgnoreCase)

@@ -127,6 +127,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _displayIconKey = "display_default";
     private string _networkIconKey = "network_default";
     private string _usbIconKey = "usb_default";
+    private string _audioIconKey = "audio_default";
     private ImageSource _osIconSource = HardwareIconResolver.ResolveOsIcon(GetRuntimeOsDefaultName());
     private ImageSource _cpuIconSource = HardwareIconResolver.ResolveIcon("cpu_default", "cpu_default");
     private ImageSource _gpuIconSource = HardwareIconResolver.ResolveIcon("gpu_default", "gpu_default");
@@ -136,6 +137,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private ImageSource _displayIconSource = HardwareIconResolver.ResolveIcon("display_default", "display_default");
     private ImageSource _networkIconSource = HardwareIconResolver.ResolveIcon("network_default", "network_default");
     private ImageSource _usbIconSource = HardwareIconResolver.ResolveIcon("usb_default", "usb_default");
+    private ImageSource _audioIconSource = HardwareIconResolver.ResolveIcon("audio_default", "audio_default");
 
     // Security
     private string _kernelDmaProtection = "Loading...";
@@ -289,6 +291,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public string DisplayIconKey { get => _displayIconKey; private set => SetProperty(ref _displayIconKey, value); }
     public string NetworkIconKey { get => _networkIconKey; private set => SetProperty(ref _networkIconKey, value); }
     public string UsbIconKey { get => _usbIconKey; private set => SetProperty(ref _usbIconKey, value); }
+    public string AudioIconKey { get => _audioIconKey; private set => SetProperty(ref _audioIconKey, value); }
     public ImageSource OsIconSource { get => _osIconSource; private set => SetProperty(ref _osIconSource, value); }
     public ImageSource CpuIconSource { get => _cpuIconSource; private set => SetProperty(ref _cpuIconSource, value); }
     public ImageSource GpuIconSource { get => _gpuIconSource; private set => SetProperty(ref _gpuIconSource, value); }
@@ -298,6 +301,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public ImageSource DisplayIconSource { get => _displayIconSource; private set => SetProperty(ref _displayIconSource, value); }
     public ImageSource NetworkIconSource { get => _networkIconSource; private set => SetProperty(ref _networkIconSource, value); }
     public ImageSource UsbIconSource { get => _usbIconSource; private set => SetProperty(ref _usbIconSource, value); }
+    public ImageSource AudioIconSource { get => _audioIconSource; private set => SetProperty(ref _audioIconSource, value); }
 
     // Security
     public string KernelDmaProtection { get => _kernelDmaProtection; private set => SetProperty(ref _kernelDmaProtection, value); }
@@ -542,6 +546,7 @@ public sealed class DashboardViewModel : ViewModelBase
                 "disk" or "storage" => new Views.StorageDetailWindow(),
                 "network" => new Views.NetworkDetailWindow(),
                 "usb" => new Views.UsbDetailWindow(),
+                "audio" => new Views.AudioDetailWindow(),
                 "motherboard" or "mobo" => new Views.MotherboardDetailWindow(),
                 "displays" or "display" => new Views.DisplaysDetailWindow(),
                 _ => null
@@ -877,6 +882,13 @@ public sealed class DashboardViewModel : ViewModelBase
         PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, snapshot.Audio.PrimaryDeviceName);
         PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, snapshot.Audio.PrimaryManufacturer);
         PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, snapshot.Audio.PrimaryStatus);
+        if (!string.IsNullOrWhiteSpace(snapshot.Audio.PrimaryDeviceName))
+        {
+            var audioLookup = JoinNonEmpty(snapshot.Audio.PrimaryManufacturer, snapshot.Audio.PrimaryDeviceName);
+            var audioResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audioLookup);
+            AudioIconKey = audioResolution.IconKey;
+            AudioIconSource = HardwareIconService.Resolve(audioResolution);
+        }
 
         NotifyCompactSummaryPropertiesChanged();
     }
@@ -2316,6 +2328,13 @@ public sealed class DashboardViewModel : ViewModelBase
         PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, primaryDevice);
         PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, primaryManufacturer);
         PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, primaryStatus);
+        if (!string.IsNullOrWhiteSpace(primaryDevice))
+        {
+            var audioLookup = JoinNonEmpty(primaryManufacturer, primaryDevice);
+            var audioResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audioLookup);
+            AudioIconKey = audioResolution.IconKey;
+            AudioIconSource = HardwareIconService.Resolve(audioResolution);
+        }
     }
 
     private static string GenerateNetworkDriverUrl(string description)

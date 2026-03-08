@@ -21,6 +21,7 @@ public static class HardwareIconSourceDb
         ["network_generic"] = "network_default",
         ["usb_generic"] = "usb_default",
         ["display_generic"] = "display_default",
+        ["audio_generic"] = "audio_default",
         ["mb_default"] = "motherboard_default",
         ["os_windows10"] = "os/windows10",
         ["os_windows11"] = "os/windows11"
@@ -38,7 +39,7 @@ public static class HardwareIconSourceDb
         ["usb"] = "usb_default",
         ["display"] = "display_default",
         ["os"] = "os/windows10",
-        ["audio"] = "cpu_default"
+        ["audio"] = "audio_default"
     };
 
     public static bool ContainsKey(string? iconKey)

@@ -900,6 +900,35 @@
                                        TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
+
+                    <Button Style="{StaticResource DashboardCardButtonStyle}"
+                            Command="{Binding OpenDetailCommand}"
+                            CommandParameter="audio">
+                        <StackPanel>
+                            <DockPanel LastChildFill="True">
+                                <Image Source="{Binding AudioIconSource}"
+                                       Width="28"
+                                       Height="28"
+                                       Stretch="Uniform"
+                                       Margin="0,0,10,0"/>
+                                <StackPanel>
+                                    <TextBlock Text="Audio"
+                                               Foreground="{DynamicResource ForegroundLightBrush}"
+                                               FontSize="11"/>
+                                    <TextBlock Text="{Binding AudioDeviceCount, StringFormat={}{0} devices}"
+                                               Margin="0,2,0,0"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               FontWeight="SemiBold"
+                                               FontSize="12"/>
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{Binding AudioCompactSummary}"
+                                       Margin="0,10,0,0"
+                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Button>
                 </WrapPanel>
             </StackPanel>
         </ScrollViewer>

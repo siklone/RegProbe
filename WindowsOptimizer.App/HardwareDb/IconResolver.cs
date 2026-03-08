@@ -41,7 +41,7 @@ public static class IconResolver
         [HardwareType.Display] = "display_default",
         [HardwareType.Network] = "network_default",
         [HardwareType.Usb] = "usb_default",
-        [HardwareType.Audio] = "cpu_default"
+        [HardwareType.Audio] = "audio_default"
     };
 
     private static readonly (Regex Pattern, string IconKey)[] CpuPatterns =

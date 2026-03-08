@@ -264,6 +264,15 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void ResolveResult_UsesAudioDefaultIconForCreativeAudioDevice()
+    {
+        var result = HardwareIconService.ResolveResult(HardwareType.Audio, "Creative Sound Blaster Audigy Fx V2");
+
+        Assert.Equal("audio_default", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.Fallback, result.Source);
+    }
+
+    [Fact]
     public void BuildDisplayLookupSeed_ExpandsManufacturerCodes()
     {
         var seed = HardwareIconService.BuildDisplayLookupSeed("GSM");
