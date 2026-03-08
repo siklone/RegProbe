@@ -39,6 +39,12 @@ public sealed class AppPaths
 
     public string NohutoAnalysisReportPath => Path.Combine(LogDirectory, "nohuto-analysis.json");
 
+    public string NohutoAnalysisMarkdownPath => Path.Combine(LogDirectory, "nohuto-analysis.md");
+
+    public string WinConfigCatalogCacheFilePath => Path.Combine(AppDataRoot, "win-config-catalog.json");
+
+    public string WinConfigCatalogMarkdownReportPath => Path.Combine(LogDirectory, "win-config-catalog.md");
+
     public void EnsureDirectories()
     {
         Directory.CreateDirectory(AppDataRoot);

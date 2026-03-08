@@ -101,6 +101,35 @@
             <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
 
+        <Style x:Key="CatalogCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Margin" Value="0,0,12,12"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="MinHeight" Value="170"/>
+        </Style>
+
+        <Style x:Key="PolicyReferenceCardStyle" TargetType="Border" BasedOn="{StaticResource CatalogCardStyle}">
+            <Setter Property="Width" Value="340"/>
+            <Setter Property="MinHeight" Value="310"/>
+        </Style>
+
+        <Style x:Key="PolicyReferenceInfoCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
+        </Style>
+
+        <Style x:Key="TweakInsightCardStyle" TargetType="Border" BasedOn="{StaticResource PolicyReferenceInfoCardStyle}">
+            <Setter Property="Margin" Value="0,0,8,8"/>
+        </Style>
+
         <converters:EnumToBooleanConverter x:Key="EnumToBool" />
         <converters:TabToVisibilityConverter x:Key="TabToVis" />
 
@@ -276,6 +305,40 @@
                     <Setter Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
                 </DataTrigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="WorkspaceModeButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- Filter Bar Button with Smooth Animations -->
@@ -1043,7 +1106,7 @@
                                                VerticalAlignment="Center"/>
 	                                </Border>
 	                            </StackPanel>
-	                            <TextBlock Text="{Binding Description}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextTrimming="CharacterEllipsis" Margin="0,0,0,1" ToolTip="{Binding Description}" LineHeight="14"/>
+	                            <TextBlock Text="{Binding Description}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap" MaxHeight="32" Margin="0,0,0,2" ToolTip="{Binding Description}" LineHeight="14"/>
 	                            <Grid Margin="0,1,0,0"
 	                                  Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"
 	                                  ToolTip="{Binding CompactInfoTooltip}">
@@ -1066,7 +1129,6 @@
 	                                           Text="{Binding CompactInfoLine}"
 	                                           Foreground="{DynamicResource ForegroundLightBrush}"
 	                                           FontSize="11"
-	                                           FontFamily="Consolas"
 	                                           Opacity="0.85"
 	                                           TextTrimming="CharacterEllipsis"/>
 	                            </Grid>
@@ -1230,15 +1292,57 @@
                          <!-- Detail Tabs -->
                          <UniformGrid Columns="2" Margin="0,0,0,10">
                              <ToggleButton IsChecked="{Binding ShowTerminal, Converter={StaticResource InverseBool}, Mode=TwoWay}"
-                                           Content="Technical Info"
+                                           Content="What Changes"
                                            Style="{StaticResource TabButtonStyle}"/>
                              <ToggleButton IsChecked="{Binding ShowTerminal, Mode=TwoWay}"
-                                           Content="Execution Log"
+                                           Content="Run Details"
                                            Style="{StaticResource TabButtonStyle}"/>
                          </UniformGrid>
 
                          <!-- Tab View 1: Technical Info -->
                          <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource InverseBoolToVisibility}}">
+                             <UniformGrid Columns="2" Margin="0,0,0,10">
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10" Margin="0,0,6,0">
+                                     <StackPanel>
+                                         <TextBlock Text="What this setting does" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding Description}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10" Margin="6,0,0,0">
+                                     <StackPanel>
+                                         <TextBlock Text="What to expect" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding EffectSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                             </UniformGrid>
+
+                             <UniformGrid Columns="2" Margin="0,0,0,10">
+                                 <Border Style="{StaticResource TweakInsightCardStyle}">
+                                     <StackPanel>
+                                         <TextBlock Text="Detected from" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                         <TextBlock Text="{Binding DetectedFromSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Style="{StaticResource TweakInsightCardStyle}">
+                                     <StackPanel>
+                                         <TextBlock Text="Affects" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                         <TextBlock Text="{Binding AffectsSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Style="{StaticResource TweakInsightCardStyle}">
+                                     <StackPanel>
+                                         <TextBlock Text="Restart" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                         <TextBlock Text="{Binding RestartAdvice}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Style="{StaticResource TweakInsightCardStyle}">
+                                     <StackPanel>
+                                         <TextBlock Text="Related settings" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                         <TextBlock Text="{Binding RelatedSettingsSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                             </UniformGrid>
+
                              <!-- Registry Info -->
                              <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
                                  <TextBlock Text="Registry Location" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
@@ -1256,7 +1360,7 @@
 
                              <!-- Registry Diff -->
                              <StackPanel Visibility="{Binding HasDiff, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
-                                 <TextBlock Text="Registry Value Comparison" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
+                                 <TextBlock Text="Current vs target" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
                                  <UniformGrid Columns="2">
                                      <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="4,0,0,4" Padding="8,6" BorderBrush="{DynamicResource GlassBorderBrush}" BorderThickness="1,1,0,1">
                                          <StackPanel>
@@ -1317,7 +1421,9 @@
                              </StackPanel>
 
                              <!-- Reference Links -->
-	                             <ItemsControl ItemsSource="{Binding ReferenceLinks}" Margin="0,0,0,10">
+	                             <ItemsControl ItemsSource="{Binding UserReferenceLinks}"
+                                           Margin="0,0,0,10"
+                                           Visibility="{Binding HasUserReferenceLinks, Converter={StaticResource BoolToVisibility}}">
 	                                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
 	                                 <ItemsControl.ItemTemplate>
 	                                     <DataTemplate>
@@ -1508,9 +1614,10 @@
                                    Foreground="{DynamicResource ForegroundBrightestBrush}"
                                    FontSize="12"/>
                         <TextBlock Text="{Binding Description}"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
                                    FontSize="10"
-                                   TextTrimming="CharacterEllipsis"
+                                   TextWrapping="Wrap"
+                                   MaxHeight="30"
                                    ToolTip="{Binding Description}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                             <Border Style="{StaticResource RiskBadgeStyle}" Margin="0,0,6,0">
@@ -1679,9 +1786,10 @@
         <Grid Margin="16,8,16,16" ClipToBounds="False">
             <TabControl Style="{StaticResource ModernMainTabControlStyle}"
                         ItemContainerStyle="{StaticResource ModernMainTabItemStyle}"
+                        SelectedIndex="{Binding SelectedMainTabIndex, Mode=TwoWay}"
                         Margin="0"
                         Padding="0">
-                <TabItem Header="Policies">
+                <TabItem Header="Configuration">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1699,8 +1807,61 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
+
+                                <Grid Grid.Row="0" Margin="4,4,4,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding CurrentWorkspaceLabel}"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                        <TextBlock Text="{Binding CurrentWorkspaceDescription}"
+                                                   Margin="0,4,0,0"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <WrapPanel Grid.Column="1"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Top">
+                                        <ToggleButton Command="{Binding ShowSettingsWorkspaceCommand}"
+                                                      IsChecked="{Binding IsSettingsWorkspaceSelected, Mode=OneWay}"
+                                                      Style="{StaticResource WorkspaceModeButtonStyle}">
+                                            <StackPanel>
+                                                <TextBlock Text="Windows Settings"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding SettingsWorkspaceCount, StringFormat={}{0} items}"
+                                                           Margin="0,4,0,0"
+                                                           FontSize="10"
+                                                           Opacity="0.85"/>
+                                            </StackPanel>
+                                        </ToggleButton>
+                                        <ToggleButton Command="{Binding ShowMaintenanceWorkspaceCommand}"
+                                                      IsChecked="{Binding IsMaintenanceWorkspaceSelected, Mode=OneWay}"
+                                                      Style="{StaticResource WorkspaceModeButtonStyle}"
+                                                      Margin="0,0,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="Maintenance"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding MaintenanceWorkspaceCount, StringFormat={}{0} items}"
+                                                           Margin="0,4,0,0"
+                                                           FontSize="10"
+                                                           Opacity="0.85"/>
+                                            </StackPanel>
+                                        </ToggleButton>
+                                    </WrapPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -1712,7 +1873,7 @@
                                         <Grid Width="280" Margin="0,0,10,6">
                                             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                                      Style="{StaticResource SearchBoxStyle}"
-                                                     Tag="Search policies, IDs, or descriptions..."/>
+                                                     Tag="{Binding SearchPlaceholder}"/>
                                         </Grid>
                                         <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
                                             <StackPanel Orientation="Horizontal">
@@ -1758,12 +1919,6 @@
                                     <WrapPanel Grid.Column="1"
                                                HorizontalAlignment="Right"
                                                Margin="0,0,0,6">
-                                        <Button Command="{Binding OpenLogFolderCommand}" ToolTip="Open logs folder" Style="{StaticResource CompactButton}" Margin="0,0,6,6">
-                                            <TextBlock Text="Logs"/>
-                                        </Button>
-                                        <Button Command="{Binding OpenDocsCoverageReportCommand}" ToolTip="Docs Coverage Report" Style="{StaticResource CompactButton}" Margin="0,0,8,6">
-                                            <TextBlock Text="Docs"/>
-                                        </Button>
                                         <Button Command="{Binding ExpandAllDetailsCommand}" ToolTip="Expand all details" Style="{StaticResource CompactButton}" Margin="0,0,4,6">
                                             <TextBlock Text="Expand"/>
                                         </Button>
@@ -1776,13 +1931,17 @@
                                     </WrapPanel>
                                 </Grid>
 
-                                <Grid Grid.Row="1" Margin="4,0,4,0">
+                                <Grid Grid.Row="2" Margin="4,0,4,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding FilterSummary}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding InventoryStatusMessage}" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="11"/>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding InventoryStatusMessage}"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"
+                                               FontSize="11"
+                                               Margin="12,0,0,0"/>
                                 </Grid>
                             </Grid>
                         </Border>
@@ -1811,12 +1970,12 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Policy Domains"
+                                <TextBlock Text="{Binding WorkspaceCategoryHeader}"
                                            FontSize="13"
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Grid.Row="1"
-                                           Text="{Binding TotalTweaksAvailable, StringFormat={}{0} policies cataloged}"
+                                           Text="{Binding CurrentWorkspaceCountLabel}"
                                            FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
                                            Margin="0,3,0,10"/>
@@ -1828,14 +1987,14 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="All Policies"
+                                        <TextBlock Text="{Binding AllItemsLabel}"
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                         <Border Grid.Column="1"
                                                 Background="{DynamicResource BackgroundMediumBrush}"
                                                 CornerRadius="10"
                                                 Padding="8,2">
-                                            <TextBlock Text="{Binding TotalTweaksAvailable}"
+                                            <TextBlock Text="{Binding CurrentWorkspaceItemCount}"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                                        FontSize="10"
                                                        FontWeight="Bold"/>
@@ -1936,6 +2095,10 @@
                                            FontSize="18"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding WorkspaceStatusHint}"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                           Margin="0,4,0,0"/>
                                 <TextBlock Text="{Binding BulkStatusMessage}"
                                            FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
@@ -1947,17 +2110,8 @@
                                         BorderThickness="1"
                                         CornerRadius="8"
                                         Padding="10,6"
-                                        Margin="0,10,20,4">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding SelectedCategoryName}" Value="Network">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
+                                        Margin="0,10,20,4"
+                                        Visibility="{Binding ShowDnsConfigurationPanel, Converter={StaticResource BoolToVisibility}}">
                                     <Grid DataContext="{Binding DnsConfiguration}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -2061,12 +2215,12 @@
                                         HorizontalAlignment="Center"
                                         Visibility="{Binding HasVisibleTweaks, Converter={StaticResource InverseBoolToVisibility}}">
                                     <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="No policies match your filters"
+                                        <TextBlock Text="{Binding EmptyStateTitle}"
                                                    FontSize="13"
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                    HorizontalAlignment="Center"/>
-                                         <TextBlock Text="Try clearing search or category filters."
+                                         <TextBlock Text="{Binding EmptyStateDescription}"
                                                    FontSize="11"
                                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                                    HorizontalAlignment="Center"
@@ -2077,6 +2231,270 @@
                         </Grid>
                     </Grid>
                 </Grid>
+                </TabItem>
+
+                <TabItem Header="Policy Reference">
+                    <Grid DataContext="{Binding PolicyReference}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="0,0,0,12">
+                            <Border Background="{StaticResource TweakPanelGradientBrush}"
+                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="14"
+                                    Padding="12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Margin="0,0,16,0">
+                                        <TextBlock Text="{Binding Headline}"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                        <TextBlock Text="{Binding Detail}"
+                                                   Margin="0,6,0,0"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Context}"
+                                                   Margin="0,6,0,0"
+                                                   FontSize="10"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   TextWrapping="Wrap"/>
+                                        <Grid Width="320" Margin="0,10,0,0">
+                                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                                     Style="{StaticResource SearchBoxStyle}"
+                                                     Tag="Search Windows Explorer, Edge, Search, System..."/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <WrapPanel Margin="0,10,0,0">
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding PolicyBackedSettingCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Policy-backed Settings"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding ComponentCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Components"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding MachineScopedSettingCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Machine-scoped"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding UserScopedSettingCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="User-scoped"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Padding="0,0,8,8">
+                            <StackPanel>
+                                <WrapPanel Visibility="{Binding HasItems, Converter={StaticResource BoolToVisibility}}">
+                                    <ItemsControl ItemsSource="{Binding ItemsView}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource PolicyReferenceCardStyle}">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <TextBlock Text="{Binding ComponentName}"
+                                                                   FontSize="14"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                                   TextWrapping="Wrap"/>
+
+                                                        <TextBlock Grid.Row="1"
+                                                                   Text="{Binding Description}"
+                                                                   Margin="0,8,0,0"
+                                                                   FontSize="11"
+                                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                   TextWrapping="Wrap"/>
+
+                                                        <WrapPanel Grid.Row="2"
+                                                                   Margin="0,10,0,0">
+                                                            <Border Background="{DynamicResource BackgroundMediumBrush}"
+                                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="9"
+                                                                    Padding="8,3"
+                                                                    Margin="0,0,6,6">
+                                                                <TextBlock Text="{Binding ScopeLabel}"
+                                                                           FontSize="10"
+                                                                           Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                                            </Border>
+                                                            <Border Background="{DynamicResource BackgroundMediumBrush}"
+                                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="9"
+                                                                    Padding="8,3"
+                                                                    Margin="0,0,6,6">
+                                                                <TextBlock Text="{Binding SettingCountLabel}"
+                                                                           FontSize="10"
+                                                                           Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                                            </Border>
+                                                            <Border Background="{DynamicResource BackgroundMediumBrush}"
+                                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="9"
+                                                                    Padding="8,3"
+                                                                    Margin="0,0,6,6">
+                                                                <TextBlock Text="{Binding PrimaryCategory}"
+                                                                           FontSize="10"
+                                                                           Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                                            </Border>
+                                                            <Border Background="{DynamicResource BackgroundMediumBrush}"
+                                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="9"
+                                                                    Padding="8,3"
+                                                                    Margin="0,0,6,6">
+                                                                <TextBlock Text="{Binding StatusLabel}"
+                                                                           FontSize="10"
+                                                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                            </Border>
+                                                        </WrapPanel>
+
+                                                        <StackPanel Grid.Row="3"
+                                                                    Margin="0,8,0,0">
+                                                            <TextBlock Text="{Binding RiskLabel}"
+                                                                       FontSize="10"
+                                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                                       TextWrapping="Wrap"/>
+                                                            <TextBlock Text="{Binding ExampleSummary}"
+                                                                       Margin="0,6,0,0"
+                                                                       FontSize="10"
+                                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                       TextWrapping="Wrap"/>
+                                                            <UniformGrid Columns="2"
+                                                                         Margin="0,8,0,0">
+                                                                <Border Style="{StaticResource PolicyReferenceInfoCardStyle}">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="Windows Reads"
+                                                                                   FontSize="10"
+                                                                                   FontWeight="SemiBold"
+                                                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                                        <TextBlock Text="{Binding ReadPathLabel}"
+                                                                                   Margin="0,4,0,0"
+                                                                                   FontSize="10"
+                                                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <Border Style="{StaticResource PolicyReferenceInfoCardStyle}">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="Scope"
+                                                                                   FontSize="10"
+                                                                                   FontWeight="SemiBold"
+                                                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                                        <TextBlock Text="{Binding ScopeDetail}"
+                                                                                   Margin="0,4,0,0"
+                                                                                   FontSize="10"
+                                                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <Border Style="{StaticResource PolicyReferenceInfoCardStyle}">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="What To Expect"
+                                                                                   FontSize="10"
+                                                                                   FontWeight="SemiBold"
+                                                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                                        <TextBlock Text="{Binding ExpectedBehavior}"
+                                                                                   Margin="0,4,0,0"
+                                                                                   FontSize="10"
+                                                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <Border Style="{StaticResource PolicyReferenceInfoCardStyle}">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="Related Settings"
+                                                                                   FontSize="10"
+                                                                                   FontWeight="SemiBold"
+                                                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                                        <TextBlock Text="{Binding RelatedSettingsLabel}"
+                                                                                   Margin="0,4,0,0"
+                                                                                   FontSize="10"
+                                                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                                                   TextWrapping="Wrap"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </UniformGrid>
+                                                        </StackPanel>
+
+                                                        <WrapPanel Grid.Row="4"
+                                                                   Margin="0,10,0,0">
+                                                            <Button Content="Show matching settings"
+                                                                    Command="{Binding OpenMatchingSettingsCommand}"
+                                                                    Style="{StaticResource CompactButton}"/>
+                                                        </WrapPanel>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </WrapPanel>
+
+                                <Border Padding="20"
+                                        Background="{DynamicResource BackgroundDarkBrush}"
+                                        CornerRadius="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Visibility="{Binding HasItems, Converter={StaticResource InverseBoolToVisibility}}">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="No policy-backed areas match your search"
+                                                   FontSize="13"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                   HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Try a broader search or run Detect to refresh local setting states."
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
                 </TabItem>
 
                 <TabItem Header="Bloatware">

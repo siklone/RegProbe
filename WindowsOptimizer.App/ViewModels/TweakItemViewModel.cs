@@ -18,6 +18,7 @@ using WindowsOptimizer.Engine.Tweaks;
 using WindowsOptimizer.Engine.Tweaks.Commands;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
 using WindowsOptimizer.Infrastructure;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.Utilities;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -35,6 +36,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
     private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
     private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
+    private static readonly TweakInsightFormatter InsightFormatter = new();
 
     private readonly ITweak _tweak;
     private readonly TweakExecutionPipeline _pipeline;
@@ -78,6 +80,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     private double _recommendationConfidence;
     private bool _isSelected;
     private bool _isFavorite;
+    private bool _hasNohutoEvidence;
+    private bool _hasWindowsInternalsContext;
+    private bool _needsSourceReview;
+    private string _provenanceSummary = string.Empty;
     private readonly RelayCommand _toggleFavoriteCommand;
     private readonly ObservableCollection<string> _batchDetails = new();
     private string _batchDetailsTitle = "Details";
@@ -98,6 +104,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         };
 
         ReferenceLinks = new ObservableCollection<ReferenceLink>();
+        ReferenceLinks.CollectionChanged += (_, __) =>
+        {
+            OnPropertyChanged(nameof(HasReferenceLinks));
+            OnPropertyChanged(nameof(UserReferenceLinks));
+            OnPropertyChanged(nameof(HasUserReferenceLinks));
+        };
         SubOptions = new ObservableCollection<TweakSubOption>();
 
         ResetSteps();
@@ -116,7 +128,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
 
         _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
-        _batchDetails.CollectionChanged += (_, __) => OnPropertyChanged(nameof(HasBatchDetails));
+        _batchDetails.CollectionChanged += (_, __) =>
+        {
+            OnPropertyChanged(nameof(HasBatchDetails));
+            RaiseInsightPropertiesChanged();
+        };
 
         TryPopulateTechnicalInfo();
     }
@@ -280,7 +296,13 @@ public sealed class TweakItemViewModel : ViewModelBase
     public TweakActionType ActionType
     {
         get => _actionType;
-        set => SetProperty(ref _actionType, value);
+        set
+        {
+            if (SetProperty(ref _actionType, value))
+            {
+                RaiseInsightPropertiesChanged();
+            }
+        }
     }
 
     public string ActionButtonText
@@ -298,6 +320,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasRegistryPath));
                 OnPropertyChanged(nameof(HasDiff));
+                RaiseInsightPropertiesChanged();
             }
         }
     }
@@ -316,6 +339,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public ObservableCollection<ReferenceLink> ReferenceLinks { get; }
 
+    public IEnumerable<ReferenceLink> UserReferenceLinks =>
+        ReferenceLinks.Where(static link => link.Kind != ReferenceLinkKind.Source && link.Kind != ReferenceLinkKind.Catalog);
+
     public ObservableCollection<TweakSubOption> SubOptions { get; }
 
     public bool HasSubOptions => SubOptions.Any();
@@ -325,6 +351,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public bool HasCodeExample => !string.IsNullOrEmpty(CodeExample);
 
     public bool HasReferenceLinks => ReferenceLinks.Any();
+
+    public bool HasUserReferenceLinks => UserReferenceLinks.Any();
 
     public PriorityCalculatorViewModel? PriorityCalculator
     {
@@ -465,6 +493,60 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string ImpactAreaLabel => _impactAreaLabel;
 
+    public string EffectSummary
+    {
+        get
+        {
+            var segments = new List<string>
+            {
+                Risk switch
+                {
+                    TweakRiskLevel.Safe => "Low risk and designed to be reversible.",
+                    TweakRiskLevel.Advanced => "Changes Windows behavior more noticeably, so review before applying.",
+                    TweakRiskLevel.Risky => "Use carefully and verify the result after applying.",
+                    _ => "Review before applying."
+                }
+            };
+
+            var scope = Category.ToLowerInvariant() switch
+            {
+                "privacy" => "Main impact: privacy and background data collection.",
+                "performance" => "Main impact: responsiveness, latency, or background load.",
+                "security" => "Main impact: security posture and protection behavior.",
+                "network" => "Main impact: connectivity, DNS, or transport behavior.",
+                "visibility" => "Main impact: Windows UI visibility and shell behavior.",
+                "power" => "Main impact: power plans, timers, or idle behavior.",
+                "system" => "Main impact: Windows platform defaults and system services.",
+                _ => string.Empty
+            };
+
+            if (!string.IsNullOrWhiteSpace(scope))
+            {
+                segments.Add(scope);
+            }
+
+            if (RequiresElevation)
+            {
+                segments.Add("Requires administrator approval.");
+            }
+
+            if (WillPromptForDetect)
+            {
+                segments.Add("Status check may ask for an elevated prompt on this PC.");
+            }
+
+            return string.Join(" ", segments);
+        }
+    }
+
+    public string DetectedFromSummary => BuildInsightSnapshot().DetectedFrom;
+
+    public string AffectsSummary => BuildInsightSnapshot().Affects;
+
+    public string RestartAdvice => BuildInsightSnapshot().RestartAdvice;
+
+    public string RelatedSettingsSummary => BuildInsightSnapshot().RelatedSettings;
+
     public bool HasCompactInfoLine => !string.IsNullOrWhiteSpace(ImpactAreaLabel);
 
     public string CompactInfoLine
@@ -516,6 +598,86 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";
 
+    public bool HasNohutoEvidence
+    {
+        get => _hasNohutoEvidence;
+        set
+        {
+            if (SetProperty(ref _hasNohutoEvidence, value))
+            {
+                OnPropertyChanged(nameof(HasProvenance));
+                OnPropertyChanged(nameof(ProvenanceStatusText));
+            }
+        }
+    }
+
+    public bool HasWindowsInternalsContext
+    {
+        get => _hasWindowsInternalsContext;
+        set
+        {
+            if (SetProperty(ref _hasWindowsInternalsContext, value))
+            {
+                OnPropertyChanged(nameof(HasProvenance));
+                OnPropertyChanged(nameof(ProvenanceStatusText));
+            }
+        }
+    }
+
+    public bool NeedsSourceReview
+    {
+        get => _needsSourceReview;
+        set
+        {
+            if (SetProperty(ref _needsSourceReview, value))
+            {
+                OnPropertyChanged(nameof(HasProvenance));
+                OnPropertyChanged(nameof(ProvenanceStatusText));
+            }
+        }
+    }
+
+    public string ProvenanceSummary
+    {
+        get => _provenanceSummary;
+        set
+        {
+            if (SetProperty(ref _provenanceSummary, value))
+            {
+                OnPropertyChanged(nameof(HasProvenance));
+            }
+        }
+    }
+
+    public bool HasProvenance =>
+        HasNohutoEvidence ||
+        HasWindowsInternalsContext ||
+        NeedsSourceReview ||
+        !string.IsNullOrWhiteSpace(ProvenanceSummary);
+
+    public string ProvenanceStatusText
+    {
+        get
+        {
+            if (HasNohutoEvidence && HasWindowsInternalsContext)
+            {
+                return "Nohuto + Internals";
+            }
+
+            if (HasNohutoEvidence)
+            {
+                return "Nohuto-backed";
+            }
+
+            if (HasWindowsInternalsContext)
+            {
+                return "Internals context";
+            }
+
+            return NeedsSourceReview ? "Needs review" : "No provenance";
+        }
+    }
+
     public ObservableCollection<string> BatchDetails => _batchDetails;
 
     public string BatchDetailsTitle
@@ -551,6 +713,27 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         get => _showTerminal;
         set => SetProperty(ref _showTerminal, value);
+    }
+
+    private TweakInsightSnapshot BuildInsightSnapshot()
+    {
+        return InsightFormatter.Build(new TweakInsightInput
+        {
+            Id = Id,
+            Category = Category,
+            ImpactAreaLabel = ImpactAreaLabel,
+            RegistryPath = RegistryPath,
+            ActionType = ActionType,
+            HasBatchDetails = HasBatchDetails
+        });
+    }
+
+    private void RaiseInsightPropertiesChanged()
+    {
+        OnPropertyChanged(nameof(DetectedFromSummary));
+        OnPropertyChanged(nameof(AffectsSummary));
+        OnPropertyChanged(nameof(RestartAdvice));
+        OnPropertyChanged(nameof(RelatedSettingsSummary));
     }
 
     private void AppendToTerminal(string message)

@@ -153,4 +153,68 @@ public partial class MonitorView : UserControl
             parent?.RaiseEvent(eventArg);
         }
     }
+
+    private void PerformanceTiles_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (DataContext is not MonitorViewModel viewModel)
+        {
+            return;
+        }
+
+        var container = FindAncestor<ListBoxItem>(e.OriginalSource as DependencyObject);
+        if (container?.DataContext is MonitorViewModel.PerformanceItemViewModel item)
+        {
+            viewModel.TogglePerformanceDetail(item);
+        }
+    }
+
+    private void PerformanceTiles_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key is not Key.Enter and not Key.Space)
+        {
+            return;
+        }
+
+        if (DataContext is not MonitorViewModel viewModel ||
+            sender is not ListBox listBox ||
+            listBox.SelectedItem is not MonitorViewModel.PerformanceItemViewModel item)
+        {
+            return;
+        }
+
+        viewModel.OpenPerformanceDetail(item);
+        e.Handled = true;
+    }
+
+    private void PerformanceSections_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (DataContext is not MonitorViewModel viewModel)
+        {
+            return;
+        }
+
+        var container = FindAncestor<ListBoxItem>(e.OriginalSource as DependencyObject);
+        if (container?.DataContext is MonitorSectionLayout section)
+        {
+            viewModel.TogglePerformanceSectionDetail(section);
+        }
+    }
+
+    private void PerformanceSections_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key is not Key.Enter and not Key.Space)
+        {
+            return;
+        }
+
+        if (DataContext is not MonitorViewModel viewModel ||
+            sender is not ListBox listBox ||
+            listBox.SelectedItem is not MonitorSectionLayout section)
+        {
+            return;
+        }
+
+        viewModel.OpenPerformanceSectionDetail(section);
+        e.Handled = true;
+    }
 }

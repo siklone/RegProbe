@@ -22,6 +22,7 @@ using WindowsOptimizer.App.HardwareDb;
 using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.App.ViewModels.Hardware;
+using WindowsOptimizer.Infrastructure;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -89,6 +90,8 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _availableVirtualMemory = "Loading...";
     private string _pageFileSpace = "Loading...";
     private string _memorySlots = "Loading...";
+    private int _installedMemoryModuleCount;
+    private int _memorySlotCount;
     
     // Memory Detailed
     private MemoryDetailedModel _memoryDetails = new();
@@ -151,6 +154,20 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _primaryAudioManufacturer = "Loading...";
     private string _primaryAudioStatus = "Loading...";
     private int _audioDeviceCount;
+    private int _audioPhysicalDeviceCount;
+    private int _audioVirtualDeviceCount;
+    private string _primaryAudioDriverProvider = string.Empty;
+    private string _primaryAudioDriverVersion = string.Empty;
+    private string _primaryAudioDriverDate = string.Empty;
+    private long _storageFreeBytes;
+    private int _storageVolumeCount;
+    private int _storageExternalDriveCount;
+    private int _storageSystemDriveCount;
+    private int _usbControllerCount;
+    private int _usbHubCount;
+    private int _usbInputDeviceCount;
+    private int _usbAudioDeviceCount;
+    private int _usbStorageDeviceCount;
 
     // Collections
     private ObservableCollection<RamModuleModel> _ramModules = new();
@@ -167,20 +184,45 @@ public sealed class DashboardViewModel : ViewModelBase
     private int _auditWarningCount;
     private int _auditErrorCount;
     private ObservableCollection<string> _auditHighlights = new();
+    private ObservableCollection<InstallRecommendationItemViewModel> _installRecommendations = new();
+    private string _installRecommendationReadySummary = string.Empty;
+    private string _snapshotChangeHeadline = "Baseline pending";
+    private string _snapshotChangeDetail = "The first local snapshot will be used as the dashboard baseline.";
+    private string _snapshotChangeContext = "History appears after the next refresh.";
+    private readonly AppPaths _appPaths;
+    private readonly RelayCommand _refreshConfigurationSourcesCommand;
+    private readonly RelayCommand _openConfigurationSourcesReportCommand;
+    private ObservableCollection<NohutoSourceItemViewModel> _configurationSources = new();
+    private string _configurationSourcesHeadline = "Configuration sources pending";
+    private string _configurationSourcesDetail = "The nohuto source feed has not been checked yet.";
+    private string _configurationSourcesContext = "win-config, win-registry, decompiled-pseudocode, regkit";
+    private string _configurationSourcesReportPath = string.Empty;
+    private bool _isRefreshingConfigurationSources;
 
 
     public DashboardViewModel()
     {
+        _appPaths = AppPaths.FromEnvironment();
         OpenUrlCommand = new RelayCommand(OpenUrl);
         OpenDetailCommand = new RelayCommand(OpenDetail, _ => true);
         _openAuditReportCommand = new RelayCommand(OpenAuditReport, _ => !string.IsNullOrWhiteSpace(AuditReportPath));
+        _refreshConfigurationSourcesCommand = new RelayCommand(
+            _ => _ = RefreshConfigurationSourcesAsync(isManual: true),
+            _ => !IsRefreshingConfigurationSources);
+        _openConfigurationSourcesReportCommand = new RelayCommand(
+            OpenConfigurationSourcesReport,
+            _ => !string.IsNullOrWhiteSpace(ConfigurationSourcesReportPath));
         OpenAuditReportCommand = _openAuditReportCommand;
+        RefreshConfigurationSourcesCommand = _refreshConfigurationSourcesCommand;
+        OpenConfigurationSourcesReportCommand = _openConfigurationSourcesReportCommand;
         _ = LoadSystemInfoAsync();
     }
 
     public ICommand OpenUrlCommand { get; }
     public ICommand OpenDetailCommand { get; }
     public ICommand OpenAuditReportCommand { get; }
+    public ICommand RefreshConfigurationSourcesCommand { get; }
+    public ICommand OpenConfigurationSourcesReportCommand { get; }
 
     public bool IsLoading { get => _isLoading; private set => SetProperty(ref _isLoading, value); }
 
@@ -326,6 +368,9 @@ public sealed class DashboardViewModel : ViewModelBase
     public string AuditScore { get => _auditScore; private set => SetProperty(ref _auditScore, value); }
     public string AuditStatus { get => _auditStatus; private set => SetProperty(ref _auditStatus, value); }
     public string AuditDetail { get => _auditDetail; private set => SetProperty(ref _auditDetail, value); }
+    public string SnapshotChangeHeadline { get => _snapshotChangeHeadline; private set => SetProperty(ref _snapshotChangeHeadline, value); }
+    public string SnapshotChangeDetail { get => _snapshotChangeDetail; private set => SetProperty(ref _snapshotChangeDetail, value); }
+    public string SnapshotChangeContext { get => _snapshotChangeContext; private set => SetProperty(ref _snapshotChangeContext, value); }
     public string PlatformIdentity => JoinNonEmpty(SystemManufacturer, SystemModel);
     public string OsCompactSummary => JoinNonEmpty(OsVersion, HasValue(OsBuild) ? $"Build {OsBuild}" : null, OsArchitecture);
     public string SystemEnvironmentSummary => JoinNonEmpty(
@@ -341,11 +386,88 @@ public sealed class DashboardViewModel : ViewModelBase
         TotalPhysicalMemory,
         MemoryDetails.Type,
         MemoryDetails.Frequency,
-        HasValue(MemorySlots) ? $"{MemorySlots} modules" : null);
+        MemoryPopulationSummary);
+    public string MemoryPopulationSummary =>
+        HardwarePresentationFormatter.BuildMemoryPopulationSummary(_installedMemoryModuleCount, _memorySlotCount) ?? string.Empty;
     public string MemoryRuntimeSummary => JoinNonEmpty(
         HasValue(AvailablePhysicalMemory) ? $"Free {AvailablePhysicalMemory}" : null,
         HasValue(AvailableVirtualMemory) ? $"Virtual {AvailableVirtualMemory}" : null,
         HasValue(PageFileSpace) ? $"Page {PageFileSpace}" : null);
+    public string GraphicsCardSummary => JoinNonEmpty(
+        GpuVideoMemory,
+        GpuRefreshRate,
+        !HasValue(GpuRefreshRate) ? GpuResolution : null);
+    public string MemoryCardSummary => JoinNonEmpty(
+        MemoryDetails.Type,
+        MemoryDetails.Frequency,
+        MemoryPopulationSummary);
+    public string SecurityHealthSummary
+    {
+        get
+        {
+            var summary = JoinNonEmpty(
+                HasValue(SecureBootState) ? $"Secure Boot {SecureBootState}" : null,
+                HasValue(TpmVersion) ? $"TPM {TpmVersion}" : null);
+            return HasValue(summary) ? summary : "Security pending";
+        }
+    }
+    public string NetworkHealthSummary
+    {
+        get
+        {
+            var primaryNetwork = GetPrimaryNetworkAdapter();
+            var summary = JoinNonEmpty(
+                FormatNetworkHealthStatus(primaryNetwork?.Status),
+                HasValue(primaryNetwork?.Speed) ? primaryNetwork!.Speed : null,
+                primaryNetwork?.Type);
+            return HasValue(summary) ? summary : "No active link";
+        }
+    }
+    public string BootDriveHealthSummary
+    {
+        get
+        {
+            var primaryDisk = GetPrimaryDiskDrive();
+            var summary = JoinNonEmpty(
+                GetPrimaryDriveLabel(primaryDisk),
+                primaryDisk?.FreeBytes > 0 ? $"{FormatBytes(primaryDisk.FreeBytes)} free" : null,
+                primaryDisk?.MediaType);
+            return HasValue(summary) ? summary : "Primary drive pending";
+        }
+    }
+    public string DisplayHealthSummary
+    {
+        get
+        {
+            var primaryDisplay = GetPrimaryMonitor();
+            var summary = JoinNonEmpty(
+                Monitors.Count > 0 ? $"{Monitors.Count} active" : null,
+                primaryDisplay?.RefreshRate,
+                primaryDisplay?.ConnectionType);
+            return HasValue(summary) ? summary : "Display pending";
+        }
+    }
+    public string DisplayOccupancySummary =>
+        HardwarePresentationFormatter.BuildDisplayOccupancySummary(
+            Monitors.Count,
+            Monitors.Count(static monitor => monitor.IsPrimary)) ?? string.Empty;
+    public string StorageOccupancySummary =>
+        HardwarePresentationFormatter.BuildStorageOccupancySummary(
+            DiskDrives.Count,
+            _storageSystemDriveCount,
+            _storageExternalDriveCount) ?? string.Empty;
+    public string UsbOccupancySummary
+    {
+        get
+        {
+            var endpointCount = UsbDevices.Count(static device => !device.IsController);
+            var deviceCount = endpointCount > 0 ? endpointCount : UsbDevices.Count;
+            return HardwarePresentationFormatter.BuildUsbOccupancySummary(
+                _usbControllerCount,
+                _usbHubCount,
+                deviceCount) ?? string.Empty;
+        }
+    }
     public string GraphicsCompactSummary => JoinNonEmpty(GpuVideoMemory, GpuResolution, GpuRefreshRate);
     public string FirmwareCompactSummary => JoinNonEmpty(BiosVersion, BiosDate, BiosMode);
     public string FirmwarePlatformSummary => JoinNonEmpty(
@@ -362,10 +484,21 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             var firstDisk = GetPrimaryDiskDrive();
             return JoinNonEmpty(
-                DiskDrives.Count > 0 ? $"{DiskDrives.Count} drives" : null,
-                firstDisk?.InterfacePretty,
-                firstDisk?.DisplayCapacity,
-                firstDisk?.Model);
+                firstDisk?.MediaType,
+                firstDisk?.Size,
+                CleanStorageValue(firstDisk?.LogicalDrives),
+                firstDisk?.FreeBytes > 0 ? $"{firstDisk.FreeSpace} free" : null);
+        }
+    }
+    public string StorageCardSummary
+    {
+        get
+        {
+            var totalBytes = DiskDrives.Sum(static disk => Math.Max(0, disk.SizeBytes));
+            return JoinNonEmpty(
+                totalBytes > 0 ? $"{FormatBytes(totalBytes)} total" : null,
+                _storageSystemDriveCount > 0 ? $"{_storageSystemDriveCount} system" : null,
+                _storageExternalDriveCount > 0 ? $"{_storageExternalDriveCount} external" : null);
         }
     }
     public string StorageCapacitySummary
@@ -373,11 +506,11 @@ public sealed class DashboardViewModel : ViewModelBase
         get
         {
             var totalBytes = DiskDrives.Sum(static disk => Math.Max(0, disk.SizeBytes));
-            var primaryDisk = GetPrimaryDiskDrive();
             return JoinNonEmpty(
                 totalBytes > 0 ? $"{FormatBytes(totalBytes)} total" : null,
-                primaryDisk?.LogicalDrives,
-                primaryDisk?.Model);
+                _storageFreeBytes > 0 ? $"{FormatBytes(_storageFreeBytes)} free" : null,
+                _storageVolumeCount > 0 ? $"{_storageVolumeCount} volumes" : null,
+                _storageExternalDriveCount > 0 ? $"{_storageExternalDriveCount} external" : null);
         }
     }
     public string StorageIdentitySummary
@@ -386,9 +519,10 @@ public sealed class DashboardViewModel : ViewModelBase
         {
             var primaryDisk = GetPrimaryDiskDrive();
             return JoinNonEmpty(
+                DiskDrives.Count > 0 ? $"{DiskDrives.Count} drives" : null,
                 primaryDisk?.InterfacePretty,
-                primaryDisk?.LogicalDrives,
-                HasValue(primaryDisk?.FirmwareRevision) ? $"FW {primaryDisk!.FirmwareRevision}" : null);
+                CleanStorageValue(primaryDisk?.LogicalDrives),
+                primaryDisk?.Model);
         }
     }
     public string PrimaryDisplaySummary
@@ -401,6 +535,17 @@ public sealed class DashboardViewModel : ViewModelBase
                 primaryDisplay?.Resolution,
                 primaryDisplay?.RefreshRate,
                 primaryDisplay?.ConnectionType);
+        }
+    }
+    public string DisplayCardSummary
+    {
+        get
+        {
+            var primaryDisplay = GetPrimaryMonitor();
+            return JoinNonEmpty(
+                primaryDisplay?.Name,
+                primaryDisplay?.RefreshRate,
+                !HasValue(primaryDisplay?.RefreshRate) ? primaryDisplay?.ConnectionType : null);
         }
     }
     public string PrimaryDisplayTechSummary
@@ -423,6 +568,17 @@ public sealed class DashboardViewModel : ViewModelBase
                 primaryNetwork?.Name,
                 primaryNetwork?.Speed,
                 primaryNetwork?.Status,
+                primaryNetwork?.Type);
+        }
+    }
+    public string NetworkCardSummary
+    {
+        get
+        {
+            var primaryNetwork = GetPrimaryNetworkAdapter();
+            return JoinNonEmpty(
+                FormatNetworkHealthStatus(primaryNetwork?.Status),
+                primaryNetwork?.Speed,
                 primaryNetwork?.Type);
         }
     }
@@ -452,19 +608,40 @@ public sealed class DashboardViewModel : ViewModelBase
     {
         get
         {
-            var controllerCount = UsbDevices.Count(static device => device.IsController);
-            var primaryDevice = UsbDevices.FirstOrDefault(static device => !device.IsController);
+            var primaryDevice = GetPrimaryUsbDevice();
             return JoinNonEmpty(
-                UsbDevices.Count > 0 ? $"{UsbDevices.Count} devices" : null,
-                controllerCount > 0 ? $"{controllerCount} controllers" : null,
                 primaryDevice?.Manufacturer,
-                primaryDevice?.Name);
+                primaryDevice?.Name,
+                _usbHubCount > 0 ? $"{_usbHubCount} hubs" : null,
+                _usbStorageDeviceCount > 0 ? $"{_usbStorageDeviceCount} storage" : null,
+                _usbAudioDeviceCount > 0 ? $"{_usbAudioDeviceCount} audio" : null,
+                _usbInputDeviceCount > 0 ? $"{_usbInputDeviceCount} input" : null);
+        }
+    }
+    public string UsbCardSummary => JoinNonEmpty(
+        _usbControllerCount > 0 ? $"{_usbControllerCount} ctrl" : null,
+        _usbHubCount > 0 ? $"{_usbHubCount} hubs" : null,
+        _usbStorageDeviceCount > 0 ? $"{_usbStorageDeviceCount} storage" : null,
+        _usbInputDeviceCount > 0 ? $"{_usbInputDeviceCount} input" : null);
+    public string UsbHeadline
+    {
+        get
+        {
+            var endpointCount = UsbDevices.Count(static device => !device.IsController);
+            var displayCount = endpointCount > 0 ? endpointCount : UsbDevices.Count;
+            return $"{displayCount} devices";
         }
     }
     public string AudioCompactSummary => JoinNonEmpty(
-        AudioDeviceCount > 0 ? $"{AudioDeviceCount} devices" : null,
         PrimaryAudioManufacturer,
-        PrimaryAudioDevice);
+        PrimaryAudioDevice,
+        HardwarePresentationFormatter.BuildAudioDriverSummary(_primaryAudioDriverProvider, _primaryAudioDriverVersion),
+        _audioVirtualDeviceCount > 0 ? $"{_audioVirtualDeviceCount} virtual" : null,
+        _audioPhysicalDeviceCount > 0 ? $"{_audioPhysicalDeviceCount} physical" : null);
+    public string AudioCardSummary => JoinNonEmpty(
+        BuildCompactAudioLead(PrimaryAudioManufacturer, PrimaryAudioDevice),
+        _audioPhysicalDeviceCount > 0 ? $"{_audioPhysicalDeviceCount} physical" : null,
+        _audioVirtualDeviceCount > 0 ? $"{_audioVirtualDeviceCount} virtual" : null);
     public string SecurityCompactSummary => JoinNonEmpty(
         HasValue(SecureBootState) ? $"Secure Boot {SecureBootState}" : null,
         HasValue(TpmVersion) ? $"TPM {TpmVersion}" : null,
@@ -497,6 +674,37 @@ public sealed class DashboardViewModel : ViewModelBase
     public int AuditWarningCount { get => _auditWarningCount; private set => SetProperty(ref _auditWarningCount, value); }
     public int AuditErrorCount { get => _auditErrorCount; private set => SetProperty(ref _auditErrorCount, value); }
     public ObservableCollection<string> AuditHighlights { get => _auditHighlights; private set => SetProperty(ref _auditHighlights, value); }
+    public ObservableCollection<InstallRecommendationItemViewModel> InstallRecommendations { get => _installRecommendations; private set => SetProperty(ref _installRecommendations, value); }
+    public string InstallRecommendationReadySummary { get => _installRecommendationReadySummary; private set => SetProperty(ref _installRecommendationReadySummary, value); }
+    public bool HasInstallRecommendations => InstallRecommendations.Count > 0;
+    public bool HasInstallRecommendationReadySummary => HasValue(InstallRecommendationReadySummary);
+    public ObservableCollection<NohutoSourceItemViewModel> ConfigurationSources { get => _configurationSources; private set => SetProperty(ref _configurationSources, value); }
+    public string ConfigurationSourcesHeadline { get => _configurationSourcesHeadline; private set => SetProperty(ref _configurationSourcesHeadline, value); }
+    public string ConfigurationSourcesDetail { get => _configurationSourcesDetail; private set => SetProperty(ref _configurationSourcesDetail, value); }
+    public string ConfigurationSourcesContext { get => _configurationSourcesContext; private set => SetProperty(ref _configurationSourcesContext, value); }
+    public bool HasConfigurationSources => ConfigurationSources.Count > 0;
+    public bool IsRefreshingConfigurationSources
+    {
+        get => _isRefreshingConfigurationSources;
+        private set
+        {
+            if (SetProperty(ref _isRefreshingConfigurationSources, value))
+            {
+                _refreshConfigurationSourcesCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+    public string ConfigurationSourcesReportPath
+    {
+        get => _configurationSourcesReportPath;
+        private set
+        {
+            if (SetProperty(ref _configurationSourcesReportPath, value))
+            {
+                _openConfigurationSourcesReportCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
 
     private void OpenUrl(object? parameter)
     {
@@ -521,6 +729,23 @@ public sealed class DashboardViewModel : ViewModelBase
         try
         {
             Process.Start(new ProcessStartInfo(AuditReportPath) { UseShellExecute = true });
+        }
+        catch
+        {
+            // Ignore shell launch failures on the dashboard.
+        }
+    }
+
+    private void OpenConfigurationSourcesReport(object? _)
+    {
+        if (string.IsNullOrWhiteSpace(ConfigurationSourcesReportPath) || !File.Exists(ConfigurationSourcesReportPath))
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(ConfigurationSourcesReportPath) { UseShellExecute = true });
         }
         catch
         {
@@ -596,7 +821,11 @@ public sealed class DashboardViewModel : ViewModelBase
             snapshot = HardwarePreloadService.Instance.GetSnapshot();
             ApplySnapshotCorrections(snapshot);
             RunHardwareAudit(snapshot);
+            RefreshInstallRecommendations();
+            UpdateSnapshotChangeSummary();
+            LoadConfigurationSourcesFromCache();
             NotifyCompactSummaryPropertiesChanged();
+            _ = RefreshConfigurationSourcesAsync(isManual: false);
         }
         catch (Exception ex)
         {
@@ -757,7 +986,12 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         if (snapshot.Memory.ModuleCount > 0)
         {
-            MemorySlots = snapshot.Memory.ModuleCount.ToString();
+            _installedMemoryModuleCount = Math.Max(_installedMemoryModuleCount, snapshot.Memory.ModuleCount);
+        }
+        if (snapshot.Memory.TotalSlotCount > 0)
+        {
+            _memorySlotCount = Math.Max(_memorySlotCount, snapshot.Memory.TotalSlotCount);
+            MemorySlots = snapshot.Memory.TotalSlotCount.ToString();
         }
         if (!string.IsNullOrWhiteSpace(snapshot.Memory.MemoryType))
         {
@@ -787,29 +1021,7 @@ public sealed class DashboardViewModel : ViewModelBase
 
         if (snapshot.Storage.DeviceCount > 0)
         {
-            if (DiskDrives.Count == 0)
-            {
-                DiskDrives = new ObservableCollection<DiskDriveModel>(snapshot.Storage.Disks.Select(disk => new DiskDriveModel
-                {
-                    Model = disk.Model ?? string.Empty,
-                    Size = FormatBytes(disk.SizeBytes),
-                    SizeBytes = disk.SizeBytes,
-                    InterfaceType = disk.InterfaceType ?? string.Empty,
-                    MediaType = disk.MediaType ?? string.Empty,
-                    SerialNumber = disk.SerialNumber ?? string.Empty,
-                    FirmwareRevision = disk.FirmwareRevision ?? string.Empty,
-                    Partitions = disk.PartitionCount.ToString(),
-                    Status = string.Empty,
-                    SearchUrl = GenerateSearchUrl(disk.Model ?? string.Empty, "storage"),
-                    InterfacePretty = SimplifyStorageInterface(disk.InterfaceType, disk.MediaType),
-                    DisplayCapacity = $"[{FormatBytes(disk.SizeBytes).Replace(" ", string.Empty)}]"
-                }));
-            }
-
-            var storageLookup = snapshot.Storage.PrimaryModel ?? DiskDrives.FirstOrDefault()?.Model;
-            var storageResolution = HardwareIconService.ResolveResult(HardwareType.Storage, storageLookup);
-            StorageIconKey = storageResolution.IconKey;
-            StorageIconSource = HardwareIconService.Resolve(storageResolution);
+            ApplyStorageHardwareData(snapshot.Storage, replaceCollection: DiskDrives.Count == 0);
         }
 
         if (snapshot.Displays.Devices.Count > 0 && Monitors.Count == 0)
@@ -868,27 +1080,12 @@ public sealed class DashboardViewModel : ViewModelBase
             NetworkIconSource = HardwareIconService.Resolve(networkResolution);
         }
 
-        if (!string.IsNullOrWhiteSpace(snapshot.Usb.PrimaryControllerName))
+        if (snapshot.Usb.UsbDeviceCount > 0 || snapshot.Usb.Devices.Count > 0)
         {
-            var usbResolution = HardwareIconService.ResolveResult(HardwareType.Usb, snapshot.Usb.PrimaryControllerName);
-            UsbIconKey = usbResolution.IconKey;
-            UsbIconSource = HardwareIconService.Resolve(usbResolution);
+            ApplyUsbHardwareData(snapshot.Usb, replaceCollection: UsbDevices.Count == 0);
         }
 
-        if (snapshot.Audio.DeviceCount > 0)
-        {
-            AudioDeviceCount = Math.Max(AudioDeviceCount, snapshot.Audio.DeviceCount);
-        }
-        PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, snapshot.Audio.PrimaryDeviceName);
-        PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, snapshot.Audio.PrimaryManufacturer);
-        PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, snapshot.Audio.PrimaryStatus);
-        if (!string.IsNullOrWhiteSpace(snapshot.Audio.PrimaryDeviceName))
-        {
-            var audioLookup = JoinNonEmpty(snapshot.Audio.PrimaryManufacturer, snapshot.Audio.PrimaryDeviceName);
-            var audioResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audioLookup);
-            AudioIconKey = audioResolution.IconKey;
-            AudioIconSource = HardwareIconService.Resolve(audioResolution);
-        }
+        ApplyAudioHardwareData(snapshot.Audio);
 
         NotifyCompactSummaryPropertiesChanged();
     }
@@ -916,6 +1113,295 @@ public sealed class DashboardViewModel : ViewModelBase
                 .ThenBy(static issue => issue.Section)
                 .Take(4)
                 .Select(static issue => $"{issue.Section}: {issue.Message}"));
+    }
+
+    private void UpdateSnapshotChangeSummary()
+    {
+        try
+        {
+            var result = DashboardSnapshotDeltaService.Instance.UpdateAndSave(CreateDashboardSnapshotDeltaState());
+            SnapshotChangeHeadline = result.Headline;
+            SnapshotChangeDetail = result.Detail;
+            SnapshotChangeContext = result.Context;
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Dashboard snapshot history update failed", ex);
+            SnapshotChangeHeadline = "History unavailable";
+            SnapshotChangeDetail = "Local snapshot comparison could not be generated.";
+            SnapshotChangeContext = string.Empty;
+        }
+    }
+
+    private void RefreshInstallRecommendations()
+    {
+        try
+        {
+            var context = CreateInstallRecommendationContext();
+            var allRecommendations = InstallRecommendationService.Instance.GetRecommendations(context);
+            var readyRuntimeTitles = allRecommendations
+                .Where(static recommendation => recommendation.Category == "Runtime" && recommendation.IsInstalled)
+                .Select(static recommendation => recommendation.Title)
+                .ToList();
+
+            InstallRecommendationReadySummary = readyRuntimeTitles.Count == 0
+                ? string.Empty
+                : $"Already installed: {string.Join(", ", readyRuntimeTitles.Select(CompactInstallReadyTitle))}";
+
+            InstallRecommendations = new ObservableCollection<InstallRecommendationItemViewModel>(
+                allRecommendations
+                    .Where(static recommendation => recommendation.Category == "Driver" || recommendation.Category == "Utility" || !recommendation.IsInstalled)
+                    .Select(recommendation => new InstallRecommendationItemViewModel(
+                        recommendation,
+                        RunInstallRecommendationPrimaryAction,
+                        OpenInstallRecommendationSource)));
+
+            OnPropertyChanged(nameof(HasInstallRecommendations));
+            OnPropertyChanged(nameof(HasInstallRecommendationReadySummary));
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Dashboard recommendation refresh failed", ex);
+            InstallRecommendations = new ObservableCollection<InstallRecommendationItemViewModel>();
+            InstallRecommendationReadySummary = string.Empty;
+            OnPropertyChanged(nameof(HasInstallRecommendations));
+            OnPropertyChanged(nameof(HasInstallRecommendationReadySummary));
+        }
+    }
+
+    private void LoadConfigurationSourcesFromCache()
+    {
+        try
+        {
+            using var scanService = new NohutoRepoScanService(_appPaths);
+            var cachedState = scanService.LoadCachedState();
+            ApplyConfigurationSourceResult(new NohutoRepoScanResult
+            {
+                CheckedSuccessfully = cachedState.Repositories.Any(static repository => repository.CheckedSuccessfully),
+                UsedCachedData = true,
+                UpdatedRepositoryCount = cachedState.Repositories.Count(static repository => repository.StateKind == NohutoRepositoryStateKind.Updated),
+                BaselineRepositoryCount = cachedState.Repositories.Count(static repository => repository.StateKind == NohutoRepositoryStateKind.Baseline),
+                CheckedAtUtc = cachedState.LastCheckedAtUtc,
+                Summary = string.IsNullOrWhiteSpace(cachedState.LastSummary)
+                    ? "Configuration source feed pending."
+                    : cachedState.LastSummary,
+                JsonReportPath = _appPaths.NohutoAnalysisReportPath,
+                MarkdownReportPath = _appPaths.NohutoAnalysisMarkdownPath,
+                Repositories = cachedState.Repositories
+            });
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Configuration source cache load failed", ex);
+        }
+    }
+
+    private async Task RefreshConfigurationSourcesAsync(bool isManual)
+    {
+        if (IsRefreshingConfigurationSources)
+        {
+            return;
+        }
+
+        IsRefreshingConfigurationSources = true;
+
+        try
+        {
+            using var timeoutCts = new CancellationTokenSource(isManual
+                ? TimeSpan.FromSeconds(16)
+                : TimeSpan.FromSeconds(10));
+            using var scanService = new NohutoRepoScanService(_appPaths);
+            var result = await scanService.CheckAndAnalyzeAsync(
+                timeoutCts.Token,
+                isManual ? null : TimeSpan.FromHours(2));
+
+            ApplyConfigurationSourceResult(result);
+            AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
+        }
+        catch (OperationCanceledException)
+        {
+            ConfigurationSourcesHeadline = "Configuration source refresh timed out";
+            ConfigurationSourcesDetail = "The local feed remains available. Try Refresh again if you need a live check.";
+            ConfigurationSourcesContext = BuildConfigurationContext(Array.Empty<string>(), null, usedCachedData: false, failedChecks: 0);
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Configuration source refresh failed", ex);
+            ConfigurationSourcesHeadline = "Configuration source refresh failed";
+            ConfigurationSourcesDetail = "Cached nohuto source data is still available.";
+            ConfigurationSourcesContext = ex.Message;
+        }
+        finally
+        {
+            IsRefreshingConfigurationSources = false;
+        }
+    }
+
+    private void ApplyConfigurationSourceResult(NohutoRepoScanResult result)
+    {
+        var reportPath = FirstNonEmpty(result.MarkdownReportPath, _appPaths.NohutoAnalysisMarkdownPath);
+        ConfigurationSourcesReportPath = File.Exists(reportPath) ? reportPath : string.Empty;
+        ConfigurationSources = new ObservableCollection<NohutoSourceItemViewModel>(
+            result.Repositories
+                .Select(static repository => new NohutoSourceItemViewModel(repository)));
+        OnPropertyChanged(nameof(HasConfigurationSources));
+
+        var updatedRepos = result.Repositories
+            .Where(static repository => repository.StateKind == NohutoRepositoryStateKind.Updated)
+            .Select(static repository => repository.DisplayName)
+            .ToArray();
+        var failedChecks = result.Repositories.Count(static repository => repository.StateKind == NohutoRepositoryStateKind.Failed);
+        var baselines = result.Repositories.Count(static repository => repository.StateKind == NohutoRepositoryStateKind.Baseline);
+
+        if (updatedRepos.Length > 0)
+        {
+            ConfigurationSourcesHeadline = $"{updatedRepos.Length} source updates detected";
+            ConfigurationSourcesDetail = $"Updated: {string.Join(", ", updatedRepos.Take(3))}{(updatedRepos.Length > 3 ? "..." : string.Empty)}";
+        }
+        else if (baselines > 0)
+        {
+            ConfigurationSourcesHeadline = $"{baselines} sources baselined";
+            ConfigurationSourcesDetail = "Initial source baselines are saved. Future upstream changes will show here.";
+        }
+        else if (result.CheckedSuccessfully)
+        {
+            ConfigurationSourcesHeadline = $"{result.Repositories.Count} sources tracked";
+            ConfigurationSourcesDetail = "No new upstream changes across the tracked nohuto repositories.";
+        }
+        else
+        {
+            ConfigurationSourcesHeadline = "Configuration sources unavailable";
+            ConfigurationSourcesDetail = "The nohuto feed could not be refreshed.";
+        }
+
+        ConfigurationSourcesContext = BuildConfigurationContext(
+            result.Repositories
+                .Where(static repository => repository.CheckedSuccessfully)
+                .SelectMany(static repository => repository.LastAnalysis.TopCategories)
+                .OrderByDescending(static insight => insight.Score)
+                .Select(static insight => insight.Category)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .Take(3),
+            result.CheckedAtUtc == default ? null : result.CheckedAtUtc,
+            result.UsedCachedData,
+            failedChecks);
+    }
+
+    private InstallRecommendationContext CreateInstallRecommendationContext()
+    {
+        return new InstallRecommendationContext
+        {
+            Is64BitOs = HasValue(OsArchitecture) && OsArchitecture.Contains("64", StringComparison.OrdinalIgnoreCase),
+            CpuName = FirstNonEmpty(ProcessorName, CpuDetails.Name),
+            MotherboardModel = FirstNonEmpty(BaseboardProduct, MotherboardDetails.Model),
+            MotherboardChipset = MotherboardDetails.Chipset,
+            GpuName = GpuName,
+            GpuDriverVersion = GpuDriverVersion,
+            GpuDriverDate = GpuDriverDate,
+            NetworkHints = NetworkAdapters
+                .SelectMany(static adapter => new[] { adapter.Name, adapter.Description })
+                .Where(HasValue)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .Take(12)
+                .ToArray()
+        };
+    }
+
+    private void RunInstallRecommendationPrimaryAction(InstallRecommendationItemViewModel item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        if (!item.HasInstallAction || string.IsNullOrWhiteSpace(item.InstallCommand))
+        {
+            OpenInstallRecommendationSource(item);
+            return;
+        }
+
+        var message = $"Run this install command?\n\n{item.InstallCommand}\n\nSource: {item.SourceName}";
+        var result = MessageBox.Show(
+            message,
+            item.Title,
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question);
+        if (result != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        try
+        {
+            var command = item.InstallCommand.Replace("\"", "`\"");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoExit -NoProfile -ExecutionPolicy Bypass -Command \"& {{ {command} }}\"",
+                UseShellExecute = true
+            });
+
+            AppDiagnostics.Log($"[InstallRecommendations] Started install action '{item.Id}' with command '{item.InstallCommand}'.");
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException($"Install recommendation launch failed: {item.Id}", ex);
+            MessageBox.Show(
+                "The install command could not be started.",
+                item.Title,
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
+    }
+
+    private void OpenInstallRecommendationSource(InstallRecommendationItemViewModel item)
+    {
+        if (item == null || !item.HasSourceAction)
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(item.SourceUrl) { UseShellExecute = true });
+            AppDiagnostics.Log($"[InstallRecommendations] Opened source for '{item.Id}' -> {item.SourceUrl}");
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException($"Install recommendation source launch failed: {item.Id}", ex);
+        }
+    }
+
+    private DashboardSnapshotDeltaState CreateDashboardSnapshotDeltaState()
+    {
+        var primaryDisplay = GetPrimaryMonitor();
+        var primaryDisk = GetPrimaryDiskDrive();
+        var primaryNetwork = GetPrimaryNetworkAdapter();
+        var endpointCount = UsbDevices.Count(static device => !device.IsController);
+
+        return new DashboardSnapshotDeltaState
+        {
+            CapturedAtLocal = DateTimeOffset.Now,
+            BiosVersion = BiosVersion,
+            GpuDriverVersion = GpuDriverVersion,
+            AudioDriverVersion = _primaryAudioDriverVersion,
+            MemoryModuleCount = _installedMemoryModuleCount,
+            MemorySlotCount = _memorySlotCount,
+            DisplayCount = Monitors.Count,
+            PrimaryDisplayName = primaryDisplay?.Name,
+            PrimaryDisplayConnection = primaryDisplay?.ConnectionType,
+            StorageDriveCount = DiskDrives.Count,
+            SystemDriveCount = _storageSystemDriveCount,
+            ExternalDriveCount = _storageExternalDriveCount,
+            PrimaryStorageModel = primaryDisk?.Model,
+            UsbControllerCount = _usbControllerCount,
+            UsbHubCount = _usbHubCount,
+            UsbDeviceCount = endpointCount > 0 ? endpointCount : UsbDevices.Count,
+            PrimaryNetworkName = primaryNetwork?.Name,
+            NetworkLinkSpeed = primaryNetwork?.Speed,
+            SecureBootState = SecureBootState,
+            TpmVersion = TpmVersion
+        };
     }
 
     private static string PreferBetter(string currentValue, string? candidateValue)
@@ -953,6 +1439,30 @@ public sealed class DashboardViewModel : ViewModelBase
     private static string JoinNonEmpty(params string?[] values)
     {
         return string.Join(" · ", values.Where(HasValue));
+    }
+
+    private static string BuildConfigurationContext(
+        IEnumerable<string> categories,
+        DateTimeOffset? checkedAtUtc,
+        bool usedCachedData,
+        int failedChecks)
+    {
+        var topImpact = categories
+            .Where(HasValue)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(3)
+            .ToArray();
+
+        var impactText = topImpact.Length == 0
+            ? "Impact map pending"
+            : $"Top impact {string.Join(", ", topImpact)}";
+        var checkText = checkedAtUtc.HasValue
+            ? $"Checked {checkedAtUtc.Value.ToLocalTime():yyyy-MM-dd HH:mm}"
+            : null;
+        var cacheText = usedCachedData ? "cache" : "live";
+        var failureText = failedChecks > 0 ? $"{failedChecks} failed" : null;
+
+        return JoinNonEmpty(impactText, checkText, cacheText, failureText);
     }
 
     private static string GetRuntimeOsDefaultName()
@@ -995,6 +1505,46 @@ public sealed class DashboardViewModel : ViewModelBase
         return HasValue(value) ? $"{prefix}{value}" : null;
     }
 
+    private static string? FormatNetworkHealthStatus(string? status)
+    {
+        if (!HasValue(status))
+        {
+            return null;
+        }
+
+        if (IsConnectedNetworkStatus(status))
+        {
+            return "Link up";
+        }
+
+        if (status!.Contains("down", StringComparison.OrdinalIgnoreCase) ||
+            status.Contains("disconnected", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Link down";
+        }
+
+        return status;
+    }
+
+    private static string? GetPrimaryDriveLabel(DiskDriveModel? disk)
+    {
+        if (disk == null)
+        {
+            return null;
+        }
+
+        var logicalDrive = CleanStorageValue(disk.LogicalDrives)?
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .FirstOrDefault();
+
+        if (!string.IsNullOrWhiteSpace(logicalDrive))
+        {
+            return logicalDrive;
+        }
+
+        return disk.IsSystemDisk ? "System" : null;
+    }
+
     private static string? CleanNetworkValue(string? value)
     {
         if (!HasValue(value))
@@ -1017,6 +1567,40 @@ public sealed class DashboardViewModel : ViewModelBase
             .FirstOrDefault();
     }
 
+    private static string? BuildCompactAudioLead(string? manufacturer, string? device)
+    {
+        var candidate = FirstNonEmpty(device, manufacturer);
+        if (!HasValue(candidate))
+        {
+            return null;
+        }
+
+        var trimmed = candidate!.Trim();
+        var dashParts = trimmed.Split(" - ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (dashParts.Length >= 2)
+        {
+            return dashParts[^1];
+        }
+
+        return trimmed
+            .Replace("Creative Technology Ltd.", "Creative", StringComparison.OrdinalIgnoreCase)
+            .Replace("Corporation", string.Empty, StringComparison.OrdinalIgnoreCase)
+            .Trim();
+    }
+
+    private static string CompactInstallReadyTitle(string title)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return string.Empty;
+        }
+
+        return title
+            .Replace("VC++ Runtime ", "VC++ ", StringComparison.OrdinalIgnoreCase)
+            .Replace("DirectX Legacy", "DirectX", StringComparison.OrdinalIgnoreCase)
+            .Trim();
+    }
+
     private MonitorModel? GetPrimaryMonitor()
     {
         return Monitors.FirstOrDefault(static monitor => monitor.IsPrimary) ?? Monitors.FirstOrDefault();
@@ -1035,8 +1619,20 @@ public sealed class DashboardViewModel : ViewModelBase
     private DiskDriveModel? GetPrimaryDiskDrive()
     {
         return DiskDrives
-            .OrderByDescending(disk => ContainsIgnoreCase(BootDevice, disk.Model) || ContainsIgnoreCase(disk.LogicalDrives, "C:"))
+            .OrderByDescending(static disk => disk.IsSystemDisk)
+            .ThenByDescending(disk => ContainsIgnoreCase(BootDevice, disk.Model) || ContainsIgnoreCase(disk.LogicalDrives, "C:"))
             .ThenByDescending(static disk => disk.SizeBytes)
+            .FirstOrDefault();
+    }
+
+    private UsbDeviceModel? GetPrimaryUsbDevice()
+    {
+        return UsbDevices
+            .OrderBy(static device => device.IsController ? 2 : device.IsHub ? 1 : 0)
+            .ThenByDescending(device => string.Equals(device.Status, "OK", StringComparison.OrdinalIgnoreCase))
+            .ThenByDescending(device => !string.IsNullOrWhiteSpace(device.Manufacturer) &&
+                                        !device.Manufacturer.Contains("Microsoft", StringComparison.OrdinalIgnoreCase))
+            .ThenBy(device => device.Name, StringComparer.OrdinalIgnoreCase)
             .FirstOrDefault();
     }
 
@@ -1061,6 +1657,13 @@ public sealed class DashboardViewModel : ViewModelBase
                source.Contains(value, StringComparison.OrdinalIgnoreCase);
     }
 
+    private static string? CleanStorageValue(string? value)
+    {
+        return HasValue(value) && !string.Equals(value, "N/A", StringComparison.OrdinalIgnoreCase)
+            ? value
+            : null;
+    }
+
     private void NotifyCompactSummaryPropertiesChanged()
     {
         OnPropertyChanged(nameof(PlatformIdentity));
@@ -1068,59 +1671,173 @@ public sealed class DashboardViewModel : ViewModelBase
         OnPropertyChanged(nameof(SystemEnvironmentSummary));
         OnPropertyChanged(nameof(ProcessorCompactSummary));
         OnPropertyChanged(nameof(MemoryCompactSummary));
+        OnPropertyChanged(nameof(MemoryCardSummary));
+        OnPropertyChanged(nameof(MemoryPopulationSummary));
         OnPropertyChanged(nameof(MemoryRuntimeSummary));
+        OnPropertyChanged(nameof(SecurityHealthSummary));
+        OnPropertyChanged(nameof(NetworkHealthSummary));
+        OnPropertyChanged(nameof(BootDriveHealthSummary));
+        OnPropertyChanged(nameof(DisplayHealthSummary));
+        OnPropertyChanged(nameof(DisplayOccupancySummary));
+        OnPropertyChanged(nameof(StorageOccupancySummary));
+        OnPropertyChanged(nameof(UsbOccupancySummary));
         OnPropertyChanged(nameof(GraphicsCompactSummary));
+        OnPropertyChanged(nameof(GraphicsCardSummary));
         OnPropertyChanged(nameof(FirmwareCompactSummary));
         OnPropertyChanged(nameof(FirmwarePlatformSummary));
         OnPropertyChanged(nameof(MotherboardCompactSummary));
         OnPropertyChanged(nameof(StorageCompactSummary));
+        OnPropertyChanged(nameof(StorageCardSummary));
         OnPropertyChanged(nameof(StorageCapacitySummary));
         OnPropertyChanged(nameof(StorageIdentitySummary));
         OnPropertyChanged(nameof(PrimaryDisplaySummary));
+        OnPropertyChanged(nameof(DisplayCardSummary));
         OnPropertyChanged(nameof(PrimaryDisplayTechSummary));
         OnPropertyChanged(nameof(PrimaryNetworkSummary));
+        OnPropertyChanged(nameof(NetworkCardSummary));
         OnPropertyChanged(nameof(NetworkEndpointSummary));
         OnPropertyChanged(nameof(NetworkIdentitySummary));
         OnPropertyChanged(nameof(UsbCompactSummary));
+        OnPropertyChanged(nameof(UsbCardSummary));
+        OnPropertyChanged(nameof(UsbHeadline));
         OnPropertyChanged(nameof(AudioCompactSummary));
+        OnPropertyChanged(nameof(AudioCardSummary));
         OnPropertyChanged(nameof(SecurityCompactSummary));
         OnPropertyChanged(nameof(SecurityPlatformSummary));
         OnPropertyChanged(nameof(SecurityServiceSummary));
         OnPropertyChanged(nameof(AuditCompactSummary));
     }
 
+    private void ApplyStorageHardwareData(StorageHardwareData storage, bool replaceCollection)
+    {
+        _storageFreeBytes = Math.Max(_storageFreeBytes, storage.TotalFreeBytes);
+        _storageVolumeCount = Math.Max(_storageVolumeCount, storage.VolumeCount);
+        _storageExternalDriveCount = Math.Max(_storageExternalDriveCount, storage.ExternalDriveCount);
+        _storageSystemDriveCount = Math.Max(_storageSystemDriveCount, storage.SystemDriveCount);
+
+        if (replaceCollection)
+        {
+            DiskDrives = new ObservableCollection<DiskDriveModel>(storage.Disks.Select(MapDiskDriveModel));
+        }
+
+        var storageLookup = storage.PrimaryModel ?? GetPrimaryDiskDrive()?.Model;
+        var storageResolution = HardwareIconService.ResolveResult(HardwareType.Storage, storageLookup);
+        StorageIconKey = storageResolution.IconKey;
+        StorageIconSource = HardwareIconService.Resolve(storageResolution);
+    }
+
+    private void ApplyUsbHardwareData(UsbHardwareData usb, bool replaceCollection)
+    {
+        _usbControllerCount = Math.Max(_usbControllerCount, usb.UsbControllerCount);
+        _usbHubCount = Math.Max(_usbHubCount, usb.HubCount);
+        _usbInputDeviceCount = Math.Max(_usbInputDeviceCount, usb.InputDeviceCount);
+        _usbAudioDeviceCount = Math.Max(_usbAudioDeviceCount, usb.AudioDeviceCount);
+        _usbStorageDeviceCount = Math.Max(_usbStorageDeviceCount, usb.StorageDeviceCount);
+
+        if (replaceCollection && usb.Devices.Count > 0)
+        {
+            UsbDevices = new ObservableCollection<UsbDeviceModel>(usb.Devices.Select(MapUsbDeviceModel));
+        }
+
+        var primaryUsbLookup = FirstNonEmpty(usb.PrimaryUsbDeviceName, usb.PrimaryControllerName, GetPrimaryUsbDevice()?.Name);
+        if (!string.IsNullOrWhiteSpace(primaryUsbLookup))
+        {
+            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsb(primaryUsbLookup);
+            UsbIconKey = matchedUsb?.IconKey
+                ?? HardwareIconResolver.ResolveIconKey("usb", primaryUsbLookup, HardwareIconResolver.GetFallbackKey("usb"));
+            UsbIconSource = HardwareIconResolver.ResolveIcon(UsbIconKey, HardwareIconResolver.GetFallbackKey("usb"));
+        }
+    }
+
+    private void ApplyAudioHardwareData(AudioHardwareData audio)
+    {
+        if (audio.DeviceCount > 0)
+        {
+            AudioDeviceCount = Math.Max(AudioDeviceCount, audio.DeviceCount);
+        }
+
+        _audioPhysicalDeviceCount = Math.Max(_audioPhysicalDeviceCount, audio.PhysicalDeviceCount);
+        _audioVirtualDeviceCount = Math.Max(_audioVirtualDeviceCount, audio.VirtualDeviceCount);
+        _primaryAudioDriverProvider = PreferBetter(_primaryAudioDriverProvider, audio.PrimaryDriverProvider);
+        _primaryAudioDriverVersion = PreferBetter(_primaryAudioDriverVersion, audio.PrimaryDriverVersion);
+        _primaryAudioDriverDate = PreferBetter(_primaryAudioDriverDate, audio.PrimaryDriverDate);
+        PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, audio.PrimaryDeviceName);
+        PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, audio.PrimaryManufacturer);
+        PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, audio.PrimaryStatus);
+        if (!string.IsNullOrWhiteSpace(PrimaryAudioDevice))
+        {
+            var audioLookup = JoinNonEmpty(PrimaryAudioManufacturer, PrimaryAudioDevice);
+            var audioResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audioLookup);
+            AudioIconKey = audioResolution.IconKey;
+            AudioIconSource = HardwareIconService.Resolve(audioResolution);
+        }
+    }
+
+    private static DiskDriveModel MapDiskDriveModel(DiskDriveData disk)
+    {
+        var formattedSize = FormatBytes(disk.SizeBytes);
+        return new DiskDriveModel
+        {
+            Model = disk.Model ?? string.Empty,
+            Size = formattedSize,
+            SizeBytes = disk.SizeBytes,
+            InterfaceType = disk.InterfaceType ?? string.Empty,
+            MediaType = disk.MediaType ?? string.Empty,
+            SerialNumber = disk.SerialNumber ?? string.Empty,
+            FirmwareRevision = disk.FirmwareRevision ?? string.Empty,
+            Partitions = disk.PartitionCount > 0 ? disk.PartitionCount.ToString() : string.Empty,
+            IsExternal = disk.IsExternal,
+            LogicalDrives = disk.LogicalDrives ?? string.Empty,
+            Status = disk.Status ?? string.Empty,
+            SearchUrl = GenerateSearchUrl(disk.Model ?? string.Empty, "storage"),
+            InterfacePretty = !string.IsNullOrWhiteSpace(disk.InterfaceSummary)
+                ? disk.InterfaceSummary
+                : SimplifyStorageInterface(disk.InterfaceType, disk.MediaType),
+            DisplayCapacity = $"[{formattedSize.Replace(" ", string.Empty)}]",
+            FreeBytes = disk.FreeBytes,
+            FreeSpace = disk.FreeBytes > 0 ? FormatBytes(disk.FreeBytes) : string.Empty,
+            VolumeCount = disk.VolumeCount,
+            VolumeSummary = BuildVolumeSummary(disk.Volumes),
+            IsSystemDisk = disk.IsSystemDisk
+        };
+    }
+
+    private static UsbDeviceModel MapUsbDeviceModel(UsbDeviceData device)
+    {
+        var searchSeed = !string.IsNullOrWhiteSpace(device.VendorId)
+            ? $"https://devicehunt.com/view/type/usb/vendor/{device.VendorId}"
+            : GenerateSearchUrl(device.Name ?? string.Empty, "usb");
+        return new UsbDeviceModel
+        {
+            Name = device.IsController && !string.IsNullOrWhiteSpace(device.Name)
+                ? $"[Controller] {device.Name}"
+                : device.Name ?? string.Empty,
+            DeviceId = device.DeviceId ?? string.Empty,
+            Manufacturer = device.Manufacturer ?? string.Empty,
+            VendorId = device.VendorId ?? string.Empty,
+            ProductId = device.ProductId ?? string.Empty,
+            Status = device.Status ?? string.Empty,
+            IsController = device.IsController,
+            IsHub = device.IsHub,
+            Category = device.Category ?? string.Empty,
+            ClassName = device.ClassName ?? string.Empty,
+            Service = device.Service ?? string.Empty,
+            SearchUrl = searchSeed
+        };
+    }
+
+    private static string BuildVolumeSummary(IEnumerable<StorageVolumeData> volumes)
+    {
+        var letters = volumes
+            .Select(static volume => volume.DriveLetter)
+            .Where(static driveLetter => !string.IsNullOrWhiteSpace(driveLetter))
+            .ToList();
+        return letters.Count > 0 ? string.Join(", ", letters) : string.Empty;
+    }
+
     private static string SimplifyStorageInterface(string? interfaceType, string? mediaType)
     {
-        if (!string.IsNullOrWhiteSpace(mediaType) &&
-            mediaType.Contains("NVMe", StringComparison.OrdinalIgnoreCase))
-        {
-            return "NVMe";
-        }
-
-        if (!string.IsNullOrWhiteSpace(interfaceType))
-        {
-            if (interfaceType.Contains("USB", StringComparison.OrdinalIgnoreCase))
-            {
-                return "USB";
-            }
-
-            if (interfaceType.Contains("SATA", StringComparison.OrdinalIgnoreCase) ||
-                interfaceType.Contains("IDE", StringComparison.OrdinalIgnoreCase))
-            {
-                return "SATA";
-            }
-
-            if (interfaceType.Contains("SCSI", StringComparison.OrdinalIgnoreCase) &&
-                !string.IsNullOrWhiteSpace(mediaType) &&
-                mediaType.Contains("SSD", StringComparison.OrdinalIgnoreCase))
-            {
-                return "NVMe";
-            }
-
-            return interfaceType;
-        }
-
-        return string.Empty;
+        return HardwarePresentationFormatter.BuildStorageInterfaceSummary(interfaceType, mediaType);
     }
 
     private void LoadOperatingSystemInfo()
@@ -1473,7 +2190,15 @@ public sealed class DashboardViewModel : ViewModelBase
             }
 
             var totalSlots = DashboardInfoHelpers.SumPositiveInts(slotCounts);
-            MemorySlots = totalSlots.HasValue ? totalSlots.Value.ToString() : "Unknown";
+            if (totalSlots.HasValue)
+            {
+                _memorySlotCount = totalSlots.Value;
+                MemorySlots = totalSlots.Value.ToString();
+            }
+            else
+            {
+                MemorySlots = "Unknown";
+            }
         }
         catch { }
     }
@@ -1569,6 +2294,8 @@ public sealed class DashboardViewModel : ViewModelBase
             memDetails.FSB_DRAM = string.Empty;
             memDetails.Channels = (moduleCount >= 2) ? "Dual" : "Single";
             if (moduleCount >= 4) memDetails.Channels = "Quad";
+
+            _installedMemoryModuleCount = moduleCount;
             
             MemoryDetails = memDetails;
             var memoryBrand = memDetails.Modules.FirstOrDefault()?.Manufacturer ?? "";
@@ -1656,7 +2383,7 @@ public sealed class DashboardViewModel : ViewModelBase
                 GpuIconSource = HardwareIconService.Resolve(gpuResolution);
                 details.CodeName = matchedGpu.Model?.Codename ?? string.Empty;
                 details.Technology = matchedGpu.Model?.ProcessNode ?? string.Empty;
-                details.MemoryType = string.Empty;
+                details.MemoryType = HardwarePresentationFormatter.InferVramType(gpuName, null) ?? string.Empty;
                 details.BusInterface = string.Empty;
                 details.BusWidth = string.Empty;
                 details.Bandwidth = string.Empty;
@@ -1987,65 +2714,11 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private void LoadDiskDrivesInfo()
     {
-        var drives = new List<DiskDriveModel>();
-        var msftDisks = LoadMsftPhysicalDiskInfo();
-        try
+        var storage = HardwarePeripheralDataCollector.LoadStorageData();
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
         {
-            // Get physical disk info
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                var model = obj["Model"]?.ToString() ?? "Unknown";
-                var matchedStorage = HardwareKnowledgeDbService.Instance.MatchStorage(model);
-                StorageIconKey = matchedStorage?.IconKey
-                    ?? HardwareIconResolver.ResolveIconKey("storage", model, HardwareIconResolver.GetFallbackKey("storage"));
-                StorageIconSource = HardwareIconResolver.ResolveIcon(StorageIconKey, HardwareIconResolver.GetFallbackKey("storage"));
-                var size = Convert.ToInt64(obj["Size"] ?? 0);
-                var interfaceType = obj["InterfaceType"]?.ToString() ?? "Unknown"; // e.g. SCSI, IDE
-                var mediaType = obj["MediaType"]?.ToString() ?? "Unknown";
-                var serialNumber = obj["SerialNumber"]?.ToString()?.Trim() ?? "Unknown";
-                var firmwareRevision = obj["FirmwareRevision"]?.ToString() ?? "Unknown";
-                var partitions = obj["Partitions"]?.ToString() ?? "0";
-                var deviceId = obj["DeviceID"]?.ToString() ?? "";
-                var diskIndex = TryGetUInt(obj["Index"]);
-
-                // Determine if external or internal
-                var isExternal = interfaceType.Contains("USB", StringComparison.OrdinalIgnoreCase) ||
-                                 mediaType.Contains("Removable", StringComparison.OrdinalIgnoreCase) ||
-                                 mediaType.Contains("External", StringComparison.OrdinalIgnoreCase);
-
-                // Get disk type (SSD/HDD/NVMe)
-                var diskType = GetDiskType(msftDisks, diskIndex, model, interfaceType);
-
-                // Get associated logical drives
-                var logicalDrives = GetLogicalDrivesForDisk(deviceId);
-
-                var interfacePretty = SimplifyStorageInterface(interfaceType, diskType);
-
-                var formattedSize = FormatBytes(size);
-
-                drives.Add(new DiskDriveModel
-                {
-                    Model = model,
-                    Size = formattedSize,
-                    SizeBytes = size,
-                    InterfaceType = interfaceType,
-                    MediaType = diskType,
-                    SerialNumber = serialNumber,
-                    FirmwareRevision = firmwareRevision,
-                    Partitions = partitions,
-                    IsExternal = isExternal,
-                    LogicalDrives = logicalDrives,
-                    Status = obj["Status"]?.ToString() ?? "Unknown",
-                    SearchUrl = GenerateSearchUrl(model, "storage"),
-                    InterfacePretty = interfacePretty,
-                    DisplayCapacity = $"[{formattedSize.Replace(" ", "")}]" // e.g. [500GB]
-                });
-            }
-        }
-        catch { }
-
-        System.Windows.Application.Current?.Dispatcher?.Invoke(() => DiskDrives = new ObservableCollection<DiskDriveModel>(drives));
+            ApplyStorageHardwareData(storage, replaceCollection: true);
+        });
     }
 
     private static Dictionary<uint, (int mediaType, int busType)> LoadMsftPhysicalDiskInfo()
@@ -2131,102 +2804,10 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private void LoadUsbDevicesInfo()
     {
-        var devices = new List<UsbDeviceModel>();
-        try
-        {
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                var name = obj["Name"]?.ToString() ?? "Unknown USB Device";
-                var deviceId = obj["DeviceID"]?.ToString() ?? "";
-                var pnpDeviceId = obj["PNPDeviceID"]?.ToString() ?? "";
-                var status = obj["Status"]?.ToString() ?? "Unknown";
-
-                // Parse VID and PID from DeviceID
-                var (vid, pid) = ParseVidPid(pnpDeviceId);
-
-                devices.Add(new UsbDeviceModel
-                {
-                    Name = name,
-                    DeviceId = deviceId,
-                    VendorId = vid,
-                    ProductId = pid,
-                    Status = status,
-                    SearchUrl = !string.IsNullOrEmpty(vid) ? $"https://devicehunt.com/view/type/usb/vendor/{vid}" : ""
-                });
-            }
-
-            // Also get USB controllers
-            using var controllerSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBController");
-            foreach (ManagementObject obj in controllerSearcher.Get())
-            {
-                var name = obj["Name"]?.ToString() ?? "USB Controller";
-                var manufacturer = obj["Manufacturer"]?.ToString() ?? "Unknown";
-                var deviceId = obj["DeviceID"]?.ToString() ?? "";
-                var status = obj["Status"]?.ToString() ?? "Unknown";
-
-                devices.Add(new UsbDeviceModel
-                {
-                    Name = $"[Controller] {name}",
-                    DeviceId = deviceId,
-                    Manufacturer = manufacturer,
-                    Status = status,
-                    IsController = true
-                });
-            }
-
-            // Get connected USB devices
-            using var pnpSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE 'USB%'");
-            foreach (ManagementObject obj in pnpSearcher.Get())
-            {
-                var name = obj["Name"]?.ToString() ?? "USB Device";
-                var deviceId = obj["DeviceID"]?.ToString() ?? "";
-                var manufacturer = obj["Manufacturer"]?.ToString() ?? "";
-                var status = obj["Status"]?.ToString() ?? "Unknown";
-                
-                // Skip if already added
-                if (devices.Any(d => d.DeviceId == deviceId))
-                    continue;
-
-                // Skip generic hubs and controllers
-                if (name.Contains("Hub", StringComparison.OrdinalIgnoreCase) && 
-                    !name.Contains("Keyboard", StringComparison.OrdinalIgnoreCase) &&
-                    !name.Contains("Mouse", StringComparison.OrdinalIgnoreCase))
-                    continue;
-
-                var (vid, pid) = ParseVidPid(deviceId);
-
-                devices.Add(new UsbDeviceModel
-                {
-                    Name = name,
-                    DeviceId = deviceId,
-                    Manufacturer = manufacturer,
-                    VendorId = vid,
-                    ProductId = pid,
-                    Status = status,
-                    SearchUrl = !string.IsNullOrEmpty(vid) ? $"https://devicehunt.com/view/type/usb/vendor/{vid}" : ""
-                });
-            }
-        }
-        catch { }
-
-        // Sort: controllers first, then by name
-        var sorted = devices
-            .Where(d => !string.IsNullOrEmpty(d.Name))
-            .DistinctBy(d => d.DeviceId)
-            .OrderByDescending(d => d.IsController)
-            .ThenBy(d => d.Name)
-            .ToList();
-
-        var primaryUsbName = sorted.FirstOrDefault()?.Name;
-        var matchedUsbController = HardwareKnowledgeDbService.Instance.MatchUsb(primaryUsbName ?? string.Empty);
-
+        var usb = HardwarePeripheralDataCollector.LoadUsbData();
         System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
         {
-            UsbDevices = new ObservableCollection<UsbDeviceModel>(sorted);
-            UsbIconKey = matchedUsbController?.IconKey
-                ?? HardwareIconResolver.ResolveIconKey("usb", primaryUsbName, HardwareIconResolver.GetFallbackKey("usb"));
-            UsbIconSource = HardwareIconResolver.ResolveIcon(UsbIconKey, HardwareIconResolver.GetFallbackKey("usb"));
+            ApplyUsbHardwareData(usb, replaceCollection: true);
         });
     }
 
@@ -2289,52 +2870,11 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private void LoadAudioInfo()
     {
-        var deviceCount = 0;
-        var primaryDevice = string.Empty;
-        var primaryManufacturer = string.Empty;
-        var primaryStatus = string.Empty;
-        var bestScore = int.MinValue;
-
-        try
+        var audio = HardwarePeripheralDataCollector.LoadAudioData();
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
         {
-            using var searcher = new ManagementObjectSearcher("SELECT Name, Manufacturer, Status, DeviceID FROM Win32_SoundDevice");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                var name = obj["Name"]?.ToString();
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    continue;
-                }
-
-                deviceCount++;
-                var manufacturer = obj["Manufacturer"]?.ToString() ?? string.Empty;
-                var status = obj["Status"]?.ToString() ?? string.Empty;
-                var deviceId = obj["DeviceID"]?.ToString();
-                var score = AudioDetectionHelpers.ScoreDevice(name, manufacturer, status, deviceId);
-                if (score > bestScore)
-                {
-                    bestScore = score;
-                    primaryDevice = name;
-                    primaryManufacturer = manufacturer;
-                    primaryStatus = status;
-                }
-            }
-        }
-        catch
-        {
-        }
-
-        AudioDeviceCount = Math.Max(AudioDeviceCount, deviceCount);
-        PrimaryAudioDevice = PreferBetter(PrimaryAudioDevice, primaryDevice);
-        PrimaryAudioManufacturer = PreferBetter(PrimaryAudioManufacturer, primaryManufacturer);
-        PrimaryAudioStatus = PreferBetter(PrimaryAudioStatus, primaryStatus);
-        if (!string.IsNullOrWhiteSpace(primaryDevice))
-        {
-            var audioLookup = JoinNonEmpty(primaryManufacturer, primaryDevice);
-            var audioResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audioLookup);
-            AudioIconKey = audioResolution.IconKey;
-            AudioIconSource = HardwareIconService.Resolve(audioResolution);
-        }
+            ApplyAudioHardwareData(audio);
+        });
     }
 
     private static string GenerateNetworkDriverUrl(string description)
@@ -2690,6 +3230,11 @@ public class DiskDriveModel
     // New fields for detailed view
     public string InterfacePretty { get; set; } = ""; // e.g. "NVMe 16.0 GT/s"
     public string DisplayCapacity { get; set; } = ""; // e.g. "[500 GB]"
+    public long FreeBytes { get; set; }
+    public string FreeSpace { get; set; } = "";
+    public int VolumeCount { get; set; }
+    public string VolumeSummary { get; set; } = "";
+    public bool IsSystemDisk { get; set; }
 }
 
 public class UsbDeviceModel
@@ -2701,6 +3246,10 @@ public class UsbDeviceModel
     public string ProductId { get; set; } = "";
     public string Status { get; set; } = "";
     public bool IsController { get; set; }
+    public bool IsHub { get; set; }
+    public string Category { get; set; } = "";
+    public string ClassName { get; set; } = "";
+    public string Service { get; set; } = "";
     public string SearchUrl { get; set; } = "";
 }
 
