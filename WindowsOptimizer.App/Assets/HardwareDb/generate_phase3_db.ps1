@@ -1382,7 +1382,7 @@ $usbSeeds = @(
     @{ Brand = "ASMedia"; Model = "ASM3242"; Standard = "USB4 40Gbps" },
     @{ Brand = "Renesas"; Model = "uPD720202"; Standard = "USB 3.0" },
     @{ Brand = "Intel"; Model = "Thunderbolt USB4"; Standard = "USB4 40Gbps" },
-    @{ Brand = "AMD"; Model = "Promontory USB"; Standard = "USB 3.2 Gen2" },
+    @{ Brand = "AMD"; Model = "Promontory USB"; Standard = "USB 3.2 Gen2"; Aliases = @("AMD USB 3.10 eXtensible Host Controller - 1.10 (Microsoft)", "AMD USB 3.10 eXtensible Host Controller - 1.10", "AMD USB 3.20 eXtensible Host Controller - 1.10 (Microsoft)", "AMD USB 3.20 eXtensible Host Controller - 1.10", "AMD USB eXtensible Host Controller") },
     @{ Brand = "VIA"; Model = "VL805"; Standard = "USB 3.0" },
     @{ Brand = "Fresco Logic"; Model = "FL1100"; Standard = "USB 3.0" }
 )
@@ -1411,7 +1411,7 @@ $usbControllers = Expand-Deterministic -Seeds $usbSeeds -TargetCount 3600 -Build
         aliases = @(
             ("{0} {1}" -f $s.Brand, $s.Model).ToLower(),
             $s.Model.ToLower()
-        )
+        ) + @($s.Aliases | ForEach-Object { $_.ToLower() })
         normalizedName = $normalized
     }
 }

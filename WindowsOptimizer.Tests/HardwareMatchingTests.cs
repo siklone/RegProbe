@@ -242,6 +242,28 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void ResolveResult_UsesDatabaseModelForRyzen5700X3dObservedName()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Cpu, "AMD Ryzen 7 5700X3D 8-Core Processor");
+
+        Assert.Equal("cpu_ryzen7", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesDatabaseModelForAmdUsbObservedControllerName()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Usb, "AMD USB 3.10 eXtensible Host Controller - 1.10 (Microsoft)");
+
+        Assert.Equal("usb_amd", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
     public void BuildDisplayLookupSeed_ExpandsManufacturerCodes()
     {
         var seed = HardwareIconService.BuildDisplayLookupSeed("GSM");
