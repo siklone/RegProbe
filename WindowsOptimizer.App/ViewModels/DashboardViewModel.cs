@@ -9,6 +9,7 @@ using System.Net.NetworkInformation;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ using WindowsOptimizer.App.Models;
 using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.HardwareDb;
 using WindowsOptimizer.App.Services;
+using WindowsOptimizer.App.Utilities;
 using WindowsOptimizer.App.ViewModels.Hardware;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -145,17 +147,29 @@ public sealed class DashboardViewModel : ViewModelBase
     private ObservableCollection<UsbDeviceModel> _usbDevices = new();
     private ObservableCollection<NetworkAdapterModel> _networkAdapters = new();
     private ObservableCollection<MonitorModel> _monitors = new();
+    private readonly RelayCommand _openAuditReportCommand;
+    private string _auditScore = "Pending";
+    private string _auditStatus = "Hardware audit pending";
+    private string _auditDetail = "The audit report will appear after the first snapshot is validated.";
+    private string _auditReportPath = string.Empty;
+    private int _auditIssueCount;
+    private int _auditWarningCount;
+    private int _auditErrorCount;
+    private ObservableCollection<string> _auditHighlights = new();
 
 
     public DashboardViewModel()
     {
         OpenUrlCommand = new RelayCommand(OpenUrl);
         OpenDetailCommand = new RelayCommand(OpenDetail, _ => true);
+        _openAuditReportCommand = new RelayCommand(OpenAuditReport, _ => !string.IsNullOrWhiteSpace(AuditReportPath));
+        OpenAuditReportCommand = _openAuditReportCommand;
         _ = LoadSystemInfoAsync();
     }
 
     public ICommand OpenUrlCommand { get; }
     public ICommand OpenDetailCommand { get; }
+    public ICommand OpenAuditReportCommand { get; }
 
     public bool IsLoading { get => _isLoading; private set => SetProperty(ref _isLoading, value); }
 
@@ -288,6 +302,24 @@ public sealed class DashboardViewModel : ViewModelBase
     public ObservableCollection<UsbDeviceModel> UsbDevices { get => _usbDevices; private set => SetProperty(ref _usbDevices, value); }
     public ObservableCollection<NetworkAdapterModel> NetworkAdapters { get => _networkAdapters; private set => SetProperty(ref _networkAdapters, value); }
     public ObservableCollection<MonitorModel> Monitors { get => _monitors; private set => SetProperty(ref _monitors, value); }
+    public string AuditScore { get => _auditScore; private set => SetProperty(ref _auditScore, value); }
+    public string AuditStatus { get => _auditStatus; private set => SetProperty(ref _auditStatus, value); }
+    public string AuditDetail { get => _auditDetail; private set => SetProperty(ref _auditDetail, value); }
+    public string AuditReportPath
+    {
+        get => _auditReportPath;
+        private set
+        {
+            if (SetProperty(ref _auditReportPath, value))
+            {
+                _openAuditReportCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+    public int AuditIssueCount { get => _auditIssueCount; private set => SetProperty(ref _auditIssueCount, value); }
+    public int AuditWarningCount { get => _auditWarningCount; private set => SetProperty(ref _auditWarningCount, value); }
+    public int AuditErrorCount { get => _auditErrorCount; private set => SetProperty(ref _auditErrorCount, value); }
+    public ObservableCollection<string> AuditHighlights { get => _auditHighlights; private set => SetProperty(ref _auditHighlights, value); }
 
     private void OpenUrl(object? parameter)
     {
@@ -299,6 +331,23 @@ public sealed class DashboardViewModel : ViewModelBase
                 Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
             }
             catch { }
+        }
+    }
+
+    private void OpenAuditReport(object? _)
+    {
+        if (string.IsNullOrWhiteSpace(AuditReportPath) || !File.Exists(AuditReportPath))
+        {
+            return;
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(AuditReportPath) { UseShellExecute = true });
+        }
+        catch
+        {
+            // Ignore shell launch failures on the dashboard.
         }
     }
 
@@ -341,8 +390,13 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private async Task LoadSystemInfoAsync()
     {
+        HardwareDetailSnapshot? snapshot = null;
         try
         {
+            await HardwareDbLoader.LoadAllAsync(CancellationToken.None);
+            await HardwarePreloadService.Instance.PreloadAsync(CancellationToken.None);
+            snapshot = HardwarePreloadService.Instance.GetSnapshot();
+
             await Task.Run(() =>
             {
                 try { LoadOperatingSystemInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"OS: {ex.Message}"); }
@@ -359,6 +413,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 try { LoadNetworkInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Net: {ex.Message}"); }
                 try { LoadSecurityInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Sec: {ex.Message}"); }
             });
+
+            snapshot = HardwarePreloadService.Instance.GetSnapshot();
+            ApplySnapshotCorrections(snapshot);
+            RunHardwareAudit(snapshot);
         }
         catch (Exception ex)
         {
@@ -374,6 +432,329 @@ public sealed class DashboardViewModel : ViewModelBase
                 "Dashboard Ready",
                 TimeSpan.FromSeconds(5));
         }
+    }
+
+    private void ApplySnapshotCorrections(HardwareDetailSnapshot snapshot)
+    {
+        OsName = PreferBetter(OsName, snapshot.Os.NormalizedName);
+        OsVersion = PreferBetter(OsVersion, FirstNonEmpty(snapshot.Os.DisplayVersion, snapshot.Os.Version, snapshot.Os.ReleaseId));
+        if (snapshot.Os.BuildNumber > 0)
+        {
+            OsBuild = snapshot.Os.BuildNumber.ToString();
+        }
+        OsArchitecture = PreferBetter(OsArchitecture, snapshot.Os.Architecture);
+        Uptime = PreferBetter(Uptime, snapshot.Os.Uptime);
+        if (!string.IsNullOrWhiteSpace(snapshot.Os.IconKey))
+        {
+            OsIconKey = snapshot.Os.IconKey;
+            OsIconSource = HardwareIconService.ResolveByIconKey(HardwareType.Os, snapshot.Os.IconKey, snapshot.Os.NormalizedName);
+        }
+
+        if (!string.IsNullOrWhiteSpace(snapshot.Cpu.Name))
+        {
+            var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpuDetailed(snapshot.Cpu.Name);
+            var cpuResolution = HardwareIconService.ResolveResult(HardwareType.Cpu, snapshot.Cpu.Name, matchedCpu.Model);
+            ProcessorName = PreferBetter(ProcessorName, snapshot.Cpu.Name);
+            if (snapshot.Cpu.Cores > 0)
+            {
+                ProcessorCores = snapshot.Cpu.Cores.ToString();
+            }
+            if (snapshot.Cpu.Threads > 0)
+            {
+                ProcessorThreads = snapshot.Cpu.Threads.ToString();
+            }
+            if (snapshot.Cpu.MaxClockMhz > 0)
+            {
+                ProcessorSpeed = $"{snapshot.Cpu.MaxClockMhz} MHz";
+            }
+            ProcessorSocket = PreferBetter(ProcessorSocket, snapshot.Cpu.Socket);
+            if (snapshot.Cpu.L1CacheKB > 0)
+            {
+                CpuDetails.L1Cache = FormatBytes(snapshot.Cpu.L1CacheKB * 1024L);
+            }
+            if (snapshot.Cpu.L2CacheKB > 0)
+            {
+                CpuDetails.L2Cache = FormatBytes(snapshot.Cpu.L2CacheKB * 1024L);
+                OnPropertyChanged(nameof(ProcessorL2Cache));
+            }
+            if (snapshot.Cpu.L3CacheKB > 0)
+            {
+                CpuDetails.L3Cache = FormatBytes(snapshot.Cpu.L3CacheKB * 1024L);
+                OnPropertyChanged(nameof(ProcessorL3Cache));
+            }
+            CpuDetails.CodeName = PreferBetter(CpuDetails.CodeName, matchedCpu.Model?.Codename);
+            CpuDetails.Technology = PreferBetter(CpuDetails.Technology, matchedCpu.Model?.ProcessNode);
+            CpuIconKey = cpuResolution.IconKey;
+            CpuIconSource = HardwareIconService.Resolve(cpuResolution);
+        }
+
+        if (!string.IsNullOrWhiteSpace(snapshot.Gpu.Name))
+        {
+            var gpuLookupSeed = HardwareIconService.BuildGpuLookupSeed(snapshot.Gpu.Name, snapshot.Gpu.Vendor, snapshot.Gpu.PnpDeviceId);
+            var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpuDetailed(gpuLookupSeed);
+            var gpuResolution = HardwareIconService.ResolveResult(HardwareType.Gpu, gpuLookupSeed, matchedGpu.Model);
+            GpuName = PreferBetter(GpuName, snapshot.Gpu.Name);
+            GpuDetails.CodeName = PreferBetter(GpuDetails.CodeName, matchedGpu.Model?.Codename);
+            GpuDetails.Technology = PreferBetter(GpuDetails.Technology, matchedGpu.Model?.ProcessNode);
+            GpuDetails.MemoryType = PreferBetter(GpuDetails.MemoryType, snapshot.Gpu.InferredVramType);
+            if (string.IsNullOrWhiteSpace(GpuDetails.Shaders) && matchedGpu.Model?.Units > 0)
+            {
+                GpuDetails.Shaders = matchedGpu.Model.Units.ToString();
+            }
+            if (snapshot.Gpu.AdapterRamBytes > 0)
+            {
+                var vram = FormatBytes(snapshot.Gpu.AdapterRamBytes);
+                GpuVideoMemory = vram;
+                GpuDetails.MemorySize = vram;
+            }
+            if (snapshot.Gpu.CurrentHorizontalResolution > 0 && snapshot.Gpu.CurrentVerticalResolution > 0)
+            {
+                GpuResolution = $"{snapshot.Gpu.CurrentHorizontalResolution} x {snapshot.Gpu.CurrentVerticalResolution}";
+            }
+            if (snapshot.Gpu.RefreshRateHz > 0)
+            {
+                GpuRefreshRate = $"{snapshot.Gpu.RefreshRateHz} Hz";
+            }
+            GpuIconKey = gpuResolution.IconKey;
+            GpuIconSource = HardwareIconService.Resolve(gpuResolution);
+        }
+
+        if (!HardwareAuditHeuristics.IsPlaceholderValue(snapshot.Motherboard.Manufacturer) ||
+            !HardwareAuditHeuristics.IsPlaceholderValue(snapshot.Motherboard.Product) ||
+            !HardwareAuditHeuristics.IsPlaceholderValue(snapshot.Motherboard.Model))
+        {
+            MotherboardDetails.Manufacturer = PreferBetter(MotherboardDetails.Manufacturer, snapshot.Motherboard.Manufacturer);
+            MotherboardDetails.Model = PreferBetter(MotherboardDetails.Model, FirstNonEmpty(snapshot.Motherboard.Product, snapshot.Motherboard.Model));
+            MotherboardDetails.Version = PreferBetter(MotherboardDetails.Version, snapshot.Motherboard.Version);
+            MotherboardDetails.BiosVendor = PreferBetter(MotherboardDetails.BiosVendor, snapshot.Motherboard.BiosVendor);
+            MotherboardDetails.BiosVersion = PreferBetter(MotherboardDetails.BiosVersion, snapshot.Motherboard.BiosVersion);
+            MotherboardDetails.BiosDate = PreferBetter(MotherboardDetails.BiosDate, snapshot.Motherboard.BiosDate);
+            MotherboardDetails.Chipset = PreferBetter(MotherboardDetails.Chipset, snapshot.Motherboard.Chipset);
+            BaseboardSerialNumber = PreferBetter(BaseboardSerialNumber, snapshot.Motherboard.Serial);
+
+            var boardLookupSeed = HardwareIconService.BuildMotherboardLookupSeed(
+                snapshot.Motherboard.Manufacturer,
+                snapshot.Motherboard.Product,
+                snapshot.Motherboard.Model,
+                snapshot.Motherboard.Version,
+                snapshot.Motherboard.BiosVendor,
+                snapshot.Motherboard.Chipset);
+            var boardResolution = HardwareIconService.ResolveResult(HardwareType.Motherboard, boardLookupSeed);
+            MotherboardIconKey = boardResolution.IconKey;
+            MotherboardIconSource = HardwareIconService.Resolve(boardResolution);
+            OnPropertyChanged(nameof(BaseboardManufacturer));
+            OnPropertyChanged(nameof(BaseboardProduct));
+            OnPropertyChanged(nameof(BaseboardVersion));
+        }
+
+        if (snapshot.Memory.TotalBytes > 0)
+        {
+            TotalPhysicalMemory = FormatBytes(snapshot.Memory.TotalBytes);
+        }
+        if (snapshot.Memory.ModuleCount > 0)
+        {
+            MemorySlots = snapshot.Memory.ModuleCount.ToString();
+        }
+        if (!string.IsNullOrWhiteSpace(snapshot.Memory.MemoryType))
+        {
+            MemoryDetails.Type = snapshot.Memory.MemoryType;
+        }
+        if (snapshot.Memory.SpeedMhz > 0)
+        {
+            MemoryDetails.Frequency = $"{snapshot.Memory.SpeedMhz:F1} MHz";
+            MemoryDetails.DRAMFrequency = $"{snapshot.Memory.SpeedMhz / 2.0:F1} MHz";
+        }
+        if (snapshot.Memory.Modules.Count > 0 && RamModules.Count == 0)
+        {
+            RamModules = new ObservableCollection<RamModuleModel>(snapshot.Memory.Modules.Select(module => new RamModuleModel
+            {
+                Slot = module.Slot ?? string.Empty,
+                Bank = module.BankLabel ?? string.Empty,
+                Manufacturer = module.Manufacturer ?? string.Empty,
+                PartNumber = module.PartNumber ?? string.Empty,
+                Capacity = FormatBytes(module.CapacityBytes),
+                Speed = module.ConfiguredSpeedMhz > 0 ? $"{module.ConfiguredSpeedMhz} MHz" : module.SpeedMhz > 0 ? $"{module.SpeedMhz} MHz" : string.Empty,
+                FormFactor = module.FormFactor ?? string.Empty,
+                MemoryType = module.MemoryType ?? string.Empty,
+                SerialNumber = module.SerialNumber ?? string.Empty,
+                SearchUrl = GenerateSearchUrl($"{module.Manufacturer} {module.PartNumber}".Trim(), "ram")
+            }));
+        }
+
+        if (snapshot.Storage.DeviceCount > 0)
+        {
+            if (DiskDrives.Count == 0)
+            {
+                DiskDrives = new ObservableCollection<DiskDriveModel>(snapshot.Storage.Disks.Select(disk => new DiskDriveModel
+                {
+                    Model = disk.Model ?? string.Empty,
+                    Size = FormatBytes(disk.SizeBytes),
+                    SizeBytes = disk.SizeBytes,
+                    InterfaceType = disk.InterfaceType ?? string.Empty,
+                    MediaType = disk.MediaType ?? string.Empty,
+                    SerialNumber = disk.SerialNumber ?? string.Empty,
+                    FirmwareRevision = disk.FirmwareRevision ?? string.Empty,
+                    Partitions = disk.PartitionCount.ToString(),
+                    Status = string.Empty,
+                    SearchUrl = GenerateSearchUrl(disk.Model ?? string.Empty, "storage"),
+                    InterfacePretty = SimplifyStorageInterface(disk.InterfaceType, disk.MediaType),
+                    DisplayCapacity = $"[{FormatBytes(disk.SizeBytes).Replace(" ", string.Empty)}]"
+                }));
+            }
+
+            var storageLookup = snapshot.Storage.PrimaryModel ?? DiskDrives.FirstOrDefault()?.Model;
+            var storageResolution = HardwareIconService.ResolveResult(HardwareType.Storage, storageLookup);
+            StorageIconKey = storageResolution.IconKey;
+            StorageIconSource = HardwareIconService.Resolve(storageResolution);
+        }
+
+        if (snapshot.Displays.Devices.Count > 0 && Monitors.Count == 0)
+        {
+            Monitors = new ObservableCollection<MonitorModel>(snapshot.Displays.Devices.Select(device => new MonitorModel
+            {
+                Name = device.Name ?? string.Empty,
+                DeviceName = device.DeviceName ?? string.Empty,
+                Resolution = !string.IsNullOrWhiteSpace(device.Resolution) ? device.Resolution : $"{device.Width} x {device.Height}",
+                RefreshRate = device.RefreshRateHz > 0 ? $"{device.RefreshRateHz} Hz" : string.Empty,
+                BitsPerPixel = device.BitsPerPixel > 0 ? $"{device.BitsPerPixel}-bit" : string.Empty,
+                IsPrimary = device.IsPrimary,
+                ConnectionType = device.ConnectionType ?? string.Empty,
+                PhysicalSize = device.PhysicalWidthCm > 0 && device.PhysicalHeightCm > 0 ? $"{device.PhysicalWidthCm} x {device.PhysicalHeightCm} cm" : string.Empty,
+                MatchMode = device.MatchMode ?? string.Empty,
+                MatchKey = device.MatchKey ?? string.Empty,
+                MatchedInstance = device.MatchedInstance ?? string.Empty,
+                SearchUrl = GenerateSearchUrl(device.Name ?? string.Empty, "monitor"),
+                IconLookupSeed = device.IconLookupSeed ?? string.Empty
+            }));
+        }
+        if (snapshot.Displays.Devices.Count > 0)
+        {
+            var primaryDisplay = snapshot.Displays.Devices.FirstOrDefault(static device => device.IsPrimary) ?? snapshot.Displays.Devices.FirstOrDefault();
+            if (primaryDisplay != null)
+            {
+                var displayResolution = HardwareIconService.ResolveResult(HardwareType.Display, primaryDisplay.IconLookupSeed ?? primaryDisplay.Name);
+                DisplayIconKey = displayResolution.IconKey;
+                DisplayIconSource = HardwareIconService.Resolve(displayResolution);
+            }
+        }
+
+        if (snapshot.Network.Adapters.Count > 0 && NetworkAdapters.Count == 0)
+        {
+            NetworkAdapters = new ObservableCollection<NetworkAdapterModel>(snapshot.Network.Adapters.Select(adapter => new NetworkAdapterModel
+            {
+                Name = adapter.Name ?? string.Empty,
+                Description = adapter.Description ?? string.Empty,
+                Type = adapter.AdapterType ?? string.Empty,
+                Status = adapter.Status ?? string.Empty,
+                Speed = adapter.LinkSpeed ?? string.Empty,
+                MacAddress = adapter.MacAddress ?? string.Empty,
+                IpAddress = adapter.Ipv4 ?? string.Empty,
+                SubnetMask = string.Empty,
+                DefaultGateway = adapter.Gateway ?? string.Empty,
+                DnsServers = adapter.Dns ?? string.Empty,
+                DriverUrl = GenerateNetworkDriverUrl(adapter.Description ?? adapter.Name ?? string.Empty)
+            }));
+        }
+        if (snapshot.Network.AdapterCount > 0)
+        {
+            var networkLookup = FirstNonEmpty(snapshot.Network.PrimaryAdapterDescription, snapshot.Network.PrimaryAdapterName);
+            var networkResolution = HardwareIconService.ResolveResult(HardwareType.Network, networkLookup);
+            NetworkIconKey = networkResolution.IconKey;
+            NetworkIconSource = HardwareIconService.Resolve(networkResolution);
+        }
+
+        if (!string.IsNullOrWhiteSpace(snapshot.Usb.PrimaryControllerName))
+        {
+            var usbResolution = HardwareIconService.ResolveResult(HardwareType.Usb, snapshot.Usb.PrimaryControllerName);
+            UsbIconKey = usbResolution.IconKey;
+            UsbIconSource = HardwareIconService.Resolve(usbResolution);
+        }
+    }
+
+    private void RunHardwareAudit(HardwareDetailSnapshot snapshot)
+    {
+        var report = HardwareAuditService.Instance.CreateReport(snapshot);
+        var savedPath = HardwareAuditService.Instance.SaveReport(report);
+        AuditScore = $"{report.Score}/100";
+        AuditIssueCount = report.Issues.Count;
+        AuditWarningCount = report.WarningCount;
+        AuditErrorCount = report.ErrorCount;
+        AuditReportPath = savedPath;
+        AuditStatus = report.ErrorCount > 0
+            ? "Detection issues need attention"
+            : report.WarningCount > 0
+                ? "Hardware snapshot is usable with a few weak spots"
+                : "Hardware snapshot looks clean";
+        AuditDetail = report.ErrorCount > 0 || report.WarningCount > 0
+            ? $"{report.ErrorCount} errors, {report.WarningCount} warnings. Last report saved locally."
+            : "No suspicious records were found in the current snapshot.";
+        AuditHighlights = new ObservableCollection<string>(
+            report.Issues
+                .OrderByDescending(static issue => issue.Severity)
+                .ThenBy(static issue => issue.Section)
+                .Take(4)
+                .Select(static issue => $"{issue.Section}: {issue.Message}"));
+    }
+
+    private static string PreferBetter(string currentValue, string? candidateValue)
+    {
+        if (string.IsNullOrWhiteSpace(candidateValue))
+        {
+            return currentValue;
+        }
+
+        return string.IsNullOrWhiteSpace(currentValue) ||
+               currentValue.StartsWith("Loading", StringComparison.OrdinalIgnoreCase) ||
+               HardwareAuditHeuristics.IsPlaceholderValue(currentValue)
+            ? candidateValue.Trim()
+            : currentValue;
+    }
+
+    private static string FirstNonEmpty(params string?[] values)
+    {
+        foreach (var value in values)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                return value.Trim();
+            }
+        }
+
+        return string.Empty;
+    }
+
+    private static string SimplifyStorageInterface(string? interfaceType, string? mediaType)
+    {
+        if (!string.IsNullOrWhiteSpace(mediaType) &&
+            mediaType.Contains("NVMe", StringComparison.OrdinalIgnoreCase))
+        {
+            return "NVMe";
+        }
+
+        if (!string.IsNullOrWhiteSpace(interfaceType))
+        {
+            if (interfaceType.Contains("USB", StringComparison.OrdinalIgnoreCase))
+            {
+                return "USB";
+            }
+
+            if (interfaceType.Contains("SATA", StringComparison.OrdinalIgnoreCase) ||
+                interfaceType.Contains("IDE", StringComparison.OrdinalIgnoreCase))
+            {
+                return "SATA";
+            }
+
+            if (interfaceType.Contains("SCSI", StringComparison.OrdinalIgnoreCase) &&
+                !string.IsNullOrWhiteSpace(mediaType) &&
+                mediaType.Contains("SSD", StringComparison.OrdinalIgnoreCase))
+            {
+                return "NVMe";
+            }
+
+            return interfaceType;
+        }
+
+        return string.Empty;
     }
 
     private void LoadOperatingSystemInfo()
@@ -560,10 +941,9 @@ public sealed class DashboardViewModel : ViewModelBase
                 }
             }
             
-            // Graphic Interface (Mock logic as WMI doesn't easily give PCIe version of slot 1 readily without complexity)
-            details.GraphicInterface = "PCI-Express";
-            details.GraphicVersion = "4.0"; // Placeholder guess for modern boards
-            details.LinkWidth = "x16";
+            details.GraphicInterface = string.Empty;
+            details.GraphicVersion = string.Empty;
+            details.LinkWidth = string.Empty;
 
             MotherboardDetails = details;
             var boardLookupSeed = HardwareIconService.BuildMotherboardLookupSeed(
@@ -599,10 +979,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     details.Name = obj["Name"]?.ToString()?.Trim() ?? "Unknown";
-                    var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpu(details.Name);
-                    CpuIconKey = matchedCpu?.IconKey
-                        ?? HardwareIconResolver.ResolveIconKey("cpu", details.Name, HardwareIconResolver.GetFallbackKey("cpu"));
-                    CpuIconSource = HardwareIconResolver.ResolveIcon(CpuIconKey, HardwareIconResolver.GetFallbackKey("cpu"));
+                    var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpuDetailed(details.Name);
+                    var cpuResolution = HardwareIconService.ResolveResult(HardwareType.Cpu, details.Name, matchedCpu.Model);
+                    CpuIconKey = cpuResolution.IconKey;
+                    CpuIconSource = HardwareIconService.Resolve(cpuResolution);
                     details.Specification = details.Name;
                     
                     var maxClock = obj["MaxClockSpeed"];
@@ -637,29 +1017,19 @@ public sealed class DashboardViewModel : ViewModelBase
                     details.L2Cache = FormatBytes(l2);
                     details.L3Cache = FormatBytes(l3);
                     
-                    // Try to guess Technology/CodeName (Very rough heuristics)
-                    if (details.Name.Contains("Ryzen") && details.Name.Contains("5000")) 
+                    details.CodeName = matchedCpu.Model?.Codename ?? string.Empty;
+                    details.Technology = matchedCpu.Model?.ProcessNode ?? string.Empty;
+                    details.Instructions = string.Empty;
+
+                    var extClock = Convert.ToInt32(obj["ExtClock"] ?? 0);
+                    details.BusSpeed = extClock > 0 ? $"{extClock:F1} MHz" : string.Empty;
+                    if (extClock > 0 && decimal.TryParse(obj["MaxClockSpeed"]?.ToString(), out decimal maxClockVal))
                     {
-                        details.CodeName = "Vermeer";
-                        details.Technology = "7 nm";
-                    }
-                    else if (details.Name.Contains("Intel") && details.Name.Contains("12900"))
-                    {
-                        details.CodeName = "Alder Lake";
-                        details.Technology = "10 nm";
-                    }
-                    // ... add more if needed or leave empty
-                    
-                    details.Instructions = "MMX, SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2, EM64T, VT-x, AES, AVX, AVX2, FMA3"; // Generic modern set
-                    
-                    details.BusSpeed = "100.0 MHz"; // Standard for modern systems
-                    if (decimal.TryParse(obj["MaxClockSpeed"]?.ToString(), out decimal maxClockVal))
-                    {
-                        details.Multiplier = $"x {maxClockVal / 100.0m:F1}";
+                        details.Multiplier = $"x {maxClockVal / extClock:F1}";
                     }
                     else
                     {
-                        details.Multiplier = "Unknown";
+                        details.Multiplier = string.Empty;
                     }
 
                     ProcessorSearchUrl = GenerateSearchUrl(details.Name, "cpu");
@@ -679,8 +1049,8 @@ public sealed class DashboardViewModel : ViewModelBase
             if (string.IsNullOrEmpty(details.L1Cache))
             {
                  int.TryParse(details.Cores, out int cores);
-                 if (cores > 0) details.L1Cache = $"{cores} x 32 KB";
-                 else details.L1Cache = "Unknown";
+                if (cores > 0) details.L1Cache = $"{cores} x 32 KB";
+                 else details.L1Cache = string.Empty;
             }
 
             CpuDetails = details;
@@ -812,28 +1182,8 @@ public sealed class DashboardViewModel : ViewModelBase
                     Manufacturer = manufacturer,
                     PartNumber = partNumber,
                     SerialNumber = serialNumber,
-                    WeekYear = "Unknown" // Not available inside Win32_PhysicalMemory
+                    WeekYear = string.Empty
                 };
-                
-                // Mockup Timings (JEDEC/XMP) for the UI demo since we can't read SPD without driver
-                if (maxFreq > 2000) // Likely DDR4/5
-                {
-                    detailMod.Timings = new ObservableCollection<SpdTimingModel>
-                    {
-                        new SpdTimingModel { Frequency = "1800", CAS="18", RAS="22", RC="67", Voltage="1.35" },
-                        new SpdTimingModel { Frequency = "1667", CAS="17", RAS="21", RC="62", Voltage="1.35" },
-                        new SpdTimingModel { Frequency = "1333", CAS="14", RAS="17", RC="49", Voltage="1.35" }
-                    };
-                }
-                else 
-                {
-                     // DDR3/DDR2 Fallback mock
-                    detailMod.Timings = new ObservableCollection<SpdTimingModel>
-                    {
-                        new SpdTimingModel { Frequency = "800", CAS="11", RAS="11", RC="28", Voltage="1.50" },
-                        new SpdTimingModel { Frequency = "667", CAS="9", RAS="9", RC="24", Voltage="1.50" },
-                    };
-                }
                 memDetails.Modules.Add(detailMod);
 
                 // Set General Info on first module (assuming homogenous)
@@ -854,13 +1204,6 @@ public sealed class DashboardViewModel : ViewModelBase
             memDetails.Channels = (moduleCount >= 2) ? "Dual" : "Single";
             if (moduleCount >= 4) memDetails.Channels = "Quad";
             
-            // Mock main timings based on frequency
-            memDetails.CAS = "18";
-            memDetails.tRCD = "22";
-            memDetails.tRP = "22";
-            memDetails.tRAS = "44";
-            memDetails.CR = "1T";
-
             MemoryDetails = memDetails;
             var memoryBrand = memDetails.Modules.FirstOrDefault()?.Manufacturer ?? "";
             var matchedMemory = HardwareKnowledgeDbService.Instance.MatchMemory($"{memoryBrand} {memDetails.Type}");
@@ -930,65 +1273,6 @@ public sealed class DashboardViewModel : ViewModelBase
 
                 var refreshRate = Convert.ToInt32(obj["CurrentRefreshRate"] ?? 0);
                 
-                // MOCK LOGIC for "Detailed" fields impossible to get via WMI without heavy driver calls
-                // If it looks like a high-end NVIDIA card, fill with "GPU-Z style" approximations or placeholders
-                if (gpuName.Contains("RTX"))
-                {
-                    details.Technology = "5 nm"; // Placeholder logic
-                    details.BusInterface = "PCIe x16 4.0";
-                    details.MemoryType = "GDDR6X";
-                    details.BusWidth = "256-bit";
-                    details.Bandwidth = "Unknown";
-                    details.Shaders = "Unknown"; // Dynamic lookup required
-                    
-                    if (gpuName.Contains("5070"))
-                    {
-                         // Specific mock for user's screenshot request
-                         details.Manufacturer = "NVIDIA";
-                         details.SubVendor = "PNY";
-                         details.CodeName = "GB205-300";
-                         details.Technology = "4 nm";
-                         details.BusInterface = "PCIe v5.0 x16";
-                         details.MemoryType = "GDDR7";
-                         details.BusWidth = "192-bit";
-                         details.Rops = "80";
-                         details.Shaders = "6144"; // 4608? 6144 in screenshot
-                         details.Tmus = "192";
-                         details.GpuClock = "330.0 MHz";
-                         details.MemoryClock = "1750.1 MHz";
-                         details.BoostClock = "1507.0 MHz";
-                         details.Bandwidth = "32.0 GT/s";
-                    }
-                    else if (gpuName.Contains("4090"))
-                    {
-                         details.CodeName = "AD102";
-                         details.MemoryType = "GDDR6X";
-                         details.BusWidth = "384-bit";
-                         details.Shaders = "16384";
-                    }
-                    else if (gpuName.Contains("3080"))
-                    {
-                         details.CodeName = "GA102";
-                         details.BusWidth = "320-bit";
-                         details.Shaders = "8704";
-                    }
-                }
-                else
-                {
-                    details.BusInterface = "PCIe";
-                    details.MemoryType = "DDR";
-                }
-
-                if (string.IsNullOrEmpty(details.GpuClock))
-                {
-                    // Basic fallbacks
-                    details.GpuClock = "Unknown";
-                    details.MemoryClock = "Unknown";
-                    details.BoostClock = "Unknown"; 
-                    details.Rops = "Unknown";
-                    details.Shaders = "Unknown";
-                }
-
                 // Generate search URL
                 details.SearchUrl = GenerateGpuUrl(gpuName);
                 GpuSearchUrl = details.SearchUrl;
@@ -1000,10 +1284,22 @@ public sealed class DashboardViewModel : ViewModelBase
                     details.SubVendor,
                     details.CodeName,
                     pnpDeviceId);
-                var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpu(gpuLookupSeed);
-                GpuIconKey = matchedGpu?.IconKey
-                    ?? HardwareIconResolver.ResolveIconKey("gpu", gpuLookupSeed, HardwareIconResolver.GetFallbackKey("gpu"));
-                GpuIconSource = HardwareIconResolver.ResolveIcon(GpuIconKey, HardwareIconResolver.GetFallbackKey("gpu"));
+                var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpuDetailed(gpuLookupSeed);
+                var gpuResolution = HardwareIconService.ResolveResult(HardwareType.Gpu, gpuLookupSeed, matchedGpu.Model);
+                GpuIconKey = gpuResolution.IconKey;
+                GpuIconSource = HardwareIconService.Resolve(gpuResolution);
+                details.CodeName = matchedGpu.Model?.Codename ?? string.Empty;
+                details.Technology = matchedGpu.Model?.ProcessNode ?? string.Empty;
+                details.MemoryType = string.Empty;
+                details.BusInterface = string.Empty;
+                details.BusWidth = string.Empty;
+                details.Bandwidth = string.Empty;
+                details.Rops = string.Empty;
+                details.Tmus = string.Empty;
+                details.GpuClock = string.Empty;
+                details.MemoryClock = string.Empty;
+                details.BoostClock = string.Empty;
+                details.Shaders = matchedGpu.Model?.Units > 0 ? matchedGpu.Model.Units.ToString() : string.Empty;
                 
                 break; // Only first GPU
             }
@@ -1358,22 +1654,7 @@ public sealed class DashboardViewModel : ViewModelBase
                 // Get associated logical drives
                 var logicalDrives = GetLogicalDrivesForDisk(deviceId);
 
-                // Enhance Interface Description
-                var interfacePretty = interfaceType;
-                if (model.Contains("NVMe", StringComparison.OrdinalIgnoreCase) || interfaceType == "SCSI" && diskType == "SSD")
-                {
-                     interfacePretty = "NVMe"; 
-                     // Mock Speed for UI consistency
-                     interfacePretty += " x4 16.0 GT/s";
-                }
-                else if (interfaceType == "IDE" || interfaceType == "SATA")
-                {
-                     interfacePretty = "SATA III 6.0 Gb/s";
-                }
-                else if (isExternal)
-                {
-                     interfacePretty = "USB 3.0";
-                }
+                var interfacePretty = SimplifyStorageInterface(interfaceType, diskType);
 
                 var formattedSize = FormatBytes(size);
 
