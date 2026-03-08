@@ -171,7 +171,7 @@
         </Style>
 
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="Margin" Value="0,0,0,6"/>
@@ -197,8 +197,8 @@
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="12,6"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -235,11 +235,11 @@
         </Style>
 
         <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Padding" Value="10,7"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -251,14 +251,15 @@
                                 Padding="{TemplateBinding Padding}">
                             <StackPanel>
                                 <TextBlock Text="{Binding Title}"
-                                           FontSize="12"
+                                           FontSize="11"
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}"
                                            FontSize="10"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
                                            Margin="0,2,0,0"
-                                           TextTrimming="CharacterEllipsis"/>
+                                           TextWrapping="Wrap"
+                                           MaxWidth="180"/>
                             </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -277,7 +278,7 @@
         </Style>
 
         <Style x:Key="ProcessCategoryTabStyle" TargetType="ListBoxItem">
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -300,7 +301,8 @@
                                            FontSize="9"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
                                            Margin="0,2,0,0"
-                                           TextTrimming="CharacterEllipsis"/>
+                                           TextWrapping="Wrap"
+                                           MaxWidth="160"/>
                             </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -810,7 +812,7 @@
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        Margin="0,0,0,10"/>
-                            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" MaxHeight="300">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="300">
                                 <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -869,7 +871,7 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                           TextWrapping="Wrap" MaxWidth="220"/>
                             </StackPanel>
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
@@ -882,7 +884,7 @@
                                            VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                             </StackPanel>
                             <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="240"
                                        Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
@@ -938,7 +940,7 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                           TextWrapping="Wrap" MaxWidth="220"/>
                             </StackPanel>
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
@@ -950,7 +952,7 @@
                                            VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                             </StackPanel>
                             <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="240"
                                        Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
@@ -1002,7 +1004,7 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                           TextWrapping="Wrap" MaxWidth="220"/>
                             </StackPanel>
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
@@ -1014,7 +1016,7 @@
                                            VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                             </StackPanel>
                             <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="240"
                                        Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
@@ -1066,7 +1068,7 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                           TextWrapping="Wrap" MaxWidth="220"/>
                             </StackPanel>
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
@@ -1078,7 +1080,7 @@
                                            VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                             </StackPanel>
                             <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="240"
                                        Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
@@ -1130,7 +1132,7 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding Subtitle}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                           TextWrapping="Wrap" MaxWidth="220"/>
                             </StackPanel>
                             <Ellipse Grid.Column="2" Width="10" Height="10" Fill="{Binding StatusColor}" VerticalAlignment="Top"/>
                         </Grid>
@@ -1142,7 +1144,7 @@
                                            VerticalAlignment="Bottom" Margin="4,0,0,8"/>
                             </StackPanel>
                             <TextBlock Text="{Binding LiveSummary}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                       Margin="0,2,0,0" TextWrapping="Wrap" MaxWidth="240"
                                        Visibility="{Binding LiveSummary, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                         </StackPanel>
 
@@ -2293,7 +2295,7 @@
                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
+                            <WrapPanel/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemContainerStyle>
@@ -2372,8 +2374,8 @@
                               BorderThickness="0"
                               utils:ScrollViewerHelper.EnableMouseWheelScroll="True"
                               MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ViewportHeight}"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
                               ScrollViewer.IsDeferredScrollingEnabled="True"
                               ScrollViewer.CanContentScroll="True"
                               VirtualizingStackPanel.IsVirtualizing="True"
@@ -2503,8 +2505,8 @@
                                   BorderThickness="0"
                                   utils:ScrollViewerHelper.EnableMouseWheelScroll="True"
                                   MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ViewportHeight}"
-                                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                   ScrollViewer.IsDeferredScrollingEnabled="True"
                                   ScrollViewer.CanContentScroll="True"
                                   VirtualizingStackPanel.IsVirtualizing="True"
@@ -2548,7 +2550,7 @@
                                    FontSize="14"
                                    FontWeight="SemiBold"
                                    Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                   TextTrimming="CharacterEllipsis"
+                                   TextWrapping="Wrap"
                                    Margin="0,0,0,6"/>
                         <TextBlock Text="{Binding SelectedService.Description}"
                                    FontSize="11"
@@ -2570,7 +2572,7 @@
                                                    Text="{Binding Value}"
                                                    FontSize="11"
                                                    Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                   TextTrimming="CharacterEllipsis"
+                                                   TextWrapping="Wrap"
                                                    ToolTip="{Binding Value}"/>
                                     </Grid>
                                 </DataTemplate>
@@ -2621,26 +2623,26 @@
     </UserControl.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden"
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.IsDeferredScrollingEnabled="True"
                       ScrollViewer.PanningMode="VerticalOnly">
-            <StackPanel Margin="20">
+            <StackPanel Margin="16">
 
             <!-- Header -->
-            <Grid Margin="0,0,0,20">
+            <Grid Margin="0,0,0,16">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <TextBlock Text="{Binding Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                    <TextBlock Text="Real-time system hardware monitoring" FontSize="14" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding Title}" FontSize="26" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                    <TextBlock Text="Real-time system hardware monitoring" FontSize="12" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
                     <TextBlock Text="{Binding StatusMessage}"
-                               FontSize="12"
+                               FontSize="11"
                                FontWeight="SemiBold"
                                Foreground="{DynamicResource AccentBrightCyanBrush}"
-                               Margin="0,6,0,0"
+                               Margin="0,4,0,0"
                                Visibility="{Binding StatusMessage, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
                     <ListBox ItemsSource="{Binding MonitorTabs}"
                              SelectedItem="{Binding SelectedTab}"
@@ -2651,7 +2653,7 @@
                              ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <WrapPanel/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemContainerStyle>
@@ -2679,17 +2681,6 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
                             <TextBlock Text="Save"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Command="{Binding ExportSensorDiagnosticsCommand}"
-                            Style="{StaticResource HeaderActionButtonStyle}"
-                            VerticalAlignment="Center"
-                            Margin="8,0,0,0"
-                            ToolTip="Export a sensor diagnostics report for troubleshooting."
-                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE9D9;" FontSize="12" Margin="0,0,6,0"/>
-                            <TextBlock Text="Sensors"/>
                         </StackPanel>
                     </Button>
                     <Button Command="{Binding ToggleLayoutEditorCommand}"
@@ -2784,7 +2775,7 @@
 
                     <ScrollViewer Grid.Row="2"
                                   Margin="0,16,0,0"
-                                  VerticalScrollBarVisibility="Hidden">
+                                  VerticalScrollBarVisibility="Auto">
                         <ListBox ItemsSource="{Binding MonitorSections}"
                                  AllowDrop="True"
                                  Background="Transparent"

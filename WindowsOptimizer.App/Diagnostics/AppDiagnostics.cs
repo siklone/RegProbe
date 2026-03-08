@@ -72,27 +72,27 @@ public static class AppDiagnostics
                             {
                                 File.AppendAllText(testFile, "test");
                                 File.Delete(testFile);
-                                logPath = Path.Combine(testDir, "WindowsOptimizer_Debug.log");
+                                logPath = Path.Combine(testDir, "WindowsOptimizer_Diagnostics.log");
                             }
                             catch
                             {
                                 // Not writable, fall back
-                                logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Debug.log");
+                                logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Diagnostics.log");
                             }
                         }
                         else
                         {
-                            logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Debug.log");
+                            logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Diagnostics.log");
                         }
                     }
                     catch
                     {
-                        logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Debug.log");
+                        logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Diagnostics.log");
                     }
                 }
                 else
                 {
-                    logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Debug.log");
+                    logPath = Path.Combine(AppContext.BaseDirectory, "WindowsOptimizer_Diagnostics.log");
                 }
 
                 var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");

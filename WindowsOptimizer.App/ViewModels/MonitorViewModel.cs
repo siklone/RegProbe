@@ -4747,7 +4747,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Diagnostics.log");
             var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
             System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

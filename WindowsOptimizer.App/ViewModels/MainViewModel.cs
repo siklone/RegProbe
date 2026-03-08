@@ -80,13 +80,20 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         try
         {
             monitor = new MonitorViewModel(AppServices.MetricWorkerPool);
-            System.Diagnostics.Debug.WriteLine("MonitorViewModel created successfully");
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"CRITICAL: Failed to create MonitorViewModel: {ex.Message}");
-            System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
-            System.Diagnostics.Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+            LogToFile($"MonitorViewModel creation failed: {ex.Message}");
+            if (!string.IsNullOrWhiteSpace(ex.StackTrace))
+            {
+                LogToFile(ex.StackTrace);
+            }
+
+            if (!string.IsNullOrWhiteSpace(ex.InnerException?.Message))
+            {
+                LogToFile($"Inner: {ex.InnerException.Message}");
+            }
+
             throw; // Re-throw to see the actual error
         }
 
@@ -551,7 +558,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }
