@@ -47,14 +47,11 @@ public partial class HardwareDetailWindow : Window
             return;
         }
 
-        var reservedHeight = HasDeviceTabsBorder?.ActualHeight > 0 ? 236 : 208;
+        var headerHeight = HeaderCard?.ActualHeight ?? 0;
+        var tabsHeight = HasDeviceTabsBorder?.ActualHeight ?? 0;
+        var reservedHeight = headerHeight + tabsHeight + 96;
         var viewportTarget = ActualHeight > 0 ? ActualHeight : Height;
         scrollViewer.MaxHeight = Math.Max(320, viewportTarget - reservedHeight);
-    }
-
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
     }
 
     protected override void OnClosed(EventArgs e)

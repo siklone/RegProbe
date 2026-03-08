@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -20,6 +19,7 @@ namespace WindowsOptimizer.App.ViewModels.Hardware;
 
 public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 {
+    private const string SectionMarkerKey = "__section";
     private string _title = string.Empty;
     private string _subtitle = string.Empty;
     private string _iconKey = string.Empty;
@@ -130,24 +130,23 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
         AppDiagnostics.Log($"[DetailVM] SetSpecs invoked. Incoming specs count: {incomingCount}, VM: {GetType().Name}");
 
         SpecsCollection.Clear();
+        _specs.Clear();
         foreach (var item in specs)
         {
-            if (string.IsNullOrWhiteSpace(item.Key) || string.IsNullOrWhiteSpace(item.Value))
+            var specItem = CreateSpecItem(item);
+            if (specItem == null)
             {
                 continue;
             }
 
-            SpecsCollection.Add(item);
+            if (!specItem.IsGroupHeader)
+            {
+                SpecsCollection.Add(new KeyValuePair<string, string>(specItem.Label, specItem.Value));
+            }
+
+            _specs.Add(specItem);
         }
         AppDiagnostics.Log($"[DetailVM] SetSpecs completed. SpecsCollection count after add: {SpecsCollection.Count}, VM: {GetType().Name}");
-
-        // Keep the stable Specs collection in sync so bindings observe the
-        // incremental changes rather than losing the collection instance.
-        _specs.Clear();
-        foreach (var item in SpecsCollection)
-        {
-            _specs.Add(SpecItem.Row(item.Key, item.Value));
-        }
         AppDiagnostics.Log($"[DetailVM] _specs synced. _specs.Count: {_specs.Count}, VM: {GetType().Name}");
     }
 
@@ -328,6 +327,32 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
     }
     protected static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
 
+    protected static KeyValuePair<string, string> SectionRow(string title)
+    {
+        return new KeyValuePair<string, string>(SectionMarkerKey, title);
+    }
+
+    private static SpecItem? CreateSpecItem(KeyValuePair<string, string> item)
+    {
+        if (string.Equals(item.Key, SectionMarkerKey, StringComparison.Ordinal))
+        {
+            return string.IsNullOrWhiteSpace(item.Value) ? null : SpecItem.Header(item.Value.Trim());
+        }
+
+        if (string.Equals(item.Key, "---", StringComparison.Ordinal) &&
+            string.Equals(item.Value, "---", StringComparison.Ordinal))
+        {
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(item.Key) || string.IsNullOrWhiteSpace(item.Value))
+        {
+            return null;
+        }
+
+        return SpecItem.Row(item.Key, item.Value);
+    }
+
     private static void AppendIconResolutionSpecs(List<KeyValuePair<string, string>> specs, HardwareIconResolutionResult resolution)
     {
         _ = specs;
@@ -372,24 +397,30 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 
     private static void AppendRichSpecs(List<KeyValuePair<string, string>> specs, HardwareModelBase model, HardwareIconResolutionResult? iconResolution = null)
     {
-        specs.Add(new("---", "---")); // Separator
-        specs.Add(new("Database Match", iconResolution?.DatabaseMatchLabel ?? "Verified"));
-        if (!string.IsNullOrWhiteSpace(model.Generation)) specs.Add(new("Generation", model.Generation));
-        if (!string.IsNullOrWhiteSpace(model.Codename)) specs.Add(new("Codename", model.Codename));
-        if (model.ReleaseYear > 0) specs.Add(new("Release Year", model.ReleaseYear.ToString()));
-        if (!string.IsNullOrWhiteSpace(model.Architecture)) specs.Add(new("Architecture", model.Architecture));
-        if (!string.IsNullOrWhiteSpace(model.ProcessNode)) specs.Add(new("Process Node", model.ProcessNode));
+        _ = iconResolution;
+        var referenceRows = new List<KeyValuePair<string, string>>();
+        if (!string.IsNullOrWhiteSpace(model.Generation)) referenceRows.Add(new("Generation", model.Generation));
+        if (!string.IsNullOrWhiteSpace(model.Codename)) referenceRows.Add(new("Codename", model.Codename));
+        if (model.ReleaseYear > 0) referenceRows.Add(new("Release Year", model.ReleaseYear.ToString()));
+        if (!string.IsNullOrWhiteSpace(model.Architecture)) referenceRows.Add(new("Architecture", model.Architecture));
+        if (!string.IsNullOrWhiteSpace(model.ProcessNode)) referenceRows.Add(new("Process Node", model.ProcessNode));
 
         if (model is CpuModel cpu)
         {
-            if (cpu.CoreCount > 0) specs.Add(new("Physical Cores", cpu.CoreCount.ToString()));
-            if (cpu.ThreadCount > 0) specs.Add(new("Total Threads", cpu.ThreadCount.ToString()));
-            if (cpu.MaxBoostGHz > 0) specs.Add(new("Max Boost", $"{cpu.MaxBoostGHz:F1} GHz"));
+            if (cpu.CoreCount > 0) referenceRows.Add(new("Physical Cores", cpu.CoreCount.ToString()));
+            if (cpu.ThreadCount > 0) referenceRows.Add(new("Total Threads", cpu.ThreadCount.ToString()));
+            if (cpu.MaxBoostGHz > 0) referenceRows.Add(new("Max Boost", $"{cpu.MaxBoostGHz:F1} GHz"));
         }
         else if (model is GpuModel gpu)
         {
-            if (gpu.VramGB > 0) specs.Add(new("VRAM Size", $"{gpu.VramGB} GB"));
-            if (gpu.BoostMHz > 0) specs.Add(new("Boost Clock", $"{gpu.BoostMHz} MHz"));
+            if (gpu.VramGB > 0) referenceRows.Add(new("VRAM Size", $"{gpu.VramGB} GB"));
+            if (gpu.BoostMHz > 0) referenceRows.Add(new("Boost Clock", $"{gpu.BoostMHz} MHz"));
+        }
+
+        if (referenceRows.Count > 0)
+        {
+            specs.Add(SectionRow("Reference profile"));
+            specs.AddRange(referenceRows);
         }
     }
 
@@ -744,22 +775,34 @@ public sealed class MemoryDetailVM : HardwareDetailViewModelBase
 
             if (mem.Modules.Count > 0)
             {
-                specs.Add(new("---", "---"));
                 for (var i = 0; i < mem.Modules.Count; i++)
                 {
                     var module = mem.Modules[i];
                     var slotName = !string.IsNullOrWhiteSpace(module.Slot) ? module.Slot : $"Module {i + 1}";
-                    var prefix = $"[{slotName}]";
-                    if (!string.IsNullOrWhiteSpace(module.BankLabel)) specs.Add(new($"{prefix} Bank", module.BankLabel));
-                    if (!string.IsNullOrWhiteSpace(module.Manufacturer)) specs.Add(new($"{prefix} Manufacturer", module.Manufacturer));
-                    if (!string.IsNullOrWhiteSpace(module.PartNumber)) specs.Add(new($"{prefix} Part Number", module.PartNumber));
-                    if (module.CapacityBytes > 0) specs.Add(new($"{prefix} Capacity", FormatBytes(module.CapacityBytes)));
-                    if (module.SpeedMhz > 0) specs.Add(new($"{prefix} Speed", $"{module.SpeedMhz} MHz"));
-                    if (module.ConfiguredSpeedMhz > 0 && module.ConfiguredSpeedMhz != module.SpeedMhz) specs.Add(new($"{prefix} Configured Speed", $"{module.ConfiguredSpeedMhz} MHz"));
-                    if (!string.IsNullOrWhiteSpace(module.MemoryType)) specs.Add(new($"{prefix} Type", module.MemoryType));
-                    if (!string.IsNullOrWhiteSpace(module.FormFactor)) specs.Add(new($"{prefix} Form Factor", module.FormFactor));
-                    if (module.MinVoltageMv > 0) specs.Add(new($"{prefix} Min Voltage", $"{module.MinVoltageMv / 1000.0:F2} V"));
-                    if (!string.IsNullOrWhiteSpace(module.SerialNumber)) specs.Add(new($"{prefix} Serial", module.SerialNumber));
+                    var moduleRows = new List<KeyValuePair<string, string>>();
+                    if (!string.IsNullOrWhiteSpace(module.BankLabel) &&
+                        !string.Equals(module.BankLabel, slotName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        moduleRows.Add(new("Bank", module.BankLabel));
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(module.Manufacturer)) moduleRows.Add(new("Manufacturer", module.Manufacturer));
+                    if (!string.IsNullOrWhiteSpace(module.PartNumber)) moduleRows.Add(new("Part Number", module.PartNumber));
+                    if (module.CapacityBytes > 0) moduleRows.Add(new("Capacity", FormatBytes(module.CapacityBytes)));
+                    if (module.SpeedMhz > 0) moduleRows.Add(new("Speed", $"{module.SpeedMhz} MHz"));
+                    if (module.ConfiguredSpeedMhz > 0 && module.ConfiguredSpeedMhz != module.SpeedMhz) moduleRows.Add(new("Configured Speed", $"{module.ConfiguredSpeedMhz} MHz"));
+                    if (!string.IsNullOrWhiteSpace(module.MemoryType)) moduleRows.Add(new("Type", module.MemoryType));
+                    if (!string.IsNullOrWhiteSpace(module.FormFactor)) moduleRows.Add(new("Form Factor", module.FormFactor));
+                    if (module.MinVoltageMv > 0) moduleRows.Add(new("Min Voltage", $"{module.MinVoltageMv / 1000.0:F2} V"));
+                    if (!string.IsNullOrWhiteSpace(module.SerialNumber)) moduleRows.Add(new("Serial", module.SerialNumber));
+
+                    if (moduleRows.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    specs.Add(SectionRow(slotName));
+                    specs.AddRange(moduleRows);
                 }
             }
 

@@ -82,15 +82,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Row 0: Header -->
-            <Border Grid.Row="0" Margin="10,10,10,6" Style="{DynamicResource ModernCardStyle}">
+            <Border x:Name="HeaderCard" Grid.Row="0" Margin="10,10,10,8" Style="{DynamicResource ModernCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0"
@@ -120,11 +120,26 @@
                                    Foreground="{DynamicResource MutedForegroundBrush}"
                                    TextWrapping="Wrap"/>
                     </StackPanel>
+
+                    <Button Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            Margin="12,0,0,0"
+                            Padding="0"
+                            VerticalAlignment="Top"
+                            Content="X"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Background="{DynamicResource BackgroundLightBrush}"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            Style="{DynamicResource ModernButtonStyle}"/>
                 </Grid>
             </Border>
 
             <!-- Row 1: Scrollable Content -->
-            <Border Grid.Row="1" Margin="12,0,12,0" Style="{DynamicResource ModernCardStyle}">
+            <Border Grid.Row="1" Margin="10,0,10,10" Style="{DynamicResource ModernCardStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -133,7 +148,7 @@
 
                     <Border x:Name="HasDeviceTabsBorder"
                             Grid.Row="0"
-                            Margin="6,6,6,0"
+                            Margin="0,0,0,10"
                             Background="{DynamicResource BackgroundMediumBrush}"
                             CornerRadius="8"
                             Visibility="{Binding HasDeviceTabs, Converter={StaticResource BoolToVisibility}}">
@@ -201,15 +216,12 @@
                     <!-- Loading Skeleton -->
                     <Grid Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Margin="8">
-                            <TextBlock Text="{Binding LoadingMessage}"
-                                       Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,0,0,8"/>
                             <ItemsControl ItemsSource="{Binding SkeletonRows}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Height="24"
-                                                Margin="0,0,0,4"
-                                                CornerRadius="6"
+                                        <Border Height="20"
+                                                Margin="0,0,0,6"
+                                                CornerRadius="8"
                                                 Background="{DynamicResource BackgroundMediumBrush}"
                                                 Opacity="0.6"/>
                                     </DataTemplate>
@@ -234,42 +246,59 @@
                             </Style>
                         </ScrollViewer.Resources>
 
-                        <ItemsControl ItemsSource="{Binding Specs}" Margin="8">
+                        <ItemsControl ItemsSource="{Binding Specs}" Margin="4,2,4,4">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0,4">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="150"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" 
-                                                 Text="{Binding Label}" 
-                                                 Foreground="{DynamicResource MutedForegroundBrush}" 
-                                                 FontSize="12"
-                                                 TextWrapping="Wrap"
-                                                 VerticalAlignment="Top"/>
-                                        <TextBlock Grid.Column="1" 
-                                                 Text="{Binding Value}" 
-                                                 Foreground="{DynamicResource ForegroundBrightestBrush}" 
-                                                 FontSize="12" 
-                                                 TextWrapping="Wrap"
-                                                 VerticalAlignment="Top"/>
+                                    <Grid Margin="0,0,0,8">
+                                        <Border x:Name="ValueRowBorder"
+                                                Padding="10,8"
+                                                CornerRadius="10"
+                                                Background="#14000000"
+                                                BorderBrush="#18FFFFFF"
+                                                BorderThickness="1">
+                                            <Grid x:Name="ValueRow">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="156"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
+                                                           Text="{Binding Label}"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                                           FontSize="11"
+                                                           TextWrapping="Wrap"
+                                                           VerticalAlignment="Top"
+                                                           Margin="0,0,12,0"/>
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding Value}"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"
+                                                           TextWrapping="Wrap"
+                                                           VerticalAlignment="Top"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <StackPanel x:Name="HeaderRow" Visibility="Collapsed" Margin="2,10,2,0">
+                                            <TextBlock Text="{Binding Label}"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                       TextWrapping="Wrap"/>
+                                            <Border Height="1"
+                                                    Margin="0,6,0,0"
+                                                    Background="#20FFFFFF"/>
+                                        </StackPanel>
                                     </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsGroupHeader}" Value="True">
+                                            <Setter TargetName="ValueRowBorder" Property="Visibility" Value="Collapsed"/>
+                                            <Setter TargetName="HeaderRow" Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
-                </Grid>
-            </Border>
-
-            <!-- Row 2: Footer -->
-            <Border Grid.Row="2" Margin="12,8,12,12" Style="{DynamicResource ModernCardStyle}">
-                <Grid>
-                    <Button Content="Close"
-                            HorizontalAlignment="Right"
-                            Padding="20,6"
-                            Click="CloseButton_Click"
-                            Style="{DynamicResource ModernButtonStyle}"/>
                 </Grid>
             </Border>
         </Grid>
