@@ -11,9 +11,12 @@
     <!-- Quantum Optimizations -->
     <!-- NOTE: ReadyToRun publish can fail on duplicate simple-name inputs (e.g., Dia2Lib.dll). -->
     <PublishReadyToRun>false</PublishReadyToRun>
+    <!-- Publishing settings: keep distribution deterministic and only used by publish step -->
     <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>true</SelfContained>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <SelfContained>false</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
+    <!-- Ensure build outputs are produced to bin/ during development.
+         Distribution packaging must use the scripts/publish_release.ps1 script which writes to /publish_final/. -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +36,13 @@
 
   <ItemGroup>
     <Resource Include="Resources\tray-icon.ico" Condition="Exists('Resources\tray-icon.ico')" />
+    <Resource Include="Resources\Icons\**\*.png" />
+    <Resource Include="Assets\Icons\**\*.png" />
+    <!-- Hardware DB JSONs are large generated artifacts. They are copied only when present; prefer rule-based matching in source.
+         These files are allowed to be removed during cleanup. -->
+    <Content Include="Assets\HardwareDb\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

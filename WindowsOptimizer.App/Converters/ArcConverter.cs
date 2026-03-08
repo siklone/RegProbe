@@ -37,7 +37,7 @@ public class ArcConverter : IMultiValueConverter
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return Array.Empty<object>();
     }
 
     private Geometry GetArcGeometry(double angle, double radius)

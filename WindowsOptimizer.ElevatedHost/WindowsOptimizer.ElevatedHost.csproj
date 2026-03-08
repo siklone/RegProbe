@@ -6,9 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     
-    <!-- Match App containment for referencing -->
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
+    <!-- ElevatedHost must be a framework-dependent executable so it can be
+         referenced by the main App project. Removed runtime/publish-specific
+         properties (SelfContained/RuntimeIdentifier/etc.) to avoid
+         NETSDK1151 errors. -->
   </PropertyGroup>
 
   <ItemGroup>

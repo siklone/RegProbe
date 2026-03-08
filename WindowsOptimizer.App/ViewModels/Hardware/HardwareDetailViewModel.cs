@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,30 +12,24 @@ using System.Windows.Media;
 using WindowsOptimizer.App.HardwareDb;
 using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.ViewModels;
+using WindowsOptimizer.App.Models;
+using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.HardwareDb.Models;
 
 namespace WindowsOptimizer.App.ViewModels.Hardware;
-
-public enum HardwareType
-{
-    Os,
-    Cpu,
-    Gpu,
-    Motherboard,
-    Memory,
-    Storage,
-    Displays,
-    Network,
-    Usb
-}
 
 public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 {
     private string _title = string.Empty;
     private string _subtitle = string.Empty;
     private string _iconKey = string.Empty;
-    private ImageSource _iconSource = HardwareIconResolver.ResolveIcon("display_generic", "display_generic");
+    private ImageSource _iconSource = IconResolver.ResolveByKey(null, HardwareType.Display);
     private bool _isLoading;
     private string _loadingStatus = "Loading system data...";
+    private readonly ObservableCollection<SpecItem> _specs = new();
+    private readonly ObservableCollection<HardwareDetailTab> _deviceTabs = new();
+    private HardwareDetailTab? _selectedDeviceTab;
+    private bool _suppressTabSpecSync;
     private Func<HardwareDetailSnapshot, HardwareDetailPayload>? _collector;
     private bool _subscribedToUpdates;
 
@@ -47,6 +43,10 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
                 window.Close();
             }
         });
+        // Keep the XAML-facing `Specs` property in sync whenever the underlying
+        // SpecsCollection changes so bindings update correctly.
+        SpecsCollection.CollectionChanged += (s, e) => OnPropertyChanged(nameof(Specs));
+        _deviceTabs.CollectionChanged += (s, e) => OnPropertyChanged(nameof(HasDeviceTabs));
     }
 
     public HardwareType HardwareType { get; }
@@ -77,6 +77,26 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 
     public ObservableCollection<KeyValuePair<string, string>> SpecsCollection { get; } = new();
 
+    // Backwards-compatible property expected by the XAML. Use a stable
+    // collection instance so WPF can observe incremental changes reliably.
+    public ObservableCollection<SpecItem> Specs => _specs;
+    public ObservableCollection<HardwareDetailTab> DeviceTabs => _deviceTabs;
+    public bool HasDeviceTabs => _deviceTabs.Count > 0;
+
+    public HardwareDetailTab? SelectedDeviceTab
+    {
+        get => _selectedDeviceTab;
+        set
+        {
+            if (!SetProperty(ref _selectedDeviceTab, value) || value == null || _suppressTabSpecSync)
+            {
+                return;
+            }
+
+            SetSpecs(value.Specs);
+        }
+    }
+
     public ObservableCollection<int> SkeletonRows { get; } = new() { 1, 2, 3, 4, 5, 6 };
 
     public bool IsLoading
@@ -88,13 +108,27 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
     public string LoadingStatus
     {
         get => _loadingStatus;
-        protected set => SetProperty(ref _loadingStatus, value);
+        protected set
+        {
+            if (SetProperty(ref _loadingStatus, value))
+            {
+                // Notify the legacy XAML binding that expects `LoadingMessage`.
+                OnPropertyChanged(nameof(LoadingMessage));
+            }
+        }
     }
+
+    // Backwards-compatible alias used by the XAML
+    public string LoadingMessage => LoadingStatus;
 
     public ICommand CloseCommand { get; }
 
-    protected void SetSpecs(IEnumerable<KeyValuePair<string, string>> specs)
+    protected void SetSpecs(IEnumerable<KeyValuePair<string, string>>? specs)
     {
+        specs ??= Array.Empty<KeyValuePair<string, string>>();
+        var incomingCount = specs.Count();
+        AppDiagnostics.Log($"[DetailVM] SetSpecs invoked. Incoming specs count: {incomingCount}, VM: {GetType().Name}");
+
         SpecsCollection.Clear();
         foreach (var item in specs)
         {
@@ -104,6 +138,51 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
             }
 
             SpecsCollection.Add(item);
+        }
+        AppDiagnostics.Log($"[DetailVM] SetSpecs completed. SpecsCollection count after add: {SpecsCollection.Count}, VM: {GetType().Name}");
+
+        // Keep the stable Specs collection in sync so bindings observe the
+        // incremental changes rather than losing the collection instance.
+        _specs.Clear();
+        foreach (var item in SpecsCollection)
+        {
+            _specs.Add(SpecItem.Row(item.Key, item.Value));
+        }
+        AppDiagnostics.Log($"[DetailVM] _specs synced. _specs.Count: {_specs.Count}, VM: {GetType().Name}");
+    }
+
+    protected void SetDeviceTabs(IEnumerable<HardwareDetailTab>? tabs)
+    {
+        _suppressTabSpecSync = true;
+        try
+        {
+            _deviceTabs.Clear();
+            foreach (var tab in tabs ?? Enumerable.Empty<HardwareDetailTab>())
+            {
+                if (string.IsNullOrWhiteSpace(tab.Header))
+                {
+                    continue;
+                }
+
+                _deviceTabs.Add(tab);
+            }
+
+            if (_deviceTabs.Count > 0)
+            {
+                SelectedDeviceTab = _deviceTabs[0];
+                SetSpecs(SelectedDeviceTab.Specs);
+            }
+            else
+            {
+                SelectedDeviceTab = null;
+            }
+        }
+        finally
+        {
+            _suppressTabSpecSync = false;
+            OnPropertyChanged(nameof(DeviceTabs));
+            OnPropertyChanged(nameof(HasDeviceTabs));
+            OnPropertyChanged(nameof(SelectedDeviceTab));
         }
     }
 
@@ -120,12 +199,14 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
     {
         IsLoading = true;
         LoadingStatus = "Loading system data...";
+        SetDeviceTabs(null);
         SetSpecs(new[]
         {
             new KeyValuePair<string, string>("Loading", "Collecting system info..."),
             new KeyValuePair<string, string>("Loading", "Collecting system info..."),
             new KeyValuePair<string, string>("Loading", "Collecting system info...")
         });
+        AppDiagnostics.Log($"[DetailVM] BeginLoad placeholder SetSpecs called. SpecsCollection count: {SpecsCollection.Count}, Title: {Title}, VM: {GetType().Name}");
 
         _ = LoadAsync(snapshot, collector);
     }
@@ -139,14 +220,28 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 
         var snapshot = HardwarePreloadService.Instance.GetSnapshot();
         var payload = _collector(snapshot);
+        AppDiagnostics.Log($"[DetailVM] OnSnapshotUpdated payload.Specs count: {payload.Specs?.Count() ?? 0}, VM: {GetType().Name}, Tier: {tier}");
         Application.Current?.Dispatcher?.Invoke(() =>
         {
             Title = payload.Title;
             Subtitle = payload.Subtitle;
-            IconKey = payload.IconKey;
-            IconSource = HardwareIconResolver.ResolveIcon(payload.IconKey, payload.FallbackIconKey);
-            SetSpecs(payload.Specs);
-            IsLoading = tier < 3;
+            IconKey = payload.IconResolution.IconKey;
+            IconSource = HardwareIconService.Resolve(payload.IconResolution);
+
+            var tabs = BuildDisplayTabs(payload.DeviceTabs);
+            if (tabs.Count > 0)
+            {
+                SetDeviceTabs(tabs);
+            }
+            else
+            {
+                SetDeviceTabs(null);
+                SetSpecs(BuildDisplaySpecs(payload.Specs, payload.IconResolution, payload.MatchedModel));
+            }
+
+            AppDiagnostics.Log($"[DetailVM] SetSpecs called. SpecsCollection count: {SpecsCollection.Count}, Title: {Title}, VM: {GetType().Name}");
+            // Always show partial data immediately instead of hiding the specs while tiers complete
+            IsLoading = false;
             LoadingStatus = tier switch
             {
                 1 => "Collecting security metrics...",
@@ -173,38 +268,164 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
                 return collector(cache);
             });
 
-            Title = payload.Title;
-            Subtitle = payload.Subtitle;
-            IconKey = payload.IconKey;
-            IconSource = HardwareIconResolver.ResolveIcon(payload.IconKey, payload.FallbackIconKey);
-            SetSpecs(payload.Specs);
-            IsLoading = HardwarePreloadService.Instance.CurrentTier < 3;
-            LoadingStatus = HardwarePreloadService.Instance.CurrentTier switch
+            AppDiagnostics.Log($"[DetailVM] LoadAsync payload.Specs count: {payload.Specs?.Count() ?? 0}, VM: {GetType().Name}, SnapshotProvided: {snapshot != null}");
+
+            // Set UI-bound properties on the UI thread. LoadAsync runs the
+            // collector on a background thread via Task.Run so we must marshal
+            // updates to the Dispatcher before touching ObservableCollection.
+            Application.Current?.Dispatcher?.Invoke(() =>
             {
-                1 => "Collecting security metrics...",
-                2 => "Collecting firmware and board data...",
-                _ => "Ready"
-            };
+                Title = payload.Title;
+                Subtitle = payload.Subtitle;
+                IconKey = payload.IconResolution.IconKey;
+                IconSource = HardwareIconService.Resolve(payload.IconResolution);
+
+                var tabs = BuildDisplayTabs(payload.DeviceTabs);
+                if (tabs.Count > 0)
+                {
+                    SetDeviceTabs(tabs);
+                }
+                else
+                {
+                    SetDeviceTabs(null);
+                    SetSpecs(BuildDisplaySpecs(payload.Specs, payload.IconResolution, payload.MatchedModel));
+                }
+
+                AppDiagnostics.Log($"[DetailVM] SetSpecs called. SpecsCollection count: {SpecsCollection.Count}, Title: {Title}, VM: {GetType().Name}");
+                IsLoading = false;
+                LoadingStatus = HardwarePreloadService.Instance.CurrentTier switch
+                {
+                    1 => "Collecting security metrics...",
+                    2 => "Collecting firmware and board data...",
+                    _ => "Ready"
+                };
+            });
         }
         finally
         {
-            if (HardwarePreloadService.Instance.CurrentTier >= 3)
-            {
-                IsLoading = false;
-            }
+            // No-op: IsLoading is set to false when payload arrives; keep finally for symmetry but do not override
         }
     }
 
     protected sealed record HardwareDetailPayload(
         string Title,
         string Subtitle,
-        string IconKey,
-        string FallbackIconKey,
-        IEnumerable<KeyValuePair<string, string>> Specs);
+        HardwareIconResolutionResult IconResolution,
+        IEnumerable<KeyValuePair<string, string>> Specs,
+        HardwareModelBase? MatchedModel = null,
+        IEnumerable<HardwareDetailTab>? DeviceTabs = null);
+
+    public sealed record HardwareDetailTab(
+        string Header,
+        IReadOnlyList<KeyValuePair<string, string>> Specs,
+        HardwareIconResolutionResult? IconResolution = null,
+        HardwareModelBase? MatchedModel = null,
+        ImageSource? IconSource = null);
 
     protected static T ResolveCached<T>(string key, T fallback) where T : class
     {
         return MetricCacheService.Instance.Get<T>(key) ?? fallback;
+    }
+    protected static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+
+    private static void AppendIconResolutionSpecs(List<KeyValuePair<string, string>> specs, HardwareIconResolutionResult resolution)
+    {
+        specs.Add(new("---", "---"));
+        specs.Add(new("Resolved Icon", resolution.IconKey));
+        specs.Add(new("Icon Source", resolution.SourceLabel));
+        specs.Add(new("Icon Match", resolution.MatchLabel));
+    }
+
+    private static List<KeyValuePair<string, string>> BuildDisplaySpecs(
+        IEnumerable<KeyValuePair<string, string>>? specs,
+        HardwareIconResolutionResult? resolution,
+        HardwareModelBase? matchedModel)
+    {
+        var rows = (specs ?? Enumerable.Empty<KeyValuePair<string, string>>()).ToList();
+        if (resolution != null)
+        {
+            AppendIconResolutionSpecs(rows, resolution);
+        }
+
+        if (matchedModel != null)
+        {
+            AppendRichSpecs(rows, matchedModel, resolution);
+        }
+
+        return rows;
+    }
+
+    private static List<HardwareDetailTab> BuildDisplayTabs(IEnumerable<HardwareDetailTab>? tabs)
+    {
+        var displayTabs = new List<HardwareDetailTab>();
+        foreach (var tab in tabs ?? Enumerable.Empty<HardwareDetailTab>())
+        {
+            var resolution = tab.IconResolution;
+            var iconSource = tab.IconSource ?? (resolution != null ? HardwareIconService.Resolve(resolution) : null);
+            displayTabs.Add(tab with
+            {
+                Specs = BuildDisplaySpecs(tab.Specs, resolution, tab.MatchedModel),
+                IconSource = iconSource
+            });
+        }
+
+        return displayTabs;
+    }
+
+    private static void AppendRichSpecs(List<KeyValuePair<string, string>> specs, HardwareModelBase model, HardwareIconResolutionResult? iconResolution = null)
+    {
+        specs.Add(new("---", "---")); // Separator
+        specs.Add(new("Database Match", iconResolution?.DatabaseMatchLabel ?? "Verified"));
+        if (!string.IsNullOrWhiteSpace(model.Generation)) specs.Add(new("Generation", model.Generation));
+        if (!string.IsNullOrWhiteSpace(model.Codename)) specs.Add(new("Codename", model.Codename));
+        if (model.ReleaseYear > 0) specs.Add(new("Release Year", model.ReleaseYear.ToString()));
+        if (!string.IsNullOrWhiteSpace(model.Architecture)) specs.Add(new("Architecture", model.Architecture));
+        if (!string.IsNullOrWhiteSpace(model.ProcessNode)) specs.Add(new("Process Node", model.ProcessNode));
+
+        if (model is CpuModel cpu)
+        {
+            if (cpu.CoreCount > 0) specs.Add(new("Physical Cores", cpu.CoreCount.ToString()));
+            if (cpu.ThreadCount > 0) specs.Add(new("Total Threads", cpu.ThreadCount.ToString()));
+            if (cpu.MaxBoostGHz > 0) specs.Add(new("Max Boost", $"{cpu.MaxBoostGHz:F1} GHz"));
+        }
+        else if (model is GpuModel gpu)
+        {
+            if (gpu.VramGB > 0) specs.Add(new("VRAM Size", $"{gpu.VramGB} GB"));
+            if (gpu.BoostMHz > 0) specs.Add(new("Boost Clock", $"{gpu.BoostMHz} MHz"));
+        }
+    }
+
+    protected static string FormatBytes(long bytes)
+    {
+        const long giga = 1024L * 1024L * 1024L;
+        const long tera = giga * 1024L;
+        if (bytes <= 0) return "Unknown";
+        return bytes >= tera
+            ? $"{bytes / (double)tera:F2} TB"
+            : $"{bytes / (double)giga:F1} GB";
+    }
+
+    protected static string FormatHz(int mhz)
+    {
+        if (mhz <= 0) return "Unknown";
+        if (mhz >= 1000) return $"{mhz / 1000.0:F2} GHz";
+        return $"{mhz} MHz";
+    }
+
+    protected static string FormatMacAddress(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return "Unknown";
+        }
+
+        var compact = value.Replace(":", string.Empty).Replace("-", string.Empty).Trim();
+        if (compact.Length != 12)
+        {
+            return value;
+        }
+
+        return string.Join(":", Enumerable.Range(0, 6).Select(i => compact.Substring(i * 2, 2)));
     }
 }
 
@@ -215,95 +436,133 @@ public sealed class OsDetailVM : HardwareDetailViewModelBase
     {
         Title = "Operating System";
         Subtitle = "Loading system data...";
-        IconKey = "os/windows10";
-        IconSource = HardwareIconResolver.ResolveOsIcon("Windows 10");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Os);
+        IconSource = IconResolver.Resolve(HardwareType.Os, null, "Windows 10");
 
         BeginLoad(snapshot, cache =>
         {
             var os = ResolveCached("OS", cache.Os);
-            var osName = ValueOrUnknown(os.NormalizedName);
-            var subtitle = ValueOrUnknown(os.ProductName);
             var normalized = !string.IsNullOrWhiteSpace(os.NormalizedName)
                 ? os.NormalizedName
                 : BuildNormalizedOsName(os.BuildNumber, os.Edition, os.DisplayVersion, os.ReleaseId);
-            var iconKey = normalized.Contains("Windows 11", StringComparison.OrdinalIgnoreCase)
-                ? "os/windows11"
-                : "os/windows10";
+            var displayProductName = BuildDisplayProductName(os.ProductName, os.BuildNumber, os.Edition);
+            
+            var subtitle = !string.IsNullOrWhiteSpace(normalized) ? normalized : "Windows Operating System";
+            var iconResolution = HardwareIconService.ResolveByIconKeyResult(HardwareType.Os, os.IconKey, normalized);
 
-            var specs = new[]
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(displayProductName)) specs.Add(new("Product Name", displayProductName));
+            if (!string.IsNullOrWhiteSpace(os.ProductName) &&
+                !string.Equals(displayProductName, os.ProductName, StringComparison.OrdinalIgnoreCase))
             {
-                new KeyValuePair<string, string>("Edition", ValueOrUnknown(os.Edition)),
-                new KeyValuePair<string, string>("Product Name", ValueOrUnknown(os.ProductName)),
-                new KeyValuePair<string, string>("Normalized OS", ValueOrUnknown(normalized)),
-                new KeyValuePair<string, string>("Display Version", ValueOrUnknown(os.DisplayVersion)),
-                new KeyValuePair<string, string>("Release ID", ValueOrUnknown(os.ReleaseId)),
-                new KeyValuePair<string, string>("UBR", os.Ubr > 0 ? os.Ubr.ToString() : "Unknown"),
-                new KeyValuePair<string, string>("Install Type", ValueOrUnknown(os.InstallType)),
-                new KeyValuePair<string, string>("Registered Owner", ValueOrUnknown(os.RegisteredOwner)),
-                new KeyValuePair<string, string>("Registered Organization", ValueOrUnknown(os.RegisteredOrganization)),
-                new KeyValuePair<string, string>("Windows Experience Index", ValueOrUnknown(os.WindowsExperienceIndex)),
-                new KeyValuePair<string, string>("Last Boot Time", ValueOrUnknown(os.LastBootTime)),
-                new KeyValuePair<string, string>("Uptime", ValueOrUnknown(os.Uptime)),
-                new KeyValuePair<string, string>("BIOS Mode", ValueOrUnknown(os.BiosMode)),
-                new KeyValuePair<string, string>("Secure Boot State", ValueOrUnknown(os.SecureBootState)),
-                new KeyValuePair<string, string>("TPM Version", ValueOrUnknown(os.TpmVersion)),
-                new KeyValuePair<string, string>("BitLocker Status", ValueOrUnknown(os.BitLockerStatus)),
-                new KeyValuePair<string, string>("Device Guard", ValueOrUnknown(os.DeviceGuardStatus)),
-                new KeyValuePair<string, string>("Credential Guard", ValueOrUnknown(os.CredentialGuardStatus)),
-                new KeyValuePair<string, string>("Virtualization Enabled", ValueOrUnknown(os.VirtualizationEnabled)),
-                new KeyValuePair<string, string>("Hyper-V Installed", ValueOrUnknown(os.HyperVInstalled)),
-                new KeyValuePair<string, string>("Windows Defender Status", ValueOrUnknown(os.DefenderStatus)),
-                new KeyValuePair<string, string>("Firewall Status", ValueOrUnknown(os.FirewallStatus)),
-                new KeyValuePair<string, string>("Build", os.BuildNumber > 0 ? os.BuildNumber.ToString() : "Unknown"),
-                new KeyValuePair<string, string>("Architecture", ValueOrUnknown(os.Architecture)),
-                new KeyValuePair<string, string>("Username", ValueOrUnknown(os.Username)),
-                new KeyValuePair<string, string>("Install Date", ValueOrUnknown(os.InstallDate)),
-                new KeyValuePair<string, string>("Version", ValueOrUnknown(os.Version))
-            };
+                specs.Add(new("Registry Product Name", os.ProductName));
+            }
+            if (!string.IsNullOrWhiteSpace(os.Edition)) specs.Add(new("Edition", os.Edition));
+            if (!string.IsNullOrWhiteSpace(os.DisplayVersion)) specs.Add(new("Display Version", os.DisplayVersion));
+            if (!string.IsNullOrWhiteSpace(os.ReleaseId)) specs.Add(new("Release ID", os.ReleaseId));
+            if (!string.IsNullOrWhiteSpace(os.Version)) specs.Add(new("Version", os.Version));
+            if (os.BuildNumber > 0) specs.Add(new("Build", os.BuildNumber.ToString()));
+            if (os.Ubr > 0) specs.Add(new("UBR", os.Ubr.ToString()));
+            if (!string.IsNullOrWhiteSpace(os.Architecture)) specs.Add(new("Architecture", os.Architecture));
+            if (!string.IsNullOrWhiteSpace(os.InstallType)) specs.Add(new("Install Type", os.InstallType));
+            if (!string.IsNullOrWhiteSpace(os.InstallDate)) specs.Add(new("Install Date", os.InstallDate));
+            if (!string.IsNullOrWhiteSpace(os.LastBootTime)) specs.Add(new("Last Boot", os.LastBootTime));
+            if (!string.IsNullOrWhiteSpace(os.Uptime)) specs.Add(new("Uptime", os.Uptime));
+            if (!string.IsNullOrWhiteSpace(os.Username)) specs.Add(new("User", os.Username));
+            if (!string.IsNullOrWhiteSpace(os.RegisteredOwner)) specs.Add(new("Registered Owner", os.RegisteredOwner));
+            if (!string.IsNullOrWhiteSpace(os.RegisteredOrganization)) specs.Add(new("Registered Organization", os.RegisteredOrganization));
+            if (!string.IsNullOrWhiteSpace(os.WindowsExperienceIndex)) specs.Add(new("Windows Experience Index", os.WindowsExperienceIndex));
+            if (!string.IsNullOrWhiteSpace(os.BiosMode)) specs.Add(new("BIOS Mode", os.BiosMode));
+            if (!string.IsNullOrWhiteSpace(os.SecureBootState)) specs.Add(new("Secure Boot", os.SecureBootState));
+            if (!string.IsNullOrWhiteSpace(os.TpmVersion)) specs.Add(new("TPM", os.TpmVersion));
+            if (!string.IsNullOrWhiteSpace(os.BitLockerStatus)) specs.Add(new("BitLocker", os.BitLockerStatus));
+            if (!string.IsNullOrWhiteSpace(os.DeviceGuardStatus)) specs.Add(new("Device Guard", os.DeviceGuardStatus));
+            if (!string.IsNullOrWhiteSpace(os.CredentialGuardStatus)) specs.Add(new("Credential Guard", os.CredentialGuardStatus));
+            if (!string.IsNullOrWhiteSpace(os.VirtualizationEnabled)) specs.Add(new("Virtualization", os.VirtualizationEnabled));
+            if (!string.IsNullOrWhiteSpace(os.HyperVInstalled)) specs.Add(new("Hyper-V", os.HyperVInstalled));
+            if (!string.IsNullOrWhiteSpace(os.DefenderStatus)) specs.Add(new("Defender Service", os.DefenderStatus));
+            if (!string.IsNullOrWhiteSpace(os.FirewallStatus)) specs.Add(new("Firewall Service", os.FirewallStatus));
 
-            LogSpecSource("Edition", os.EditionSource);
-            LogSpecSource("Product Name", os.ProductNameSource);
-            LogSpecSource("Display Version", os.DisplayVersionSource);
-            LogSpecSource("Release ID", os.ReleaseIdSource);
-            LogSpecSource("Install Type", os.InstallTypeSource);
-            LogSpecSource("Registered Owner", os.RegisteredOwnerSource);
-            LogSpecSource("Registered Organization", os.RegisteredOrganizationSource);
-            LogSpecSource("Windows Experience Index", os.WindowsExperienceIndexSource);
-            LogSpecSource("Last Boot Time", os.LastBootTimeSource);
-            LogSpecSource("Uptime", os.UptimeSource);
-            LogSpecSource("BIOS Mode", os.BiosModeSource);
-            LogSpecSource("Secure Boot State", os.SecureBootStateSource);
-            LogSpecSource("TPM Version", os.TpmVersionSource);
-            LogSpecSource("BitLocker Status", os.BitLockerStatusSource);
-            LogSpecSource("Device Guard", os.DeviceGuardStatusSource);
-            LogSpecSource("Credential Guard", os.CredentialGuardStatusSource);
-            LogSpecSource("Virtualization Enabled", os.VirtualizationEnabledSource);
-            LogSpecSource("Hyper-V Installed", os.HyperVInstalledSource);
-            LogSpecSource("Windows Defender Status", os.DefenderStatusSource);
-            LogSpecSource("Firewall Status", os.FirewallStatusSource);
-            LogSpecSource("Build", os.BuildNumberSource);
-            LogSpecSource("Architecture", os.ArchitectureSource);
-            LogSpecSource("Username", os.UsernameSource);
-            LogSpecSource("Install Date", os.InstallDateSource);
-            LogSpecSource("Version", os.VersionSource);
+            var sourceHints = new[]
+            {
+                ("Product Name Source", os.ProductNameSource),
+                ("Build Source", os.BuildNumberSource),
+                ("Version Source", os.VersionSource),
+                ("Display Version Source", os.DisplayVersionSource),
+                ("Architecture Source", os.ArchitectureSource),
+                ("Secure Boot Source", os.SecureBootStateSource),
+                ("TPM Source", os.TpmVersionSource)
+            }
+            .Where(entry => !string.IsNullOrWhiteSpace(entry.Item2))
+            .Select(entry => new KeyValuePair<string, string>(entry.Item1, entry.Item2!))
+            .ToList();
 
-            return new HardwareDetailPayload("Operating System", subtitle, iconKey, "os/windows10", specs);
+            if (sourceHints.Count > 0)
+            {
+                specs.Add(new("---", "---"));
+                specs.AddRange(sourceHints);
+            }
+
+            return new HardwareDetailPayload("Operating System", subtitle, iconResolution, specs);
         });
-    }
-
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-
-    private static void LogSpecSource(string name, string? source)
-    {
-        Debug.WriteLine($"[OS Detail] {name} source={ValueOrUnknown(source)}");
     }
 
     private static string BuildNormalizedOsName(int buildNumber, string? edition, string? displayVersion, string? releaseId)
     {
         var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
-        var normalized = string.IsNullOrWhiteSpace(edition) ? osBase : $"{osBase} {edition}";
+        var normalizedEdition = NormalizeEditionLabel(edition);
+        var normalized = string.IsNullOrWhiteSpace(normalizedEdition) ? osBase : $"{osBase} {normalizedEdition}";
         var version = !string.IsNullOrWhiteSpace(displayVersion) ? displayVersion : releaseId;
         return string.IsNullOrWhiteSpace(version) ? normalized : $"{normalized} ({version})";
+    }
+
+    private static string BuildDisplayProductName(string? productName, int buildNumber, string? edition)
+    {
+        var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
+        var normalizedEdition = NormalizeEditionLabel(edition);
+        var normalizedBaseWithEdition = string.IsNullOrWhiteSpace(normalizedEdition)
+            ? osBase
+            : $"{osBase} {normalizedEdition}";
+
+        var candidate = productName?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(candidate))
+        {
+            return normalizedBaseWithEdition;
+        }
+
+        if (buildNumber >= 22000 && candidate.Contains("Windows 10", StringComparison.OrdinalIgnoreCase))
+        {
+            candidate = Regex.Replace(candidate, "Windows\\s+10", "Windows 11", RegexOptions.IgnoreCase);
+        }
+        else if (buildNumber > 0 && buildNumber < 22000 && candidate.Contains("Windows 11", StringComparison.OrdinalIgnoreCase))
+        {
+            candidate = Regex.Replace(candidate, "Windows\\s+11", "Windows 10", RegexOptions.IgnoreCase);
+        }
+
+        if (!string.IsNullOrWhiteSpace(normalizedEdition) &&
+            !candidate.Contains(normalizedEdition, StringComparison.OrdinalIgnoreCase))
+        {
+            candidate = normalizedBaseWithEdition;
+        }
+
+        return candidate;
+    }
+
+    private static string NormalizeEditionLabel(string? edition)
+    {
+        if (string.IsNullOrWhiteSpace(edition))
+        {
+            return string.Empty;
+        }
+
+        return edition.Trim() switch
+        {
+            "Professional" => "Pro",
+            "Core" => "Home",
+            "CoreSingleLanguage" => "Home Single Language",
+            "EnterpriseS" => "Enterprise LTSC",
+            _ => edition.Trim()
+        };
     }
 }
 
@@ -314,57 +573,50 @@ public sealed class CpuDetailVM : HardwareDetailViewModelBase
     {
         Title = "CPU";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("cpu");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "cpu_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Cpu);
+        IconSource = IconResolver.Resolve(HardwareType.Cpu, null, null);
 
         BeginLoad(snapshot, cache =>
         {
             var cpu = ResolveCached("CPU", cache.Cpu);
             var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpu(cpu.Name ?? string.Empty);
-            var specs = new List<KeyValuePair<string, string>>
-            {
-                new("Name", ValueOrUnknown(cpu.Name)),
-                new("Manufacturer", ValueOrUnknown(cpu.Manufacturer)),
-                new("Architecture", ValueOrUnknown(cpu.Architecture)),
-                new("Max Clock", cpu.MaxClockMhz > 0 ? $"{cpu.MaxClockMhz} MHz" : "Unknown")
-            };
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(cpu.Name)) specs.Add(new("Name", cpu.Name));
+            if (!string.IsNullOrWhiteSpace(cpu.Manufacturer)) specs.Add(new("Manufacturer", cpu.Manufacturer));
+            if (!string.IsNullOrWhiteSpace(cpu.Architecture)) specs.Add(new("Architecture", cpu.Architecture));
+            if (!string.IsNullOrWhiteSpace(cpu.Socket)) specs.Add(new("Socket", cpu.Socket));
 
+            if (cpu.MaxClockMhz > 0) specs.Add(new("Max Clock", FormatHz(cpu.MaxClockMhz)));
+            if (cpu.CurrentClockMhz > 0) specs.Add(new("Current Clock", $"{cpu.CurrentClockMhz} MHz"));
+            if (cpu.BusSpeedMhz > 0) specs.Add(new("Bus Speed", $"{cpu.BusSpeedMhz} MHz"));
             if (cpu.Cores > 0) specs.Add(new("Cores", cpu.Cores.ToString()));
             if (cpu.Threads > 0) specs.Add(new("Threads", cpu.Threads.ToString()));
-            if (!string.IsNullOrWhiteSpace(cpu.Description)) specs.Add(new("Description", cpu.Description));
+            if (cpu.HyperThreading.HasValue) specs.Add(new("Hyper-Threading", cpu.HyperThreading.Value ? "Supported" : "Not Supported"));
+            if (cpu.Virtualization.HasValue) specs.Add(new("Virtualization Firmware", cpu.Virtualization.Value ? "Enabled" : "Disabled"));
+            
+            if (cpu.L1CacheKB > 0) specs.Add(new("L1 Cache", $"{cpu.L1CacheKB} KB"));
             if (cpu.L2CacheKB > 0) specs.Add(new("L2 Cache", $"{cpu.L2CacheKB} KB"));
             if (cpu.L3CacheKB > 0) specs.Add(new("L3 Cache", $"{cpu.L3CacheKB} KB"));
-            if (matchedCpu != null)
+            
+            if (cpu.VoltageV > 0) specs.Add(new("Voltage", $"{cpu.VoltageV:F1} V"));
+            if (cpu.AddressWidth > 0) specs.Add(new("Address Width", $"{cpu.AddressWidth}-bit"));
+            if (!string.IsNullOrWhiteSpace(cpu.CpuFamily)) specs.Add(new("Family", cpu.CpuFamily));
+            if (!string.IsNullOrWhiteSpace(cpu.CpuModel)) specs.Add(new("Model", cpu.CpuModel));
+            if (!string.IsNullOrWhiteSpace(cpu.Stepping)) specs.Add(new("Stepping", cpu.Stepping));
+            if (!string.IsNullOrWhiteSpace(cpu.Microcode)) specs.Add(new("Microcode", cpu.Microcode));
+            if (!string.IsNullOrWhiteSpace(cpu.Revision)) specs.Add(new("Revision", cpu.Revision));
+            if (!string.IsNullOrWhiteSpace(cpu.Caption)) specs.Add(new("Description", cpu.Caption));
+            if (!string.IsNullOrWhiteSpace(cpu.Description) &&
+                !string.Equals(cpu.Description, cpu.Caption, StringComparison.OrdinalIgnoreCase))
             {
-                specs.Add(new("DB Match", $"{matchedCpu.Brand} {matchedCpu.ModelName}".Trim()));
-                specs.Add(new("Performance Tier", matchedCpu.GetTier()));
+                specs.Add(new("WMI Description", cpu.Description));
             }
 
-            string iconKey;
-            if (matchedCpu != null)
-            {
-                iconKey = matchedCpu.IconKey ?? HardwareIconResolver.GetFallbackKey("cpu");
-                // Normalize any legacy per-series Ryzen keys to the new universal key
-                if (iconKey.IndexOf("ryzen", StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    iconKey = "amd_ryzen_cpu";
-                }
-            }
-            else
-            {
-                iconKey = HardwareIconResolver.ResolveIconKey("cpu", cpu.Name, HardwareIconResolver.GetFallbackKey("cpu"));
-            }
-
-            return new HardwareDetailPayload(
-                ValueOrUnknown(cpu.Name),
-                ValueOrUnknown(cpu.Manufacturer),
-                iconKey,
-                HardwareIconResolver.GetFallbackKey("cpu"),
-                specs);
+            var subtitle = matchedCpu?.ModelName ?? cpu.Name ?? "Processor";
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Cpu, cpu.Name, matchedCpu);
+            return new HardwareDetailPayload("CPU", subtitle, iconResolution, specs, matchedCpu);
         });
     }
-
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
 }
 
 public sealed class GpuDetailVM : HardwareDetailViewModelBase
@@ -374,52 +626,49 @@ public sealed class GpuDetailVM : HardwareDetailViewModelBase
     {
         Title = "GPU";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("gpu");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "gpu_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Gpu);
+        IconSource = IconResolver.Resolve(HardwareType.Gpu, null, null);
 
         BeginLoad(snapshot, cache =>
         {
             var gpu = ResolveCached("GPU", cache.Gpu);
-            var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpu(gpu.Name ?? string.Empty);
-            var specs = new List<KeyValuePair<string, string>>
+            var gpuLookupSeed = HardwareIconService.BuildGpuLookupSeed(
+                gpu.Name,
+                gpu.Vendor,
+                gpu.VendorId,
+                gpu.DeviceId,
+                gpu.PnpDeviceId,
+                gpu.VideoProcessor);
+            var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpu(gpuLookupSeed);
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(gpu.Name)) specs.Add(new("Name", gpu.Name));
+            if (!string.IsNullOrWhiteSpace(gpu.Vendor)) specs.Add(new("Vendor", gpu.Vendor));
+            if (!string.IsNullOrWhiteSpace(gpu.VendorId) && !string.IsNullOrWhiteSpace(gpu.DeviceId))
             {
-                new("Name", ValueOrUnknown(gpu.Name)),
-                new("Vendor", ValueOrUnknown(gpu.Vendor)),
-                new("Vendor ID", ValueOrUnknown(gpu.VendorId)),
-                new("Device ID", ValueOrUnknown(gpu.DeviceId)),
-                new("Driver Version", ValueOrUnknown(gpu.DriverVersion)),
-                new("Memory", gpu.AdapterRamBytes > 0 ? FormatBytes(gpu.AdapterRamBytes) : "Unknown")
-            };
-
-            if (!string.IsNullOrWhiteSpace(gpu.DriverDate)) specs.Add(new("Driver Date", ValueOrUnknown(gpu.DriverDate)));
-            if (gpu.CurrentHorizontalResolution > 0 && gpu.CurrentVerticalResolution > 0) specs.Add(new("Current Resolution", $"{gpu.CurrentHorizontalResolution}x{gpu.CurrentVerticalResolution}"));
-            if (gpu.RefreshRateHz > 0) specs.Add(new("Refresh Rate", $"{gpu.RefreshRateHz} Hz"));
-            if (!string.IsNullOrWhiteSpace(gpu.VideoProcessor)) specs.Add(new("GPU Processor", ValueOrUnknown(gpu.VideoProcessor)));
-            if (!string.IsNullOrWhiteSpace(gpu.AdapterDacType)) specs.Add(new("Adapter DAC", ValueOrUnknown(gpu.AdapterDacType)));
-
-            if (matchedGpu != null)
-            {
-                specs.Add(new("DB Match", $"{matchedGpu.Brand} {matchedGpu.ModelName}".Trim()));
-                specs.Add(new("Performance Tier", matchedGpu.GetTier()));
+                specs.Add(new("PCI ID", $"VEN_{gpu.VendorId}&DEV_{gpu.DeviceId}"));
             }
+            if (!string.IsNullOrWhiteSpace(gpu.VendorId)) specs.Add(new("PCI Vendor ID", gpu.VendorId));
+            if (!string.IsNullOrWhiteSpace(gpu.DeviceId)) specs.Add(new("PCI Device ID", gpu.DeviceId));
+            if (!string.IsNullOrWhiteSpace(gpu.DriverVersion)) specs.Add(new("Driver Version", gpu.DriverVersion));
+            if (!string.IsNullOrWhiteSpace(gpu.DriverDate)) specs.Add(new("Driver Date", gpu.DriverDate));
+            if (gpu.AdapterRamBytes > 0) specs.Add(new("VRAM", FormatBytes(gpu.AdapterRamBytes)));
+            if (!string.IsNullOrWhiteSpace(gpu.InferredVramType)) specs.Add(new("VRAM Type", gpu.InferredVramType));
+            if (!string.IsNullOrWhiteSpace(gpu.VideoProcessor)) specs.Add(new("Processor", gpu.VideoProcessor));
+            if (!string.IsNullOrWhiteSpace(gpu.AdapterDacType)) specs.Add(new("Adapter DAC", gpu.AdapterDacType));
+            if (!string.IsNullOrWhiteSpace(gpu.PnpDeviceId))
+            {
+                specs.Add(new("PNP Device ID", gpu.PnpDeviceId));
+            }
+            if (gpu.CurrentHorizontalResolution > 0 && gpu.CurrentVerticalResolution > 0)
+            {
+                specs.Add(new("Active Desktop Resolution", $"{gpu.CurrentHorizontalResolution} x {gpu.CurrentVerticalResolution}"));
+            }
+            if (gpu.RefreshRateHz > 0) specs.Add(new("Active Refresh Rate", $"{gpu.RefreshRateHz} Hz"));
 
-            return new HardwareDetailPayload(
-                ValueOrUnknown(gpu.Name),
-                ValueOrUnknown(gpu.Vendor),
-                matchedGpu != null
-                    ? matchedGpu.IconKey
-                    : HardwareIconResolver.GetFallbackKey("gpu"),
-                HardwareIconResolver.GetFallbackKey("gpu"),
-                specs);
+            var subtitle = matchedGpu?.ModelName ?? gpu.Name ?? "Graphics Card";
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Gpu, gpuLookupSeed, matchedGpu);
+            return new HardwareDetailPayload("GPU", subtitle, iconResolution, specs, matchedGpu);
         });
-    }
-
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-
-    private static string FormatBytes(long bytes)
-    {
-        const long giga = 1024L * 1024L * 1024L;
-        return bytes <= 0 ? "Unknown" : $"{bytes / (double)giga:F1} GB";
     }
 }
 
@@ -430,59 +679,56 @@ public sealed class MotherboardDetailVM : HardwareDetailViewModelBase
     {
         Title = "Motherboard";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("chipset");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "chipset_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Motherboard);
+        IconSource = IconResolver.Resolve(HardwareType.Motherboard, null, null);
 
         BeginLoad(snapshot, cache =>
         {
-            var board = ResolveCached("Motherboard", cache.Motherboard);
-            var boardQuery = $"{board.Manufacturer} {board.Model} {board.Product}";
-            var matchedBoard = HardwareKnowledgeDbService.Instance.MatchMotherboard(boardQuery);
-            var matchedChipset = HardwareKnowledgeDbService.Instance.MatchChipset(board.Chipset ?? string.Empty);
-            var specs = new[]
-            {
-                new KeyValuePair<string, string>("Manufacturer", ValueOrUnknown(board.Manufacturer)),
-                new KeyValuePair<string, string>("Model", ValueOrUnknown(board.Model)),
-                new KeyValuePair<string, string>("Product", ValueOrUnknown(board.Product)),
-                new KeyValuePair<string, string>("Serial", ValueOrUnknown(board.Serial)),
-                new KeyValuePair<string, string>("Version", ValueOrUnknown(board.Version)),
-                new KeyValuePair<string, string>("BIOS Vendor", ValueOrUnknown(board.BiosVendor)),
-                new KeyValuePair<string, string>("BIOS Version", ValueOrUnknown(board.BiosVersion)),
-                new KeyValuePair<string, string>("BIOS Date", ValueOrUnknown(board.BiosDate)),
-                new KeyValuePair<string, string>("Chipset", ValueOrUnknown(board.Chipset)),
-                new KeyValuePair<string, string>("System Slots", board.SystemSlotCount > 0 ? board.SystemSlotCount.ToString() : "Unknown")
-            };
+            var mb = ResolveCached("Motherboard", cache.Motherboard);
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(mb.Manufacturer)) specs.Add(new("Manufacturer", mb.Manufacturer));
+            if (!string.IsNullOrWhiteSpace(mb.Model)) specs.Add(new("Model", mb.Model));
+            if (!string.IsNullOrWhiteSpace(mb.Product)) specs.Add(new("Product", mb.Product));
+            if (!string.IsNullOrWhiteSpace(mb.Version)) specs.Add(new("Version", mb.Version));
+            if (!string.IsNullOrWhiteSpace(mb.BiosVersion)) specs.Add(new("BIOS Version", mb.BiosVersion));
+            if (!string.IsNullOrWhiteSpace(mb.BiosVendor)) specs.Add(new("BIOS Vendor", mb.BiosVendor));
+            if (!string.IsNullOrWhiteSpace(mb.BiosDate)) specs.Add(new("BIOS Date", mb.BiosDate));
+            var chipset = !string.IsNullOrWhiteSpace(mb.Chipset)
+                ? mb.Chipset
+                : TryExtractChipset(mb.Product ?? mb.Model);
+            if (!string.IsNullOrWhiteSpace(chipset)) specs.Add(new("Chipset", chipset));
+            if (!string.IsNullOrWhiteSpace(mb.Serial)) specs.Add(new("Serial", mb.Serial));
+            if (!string.IsNullOrWhiteSpace(mb.AssetTag)) specs.Add(new("Asset Tag", mb.AssetTag));
+            if (mb.SystemSlotCount > 0) specs.Add(new("Expansion Slots", mb.SystemSlotCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(mb.ChassisType)) specs.Add(new("Chassis Type", mb.ChassisType));
+            if (!string.IsNullOrWhiteSpace(cache.Cpu.Socket)) specs.Add(new("CPU Socket", cache.Cpu.Socket));
+            if (!string.IsNullOrWhiteSpace(cache.Os.BiosMode)) specs.Add(new("Firmware Mode", cache.Os.BiosMode));
+            if (!string.IsNullOrWhiteSpace(cache.Os.SecureBootState)) specs.Add(new("Secure Boot", cache.Os.SecureBootState));
 
-            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
-            if (matchedBoard != null)
-            {
-                enrichedSpecs.Add(new("DB Match", $"{matchedBoard.Brand} {matchedBoard.ModelName}".Trim()));
-            }
-
-            if (matchedChipset != null)
-            {
-                enrichedSpecs.Add(new("Chipset Family", $"{matchedChipset.Brand} {matchedChipset.ModelName}".Trim()));
-            }
-
-            var iconKey = matchedBoard?.IconKey ?? HardwareIconResolver.GetFallbackKey("chipset");
-
-            return new HardwareDetailPayload(
-                BuildTitle(board),
-                ValueOrUnknown(board.Product),
-                iconKey,
-                HardwareIconResolver.GetFallbackKey("chipset"),
-                enrichedSpecs);
+            var boardLookup = HardwareIconService.BuildMotherboardLookupSeed(
+                mb.Manufacturer,
+                mb.Product,
+                mb.Model,
+                mb.Version,
+                mb.BiosVendor,
+                chipset);
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Motherboard, boardLookup);
+            var matchedMb = iconResolution.MatchedModel as MotherboardModel;
+            var subtitle = matchedMb?.ModelName ?? mb.Product ?? mb.Model ?? "Motherboard";
+            return new HardwareDetailPayload("Motherboard", subtitle, iconResolution, specs, matchedMb);
         });
     }
 
-    private static string BuildTitle(MotherboardHardwareData board)
+    private static string? TryExtractChipset(string? input)
     {
-        var manufacturer = ValueOrUnknown(board.Manufacturer);
-        var model = ValueOrUnknown(board.Model);
-        return $"{manufacturer} {model}".Trim();
-    }
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return null;
+        }
 
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+        var match = Regex.Match(input, @"\b([ABHXZ]\d{2,3}|W\d{2,3}|TRX\d{2,3}|X\d{3}E?)\b", RegexOptions.IgnoreCase);
+        return match.Success ? match.Groups[1].Value.ToUpperInvariant() : null;
+    }
 }
 
 public sealed class MemoryDetailVM : HardwareDetailViewModelBase
@@ -492,53 +738,51 @@ public sealed class MemoryDetailVM : HardwareDetailViewModelBase
     {
         Title = "Memory";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("memory");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "memory_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Memory);
+        IconSource = IconResolver.Resolve(HardwareType.Memory, null, null);
 
         BeginLoad(snapshot, cache =>
         {
-            var memory = ResolveCached("Memory", cache.Memory);
-            var memoryQuery = $"{memory.PrimaryManufacturer} {memory.PrimaryModel} {memory.MemoryType} {memory.SpeedMhz}";
-            var matchedMemory = HardwareKnowledgeDbService.Instance.MatchMemory(memoryQuery);
-            var matchedChip = HardwareKnowledgeDbService.Instance.MatchMemoryChip(memory.PrimaryModel ?? string.Empty);
-            var specs = new[]
-            {
-                new KeyValuePair<string, string>("Total", memory.TotalBytes > 0 ? FormatBytes(memory.TotalBytes) : "Unknown"),
-                new KeyValuePair<string, string>("Modules", memory.ModuleCount > 0 ? memory.ModuleCount.ToString() : "Unknown"),
-                new KeyValuePair<string, string>("Type", ValueOrUnknown(memory.MemoryType)),
-                new KeyValuePair<string, string>("Speed", memory.SpeedMhz > 0 ? $"{memory.SpeedMhz} MHz" : "Unknown"),
-                new KeyValuePair<string, string>("Primary Manufacturer", ValueOrUnknown(memory.PrimaryManufacturer)),
-                new KeyValuePair<string, string>("Primary Model", ValueOrUnknown(memory.PrimaryModel))
-            };
+            var mem = ResolveCached("Memory", cache.Memory);
+            var memoryLookup = $"{mem.PrimaryManufacturer} {mem.PrimaryModel} {mem.MemoryType}".Trim();
+            var matchedMem = HardwareKnowledgeDbService.Instance.MatchMemory(memoryLookup);
+            var specs = new List<KeyValuePair<string, string>>();
+            if (mem.TotalBytes > 0) specs.Add(new("Total Capacity", FormatBytes(mem.TotalBytes)));
+            if (mem.ModuleCount > 0) specs.Add(new("Modules", mem.ModuleCount.ToString()));
+            if (mem.TotalBytes > 0 && mem.ModuleCount > 0) specs.Add(new("Average Module Size", FormatBytes(mem.TotalBytes / mem.ModuleCount)));
+            if (mem.SpeedMhz > 0) specs.Add(new("Frequency", $"{mem.SpeedMhz} MHz"));
+            if (mem.ConfiguredSpeedMhz > 0 && mem.ConfiguredSpeedMhz != mem.SpeedMhz) specs.Add(new("Configured Speed", $"{mem.ConfiguredSpeedMhz} MHz"));
+            if (!string.IsNullOrWhiteSpace(mem.MemoryType)) specs.Add(new("Memory Type", mem.MemoryType));
+            if (!string.IsNullOrWhiteSpace(mem.FormFactor)) specs.Add(new("Form Factor", mem.FormFactor));
+            if (mem.MinVoltageMv > 0) specs.Add(new("Min Voltage", $"{mem.MinVoltageMv / 1000.0:F2} V"));
+            if (!string.IsNullOrWhiteSpace(mem.PrimaryManufacturer)) specs.Add(new("Manufacturer", mem.PrimaryManufacturer));
+            if (!string.IsNullOrWhiteSpace(mem.PrimaryModel)) specs.Add(new("Primary Module", mem.PrimaryModel));
 
-            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
-            if (matchedMemory != null)
+            if (mem.Modules.Count > 0)
             {
-                enrichedSpecs.Add(new("DB Match", $"{matchedMemory.Brand} {matchedMemory.ModelName}".Trim()));
+                specs.Add(new("---", "---"));
+                for (var i = 0; i < mem.Modules.Count; i++)
+                {
+                    var module = mem.Modules[i];
+                    var slotName = !string.IsNullOrWhiteSpace(module.Slot) ? module.Slot : $"Module {i + 1}";
+                    var prefix = $"[{slotName}]";
+                    if (!string.IsNullOrWhiteSpace(module.BankLabel)) specs.Add(new($"{prefix} Bank", module.BankLabel));
+                    if (!string.IsNullOrWhiteSpace(module.Manufacturer)) specs.Add(new($"{prefix} Manufacturer", module.Manufacturer));
+                    if (!string.IsNullOrWhiteSpace(module.PartNumber)) specs.Add(new($"{prefix} Part Number", module.PartNumber));
+                    if (module.CapacityBytes > 0) specs.Add(new($"{prefix} Capacity", FormatBytes(module.CapacityBytes)));
+                    if (module.SpeedMhz > 0) specs.Add(new($"{prefix} Speed", $"{module.SpeedMhz} MHz"));
+                    if (module.ConfiguredSpeedMhz > 0 && module.ConfiguredSpeedMhz != module.SpeedMhz) specs.Add(new($"{prefix} Configured Speed", $"{module.ConfiguredSpeedMhz} MHz"));
+                    if (!string.IsNullOrWhiteSpace(module.MemoryType)) specs.Add(new($"{prefix} Type", module.MemoryType));
+                    if (!string.IsNullOrWhiteSpace(module.FormFactor)) specs.Add(new($"{prefix} Form Factor", module.FormFactor));
+                    if (module.MinVoltageMv > 0) specs.Add(new($"{prefix} Min Voltage", $"{module.MinVoltageMv / 1000.0:F2} V"));
+                    if (!string.IsNullOrWhiteSpace(module.SerialNumber)) specs.Add(new($"{prefix} Serial", module.SerialNumber));
+                }
             }
 
-            if (matchedChip != null)
-            {
-                enrichedSpecs.Add(new("Memory IC", $"{matchedChip.Brand} {matchedChip.ModelName}".Trim()));
-            }
-
-            return new HardwareDetailPayload(
-                "Memory",
-                memory.ModuleCount > 0 ? $"{memory.ModuleCount} module(s)" : "No module data",
-                matchedMemory != null
-                    ? matchedMemory.IconKey
-                    : HardwareIconResolver.GetFallbackKey("memory"),
-                HardwareIconResolver.GetFallbackKey("memory"),
-                enrichedSpecs);
+            var subtitle = matchedMem?.ModelName ?? (!string.IsNullOrWhiteSpace(mem.MemoryType) ? $"{FormatBytes(mem.TotalBytes)} {mem.MemoryType}" : "System RAM");
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Memory, memoryLookup, matchedMem);
+            return new HardwareDetailPayload("Memory", subtitle, iconResolution, specs, matchedMem);
         });
-    }
-
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-
-    private static string FormatBytes(long bytes)
-    {
-        const long giga = 1024L * 1024L * 1024L;
-        return bytes <= 0 ? "Unknown" : $"{bytes / (double)giga:F1} GB";
     }
 }
 
@@ -549,98 +793,211 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
     {
         Title = "Storage";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("storage");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "storage_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Storage);
+        IconSource = IconResolver.Resolve(HardwareType.Storage, null, null);
 
         BeginLoad(snapshot, cache =>
         {
             var storage = ResolveCached("Storage", cache.Storage);
-            var matchedStorage = HardwareKnowledgeDbService.Instance.MatchStorage(storage.PrimaryModel ?? string.Empty);
-            var specs = new[]
-            {
-                new KeyValuePair<string, string>("Drives", storage.DeviceCount > 0 ? storage.DeviceCount.ToString() : "Unknown"),
-                new KeyValuePair<string, string>("Total Capacity", storage.TotalSizeBytes > 0 ? FormatBytes(storage.TotalSizeBytes) : "Unknown"),
-                new KeyValuePair<string, string>("Primary Model", ValueOrUnknown(storage.PrimaryModel)),
-                new KeyValuePair<string, string>("Primary Interface", ValueOrUnknown(storage.PrimaryInterface))
-            };
+            var storageLookup = storage.PrimaryModel ?? string.Empty;
+            var matchedStorage = HardwareKnowledgeDbService.Instance.MatchStorage(storageLookup);
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Storage, storageLookup, matchedStorage);
+            var overviewSpecs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(storage.PrimaryModel)) overviewSpecs.Add(new("Primary Drive", storage.PrimaryModel));
+            if (storage.TotalSizeBytes > 0) overviewSpecs.Add(new("Total Capacity", FormatBytes(storage.TotalSizeBytes)));
+            if (storage.DeviceCount > 0) overviewSpecs.Add(new("Drive Count", storage.DeviceCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(storage.PrimaryMediaType)) overviewSpecs.Add(new("Primary Media Type", storage.PrimaryMediaType));
+            if (!string.IsNullOrWhiteSpace(storage.PrimaryInterface)) overviewSpecs.Add(new("Primary Interface", storage.PrimaryInterface));
+            if (!string.IsNullOrWhiteSpace(storage.FirmwareRevision)) overviewSpecs.Add(new("Primary Firmware", storage.FirmwareRevision));
+            if (storage.PartitionCount > 0) overviewSpecs.Add(new("Primary Partitions", storage.PartitionCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(storage.PrimarySerialNumber)) overviewSpecs.Add(new("Primary Serial Number", storage.PrimarySerialNumber));
 
-            var enrichedSpecs = new List<KeyValuePair<string, string>>(specs);
-            if (matchedStorage != null)
+            var tabs = new List<HardwareDetailTab>();
+            if (overviewSpecs.Count > 0)
             {
-                enrichedSpecs.Add(new("DB Match", $"{matchedStorage.Brand} {matchedStorage.ModelName}".Trim()));
+                tabs.Add(new HardwareDetailTab(
+                    "Overview",
+                    overviewSpecs,
+                    iconResolution,
+                    matchedStorage));
             }
 
+            for (var i = 0; i < storage.Disks.Count; i++)
+            {
+                var disk = storage.Disks[i];
+                var diskLookup = disk.Model ?? string.Empty;
+                var matchedDisk = HardwareKnowledgeDbService.Instance.MatchStorage(diskLookup);
+                var diskResolution = HardwareIconService.ResolveResult(HardwareType.Storage, diskLookup, matchedDisk);
+                var diskSpecs = new List<KeyValuePair<string, string>>();
+                if (!string.IsNullOrWhiteSpace(disk.Model)) diskSpecs.Add(new("Model", disk.Model));
+                if (disk.SizeBytes > 0) diskSpecs.Add(new("Capacity", FormatBytes(disk.SizeBytes)));
+                if (!string.IsNullOrWhiteSpace(disk.MediaType)) diskSpecs.Add(new("Media Type", disk.MediaType));
+                if (!string.IsNullOrWhiteSpace(disk.InterfaceType)) diskSpecs.Add(new("Interface", disk.InterfaceType));
+                if (!string.IsNullOrWhiteSpace(disk.FirmwareRevision)) diskSpecs.Add(new("Firmware", disk.FirmwareRevision));
+                if (disk.PartitionCount > 0) diskSpecs.Add(new("Partitions", disk.PartitionCount.ToString()));
+                if (disk.Index >= 0) diskSpecs.Add(new("Disk Index", disk.Index.ToString()));
+                if (!string.IsNullOrWhiteSpace(disk.SerialNumber)) diskSpecs.Add(new("Serial", disk.SerialNumber));
+
+                var shortLabel = !string.IsNullOrWhiteSpace(disk.Model)
+                    ? TrimDiskTabHeader(disk.Model)
+                    : $"Disk {i + 1}";
+                tabs.Add(new HardwareDetailTab(
+                    shortLabel,
+                    diskSpecs,
+                    diskResolution,
+                    matchedDisk));
+            }
+
+            var subtitle = matchedStorage?.ModelName ?? storage.PrimaryModel ?? "System Storage";
             return new HardwareDetailPayload(
                 "Storage",
-                storage.DeviceCount > 0 ? $"{storage.DeviceCount} drive(s)" : "No drive data",
-                matchedStorage != null
-                    ? matchedStorage.IconKey
-                    : HardwareIconResolver.GetFallbackKey("storage"),
-                HardwareIconResolver.GetFallbackKey("storage"),
-                enrichedSpecs);
+                subtitle,
+                iconResolution,
+                overviewSpecs,
+                matchedStorage,
+                tabs);
         });
     }
 
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-
-    private static string FormatBytes(long bytes)
+    private static string TrimDiskTabHeader(string model)
     {
-        const long giga = 1024L * 1024L * 1024L;
-        const long tera = giga * 1024L;
-        if (bytes <= 0)
-        {
-            return "Unknown";
-        }
-
-        return bytes >= tera
-            ? $"{bytes / (double)tera:F2} TB"
-            : $"{bytes / (double)giga:F1} GB";
+        var compact = Regex.Replace(model, @"\s+", " ").Trim();
+        return compact.Length <= 18 ? compact : $"{compact[..18]}...";
     }
 }
 
 public sealed class DisplaysDetailVM : HardwareDetailViewModelBase
 {
     public DisplaysDetailVM(HardwareDetailSnapshot? snapshot = null)
-        : base(HardwareType.Displays)
+        : base(HardwareType.Display)
     {
         Title = "Displays";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("display");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "display_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Display);
+        IconSource = IconResolver.Resolve(HardwareType.Display, null, null);
 
         BeginLoad(snapshot, cache =>
         {
-            var displays = ResolveCached("Displays", cache.Displays);
-            var gpu = ResolveCached("GPU", cache.Gpu);
-            var specs = new List<KeyValuePair<string, string>>
+            var display = ResolveCached("Displays", cache.Displays);
+            var overview = new List<KeyValuePair<string, string>>();
+            if (display.DisplayCount > 0) overview.Add(new("Monitor Count", display.DisplayCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(display.PrimaryMonitorName)) overview.Add(new("Primary Monitor", display.PrimaryMonitorName));
+            if (display.PrimaryWidth > 0 && display.PrimaryHeight > 0) overview.Add(new("Primary Resolution", $"{display.PrimaryWidth} x {display.PrimaryHeight}"));
+            if (display.PrimaryRefreshRateHz > 0) overview.Add(new("Primary Refresh Rate", $"{display.PrimaryRefreshRateHz} Hz"));
+            if (display.PrimaryBitsPerPixel > 0) overview.Add(new("Primary Color Depth", $"{display.PrimaryBitsPerPixel}-bit"));
+            if (display.VirtualWidth > 0 && display.VirtualHeight > 0) overview.Add(new("Virtual Desktop", $"{display.VirtualWidth} x {display.VirtualHeight}"));
+            if (!string.IsNullOrWhiteSpace(display.GpuOutput)) overview.Add(new("GPU Output", display.GpuOutput));
+
+            var orderedDisplays = display.Devices
+                .OrderByDescending(device => device.IsPrimary)
+                .ThenBy(device => device.Name ?? device.DeviceName ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var primaryDisplay = orderedDisplays.FirstOrDefault();
+            var displayLookupSeed = !string.IsNullOrWhiteSpace(primaryDisplay?.IconLookupSeed)
+                ? primaryDisplay!.IconLookupSeed
+                : HardwareIconService.BuildDisplayLookupSeed(
+                    display.PrimaryMonitorName,
+                    display.MonitorManufacturer,
+                    display.MonitorModel);
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Display, displayLookupSeed);
+
+            var tabs = new List<HardwareDetailTab>();
+            if (display.DisplayCount > 1 && overview.Count > 0)
             {
-                new KeyValuePair<string, string>("Primary Resolution", displays.PrimaryWidth > 0 && displays.PrimaryHeight > 0 ? $"{displays.PrimaryWidth}x{displays.PrimaryHeight}" : "Unknown"),
-                new KeyValuePair<string, string>("Display Count", displays.DisplayCount > 0 ? displays.DisplayCount.ToString() : "Unknown"),
-                new KeyValuePair<string, string>("Graphics Adapter", ValueOrUnknown(gpu.Name)),
-                new KeyValuePair<string, string>("Adapter Vendor", ValueOrUnknown(gpu.Vendor))
-            };
+                tabs.Add(new HardwareDetailTab(
+                    "Overview",
+                    overview,
+                    iconResolution));
+            }
 
-            if (displays.PrimaryRefreshRateHz > 0) specs.Add(new("Primary Refresh Rate", $"{displays.PrimaryRefreshRateHz} Hz"));
-            if (displays.PrimaryBitsPerPixel > 0) specs.Add(new("Color Depth", $"{displays.PrimaryBitsPerPixel}-bit"));
-            if (displays.VirtualWidth > 0 && displays.VirtualHeight > 0) specs.Add(new("Virtual Desktop", $"{displays.VirtualWidth}x{displays.VirtualHeight}"));
-            if (!string.IsNullOrWhiteSpace(displays.PrimaryMonitorName)) specs.Add(new("Primary Monitor", ValueOrUnknown(displays.PrimaryMonitorName)));
-            if (!string.IsNullOrWhiteSpace(displays.MonitorManufacturer)) specs.Add(new("Monitor Manufacturer", ValueOrUnknown(displays.MonitorManufacturer)));
-            if (!string.IsNullOrWhiteSpace(displays.MonitorModel)) specs.Add(new("Monitor Model", ValueOrUnknown(displays.MonitorModel)));
-            if (!string.IsNullOrWhiteSpace(displays.GpuOutput)) specs.Add(new("GPU Output", ValueOrUnknown(displays.GpuOutput)));
+            var displayIndex = 1;
+            foreach (var device in orderedDisplays)
+            {
+                var deviceLookupSeed = !string.IsNullOrWhiteSpace(device.IconLookupSeed)
+                    ? device.IconLookupSeed
+                    : HardwareIconService.BuildDisplayLookupSeed(
+                        device.Name,
+                        device.Manufacturer,
+                        device.Model,
+                        device.ProductCode);
+                var deviceResolution = HardwareIconService.ResolveResult(HardwareType.Display, deviceLookupSeed);
+                var deviceSpecs = new List<KeyValuePair<string, string>>();
+                if (!string.IsNullOrWhiteSpace(device.Name)) deviceSpecs.Add(new("Monitor", device.Name));
+                if (!string.IsNullOrWhiteSpace(device.Manufacturer)) deviceSpecs.Add(new("Manufacturer", device.Manufacturer));
+                if (!string.IsNullOrWhiteSpace(device.Model)) deviceSpecs.Add(new("Model", device.Model));
+                if (!string.IsNullOrWhiteSpace(device.ProductCode)) deviceSpecs.Add(new("Product Code", device.ProductCode));
+                if (!string.IsNullOrWhiteSpace(device.Resolution)) deviceSpecs.Add(new("Resolution", device.Resolution));
+                if (device.RefreshRateHz > 0) deviceSpecs.Add(new("Refresh Rate", $"{device.RefreshRateHz} Hz"));
+                if (device.BitsPerPixel > 0) deviceSpecs.Add(new("Color Depth", $"{device.BitsPerPixel}-bit"));
+                if (device.PhysicalWidthCm > 0 && device.PhysicalHeightCm > 0)
+                {
+                    deviceSpecs.Add(new("Physical Size", $"{device.PhysicalWidthCm} x {device.PhysicalHeightCm} cm"));
+                }
+                if (!string.IsNullOrWhiteSpace(device.ConnectionType) &&
+                    !string.Equals(device.ConnectionType, "Unknown", StringComparison.OrdinalIgnoreCase))
+                {
+                    deviceSpecs.Add(new("Connection", device.ConnectionType));
+                }
 
+                if (!string.IsNullOrWhiteSpace(device.DeviceName))
+                {
+                    deviceSpecs.Add(new("Desktop Target", device.DeviceName.Replace(@"\\.\", "")));
+                }
+
+                deviceSpecs.Add(new("Desktop Role", device.IsPrimary ? "Primary" : "Secondary"));
+                if (!string.IsNullOrWhiteSpace(display.GpuOutput)) deviceSpecs.Add(new("GPU Output", display.GpuOutput));
+                if (!string.IsNullOrWhiteSpace(device.MatchMode) &&
+                    !string.Equals(device.MatchMode, "Unmatched", StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(device.MatchMode, "Fallback", StringComparison.OrdinalIgnoreCase))
+                {
+                    deviceSpecs.Add(new("Match Mode", device.MatchMode));
+                }
+
+                if (!string.IsNullOrWhiteSpace(device.MatchKey))
+                {
+                    deviceSpecs.Add(new("Match Key", device.MatchKey));
+                }
+
+                if (!string.IsNullOrWhiteSpace(device.MatchedInstance))
+                {
+                    deviceSpecs.Add(new("Matched Instance", device.MatchedInstance));
+                }
+
+                var headerSeed = !string.IsNullOrWhiteSpace(device.Name)
+                    ? device.Name
+                    : !string.IsNullOrWhiteSpace(device.Model)
+                        ? device.Model
+                        : $"Display {displayIndex}";
+                var tabHeader = device.IsPrimary
+                    ? $"Primary - {TrimDisplayTabHeader(headerSeed)}"
+                    : TrimDisplayTabHeader(headerSeed);
+                tabs.Add(new HardwareDetailTab(
+                    tabHeader,
+                    deviceSpecs,
+                    deviceResolution,
+                    deviceResolution.MatchedModel));
+                displayIndex++;
+            }
+
+            var subtitle = display.DisplayCount > 1
+                ? $"{display.DisplayCount} monitors connected"
+                : display.PrimaryMonitorName ?? primaryDisplay?.Name ?? "Primary Display";
             return new HardwareDetailPayload(
                 "Displays",
-                ValueOrUnknown(gpu.Name),
-                HardwareIconResolver.ResolveIconKey(
-                    "display",
-                    $"{displays.PrimaryMonitorName} {displays.MonitorManufacturer} {displays.MonitorModel}",
-                    HardwareIconResolver.GetFallbackKey("display")),
-                HardwareIconResolver.GetFallbackKey("display"),
-                specs);
+                subtitle,
+                iconResolution,
+                overview,
+                iconResolution.MatchedModel,
+                tabs);
         });
     }
 
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+    private static string TrimDisplayTabHeader(string monitorName)
+    {
+        var compact = Regex.Replace(monitorName, @"\s+", " ").Trim();
+        return compact.Length <= 20 ? compact : $"{compact[..20]}...";
+    }
 }
 
 public sealed class NetworkDetailVM : HardwareDetailViewModelBase
@@ -650,53 +1007,105 @@ public sealed class NetworkDetailVM : HardwareDetailViewModelBase
     {
         Title = "Network";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("network");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "network_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Network);
+        IconSource = IconResolver.Resolve(HardwareType.Network, null, null);
 
         BeginLoad(snapshot, cache =>
         {
-            var network = ResolveCached("Network", cache.Network);
-            var matchQuery = !string.IsNullOrWhiteSpace(network.PrimaryAdapterDescription)
-                ? network.PrimaryAdapterDescription
-                : network.PrimaryAdapterName;
-            var matchedNetwork = HardwareKnowledgeDbService.Instance.MatchNetworkAdapter(matchQuery ?? string.Empty);
+            var net = ResolveCached("Network", cache.Network);
+            var overview = new List<KeyValuePair<string, string>>();
+            if (net.AdapterCount > 0) overview.Add(new("Total Adapters", net.AdapterCount.ToString()));
+            if (net.AdapterUpCount > 0) overview.Add(new("Adapters Up", net.AdapterUpCount.ToString()));
+            if (net.WirelessAdapterCount > 0) overview.Add(new("Wireless Adapters", net.WirelessAdapterCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(net.PrimaryAdapterName)) overview.Add(new("Primary Adapter", net.PrimaryAdapterName));
+            if (!string.IsNullOrWhiteSpace(net.PrimaryAdapterDescription)) overview.Add(new("Primary Description", net.PrimaryAdapterDescription));
+            if (!string.IsNullOrWhiteSpace(net.PrimaryLinkSpeed)) overview.Add(new("Primary Link Speed", net.PrimaryLinkSpeed));
+            if (!string.IsNullOrWhiteSpace(net.NetConnectionStatus)) overview.Add(new("Primary Status", net.NetConnectionStatus));
+            var iconLookup = $"{net.PrimaryAdapterDescription} {net.PrimaryAdapterName}".Trim();
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Network, iconLookup);
 
-            var specs = new List<KeyValuePair<string, string>>
+            var tabs = new List<HardwareDetailTab>();
+            if (overview.Count > 0)
             {
-                new KeyValuePair<string, string>("Adapters Detected", network.AdapterCount.ToString()),
-                new KeyValuePair<string, string>("Adapters Up", network.AdapterUpCount.ToString()),
-                new KeyValuePair<string, string>("Wireless Adapters", network.WirelessAdapterCount.ToString()),
-                new KeyValuePair<string, string>("Primary Adapter", ValueOrUnknown(network.PrimaryAdapterName)),
-                new KeyValuePair<string, string>("Description", ValueOrUnknown(network.PrimaryAdapterDescription)),
-                new KeyValuePair<string, string>("Adapter Type", ValueOrUnknown(network.PrimaryAdapterType)),
-                new KeyValuePair<string, string>("Link Speed", ValueOrUnknown(network.PrimaryLinkSpeed)),
-                new KeyValuePair<string, string>("IPv4", ValueOrUnknown(network.PrimaryIpv4)),
-                new KeyValuePair<string, string>("Gateway", ValueOrUnknown(network.PrimaryGateway)),
-                new KeyValuePair<string, string>("DNS", ValueOrUnknown(network.PrimaryDns)),
-                new KeyValuePair<string, string>("MAC Address", ValueOrUnknown(network.PrimaryMacAddress)),
-                new KeyValuePair<string, string>("Source", "Startup cache")
-            };
-
-            if (matchedNetwork != null)
-            {
-                specs.Add(new("DB Match", $"{matchedNetwork.Brand} {matchedNetwork.ModelName}".Trim()));
+                tabs.Add(new HardwareDetailTab(
+                    "Overview",
+                    overview,
+                    iconResolution,
+                    iconResolution.MatchedModel));
             }
 
+            if (net.Adapters.Count > 0)
+            {
+                foreach (var adapter in net.Adapters)
+                {
+                    var adapterLookup = $"{adapter.Description} {adapter.Name}".Trim();
+                    var matchedAdapter = HardwareKnowledgeDbService.Instance.MatchNetworkAdapter(adapterLookup);
+                    var adapterResolution = HardwareIconService.ResolveResult(HardwareType.Network, adapterLookup, matchedAdapter);
+                    var adapterSpecs = new List<KeyValuePair<string, string>>();
+                    if (!string.IsNullOrWhiteSpace(adapter.Name)) adapterSpecs.Add(new("Name", adapter.Name));
+                    if (!string.IsNullOrWhiteSpace(adapter.Description)) adapterSpecs.Add(new("Description", adapter.Description));
+                    if (!string.IsNullOrWhiteSpace(adapter.AdapterType)) adapterSpecs.Add(new("Type", adapter.AdapterType));
+                    if (!string.IsNullOrWhiteSpace(adapter.Status)) adapterSpecs.Add(new("Status", adapter.Status));
+                    if (!string.IsNullOrWhiteSpace(adapter.LinkSpeed)) adapterSpecs.Add(new("Link Speed", adapter.LinkSpeed));
+                    if (!string.IsNullOrWhiteSpace(adapter.MacAddress)) adapterSpecs.Add(new("MAC Address", FormatMacAddress(adapter.MacAddress)));
+                    if (!string.IsNullOrWhiteSpace(adapter.Ipv4)) adapterSpecs.Add(new("IPv4", adapter.Ipv4));
+                    if (!string.IsNullOrWhiteSpace(adapter.Ipv6)) adapterSpecs.Add(new("IPv6", adapter.Ipv6));
+                    if (!string.IsNullOrWhiteSpace(adapter.Gateway)) adapterSpecs.Add(new("Gateway", adapter.Gateway));
+                    if (!string.IsNullOrWhiteSpace(adapter.Dns)) adapterSpecs.Add(new("DNS", adapter.Dns));
+                    if (!string.IsNullOrWhiteSpace(adapter.DhcpEnabled)) adapterSpecs.Add(new("DHCP Enabled", adapter.DhcpEnabled));
+                    if (!string.IsNullOrWhiteSpace(adapter.DhcpServer)) adapterSpecs.Add(new("DHCP Server", adapter.DhcpServer));
+                    if (!string.IsNullOrWhiteSpace(adapter.LeaseObtained)) adapterSpecs.Add(new("Lease Obtained", adapter.LeaseObtained));
+                    if (!string.IsNullOrWhiteSpace(adapter.LeaseExpires)) adapterSpecs.Add(new("Lease Expires", adapter.LeaseExpires));
+
+                    var tabHeader = !string.IsNullOrWhiteSpace(adapter.Name)
+                        ? TrimNetworkTabHeader(adapter.Name)
+                        : "Adapter";
+                    tabs.Add(new HardwareDetailTab(
+                        tabHeader,
+                        adapterSpecs,
+                        adapterResolution,
+                        matchedAdapter));
+                }
+            }
+            else
+            {
+                var primarySpecs = new List<KeyValuePair<string, string>>();
+                if (!string.IsNullOrWhiteSpace(net.PrimaryAdapterName)) primarySpecs.Add(new("Name", net.PrimaryAdapterName));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryAdapterDescription)) primarySpecs.Add(new("Description", net.PrimaryAdapterDescription));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryAdapterType)) primarySpecs.Add(new("Type", net.PrimaryAdapterType));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryIpv4)) primarySpecs.Add(new("IPv4", net.PrimaryIpv4));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryIpv6)) primarySpecs.Add(new("IPv6", net.PrimaryIpv6));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryLinkSpeed)) primarySpecs.Add(new("Link Speed", net.PrimaryLinkSpeed));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryGateway)) primarySpecs.Add(new("Gateway", net.PrimaryGateway));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryDns)) primarySpecs.Add(new("DNS", net.PrimaryDns));
+                if (!string.IsNullOrWhiteSpace(net.PrimaryMacAddress)) primarySpecs.Add(new("MAC Address", FormatMacAddress(net.PrimaryMacAddress)));
+                if (!string.IsNullOrWhiteSpace(net.NetConnectionStatus)) primarySpecs.Add(new("Status", net.NetConnectionStatus));
+                if (primarySpecs.Count > 0)
+                {
+                    tabs.Add(new HardwareDetailTab(
+                        "Primary",
+                        primarySpecs,
+                        iconResolution,
+                        iconResolution.MatchedModel));
+                }
+            }
+
+            var subtitle = net.PrimaryAdapterName ?? "Network Adapter";
             return new HardwareDetailPayload(
                 "Network",
-                ValueOrUnknown(network.PrimaryAdapterName),
-                matchedNetwork != null
-                    ? matchedNetwork.IconKey
-                    : HardwareIconResolver.ResolveIconKey(
-                        "network",
-                        $"{network.PrimaryAdapterDescription} {network.PrimaryAdapterName}",
-                        HardwareIconResolver.GetFallbackKey("network")),
-                HardwareIconResolver.GetFallbackKey("network"),
-                specs);
+                subtitle,
+                iconResolution,
+                overview,
+                iconResolution.MatchedModel,
+                tabs);
         });
     }
 
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+    private static string TrimNetworkTabHeader(string adapterName)
+    {
+        var compact = Regex.Replace(adapterName, @"\s+", " ").Trim();
+        return compact.Length <= 20 ? compact : $"{compact[..20]}...";
+    }
 }
 
 public sealed class UsbDetailVM : HardwareDetailViewModelBase
@@ -704,52 +1113,56 @@ public sealed class UsbDetailVM : HardwareDetailViewModelBase
     public UsbDetailVM(HardwareDetailSnapshot? snapshot = null)
         : base(HardwareType.Usb)
     {
-        Title = "USB";
+        Title = "USB Controllers";
         Subtitle = "Loading system data...";
-        IconKey = HardwareIconResolver.GetFallbackKey("usb");
-        IconSource = HardwareIconResolver.ResolveIcon(IconKey, "usb_generic");
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Usb);
+        IconSource = IconResolver.Resolve(HardwareType.Usb, null, null);
 
         BeginLoad(snapshot, cache =>
         {
             var usb = ResolveCached("USB", cache.Usb);
-            var matchQuery = !string.IsNullOrWhiteSpace(usb.PrimaryControllerName)
-                ? usb.PrimaryControllerName
-                : usb.PrimaryUsbDeviceName;
-            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsbController(matchQuery ?? string.Empty);
+            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsb(usb.PrimaryControllerName ?? string.Empty);
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryControllerName)) specs.Add(new("Primary Controller", usb.PrimaryControllerName));
+            if (usb.RemovableDriveCount > 0) specs.Add(new("Removable Drives", usb.RemovableDriveCount.ToString()));
+            if (usb.UsbControllerCount > 0) specs.Add(new("Controllers", usb.UsbControllerCount.ToString()));
+            if (usb.UsbDeviceCount > 0) specs.Add(new("Total Devices", usb.UsbDeviceCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryUsbDeviceName)) specs.Add(new("Primary Device", usb.PrimaryUsbDeviceName));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryVendorId)) specs.Add(new("Vendor ID", usb.PrimaryVendorId));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryProductId)) specs.Add(new("Product ID", usb.PrimaryProductId));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryStatus)) specs.Add(new("Status", usb.PrimaryStatus));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryDeviceId)) specs.Add(new("Device ID", usb.PrimaryDeviceId));
 
-            var specs = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("Removable Drives", usb.RemovableDriveCount.ToString()),
-                new KeyValuePair<string, string>("USB Controllers", usb.UsbControllerCount.ToString()),
-                new KeyValuePair<string, string>("USB Devices", usb.UsbDeviceCount.ToString()),
-                new KeyValuePair<string, string>("Primary Controller", ValueOrUnknown(usb.PrimaryControllerName)),
-                new KeyValuePair<string, string>("Primary Device", ValueOrUnknown(usb.PrimaryUsbDeviceName)),
-                new KeyValuePair<string, string>("Vendor ID", ValueOrUnknown(usb.PrimaryVendorId)),
-                new KeyValuePair<string, string>("Product ID", ValueOrUnknown(usb.PrimaryProductId)),
-                new KeyValuePair<string, string>("Source", "Startup cache"),
-                new KeyValuePair<string, string>("Tip", "Use Monitor tab for detailed USB inventory")
-            };
-
-            if (matchedUsb != null)
-            {
-                specs.Add(new("DB Match", $"{matchedUsb.Brand} {matchedUsb.ModelName}".Trim()));
-            }
-
-            return new HardwareDetailPayload(
-                "USB",
-                ValueOrUnknown(usb.PrimaryControllerName),
-                matchedUsb != null
-                    ? matchedUsb.IconKey
-                    : HardwareIconResolver.ResolveIconKey(
-                        "usb",
-                        $"{usb.PrimaryControllerName} {usb.PrimaryUsbDeviceName}",
-                        HardwareIconResolver.GetFallbackKey("usb")),
-                HardwareIconResolver.GetFallbackKey("usb"),
-                specs);
+            var subtitle = matchedUsb?.ModelName ?? usb.PrimaryControllerName ?? "USB Controller";
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Usb, usb.PrimaryControllerName, matchedUsb);
+            return new HardwareDetailPayload("USB", subtitle, iconResolution, specs, matchedUsb);
         });
     }
+}
 
-    private static string ValueOrUnknown(string? value) => string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+public sealed class AudioDetailVM : HardwareDetailViewModelBase
+{
+    public AudioDetailVM(HardwareDetailSnapshot? snapshot = null)
+        : base(HardwareType.Audio)
+    {
+        Title = "Audio Devices";
+        Subtitle = "Loading audio data...";
+        IconKey = IconResolver.GetDefaultKey(HardwareType.Audio);
+        IconSource = IconResolver.Resolve(HardwareType.Audio, null, null);
+
+        BeginLoad(snapshot, cache =>
+        {
+            var audio = ResolveCached("Audio", cache.Audio);
+            var specs = new List<KeyValuePair<string, string>>();
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryDeviceName)) specs.Add(new("Device", audio.PrimaryDeviceName));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryManufacturer)) specs.Add(new("Manufacturer", audio.PrimaryManufacturer));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryStatus)) specs.Add(new("Status", audio.PrimaryStatus));
+
+            var subtitle = audio.PrimaryDeviceName ?? "Audio Device";
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audio.PrimaryDeviceName);
+            return new HardwareDetailPayload("Audio", subtitle, iconResolution, specs);
+        });
+    }
 }
 
 public static class HardwareDetailViewModelFactory
@@ -764,9 +1177,10 @@ public static class HardwareDetailViewModelFactory
             HardwareType.Motherboard => new MotherboardDetailVM(snapshot),
             HardwareType.Memory => new MemoryDetailVM(snapshot),
             HardwareType.Storage => new StorageDetailVM(snapshot),
-            HardwareType.Displays => new DisplaysDetailVM(snapshot),
+            HardwareType.Display => new DisplaysDetailVM(snapshot),
             HardwareType.Network => new NetworkDetailVM(snapshot),
             HardwareType.Usb => new UsbDetailVM(snapshot),
+            HardwareType.Audio => new AudioDetailVM(snapshot),
             _ => null
         };
     }

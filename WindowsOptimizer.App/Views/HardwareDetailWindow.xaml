@@ -3,247 +3,281 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters"
         mc:Ignorable="d"
-        Title="{Binding WindowTitle}"
-        Height="600" Width="800"
-        MinHeight="400" MinWidth="600"
+        Title="{Binding Title}"
+        SizeToContent="Height"
+        Width="640"
+        MinWidth="520"
+        MaxWidth="760"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResizeWithGrip"
         Background="{DynamicResource BackgroundDarkestBrush}"
         FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
-        FontSize="12"
-        ResizeMode="CanResize"
-        Opacity="0">
+        FontSize="12">
 
-    <!-- Entrance Animation: Fade-in + Slide-up -->
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Window.Loaded">
-            <BeginStoryboard>
-                <Storyboard>
-                    <!-- Fade in -->
-                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                     From="0" To="1" Duration="0:0:0.35"
-                                     EasingFunction="{StaticResource EntranceEase}"/>
-                    <!-- Slide up -->
-                    <DoubleAnimation Storyboard.TargetName="RootTransform"
-                                     Storyboard.TargetProperty="Y"
-                                     From="30" To="0" Duration="0:0:0.35"
-                                     EasingFunction="{StaticResource EntranceEase}"/>
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="40"
+                            ResizeBorderThickness="6"
+                            GlassFrameThickness="0"
+                            CornerRadius="0"/>
+    </shell:WindowChrome.WindowChrome>
 
-    <Window.RenderTransform>
-        <TranslateTransform x:Name="RootTransform" Y="30"/>
-    </Window.RenderTransform>
+    <Window.InputBindings>
+        <KeyBinding Key="Escape"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Window.InputBindings>
 
     <Window.Resources>
-        <CubicEase x:Key="EntranceEase" EasingMode="EaseOut"/>
-        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-        <Style x:Key="DetailLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,2"/>
-        </Style>
-        <Style x:Key="DetailValueStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
-        </Style>
-        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
-            <Setter Property="Margin" Value="0,16,0,12"/>
-        </Style>
-        <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Colors.xaml"/>
+                <ResourceDictionary Source="/Resources/Typography.xaml"/>
+                <ResourceDictionary Source="/Resources/Spacing.xaml"/>
+                <ResourceDictionary Source="/Resources/Icons.xaml"/>
+                <ResourceDictionary Source="/Resources/Animations.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="/Resources/ModernStyles.xaml"/>
+                <ResourceDictionary Source="/Resources/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+            <converters:WindowHeightConverter x:Key="WindowHeightConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Border x:Name="RootPanel"
+            Margin="10"
+            CornerRadius="12"
+            BorderBrush="{DynamicResource GlassBorderBrush}"
+            BorderThickness="1"
+            ClipToBounds="True"
+            Opacity="0"
+            RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TranslateTransform x:Name="RootTranslate" Y="10"/>
+        </Border.RenderTransform>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.18"/>
+                        <DoubleAnimation Storyboard.TargetName="RootTranslate" Storyboard.TargetProperty="Y" From="10" To="0" Duration="0:0:0.18">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Border Grid.Row="0" Background="{DynamicResource BackgroundDarkBrush}" Padding="24,20">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <!-- Row 0: Header -->
+            <Border Grid.Row="0" Margin="12,12,12,8" Style="{DynamicResource ModernCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Icon -->
-                <Border Grid.Column="0" Background="{Binding IconBackground}" CornerRadius="12" Padding="16" Margin="0,0,20,0">
-                    <TextBlock Text="{Binding Icon}" FontFamily="Segoe MDL2 Assets" FontSize="32"/>
-                </Border>
+                    <Border Grid.Column="0"
+                            Width="48"
+                            Height="48"
+                            CornerRadius="10"
+                            Background="{DynamicResource BackgroundLightBrush}"
+                            VerticalAlignment="Center"
+                            Margin="0,0,12,0">
+                        <Image Source="{Binding IconSource}"
+                               Width="28"
+                               Height="28"
+                               Stretch="Uniform"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Border>
 
-                <!-- Title & Subtitle -->
-                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Title}" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                    <TextBlock Text="{Binding Subtitle}" FontSize="14" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,4,0,0"/>
-                </StackPanel>
-
-                <!-- Status & Primary Value -->
-                <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding PrimaryValue}" FontSize="48" FontWeight="Bold" Foreground="{Binding PrimaryValueColor}"/>
-                        <TextBlock Text="{Binding PrimaryUnit}" FontSize="24" Foreground="{DynamicResource ForegroundLightBrush}"
-                                   VerticalAlignment="Bottom" Margin="4,0,0,8"/>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Title}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Subtitle}"
+                                   Margin="0,4,0,0"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,0">
-                        <Ellipse Width="12" Height="12" Fill="{Binding StatusColor}" Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="{DynamicResource MutedForegroundBrush}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
 
-        <!-- Content Area -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Padding="24,12">
-            <StackPanel>
-                <!-- Quick Stats Row -->
-                <UniformGrid Rows="1" Columns="4" Margin="0,0,0,16">
-                    <Border Style="{StaticResource CardStyle}" Margin="0,0,6,0">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Stat1Label}" Style="{StaticResource DetailLabelStyle}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Stat1Value}" FontSize="24" FontWeight="Bold"
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}" HorizontalAlignment="Center"/>
-                        </StackPanel>
+            <!-- Row 1: Scrollable Content -->
+            <Border Grid.Row="1" Margin="12,0,12,0" Style="{DynamicResource ModernCardStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Margin="8,8,8,0"
+                            Background="{DynamicResource BackgroundMediumBrush}"
+                            CornerRadius="8"
+                            Visibility="{Binding HasDeviceTabs, Converter={StaticResource BoolToVisibility}}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      CanContentScroll="False"
+                                      Style="{DynamicResource AutoHidingScrollViewerStyle}">
+                            <ListBox ItemsSource="{Binding DeviceTabs}"
+                                     SelectedItem="{Binding SelectedDeviceTab, Mode=TwoWay}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding IconSource}"
+                                                   Width="14"
+                                                   Height="14"
+                                                   Margin="0,0,6,0"
+                                                   Stretch="Uniform"
+                                                   VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Header}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Margin" Value="4"/>
+                                        <Setter Property="Padding" Value="12,6"/>
+                                        <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border x:Name="ItemBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            CornerRadius="6"
+                                                            Padding="{TemplateBinding Padding}">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource AccentPrimaryBrush}"/>
+                                                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="ItemBorder" Property="Opacity" Value="0.9"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </ScrollViewer>
                     </Border>
-                    <Border Style="{StaticResource CardStyle}" Margin="3,0">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Stat2Label}" Style="{StaticResource DetailLabelStyle}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Stat2Value}" FontSize="24" FontWeight="Bold"
-                                       Foreground="{DynamicResource SuccessBrush}" HorizontalAlignment="Center"/>
+
+                    <!-- Loading Skeleton -->
+                    <Grid Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Margin="8">
+                            <TextBlock Text="{Binding LoadingMessage}"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,0,0,8"/>
+                            <ItemsControl ItemsSource="{Binding SkeletonRows}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Height="24"
+                                                Margin="0,0,0,4"
+                                                CornerRadius="6"
+                                                Background="{DynamicResource BackgroundMediumBrush}"
+                                                Opacity="0.6"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
-                    </Border>
-                    <Border Style="{StaticResource CardStyle}" Margin="3,0">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Stat3Label}" Style="{StaticResource DetailLabelStyle}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Stat3Value}" FontSize="24" FontWeight="Bold"
-                                       Foreground="{DynamicResource CautionBrush}" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-                    <Border Style="{StaticResource CardStyle}" Margin="6,0,0,0">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Stat4Label}" Style="{StaticResource DetailLabelStyle}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Stat4Value}" FontSize="24" FontWeight="Bold"
-                                       Foreground="{DynamicResource InfoBrush}" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-                </UniformGrid>
+                    </Grid>
 
-                <!-- Specifications Section -->
-                <TextBlock Text="Specifications" Style="{StaticResource SectionHeaderStyle}"/>
-                <Border Style="{StaticResource CardStyle}">
-                    <ItemsControl ItemsSource="{Binding Specifications}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,0,0,8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Key}" Style="{StaticResource DetailLabelStyle}" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Value}" Style="{StaticResource DetailValueStyle}"
-                                               VerticalAlignment="Center" Margin="0" TextWrapping="Wrap"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Border>
+                    <!-- Scrollable Specs -->
+                    <ScrollViewer Grid.Row="1"
+                                  x:Name="SpecsScrollViewer"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  CanContentScroll="True"
+                                  PanningMode="VerticalOnly"
+                                  Style="{DynamicResource AutoHidingScrollViewerStyle}"
+                                  MaxHeight="480"
+                                  Margin="0,4,0,0"
+                                  Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                        <ScrollViewer.Resources>
+                            <Style TargetType="ScrollBar">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </ScrollViewer.Resources>
 
-                <!-- Additional Details Section -->
-                <TextBlock Text="Details" Style="{StaticResource SectionHeaderStyle}"
-                           Visibility="{Binding HasDetails, Converter={StaticResource BoolToVisibility}}"/>
-                <Border Style="{StaticResource CardStyle}"
-                        Visibility="{Binding HasDetails, Converter={StaticResource BoolToVisibility}}">
-                    <ItemsControl ItemsSource="{Binding Details}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,0,0,8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Key}" Style="{StaticResource DetailLabelStyle}" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Value}" Style="{StaticResource DetailValueStyle}"
-                                               VerticalAlignment="Center" Margin="0" TextWrapping="Wrap"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Border>
+                        <ItemsControl ItemsSource="{Binding Specs}" Margin="8">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" 
+                                                 Text="{Binding Label}" 
+                                                 Foreground="{DynamicResource MutedForegroundBrush}" 
+                                                 FontSize="13"
+                                                 VerticalAlignment="Top"/>
+                                        <TextBlock Grid.Column="1" 
+                                                 Text="{Binding Value}" 
+                                                 Foreground="{DynamicResource ForegroundBrightestBrush}" 
+                                                 FontSize="13" 
+                                                 TextWrapping="Wrap"
+                                                 VerticalAlignment="Top"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
 
-                <!-- Sub-Items (for RAM modules, Disk partitions, etc.) -->
-                <TextBlock Text="{Binding SubItemsHeader}" Style="{StaticResource SectionHeaderStyle}"
-                           Visibility="{Binding HasSubItems, Converter={StaticResource BoolToVisibility}}"/>
-                <ItemsControl ItemsSource="{Binding SubItems}"
-                              Visibility="{Binding HasSubItems, Converter={StaticResource BoolToVisibility}}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Style="{StaticResource CardStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+            <!-- Row 2: Footer -->
+            <Border Grid.Row="2" Margin="12,8,12,12" Style="{DynamicResource ModernCardStyle}">
+                <Grid>
+                    <TextBlock Text="Data loaded from cache"
+                               VerticalAlignment="Center"
+                               FontSize="11"
+                               Foreground="{DynamicResource MutedForegroundBrush}"/>
 
-                                    <Border Grid.Column="0" Background="{DynamicResource BackgroundLightBrush}"
-                                            CornerRadius="8" Padding="12" Margin="0,0,16,0" VerticalAlignment="Top">
-                                        <TextBlock Text="{Binding Icon}" FontFamily="Segoe MDL2 Assets" FontSize="20"/>
-                                    </Border>
-
-                                    <StackPanel Grid.Column="1">
-                                        <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,0,8"/>
-                                        <ItemsControl ItemsSource="{Binding Properties}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <WrapPanel/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal" Margin="0,0,24,4">
-                                                        <TextBlock Text="{Binding Key}" FontSize="11"
-                                                                   Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,0,6,0"/>
-                                                        <TextBlock Text="{Binding Value}" FontSize="11" FontWeight="SemiBold"
-                                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-
-        <!-- Footer -->
-        <Border Grid.Row="2" Background="{DynamicResource BackgroundDarkBrush}" Padding="24,16">
-            <Grid>
-                <TextBlock Text="{Binding FooterText}" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"
-                           VerticalAlignment="Center"/>
-                <Button Content="Close" HorizontalAlignment="Right" Padding="24,8"
-                        Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                        Style="{DynamicResource ModernButtonStyle}"/>
-            </Grid>
-        </Border>
-    </Grid>
+                    <Button Content="Close"
+                            HorizontalAlignment="Right"
+                            Padding="20,6"
+                            Click="CloseButton_Click"
+                            Style="{DynamicResource ModernButtonStyle}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
-

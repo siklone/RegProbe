@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,16 +18,26 @@ namespace WindowsOptimizer.App.Services;
 /// </summary>
 public sealed class SingleInstanceManager : IDisposable
 {
-    private const string MutexName = "Global\\WindowsOptimizer_SingleInstance_v2";
-    private const string PipeName = "WindowsOptimizer_IPC_v2";
+    private const string MutexPrefix = "Global\\WindowsOptimizer_SingleInstance";
+    private const string PipePrefix = "WindowsOptimizer_IPC";
     private const int PipeConnectTimeoutMs = 3000;
     private const int MaxRetries = 3;
+
+    private readonly string _mutexName;
+    private readonly string _pipeName;
 
     private Mutex? _mutex;
     private NamedPipeServerStream? _pipeServer;
     private CancellationTokenSource? _pipeCts;
     private bool _isFirstInstance;
     private bool _disposed;
+
+    public SingleInstanceManager()
+    {
+        var key = GetInstanceKey();
+        _mutexName = $"{MutexPrefix}_{key}";
+        _pipeName = $"{PipePrefix}_{key}";
+    }
 
     /// <summary>
     /// Returns true if this is the first (and only) instance of the application.
@@ -48,7 +60,7 @@ public sealed class SingleInstanceManager : IDisposable
         {
             // createdNew = true means we created the mutex (first instance)
             // createdNew = false means mutex already exists (another instance)
-            _mutex = new Mutex(true, MutexName, out _isFirstInstance);
+            _mutex = new Mutex(true, _mutexName, out _isFirstInstance);
 
             if (_isFirstInstance)
             {
@@ -97,7 +109,7 @@ public sealed class SingleInstanceManager : IDisposable
             {
                 // Create new pipe server for each connection
                 _pipeServer = new NamedPipeServerStream(
-                    PipeName,
+                    _pipeName,
                     PipeDirection.In,
                     1,  // Max one client at a time
                     PipeTransmissionMode.Byte,
@@ -155,7 +167,7 @@ public sealed class SingleInstanceManager : IDisposable
         {
             try
             {
-                using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
+                using var client = new NamedPipeClientStream(".", _pipeName, PipeDirection.Out);
                 client.Connect(PipeConnectTimeoutMs);
 
                 using var writer = new StreamWriter(client);
@@ -177,6 +189,20 @@ public sealed class SingleInstanceManager : IDisposable
 
         // All retries failed - first instance may be hung
         ShowInstanceWarning();
+    }
+
+    private static string GetInstanceKey()
+    {
+        try
+        {
+            var baseDir = AppContext.BaseDirectory.TrimEnd('\\', '/').ToUpperInvariant();
+            var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(baseDir));
+            return Convert.ToHexString(bytes.AsSpan(0, 6)).ToLowerInvariant();
+        }
+        catch
+        {
+            return "default";
+        }
     }
 
     private static void ShowInstanceWarning()

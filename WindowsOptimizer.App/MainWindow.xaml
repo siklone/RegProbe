@@ -84,7 +84,7 @@
                                         CornerRadius="8"
                                         BorderThickness="1"
                                         BorderBrush="Transparent"
-                                        Padding="12,10">
+                                        Padding="12,9">
                                     <ContentPresenter />
                                 </Border>
                             </Grid>
@@ -241,13 +241,9 @@
             </Grid.ColumnDefinitions>
 
             <!-- Enhanced Sidebar (Glass Effect) -->
-        <Border Grid.Column="0" 
-                Background="{DynamicResource BackgroundDarkBrush}"
-                BorderBrush="{DynamicResource GlassBorderBrush}"
-                BorderThickness="0,0,1,0">
-            <Border.Effect>
-                <DropShadowEffect Color="{DynamicResource ShadowColorLarge}" BlurRadius="20" ShadowDepth="0" Opacity="0.3" Direction="0"/>
-            </Border.Effect>
+             <Border Grid.Column="0" 
+                 Background="{DynamicResource BackgroundDarkBrush}"
+                 BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -291,7 +287,7 @@
                          Margin="0,8,0,0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="36">
+                            <Grid Height="32">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
@@ -309,7 +305,7 @@
                                            Text="{Binding Title}" 
                                            VerticalAlignment="Center"
                                            FontSize="13"
-                                           Margin="8,0,0,0"/>
+                                           Margin="10,0,0,0"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -484,21 +480,34 @@
 
         <!-- Startup Scan Overlay -->
         <Grid Panel.ZIndex="100"
+              IsHitTestVisible="False"
               Visibility="{Binding IsStartupScanActive, Converter={StaticResource BoolToVisibility}}">
-            <Border Background="{DynamicResource BackgroundDarkestBrush}" Opacity="0.92"/>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="360">
-                <TextBlock Text="Opening..."
-                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                           FontSize="18"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"/>
-                <TextBlock Text="(System scan in progress; this may take a moment.)"
-                           Foreground="{DynamicResource ForegroundLightBrush}"
-                           FontSize="12"
-                           Margin="0,6,0,16"
-                           HorizontalAlignment="Center"/>
-                <ProgressBar Height="6" IsIndeterminate="True"/>
-            </StackPanel>
+            <Border HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Width="240"
+                    Margin="0,0,24,24"
+                    Padding="16,14"
+                    Background="{DynamicResource BackgroundDarkestBrush}"
+                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Opacity="0.96">
+                <Border.Effect>
+                    <DropShadowEffect Color="{DynamicResource ShadowColorMedium}"
+                                      BlurRadius="18"
+                                      ShadowDepth="0"
+                                      Opacity="0.28"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="Background scan"
+                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                               FontSize="13"
+                               FontWeight="SemiBold"/>
+                    <ProgressBar Height="4"
+                                 Margin="0,10,0,0"
+                                 IsIndeterminate="True"/>
+                </StackPanel>
+            </Border>
         </Grid>
 
         <!-- System Tray Icon (outside layout Grid to avoid rendering in window) -->

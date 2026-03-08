@@ -6,15 +6,18 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Win32;
 using WindowsOptimizer.App.Models;
 using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.HardwareDb;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.ViewModels.Hardware;
 
 namespace WindowsOptimizer.App.ViewModels;
@@ -110,6 +113,24 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _windowsBuildUrl = "";
     private string _motherboardDriverUrl = "";
     private string _chipsetDriverUrl = "";
+    private string _osIconKey = "os/windows10";
+    private string _cpuIconKey = "cpu_default";
+    private string _gpuIconKey = "gpu_default";
+    private string _memoryIconKey = "memory_default";
+    private string _storageIconKey = "storage_default";
+    private string _motherboardIconKey = "chipset_default";
+    private string _displayIconKey = "display_default";
+    private string _networkIconKey = "network_default";
+    private string _usbIconKey = "usb_default";
+    private ImageSource _osIconSource = HardwareIconResolver.ResolveOsIcon("Windows 10");
+    private ImageSource _cpuIconSource = HardwareIconResolver.ResolveIcon("cpu_default", "cpu_default");
+    private ImageSource _gpuIconSource = HardwareIconResolver.ResolveIcon("gpu_default", "gpu_default");
+    private ImageSource _memoryIconSource = HardwareIconResolver.ResolveIcon("memory_default", "memory_default");
+    private ImageSource _storageIconSource = HardwareIconResolver.ResolveIcon("storage_default", "storage_default");
+    private ImageSource _motherboardIconSource = HardwareIconResolver.ResolveIcon("chipset_default", "chipset_default");
+    private ImageSource _displayIconSource = HardwareIconResolver.ResolveIcon("display_default", "display_default");
+    private ImageSource _networkIconSource = HardwareIconResolver.ResolveIcon("network_default", "network_default");
+    private ImageSource _usbIconSource = HardwareIconResolver.ResolveIcon("usb_default", "usb_default");
 
     // Security
     private string _kernelDmaProtection = "Loading...";
@@ -129,7 +150,7 @@ public sealed class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         OpenUrlCommand = new RelayCommand(OpenUrl);
-        OpenDetailCommand = new RelayCommand(OpenDetail);
+        OpenDetailCommand = new RelayCommand(OpenDetail, _ => true);
         _ = LoadSystemInfoAsync();
     }
 
@@ -234,6 +255,24 @@ public sealed class DashboardViewModel : ViewModelBase
     public string WindowsBuildUrl { get => _windowsBuildUrl; private set => SetProperty(ref _windowsBuildUrl, value); }
     public string MotherboardDriverUrl { get => _motherboardDriverUrl; private set => SetProperty(ref _motherboardDriverUrl, value); }
     public string ChipsetDriverUrl { get => _chipsetDriverUrl; private set => SetProperty(ref _chipsetDriverUrl, value); }
+    public string OsIconKey { get => _osIconKey; private set => SetProperty(ref _osIconKey, value); }
+    public string CpuIconKey { get => _cpuIconKey; private set => SetProperty(ref _cpuIconKey, value); }
+    public string GpuIconKey { get => _gpuIconKey; private set => SetProperty(ref _gpuIconKey, value); }
+    public string MemoryIconKey { get => _memoryIconKey; private set => SetProperty(ref _memoryIconKey, value); }
+    public string StorageIconKey { get => _storageIconKey; private set => SetProperty(ref _storageIconKey, value); }
+    public string MotherboardIconKey { get => _motherboardIconKey; private set => SetProperty(ref _motherboardIconKey, value); }
+    public string DisplayIconKey { get => _displayIconKey; private set => SetProperty(ref _displayIconKey, value); }
+    public string NetworkIconKey { get => _networkIconKey; private set => SetProperty(ref _networkIconKey, value); }
+    public string UsbIconKey { get => _usbIconKey; private set => SetProperty(ref _usbIconKey, value); }
+    public ImageSource OsIconSource { get => _osIconSource; private set => SetProperty(ref _osIconSource, value); }
+    public ImageSource CpuIconSource { get => _cpuIconSource; private set => SetProperty(ref _cpuIconSource, value); }
+    public ImageSource GpuIconSource { get => _gpuIconSource; private set => SetProperty(ref _gpuIconSource, value); }
+    public ImageSource MemoryIconSource { get => _memoryIconSource; private set => SetProperty(ref _memoryIconSource, value); }
+    public ImageSource StorageIconSource { get => _storageIconSource; private set => SetProperty(ref _storageIconSource, value); }
+    public ImageSource MotherboardIconSource { get => _motherboardIconSource; private set => SetProperty(ref _motherboardIconSource, value); }
+    public ImageSource DisplayIconSource { get => _displayIconSource; private set => SetProperty(ref _displayIconSource, value); }
+    public ImageSource NetworkIconSource { get => _networkIconSource; private set => SetProperty(ref _networkIconSource, value); }
+    public ImageSource UsbIconSource { get => _usbIconSource; private set => SetProperty(ref _usbIconSource, value); }
 
     // Security
     public string KernelDmaProtection { get => _kernelDmaProtection; private set => SetProperty(ref _kernelDmaProtection, value); }
@@ -265,165 +304,39 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public void OpenDetail(object? parameter)
     {
+        System.Diagnostics.Debug.WriteLine($"OPEN CARD: {parameter ?? "<null>"}");
+
         if (parameter is not string section) return;
 
         try
         {
-            HardwareDetailViewModel? viewModel = section.ToLowerInvariant() switch
+            Window? window = section.ToLowerInvariant() switch
             {
-                "os" => BuildOsDetailViewModel(),
-                "cpu" => new HardwareDetailViewModel(HardwareType.Cpu),
-                "memory" or "ram" => new HardwareDetailViewModel(HardwareType.Ram),
-                "gpu" => new HardwareDetailViewModel(HardwareType.Gpu),
-                "motherboard" or "mobo" => new HardwareDetailViewModel(HardwareType.Motherboard),
-                "disk" or "storage" => new HardwareDetailViewModel(HardwareType.Disk),
-                "system" => BuildSystemBiosDetailViewModel(),
-                "network" => BuildNetworkDetailViewModel(),
-                "usb" => BuildUsbDetailViewModel(),
+                "os" => new Views.OsDetailWindow(),
+                "cpu" => new Views.CpuDetailWindow(),
+                "gpu" => new Views.GpuDetailWindow(),
+                "memory" or "ram" => new Views.MemoryDetailWindow(),
+                "disk" or "storage" => new Views.StorageDetailWindow(),
+                "network" => new Views.NetworkDetailWindow(),
+                "usb" => new Views.UsbDetailWindow(),
+                "motherboard" or "mobo" => new Views.MotherboardDetailWindow(),
+                "displays" or "display" => new Views.DisplaysDetailWindow(),
                 _ => null
             };
 
-            if (viewModel == null) return;
-
-            var window = new Views.HardwareDetailWindow
+            if (window == null)
             {
-                DataContext = viewModel,
-                Owner = System.Windows.Application.Current?.MainWindow
-            };
+                System.Diagnostics.Debug.WriteLine($"OpenDetail ignored: unsupported section '{section}'.");
+                return;
+            }
+
+            window.Owner = System.Windows.Application.Current?.MainWindow;
             window.ShowDialog();
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"OpenDetail error: {ex.Message}");
         }
-    }
-
-    private HardwareDetailViewModel BuildOsDetailViewModel()
-    {
-        var specs = new List<KeyValuePair<string, string>>
-        {
-            new("OS Name", OsName),
-            new("Version", OsVersion),
-            new("Build Number", OsBuild),
-            new("Architecture", OsArchitecture),
-            new("Install Date", OsInstallDate),
-            new("Windows Directory", WindowsDirectory),
-            new("System Directory", SystemDirectory),
-            new("Boot Device", BootDevice),
-            new("Time Zone", TimeZone),
-            new("User Name", UserName),
-            new("System Uptime", Uptime)
-        };
-
-        return new HardwareDetailViewModel(
-            HardwareType.OperatingSystem,
-            subtitle: OsName,
-            specifications: specs,
-            primaryValue: OsBuild,
-            primaryUnit: "");
-    }
-
-    private HardwareDetailViewModel BuildSystemBiosDetailViewModel()
-    {
-        var specs = new List<KeyValuePair<string, string>>
-        {
-            new("Computer Name", SystemName),
-            new("Manufacturer", SystemManufacturer),
-            new("Model", SystemModel),
-            new("SKU", SystemSku),
-            new("System Type", SystemType)
-        };
-
-        var details = new List<KeyValuePair<string, string>>
-        {
-            new("BIOS Mode", BiosMode),
-            new("BIOS Version", BiosVersion),
-            new("BIOS Date", BiosDate),
-            new("SMBIOS Version", SmbiosVersion),
-            new("Secure Boot", SecureBootState),
-            new("Kernel DMA Protection", KernelDmaProtection),
-            new("Virtualization Security", VirtualizationSecurity),
-            new("Device Guard", DeviceGuard),
-            new("Hypervisor Enforced", HypervisorEnforced),
-            new("Credential Guard", CredentialGuard)
-        };
-
-        return new HardwareDetailViewModel(
-            HardwareType.SystemBios,
-            subtitle: $"{SystemManufacturer} {SystemModel}",
-            specifications: specs,
-            details: details,
-            primaryValue: BiosMode,
-            primaryUnit: "");
-    }
-
-    private HardwareDetailViewModel BuildNetworkDetailViewModel()
-    {
-        var specs = new List<KeyValuePair<string, string>>
-        {
-            new("Adapters Found", NetworkAdapters.Count.ToString())
-        };
-
-        var subItems = new List<SubItemViewModel>();
-        foreach (var adapter in NetworkAdapters)
-        {
-            var sub = new SubItemViewModel
-            {
-                Icon = "\uE968",
-                Name = adapter.Name
-            };
-            sub.Properties.Add(new("Status", adapter.Status));
-            if (!string.IsNullOrWhiteSpace(adapter.IpAddress))
-                sub.Properties.Add(new("IP", adapter.IpAddress));
-            if (!string.IsNullOrWhiteSpace(adapter.MacAddress))
-                sub.Properties.Add(new("MAC", adapter.MacAddress));
-            if (!string.IsNullOrWhiteSpace(adapter.Speed))
-                sub.Properties.Add(new("Speed", adapter.Speed));
-            if (!string.IsNullOrWhiteSpace(adapter.DnsServers))
-                sub.Properties.Add(new("DNS", adapter.DnsServers));
-            subItems.Add(sub);
-        }
-
-        return new HardwareDetailViewModel(
-            HardwareType.Network,
-            subtitle: $"{NetworkAdapters.Count} Adapter(s)",
-            specifications: specs,
-            subItems: subItems,
-            subItemsHeader: "Network Adapters",
-            primaryValue: NetworkAdapters.Count.ToString(),
-            primaryUnit: "adapters");
-    }
-
-    private HardwareDetailViewModel BuildUsbDetailViewModel()
-    {
-        var specs = new List<KeyValuePair<string, string>>
-        {
-            new("Devices Found", UsbDevices.Count.ToString())
-        };
-
-        var subItems = new List<SubItemViewModel>();
-        foreach (var usb in UsbDevices)
-        {
-            var sub = new SubItemViewModel
-            {
-                Icon = "\uE88E",
-                Name = usb.Name
-            };
-            if (!string.IsNullOrWhiteSpace(usb.VendorId))
-                sub.Properties.Add(new("VID", usb.VendorId));
-            if (!string.IsNullOrWhiteSpace(usb.ProductId))
-                sub.Properties.Add(new("PID", usb.ProductId));
-            subItems.Add(sub);
-        }
-
-        return new HardwareDetailViewModel(
-            HardwareType.Usb,
-            subtitle: $"{UsbDevices.Count} Device(s)",
-            specifications: specs,
-            subItems: subItems,
-            subItemsHeader: "USB Devices",
-            primaryValue: UsbDevices.Count.ToString(),
-            primaryUnit: "devices");
     }
 
     private async Task LoadSystemInfoAsync()
@@ -465,14 +378,20 @@ public sealed class DashboardViewModel : ViewModelBase
 
     private void LoadOperatingSystemInfo()
     {
+        var resolved = OsDetectionResolver.Resolve(includeWmiCrossCheck: true);
+        OsName = string.IsNullOrWhiteSpace(resolved.NormalizedName) ? "Unknown" : resolved.NormalizedName;
+        OsVersion = !string.IsNullOrWhiteSpace(resolved.DisplayVersion)
+            ? resolved.DisplayVersion
+            : (!string.IsNullOrWhiteSpace(resolved.Version) ? resolved.Version : "Unknown");
+        OsBuild = resolved.BuildNumber > 0 ? resolved.BuildNumber.ToString() : "Unknown";
+        OsIconKey = resolved.IconKey;
+        OsIconSource = HardwareIconResolver.ResolveIcon(resolved.IconKey, "os/windows10");
+
         try
         {
             using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             foreach (ManagementObject obj in searcher.Get())
             {
-                OsName = obj["Caption"]?.ToString() ?? "Unknown";
-                OsVersion = obj["Version"]?.ToString() ?? "Unknown";
-                OsBuild = obj["BuildNumber"]?.ToString() ?? "Unknown";
                 OsArchitecture = obj["OSArchitecture"]?.ToString() ?? "Unknown";
                 SystemName = obj["CSName"]?.ToString() ?? Environment.MachineName;
 
@@ -503,6 +422,11 @@ public sealed class DashboardViewModel : ViewModelBase
             }
         }
         catch { }
+
+        if (string.IsNullOrWhiteSpace(OsArchitecture))
+        {
+            OsArchitecture = resolved.Architecture;
+        }
 
         TimeZone = System.TimeZoneInfo.Local.StandardName;
         UserName = $"{Environment.UserDomainName}\\{Environment.UserName}";
@@ -642,6 +566,15 @@ public sealed class DashboardViewModel : ViewModelBase
             details.LinkWidth = "x16";
 
             MotherboardDetails = details;
+            var boardLookupSeed = HardwareIconService.BuildMotherboardLookupSeed(
+                details.Manufacturer,
+                details.Model,
+                details.Version,
+                details.BiosVendor,
+                details.Chipset);
+            var boardIconResolution = HardwareIconService.ResolveResult(HardwareType.Motherboard, boardLookupSeed);
+            MotherboardIconKey = boardIconResolution.IconKey;
+            MotherboardIconSource = HardwareIconService.Resolve(boardIconResolution);
 
             // Generate motherboard driver URL
             MotherboardDriverUrl = GenerateMotherboardUrl(details.Manufacturer, details.Model);
@@ -666,6 +599,10 @@ public sealed class DashboardViewModel : ViewModelBase
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     details.Name = obj["Name"]?.ToString()?.Trim() ?? "Unknown";
+                    var matchedCpu = HardwareKnowledgeDbService.Instance.MatchCpu(details.Name);
+                    CpuIconKey = matchedCpu?.IconKey
+                        ?? HardwareIconResolver.ResolveIconKey("cpu", details.Name, HardwareIconResolver.GetFallbackKey("cpu"));
+                    CpuIconSource = HardwareIconResolver.ResolveIcon(CpuIconKey, HardwareIconResolver.GetFallbackKey("cpu"));
                     details.Specification = details.Name;
                     
                     var maxClock = obj["MaxClockSpeed"];
@@ -925,6 +862,11 @@ public sealed class DashboardViewModel : ViewModelBase
             memDetails.CR = "1T";
 
             MemoryDetails = memDetails;
+            var memoryBrand = memDetails.Modules.FirstOrDefault()?.Manufacturer ?? "";
+            var matchedMemory = HardwareKnowledgeDbService.Instance.MatchMemory($"{memoryBrand} {memDetails.Type}");
+            MemoryIconKey = matchedMemory?.IconKey
+                ?? HardwareIconResolver.ResolveIconKey("memory", $"{memoryBrand} {memDetails.Type}", HardwareIconResolver.GetFallbackKey("memory"));
+            MemoryIconSource = HardwareIconResolver.ResolveIcon(MemoryIconKey, HardwareIconResolver.GetFallbackKey("memory"));
         }
         catch { }
         
@@ -945,6 +887,7 @@ public sealed class DashboardViewModel : ViewModelBase
                 
                 details.Name = gpuName;
                 details.Vendor = obj["AdapterCompatibility"]?.ToString() ?? "Unknown";
+                details.Manufacturer = details.Vendor;
                 var driverDateStr = obj["DriverDate"]?.ToString();
                 var driverVersion = obj["DriverVersion"]?.ToString() ?? "Unknown";
                 
@@ -1049,6 +992,18 @@ public sealed class DashboardViewModel : ViewModelBase
                 // Generate search URL
                 details.SearchUrl = GenerateGpuUrl(gpuName);
                 GpuSearchUrl = details.SearchUrl;
+
+                var gpuLookupSeed = HardwareIconService.BuildGpuLookupSeed(
+                    gpuName,
+                    details.Vendor,
+                    details.Manufacturer,
+                    details.SubVendor,
+                    details.CodeName,
+                    pnpDeviceId);
+                var matchedGpu = HardwareKnowledgeDbService.Instance.MatchGpu(gpuLookupSeed);
+                GpuIconKey = matchedGpu?.IconKey
+                    ?? HardwareIconResolver.ResolveIconKey("gpu", gpuLookupSeed, HardwareIconResolver.GetFallbackKey("gpu"));
+                GpuIconSource = HardwareIconResolver.ResolveIcon(GpuIconKey, HardwareIconResolver.GetFallbackKey("gpu"));
                 
                 break; // Only first GPU
             }
@@ -1063,646 +1018,96 @@ public sealed class DashboardViewModel : ViewModelBase
         var monitors = new List<MonitorModel>();
         try
         {
-            var monitorEdidByInstance = LoadMonitorEdidInfoByInstance();
-            var monitorNamesByInstance = monitorEdidByInstance
-                .Select(kvp => new
-                {
-                    kvp.Key,
-                    Name = !string.IsNullOrWhiteSpace(kvp.Value.UserFriendlyName)
-                        ? kvp.Value.UserFriendlyName
-                        : kvp.Value.EdidInfo.MonitorName
-                })
-                .Where(entry => !string.IsNullOrWhiteSpace(entry.Name))
-                .ToDictionary(entry => entry.Key, entry => entry.Name!, StringComparer.OrdinalIgnoreCase);
-            var connectionTypesByInstance = LoadMonitorConnectionTypesByInstance();
-            var instanceNames = monitorEdidByInstance.Keys
-                .Concat(connectionTypesByInstance.Keys)
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList();
-            var uniqueInstanceMap = BuildUniqueMonitorInstanceMap(instanceNames);
-            var prefixIndex = BuildMonitorPrefixIndex(instanceNames);
-            var uniquePrefixMap = BuildUniqueMonitorPrefixMap(prefixIndex);
-            var edidMatchIndex = BuildEdidMatchIndex(monitorEdidByInstance.Values);
-            var uniqueEdidMatchMap = BuildUniqueEdidMatchMap(edidMatchIndex);
-            var reportLines = new List<string>();
-
-            foreach (var screen in System.Windows.Forms.Screen.AllScreens)
+            var resolvedDisplays = DisplayDetectionHelpers.ResolveConnectedDisplays();
+            monitors = resolvedDisplays.Select(display => new MonitorModel
             {
-                var deviceName = screen.DeviceName;
-                var settings = GetDisplaySettings(deviceName, screen);
-                var displayDevice = GetMonitorDisplayDevice(deviceName);
+                Name = display.Name,
+                DeviceName = display.DeviceName,
+                Resolution = $"{display.Width} x {display.Height}",
+                RefreshRate = display.RefreshRateHz > 0 ? $"{display.RefreshRateHz} Hz" : "Unknown",
+                BitsPerPixel = display.BitsPerPixel > 0 ? $"{display.BitsPerPixel}-bit" : "Unknown",
+                IsPrimary = display.IsPrimary,
+                ConnectionType = string.IsNullOrWhiteSpace(display.ConnectionType) ? "Unknown" : display.ConnectionType,
+                SearchUrl = GenerateSearchUrl(display.Name, "monitor"),
+                IconLookupSeed = display.IconLookupSeed,
+                PhysicalSize = FormatDisplaySize(display.PhysicalWidthCm, display.PhysicalHeightCm),
+                MatchMode = display.MatchMode,
+                MatchKey = display.MatchKey ?? string.Empty,
+                MatchedInstance = display.MatchedInstance ?? string.Empty
+            }).ToList();
 
-                var instanceId = DashboardInfoHelpers.NormalizeMonitorInstanceId(displayDevice?.DeviceID);
-                var prefixId = DashboardInfoHelpers.GetMonitorInstancePrefix(instanceId);
-                DashboardInfoHelpers.EdidInfo? registryEdidInfo = null;
-                if (TryGetEdidInfo(displayDevice?.DeviceID, out var edidInfo))
-                {
-                    registryEdidInfo = edidInfo;
-                }
-
-                string matchMode = "Unmatched";
-                string? matchKey = null;
-                string? matchedInstance = null;
-
-                if (TryResolveMonitorInstance(instanceId, uniqueInstanceMap, out var resolvedInstance, out var resolvedMode, out var resolvedKey))
-                {
-                    matchedInstance = resolvedInstance;
-                    matchMode = resolvedMode;
-                    matchKey = resolvedKey;
-                }
-                else if (registryEdidInfo.HasValue &&
-                         TryResolveMonitorInstanceByEdid(registryEdidInfo.Value, uniqueEdidMatchMap, out var edidInstance, out var edidMode, out var edidKey))
-                {
-                    matchedInstance = edidInstance;
-                    matchMode = edidMode;
-                    matchKey = edidKey;
-                }
-                else if (!string.IsNullOrEmpty(prefixId) &&
-                         uniquePrefixMap.TryGetValue(prefixId, out var prefixInstance))
-                {
-                    matchedInstance = prefixInstance;
-                    matchMode = "PrefixUnique";
-                    matchKey = prefixId;
-                }
-                else if (!string.IsNullOrEmpty(prefixId) &&
-                         prefixIndex.TryGetValue(prefixId, out var prefixMatches) &&
-                         prefixMatches.Count > 1)
-                {
-                    matchMode = "PrefixAmbiguous";
-                }
-
-                string monitorName;
-                if (!string.IsNullOrEmpty(matchedInstance) &&
-                    monitorNamesByInstance.TryGetValue(matchedInstance, out var friendlyName))
-                {
-                    monitorName = friendlyName;
-                }
-                else if (displayDevice is { DeviceString: { } deviceString } &&
-                         !string.IsNullOrWhiteSpace(deviceString))
-                {
-                    monitorName = deviceString;
-                }
-                else
-                {
-                    monitorName = deviceName.Replace(@"\\.\", "");
-                }
-
-                string connectionType = "Unknown";
-                if (!string.IsNullOrEmpty(matchedInstance) &&
-                    connectionTypesByInstance.TryGetValue(matchedInstance, out var videoType))
-                {
-                    connectionType = DashboardInfoHelpers.MapVideoOutputTechnology(videoType);
-                }
-
-                var refreshRate = settings.RefreshRate > 0 ? $"{settings.RefreshRate} Hz" : "Unknown";
-                var bitsPerPixel = settings.BitsPerPixel > 0 ? settings.BitsPerPixel : screen.BitsPerPixel;
-
-                monitors.Add(new MonitorModel
-                {
-                    Name = monitorName,
-                    DeviceName = deviceName,
-                    Resolution = $"{settings.Width} x {settings.Height}",
-                    RefreshRate = refreshRate,
-                    BitsPerPixel = $"{bitsPerPixel}-bit",
-                    IsPrimary = screen.Primary,
-                    ConnectionType = connectionType,
-                    SearchUrl = GenerateSearchUrl(monitorName, "monitor")
-                });
-
-                monitorEdidByInstance.TryGetValue(matchedInstance ?? string.Empty, out var matchedEdidInfo);
-
-                reportLines.Add(BuildMonitorReportLine(
-                    deviceName,
-                    displayDevice?.DeviceString,
-                    displayDevice?.DeviceID,
-                    instanceId,
-                    prefixId,
-                    matchedInstance,
-                    matchMode,
-                    matchKey,
-                    monitorName,
-                    connectionType,
-                    prefixIndex,
-                    registryEdidInfo,
-                    matchedEdidInfo));
-            }
-
-            LogMonitorMatchReport(reportLines);
+            LogMonitorMatchReport(resolvedDisplays.Select(BuildMonitorReportLine).ToList());
         }
         catch { }
 
-        // If WMI failed, try fallback using Screen class
-        if (monitors.Count == 0)
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
         {
-            try
+            Monitors = new ObservableCollection<MonitorModel>(monitors);
+            var primaryMonitor = monitors.FirstOrDefault(m => m.IsPrimary) ?? monitors.FirstOrDefault();
+            var displayLookupSeed = primaryMonitor?.IconLookupSeed;
+            if (string.IsNullOrWhiteSpace(displayLookupSeed))
             {
-                foreach (var screen in System.Windows.Forms.Screen.AllScreens)
-                {
-                    monitors.Add(new MonitorModel
-                    {
-                        Name = screen.DeviceName.Replace(@"\\.\", ""),
-                        DeviceName = screen.DeviceName,
-                        Resolution = $"{screen.Bounds.Width} x {screen.Bounds.Height}",
-                        RefreshRate = "Unknown",
-                        BitsPerPixel = $"{screen.BitsPerPixel}-bit",
-                        IsPrimary = screen.Primary,
-                        ConnectionType = "Unknown",
-                        SearchUrl = ""
-                    });
-                }
+                displayLookupSeed = primaryMonitor?.Name;
             }
-            catch { }
-        }
 
-        System.Windows.Application.Current?.Dispatcher?.Invoke(() => Monitors = new ObservableCollection<MonitorModel>(monitors));
+            var displayIconResolution = HardwareIconService.ResolveResult(HardwareType.Display, displayLookupSeed);
+            DisplayIconKey = displayIconResolution.IconKey;
+            DisplayIconSource = HardwareIconService.Resolve(displayIconResolution);
+        });
     }
 
-    private static (int Width, int Height, int RefreshRate, int BitsPerPixel) GetDisplaySettings(
-        string deviceName,
-        System.Windows.Forms.Screen screen)
-    {
-        var devMode = new DevMode
-        {
-            dmSize = (short)Marshal.SizeOf<DevMode>()
-        };
-
-        if (EnumDisplaySettings(deviceName, EnumCurrentSettings, ref devMode))
-        {
-            return (devMode.dmPelsWidth, devMode.dmPelsHeight, devMode.dmDisplayFrequency, devMode.dmBitsPerPel);
-        }
-
-        return (screen.Bounds.Width, screen.Bounds.Height, 0, screen.BitsPerPixel);
-    }
-
-    private static DisplayDevice? GetMonitorDisplayDevice(string deviceName)
-    {
-        DisplayDevice? first = null;
-        var display = new DisplayDevice
-        {
-            cb = Marshal.SizeOf<DisplayDevice>()
-        };
-
-        for (uint i = 0; EnumDisplayDevices(deviceName, i, ref display, 0); i++)
-        {
-            first ??= display;
-            if ((display.StateFlags & DisplayDeviceStateFlags.AttachedToDesktop) != 0)
-            {
-                return display;
-            }
-
-            display = new DisplayDevice
-            {
-                cb = Marshal.SizeOf<DisplayDevice>()
-            };
-        }
-
-        return first;
-    }
-
-    private sealed class MonitorEdidInfo
-    {
-        public string InstanceName { get; init; } = "";
-        public string UserFriendlyName { get; init; } = "";
-        public DashboardInfoHelpers.EdidInfo EdidInfo { get; init; }
-    }
-
-    private static Dictionary<string, MonitorEdidInfo> LoadMonitorEdidInfoByInstance()
-    {
-        var infos = new Dictionary<string, MonitorEdidInfo>(StringComparer.OrdinalIgnoreCase);
-        var wmiInfo = new Dictionary<string, (string UserFriendly, string Manufacturer, string Product, string Serial)>(StringComparer.OrdinalIgnoreCase);
-        var edidInfoByInstance = new Dictionary<string, DashboardInfoHelpers.EdidInfo>(StringComparer.OrdinalIgnoreCase);
-        var sizeInfoByInstance = new Dictionary<string, (int? Horizontal, int? Vertical)>(StringComparer.OrdinalIgnoreCase);
-
-        try
-        {
-            using var monitorIdSearcher = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM WmiMonitorID");
-            foreach (ManagementObject obj in monitorIdSearcher.Get())
-            {
-                var instanceName = obj["InstanceName"]?.ToString();
-                if (string.IsNullOrWhiteSpace(instanceName))
-                {
-                    continue;
-                }
-
-                var userFriendlyName = DashboardInfoHelpers.DecodeWmiString(obj["UserFriendlyName"] as ushort[]);
-                var manufacturer = DashboardInfoHelpers.DecodeWmiString(obj["ManufacturerName"] as ushort[]);
-                var productCode = DashboardInfoHelpers.DecodeWmiProductCode(obj["ProductCodeID"] as ushort[]);
-                var serialNumber = DashboardInfoHelpers.DecodeWmiString(obj["SerialNumberID"] as ushort[]);
-
-                wmiInfo[instanceName] = (userFriendlyName, manufacturer, productCode, serialNumber);
-            }
-        }
-        catch { }
-
-        try
-        {
-            using var paramsSearcher = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM WmiMonitorBasicDisplayParams");
-            foreach (ManagementObject obj in paramsSearcher.Get())
-            {
-                var instanceName = obj["InstanceName"]?.ToString();
-                if (string.IsNullOrWhiteSpace(instanceName))
-                {
-                    continue;
-                }
-
-                var horizontal = Convert.ToInt32(obj["MaxHorizontalImageSize"] ?? 0);
-                var vertical = Convert.ToInt32(obj["MaxVerticalImageSize"] ?? 0);
-                sizeInfoByInstance[instanceName] = (
-                    horizontal > 0 ? horizontal : null,
-                    vertical > 0 ? vertical : null);
-            }
-        }
-        catch { }
-
-        try
-        {
-            using var descriptorSearcher = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM WmiMonitorDescriptorMethods");
-            foreach (ManagementObject obj in descriptorSearcher.Get())
-            {
-                var instanceName = obj["InstanceName"]?.ToString();
-                if (string.IsNullOrWhiteSpace(instanceName))
-                {
-                    continue;
-                }
-
-                if (TryGetEdidFromDescriptorMethods(obj, out var edidBytes))
-                {
-                    edidInfoByInstance[instanceName] = DashboardInfoHelpers.ParseEdid(edidBytes);
-                }
-            }
-        }
-        catch { }
-
-        var allInstanceNames = wmiInfo.Keys
-            .Concat(edidInfoByInstance.Keys)
-            .Concat(sizeInfoByInstance.Keys)
-            .Distinct(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var instanceName in allInstanceNames)
-        {
-            wmiInfo.TryGetValue(instanceName, out var wmi);
-            edidInfoByInstance.TryGetValue(instanceName, out var edidInfo);
-            sizeInfoByInstance.TryGetValue(instanceName, out var sizeInfo);
-
-            var mergedEdid = MergeEdidInfo(edidInfo, wmi.Manufacturer, wmi.Product, wmi.Serial, wmi.UserFriendly, sizeInfo);
-
-            infos[instanceName] = new MonitorEdidInfo
-            {
-                InstanceName = instanceName,
-                UserFriendlyName = wmi.UserFriendly ?? string.Empty,
-                EdidInfo = mergedEdid
-            };
-        }
-
-        return infos;
-    }
-
-    private static bool TryGetEdidFromDescriptorMethods(ManagementObject obj, out byte[] edidBytes)
-    {
-        edidBytes = Array.Empty<byte>();
-        try
-        {
-            using var inParams = obj.GetMethodParameters("WmiGetMonitorRawEEdidV1Block");
-            inParams["BlockId"] = 0;
-            using var outParams = obj.InvokeMethod("WmiGetMonitorRawEEdidV1Block", inParams, null);
-            if (outParams != null &&
-                outParams["BlockContent"] is byte[] content &&
-                content.Length >= 128)
-            {
-                edidBytes = content;
-                return true;
-            }
-        }
-        catch { }
-
-        return false;
-    }
-
-    private static DashboardInfoHelpers.EdidInfo MergeEdidInfo(
-        DashboardInfoHelpers.EdidInfo edidInfo,
-        string manufacturer,
-        string product,
-        string serial,
-        string monitorName,
-        (int? Horizontal, int? Vertical) sizeInfo)
-    {
-        var merged = edidInfo;
-
-        if (string.IsNullOrWhiteSpace(merged.ManufacturerId) && !string.IsNullOrWhiteSpace(manufacturer))
-        {
-            merged = merged with { ManufacturerId = manufacturer };
-        }
-
-        if (string.IsNullOrWhiteSpace(merged.ProductCodeHex) && !string.IsNullOrWhiteSpace(product))
-        {
-            merged = merged with { ProductCodeHex = product };
-        }
-
-        if (string.IsNullOrWhiteSpace(merged.SerialNumber) && !string.IsNullOrWhiteSpace(serial))
-        {
-            merged = merged with { SerialNumber = serial };
-        }
-
-        if (string.IsNullOrWhiteSpace(merged.MonitorName) && !string.IsNullOrWhiteSpace(monitorName))
-        {
-            merged = merged with { MonitorName = monitorName };
-        }
-
-        if (!merged.HorizontalSizeCm.HasValue && sizeInfo.Horizontal.HasValue)
-        {
-            merged = merged with { HorizontalSizeCm = sizeInfo.Horizontal };
-        }
-
-        if (!merged.VerticalSizeCm.HasValue && sizeInfo.Vertical.HasValue)
-        {
-            merged = merged with { VerticalSizeCm = sizeInfo.Vertical };
-        }
-
-        return merged;
-    }
-
-    private static Dictionary<string, int> LoadMonitorConnectionTypesByInstance()
-    {
-        var types = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        try
-        {
-            using var connectionSearcher = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM WmiMonitorConnectionParams");
-            foreach (ManagementObject obj in connectionSearcher.Get())
-            {
-                var instanceName = obj["InstanceName"]?.ToString();
-                if (string.IsNullOrWhiteSpace(instanceName))
-                {
-                    continue;
-                }
-
-                var videoType = Convert.ToInt32(obj["VideoOutputTechnology"] ?? -1);
-                types[instanceName] = videoType;
-            }
-        }
-        catch { }
-
-        return types;
-    }
-
-    private static bool TryGetEdidInfo(string? deviceId, out DashboardInfoHelpers.EdidInfo info)
-    {
-        info = default;
-        if (string.IsNullOrWhiteSpace(deviceId))
-        {
-            return false;
-        }
-
-        var normalized = DashboardInfoHelpers.NormalizeMonitorInstanceId(deviceId);
-        var paths = new List<string> { normalized };
-        if (!string.Equals(normalized, deviceId.Trim(), StringComparison.OrdinalIgnoreCase))
-        {
-            paths.Add(deviceId.Trim());
-        }
-
-        foreach (var path in paths)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                continue;
-            }
-
-            try
-            {
-                using var key = Registry.LocalMachine.OpenSubKey($@"SYSTEM\CurrentControlSet\Enum\{path}\Device Parameters");
-                var edidBytes = key?.GetValue("EDID") as byte[];
-                if (edidBytes == null || edidBytes.Length < 128)
-                {
-                    continue;
-                }
-
-                info = DashboardInfoHelpers.ParseEdid(edidBytes);
-                return !string.IsNullOrWhiteSpace(info.ManufacturerId) ||
-                       !string.IsNullOrWhiteSpace(info.MonitorName) ||
-                       !string.IsNullOrWhiteSpace(info.SerialNumber);
-            }
-            catch
-            {
-                // Ignore registry access errors
-            }
-        }
-
-        return false;
-    }
-
-    private static Dictionary<string, List<string>> BuildEdidMatchIndex(IEnumerable<MonitorEdidInfo> infos)
-    {
-        var index = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-        foreach (var info in infos)
-        {
-            foreach (var candidate in DashboardInfoHelpers.GetEdidMatchCandidates(info.EdidInfo))
-            {
-                if (!index.TryGetValue(candidate.Key, out var list))
-                {
-                    list = new List<string>();
-                    index[candidate.Key] = list;
-                }
-
-                if (!list.Contains(info.InstanceName, StringComparer.OrdinalIgnoreCase))
-                {
-                    list.Add(info.InstanceName);
-                }
-            }
-        }
-
-        return index;
-    }
-
-    private static Dictionary<string, string> BuildUniqueEdidMatchMap(Dictionary<string, List<string>> edidIndex)
-    {
-        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var kvp in edidIndex)
-        {
-            if (kvp.Value.Count == 1)
-            {
-                map[kvp.Key] = kvp.Value[0];
-            }
-        }
-
-        return map;
-    }
-
-    private static bool TryResolveMonitorInstanceByEdid(
-        DashboardInfoHelpers.EdidInfo edidInfo,
-        IReadOnlyDictionary<string, string> uniqueEdidMap,
-        out string matchedInstance,
-        out string matchMode,
-        out string? matchKey)
-    {
-        matchedInstance = string.Empty;
-        matchMode = "Unmatched";
-        matchKey = null;
-
-        foreach (var candidate in DashboardInfoHelpers.GetEdidMatchCandidates(edidInfo))
-        {
-            if (uniqueEdidMap.TryGetValue(candidate.Key, out var instance))
-            {
-                matchedInstance = instance;
-                matchMode = candidate.Mode;
-                matchKey = candidate.Key;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private static Dictionary<string, List<string>> BuildMonitorPrefixIndex(IEnumerable<string> instances)
-    {
-        var index = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-        foreach (var instance in instances)
-        {
-            var prefix = DashboardInfoHelpers.GetMonitorInstancePrefix(instance);
-            if (string.IsNullOrEmpty(prefix))
-            {
-                continue;
-            }
-
-            if (!index.TryGetValue(prefix, out var list))
-            {
-                list = new List<string>();
-                index[prefix] = list;
-            }
-
-            list.Add(instance);
-        }
-
-        return index;
-    }
-
-    private static Dictionary<string, string> BuildUniqueMonitorPrefixMap(Dictionary<string, List<string>> prefixIndex)
-    {
-        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var kvp in prefixIndex)
-        {
-            if (kvp.Value.Count == 1)
-            {
-                map[kvp.Key] = kvp.Value[0];
-            }
-        }
-
-        return map;
-    }
-
-    private static Dictionary<string, string> BuildUniqueMonitorInstanceMap(IEnumerable<string> instances)
-    {
-        var index = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-        foreach (var instance in instances)
-        {
-            foreach (var candidate in DashboardInfoHelpers.GetMonitorMatchCandidates(instance))
-            {
-                if (!index.TryGetValue(candidate.Key, out var list))
-                {
-                    list = new List<string>();
-                    index[candidate.Key] = list;
-                }
-
-                if (!list.Contains(instance, StringComparer.OrdinalIgnoreCase))
-                {
-                    list.Add(instance);
-                }
-            }
-        }
-
-        var unique = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var kvp in index)
-        {
-            if (kvp.Value.Count == 1)
-            {
-                unique[kvp.Key] = kvp.Value[0];
-            }
-        }
-
-        return unique;
-    }
-
-    private static bool TryResolveMonitorInstance(
-        string? instanceId,
-        IReadOnlyDictionary<string, string> uniqueInstanceMap,
-        out string matchedInstance,
-        out string matchMode,
-        out string? matchKey)
-    {
-        matchedInstance = string.Empty;
-        matchMode = "Unmatched";
-        matchKey = null;
-
-        foreach (var candidate in DashboardInfoHelpers.GetMonitorMatchCandidates(instanceId))
-        {
-            if (uniqueInstanceMap.TryGetValue(candidate.Key, out var instance))
-            {
-                matchedInstance = instance;
-                matchMode = candidate.Mode;
-                matchKey = candidate.Key;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private static string BuildMonitorReportLine(
-        string deviceName,
-        string? deviceString,
-        string? deviceId,
-        string instanceId,
-        string? prefixId,
-        string? matchedInstance,
-        string matchMode,
-        string? matchKey,
-        string monitorName,
-        string connectionType,
-        IReadOnlyDictionary<string, List<string>> prefixIndex,
-        DashboardInfoHelpers.EdidInfo? registryEdidInfo,
-        MonitorEdidInfo? matchedEdidInfo)
+    private static string BuildMonitorReportLine(DisplayDetectionHelpers.ResolvedDisplayInfo display)
     {
         var sb = new StringBuilder();
         sb.Append("[Dashboard][MonitorMatch] ");
-        sb.Append($"DeviceName='{deviceName}' ");
-        if (!string.IsNullOrWhiteSpace(deviceString))
+        sb.Append($"DeviceName='{display.DeviceName}' ");
+        if (!string.IsNullOrWhiteSpace(display.DeviceString))
         {
-            sb.Append($"DeviceString='{deviceString}' ");
+            sb.Append($"DeviceString='{display.DeviceString}' ");
         }
-        if (!string.IsNullOrWhiteSpace(deviceId))
+        if (!string.IsNullOrWhiteSpace(display.DeviceId))
         {
-            sb.Append($"DeviceID='{deviceId}' ");
+            sb.Append($"DeviceID='{display.DeviceId}' ");
         }
-        if (!string.IsNullOrWhiteSpace(instanceId))
+        if (!string.IsNullOrWhiteSpace(display.InstanceId))
         {
-            sb.Append($"Instance='{instanceId}' ");
+            sb.Append($"Instance='{display.InstanceId}' ");
         }
-        if (!string.IsNullOrWhiteSpace(prefixId))
+        if (!string.IsNullOrWhiteSpace(display.PrefixId))
         {
-            sb.Append($"Prefix='{prefixId}' ");
-            if (prefixIndex.TryGetValue(prefixId, out var matches))
+            sb.Append($"Prefix='{display.PrefixId}' ");
+            if (display.PrefixMatchCount > 0)
             {
-                sb.Append($"PrefixMatches={matches.Count} ");
+                sb.Append($"PrefixMatches={display.PrefixMatchCount} ");
             }
         }
-        sb.Append($"MatchMode='{matchMode}' ");
-        if (!string.IsNullOrWhiteSpace(matchKey))
+        sb.Append($"MatchMode='{display.MatchMode}' ");
+        if (!string.IsNullOrWhiteSpace(display.MatchKey))
         {
-            sb.Append($"MatchKey='{matchKey}' ");
+            sb.Append($"MatchKey='{display.MatchKey}' ");
         }
-        if (!string.IsNullOrWhiteSpace(matchedInstance))
+        if (!string.IsNullOrWhiteSpace(display.MatchedInstance))
         {
-            sb.Append($"MatchedInstance='{matchedInstance}' ");
+            sb.Append($"MatchedInstance='{display.MatchedInstance}' ");
         }
-        if (registryEdidInfo.HasValue)
+        if (display.RegistryEdidInfo.HasValue)
         {
-            AppendEdidDetails(sb, "EdidReg", registryEdidInfo.Value, null);
+            AppendEdidDetails(sb, "EdidReg", display.RegistryEdidInfo.Value, null);
         }
-        if (matchedEdidInfo != null)
+        if (display.MatchedEdidInfo != null)
         {
-            AppendEdidDetails(sb, "EdidWmi", matchedEdidInfo.EdidInfo, matchedEdidInfo.UserFriendlyName);
+            AppendEdidDetails(sb, "EdidWmi", display.MatchedEdidInfo.EdidInfo, display.MatchedEdidInfo.UserFriendlyName);
         }
-        sb.Append($"Name='{monitorName}' ");
-        sb.Append($"Connection='{connectionType}'");
+        sb.Append($"Name='{display.Name}' ");
+        sb.Append($"Connection='{display.ConnectionType}'");
         return sb.ToString();
+    }
+
+    private static string FormatDisplaySize(int? widthCm, int? heightCm)
+    {
+        return widthCm.HasValue && heightCm.HasValue
+            ? $"{widthCm.Value} x {heightCm.Value} cm"
+            : string.Empty;
     }
 
     private static void AppendEdidDetails(
@@ -1755,85 +1160,6 @@ public sealed class DashboardViewModel : ViewModelBase
 
         AppDiagnostics.Log(sb.ToString().TrimEnd());
     }
-
-    private const int EnumCurrentSettings = -1;
-
-    [Flags]
-    private enum DisplayDeviceStateFlags : int
-    {
-        AttachedToDesktop = 0x1,
-        MultiDriver = 0x2,
-        PrimaryDevice = 0x4,
-        MirroringDriver = 0x8,
-        VgaCompatible = 0x10,
-        Removable = 0x20,
-        ModesPruned = 0x08000000,
-        Remote = 0x04000000,
-        Disconnect = 0x02000000
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    private struct DisplayDevice
-    {
-        public int cb;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        public string DeviceName;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-        public string DeviceString;
-        public DisplayDeviceStateFlags StateFlags;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-        public string DeviceID;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
-        public string DeviceKey;
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    private struct DevMode
-    {
-        private const int CchDeviceName = 32;
-        private const int CchFormName = 32;
-
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CchDeviceName)]
-        public string dmDeviceName;
-        public short dmSpecVersion;
-        public short dmDriverVersion;
-        public short dmSize;
-        public short dmDriverExtra;
-        public int dmFields;
-        public int dmPositionX;
-        public int dmPositionY;
-        public int dmDisplayOrientation;
-        public int dmDisplayFixedOutput;
-        public short dmColor;
-        public short dmDuplex;
-        public short dmYResolution;
-        public short dmTTOption;
-        public short dmCollate;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CchFormName)]
-        public string dmFormName;
-        public short dmLogPixels;
-        public int dmBitsPerPel;
-        public int dmPelsWidth;
-        public int dmPelsHeight;
-        public int dmDisplayFlags;
-        public int dmDisplayFrequency;
-        public int dmICMMethod;
-        public int dmICMIntent;
-        public int dmMediaType;
-        public int dmDitherType;
-        public int dmReserved1;
-        public int dmReserved2;
-        public int dmPanningWidth;
-        public int dmPanningHeight;
-    }
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool EnumDisplaySettings(string lpszDeviceName, int iModeNum, ref DevMode lpDevMode);
-
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool EnumDisplayDevices(string? lpDevice, uint iDevNum, ref DisplayDevice lpDisplayDevice, uint dwFlags);
 
     private long GetGpuVramFromRegistry(string gpuName, string? pnpDeviceId)
     {
@@ -2008,6 +1334,10 @@ public sealed class DashboardViewModel : ViewModelBase
             foreach (ManagementObject obj in searcher.Get())
             {
                 var model = obj["Model"]?.ToString() ?? "Unknown";
+                var matchedStorage = HardwareKnowledgeDbService.Instance.MatchStorage(model);
+                StorageIconKey = matchedStorage?.IconKey
+                    ?? HardwareIconResolver.ResolveIconKey("storage", model, HardwareIconResolver.GetFallbackKey("storage"));
+                StorageIconSource = HardwareIconResolver.ResolveIcon(StorageIconKey, HardwareIconResolver.GetFallbackKey("storage"));
                 var size = Convert.ToInt64(obj["Size"] ?? 0);
                 var interfaceType = obj["InterfaceType"]?.ToString() ?? "Unknown"; // e.g. SCSI, IDE
                 var mediaType = obj["MediaType"]?.ToString() ?? "Unknown";
@@ -2241,7 +1571,16 @@ public sealed class DashboardViewModel : ViewModelBase
             .ThenBy(d => d.Name)
             .ToList();
 
-        System.Windows.Application.Current?.Dispatcher?.Invoke(() => UsbDevices = new ObservableCollection<UsbDeviceModel>(sorted));
+        var primaryUsbName = sorted.FirstOrDefault()?.Name;
+        var matchedUsbController = HardwareKnowledgeDbService.Instance.MatchUsb(primaryUsbName ?? string.Empty);
+
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+        {
+            UsbDevices = new ObservableCollection<UsbDeviceModel>(sorted);
+            UsbIconKey = matchedUsbController?.IconKey
+                ?? HardwareIconResolver.ResolveIconKey("usb", primaryUsbName, HardwareIconResolver.GetFallbackKey("usb"));
+            UsbIconSource = HardwareIconResolver.ResolveIcon(UsbIconKey, HardwareIconResolver.GetFallbackKey("usb"));
+        });
     }
 
     private static (string vid, string pid) ParseVidPid(string deviceId)
@@ -2287,7 +1626,17 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch { }
 
-        System.Windows.Application.Current?.Dispatcher?.Invoke(() => NetworkAdapters = new ObservableCollection<NetworkAdapterModel>(adapters));
+        var primaryNetworkDesc = adapters.FirstOrDefault()?.Description;
+        var matchedNetwork = HardwareKnowledgeDbService.Instance.MatchNetworkAdapter(primaryNetworkDesc ?? string.Empty);
+
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+        {
+            NetworkAdapters = new ObservableCollection<NetworkAdapterModel>(adapters);
+            var primaryNetworkName = adapters.FirstOrDefault()?.Description ?? adapters.FirstOrDefault()?.Name;
+            NetworkIconKey = matchedNetwork?.IconKey
+                ?? HardwareIconResolver.ResolveIconKey("network", primaryNetworkName, HardwareIconResolver.GetFallbackKey("network"));
+            NetworkIconSource = HardwareIconResolver.ResolveIcon(NetworkIconKey, HardwareIconResolver.GetFallbackKey("network"));
+        });
     }
 
     private static string GenerateNetworkDriverUrl(string description)
@@ -2666,7 +2015,12 @@ public class MonitorModel
     public string BitsPerPixel { get; set; } = "";
     public bool IsPrimary { get; set; }
     public string ConnectionType { get; set; } = "";
+    public string PhysicalSize { get; set; } = "";
+    public string MatchMode { get; set; } = "";
+    public string MatchKey { get; set; } = "";
+    public string MatchedInstance { get; set; } = "";
     public string SearchUrl { get; set; } = "";
+    public string IconLookupSeed { get; set; } = "";
 }
 
 public class GpuDetailedModel

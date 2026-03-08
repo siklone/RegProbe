@@ -1,215 +1,145 @@
 # Windows Optimizer
 
-A modern, safe, and reversible Windows optimization tool built with WPF and .NET 8.
+Windows Optimizer is a WPF/.NET 8 desktop app for Windows 10/11 focused on safe, reversible tweaks, hardware-aware diagnostics, and traceable documentation.
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
 ![License](https://img.shields.io/badge/license-TBD-yellow)
 
-## 🎯 Features
+## Features
 
-### 📊 **Real-Time System Monitoring**
-- Task Manager-style hardware monitoring
-- CPU, RAM, Disk, Network real-time metrics
-- Temperature sensors (CPU/GPU) via LibreHardwareMonitor (may show N/A if sensors aren't available)
-- Top 10 processes by CPU/RAM usage
-- Top 10 processes by network (approx. process I/O bytes; may include disk activity)
-- Network adapter statistics (all adapters listed separately, with throughput)
-- Disk activity per drive with read/write speeds
-- 60-second history graphs for CPU and RAM
-- Save a CSV snapshot to your Desktop
+### Monitoring and hardware details
+- Real-time CPU, RAM, disk, network, and temperature monitoring
+- Dashboard cards for OS, motherboard, CPU, GPU, memory, storage, displays, network, and USB
+- Detail windows with richer hardware metadata and source-aware fallbacks
+- Optional hardware knowledge DB and icon mapping for better model matching
 
-### ⚙️ **System Tweaks**
-- Safe/reversible pipeline: Detect → Apply → Verify → Rollback
-- Default behavior is Preview/DryRun (no system changes until you Apply)
+### Tweak engine
+- Safe pipeline: Detect -> Apply -> Verify -> Rollback
+- Preview-first behavior by default
 - Risk levels: Safe / Advanced / Risky
-- Category-based navigation + search + batch actions
+- Category navigation, search, multi-select, and batch execution
+- Export/import profiles and built-in presets
 
-### 🔌 **Plugin System**
-- Dynamic plugin loading from `Plugins` directory
-- ITweakPlugin interface for custom tweaks
-- Example plugin: HelloWorld (demonstrates safe, reversible tweak)
-- Full SDK with documentation
+### Documentation and research linkage
+- Tweak entries can link back to generated docs and category docs
+- Research attribution is centered around `nohuto/win-config` plus official Microsoft sources
+- Local docs are copied into build/publish output for in-app navigation
 
-### 📦 **Batch Operations**
-- Multi-select tweaks with checkboxes
-- Bulk apply/rollback operations
-- Progress tracking
+### Extensibility
+- Elevated operations are isolated in `WindowsOptimizer.ElevatedHost`
+- Plugin loading is supported through the `Plugins` folder
+- `WindowsOptimizer.Plugins.DevTools` acts as the bundled example/support plugin
 
-### 💾 **Profile Management**
-- Export/Import tweak configurations
-- 4 built-in presets:
-  - 🎮 **Gaming**: Optimized for maximum gaming performance
-  - 🔒 **Privacy**: Maximum privacy with telemetry disabled
-  - 🏢 **Workstation**: Balanced for productivity
-  - 🔋 **Laptop**: Battery-optimized settings
-- Custom profile creation
+## Solution layout
 
-### 🧠 **Hardware Intelligence**
-- Automatic hardware detection
-- Smart tweak recommendations based on system profile
-- Adaptive optimization
-
-## 🏗️ Architecture
-
-### Provider Pattern
-All tweaks are organized into modular `ITweakProvider` implementations:
-- **BaseTweakProvider**: Abstract base with helper methods
-- **Category-specific providers**: Each provider handles its domain
-- **Dependency Injection**: Providers injected into TweaksViewModel
-- **LegacyTweakProvider (temporary)**: Restores legacy tweaks pending full migration
-
-### Plugin SDK
-```csharp
-public interface ITweakPlugin
-{
-    string PluginName { get; }
-    string Author { get; }
-    string Version { get; }
-    IEnumerable<ITweak> GetTweaks();
-}
+```text
+WindowsOptimizer.App/              WPF UI, view models, assets, app startup
+WindowsOptimizer.Core/             Contracts, models, plugin and tweak interfaces
+WindowsOptimizer.Engine/           Tweak execution pipeline and providers
+WindowsOptimizer.Infrastructure/   Registry, metrics, elevation, hardware access
+WindowsOptimizer.ElevatedHost/     Elevated helper process
+WindowsOptimizer.CLI/              CLI surface for non-UI scenarios
+WindowsOptimizer.Plugins.DevTools/ Bundled plugin/support assembly
+WindowsOptimizer.Tests/            Unit tests
+Docs/                              Tweak docs, generated catalogs, source attribution
+Tools/                             One-off developer utilities for icon work
+scripts/                           Packaging, docs, cleanup, and asset generation scripts
 ```
 
-### Project Structure
-```
-WindowsOptimizer/
-├── WindowsOptimizer.Core/          # Domain models, interfaces
-├── WindowsOptimizer.Engine/        # Business logic, tweak execution
-├── WindowsOptimizer.Infrastructure/ # External services, metrics, registry
-├── WindowsOptimizer.App/           # WPF UI, ViewModels
-├── WindowsOptimizer.ElevatedHost/  # Elevated process for admin operations
-├── WindowsOptimizer.Plugins.HelloWorld/ # Example plugin
-└── WindowsOptimizer.Tests/         # Unit tests
-```
-
-## 🚀 Getting Started
+## Getting started
 
 ### Prerequisites
-- Windows 10/11
-- .NET 8.0 SDK
-- Administrator privileges (for some tweaks; admin operations run via `WindowsOptimizer.ElevatedHost`)
+- Windows 10 or Windows 11
+- .NET 8 SDK
+- PowerShell 7+ recommended for helper scripts
 
 ### Build
+
 ```powershell
 git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
 cd WPF-Windows-optimizer-with-safe-reversible-tweaks
-dotnet build
+dotnet build WindowsOptimizerSuite.sln
 ```
 
 ### Run
+
 ```powershell
-dotnet run --project WindowsOptimizer.App
+dotnet run --project WindowsOptimizer.App/WindowsOptimizer.App.csproj
 ```
 
-> Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
-> `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`
+If the app cannot locate the elevated helper when running from source, set:
 
-### Build Release
 ```powershell
-dotnet publish WindowsOptimizer.App -c Release -r win-x64 --self-contained
+$env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
 ```
 
-## 🔌 Creating Plugins
+### Publish a release build
 
-### 1. Create Plugin Project
+Use the repo script instead of ad-hoc publish commands so output stays deterministic:
+
 ```powershell
-dotnet new classlib -n WindowsOptimizer.Plugins.MyPlugin
-dotnet add reference ../WindowsOptimizer.Core/WindowsOptimizer.Core.csproj
+pwsh -File scripts/publish_release.ps1
 ```
 
-### 2. Implement ITweakPlugin
-```csharp
-using WindowsOptimizer.Core;
-using WindowsOptimizer.Core.Plugins;
+### Clean generated build output
 
-public class MyPlugin : ITweakPlugin
-{
-    public string PluginName => "My Custom Plugin";
-    public string Author => "Your Name";
-    public string Version => "1.0.0";
-
-    public IEnumerable<ITweak> GetTweaks()
-    {
-        return new List<ITweak>
-        {
-            new MyCustomTweak()
-        };
-    }
-}
-```
-
-### 3. Deploy Plugin
 ```powershell
-dotnet build
-Copy-Item bin/Release/net8.0-windows/WindowsOptimizer.Plugins.MyPlugin.dll `
-    -Destination ../WindowsOptimizer.App/bin/Release/net8.0-windows/win-x64/Plugins/
+pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
 ```
 
-See `WindowsOptimizer.Plugins.HelloWorld` for a complete example.
+## Optional generated assets
 
-## 📖 Usage
+The hardware icon and knowledge-db work has two layers:
 
-### Monitor Page
-- Real-time hardware metrics
-- Top processes by CPU/RAM
-- Network and disk activity
-- Temperature monitoring
+- Source code fallbacks: rule-based matching and default icons continue to work without generated datasets
+- Optional generated inputs: `WindowsOptimizer.App/Assets/HardwareDb/*.json` and extended icon packs improve matching quality and UI coverage when present
 
-### Tweaks Page
-- Browse tweaks by category
-- Search and filter
-- Multi-select for batch operations
-- One-click apply/rollback
-- Profile export/import
+Useful related scripts:
 
-### Profiles
-1. Click **Export Profile** to save current configuration
-2. Click **Import Profile** to load a saved configuration
-3. Use preset profiles for quick optimization
+- `scripts/build_and_download_icon_db.ps1` regenerates icon source data and downloads icon assets
+- The icon generator also scans `WindowsOptimizer.App/Assets/HardwareDb/hardware_db_*.json` so newly introduced `iconKey` values can automatically become downloadable icon targets
+- `scripts/publish_release.ps1` creates a deterministic `publish_final/` folder
+- `scripts/clean_build_outputs.ps1` removes generated `bin/`, `obj/`, and `publish/` folders
 
-## 🛡️ Safety
+`WindowsOptimizer.App/Assets/HardwareDb/HardwareIconDownloadReport.json` is treated as a local generation report, not a source artifact.
 
-All tweaks are:
-- ✅ **Reversible**: Detect → Apply → Verify → Rollback (rollback currently relies on the last Detect snapshot in the same app session)
-- ✅ **Logged**: All actions logged for audit (`%TEMP%\\WindowsOptimizer_Debug.log` and `tweak-log.csv`)
-- ✅ **Verified**: Post-apply verification step
-- ✅ **Preview-first**: No system changes until you click Apply
+## Safety model
 
-**Risk Levels:**
-- 🟢 **Safe**: No side effects, recommended for all users
-- 🟡 **Advanced**: May affect functionality, understand before applying
-- 🔴 **Risky**: Only for advanced users, may cause issues
+All tweak work is expected to remain reversible and auditable:
 
-## 🤝 Contributing
+- Reversible flow: Detect -> Apply -> Verify -> Rollback
+- No automatic system modification on startup
+- Logging to `%TEMP%\WindowsOptimizer_Debug.log` and tweak execution logs
+- Elevated work runs out-of-process instead of forcing the app to run always-admin
 
-Contributions welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+## Documentation
 
-## 📝 License
+- Main source map: [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
+- Research attribution: [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
+- Service notes: [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
+- Hardware dashboard manual checklist: [Docs/system/dashboard_hardware_live_checklist.md](Docs/system/dashboard_hardware_live_checklist.md)
 
-TBD (no LICENSE file committed yet).
+## Contributing
 
-## 🙏 Acknowledgments
+`main` is the only intended remote branch. Keep changes small, testable, and reversible, especially around tweaks and elevated operations.
 
-- **[nohuto/win-config](https://github.com/nohuto/win-config)** - Windows registry research and documentation (AGPL-3.0)
-- **[nohuto/win-registry](https://github.com/nohuto/win-registry)** - Registry value documentation with traces (GPL-3.0)
-- **LibreHardwareMonitor** - Hardware sensor data
-- **Nord Theme** - UI color palette
-- **WPF Community** - Framework and patterns
+Before opening a PR or merging work:
 
-> See [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md) for detailed attribution and links to source documentation.
+1. Build the solution.
+2. Add or update tests where behavior changed.
+3. Keep docs in `Docs/` aligned with tweak/source changes.
+4. Avoid committing build outputs, temp probes, or local scratch folders.
 
-## 📞 Support
+## License
 
-- 🐛 **Issues**: GitHub Issues
-- 💬 **Discussions**: GitHub Discussions
-- 🧾 **Logs**: `%TEMP%\\WindowsOptimizer_Debug.log`
+TBD. No `LICENSE` file is committed yet.
 
----
+## Acknowledgments
 
-**⚠️ Disclaimer**: This tool modifies Windows registry settings. Always create a system restore point before applying tweaks. Use at your own risk.
+- [nohuto/win-config](https://github.com/nohuto/win-config)
+- [nohuto/win-registry](https://github.com/nohuto/win-registry)
+- LibreHardwareMonitor
+- Microsoft Learn and related official Windows documentation
+
+Use at your own risk. This app can modify Windows settings, so create a restore point before applying changes.

@@ -17,15 +17,20 @@ git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-
 cd WPF-Windows-optimizer-with-safe-reversible-tweaks
 ```
 
-### 2. Create a Branch
+### 2. Sync `main`
 
 ```bash
-git checkout -b feature/my-new-feature
-# or
-git checkout -b fix/issue-123
+git checkout main
+git pull origin main
 ```
 
-### 3. Make Changes
+### 3. Make Changes on `main`
+
+This repository follows a single-branch workflow:
+
+- `main` is the only long-lived branch
+- Do not keep feature/fix branches on the remote
+- If you temporarily create a local branch for scratch work, merge or cherry-pick it back to `main` and delete it immediately
 
 - Write clean, readable code
 - Follow existing code style
@@ -40,7 +45,7 @@ dotnet test
 # Manual testing recommended
 ```
 
-### 5. Commit
+### 5. Commit to `main`
 
 Use conventional commit messages:
 
@@ -52,13 +57,27 @@ refactor: Improve provider pattern
 test: Add unit tests for TweakExecutionPipeline
 ```
 
-### 6. Push and Create PR
+### 6. Push `main`
 
 ```bash
-git push origin feature/my-new-feature
+git push origin main
 ```
 
-Then create a Pull Request on GitHub.
+### 7. Keep the Remote Single-Branch
+
+If any old remote branches exist, delete them so the repo stays `main`-only:
+
+```bash
+git push origin --delete branch-name
+```
+
+To list remote branches before deleting:
+
+```bash
+git branch -r
+```
+
+GitHub settings should also keep `main` as the default branch.
 
 ## Development Setup
 
@@ -158,7 +177,7 @@ var providers = new ITweakProvider[]
 
 ### Option 3: Create Plugin
 
-See `WindowsOptimizer.Plugins.HelloWorld` for a complete example.
+See `WindowsOptimizer.Plugins.DevTools` for the current in-repo plugin/support assembly.
 
 ## Tweak Guidelines
 

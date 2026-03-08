@@ -118,27 +118,59 @@ public class PresetService
     /// <summary>
     /// Validates if preset is compatible with current system.
     /// </summary>
-    public Task<PresetValidationResult> ValidatePresetAsync(string presetId)
+    public async Task<PresetValidationResult> ValidatePresetAsync(string presetId)
     {
         var preset = GetAllPresets().FirstOrDefault(p => p.Id == presetId);
+        var osVersion = ResolveOsVersion();
         if (preset == null)
         {
-            return Task.FromResult(new PresetValidationResult(
+            return new PresetValidationResult(
                 IsValid: false,
                 IncompatibleTweaks: new List<string>(),
-                OsVersion: Environment.OSVersion.VersionString,
+                OsVersion: osVersion,
                 Warnings: new List<string> { "Preset not found" }
-            ));
+            );
         }
 
-        // For now, assume all tweaks are compatible
-        // TODO: Add actual compatibility checks based on OS version
-        return Task.FromResult(new PresetValidationResult(
-            IsValid: true,
-            IncompatibleTweaks: new List<string>(),
-            OsVersion: Environment.OSVersion.VersionString,
-            Warnings: new List<string>()
-        ));
+        var incompatibleTweaks = new List<string>();
+        var warnings = new List<string>();
+
+        foreach (var tweakId in preset.TweakIds)
+        {
+            var tweak = _tweakCatalog.FindById(tweakId);
+            if (tweak is null)
+            {
+                incompatibleTweaks.Add(tweakId);
+                warnings.Add($"Tweak '{tweakId}' is not available in the current catalog.");
+                continue;
+            }
+
+            try
+            {
+                var detectStep = await _tweakCatalog.ExecuteStepAsync(tweak, TweakAction.Detect);
+                if (detectStep.Result.Status is TweakStatus.NotApplicable or TweakStatus.Failed)
+                {
+                    incompatibleTweaks.Add(tweakId);
+
+                    if (!string.IsNullOrWhiteSpace(detectStep.Result.Message))
+                    {
+                        warnings.Add($"{tweak.Name}: {detectStep.Result.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                incompatibleTweaks.Add(tweakId);
+                warnings.Add($"{tweak.Name}: validation failed ({ex.Message})");
+            }
+        }
+
+        return new PresetValidationResult(
+            IsValid: incompatibleTweaks.Count == 0,
+            IncompatibleTweaks: incompatibleTweaks,
+            OsVersion: osVersion,
+            Warnings: warnings
+        );
     }
 
     // Preset Definitions
@@ -245,5 +277,17 @@ public class PresetService
         }
 
         await _tweakCatalog.ExecuteStepAsync(tweak, TweakAction.Rollback);
+    }
+
+    private static string ResolveOsVersion()
+    {
+        try
+        {
+            return OsDetectionResolver.Resolve(includeWmiCrossCheck: false).NormalizedName;
+        }
+        catch
+        {
+            return Environment.OSVersion.VersionString;
+        }
     }
 }

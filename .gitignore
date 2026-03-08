@@ -35,7 +35,9 @@ bld/
 [Ll]ogs/
 
 # Build results on 'Bin' directories
+## Keep source bins out of git; allow a single publish_final folder for distribution
 **/[Bb]in/*
+publish_final/
 # Uncomment if you have tasks that rely on *.refresh files to move binaries
 # (https://github.com/github/gitignore/pull/3736)
 #!**/[Bb]in/*.refresh
@@ -428,4 +430,11 @@ dist/
 # Local agent / assistant settings
 .claude/
 *.local.json
+
+# Repo-local scratch and generated diagnostics
+/LocalBackup/
+/tmp_icon_probe/
+/build_error.log
+/msbuild.errors.log
+/WindowsOptimizer.App/Assets/HardwareDb/HardwareIconDownloadReport.json
 

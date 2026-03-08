@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using WindowsOptimizer.Core.Registry;
 using System.ServiceProcess;
+using WindowsOptimizer.App.HardwareDb;
 using CoreServiceStartMode = WindowsOptimizer.Core.Services.ServiceStartMode;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Infrastructure;
@@ -2301,18 +2302,34 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         {
             "cpu" => HardwareType.Cpu,
             "gpu" => HardwareType.Gpu,
-            "ram" => HardwareType.Ram,
-            "disk" or "storage" => HardwareType.Disk,
+            "ram" => HardwareType.Memory,
+            "disk" or "storage" => HardwareType.Storage,
             "motherboard" or "mobo" or "board" => HardwareType.Motherboard,
             _ => HardwareType.Cpu
         };
 
-        var viewModel = new HardwareDetailViewModel(type, _metricBus);
+        var viewModel = HardwareDetailViewModelFactory.Create(type);
+        if (viewModel == null)
+        {
+            return;
+        }
+
         var window = new Views.HardwareDetailWindow
         {
             DataContext = viewModel,
             Owner = Application.Current.MainWindow
         };
+
+        try
+        {
+            var dc = window.DataContext;
+            WindowsOptimizer.App.Diagnostics.AppDiagnostics.Log($"[WindowOpen] (Monitor) DataContext type: {dc?.GetType().Name}, SpecsCollection count: {(dc as dynamic)?.SpecsCollection?.Count ?? -1}, Specs count: {(dc as dynamic)?.Specs?.Count ?? -1}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[MonitorViewModel] DataContext log failed: {ex.Message}");
+        }
+
         window.ShowDialog();
     }
 

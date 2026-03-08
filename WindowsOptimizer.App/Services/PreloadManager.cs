@@ -89,7 +89,7 @@ public sealed class PreloadManager
             try
             {
                 _progress.Report(new PreloadProgress(
-                    ++completed, total, task.Name, PreloadState.Running));
+                    completed, total, task.Name, PreloadState.Running));
 
                 var sw = Stopwatch.StartNew();
                 var value = await task.Task(ct);
@@ -98,8 +98,10 @@ public sealed class PreloadManager
                 result.Results[task.Name] = value;
                 Debug.WriteLine($"[PreloadManager] Critical '{task.Name}' completed in {sw.ElapsedMilliseconds}ms");
 
+                var current = Interlocked.Increment(ref completed);
+
                 _progress.Report(new PreloadProgress(
-                    completed, total, task.Name, PreloadState.Completed));
+                    current, total, task.Name, PreloadState.Completed));
             }
             catch (OperationCanceledException) when (ct.IsCancellationRequested)
             {
@@ -110,8 +112,10 @@ public sealed class PreloadManager
                 result.Errors[task.Name] = ex;
                 Debug.WriteLine($"[PreloadManager] Critical '{task.Name}' FAILED: {ex.Message}");
 
+                var current = Interlocked.Increment(ref completed);
+
                 _progress.Report(new PreloadProgress(
-                    completed, total, task.Name, PreloadState.Failed, ex.Message));
+                    current, total, task.Name, PreloadState.Failed, ex.Message));
 
                 // Critical task failed - throw to stop startup
                 throw new PreloadException($"Critical task '{task.Name}' failed", ex);
@@ -125,9 +129,8 @@ public sealed class PreloadManager
             await _throttle.WaitAsync(ct);
             try
             {
-                var current = Interlocked.Increment(ref completed);
                 _progress.Report(new PreloadProgress(
-                    current, total, task.Name, PreloadState.Running));
+                    Volatile.Read(ref completed), total, task.Name, PreloadState.Running));
 
                 var sw = Stopwatch.StartNew();
                 var value = await task.Task(ct);
@@ -135,6 +138,8 @@ public sealed class PreloadManager
 
                 result.Results[task.Name] = value;
                 Debug.WriteLine($"[PreloadManager] Non-critical '{task.Name}' completed in {sw.ElapsedMilliseconds}ms");
+
+                var current = Interlocked.Increment(ref completed);
 
                 _progress.Report(new PreloadProgress(
                     current, total, task.Name, PreloadState.Completed));

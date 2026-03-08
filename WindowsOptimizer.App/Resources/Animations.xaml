@@ -17,6 +17,8 @@
     <QuadraticEase x:Key="EaseIn" EasingMode="EaseIn"/>
     <QuadraticEase x:Key="EaseInOut" EasingMode="EaseInOut"/>
     <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
+    <!-- EntranceEase: small, reversible fallback used by some views -->
+    <CubicEase x:Key="EntranceEase" EasingMode="EaseOut"/>
     <CircleEase x:Key="CircleEaseOut" EasingMode="EaseOut"/>
     <BackEase x:Key="BackEaseOut" EasingMode="EaseOut" Amplitude="0.3"/>
     <ElasticEase x:Key="ElasticEaseOut" EasingMode="EaseOut" Oscillations="1" Springiness="5"/>

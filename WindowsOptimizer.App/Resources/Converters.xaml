@@ -8,6 +8,8 @@
 
     <!-- Inverse Boolean Converter -->
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+
 
     <!-- Null to Visibility Converter -->
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>

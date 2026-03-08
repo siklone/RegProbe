@@ -1,12 +1,16 @@
-﻿using System;
+using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
+using WindowsOptimizer.App.HardwareDb;
 using WindowsOptimizer.App.Services;
-using WindowsOptimizer.Infrastructure;
-using System.Threading;
+using WindowsOptimizer.App.Services.Hardware;
+using WindowsOptimizer.App.Services.OsDetection;
 using WindowsOptimizer.App.ViewModels;
+using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Hardware;
 
 namespace WindowsOptimizer.App;
@@ -42,7 +46,10 @@ public partial class App : Application
         StartupWindow? splash = null;
         try
         {
+            AppDiagnostics.Log("[APP] OnStartup begin");
+
             var settings = await LoadSettingsAsync();
+            AppDiagnostics.Log("[APP] Settings loaded");
 
             // Load saved theme preference before showing any windows.
             ApplyTheme(settings);
@@ -60,54 +67,13 @@ public partial class App : Application
                 ? new Progress<PreloadProgress>(progress => splash?.UpdatePreloadProgress(progress))
                 : new Progress<PreloadProgress>(_ => { });
 
-            var preloader = new PreloadManager(preloadProgress);
-            preloader.RegisterTask("Initialize threading", _ =>
-            {
-                AppServices.InitializeMetricThreading(action =>
-                {
-                    var dispatcher = Current?.Dispatcher;
-                    if (dispatcher == null)
-                    {
-                        action();
-                    }
-                    else
-                    {
-                        dispatcher.InvokeAsync(action, DispatcherPriority.DataBind);
-                    }
-                });
-                return Task.CompletedTask;
-            }, isCritical: true, priority: 100);
+            var preloader = CreateStartupPreloader(preloadProgress);
 
-            preloader.RegisterTask("Hardware database", ct =>
-                HardwareDatabase.InitializeAsync(ct), isCritical: false, priority: 90);
-
-            preloader.RegisterTask("Warm hardware inventory", ct => Task.Run(() =>
-            {
-                _ = HardwareIdentifier.GetCpuId();
-                _ = HardwareIdentifier.GetGpuId();
-                _ = HardwareIdentifier.GetRamId();
-            }, ct), isCritical: false, priority: 50);
-
-            preloader.RegisterTask("Analyze nohuto updates", async ct =>
-            {
-                using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-                timeoutCts.CancelAfter(TimeSpan.FromSeconds(6));
-
-                var scanPaths = AppPaths.FromEnvironment();
-                using var scanService = new NohutoRepoScanService(scanPaths);
-                var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token);
-                AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
-            }, isCritical: false, priority: 40);
-
-            preloader.RegisterTask("Hardware database update", async ct =>
-            {
-                if (HardwareDatabase.TryGetInstance(out var database) && database != null)
-                {
-                    await database.CheckForUpdatesAsync(ct);
-                }
-            }, isCritical: false, priority: 20);
-
+            Debug.WriteLine("[APP] Calling PreloadAllAsync...");
+            AppDiagnostics.Log("[APP] Calling PreloadAllAsync...");
             await preloader.RunAllAsync(CancellationToken.None);
+            Debug.WriteLine("[APP] PreloadAllAsync done.");
+            AppDiagnostics.Log("[APP] PreloadAllAsync done.");
 
             var mainWindow = new MainWindow
             {
@@ -118,20 +84,11 @@ public partial class App : Application
             // GPU hardware acceleration settings
             ConfigureRenderSettings();
 
-            if (settings.RunStartupScanOnLaunch)
-            {
-                if (mainWindow.DataContext is MainViewModel mainVm)
-                {
-                    IProgress<StartupScanProgress> scanProgress = new Progress<StartupScanProgress>(progress => splash?.UpdateScanProgress(progress));
-                    scanProgress.Report(new StartupScanProgress(0, 0));
-                    await mainVm.RunStartupScanAsync(scanProgress, CancellationToken.None);
-                }
-            }
-
-            splash?.Close();
-
             mainWindow.Show();
             mainWindow.Activate();
+            splash?.Close();
+
+            QueueDeferredStartupWork(settings, mainWindow);
         }
         catch (Exception ex)
         {
@@ -146,6 +103,128 @@ public partial class App : Application
             }
 
             MainWindow.Show();
+        }
+    }
+
+    private static PreloadManager CreateStartupPreloader(IProgress<PreloadProgress> progress)
+    {
+        var preloader = new PreloadManager(progress);
+        RegisterCorePreloadTasks(preloader);
+        preloader.RegisterTask("Load hardware knowledge", async ct =>
+        {
+            await HardwareDbLoader.LoadAllAsync(ct);
+        }, isCritical: true, priority: 90);
+        return preloader;
+    }
+
+    private static PreloadManager CreateDeferredPreloader()
+    {
+        var preloader = new PreloadManager(new Progress<PreloadProgress>(_ => { }));
+        preloader.RegisterTask("Hardware database", async ct =>
+        {
+            await HardwareDatabase.InitializeAsync(ct);
+            if (HardwareDatabase.TryGetInstance(out var database) && database != null)
+            {
+                await database.CheckForUpdatesAsync(ct);
+            }
+        }, isCritical: false, priority: 90);
+
+        preloader.RegisterTask("Start hardware metric cache", async ct =>
+        {
+            await HardwarePreloadService.Instance.PreloadAsync(ct);
+        }, isCritical: false, priority: 70);
+
+        preloader.RegisterTask("Warm hardware icon cache", _ =>
+        {
+            HardwareIconResolver.PreloadIcons();
+            return Task.CompletedTask;
+        }, isCritical: false, priority: 69);
+
+        preloader.RegisterTask("Parallel hardware preloader", async ct =>
+        {
+            try
+            {
+                var hd = new HardwareDataPreloader(MetricCacheService.Instance, AppServices.OsDetectionService, AppServices.MotherboardProvider);
+                await hd.PreloadAllAsync(new Progress<PreloadProgress>(_ => { }));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[App] Parallel hardware preloader failed: {ex.Message}");
+            }
+        }, isCritical: false, priority: 68);
+
+        preloader.RegisterTask("Analyze nohuto updates", async ct =>
+        {
+            using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeoutCts.CancelAfter(TimeSpan.FromSeconds(6));
+
+            var scanPaths = AppPaths.FromEnvironment();
+            using var scanService = new NohutoRepoScanService(scanPaths);
+            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token);
+            AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
+        }, isCritical: false, priority: 40);
+
+        return preloader;
+    }
+
+    private static void RegisterCorePreloadTasks(PreloadManager preloader)
+    {
+        preloader.RegisterTask("Initialize threading", _ =>
+        {
+            AppServices.InitializeMetricThreading(action =>
+            {
+                var dispatcher = Current?.Dispatcher;
+                if (dispatcher == null)
+                {
+                    action();
+                }
+                else
+                {
+                    dispatcher.InvokeAsync(action, DispatcherPriority.DataBind);
+                }
+            });
+            return Task.CompletedTask;
+        }, isCritical: true, priority: 100);
+    }
+
+    private void QueueDeferredStartupWork(AppSettings settings, MainWindow mainWindow)
+    {
+        _ = Dispatcher.InvokeAsync(() =>
+        {
+            _ = RunDeferredPreloadAsync();
+
+            if (settings.RunStartupScanOnLaunch && mainWindow.DataContext is MainViewModel mainVm)
+            {
+                _ = RunDeferredStartupScanAsync(mainVm);
+            }
+        }, DispatcherPriority.ContextIdle);
+    }
+
+    private static async Task RunDeferredPreloadAsync()
+    {
+        try
+        {
+            AppDiagnostics.Log("[APP] Starting deferred startup work");
+            var preloader = CreateDeferredPreloader();
+            await preloader.RunAllAsync(CancellationToken.None);
+            AppDiagnostics.Log("[APP] Deferred startup work complete");
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Deferred startup work failed", ex);
+        }
+    }
+
+    private static async Task RunDeferredStartupScanAsync(MainViewModel mainVm)
+    {
+        try
+        {
+            await Task.Delay(150);
+            await mainVm.RunStartupScanAsync(null, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Deferred startup scan failed", ex);
         }
     }
 

@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IconPackManifest",
+  "description": "Schema for icon pack manifest",
+  "type": "object",
+  "required": ["version", "requiredIcons", "folderStructure"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "requiredIcons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "category", "description"],
+        "properties": {
+          "key": { "type": "string", "description": "Icon key (filename without extension)" },
+          "category": { "type": "string", "description": "Hardware category" },
+          "description": { "type": "string", "description": "Human-readable description" }
+        }
+      }
+    },
+    "folderStructure": {
+      "type": "object",
+      "required": ["root", "categories"],
+      "properties": {
+        "root": { "type": "string", "description": "Root folder path" },
+        "categories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Subfolder names for organized storage"
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "totalIcons": { "type": "integer" },
+        "byCategory": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        }
+      }
+    }
+  }
+}
