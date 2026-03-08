@@ -153,11 +153,11 @@ public partial class App : Application
         preloader.RegisterTask("Analyze nohuto updates", async ct =>
         {
             using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            timeoutCts.CancelAfter(TimeSpan.FromSeconds(6));
+            timeoutCts.CancelAfter(TimeSpan.FromSeconds(12));
 
             var scanPaths = AppPaths.FromEnvironment();
             using var scanService = new NohutoRepoScanService(scanPaths);
-            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token);
+            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token, TimeSpan.FromHours(2));
             AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
         }, isCritical: false, priority: 40);
 

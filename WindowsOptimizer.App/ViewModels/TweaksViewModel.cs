@@ -61,8 +61,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _openLogFolderCommand;
     private readonly RelayCommand _openCsvLogCommand;
     private readonly RelayCommand _openDocsCoverageReportCommand;
+    private readonly RelayCommand _openProvenanceReportCommand;
     private readonly RelayCommand _filterAppliedCommand;
     private readonly RelayCommand _filterRolledBackCommand;
+    private readonly RelayCommand _showSettingsWorkspaceCommand;
+    private readonly RelayCommand _showMaintenanceWorkspaceCommand;
 	private readonly RelayCommand _expandAllDetailsCommand;
 	private readonly RelayCommand _collapseAllDetailsCommand;
 	private readonly bool _isElevated;
@@ -77,7 +80,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly ICommandRunner _elevatedCommandRunner;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
-    private string _filterSummary = "Showing 0 of 0 policies.";
+    private string _filterSummary = "Showing 0 of 0 settings.";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -90,6 +93,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _showRisky = true;
     private bool _showFavoritesOnly = false;
     private string _selectedCategoryName = string.Empty;
+    private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
+    private int _selectedMainTabIndex;
     private bool _hasVisibleTweaks;
     private bool _isFlatView;
     private readonly IFavoritesStore _favoritesStore;
@@ -99,7 +104,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private CancellationTokenSource? _inventorySaveCts;
     private bool _isApplyingCachedInventory;
     private bool _isBackgroundRefreshRunning;
-    private string _inventoryStatusMessage = "Inventory snapshot not available yet.";
+    private string _inventoryStatusMessage = "Status check not available yet.";
     private readonly string _logFolderPath;
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly PluginLoader _pluginLoader = new();
@@ -111,11 +116,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private int _docsMissingCount;
     private string _docsCoverageSummary = "Docs report unavailable.";
     private string _docsCoverageReportPath = string.Empty;
+    private int _provenanceReviewCount;
+    private string _provenanceCoverageSummary = "Source provenance unavailable.";
+    private string _provenanceReportPath = string.Empty;
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
     private readonly TweakDocumentationLinker _documentationLinker = new();
+    private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
+    private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
@@ -123,18 +133,46 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     /// DNS configuration panel ViewModel for Network category.
     /// </summary>
     public DnsConfigurationViewModel DnsConfiguration { get; } = new();
+    public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
+    public PolicyReferencePanelViewModel PolicyReference { get; }
 
     public BloatwareViewModel Bloatware { get; }
     public StartupViewModel Startup { get; }
 
-    private string _currentTab = "Policies";
+    private string _currentTab = "Configuration";
     public string CurrentTab
     {
         get => _currentTab;
         set => SetProperty(ref _currentTab, value);
     }
+
+    public ConfigurationWorkspaceKind SelectedWorkspace
+    {
+        get => _selectedWorkspace;
+        set
+        {
+            if (SetProperty(ref _selectedWorkspace, value))
+            {
+                RaiseWorkspacePropertiesChanged();
+
+                if (!string.IsNullOrWhiteSpace(_selectedCategoryName) && !CurrentWorkspaceContainsCategory(_selectedCategoryName))
+                {
+                    SelectedCategoryName = string.Empty;
+                }
+
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
     
     public RelayCommand SetTabCommand { get; }
+
+    public int SelectedMainTabIndex
+    {
+        get => _selectedMainTabIndex;
+        set => SetProperty(ref _selectedMainTabIndex, value);
+    }
 
     public TweaksViewModel(
         IEnumerable<ITweakProvider>? providers, 
@@ -219,8 +257,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _openDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport());
+        _openProvenanceReportCommand = new RelayCommand(_ => OpenProvenanceReport());
         _filterAppliedCommand = new RelayCommand(_ => StatusFilter = "applied");
         _filterRolledBackCommand = new RelayCommand(_ => StatusFilter = "rolledback");
+        _showSettingsWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Settings);
+        _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
         ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
@@ -237,11 +278,72 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ApplyTweakMetadata();
         LoadCachedInventoryState();
         _documentationLinker.Apply(Tweaks);
+        _provenanceCatalogService.Apply(Tweaks);
+        WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
+        PolicyReference = new PolicyReferencePanelViewModel(OpenPolicyReferenceEntry);
         UpdateFilterSummary();
         LoadDocsCoverageReport();
+        LoadProvenanceCoverageReport();
         RefreshSummaryStats();
+        RefreshPolicyReferencePanel();
         _ = InitializePresetsAsync();
 
+    }
+
+    private IDictionary<string, int> BuildWinConfigCategoryCoverageMap()
+    {
+        var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var tweak in Tweaks)
+        {
+            var categoryId = MapLocalCategoryToWinConfigId(tweak.Category);
+            if (string.IsNullOrWhiteSpace(categoryId))
+            {
+                continue;
+            }
+
+            counts.TryGetValue(categoryId, out var current);
+            counts[categoryId] = current + 1;
+        }
+
+        return counts;
+    }
+
+    private static string? MapLocalCategoryToWinConfigId(string? category)
+    {
+        if (string.IsNullOrWhiteSpace(category))
+        {
+            return null;
+        }
+
+        var normalized = category.Trim().ToLowerInvariant();
+
+        if (normalized.Contains("network"))
+            return "network";
+        if (normalized.Contains("power"))
+            return "power";
+        if (normalized.Contains("privacy"))
+            return "privacy";
+        if (normalized.Contains("security"))
+            return "security";
+        if (normalized.Contains("system"))
+            return "system";
+        if (normalized.Contains("visibility") || normalized.Contains("display") || normalized.Contains("explorer"))
+            return "visibility";
+        if (normalized.Contains("peripheral") || normalized.Contains("input") || normalized.Contains("usb") || normalized.Contains("audio"))
+            return "peripheral";
+        if (normalized.Contains("nvidia") || normalized.Contains("graphics") || normalized.Contains("gpu"))
+            return "nvidia";
+        if (normalized.Contains("cleanup"))
+            return "cleanup";
+        if (normalized.Contains("policy"))
+            return "policies";
+        if (normalized.Contains("performance") || normalized.Contains("affinity"))
+            return "affinities";
+        if (normalized.Contains("misc"))
+            return "misc";
+
+        return null;
     }
 
     private void LoadProviderTweaks()
@@ -392,9 +494,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ICommand OpenDocsCoverageReportCommand => _openDocsCoverageReportCommand;
 
+    public ICommand OpenProvenanceReportCommand => _openProvenanceReportCommand;
+
     public ICommand FilterAppliedCommand => _filterAppliedCommand;
 
     public ICommand FilterRolledBackCommand => _filterRolledBackCommand;
+
+    public ICommand ShowSettingsWorkspaceCommand => _showSettingsWorkspaceCommand;
+
+    public ICommand ShowMaintenanceWorkspaceCommand => _showMaintenanceWorkspaceCommand;
 
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
@@ -410,6 +518,52 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         get => _totalTweaksAvailable;
         private set => SetProperty(ref _totalTweaksAvailable, value);
     }
+
+    public int SettingsWorkspaceCount => Tweaks.Count(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings);
+
+    public int MaintenanceWorkspaceCount => Tweaks.Count(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
+
+    public int CurrentWorkspaceItemCount => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance
+        ? MaintenanceWorkspaceCount
+        : SettingsWorkspaceCount;
+
+    public bool IsSettingsWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Settings;
+
+    public bool IsMaintenanceWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
+
+    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Maintenance" : "Windows Settings";
+
+    public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
+        ? "One-time cleanup and repair actions that help you reset, clean, or troubleshoot Windows."
+        : "Persistent Windows settings that stay applied until you change them again.";
+
+    public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
+        ? $"{CurrentWorkspaceItemCount} tasks available"
+        : $"{CurrentWorkspaceItemCount} settings available";
+
+    public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Task Groups" : "Configuration Areas";
+
+    public string AllItemsLabel => IsMaintenanceWorkspaceSelected ? "All Tasks" : "All Settings";
+
+    public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
+        ? "Search cleanup tasks, repair actions, or IDs..."
+        : "Search settings, IDs, or explanations...";
+
+    public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
+        ? "Use these when you want to clean up Windows, reset caches, or fix a problem."
+        : "Use these to change how Windows behaves and keep that behavior in place.";
+
+    public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
+        ? "No maintenance tasks match your filters"
+        : "No settings match your filters";
+
+    public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
+        ? "Try clearing the search or switching back to Windows Settings."
+        : "Try clearing the search or changing the selected area.";
+
+    public bool ShowDnsConfigurationPanel =>
+        IsSettingsWorkspaceSelected &&
+        string.Equals(SelectedCategoryName, "Network", StringComparison.OrdinalIgnoreCase);
 
     public int TweaksApplied
     {
@@ -463,6 +617,24 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool DocsCoverageCritical => DocsMissingCount > 10;
 
+    public int ProvenanceReviewCount
+    {
+        get => _provenanceReviewCount;
+        private set => SetProperty(ref _provenanceReviewCount, value);
+    }
+
+    public string ProvenanceCoverageSummary
+    {
+        get => _provenanceCoverageSummary;
+        private set => SetProperty(ref _provenanceCoverageSummary, value);
+    }
+
+    public string ProvenanceReportPath
+    {
+        get => _provenanceReportPath;
+        private set => SetProperty(ref _provenanceReportPath, value);
+    }
+
     public int ScorableTweaksMeasuredTotal => Tweaks.Count(t => IsScorableForHealth(t) && t.AppliedStatus != TweakAppliedStatus.Unknown);
 
     public int ScorableTweaksApplied => Tweaks.Count(t => IsScorableForHealth(t) && t.IsApplied);
@@ -484,7 +656,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string HealthCalculationSummary => ScorableTweaksMeasuredTotal == 0
         ? "Health is calculated from detected states. Run Detect to refresh current states."
-        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected policies applied (Safe+Advanced; excludes Demo/Risky).";
+        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected settings applied (Safe+Advanced; excludes Demo/Risky).";
 
     public string HealthStatusMessage => GlobalOptimizationScore switch
     {
@@ -591,8 +763,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     public string SelectionSummary => SelectedCount == 0
-        ? "No policies selected"
-        : $"{SelectedCount} polic{(SelectedCount == 1 ? "y" : "ies")} selected";
+        ? "No settings selected"
+        : $"{SelectedCount} setting{(SelectedCount == 1 ? string.Empty : "s")} selected";
 
     public bool HasSelection => SelectedCount > 0;
 
@@ -637,8 +809,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string StatusFilterLabel => _statusFilter switch
     {
-        "applied" => "Applied Policies",
-        "rolledback" => "Rolled Back Policies",
+        "applied" => "Applied Settings",
+        "rolledback" => "Rolled Back Settings",
         _ => ""
     };
 
@@ -724,6 +896,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(IsAllCategoriesSelected));
                 OnPropertyChanged(nameof(SelectedCategoryLabel));
+                OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
                 TweaksView.Refresh();
                 // Keep sidebar scroll/selection stable when only switching category.
                 UpdateFilterSummary(rebuildCategoryGroups: false);
@@ -733,7 +906,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool IsAllCategoriesSelected => string.IsNullOrWhiteSpace(_selectedCategoryName);
 
-    public string SelectedCategoryLabel => IsAllCategoriesSelected ? "All Policies" : _selectedCategoryName;
+    public string SelectedCategoryLabel => IsAllCategoriesSelected ? AllItemsLabel : _selectedCategoryName;
 
     public int FavoritesCount => Tweaks.Count(t => t.IsFavorite);
 
@@ -911,11 +1084,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                  or nameof(TweakItemViewModel.WasRolledBack)
                  or nameof(TweakItemViewModel.CurrentValue)
                  or nameof(TweakItemViewModel.TargetValue)
-                 or nameof(TweakItemViewModel.LastDetectedAtUtc))
+                 or nameof(TweakItemViewModel.LastDetectedAtUtc)
+                 or nameof(TweakItemViewModel.RegistryPath))
         {
             RaiseHealthMetricsChanged();
             RefreshSummaryStats();
             ScheduleInventorySnapshotSave();
+            RefreshPolicyReferencePanel();
             if (!string.IsNullOrEmpty(_statusFilter))
             {
                 TweaksView.Refresh();
@@ -968,7 +1143,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         UpdateSelectionCount();
         RaiseHealthMetricsChanged();
+        RaiseWorkspacePropertiesChanged();
         RefreshSummaryStats();
+        RefreshPolicyReferencePanel();
     }
 
     private void RaiseHealthMetricsChanged()
@@ -1026,6 +1203,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
     {
+        if (GetWorkspaceKind(item) != SelectedWorkspace)
+        {
+            return false;
+        }
+
         if (includeCategoryFilter && !IsAllCategoriesSelected)
         {
             if (!string.Equals(item.Category, _selectedCategoryName, StringComparison.OrdinalIgnoreCase))
@@ -1077,6 +1259,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         bool matches = item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+            || item.RegistryPath.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
 
         item.IsHighlighted = matches;
@@ -1085,9 +1268,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void UpdateFilterSummary(bool rebuildCategoryGroups = true)
     {
-        var total = Tweaks.Count;
+        var total = CurrentWorkspaceItemCount;
         var visible = TweaksView.Cast<object>().Count();
-        FilterSummary = $"Showing {visible} of {total} policies.";
+        var noun = IsMaintenanceWorkspaceSelected ? "tasks" : "settings";
+        FilterSummary = $"Showing {visible} of {total} {noun}.";
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
@@ -1120,7 +1304,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 : char.ToUpperInvariant(segment[0]) + segment[1..].ToLowerInvariant();
         }
 
-        var categoryOrder = new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications", "Devtools" };
+        var categoryOrder = IsMaintenanceWorkspaceSelected
+            ? new[] { "Cleanup", "Network", "System", "Security", "Privacy", "Peripheral", "Power" }
+            : new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications", "Devtools" };
         var rootGroups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var tweak in Tweaks.Where(t => FilterTweaksInternal(t, includeCategoryFilter: false)))
@@ -1182,6 +1368,34 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private ConfigurationWorkspaceKind GetWorkspaceKind(TweakItemViewModel tweak)
+        => _workspaceClassifier.Classify(tweak.Id, tweak.Category);
+
+    private bool CurrentWorkspaceContainsCategory(string categoryName)
+        => Tweaks.Any(t =>
+            GetWorkspaceKind(t) == SelectedWorkspace &&
+            string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
+
+    private void RaiseWorkspacePropertiesChanged()
+    {
+        OnPropertyChanged(nameof(SettingsWorkspaceCount));
+        OnPropertyChanged(nameof(MaintenanceWorkspaceCount));
+        OnPropertyChanged(nameof(CurrentWorkspaceItemCount));
+        OnPropertyChanged(nameof(IsSettingsWorkspaceSelected));
+        OnPropertyChanged(nameof(IsMaintenanceWorkspaceSelected));
+        OnPropertyChanged(nameof(CurrentWorkspaceLabel));
+        OnPropertyChanged(nameof(CurrentWorkspaceDescription));
+        OnPropertyChanged(nameof(CurrentWorkspaceCountLabel));
+        OnPropertyChanged(nameof(WorkspaceCategoryHeader));
+        OnPropertyChanged(nameof(AllItemsLabel));
+        OnPropertyChanged(nameof(SearchPlaceholder));
+        OnPropertyChanged(nameof(WorkspaceStatusHint));
+        OnPropertyChanged(nameof(EmptyStateTitle));
+        OnPropertyChanged(nameof(EmptyStateDescription));
+        OnPropertyChanged(nameof(SelectedCategoryLabel));
+        OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+    }
+
     public void ExpandAllCategories()
     {
         foreach (var group in CategoryGroups)
@@ -1211,10 +1425,30 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private void RefreshSummaryStats()
     {
         TotalTweaksAvailable = Tweaks.Count;
+        RaiseWorkspacePropertiesChanged();
         TweaksApplied = Tweaks.Count(t => t.IsApplied);
         TweaksRolledBack = Tweaks.Count(t => t.WasRolledBack);
         RefreshLogFileSize();
         UpdateInventoryStatusMessage();
+    }
+
+    private void RefreshPolicyReferencePanel()
+    {
+        PolicyReference?.Refresh(Tweaks);
+    }
+
+    private void OpenPolicyReferenceEntry(PolicyReferenceEntry entry)
+    {
+        if (entry is null)
+        {
+            return;
+        }
+
+        SelectedMainTabIndex = 0;
+        SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
+        SelectedCategoryName = string.Empty;
+        StatusFilter = string.Empty;
+        SearchText = entry.SearchFragment;
     }
 
     private void LoadCachedInventoryState()
@@ -1256,7 +1490,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 var latestText = latestTimestamp.HasValue
                     ? latestTimestamp.Value.ToLocalTime().ToString("HH:mm:ss")
                     : "unknown time";
-                InventoryStatusMessage = $"Loaded cached inventory for {appliedCount} policies (last: {latestText}).";
+                InventoryStatusMessage = $"Loaded last checked status for {appliedCount} settings (last: {latestText}).";
             }
         }
         finally
@@ -1276,8 +1510,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             : string.Empty;
 
         InventoryStatusMessage = requiresPrompt > 0
-            ? $"Inventory: {detected}/{total} live. {requiresPrompt} require admin prompt.{suffix}"
-            : $"Inventory: {detected}/{total} live.{suffix}";
+            ? $"Live status: {detected}/{total} checked. {requiresPrompt} need admin confirmation.{suffix}"
+            : $"Live status: {detected}/{total} checked.{suffix}";
     }
 
     private async void ScheduleInventorySnapshotSave()
@@ -1391,6 +1625,34 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private void LoadProvenanceCoverageReport()
+    {
+        try
+        {
+            var catalog = _provenanceCatalogService.Catalog;
+            ProvenanceReportPath = _provenanceCatalogService.ResolveMarkdownReportPath();
+
+            if (catalog.TotalTweaks <= 0)
+            {
+                ProvenanceReviewCount = 0;
+                ProvenanceCoverageSummary = "Source provenance unavailable.";
+                return;
+            }
+
+            ProvenanceReviewCount = catalog.ReviewNeededTweaks;
+            ProvenanceCoverageSummary =
+                $"{catalog.RepoBackedTweaks}/{catalog.TotalTweaks} repo-backed · " +
+                $"{catalog.InternalsBackedTweaks} internals refs · " +
+                $"{catalog.ReviewNeededTweaks} review";
+        }
+        catch
+        {
+            ProvenanceReportPath = string.Empty;
+            ProvenanceReviewCount = 0;
+            ProvenanceCoverageSummary = "Source provenance unavailable.";
+        }
+    }
+
     private void OpenDocsCoverageReport()
     {
         try
@@ -1405,6 +1667,30 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = DocsCoverageReportPath,
+                    UseShellExecute = true
+                });
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
+    }
+
+    private void OpenProvenanceReport()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(ProvenanceReportPath) || !File.Exists(ProvenanceReportPath))
+            {
+                LoadProvenanceCoverageReport();
+            }
+
+            if (!string.IsNullOrWhiteSpace(ProvenanceReportPath) && File.Exists(ProvenanceReportPath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = ProvenanceReportPath,
                     UseShellExecute = true
                 });
             }

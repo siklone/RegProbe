@@ -50,6 +50,15 @@
 
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
             <converters:WindowHeightConverter x:Key="WindowHeightConverter"/>
+
+            <Style x:Key="InsightCardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="12,10"/>
+                <Setter Property="Margin" Value="0,0,10,10"/>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -143,11 +152,73 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
+                    <UniformGrid Grid.Row="0"
+                                 Columns="2"
+                                 Margin="0,0,0,10"
+                                 Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                        <Border Style="{StaticResource InsightCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="What This Is"
+                                           FontSize="10"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="{Binding WhatThisIs}"
+                                           Margin="0,6,0,0"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource InsightCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Why It Matters"
+                                           FontSize="10"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="{Binding WhyItMatters}"
+                                           Margin="0,6,0,0"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource InsightCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Driver / Runtime"
+                                           FontSize="10"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="{Binding DriverRuntime}"
+                                           Margin="0,6,0,0"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource InsightCardStyle}" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Common Actions"
+                                           FontSize="10"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="{Binding CommonActions}"
+                                           Margin="0,6,0,0"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+
                     <Border x:Name="HasDeviceTabsBorder"
-                            Grid.Row="0"
+                            Grid.Row="1"
                             Margin="0,0,0,10"
                             Background="{DynamicResource BackgroundMediumBrush}"
                             CornerRadius="8"
@@ -214,7 +285,7 @@
                     </Border>
 
                     <!-- Loading Skeleton -->
-                    <Grid Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
+                    <Grid Grid.Row="2" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Margin="8">
                             <ItemsControl ItemsSource="{Binding SkeletonRows}">
                                 <ItemsControl.ItemTemplate>
@@ -231,7 +302,7 @@
                     </Grid>
 
                     <!-- Scrollable Specs -->
-                    <ScrollViewer Grid.Row="1"
+                    <ScrollViewer Grid.Row="2"
                                   x:Name="SpecsScrollViewer"
                                   VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
@@ -247,29 +318,36 @@
                         </ScrollViewer.Resources>
 
                         <ItemsControl ItemsSource="{Binding Specs}" Margin="4,2,4,4">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0,0,0,8">
+                                    <Grid x:Name="SpecItemRoot"
+                                          Width="332"
+                                          Margin="0,0,8,8">
                                         <Border x:Name="ValueRowBorder"
                                                 Padding="10,8"
-                                                CornerRadius="10"
+                                                CornerRadius="12"
                                                 Background="#14000000"
                                                 BorderBrush="#18FFFFFF"
                                                 BorderThickness="1">
                                             <Grid x:Name="ValueRow">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="156"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0"
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0"
                                                            Text="{Binding Label}"
                                                            Foreground="{DynamicResource MutedForegroundBrush}"
-                                                           FontSize="11"
+                                                           FontSize="10"
                                                            TextWrapping="Wrap"
-                                                           VerticalAlignment="Top"
-                                                           Margin="0,0,12,0"/>
-                                                <TextBlock Grid.Column="1"
+                                                           VerticalAlignment="Top"/>
+                                                <TextBlock Grid.Row="1"
                                                            Text="{Binding Value}"
+                                                           Margin="0,4,0,0"
                                                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                            FontSize="11"
                                                            FontWeight="SemiBold"
@@ -278,7 +356,10 @@
                                             </Grid>
                                         </Border>
 
-                                        <StackPanel x:Name="HeaderRow" Visibility="Collapsed" Margin="2,10,2,0">
+                                        <StackPanel x:Name="HeaderRow"
+                                                    Width="560"
+                                                    Visibility="Collapsed"
+                                                    Margin="2,8,2,2">
                                             <TextBlock Text="{Binding Label}"
                                                        FontSize="11"
                                                        FontWeight="SemiBold"
@@ -293,6 +374,7 @@
                                         <DataTrigger Binding="{Binding IsGroupHeader}" Value="True">
                                             <Setter TargetName="ValueRowBorder" Property="Visibility" Value="Collapsed"/>
                                             <Setter TargetName="HeaderRow" Property="Visibility" Value="Visible"/>
+                                            <Setter TargetName="SpecItemRoot" Property="Width" Value="560"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>

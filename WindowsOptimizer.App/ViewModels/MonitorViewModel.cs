@@ -93,6 +93,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private bool _isRamAlertActive;
     private ProcessMonitor.NetworkProcessMode _networkProcessMode = ProcessMonitor.NetworkProcessMode.ApproximateIo;
     private PerformanceItemViewModel? _selectedPerformanceItem;
+    private bool _isPerformanceDetailOpen;
     private ObservableCollection<double> _performancePrimaryHistory = new(Enumerable.Repeat(0.0, 60));
     private ObservableCollection<double> _performanceSecondaryHistory = new(Enumerable.Repeat(0.0, 60));
     private string _performanceChartTitle = "Performance";
@@ -130,6 +131,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _moveSectionUpCommand;
     private readonly RelayCommand _moveSectionDownCommand;
     private readonly RelayCommand _resetLayoutCommand;
+    private readonly RelayCommand _closePerformanceDetailCommand;
+    private readonly RelayCommand _closePerformanceSectionCommand;
     private readonly RelayCommand _exportSensorDiagnosticsCommand;
     private readonly RelayCommand _refreshStartupAppsCommand;
     private readonly RelayCommand _refreshServicesCommand;
@@ -139,7 +142,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _disableServiceCommand = new(_ => { });
 
     private MonitorTabItem? _selectedTab;
+    private MonitorSectionLayout? _selectedPerformanceSection;
     private ProcessCategoryItem? _selectedProcessCategory;
+    private bool _isPerformanceSectionDetailOpen;
     private bool _isStartupAppsLoading;
     private bool _isServicesLoading;
     private bool _isStartupActionInProgress;
@@ -207,6 +212,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionUpCommand = new RelayCommand(param => MoveSection(param, -1), param => CanMoveSection(param, -1));
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
             _resetLayoutCommand = new RelayCommand(_ => ResetLayout());
+            _closePerformanceDetailCommand = new RelayCommand(_ => ClosePerformanceDetail(), _ => IsPerformanceDetailOpen);
+            _closePerformanceSectionCommand = new RelayCommand(_ => ClosePerformanceSectionDetail(), _ => IsPerformanceSectionDetailOpen);
             _openHardwareDetailCommand = new RelayCommand(OpenHardwareDetail);
             InitializeLayout();
             MonitorSections.CollectionChanged += OnMonitorSectionsChanged;
@@ -382,16 +389,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             }
 
             MonitorTabs.Clear();
-            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
-            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Overview", "Live hardware status and activity"));
+            MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top apps using CPU, RAM, disk, and network"));
             // StartupApps and Services removed - they have their own dedicated views in the sidebar
             SelectedTab = MonitorTabs.FirstOrDefault();
 
             ProcessCategories.Clear();
-            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU", "Top CPU usage"));
-            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "RAM", "Top memory usage"));
-            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Top network activity"));
-            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk I/O", "Top disk activity"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU load", "Highest CPU usage right now"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "Memory", "Highest memory usage right now"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Most network traffic right now"));
+            ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk", "Most disk activity right now"));
             SelectedProcessCategory = ProcessCategories.FirstOrDefault();
         }
         catch (Exception ex)
@@ -431,6 +438,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionUpCommand = new RelayCommand(_ => { });
             _moveSectionDownCommand = new RelayCommand(_ => { });
             _resetLayoutCommand = new RelayCommand(_ => { });
+            _closePerformanceDetailCommand = new RelayCommand(_ => { }, _ => false);
+            _closePerformanceSectionCommand = new RelayCommand(_ => { }, _ => false);
             _exportSensorDiagnosticsCommand = new RelayCommand(_ => { });
             _refreshStartupAppsCommand = new RelayCommand(_ => { });
             _refreshServicesCommand = new RelayCommand(_ => { });
@@ -447,8 +456,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             if (MonitorTabs.Count == 0)
             {
-                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Performance", "Hardware charts and summaries"));
-                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top CPU, RAM, disk, and network"));
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Performance, "Overview", "Live hardware status and activity"));
+                MonitorTabs.Add(new MonitorTabItem(MonitorTab.Processes, "Processes", "Top apps using CPU, RAM, disk, and network"));
                 // StartupApps and Services removed - they have their own dedicated views
             }
 
@@ -456,10 +465,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
             if (ProcessCategories.Count == 0)
             {
-                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU", "Top CPU usage"));
-                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "RAM", "Top memory usage"));
-                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Top network activity"));
-                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk I/O", "Top disk activity"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Cpu, "CPU load", "Highest CPU usage right now"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Memory, "Memory", "Highest memory usage right now"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Network, "Network", "Most network traffic right now"));
+                ProcessCategories.Add(new ProcessCategoryItem(ProcessCategory.Disk, "Disk", "Most disk activity right now"));
             }
 
             SelectedProcessCategory ??= ProcessCategories.FirstOrDefault();
@@ -744,6 +753,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     private void ApplyLayout(IEnumerable<MonitorSectionLayout> layout)
     {
+        var selectedKey = SelectedPerformanceSection?.Key;
         _isLayoutLoading = true;
         foreach (var section in MonitorSections)
         {
@@ -758,6 +768,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
 
         _isLayoutLoading = false;
+        SyncSelectedPerformanceSection(selectedKey);
         UpdateLayoutCommands();
     }
 
@@ -770,6 +781,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         if (e.PropertyName == nameof(MonitorSectionLayout.IsVisible))
         {
+            if (sender is MonitorSectionLayout section &&
+                !section.IsVisible &&
+                ReferenceEquals(SelectedPerformanceSection, section))
+            {
+                ClosePerformanceSectionDetail();
+            }
+
             _ = SaveLayoutAsync();
         }
     }
@@ -823,8 +841,42 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             return;
         }
 
+        SyncSelectedPerformanceSection(SelectedPerformanceSection?.Key);
         UpdateLayoutCommands();
         _ = SaveLayoutAsync();
+    }
+
+    private void SyncSelectedPerformanceSection(string? selectedKey)
+    {
+        if (string.IsNullOrWhiteSpace(selectedKey))
+        {
+            if (SelectedPerformanceSection != null && !MonitorSections.Contains(SelectedPerformanceSection))
+            {
+                SelectedPerformanceSection = null;
+            }
+
+            return;
+        }
+
+        var match = MonitorSections.FirstOrDefault(section =>
+            string.Equals(section.Key, selectedKey, StringComparison.OrdinalIgnoreCase));
+
+        if (match == null)
+        {
+            SelectedPerformanceSection = null;
+            ClosePerformanceSectionDetail();
+            return;
+        }
+
+        if (!ReferenceEquals(SelectedPerformanceSection, match))
+        {
+            SelectedPerformanceSection = match;
+        }
+
+        if (!match.IsVisible)
+        {
+            ClosePerformanceSectionDetail();
+        }
     }
 
     private void ResetLayout()
@@ -2100,7 +2152,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
     }
 
-    public string Title => "Monitor";
+    public string Title => "Monitoring";
 
     public ObservableCollection<MonitorSectionLayout> MonitorSections { get; } = new();
     public ObservableCollection<MonitorTabItem> MonitorTabs { get; } = new();
@@ -2149,6 +2201,59 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             }
         }
     }
+
+    public MonitorSectionLayout? SelectedPerformanceSection
+    {
+        get => _selectedPerformanceSection;
+        set
+        {
+            if (SetProperty(ref _selectedPerformanceSection, value))
+            {
+                if (value == null)
+                {
+                    IsPerformanceSectionDetailOpen = false;
+                }
+
+                OnPropertyChanged(nameof(HasPerformanceSectionDetail));
+                OnPropertyChanged(nameof(SelectedPerformanceSectionTitle));
+                OnPropertyChanged(nameof(SelectedPerformanceSectionDescription));
+                OnPropertyChanged(nameof(PerformanceSectionEmptyStateTitle));
+                OnPropertyChanged(nameof(PerformanceSectionEmptyStateText));
+            }
+        }
+    }
+
+    public bool IsPerformanceSectionDetailOpen
+    {
+        get => _isPerformanceSectionDetailOpen;
+        private set
+        {
+            if (SetProperty(ref _isPerformanceSectionDetailOpen, value))
+            {
+                OnPropertyChanged(nameof(IsPerformanceSectionDetailClosed));
+                OnPropertyChanged(nameof(HasPerformanceSectionDetail));
+                OnPropertyChanged(nameof(PerformanceSectionEmptyStateTitle));
+                OnPropertyChanged(nameof(PerformanceSectionEmptyStateText));
+                _closePerformanceSectionCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsPerformanceSectionDetailClosed => !IsPerformanceSectionDetailOpen;
+
+    public bool HasPerformanceSectionDetail => IsPerformanceSectionDetailOpen && SelectedPerformanceSection != null;
+
+    public string SelectedPerformanceSectionTitle => SelectedPerformanceSection?.Title ?? "Overview";
+
+    public string SelectedPerformanceSectionDescription => SelectedPerformanceSection?.Description ?? string.Empty;
+
+    public string PerformanceSectionEmptyStateTitle => SelectedPerformanceSection == null
+        ? "Choose a monitor section"
+        : "Open this section";
+
+    public string PerformanceSectionEmptyStateText => SelectedPerformanceSection == null
+        ? "Start with a compact section card, then open only the live details you want to inspect."
+        : $"Click {SelectedPerformanceSection.Title} to open its live monitoring panel.";
 
     public bool IsPerformanceTab => SelectedTab?.Tab == MonitorTab.Performance;
     public bool IsProcessesTab => SelectedTab?.Tab == MonitorTab.Processes;
@@ -2213,6 +2318,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ICommand MoveSectionUpCommand => _moveSectionUpCommand;
     public ICommand MoveSectionDownCommand => _moveSectionDownCommand;
     public ICommand ResetLayoutCommand => _resetLayoutCommand;
+    public ICommand ClosePerformanceSectionCommand => _closePerformanceSectionCommand;
     public ICommand ToggleStartupAppCommand => _toggleStartupAppCommand;
     public ICommand EnableServiceCommand => _enableServiceCommand;
     public ICommand DisableServiceCommand => _disableServiceCommand;
@@ -2292,7 +2398,84 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public MotherboardCardViewModel MotherboardCard => _motherboardCard;
 
     // Command to open hardware detail window
+    public ICommand ClosePerformanceDetailCommand => _closePerformanceDetailCommand;
     public ICommand OpenHardwareDetailCommand => _openHardwareDetailCommand;
+
+    public void OpenPerformanceDetail(PerformanceItemViewModel? item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        if (!ReferenceEquals(SelectedPerformanceItem, item))
+        {
+            SelectedPerformanceItem = item;
+        }
+        else
+        {
+            UpdatePerformanceSelection();
+        }
+
+        IsPerformanceDetailOpen = true;
+    }
+
+    public void TogglePerformanceDetail(PerformanceItemViewModel? item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        if (ReferenceEquals(SelectedPerformanceItem, item) && IsPerformanceDetailOpen)
+        {
+            ClosePerformanceDetail();
+            return;
+        }
+
+        OpenPerformanceDetail(item);
+    }
+
+    public void ClosePerformanceDetail()
+    {
+        IsPerformanceDetailOpen = false;
+    }
+
+    public void OpenPerformanceSectionDetail(MonitorSectionLayout? section)
+    {
+        if (section == null)
+        {
+            return;
+        }
+
+        if (!ReferenceEquals(SelectedPerformanceSection, section))
+        {
+            SelectedPerformanceSection = section;
+        }
+
+        IsPerformanceSectionDetailOpen = true;
+    }
+
+    public void TogglePerformanceSectionDetail(MonitorSectionLayout? section)
+    {
+        if (section == null)
+        {
+            return;
+        }
+
+        if (ReferenceEquals(SelectedPerformanceSection, section) && IsPerformanceSectionDetailOpen)
+        {
+            ClosePerformanceSectionDetail();
+            return;
+        }
+
+        OpenPerformanceSectionDetail(section);
+    }
+
+    public void ClosePerformanceSectionDetail()
+    {
+        IsPerformanceSectionDetailOpen = false;
+    }
 
     private void OpenHardwareDetail(object? parameter)
     {
@@ -2628,9 +2811,45 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             if (SetProperty(ref _selectedPerformanceItem, value))
             {
                 UpdatePerformanceSelection();
+                if (value == null)
+                {
+                    IsPerformanceDetailOpen = false;
+                }
+
+                OnPropertyChanged(nameof(HasPerformanceDetail));
+                OnPropertyChanged(nameof(PerformanceDetailEmptyStateTitle));
+                OnPropertyChanged(nameof(PerformanceDetailEmptyStateText));
             }
         }
     }
+
+    public bool IsPerformanceDetailOpen
+    {
+        get => _isPerformanceDetailOpen;
+        private set
+        {
+            if (SetProperty(ref _isPerformanceDetailOpen, value))
+            {
+                OnPropertyChanged(nameof(IsPerformanceDetailClosed));
+                OnPropertyChanged(nameof(HasPerformanceDetail));
+                OnPropertyChanged(nameof(PerformanceDetailEmptyStateTitle));
+                OnPropertyChanged(nameof(PerformanceDetailEmptyStateText));
+                _closePerformanceDetailCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsPerformanceDetailClosed => !IsPerformanceDetailOpen;
+
+    public bool HasPerformanceDetail => IsPerformanceDetailOpen && SelectedPerformanceItem != null;
+
+    public string PerformanceDetailEmptyStateTitle => SelectedPerformanceItem == null
+        ? "Choose a metric"
+        : "Open live details";
+
+    public string PerformanceDetailEmptyStateText => SelectedPerformanceItem == null
+        ? "CPU, Memory, GPU, Storage and Network stay compact until you open one."
+        : $"Click {SelectedPerformanceItem.Title} to open its live chart and deeper stats.";
 
     public string PerformanceChartTitle
     {

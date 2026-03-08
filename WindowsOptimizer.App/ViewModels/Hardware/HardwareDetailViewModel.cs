@@ -20,12 +20,17 @@ namespace WindowsOptimizer.App.ViewModels.Hardware;
 public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 {
     private const string SectionMarkerKey = "__section";
+    private static readonly HardwareDetailInsightFormatter InsightFormatter = new();
     private string _title = string.Empty;
     private string _subtitle = string.Empty;
     private string _iconKey = string.Empty;
     private ImageSource _iconSource = IconResolver.ResolveByKey(null, HardwareType.Display);
     private bool _isLoading;
     private string _loadingStatus = "Loading system data...";
+    private string _whatThisIs = "This page summarizes the selected device and the identifiers Windows is reading right now.";
+    private string _whyItMatters = "The fields below help you verify the device, compare hardware behavior, and confirm what Windows currently sees.";
+    private string _driverRuntime = "Driver, firmware, and runtime relevance changes by device type, so this summary updates with the selected hardware.";
+    private string _commonActions = "Use the detail list below to compare versions, identifiers, ports, and current device state.";
     private readonly ObservableCollection<SpecItem> _specs = new();
     private readonly ObservableCollection<HardwareDetailTab> _deviceTabs = new();
     private HardwareDetailTab? _selectedDeviceTab;
@@ -54,13 +59,25 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
     public string Title
     {
         get => _title;
-        protected set => SetProperty(ref _title, value);
+        protected set
+        {
+            if (SetProperty(ref _title, value))
+            {
+                UpdateInsightSnapshot();
+            }
+        }
     }
 
     public string Subtitle
     {
         get => _subtitle;
-        protected set => SetProperty(ref _subtitle, value);
+        protected set
+        {
+            if (SetProperty(ref _subtitle, value))
+            {
+                UpdateInsightSnapshot();
+            }
+        }
     }
 
     public ImageSource IconSource
@@ -102,7 +119,13 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
     public bool IsLoading
     {
         get => _isLoading;
-        protected set => SetProperty(ref _isLoading, value);
+        protected set
+        {
+            if (SetProperty(ref _isLoading, value))
+            {
+                UpdateInsightSnapshot();
+            }
+        }
     }
 
     public string LoadingStatus
@@ -120,6 +143,30 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 
     // Backwards-compatible alias used by the XAML
     public string LoadingMessage => LoadingStatus;
+
+    public string WhatThisIs
+    {
+        get => _whatThisIs;
+        private set => SetProperty(ref _whatThisIs, value);
+    }
+
+    public string WhyItMatters
+    {
+        get => _whyItMatters;
+        private set => SetProperty(ref _whyItMatters, value);
+    }
+
+    public string DriverRuntime
+    {
+        get => _driverRuntime;
+        private set => SetProperty(ref _driverRuntime, value);
+    }
+
+    public string CommonActions
+    {
+        get => _commonActions;
+        private set => SetProperty(ref _commonActions, value);
+    }
 
     public ICommand CloseCommand { get; }
 
@@ -148,6 +195,7 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
         }
         AppDiagnostics.Log($"[DetailVM] SetSpecs completed. SpecsCollection count after add: {SpecsCollection.Count}, VM: {GetType().Name}");
         AppDiagnostics.Log($"[DetailVM] _specs synced. _specs.Count: {_specs.Count}, VM: {GetType().Name}");
+        UpdateInsightSnapshot();
     }
 
     protected void SetDeviceTabs(IEnumerable<HardwareDetailTab>? tabs)
@@ -182,7 +230,25 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
             OnPropertyChanged(nameof(DeviceTabs));
             OnPropertyChanged(nameof(HasDeviceTabs));
             OnPropertyChanged(nameof(SelectedDeviceTab));
+            UpdateInsightSnapshot();
         }
+    }
+
+    private void UpdateInsightSnapshot()
+    {
+        var snapshot = InsightFormatter.Build(new HardwareDetailInsightInput
+        {
+            HardwareType = HardwareType,
+            Title = Title,
+            Subtitle = Subtitle,
+            Specs = SpecsCollection,
+            SelectedTabHeader = SelectedDeviceTab?.Header
+        });
+
+        WhatThisIs = snapshot.WhatThisIs;
+        WhyItMatters = snapshot.WhyItMatters;
+        DriverRuntime = snapshot.DriverRuntime;
+        CommonActions = snapshot.CommonActions;
     }
 
     public virtual void Dispose()
@@ -474,18 +540,21 @@ public sealed class OsDetailVM : HardwareDetailViewModelBase
             var os = ResolveCached("OS", cache.Os);
             var normalized = !string.IsNullOrWhiteSpace(os.NormalizedName)
                 ? os.NormalizedName
-                : BuildNormalizedOsName(os.BuildNumber, os.Edition, os.DisplayVersion, os.ReleaseId);
-            var displayProductName = BuildDisplayProductName(os.ProductName, os.BuildNumber, os.Edition);
+                : HardwarePresentationFormatter.BuildNormalizedOsName(os.BuildNumber, os.Edition, os.DisplayVersion, os.ReleaseId);
+            var displayProductName = HardwarePresentationFormatter.BuildDisplayProductName(os.ProductName, os.BuildNumber, os.Edition);
             
             var subtitle = !string.IsNullOrWhiteSpace(normalized) ? normalized : "Windows Operating System";
             var iconResolution = HardwareIconService.ResolveByIconKeyResult(HardwareType.Os, os.IconKey, normalized);
 
             var specs = new List<KeyValuePair<string, string>>();
             if (!string.IsNullOrWhiteSpace(displayProductName)) specs.Add(new("Product Name", displayProductName));
-            if (!string.IsNullOrWhiteSpace(os.ProductName) &&
-                !string.Equals(displayProductName, os.ProductName, StringComparison.OrdinalIgnoreCase))
+            if (HardwarePresentationFormatter.ShouldShowRegistryProductName(
+                    os.ProductName,
+                    displayProductName,
+                    os.BuildNumber,
+                    os.Edition))
             {
-                specs.Add(new("Registry Product Name", os.ProductName));
+                specs.Add(new("Registry Product Name", os.ProductName!.Trim()));
             }
             if (!string.IsNullOrWhiteSpace(os.Edition)) specs.Add(new("Edition", os.Edition));
             if (!string.IsNullOrWhiteSpace(os.DisplayVersion)) specs.Add(new("Display Version", os.DisplayVersion));
@@ -522,63 +591,6 @@ public sealed class OsDetailVM : HardwareDetailViewModelBase
         return Environment.OSVersion.Version.Build >= 22000 ? "Windows 11" : "Windows 10";
     }
 
-    private static string BuildNormalizedOsName(int buildNumber, string? edition, string? displayVersion, string? releaseId)
-    {
-        var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
-        var normalizedEdition = NormalizeEditionLabel(edition);
-        var normalized = string.IsNullOrWhiteSpace(normalizedEdition) ? osBase : $"{osBase} {normalizedEdition}";
-        var version = !string.IsNullOrWhiteSpace(displayVersion) ? displayVersion : releaseId;
-        return string.IsNullOrWhiteSpace(version) ? normalized : $"{normalized} ({version})";
-    }
-
-    private static string BuildDisplayProductName(string? productName, int buildNumber, string? edition)
-    {
-        var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
-        var normalizedEdition = NormalizeEditionLabel(edition);
-        var normalizedBaseWithEdition = string.IsNullOrWhiteSpace(normalizedEdition)
-            ? osBase
-            : $"{osBase} {normalizedEdition}";
-
-        var candidate = productName?.Trim() ?? string.Empty;
-        if (string.IsNullOrWhiteSpace(candidate))
-        {
-            return normalizedBaseWithEdition;
-        }
-
-        if (buildNumber >= 22000 && candidate.Contains("Windows 10", StringComparison.OrdinalIgnoreCase))
-        {
-            candidate = Regex.Replace(candidate, "Windows\\s+10", "Windows 11", RegexOptions.IgnoreCase);
-        }
-        else if (buildNumber > 0 && buildNumber < 22000 && candidate.Contains("Windows 11", StringComparison.OrdinalIgnoreCase))
-        {
-            candidate = Regex.Replace(candidate, "Windows\\s+11", "Windows 10", RegexOptions.IgnoreCase);
-        }
-
-        if (!string.IsNullOrWhiteSpace(normalizedEdition) &&
-            !candidate.Contains(normalizedEdition, StringComparison.OrdinalIgnoreCase))
-        {
-            candidate = normalizedBaseWithEdition;
-        }
-
-        return candidate;
-    }
-
-    private static string NormalizeEditionLabel(string? edition)
-    {
-        if (string.IsNullOrWhiteSpace(edition))
-        {
-            return string.Empty;
-        }
-
-        return edition.Trim() switch
-        {
-            "Professional" => "Pro",
-            "Core" => "Home",
-            "CoreSingleLanguage" => "Home Single Language",
-            "EnterpriseS" => "Enterprise LTSC",
-            _ => edition.Trim()
-        };
-    }
 }
 
 public sealed class CpuDetailVM : HardwareDetailViewModelBase
@@ -764,6 +776,10 @@ public sealed class MemoryDetailVM : HardwareDetailViewModelBase
             var specs = new List<KeyValuePair<string, string>>();
             if (mem.TotalBytes > 0) specs.Add(new("Total Capacity", FormatBytes(mem.TotalBytes)));
             if (mem.ModuleCount > 0) specs.Add(new("Modules", mem.ModuleCount.ToString()));
+            if (mem.TotalSlotCount > 0) specs.Add(new("Total Slots", mem.TotalSlotCount.ToString()));
+            if (mem.TotalSlotCount > mem.ModuleCount) specs.Add(new("Empty Slots", (mem.TotalSlotCount - mem.ModuleCount).ToString()));
+            var population = HardwarePresentationFormatter.BuildMemoryPopulationSummary(mem.ModuleCount, mem.TotalSlotCount);
+            if (!string.IsNullOrWhiteSpace(population)) specs.Add(new("Population", population));
             if (mem.TotalBytes > 0 && mem.ModuleCount > 0) specs.Add(new("Average Module Size", FormatBytes(mem.TotalBytes / mem.ModuleCount)));
             if (mem.SpeedMhz > 0) specs.Add(new("Frequency", $"{mem.SpeedMhz} MHz"));
             if (mem.ConfiguredSpeedMhz > 0 && mem.ConfiguredSpeedMhz != mem.SpeedMhz) specs.Add(new("Configured Speed", $"{mem.ConfiguredSpeedMhz} MHz"));
@@ -778,12 +794,13 @@ public sealed class MemoryDetailVM : HardwareDetailViewModelBase
                 for (var i = 0; i < mem.Modules.Count; i++)
                 {
                     var module = mem.Modules[i];
-                    var slotName = !string.IsNullOrWhiteSpace(module.Slot) ? module.Slot : $"Module {i + 1}";
+                    var slotName = HardwarePresentationFormatter.BuildMemoryModuleHeader(module, mem.Modules, i);
+                    var bankLabel = HardwarePresentationFormatter.FormatMemoryBankLabel(module.BankLabel);
                     var moduleRows = new List<KeyValuePair<string, string>>();
-                    if (!string.IsNullOrWhiteSpace(module.BankLabel) &&
-                        !string.Equals(module.BankLabel, slotName, StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrWhiteSpace(bankLabel) &&
+                        !slotName.Contains(bankLabel, StringComparison.OrdinalIgnoreCase))
                     {
-                        moduleRows.Add(new("Bank", module.BankLabel));
+                        moduleRows.Add(new("Bank", bankLabel));
                     }
 
                     if (!string.IsNullOrWhiteSpace(module.Manufacturer)) moduleRows.Add(new("Manufacturer", module.Manufacturer));
@@ -832,9 +849,16 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
             var overviewSpecs = new List<KeyValuePair<string, string>>();
             if (!string.IsNullOrWhiteSpace(storage.PrimaryModel)) overviewSpecs.Add(new("Primary Drive", storage.PrimaryModel));
             if (storage.TotalSizeBytes > 0) overviewSpecs.Add(new("Total Capacity", FormatBytes(storage.TotalSizeBytes)));
+            if (storage.TotalFreeBytes > 0) overviewSpecs.Add(new("Total Free Space", FormatBytes(storage.TotalFreeBytes)));
             if (storage.DeviceCount > 0) overviewSpecs.Add(new("Drive Count", storage.DeviceCount.ToString()));
+            if (storage.VolumeCount > 0) overviewSpecs.Add(new("Volume Count", storage.VolumeCount.ToString()));
+            if (storage.ExternalDriveCount > 0) overviewSpecs.Add(new("External Drives", storage.ExternalDriveCount.ToString()));
+            if (storage.SystemDriveCount > 0) overviewSpecs.Add(new("System Drives", storage.SystemDriveCount.ToString()));
             if (!string.IsNullOrWhiteSpace(storage.PrimaryMediaType)) overviewSpecs.Add(new("Primary Media Type", storage.PrimaryMediaType));
-            if (!string.IsNullOrWhiteSpace(storage.PrimaryInterface)) overviewSpecs.Add(new("Primary Interface", storage.PrimaryInterface));
+            if (!string.IsNullOrWhiteSpace(storage.Disks.FirstOrDefault()?.InterfaceSummary ?? storage.PrimaryInterface))
+            {
+                overviewSpecs.Add(new("Primary Interface", storage.Disks.FirstOrDefault()?.InterfaceSummary ?? storage.PrimaryInterface!));
+            }
             if (!string.IsNullOrWhiteSpace(storage.Disks.FirstOrDefault()?.LogicalDrives)) overviewSpecs.Add(new("Primary Volumes", storage.Disks.First().LogicalDrives!));
             if (!string.IsNullOrWhiteSpace(storage.FirmwareRevision)) overviewSpecs.Add(new("Primary Firmware", storage.FirmwareRevision));
             if (storage.PartitionCount > 0) overviewSpecs.Add(new("Primary Partitions", storage.PartitionCount.ToString()));
@@ -859,13 +883,38 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
                 var diskSpecs = new List<KeyValuePair<string, string>>();
                 if (!string.IsNullOrWhiteSpace(disk.Model)) diskSpecs.Add(new("Model", disk.Model));
                 if (disk.SizeBytes > 0) diskSpecs.Add(new("Capacity", FormatBytes(disk.SizeBytes)));
+                if (disk.FreeBytes > 0) diskSpecs.Add(new("Free Space", FormatBytes(disk.FreeBytes)));
                 if (!string.IsNullOrWhiteSpace(disk.MediaType)) diskSpecs.Add(new("Media Type", disk.MediaType));
-                if (!string.IsNullOrWhiteSpace(disk.InterfaceType)) diskSpecs.Add(new("Interface", disk.InterfaceType));
-                if (!string.IsNullOrWhiteSpace(disk.LogicalDrives)) diskSpecs.Add(new("Volumes", disk.LogicalDrives));
+                if (!string.IsNullOrWhiteSpace(disk.InterfaceSummary ?? disk.InterfaceType))
+                {
+                    diskSpecs.Add(new("Interface", disk.InterfaceSummary ?? disk.InterfaceType!));
+                }
+                if (!string.IsNullOrWhiteSpace(disk.LogicalDrives)) diskSpecs.Add(new("Drive Letters", disk.LogicalDrives));
                 if (!string.IsNullOrWhiteSpace(disk.FirmwareRevision)) diskSpecs.Add(new("Firmware", disk.FirmwareRevision));
                 if (disk.PartitionCount > 0) diskSpecs.Add(new("Partitions", disk.PartitionCount.ToString()));
+                if (disk.VolumeCount > 0) diskSpecs.Add(new("Volume Count", disk.VolumeCount.ToString()));
                 if (disk.Index >= 0) diskSpecs.Add(new("Disk Index", disk.Index.ToString()));
                 if (!string.IsNullOrWhiteSpace(disk.SerialNumber)) diskSpecs.Add(new("Serial", disk.SerialNumber));
+                if (!string.IsNullOrWhiteSpace(disk.Status)) diskSpecs.Add(new("Status", disk.Status));
+                if (disk.IsSystemDisk) diskSpecs.Add(new("Role", "System"));
+                if (disk.IsExternal) diskSpecs.Add(new("External", "Yes"));
+                if (!string.IsNullOrWhiteSpace(disk.PnpDeviceId)) diskSpecs.Add(new("PNP Device ID", disk.PnpDeviceId));
+
+                if (disk.Volumes.Count > 0)
+                {
+                    diskSpecs.Add(SectionRow("Volumes"));
+                    foreach (var volume in disk.Volumes)
+                    {
+                        diskSpecs.Add(SectionRow(BuildStorageVolumeHeader(volume)));
+                        if (!string.IsNullOrWhiteSpace(volume.FileSystem)) diskSpecs.Add(new("File System", volume.FileSystem));
+                        if (volume.SizeBytes > 0) diskSpecs.Add(new("Capacity", FormatBytes(volume.SizeBytes)));
+                        if (volume.FreeBytes > 0) diskSpecs.Add(new("Free Space", FormatBytes(volume.FreeBytes)));
+                        if (!string.IsNullOrWhiteSpace(volume.PartitionType)) diskSpecs.Add(new("Partition Type", volume.PartitionType));
+                        if (volume.IsPrimary) diskSpecs.Add(new("Primary Partition", "Yes"));
+                        if (volume.IsBoot) diskSpecs.Add(new("Boot Partition", "Yes"));
+                        if (volume.IsSystem) diskSpecs.Add(new("System Volume", "Yes"));
+                    }
+                }
 
                 var shortLabel = !string.IsNullOrWhiteSpace(disk.Model)
                     ? TrimDiskTabHeader(disk.Model)
@@ -892,6 +941,14 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
     {
         var compact = Regex.Replace(model, @"\s+", " ").Trim();
         return compact.Length <= 18 ? compact : $"{compact[..18]}...";
+    }
+
+    private static string BuildStorageVolumeHeader(StorageVolumeData volume)
+    {
+        var parts = new List<string>();
+        if (!string.IsNullOrWhiteSpace(volume.DriveLetter)) parts.Add(volume.DriveLetter);
+        if (!string.IsNullOrWhiteSpace(volume.Label)) parts.Add(volume.Label);
+        return parts.Count > 0 ? string.Join(" ", parts) : "Volume";
     }
 }
 
@@ -1126,7 +1183,7 @@ public sealed class UsbDetailVM : HardwareDetailViewModelBase
     public UsbDetailVM(HardwareDetailSnapshot? snapshot = null)
         : base(HardwareType.Usb)
     {
-        Title = "USB Controllers";
+        Title = "USB";
         Subtitle = "Loading system data...";
         IconKey = IconResolver.GetDefaultKey(HardwareType.Usb);
         IconSource = IconResolver.Resolve(HardwareType.Usb, null, null);
@@ -1134,22 +1191,94 @@ public sealed class UsbDetailVM : HardwareDetailViewModelBase
         BeginLoad(snapshot, cache =>
         {
             var usb = ResolveCached("USB", cache.Usb);
-            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsb(usb.PrimaryControllerName ?? string.Empty);
-            var specs = new List<KeyValuePair<string, string>>();
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryControllerName)) specs.Add(new("Primary Controller", usb.PrimaryControllerName));
-            if (usb.RemovableDriveCount > 0) specs.Add(new("Removable Drives", usb.RemovableDriveCount.ToString()));
-            if (usb.UsbControllerCount > 0) specs.Add(new("Controllers", usb.UsbControllerCount.ToString()));
-            if (usb.UsbDeviceCount > 0) specs.Add(new("Total Devices", usb.UsbDeviceCount.ToString()));
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryUsbDeviceName)) specs.Add(new("Primary Device", usb.PrimaryUsbDeviceName));
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryVendorId)) specs.Add(new("Vendor ID", usb.PrimaryVendorId));
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryProductId)) specs.Add(new("Product ID", usb.PrimaryProductId));
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryStatus)) specs.Add(new("Status", usb.PrimaryStatus));
-            if (!string.IsNullOrWhiteSpace(usb.PrimaryDeviceId)) specs.Add(new("Device ID", usb.PrimaryDeviceId));
+            var iconLookup = !string.IsNullOrWhiteSpace(usb.PrimaryUsbDeviceName)
+                ? usb.PrimaryUsbDeviceName
+                : usb.PrimaryControllerName ?? string.Empty;
+            var matchedUsb = HardwareKnowledgeDbService.Instance.MatchUsb(iconLookup);
+            var overviewSpecs = new List<KeyValuePair<string, string>>();
+            if (usb.UsbControllerCount > 0) overviewSpecs.Add(new("Controllers", usb.UsbControllerCount.ToString()));
+            if (usb.HubCount > 0) overviewSpecs.Add(new("Hubs", usb.HubCount.ToString()));
+            if (usb.UsbDeviceCount > 0) overviewSpecs.Add(new("USB Endpoints", usb.UsbDeviceCount.ToString()));
+            if (usb.RemovableDriveCount > 0) overviewSpecs.Add(new("Removable Drives", usb.RemovableDriveCount.ToString()));
+            if (usb.InputDeviceCount > 0) overviewSpecs.Add(new("Input Devices", usb.InputDeviceCount.ToString()));
+            if (usb.AudioDeviceCount > 0) overviewSpecs.Add(new("Audio Devices", usb.AudioDeviceCount.ToString()));
+            if (usb.StorageDeviceCount > 0) overviewSpecs.Add(new("Storage Devices", usb.StorageDeviceCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryControllerName)) overviewSpecs.Add(new("Primary Controller", usb.PrimaryControllerName));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryUsbDeviceName)) overviewSpecs.Add(new("Primary Device", usb.PrimaryUsbDeviceName));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryManufacturer)) overviewSpecs.Add(new("Primary Manufacturer", usb.PrimaryManufacturer));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryCategory)) overviewSpecs.Add(new("Primary Category", usb.PrimaryCategory));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryVendorId)) overviewSpecs.Add(new("Vendor ID", usb.PrimaryVendorId));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryProductId)) overviewSpecs.Add(new("Product ID", usb.PrimaryProductId));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryStatus)) overviewSpecs.Add(new("Status", usb.PrimaryStatus));
+            if (!string.IsNullOrWhiteSpace(usb.PrimaryDeviceId)) overviewSpecs.Add(new("Device ID", usb.PrimaryDeviceId));
 
-            var subtitle = matchedUsb?.ModelName ?? usb.PrimaryControllerName ?? "USB Controller";
-            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Usb, usb.PrimaryControllerName, matchedUsb);
-            return new HardwareDetailPayload("USB", subtitle, iconResolution, specs, matchedUsb);
+            var tabs = new List<HardwareDetailTab>();
+            if (overviewSpecs.Count > 0)
+            {
+                tabs.Add(new HardwareDetailTab(
+                    "Overview",
+                    overviewSpecs,
+                    HardwareIconService.ResolveResult(HardwareType.Usb, iconLookup, matchedUsb),
+                    matchedUsb));
+            }
+
+            var controllers = usb.Devices.Where(static device => device.IsController).ToList();
+            if (controllers.Count > 0)
+            {
+                tabs.Add(new HardwareDetailTab(
+                    "Controllers",
+                    BuildUsbDeviceSpecs(controllers),
+                    HardwareIconService.ResolveResult(HardwareType.Usb, usb.PrimaryControllerName, matchedUsb),
+                    matchedUsb));
+            }
+
+            var hubs = usb.Devices.Where(static device => device.IsHub && !device.IsController).ToList();
+            if (hubs.Count > 0)
+            {
+                tabs.Add(new HardwareDetailTab(
+                    "Hubs",
+                    BuildUsbDeviceSpecs(hubs),
+                    HardwareIconService.ResolveResult(HardwareType.Usb, hubs[0].Name, matchedUsb),
+                    matchedUsb));
+            }
+
+            var endpoints = usb.Devices.Where(static device => !device.IsController && !device.IsHub).ToList();
+            if (endpoints.Count > 0)
+            {
+                tabs.Add(new HardwareDetailTab(
+                    "Devices",
+                    BuildUsbDeviceSpecs(endpoints),
+                    HardwareIconService.ResolveResult(HardwareType.Usb, usb.PrimaryUsbDeviceName, matchedUsb),
+                    matchedUsb));
+            }
+
+            var subtitle = matchedUsb?.ModelName ?? usb.PrimaryUsbDeviceName ?? usb.PrimaryControllerName ?? "USB Devices";
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Usb, iconLookup, matchedUsb);
+            return new HardwareDetailPayload("USB", subtitle, iconResolution, overviewSpecs, matchedUsb, tabs);
         });
+    }
+
+    private static List<KeyValuePair<string, string>> BuildUsbDeviceSpecs(IEnumerable<UsbDeviceData> devices)
+    {
+        var specs = new List<KeyValuePair<string, string>>();
+        var index = 1;
+        foreach (var device in devices)
+        {
+            var header = !string.IsNullOrWhiteSpace(device.Name) ? device.Name : $"USB Device {index}";
+            specs.Add(SectionRow(header));
+            if (!string.IsNullOrWhiteSpace(device.Category)) specs.Add(new("Category", device.Category));
+            if (!string.IsNullOrWhiteSpace(device.Manufacturer)) specs.Add(new("Manufacturer", device.Manufacturer));
+            if (!string.IsNullOrWhiteSpace(device.Status)) specs.Add(new("Status", device.Status));
+            if (!string.IsNullOrWhiteSpace(device.ClassName)) specs.Add(new("Class", device.ClassName));
+            if (!string.IsNullOrWhiteSpace(device.Service)) specs.Add(new("Service", device.Service));
+            if (!string.IsNullOrWhiteSpace(device.VendorId)) specs.Add(new("Vendor ID", device.VendorId));
+            if (!string.IsNullOrWhiteSpace(device.ProductId)) specs.Add(new("Product ID", device.ProductId));
+            if (!string.IsNullOrWhiteSpace(device.DeviceId)) specs.Add(new("Device ID", device.DeviceId));
+            if (!string.IsNullOrWhiteSpace(device.Description)) specs.Add(new("Description", device.Description));
+            index++;
+        }
+
+        return specs;
     }
 }
 
@@ -1166,14 +1295,57 @@ public sealed class AudioDetailVM : HardwareDetailViewModelBase
         BeginLoad(snapshot, cache =>
         {
             var audio = ResolveCached("Audio", cache.Audio);
-            var specs = new List<KeyValuePair<string, string>>();
-            if (!string.IsNullOrWhiteSpace(audio.PrimaryDeviceName)) specs.Add(new("Device", audio.PrimaryDeviceName));
-            if (!string.IsNullOrWhiteSpace(audio.PrimaryManufacturer)) specs.Add(new("Manufacturer", audio.PrimaryManufacturer));
-            if (!string.IsNullOrWhiteSpace(audio.PrimaryStatus)) specs.Add(new("Status", audio.PrimaryStatus));
+            var overviewSpecs = new List<KeyValuePair<string, string>>();
+            if (audio.DeviceCount > 0) overviewSpecs.Add(new("Device Count", audio.DeviceCount.ToString()));
+            if (audio.PhysicalDeviceCount > 0) overviewSpecs.Add(new("Physical Devices", audio.PhysicalDeviceCount.ToString()));
+            if (audio.VirtualDeviceCount > 0) overviewSpecs.Add(new("Virtual Devices", audio.VirtualDeviceCount.ToString()));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryDeviceName)) overviewSpecs.Add(new("Primary Device", audio.PrimaryDeviceName));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryManufacturer)) overviewSpecs.Add(new("Manufacturer", audio.PrimaryManufacturer));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryStatus)) overviewSpecs.Add(new("Status", audio.PrimaryStatus));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryDriverProvider)) overviewSpecs.Add(new("Driver Provider", audio.PrimaryDriverProvider));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryDriverVersion)) overviewSpecs.Add(new("Driver Version", audio.PrimaryDriverVersion));
+            if (!string.IsNullOrWhiteSpace(audio.PrimaryDriverDate)) overviewSpecs.Add(new("Driver Date", audio.PrimaryDriverDate));
+
+            var tabs = new List<HardwareDetailTab>();
+            var iconLookup = $"{audio.PrimaryManufacturer} {audio.PrimaryDeviceName}".Trim();
+            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Audio, iconLookup);
+            if (overviewSpecs.Count > 0)
+            {
+                tabs.Add(new HardwareDetailTab(
+                    "Overview",
+                    overviewSpecs,
+                    iconResolution,
+                    iconResolution.MatchedModel));
+            }
+
+            if (audio.Devices.Count > 0)
+            {
+                var deviceSpecs = new List<KeyValuePair<string, string>>();
+                var index = 1;
+                foreach (var device in audio.Devices)
+                {
+                    deviceSpecs.Add(SectionRow(!string.IsNullOrWhiteSpace(device.Name) ? device.Name : $"Audio Device {index}"));
+                    if (!string.IsNullOrWhiteSpace(device.Manufacturer)) deviceSpecs.Add(new("Manufacturer", device.Manufacturer));
+                    if (!string.IsNullOrWhiteSpace(device.Status)) deviceSpecs.Add(new("Status", device.Status));
+                    if (!string.IsNullOrWhiteSpace(device.DriverProvider)) deviceSpecs.Add(new("Driver Provider", device.DriverProvider));
+                    if (!string.IsNullOrWhiteSpace(device.DriverVersion)) deviceSpecs.Add(new("Driver Version", device.DriverVersion));
+                    if (!string.IsNullOrWhiteSpace(device.DriverDate)) deviceSpecs.Add(new("Driver Date", device.DriverDate));
+                    if (!string.IsNullOrWhiteSpace(device.InfName)) deviceSpecs.Add(new("INF", device.InfName));
+                    if (!string.IsNullOrWhiteSpace(device.DeviceId)) deviceSpecs.Add(new("Device ID", device.DeviceId));
+                    if (device.IsPrimary) deviceSpecs.Add(new("Primary", "Yes"));
+                    if (device.IsVirtual) deviceSpecs.Add(new("Type", "Virtual"));
+                    index++;
+                }
+
+                tabs.Add(new HardwareDetailTab(
+                    "Devices",
+                    deviceSpecs,
+                    iconResolution,
+                    iconResolution.MatchedModel));
+            }
 
             var subtitle = audio.PrimaryDeviceName ?? "Audio Device";
-            var iconResolution = HardwareIconService.ResolveResult(HardwareType.Audio, audio.PrimaryDeviceName);
-            return new HardwareDetailPayload("Audio", subtitle, iconResolution, specs);
+            return new HardwareDetailPayload("Audio", subtitle, iconResolution, overviewSpecs, iconResolution.MatchedModel, tabs);
         });
     }
 }

@@ -581,7 +581,7 @@ public sealed class HardwarePreloadService
         }
 
         // Infer VRAM type heuristically from GPU name (WMI does not expose this)
-        data.InferredVramType = InferVramType(data.Name, data.VendorId);
+        data.InferredVramType = HardwarePresentationFormatter.InferVramType(data.Name, data.VendorId);
 
         return data;
     }
@@ -779,6 +779,19 @@ public sealed class HardwarePreloadService
 
         try
         {
+            using var arraySearcher = new ManagementObjectSearcher("SELECT MemoryDevices FROM Win32_PhysicalMemoryArray");
+            foreach (ManagementObject obj in arraySearcher.Get())
+            {
+                data.TotalSlotCount += GetIntSafe(obj, "MemoryDevices");
+            }
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.Log($"[HardwarePreloadService] Memory array read failed: {ex.Message}");
+        }
+
+        try
+        {
             using var searcher = new ManagementObjectSearcher(
                 "SELECT Manufacturer, PartNumber, SerialNumber, DeviceLocator, BankLabel, Capacity, Speed, ConfiguredClockSpeed, " +
                 "SMBIOSMemoryType, FormFactor, MinVoltage FROM Win32_PhysicalMemory");
@@ -885,58 +898,7 @@ public sealed class HardwarePreloadService
 
     private static StorageHardwareData LoadStorageData()
     {
-        var data = new StorageHardwareData();
-
-        try
-        {
-            using var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                data.DeviceCount++;
-                var size = Convert.ToInt64(obj["Size"] ?? 0L);
-                data.TotalSizeBytes += size;
-
-                var disk = new DiskDriveData
-                {
-                    DeviceId = GetValueSafe(obj, "DeviceID"),
-                    Model = GetValueSafe(obj, "Model"),
-                    InterfaceType = GetValueSafe(obj, "InterfaceType"),
-                    SerialNumber = GetValueSafe(obj, "SerialNumber")?.Trim(),
-                    FirmwareRevision = GetValueSafe(obj, "FirmwareRevision"),
-                    MediaType = GetValueSafe(obj, "MediaType"),
-                    SizeBytes = size,
-                    PartitionCount = Convert.ToInt32(obj["Partitions"] ?? 0),
-                    Index = Convert.ToInt32(obj["Index"] ?? 0)
-                };
-                data.Disks.Add(disk);
-            }
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.Log($"[HardwarePreloadService] Storage WMI read failed: {ex.Message}");
-        }
-
-        foreach (var disk in data.Disks)
-        {
-            if (string.IsNullOrWhiteSpace(disk.MediaType))
-            {
-                disk.MediaType = InferMediaType(disk.Model, disk.InterfaceType);
-            }
-
-            if (!string.IsNullOrWhiteSpace(disk.DeviceId))
-            {
-                disk.LogicalDrives = GetLogicalDrivesForDisk(disk.DeviceId!);
-            }
-        }
-
-        data.Disks = data.Disks
-            .OrderByDescending(static d => HasLogicalDriveLetter(d.LogicalDrives, "C:"))
-            .ThenBy(static d => d.Index)
-            .ToList();
-        data.DeviceCount = data.Disks.Count;
-        data.TotalSizeBytes = data.Disks.Sum(d => d.SizeBytes);
-
-        return data;
+        return HardwarePeripheralDataCollector.LoadStorageData();
     }
 
     private static string? InferMediaType(string? model, string? interfaceType)
@@ -1448,97 +1410,12 @@ public sealed class HardwarePreloadService
 
     private static UsbHardwareData LoadUsbData()
     {
-        var data = new UsbHardwareData();
-        try
-        {
-            foreach (var drive in System.IO.DriveInfo.GetDrives())
-            {
-                if (drive.DriveType == System.IO.DriveType.Removable)
-                {
-                    data.RemovableDriveCount++;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.Log($"[HardwarePreloadService] USB load failed: {ex.Message}");
-        }
-
-        try
-        {
-            using var controllerSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBController");
-            foreach (ManagementObject controller in controllerSearcher.Get())
-            {
-                data.UsbControllerCount++;
-                data.PrimaryControllerName ??= GetValueSafe(controller, "Name");
-            }
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.Log($"[HardwarePreloadService] USB controller read failed: {ex.Message}");
-        }
-
-        try
-        {
-            using var deviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE PNPClass='USB'");
-            foreach (ManagementObject device in deviceSearcher.Get())
-            {
-                data.UsbDeviceCount++;
-                data.PrimaryUsbDeviceName ??= GetValueSafe(device, "Name");
-                data.PrimaryStatus ??= GetValueSafe(device, "Status");
-                data.PrimaryDeviceId ??= GetValueSafe(device, "DeviceID");
-
-                if (string.IsNullOrWhiteSpace(data.PrimaryVendorId) || string.IsNullOrWhiteSpace(data.PrimaryProductId))
-                {
-                    var deviceId = GetValueSafe(device, "DeviceID");
-                    ParseUsbVidPid(deviceId, out var vid, out var pid);
-                    data.PrimaryVendorId ??= vid;
-                    data.PrimaryProductId ??= pid;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.Log($"[HardwarePreloadService] USB device read failed: {ex.Message}");
-        }
-
-        return data;
+        return HardwarePeripheralDataCollector.LoadUsbData();
     }
 
     private static AudioHardwareData LoadAudioData()
     {
-        var data = new AudioHardwareData();
-        var bestScore = int.MinValue;
-        try
-        {
-            using var searcher = new ManagementObjectSearcher("SELECT Name, Manufacturer, Status, DeviceID FROM Win32_SoundDevice");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                var name = obj["Name"]?.ToString();
-                if (string.IsNullOrWhiteSpace(name)) continue;
-
-                data.DeviceCount++;
-                data.AllDevices.Add(name);
-                var manufacturer = obj["Manufacturer"]?.ToString();
-                var status = obj["Status"]?.ToString();
-                var deviceId = obj["DeviceID"]?.ToString();
-                var score = AudioDetectionHelpers.ScoreDevice(name, manufacturer, status, deviceId);
-
-                if (score > bestScore)
-                {
-                    bestScore = score;
-                    data.PrimaryDeviceName = name;
-                    data.PrimaryManufacturer = manufacturer;
-                    data.PrimaryStatus = status;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.Log($"[HardwarePreloadService] Audio WMI read failed: {ex.Message}");
-        }
-
-        return data;
+        return HardwarePeripheralDataCollector.LoadAudioData();
     }
 
     private static string? FormatLinkSpeed(long speedBitsPerSecond)
@@ -2290,6 +2167,7 @@ public sealed class MemoryHardwareData
 {
     public long TotalBytes { get; set; }
     public int ModuleCount { get; set; }
+    public int TotalSlotCount { get; set; }
     public string? PrimaryManufacturer { get; set; }
     public string? PrimaryModel { get; set; }
     public string? MemoryType { get; set; }
@@ -2325,14 +2203,39 @@ public sealed class DiskDriveData
     public string? FirmwareRevision { get; set; }
     public string? LogicalDrives { get; set; }
     public long SizeBytes { get; set; }
+    public long FreeBytes { get; set; }
     public int PartitionCount { get; set; }
     public int Index { get; set; }
+    public int VolumeCount { get; set; }
+    public string? Status { get; set; }
+    public string? PnpDeviceId { get; set; }
+    public string? InterfaceSummary { get; set; }
+    public bool IsExternal { get; set; }
+    public bool IsSystemDisk { get; set; }
+    public List<StorageVolumeData> Volumes { get; set; } = new();
+}
+
+public sealed class StorageVolumeData
+{
+    public string? DriveLetter { get; set; }
+    public string? Label { get; set; }
+    public string? FileSystem { get; set; }
+    public long SizeBytes { get; set; }
+    public long FreeBytes { get; set; }
+    public string? PartitionType { get; set; }
+    public bool IsBoot { get; set; }
+    public bool IsPrimary { get; set; }
+    public bool IsSystem { get; set; }
 }
 
 public sealed class StorageHardwareData
 {
     public int DeviceCount { get; set; }
     public long TotalSizeBytes { get; set; }
+    public long TotalFreeBytes { get; set; }
+    public int VolumeCount { get; set; }
+    public int ExternalDriveCount { get; set; }
+    public int SystemDriveCount { get; set; }
     public List<DiskDriveData> Disks { get; set; } = new();
     
     // Legacy support for primary drive (first in list)
@@ -2430,19 +2333,63 @@ public sealed class UsbHardwareData
     public int RemovableDriveCount { get; set; }
     public int UsbControllerCount { get; set; }
     public int UsbDeviceCount { get; set; }
+    public int HubCount { get; set; }
+    public int InputDeviceCount { get; set; }
+    public int AudioDeviceCount { get; set; }
+    public int StorageDeviceCount { get; set; }
     public string? PrimaryControllerName { get; set; }
     public string? PrimaryUsbDeviceName { get; set; }
+    public string? PrimaryManufacturer { get; set; }
+    public string? PrimaryCategory { get; set; }
     public string? PrimaryVendorId { get; set; }
     public string? PrimaryProductId { get; set; }
     public string? PrimaryStatus { get; set; }
     public string? PrimaryDeviceId { get; set; }
+    public List<UsbDeviceData> Devices { get; set; } = new();
+}
+
+public sealed class UsbDeviceData
+{
+    public string? Name { get; set; }
+    public string? DeviceId { get; set; }
+    public string? PnpDeviceId { get; set; }
+    public string? Manufacturer { get; set; }
+    public string? VendorId { get; set; }
+    public string? ProductId { get; set; }
+    public string? Status { get; set; }
+    public string? Description { get; set; }
+    public string? ClassName { get; set; }
+    public string? Service { get; set; }
+    public string? Category { get; set; }
+    public bool IsController { get; set; }
+    public bool IsHub { get; set; }
 }
 
 public sealed class AudioHardwareData
 {
     public int DeviceCount { get; set; }
+    public int PhysicalDeviceCount { get; set; }
+    public int VirtualDeviceCount { get; set; }
     public string? PrimaryDeviceName { get; set; }
     public string? PrimaryManufacturer { get; set; }
     public string? PrimaryStatus { get; set; }
+    public string? PrimaryDriverProvider { get; set; }
+    public string? PrimaryDriverVersion { get; set; }
+    public string? PrimaryDriverDate { get; set; }
     public List<string> AllDevices { get; set; } = new();
+    public List<AudioDeviceData> Devices { get; set; } = new();
+}
+
+public sealed class AudioDeviceData
+{
+    public string? Name { get; set; }
+    public string? Manufacturer { get; set; }
+    public string? Status { get; set; }
+    public string? DeviceId { get; set; }
+    public string? DriverProvider { get; set; }
+    public string? DriverVersion { get; set; }
+    public string? DriverDate { get; set; }
+    public string? InfName { get; set; }
+    public bool IsPrimary { get; set; }
+    public bool IsVirtual { get; set; }
 }

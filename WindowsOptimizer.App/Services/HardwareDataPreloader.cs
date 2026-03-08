@@ -183,7 +183,7 @@ public sealed class HardwareDataPreloader : IHardwareDataPreloader
                         
                         if (!string.IsNullOrWhiteSpace(data.Name))
                         {
-                            data.InferredVramType = InferVramType(data.Name);
+                            data.InferredVramType = HardwarePresentationFormatter.InferVramType(data.Name, null);
                         }
                         break;
                     }
@@ -266,43 +266,7 @@ public sealed class HardwareDataPreloader : IHardwareDataPreloader
 
     private async Task<object> LoadStorageAsync()
     {
-        return await Task.Run(() =>
-        {
-            var data = new StorageHardwareData();
-            try
-            {
-                var deviceCount = 0;
-                long totalSize = 0;
-
-                using var searcher = new ManagementObjectSearcher(
-                    "SELECT Model, Size, InterfaceType, SerialNumber FROM Win32_DiskDrive");
-                foreach (ManagementObject obj in searcher.Get())
-                {
-                    using (obj)
-                    {
-                        var model = SafeGetString(obj, "Model");
-                        var interfaceType = SafeGetString(obj, "InterfaceType");
-                        var serialNumber = SafeGetString(obj, "SerialNumber");
-                        var sizeBytes = SafeGetLong(obj, "Size");
-
-                        deviceCount++;
-                        totalSize += sizeBytes;
-                        data.Disks.Add(new DiskDriveData
-                        {
-                            Model = model,
-                            InterfaceType = interfaceType,
-                            SerialNumber = serialNumber,
-                            MediaType = string.IsNullOrWhiteSpace(model) ? null : InferMediaType(model, interfaceType),
-                            SizeBytes = sizeBytes
-                        });
-                    }
-                }
-                data.DeviceCount = deviceCount;
-                data.TotalSizeBytes = totalSize;
-            }
-            catch (Exception ex) { Debug.WriteLine($"[HardwareDataPreloader] Storage: {ex.Message}"); }
-            return data;
-        });
+        return await Task.Run<object>(() => HardwarePeripheralDataCollector.LoadStorageData());
     }
 
     private async Task<object> LoadNetworkAsync()
@@ -380,11 +344,7 @@ public sealed class HardwareDataPreloader : IHardwareDataPreloader
 
     private string InferVramType(string gpuName)
     {
-        var name = gpuName.ToUpperInvariant();
-        if (name.Contains("RTX 40") || name.Contains("RTX 30")) return "GDDR6X";
-        if (name.Contains("RTX 20") || name.Contains("GTX 16") || name.Contains("RX 6") || name.Contains("RX 5")) return "GDDR6";
-        if (name.Contains("GTX 10") || name.Contains("RX 4")) return "GDDR5";
-        return "Unknown";
+        return HardwarePresentationFormatter.InferVramType(gpuName, null) ?? "Unknown";
     }
 
     private string ToFormFactor(int ff) => ff switch

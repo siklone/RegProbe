@@ -146,6 +146,8 @@
                     <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
                             Width="46" Height="48" 
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            Focusable="False"
+                            FocusVisualStyle="{x:Null}"
                             ToolTip="Minimize"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                         <Button.Style>
@@ -175,6 +177,8 @@
                     <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
                             Width="46" Height="48"
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            Focusable="False"
+                            FocusVisualStyle="{x:Null}"
                             ToolTip="Maximize"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                         <Button.Style>
@@ -205,6 +209,8 @@
                     <Button x:Name="CloseButton" Click="CloseButton_Click"
                             Width="46" Height="48"
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            Focusable="False"
+                            FocusVisualStyle="{x:Null}"
                             ToolTip="Close"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                         <Button.Style>
