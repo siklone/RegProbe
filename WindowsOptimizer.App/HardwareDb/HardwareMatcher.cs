@@ -56,6 +56,14 @@ public static class HardwareMatcher
         var best = FindBestPartialMatch(normalized, normalizedIndex, preferSource: 2);
         var bestAlias = FindBestPartialMatch(normalized, aliasIndex, preferSource: 1);
 
+        if (best != null &&
+            bestAlias != null &&
+            best.Value.Score == bestAlias.Value.Score &&
+            !SameIdentity(best.Value.Model, bestAlias.Value.Model))
+        {
+            return new HardwareMatchResult<TModel>(null, HardwareMatchKind.None);
+        }
+
         if (bestAlias != null && (best == null || bestAlias.Value.Score > best.Value.Score))
         {
             return new HardwareMatchResult<TModel>(bestAlias.Value.Model, HardwareMatchKind.PartialAlias);
@@ -73,6 +81,7 @@ public static class HardwareMatcher
         where TModel : HardwareModelBase
     {
         (TModel Model, int Score)? best = null;
+        var hasAmbiguousBest = false;
         var normalizedTokenCount = CountTokens(normalized);
 
         foreach (var kv in index)
@@ -80,7 +89,7 @@ public static class HardwareMatcher
             var key = kv.Key;
             var keyTokenCount = CountTokens(key);
             var canUseForwardContains = keyTokenCount >= 2 || key.Length >= 6;
-            var canUseReverseContains = normalizedTokenCount >= 2 && normalized.Length >= 6;
+            var canUseReverseContains = normalizedTokenCount >= 3 && normalized.Length >= 6;
 
             var isPartialMatch =
                 (canUseForwardContains && normalized.Contains(key, StringComparison.Ordinal)) ||
@@ -95,10 +104,17 @@ public static class HardwareMatcher
             if (best == null || score > best.Value.Score)
             {
                 best = (kv.Value, score);
+                hasAmbiguousBest = false;
+                continue;
+            }
+
+            if (score == best.Value.Score && !SameIdentity(best.Value.Model, kv.Value))
+            {
+                hasAmbiguousBest = true;
             }
         }
 
-        return best;
+        return hasAmbiguousBest ? null : best;
     }
 
     private static int CountTokens(string value)
@@ -109,5 +125,21 @@ public static class HardwareMatcher
         }
 
         return value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+    }
+
+    private static bool SameIdentity<TModel>(TModel left, TModel right)
+        where TModel : HardwareModelBase
+    {
+        if (!string.IsNullOrWhiteSpace(left.Id) &&
+            !string.IsNullOrWhiteSpace(right.Id) &&
+            string.Equals(left.Id, right.Id, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        return string.Equals(
+            HardwareNameNormalizer.Normalize(left.NormalizedName),
+            HardwareNameNormalizer.Normalize(right.NormalizedName),
+            StringComparison.OrdinalIgnoreCase);
     }
 }

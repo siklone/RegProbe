@@ -82,6 +82,23 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void MatchDetailed_ReturnsNoneForAmbiguousPartialMatches()
+    {
+        var first = new StorageControllerModel { Id = "first", NormalizedName = "samsung 990 pro 1tb" };
+        var second = new StorageControllerModel { Id = "second", NormalizedName = "samsung 990 pro 2tb" };
+        var index = new Dictionary<string, StorageControllerModel>(StringComparer.OrdinalIgnoreCase)
+        {
+            [HardwareNameNormalizer.Normalize(first.NormalizedName)] = first,
+            [HardwareNameNormalizer.Normalize(second.NormalizedName)] = second
+        };
+
+        var result = HardwareMatcher.MatchDetailed("Samsung 990 PRO", index, new Dictionary<string, StorageControllerModel>(StringComparer.OrdinalIgnoreCase));
+
+        Assert.False(result.HasMatch);
+        Assert.Equal(HardwareMatchKind.None, result.MatchKind);
+    }
+
+    [Fact]
     public void Match_ReturnsNullForOverlyGenericToken()
     {
         var intel = new CpuModel { Id = "intel", NormalizedName = "intel core i9-14900k" };
@@ -167,7 +184,7 @@ public sealed class HardwareMatchingTests
 
         Assert.Equal("storage_wd_black", result.IconKey);
         Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.PartialAlias, result.MatchKind);
+        Assert.Equal(HardwareMatchKind.ExactName, result.MatchKind);
     }
 
     [Fact]
@@ -179,6 +196,16 @@ public sealed class HardwareMatchingTests
         Assert.Equal("storage_samsung_990pro", result.IconKey);
         Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesRuleMapWhenStorageFamilyQueryIsAmbiguous()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "Samsung 990 PRO");
+
+        Assert.Equal("storage_samsung_990pro", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
     }
 
     [Fact]
@@ -411,6 +438,16 @@ public sealed class HardwareMatchingTests
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
         Assert.Equal("mb_gigabyte_aorus", result.Model!.IconKey);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesRuleMapWhenMotherboardFamilyQueryIsAmbiguous()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, "ASUS ROG");
+
+        Assert.Equal("mb_asus_rog", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
     }
 
     [Fact]

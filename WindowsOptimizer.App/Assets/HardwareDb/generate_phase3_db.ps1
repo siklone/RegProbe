@@ -43,20 +43,74 @@ function Get-UniqueAliases {
     return @($result)
 }
 
+function Merge-DbItems {
+    param(
+        [object[]]$Items
+    )
+
+    $merged = New-Object System.Collections.Generic.List[object]
+    $index = @{}
+
+    foreach ($item in $Items) {
+        if ($item.Contains("aliases") -and $null -ne $item.aliases) {
+            $item.aliases = @(Get-UniqueAliases -Aliases $item.aliases)
+        }
+        else {
+            $item.aliases = @()
+        }
+
+        $identity = Normalize-AliasKey -Value ([string]$item.normalizedName)
+        if ([string]::IsNullOrWhiteSpace($identity)) {
+            $identity = Normalize-AliasKey -Value ([string]$item.modelName)
+        }
+
+        if ([string]::IsNullOrWhiteSpace($identity)) {
+            $identity = [string]$item.id
+        }
+
+        if (-not $index.ContainsKey($identity)) {
+            $index[$identity] = $item
+            $merged.Add($item)
+            continue
+        }
+
+        $existing = $index[$identity]
+        $aliasPool = New-Object System.Collections.Generic.List[string]
+
+        foreach ($value in @($existing.aliases) + @($item.aliases) + @($existing.modelName) + @($item.modelName)) {
+            if (-not [string]::IsNullOrWhiteSpace($value)) {
+                $aliasPool.Add($value)
+            }
+        }
+
+        $existing.aliases = @(Get-UniqueAliases -Aliases $aliasPool)
+
+        foreach ($key in $item.Keys) {
+            if ($key -eq "aliases") {
+                continue
+            }
+
+            $existingValue = [string]$existing[$key]
+            $incomingValue = [string]$item[$key]
+            if ([string]::IsNullOrWhiteSpace($existingValue) -and -not [string]::IsNullOrWhiteSpace($incomingValue)) {
+                $existing[$key] = $item[$key]
+            }
+        }
+    }
+
+    return $merged.ToArray()
+}
+
 function Save-Db {
     param(
         [string]$File,
         [object[]]$Items
     )
 
-    foreach ($item in $Items) {
-        if ($item.Contains("aliases") -and $null -ne $item.aliases) {
-            $item.aliases = @(Get-UniqueAliases -Aliases $item.aliases)
-        }
-    }
+    $Items = @(Merge-DbItems -Items $Items)
 
     $doc = [ordered]@{
-        version = "2026.03.08-phase3-icon-enriched"
+        version = "2026.03.08-phase3-icon-enriched-deduped"
         generatedAtUtc = (Get-Date).ToUniversalTime().ToString("o")
         items = $Items
     }
@@ -238,6 +292,22 @@ function Format-StorageCapacityLabel {
     }
 
     return ("{0}GB" -f $CapacityGb)
+}
+
+function Get-StorageCapacityAliasLabels {
+    param(
+        [int]$CapacityGb
+    )
+
+    $labels = New-Object System.Collections.Generic.List[string]
+    $labels.Add((Format-StorageCapacityLabel -CapacityGb $CapacityGb))
+    $labels.Add(("{0}GB" -f $CapacityGb))
+
+    if ($CapacityGb -ge 1000 -and $CapacityGb % 1000 -eq 0) {
+        $labels.Add(("{0}TB" -f [int]($CapacityGb / 1000)))
+    }
+
+    return @($labels | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
 }
 
 function Add-StorageAliasVariants {
@@ -1140,7 +1210,8 @@ $storageControllers = Expand-Deterministic -Seeds $storageSeeds -TargetCount 480
 
     $seedInstance = [int]($i / $storageSeeds.Count)
     $capacityGb = $s.CapacitiesGb[$seedInstance % $s.CapacitiesGb.Count]
-    $capacityLabel = Format-StorageCapacityLabel -CapacityGb $capacityGb
+    $capacityLabels = @(Get-StorageCapacityAliasLabels -CapacityGb $capacityGb)
+    $capacityLabel = $capacityLabels[0]
     $queueDepth = if ($s.Interface -like "SATA*") { 32 } elseif ($s.Interface -like "USB*") { 64 } else { 65535 }
     $tbw = if ($s.TbwPerTb -gt 0) { [int]([Math]::Round(($capacityGb / 1000.0) * $s.TbwPerTb)) } else { 0 }
     $typeTag = if ($s.Type -like "*NVMe*") { "nvme" } elseif ($s.Type -like "*HDD*") { "hdd" } else { "ssd" }
@@ -1151,15 +1222,22 @@ $storageControllers = Expand-Deterministic -Seeds $storageSeeds -TargetCount 480
     $aliases = New-Object System.Collections.Generic.List[string]
     $aliases.Add($modelName.ToLower())
     $aliases.Add(("{0} {1}" -f $s.Brand, $s.Series).ToLower())
-    $aliases.Add(("{0} {1}" -f $s.Series, $capacityLabel).ToLower())
     $aliases.Add($s.Series.ToLower())
+    foreach ($label in $capacityLabels) {
+        $aliases.Add(("{0} {1}" -f $s.Series, $label).ToLower())
+        $aliases.Add(("{0} {1} {2}" -f $s.Brand, $s.Series, $label).ToLower())
+    }
     if ($s.Type -like "*SSD*") {
-        $aliases.Add(("{0} SSD {1} {2}" -f $s.Brand, $s.Series, $capacityLabel).ToLower())
         $aliases.Add(("{0} SSD {1}" -f $s.Brand, $s.Series).ToLower())
+        foreach ($label in $capacityLabels) {
+            $aliases.Add(("{0} SSD {1} {2}" -f $s.Brand, $s.Series, $label).ToLower())
+        }
     }
     foreach ($extraAlias in ($s.ExtraAliases | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })) {
         $aliases.Add($extraAlias.ToLower())
-        $aliases.Add(("{0} {1}" -f $extraAlias, $capacityLabel).ToLower())
+        foreach ($label in $capacityLabels) {
+            $aliases.Add(("{0} {1}" -f $extraAlias, $label).ToLower())
+        }
     }
     if ($s.ContainsKey("CapacityAliasesByGb") -and $null -ne $s.CapacityAliasesByGb) {
         $capacityKey = [string]$capacityGb

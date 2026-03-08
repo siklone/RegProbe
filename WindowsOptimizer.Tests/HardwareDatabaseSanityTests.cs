@@ -26,6 +26,7 @@ public sealed class HardwareDatabaseSanityTests
         Assert.True(Directory.Exists(HardwareDbRoot), $"Hardware DB root not found: {HardwareDbRoot}");
 
         var problems = new List<string>();
+        var seenNormalizedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var dbFiles = Directory.GetFiles(HardwareDbRoot, "hardware_db_*.json", SearchOption.TopDirectoryOnly)
             .Where(static path => !path.EndsWith("_schema.json", StringComparison.OrdinalIgnoreCase))
             .OrderBy(static path => path, StringComparer.OrdinalIgnoreCase)
@@ -52,10 +53,15 @@ public sealed class HardwareDatabaseSanityTests
                 var iconKey = item.TryGetProperty("iconKey", out var iconKeyElement)
                     ? iconKeyElement.GetString() ?? string.Empty
                     : string.Empty;
+                var dedupeKey = $"{Path.GetFileName(dbFile)}::{HardwareNameNormalizer.Normalize(normalizedName)}";
 
                 if (string.IsNullOrWhiteSpace(normalizedName))
                 {
                     problems.Add($"{Path.GetFileName(dbFile)}:{id}: normalizedName is empty");
+                }
+                else if (!seenNormalizedNames.Add(dedupeKey))
+                {
+                    problems.Add($"{Path.GetFileName(dbFile)}:{id}: duplicate normalizedName '{normalizedName}'");
                 }
 
                 if (string.IsNullOrWhiteSpace(iconKey))

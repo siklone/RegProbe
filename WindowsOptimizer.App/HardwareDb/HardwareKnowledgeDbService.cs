@@ -219,35 +219,65 @@ public sealed class HardwareKnowledgeDbService
     private static IReadOnlyDictionary<string, TModel> BuildIndex<TModel>(IEnumerable<TModel> items)
         where TModel : HardwareModelBase
     {
+        return BuildUniqueIndex(items, static item => new[] { item.NormalizedName });
+    }
+
+    private static IReadOnlyDictionary<string, TModel> BuildAliasIndex<TModel>(IEnumerable<TModel> items)
+        where TModel : HardwareModelBase
+    {
+        return BuildUniqueIndex(items, static item => item.Aliases);
+    }
+
+    private static IReadOnlyDictionary<string, TModel> BuildUniqueIndex<TModel>(
+        IEnumerable<TModel> items,
+        Func<TModel, IEnumerable<string>> keySelector)
+        where TModel : HardwareModelBase
+    {
         var map = new Dictionary<string, TModel>(StringComparer.OrdinalIgnoreCase);
+        var ambiguousKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         foreach (var item in items)
         {
-            var key = HardwareNameNormalizer.Normalize(item.NormalizedName);
-            if (!string.IsNullOrWhiteSpace(key))
+            foreach (var rawKey in keySelector(item))
             {
-                map[key] = item;
+                var key = HardwareNameNormalizer.Normalize(rawKey);
+                if (string.IsNullOrWhiteSpace(key) || ambiguousKeys.Contains(key))
+                {
+                    continue;
+                }
+
+                if (!map.TryGetValue(key, out var existing))
+                {
+                    map[key] = item;
+                    continue;
+                }
+
+                if (SameIdentity(existing, item))
+                {
+                    continue;
+                }
+
+                map.Remove(key);
+                ambiguousKeys.Add(key);
             }
         }
 
         return map;
     }
 
-    private static IReadOnlyDictionary<string, TModel> BuildAliasIndex<TModel>(IEnumerable<TModel> items)
+    private static bool SameIdentity<TModel>(TModel left, TModel right)
         where TModel : HardwareModelBase
     {
-        var map = new Dictionary<string, TModel>(StringComparer.OrdinalIgnoreCase);
-        foreach (var item in items)
+        if (!string.IsNullOrWhiteSpace(left.Id) &&
+            !string.IsNullOrWhiteSpace(right.Id) &&
+            string.Equals(left.Id, right.Id, StringComparison.OrdinalIgnoreCase))
         {
-            foreach (var alias in item.Aliases)
-            {
-                var key = HardwareNameNormalizer.Normalize(alias);
-                if (!string.IsNullOrWhiteSpace(key))
-                {
-                    map[key] = item;
-                }
-            }
+            return true;
         }
 
-        return map;
+        return string.Equals(
+            HardwareNameNormalizer.Normalize(left.NormalizedName),
+            HardwareNameNormalizer.Normalize(right.NormalizedName),
+            StringComparison.OrdinalIgnoreCase);
     }
 }
