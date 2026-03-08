@@ -269,7 +269,7 @@ public sealed class RollbackStateStore : IRollbackStateStore
     {
         try
         {
-            var logPath = Path.Combine(Path.GetTempPath(), "WindowsOptimizer_Debug.log");
+            var logPath = Path.Combine(Path.GetTempPath(), "WindowsOptimizer_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

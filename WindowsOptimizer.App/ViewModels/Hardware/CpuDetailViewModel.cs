@@ -66,9 +66,6 @@ public sealed class CpuDetailViewModel : BaseViewModel
             AddRowIf("L2/Core", $"{l2PerCore} KB");
         }
 
-        AddHeader("Performance");
-        AddRow("Status", "Data from cache");
-
         ResolveIcon(cpu.Manufacturer, cpu.Name);
         AppDiagnostics.Log($"[CpuDetailVM] After populate: Title={Title}, Subtitle={Subtitle}, SpecsCount={Specs.Count}");
         SetLoadingComplete();

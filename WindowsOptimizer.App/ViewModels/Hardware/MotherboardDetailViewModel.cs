@@ -65,9 +65,6 @@ public sealed class MotherboardDetailViewModel : BaseViewModel
         AddHeader("Memory Support");
         AddRow("Info", "See Memory tab for details");
 
-        AddHeader("Status");
-        AddRow("Data Source", "Startup cache");
-
         ResolveIcon(mb.Manufacturer, mb.Product ?? mb.Model);
         AppDiagnostics.Log($"[MotherboardDetailVM] After populate: Title={Title}, Subtitle={Subtitle}, SpecsCount={Specs.Count}");
         SetLoadingComplete();

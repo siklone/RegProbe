@@ -7,6 +7,7 @@ using System.Management;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Runtime.Versioning;
+using WinRegistry = Microsoft.Win32.Registry;
 using LibreHardwareMonitor.Hardware;
 
 namespace WindowsOptimizer.Infrastructure.Metrics;
@@ -1560,15 +1561,7 @@ public sealed class MetricProvider : IDisposable
 
         try
         {
-            // Get OS info
-            using (var searcher = new ManagementObjectSearcher("SELECT Caption, Version FROM Win32_OperatingSystem"))
-            {
-                foreach (ManagementObject obj in searcher.Get())
-                {
-                    info.OsName = obj["Caption"]?.ToString() ?? "Unknown";
-                    info.OsVersion = obj["Version"]?.ToString() ?? "Unknown";
-                }
-            }
+            PopulateOsInfo(info);
 
             // Get CPU info
             using (var searcher = new ManagementObjectSearcher("SELECT Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor"))
@@ -1618,6 +1611,141 @@ public sealed class MetricProvider : IDisposable
         }
 
         return info;
+    }
+
+    private static void PopulateOsInfo(SystemInfo info)
+    {
+        var productName = string.Empty;
+        var displayVersion = string.Empty;
+        var releaseId = string.Empty;
+        var editionId = string.Empty;
+        var version = string.Empty;
+        var wmiCaption = string.Empty;
+        var buildNumber = 0;
+
+        try
+        {
+            using var currentVersion = WinRegistry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            if (currentVersion != null)
+            {
+                productName = currentVersion.GetValue("ProductName")?.ToString() ?? string.Empty;
+                displayVersion = currentVersion.GetValue("DisplayVersion")?.ToString() ?? string.Empty;
+                releaseId = currentVersion.GetValue("ReleaseId")?.ToString() ?? string.Empty;
+                editionId = currentVersion.GetValue("EditionID")?.ToString() ?? string.Empty;
+                version = currentVersion.GetValue("CurrentVersion")?.ToString() ?? string.Empty;
+
+                var buildText = currentVersion.GetValue("CurrentBuild")?.ToString()
+                    ?? currentVersion.GetValue("CurrentBuildNumber")?.ToString();
+                _ = int.TryParse(buildText, out buildNumber);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"MetricProvider OS registry read failed: {ex.Message}");
+        }
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT Caption, Version, BuildNumber FROM Win32_OperatingSystem");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                wmiCaption = obj["Caption"]?.ToString() ?? string.Empty;
+                version = obj["Version"]?.ToString() ?? version;
+
+                if (buildNumber <= 0 && int.TryParse(obj["BuildNumber"]?.ToString(), out var wmiBuild))
+                {
+                    buildNumber = wmiBuild;
+                }
+
+                break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"MetricProvider OS WMI read failed: {ex.Message}");
+        }
+
+        if (buildNumber >= 22000)
+        {
+            if (!string.IsNullOrWhiteSpace(productName) &&
+                productName.Contains("Windows 10", StringComparison.OrdinalIgnoreCase))
+            {
+                productName = Regex.Replace(productName, "Windows\\s+10", "Windows 11", RegexOptions.IgnoreCase);
+            }
+
+            if (!string.IsNullOrWhiteSpace(wmiCaption) &&
+                wmiCaption.Contains("Windows 10", StringComparison.OrdinalIgnoreCase))
+            {
+                wmiCaption = Regex.Replace(wmiCaption, "Windows\\s+10", "Windows 11", RegexOptions.IgnoreCase);
+            }
+        }
+
+        var normalizedName = BuildNormalizedWindowsName(buildNumber, editionId, displayVersion, releaseId);
+        if (string.IsNullOrWhiteSpace(normalizedName))
+        {
+            normalizedName = !string.IsNullOrWhiteSpace(productName) ? productName : wmiCaption;
+        }
+
+        info.OsName = string.IsNullOrWhiteSpace(normalizedName) ? "Unknown" : normalizedName;
+        info.OsVersion = BuildOsVersionLabel(displayVersion, releaseId, buildNumber, version);
+    }
+
+    private static string BuildNormalizedWindowsName(int buildNumber, string? editionId, string? displayVersion, string? releaseId)
+    {
+        if (buildNumber <= 0 && string.IsNullOrWhiteSpace(editionId) && string.IsNullOrWhiteSpace(displayVersion) && string.IsNullOrWhiteSpace(releaseId))
+        {
+            return string.Empty;
+        }
+
+        var osBase = buildNumber >= 22000 ? "Windows 11" : "Windows 10";
+        var edition = NormalizeWindowsEdition(editionId);
+        var normalized = string.IsNullOrWhiteSpace(edition) ? osBase : $"{osBase} {edition}";
+        var version = !string.IsNullOrWhiteSpace(displayVersion) ? displayVersion : releaseId;
+        return string.IsNullOrWhiteSpace(version) ? normalized : $"{normalized} ({version})";
+    }
+
+    private static string NormalizeWindowsEdition(string? edition)
+    {
+        if (string.IsNullOrWhiteSpace(edition))
+        {
+            return string.Empty;
+        }
+
+        return edition.Trim() switch
+        {
+            "Professional" => "Pro",
+            "Core" => "Home",
+            "CoreSingleLanguage" => "Home Single Language",
+            "EnterpriseS" => "Enterprise LTSC",
+            "ProEducation" => "Pro Education",
+            "ProForWorkstations" => "Pro for Workstations",
+            _ => edition.Trim()
+        };
+    }
+
+    private static string BuildOsVersionLabel(string? displayVersion, string? releaseId, int buildNumber, string? version)
+    {
+        var parts = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(displayVersion))
+        {
+            parts.Add(displayVersion.Trim());
+        }
+        else if (!string.IsNullOrWhiteSpace(releaseId) && !string.Equals(releaseId, "2009", StringComparison.OrdinalIgnoreCase))
+        {
+            parts.Add(releaseId.Trim());
+        }
+
+        if (buildNumber > 0)
+        {
+            parts.Add($"Build {buildNumber}");
+        }
+        else if (!string.IsNullOrWhiteSpace(version))
+        {
+            parts.Add(version.Trim());
+        }
+
+        return parts.Count > 0 ? string.Join(" · ", parts) : "Unknown";
     }
 
     public double GetTotalRamGb()

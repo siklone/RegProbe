@@ -265,11 +265,6 @@
             <!-- Row 2: Footer -->
             <Border Grid.Row="2" Margin="12,8,12,12" Style="{DynamicResource ModernCardStyle}">
                 <Grid>
-                    <TextBlock Text="Data loaded from cache"
-                               VerticalAlignment="Center"
-                               FontSize="11"
-                               Foreground="{DynamicResource MutedForegroundBrush}"/>
-
                     <Button Content="Close"
                             HorizontalAlignment="Right"
                             Padding="20,6"

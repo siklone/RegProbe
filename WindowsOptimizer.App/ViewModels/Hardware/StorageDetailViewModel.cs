@@ -49,7 +49,6 @@ public sealed class StorageDetailViewModel : BaseViewModel
         AddRowIf("Interface", storage.PrimaryInterface);
 
         AddHeader("Status");
-        AddRow("Data Source", "Startup cache");
         AddRow("Tip", "Use Monitor tab for per-drive details");
 
         ResolveIcon(null, storage.PrimaryModel);

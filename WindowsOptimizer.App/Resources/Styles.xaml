@@ -199,6 +199,23 @@
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="CanContentScroll" Value="False"/>
     </Style>
+
+    <!-- Global invisible scrollbars: keep wheel/touch scrolling, remove visual chrome -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+            </Trigger>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Height" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     
     <!-- Auto-Hiding ScrollViewer Style (Modern Overlay) -->
     <Style x:Key="AutoHidingScrollViewerStyle" TargetType="ScrollViewer">
@@ -212,8 +229,8 @@
                         <ScrollBar x:Name="PART_VerticalScrollBar"
                                    Orientation="Vertical"
                                    HorizontalAlignment="Right"
-                                   Width="8"
-                                   Margin="0,2,2,2"
+                                   Width="0"
+                                   Margin="0"
                                    Opacity="0"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Maximum="{TemplateBinding ScrollableHeight}"

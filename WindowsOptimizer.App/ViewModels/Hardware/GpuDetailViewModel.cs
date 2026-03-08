@@ -67,9 +67,6 @@ public sealed class GpuDetailViewModel : BaseViewModel
         }
         AddRowIf("Refresh Rate", gpu.RefreshRateHz > 0 ? $"{gpu.RefreshRateHz} Hz" : null);
 
-        AddHeader("Status");
-        AddRow("Data Source", "Startup cache");
-
         ResolveIcon(gpu.Vendor, gpu.Name);
         AppDiagnostics.Log($"[GpuDetailVM] After populate: Title={Title}, Subtitle={Subtitle}, SpecsCount={Specs.Count}");
         SetLoadingComplete();

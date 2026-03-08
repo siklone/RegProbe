@@ -305,6 +305,62 @@ public sealed class DashboardViewModel : ViewModelBase
     public string AuditScore { get => _auditScore; private set => SetProperty(ref _auditScore, value); }
     public string AuditStatus { get => _auditStatus; private set => SetProperty(ref _auditStatus, value); }
     public string AuditDetail { get => _auditDetail; private set => SetProperty(ref _auditDetail, value); }
+    public string PlatformIdentity => JoinNonEmpty(SystemManufacturer, SystemModel);
+    public string OsCompactSummary => JoinNonEmpty(OsVersion, HasValue(OsBuild) ? $"Build {OsBuild}" : null, OsArchitecture);
+    public string ProcessorCompactSummary => JoinNonEmpty(
+        HasValue(ProcessorCores) && HasValue(ProcessorThreads) ? $"{ProcessorCores}C / {ProcessorThreads}T" : null,
+        ProcessorSpeed,
+        ProcessorSocket);
+    public string MemoryCompactSummary => JoinNonEmpty(
+        TotalPhysicalMemory,
+        MemoryDetails.Type,
+        MemoryDetails.Frequency,
+        HasValue(MemorySlots) ? $"{MemorySlots} modules" : null);
+    public string GraphicsCompactSummary => JoinNonEmpty(GpuVideoMemory, GpuResolution, GpuRefreshRate);
+    public string FirmwareCompactSummary => JoinNonEmpty(BiosVersion, BiosDate, BiosMode);
+    public string StorageCompactSummary
+    {
+        get
+        {
+            var firstDisk = DiskDrives.OrderByDescending(static disk => disk.SizeBytes).FirstOrDefault();
+            return JoinNonEmpty(
+                DiskDrives.Count > 0 ? $"{DiskDrives.Count} drives" : null,
+                firstDisk?.InterfacePretty,
+                firstDisk?.DisplayCapacity,
+                firstDisk?.Model);
+        }
+    }
+    public string PrimaryDisplaySummary
+    {
+        get
+        {
+            var primaryDisplay = Monitors.FirstOrDefault(static monitor => monitor.IsPrimary) ?? Monitors.FirstOrDefault();
+            return JoinNonEmpty(
+                primaryDisplay?.Name,
+                primaryDisplay?.Resolution,
+                primaryDisplay?.RefreshRate,
+                primaryDisplay?.ConnectionType);
+        }
+    }
+    public string PrimaryNetworkSummary
+    {
+        get
+        {
+            var primaryNetwork = NetworkAdapters.FirstOrDefault(static adapter =>
+                    adapter.Status.Contains("up", StringComparison.OrdinalIgnoreCase) ||
+                    adapter.Status.Contains("connected", StringComparison.OrdinalIgnoreCase))
+                ?? NetworkAdapters.FirstOrDefault();
+            return JoinNonEmpty(
+                primaryNetwork?.Name,
+                primaryNetwork?.Speed,
+                primaryNetwork?.Status,
+                primaryNetwork?.Type);
+        }
+    }
+    public string AuditCompactSummary => JoinNonEmpty(
+        AuditScore,
+        AuditErrorCount > 0 ? $"{AuditErrorCount} errors" : null,
+        AuditWarningCount > 0 ? $"{AuditWarningCount} warnings" : AuditErrorCount == 0 ? "clean" : null);
     public string AuditReportPath
     {
         get => _auditReportPath;
@@ -417,6 +473,7 @@ public sealed class DashboardViewModel : ViewModelBase
             snapshot = HardwarePreloadService.Instance.GetSnapshot();
             ApplySnapshotCorrections(snapshot);
             RunHardwareAudit(snapshot);
+            NotifyCompactSummaryPropertiesChanged();
         }
         catch (Exception ex)
         {
@@ -675,6 +732,8 @@ public sealed class DashboardViewModel : ViewModelBase
             UsbIconKey = usbResolution.IconKey;
             UsbIconSource = HardwareIconService.Resolve(usbResolution);
         }
+
+        NotifyCompactSummaryPropertiesChanged();
     }
 
     private void RunHardwareAudit(HardwareDetailSnapshot snapshot)
@@ -727,6 +786,30 @@ public sealed class DashboardViewModel : ViewModelBase
         }
 
         return string.Empty;
+    }
+
+    private static bool HasValue(string? value)
+    {
+        return !string.IsNullOrWhiteSpace(value) && !HardwareAuditHeuristics.IsPlaceholderValue(value);
+    }
+
+    private static string JoinNonEmpty(params string?[] values)
+    {
+        return string.Join(" · ", values.Where(HasValue));
+    }
+
+    private void NotifyCompactSummaryPropertiesChanged()
+    {
+        OnPropertyChanged(nameof(PlatformIdentity));
+        OnPropertyChanged(nameof(OsCompactSummary));
+        OnPropertyChanged(nameof(ProcessorCompactSummary));
+        OnPropertyChanged(nameof(MemoryCompactSummary));
+        OnPropertyChanged(nameof(GraphicsCompactSummary));
+        OnPropertyChanged(nameof(FirmwareCompactSummary));
+        OnPropertyChanged(nameof(StorageCompactSummary));
+        OnPropertyChanged(nameof(PrimaryDisplaySummary));
+        OnPropertyChanged(nameof(PrimaryNetworkSummary));
+        OnPropertyChanged(nameof(AuditCompactSummary));
     }
 
     private static string SimplifyStorageInterface(string? interfaceType, string? mediaType)

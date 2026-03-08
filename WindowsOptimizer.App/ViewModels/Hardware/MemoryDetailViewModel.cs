@@ -55,9 +55,6 @@ public sealed class MemoryDetailViewModel : BaseViewModel
         AddRow("Status", "Per-slot details require WMI query");
         AddRow("Tip", "Use Monitor tab for live memory metrics");
 
-        AddHeader("Status");
-        AddRow("Data Source", "Startup cache");
-
         ResolveIcon(memory.PrimaryManufacturer, memory.PrimaryModel);
         AppDiagnostics.Log($"[MemoryDetailVM] After populate: Title={Title}, Subtitle={Subtitle}, SpecsCount={Specs.Count}");
         SetLoadingComplete();

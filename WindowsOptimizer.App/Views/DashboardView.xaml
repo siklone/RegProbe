@@ -161,10 +161,10 @@
             </Border>
         </Border>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
                       HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Margin="20,18,20,22">
-                <Grid Margin="0,0,0,14">
+            <StackPanel Margin="14,12,14,16">
+                <Grid Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -172,35 +172,37 @@
 
                     <StackPanel>
                         <TextBlock Text="Dashboard"
-                                   FontSize="24"
+                                   FontSize="20"
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                        <TextBlock Text="{Binding SystemName, StringFormat=Validated live hardware snapshot for {0}}"
-                                   Margin="0,6,0,0"
-                                   FontSize="12"
+                        <TextBlock Text="{Binding PlatformIdentity}"
+                                   Margin="0,4,0,0"
+                                   FontSize="11"
                                    Foreground="{DynamicResource ForegroundLightBrush}"/>
                     </StackPanel>
 
                     <Border Grid.Column="1"
-                            Padding="12,8"
-                            CornerRadius="14"
+                            Padding="10,7"
+                            CornerRadius="12"
                             Background="#1D0C1118"
                             BorderBrush="#2FC8F5FF"
                             BorderThickness="1">
                         <StackPanel>
-                            <TextBlock Text="Data quality"
+                            <TextBlock Text="Quality"
                                        FontSize="9"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="{Binding AuditScore}"
+                            <TextBlock Text="{Binding AuditCompactSummary}"
                                        Margin="0,2,0,0"
-                                       FontSize="16"
+                                       FontSize="11"
                                        FontWeight="Bold"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"
+                                       MaxWidth="180"/>
                         </StackPanel>
                     </Border>
                 </Grid>
 
-                <Grid Margin="0,0,0,14">
+                <Grid Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.15*"/>
                         <ColumnDefinition Width="1.15*"/>
@@ -215,97 +217,110 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Width="84"
-                                    Height="84"
-                                    CornerRadius="22"
+                            <Border Width="68"
+                                    Height="68"
+                                    CornerRadius="18"
                                     Background="{DynamicResource BackgroundMediumBrush}"
                                     BorderBrush="{DynamicResource GlassBorderBrush}"
                                     BorderThickness="1">
                                 <Image Source="{Binding OsIconSource}"
-                                       Width="44"
-                                       Height="44"
+                                       Width="36"
+                                       Height="36"
                                        Stretch="Uniform"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
                             </Border>
 
                             <StackPanel Grid.Column="1"
-                                        Margin="18,0,0,0">
-                                <TextBlock Text="System overview"
-                                           FontSize="11"
+                                        Margin="14,0,0,0">
+                                <TextBlock Text="System"
+                                           FontSize="10"
                                            Foreground="{DynamicResource ForegroundLightBrush}"/>
                                 <TextBlock Text="{Binding OsName}"
-                                           Margin="0,6,0,0"
-                                           FontSize="22"
+                                           Margin="0,4,0,0"
+                                           FontSize="18"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding SystemModel}"
-                                           Margin="0,10,0,0"
-                                           FontSize="13"
+                                <TextBlock Text="{Binding OsCompactSummary}"
+                                           Margin="0,4,0,0"
+                                           FontSize="11"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding PlatformIdentity}"
+                                           Margin="0,7,0,0"
+                                           FontSize="12"
                                            Foreground="{DynamicResource ForegroundBrightBrush}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding ProcessorName}"
-                                           Margin="0,9,0,0"
-                                           FontSize="12"
+                                <TextBlock Text="{Binding ProcessorCompactSummary}"
+                                           Margin="0,6,0,0"
+                                           FontSize="11"
                                            Foreground="{DynamicResource ForegroundLightBrush}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding GpuName}"
+                                <TextBlock Text="{Binding GraphicsCompactSummary}"
                                            Margin="0,4,0,0"
-                                           FontSize="12"
+                                           FontSize="11"
                                            Foreground="{DynamicResource ForegroundLightBrush}"
                                            TextWrapping="Wrap"/>
 
-                                <WrapPanel Margin="0,14,0,0">
+                                <WrapPanel Margin="0,10,0,0">
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
-                                            <TextBlock Text="Build"
-                                                       FontSize="10"
+                                            <TextBlock Text="Firmware"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding OsBuild}"
+                                            <TextBlock Text="{Binding FirmwareCompactSummary}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border Style="{StaticResource DashboardChipStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="Architecture"
-                                                       FontSize="10"
-                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding OsArchitecture}"
-                                                       Margin="0,2,0,0"
-                                                       FontSize="13"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextWrapping="Wrap"
+                                                       MaxWidth="180"/>
                                         </StackPanel>
                                     </Border>
 
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
                                             <TextBlock Text="Memory"
-                                                       FontSize="10"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding TotalPhysicalMemory}"
+                                            <TextBlock Text="{Binding MemoryCompactSummary}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextWrapping="Wrap"
+                                                       MaxWidth="180"/>
                                         </StackPanel>
                                     </Border>
 
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
-                                            <TextBlock Text="Uptime"
-                                                       FontSize="10"
+                                            <TextBlock Text="Display"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding Uptime}"
+                                            <TextBlock Text="{Binding PrimaryDisplaySummary}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextWrapping="Wrap"
+                                                       MaxWidth="180"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource DashboardChipStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="Network"
+                                                       FontSize="9"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                            <TextBlock Text="{Binding PrimaryNetworkSummary}"
+                                                       Margin="0,2,0,0"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextWrapping="Wrap"
+                                                       MaxWidth="180"/>
                                         </StackPanel>
                                     </Border>
                                 </WrapPanel>
@@ -317,29 +332,30 @@
                         <Border Margin="0,0,0,12"
                                 Style="{StaticResource DashboardSurfaceStyle}">
                             <StackPanel>
-                                <TextBlock Text="Data quality"
-                                           FontSize="11"
+                                <TextBlock Text="Audit"
+                                           FontSize="10"
                                            Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                <TextBlock Text="{Binding AuditStatus}"
-                                           Margin="0,8,0,0"
-                                           FontSize="17"
+                                <TextBlock Text="{Binding AuditScore}"
+                                           Margin="0,6,0,0"
+                                           FontSize="15"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                                            TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding AuditDetail}"
-                                           Margin="0,8,0,0"
+                                <TextBlock Text="{Binding AuditStatus}"
+                                           Margin="0,3,0,0"
+                                           FontSize="10"
                                            Foreground="{DynamicResource ForegroundLightBrush}"
                                            TextWrapping="Wrap"/>
 
-                                <WrapPanel Margin="0,12,0,0">
+                                <WrapPanel Margin="0,10,0,0">
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
                                             <TextBlock Text="Issues"
-                                                       FontSize="10"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                                             <TextBlock Text="{Binding AuditIssueCount}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                         </StackPanel>
@@ -348,11 +364,11 @@
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
                                             <TextBlock Text="Warnings"
-                                                       FontSize="10"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                                             <TextBlock Text="{Binding AuditWarningCount}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                         </StackPanel>
@@ -361,28 +377,16 @@
                                     <Border Style="{StaticResource DashboardChipStyle}">
                                         <StackPanel>
                                             <TextBlock Text="Errors"
-                                                       FontSize="10"
+                                                       FontSize="9"
                                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                                             <TextBlock Text="{Binding AuditErrorCount}"
                                                        Margin="0,2,0,0"
-                                                       FontSize="13"
+                                                       FontSize="11"
                                                        FontWeight="SemiBold"
                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                         </StackPanel>
                                     </Border>
                                 </WrapPanel>
-
-                                <ItemsControl ItemsSource="{Binding AuditHighlights}"
-                                              Margin="0,12,0,0">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Margin="0,0,0,6"
-                                                       Foreground="{DynamicResource ForegroundBrightBrush}"
-                                                       TextWrapping="Wrap"
-                                                       Text="{Binding StringFormat=• {0}}"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
 
                                 <Button Content="Open audit JSON"
                                         Command="{Binding OpenAuditReportCommand}"
@@ -392,12 +396,14 @@
 
                         <Border Style="{StaticResource DashboardSurfaceStyle}">
                             <StackPanel>
-                                <TextBlock Text="Live inventory"
-                                           FontSize="12"
+                                <TextBlock Text="Inventory"
+                                           FontSize="10"
                                            Foreground="{DynamicResource ForegroundLightBrush}"/>
 
                                 <Grid Margin="0,12,0,0">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
@@ -408,10 +414,10 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="Motherboard"
+                                    <TextBlock Text="CPU"
                                                Foreground="{DynamicResource ForegroundLightBrush}"/>
                                     <TextBlock Grid.Column="1"
-                                               Text="{Binding BaseboardProduct}"
+                                               Text="{Binding ProcessorCompactSummary}"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                TextWrapping="Wrap"
@@ -419,63 +425,117 @@
 
                                     <TextBlock Grid.Row="1"
                                                Margin="0,10,0,0"
-                                               Text="Storage"
+                                               Text="Graphics"
                                                Foreground="{DynamicResource ForegroundLightBrush}"/>
                                     <TextBlock Grid.Row="1"
                                                Grid.Column="1"
                                                Margin="0,10,0,0"
-                                               Text="{Binding DiskDrives.Count, StringFormat={}{0} drives}"
+                                               Text="{Binding GraphicsCompactSummary}"
                                                FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
 
                                     <TextBlock Grid.Row="2"
                                                Margin="0,10,0,0"
-                                               Text="Displays"
+                                               Text="Memory"
                                                Foreground="{DynamicResource ForegroundLightBrush}"/>
                                     <TextBlock Grid.Row="2"
                                                Grid.Column="1"
                                                Margin="0,10,0,0"
-                                               Text="{Binding Monitors.Count, StringFormat={}{0} active}"
+                                               Text="{Binding MemoryCompactSummary}"
                                                FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
 
                                     <TextBlock Grid.Row="3"
+                                               Margin="0,10,0,0"
+                                               Text="Storage"
+                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="1"
+                                               Margin="0,10,0,0"
+                                               Text="{Binding StorageCompactSummary}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
+
+                                    <TextBlock Grid.Row="4"
+                                               Margin="0,10,0,0"
+                                               Text="Display"
+                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="1"
+                                               Margin="0,10,0,0"
+                                               Text="{Binding PrimaryDisplaySummary}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
+
+                                    <TextBlock Grid.Row="5"
                                                Margin="0,10,0,0"
                                                Text="Network"
                                                Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Grid.Row="3"
+                                    <TextBlock Grid.Row="5"
                                                Grid.Column="1"
                                                Margin="0,10,0,0"
-                                               Text="{Binding NetworkAdapters.Count, StringFormat={}{0} adapters}"
+                                               Text="{Binding PrimaryNetworkSummary}"
                                                FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
                                 </Grid>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="0,0,0,14">
+                <Grid Margin="0,0,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0"
-                            Margin="0,0,10,0"
+                            Margin="0,0,8,8"
+                            Style="{StaticResource DashboardSurfaceStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Firmware"
+                                       FontSize="10"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                            <TextBlock Text="{Binding FirmwareCompactSummary}"
+                                       Margin="0,6,0,0"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding SmbiosVersion, StringFormat=SMBIOS {0}}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Margin="0,0,0,8"
                             Style="{StaticResource DashboardSurfaceStyle}">
                         <StackPanel>
                             <TextBlock Text="Security"
-                                       FontSize="11"
+                                       FontSize="10"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                             <TextBlock Text="{Binding SecureBootState}"
-                                       Margin="0,8,0,0"
-                                       FontSize="17"
+                                       Margin="0,6,0,0"
+                                       FontSize="14"
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                            <TextBlock Text="{Binding BiosMode, StringFormat=BIOS mode: {0}}"
-                                       Margin="0,8,0,0"
+                            <TextBlock Text="{Binding BiosMode, StringFormat=Boot: {0}}"
+                                       Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundBrightBrush}"/>
                             <TextBlock Text="{Binding CredentialGuard, StringFormat=Credential Guard: {0}}"
                                        Margin="0,4,0,0"
@@ -483,53 +543,54 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="1"
-                            Margin="0,0,10,0"
+                    <Border Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,8,0"
                             Style="{StaticResource DashboardSurfaceStyle}">
                         <StackPanel>
-                            <TextBlock Text="Storage focus"
-                                       FontSize="11"
+                            <TextBlock Text="Display"
+                                       FontSize="10"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="{Binding BootDevice}"
-                                       Margin="0,8,0,0"
-                                       FontSize="16"
+                            <TextBlock Text="{Binding PrimaryDisplaySummary}"
+                                       Margin="0,6,0,0"
+                                       FontSize="13"
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding DiskDrives.Count, StringFormat=Detected drives: {0}}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                            <TextBlock Text="{Binding GraphicsCompactSummary}"
+                                       Margin="0,4,0,0"
+                                       Foreground="{DynamicResource ForegroundBrightBrush}"/>
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="2"
+                    <Border Grid.Row="1"
+                            Grid.Column="1"
                             Style="{StaticResource DashboardSurfaceStyle}">
                         <StackPanel>
-                            <TextBlock Text="Display focus"
-                                       FontSize="11"
+                            <TextBlock Text="Network &amp; Storage"
+                                       FontSize="10"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="{Binding GpuResolution}"
-                                       Margin="0,8,0,0"
-                                       FontSize="17"
+                            <TextBlock Text="{Binding PrimaryNetworkSummary}"
+                                       Margin="0,6,0,0"
+                                       FontSize="13"
                                        FontWeight="Bold"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                            <TextBlock Text="{Binding GpuRefreshRate, StringFormat=Refresh: {0}}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundBrightBrush}"/>
-                            <TextBlock Text="{Binding Monitors.Count, StringFormat=Detected displays: {0}}"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding StorageCompactSummary}"
                                        Margin="0,4,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                       Foreground="{DynamicResource ForegroundBrightBrush}"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>
                 </Grid>
 
-                <TextBlock Text="Hardware details"
-                           Margin="0,0,0,12"
-                           FontSize="14"
+                <TextBlock Text="Hardware"
+                           Margin="0,0,0,8"
+                           FontSize="12"
                            FontWeight="SemiBold"
                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
 
-                <WrapPanel ItemWidth="214">
+                <WrapPanel ItemWidth="186">
                     <Button Style="{StaticResource DashboardCardButtonStyle}"
                             Command="{Binding OpenDetailCommand}"
                             CommandParameter="os">
@@ -548,14 +609,15 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"
+                                               FontSize="12"
                                                TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding OsVersion}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding OsCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -577,14 +639,15 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"
+                                               FontSize="12"
                                                TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding BaseboardManufacturer}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding FirmwareCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -606,14 +669,15 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"
+                                               FontSize="12"
                                                TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding ProcessorCores, StringFormat={}{0} cores}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding ProcessorCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -635,14 +699,15 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"
+                                               FontSize="12"
                                                TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding GpuResolution}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding GraphicsCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -664,13 +729,14 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               FontSize="12"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding MemorySlots, StringFormat={}{0} modules}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding MemoryCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -692,11 +758,11 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               FontSize="12"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="{Binding BootDevice}"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding StorageCompactSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
                                        FontWeight="SemiBold"
                                        TextWrapping="Wrap"/>
@@ -721,13 +787,14 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               FontSize="12"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="Per-monitor detail view"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding PrimaryDisplaySummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                       FontWeight="SemiBold"/>
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
 
@@ -749,11 +816,11 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               FontSize="12"/>
                                 </StackPanel>
                             </DockPanel>
-                            <TextBlock Text="Inspect adapter inventory"
-                                       Margin="0,14,0,0"
+                            <TextBlock Text="{Binding PrimaryNetworkSummary}"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
                                        FontWeight="SemiBold"
                                        TextWrapping="Wrap"/>
@@ -778,11 +845,11 @@
                                                Margin="0,2,0,0"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               FontSize="12"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Text="Controller and device detail"
-                                       Margin="0,14,0,0"
+                                       Margin="0,10,0,0"
                                        Foreground="{DynamicResource AccentBrightCyanBrush}"
                                        FontWeight="SemiBold"/>
                         </StackPanel>
