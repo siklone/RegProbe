@@ -239,6 +239,48 @@ function Resolve-MemoryChipIconKey {
     return "memory_default"
 }
 
+function Add-MemoryAliasVariants {
+    param(
+        [System.Collections.Generic.List[string]]$Aliases,
+        [string]$Brand,
+        [string]$Type,
+        [string]$Alias
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Alias)) {
+        return
+    }
+
+    $variants = New-Object System.Collections.Generic.List[string]
+    $variants.Add($Alias.Trim())
+
+    $compact = $Alias -replace "[^A-Za-z0-9]", ""
+    if (-not [string]::IsNullOrWhiteSpace($compact)) {
+        $variants.Add($compact)
+    }
+
+    foreach ($variant in ($variants | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)) {
+        $trimmed = $variant.Trim()
+        $lower = $trimmed.ToLowerInvariant()
+        $brandPrefix = $Brand.Trim().ToLowerInvariant()
+        $typeSuffix = $Type.Trim().ToLowerInvariant()
+
+        $Aliases.Add($lower)
+
+        if (-not $lower.StartsWith($brandPrefix)) {
+            $Aliases.Add(("{0} {1}" -f $Brand, $trimmed).Trim().ToLowerInvariant())
+        }
+
+        if (-not $lower.EndsWith($typeSuffix)) {
+            $Aliases.Add(("{0} {1}" -f $trimmed, $Type).Trim().ToLowerInvariant())
+        }
+
+        if (-not $lower.StartsWith($brandPrefix) -or -not $lower.EndsWith($typeSuffix)) {
+            $Aliases.Add(("{0} {1} {2}" -f $Brand, $trimmed, $Type).Trim().ToLowerInvariant())
+        }
+    }
+}
+
 function Resolve-StorageControllerIconKey {
     param(
         [string]$Brand,
@@ -983,6 +1025,13 @@ $memorySeeds = @(
     @{ Brand = "Crucial"; Series = "Pro"; Type = "DDR5" },
     @{ Brand = "Samsung"; Series = "OEM"; Type = "DDR5" },
     @{ Brand = "SK Hynix"; Series = "OEM"; Type = "DDR5" },
+    @{
+        Brand = "A-DATA Technology"; Series = "XPG"; Type = "DDR4";
+        ExtraAliases = @("ADATA XPG", "A-DATA XPG", "XPG");
+        PartAliasesByRate = @{
+            "3600" = @("AX4U360016G18I-BR30", "ADATA AX4U360016G18I-BR30", "A-DATA Technology AX4U360016G18I-BR30")
+        }
+    },
     @{ Brand = "TEAMGROUP"; Series = "T-Force Delta"; Type = "DDR5" },
     @{ Brand = "Patriot"; Series = "Viper Steel"; Type = "DDR4" }
 )
@@ -1006,6 +1055,34 @@ $memoryModules = Expand-Deterministic -Seeds $memorySeeds -TargetCount 4200 -Bui
 
     $kitTag = if ($moduleCount -ge 4) { "quad-kit" } else { "dual-kit" }
 
+    $aliases = New-Object System.Collections.Generic.List[string]
+    foreach ($alias in @(
+        ("{0} {1} {2} {3}" -f $s.Brand, $s.Series, $s.Type, $rate),
+        ("{0} {1} {2}" -f $s.Brand, $s.Type, $rate),
+        ("{0} {1}" -f $s.Brand, $s.Series),
+        ("{0} {1}" -f $s.Series, $s.Type),
+        ("{0} {1}" -f $s.Series, $rate)
+    )) {
+        if (-not [string]::IsNullOrWhiteSpace($alias)) {
+            Add-MemoryAliasVariants -Aliases $aliases -Brand $s.Brand -Type $s.Type -Alias $alias
+        }
+    }
+
+    if ($s.ContainsKey("ExtraAliases") -and $null -ne $s.ExtraAliases) {
+        foreach ($extraAlias in ($s.ExtraAliases | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })) {
+            Add-MemoryAliasVariants -Aliases $aliases -Brand $s.Brand -Type $s.Type -Alias $extraAlias
+        }
+    }
+
+    if ($s.ContainsKey("PartAliasesByRate") -and $null -ne $s.PartAliasesByRate) {
+        $rateKey = [string]$rate
+        if ($s.PartAliasesByRate.ContainsKey($rateKey)) {
+            foreach ($partAlias in ($s.PartAliasesByRate[$rateKey] | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })) {
+                Add-MemoryAliasVariants -Aliases $aliases -Brand $s.Brand -Type $s.Type -Alias $partAlias
+            }
+        }
+    }
+
     [ordered]@{
         id = ("mem_module_{0:00000}" -f ($i + 1))
         brand = $s.Brand
@@ -1021,10 +1098,7 @@ $memoryModules = Expand-Deterministic -Seeds $memorySeeds -TargetCount 4200 -Bui
         maxDataRateMTs = $rate
         tags = @("module", $kitTag)
         iconKey = Resolve-MemoryModuleIconKey -Brand $s.Brand -Series $s.Series -Type $s.Type
-        aliases = @(
-            ("{0} {1} {2} {3}" -f $s.Brand, $s.Series, $s.Type, $rate).ToLower(),
-            ("{0} {1} {2}" -f $s.Brand, $s.Type, $rate).ToLower()
-        )
+        aliases = @(Get-UniqueAliases -Aliases $aliases)
         normalizedName = $normalized
     }
 }
@@ -1132,6 +1206,30 @@ $storageSeeds = @(
             "500" = @("WDS500G3B0E")
             "1000" = @("WDS100T3B0E")
             "2000" = @("WDS200T3B0E")
+        }
+    },
+    @{
+        Brand = "Crucial"; Series = "P3 Plus"; Type = "NVMe SSD"; Interface = "PCIe 4.0 x4"; FormFactor = "M.2 2280";
+        Controller = "Crucial NVMe"; Nand = "Micron 3D NAND"; CapacitiesGb = @(500, 1000, 2000, 4000); ReleaseYear = 2022;
+        SeqReadMbps = 5000; SeqWriteMbps = 4200; RandomReadIops = 650; RandomWriteIops = 700; TbwPerTb = 440;
+        ExtraAliases = @("Crucial P3 Plus", "P3 Plus");
+        CapacityAliasesByGb = @{
+            "500" = @("CT500P3PSSD8")
+            "1000" = @("CT1000P3PSSD8")
+            "2000" = @("CT2000P3PSSD8")
+            "4000" = @("CT4000P3PSSD8")
+        }
+    },
+    @{
+        Brand = "Crucial"; Series = "P3"; Type = "NVMe SSD"; Interface = "PCIe 3.0 x4"; FormFactor = "M.2 2280";
+        Controller = "Crucial NVMe"; Nand = "Micron 3D NAND"; CapacitiesGb = @(500, 1000, 2000, 4000); ReleaseYear = 2022;
+        SeqReadMbps = 3500; SeqWriteMbps = 3000; RandomReadIops = 450; RandomWriteIops = 500; TbwPerTb = 220;
+        ExtraAliases = @("Crucial P3", "P3");
+        CapacityAliasesByGb = @{
+            "500" = @("CT500P3SSD8")
+            "1000" = @("CT1000P3SSD8")
+            "2000" = @("CT2000P3SSD8")
+            "4000" = @("CT4000P3SSD8")
         }
     },
     @{

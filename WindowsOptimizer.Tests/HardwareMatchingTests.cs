@@ -220,6 +220,28 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void ResolveResult_UsesDatabaseModelForCrucialP3PlusSkuCode()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "CT500P3PSSD8");
+
+        Assert.Equal("storage_crucial", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesDatabaseModelForAdataMemorySkuCode()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Memory, "A-DATA Technology AX4U360016G18I-BR30 DDR4");
+
+        Assert.Equal("memory_ddr4", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
     public void BuildDisplayLookupSeed_ExpandsManufacturerCodes()
     {
         var seed = HardwareIconService.BuildDisplayLookupSeed("GSM");

@@ -275,11 +275,25 @@ public sealed class HardwareAuditService
     {
         var raw = FirstNonEmpty(network.PrimaryAdapterDescription, network.PrimaryAdapterName);
         var component = CreateComponent("Network", HardwareType.Network, raw, raw);
+        var primaryAdapter = network.Adapters.FirstOrDefault(static adapter => adapter.IsPrimary)
+            ?? network.Adapters.FirstOrDefault(adapter =>
+                string.Equals(adapter.Name, network.PrimaryAdapterName, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(adapter.Description, network.PrimaryAdapterDescription, StringComparison.OrdinalIgnoreCase))
+            ?? HardwarePreloadService.ChoosePrimaryNetworkAdapter(network.Adapters);
 
         AddIf(component, network.AdapterCount <= 0, "AdapterCount", "No network adapters were resolved.", HardwareAuditSeverity.Error, network.AdapterCount.ToString());
         AddIf(component, network.AdapterUpCount <= 0, "AdapterUpCount", "No active network adapter is currently up.", HardwareAuditSeverity.Warning, network.AdapterUpCount.ToString());
         AddIf(component, HardwareAuditHeuristics.IsPlaceholderValue(network.PrimaryAdapterDescription) && HardwareAuditHeuristics.IsPlaceholderValue(network.PrimaryAdapterName), "PrimaryAdapter", "Primary network adapter description is missing.", HardwareAuditSeverity.Warning, raw);
         AddIf(component, string.IsNullOrWhiteSpace(network.PrimaryLinkSpeed), "PrimaryLinkSpeed", "Primary network link speed is missing.", HardwareAuditSeverity.Info, network.PrimaryLinkSpeed);
+        AddIf(
+            component,
+            primaryAdapter != null &&
+            IsLikelyVirtualNetworkAdapter(primaryAdapter) &&
+            network.Adapters.Any(adapter => !ReferenceEquals(adapter, primaryAdapter) && IsConnectedPhysicalNetworkAdapter(adapter)),
+            "PrimaryAdapter",
+            "Primary network adapter is virtual while a physical connected adapter is available.",
+            HardwareAuditSeverity.Warning,
+            raw);
 
         return component;
     }
@@ -355,6 +369,37 @@ public sealed class HardwareAuditService
             HardwareIconResolutionSource.RuleMap => 72,
             _ => 35
         };
+    }
+
+    private static bool IsConnectedPhysicalNetworkAdapter(NetworkAdapterData adapter)
+    {
+        return !IsLikelyVirtualNetworkAdapter(adapter) &&
+               (string.Equals(adapter.Status, "Up", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(adapter.Status, "Connected", StringComparison.OrdinalIgnoreCase)) &&
+               (!string.IsNullOrWhiteSpace(adapter.Gateway) || !string.IsNullOrWhiteSpace(adapter.Ipv4));
+    }
+
+    private static bool IsLikelyVirtualNetworkAdapter(NetworkAdapterData adapter)
+    {
+        var joined = $"{adapter.Name} {adapter.Description} {adapter.AdapterType}".Trim();
+        if (string.IsNullOrWhiteSpace(joined))
+        {
+            return false;
+        }
+
+        var value = joined.ToLowerInvariant();
+        return value.Contains("wireguard") ||
+               value.Contains("wintun") ||
+               value.Contains("tailscale") ||
+               value.Contains("zerotier") ||
+               value.Contains("hamachi") ||
+               value.Contains("tap-windows") ||
+               value.Contains("vpn") ||
+               value.Contains("virtual") ||
+               value.Contains("hyper-v") ||
+               value.Contains("vmware") ||
+               value.Contains("tunnel") ||
+               value.Contains("loopback");
     }
 
     private static string FirstNonEmpty(params string?[] values)

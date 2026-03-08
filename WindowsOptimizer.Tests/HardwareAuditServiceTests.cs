@@ -113,4 +113,49 @@ public sealed class HardwareAuditServiceTests
         Assert.Equal("CPU", cpuComponent.Section);
         Assert.DoesNotContain(cpuComponent.Issues, issue => issue.Severity == HardwareAuditSeverity.Error);
     }
+
+    [Fact]
+    public void CreateReport_FlagsVirtualPrimaryNetworkWhenPhysicalAdapterExists()
+    {
+        var snapshot = new HardwareDetailSnapshot
+        {
+            Network = new NetworkHardwareData
+            {
+                AdapterCount = 2,
+                AdapterUpCount = 2,
+                PrimaryAdapterName = "WireGuard Tunnel",
+                PrimaryAdapterDescription = "WireGuard Tunnel",
+                PrimaryLinkSpeed = "10 Gbps",
+                Adapters =
+                {
+                    new NetworkAdapterData
+                    {
+                        Name = "WireGuard Tunnel",
+                        Description = "WireGuard Tunnel",
+                        AdapterType = "Ethernet",
+                        Status = "Up",
+                        Ipv4 = "10.7.0.2",
+                        IsPrimary = true
+                    },
+                    new NetworkAdapterData
+                    {
+                        Name = "Ethernet",
+                        Description = "Intel(R) Ethernet Controller I225-V",
+                        AdapterType = "Ethernet",
+                        Status = "Connected",
+                        Ipv4 = "192.168.1.25",
+                        Gateway = "192.168.1.1"
+                    }
+                }
+            }
+        };
+
+        var report = HardwareAuditService.Instance.CreateReport(snapshot);
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Section == "Network" &&
+                     issue.Field == "PrimaryAdapter" &&
+                     issue.Message.Contains("virtual", System.StringComparison.OrdinalIgnoreCase));
+    }
 }

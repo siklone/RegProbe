@@ -792,6 +792,7 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
             if (storage.DeviceCount > 0) overviewSpecs.Add(new("Drive Count", storage.DeviceCount.ToString()));
             if (!string.IsNullOrWhiteSpace(storage.PrimaryMediaType)) overviewSpecs.Add(new("Primary Media Type", storage.PrimaryMediaType));
             if (!string.IsNullOrWhiteSpace(storage.PrimaryInterface)) overviewSpecs.Add(new("Primary Interface", storage.PrimaryInterface));
+            if (!string.IsNullOrWhiteSpace(storage.Disks.FirstOrDefault()?.LogicalDrives)) overviewSpecs.Add(new("Primary Volumes", storage.Disks.First().LogicalDrives!));
             if (!string.IsNullOrWhiteSpace(storage.FirmwareRevision)) overviewSpecs.Add(new("Primary Firmware", storage.FirmwareRevision));
             if (storage.PartitionCount > 0) overviewSpecs.Add(new("Primary Partitions", storage.PartitionCount.ToString()));
             if (!string.IsNullOrWhiteSpace(storage.PrimarySerialNumber)) overviewSpecs.Add(new("Primary Serial Number", storage.PrimarySerialNumber));
@@ -817,6 +818,7 @@ public sealed class StorageDetailVM : HardwareDetailViewModelBase
                 if (disk.SizeBytes > 0) diskSpecs.Add(new("Capacity", FormatBytes(disk.SizeBytes)));
                 if (!string.IsNullOrWhiteSpace(disk.MediaType)) diskSpecs.Add(new("Media Type", disk.MediaType));
                 if (!string.IsNullOrWhiteSpace(disk.InterfaceType)) diskSpecs.Add(new("Interface", disk.InterfaceType));
+                if (!string.IsNullOrWhiteSpace(disk.LogicalDrives)) diskSpecs.Add(new("Volumes", disk.LogicalDrives));
                 if (!string.IsNullOrWhiteSpace(disk.FirmwareRevision)) diskSpecs.Add(new("Firmware", disk.FirmwareRevision));
                 if (disk.PartitionCount > 0) diskSpecs.Add(new("Partitions", disk.PartitionCount.ToString()));
                 if (disk.Index >= 0) diskSpecs.Add(new("Disk Index", disk.Index.ToString()));

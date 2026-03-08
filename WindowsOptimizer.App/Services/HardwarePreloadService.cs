@@ -898,6 +898,7 @@ public sealed class HardwarePreloadService
 
                 var disk = new DiskDriveData
                 {
+                    DeviceId = GetValueSafe(obj, "DeviceID"),
                     Model = GetValueSafe(obj, "Model"),
                     InterfaceType = GetValueSafe(obj, "InterfaceType"),
                     SerialNumber = GetValueSafe(obj, "SerialNumber")?.Trim(),
@@ -921,9 +922,17 @@ public sealed class HardwarePreloadService
             {
                 disk.MediaType = InferMediaType(disk.Model, disk.InterfaceType);
             }
+
+            if (!string.IsNullOrWhiteSpace(disk.DeviceId))
+            {
+                disk.LogicalDrives = GetLogicalDrivesForDisk(disk.DeviceId!);
+            }
         }
 
-        data.Disks = data.Disks.OrderBy(d => d.Index).ToList();
+        data.Disks = data.Disks
+            .OrderByDescending(static d => HasLogicalDriveLetter(d.LogicalDrives, "C:"))
+            .ThenBy(static d => d.Index)
+            .ToList();
         data.DeviceCount = data.Disks.Count;
         data.TotalSizeBytes = data.Disks.Sum(d => d.SizeBytes);
 
@@ -1104,7 +1113,7 @@ public sealed class HardwarePreloadService
         var data = new NetworkHardwareData();
         try
         {
-            System.Net.NetworkInformation.NetworkInterface? preferred = null;
+            var adaptersById = new Dictionary<string, System.Net.NetworkInformation.NetworkInterface>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var adapter in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
             {
@@ -1116,58 +1125,64 @@ public sealed class HardwarePreloadService
 
                 var detail = CreateNetworkAdapterData(adapter);
                 data.Adapters.Add(detail);
+                if (!string.IsNullOrWhiteSpace(detail.AdapterId))
+                {
+                    adaptersById[detail.AdapterId] = adapter;
+                }
+
                 data.AdapterCount++;
                 if (adapter.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up)
                 {
                     data.AdapterUpCount++;
-                    preferred ??= adapter;
                 }
 
                 if (adapter.NetworkInterfaceType == System.Net.NetworkInformation.NetworkInterfaceType.Wireless80211)
                 {
                     data.WirelessAdapterCount++;
                 }
-
-                preferred ??= adapter;
             }
 
-            if (preferred != null)
+            var primary = ChoosePrimaryNetworkAdapter(data.Adapters);
+            if (primary != null)
             {
-                var primary = data.Adapters.FirstOrDefault(a => string.Equals(a.AdapterId, preferred.Id, StringComparison.OrdinalIgnoreCase))
-                    ?? data.Adapters.FirstOrDefault();
-                if (primary != null)
-                {
-                    primary.IsPrimary = true;
-                    ApplyPrimaryNetworkAdapter(data, primary);
-                }
+                primary.IsPrimary = true;
+                ApplyPrimaryNetworkAdapter(data, primary);
 
                 // WMI enrichment for DHCP and status
                 try
                 {
-                    using var configSearcher = new ManagementObjectSearcher(
-                        $"SELECT * FROM Win32_NetworkAdapterConfiguration WHERE SettingID = '{preferred.Id}'");
-                    foreach (ManagementObject config in configSearcher.Get())
+                    if (!adaptersById.TryGetValue(primary.AdapterId ?? string.Empty, out var preferred))
                     {
-                        data.DhcpEnabled = GetValueSafe(config, "DHCPEnabled") == "True" ? "Yes" : "No";
-                        data.DhcpServer = GetValueSafe(config, "DHCPServer");
-                        
-                        var obtained = GetValueSafe(config, "DHCPLeaseObtained");
-                        if (!string.IsNullOrWhiteSpace(obtained))
-                            try { data.LeaseObtained = ManagementDateTimeConverter.ToDateTime(obtained).ToString("yyyy-MM-dd HH:mm"); } catch { }
-                            
-                        var expires = GetValueSafe(config, "DHCPLeaseExpires");
-                        if (!string.IsNullOrWhiteSpace(expires))
-                            try { data.LeaseExpires = ManagementDateTimeConverter.ToDateTime(expires).ToString("yyyy-MM-dd HH:mm"); } catch { }
-                        break;
+                        preferred = null;
                     }
 
-                    using var adapterSearcher = new ManagementObjectSearcher(
-                        $"SELECT * FROM Win32_NetworkAdapter WHERE GUID = '{preferred.Id}'");
-                    foreach (ManagementObject adapterObj in adapterSearcher.Get())
+                    if (preferred != null)
                     {
-                        var status = GetValueSafe(adapterObj, "NetConnectionStatus");
-                        data.NetConnectionStatus = MapNetConnectionStatus(status);
-                        break;
+                        using var configSearcher = new ManagementObjectSearcher(
+                            $"SELECT * FROM Win32_NetworkAdapterConfiguration WHERE SettingID = '{preferred.Id}'");
+                        foreach (ManagementObject config in configSearcher.Get())
+                        {
+                            data.DhcpEnabled = GetValueSafe(config, "DHCPEnabled") == "True" ? "Yes" : "No";
+                            data.DhcpServer = GetValueSafe(config, "DHCPServer");
+                            
+                            var obtained = GetValueSafe(config, "DHCPLeaseObtained");
+                            if (!string.IsNullOrWhiteSpace(obtained))
+                                try { data.LeaseObtained = ManagementDateTimeConverter.ToDateTime(obtained).ToString("yyyy-MM-dd HH:mm"); } catch { }
+                                
+                            var expires = GetValueSafe(config, "DHCPLeaseExpires");
+                            if (!string.IsNullOrWhiteSpace(expires))
+                                try { data.LeaseExpires = ManagementDateTimeConverter.ToDateTime(expires).ToString("yyyy-MM-dd HH:mm"); } catch { }
+                            break;
+                        }
+
+                        using var adapterSearcher = new ManagementObjectSearcher(
+                            $"SELECT * FROM Win32_NetworkAdapter WHERE GUID = '{preferred.Id}'");
+                        foreach (ManagementObject adapterObj in adapterSearcher.Get())
+                        {
+                            var status = GetValueSafe(adapterObj, "NetConnectionStatus");
+                            data.NetConnectionStatus = MapNetConnectionStatus(status);
+                            break;
+                        }
                     }
                 }
                 catch { }
@@ -1191,6 +1206,7 @@ public sealed class HardwarePreloadService
 
         data.Adapters = data.Adapters
             .OrderByDescending(a => a.IsPrimary)
+            .ThenByDescending(GetNetworkAdapterPriority)
             .ThenBy(a => a.Name)
             .ToList();
 
@@ -1201,6 +1217,14 @@ public sealed class HardwarePreloadService
             a.AdapterType.Contains("Wireless", StringComparison.OrdinalIgnoreCase));
 
         return data;
+    }
+
+    internal static NetworkAdapterData? ChoosePrimaryNetworkAdapter(IEnumerable<NetworkAdapterData> adapters)
+    {
+        return adapters
+            .OrderByDescending(GetNetworkAdapterPriority)
+            .ThenBy(a => a.Name, StringComparer.OrdinalIgnoreCase)
+            .FirstOrDefault();
     }
 
     private static NetworkAdapterData CreateNetworkAdapterData(System.Net.NetworkInformation.NetworkInterface adapter)
@@ -1245,6 +1269,154 @@ public sealed class HardwarePreloadService
         detail.Dns = dnsList.Count > 0 ? string.Join(", ", dnsList) : null;
 
         return detail;
+    }
+
+    private static int GetNetworkAdapterPriority(NetworkAdapterData adapter)
+    {
+        var score = 0;
+        if (IsConnectedStatus(adapter.Status))
+        {
+            score += 500;
+        }
+
+        if (HasUsableIpv4(adapter.Ipv4))
+        {
+            score += 220;
+        }
+
+        if (HasUsableGateway(adapter.Gateway))
+        {
+            score += 180;
+        }
+
+        if (!IsVirtualNetworkAdapter(adapter))
+        {
+            score += 160;
+        }
+
+        if (IsPhysicalNetworkType(adapter.AdapterType))
+        {
+            score += 80;
+        }
+
+        score += GetLinkSpeedScore(adapter.LinkSpeed);
+        return score;
+    }
+
+    private static bool IsConnectedStatus(string? status)
+    {
+        return string.Equals(status, "Up", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(status, "Connected", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool HasUsableIpv4(string? ipv4)
+    {
+        return !string.IsNullOrWhiteSpace(ipv4) &&
+               !ipv4.StartsWith("169.254.", StringComparison.OrdinalIgnoreCase) &&
+               !ipv4.Equals("0.0.0.0", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool HasUsableGateway(string? gateway)
+    {
+        return !string.IsNullOrWhiteSpace(gateway) &&
+               !gateway.Equals("0.0.0.0", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsPhysicalNetworkType(string? adapterType)
+    {
+        if (string.IsNullOrWhiteSpace(adapterType))
+        {
+            return false;
+        }
+
+        return adapterType.Contains("Ethernet", StringComparison.OrdinalIgnoreCase) ||
+               adapterType.Contains("Wireless", StringComparison.OrdinalIgnoreCase) ||
+               adapterType.Contains("Gigabit", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsVirtualNetworkAdapter(NetworkAdapterData adapter)
+    {
+        var joined = $"{adapter.Name} {adapter.Description} {adapter.AdapterType}".Trim();
+        if (string.IsNullOrWhiteSpace(joined))
+        {
+            return false;
+        }
+
+        var value = joined.ToLowerInvariant();
+        return value.Contains("wireguard") ||
+               value.Contains("wintun") ||
+               value.Contains("tailscale") ||
+               value.Contains("zerotier") ||
+               value.Contains("hamachi") ||
+               value.Contains("tap-windows") ||
+               value.Contains("virtual") ||
+               value.Contains("hyper-v") ||
+               value.Contains("vmware") ||
+               value.Contains("vpn") ||
+               value.Contains("tunnel") ||
+               value.Contains("loopback");
+    }
+
+    private static int GetLinkSpeedScore(string? linkSpeed)
+    {
+        if (string.IsNullOrWhiteSpace(linkSpeed))
+        {
+            return 0;
+        }
+
+        var match = Regex.Match(linkSpeed, @"(?<value>\d+(\.\d+)?)\s*(?<unit>Gbps|Mbps)", RegexOptions.IgnoreCase);
+        if (!match.Success)
+        {
+            return 0;
+        }
+
+        var numeric = double.Parse(match.Groups["value"].Value, System.Globalization.CultureInfo.InvariantCulture);
+        var unit = match.Groups["unit"].Value;
+        var mbps = unit.StartsWith("g", StringComparison.OrdinalIgnoreCase) ? numeric * 1000d : numeric;
+        return (int)Math.Clamp(mbps / 100d, 0d, 60d);
+    }
+
+    private static string? GetLogicalDrivesForDisk(string deviceId)
+    {
+        var logicalDrives = new List<string>();
+        try
+        {
+            using var partitionSearcher = new ManagementObjectSearcher(
+                $"ASSOCIATORS OF {{Win32_DiskDrive.DeviceID='{deviceId.Replace("\\", "\\\\")}'}} WHERE AssocClass=Win32_DiskDriveToDiskPartition");
+
+            foreach (ManagementObject partition in partitionSearcher.Get())
+            {
+                using var logicalSearcher = new ManagementObjectSearcher(
+                    $"ASSOCIATORS OF {{Win32_DiskPartition.DeviceID='{partition["DeviceID"]}'}} WHERE AssocClass=Win32_LogicalDiskToPartition");
+
+                foreach (ManagementObject logical in logicalSearcher.Get())
+                {
+                    var driveLetter = logical["DeviceID"]?.ToString();
+                    if (!string.IsNullOrWhiteSpace(driveLetter))
+                    {
+                        logicalDrives.Add(driveLetter);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            return null;
+        }
+
+        return logicalDrives.Count > 0 ? string.Join(", ", logicalDrives.Distinct(StringComparer.OrdinalIgnoreCase)) : null;
+    }
+
+    private static bool HasLogicalDriveLetter(string? logicalDrives, string driveLetter)
+    {
+        if (string.IsNullOrWhiteSpace(logicalDrives))
+        {
+            return false;
+        }
+
+        return logicalDrives
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Any(letter => string.Equals(letter, driveLetter, StringComparison.OrdinalIgnoreCase));
     }
 
     private static void ApplyPrimaryNetworkAdapter(NetworkHardwareData data, NetworkAdapterData primary)
@@ -2139,11 +2311,13 @@ public sealed class MemoryModuleData
 
 public sealed class DiskDriveData
 {
+    public string? DeviceId { get; set; }
     public string? Model { get; set; }
     public string? InterfaceType { get; set; }
     public string? SerialNumber { get; set; }
     public string? MediaType { get; set; }
     public string? FirmwareRevision { get; set; }
+    public string? LogicalDrives { get; set; }
     public long SizeBytes { get; set; }
     public int PartitionCount { get; set; }
     public int Index { get; set; }
