@@ -132,6 +132,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _moveSectionDownCommand;
     private readonly RelayCommand _resetLayoutCommand;
     private readonly RelayCommand _closePerformanceDetailCommand;
+    private readonly RelayCommand _openPerformanceMetricCommand;
     private readonly RelayCommand _closePerformanceSectionCommand;
     private readonly RelayCommand _exportSensorDiagnosticsCommand;
     private readonly RelayCommand _refreshStartupAppsCommand;
@@ -213,6 +214,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionDownCommand = new RelayCommand(param => MoveSection(param, 1), param => CanMoveSection(param, 1));
             _resetLayoutCommand = new RelayCommand(_ => ResetLayout());
             _closePerformanceDetailCommand = new RelayCommand(_ => ClosePerformanceDetail(), _ => IsPerformanceDetailOpen);
+            _openPerformanceMetricCommand = new RelayCommand(param => OpenPerformanceMetricByKey(param as string));
             _closePerformanceSectionCommand = new RelayCommand(_ => ClosePerformanceSectionDetail(), _ => IsPerformanceSectionDetailOpen);
             _openHardwareDetailCommand = new RelayCommand(OpenHardwareDetail);
             InitializeLayout();
@@ -439,6 +441,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             _moveSectionDownCommand = new RelayCommand(_ => { });
             _resetLayoutCommand = new RelayCommand(_ => { });
             _closePerformanceDetailCommand = new RelayCommand(_ => { }, _ => false);
+            _openPerformanceMetricCommand = new RelayCommand(_ => { });
             _closePerformanceSectionCommand = new RelayCommand(_ => { }, _ => false);
             _exportSensorDiagnosticsCommand = new RelayCommand(_ => { });
             _refreshStartupAppsCommand = new RelayCommand(_ => { });
@@ -2318,6 +2321,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ICommand MoveSectionUpCommand => _moveSectionUpCommand;
     public ICommand MoveSectionDownCommand => _moveSectionDownCommand;
     public ICommand ResetLayoutCommand => _resetLayoutCommand;
+    public ICommand OpenPerformanceMetricCommand => _openPerformanceMetricCommand;
     public ICommand ClosePerformanceSectionCommand => _closePerformanceSectionCommand;
     public ICommand ToggleStartupAppCommand => _toggleStartupAppCommand;
     public ICommand EnableServiceCommand => _enableServiceCommand;
@@ -2354,6 +2358,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public ObservableCollection<StartupAppEntry> StartupApps { get; }
     public ObservableCollection<ServiceEntry> Services { get; }
     public ObservableCollection<InfoDetailItem> ServiceDetailItems { get; }
+
+    public string SelectedPerformanceMetricKey => IsPerformanceDetailOpen
+        ? SelectedPerformanceItem?.Key ?? string.Empty
+        : string.Empty;
+
+    public bool IsCpuMetricSelected => string.Equals(SelectedPerformanceMetricKey, "cpu", StringComparison.OrdinalIgnoreCase);
+    public bool IsMemoryMetricSelected => string.Equals(SelectedPerformanceMetricKey, "memory", StringComparison.OrdinalIgnoreCase);
+    public bool IsGpuMetricSelected => string.Equals(SelectedPerformanceMetricKey, "gpu", StringComparison.OrdinalIgnoreCase);
+    public bool IsStorageMetricSelected => string.Equals(SelectedPerformanceMetricKey, "disk", StringComparison.OrdinalIgnoreCase);
+    public bool IsNetworkMetricSelected => string.Equals(SelectedPerformanceMetricKey, "net", StringComparison.OrdinalIgnoreCase);
 
     public double CpuUsage
     {
@@ -2418,6 +2432,25 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
 
         IsPerformanceDetailOpen = true;
+    }
+
+    private void OpenPerformanceMetricByKey(string? key)
+    {
+        if (string.IsNullOrWhiteSpace(key))
+        {
+            return;
+        }
+
+        EnsurePerformanceItems();
+        var item = PerformanceItems.FirstOrDefault(candidate =>
+            string.Equals(candidate.Key, key, StringComparison.OrdinalIgnoreCase));
+
+        if (item == null)
+        {
+            return;
+        }
+
+        TogglePerformanceDetail(item);
     }
 
     public void TogglePerformanceDetail(PerformanceItemViewModel? item)
@@ -2819,6 +2852,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(HasPerformanceDetail));
                 OnPropertyChanged(nameof(PerformanceDetailEmptyStateTitle));
                 OnPropertyChanged(nameof(PerformanceDetailEmptyStateText));
+                OnPropertyChanged(nameof(SelectedPerformanceMetricKey));
+                OnPropertyChanged(nameof(IsCpuMetricSelected));
+                OnPropertyChanged(nameof(IsMemoryMetricSelected));
+                OnPropertyChanged(nameof(IsGpuMetricSelected));
+                OnPropertyChanged(nameof(IsStorageMetricSelected));
+                OnPropertyChanged(nameof(IsNetworkMetricSelected));
             }
         }
     }
@@ -2834,6 +2873,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 OnPropertyChanged(nameof(HasPerformanceDetail));
                 OnPropertyChanged(nameof(PerformanceDetailEmptyStateTitle));
                 OnPropertyChanged(nameof(PerformanceDetailEmptyStateText));
+                OnPropertyChanged(nameof(SelectedPerformanceMetricKey));
+                OnPropertyChanged(nameof(IsCpuMetricSelected));
+                OnPropertyChanged(nameof(IsMemoryMetricSelected));
+                OnPropertyChanged(nameof(IsGpuMetricSelected));
+                OnPropertyChanged(nameof(IsStorageMetricSelected));
+                OnPropertyChanged(nameof(IsNetworkMetricSelected));
                 _closePerformanceDetailCommand.RaiseCanExecuteChanged();
             }
         }
@@ -3339,6 +3384,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformancePrimaryLabel = "Usage %";
                 PerformanceSecondaryLabel = string.Empty;
                 PerformanceHistoryScaleMax = 100;
+                if (HasCpuTemp)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Temperature", CpuTempText));
+                }
+                if (HasCpuPower)
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Package power", CpuPowerText));
+                }
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Speed", FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Base speed", FormatSpeedGHz(_cpuPerformanceSnapshot.BaseSpeedMhz)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Processes", FormatCount(_cpuPerformanceSnapshot.ProcessCount)));
@@ -3374,11 +3427,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             case PerformanceItemKind.Disk:
             {
                 var drive = selection.Identifier;
-                var perf = _diskPerformanceSnapshots.FirstOrDefault(d => d.DriveLetter.Equals(drive, StringComparison.OrdinalIgnoreCase));
+                var perf = !string.IsNullOrWhiteSpace(drive)
+                    ? _diskPerformanceSnapshots.FirstOrDefault(d => d.DriveLetter.Equals(drive, StringComparison.OrdinalIgnoreCase))
+                    : null;
                 var readHistory = !string.IsNullOrWhiteSpace(drive) ? GetOrCreateHistory(_diskReadHistoryByDrive, drive) : DiskReadHistory;
                 var writeHistory = !string.IsNullOrWhiteSpace(drive) ? GetOrCreateHistory(_diskWriteHistoryByDrive, drive) : DiskWriteHistory;
 
-                PerformanceChartTitle = $"Disk {drive}";
+                PerformanceChartTitle = !string.IsNullOrWhiteSpace(drive) ? $"Disk {drive}" : "Storage Activity";
                 PerformancePrimaryHistory = readHistory;
                 PerformanceSecondaryHistory = writeHistory;
                 PerformancePrimaryLabel = "Read MB/s";
@@ -3394,7 +3449,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Capacity", $"{perf.TotalSizeGb:F1} GB"));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Model", FormatText(perf.Model)));
                 }
-                
+                else
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Drives", FormatCount(_diskPerformanceSnapshots.Count)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Peak read", $"{_diskPerformanceSnapshots.Max(d => d.ReadMbps ?? 0):F1} MB/s"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Peak write", $"{_diskPerformanceSnapshots.Max(d => d.WriteMbps ?? 0):F1} MB/s"));
+                }
+                 
                 // General Disk Health (if available) - showing global status for now as per previous UI
                 if (!string.IsNullOrWhiteSpace(DiskHealthText) && DiskHealthText != "N/A")
                 {
@@ -3419,10 +3480,14 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                               ?? NetworkAdapters.FirstOrDefault(a => a.Name == selection.Title);
 
                 var adapterId = adapter?.AdapterId ?? selection.Identifier ?? selection.Title;
-                var sendHistory = GetOrCreateHistory(_netSendHistoryByAdapter, adapterId);
-                var receiveHistory = GetOrCreateHistory(_netReceiveHistoryByAdapter, adapterId);
+                var sendHistory = adapter != null
+                    ? GetOrCreateHistory(_netSendHistoryByAdapter, adapterId)
+                    : NetworkUploadHistory;
+                var receiveHistory = adapter != null
+                    ? GetOrCreateHistory(_netReceiveHistoryByAdapter, adapterId)
+                    : NetworkDownloadHistory;
 
-                PerformanceChartTitle = adapter?.Name ?? "Network";
+                PerformanceChartTitle = adapter?.Name ?? "Network Activity";
                 PerformancePrimaryHistory = receiveHistory;
                 PerformanceSecondaryHistory = sendHistory;
                 PerformancePrimaryLabel = "Receive Mbps";
@@ -3436,7 +3501,23 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     PerformanceDetailItems.Add(new PerformanceDetailItem("IPv4", string.IsNullOrWhiteSpace(adapter.Ipv4Address) ? "N/A" : adapter.Ipv4Address));
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Link speed", adapter.LinkSpeedMbps > 0 ? $"{adapter.LinkSpeedMbps:F0} Mbps" : "N/A"));
                 }
-                
+                else
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Adapters", FormatCount(NetworkAdapters.Count)));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Receive", $"{NetworkAdapters.Sum(a => a.ReceiveMbps):F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Send", $"{NetworkAdapters.Sum(a => a.SendMbps):F1} Mbps"));
+                }
+
+                if (!string.IsNullOrWhiteSpace(GatewayLatencyText))
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Gateway latency", GatewayLatencyText));
+                }
+
+                if (!string.IsNullOrWhiteSpace(WifiSignalText))
+                {
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Wi-Fi signal", WifiSignalText));
+                }
+                 
                 // Compact list of all adapters
                 PerformanceDetailItems.Add(new PerformanceDetailItem("", "")); // Spacer
                 PerformanceDetailItems.Add(new PerformanceDetailItem("All Adapters", "D/U Mbps"));

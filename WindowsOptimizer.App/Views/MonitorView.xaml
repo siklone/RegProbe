@@ -262,6 +262,25 @@
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
+        <Style x:Key="MonitorMetricLauncherStyle" TargetType="Border" BasedOn="{StaticResource MonitorSummaryPillStyle}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MonitorContextCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
         <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
@@ -702,98 +721,6 @@
         <DataTemplate x:Key="MonitorPerformanceTemplate">
             <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
                 <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Live Performance"
-                                       Style="{StaticResource SectionHeaderStyle}"/>
-                            <TextBlock Text="Current load, temperatures, storage health, and network responsiveness."
-                                       FontSize="12"
-                                       Foreground="{DynamicResource MutedForegroundBrush}"
-                                       Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Grid>
-
-                    <ListBox ItemsSource="{Binding PerformanceItems}"
-                             SelectedItem="{Binding SelectedPerformanceItem}"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Margin="0,12,0,12"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             PreviewMouseWheel="ListBox_PreviewMouseWheel"
-                             PreviewMouseLeftButtonUp="PerformanceTiles_PreviewMouseLeftButtonUp"
-                             PreviewKeyDown="PerformanceTiles_PreviewKeyDown">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Width" Value="170"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Margin" Value="0,0,10,10"/>
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border CornerRadius="10"
-                                        Padding="12"
-                                        BorderThickness="1"
-                                        BorderBrush="{DynamicResource GlassBorderBrush}"
-                                        MinWidth="150">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                            <Setter Property="Opacity" Value="1"/>
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                                                   Value="True"/>
-                                                        <Condition Binding="{Binding DataContext.IsPerformanceDetailOpen, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                   Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                </MultiDataTrigger>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                </Trigger>
-                                                <DataTrigger Binding="{Binding IsActive}" Value="False">
-                                                    <Setter Property="Opacity" Value="0.55"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Title}"
-                                                   FontSize="12"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        <TextBlock Text="{Binding Subtitle}"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                                   Margin="0,4,0,0"/>
-                                        <TextBlock Text="Click for live details"
-                                                   FontSize="10"
-                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                                   Margin="0,8,0,0"
-                                                   Visibility="{Binding DataContext.IsPerformanceDetailClosed, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
                     <Border Padding="14,12"
                             CornerRadius="12"
                             Background="{DynamicResource BackgroundMediumBrush}"
@@ -956,8 +883,365 @@
                                     </ScrollViewer>
                                 </StackPanel>
                             </Grid>
+
+                            <ContentControl Margin="0,16,0,0" Content="{Binding}">
+                                <ContentControl.Style>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="cpu">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorCpuContextTemplate}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="memory">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorMemoryContextTemplate}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="gpu">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorGpuContextTemplate}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Style>
+                            </ContentControl>
                         </StackPanel>
                     </Border>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorCpuContextTemplate">
+            <Border Style="{StaticResource MonitorContextCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Busy right now"
+                               Style="{StaticResource SectionHeaderStyle}"
+                               Margin="0,0,0,2"/>
+                    <TextBlock Text="The processes putting the most load on your CPU at this moment."
+                               FontSize="12"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,0,0,10"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  MaxHeight="220">
+                        <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource MonitorContextCardStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Name}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                <TextBlock FontSize="10"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           Margin="0,3,0,0">
+                                                    <Run Text="PID "/>
+                                                    <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                                    <Run Text="  Threads "/>
+                                                    <Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                    <Run Text="  Handles "/>
+                                                    <Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                                <TextBlock Text="CPU"
+                                                           FontSize="10"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                           FontSize="12"
+                                                           FontWeight="Bold">
+                                                    <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text="%"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
+                                                <TextBlock Text="RAM"
+                                                           FontSize="10"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                    <Run Text=" MB"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorMemoryContextTemplate">
+            <Border Style="{StaticResource MonitorContextCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Using the most memory"
+                               Style="{StaticResource SectionHeaderStyle}"
+                               Margin="0,0,0,2"/>
+                    <TextBlock Text="Apps currently reserving the biggest share of memory."
+                               FontSize="12"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,0,0,10"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  MaxHeight="220">
+                        <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource MonitorContextCardStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Name}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                <TextBlock FontSize="10"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           Margin="0,3,0,0">
+                                                    <Run Text="PID "/>
+                                                    <Run Text="{Binding Pid, Mode=OneWay}"/>
+                                                    <Run Text="  Threads "/>
+                                                    <Run Text="{Binding Threads, Mode=OneWay}"/>
+                                                    <Run Text="  Handles "/>
+                                                    <Run Text="{Binding Handles, Mode=OneWay}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                                <TextBlock Text="RAM"
+                                                           FontSize="10"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource SuccessBrush}"
+                                                           FontSize="12"
+                                                           FontWeight="Bold">
+                                                    <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                    <Run Text=" MB"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
+                                                <TextBlock Text="CPU"
+                                                           FontSize="10"
+                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold">
+                                                    <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text="%"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorGpuContextTemplate">
+            <Border Style="{StaticResource MonitorContextCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="GPU quick view"
+                               Style="{StaticResource SectionHeaderStyle}"
+                               Margin="0,0,0,2"/>
+                    <TextBlock Text="Live sensors that matter most while gaming or rendering."
+                               FontSize="12"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,0,0,10"/>
+                    <WrapPanel>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8">
+                            <StackPanel>
+                                <TextBlock Text="Load" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock FontSize="14" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}">
+                                    <Run Text="{Binding GpuUsage, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                    <Run Text="%"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8">
+                            <StackPanel>
+                                <TextBlock Text="Temperature" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuTempText}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8"
+                                Visibility="{Binding HasGpuMemory, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Memory" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuMemoryUsageText}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource SuccessBrush}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8"
+                                Visibility="{Binding HasGpuPower, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Power" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuPowerText}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8"
+                                Visibility="{Binding HasGpuCoreClock, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Core clock" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuCoreClockText}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8"
+                                Visibility="{Binding HasGpuMemoryClock, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Memory clock" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuMemoryClockText}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorContextCardStyle}" Width="164" Margin="0,0,8,8"
+                                Visibility="{Binding HasGpuFan, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Fan" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuFanRpmText}" FontSize="14" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorStorageContextTemplate">
+            <Border Style="{StaticResource MonitorContextCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Drives right now"
+                               Style="{StaticResource SectionHeaderStyle}"
+                               Margin="0,0,0,2"/>
+                    <TextBlock Text="Live drive activity, capacity usage, and the disks currently doing work."
+                               FontSize="12"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,0,0,10"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  MaxHeight="220">
+                        <ItemsControl ItemsSource="{Binding Disks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource MonitorContextCardStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}">
+                                                    <Run Text="{Binding DriveLetter, Mode=OneWay}"/>
+                                                    <Run Text="  "/>
+                                                    <Run Text="{Binding DescriptorText, Mode=OneWay}"/>
+                                                </TextBlock>
+                                                <TextBlock Text="{Binding Model}"
+                                                           FontSize="10"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           Margin="0,3,0,0"
+                                                           TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                                <TextBlock Text="Read" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource SuccessBrush}" FontSize="12" FontWeight="Bold">
+                                                    <Run Text="{Binding ReadMBps, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text=" MB/s"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
+                                                <TextBlock Text="Write" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource DangerBrush}" FontSize="12" FontWeight="Bold">
+                                                    <Run Text="{Binding WriteMBps, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text=" MB/s"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="3" Margin="12,0,0,0">
+                                                <TextBlock Text="Used" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource CautionBrush}" FontSize="12" FontWeight="Bold">
+                                                    <Run Text="{Binding UsedPercent, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                    <Run Text="%"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MonitorNetworkContextTemplate">
+            <Border Style="{StaticResource MonitorContextCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Network adapters"
+                               Style="{StaticResource SectionHeaderStyle}"
+                               Margin="0,0,0,2"/>
+                    <TextBlock Text="Which adapters are active and how much traffic each one is pushing right now."
+                               FontSize="12"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,0,0,10"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  MaxHeight="220">
+                        <ItemsControl ItemsSource="{Binding NetworkAdapters}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource MonitorContextCardStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Name}"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                                <TextBlock FontSize="10"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           Margin="0,3,0,0">
+                                                    <Run Text="{Binding StatusText, Mode=OneWay}"/>
+                                                    <Run Text="  "/>
+                                                    <Run Text="{Binding Type, Mode=OneWay}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                                <TextBlock Text="Down" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource SuccessBrush}" FontSize="12" FontWeight="Bold">
+                                                    <Run Text="{Binding ReceiveMbps, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text=" Mbps"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
+                                                <TextBlock Text="Up" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                                <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="12" FontWeight="Bold">
+                                                    <Run Text="{Binding SendMbps, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                    <Run Text=" Mbps"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -2904,9 +3188,23 @@
                                Foreground="{DynamicResource AccentBrightCyanBrush}"
                                Margin="0,4,0,0"
                                Visibility="{Binding StatusMessage, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
-                    <WrapPanel Margin="0,12,0,2"
-                               Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
-                        <Border Style="{StaticResource MonitorSummaryPillStyle}">
+                    <WrapPanel Margin="0,12,0,2">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCpuMetricSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding OpenPerformanceMetricCommand}"
+                                              CommandParameter="cpu"/>
+                            </Border.InputBindings>
                             <StackPanel>
                                 <TextBlock Text="CPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
                                 <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
@@ -2916,7 +3214,22 @@
                                 <TextBlock Text="{Binding CpuTempText}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0"/>
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource MonitorSummaryPillStyle}">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMemoryMetricSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding OpenPerformanceMetricCommand}"
+                                              CommandParameter="memory"/>
+                            </Border.InputBindings>
                             <StackPanel>
                                 <TextBlock Text="Memory" Style="{StaticResource MonitorSummaryLabelStyle}"/>
                                 <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
@@ -2931,7 +3244,22 @@
                                 </TextBlock>
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource MonitorSummaryPillStyle}">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsGpuMetricSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding OpenPerformanceMetricCommand}"
+                                              CommandParameter="gpu"/>
+                            </Border.InputBindings>
                             <StackPanel>
                                 <TextBlock Text="GPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
                                 <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
@@ -2941,14 +3269,44 @@
                                 <TextBlock Text="{Binding GpuTempText}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0"/>
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource MonitorSummaryPillStyle}">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsStorageMetricSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding OpenPerformanceMetricCommand}"
+                                              CommandParameter="disk"/>
+                            </Border.InputBindings>
                             <StackPanel>
                                 <TextBlock Text="Storage" Style="{StaticResource MonitorSummaryLabelStyle}"/>
                                 <TextBlock Text="{Binding DiskHealthText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
                                 <TextBlock Text="{Binding DiskHealthDetail}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>
-                        <Border Style="{StaticResource MonitorSummaryPillStyle}">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsNetworkMetricSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding OpenPerformanceMetricCommand}"
+                                              CommandParameter="net"/>
+                            </Border.InputBindings>
                             <StackPanel>
                                 <TextBlock Text="Network" Style="{StaticResource MonitorSummaryLabelStyle}"/>
                                 <TextBlock Text="{Binding GatewayLatencyText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
@@ -2958,30 +3316,13 @@
                             </StackPanel>
                         </Border>
                     </WrapPanel>
-                    <ListBox ItemsSource="{Binding MonitorTabs}"
-                             SelectedItem="{Binding SelectedTab}"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Margin="0,12,0,0"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource MonitorTabItemStyle}"/>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Row="1"
                             Orientation="Horizontal"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Margin="0,8,0,0">
-                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second."
-                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
+                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
                             <TextBlock Text="Auto refresh 1s" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
@@ -2990,8 +3331,7 @@
                     <Button Command="{Binding ExportMetricsCommand}"
                             Style="{StaticResource HeaderActionButtonStyle}"
                             VerticalAlignment="Center"
-                            ToolTip="Save snapshot (CSV) to your Desktop."
-                            Visibility="{Binding IsPerformanceTab, Converter={StaticResource BoolToVisibility}}">
+                            ToolTip="Save snapshot (CSV) to your Desktop.">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
                             <TextBlock Text="Export CSV"/>
@@ -3011,24 +3351,8 @@
                 </StackPanel>
             </Grid>
 
-            <ContentControl Content="{Binding}">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="ContentTemplate" Value="{StaticResource MonitorPerformanceTabTemplate}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.Processes}">
-                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorProcessesTabTemplate}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.StartupApps}">
-                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorStartupAppsTemplate}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedTab.Tab}" Value="{x:Static viewModels:MonitorViewModel+MonitorTab.Services}">
-                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorServicesTemplate}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
+            <ContentControl Content="{Binding}"
+                            ContentTemplate="{StaticResource MonitorPerformanceTemplate}"/>
 
             </StackPanel>
         </ScrollViewer>
