@@ -159,6 +159,7 @@ public static class IconResolver
 
     private static readonly (Regex Pattern, string IconKey)[] NetworkPatterns =
     {
+        (Compile(@"wireguard|wintun"), "network_wireguard"),
         (Compile(@"i226"), "network_intel_i226"),
         (Compile(@"i225"), "network_intel_i225"),
         (Compile(@"ax211|ax210"), "network_intel_wifi6e"),
@@ -196,6 +197,7 @@ public static class IconResolver
 
     private static readonly (Regex Pattern, string IconKey)[] DisplayPatterns =
     {
+        (Compile(@"e27fvc[\s-]*e|excalibur|wam\s*2700"), "display_excalibur"),
         (Compile(@"rog\s*swift"), "display_asus_rog"),
         (Compile(@"proart"), "display_asus_proart"),
         (Compile(@"asus"), "display_asus"),

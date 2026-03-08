@@ -7,7 +7,9 @@
              d:DesignHeight="920"
              d:DesignWidth="1200"
              FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
-             FontSize="12">
+             FontSize="12"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
@@ -412,8 +414,8 @@
                                                Text="{Binding BaseboardProduct}"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               TextTrimming="CharacterEllipsis"
-                                               MaxWidth="170"/>
+                                               TextWrapping="Wrap"
+                                               MaxWidth="220"/>
 
                                     <TextBlock Grid.Row="1"
                                                Margin="0,10,0,0"
@@ -494,12 +496,8 @@
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding StorageIconKey, StringFormat=Resolved icon: {0}}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundBrightBrush}"
-                                       TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding DiskDrives.Count, StringFormat=Detected drives: {0}}"
-                                       Margin="0,4,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                         </StackPanel>
                     </Border>
@@ -518,7 +516,7 @@
                             <TextBlock Text="{Binding GpuRefreshRate, StringFormat=Refresh: {0}}"
                                        Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundBrightBrush}"/>
-                            <TextBlock Text="{Binding Monitors.Count, StringFormat=Monitor tabs available: {0}}"
+                            <TextBlock Text="{Binding Monitors.Count, StringFormat=Detected displays: {0}}"
                                        Margin="0,4,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"/>
                         </StackPanel>

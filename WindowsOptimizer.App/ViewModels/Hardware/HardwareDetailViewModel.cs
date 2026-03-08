@@ -330,10 +330,8 @@ public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 
     private static void AppendIconResolutionSpecs(List<KeyValuePair<string, string>> specs, HardwareIconResolutionResult resolution)
     {
-        specs.Add(new("---", "---"));
-        specs.Add(new("Resolved Icon", resolution.IconKey));
-        specs.Add(new("Icon Source", resolution.SourceLabel));
-        specs.Add(new("Icon Match", resolution.MatchLabel));
+        _ = specs;
+        _ = resolution;
     }
 
     private static List<KeyValuePair<string, string>> BuildDisplaySpecs(
@@ -947,22 +945,6 @@ public sealed class DisplaysDetailVM : HardwareDetailViewModelBase
 
                 deviceSpecs.Add(new("Desktop Role", device.IsPrimary ? "Primary" : "Secondary"));
                 if (!string.IsNullOrWhiteSpace(display.GpuOutput)) deviceSpecs.Add(new("GPU Output", display.GpuOutput));
-                if (!string.IsNullOrWhiteSpace(device.MatchMode) &&
-                    !string.Equals(device.MatchMode, "Unmatched", StringComparison.OrdinalIgnoreCase) &&
-                    !string.Equals(device.MatchMode, "Fallback", StringComparison.OrdinalIgnoreCase))
-                {
-                    deviceSpecs.Add(new("Match Mode", device.MatchMode));
-                }
-
-                if (!string.IsNullOrWhiteSpace(device.MatchKey))
-                {
-                    deviceSpecs.Add(new("Match Key", device.MatchKey));
-                }
-
-                if (!string.IsNullOrWhiteSpace(device.MatchedInstance))
-                {
-                    deviceSpecs.Add(new("Matched Instance", device.MatchedInstance));
-                }
 
                 var headerSeed = !string.IsNullOrWhiteSpace(device.Name)
                     ? device.Name

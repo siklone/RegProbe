@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,9 +17,7 @@ public partial class MonitorView : UserControl
     {
         try
         {
-            LogToFile("MonitorView: Constructor started");
             InitializeComponent();
-            LogToFile("MonitorView: InitializeComponent completed successfully");
         }
         catch (Exception ex)
         {
@@ -40,7 +37,7 @@ public partial class MonitorView : UserControl
                     Text =
                         "Monitor view failed to load.\n\n" +
                         $"{ex.GetType().Name}: {ex.Message}\n\n" +
-                        "Details were written to %TEMP%\\WindowsOptimizer_Debug.log"
+                        "Details were written to the application diagnostics log."
                 }
             };
         }
@@ -142,20 +139,6 @@ public partial class MonitorView : UserControl
         }
 
         return null;
-    }
-
-    private static void LogToFile(string message)
-    {
-        try
-        {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "WindowsOptimizer_Debug.log");
-            var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
-            System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
-        }
-        catch
-        {
-            // Ignore logging errors
-        }
     }
 
     private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

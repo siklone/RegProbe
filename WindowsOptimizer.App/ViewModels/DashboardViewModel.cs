@@ -353,9 +353,10 @@ public sealed class DashboardViewModel : ViewModelBase
 
     public void OpenDetail(object? parameter)
     {
-        System.Diagnostics.Debug.WriteLine($"OPEN CARD: {parameter ?? "<null>"}");
-
-        if (parameter is not string section) return;
+        if (parameter is not string section)
+        {
+            return;
+        }
 
         try
         {
@@ -375,7 +376,6 @@ public sealed class DashboardViewModel : ViewModelBase
 
             if (window == null)
             {
-                System.Diagnostics.Debug.WriteLine($"OpenDetail ignored: unsupported section '{section}'.");
                 return;
             }
 
@@ -384,7 +384,7 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"OpenDetail error: {ex.Message}");
+            AppDiagnostics.LogException($"Dashboard detail launch failed for '{section}'", ex);
         }
     }
 
@@ -399,19 +399,19 @@ public sealed class DashboardViewModel : ViewModelBase
 
             await Task.Run(() =>
             {
-                try { LoadOperatingSystemInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"OS: {ex.Message}"); }
-                try { LoadSystemInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"System: {ex.Message}"); }
-                try { LoadBiosInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"BIOS: {ex.Message}"); }
-                try { LoadMotherboardInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Mobo: {ex.Message}"); }
-                try { LoadProcessorInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"CPU: {ex.Message}"); }
-                try { LoadMemoryInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Mem: {ex.Message}"); }
-                try { LoadRamModulesInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"RAM: {ex.Message}"); }
-                try { LoadGraphicsInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"GPU: {ex.Message}"); }
-                try { LoadMonitorsInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Monitor: {ex.Message}"); }
-                try { LoadDiskDrivesInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Disk: {ex.Message}"); }
-                try { LoadUsbDevicesInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"USB: {ex.Message}"); }
-                try { LoadNetworkInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Net: {ex.Message}"); }
-                try { LoadSecurityInfo(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"Sec: {ex.Message}"); }
+                TryLoadDashboardSection("OS", LoadOperatingSystemInfo);
+                TryLoadDashboardSection("System", LoadSystemInfo);
+                TryLoadDashboardSection("BIOS", LoadBiosInfo);
+                TryLoadDashboardSection("Motherboard", LoadMotherboardInfo);
+                TryLoadDashboardSection("CPU", LoadProcessorInfo);
+                TryLoadDashboardSection("Memory", LoadMemoryInfo);
+                TryLoadDashboardSection("RAM Modules", LoadRamModulesInfo);
+                TryLoadDashboardSection("GPU", LoadGraphicsInfo);
+                TryLoadDashboardSection("Displays", LoadMonitorsInfo);
+                TryLoadDashboardSection("Storage", LoadDiskDrivesInfo);
+                TryLoadDashboardSection("USB", LoadUsbDevicesInfo);
+                TryLoadDashboardSection("Network", LoadNetworkInfo);
+                TryLoadDashboardSection("Security", LoadSecurityInfo);
             });
 
             snapshot = HardwarePreloadService.Instance.GetSnapshot();
@@ -420,17 +420,23 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Failed to load system info: {ex.Message}");
+            AppDiagnostics.LogException("Dashboard load failed", ex);
         }
         finally
         {
             IsLoading = false;
-            
-            // Show notification when system info is loaded
-            MainWindow.Instance?.Notifications.ShowSuccess(
-                $"System information loaded successfully. Detected {CpuDetails.Name} with {TotalPhysicalMemory} RAM.",
-                "Dashboard Ready",
-                TimeSpan.FromSeconds(5));
+        }
+    }
+
+    private static void TryLoadDashboardSection(string sectionName, Action loader)
+    {
+        try
+        {
+            loader();
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException($"Dashboard {sectionName} load failed", ex);
         }
     }
 
@@ -1066,7 +1072,7 @@ public sealed class DashboardViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Error loading CPU info: {ex.Message}");
+            AppDiagnostics.LogException("Dashboard CPU load failed", ex);
         }
     }
 
@@ -1200,7 +1206,7 @@ public sealed class DashboardViewModel : ViewModelBase
             memDetails.Frequency = $"{maxFreq:F1} MHz";
             double realFreq = maxFreq / 2.0; // DDR double rate
             memDetails.DRAMFrequency = $"{realFreq:F1} MHz";
-            memDetails.FSB_DRAM = $"1:{Math.Round(maxFreq/100.0)}"; // Rough mock
+            memDetails.FSB_DRAM = string.Empty;
             memDetails.Channels = (moduleCount >= 2) ? "Dual" : "Single";
             if (moduleCount >= 4) memDetails.Channels = "Quad";
             

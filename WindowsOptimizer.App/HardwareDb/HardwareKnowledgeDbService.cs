@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.App.HardwareDb.Models;
@@ -10,6 +11,7 @@ namespace WindowsOptimizer.App.HardwareDb;
 
 public sealed class HardwareKnowledgeDbService
 {
+    private static readonly Regex RevisionSuffixRegex = new(@"\brev\s+[a-z0-9]+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true
@@ -275,9 +277,33 @@ public sealed class HardwareKnowledgeDbService
             return true;
         }
 
+        if (!string.IsNullOrWhiteSpace(left.Brand) &&
+            !string.IsNullOrWhiteSpace(right.Brand) &&
+            !string.IsNullOrWhiteSpace(left.ModelName) &&
+            !string.IsNullOrWhiteSpace(right.ModelName) &&
+            !string.IsNullOrWhiteSpace(left.IconKey) &&
+            string.Equals(left.Brand, right.Brand, StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(left.IconKey, right.IconKey, StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(NormalizeIdentityModel(left.ModelName), NormalizeIdentityModel(right.ModelName), StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
         return string.Equals(
             HardwareNameNormalizer.Normalize(left.NormalizedName),
             HardwareNameNormalizer.Normalize(right.NormalizedName),
             StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string NormalizeIdentityModel(string value)
+    {
+        var normalized = HardwareNameNormalizer.Normalize(value);
+        if (string.IsNullOrWhiteSpace(normalized))
+        {
+            return string.Empty;
+        }
+
+        normalized = RevisionSuffixRegex.Replace(normalized, " ");
+        return Regex.Replace(normalized, @"\s+", " ").Trim();
     }
 }

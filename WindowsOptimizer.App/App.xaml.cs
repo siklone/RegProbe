@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -69,10 +68,8 @@ public partial class App : Application
 
             var preloader = CreateStartupPreloader(preloadProgress);
 
-            Debug.WriteLine("[APP] Calling PreloadAllAsync...");
             AppDiagnostics.Log("[APP] Calling PreloadAllAsync...");
             await preloader.RunAllAsync(CancellationToken.None);
-            Debug.WriteLine("[APP] PreloadAllAsync done.");
             AppDiagnostics.Log("[APP] PreloadAllAsync done.");
 
             var mainWindow = new MainWindow
@@ -149,7 +146,7 @@ public partial class App : Application
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[App] Parallel hardware preloader failed: {ex.Message}");
+                AppDiagnostics.LogException("Parallel hardware preloader failed", ex);
             }
         }, isCritical: false, priority: 68);
 
@@ -269,7 +266,7 @@ public partial class App : Application
             try
             {
                 MessageBox.Show(
-                    $"Unexpected error: {e.Exception.Message}\n\nDetails were written to %TEMP%\\WindowsOptimizer_Debug.log and CrashLogs.",
+                    $"Unexpected error: {e.Exception.Message}\n\nDetails were written to the application logs and CrashLogs.",
                     "Windows Optimizer",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
@@ -324,7 +321,7 @@ public partial class App : Application
         catch (Exception ex)
         {
             // Non-critical, continue without optimization
-            System.Diagnostics.Debug.WriteLine($"Render settings configuration failed: {ex.Message}");
+            AppDiagnostics.LogException("Render settings configuration failed", ex);
         }
     }
 
@@ -333,8 +330,6 @@ public partial class App : Application
     /// </summary>
     private void OnArgumentsReceived(object? sender, string[] args)
     {
-        System.Diagnostics.Debug.WriteLine($"[App] Received args from second instance: {string.Join(" ", args)}");
-
         // Example: Navigate to specific tab based on args
         if (MainWindow?.DataContext is MainViewModel mainVm)
         {
@@ -343,12 +338,12 @@ public partial class App : Application
                 if (arg.Equals("--monitor", StringComparison.OrdinalIgnoreCase))
                 {
                     // Navigate to Monitor tab
-                    System.Diagnostics.Debug.WriteLine("[App] Navigating to Monitor via IPC arg");
+                    AppDiagnostics.Log("[App] Navigating to Monitor via IPC arg");
                 }
                 else if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
                 {
                     // Navigate to Tweaks tab
-                    System.Diagnostics.Debug.WriteLine("[App] Navigating to Tweaks via IPC arg");
+                    AppDiagnostics.Log("[App] Navigating to Tweaks via IPC arg");
                 }
             }
         }

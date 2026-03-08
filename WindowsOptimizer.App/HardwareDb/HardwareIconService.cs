@@ -59,6 +59,7 @@ public sealed record HardwareIconResolutionResult(
 public static class HardwareIconService
 {
     private static readonly Regex PciVendorRegex = new(@"VEN[_-]?(?<vendor>[0-9A-F]{4})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex MotherboardChipsetRegex = new(@"\b(?<chipset>(?:z|x|b|a|h|w)\d{3,4}[a-z]?)\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly ConcurrentDictionary<string, ImageSource> IconCache = new(StringComparer.OrdinalIgnoreCase);
     private static readonly IReadOnlyDictionary<string, string> DisplayVendorAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -75,7 +76,8 @@ public static class HardwareIconService
         ["MSI"] = "MSI",
         ["SAM"] = "Samsung",
         ["SEC"] = "Samsung",
-        ["VSC"] = "ViewSonic"
+        ["VSC"] = "ViewSonic",
+        ["WAM"] = "Excalibur"
     };
     private static readonly IReadOnlyDictionary<string, string> GpuVendorAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -98,6 +100,15 @@ public static class HardwareIconService
         ["super micro"] = "Supermicro",
         ["supermicro"] = "Supermicro",
         ["evga corp"] = "EVGA"
+    };
+    private static readonly string[] FirmwareVendorNoise =
+    {
+        "american megatrends",
+        "ami",
+        "insyde",
+        "phoenix",
+        "uefi",
+        "bios"
     };
     
     public static ImageSource Resolve(HardwareType type, string? modelName, HardwareModelBase? matchedModel = null)
@@ -202,6 +213,11 @@ public static class HardwareIconService
                 continue;
             }
 
+            if (IsFirmwareVendorNoise(value))
+            {
+                continue;
+            }
+
             expanded.Add(value);
 
             var normalized = HardwareNameNormalizer.Normalize(value);
@@ -215,6 +231,25 @@ public static class HardwareIconService
         }
 
         return BuildLookupSeed(expanded.ToArray());
+    }
+
+    private static bool IsFirmwareVendorNoise(string value)
+    {
+        var normalized = HardwareNameNormalizer.Normalize(value);
+        if (string.IsNullOrWhiteSpace(normalized))
+        {
+            return false;
+        }
+
+        foreach (var token in FirmwareVendorNoise)
+        {
+            if (normalized.Contains(token, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static HardwareIconResolutionResult ResolveResult(HardwareType type, string? modelName, HardwareModelBase? matchedModel = null)
@@ -238,12 +273,15 @@ public static class HardwareIconService
         if (resolved == null && effectiveModel == null && !string.IsNullOrWhiteSpace(modelName))
         {
             var dbMatch = MatchFromDbDetailed(type, modelName);
-            effectiveModel = dbMatch.Model;
-            matchKind = dbMatch.MatchKind;
-            if (effectiveModel != null && !string.IsNullOrWhiteSpace(effectiveModel.IconKey))
+            if (ShouldUseDatabaseMatch(type, requestedName, dbMatch.Model, dbMatch.MatchKind))
             {
-                resolved = effectiveModel.IconKey;
-                source = HardwareIconResolutionSource.DatabaseModel;
+                effectiveModel = dbMatch.Model;
+                matchKind = dbMatch.MatchKind;
+                if (effectiveModel != null && !string.IsNullOrWhiteSpace(effectiveModel.IconKey))
+                {
+                    resolved = effectiveModel.IconKey;
+                    source = HardwareIconResolutionSource.DatabaseModel;
+                }
             }
         }
 
@@ -379,6 +417,75 @@ public static class HardwareIconService
         }
 
         return score;
+    }
+
+    private static bool ShouldUseDatabaseMatch(HardwareType type, string requestedName, HardwareModelBase? model, HardwareMatchKind matchKind)
+    {
+        if (model == null)
+        {
+            return false;
+        }
+
+        if (type != HardwareType.Motherboard)
+        {
+            return true;
+        }
+
+        return ShouldTrustMotherboardMatch(requestedName, model, matchKind);
+    }
+
+    private static bool ShouldTrustMotherboardMatch(string requestedName, HardwareModelBase model, HardwareMatchKind matchKind)
+    {
+        if (matchKind is HardwareMatchKind.ExactName or HardwareMatchKind.ExactAlias or HardwareMatchKind.ProvidedModel)
+        {
+            return true;
+        }
+
+        var requested = HardwareNameNormalizer.Normalize(requestedName);
+        if (string.IsNullOrWhiteSpace(requested))
+        {
+            return false;
+        }
+
+        var requestedChipset = ExtractMotherboardChipset(requested);
+        var modelChipset = ExtractMotherboardChipset(string.Join(" ",
+            model.ModelName,
+            model.Generation,
+            model.Codename,
+            model.NormalizedName));
+
+        if (!string.IsNullOrWhiteSpace(requestedChipset))
+        {
+            if (string.IsNullOrWhiteSpace(modelChipset) ||
+                !string.Equals(requestedChipset, modelChipset, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+        }
+
+        var requestedCompact = requested.Replace(" ", string.Empty, StringComparison.Ordinal);
+        var modelCompact = HardwareNameNormalizer.Normalize(model.ModelName).Replace(" ", string.Empty, StringComparison.Ordinal);
+        if (!string.IsNullOrWhiteSpace(modelCompact) &&
+            modelCompact.Contains("mpro4", StringComparison.OrdinalIgnoreCase) &&
+            requestedCompact.Contains("pro4", StringComparison.OrdinalIgnoreCase) &&
+            !requestedCompact.Contains("mpro4", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return !string.IsNullOrWhiteSpace(requestedChipset) || requested.Length >= 12;
+    }
+
+    private static string ExtractMotherboardChipset(string value)
+    {
+        var normalized = HardwareNameNormalizer.Normalize(value);
+        if (string.IsNullOrWhiteSpace(normalized))
+        {
+            return string.Empty;
+        }
+
+        var match = MotherboardChipsetRegex.Match(normalized);
+        return match.Success ? match.Groups["chipset"].Value : string.Empty;
     }
 
     private static (HardwareModelBase? Model, HardwareMatchKind MatchKind) MatchFromDbDetailed(HardwareType type, string modelName)

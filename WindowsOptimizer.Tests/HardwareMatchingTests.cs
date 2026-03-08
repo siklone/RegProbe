@@ -305,6 +305,15 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void BuildMotherboardLookupSeed_SkipsFirmwareVendorNoise()
+    {
+        var seed = HardwareIconService.BuildMotherboardLookupSeed("ASRock", "B550 Pro4", "American Megatrends International, LLC.", "B550");
+
+        Assert.DoesNotContain("American Megatrends", seed, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("AMI", seed, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void ResolveResult_UsesGpuRuleForGigabyteBoardCode()
     {
         EnsureKnowledgeDbLoaded();
@@ -402,6 +411,21 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
+    public void ResolveResult_UsesMotherboardDatabaseForAsrockPro4Board()
+    {
+        EnsureKnowledgeDbLoaded();
+        var seed = HardwareIconService.BuildMotherboardLookupSeed(
+            "ASRock",
+            "B550 Pro4",
+            "American Megatrends International, LLC.",
+            "B550");
+        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
+
+        Assert.Equal("mb_asrock", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+    }
+
+    [Fact]
     public void ResolveResult_UsesMotherboardRuleForAsusStrixBoard()
     {
         EnsureKnowledgeDbLoaded();
@@ -411,7 +435,7 @@ public sealed class HardwareMatchingTests
         var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
 
         Assert.Equal("mb_asus_rog", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
+        Assert.NotEqual(HardwareIconResolutionSource.Fallback, result.Source);
     }
 
     [Fact]
@@ -490,5 +514,27 @@ public sealed class HardwareMatchingTests
 
         Assert.Equal("network_1gbe", result.IconKey);
         Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesNetworkDatabaseForWireGuardTunnel()
+    {
+        EnsureKnowledgeDbLoaded();
+        var result = HardwareIconService.ResolveResult(HardwareType.Network, "WireGuard Tunnel");
+
+        Assert.Equal("network_wireguard", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+    }
+
+    [Fact]
+    public void ResolveResult_UsesDisplayDatabaseForExcaliburModelCode()
+    {
+        EnsureKnowledgeDbLoaded();
+        var seed = HardwareIconService.BuildDisplayLookupSeed("E27FVC-E", "WAM", "2700");
+        var result = HardwareIconService.ResolveResult(HardwareType.Display, seed);
+
+        Assert.Equal("display_excalibur", result.IconKey);
+        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
     }
 }

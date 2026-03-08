@@ -1,6 +1,6 @@
 using System;
 using System.Windows;
-using WindowsOptimizer.App.Diagnostics;
+using System.Windows.Controls;
 
 namespace WindowsOptimizer.App.Views;
 
@@ -9,30 +9,47 @@ public partial class HardwareDetailWindow : Window
     public HardwareDetailWindow()
     {
         InitializeComponent();
-        // Log actual DataContext and Specs count when the window is shown (helps diagnose which VM is used).
-        this.Loaded += (s, e) =>
-        {
-            var dc = this.DataContext;
-            var specsCount = -1;
-            try { specsCount = ((dynamic)dc)?.Specs?.Count ?? -1; } catch { }
-            AppDiagnostics.Log($"[HardwareDetailWindow.Loaded] DataContext type: {dc?.GetType().Name}, Specs count: {specsCount}");
-        };
-
         Loaded += OnLoaded;
+        SizeChanged += OnSizeChanged;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        var ownerHeight = Owner?.ActualHeight ?? 0;
-        MaxHeight = ownerHeight > 0
-            ? ownerHeight * 0.85
-            : SystemParameters.WorkArea.Height * 0.85;
+        ApplyWindowBounds();
+        UpdateScrollableRegion();
+    }
 
-        var scrollViewer = SpecsScrollViewer;
-        if (scrollViewer != null && MaxHeight > 0)
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        UpdateScrollableRegion();
+    }
+
+    private void ApplyWindowBounds()
+    {
+        var workArea = SystemParameters.WorkArea;
+        var ownerWidth = Owner?.ActualWidth ?? 0;
+        var ownerHeight = Owner?.ActualHeight ?? 0;
+
+        MaxWidth = Math.Min(workArea.Width * 0.92, 1100);
+        MaxHeight = Math.Min(workArea.Height * 0.92, 920);
+
+        var targetWidth = ownerWidth > 0 ? ownerWidth * 0.62 : workArea.Width * 0.56;
+        var targetHeight = ownerHeight > 0 ? ownerHeight * 0.84 : workArea.Height * 0.8;
+
+        Width = Math.Clamp(targetWidth, MinWidth, MaxWidth);
+        Height = Math.Clamp(targetHeight, MinHeight, MaxHeight);
+    }
+
+    private void UpdateScrollableRegion()
+    {
+        if (SpecsScrollViewer is not ScrollViewer scrollViewer)
         {
-            scrollViewer.MaxHeight = MaxHeight - 180;
+            return;
         }
+
+        var reservedHeight = HasDeviceTabsBorder?.ActualHeight > 0 ? 236 : 208;
+        var viewportTarget = ActualHeight > 0 ? ActualHeight : Height;
+        scrollViewer.MaxHeight = Math.Max(320, viewportTarget - reservedHeight);
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)

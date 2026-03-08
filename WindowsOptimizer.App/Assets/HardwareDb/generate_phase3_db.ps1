@@ -379,12 +379,15 @@ function Add-MotherboardAliasVariants {
 
     $vendorAliases = Get-MotherboardVendorAliases -Brand $Brand
     $variants = New-Object System.Collections.Generic.List[string]
+    $normalizedModelName = ($ModelName -replace "[^A-Za-z0-9 ]", " ").ToLowerInvariant()
+    $normalizedChipset = ($Chipset -replace "[^A-Za-z0-9]", "").ToLowerInvariant()
+    $allowChipsetSeriesAlias = -not [string]::IsNullOrWhiteSpace($normalizedChipset) -and ($normalizedModelName -notmatch ("^{0}[a-z0-9]+" -f [regex]::Escape($normalizedChipset)))
 
     foreach ($candidate in @(
         $ModelName,
         ("{0} {1}" -f $Brand, $ModelName).Trim(),
-        ("{0} {1}" -f $Chipset, $Series).Trim(),
-        ("{0} {1} {2}" -f $Brand, $Chipset, $Series).Trim(),
+        $(if ($allowChipsetSeriesAlias) { ("{0} {1}" -f $Chipset, $Series).Trim() }),
+        $(if ($allowChipsetSeriesAlias) { ("{0} {1} {2}" -f $Brand, $Chipset, $Series).Trim() }),
         ("{0} {1}" -f $Brand, $Series).Trim()
     )) {
         if (-not [string]::IsNullOrWhiteSpace($candidate)) {
@@ -514,6 +517,7 @@ function Resolve-NetworkIconKey {
     $modelKey = $Model.Trim().ToLowerInvariant()
     $genKey = $Generation.Trim().ToLowerInvariant()
 
+    if ($brandKey -eq "wireguard" -or $modelKey -match "wireguard|wintun") { return "network_wireguard" }
     if ($modelKey -match "i226") { return "network_intel_i226" }
     if ($modelKey -match "i225") { return "network_intel_i225" }
     if ($modelKey -match "i219|i211|i210") { return "network_1gbe" }
@@ -539,6 +543,7 @@ function Resolve-NetworkIconKey {
     if ($brandKey -eq "killer") { return "network_killer" }
     if ($brandKey -eq "broadcom") { return "network_broadcom" }
     if ($brandKey -eq "mediatek") { return "network_mediatek" }
+    if ($genKey -match "vpn") { return "network_wireguard" }
     if ($genKey -match "ethernet") { return "network_1gbe" }
     return "network_default"
 }
@@ -712,6 +717,7 @@ function Get-DisplayVendorAliases {
         "benq" { return @("BNQ", "BenQ") }
         "viewsonic" { return @("VSC", "ViewSonic") }
         "aoc" { return @("AOC") }
+        "excalibur" { return @("WAM", "Excalibur", "Casper") }
         default { return @($Brand) }
     }
 }
@@ -754,6 +760,7 @@ function Resolve-DisplayDbIconKey {
         return "display_samsung"
     }
 
+    if ($brandKey -eq "excalibur") { return "display_excalibur" }
     if ($brandKey -eq "benq") { return "display_benq" }
     if ($brandKey -eq "viewsonic") { return "display_viewsonic" }
     if ($brandKey -eq "aoc") { return "display_aoc" }
@@ -862,6 +869,7 @@ $displaySeeds = @(
     @{ Brand = "Samsung"; Series = "Odyssey"; ModelCode = "G85SB"; ProductName = "Samsung Odyssey OLED G8"; PanelType = "QD-OLED"; ScreenSizeInches = 34.0; ReleaseYear = 2022; Aliases = @("Odyssey G85SB", "LS34BG850SNXZA") },
     @{ Brand = "Samsung"; Series = "Odyssey"; ModelCode = "G95SC"; ProductName = "Samsung Odyssey OLED G9"; PanelType = "QD-OLED"; ScreenSizeInches = 49.0; ReleaseYear = 2023; Aliases = @("Odyssey G95SC", "LS49CG954SNXZA") },
     @{ Brand = "Samsung"; Series = "Odyssey"; ModelCode = "G80SD"; ProductName = "Samsung Odyssey OLED G8 G80SD"; PanelType = "QD-OLED"; ScreenSizeInches = 32.0; ReleaseYear = 2024; Aliases = @("Odyssey G80SD", "LS32DG802SNXZA") },
+    @{ Brand = "Excalibur"; Series = "Curved Gaming"; ModelCode = "E27FVC-E"; ProductName = "Excalibur E27FVC-E"; PanelType = "VA"; ScreenSizeInches = 27.0; ReleaseYear = 2023; Aliases = @("Casper Excalibur E27FVC-E", "E27FVC-E WAM 2700", "WAM 2700") },
     @{ Brand = "BenQ"; Series = "MOBIUZ"; ModelCode = "EX2710Q"; ProductName = "BenQ MOBIUZ EX2710Q"; PanelType = "IPS"; ScreenSizeInches = 27.0; ReleaseYear = 2021; Aliases = @("BenQ EX2710Q") },
     @{ Brand = "ViewSonic"; Series = "Elite"; ModelCode = "XG2431"; ProductName = "ViewSonic XG2431"; PanelType = "IPS"; ScreenSizeInches = 24.0; ReleaseYear = 2021; Aliases = @("ViewSonic XG2431") },
     @{ Brand = "AOC"; Series = "AGON"; ModelCode = "AG274QG"; ProductName = "AOC AGON AG274QG"; PanelType = "IPS"; ScreenSizeInches = 27.0; ReleaseYear = 2022; Aliases = @("AOC AG274QG") }
@@ -1325,6 +1333,7 @@ $motherboardSeeds = @(
     @{ Brand = "ASRock"; Series = "Phantom Gaming"; Chipset = "B650E"; Socket = "AM5"; Models = @("B650E PG Riptide WiFi", "B650E PG-ITX WiFi", "B650E Phantom Gaming 4", "B650E PG Lightning") },
     @{ Brand = "ASRock"; Series = "Taichi"; Chipset = "X870E"; Socket = "AM5"; Models = @("X870E Taichi", "X870E Taichi Lite", "X870E Taichi Carrara") },
     @{ Brand = "ASRock"; Series = "Steel Legend"; Chipset = "B550"; Socket = "AM4"; Models = @("B550 Steel Legend", "B550M Steel Legend", "B550 Steel Legend WiFi") },
+    @{ Brand = "ASRock"; Series = "Pro4"; Chipset = "B550"; Socket = "AM4"; Models = @("B550 Pro4", "B550M Pro4") },
     @{ Brand = "Biostar"; Series = "Racing"; Chipset = "B650"; Socket = "AM5"; Models = @("RACING B650GTQ", "B650EGTQ", "B650MP-E PRO") },
     @{ Brand = "EVGA"; Series = "Dark"; Chipset = "Z790"; Socket = "LGA1700"; Models = @("Z790 DARK K|NGP|N", "Z790 CLASSIFIED") },
     @{ Brand = "Supermicro"; Series = "Workstation"; Chipset = "W680"; Socket = "LGA1700"; Models = @("X13SAE-F", "X13SWA-TF", "X13SRA-TF") }
@@ -1390,7 +1399,8 @@ $networkSeeds = @(
     @{ Brand = "Killer"; Model = "E3100G"; Gen = "Ethernet 2.5GbE" },
     @{ Brand = "Broadcom"; Model = "BCM57781"; Gen = "Ethernet 1GbE" },
     @{ Brand = "MediaTek"; Model = "MT7921"; Gen = "Wi-Fi 6" },
-    @{ Brand = "Qualcomm"; Model = "NCM865"; Gen = "Wi-Fi 7" }
+    @{ Brand = "Qualcomm"; Model = "NCM865"; Gen = "Wi-Fi 7" },
+    @{ Brand = "WireGuard"; Model = "WireGuard Tunnel"; Gen = "VPN Tunnel" }
 )
 
 $networkAdapters = Expand-Deterministic -Seeds $networkSeeds -TargetCount 4200 -Builder {

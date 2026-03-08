@@ -1,18 +1,563 @@
 ﻿{
-    "version":  "2026.02.27-web-icon-db",
-    "generatedAtUtc":  "2026-02-27T11:01:33.5039895Z",
+    "version":  "2026.02.18-web-icon-db",
+    "generatedAtUtc":  "2026-03-08T05:22:02.7668727Z",
     "source":  "Generated from IconPackManifest + domain mapping rules",
+    "manifestVersion":  "2026.02.18",
     "provider":  "google_favicon",
-    "itemCount":  187,
+    "categoryFallbacks":  {
+                              "chipset":  "chipset_default",
+                              "cpu":  "cpu_default",
+                              "display":  "display_default",
+                              "gpu":  "gpu_default",
+                              "memory":  "memory_default",
+                              "motherboard":  "motherboard_default",
+                              "network":  "network_default",
+                              "os":  "os/windows10",
+                              "storage":  "storage_default",
+                              "usb":  "usb_default"
+                          },
+    "itemCount":  189,
     "items":  [
+                  {
+                      "key":  "amd_ryzen",
+                      "category":  "brand",
+                      "description":  "AMD Ryzen brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "asrock",
+                      "category":  "brand",
+                      "description":  "ASRock brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asrock.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "asus",
+                      "category":  "brand",
+                      "description":  "ASUS brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "gigabyte",
+                      "category":  "brand",
+                      "description":  "Gigabyte brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "gigabyte.us",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "gigabyte.us",
+                                      "www.aorus.com",
+                                      "www.gigabyte.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "intel_core",
+                      "category":  "brand",
+                      "description":  "Intel Core brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "msi",
+                      "category":  "brand",
+                      "description":  "MSI brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "nvidia",
+                      "category":  "brand",
+                      "description":  "NVIDIA brand",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd",
+                      "category":  "chipset",
+                      "description":  "AMD chipset generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_a520",
+                      "category":  "chipset",
+                      "description":  "AMD A520",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_a620",
+                      "category":  "chipset",
+                      "description":  "AMD A620",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_b450",
+                      "category":  "chipset",
+                      "description":  "AMD B450",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_b550",
+                      "category":  "chipset",
+                      "description":  "AMD B550",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_b650",
+                      "category":  "chipset",
+                      "description":  "AMD B650",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_b650e",
+                      "category":  "chipset",
+                      "description":  "AMD B650E",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_b850",
+                      "category":  "chipset",
+                      "description":  "AMD B850",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x470",
+                      "category":  "chipset",
+                      "description":  "AMD X470",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x570",
+                      "category":  "chipset",
+                      "description":  "AMD X570",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x670",
+                      "category":  "chipset",
+                      "description":  "AMD X670",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x670e",
+                      "category":  "chipset",
+                      "description":  "AMD X670E",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x870",
+                      "category":  "chipset",
+                      "description":  "AMD X870",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_amd_x870e",
+                      "category":  "chipset",
+                      "description":  "AMD X870E",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_default",
+                      "category":  "chipset",
+                      "description":  "Generic chipset fallback",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel",
+                      "category":  "chipset",
+                      "description":  "Intel chipset generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_b660",
+                      "category":  "chipset",
+                      "description":  "Intel B660",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_b760",
+                      "category":  "chipset",
+                      "description":  "Intel B760",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_b860",
+                      "category":  "chipset",
+                      "description":  "Intel B860",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_h670",
+                      "category":  "chipset",
+                      "description":  "Intel H670",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_h770",
+                      "category":  "chipset",
+                      "description":  "Intel H770",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_h810",
+                      "category":  "chipset",
+                      "description":  "Intel H810",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_z490",
+                      "category":  "chipset",
+                      "description":  "Intel Z490",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_z590",
+                      "category":  "chipset",
+                      "description":  "Intel Z590",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_z690",
+                      "category":  "chipset",
+                      "description":  "Intel Z690",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_z790",
+                      "category":  "chipset",
+                      "description":  "Intel Z790",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "chipset_intel_z890",
+                      "category":  "chipset",
+                      "description":  "Intel Z890",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "amd_ryzen_cpu",
+                      "category":  "cpu",
+                      "description":  "AMD Ryzen generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_amd",
+                      "category":  "cpu",
+                      "description":  "AMD generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_amd_athlon",
+                      "category":  "cpu",
+                      "description":  "AMD Athlon",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_amd_fx",
+                      "category":  "cpu",
+                      "description":  "AMD FX",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_amd_phenom",
+                      "category":  "cpu",
+                      "description":  "AMD Phenom",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
                   {
                       "key":  "cpu_default",
                       "category":  "cpu",
                       "description":  "Generic CPU fallback",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "amd.com",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
+                                      "amd.com",
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_epyc",
+                      "category":  "cpu",
+                      "description":  "AMD EPYC",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
                                       "amd.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_i3",
+                      "category":  "cpu",
+                      "description":  "Intel Core i3",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_i5",
+                      "category":  "cpu",
+                      "description":  "Intel Core i5",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_i7",
+                      "category":  "cpu",
+                      "description":  "Intel Core i7",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "cpu_i9",
+                      "category":  "cpu",
+                      "description":  "Intel Core i9",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -21,71 +566,11 @@
                       "category":  "cpu",
                       "description":  "Intel generic",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_intel_ultra",
-                      "category":  "cpu",
-                      "description":  "Intel Core Ultra series",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_i3",
-                      "category":  "cpu",
-                      "description":  "Intel Core i3",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_i5",
-                      "category":  "cpu",
-                      "description":  "Intel Core i5",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_i7",
-                      "category":  "cpu",
-                      "description":  "Intel Core i7",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_i9",
-                      "category":  "cpu",
-                      "description":  "Intel Core i9",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_xeon",
-                      "category":  "cpu",
-                      "description":  "Intel Xeon",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_xeon_w",
-                      "category":  "cpu",
-                      "description":  "Intel Xeon W",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "cpu_intel_pentium",
-                      "category":  "cpu",
-                      "description":  "Intel Pentium",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -93,23 +578,35 @@
                       "category":  "cpu",
                       "description":  "Intel Celeron",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "cpu_amd",
+                      "key":  "cpu_intel_pentium",
                       "category":  "cpu",
-                      "description":  "AMD generic",
+                      "description":  "Intel Pentium",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "amd_ryzen_cpu",
+                      "key":  "cpu_intel_ultra",
                       "category":  "cpu",
-                      "description":  "AMD Ryzen generic",
+                      "description":  "Intel Core Ultra series",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -117,7 +614,11 @@
                       "category":  "cpu",
                       "description":  "AMD Ryzen 3",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -125,7 +626,11 @@
                       "category":  "cpu",
                       "description":  "AMD Ryzen 5",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -133,7 +638,11 @@
                       "category":  "cpu",
                       "description":  "AMD Ryzen 7",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -141,7 +650,11 @@
                       "category":  "cpu",
                       "description":  "AMD Ryzen 9",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -149,39 +662,280 @@
                       "category":  "cpu",
                       "description":  "AMD Threadripper",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "cpu_epyc",
+                      "key":  "cpu_xeon",
                       "category":  "cpu",
-                      "description":  "AMD EPYC",
+                      "description":  "Intel Xeon",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "cpu_amd_athlon",
+                      "key":  "cpu_xeon_w",
                       "category":  "cpu",
-                      "description":  "AMD Athlon",
+                      "description":  "Intel Xeon W",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "cpu_amd_phenom",
-                      "category":  "cpu",
-                      "description":  "AMD Phenom",
+                      "key":  "display_acer",
+                      "category":  "display",
+                      "description":  "Acer generic",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "acer.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "cpu_amd_fx",
-                      "category":  "cpu",
-                      "description":  "AMD FX",
+                      "key":  "display_acer_predator",
+                      "category":  "display",
+                      "description":  "Acer Predator",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "acer.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_aoc",
+                      "category":  "display",
+                      "description":  "AOC",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "aoc.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_asus",
+                      "category":  "display",
+                      "description":  "ASUS generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_asus_proart",
+                      "category":  "display",
+                      "description":  "ASUS ProArt",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_asus_rog",
+                      "category":  "display",
+                      "description":  "ASUS ROG Swift",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_benq",
+                      "category":  "display",
+                      "description":  "BenQ",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "b",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "benq.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_default",
+                      "category":  "display",
+                      "description":  "Generic display fallback",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_dell",
+                      "category":  "display",
+                      "description":  "Dell generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "alienware.com",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "alienware.com",
+                                      "dell.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_dell_alienware",
+                      "category":  "display",
+                      "description":  "Dell Alienware",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "alienware.com",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "alienware.com",
+                                      "dell.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_dell_ultrasharp",
+                      "category":  "display",
+                      "description":  "Dell UltraSharp",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "alienware.com",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "alienware.com",
+                                      "dell.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_excalibur",
+                      "category":  "display",
+                      "description":  "Excalibur",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_gigabyte",
+                      "category":  "display",
+                      "description":  "Gigabyte",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "gigabyte.us",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "gigabyte.us",
+                                      "www.aorus.com",
+                                      "www.gigabyte.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_lg",
+                      "category":  "display",
+                      "description":  "LG generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "l",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "lg.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_lg_ultragear",
+                      "category":  "display",
+                      "description":  "LG UltraGear",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "l",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "lg.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_msi",
+                      "category":  "display",
+                      "description":  "MSI",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_samsung",
+                      "category":  "display",
+                      "description":  "Samsung generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_samsung_odyssey",
+                      "category":  "display",
+                      "description":  "Samsung Odyssey",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "display_viewsonic",
+                      "category":  "display",
+                      "description":  "ViewSonic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "v",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "viewsonic.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "amd_gpu",
+                      "category":  "gpu",
+                      "description":  "AMD GPU generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -189,9 +943,59 @@
                       "category":  "gpu",
                       "description":  "Generic GPU fallback",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "amd.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "nvidia.com",
                                       "amd.com",
+                                      "intel.com",
+                                      "nvidia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "gpu_gtx",
+                      "category":  "gpu",
+                      "description":  "NVIDIA GTX generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "gpu_gtx10",
+                      "category":  "gpu",
+                      "description":  "NVIDIA GTX 10 series",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "gpu_gtx16",
+                      "category":  "gpu",
+                      "description":  "NVIDIA GTX 16 series",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "gpu_intel_arc",
+                      "category":  "gpu",
+                      "description":  "Intel Arc",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
                                       "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
@@ -201,71 +1005,11 @@
                       "category":  "gpu",
                       "description":  "NVIDIA generic",
                       "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_gtx",
-                      "category":  "gpu",
-                      "description":  "NVIDIA GTX generic",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_gtx10",
-                      "category":  "gpu",
-                      "description":  "NVIDIA GTX 10 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_gtx16",
-                      "category":  "gpu",
-                      "description":  "NVIDIA GTX 16 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rtx",
-                      "category":  "gpu",
-                      "description":  "NVIDIA RTX generic",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rtx20",
-                      "category":  "gpu",
-                      "description":  "NVIDIA RTX 20 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rtx30",
-                      "category":  "gpu",
-                      "description":  "NVIDIA RTX 30 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rtx40",
-                      "category":  "gpu",
-                      "description":  "NVIDIA RTX 40 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rtx50",
-                      "category":  "gpu",
-                      "description":  "NVIDIA RTX 50 series",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -273,15 +1017,11 @@
                       "category":  "gpu",
                       "description":  "NVIDIA Quadro",
                       "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "amd_gpu",
-                      "category":  "gpu",
-                      "description":  "AMD GPU generic",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -289,7 +1029,11 @@
                       "category":  "gpu",
                       "description":  "AMD Radeon generic",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -297,39 +1041,11 @@
                       "category":  "gpu",
                       "description":  "AMD Radeon Pro",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rx5000",
-                      "category":  "gpu",
-                      "description":  "AMD RX 5000 series",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rx6000",
-                      "category":  "gpu",
-                      "description":  "AMD RX 6000 series",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rx7000",
-                      "category":  "gpu",
-                      "description":  "AMD RX 7000 series",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gpu_rx9000",
-                      "category":  "gpu",
-                      "description":  "AMD RX 9000 series",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -337,405 +1053,177 @@
                       "category":  "gpu",
                       "description":  "AMD RDNA4",
                       "provider":  "google_favicon",
-                      "domains":  "amd.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "gpu_intel_arc",
+                      "key":  "gpu_rtx",
                       "category":  "gpu",
-                      "description":  "Intel Arc",
+                      "description":  "NVIDIA RTX generic",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "motherboard_default",
-                      "category":  "motherboard",
-                      "description":  "Generic motherboard fallback",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
                       "domains":  [
-                                      "asus.com",
-                                      "msi.com",
-                                      "asrock.com",
-                                      "gigabyte.com.tw"
+                                      "nvidia.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_asus",
-                      "category":  "motherboard",
-                      "description":  "ASUS generic",
+                      "key":  "gpu_rtx20",
+                      "category":  "gpu",
+                      "description":  "NVIDIA RTX 20 series",
                       "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_asus_rog",
-                      "category":  "motherboard",
-                      "description":  "ASUS ROG",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_asus_tuf",
-                      "category":  "motherboard",
-                      "description":  "ASUS TUF",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_asus_prime",
-                      "category":  "motherboard",
-                      "description":  "ASUS Prime",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_msi",
-                      "category":  "motherboard",
-                      "description":  "MSI generic",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_msi_meg",
-                      "category":  "motherboard",
-                      "description":  "MSI MEG",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_msi_mpg",
-                      "category":  "motherboard",
-                      "description":  "MSI MPG",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_msi_mag",
-                      "category":  "motherboard",
-                      "description":  "MSI MAG",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_gigabyte",
-                      "category":  "motherboard",
-                      "description":  "Gigabyte generic",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
                       "domains":  [
-                                      "www.aorus.com",
-                                      "www.gigabyte.com",
-                                      "gigabyte.us"
+                                      "nvidia.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_gigabyte_aorus",
-                      "category":  "motherboard",
-                      "description":  "Gigabyte AORUS",
+                      "key":  "gpu_rtx30",
+                      "category":  "gpu",
+                      "description":  "NVIDIA RTX 30 series",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
                       "domains":  [
-                                      "www.aorus.com",
-                                      "www.gigabyte.com",
-                                      "gigabyte.us"
+                                      "nvidia.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_gigabyte_gaming",
-                      "category":  "motherboard",
-                      "description":  "Gigabyte Gaming",
+                      "key":  "gpu_rtx40",
+                      "category":  "gpu",
+                      "description":  "NVIDIA RTX 40 series",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
                       "domains":  [
-                                      "www.aorus.com",
-                                      "www.gigabyte.com",
-                                      "gigabyte.us"
+                                      "nvidia.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_asrock",
-                      "category":  "motherboard",
-                      "description":  "ASRock generic",
+                      "key":  "gpu_rtx50",
+                      "category":  "gpu",
+                      "description":  "NVIDIA RTX 50 series",
                       "provider":  "google_favicon",
-                      "domains":  "asrock.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_asrock_taichi",
-                      "category":  "motherboard",
-                      "description":  "ASRock Taichi",
-                      "provider":  "google_favicon",
-                      "domains":  "asrock.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_asrock_phantom",
-                      "category":  "motherboard",
-                      "description":  "ASRock Phantom Gaming",
-                      "provider":  "google_favicon",
-                      "domains":  "asrock.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "mb_biostar",
-                      "category":  "motherboard",
-                      "description":  "Biostar",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
                       "domains":  [
-                                      "www.biostar.com.tw",
-                                      "biostar.com"
+                                      "nvidia.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_supermicro",
-                      "category":  "motherboard",
-                      "description":  "Supermicro",
+                      "key":  "gpu_rx5000",
+                      "category":  "gpu",
+                      "description":  "AMD RX 5000 series",
                       "provider":  "google_favicon",
-                      "domains":  "supermicro.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "mb_evga",
-                      "category":  "motherboard",
-                      "description":  "EVGA",
+                      "key":  "gpu_rx6000",
+                      "category":  "gpu",
+                      "description":  "AMD RX 6000 series",
                       "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "chipset_default",
-                      "category":  "chipset",
-                      "description":  "Generic chipset fallback",
+                      "key":  "gpu_rx7000",
+                      "category":  "gpu",
+                      "description":  "AMD RX 7000 series",
                       "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "chipset_intel",
-                      "category":  "chipset",
-                      "description":  "Intel chipset generic",
+                      "key":  "gpu_rx9000",
+                      "category":  "gpu",
+                      "description":  "AMD RX 9000 series",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "amd.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "chipset_intel_z890",
-                      "category":  "chipset",
-                      "description":  "Intel Z890",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_z790",
-                      "category":  "chipset",
-                      "description":  "Intel Z790",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_z690",
-                      "category":  "chipset",
-                      "description":  "Intel Z690",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_z590",
-                      "category":  "chipset",
-                      "description":  "Intel Z590",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_z490",
-                      "category":  "chipset",
-                      "description":  "Intel Z490",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_b860",
-                      "category":  "chipset",
-                      "description":  "Intel B860",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_b760",
-                      "category":  "chipset",
-                      "description":  "Intel B760",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_b660",
-                      "category":  "chipset",
-                      "description":  "Intel B660",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_h810",
-                      "category":  "chipset",
-                      "description":  "Intel H810",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_h770",
-                      "category":  "chipset",
-                      "description":  "Intel H770",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_intel_h670",
-                      "category":  "chipset",
-                      "description":  "Intel H670",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd",
-                      "category":  "chipset",
-                      "description":  "AMD chipset generic",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x870e",
-                      "category":  "chipset",
-                      "description":  "AMD X870E",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x870",
-                      "category":  "chipset",
-                      "description":  "AMD X870",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x670e",
-                      "category":  "chipset",
-                      "description":  "AMD X670E",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x670",
-                      "category":  "chipset",
-                      "description":  "AMD X670",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x570",
-                      "category":  "chipset",
-                      "description":  "AMD X570",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_x470",
-                      "category":  "chipset",
-                      "description":  "AMD X470",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_b850",
-                      "category":  "chipset",
-                      "description":  "AMD B850",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_b650e",
-                      "category":  "chipset",
-                      "description":  "AMD B650E",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_b650",
-                      "category":  "chipset",
-                      "description":  "AMD B650",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_b550",
-                      "category":  "chipset",
-                      "description":  "AMD B550",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_b450",
-                      "category":  "chipset",
-                      "description":  "AMD B450",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_a620",
-                      "category":  "chipset",
-                      "description":  "AMD A620",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "chipset_amd_a520",
-                      "category":  "chipset",
-                      "description":  "AMD A520",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_default",
+                      "key":  "memory_corsair",
                       "category":  "memory",
-                      "description":  "Generic memory fallback",
+                      "description":  "Corsair generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
                       "domains":  [
-                                      "kingston.com",
-                                      "corsair.com",
+                                      "corsair.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_corsair_dominator",
+                      "category":  "memory",
+                      "description":  "Corsair Dominator",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "corsair.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_corsair_vengeance",
+                      "category":  "memory",
+                      "description":  "Corsair Vengeance",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "corsair.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_crucial",
+                      "category":  "memory",
+                      "description":  "Crucial generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "crucial.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_crucial_ballistix",
+                      "category":  "memory",
+                      "description":  "Crucial Ballistix",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
                                       "crucial.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
@@ -745,10 +1233,12 @@
                       "category":  "memory",
                       "description":  "DDR4 generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "corsair.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "kingston.com",
                                       "corsair.com",
-                                      "crucial.com"
+                                      "crucial.com",
+                                      "kingston.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -757,51 +1247,27 @@
                       "category":  "memory",
                       "description":  "DDR5 generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "corsair.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "kingston.com",
                                       "corsair.com",
-                                      "crucial.com"
+                                      "crucial.com",
+                                      "kingston.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "memory_corsair",
+                      "key":  "memory_default",
                       "category":  "memory",
-                      "description":  "Corsair generic",
+                      "description":  "Generic memory fallback",
                       "provider":  "google_favicon",
-                      "domains":  "corsair.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_corsair_dominator",
-                      "category":  "memory",
-                      "description":  "Corsair Dominator",
-                      "provider":  "google_favicon",
-                      "domains":  "corsair.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_corsair_vengeance",
-                      "category":  "memory",
-                      "description":  "Corsair Vengeance",
-                      "provider":  "google_favicon",
-                      "domains":  "corsair.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_kingston",
-                      "category":  "memory",
-                      "description":  "Kingston generic",
-                      "provider":  "google_favicon",
-                      "domains":  "kingston.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_kingston_fury",
-                      "category":  "memory",
-                      "description":  "Kingston Fury",
-                      "provider":  "google_favicon",
-                      "domains":  "kingston.com",
+                      "preferredDomain":  "corsair.com",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "corsair.com",
+                                      "crucial.com",
+                                      "kingston.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -809,15 +1275,11 @@
                       "category":  "memory",
                       "description":  "G.Skill generic",
                       "provider":  "google_favicon",
-                      "domains":  "gskill.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_gskill_trident",
-                      "category":  "memory",
-                      "description":  "G.Skill Trident Z",
-                      "provider":  "google_favicon",
-                      "domains":  "gskill.com",
+                      "preferredDomain":  "g",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "gskill.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -825,31 +1287,23 @@
                       "category":  "memory",
                       "description":  "G.Skill Ripjaws",
                       "provider":  "google_favicon",
-                      "domains":  "gskill.com",
+                      "preferredDomain":  "g",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "gskill.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "memory_crucial",
+                      "key":  "memory_gskill_trident",
                       "category":  "memory",
-                      "description":  "Crucial generic",
+                      "description":  "G.Skill Trident Z",
                       "provider":  "google_favicon",
-                      "domains":  "crucial.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_crucial_ballistix",
-                      "category":  "memory",
-                      "description":  "Crucial Ballistix",
-                      "provider":  "google_favicon",
-                      "domains":  "crucial.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "memory_samsung",
-                      "category":  "memory",
-                      "description":  "Samsung",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
+                      "preferredDomain":  "g",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "gskill.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -857,7 +1311,35 @@
                       "category":  "memory",
                       "description":  "SK Hynix",
                       "provider":  "google_favicon",
-                      "domains":  "skhynix.com",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "skhynix.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_kingston",
+                      "category":  "memory",
+                      "description":  "Kingston generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "k",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "kingston.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "memory_kingston_fury",
+                      "category":  "memory",
+                      "description":  "Kingston Fury",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "k",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "kingston.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -865,208 +1347,289 @@
                       "category":  "memory",
                       "description":  "Micron",
                       "provider":  "google_favicon",
-                      "domains":  "micron.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_default",
-                      "category":  "storage",
-                      "description":  "Generic storage fallback",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
                       "domains":  [
-                                      "samsung.com",
-                                      "westerndigital.com",
-                                      "seagate.com",
-                                      "crucial.com"
+                                      "micron.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_hdd",
-                      "category":  "storage",
-                      "description":  "HDD generic",
+                      "key":  "memory_samsung",
+                      "category":  "memory",
+                      "description":  "Samsung",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
                       "domains":  [
-                                      "samsung.com",
-                                      "westerndigital.com",
-                                      "seagate.com",
-                                      "crucial.com"
+                                      "samsung.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_ssd",
-                      "category":  "storage",
-                      "description":  "SSD generic",
+                      "key":  "mb_asrock",
+                      "category":  "motherboard",
+                      "description":  "ASRock generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
                       "domains":  [
-                                      "samsung.com",
-                                      "westerndigital.com",
-                                      "seagate.com",
-                                      "crucial.com"
+                                      "asrock.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_nvme",
-                      "category":  "storage",
-                      "description":  "NVMe generic",
+                      "key":  "mb_asrock_phantom",
+                      "category":  "motherboard",
+                      "description":  "ASRock Phantom Gaming",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
                       "domains":  [
-                                      "samsung.com",
-                                      "westerndigital.com",
-                                      "seagate.com",
-                                      "crucial.com"
+                                      "asrock.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_samsung",
-                      "category":  "storage",
-                      "description":  "Samsung generic",
+                      "key":  "mb_asrock_taichi",
+                      "category":  "motherboard",
+                      "description":  "ASRock Taichi",
                       "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_samsung_990pro",
-                      "category":  "storage",
-                      "description":  "Samsung 990 Pro",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_samsung_980pro",
-                      "category":  "storage",
-                      "description":  "Samsung 980 Pro",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_samsung_970evo",
-                      "category":  "storage",
-                      "description":  "Samsung 970 EVO",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_samsung_970",
-                      "category":  "storage",
-                      "description":  "Samsung 970",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "storage_wd",
-                      "category":  "storage",
-                      "description":  "WD generic",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
                       "domains":  [
-                                      "samsung.com",
-                                      "westerndigital.com",
-                                      "seagate.com",
-                                      "crucial.com"
+                                      "asrock.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_wd_black",
-                      "category":  "storage",
-                      "description":  "WD Black",
+                      "key":  "mb_asus",
+                      "category":  "motherboard",
+                      "description":  "ASUS generic",
                       "provider":  "google_favicon",
-                      "domains":  "westerndigital.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_wd_blue",
-                      "category":  "storage",
-                      "description":  "WD Blue",
+                      "key":  "mb_asus_prime",
+                      "category":  "motherboard",
+                      "description":  "ASUS Prime",
                       "provider":  "google_favicon",
-                      "domains":  "westerndigital.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_seagate",
-                      "category":  "storage",
-                      "description":  "Seagate generic",
+                      "key":  "mb_asus_rog",
+                      "category":  "motherboard",
+                      "description":  "ASUS ROG",
                       "provider":  "google_favicon",
-                      "domains":  "seagate.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_seagate_firecuda",
-                      "category":  "storage",
-                      "description":  "Seagate FireCuda",
+                      "key":  "mb_asus_tuf",
+                      "category":  "motherboard",
+                      "description":  "ASUS TUF",
                       "provider":  "google_favicon",
-                      "domains":  "seagate.com",
+                      "preferredDomain":  "a",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "asus.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_seagate_barracuda",
-                      "category":  "storage",
-                      "description":  "Seagate Barracuda",
+                      "key":  "mb_biostar",
+                      "category":  "motherboard",
+                      "description":  "Biostar",
                       "provider":  "google_favicon",
-                      "domains":  "seagate.com",
+                      "preferredDomain":  "biostar.com",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "biostar.com",
+                                      "www.biostar.com.tw"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_crucial",
-                      "category":  "storage",
-                      "description":  "Crucial generic",
+                      "key":  "mb_evga",
+                      "category":  "motherboard",
+                      "description":  "EVGA",
                       "provider":  "google_favicon",
-                      "domains":  "crucial.com",
+                      "preferredDomain":  "n",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "nvidia.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_crucial_p5",
-                      "category":  "storage",
-                      "description":  "Crucial P5 Plus",
+                      "key":  "mb_gigabyte",
+                      "category":  "motherboard",
+                      "description":  "Gigabyte generic",
                       "provider":  "google_favicon",
-                      "domains":  "crucial.com",
+                      "preferredDomain":  "gigabyte.us",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "gigabyte.us",
+                                      "www.aorus.com",
+                                      "www.gigabyte.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_kingston",
-                      "category":  "storage",
-                      "description":  "Kingston generic",
+                      "key":  "mb_gigabyte_aorus",
+                      "category":  "motherboard",
+                      "description":  "Gigabyte AORUS",
                       "provider":  "google_favicon",
-                      "domains":  "kingston.com",
+                      "preferredDomain":  "gigabyte.us",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "gigabyte.us",
+                                      "www.aorus.com",
+                                      "www.gigabyte.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_kingston_kc3000",
-                      "category":  "storage",
-                      "description":  "Kingston KC3000",
+                      "key":  "mb_gigabyte_gaming",
+                      "category":  "motherboard",
+                      "description":  "Gigabyte Gaming",
                       "provider":  "google_favicon",
-                      "domains":  "kingston.com",
+                      "preferredDomain":  "gigabyte.us",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "gigabyte.us",
+                                      "www.aorus.com",
+                                      "www.gigabyte.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_corsair",
-                      "category":  "storage",
-                      "description":  "Corsair generic",
+                      "key":  "mb_msi",
+                      "category":  "motherboard",
+                      "description":  "MSI generic",
                       "provider":  "google_favicon",
-                      "domains":  "corsair.com",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_corsair_mp600",
-                      "category":  "storage",
-                      "description":  "Corsair MP600",
+                      "key":  "mb_msi_mag",
+                      "category":  "motherboard",
+                      "description":  "MSI MAG",
                       "provider":  "google_favicon",
-                      "domains":  "corsair.com",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "storage_kioxia",
-                      "category":  "storage",
-                      "description":  "Kioxia",
+                      "key":  "mb_msi_meg",
+                      "category":  "motherboard",
+                      "description":  "MSI MEG",
                       "provider":  "google_favicon",
-                      "domains":  "kioxia.com",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "mb_msi_mpg",
+                      "category":  "motherboard",
+                      "description":  "MSI MPG",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "msi.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "mb_supermicro",
+                      "category":  "motherboard",
+                      "description":  "Supermicro",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "supermicro.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "motherboard_default",
+                      "category":  "motherboard",
+                      "description":  "Generic motherboard fallback",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "asrock.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "asrock.com",
+                                      "asus.com",
+                                      "gigabyte.com.tw",
+                                      "msi.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_1gbe",
+                      "category":  "network",
+                      "description":  "1GbE",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "broadcom.com",
+                                      "intel.com",
+                                      "realtek.com.tw"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_2_5gbe",
+                      "category":  "network",
+                      "description":  "2.5GbE",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
+                      "domains":  [
+                                      "broadcom.com",
+                                      "intel.com",
+                                      "realtek.com.tw"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_broadcom",
+                      "category":  "network",
+                      "description":  "Broadcom",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "b",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "broadcom.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1074,9 +1637,11 @@
                       "category":  "network",
                       "description":  "Generic network fallback",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "intel.com",
                                       "broadcom.com",
+                                      "intel.com",
                                       "realtek.com.tw"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
@@ -1086,23 +1651,11 @@
                       "category":  "network",
                       "description":  "Intel generic",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "network_intel_i225",
-                      "category":  "network",
-                      "description":  "Intel I225-V",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "network_intel_i226",
-                      "category":  "network",
-                      "description":  "Intel I226-V",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1110,7 +1663,11 @@
                       "category":  "network",
                       "description":  "Intel AX200",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1118,7 +1675,11 @@
                       "category":  "network",
                       "description":  "Intel AX201",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1126,7 +1687,11 @@
                       "category":  "network",
                       "description":  "Intel AX210",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1134,31 +1699,35 @@
                       "category":  "network",
                       "description":  "Intel AX211",
                       "provider":  "google_favicon",
-                      "domains":  "intel.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "network_realtek",
+                      "key":  "network_intel_i225",
                       "category":  "network",
-                      "description":  "Realtek generic",
+                      "description":  "Intel I225-V",
                       "provider":  "google_favicon",
-                      "domains":  "www.realtek.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "network_realtek_8111",
+                      "key":  "network_intel_i226",
                       "category":  "network",
-                      "description":  "Realtek RTL8111",
+                      "description":  "Intel I226-V",
                       "provider":  "google_favicon",
-                      "domains":  "www.realtek.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "network_realtek_8125",
-                      "category":  "network",
-                      "description":  "Realtek RTL8125",
-                      "provider":  "google_favicon",
-                      "domains":  "www.realtek.com",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1166,6 +1735,8 @@
                       "category":  "network",
                       "description":  "Killer generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "intel.com",
+                      "domainCount":  2,
                       "domains":  [
                                       "intel.com",
                                       "killernetworking.com"
@@ -1177,6 +1748,8 @@
                       "category":  "network",
                       "description":  "Killer E2600",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "intel.com",
+                      "domainCount":  2,
                       "domains":  [
                                       "intel.com",
                                       "killernetworking.com"
@@ -1188,6 +1761,8 @@
                       "category":  "network",
                       "description":  "Killer E3000",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "intel.com",
+                      "domainCount":  2,
                       "domains":  [
                                       "intel.com",
                                       "killernetworking.com"
@@ -1195,19 +1770,51 @@
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "network_broadcom",
-                      "category":  "network",
-                      "description":  "Broadcom",
-                      "provider":  "google_favicon",
-                      "domains":  "broadcom.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
                       "key":  "network_mediatek",
                       "category":  "network",
                       "description":  "MediaTek",
                       "provider":  "google_favicon",
-                      "domains":  "mediatek.com",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "mediatek.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_realtek",
+                      "category":  "network",
+                      "description":  "Realtek generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "www.realtek.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_realtek_8111",
+                      "category":  "network",
+                      "description":  "Realtek RTL8111",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "www.realtek.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "network_realtek_8125",
+                      "category":  "network",
+                      "description":  "Realtek RTL8125",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "www.realtek.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1215,9 +1822,11 @@
                       "category":  "network",
                       "description":  "WiFi 6 generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "intel.com",
                                       "broadcom.com",
+                                      "intel.com",
                                       "realtek.com.tw"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
@@ -1227,9 +1836,11 @@
                       "category":  "network",
                       "description":  "WiFi 6E generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "intel.com",
                                       "broadcom.com",
+                                      "intel.com",
                                       "realtek.com.tw"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
@@ -1239,45 +1850,353 @@
                       "category":  "network",
                       "description":  "WiFi 7 generic",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "intel.com",
                                       "broadcom.com",
+                                      "intel.com",
                                       "realtek.com.tw"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "network_1gbe",
+                      "key":  "network_wireguard",
                       "category":  "network",
-                      "description":  "1GbE",
+                      "description":  "WireGuard VPN tunnel",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "broadcom.com",
+                      "domainCount":  3,
                       "domains":  [
-                                      "intel.com",
                                       "broadcom.com",
+                                      "intel.com",
                                       "realtek.com.tw"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "network_2_5gbe",
-                      "category":  "network",
-                      "description":  "2.5GbE",
+                      "key":  "os/windows10",
+                      "category":  "os",
+                      "description":  "Windows 10",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
                       "domains":  [
-                                      "intel.com",
-                                      "broadcom.com",
-                                      "realtek.com.tw"
+                                      "microsoft.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
-                      "key":  "usb_default",
-                      "category":  "usb",
-                      "description":  "Generic USB fallback",
+                      "key":  "os/windows11",
+                      "category":  "os",
+                      "description":  "Windows 11",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "windows10",
+                      "category":  "os",
+                      "description":  "Windows 10 alias",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "windows11",
+                      "category":  "os",
+                      "description":  "Windows 11 alias",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "m",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "microsoft.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_corsair",
+                      "category":  "storage",
+                      "description":  "Corsair generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "corsair.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_corsair_mp600",
+                      "category":  "storage",
+                      "description":  "Corsair MP600",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "corsair.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_crucial",
+                      "category":  "storage",
+                      "description":  "Crucial generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "crucial.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_crucial_p5",
+                      "category":  "storage",
+                      "description":  "Crucial P5 Plus",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "c",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "crucial.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_default",
+                      "category":  "storage",
+                      "description":  "Generic storage fallback",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "crucial.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "crucial.com",
+                                      "samsung.com",
+                                      "seagate.com",
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_hdd",
+                      "category":  "storage",
+                      "description":  "HDD generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "crucial.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "crucial.com",
+                                      "samsung.com",
+                                      "seagate.com",
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_kingston",
+                      "category":  "storage",
+                      "description":  "Kingston generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "k",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "kingston.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_kingston_kc3000",
+                      "category":  "storage",
+                      "description":  "Kingston KC3000",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "k",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "kingston.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_kioxia",
+                      "category":  "storage",
+                      "description":  "Kioxia",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "k",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "kioxia.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_nvme",
+                      "category":  "storage",
+                      "description":  "NVMe generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "crucial.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "crucial.com",
+                                      "samsung.com",
+                                      "seagate.com",
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_samsung",
+                      "category":  "storage",
+                      "description":  "Samsung generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_samsung_970",
+                      "category":  "storage",
+                      "description":  "Samsung 970",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_samsung_970evo",
+                      "category":  "storage",
+                      "description":  "Samsung 970 EVO",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_samsung_980pro",
+                      "category":  "storage",
+                      "description":  "Samsung 980 Pro",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_samsung_990pro",
+                      "category":  "storage",
+                      "description":  "Samsung 990 Pro",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "samsung.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_seagate",
+                      "category":  "storage",
+                      "description":  "Seagate generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "seagate.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_seagate_barracuda",
+                      "category":  "storage",
+                      "description":  "Seagate Barracuda",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "seagate.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_seagate_firecuda",
+                      "category":  "storage",
+                      "description":  "Seagate FireCuda",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "s",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "seagate.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_ssd",
+                      "category":  "storage",
+                      "description":  "SSD generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "crucial.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "crucial.com",
+                                      "samsung.com",
+                                      "seagate.com",
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_wd",
+                      "category":  "storage",
+                      "description":  "WD generic",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "crucial.com",
+                      "domainCount":  4,
+                      "domains":  [
+                                      "crucial.com",
+                                      "samsung.com",
+                                      "seagate.com",
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_wd_black",
+                      "category":  "storage",
+                      "description":  "WD Black",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "westerndigital.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "storage_wd_blue",
+                      "category":  "storage",
+                      "description":  "WD Blue",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "westerndigital.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -1286,9 +2205,11 @@
                       "category":  "usb",
                       "description":  "USB 2.0",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "asmedia.com.tw",
+                                      "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -1297,9 +2218,11 @@
                       "category":  "usb",
                       "description":  "USB 3.0",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "asmedia.com.tw",
+                                      "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -1308,9 +2231,11 @@
                       "category":  "usb",
                       "description":  "USB 3.1",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "asmedia.com.tw",
+                                      "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -1319,29 +2244,12 @@
                       "category":  "usb",
                       "description":  "USB 3.2",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "asmedia.com.tw",
+                                      "intel.com"
                                   ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "usb_usb4",
-                      "category":  "usb",
-                      "description":  "USB4",
-                      "provider":  "google_favicon",
-                      "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
-                                  ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "usb_intel",
-                      "category":  "usb",
-                      "description":  "Intel USB",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1349,9 +2257,11 @@
                       "category":  "usb",
                       "description":  "AMD USB",
                       "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
                       "domains":  [
-                                      "intel.com",
-                                      "asmedia.com.tw"
+                                      "asmedia.com.tw",
+                                      "intel.com"
                                   ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
@@ -1360,7 +2270,11 @@
                       "category":  "usb",
                       "description":  "ASMedia generic",
                       "provider":  "google_favicon",
-                      "domains":  "www.asmedia.com.tw",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "www.asmedia.com.tw"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1368,7 +2282,36 @@
                       "category":  "usb",
                       "description":  "ASMedia ASM3142",
                       "provider":  "google_favicon",
-                      "domains":  "www.asmedia.com.tw",
+                      "preferredDomain":  "w",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "www.asmedia.com.tw"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "usb_default",
+                      "category":  "usb",
+                      "description":  "Generic USB fallback",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "asmedia.com.tw",
+                                      "intel.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "usb_intel",
+                      "category":  "usb",
+                      "description":  "Intel USB",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "i",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1376,7 +2319,24 @@
                       "category":  "usb",
                       "description":  "Renesas",
                       "provider":  "google_favicon",
-                      "domains":  "renesas.com",
+                      "preferredDomain":  "r",
+                      "domainCount":  1,
+                      "domains":  [
+                                      "renesas.com"
+                                  ],
+                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
+                  },
+                  {
+                      "key":  "usb_usb4",
+                      "category":  "usb",
+                      "description":  "USB4",
+                      "provider":  "google_favicon",
+                      "preferredDomain":  "asmedia.com.tw",
+                      "domainCount":  2,
+                      "domains":  [
+                                      "asmedia.com.tw",
+                                      "intel.com"
+                                  ],
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   },
                   {
@@ -1384,256 +2344,11 @@
                       "category":  "usb",
                       "description":  "VIA",
                       "provider":  "google_favicon",
-                      "domains":  "via.com.tw",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_default",
-                      "category":  "display",
-                      "description":  "Generic display fallback",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_asus",
-                      "category":  "display",
-                      "description":  "ASUS generic",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_asus_rog",
-                      "category":  "display",
-                      "description":  "ASUS ROG Swift",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_asus_proart",
-                      "category":  "display",
-                      "description":  "ASUS ProArt",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_acer",
-                      "category":  "display",
-                      "description":  "Acer generic",
-                      "provider":  "google_favicon",
-                      "domains":  "acer.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_acer_predator",
-                      "category":  "display",
-                      "description":  "Acer Predator",
-                      "provider":  "google_favicon",
-                      "domains":  "acer.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_lg",
-                      "category":  "display",
-                      "description":  "LG generic",
-                      "provider":  "google_favicon",
-                      "domains":  "lg.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_lg_ultragear",
-                      "category":  "display",
-                      "description":  "LG UltraGear",
-                      "provider":  "google_favicon",
-                      "domains":  "lg.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_samsung",
-                      "category":  "display",
-                      "description":  "Samsung generic",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_samsung_odyssey",
-                      "category":  "display",
-                      "description":  "Samsung Odyssey",
-                      "provider":  "google_favicon",
-                      "domains":  "samsung.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_dell",
-                      "category":  "display",
-                      "description":  "Dell generic",
-                      "provider":  "google_favicon",
+                      "preferredDomain":  "v",
+                      "domainCount":  1,
                       "domains":  [
-                                      "dell.com",
-                                      "alienware.com"
+                                      "via.com.tw"
                                   ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_dell_alienware",
-                      "category":  "display",
-                      "description":  "Dell Alienware",
-                      "provider":  "google_favicon",
-                      "domains":  [
-                                      "dell.com",
-                                      "alienware.com"
-                                  ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_dell_ultrasharp",
-                      "category":  "display",
-                      "description":  "Dell UltraSharp",
-                      "provider":  "google_favicon",
-                      "domains":  [
-                                      "dell.com",
-                                      "alienware.com"
-                                  ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_benq",
-                      "category":  "display",
-                      "description":  "BenQ",
-                      "provider":  "google_favicon",
-                      "domains":  "benq.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_viewsonic",
-                      "category":  "display",
-                      "description":  "ViewSonic",
-                      "provider":  "google_favicon",
-                      "domains":  "viewsonic.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_aoc",
-                      "category":  "display",
-                      "description":  "AOC",
-                      "provider":  "google_favicon",
-                      "domains":  "aoc.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_msi",
-                      "category":  "display",
-                      "description":  "MSI",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "display_gigabyte",
-                      "category":  "display",
-                      "description":  "Gigabyte",
-                      "provider":  "google_favicon",
-                      "domains":  [
-                                      "www.aorus.com",
-                                      "www.gigabyte.com",
-                                      "gigabyte.us"
-                                  ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "asus",
-                      "category":  "brand",
-                      "description":  "ASUS brand",
-                      "provider":  "google_favicon",
-                      "domains":  "asus.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "msi",
-                      "category":  "brand",
-                      "description":  "MSI brand",
-                      "provider":  "google_favicon",
-                      "domains":  "msi.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "gigabyte",
-                      "category":  "brand",
-                      "description":  "Gigabyte brand",
-                      "provider":  "google_favicon",
-                      "domains":  [
-                                      "www.aorus.com",
-                                      "www.gigabyte.com",
-                                      "gigabyte.us"
-                                  ],
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "asrock",
-                      "category":  "brand",
-                      "description":  "ASRock brand",
-                      "provider":  "google_favicon",
-                      "domains":  "asrock.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "intel_core",
-                      "category":  "brand",
-                      "description":  "Intel Core brand",
-                      "provider":  "google_favicon",
-                      "domains":  "intel.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "nvidia",
-                      "category":  "brand",
-                      "description":  "NVIDIA brand",
-                      "provider":  "google_favicon",
-                      "domains":  "nvidia.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "amd_ryzen",
-                      "category":  "brand",
-                      "description":  "AMD Ryzen brand",
-                      "provider":  "google_favicon",
-                      "domains":  "amd.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "os/windows10",
-                      "category":  "os",
-                      "description":  "Windows 10",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "os/windows11",
-                      "category":  "os",
-                      "description":  "Windows 11",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "windows10",
-                      "category":  "os",
-                      "description":  "Windows 10 alias",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
-                      "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
-                  },
-                  {
-                      "key":  "windows11",
-                      "category":  "os",
-                      "description":  "Windows 11 alias",
-                      "provider":  "google_favicon",
-                      "domains":  "microsoft.com",
                       "urlTemplate":  "https://www.google.com/s2/favicons?sz=128\u0026domain={domain}"
                   }
               ]

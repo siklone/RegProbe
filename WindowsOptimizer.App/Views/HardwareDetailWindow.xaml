@@ -7,17 +7,20 @@
         xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}"
-        SizeToContent="Height"
-        Width="640"
-        MinWidth="520"
-        MaxWidth="760"
+        Width="780"
+        Height="720"
+        MinWidth="620"
+        MinHeight="560"
+        MaxWidth="1100"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         AllowsTransparency="False"
         ResizeMode="CanResizeWithGrip"
         Background="{DynamicResource BackgroundDarkestBrush}"
         FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
-        FontSize="12">
+        FontSize="12"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
 
     <shell:WindowChrome.WindowChrome>
         <shell:WindowChrome CaptionHeight="40"
@@ -128,7 +131,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
+                    <Border x:Name="HasDeviceTabsBorder"
+                            Grid.Row="0"
                             Margin="8,8,8,0"
                             Background="{DynamicResource BackgroundMediumBrush}"
                             CornerRadius="8"
@@ -227,7 +231,6 @@
                                   CanContentScroll="True"
                                   PanningMode="VerticalOnly"
                                   Style="{DynamicResource AutoHidingScrollViewerStyle}"
-                                  MaxHeight="480"
                                   Margin="0,4,0,0"
                                   Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                         <ScrollViewer.Resources>
@@ -241,13 +244,14 @@
                                 <DataTemplate>
                                     <Grid Margin="0,4">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="168"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" 
                                                  Text="{Binding Label}" 
                                                  Foreground="{DynamicResource MutedForegroundBrush}" 
                                                  FontSize="13"
+                                                 TextWrapping="Wrap"
                                                  VerticalAlignment="Top"/>
                                         <TextBlock Grid.Column="1" 
                                                  Text="{Binding Value}" 
