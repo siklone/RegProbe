@@ -236,11 +236,20 @@ public static class IconResolver
         return HardwareIconService.ResolveByIconKey(type, iconKey);
     }
 
-    public static string GetDefaultKey(HardwareType type) => DefaultIcons.GetValueOrDefault(type, "cpu_default");
+    public static string GetDefaultKey(HardwareType type)
+    {
+        return type == HardwareType.Os
+            ? GetRuntimeOsDefaultKey()
+            : DefaultIcons.GetValueOrDefault(type, "cpu_default");
+    }
 
     private static string ResolveOsIconKey(string? vendor, string? model)
     {
         var search = Normalize($"{vendor} {model}");
+        if (string.IsNullOrWhiteSpace(search))
+        {
+            return GetRuntimeOsDefaultKey();
+        }
         
         if (search.Contains("windows 11", StringComparison.OrdinalIgnoreCase))
         {
@@ -257,13 +266,18 @@ public static class IconResolver
             return "os/windows11";
         }
 
-        return "os/windows10";
+        return GetRuntimeOsDefaultKey();
     }
 
     private static string ExtractBuildNumber(string input)
     {
         var match = Regex.Match(input, @"build\s*(\d+)", RegexOptions.IgnoreCase);
         return match.Success ? match.Groups[1].Value : "0";
+    }
+
+    private static string GetRuntimeOsDefaultKey()
+    {
+        return Environment.OSVersion.Version.Build >= 22000 ? "os/windows11" : "os/windows10";
     }
 
     private static string MatchPattern((Regex Pattern, string IconKey)[] patterns, string search, string fallback)

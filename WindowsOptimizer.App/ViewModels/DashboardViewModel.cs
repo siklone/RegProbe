@@ -115,7 +115,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _windowsBuildUrl = "";
     private string _motherboardDriverUrl = "";
     private string _chipsetDriverUrl = "";
-    private string _osIconKey = "os/windows10";
+    private string _osIconKey = GetRuntimeOsDefaultIconKey();
     private string _cpuIconKey = "cpu_default";
     private string _gpuIconKey = "gpu_default";
     private string _memoryIconKey = "memory_default";
@@ -124,7 +124,7 @@ public sealed class DashboardViewModel : ViewModelBase
     private string _displayIconKey = "display_default";
     private string _networkIconKey = "network_default";
     private string _usbIconKey = "usb_default";
-    private ImageSource _osIconSource = HardwareIconResolver.ResolveOsIcon("Windows 10");
+    private ImageSource _osIconSource = HardwareIconResolver.ResolveOsIcon(GetRuntimeOsDefaultName());
     private ImageSource _cpuIconSource = HardwareIconResolver.ResolveIcon("cpu_default", "cpu_default");
     private ImageSource _gpuIconSource = HardwareIconResolver.ResolveIcon("gpu_default", "gpu_default");
     private ImageSource _memoryIconSource = HardwareIconResolver.ResolveIcon("memory_default", "memory_default");
@@ -307,6 +307,11 @@ public sealed class DashboardViewModel : ViewModelBase
     public string AuditDetail { get => _auditDetail; private set => SetProperty(ref _auditDetail, value); }
     public string PlatformIdentity => JoinNonEmpty(SystemManufacturer, SystemModel);
     public string OsCompactSummary => JoinNonEmpty(OsVersion, HasValue(OsBuild) ? $"Build {OsBuild}" : null, OsArchitecture);
+    public string SystemEnvironmentSummary => JoinNonEmpty(
+        HasValue(SystemType) ? SystemType : null,
+        NormalizeOemValue(SystemSku),
+        FormatInstalledDate(OsInstallDate),
+        Uptime);
     public string ProcessorCompactSummary => JoinNonEmpty(
         HasValue(ProcessorCores) && HasValue(ProcessorThreads) ? $"{ProcessorCores}C / {ProcessorThreads}T" : null,
         ProcessorSpeed,
@@ -316,13 +321,21 @@ public sealed class DashboardViewModel : ViewModelBase
         MemoryDetails.Type,
         MemoryDetails.Frequency,
         HasValue(MemorySlots) ? $"{MemorySlots} modules" : null);
+    public string MemoryRuntimeSummary => JoinNonEmpty(
+        HasValue(AvailablePhysicalMemory) ? $"Free {AvailablePhysicalMemory}" : null,
+        HasValue(AvailableVirtualMemory) ? $"Virtual {AvailableVirtualMemory}" : null,
+        HasValue(PageFileSpace) ? $"Page {PageFileSpace}" : null);
     public string GraphicsCompactSummary => JoinNonEmpty(GpuVideoMemory, GpuResolution, GpuRefreshRate);
     public string FirmwareCompactSummary => JoinNonEmpty(BiosVersion, BiosDate, BiosMode);
+    public string MotherboardCompactSummary => JoinNonEmpty(
+        BaseboardManufacturer,
+        MotherboardDetails.Chipset,
+        NormalizeOemValue(BaseboardVersion));
     public string StorageCompactSummary
     {
         get
         {
-            var firstDisk = DiskDrives.OrderByDescending(static disk => disk.SizeBytes).FirstOrDefault();
+            var firstDisk = GetPrimaryDiskDrive();
             return JoinNonEmpty(
                 DiskDrives.Count > 0 ? $"{DiskDrives.Count} drives" : null,
                 firstDisk?.InterfacePretty,
@@ -330,11 +343,23 @@ public sealed class DashboardViewModel : ViewModelBase
                 firstDisk?.Model);
         }
     }
+    public string StorageCapacitySummary
+    {
+        get
+        {
+            var totalBytes = DiskDrives.Sum(static disk => Math.Max(0, disk.SizeBytes));
+            var primaryDisk = GetPrimaryDiskDrive();
+            return JoinNonEmpty(
+                totalBytes > 0 ? $"{FormatBytes(totalBytes)} total" : null,
+                primaryDisk?.LogicalDrives,
+                BootDevice);
+        }
+    }
     public string PrimaryDisplaySummary
     {
         get
         {
-            var primaryDisplay = Monitors.FirstOrDefault(static monitor => monitor.IsPrimary) ?? Monitors.FirstOrDefault();
+            var primaryDisplay = GetPrimaryMonitor();
             return JoinNonEmpty(
                 primaryDisplay?.Name,
                 primaryDisplay?.Resolution,
@@ -342,14 +367,22 @@ public sealed class DashboardViewModel : ViewModelBase
                 primaryDisplay?.ConnectionType);
         }
     }
+    public string PrimaryDisplayTechSummary
+    {
+        get
+        {
+            var primaryDisplay = GetPrimaryMonitor();
+            return JoinNonEmpty(
+                primaryDisplay?.PhysicalSize,
+                primaryDisplay?.BitsPerPixel,
+                primaryDisplay?.ConnectionType);
+        }
+    }
     public string PrimaryNetworkSummary
     {
         get
         {
-            var primaryNetwork = NetworkAdapters.FirstOrDefault(static adapter =>
-                    adapter.Status.Contains("up", StringComparison.OrdinalIgnoreCase) ||
-                    adapter.Status.Contains("connected", StringComparison.OrdinalIgnoreCase))
-                ?? NetworkAdapters.FirstOrDefault();
+            var primaryNetwork = GetPrimaryNetworkAdapter();
             return JoinNonEmpty(
                 primaryNetwork?.Name,
                 primaryNetwork?.Speed,
@@ -357,6 +390,38 @@ public sealed class DashboardViewModel : ViewModelBase
                 primaryNetwork?.Type);
         }
     }
+    public string NetworkEndpointSummary
+    {
+        get
+        {
+            var primaryNetwork = GetPrimaryNetworkAdapter();
+            return JoinNonEmpty(
+                CleanNetworkValue(primaryNetwork?.IpAddress),
+                PrefixValue(CleanNetworkValue(primaryNetwork?.DefaultGateway), "GW "),
+                PrefixValue(FirstDnsServer(primaryNetwork), "DNS "));
+        }
+    }
+    public string UsbCompactSummary
+    {
+        get
+        {
+            var controllerCount = UsbDevices.Count(static device => device.IsController);
+            var primaryDevice = UsbDevices.FirstOrDefault(static device => !device.IsController);
+            return JoinNonEmpty(
+                UsbDevices.Count > 0 ? $"{UsbDevices.Count} devices" : null,
+                controllerCount > 0 ? $"{controllerCount} controllers" : null,
+                primaryDevice?.Manufacturer,
+                primaryDevice?.Name);
+        }
+    }
+    public string SecurityCompactSummary => JoinNonEmpty(
+        HasValue(SecureBootState) ? $"Secure Boot {SecureBootState}" : null,
+        HasValue(KernelDmaProtection) && !KernelDmaProtection.Equals("Off", StringComparison.OrdinalIgnoreCase) ? $"DMA {KernelDmaProtection}" : null,
+        HasValue(CredentialGuard) && !CredentialGuard.Equals("Not enabled", StringComparison.OrdinalIgnoreCase) ? $"CG {CredentialGuard}" : null);
+    public string SecurityPlatformSummary => JoinNonEmpty(
+        HasValue(VirtualizationSecurity) && !VirtualizationSecurity.StartsWith("Not", StringComparison.OrdinalIgnoreCase) ? $"VBS {VirtualizationSecurity}" : null,
+        HasValue(DeviceGuard) && !DeviceGuard.StartsWith("Not", StringComparison.OrdinalIgnoreCase) ? $"DG {DeviceGuard}" : null,
+        string.Equals(HypervisorEnforced, "Yes", StringComparison.OrdinalIgnoreCase) ? "HVCI" : null);
     public string AuditCompactSummary => JoinNonEmpty(
         AuditScore,
         AuditErrorCount > 0 ? $"{AuditErrorCount} errors" : null,
@@ -506,7 +571,21 @@ public sealed class DashboardViewModel : ViewModelBase
             OsBuild = snapshot.Os.BuildNumber.ToString();
         }
         OsArchitecture = PreferBetter(OsArchitecture, snapshot.Os.Architecture);
+        OsInstallDate = PreferBetter(OsInstallDate, snapshot.Os.InstallDate);
         Uptime = PreferBetter(Uptime, snapshot.Os.Uptime);
+        UserName = PreferBetter(UserName, snapshot.Os.Username);
+        SecureBootState = PreferBetter(SecureBootState, snapshot.Os.SecureBootState);
+        BiosMode = PreferBetter(BiosMode, snapshot.Os.BiosMode);
+        CredentialGuard = PreferBetter(CredentialGuard, snapshot.Os.CredentialGuardStatus);
+        DeviceGuard = PreferBetter(DeviceGuard, snapshot.Os.DeviceGuardStatus);
+        if (!string.IsNullOrWhiteSpace(snapshot.Os.VirtualizationEnabled))
+        {
+            VirtualizationSecurity = PreferBetter(VirtualizationSecurity, snapshot.Os.VirtualizationEnabled);
+        }
+        if (!string.IsNullOrWhiteSpace(snapshot.Os.HyperVInstalled))
+        {
+            HypervisorEnforced = PreferBetter(HypervisorEnforced, snapshot.Os.HyperVInstalled);
+        }
         if (!string.IsNullOrWhiteSpace(snapshot.Os.IconKey))
         {
             OsIconKey = snapshot.Os.IconKey;
@@ -798,17 +877,132 @@ public sealed class DashboardViewModel : ViewModelBase
         return string.Join(" · ", values.Where(HasValue));
     }
 
+    private static string GetRuntimeOsDefaultName()
+    {
+        return Environment.OSVersion.Version.Build >= 22000 ? "Windows 11" : "Windows 10";
+    }
+
+    private static string GetRuntimeOsDefaultIconKey()
+    {
+        return HardwareIconResolver.ResolveOsIconKey(GetRuntimeOsDefaultName());
+    }
+
+    private static string? NormalizeOemValue(string? value)
+    {
+        if (!HasValue(value))
+        {
+            return null;
+        }
+
+        return value!.Contains("To Be Filled", StringComparison.OrdinalIgnoreCase) ? null : value;
+    }
+
+    private static string? FormatInstalledDate(string? value)
+    {
+        if (!HasValue(value))
+        {
+            return null;
+        }
+
+        if (DateTime.TryParse(value, out var parsed))
+        {
+            return $"Installed {parsed:yyyy-MM-dd}";
+        }
+
+        return $"Installed {value}";
+    }
+
+    private static string? PrefixValue(string? value, string prefix)
+    {
+        return HasValue(value) ? $"{prefix}{value}" : null;
+    }
+
+    private static string? CleanNetworkValue(string? value)
+    {
+        if (!HasValue(value))
+        {
+            return null;
+        }
+
+        return value!.Equals("N/A", StringComparison.OrdinalIgnoreCase) ? null : value;
+    }
+
+    private static string? FirstDnsServer(NetworkAdapterModel? adapter)
+    {
+        if (adapter == null || string.IsNullOrWhiteSpace(adapter.DnsServers))
+        {
+            return null;
+        }
+
+        return adapter.DnsServers
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .FirstOrDefault();
+    }
+
+    private MonitorModel? GetPrimaryMonitor()
+    {
+        return Monitors.FirstOrDefault(static monitor => monitor.IsPrimary) ?? Monitors.FirstOrDefault();
+    }
+
+    private NetworkAdapterModel? GetPrimaryNetworkAdapter()
+    {
+        return NetworkAdapters
+            .OrderByDescending(adapter => IsConnectedNetworkStatus(adapter.Status))
+            .ThenByDescending(adapter => !IsVirtualNetworkType(adapter.Type))
+            .ThenByDescending(adapter => !string.IsNullOrWhiteSpace(CleanNetworkValue(adapter.IpAddress)))
+            .ThenBy(adapter => adapter.Name, StringComparer.OrdinalIgnoreCase)
+            .FirstOrDefault();
+    }
+
+    private DiskDriveModel? GetPrimaryDiskDrive()
+    {
+        return DiskDrives
+            .OrderByDescending(disk => ContainsIgnoreCase(BootDevice, disk.Model) || ContainsIgnoreCase(disk.LogicalDrives, "C:"))
+            .ThenByDescending(static disk => disk.SizeBytes)
+            .FirstOrDefault();
+    }
+
+    private static bool IsConnectedNetworkStatus(string? status)
+    {
+        return !string.IsNullOrWhiteSpace(status) &&
+               (status.Contains("up", StringComparison.OrdinalIgnoreCase) ||
+                status.Contains("connected", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static bool IsVirtualNetworkType(string? type)
+    {
+        return !string.IsNullOrWhiteSpace(type) &&
+               (type.Contains("loopback", StringComparison.OrdinalIgnoreCase) ||
+                type.Contains("tunnel", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static bool ContainsIgnoreCase(string? source, string? value)
+    {
+        return !string.IsNullOrWhiteSpace(source) &&
+               !string.IsNullOrWhiteSpace(value) &&
+               source.Contains(value, StringComparison.OrdinalIgnoreCase);
+    }
+
     private void NotifyCompactSummaryPropertiesChanged()
     {
         OnPropertyChanged(nameof(PlatformIdentity));
         OnPropertyChanged(nameof(OsCompactSummary));
+        OnPropertyChanged(nameof(SystemEnvironmentSummary));
         OnPropertyChanged(nameof(ProcessorCompactSummary));
         OnPropertyChanged(nameof(MemoryCompactSummary));
+        OnPropertyChanged(nameof(MemoryRuntimeSummary));
         OnPropertyChanged(nameof(GraphicsCompactSummary));
         OnPropertyChanged(nameof(FirmwareCompactSummary));
+        OnPropertyChanged(nameof(MotherboardCompactSummary));
         OnPropertyChanged(nameof(StorageCompactSummary));
+        OnPropertyChanged(nameof(StorageCapacitySummary));
         OnPropertyChanged(nameof(PrimaryDisplaySummary));
+        OnPropertyChanged(nameof(PrimaryDisplayTechSummary));
         OnPropertyChanged(nameof(PrimaryNetworkSummary));
+        OnPropertyChanged(nameof(NetworkEndpointSummary));
+        OnPropertyChanged(nameof(UsbCompactSummary));
+        OnPropertyChanged(nameof(SecurityCompactSummary));
+        OnPropertyChanged(nameof(SecurityPlatformSummary));
         OnPropertyChanged(nameof(AuditCompactSummary));
     }
 
@@ -855,7 +1049,7 @@ public sealed class DashboardViewModel : ViewModelBase
             : (!string.IsNullOrWhiteSpace(resolved.Version) ? resolved.Version : "Unknown");
         OsBuild = resolved.BuildNumber > 0 ? resolved.BuildNumber.ToString() : "Unknown";
         OsIconKey = resolved.IconKey;
-        OsIconSource = HardwareIconResolver.ResolveIcon(resolved.IconKey, "os/windows10");
+        OsIconSource = HardwareIconResolver.ResolveIcon(resolved.IconKey, HardwareIconResolver.GetFallbackKey("os"));
 
         try
         {

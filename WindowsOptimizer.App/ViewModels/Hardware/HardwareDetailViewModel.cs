@@ -434,8 +434,9 @@ public sealed class OsDetailVM : HardwareDetailViewModelBase
     {
         Title = "Operating System";
         Subtitle = "Loading system data...";
-        IconKey = IconResolver.GetDefaultKey(HardwareType.Os);
-        IconSource = IconResolver.Resolve(HardwareType.Os, null, "Windows 10");
+        var runtimeOsName = GetRuntimeOsDefaultName();
+        IconKey = HardwareIconResolver.ResolveOsIconKey(runtimeOsName);
+        IconSource = HardwareIconResolver.ResolveOsIcon(runtimeOsName);
 
         BeginLoad(snapshot, cache =>
         {
@@ -481,28 +482,13 @@ public sealed class OsDetailVM : HardwareDetailViewModelBase
             if (!string.IsNullOrWhiteSpace(os.DefenderStatus)) specs.Add(new("Defender Service", os.DefenderStatus));
             if (!string.IsNullOrWhiteSpace(os.FirewallStatus)) specs.Add(new("Firewall Service", os.FirewallStatus));
 
-            var sourceHints = new[]
-            {
-                ("Product Name Source", os.ProductNameSource),
-                ("Build Source", os.BuildNumberSource),
-                ("Version Source", os.VersionSource),
-                ("Display Version Source", os.DisplayVersionSource),
-                ("Architecture Source", os.ArchitectureSource),
-                ("Secure Boot Source", os.SecureBootStateSource),
-                ("TPM Source", os.TpmVersionSource)
-            }
-            .Where(entry => !string.IsNullOrWhiteSpace(entry.Item2))
-            .Select(entry => new KeyValuePair<string, string>(entry.Item1, entry.Item2!))
-            .ToList();
-
-            if (sourceHints.Count > 0)
-            {
-                specs.Add(new("---", "---"));
-                specs.AddRange(sourceHints);
-            }
-
             return new HardwareDetailPayload("Operating System", subtitle, iconResolution, specs);
         });
+    }
+
+    private static string GetRuntimeOsDefaultName()
+    {
+        return Environment.OSVersion.Version.Build >= 22000 ? "Windows 11" : "Windows 10";
     }
 
     private static string BuildNormalizedOsName(int buildNumber, string? edition, string? displayVersion, string? releaseId)

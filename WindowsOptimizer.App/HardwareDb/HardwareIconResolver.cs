@@ -39,6 +39,11 @@ public static class HardwareIconResolver
     public static string GetFallbackKey(string category)
     {
         var normalizedCategory = HardwareIconSourceDb.NormalizeCategory(category);
+        if (normalizedCategory.Equals("os", StringComparison.OrdinalIgnoreCase))
+        {
+            return GetRuntimeOsFallbackKey();
+        }
+
         var candidate = LegacyFallbackByCategory.TryGetValue(normalizedCategory, out var fallback)
             ? fallback
             : $"{normalizedCategory}_default";
@@ -96,12 +101,23 @@ public static class HardwareIconResolver
 
     public static ImageSource ResolveOsIcon(string? normalizedOsName)
     {
+        if (string.IsNullOrWhiteSpace(normalizedOsName))
+        {
+            var fallback = GetRuntimeOsFallbackKey();
+            return ResolveIcon(fallback, fallback);
+        }
+
         var iconKey = ResolveOsIconKey(normalizedOsName);
-        return ResolveIcon(iconKey, "os/windows10");
+        return ResolveIcon(iconKey, GetRuntimeOsFallbackKey());
     }
 
     public static string ResolveOsIconKey(string? normalizedOsName)
     {
+        if (string.IsNullOrWhiteSpace(normalizedOsName))
+        {
+            return GetRuntimeOsFallbackKey();
+        }
+
         var normalized = HardwareNameNormalizer.Normalize(normalizedOsName);
         if (normalized.Contains("windows 11", StringComparison.OrdinalIgnoreCase))
         {
@@ -114,6 +130,12 @@ public static class HardwareIconResolver
         }
 
         return HardwareIconResolverV2.ResolveOsIconKey(normalizedOsName);
+    }
+
+    private static string GetRuntimeOsFallbackKey()
+    {
+        var fallback = Environment.OSVersion.Version.Build >= 22000 ? "os/windows11" : "os/windows10";
+        return HardwareIconSourceDb.ResolveFallbackKey("os", fallback);
     }
 
     public static string GetCpuIcon(string? cpuName)

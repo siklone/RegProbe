@@ -396,12 +396,22 @@ public static class HardwareIconResolverV2
 
     public static ImageSource ResolveOsIcon(string? normalizedOsName)
     {
-        var iconKey = ResolveIconKey("os", normalizedOsName);
-        return ResolveIcon(iconKey, "os/windows10");
+        var fallback = GetRuntimeOsDefaultKey();
+        var iconKey = string.IsNullOrWhiteSpace(normalizedOsName)
+            ? fallback
+            : ResolveIconKey("os", normalizedOsName);
+        return ResolveIcon(iconKey, fallback);
     }
 
     public static string ResolveOsIconKey(string? normalizedOsName)
     {
-        return ResolveIconKey("os", normalizedOsName);
+        return string.IsNullOrWhiteSpace(normalizedOsName)
+            ? GetRuntimeOsDefaultKey()
+            : ResolveIconKey("os", normalizedOsName);
+    }
+
+    private static string GetRuntimeOsDefaultKey()
+    {
+        return Environment.OSVersion.Version.Build >= 22000 ? "os/windows11" : "os/windows10";
     }
 }
