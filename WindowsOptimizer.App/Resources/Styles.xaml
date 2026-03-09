@@ -173,7 +173,7 @@
         </Setter>
         <Setter Property="BorderBrush" Value="#34FFFFFF"/>
         <Setter Property="CornerRadius" Value="16"/>
-        <Setter Property="Padding" Value="14"/>
+        <Setter Property="Padding" Value="12"/>
     </Style>
 
     <Style x:Key="AppInsetPanelStyle" TargetType="Border">
@@ -181,7 +181,7 @@
         <Setter Property="BorderBrush" Value="#22FFFFFF"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="13"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="9"/>
     </Style>
 
     <Style x:Key="AppChipStyle" TargetType="Border">
@@ -189,7 +189,7 @@
         <Setter Property="BorderBrush" Value="#24FFFFFF"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="8,5"/>
+        <Setter Property="Padding" Value="7,4"/>
         <Setter Property="Margin" Value="0,0,6,6"/>
     </Style>
 
@@ -218,7 +218,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
         <Setter Property="BorderBrush" Value="#33FFFFFF"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="9,5"/>
+        <Setter Property="Padding" Value="8,4"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -253,11 +253,11 @@
 
     <Style x:Key="AppMetricTileBorderStyle" TargetType="Border">
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="Padding" Value="11,9"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Focusable" Value="True"/>
-        <Setter Property="Margin" Value="0,0,8,8"/>
-        <Setter Property="MinHeight" Value="84"/>
+        <Setter Property="Margin" Value="0,0,6,6"/>
+        <Setter Property="MinHeight" Value="80"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Setter Property="RenderTransform">
@@ -396,41 +396,47 @@
                                 BorderThickness="1"
                                 CornerRadius="999"/>
                         <Border x:Name="AnimatedFill"
-                                Width="96"
+                                Width="82"
                                 HorizontalAlignment="Left"
                                 CornerRadius="999"
-                                Opacity="0.92"
+                                Opacity="0.96"
+                                Visibility="Collapsed"
                                 RenderTransformOrigin="0,0.5">
                             <Border.RenderTransform>
-                                <TranslateTransform x:Name="SweepTransform" X="-120"/>
+                                <TranslateTransform x:Name="SweepTransform" X="-96"/>
                             </Border.RenderTransform>
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                    <GradientStop Color="#009BCD9E" Offset="0.00"/>
-                                    <GradientStop Color="#889BCD9E" Offset="0.52"/>
-                                    <GradientStop Color="#009BCD9E" Offset="1.00"/>
+                                    <GradientStop Color="#006BEAA5" Offset="0.00"/>
+                                    <GradientStop Color="#9BE8FFCF" Offset="0.42"/>
+                                    <GradientStop Color="#F6F6FFF9" Offset="0.52"/>
+                                    <GradientStop Color="#9BE8FFCF" Offset="0.62"/>
+                                    <GradientStop Color="#006BEAA5" Offset="1.00"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard x:Name="IndeterminateSweepStoryboard">
-                                <Storyboard RepeatBehavior="Forever">
-                                    <DoubleAnimation Storyboard.TargetName="SweepTransform"
-                                                     Storyboard.TargetProperty="X"
-                                                     From="-120"
-                                                     To="280"
-                                                     Duration="0:0:1.05"/>
-                                    <DoubleAnimation Storyboard.TargetName="AnimatedFill"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     From="0.55"
-                                                     To="0.96"
-                                                     Duration="0:0:0.52"
-                                                     AutoReverse="True"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Setter TargetName="AnimatedFill" Property="Visibility" Value="Visible"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="IndeterminateSweepStoryboard">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="SweepTransform"
+                                                         Storyboard.TargetProperty="X"
+                                                         From="-96"
+                                                         To="340"
+                                                         Duration="0:0:0.95"/>
+                                        <DoubleAnimation Storyboard.TargetName="AnimatedFill"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0.72"
+                                                         To="1.0"
+                                                         Duration="0:0:0.48"
+                                                         AutoReverse="True"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

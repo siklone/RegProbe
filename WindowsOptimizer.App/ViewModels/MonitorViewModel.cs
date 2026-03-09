@@ -2184,9 +2184,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     _nextCoreSampleUtc = DateTime.UtcNow;
                     _nextIoSampleUtc = DateTime.UtcNow;
                     _nextAuxSampleUtc = DateTime.UtcNow;
+                    _nextProcessSampleUtc = DateTime.UtcNow;
                     _ = SampleCoreMetricsAsync();
                     _ = SampleIoMetricsAsync();
                     _ = SampleAuxMetricsAsync();
+                    _ = SampleProcessMetricsAsync();
                 }
                 else if (IsStartupAppsTab)
                 {
@@ -2432,6 +2434,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
 
         IsPerformanceDetailOpen = true;
+        _nextProcessSampleUtc = DateTime.UtcNow;
+        if (!_isProcessSampleInProgress)
+        {
+            _ = SampleProcessMetricsAsync();
+        }
     }
 
     private void OpenPerformanceMetricByKey(string? key)
@@ -2819,10 +2826,59 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string GpuFanRpmText => HasGpuFan ? $"{GpuFanRpm:F0} RPM" : "N/A";
 
+    public string CpuClockText => FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz);
+
+    public string CpuBaseClockText => FormatSpeedGHz(_cpuPerformanceSnapshot.BaseSpeedMhz);
+
+    public string CpuProcessCountText => FormatCount(_cpuPerformanceSnapshot.ProcessCount);
+
+    public string CpuThreadCountText => FormatCount(_cpuPerformanceSnapshot.ThreadCount);
+
+    public string CpuHandleCountText => FormatCount(_cpuPerformanceSnapshot.HandleCount);
+
+    public string CpuTopologyText => $"{FormatCount(_cpuPerformanceSnapshot.Cores)} cores / {FormatCount(_cpuPerformanceSnapshot.LogicalProcessors)} threads";
+
+    public string MemoryAvailableText => $"{_memoryPerformanceSnapshot.AvailableGb:F1} GB";
+
+    public string MemoryCommittedText => FormatPairGb(_memoryPerformanceSnapshot.CommittedGb, _memoryPerformanceSnapshot.CommitLimitGb);
+
+    public string MemoryCachedText => FormatGb(_memoryPerformanceSnapshot.CachedGb);
+
+    public string MemorySpeedText => FormatSpeedMhz(_memoryPerformanceSnapshot.SpeedMhz);
+
+    public string MemorySlotUsageText => FormatSlotUsage(_memoryPerformanceSnapshot.SlotsUsed, _memoryPerformanceSnapshot.SlotsTotal);
+
+    public bool HasGpuEngineUsage => _gpuEngineUsageSnapshot.IsAvailable;
+
+    public string GpuEngine3DText => HasGpuEngineUsage ? $"{_gpuEngineUsageSnapshot.Engine3DPercent:F0}%" : "N/A";
+
+    public string GpuEngineCopyText => HasGpuEngineUsage ? $"{_gpuEngineUsageSnapshot.CopyPercent:F0}%" : "N/A";
+
+    public string GpuEngineEncodeText => HasGpuEngineUsage ? $"{_gpuEngineUsageSnapshot.VideoEncodePercent:F0}%" : "N/A";
+
+    public string GpuEngineDecodeText => HasGpuEngineUsage ? $"{_gpuEngineUsageSnapshot.VideoDecodePercent:F0}%" : "N/A";
+
     public ObservableCollection<DiskHealthItemViewModel> DiskHealthItems { get; }
 
     public bool HasDiskHealthItems => DiskHealthItems.Any(item =>
         !string.Equals(item.StatusText, "N/A", StringComparison.OrdinalIgnoreCase));
+
+    public string DiskDriveCountText => FormatCount(_diskPerformanceSnapshots.Count);
+
+    public string DiskPeakReadText => $"{_diskPerformanceSnapshots.Select(d => d.ReadMbps ?? 0).DefaultIfEmpty(0).Max():F1} MB/s";
+
+    public string DiskPeakWriteText => $"{_diskPerformanceSnapshots.Select(d => d.WriteMbps ?? 0).DefaultIfEmpty(0).Max():F1} MB/s";
+
+    public string NetworkAdapterCountText => FormatCount(NetworkAdapters.Count);
+
+    public string ActiveNetworkAdapterText =>
+        NetworkAdapters.FirstOrDefault(adapter => adapter.IsUp && !adapter.IsVirtual)?.Name
+        ?? NetworkAdapters.FirstOrDefault(adapter => adapter.IsUp)?.Name
+        ?? "No active adapter";
+
+    public string NetworkReceiveTotalText => $"{NetworkAdapters.Sum(adapter => adapter.ReceiveMbps):F1} Mbps";
+
+    public string NetworkSendTotalText => $"{NetworkAdapters.Sum(adapter => adapter.SendMbps):F1} Mbps";
 
     public ObservableCollection<double> PerformancePrimaryHistory
     {
@@ -3155,6 +3211,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 _ = SampleProcessMetricsAsync();
             }
 
+            if (IsPerformanceTab && IsPerformanceDetailOpen && !_isProcessSampleInProgress && now >= _nextProcessSampleUtc)
+            {
+                _nextProcessSampleUtc = now.Add(ProcessSampleInterval);
+                _ = SampleProcessMetricsAsync();
+            }
+
             if (IsPerformanceTab && !_isAuxSampleInProgress && now >= _nextAuxSampleUtc)
             {
                 _nextAuxSampleUtc = now.Add(AuxSampleInterval);
@@ -3370,6 +3432,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var selection = SelectedPerformanceItem ?? PerformanceItems.FirstOrDefault();
         if (selection == null)
         {
+            RaisePerformanceContextPropertyChanges();
             return;
         }
 
@@ -3571,6 +3634,34 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
         OnPropertyChanged(nameof(HasPerformanceSecondary));
         OnPropertyChanged(nameof(PerformanceHistoryScaleMid));
+        RaisePerformanceContextPropertyChanges();
+    }
+
+    private void RaisePerformanceContextPropertyChanges()
+    {
+        OnPropertyChanged(nameof(CpuClockText));
+        OnPropertyChanged(nameof(CpuBaseClockText));
+        OnPropertyChanged(nameof(CpuProcessCountText));
+        OnPropertyChanged(nameof(CpuThreadCountText));
+        OnPropertyChanged(nameof(CpuHandleCountText));
+        OnPropertyChanged(nameof(CpuTopologyText));
+        OnPropertyChanged(nameof(MemoryAvailableText));
+        OnPropertyChanged(nameof(MemoryCommittedText));
+        OnPropertyChanged(nameof(MemoryCachedText));
+        OnPropertyChanged(nameof(MemorySpeedText));
+        OnPropertyChanged(nameof(MemorySlotUsageText));
+        OnPropertyChanged(nameof(HasGpuEngineUsage));
+        OnPropertyChanged(nameof(GpuEngine3DText));
+        OnPropertyChanged(nameof(GpuEngineCopyText));
+        OnPropertyChanged(nameof(GpuEngineEncodeText));
+        OnPropertyChanged(nameof(GpuEngineDecodeText));
+        OnPropertyChanged(nameof(DiskDriveCountText));
+        OnPropertyChanged(nameof(DiskPeakReadText));
+        OnPropertyChanged(nameof(DiskPeakWriteText));
+        OnPropertyChanged(nameof(NetworkAdapterCountText));
+        OnPropertyChanged(nameof(ActiveNetworkAdapterText));
+        OnPropertyChanged(nameof(NetworkReceiveTotalText));
+        OnPropertyChanged(nameof(NetworkSendTotalText));
     }
 
     private static double GetCombinedHistoryMax(ObservableCollection<double> primary, ObservableCollection<double> secondary)

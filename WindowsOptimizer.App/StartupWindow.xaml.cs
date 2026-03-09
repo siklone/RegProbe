@@ -1,5 +1,6 @@
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media.Animation;
+using System.Windows.Media;
 using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.ViewModels;
 
@@ -7,11 +8,15 @@ namespace WindowsOptimizer.App;
 
 public partial class StartupWindow : Window
 {
+    private readonly Stopwatch _animationClock = new();
+    private bool _isSweepAnimationActive;
+
     public StartupWindow()
     {
         InitializeComponent();
         Loaded += OnLoaded;
         SizeChanged += OnSizeChanged;
+        Unloaded += OnUnloaded;
     }
 
     public void UpdateScanProgress(StartupScanProgress progress)
@@ -37,25 +42,62 @@ public partial class StartupWindow : Window
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        StartGlowAnimation();
+        UpdateGlowPositions();
     }
 
     private void StartGlowAnimation()
+    {
+        if (_isSweepAnimationActive)
+        {
+            return;
+        }
+
+        _animationClock.Restart();
+        CompositionTarget.Rendering += OnCompositionTargetRendering;
+        _isSweepAnimationActive = true;
+        UpdateGlowPositions();
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        StopGlowAnimation();
+    }
+
+    private void StopGlowAnimation()
+    {
+        if (!_isSweepAnimationActive)
+        {
+            return;
+        }
+
+        CompositionTarget.Rendering -= OnCompositionTargetRendering;
+        _animationClock.Stop();
+        _isSweepAnimationActive = false;
+    }
+
+    private void OnCompositionTargetRendering(object? sender, EventArgs e)
+    {
+        UpdateGlowPositions();
+    }
+
+    private void UpdateGlowPositions()
     {
         if (!IsLoaded || TrackHost.ActualWidth <= 0)
         {
             return;
         }
 
-        var animation = new DoubleAnimation
-        {
-            From = -88,
-            To = TrackHost.ActualWidth,
-            Duration = TimeSpan.FromSeconds(1.05),
-            RepeatBehavior = RepeatBehavior.Forever,
-            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
-        };
+        var travelWidth = TrackHost.ActualWidth + GlowSegment.Width + 36;
+        var loopProgress = (_animationClock.Elapsed.TotalMilliseconds % 980.0) / 980.0;
+        var easedProgress = loopProgress < 0.5
+            ? 2 * loopProgress * loopProgress
+            : 1 - Math.Pow(-2 * loopProgress + 2, 2) / 2;
 
-        GlowTranslate.BeginAnimation(System.Windows.Media.TranslateTransform.XProperty, animation, HandoffBehavior.SnapshotAndReplace);
+        var headLeft = -GlowSegment.Width + (travelWidth * easedProgress);
+        var trailLeft = headLeft - 34;
+
+        SweepCanvas.Width = TrackHost.ActualWidth;
+        System.Windows.Controls.Canvas.SetLeft(GlowSegment, headLeft);
+        System.Windows.Controls.Canvas.SetLeft(TrailSegment, trailLeft);
     }
 }

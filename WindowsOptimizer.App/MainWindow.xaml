@@ -66,7 +66,7 @@
         <Style x:Key="ShellTopNavItemStyle" TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Margin" Value="0,0,6,0" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -75,10 +75,10 @@
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border x:Name="Border"
                                 Background="Transparent"
-                                CornerRadius="12"
+                                CornerRadius="10"
                                 BorderThickness="1"
                                 BorderBrush="Transparent"
-                                Padding="14,8">
+                                Padding="12,7">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -296,7 +296,7 @@
                     Background="{DynamicResource BackgroundDarkBrush}"
                     BorderBrush="{DynamicResource GlassBorderBrush}"
                     BorderThickness="0,0,0,1"
-                    Padding="14,10">
+                    Padding="12,8">
                 <DockPanel LastChildFill="False">
                     <ListBox DockPanel.Dock="Left"
                              ItemsSource="{Binding NavigationItems}"
@@ -325,11 +325,7 @@
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center">
                         <TextBlock Text="{Binding AppVersionLabel}"
-                                   Margin="0,0,12,0"
-                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                   FontSize="10"
-                                   VerticalAlignment="Center"/>
-                        <TextBlock Text="Ctrl+1-5"
+                                   Margin="0,0,4,0"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
                                    FontSize="10"
                                    VerticalAlignment="Center"/>
