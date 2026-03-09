@@ -280,16 +280,29 @@
         <Style x:Key="MonitorDetailSheetStyle"
                TargetType="Border"
                BasedOn="{StaticResource AppDetailSheetStyle}">
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="12"/>
         </Style>
 
         <Style x:Key="MonitorDetailPanelStyle"
                TargetType="Border"
-               BasedOn="{StaticResource AppInsetPanelStyle}"/>
+               BasedOn="{StaticResource AppInsetPanelStyle}">
+            <Setter Property="Padding" Value="12"/>
+        </Style>
 
         <Style x:Key="MonitorDetailMetricCardStyle"
                TargetType="Border"
-               BasedOn="{StaticResource AppMiniMetricCardStyle}"/>
+               BasedOn="{StaticResource AppMiniMetricCardStyle}">
+            <Setter Property="MinWidth" Value="124"/>
+            <Setter Property="Padding" Value="9,7"/>
+        </Style>
+
+        <Style x:Key="MonitorDetailValueChipStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppInsetPanelStyle}">
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="Margin" Value="12,0,10,0"/>
+        </Style>
 
         <Style x:Key="MonitorProcessSectionCardStyle"
                TargetType="Border"
@@ -440,11 +453,11 @@
             <Setter Property="FontSize" Value="12"/>
         </Style>
 
-        <Style x:Key="CompactButton" TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
+        <Style x:Key="CompactButton"
+               TargetType="Button"
+               BasedOn="{StaticResource AppQuietActionButtonStyle}">
+            <Setter Property="Background" Value="#18000000"/>
+            <Setter Property="Padding" Value="9,5"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
@@ -773,8 +786,8 @@
                         Visibility="{Binding HasPerformanceDetail, Converter={StaticResource BoolToVisibility}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.15*"/>
-                            <ColumnDefinition Width="0.95*"/>
+                            <ColumnDefinition Width="1.08*"/>
+                            <ColumnDefinition Width="0.92*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -790,31 +803,39 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
+                                <TextBlock Text="Live detail"
+                                           Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                                 <TextBlock Text="{Binding SelectedPerformanceItem.Title}"
-                                           FontSize="15"
+                                           Margin="0,3,0,0"
+                                           FontSize="16"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding PerformanceChartTitle}"
                                            FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
-                                           Margin="0,2,0,0"/>
+                                           Margin="0,3,0,0"
+                                           TextWrapping="Wrap"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="1"
-                                        Margin="12,0,10,0"
-                                        VerticalAlignment="Center">
-                                <TextBlock Text="Live now"
-                                           FontSize="9"
-                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
-                                           FontSize="12"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            </StackPanel>
+                            <Border Grid.Column="1"
+                                    Style="{StaticResource MonitorDetailValueChipStyle}"
+                                    VerticalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="Current reading"
+                                               FontSize="9"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
+                                               Margin="0,3,0,0"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
                             <Button Grid.Column="2"
                                     Command="{Binding ClosePerformanceDetailCommand}"
                                     Style="{StaticResource CompactButton}"
-                                    Width="30"
-                                    Height="30"
+                                    Width="34"
+                                    Height="34"
                                     Padding="0"
                                     ToolTip="Close">
                                 <TextBlock FontFamily="Segoe MDL2 Assets"
@@ -840,12 +861,12 @@
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                     <TextBlock Grid.Column="1"
-                                               Text="{Binding SelectedPerformanceItem.Subtitle}"
+                                               Text="1 second samples"
                                                FontSize="10"
                                                Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 </Grid>
 
-                                <Grid Height="110">
+                                <Grid Height="122">
                                     <Border Background="{DynamicResource BackgroundDarkestBrush}"
                                             BorderBrush="{DynamicResource GlassBorderBrush}"
                                             BorderThickness="1"
@@ -893,18 +914,36 @@
                                     </Grid>
                                 </Grid>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <TextBlock Text="{Binding PerformancePrimaryLabel}"
-                                               FontSize="10"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                    <TextBlock Text="{Binding PerformanceSecondaryLabel}"
-                                               FontSize="10"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource SuccessBrush}"
-                                               Margin="12,0,0,0"
-                                               Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"/>
-                                </StackPanel>
+                                <WrapPanel Margin="0,8,0,0">
+                                    <Border Style="{StaticResource MonitorDetailMetricCardStyle}" MinWidth="112">
+                                        <StackPanel>
+                                            <TextBlock Text="Primary line"
+                                                       FontSize="9"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                            <TextBlock Text="{Binding PerformancePrimaryLabel}"
+                                                       Margin="0,3,0,0"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                       TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource MonitorDetailMetricCardStyle}"
+                                            MinWidth="112"
+                                            Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}">
+                                        <StackPanel>
+                                            <TextBlock Text="Second line"
+                                                       FontSize="9"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                            <TextBlock Text="{Binding PerformanceSecondaryLabel}"
+                                                       Margin="0,3,0,0"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource SuccessBrush}"
+                                                       TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                </WrapPanel>
                             </StackPanel>
                         </Border>
 
@@ -913,14 +952,14 @@
                             <Border Style="{StaticResource MonitorDetailPanelStyle}"
                                     Margin="0,0,0,8">
                                 <StackPanel>
-                                    <TextBlock Text="Key details"
+                                    <TextBlock Text="At a glance"
                                                FontSize="12"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                Margin="0,0,0,8"/>
                                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                                   HorizontalScrollBarVisibility="Disabled"
-                                                  MaxHeight="180">
+                                                  MaxHeight="192">
                                         <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -933,12 +972,12 @@
                                                             Style="{StaticResource MonitorDetailMetricCardStyle}">
                                                         <StackPanel>
                                                             <TextBlock Text="{Binding Label}"
-                                                                       FontSize="9"
+                                                                       FontSize="10"
                                                                        Foreground="{DynamicResource MutedForegroundBrush}"
                                                                        TextWrapping="Wrap"/>
                                                             <TextBlock Text="{Binding Value}"
                                                                        Margin="0,4,0,0"
-                                                                       FontSize="12"
+                                                                       FontSize="13"
                                                                        FontWeight="SemiBold"
                                                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                                        TextWrapping="Wrap"/>
