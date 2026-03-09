@@ -229,16 +229,34 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="999"/>
-            <Setter Property="Padding" Value="10,4"/>
-            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
         </Style>
 
-        <Style x:Key="MonitorSummaryPillStyle" TargetType="Border" BasedOn="{StaticResource HeaderPillStyle}">
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="12,8"/>
-            <Setter Property="Margin" Value="0,0,10,10"/>
-            <Setter Property="MinWidth" Value="146"/>
+        <Style x:Key="MonitorSummaryPillStyle" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="True"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="MinWidth" Value="148"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#242B36" Offset="0"/>
+                        <GradientStop Color="#1A202A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#34FFFFFF"/>
         </Style>
 
         <Style x:Key="MonitorSummaryLabelStyle" TargetType="TextBlock">
@@ -263,11 +281,13 @@
         </Style>
 
         <Style x:Key="MonitorMetricLauncherStyle" TargetType="Border" BasedOn="{StaticResource MonitorSummaryPillStyle}">
-            <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -285,49 +305,25 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Padding" Value="14"/>
-            <Setter Property="Margin" Value="0,0,0,14"/>
-            <Setter Property="Opacity" Value="0"/>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <TranslateTransform Y="10"/>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                             From="0"
-                                             To="1"
-                                             Duration="0:0:0.22"
-                                             EasingFunction="{StaticResource CubicEaseOut}"/>
-                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                             From="10"
-                                             To="0"
-                                             Duration="0:0:0.24"
-                                             EasingFunction="{StaticResource CubicEaseOut}"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
         <Style x:Key="MonitorDetailPanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
+            <Setter Property="Background" Value="#1D0C1118"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Padding" Value="10"/>
         </Style>
 
         <Style x:Key="MonitorDetailMetricCardStyle" TargetType="Border">
-            <Setter Property="Width" Value="132"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
-            <Setter Property="Padding" Value="9,8"/>
-            <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="Width" Value="124"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="8,7"/>
+            <Setter Property="Background" Value="#13000000"/>
+            <Setter Property="BorderBrush" Value="#24FFFFFF"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="10"/>
         </Style>
@@ -771,40 +767,19 @@
 
         <DataTemplate x:Key="MonitorPerformanceTemplate">
             <StackPanel Margin="0,0,0,16">
-                    <Border Padding="14,12"
-                            CornerRadius="12"
-                            Background="{DynamicResource BackgroundMediumBrush}"
-                            BorderBrush="{DynamicResource GlassBorderBrush}"
-                            BorderThickness="1"
+                    <Border Style="{StaticResource MonitorDetailPanelStyle}"
                             Visibility="{Binding IsPerformanceDetailClosed, Converter={StaticResource BoolToVisibility}}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel>
-                                <TextBlock Text="{Binding PerformanceDetailEmptyStateTitle}"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="{Binding PerformanceDetailEmptyStateText}"
-                                           FontSize="12"
-                                           Foreground="{DynamicResource MutedForegroundBrush}"
-                                           Margin="0,4,0,0"
-                                           TextWrapping="Wrap"/>
-                            </StackPanel>
-                            <Border Grid.Column="1"
-                                    Padding="10,6"
-                                    Margin="16,0,0,0"
-                                    CornerRadius="999"
-                                    Background="{DynamicResource BackgroundLightBrush}"
-                                    VerticalAlignment="Center">
-                                <TextBlock Text="Click a tile"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            </Border>
-                        </Grid>
+                        <StackPanel>
+                            <TextBlock Text="{Binding PerformanceDetailEmptyStateTitle}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            <TextBlock Text="{Binding PerformanceDetailEmptyStateText}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                       Margin="0,4,0,0"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
                     </Border>
 
                     <Border Style="{StaticResource MonitorDetailSheetStyle}"
@@ -826,21 +801,17 @@
                                                Foreground="{DynamicResource MutedForegroundBrush}"
                                                Margin="0,3,0,0"/>
                                 </StackPanel>
-                                <Border Grid.Column="1"
-                                        Style="{StaticResource HeaderPillStyle}"
-                                        Background="{DynamicResource BackgroundDarkestBrush}"
-                                        Margin="12,0,10,0"
-                                        Padding="12,7">
-                                    <StackPanel>
-                                        <TextBlock Text="Live now"
-                                                   FontSize="9"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                        <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
-                                                   FontSize="12"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                    </StackPanel>
-                                </Border>
+                                <StackPanel Grid.Column="1"
+                                            Margin="12,0,10,0"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="Current"
+                                               FontSize="9"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
+                                               FontSize="12"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                </StackPanel>
                                 <Button Grid.Column="2"
                                         Command="{Binding ClosePerformanceDetailCommand}"
                                         Style="{StaticResource CompactButton}"
@@ -928,23 +899,18 @@
                                         </Grid>
                                     </Grid>
 
-                                        <WrapPanel>
-                                            <Border Style="{StaticResource MonitorContextCardStyle}" Padding="10,5" Margin="0,0,8,0">
-                                                <TextBlock Text="{Binding PerformancePrimaryLabel}"
-                                                           FontSize="10"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                            </Border>
-                                            <Border Style="{StaticResource MonitorContextCardStyle}"
-                                                    Padding="10,5"
-                                                    Margin="0,0,8,0"
-                                                    Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}">
-                                                <TextBlock Text="{Binding PerformanceSecondaryLabel}"
-                                                           FontSize="10"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource SuccessBrush}"/>
-                                            </Border>
-                                        </WrapPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding PerformancePrimaryLabel}"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <TextBlock Text="{Binding PerformanceSecondaryLabel}"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource SuccessBrush}"
+                                                       Margin="12,0,0,0"
+                                                       Visibility="{Binding HasPerformanceSecondary, Converter={StaticResource BoolToVisibility}}"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
@@ -996,35 +962,73 @@
                                 </Border>
                             </Grid>
 
-                            <ContentControl Margin="0,12,0,0" Content="{Binding}">
-                                <ContentControl.Style>
-                                    <Style TargetType="ContentControl">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="cpu">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorCpuContextTemplate}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="memory">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorMemoryContextTemplate}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="gpu">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorGpuContextTemplate}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="disk">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorStorageContextTemplate}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="net">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Setter Property="ContentTemplate" Value="{StaticResource MonitorNetworkContextTemplate}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ContentControl.Style>
-                            </ContentControl>
+                            <StackPanel Margin="0,12,0,0">
+                                <ContentControl Content="{Binding}"
+                                                ContentTemplate="{DynamicResource MonitorCpuContextTemplate}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="cpu">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                <ContentControl Content="{Binding}"
+                                                ContentTemplate="{DynamicResource MonitorMemoryContextTemplate}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="memory">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                <ContentControl Content="{Binding}"
+                                                ContentTemplate="{DynamicResource MonitorGpuContextTemplate}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="gpu">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                <ContentControl Content="{Binding}"
+                                                ContentTemplate="{DynamicResource MonitorStorageContextTemplate}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="disk">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                                <ContentControl Content="{Binding}"
+                                                ContentTemplate="{DynamicResource MonitorNetworkContextTemplate}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="net">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
             </StackPanel>
@@ -3441,38 +3445,9 @@
                         </Border>
                     </WrapPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="1"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Margin="0,8,0,0">
-                    <Border Style="{StaticResource HeaderPillStyle}" ToolTip="Auto refresh every 1 second.">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Ellipse Width="6" Height="6" Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
-                            <TextBlock Text="Auto refresh 1s" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontWeight="SemiBold"/>
-                        </StackPanel>
-                    </Border>
-                    <Button Command="{Binding ExportMetricsCommand}"
-                            Style="{StaticResource HeaderActionButtonStyle}"
-                            VerticalAlignment="Center"
-                            ToolTip="Save snapshot (CSV) to your Desktop.">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;" FontSize="12" Margin="0,0,6,0"/>
-                            <TextBlock Text="Export CSV"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Command="{Binding ToggleLayoutEditorCommand}"
-                            Style="{StaticResource HeaderActionButtonStyle}"
-                            VerticalAlignment="Center"
-                            Margin="8,0,0,0"
-                            ToolTip="Customize which sections are visible and their order."
-                            Visibility="Collapsed">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8B7;" FontSize="12" Margin="0,0,6,0"/>
-                            <TextBlock Text="Customize"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+                <Border Grid.Row="1"
+                        Margin="0,8,0,0"
+                        Visibility="Collapsed"/>
             </Grid>
 
             <ContentControl Content="{Binding}"
