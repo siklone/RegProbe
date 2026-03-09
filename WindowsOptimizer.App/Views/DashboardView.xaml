@@ -14,128 +14,29 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
-        <Style x:Key="DashboardSurfaceStyle" TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#1F252D" Offset="0"/>
-                        <GradientStop Color="#151A20" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#38FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Padding" Value="12"/>
-        </Style>
+        <Style x:Key="DashboardSurfaceStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppSurfaceCardStyle}"/>
 
-        <Style x:Key="DashboardChipStyle" TargetType="Border">
-            <Setter Property="Background" Value="#13000000"/>
-            <Setter Property="BorderBrush" Value="#24FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="10"/>
+        <Style x:Key="DashboardChipStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppChipStyle}">
             <Setter Property="Padding" Value="7,5"/>
             <Setter Property="Margin" Value="0,0,5,5"/>
         </Style>
 
-        <Style x:Key="DashboardActionButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#18000000"/>
-            <Setter Property="BorderBrush" Value="#33FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="7,4"/>
-            <Setter Property="Cursor" Value="Hand"/>
+        <Style x:Key="DashboardActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource AppQuietActionButtonStyle}">
             <Setter Property="Margin" Value="0,6,0,0"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonRoot"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              Margin="{TemplateBinding Padding}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonRoot" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                <Setter TargetName="ButtonRoot" Property="Background" Value="#1D0C1118"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="ButtonRoot" Property="Opacity" Value="0.45"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Padding" Value="8,5"/>
         </Style>
 
-        <Style x:Key="DashboardCardButtonStyle" TargetType="Button">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#1E242C" Offset="0"/>
-                        <GradientStop Color="#161A21" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#34FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
+        <Style x:Key="DashboardCardButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource AppMetricTileButtonStyle}">
             <Setter Property="Padding" Value="10"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Focusable" Value="True"/>
-            <Setter Property="IsTabStop" Value="True"/>
             <Setter Property="Margin" Value="0,0,6,6"/>
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="CardRoot"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="15">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="CardRoot" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                <Setter TargetName="CardRoot" Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.01" Duration="0:0:0.12"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.01" Duration="0:0:0.12"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.12"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.12"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="CardRoot" Property="Background" Value="{DynamicResource PressedOverlayBrush}"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="CardRoot" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
 
         <Style x:Key="DashboardSummaryCardStyle"
@@ -227,15 +128,14 @@
                     </Border>
 
                     <StackPanel Margin="0,0,10,0">
+                        <TextBlock Text="Overview"
+                                   Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                         <TextBlock Text="Dashboard"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                   Margin="0,3,0,0"
+                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
                         <TextBlock Text="{Binding PlatformIdentity}"
                                    Margin="0,3,0,0"
-                                   FontSize="9"
-                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                   TextWrapping="Wrap"/>
+                                   Style="{StaticResource AppSectionSubtitleTextStyle}"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -330,9 +230,7 @@
 
                         <StackPanel Margin="0,0,12,0">
                             <TextBlock Text="Quick Actions"
-                                       FontSize="11"
-                                       FontWeight="SemiBold"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                             <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.DashboardQuickActionStatus}"
                                        Margin="0,4,0,0"
                                        FontSize="9"
@@ -365,9 +263,7 @@
 
                 <TextBlock Text="Hardware"
                            Margin="0,0,0,6"
-                           FontSize="11"
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                           Style="{StaticResource AppSectionEyebrowTextStyle}"/>
 
                 <WrapPanel Margin="0,0,0,10"
                            ItemWidth="190">
@@ -718,12 +614,10 @@
 
                 <StackPanel Margin="0,0,0,10"
                             Visibility="{Binding HasInstallRecommendations, Converter={StaticResource BoolToVisibility}}">
-                    <TextBlock Text="Recommended Drivers &amp; Runtimes"
-                               Margin="0,0,0,4"
-                               FontSize="11"
-                               FontWeight="SemiBold"
-                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                    <TextBlock Text="Suggested by your hardware and installed Windows components. Nothing runs until you choose it."
+                    <TextBlock Text="Drivers &amp; Recommended Installs"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <TextBlock Text="Only the installs that make sense for this PC. Nothing runs until you choose it."
+                               Margin="0,4,0,0"
                                FontSize="9"
                                Foreground="{DynamicResource ForegroundLightBrush}"
                                TextWrapping="Wrap"/>

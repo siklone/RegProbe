@@ -542,8 +542,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Maintenance" : "Windows Settings";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "One-time cleanup and repair actions that help you reset, clean, or troubleshoot Windows."
-        : "Persistent Windows settings that stay applied until you change them again.";
+        ? "One-click cleanup and repair tasks for when Windows feels messy, slow, or stuck."
+        : "PC behavior and feature switches that stay in place until you change them again.";
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
         ? $"{CurrentWorkspaceItemCount} tasks available"
@@ -554,20 +554,20 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string AllItemsLabel => IsMaintenanceWorkspaceSelected ? "All Tasks" : "All Settings";
 
     public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search cleanup tasks, repair actions, or IDs..."
-        : "Search settings, IDs, or explanations...";
+        ? "Search cleanup and repair tasks..."
+        : "Search Windows settings and feature switches...";
 
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
-        ? "Use these when you want to clean up Windows, reset caches, or fix a problem."
-        : "Use these to change how Windows behaves and keep that behavior in place.";
+        ? "Use these when you want to clean up caches, reset a component, or fix a common Windows issue."
+        : "Use these when you want Windows to behave differently and keep that behavior in place.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
-        ? "No maintenance tasks match your filters"
-        : "No settings match your filters";
+        ? "No cleanup tasks match"
+        : "No settings match";
 
     public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
-        ? "Try clearing the search or switching back to Windows Settings."
-        : "Try clearing the search or changing the selected area.";
+        ? "Try a simpler search or switch back to Windows Settings."
+        : "Try a simpler search or pick a different area.";
 
     public bool ShowDnsConfigurationPanel =>
         IsSettingsWorkspaceSelected &&

@@ -181,7 +181,7 @@
             <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="Padding" Value="12"/>
             <Setter Property="Margin" Value="0,0,0,8"/>
             <!-- GPU Cache for smoother rendering -->
@@ -192,37 +192,11 @@
             </Setter>
         </Style>
 
-        <Style x:Key="HeaderActionButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+        <Style x:Key="HeaderActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource AppQuietActionButtonStyle}">
             <Setter Property="Padding" Value="10,6"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="HeaderPillStyle" TargetType="Border">
@@ -234,59 +208,28 @@
             <Setter Property="Margin" Value="0,0,8,0"/>
         </Style>
 
-        <Style x:Key="MonitorSummaryPillStyle" TargetType="Border">
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="12,10"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Focusable" Value="True"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+        <Style x:Key="MonitorSummaryPillStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppMetricTileBorderStyle}">
             <Setter Property="Width" Value="156"/>
             <Setter Property="MinHeight" Value="84"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-            <Setter Property="RenderTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#1E242C" Offset="0"/>
-                        <GradientStop Color="#161A21" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#34FFFFFF"/>
         </Style>
 
-        <Style x:Key="MonitorSummaryLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="9"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,6"/>
-        </Style>
+        <Style x:Key="MonitorSummaryLabelStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppMetricLabelTextStyle}"/>
 
-        <Style x:Key="MonitorSummaryValueStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
-        </Style>
+        <Style x:Key="MonitorSummaryValueStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppMetricValueTextStyle}"/>
 
-        <Style x:Key="MonitorSummaryMetaStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="Margin" Value="0,6,0,0"/>
-            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-            <Setter Property="TextWrapping" Value="NoWrap"/>
-        </Style>
+        <Style x:Key="MonitorSummaryMetaStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppMetricMetaTextStyle}"/>
 
-        <Style x:Key="MonitorLauncherHintStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
+        <Style x:Key="MonitorLauncherHintStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppInsetPanelStyle}">
             <Setter Property="Padding" Value="14,12"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
@@ -327,48 +270,26 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="MonitorContextCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#14000000"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
+        <Style x:Key="MonitorContextCardStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppInsetPanelStyle}">
             <Setter Property="Padding" Value="8,6"/>
             <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
 
-        <Style x:Key="MonitorDetailSheetStyle" TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#1D242E" Offset="0"/>
-                        <GradientStop Color="#151A22" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#34FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
-        </Style>
-
-        <Style x:Key="MonitorDetailPanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="#12000000"/>
-            <Setter Property="BorderBrush" Value="#22FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="13"/>
+        <Style x:Key="MonitorDetailSheetStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppDetailSheetStyle}">
             <Setter Property="Padding" Value="10"/>
         </Style>
 
-        <Style x:Key="MonitorDetailMetricCardStyle" TargetType="Border">
-            <Setter Property="Width" Value="116"/>
-            <Setter Property="Margin" Value="0,0,6,6"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Background" Value="#16000000"/>
-            <Setter Property="BorderBrush" Value="#1EFFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="10"/>
-        </Style>
+        <Style x:Key="MonitorDetailPanelStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppInsetPanelStyle}"/>
+
+        <Style x:Key="MonitorDetailMetricCardStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppMiniMetricCardStyle}"/>
 
         <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="0,0,8,8"/>
@@ -830,8 +751,8 @@
                         Visibility="{Binding HasPerformanceDetail, Converter={StaticResource BoolToVisibility}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.35*"/>
-                            <ColumnDefinition Width="0.92*"/>
+                            <ColumnDefinition Width="1.15*"/>
+                            <ColumnDefinition Width="0.95*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -848,18 +769,18 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding SelectedPerformanceItem.Title}"
-                                           FontSize="17"
+                                           FontSize="15"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding PerformanceChartTitle}"
-                                           FontSize="10"
+                                           FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
                                            Margin="0,2,0,0"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1"
                                         Margin="12,0,10,0"
                                         VerticalAlignment="Center">
-                                <TextBlock Text="Current"
+                                <TextBlock Text="Live now"
                                            FontSize="9"
                                            Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding SelectedPerformanceItem.Subtitle}"
@@ -892,7 +813,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="60 second trend"
+                                    <TextBlock Text="Last 60 seconds"
                                                FontSize="11"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"/>
@@ -902,7 +823,7 @@
                                                Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 </Grid>
 
-                                <Grid Height="124">
+                                <Grid Height="110">
                                     <Border Background="{DynamicResource BackgroundDarkestBrush}"
                                             BorderBrush="{DynamicResource GlassBorderBrush}"
                                             BorderThickness="1"
@@ -970,14 +891,14 @@
                             <Border Style="{StaticResource MonitorDetailPanelStyle}"
                                     Margin="0,0,0,8">
                                 <StackPanel>
-                                    <TextBlock Text="Quick read"
+                                    <TextBlock Text="Key details"
                                                FontSize="12"
                                                FontWeight="SemiBold"
                                                Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                Margin="0,0,0,8"/>
                                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                                   HorizontalScrollBarVisibility="Disabled"
-                                                  MaxHeight="132">
+                                                  MaxHeight="180">
                                         <ItemsControl ItemsSource="{Binding PerformanceDetailItems}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -3445,22 +3366,28 @@
             <!-- Header -->
             <Grid Margin="0,0,0,14">
                 <StackPanel>
-                    <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                    <TextBlock Text="Live hardware status, activity, and the apps putting load on your system." FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,4,0,0"/>
+                    <TextBlock Text="Live View"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <TextBlock Text="{Binding Title}"
+                               Margin="0,2,0,0"
+                               Style="{StaticResource AppSectionTitleTextStyle}"/>
+                    <TextBlock Text="Open one tile to see live usage, health, and the apps behind it."
+                               Margin="0,4,0,0"
+                               Style="{StaticResource AppSectionSubtitleTextStyle}"/>
                     <TextBlock Text="{Binding StatusMessage}"
                                FontSize="10"
                                FontWeight="SemiBold"
                                Foreground="{DynamicResource AccentBrightCyanBrush}"
                                Margin="0,4,0,0"
                                Visibility="{Binding StatusMessage, Converter={StaticResource StringEmptyToVisibilityConverter}}"/>
-                    <WrapPanel Margin="0,10,0,0">
+                    <WrapPanel Margin="0,12,0,0">
                         <Border>
                             <Border.Style>
                                 <Style TargetType="Border" BasedOn="{StaticResource MonitorMetricLauncherStyle}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsCpuMetricSelected}" Value="True">
                                             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <Setter Property="Background" Value="#223041"/>
+                                            <Setter Property="Background" Value="#18252F"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -3494,7 +3421,7 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsMemoryMetricSelected}" Value="True">
                                             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <Setter Property="Background" Value="#223041"/>
+                                            <Setter Property="Background" Value="#18252F"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -3532,7 +3459,7 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGpuMetricSelected}" Value="True">
                                             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <Setter Property="Background" Value="#223041"/>
+                                            <Setter Property="Background" Value="#18252F"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -3566,7 +3493,7 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsStorageMetricSelected}" Value="True">
                                             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <Setter Property="Background" Value="#223041"/>
+                                            <Setter Property="Background" Value="#18252F"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -3596,7 +3523,7 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsNetworkMetricSelected}" Value="True">
                                             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <Setter Property="Background" Value="#223041"/>
+                                            <Setter Property="Background" Value="#18252F"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
