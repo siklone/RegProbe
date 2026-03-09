@@ -235,7 +235,7 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
             DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled;
             DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled;
             _isDarkTheme = settings.Theme != "Light";
-            _enableCardShadows = settings.EnableCardShadows;
+            _enableCardShadows = false;
             RunStartupScanOnLaunch = settings.RunStartupScanOnLaunch;
             ShowPreviewHint = settings.ShowPreviewHint;
             
@@ -247,10 +247,8 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
             
             OnPropertyChanged(nameof(CurrentThemePalette));
             OnPropertyChanged(nameof(IsDarkTheme));
-            OnPropertyChanged(nameof(EnableCardShadows));
-            OnPropertyChanged(nameof(IsCompactMode));
-            UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
-            UiPreferences.Current.IsCompactMode = settings.IsCompactMode;
+            UiPreferences.Current.EnableCardShadows = false;
+            UiPreferences.Current.IsCompactMode = false;
             StatusMessage = "Settings loaded successfully.";
         }
         catch (System.Exception ex)
@@ -273,15 +271,15 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
                 DiscordNotificationsEnabled = settings.DiscordNotificationsEnabled,
                 DiscordAutoPatchEnabled = settings.DiscordAutoPatchEnabled,
                 Theme = settings.Theme,
-                EnableCardShadows = settings.EnableCardShadows,
+                EnableCardShadows = false,
                 RunStartupScanOnLaunch = settings.RunStartupScanOnLaunch,
                 ShowPreviewHint = settings.ShowPreviewHint
             };
             settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
             settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
             settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
-            settings.EnableCardShadows = EnableCardShadows;
-            settings.IsCompactMode = IsCompactMode;
+            settings.EnableCardShadows = false;
+            settings.IsCompactMode = false;
             settings.RunStartupScanOnLaunch = RunStartupScanOnLaunch;
             settings.ShowPreviewHint = ShowPreviewHint;
 

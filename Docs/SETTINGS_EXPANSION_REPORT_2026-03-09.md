@@ -6,6 +6,12 @@ Date: 2026-03-09
 
 `Settings` should stay small and app-wide.
 
+Removed from visible Settings because they were low-value or noisy:
+
+- compact layout
+- card depth / shadow toggle
+- integrations and utility actions
+
 It should answer only these questions:
 
 - How should the app look?

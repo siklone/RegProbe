@@ -133,7 +133,7 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
 
-                            <Border Style="{StaticResource SettingsInsetCardStyle}">
+                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -150,46 +150,6 @@
                                               VerticalAlignment="Center"
                                               Style="{StaticResource ToggleSwitchStyle}"
                                               IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"/>
-                                </Grid>
-                            </Border>
-
-                            <Border Style="{StaticResource SettingsInsetCardStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="0,0,12,0">
-                                        <TextBlock Text="Compact layout"
-                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,3,0,0"
-                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Shows denser lists and tighter cards."/>
-                                    </StackPanel>
-                                    <CheckBox Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              Style="{StaticResource ToggleSwitchStyle}"
-                                              IsChecked="{Binding IsCompactMode, Mode=TwoWay}"/>
-                                </Grid>
-                            </Border>
-
-                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="0,0,12,0">
-                                        <TextBlock Text="Card depth"
-                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,3,0,0"
-                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Adds subtle shadows for a little more surface separation."/>
-                                    </StackPanel>
-                                    <CheckBox Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              Style="{StaticResource ToggleSwitchStyle}"
-                                              IsChecked="{Binding EnableCardShadows, Mode=TwoWay}"/>
                                 </Grid>
                             </Border>
                         </StackPanel>

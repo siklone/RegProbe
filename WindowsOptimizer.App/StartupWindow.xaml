@@ -12,25 +12,10 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Storyboard x:Key="VistaBootBarStoryboard" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetName="GlowSegment"
-                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                             From="-88"
-                             To="188"
-                             Duration="0:0:1.15"/>
-        </Storyboard>
-    </Window.Resources>
-
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard Storyboard="{StaticResource VistaBootBarStoryboard}"/>
-        </EventTrigger>
-    </Window.Triggers>
-
     <Grid Background="Transparent"
           IsHitTestVisible="False">
-        <Border Width="180"
+        <Border x:Name="TrackHost"
+                Width="180"
                 Height="8"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -61,7 +46,7 @@
                                           Color="#9BFFE1"/>
                     </Border.Effect>
                     <Border.RenderTransform>
-                        <TranslateTransform X="-88"/>
+                        <TranslateTransform x:Name="GlowTranslate" X="-88"/>
                     </Border.RenderTransform>
                 </Border>
             </Grid>

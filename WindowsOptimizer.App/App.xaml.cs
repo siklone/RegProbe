@@ -52,7 +52,8 @@ public partial class App : Application
 
             // Load saved theme preference before showing any windows.
             ApplyTheme(settings);
-            UiPreferences.Current.EnableCardShadows = settings.EnableCardShadows;
+            UiPreferences.Current.EnableCardShadows = false;
+            UiPreferences.Current.IsCompactMode = false;
 
             var showSplash = settings.RunStartupScanOnLaunch;
             if (showSplash)
