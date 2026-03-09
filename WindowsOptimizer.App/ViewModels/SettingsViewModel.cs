@@ -76,7 +76,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         
         DnsProviders = new System.Collections.ObjectModel.ObservableCollection<Models.DnsProvider>(DnsService.GetProviders());
         _ = LoadSettingsAsync();
-        _ = LoadDnsInfoAsync();
     }
 
     public string Title => "Settings";
@@ -247,7 +246,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
             _themeManager.ApplyTheme(_currentThemePalette);
             
             OnPropertyChanged(nameof(CurrentThemePalette));
-            OnPropertyChanged(nameof(CurrentThemePalette));
             OnPropertyChanged(nameof(IsDarkTheme));
             OnPropertyChanged(nameof(EnableCardShadows));
             OnPropertyChanged(nameof(IsCompactMode));
@@ -281,10 +279,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
             };
             settings.DiscordWebhookUrl = string.IsNullOrWhiteSpace(DiscordWebhookUrl) ? null : DiscordWebhookUrl;
             settings.DiscordNotificationsEnabled = DiscordNotificationsEnabled;
-            settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
-            settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
-            settings.DiscordAutoPatchEnabled = DiscordAutoPatchEnabled;
-            settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
             settings.Theme = CurrentThemePalette.Name; // Save the palette name instead of just "Dark/Light"
             settings.EnableCardShadows = EnableCardShadows;
             settings.IsCompactMode = IsCompactMode;
