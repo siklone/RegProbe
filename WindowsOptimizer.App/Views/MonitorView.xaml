@@ -1106,7 +1106,7 @@
                         <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
                             <StackPanel>
                                 <TextBlock Text="Temperature" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                <TextBlock Text="{Binding CpuTempText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding CpuTempText, Mode=OneWay}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource MonitorDetailMetricCardStyle}"
@@ -1114,6 +1114,13 @@
                             <StackPanel>
                                 <TextBlock Text="Power" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding CpuPowerText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}"
+                                Visibility="{Binding HasCpuVoltage, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Voltage" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding CpuVoltageText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
@@ -1126,6 +1133,12 @@
                             <StackPanel>
                                 <TextBlock Text="Threads" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding CpuThreadCountText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Topology" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding CpuTopologyText}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -1224,6 +1237,18 @@
                         </Border>
                         <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
                             <StackPanel>
+                                <TextBlock Text="Paged pool" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding MemoryPagedPoolText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Non-paged" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding MemoryNonPagedPoolText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
                                 <TextBlock Text="Slots" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding MemorySlotUsageText}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" TextWrapping="Wrap"/>
                             </StackPanel>
@@ -1232,6 +1257,12 @@
                             <StackPanel>
                                 <TextBlock Text="Speed" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding MemorySpeedText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Reserved" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding MemoryReservedText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -1359,6 +1390,13 @@
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource MonitorDetailMetricCardStyle}"
+                                Visibility="{Binding HasGpuHotspotTemp, Converter={StaticResource BoolToVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="Hotspot" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuHotspotTempText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}"
                                 Visibility="{Binding HasGpuEngineUsage, Converter={StaticResource BoolToVisibility}}">
                             <StackPanel>
                                 <TextBlock Text="3D engine" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
@@ -1386,6 +1424,12 @@
                                 <TextBlock Text="{Binding GpuEngineDecodeText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
                             </StackPanel>
                         </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Driver" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GpuDriverVersionText}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -1411,6 +1455,18 @@
                             <StackPanel>
                                 <TextBlock Text="Peak write" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding DiskPeakWriteText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource DangerBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Busiest" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding BusiestDiskText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Worst response" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding DiskWorstResponseText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource CautionBrush}"/>
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -1608,6 +1664,12 @@
                             <StackPanel>
                                 <TextBlock Text="Up now" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 <TextBlock Text="{Binding NetworkSendTotalText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Link speed" FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding PrimaryAdapterLinkSpeedText}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -3688,9 +3750,9 @@
                                 <TextBlock Grid.Row="2"
                                            Style="{StaticResource MonitorSummaryMetaStyle}"
                                            VerticalAlignment="Bottom">
-                                    <Run Text="{Binding CpuTempText}"/>
+                                    <Run Text="{Binding CpuTempText, Mode=OneWay}"/>
                                     <Run Text=" / "/>
-                                    <Run Text="{Binding CpuClockText}"/>
+                                    <Run Text="{Binding CpuClockText, Mode=OneWay}"/>
                                 </TextBlock>
                             </Grid>
                         </Border>
@@ -3726,7 +3788,7 @@
                                            Style="{StaticResource MonitorSummaryMetaStyle}"
                                            VerticalAlignment="Bottom">
                                     <Run Text="Free "/>
-                                    <Run Text="{Binding MemoryAvailableText}"/>
+                                    <Run Text="{Binding MemoryAvailableText, Mode=OneWay}"/>
                                 </TextBlock>
                             </Grid>
                         </Border>
@@ -3761,9 +3823,9 @@
                                 <TextBlock Grid.Row="2"
                                            Style="{StaticResource MonitorSummaryMetaStyle}"
                                            VerticalAlignment="Bottom">
-                                    <Run Text="{Binding GpuTempText}"/>
+                                    <Run Text="{Binding GpuTempText, Mode=OneWay}"/>
                                     <Run Text=" / "/>
-                                    <Run Text="{Binding GpuMemoryPercentText}"/>
+                                    <Run Text="{Binding GpuMemoryPercentText, Mode=OneWay}"/>
                                     <Run Text=" VRAM"/>
                                 </TextBlock>
                             </Grid>
@@ -3795,9 +3857,9 @@
                                 <TextBlock Grid.Row="2"
                                            Style="{StaticResource MonitorSummaryMetaStyle}"
                                            VerticalAlignment="Bottom">
-                                    <Run Text="{Binding DiskDriveCountText}"/>
+                                    <Run Text="{Binding DiskDriveCountText, Mode=OneWay}"/>
                                     <Run Text=" drives / "/>
-                                    <Run Text="{Binding DiskPeakReadText}"/>
+                                    <Run Text="{Binding DiskPeakReadText, Mode=OneWay}"/>
                                 </TextBlock>
                             </Grid>
                         </Border>
@@ -3829,7 +3891,7 @@
                                            Style="{StaticResource MonitorSummaryMetaStyle}"
                                            VerticalAlignment="Bottom">
                                     <Run Text="Down "/>
-                                    <Run Text="{Binding NetworkReceiveTotalText}"/>
+                                    <Run Text="{Binding NetworkReceiveTotalText, Mode=OneWay}"/>
                                 </TextBlock>
                             </Grid>
                         </Border>

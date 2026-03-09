@@ -2844,6 +2844,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string MemoryCachedText => FormatGb(_memoryPerformanceSnapshot.CachedGb);
 
+    public string MemoryPagedPoolText => FormatGb(_memoryPerformanceSnapshot.PagedPoolGb);
+
+    public string MemoryNonPagedPoolText => FormatGb(_memoryPerformanceSnapshot.NonPagedPoolGb);
+
+    public string MemoryReservedText => FormatMb(_memoryPerformanceSnapshot.HardwareReservedMb);
+
     public string MemorySpeedText => FormatSpeedMhz(_memoryPerformanceSnapshot.SpeedMhz);
 
     public string MemorySlotUsageText => FormatSlotUsage(_memoryPerformanceSnapshot.SlotsUsed, _memoryPerformanceSnapshot.SlotsTotal);
@@ -2858,6 +2864,10 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string GpuEngineDecodeText => HasGpuEngineUsage ? $"{_gpuEngineUsageSnapshot.VideoDecodePercent:F0}%" : "N/A";
 
+    public string GpuDriverVersionText => FormatText(_gpuPerformanceSnapshot.DriverVersion);
+
+    public string GpuDriverDateText => FormatDate(_gpuPerformanceSnapshot.DriverDate);
+
     public ObservableCollection<DiskHealthItemViewModel> DiskHealthItems { get; }
 
     public bool HasDiskHealthItems => DiskHealthItems.Any(item =>
@@ -2869,6 +2879,16 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string DiskPeakWriteText => $"{_diskPerformanceSnapshots.Select(d => d.WriteMbps ?? 0).DefaultIfEmpty(0).Max():F1} MB/s";
 
+    public string BusiestDiskText =>
+        _diskPerformanceSnapshots
+            .OrderByDescending(d => d.ActiveTimePercent ?? 0)
+            .Select(d => string.IsNullOrWhiteSpace(d.DriveLetter) ? "N/A" : d.DriveLetter)
+            .FirstOrDefault()
+        ?? "N/A";
+
+    public string DiskWorstResponseText =>
+        $"{_diskPerformanceSnapshots.Select(d => d.AvgResponseMs ?? 0).DefaultIfEmpty(0).Max():F1} ms";
+
     public string NetworkAdapterCountText => FormatCount(NetworkAdapters.Count);
 
     public string ActiveNetworkAdapterText =>
@@ -2879,6 +2899,19 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public string NetworkReceiveTotalText => $"{NetworkAdapters.Sum(adapter => adapter.ReceiveMbps):F1} Mbps";
 
     public string NetworkSendTotalText => $"{NetworkAdapters.Sum(adapter => adapter.SendMbps):F1} Mbps";
+
+    public string PrimaryAdapterLinkSpeedText
+    {
+        get
+        {
+            var primaryAdapter = NetworkAdapters.FirstOrDefault(adapter => adapter.IsUp && !adapter.IsVirtual)
+                ?? NetworkAdapters.FirstOrDefault(adapter => adapter.IsUp);
+
+            return primaryAdapter is { LinkSpeedMbps: > 0 }
+                ? $"{primaryAdapter.LinkSpeedMbps:F0} Mbps"
+                : "N/A";
+        }
+    }
 
     public ObservableCollection<double> PerformancePrimaryHistory
     {
@@ -3648,6 +3681,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(MemoryAvailableText));
         OnPropertyChanged(nameof(MemoryCommittedText));
         OnPropertyChanged(nameof(MemoryCachedText));
+        OnPropertyChanged(nameof(MemoryPagedPoolText));
+        OnPropertyChanged(nameof(MemoryNonPagedPoolText));
+        OnPropertyChanged(nameof(MemoryReservedText));
         OnPropertyChanged(nameof(MemorySpeedText));
         OnPropertyChanged(nameof(MemorySlotUsageText));
         OnPropertyChanged(nameof(HasGpuEngineUsage));
@@ -3655,13 +3691,18 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(GpuEngineCopyText));
         OnPropertyChanged(nameof(GpuEngineEncodeText));
         OnPropertyChanged(nameof(GpuEngineDecodeText));
+        OnPropertyChanged(nameof(GpuDriverVersionText));
+        OnPropertyChanged(nameof(GpuDriverDateText));
         OnPropertyChanged(nameof(DiskDriveCountText));
         OnPropertyChanged(nameof(DiskPeakReadText));
         OnPropertyChanged(nameof(DiskPeakWriteText));
+        OnPropertyChanged(nameof(BusiestDiskText));
+        OnPropertyChanged(nameof(DiskWorstResponseText));
         OnPropertyChanged(nameof(NetworkAdapterCountText));
         OnPropertyChanged(nameof(ActiveNetworkAdapterText));
         OnPropertyChanged(nameof(NetworkReceiveTotalText));
         OnPropertyChanged(nameof(NetworkSendTotalText));
+        OnPropertyChanged(nameof(PrimaryAdapterLinkSpeedText));
     }
 
     private static double GetCombinedHistoryMax(ObservableCollection<double> primary, ObservableCollection<double> secondary)
