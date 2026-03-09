@@ -1014,7 +1014,7 @@
                             </Border>
 
                             <ContentControl Content="{Binding}"
-                                            ContentTemplate="{StaticResource MonitorCpuContextTemplate}">
+                                            ContentTemplate="{DynamicResource MonitorCpuContextTemplate}">
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -1027,7 +1027,7 @@
                                 </ContentControl.Style>
                             </ContentControl>
                             <ContentControl Content="{Binding}"
-                                            ContentTemplate="{StaticResource MonitorMemoryContextTemplate}">
+                                            ContentTemplate="{DynamicResource MonitorMemoryContextTemplate}">
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -1040,7 +1040,7 @@
                                 </ContentControl.Style>
                             </ContentControl>
                             <ContentControl Content="{Binding}"
-                                            ContentTemplate="{StaticResource MonitorGpuContextTemplate}">
+                                            ContentTemplate="{DynamicResource MonitorGpuContextTemplate}">
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -1053,7 +1053,7 @@
                                 </ContentControl.Style>
                             </ContentControl>
                             <ContentControl Content="{Binding}"
-                                            ContentTemplate="{StaticResource MonitorStorageContextTemplate}">
+                                            ContentTemplate="{DynamicResource MonitorStorageContextTemplate}">
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -1066,7 +1066,7 @@
                                 </ContentControl.Style>
                             </ContentControl>
                             <ContentControl Content="{Binding}"
-                                            ContentTemplate="{StaticResource MonitorNetworkContextTemplate}">
+                                            ContentTemplate="{DynamicResource MonitorNetworkContextTemplate}">
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Setter Property="Visibility" Value="Collapsed"/>
