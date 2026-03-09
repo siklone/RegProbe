@@ -51,19 +51,95 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
             <converters:WindowHeightConverter x:Key="WindowHeightConverter"/>
 
-            <Style x:Key="InsightCardStyle" TargetType="Border">
-                <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="CornerRadius" Value="10"/>
+            <Style x:Key="HardwareDetailShellCardStyle"
+                   TargetType="Border"
+                   BasedOn="{StaticResource AppSurfaceCardStyle}">
+                <Setter Property="Padding" Value="16"/>
+                <Setter Property="CornerRadius" Value="18"/>
+            </Style>
+
+            <Style x:Key="InsightCardStyle"
+                   TargetType="Border"
+                   BasedOn="{StaticResource AppInsetPanelStyle}">
                 <Setter Property="Padding" Value="12,10"/>
                 <Setter Property="Margin" Value="0,0,10,10"/>
+                <Setter Property="MinHeight" Value="92"/>
+            </Style>
+
+            <Style x:Key="HardwareDetailTabHostStyle"
+                   TargetType="Border"
+                   BasedOn="{StaticResource AppInsetPanelStyle}">
+                <Setter Property="Padding" Value="6"/>
+                <Setter Property="CornerRadius" Value="14"/>
+            </Style>
+
+            <Style x:Key="HardwareDetailTabItemStyle" TargetType="ListBoxItem">
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="Padding" Value="11,7"/>
+                <Setter Property="Background" Value="#16000000"/>
+                <Setter Property="BorderBrush" Value="#22FFFFFF"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border x:Name="ItemBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="11"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="ItemBorder" Property="Background" Value="#1C2A33"/>
+                                    <Setter TargetName="ItemBorder" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ItemBorder" Property="Background" Value="#18252F"/>
+                                    <Setter TargetName="ItemBorder" Property="BorderBrush" Value="#32FFFFFF"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="HardwareDetailSpecCardStyle"
+                   TargetType="Border"
+                   BasedOn="{StaticResource AppInsetPanelStyle}">
+                <Setter Property="Padding" Value="12,10"/>
+                <Setter Property="CornerRadius" Value="14"/>
+            </Style>
+
+            <Style x:Key="HardwareDetailInsightTitleStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource AppSectionEyebrowTextStyle}">
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+
+            <Style x:Key="HardwareDetailInsightBodyStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource AppSectionSubtitleTextStyle}">
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+
+            <Style x:Key="HardwareDetailSectionTitleStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource AppSectionTitleTextStyle}">
+                <Setter Property="FontSize" Value="19"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
 
     <Border x:Name="RootPanel"
             Margin="10"
+            Background="{DynamicResource BackgroundDarkestBrush}"
             CornerRadius="12"
             BorderBrush="{DynamicResource GlassBorderBrush}"
             BorderThickness="1"
@@ -94,7 +170,7 @@
             </Grid.RowDefinitions>
 
             <!-- Row 0: Header -->
-            <Border x:Name="HeaderCard" Grid.Row="0" Margin="10,10,10,8" Style="{DynamicResource ModernCardStyle}">
+            <Border x:Name="HeaderCard" Grid.Row="0" Margin="10,10,10,8" Style="{StaticResource HardwareDetailShellCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -105,8 +181,9 @@
                     <Border Grid.Column="0"
                             Width="42"
                             Height="42"
-                            CornerRadius="9"
-                            Background="{DynamicResource BackgroundLightBrush}"
+                            CornerRadius="11"
+                            Style="{StaticResource AppInsetPanelStyle}"
+                            Padding="0"
                             VerticalAlignment="Center"
                             Margin="0,0,10,0">
                         <Image Source="{Binding IconSource}"
@@ -118,37 +195,38 @@
                     </Border>
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="Device details"
+                                   Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                         <TextBlock Text="{Binding Title}"
-                                   FontSize="18"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                   Margin="0,3,0,0"
+                                   Style="{StaticResource HardwareDetailSectionTitleStyle}"
                                    TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding Subtitle}"
                                    Margin="0,4,0,0"
-                                   FontSize="11"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   Style="{StaticResource AppSectionSubtitleTextStyle}"
                                    TextWrapping="Wrap"/>
                     </StackPanel>
 
                     <Button Grid.Column="2"
-                            Width="32"
-                            Height="32"
+                            Width="34"
+                            Height="34"
                             Margin="12,0,0,0"
                             Padding="0"
                             VerticalAlignment="Top"
-                            Content="X"
-                            FontSize="12"
-                            FontWeight="Bold"
-                            Background="{DynamicResource BackgroundLightBrush}"
+                            Background="#18000000"
                             shell:WindowChrome.IsHitTestVisibleInChrome="True"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                            Style="{DynamicResource ModernButtonStyle}"/>
+                            Style="{StaticResource AppQuietActionButtonStyle}">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   Text="&#xE711;"
+                                   FontSize="11"/>
+                    </Button>
                 </Grid>
             </Border>
 
             <!-- Row 1: Scrollable Content -->
-            <Border Grid.Row="1" Margin="10,0,10,10" Style="{DynamicResource ModernCardStyle}">
+            <Border Grid.Row="1" Margin="10,0,10,10" Style="{StaticResource HardwareDetailShellCardStyle}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -162,57 +240,41 @@
                                  Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                         <Border Style="{StaticResource InsightCardStyle}">
                             <StackPanel>
-                                <TextBlock Text="What This Is"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="What this is"
+                                           Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding WhatThisIs}"
                                            Margin="0,6,0,0"
-                                           FontSize="11"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           TextWrapping="Wrap"/>
+                                           Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
 
                         <Border Style="{StaticResource InsightCardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Why It Matters"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="Why it matters"
+                                           Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding WhyItMatters}"
                                            Margin="0,6,0,0"
-                                           FontSize="11"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           TextWrapping="Wrap"/>
+                                           Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
 
                         <Border Style="{StaticResource InsightCardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Driver / Runtime"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="Driver / runtime"
+                                           Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding DriverRuntime}"
                                            Margin="0,6,0,0"
-                                           FontSize="11"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           TextWrapping="Wrap"/>
+                                           Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
 
                         <Border Style="{StaticResource InsightCardStyle}" Margin="0,0,0,10">
                             <StackPanel>
-                                <TextBlock Text="Common Actions"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                <TextBlock Text="Common actions"
+                                           Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding CommonActions}"
                                            Margin="0,6,0,0"
-                                           FontSize="11"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           TextWrapping="Wrap"/>
+                                           Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
                     </UniformGrid>
@@ -220,8 +282,7 @@
                     <Border x:Name="HasDeviceTabsBorder"
                             Grid.Row="1"
                             Margin="0,0,0,10"
-                            Background="{DynamicResource BackgroundMediumBrush}"
-                            CornerRadius="8"
+                            Style="{StaticResource HardwareDetailTabHostStyle}"
                             Visibility="{Binding HasDeviceTabs, Converter={StaticResource BoolToVisibility}}">
                         <ListBox ItemsSource="{Binding DeviceTabs}"
                                  SelectedItem="{Binding SelectedDeviceTab, Mode=TwoWay}"
@@ -251,35 +312,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                             <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Margin" Value="3"/>
-                                    <Setter Property="Padding" Value="10,6"/>
-                                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ListBoxItem">
-                                                <Border x:Name="ItemBorder"
-                                                        Background="{TemplateBinding Background}"
-                                                        CornerRadius="6"
-                                                        Padding="{TemplateBinding Padding}">
-                                                    <ContentPresenter/>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource AccentPrimaryBrush}"/>
-                                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="ItemBorder" Property="Opacity" Value="0.9"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource HardwareDetailTabItemStyle}"/>
                             </ListBox.ItemContainerStyle>
                         </ListBox>
                     </Border>
@@ -327,13 +360,9 @@
                                 <DataTemplate>
                                     <Grid x:Name="SpecItemRoot"
                                           Width="332"
-                                          Margin="0,0,8,8">
+                                          Margin="0,0,10,10">
                                         <Border x:Name="ValueRowBorder"
-                                                Padding="10,8"
-                                                CornerRadius="12"
-                                                Background="#14000000"
-                                                BorderBrush="#18FFFFFF"
-                                                BorderThickness="1">
+                                                Style="{StaticResource HardwareDetailSpecCardStyle}">
                                             <Grid x:Name="ValueRow">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>
@@ -361,9 +390,7 @@
                                                     Visibility="Collapsed"
                                                     Margin="2,8,2,2">
                                             <TextBlock Text="{Binding Label}"
-                                                       FontSize="11"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                       Style="{StaticResource AppSectionEyebrowTextStyle}"
                                                        TextWrapping="Wrap"/>
                                             <Border Height="1"
                                                     Margin="0,6,0,0"

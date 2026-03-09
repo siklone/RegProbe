@@ -291,6 +291,64 @@
                TargetType="Border"
                BasedOn="{StaticResource AppMiniMetricCardStyle}"/>
 
+        <Style x:Key="MonitorProcessSectionCardStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppSurfaceCardStyle}">
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessSectionTitleStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppSectionTitleTextStyle}">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessSectionSubtitleStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppSectionSubtitleTextStyle}">
+            <Setter Property="Margin" Value="0,3,0,0"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessRowCardStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppInsetPanelStyle}">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessMetricPillStyle"
+               TargetType="Border"
+               BasedOn="{StaticResource AppMiniMetricCardStyle}">
+            <Setter Property="MinWidth" Value="84"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Padding" Value="8,6"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessPillLabelStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppMetricLabelTextStyle}">
+            <Setter Property="FontSize" Value="9"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessPillValueStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource AppMetricMetaTextStyle}">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+        </Style>
+
+        <Style x:Key="MonitorProcessActionChipStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource AppQuietActionButtonStyle}">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Margin" Value="6,0,0,0"/>
+        </Style>
+
         <Style x:Key="MonitorTabItemStyle" TargetType="ListBoxItem">
             <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
@@ -377,45 +435,9 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ProcessHeaderCellStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-
         <Style x:Key="ProcessCellStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
             <Setter Property="FontSize" Value="12"/>
-        </Style>
-
-        <Style x:Key="ProcessActionButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="6"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="CompactButton" TargetType="Button">
@@ -1019,53 +1041,49 @@
                         <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Style="{StaticResource MonitorContextCardStyle}" Margin="0,0,0,6">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Column="0">
-                                                <TextBlock Text="{Binding Name}"
-                                                           FontSize="12"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                                <TextBlock FontSize="10"
-                                                           Foreground="{DynamicResource ForegroundLightBrush}"
-                                                           Margin="0,3,0,0">
-                                                    <Run Text="PID "/>
-                                                    <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                                    <Run Text="  |  "/>
-                                                    <Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                    <Run Text=" thr  |  "/>
-                                                    <Run Text="{Binding Handles, Mode=OneWay}"/>
-                                                    <Run Text=" hnd"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
-                                                <TextBlock Text="CPU"
-                                                           FontSize="10"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                                <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                                           FontSize="12"
-                                                           FontWeight="Bold">
-                                                    <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                                                    <Run Text="%"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
-                                                <TextBlock Text="RAM"
-                                                           FontSize="10"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                           FontSize="12"
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
-                                                    <Run Text=" MB"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </Grid>
+                                    <Border Style="{StaticResource MonitorProcessRowCardStyle}" Margin="0,0,0,6">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <WrapPanel Margin="0,8,0,0">
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="CPU" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                            <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                            <Run Text="%"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                            <Run Text=" MB"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="Threads" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Text="{Binding Threads, Mode=OneWay}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </WrapPanel>
+                                        </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -1089,53 +1107,49 @@
                         <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Style="{StaticResource MonitorContextCardStyle}" Margin="0,0,0,6">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Column="0">
-                                                <TextBlock Text="{Binding Name}"
-                                                           FontSize="12"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                                <TextBlock FontSize="10"
-                                                           Foreground="{DynamicResource ForegroundLightBrush}"
-                                                           Margin="0,3,0,0">
-                                                    <Run Text="PID "/>
-                                                    <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                                    <Run Text="  |  "/>
-                                                    <Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                    <Run Text=" thr  |  "/>
-                                                    <Run Text="{Binding Handles, Mode=OneWay}"/>
-                                                    <Run Text=" hnd"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
-                                                <TextBlock Text="RAM"
-                                                           FontSize="10"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                                <TextBlock Foreground="{DynamicResource SuccessBrush}"
-                                                           FontSize="12"
-                                                           FontWeight="Bold">
-                                                    <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
-                                                    <Run Text=" MB"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2" Margin="12,0,0,0">
-                                                <TextBlock Text="CPU"
-                                                           FontSize="10"
-                                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                           FontSize="12"
-                                                           FontWeight="SemiBold">
-                                                    <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
-                                                    <Run Text="%"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </Grid>
+                                    <Border Style="{StaticResource MonitorProcessRowCardStyle}" Margin="0,0,0,6">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <WrapPanel Margin="0,8,0,0">
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Foreground="{DynamicResource SuccessBrush}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                            <Run Text=" MB"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="CPU" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                            <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                            <Run Text="%"/>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                    <StackPanel>
+                                                        <TextBlock Text="Handles" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                        <TextBlock Text="{Binding Handles, Mode=OneWay}"
+                                                                   Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </WrapPanel>
+                                        </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -2196,80 +2210,111 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MonitorTopCpuTemplate">
-            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+            <Border Style="{StaticResource MonitorProcessSectionCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Top 10 Processes by CPU" Style="{StaticResource SectionHeaderStyle}"/>
-                    <Grid Margin="0,0,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                        <TextBlock Grid.Column="1" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                    </Grid>
+                    <TextBlock Text="CPU pressure" Style="{StaticResource MonitorProcessSectionTitleStyle}"/>
+                    <TextBlock Text="The busiest apps right now, with quick actions close by."
+                               Style="{StaticResource MonitorProcessSectionSubtitleStyle}"/>
+                    <WrapPanel Margin="0,10,0,10">
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Watching" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="{Binding TopProcessesByCpu.Count, StringFormat={}{0} live apps}"
+                                           Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Sorted by" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="CPU load" Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                     <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                        </TextBlock>
-                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Kill process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource DangerBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Suspend process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource CautionBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Resume process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource SuccessBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
+                                <Border Style="{StaticResource MonitorProcessRowCardStyle}">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}"
+                                                       Style="{StaticResource ProcessCellStyle}"
+                                                       FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="End process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <WrapPanel Margin="0,8,0,0">
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="CPU" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                        <Run Text="%"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                        <Run Text=" MB"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Threads" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Threads, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Handles" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Handles, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -2279,80 +2324,111 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MonitorTopRamTemplate">
-            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+            <Border Style="{StaticResource MonitorProcessSectionCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Top 10 Processes by RAM" Style="{StaticResource SectionHeaderStyle}"/>
-                    <Grid Margin="0,0,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                        <TextBlock Grid.Column="1" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="2" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                    </Grid>
+                    <TextBlock Text="Memory pressure" Style="{StaticResource MonitorProcessSectionTitleStyle}"/>
+                    <TextBlock Text="Which apps are keeping the most RAM reserved right now."
+                               Style="{StaticResource MonitorProcessSectionSubtitleStyle}"/>
+                    <WrapPanel Margin="0,10,0,10">
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Watching" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="{Binding TopProcessesByRam.Count, StringFormat={}{0} live apps}"
+                                           Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Sorted by" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="RAM used" Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                     <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                        </TextBlock>
-                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Kill process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource DangerBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Suspend process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource CautionBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Resume process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource SuccessBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
+                                <Border Style="{StaticResource MonitorProcessRowCardStyle}">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}"
+                                                       Style="{StaticResource ProcessCellStyle}"
+                                                       FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="End process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <WrapPanel Margin="0,8,0,0">
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Foreground="{DynamicResource SuccessBrush}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                        <Run Text=" MB"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="CPU" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/>
+                                                        <Run Text="%"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Threads" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Threads, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Handles" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Handles, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -2361,258 +2437,111 @@
             </Border>
         </DataTemplate>
 
-        <DataTemplate x:Key="MonitorTopCpuRamTemplate">
-            <Grid Margin="0,0,0,16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Top CPU Processes -->
-                <Border Grid.Column="0" Style="{StaticResource SectionCardStyle}" Margin="0,0,6,0">
-                    <StackPanel>
-                        <TextBlock Text="Top 10 Processes by CPU" Style="{StaticResource SectionHeaderStyle}"/>
-                        <Grid Margin="0,0,0,8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                            <TextBlock Grid.Column="1" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        </Grid>
-                        <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                    <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                    <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                            </TextBlock>
-                                            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Kill process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource DangerBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                                </Button>
-                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Suspend process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource CautionBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                        Margin="6,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                                </Button>
-                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Resume process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource SuccessBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                        Margin="6,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
-
-                <!-- Top RAM Processes -->
-                <Border Grid.Column="1" Style="{StaticResource SectionCardStyle}" Margin="6,0,0,0">
-                    <StackPanel>
-                        <TextBlock Text="Top 10 Processes by RAM" Style="{StaticResource SectionHeaderStyle}"/>
-                        <Grid Margin="0,0,0,8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                            <TextBlock Grid.Column="1" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="2" Text="CPU" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                            <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        </Grid>
-                        <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                                <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                    <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                    <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <TextBlock Grid.Column="1" Foreground="{DynamicResource SuccessBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding CpuPercent, StringFormat={}{0:F1}, Mode=OneWay}"/><Run Text="%"/>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                                <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                            </TextBlock>
-                                            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Kill process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource DangerBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                                </Button>
-                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Suspend process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource CautionBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                        Margin="6,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                                </Button>
-                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        ToolTip="Resume process"
-                                                        Style="{StaticResource ProcessActionButtonStyle}"
-                                                        Background="{DynamicResource SuccessBrush}"
-                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                        Margin="6,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                                </Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </DataTemplate>
-
         <DataTemplate x:Key="MonitorTopNetworkTemplate">
-            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+            <Border Style="{StaticResource MonitorProcessSectionCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="{Binding NetworkProcessTitle}" Style="{StaticResource SectionHeaderStyle}"/>
-                    <TextBlock Text="{Binding NetworkProcessSubtitle}"
-                               Foreground="{DynamicResource MutedForegroundBrush}"
-                               FontSize="11"
-                               Margin="0,0,0,8"/>
-                    <Grid Margin="0,0,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                        <TextBlock Grid.Column="1" Text="I/O" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                    </Grid>
+                    <TextBlock Text="{Binding NetworkProcessTitle}" Style="{StaticResource MonitorProcessSectionTitleStyle}"/>
+                    <TextBlock Text="{Binding NetworkProcessSubtitle}" Style="{StaticResource MonitorProcessSectionSubtitleStyle}"/>
+                    <WrapPanel Margin="0,10,0,10">
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Watching" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="{Binding TopProcessesByNetwork.Count, StringFormat={}{0} live apps}"
+                                           Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Sorted by" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="Network I/O" Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                     <ItemsControl ItemsSource="{Binding TopProcessesByNetwork}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource AccentBrightCyanBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" Mbps"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                        </TextBlock>
-                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Kill process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource DangerBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Suspend process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource CautionBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Resume process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource SuccessBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
+                                <Border Style="{StaticResource MonitorProcessRowCardStyle}">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}"
+                                                       Style="{StaticResource ProcessCellStyle}"
+                                                       FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="End process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <WrapPanel Margin="0,8,0,0">
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="I/O" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding IoMbps, StringFormat={}{0:F2}, Mode=OneWay}"/>
+                                                        <Run Text=" Mbps"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                        <Run Text=" MB"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Threads" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Threads, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Handles" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Handles, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -2622,84 +2551,111 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MonitorTopDiskTemplate">
-            <Border Style="{StaticResource SectionCardStyle}" Margin="0,0,0,16">
+            <Border Style="{StaticResource MonitorProcessSectionCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Top 10 Processes by Disk I/O" Style="{StaticResource SectionHeaderStyle}"/>
-                    <TextBlock Text="Read + write throughput from process I/O counters."
-                               Foreground="{DynamicResource MutedForegroundBrush}"
-                               FontSize="11"
-                               Margin="0,0,0,8"/>
-                    <Grid Margin="0,0,0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Process" Style="{StaticResource ProcessHeaderCellStyle}"/>
-                        <TextBlock Grid.Column="1" Text="Disk I/O" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="2" Text="RAM" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="3" Text="PID" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                        <TextBlock Grid.Column="4" Text="Actions" Style="{StaticResource ProcessHeaderCellStyle}" Margin="12,0,0,0"/>
-                    </Grid>
+                    <TextBlock Text="Disk pressure" Style="{StaticResource MonitorProcessSectionTitleStyle}"/>
+                    <TextBlock Text="Read and write activity from the apps touching storage the hardest."
+                               Style="{StaticResource MonitorProcessSectionSubtitleStyle}"/>
+                    <WrapPanel Margin="0,10,0,10">
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Watching" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="{Binding TopProcessesByDisk.Count, StringFormat={}{0} live apps}"
+                                           Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Sorted by" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                <TextBlock Text="Disk I/O" Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                     <ItemsControl ItemsSource="{Binding TopProcessesByDisk}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,4">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Style="{StaticResource ProcessCellStyle}" FontWeight="SemiBold"/>
-                                            <TextBlock Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" Margin="0,2,0,0">
-                                                <Run Text="Threads: "/><Run Text="{Binding Threads, Mode=OneWay}"/>
-                                                <Run Text="  Handles: "/><Run Text="{Binding Handles, Mode=OneWay}"/>
-                                            </TextBlock>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="1" Foreground="{DynamicResource CautionBrush}" FontWeight="Bold" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding DiskMBps, StringFormat={}{0:F2}, Mode=OneWay}"/><Run Text=" MB/s"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="2" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/><Run Text=" MB"/>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="3" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0">
-                                            <Run Text="{Binding Pid, Mode=OneWay}"/>
-                                        </TextBlock>
-                                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,0,0">
-                                            <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Kill process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource DangerBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnAccentBrush}">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Suspend process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource CautionBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
-                                            </Button>
-                                            <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    CommandParameter="{Binding}"
-                                                    ToolTip="Resume process"
-                                                    Style="{StaticResource ProcessActionButtonStyle}"
-                                                    Background="{DynamicResource SuccessBrush}"
-                                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                                    Margin="6,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
+                                <Border Style="{StaticResource MonitorProcessRowCardStyle}">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}"
+                                                       Style="{StaticResource ProcessCellStyle}"
+                                                       FontWeight="SemiBold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"/>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0">
+                                                <Button Command="{Binding DataContext.KillProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="End process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource DangerBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7F4;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.SuspendProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Suspend process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource CautionBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE769;"/>
+                                                </Button>
+                                                <Button Command="{Binding DataContext.ResumeProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        ToolTip="Resume process"
+                                                        Style="{StaticResource MonitorProcessActionChipStyle}"
+                                                        Background="{DynamicResource SuccessBrush}"
+                                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}">
+                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE768;"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <WrapPanel Margin="0,8,0,0">
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Disk I/O" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Foreground="{DynamicResource CautionBrush}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding DiskMBps, StringFormat={}{0:F2}, Mode=OneWay}"/>
+                                                        <Run Text=" MB/s"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="RAM" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Style="{StaticResource MonitorProcessPillValueStyle}">
+                                                        <Run Text="{Binding RamMb, StringFormat={}{0:F0}, Mode=OneWay}"/>
+                                                        <Run Text=" MB"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="PID" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Pid, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Threads" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Threads, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource MonitorProcessMetricPillStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Handles" Style="{StaticResource MonitorProcessPillLabelStyle}"/>
+                                                    <TextBlock Text="{Binding Handles, Mode=OneWay}"
+                                                               Style="{StaticResource MonitorProcessPillValueStyle}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
