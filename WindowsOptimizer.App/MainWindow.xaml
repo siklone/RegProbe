@@ -34,14 +34,12 @@
 
     <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation: Ctrl+1 to Ctrl+7 -->
+        <!-- Navigation: Ctrl+1 to Ctrl+5 -->
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToDashboardCommand}"/>
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
-        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToBloatwareCommand}"/>
-        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToStartupCommand}"/>
-        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
-        <KeyBinding Key="D6" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
-        <KeyBinding Key="D7" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
+        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
+        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
         <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <!-- Clear filters: Escape -->
@@ -51,6 +49,54 @@
     <Window.Resources>
         <!-- Converters -->
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+
+        <ItemsPanelTemplate x:Key="ShellTopNavItemsPanel">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="ShellTopNavListStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource ShellTopNavItemsPanel}"/>
+        </Style>
+
+        <Style x:Key="ShellTopNavItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border"
+                                Background="Transparent"
+                                CornerRadius="12"
+                                BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Padding="14,8">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
+                                <Setter Property="FontWeight" Value="SemiBold" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <!-- Sidebar ListBox Style -->
         <Style TargetType="ListBox">
@@ -241,101 +287,58 @@
         
         <!-- Main Layout Grid -->
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <!-- Enhanced Sidebar (Glass Effect) -->
-             <Border Grid.Column="0" 
-                 Background="{DynamicResource BackgroundDarkBrush}"
-                 BorderThickness="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    Background="{DynamicResource BackgroundDarkBrush}"
+                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    Padding="14,10">
+                <DockPanel LastChildFill="False">
+                    <ListBox DockPanel.Dock="Left"
+                             ItemsSource="{Binding NavigationItems}"
+                             SelectedItem="{Binding SelectedNavigationItem}"
+                             Style="{StaticResource ShellTopNavListStyle}"
+                             ItemContainerStyle="{StaticResource ShellTopNavItemStyle}"
+                             WindowChrome.IsHitTestVisibleInChrome="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding IconGlyph}"
+                                               FontFamily="Segoe MDL2 Assets"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"
+                                               Opacity="0.9"/>
+                                    <TextBlock Text="{Binding Title}"
+                                               Margin="8,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="12"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                <!-- Logo/Header -->
-                <Border Grid.Row="0" Padding="20,24,20,20">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="10" Padding="8" Margin="0,0,12,0">
-                                <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="18"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            </Border>
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="Optimizer"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           FontSize="18"
-                                           FontWeight="Bold"/>
-                                <TextBlock Text="Suite"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                           FontSize="12"
-                                           FontWeight="Medium"
-                                           Margin="0,-2,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <!-- Subtitle -->
-                        <TextBlock Text="Windows Optimization Tool"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
-                                   FontSize="10"
-                                   Margin="0,12,0,0"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Navigation -->
-                <ListBox Grid.Row="1" 
-                         ItemsSource="{Binding NavigationItems}"
-                         SelectedItem="{Binding SelectedNavigationItem}"
-                         Margin="0,8,0,0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="32">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="36"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <TextBlock Grid.Column="0" 
-                                           Text="{Binding IconGlyph}" 
-                                           FontFamily="Segoe MDL2 Assets"
-                                           FontSize="15" 
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Opacity="0.85"/>
-                                           
-                                <TextBlock Grid.Column="1" 
-                                           Text="{Binding Title}" 
-                                           VerticalAlignment="Center"
-                                           FontSize="13"
-                                           Margin="10,0,0,0"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <!-- Footer -->
-                <Border Grid.Row="2" Padding="20,16" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BackgroundDarkBrush}">
-                    <StackPanel>
+                    <StackPanel DockPanel.Dock="Right"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
                         <TextBlock Text="{Binding AppVersionLabel}"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
+                                   Margin="0,0,12,0"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
                                    FontSize="10"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding AppCopyrightLabel}"
-                                   Foreground="{DynamicResource BackgroundLightBrush}"
-                                   FontSize="9"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,2,0,0"/>
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="Ctrl+1-5"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="10"
+                                   VerticalAlignment="Center"/>
                     </StackPanel>
-                </Border>
-            </Grid>
-        </Border>
+                </DockPanel>
+            </Border>
 
-        <!-- Main Content Area -->
-        <Border Grid.Column="1" Background="{DynamicResource BackgroundDarkestBrush}">
+            <!-- Main Content Area -->
+            <Border Grid.Row="1" Background="{DynamicResource BackgroundDarkestBrush}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

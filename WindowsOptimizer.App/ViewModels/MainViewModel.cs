@@ -42,6 +42,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private string _pendingRollbackMessage = string.Empty;
     private bool _isRecovering;
     private bool _isStartupScanActive;
+    private bool _isDashboardQuickActionRunning;
+    private string _dashboardQuickActionStatus = "Run a quick settings scan or a lightweight cleanup pass right from the dashboard.";
 
     public MainViewModel()
     {
@@ -122,6 +124,11 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             {
                 SyncTrayTooltipValues();
             }
+
+            if (e.PropertyName is nameof(TweaksViewModel.IsBulkRunning))
+            {
+                RaiseDashboardQuickActionCanExecuteChanged();
+            }
         };
         tweaks.PropertyChanged += _tweaksPropertyChangedHandler;
 
@@ -139,6 +146,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(4));
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
+        RunDashboardScanCommand = new RelayCommand(_ => _ = RunDashboardScanAsync(), _ => CanRunDashboardQuickAction());
+        RunFastCleanCommand = new RelayCommand(_ => _ = RunFastCleanAsync(), _ => CanRunDashboardQuickAction());
+        OpenMaintenanceWorkspaceCommand = new RelayCommand(_ => OpenMaintenanceWorkspace(), _ => _tweaksViewModel != null);
 
         // Initialize Intelligence with error handling
         _ = Task.Run(async () =>
@@ -342,7 +352,31 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public bool IsStartupScanActive
     {
         get => _isStartupScanActive;
-        private set => SetProperty(ref _isStartupScanActive, value);
+        private set
+        {
+            if (SetProperty(ref _isStartupScanActive, value))
+            {
+                RaiseDashboardQuickActionCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsDashboardQuickActionRunning
+    {
+        get => _isDashboardQuickActionRunning;
+        private set
+        {
+            if (SetProperty(ref _isDashboardQuickActionRunning, value))
+            {
+                RaiseDashboardQuickActionCanExecuteChanged();
+            }
+        }
+    }
+
+    public string DashboardQuickActionStatus
+    {
+        get => _dashboardQuickActionStatus;
+        private set => SetProperty(ref _dashboardQuickActionStatus, value);
     }
 
     public ICommand RecoverPendingRollbacksCommand { get; }
@@ -419,6 +453,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public RelayCommand NavigateToAboutCommand { get; }
     public RelayCommand FocusSearchCommand { get; }
     public RelayCommand ClearFiltersCommand { get; }
+    public RelayCommand RunDashboardScanCommand { get; }
+    public RelayCommand RunFastCleanCommand { get; }
+    public RelayCommand OpenMaintenanceWorkspaceCommand { get; }
 
     public event Action? FocusSearchRequested;
 
@@ -452,6 +489,87 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         if (_currentViewModel is TweaksViewModel tweaksViewModel)
         {
             tweaksViewModel.SearchText = _searchText;
+        }
+    }
+
+    private bool CanRunDashboardQuickAction()
+    {
+        return _tweaksViewModel != null
+            && !IsStartupScanActive
+            && !IsDashboardQuickActionRunning
+            && !_tweaksViewModel.IsBulkRunning;
+    }
+
+    private void RaiseDashboardQuickActionCanExecuteChanged()
+    {
+        RunDashboardScanCommand?.RaiseCanExecuteChanged();
+        RunFastCleanCommand?.RaiseCanExecuteChanged();
+        OpenMaintenanceWorkspaceCommand?.RaiseCanExecuteChanged();
+    }
+
+    private void OpenMaintenanceWorkspace()
+    {
+        if (_tweaksViewModel == null)
+        {
+            return;
+        }
+
+        NavigateToTab(1);
+        _tweaksViewModel.ShowMaintenanceCleanupWorkspace();
+        DashboardQuickActionStatus = "Opened Maintenance with cleanup tasks front and center.";
+    }
+
+    private async Task RunDashboardScanAsync()
+    {
+        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
+        {
+            return;
+        }
+
+        IsDashboardQuickActionRunning = true;
+        DashboardQuickActionStatus = "Scanning Windows settings and live tweak states...";
+
+        try
+        {
+            using var busy = _busyService.Busy("Scanning Windows settings...");
+            await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+            DashboardQuickActionStatus = "Quick scan finished. Current states are refreshed.";
+        }
+        catch (Exception ex)
+        {
+            DashboardQuickActionStatus = $"Quick scan could not finish: {ex.Message}";
+            LogToFile($"Dashboard quick scan failed: {ex.Message}");
+        }
+        finally
+        {
+            IsDashboardQuickActionRunning = false;
+        }
+    }
+
+    private async Task RunFastCleanAsync()
+    {
+        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
+        {
+            return;
+        }
+
+        IsDashboardQuickActionRunning = true;
+        DashboardQuickActionStatus = "Running Fast Clean on lightweight caches and cleanup tasks...";
+
+        try
+        {
+            using var busy = _busyService.Busy("Running Fast Clean...");
+            await _tweaksViewModel.RunFastCleanAsync(CancellationToken.None);
+            DashboardQuickActionStatus = "Fast Clean completed. Lightweight cleanup tasks finished successfully.";
+        }
+        catch (Exception ex)
+        {
+            DashboardQuickActionStatus = $"Fast Clean could not finish: {ex.Message}";
+            LogToFile($"Dashboard Fast Clean failed: {ex.Message}");
+        }
+        finally
+        {
+            IsDashboardQuickActionRunning = false;
         }
     }
 

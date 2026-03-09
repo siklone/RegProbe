@@ -1291,6 +1291,58 @@
         <DataTemplate x:Key="MonitorStorageContextTemplate">
             <Border Style="{StaticResource MonitorDetailPanelStyle}">
                 <StackPanel>
+                    <WrapPanel Margin="0,0,0,8"
+                               Visibility="{Binding HasDiskHealthItems, Converter={StaticResource BoolToVisibility}}">
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Overall health"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding DiskHealthText}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding DiskHealthDetail}"
+                                           Margin="0,4,0,0"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  MaxHeight="84"
+                                  Margin="0,0,0,8"
+                                  Visibility="{Binding HasDiskHealthItems, Converter={StaticResource BoolToVisibility}}">
+                        <ItemsControl ItemsSource="{Binding DiskHealthItems}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding DisplayName}"
+                                                       FontSize="10"
+                                                       Foreground="{DynamicResource MutedForegroundBrush}"
+                                                       TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding StatusText}"
+                                                       Margin="0,4,0,0"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                       TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
                     <TextBlock Text="Drives"
                                FontSize="12"
                                FontWeight="SemiBold"
@@ -1356,6 +1408,58 @@
         <DataTemplate x:Key="MonitorNetworkContextTemplate">
             <Border Style="{StaticResource MonitorDetailPanelStyle}">
                 <StackPanel>
+                    <WrapPanel Margin="0,0,0,8">
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding GatewayLatencyLabel}"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GatewayLatencyText}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Cloudflare"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding CloudflareLatencyText}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource SuccessBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Google DNS"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding GoogleLatencyText}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource MonitorDetailMetricCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Wi-Fi signal"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                <TextBlock Text="{Binding WifiSignalText}"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="{Binding WifiSignalDetail}"
+                                           Margin="0,4,0,0"
+                                           FontSize="10"
+                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+
                     <TextBlock Text="Adapters"
                                FontSize="12"
                                FontWeight="SemiBold"
