@@ -395,38 +395,42 @@
                                 BorderBrush="#229BCD9E"
                                 BorderThickness="1"
                                 CornerRadius="999"/>
-                        <Rectangle x:Name="AnimatedFill"
-                                   RadiusX="999"
-                                   RadiusY="999"
-                                   Opacity="0.98">
-                            <Rectangle.Fill>
+                        <Border x:Name="AnimatedFill"
+                                Width="96"
+                                HorizontalAlignment="Left"
+                                CornerRadius="999"
+                                Opacity="0.92"
+                                RenderTransformOrigin="0,0.5">
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="SweepTransform" X="-120"/>
+                            </Border.RenderTransform>
+                            <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                    <LinearGradientBrush.RelativeTransform>
-                                        <TranslateTransform x:Name="SweepTransform" X="-1.2"/>
-                                    </LinearGradientBrush.RelativeTransform>
-                                    <GradientStop Color="{StaticResource Success00}" Offset="0.00"/>
-                                    <GradientStop Color="{StaticResource Success20}" Offset="0.20"/>
-                                    <GradientStop Color="{StaticResource Success40}" Offset="0.48"/>
-                                    <GradientStop Color="{StaticResource Success20}" Offset="0.74"/>
-                                    <GradientStop Color="{StaticResource Success00}" Offset="1.00"/>
+                                    <GradientStop Color="#009BCD9E" Offset="0.00"/>
+                                    <GradientStop Color="#889BCD9E" Offset="0.52"/>
+                                    <GradientStop Color="#009BCD9E" Offset="1.00"/>
                                 </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                            </Border.Background>
+                        </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsIndeterminate" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="IndeterminateSweepStoryboard">
-                                    <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimation Storyboard.TargetName="SweepTransform"
-                                                         Storyboard.TargetProperty="X"
-                                                         From="-1.2"
-                                                         To="1.2"
-                                                         Duration="0:0:1.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                        </Trigger>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard x:Name="IndeterminateSweepStoryboard">
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetName="SweepTransform"
+                                                     Storyboard.TargetProperty="X"
+                                                     From="-120"
+                                                     To="280"
+                                                     Duration="0:0:1.05"/>
+                                    <DoubleAnimation Storyboard.TargetName="AnimatedFill"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     From="0.55"
+                                                     To="0.96"
+                                                     Duration="0:0:0.52"
+                                                     AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

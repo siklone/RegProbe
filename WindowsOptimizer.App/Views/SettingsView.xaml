@@ -3,84 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:services="clr-namespace:WindowsOptimizer.App.Services"
              mc:Ignorable="d"
              FontFamily="Segoe UI Variable Text, Segoe UI"
              FontSize="12">
     <UserControl.Resources>
-        <Style x:Key="SettingsComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Background" Value="#14000000"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="BorderBrush" Value="#30FFFFFF"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="12,8"/>
-            <Setter Property="MinWidth" Value="220"/>
+        <ItemsPanelTemplate x:Key="ThemePickerPanel">
+            <WrapPanel/>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="ThemePickerListStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource ThemePickerPanel}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+
+        <Style x:Key="ThemePickerItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton Name="ToggleButton"
-                                          Background="{TemplateBinding Background}"
-                                          BorderBrush="{TemplateBinding BorderBrush}"
-                                          BorderThickness="{TemplateBinding BorderThickness}"
-                                          ClickMode="Press"
-                                          Content="{TemplateBinding SelectionBoxItem}"
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                          Focusable="False"
-                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Border Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                CornerRadius="10">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="20"/>
-                                                </Grid.ColumnDefinitions>
-                                                <ContentPresenter Margin="12,8"
-                                                                  HorizontalAlignment="Left"
-                                                                  VerticalAlignment="Center"/>
-                                                <Path Grid.Column="1"
-                                                      Width="8"
-                                                      Height="4"
-                                                      Data="M0,0 L4,4 L8,0"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-                                                      Stroke="{DynamicResource ForegroundLightBrush}"
-                                                      StrokeThickness="1.4"/>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
-                            <Popup Name="Popup"
-                                   AllowsTransparency="True"
-                                   Focusable="False"
-                                   IsOpen="{TemplateBinding IsDropDownOpen}"
-                                   Placement="Bottom"
-                                   PopupAnimation="Fade">
-                                <Border Margin="0,6,0,0"
-                                        Padding="6"
-                                        Background="{DynamicResource BackgroundDarkBrush}"
-                                        BorderBrush="#30FFFFFF"
-                                        BorderThickness="1"
-                                        CornerRadius="12"
-                                        MinWidth="{TemplateBinding ActualWidth}">
-                                    <ScrollViewer MaxHeight="320">
-                                        <StackPanel IsItemsHost="True"/>
-                                    </ScrollViewer>
-                                </Border>
-                            </Popup>
-                        </Grid>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Chip"
+                                Padding="12,8"
+                                Background="#17000000"
+                                BorderBrush="#26FFFFFF"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}"/>
+                                <Setter TargetName="Chip" Property="Background" Value="#1B0C1118"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Chip" Property="Background" Value="#22131B24"/>
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="SettingsInsetCardStyle" TargetType="Border" BasedOn="{StaticResource AppInsetPanelStyle}">
-            <Setter Property="Padding" Value="14"/>
+        <Style x:Key="SettingsSectionCardStyle" TargetType="Border" BasedOn="{StaticResource AppSurfaceCardStyle}">
+            <Setter Property="Padding" Value="16"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <Style x:Key="SettingsInsetCardStyle" TargetType="Border" BasedOn="{StaticResource AppInsetPanelStyle}">
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
             <Setter Property="CornerRadius" Value="14"/>
         </Style>
 
@@ -106,61 +84,54 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   Background="{DynamicResource BackgroundDarkestBrush}">
-        <Grid Margin="32">
-            <StackPanel MaxWidth="980">
-                <StackPanel Margin="0,0,0,20">
+        <Grid Margin="28">
+            <StackPanel MaxWidth="920">
+                <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Preferences"
                                Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                     <TextBlock Text="{Binding Title}"
                                Margin="0,4,0,0"
                                Style="{StaticResource AppSectionTitleTextStyle}"
                                FontSize="28"/>
-                    <TextBlock Margin="0,8,0,0"
+                    <TextBlock Margin="0,6,0,0"
                                Style="{StaticResource AppSectionSubtitleTextStyle}"
-                               FontSize="13"
-                               Text="Only app-wide preferences live here. Hardware, cleanup, monitoring and configuration actions stay in their own screens."/>
+                               FontSize="12"
+                               Text="Theme and general app behavior."/>
                 </StackPanel>
 
-                <Grid Margin="0,0,0,16">
+                <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="18"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="0.9*"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0"
-                            Style="{StaticResource AppSurfaceCardStyle}"
-                            Margin="0,0,0,8">
+                            Style="{StaticResource SettingsSectionCardStyle}">
                         <StackPanel>
                             <TextBlock Text="Appearance"
                                        Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                            <TextBlock Text="Look and feel"
+                            <TextBlock Text="Choose a theme"
                                        Margin="0,6,0,0"
-                                       Style="{StaticResource AppSectionTitleTextStyle}"/>
-                            <TextBlock Margin="0,6,0,16"
+                                       Style="{StaticResource AppSectionTitleTextStyle}"
+                                       FontSize="20"/>
+                            <TextBlock Margin="0,6,0,14"
                                        Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                       Text="Keep the visual language simple, readable and consistent across the whole app."/>
+                                       Text="Accent changes apply immediately."/>
 
-                            <Border Style="{StaticResource SettingsInsetCardStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="0,0,12,0">
-                                        <TextBlock Text="Accent theme"
-                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
-                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Changes the app accent and keeps the rest of the shell consistent."/>
-                                    </StackPanel>
-                                    <ComboBox Grid.Column="1"
-                                              ItemsSource="{Binding AvailableThemes}"
-                                              SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
-                                              DisplayMemberPath="Name"
-                                              Style="{StaticResource SettingsComboBoxStyle}"/>
-                                </Grid>
-                            </Border>
+                            <ListBox ItemsSource="{Binding AvailableThemes}"
+                                     SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
+                                     Style="{StaticResource ThemePickerListStyle}"
+                                     ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type services:ThemePalette}">
+                                        <TextBlock Text="{Binding Name}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
 
                             <Border Style="{StaticResource SettingsInsetCardStyle}">
                                 <Grid>
@@ -171,9 +142,9 @@
                                     <StackPanel Margin="0,0,12,0">
                                         <TextBlock Text="Dark base"
                                                    Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
+                                        <TextBlock Margin="0,3,0,0"
                                                    Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Keeps backgrounds and surfaces in the darker desktop-friendly style."/>
+                                                   Text="Keeps the darker desktop-first shell style."/>
                                     </StackPanel>
                                     <CheckBox Grid.Column="1"
                                               VerticalAlignment="Center"
@@ -191,9 +162,9 @@
                                     <StackPanel Margin="0,0,12,0">
                                         <TextBlock Text="Compact layout"
                                                    Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
+                                        <TextBlock Margin="0,3,0,0"
                                                    Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Shows denser lists and tighter cards for a more information-heavy view."/>
+                                                   Text="Shows denser lists and tighter cards."/>
                                     </StackPanel>
                                     <CheckBox Grid.Column="1"
                                               VerticalAlignment="Center"
@@ -211,9 +182,9 @@
                                     <StackPanel Margin="0,0,12,0">
                                         <TextBlock Text="Card depth"
                                                    Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
+                                        <TextBlock Margin="0,3,0,0"
                                                    Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Adds soft shadows to cards. Turn it off if you prefer flatter surfaces or slightly lighter rendering."/>
+                                                   Text="Adds subtle shadows for a little more surface separation."/>
                                     </StackPanel>
                                     <CheckBox Grid.Column="1"
                                               VerticalAlignment="Center"
@@ -225,17 +196,17 @@
                     </Border>
 
                     <Border Grid.Column="2"
-                            Style="{StaticResource AppSurfaceCardStyle}"
-                            Margin="0,0,0,8">
+                            Style="{StaticResource SettingsSectionCardStyle}">
                         <StackPanel>
                             <TextBlock Text="Behavior"
                                        Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                            <TextBlock Text="General app behavior"
+                            <TextBlock Text="General"
                                        Margin="0,6,0,0"
-                                       Style="{StaticResource AppSectionTitleTextStyle}"/>
-                            <TextBlock Margin="0,6,0,16"
+                                       Style="{StaticResource AppSectionTitleTextStyle}"
+                                       FontSize="20"/>
+                            <TextBlock Margin="0,6,0,14"
                                        Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                       Text="Only low-risk app behavior belongs here. Everything task-specific should stay closer to where you use it."/>
+                                       Text="Small app-wide behavior preferences only."/>
 
                             <Border Style="{StaticResource SettingsInsetCardStyle}">
                                 <Grid>
@@ -246,9 +217,9 @@
                                     <StackPanel Margin="0,0,12,0">
                                         <TextBlock Text="Run startup scan on launch"
                                                    Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
+                                        <TextBlock Margin="0,3,0,0"
                                                    Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Performs a quick startup check before the main workspace is ready."/>
+                                                   Text="Performs a quick scan before the main workspace settles."/>
                                     </StackPanel>
                                     <CheckBox Grid.Column="1"
                                               VerticalAlignment="Center"
@@ -257,7 +228,7 @@
                                 </Grid>
                             </Border>
 
-                            <Border Style="{StaticResource SettingsInsetCardStyle}">
+                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -266,9 +237,9 @@
                                     <StackPanel Margin="0,0,12,0">
                                         <TextBlock Text="Show preview hints"
                                                    Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                        <TextBlock Margin="0,4,0,0"
+                                        <TextBlock Margin="0,3,0,0"
                                                    Style="{StaticResource SettingsItemBodyTextStyle}"
-                                                   Text="Keeps small guidance hints visible when a page uses preview-style actions or safe dry-run flows."/>
+                                                   Text="Keeps small guidance hints visible around safe preview flows."/>
                                     </StackPanel>
                                     <CheckBox Grid.Column="1"
                                               VerticalAlignment="Center"
@@ -276,75 +247,50 @@
                                               IsChecked="{Binding ShowPreviewHint, Mode=TwoWay}"/>
                                 </Grid>
                             </Border>
-
-                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
-                                <StackPanel>
-                                    <TextBlock Text="What no longer lives here"
-                                               Style="{StaticResource SettingsItemTitleTextStyle}"/>
-                                    <TextBlock Margin="0,4,0,10"
-                                               Style="{StaticResource SettingsItemBodyTextStyle}"
-                                               Text="Cleanup, updates, monitor tools, backup/import flows and service integrations now belong in their own feature areas instead of cluttering Settings."/>
-                                    <WrapPanel>
-                                        <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                            <TextBlock Text="Dashboard actions"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        </Border>
-                                        <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                            <TextBlock Text="Configuration tools"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        </Border>
-                                        <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                            <TextBlock Text="Monitor tools"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        </Border>
-                                    </WrapPanel>
-                                </StackPanel>
-                            </Border>
                         </StackPanel>
                     </Border>
                 </Grid>
 
-                <Border Style="{StaticResource AppSurfaceCardStyle}" Margin="0,0,0,16">
-                    <StackPanel>
-                        <TextBlock Text="About this app"
-                                   Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                        <TextBlock Text="Build information"
-                                   Margin="0,6,0,0"
-                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
-                        <TextBlock Margin="0,6,0,14"
-                                   Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                   Text="Small, read-only details that help you identify the running build without turning this page into a toolbox."/>
-                        <WrapPanel>
-                            <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                <StackPanel>
-                                    <TextBlock Text="Version" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
-                                </StackPanel>
-                            </Border>
-                            <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                <StackPanel>
-                                    <TextBlock Text="Build" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
-                                </StackPanel>
-                            </Border>
-                            <Border Style="{StaticResource SettingsMetaChipStyle}">
-                                <StackPanel>
-                                    <TextBlock Text="Framework" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
-                                </StackPanel>
-                            </Border>
-                        </WrapPanel>
-                    </StackPanel>
-                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <Border Style="{StaticResource AppSurfaceCardStyle}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0"
+                            Style="{StaticResource SettingsSectionCardStyle}"
+                            Margin="0">
+                        <StackPanel>
+                            <TextBlock Text="Build"
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                            <WrapPanel Margin="0,8,0,0">
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Version" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Build" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Framework" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
 
-                        <StackPanel Margin="0,0,18,0">
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SettingsSectionCardStyle}"
+                            Margin="0">
+                        <StackPanel>
                             <TextBlock Text="Status"
                                        Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                             <TextBlock Text="{Binding StatusMessage}"
@@ -352,19 +298,14 @@
                                        Style="{StaticResource AppSectionTitleTextStyle}"
                                        FontSize="16"
                                        TextWrapping="Wrap"/>
-                            <TextBlock Margin="0,6,0,0"
-                                       Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                       Text="Theme changes apply immediately. General behavior settings can be saved here whenever you are ready."/>
+                            <Button Margin="0,14,0,0"
+                                    MinWidth="148"
+                                    Command="{Binding SaveCommand}"
+                                    Content="Save changes"
+                                    Style="{StaticResource ModernButtonStyle}"/>
                         </StackPanel>
-
-                        <Button Grid.Column="1"
-                                MinWidth="140"
-                                VerticalAlignment="Center"
-                                Command="{Binding SaveCommand}"
-                                Content="Save changes"
-                                Style="{StaticResource ModernButtonStyle}"/>
-                    </Grid>
-                </Border>
+                    </Border>
+                </Grid>
             </StackPanel>
         </Grid>
     </ScrollViewer>
