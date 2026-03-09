@@ -261,15 +261,25 @@
         </Style>
 
         <Style x:Key="MonitorSummaryLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
         </Style>
 
         <Style x:Key="MonitorSummaryValueStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+
+        <Style x:Key="MonitorSummaryMetaStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="Margin" Value="0,6,0,0"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
         </Style>
 
         <Style x:Key="MonitorLauncherHintStyle" TargetType="Border">
@@ -3356,14 +3366,23 @@
                                               Command="{Binding OpenPerformanceMetricCommand}"
                                               CommandParameter="cpu"/>
                             </Border.InputBindings>
-                            <StackPanel>
-                                <TextBlock Text="CPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
-                                <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="CPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
+                                <TextBlock Grid.Row="1" Style="{StaticResource MonitorSummaryValueStyle}">
                                     <Run Text="{Binding CpuUsage, StringFormat={}{0:F0}, Mode=OneWay}"/>
-                                    <Run Text="% load"/>
+                                    <Run Text="%" FontSize="12" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <Run Text=" load" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 </TextBlock>
-                                <TextBlock Text="{Binding CpuTempText}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0"/>
-                            </StackPanel>
+                                <TextBlock Grid.Row="2"
+                                           Text="{Binding CpuTempText}"
+                                           Style="{StaticResource MonitorSummaryMetaStyle}"
+                                           VerticalAlignment="Bottom"/>
+                            </Grid>
                         </Border>
                         <Border>
                             <Border.Style>
@@ -3381,19 +3400,27 @@
                                               Command="{Binding OpenPerformanceMetricCommand}"
                                               CommandParameter="memory"/>
                             </Border.InputBindings>
-                            <StackPanel>
-                                <TextBlock Text="Memory" Style="{StaticResource MonitorSummaryLabelStyle}"/>
-                                <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Memory" Style="{StaticResource MonitorSummaryLabelStyle}"/>
+                                <TextBlock Grid.Row="1" Style="{StaticResource MonitorSummaryValueStyle}">
                                     <Run Text="{Binding RamUsagePercent, StringFormat={}{0:F0}, Mode=OneWay}"/>
-                                    <Run Text="% used"/>
+                                    <Run Text="%" FontSize="12" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <Run Text=" used" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 </TextBlock>
-                                <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0">
+                                <TextBlock Grid.Row="2"
+                                           Style="{StaticResource MonitorSummaryMetaStyle}"
+                                           VerticalAlignment="Bottom">
                                     <Run Text="{Binding RamUsedGb, StringFormat={}{0:F1}, Mode=OneWay}"/>
                                     <Run Text=" / "/>
                                     <Run Text="{Binding RamTotalGb, StringFormat={}{0:F1}, Mode=OneWay}"/>
                                     <Run Text=" GB"/>
                                 </TextBlock>
-                            </StackPanel>
+                            </Grid>
                         </Border>
                         <Border>
                             <Border.Style>
@@ -3411,14 +3438,23 @@
                                               Command="{Binding OpenPerformanceMetricCommand}"
                                               CommandParameter="gpu"/>
                             </Border.InputBindings>
-                            <StackPanel>
-                                <TextBlock Text="GPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
-                                <TextBlock Style="{StaticResource MonitorSummaryValueStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="GPU" Style="{StaticResource MonitorSummaryLabelStyle}"/>
+                                <TextBlock Grid.Row="1" Style="{StaticResource MonitorSummaryValueStyle}">
                                     <Run Text="{Binding GpuUsage, StringFormat={}{0:F0}, Mode=OneWay}"/>
-                                    <Run Text="% load"/>
+                                    <Run Text="%" FontSize="12" Foreground="{DynamicResource MutedForegroundBrush}"/>
+                                    <Run Text=" load" FontSize="11" Foreground="{DynamicResource MutedForegroundBrush}"/>
                                 </TextBlock>
-                                <TextBlock Text="{Binding GpuTempText}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0"/>
-                            </StackPanel>
+                                <TextBlock Grid.Row="2"
+                                           Text="{Binding GpuTempText}"
+                                           Style="{StaticResource MonitorSummaryMetaStyle}"
+                                           VerticalAlignment="Bottom"/>
+                            </Grid>
                         </Border>
                         <Border>
                             <Border.Style>
@@ -3436,11 +3472,19 @@
                                               Command="{Binding OpenPerformanceMetricCommand}"
                                               CommandParameter="disk"/>
                             </Border.InputBindings>
-                            <StackPanel>
-                                <TextBlock Text="Storage" Style="{StaticResource MonitorSummaryLabelStyle}"/>
-                                <TextBlock Text="{Binding DiskHealthText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
-                                <TextBlock Text="{Binding DiskHealthDetail}" FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0" TextWrapping="Wrap"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Storage" Style="{StaticResource MonitorSummaryLabelStyle}"/>
+                                <TextBlock Grid.Row="1" Text="{Binding DiskHealthText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
+                                <TextBlock Grid.Row="2"
+                                           Text="{Binding DiskHealthDetail}"
+                                           Style="{StaticResource MonitorSummaryMetaStyle}"
+                                           VerticalAlignment="Bottom"/>
+                            </Grid>
                         </Border>
                         <Border>
                             <Border.Style>
@@ -3458,13 +3502,21 @@
                                               Command="{Binding OpenPerformanceMetricCommand}"
                                               CommandParameter="net"/>
                             </Border.InputBindings>
-                            <StackPanel>
-                                <TextBlock Text="Network" Style="{StaticResource MonitorSummaryLabelStyle}"/>
-                                <TextBlock Text="{Binding GatewayLatencyText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
-                                <TextBlock FontSize="10" Foreground="{DynamicResource ForegroundLightBrush}" Margin="0,3,0,0">
-                                    <Run Text="Wi-Fi "/><Run Text="{Binding WifiSignalText, Mode=OneWay}"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Network" Style="{StaticResource MonitorSummaryLabelStyle}"/>
+                                <TextBlock Grid.Row="1" Text="{Binding GatewayLatencyText}" Style="{StaticResource MonitorSummaryValueStyle}"/>
+                                <TextBlock Grid.Row="2"
+                                           Style="{StaticResource MonitorSummaryMetaStyle}"
+                                           VerticalAlignment="Bottom">
+                                    <Run Text="Wi-Fi "/>
+                                    <Run Text="{Binding WifiSignalText, Mode=OneWay}"/>
                                 </TextBlock>
-                            </StackPanel>
+                            </Grid>
                         </Border>
                     </WrapPanel>
                 </StackPanel>
