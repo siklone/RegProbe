@@ -2070,7 +2070,6 @@ The `Open` buttons downloads & executes [`Autoruns.exe`](https://live.sysinterna
 ```c
 OneDrive
 Spotify
-Discord
 Steam
 WingetUI
 Lghub

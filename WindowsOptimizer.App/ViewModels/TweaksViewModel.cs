@@ -143,6 +143,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public DnsConfigurationViewModel DnsConfiguration { get; } = new();
     public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
     public PolicyReferencePanelViewModel PolicyReference { get; }
+    public ServiceManagementPanelViewModel ServiceManagement { get; }
 
     public BloatwareViewModel Bloatware { get; }
     public StartupViewModel Startup { get; }
@@ -289,12 +290,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _provenanceCatalogService.Apply(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         PolicyReference = new PolicyReferencePanelViewModel(OpenPolicyReferenceEntry);
+        ServiceManagement = new ServiceManagementPanelViewModel(_elevatedServiceManager, _isElevatedHostAvailable, _appLogger);
         UpdateFilterSummary();
         LoadDocsCoverageReport();
         LoadProvenanceCoverageReport();
         RefreshSummaryStats();
         RefreshPolicyReferencePanel();
         _ = InitializePresetsAsync();
+        _ = ServiceManagement.RefreshAsync();
 
     }
 

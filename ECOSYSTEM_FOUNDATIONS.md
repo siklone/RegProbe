@@ -579,7 +579,7 @@ To extend these foundations:
 For issues or questions:
 - GitHub Issues: (repository URL)
 - Documentation: `docs/` folder
-- Community: Discord/Forums (to be created)
+- Community: Forum/knowledge base (to be created)
 
 ---
 

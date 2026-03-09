@@ -208,9 +208,6 @@ public sealed class AppSettingsTests
         Assert.Equal(1, settings.SchemaVersion);
         Assert.False(settings.DemoTweakAlphaEnabled);
         Assert.False(settings.DemoTweakBetaEnabled);
-        Assert.Null(settings.DiscordWebhookUrl);
-        Assert.False(settings.DiscordNotificationsEnabled);
-        Assert.False(settings.DiscordAutoPatchEnabled);
         Assert.Equal("Dark", settings.Theme);
         Assert.False(settings.EnableCardShadows);
         Assert.True(settings.RunStartupScanOnLaunch);

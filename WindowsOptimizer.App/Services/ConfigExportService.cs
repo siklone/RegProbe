@@ -205,9 +205,6 @@ public class ConfigExportService
             ["EnableCardShadows"] = settings.EnableCardShadows,
             ["RunStartupScanOnLaunch"] = settings.RunStartupScanOnLaunch,
             ["ShowPreviewHint"] = settings.ShowPreviewHint,
-            ["DiscordWebhookUrl"] = settings.DiscordWebhookUrl ?? string.Empty,
-            ["DiscordNotificationsEnabled"] = settings.DiscordNotificationsEnabled,
-            ["DiscordAutoPatchEnabled"] = settings.DiscordAutoPatchEnabled,
             ["IsCompactMode"] = settings.IsCompactMode
         };
     }
@@ -337,21 +334,6 @@ public class ConfigExportService
         if (TryReadBool(settings, "ShowPreviewHint", out var showPreviewHint))
         {
             current.ShowPreviewHint = showPreviewHint;
-        }
-
-        if (TryReadString(settings, "DiscordWebhookUrl", out var webhook))
-        {
-            current.DiscordWebhookUrl = webhook;
-        }
-
-        if (TryReadBool(settings, "DiscordNotificationsEnabled", out var notifyEnabled))
-        {
-            current.DiscordNotificationsEnabled = notifyEnabled;
-        }
-
-        if (TryReadBool(settings, "DiscordAutoPatchEnabled", out var autoPatch))
-        {
-            current.DiscordAutoPatchEnabled = autoPatch;
         }
 
         if (TryReadBool(settings, "IsCompactMode", out var compactMode))

@@ -130,6 +130,39 @@
             <Setter Property="Margin" Value="0,0,8,8"/>
         </Style>
 
+        <Style x:Key="ServiceManagementListItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Root"
+                                Background="{DynamicResource BackgroundDarkBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Padding="12">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ServiceManagementDetailCardStyle" TargetType="Border" BasedOn="{StaticResource PolicyReferenceInfoCardStyle}">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="12"/>
+        </Style>
+
         <converters:EnumToBooleanConverter x:Key="EnumToBool" />
         <converters:TabToVisibilityConverter x:Key="TabToVis" />
 
@@ -2232,6 +2265,250 @@
                         </Grid>
                     </Grid>
                 </Grid>
+                </TabItem>
+
+                <TabItem Header="Services">
+                    <Grid DataContext="{Binding ServiceManagement}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="0,0,0,12">
+                            <Border Background="{StaticResource TweakPanelGradientBrush}"
+                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="14"
+                                    Padding="12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Margin="0,0,16,0">
+                                        <TextBlock Text="{Binding Headline}"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                        <TextBlock Text="{Binding Detail}"
+                                                   Margin="0,6,0,0"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Context}"
+                                                   Margin="0,6,0,0"
+                                                   FontSize="10"
+                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1"
+                                                HorizontalAlignment="Right">
+                                        <Grid Width="320">
+                                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                                     Style="{StaticResource SearchBoxStyle}"
+                                                     Tag="Search services, descriptions, startup types..."/>
+                                        </Grid>
+                                        <Button Content="Refresh"
+                                                Command="{Binding RefreshCommand}"
+                                                Style="{StaticResource CompactButton}"
+                                                Margin="0,10,0,0"
+                                                HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <WrapPanel Margin="0,10,0,0">
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding TotalCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Total entries"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding RunningCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Running"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding DisabledCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Disabled"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource TweakStatCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding DriverCount}"
+                                                   Style="{StaticResource TweakStatValueStyle}"/>
+                                        <TextBlock Text="Drivers"
+                                                   Style="{StaticResource TweakStatLabelStyle}"/>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.2*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="0.9*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Style="{StaticResource AppSurfaceCardStyle}"
+                                    Background="{StaticResource TweakPanelGradientBrush}"
+                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="14"
+                                    Padding="12">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="{Binding StatusMessage}"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
+
+                                    <ListBox Grid.Row="1"
+                                             Margin="0,10,0,0"
+                                             ItemsSource="{Binding ItemsView}"
+                                             SelectedItem="{Binding SelectedService}"
+                                             Background="Transparent"
+                                             BorderThickness="0"
+                                             ItemContainerStyle="{StaticResource ServiceManagementListItemStyle}"
+                                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <DockPanel>
+                                                        <TextBlock Text="{Binding DisplayName}"
+                                                                   FontSize="13"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                                   TextWrapping="Wrap"
+                                                                   DockPanel.Dock="Left"/>
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   FontSize="10"
+                                                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                                                   HorizontalAlignment="Right"/>
+                                                    </DockPanel>
+
+                                                    <TextBlock Text="{Binding DescriptionOrFallback}"
+                                                               Margin="0,6,0,0"
+                                                               FontSize="11"
+                                                               Foreground="{DynamicResource ForegroundLightBrush}"
+                                                               TextWrapping="Wrap"
+                                                               MaxHeight="46"/>
+
+                                                    <WrapPanel Margin="0,8,0,0">
+                                                        <Border Style="{StaticResource AppChipStyle}">
+                                                            <TextBlock Text="{Binding Status}"
+                                                                       FontSize="10"
+                                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                                        </Border>
+                                                        <Border Style="{StaticResource AppChipStyle}">
+                                                            <TextBlock Text="{Binding StartType}"
+                                                                       FontSize="10"
+                                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                                        </Border>
+                                                        <Border Style="{StaticResource AppChipStyle}">
+                                                            <TextBlock Text="{Binding KindText}"
+                                                                       FontSize="10"
+                                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                                        </Border>
+                                                    </WrapPanel>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Column="2"
+                                    Style="{StaticResource AppSurfaceCardStyle}"
+                                    Background="{StaticResource TweakPanelGradientBrush}"
+                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="14"
+                                    Padding="12">
+                                <StackPanel>
+                                    <TextBlock Text="Selected service"
+                                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                                    <TextBlock Text="{Binding SelectedIdentity}"
+                                               Margin="0,6,0,0"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding SelectedState}"
+                                               Margin="0,6,0,0"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                               TextWrapping="Wrap"/>
+
+                                    <Border Style="{StaticResource ServiceManagementDetailCardStyle}" Margin="0,12,0,10">
+                                        <StackPanel>
+                                            <TextBlock Text="What it does"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <TextBlock Text="{Binding SelectedWhatItDoes}"
+                                                       Margin="0,4,0,0"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource ServiceManagementDetailCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Text="Technical details"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                            <TextBlock Text="{Binding SelectedTechnicalDetails}"
+                                                       Margin="0,4,0,0"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <WrapPanel Margin="0,4,0,0">
+                                        <Button Content="Docs"
+                                                Command="{Binding OpenDocsCommand}"
+                                                Style="{StaticResource CompactButton}"/>
+                                        <Button Content="Set Manual"
+                                                Command="{Binding EnableServiceCommand}"
+                                                Style="{StaticResource CompactButton}"
+                                                Margin="8,0,0,0"
+                                                IsEnabled="{Binding CanEnableSelectedService}"/>
+                                        <Button Content="Disable"
+                                                Command="{Binding DisableServiceCommand}"
+                                                Style="{StaticResource CompactButton}"
+                                                Margin="8,0,0,0"
+                                                IsEnabled="{Binding CanDisableSelectedService}"/>
+                                    </WrapPanel>
+
+                                    <TextBlock Margin="0,10,0,0"
+                                               Text="Drivers are listed for context. Start-mode changes are only enabled for regular services."
+                                               FontSize="10"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </TabItem>
 
                 <TabItem Header="Policy Reference">
