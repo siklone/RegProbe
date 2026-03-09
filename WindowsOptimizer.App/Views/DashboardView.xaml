@@ -69,8 +69,8 @@
         <Style x:Key="DashboardHardwareCardStyle"
                TargetType="Button"
                BasedOn="{StaticResource DashboardCardButtonStyle}">
-            <Setter Property="Width" Value="196"/>
-            <Setter Property="Height" Value="126"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="142"/>
             <Setter Property="Padding" Value="12"/>
             <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -295,7 +295,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding OsCompactSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -330,7 +330,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding MotherboardCompactSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -365,7 +365,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding ProcessorCompactSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -400,7 +400,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding GraphicsCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -434,7 +434,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding MemoryCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -468,7 +468,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding StorageCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -502,7 +502,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding DisplayCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -536,7 +536,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding NetworkCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -570,7 +570,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding UsbCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>
@@ -604,7 +604,7 @@
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding AudioCardSummary}"
-                                       Margin="0,10,0,0"
+                                       Margin="0,8,0,0"
                                        Foreground="{DynamicResource ForegroundLightBrush}"
                                        FontSize="11"
                                        TextWrapping="Wrap"/>

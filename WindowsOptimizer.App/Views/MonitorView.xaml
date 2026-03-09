@@ -294,6 +294,15 @@
                BasedOn="{StaticResource AppMiniMetricCardStyle}">
             <Setter Property="MinWidth" Value="124"/>
             <Setter Property="Padding" Value="9,7"/>
+            <Setter Property="BorderBrush" Value="#2CFFFFFF"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#191F28" Offset="0"/>
+                        <GradientStop Color="#121821" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="MonitorDetailValueChipStyle"
@@ -302,6 +311,24 @@
             <Setter Property="MinWidth" Value="140"/>
             <Setter Property="Padding" Value="10,7"/>
             <Setter Property="Margin" Value="12,0,10,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="memory">
+                    <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                    <Setter Property="Background" Value="#161E2216"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="gpu">
+                    <Setter Property="BorderBrush" Value="{DynamicResource CautionBrush}"/>
+                    <Setter Property="Background" Value="#1A221C14"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="disk">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                    <Setter Property="Background" Value="#141B2330"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding SelectedPerformanceMetricKey}" Value="net">
+                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                    <Setter Property="Background" Value="#1419232B"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="MonitorProcessSectionCardStyle"
@@ -1076,7 +1103,7 @@
                                Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
-                                  MaxHeight="132">
+                                  MaxHeight="152">
                         <ItemsControl ItemsSource="{Binding TopProcessesByCpu}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -1142,7 +1169,7 @@
                                Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
-                                  MaxHeight="132">
+                                  MaxHeight="152">
                         <ItemsControl ItemsSource="{Binding TopProcessesByRam}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -1324,7 +1351,7 @@
                                Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
-                                  MaxHeight="132">
+                                  MaxHeight="152">
                         <ItemsControl ItemsSource="{Binding Disks}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -1441,7 +1468,7 @@
                                Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
-                                  MaxHeight="132">
+                                  MaxHeight="152">
                         <ItemsControl ItemsSource="{Binding NetworkAdapters}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
