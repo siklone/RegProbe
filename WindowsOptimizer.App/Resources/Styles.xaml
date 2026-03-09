@@ -162,6 +162,59 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="AnimatedLoadingBarStyle" TargetType="ProgressBar">
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="Root" SnapsToDevicePixels="True" ClipToBounds="True">
+                        <Border x:Name="Track"
+                                Background="#18242A36"
+                                BorderBrush="#229BCD9E"
+                                BorderThickness="1"
+                                CornerRadius="999"/>
+                        <Rectangle x:Name="AnimatedFill"
+                                   RadiusX="999"
+                                   RadiusY="999"
+                                   Opacity="0.98">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TranslateTransform x:Name="SweepTransform" X="-1.2"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="{StaticResource Success00}" Offset="0.00"/>
+                                    <GradientStop Color="{StaticResource Success20}" Offset="0.20"/>
+                                    <GradientStop Color="{StaticResource Success40}" Offset="0.48"/>
+                                    <GradientStop Color="{StaticResource Success20}" Offset="0.74"/>
+                                    <GradientStop Color="{StaticResource Success00}" Offset="1.00"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="IndeterminateSweepStoryboard">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="SweepTransform"
+                                                         Storyboard.TargetProperty="X"
+                                                         From="-1.2"
+                                                         To="1.2"
+                                                         Duration="0:0:1.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Status Indicator Style -->
     <Style x:Key="StatusIndicatorStyle" TargetType="Ellipse">
         <Setter Property="Width" Value="12"/>

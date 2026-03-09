@@ -511,6 +511,7 @@
                                FontWeight="SemiBold"/>
                     <ProgressBar Height="4"
                                  Margin="0,10,0,0"
+                                 Style="{StaticResource AnimatedLoadingBarStyle}"
                                  IsIndeterminate="True"/>
                 </StackPanel>
             </Border>
