@@ -2,11 +2,17 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 using Moq;
 using WindowsOptimizer.Core;
 using WindowsOptimizer.Engine.Tweaks.Commands.Power;
 using WindowsOptimizer.Engine.Tweaks.Commands.Cleanup;
+using WindowsOptimizer.Engine.Tweaks.Commands.Privacy;
+using WindowsOptimizer.Engine.Tweaks.Commands.RegistryOps;
+using WindowsOptimizer.Engine.Tweaks.Commands.Security;
 using WindowsOptimizer.Core.Commands;
+using WindowsOptimizer.Core.Registry;
+using WindowsOptimizer.Engine.Tweaks;
 using Xunit;
 
 namespace WindowsOptimizer.Tests;
@@ -195,6 +201,109 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public async Task DisableCpuCoreParkingTweak_DetectAsync_WhenDcValueIsNotDisabled_ReturnsDetectedStatus()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "Current AC Power Setting Index: 0x00000064\nCurrent DC Power Setting Index: 0x0000000a\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "Current AC Power Setting Index: 0x00000064\nCurrent DC Power Setting Index: 0x00000064\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)));
+
+        var tweak = new DisableCpuCoreParkingTweak(mockRunner.Object);
+
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, result.Status);
+        Assert.Contains("Min AC/DC: 100/10", result.Message);
+    }
+
+    [Fact]
+    public async Task DisableCpuCoreParkingTweak_ApplyAndRollback_UsePowerCfgCommands()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "Current AC Power Setting Index: 0x0000000a\nCurrent DC Power Setting Index: 0x0000000a\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)));
+
+        var tweak = new DisableCpuCoreParkingTweak(mockRunner.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Arguments.Contains("/qh") && req.Arguments.Contains("CPMINCORES")),
+            It.IsAny<CancellationToken>()), Times.AtLeastOnce);
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Arguments.Contains("/setacvalueindex") && req.Arguments.Contains("CPMINCORES") && req.Arguments.Contains("100")),
+            It.IsAny<CancellationToken>()), Times.Once);
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Arguments.Contains("/setdcvalueindex") && req.Arguments.Contains("CPMAXCORES") && req.Arguments.Contains("10")),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task RegistryCommandBatchTweak_ApplyAsync_WhenValuesAlreadyMatch_SkipsWrites()
+    {
+        var reference = new RegistryValueReference(
+            RegistryHive.LocalMachine,
+            RegistryView.Default,
+            @"SOFTWARE\Policies\Microsoft\Windows\GameDVR",
+            "AllowGameDVR");
+
+        var readAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+        readAccessor
+            .Setup(x => x.ReadValueAsync(reference, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new RegistryValueReadResult(
+                true,
+                new RegistryValueData(RegistryValueKind.DWord, NumericValue: 0)));
+
+        var writeAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+
+        var tweak = new RegistryCommandBatchTweak(
+            "system.disable-game-recording-broadcasting",
+            "Disable Game Recording & Broadcasting",
+            "Disables Windows game recording and broadcasting for all users through the official policy setting.",
+            TweakRiskLevel.Safe,
+            new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.LocalMachine,
+                    @"SOFTWARE\Policies\Microsoft\Windows\GameDVR",
+                    "AllowGameDVR",
+                    RegistryValueKind.DWord,
+                    0,
+                    RegistryView.Default)
+            },
+            readAccessor.Object,
+            writeAccessor.Object);
+
+        var result = await tweak.ApplyAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+        Assert.Contains("already match", result.Message, StringComparison.OrdinalIgnoreCase);
+        writeAccessor.VerifyNoOtherCalls();
+    }
+
+    [Fact]
     public async Task CommandTweak_ApplyAsync_WhenCommandTimesOut_ReturnsFailedStatus()
     {
         // Arrange
@@ -241,5 +350,208 @@ public sealed class CommandTweakTests
         Assert.Equal(TweakStatus.Failed, result.Status);
         Assert.Contains("exit code 1", result.Message);
         Assert.Contains("Access denied", result.Message);
+    }
+
+    [Fact]
+    public async Task DisableUacFullTweak_DetectAsync_WhenEnableLuaIsOne_ReturnsDetectedStatus()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\r\n    EnableLUA    REG_DWORD    0x1\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)));
+
+        var tweak = new DisableUacFullTweak(mockRunner.Object);
+
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, result.Status);
+        Assert.Contains("Current state: 1", result.Message);
+    }
+
+    [Fact]
+    public async Task DisableUacFullTweak_ApplyVerifyAndRollback_UseRegCommands()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\r\n    EnableLUA    REG_DWORD    0x1\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The operation completed successfully.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\r\n    EnableLUA    REG_DWORD    0x0\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The operation completed successfully.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)));
+
+        var tweak = new DisableUacFullTweak(mockRunner.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var verifyResult = await tweak.VerifyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.Verified, verifyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("reg.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count >= 8
+                && req.Arguments[0] == "add"
+                && req.Arguments.Contains("EnableLUA")
+                && req.Arguments.Contains("0")),
+            It.IsAny<CancellationToken>()), Times.Once);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("reg.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count >= 8
+                && req.Arguments[0] == "add"
+                && req.Arguments.Contains("EnableLUA")
+                && req.Arguments.Contains("1")),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task DisableFindMyDeviceTweak_ApplyVerifyAndRollback_UseRegCommands()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\r\n    AllowFindMyDevice    REG_DWORD    0x1\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The operation completed successfully.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\r\n    AllowFindMyDevice    REG_DWORD    0x0\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The operation completed successfully.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)));
+
+        var tweak = new DisableFindMyDeviceTweak(mockRunner.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var verifyResult = await tweak.VerifyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.Verified, verifyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("reg.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count >= 8
+                && req.Arguments[0] == "add"
+                && req.Arguments.Contains("AllowFindMyDevice")
+                && req.Arguments.Contains("0")),
+            It.IsAny<CancellationToken>()), Times.Once);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("reg.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count >= 8
+                && req.Arguments[0] == "add"
+                && req.Arguments.Contains("AllowFindMyDevice")
+                && req.Arguments.Contains("1")),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task RegistryCommandBatchTweak_ApplyVerifyAndRollback_UsesElevatedRegistryWrites()
+    {
+        var readRegistryAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+        var writeRegistryAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+        var reference = new RegistryValueReference(
+            RegistryHive.CurrentUser,
+            RegistryView.Default,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "DisableSearchHistory");
+        var targetData = RegistryValueData.FromObject(RegistryValueKind.DWord, 1);
+
+        readRegistryAccessor
+            .SetupSequence(x => x.ReadValueAsync(reference, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new RegistryValueReadResult(false, null))
+            .ReturnsAsync(new RegistryValueReadResult(true, targetData));
+
+        writeRegistryAccessor
+            .Setup(x => x.SetValueAsync(reference, It.Is<RegistryValueData>(value => value.Kind == RegistryValueKind.DWord && value.NumericValue == 1), It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
+
+        writeRegistryAccessor
+            .Setup(x => x.DeleteValueAsync(reference, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
+
+        var tweak = new RegistryCommandBatchTweak(
+            "privacy.disable-search-history",
+            "Disable Search History",
+            "Prevents search history from being stored for this user.",
+            TweakRiskLevel.Safe,
+            new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.CurrentUser,
+                    @"Software\Policies\Microsoft\Windows\Explorer",
+                    "DisableSearchHistory",
+                    RegistryValueKind.DWord,
+                    1)
+            },
+            readRegistryAccessor.Object,
+            writeRegistryAccessor.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var verifyResult = await tweak.VerifyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.Verified, verifyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+
+        writeRegistryAccessor.Verify(x => x.SetValueAsync(
+            reference,
+            It.Is<RegistryValueData>(value => value.Kind == RegistryValueKind.DWord && value.NumericValue == 1),
+            It.IsAny<CancellationToken>()), Times.Once);
+
+        writeRegistryAccessor.Verify(x => x.DeleteValueAsync(
+            reference,
+            It.IsAny<CancellationToken>()), Times.Once);
     }
 }

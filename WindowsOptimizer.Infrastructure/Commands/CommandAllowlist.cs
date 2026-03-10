@@ -27,12 +27,51 @@ public sealed class CommandAllowlist
         var sc = Path.Combine(systemDirectory, "sc.exe");
         var ipconfig = Path.Combine(systemDirectory, "ipconfig.exe");
         var netsh = Path.Combine(systemDirectory, "netsh.exe");
+        var reg = Path.Combine(systemDirectory, "reg.exe");
         var chkdsk = Path.Combine(systemDirectory, "chkdsk.exe");
         var wevtutil = Path.Combine(systemDirectory, "wevtutil.exe");
         var vssadmin = Path.Combine(systemDirectory, "vssadmin.exe");
         var cleanmgr = Path.Combine(systemDirectory, "cleanmgr.exe");
         var cscript = Path.Combine(systemDirectory, "cscript.exe");
         var powershell = Path.Combine(systemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe");
+        var regAllowlist = new List<string[]>
+        {
+            new[] { "query", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "EnableLUA" },
+            new[] { "add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "EnableLUA", "/t", "REG_DWORD", "/d", "0", "/f" },
+            new[] { "add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "EnableLUA", "/t", "REG_DWORD", "/d", "1", "/f" },
+            new[] { "delete", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "EnableLUA", "/f" },
+            new[] { "query", @"HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice", "/v", "AllowFindMyDevice" },
+            new[] { "add", @"HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice", "/v", "AllowFindMyDevice", "/t", "REG_DWORD", "/d", "0", "/f" },
+            new[] { "add", @"HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice", "/v", "AllowFindMyDevice", "/t", "REG_DWORD", "/d", "1", "/f" },
+            new[] { "delete", @"HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice", "/v", "AllowFindMyDevice", "/f" }
+        };
+
+        static void AddRegDwordRule(List<string[]> allowlist, string keyPath, string valueName, params string[] values)
+        {
+            foreach (var value in values)
+            {
+                allowlist.Add(new[] { "add", keyPath, "/v", valueName, "/t", "REG_DWORD", "/d", value, "/f" });
+            }
+
+            allowlist.Add(new[] { "delete", keyPath, "/v", valueName, "/f" });
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchHistory", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedPersonalizedSites", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "TurnOffSPIAnimations", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedPersonalizedSites", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessDiagnosticInfo", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\AppV\CEIP", "CEIPEnable", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Messenger\Client", "CEIP", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\CloudContent", "DisableConsumerAccountStateContent", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DoNotUseWebResults", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "SearchSuggestEnabled", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "LocalProvidersEnabled", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\MicrosoftEdge\SearchScopes", "ShowSearchSuggestionsGlobal", "0", "1", "2");
 
         var allowed = new Dictionary<string, List<string[]>>(StringComparer.OrdinalIgnoreCase)
         {
@@ -54,6 +93,14 @@ public sealed class CommandAllowlist
                 // USB selective suspend (DC/battery power)
                 new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_USB", "USBSELECTIVESUSPEND", "0" },
                 new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_USB", "USBSELECTIVESUSPEND", "1" },
+
+                // Hidden processor core parking settings
+                new[] { "/qh", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES" },
+                new[] { "/qh", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMAXCORES" },
+                new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES", "100" },
+                new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES", "100" },
+                new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMAXCORES", "100" },
+                new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMAXCORES", "100" },
 
                 // Apply power scheme changes
                 new[] { "/setactive", "SCHEME_CURRENT" },
@@ -144,6 +191,7 @@ public sealed class CommandAllowlist
                 new[] { "interface", "show", "interface" },
                 new[] { "interface", "ip", "show", "config" }
             },
+            [reg] = regAllowlist,
             [chkdsk] = new List<string[]>
             {
                 // Check disk health (read-only)
@@ -222,6 +270,12 @@ public sealed class CommandAllowlist
             return false;
         }
 
+        if (Path.GetFileName(normalizedExecutable).Equals("reg.exe", StringComparison.OrdinalIgnoreCase)
+            && IsGeneralRegistryRequestAllowed(request.Arguments, out reason))
+        {
+            return true;
+        }
+
         if (!_allowed.TryGetValue(normalizedExecutable, out var allowedArguments))
         {
             reason = "Executable is not allowlisted.";
@@ -239,6 +293,52 @@ public sealed class CommandAllowlist
 
         reason = "Arguments are not allowlisted.";
         return false;
+    }
+
+    private static bool IsGeneralRegistryRequestAllowed(IReadOnlyList<string> arguments, out string? reason)
+    {
+        if (arguments.Count < 2)
+        {
+            reason = "Registry command arguments are incomplete.";
+            return false;
+        }
+
+        var operation = arguments[0];
+        if (!operation.Equals("add", StringComparison.OrdinalIgnoreCase)
+            && !operation.Equals("delete", StringComparison.OrdinalIgnoreCase)
+            && !operation.Equals("query", StringComparison.OrdinalIgnoreCase))
+        {
+            reason = "Only reg add/delete/query operations are allowed.";
+            return false;
+        }
+
+        if (!IsRegistryHivePath(arguments[1]))
+        {
+            reason = "Registry path must target a supported hive.";
+            return false;
+        }
+
+        reason = null;
+        return true;
+    }
+
+    private static bool IsRegistryHivePath(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return false;
+        }
+
+        return path.StartsWith(@"HKLM\", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith(@"HKCU\", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith(@"HKCR\", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith(@"HKU\", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith(@"HKCC\", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("HKLM", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("HKCU", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("HKCR", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("HKU", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("HKCC", StringComparison.OrdinalIgnoreCase);
     }
 
     private string? NormalizeExecutable(string executable)

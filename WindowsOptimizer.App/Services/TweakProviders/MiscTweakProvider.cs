@@ -40,18 +40,5 @@ public sealed class MiscTweakProvider : BaseTweakProvider
         // Misc specialized
         yield return new RemoveProductKeyTweak(context.ElevatedCommandRunner);
 
-        // Search
-        yield return CreateRegistryTweak(
-            context,
-            "misc.disable-search-web-results",
-            "Disable Search Web Results",
-            "Prevents Windows Search from showing Bing web results in the Start menu.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Policies\Microsoft\Windows\Explorer",
-            "DisableSearchBoxSuggestions",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
     }
 }

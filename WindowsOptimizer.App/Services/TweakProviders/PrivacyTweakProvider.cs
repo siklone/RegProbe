@@ -7,6 +7,7 @@ using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Commands.Privacy;
 using WindowsOptimizer.Engine.Tweaks.Misc;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
@@ -124,7 +125,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryValueBatchTweak(
+        yield return CreateCommandBackedRegistryValueBatchTweak(
             context,
             "privacy.disable-ceip",
             "Disable CEIP",
@@ -429,7 +430,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", RegistryValueKind.DWord, 2)
             });
 
-        yield return CreateRegistryTweak(
+        yield return CreateCommandBackedRegistryTweak(
             context,
             "privacy.disable-app-diagnostics",
             "Disable App Diagnostics",
@@ -584,21 +585,65 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         // App-specific Telemetry
         yield return DisableOneDriveTweaks.CreateDisableOneDriveTweak(context.ElevatedRegistry);
-        yield return DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak(context.ElevatedRegistry);
+        yield return DisableEdgeFeaturesTweaks.CreateDisableEdgeFeaturesTweak(context.LocalRegistry);
         yield return DisableVisualStudioTelemetryTweak.CreateDisableVisualStudioTelemetryTweak(context.ElevatedRegistry);
         yield return DisableOfficeTelemetryTweak.CreateDisableOfficeTelemetryTweak(context.LocalRegistry);
         yield return new DisableVSCodeTelemetryTweak();
 
         // Additional Privacy Tweaks
-        yield return CreateRegistryTweak(
+        yield return CreateRegistryValuePresetBatchTweak(
             context,
             "privacy.disable-cross-device-experiences",
-            "Disable Cross-Device Experiences",
-            "Disables continue experiences on this device (CDP).",
+            "Cross-Device Sharing",
+            "Choose whether nearby Windows experiences stay off, work only with your devices, or are available to everyone nearby.",
             TweakRiskLevel.Advanced,
+            new[]
+            {
+                new RegistryValuePresetBatchOption(
+                    "off",
+                    "Off",
+                    "Stops nearby sharing and continue-on-other-device experiences on this PC.",
+                    new[]
+                    {
+                        new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\System", "EnableCdp", RegistryValueKind.DWord, 0),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 0),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "CdpSessionUserAuthzPolicy", RegistryValueKind.DWord, 0),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP\SettingsPage", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 0)
+                    }),
+                new RegistryValuePresetBatchOption(
+                    "my-devices",
+                    "My devices only",
+                    "Keeps cross-device experiences limited to devices signed in with your account.",
+                    new[]
+                    {
+                        new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\System", "EnableCdp", RegistryValueKind.DWord, 1),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 1),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "CdpSessionUserAuthzPolicy", RegistryValueKind.DWord, 1),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP\SettingsPage", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 1)
+                    }),
+                new RegistryValuePresetBatchOption(
+                    "everyone-nearby",
+                    "Everyone nearby",
+                    "Allows Windows to share supported experiences with nearby devices, not just your own.",
+                    new[]
+                    {
+                        new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\System", "EnableCdp", RegistryValueKind.DWord, 1),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 2),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP", "CdpSessionUserAuthzPolicy", RegistryValueKind.DWord, 2),
+                        new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\CDP\SettingsPage", "RomeSdkChannelUserAuthzPolicy", RegistryValueKind.DWord, 2)
+                    })
+            },
+            "off");
+
+        yield return CreateRegistryTweak(
+            context,
+            "privacy.disable-find-my-device",
+            "Disable Find My Device",
+            "Stops Windows from registering this PC with Find My Device and keeps location-based recovery turned off.",
+            TweakRiskLevel.Safe,
             RegistryHive.LocalMachine,
-            @"Software\Policies\Microsoft\Windows\System",
-            "EnableCdp",
+            @"SOFTWARE\Policies\Microsoft\FindMyDevice",
+            "AllowFindMyDevice",
             RegistryValueKind.DWord,
             0);
 
@@ -806,7 +851,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
+        yield return CreateCommandBackedRegistryTweak(
             context,
             "privacy.hide-recommended-section",
             "Hide Start Recommended Section (Policy)",
@@ -831,7 +876,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
+        yield return CreateCommandBackedRegistryTweak(
             context,
             "privacy.hide-recommended-personalized-sites",
             "Hide Start Personalized Site Recommendations (Policy)",
@@ -874,7 +919,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             },
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
+        yield return CreateCommandBackedRegistryTweak(
             context,
             "privacy.disable-consumer-account-content",
             "Disable Consumer Account State Content",
@@ -909,7 +954,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             helpPanePath,
             helpPaneDisabledPath);
 
-        yield return CreateRegistryValueBatchTweak(
+        yield return CreateCommandBackedRegistryValueBatchTweak(
             context,
             "privacy.disable-edge-search-suggestions",
             "Disable Edge Search Suggestions",

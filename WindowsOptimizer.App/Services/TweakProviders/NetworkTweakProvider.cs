@@ -56,6 +56,24 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("DirectoryCacheLifetime", RegistryValueKind.DWord, 30)
             });
 
+        yield return WithMicrosoftDoc(
+            CreateRegistryValueSetTweak(
+                context,
+                "network.smb-increase-client-metadata-cache",
+                "SMB: Increase Client Metadata Cache",
+                "Raises SMB client metadata caches and request depth for heavier remote file workloads, especially higher-latency shares.",
+                TweakRiskLevel.Advanced,
+                RegistryHive.LocalMachine,
+                @"SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters",
+                new[]
+                {
+                    new RegistryValueSetEntry("DirectoryCacheEntriesMax", RegistryValueKind.DWord, 4096),
+                    new RegistryValueSetEntry("FileInfoCacheEntriesMax", RegistryValueKind.DWord, 32768),
+                    new RegistryValueSetEntry("FileNotFoundCacheEntriesMax", RegistryValueKind.DWord, 32768),
+                    new RegistryValueSetEntry("MaxCmds", RegistryValueKind.DWord, 32768)
+                }),
+            "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/");
+
         // Command-based Network Tweaks
         yield return new FlushDnsCacheTweak(context.ElevatedCommandRunner);
         yield return new ResetNetworkStackTweak(context.ElevatedCommandRunner);

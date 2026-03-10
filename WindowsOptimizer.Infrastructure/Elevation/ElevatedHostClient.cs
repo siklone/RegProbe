@@ -83,7 +83,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
             {
                 var exePath = _options.HostExecutablePath ?? "unknown";
                 throw new ElevatedHostException(
-                    $"Failed to connect to the elevated host after starting it. " +
+                    $"Failed to connect to an elevated host after starting it. " +
                     $"EXE path: {exePath}. Check if UAC prompt was shown and accepted.");
             }
 
@@ -165,15 +165,11 @@ public sealed class ElevatedHostClient : IElevatedHostClient
     {
         try
         {
-            using var pipe = new NamedPipeClientStream(
-                ".",
-                _options.PipeName,
-                PipeDirection.InOut,
-                PipeOptions.Asynchronous);
-
-            var timeoutMs = (int)Math.Max(1, timeout.TotalMilliseconds);
-            await pipe.ConnectAsync(timeoutMs, ct);
-            return true;
+            var response = await SendOnceAsync(
+                new ElevatedHostRequest(Guid.NewGuid(), ElevatedHostRequestType.Ping),
+                timeout,
+                ct);
+            return response.IsElevated;
         }
         catch (Exception ex) when (IsConnectFailure(ex))
         {

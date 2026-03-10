@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsOptimizer.Core.Commands;
@@ -20,6 +21,12 @@ public static class Program
     {
         var options = HostOptions.Parse(args);
         using var cts = new CancellationTokenSource();
+
+        if (!IsProcessElevated())
+        {
+            Console.Error.WriteLine("ElevatedHost must run with administrator privileges.");
+            return 5;
+        }
 
         if (options.ParentProcessId > 0)
         {
@@ -238,7 +245,8 @@ public static class Program
             {
                 return new ElevatedHostResponse(
                     request.RequestId,
-                    ElevatedHostRequestType.Ping);
+                    ElevatedHostRequestType.Ping,
+                    IsElevated: IsProcessElevated());
             }
             default:
                 return new ElevatedHostResponse(
@@ -249,6 +257,18 @@ public static class Program
                         false,
                         "Unsupported elevated host request."));
         }
+    }
+
+    private static bool IsProcessElevated()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return false;
+        }
+
+        using var identity = WindowsIdentity.GetCurrent();
+        var principal = new WindowsPrincipal(identity);
+        return principal.IsInRole(WindowsBuiltInRole.Administrator);
     }
 
     private static async Task<ElevatedRegistryResponse> HandleRegistryRequestAsync(

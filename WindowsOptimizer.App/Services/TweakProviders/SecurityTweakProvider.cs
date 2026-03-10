@@ -5,6 +5,7 @@ using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Commands.Security;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
@@ -40,17 +41,7 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("PromptOnSecureDesktop", RegistryValueKind.DWord, 0)
             });
 
-        yield return CreateRegistryTweak(
-            context,
-            "security.disable-uac",
-            "Disable UAC (Full)",
-            "Disables User Account Control entirely. Requires a reboot and severely lowers system security.",
-            TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System",
-            "EnableLUA",
-            RegistryValueKind.DWord,
-            0);
+        yield return new DisableUacFullTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryTweak(
             context,

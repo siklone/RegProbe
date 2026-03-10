@@ -80,6 +80,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private double _recommendationConfidence;
     private bool _isSelected;
     private bool _isFavorite;
+    private bool _isSyncingChoiceOption;
     private bool _hasNohutoEvidence;
     private bool _hasWindowsInternalsContext;
     private bool _needsSourceReview;
@@ -88,6 +89,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly ObservableCollection<string> _batchDetails = new();
     private string _batchDetailsTitle = "Details";
     private string _batchSummaryLine = string.Empty;
+    private TweakChoiceOption? _selectedChoiceOption;
 
     public TweakItemViewModel(ITweak tweak, TweakExecutionPipeline pipeline, bool isElevated)
     {
@@ -111,6 +113,8 @@ public sealed class TweakItemViewModel : ViewModelBase
             OnPropertyChanged(nameof(HasUserReferenceLinks));
         };
         SubOptions = new ObservableCollection<TweakSubOption>();
+        ChoiceOptions = new ObservableCollection<TweakChoiceOption>();
+        ChoiceOptions.CollectionChanged += (_, __) => OnPropertyChanged(nameof(HasChoiceOptions));
 
         ResetSteps();
 
@@ -166,7 +170,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         && !IsElevated
         && _tweak is not RegistryValueTweak
         && _tweak is not RegistryValueBatchTweak
-        && _tweak is not RegistryValueSetTweak;
+        && _tweak is not RegistryValueSetTweak
+        && _tweak is not RegistryValuePresetBatchTweak;
 
     public bool IsScanFriendly =>
         _tweak is not CommandTweak
@@ -257,7 +262,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         var area = tweak switch
         {
-            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak => "Registry",
+            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak => "Registry",
             ServiceStartModeBatchTweak => "Service",
             ScheduledTaskBatchTweak => "Task",
             SettingsToggleTweak => "Settings",
@@ -345,6 +350,48 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ObservableCollection<TweakSubOption> SubOptions { get; }
 
     public bool HasSubOptions => SubOptions.Any();
+
+    public ObservableCollection<TweakChoiceOption> ChoiceOptions { get; }
+
+    public bool HasChoiceOptions => ChoiceOptions.Any();
+
+    public TweakChoiceOption? SelectedChoiceOption
+    {
+        get => _selectedChoiceOption;
+        set
+        {
+            if (!SetProperty(ref _selectedChoiceOption, value))
+            {
+                return;
+            }
+
+            OnPropertyChanged(nameof(SelectedChoiceDescription));
+
+            if (_isSyncingChoiceOption || value is null || _tweak is not RegistryValuePresetBatchTweak presetBatchTweak)
+            {
+                return;
+            }
+
+            presetBatchTweak.SelectedPresetKey = value.Key;
+            TargetValue = value.Label;
+
+            if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetLabel))
+            {
+                CurrentValue = presetBatchTweak.MatchedPresetLabel!;
+            }
+
+            if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetKey))
+            {
+                AppliedStatus = string.Equals(presetBatchTweak.MatchedPresetKey, value.Key, StringComparison.OrdinalIgnoreCase)
+                    ? TweakAppliedStatus.Applied
+                    : TweakAppliedStatus.NotApplied;
+            }
+
+            StatusMessage = $"Selected '{value.Label}'. Click Apply to use it.";
+        }
+    }
+
+    public string SelectedChoiceDescription => SelectedChoiceOption?.Description ?? string.Empty;
 
     public bool HasRegistryPath => !string.IsNullOrEmpty(RegistryPath);
 
@@ -1057,6 +1104,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (!report.Succeeded)
         {
             AppliedStatus = TweakAppliedStatus.Error;
+            SyncChoiceStateFromTweak(updateAppliedStatus: false);
             return;
         }
 
@@ -1069,6 +1117,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 TweakStatus.Detected => TweakAppliedStatus.NotApplied,
                 _ => AppliedStatus
             };
+            SyncChoiceStateFromTweak(updateAppliedStatus: true);
             return;
         }
 
@@ -1076,6 +1125,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             AppliedStatus = TweakAppliedStatus.NotApplied;
             WasRolledBack = true;
+            SyncChoiceStateFromTweak(updateAppliedStatus: true);
             return;
         }
 
@@ -1088,6 +1138,8 @@ public sealed class TweakItemViewModel : ViewModelBase
                 CurrentValue = TargetValue;
             }
         }
+
+        SyncChoiceStateFromTweak(updateAppliedStatus: true);
     }
 
     private async Task RunSingleStepAsync(TweakAction action, CancellationToken ct)
@@ -1163,6 +1215,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                     CurrentValue = TargetValue;
                 }
 
+                SyncChoiceStateFromTweak(updateAppliedStatus: true);
                 break;
             case TweakAction.Apply:
                 if (result.Status == TweakStatus.Applied)
@@ -1176,6 +1229,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                     AppliedStatus = TweakAppliedStatus.Error;
                 }
 
+                SyncChoiceStateFromTweak(updateAppliedStatus: result.Status != TweakStatus.Failed);
                 break;
             case TweakAction.Verify:
                 if (result.Status == TweakStatus.Verified)
@@ -1189,6 +1243,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                     AppliedStatus = TweakAppliedStatus.NotApplied;
                 }
 
+                SyncChoiceStateFromTweak(updateAppliedStatus: result.Status != TweakStatus.Failed);
                 break;
             case TweakAction.Rollback:
                 if (result.Status == TweakStatus.RolledBack)
@@ -1201,6 +1256,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                     AppliedStatus = TweakAppliedStatus.Error;
                 }
 
+                SyncChoiceStateFromTweak(updateAppliedStatus: result.Status != TweakStatus.Failed);
                 break;
         }
     }
@@ -1254,6 +1310,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             TryUpdateCurrentValueFromMessage(update.Message);
             SetDetectionTimestamp(update.Timestamp, fromCache: false);
+            SyncChoiceStateFromTweak(updateAppliedStatus: false);
         }
 
         var nextStep = GetNextStep(update.Action);
@@ -1602,6 +1659,21 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         switch (_tweak)
         {
+            case RegistryValuePresetBatchTweak presetBatchTweak:
+                if (string.IsNullOrWhiteSpace(RegistryPath))
+                {
+                    RegistryPath = presetBatchTweak.PrimaryScopePath;
+                }
+
+                InitializeChoiceOptions(presetBatchTweak);
+                SyncChoiceStateFromTweak(updateAppliedStatus: false);
+
+                if (string.IsNullOrWhiteSpace(CodeExample))
+                {
+                    CodeExample = "Choose an option from the row, then click Apply to write that preset.";
+                }
+
+                break;
             case RegistryValueTweak registryValueTweak:
                 if (string.IsNullOrWhiteSpace(RegistryPath))
                 {
@@ -1644,6 +1716,89 @@ public sealed class TweakItemViewModel : ViewModelBase
                 }
 
                 break;
+        }
+    }
+
+    private void InitializeChoiceOptions(RegistryValuePresetBatchTweak presetBatchTweak)
+    {
+        _isSyncingChoiceOption = true;
+        try
+        {
+            ChoiceOptions.Clear();
+            foreach (var preset in presetBatchTweak.Presets)
+            {
+                ChoiceOptions.Add(new TweakChoiceOption(preset.Key, preset.Label, preset.Description));
+            }
+
+            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
+                option => option.Key.Equals(presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase));
+        }
+        finally
+        {
+            _isSyncingChoiceOption = false;
+        }
+
+        OnPropertyChanged(nameof(HasChoiceOptions));
+        OnPropertyChanged(nameof(SelectedChoiceOption));
+        OnPropertyChanged(nameof(SelectedChoiceDescription));
+    }
+
+    private void SyncChoiceStateFromTweak(bool updateAppliedStatus)
+    {
+        if (_tweak is not RegistryValuePresetBatchTweak presetBatchTweak)
+        {
+            return;
+        }
+
+        if (ChoiceOptions.Count == 0)
+        {
+            InitializeChoiceOptions(presetBatchTweak);
+        }
+
+        _isSyncingChoiceOption = true;
+        try
+        {
+            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
+                option => option.Key.Equals(presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase));
+        }
+        finally
+        {
+            _isSyncingChoiceOption = false;
+        }
+
+        OnPropertyChanged(nameof(SelectedChoiceOption));
+        OnPropertyChanged(nameof(SelectedChoiceDescription));
+
+        if (_selectedChoiceOption is not null)
+        {
+            TargetValue = _selectedChoiceOption.Label;
+        }
+
+        if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetLabel))
+        {
+            CurrentValue = presetBatchTweak.MatchedPresetLabel!;
+        }
+        else if (HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied)
+        {
+            CurrentValue = "Custom / Mixed";
+        }
+
+        if (!updateAppliedStatus)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetKey))
+        {
+            AppliedStatus = TweakAppliedStatus.NotApplied;
+        }
+        else if (string.Equals(presetBatchTweak.MatchedPresetKey, presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase))
+        {
+            AppliedStatus = TweakAppliedStatus.Applied;
+        }
+        else
+        {
+            AppliedStatus = TweakAppliedStatus.NotApplied;
         }
     }
 
@@ -1819,6 +1974,28 @@ public sealed class TweakItemViewModel : ViewModelBase
             SetDetectionTimestamp(cachedState.LastDetectedAtUtc.Value, fromCache: true);
             LastUpdatedText = $"Last update: {cachedState.LastDetectedAtUtc.Value.ToLocalTime():HH:mm:ss}";
         }
+
+        if (_tweak is RegistryValuePresetBatchTweak presetBatchTweak && ChoiceOptions.Count > 0)
+        {
+            var matchingOption = ChoiceOptions.FirstOrDefault(option =>
+                option.Label.Equals(TargetValue, StringComparison.OrdinalIgnoreCase));
+            if (matchingOption is not null)
+            {
+                _isSyncingChoiceOption = true;
+                try
+                {
+                    presetBatchTweak.SelectedPresetKey = matchingOption.Key;
+                    _selectedChoiceOption = matchingOption;
+                }
+                finally
+                {
+                    _isSyncingChoiceOption = false;
+                }
+
+                OnPropertyChanged(nameof(SelectedChoiceOption));
+                OnPropertyChanged(nameof(SelectedChoiceDescription));
+            }
+        }
     }
 
     private static TweakAppliedStatus ParseAppliedStatus(string? statusText)
@@ -1877,6 +2054,8 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 CurrentValue = TargetValue;
             }
+
+            SyncChoiceStateFromTweak(updateAppliedStatus: true);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {
@@ -1895,10 +2074,17 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (string.IsNullOrWhiteSpace(message))
         {
             ClearBatchDetails();
+            SyncChoiceStateFromTweak(updateAppliedStatus: false);
             return;
         }
 
         TryUpdateBatchDetailsFromMessage(message);
+
+        if (_tweak is RegistryValuePresetBatchTweak)
+        {
+            SyncChoiceStateFromTweak(updateAppliedStatus: false);
+            return;
+        }
 
         if (message.Contains("Value not set", StringComparison.OrdinalIgnoreCase))
         {
@@ -2361,6 +2547,22 @@ public sealed class TweakSubOption : ViewModelBase
         get => _value;
         set => SetProperty(ref _value, value);
     }
+}
+
+public sealed class TweakChoiceOption : ViewModelBase
+{
+    public TweakChoiceOption(string key, string label, string description)
+    {
+        Key = key;
+        Label = label;
+        Description = description ?? string.Empty;
+    }
+
+    public string Key { get; }
+
+    public string Label { get; }
+
+    public string Description { get; }
 }
 
 public enum TweakSubOptionType

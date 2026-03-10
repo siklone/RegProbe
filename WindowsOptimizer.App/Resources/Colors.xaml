@@ -17,38 +17,38 @@
     <Color x:Key="Nord6">#ECEFF4</Color>
 
     <!-- Frost (Accents) -->
-    <Color x:Key="Nord7">#8FBCBB</Color> <!-- Teal -->
-    <Color x:Key="Nord8">#88C0D0</Color> <!-- Cyan -->
-    <Color x:Key="Nord9">#81A1C1</Color> <!-- Blue -->
-    <Color x:Key="Nord10">#5E81AC</Color> <!-- Dark Blue -->
+    <Color x:Key="Nord7">#63D9FF</Color> <!-- Teal -->
+    <Color x:Key="Nord8">#38D0FF</Color> <!-- Cyan -->
+    <Color x:Key="Nord9">#6EA8FF</Color> <!-- Blue -->
+    <Color x:Key="Nord10">#315A88</Color> <!-- Dark Blue -->
 
     <!-- Aurora (Status) -->
-    <Color x:Key="Nord11">#BF616A</Color> <!-- Red -->
-    <Color x:Key="Nord12">#D08770</Color> <!-- Orange -->
-    <Color x:Key="Nord13">#EBCB8B</Color> <!-- Yellow -->
-    <Color x:Key="Nord14">#A3BE8C</Color> <!-- Green -->
-    <Color x:Key="Nord15">#B48EAD</Color> <!-- Purple -->
+    <Color x:Key="Nord11">#FF4C58</Color> <!-- Red -->
+    <Color x:Key="Nord12">#FF9C57</Color> <!-- Orange -->
+    <Color x:Key="Nord13">#FFD75A</Color> <!-- Yellow -->
+    <Color x:Key="Nord14">#5BE58C</Color> <!-- Green -->
+    <Color x:Key="Nord15">#C49CF3</Color> <!-- Purple -->
 
     <!-- ============================================== -->
     <!-- SEMANTIC LAYER SYSTEM (Modern Phase 1)         -->
     <!-- ============================================== -->
 
     <!-- Base Layer Colors -->
-    <Color x:Key="LayerFillColorDefault">#171B22</Color> <!-- Slightly darker than Nord0 for contrast -->
-    <Color x:Key="LayerFillColorAlt">#1B1F27</Color>    <!-- Nord0 -->
-    <Color x:Key="CardFillColorDefault">#242A36</Color>  <!-- Nord1 -->
-    <Color x:Key="CardFillColorSecondary">#2E3546</Color> <!-- Nord2 -->
+    <Color x:Key="LayerFillColorDefault">#090B10</Color>
+    <Color x:Key="LayerFillColorAlt">#0D1118</Color>
+    <Color x:Key="CardFillColorDefault">#141923</Color>
+    <Color x:Key="CardFillColorSecondary">#1B212C</Color>
     
     <!-- Glass / Alpha System -->
     <Color x:Key="GlassLowColor">#0AFFFFFF</Color>    <!-- 4% -->
     <Color x:Key="GlassMediumColor">#14FFFFFF</Color> <!-- 8% -->
     <Color x:Key="GlassHighColor">#26FFFFFF</Color>   <!-- 15% -->
-    <Color x:Key="GlassBorderColor">#1FFFFFFF</Color> <!-- 12% border -->
+    <Color x:Key="GlassBorderColor">#24FFFFFF</Color>
 
     <!-- Text Colors -->
     <Color x:Key="TextFillColorPrimary">#ECEFF4</Color>   <!-- Nord6 -->
     <Color x:Key="TextFillColorSecondary">#D8DEE9</Color> <!-- Nord4 -->
-    <Color x:Key="TextFillColorTertiary">#9EA8BA</Color>  <!-- Muted -->
+    <Color x:Key="TextFillColorTertiary">#97A2B3</Color>
 
     <!-- ============================================== -->
     <!-- BRUSH RESOURCES                                -->
@@ -98,8 +98,9 @@
 
     <!-- Main Background Gradient (Subtle Deep Glow) -->
     <LinearGradientBrush x:Key="BackgroundGradientBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#171B22" Offset="0"/>
-        <GradientStop Color="#1C2129" Offset="1"/>
+        <GradientStop Color="#090B10" Offset="0"/>
+        <GradientStop Color="#0B0F15" Offset="0.55"/>
+        <GradientStop Color="#11151D" Offset="1"/>
     </LinearGradientBrush>
 
     <!-- Primary Action Gradient (Cyan to Blue) -->
@@ -127,6 +128,60 @@
     <SolidColorBrush x:Key="PressedOverlayBrush" Color="{StaticResource GlassHighColor}"/>
     <SolidColorBrush x:Key="DisabledOverlayBrush" Color="#60000000"/>
     <SolidColorBrush x:Key="ScrimOverlayBrush" Color="#99000000"/>
+
+    <!-- Shared shell and surface brushes -->
+    <SolidColorBrush x:Key="ShellWindowBackgroundBrush" Color="#090B10"/>
+    <SolidColorBrush x:Key="ShellTitleBarBackgroundBrush" Color="#CC090B10"/>
+    <SolidColorBrush x:Key="ShellTitleBarBorderBrush" Color="#16FFFFFF"/>
+    <SolidColorBrush x:Key="ShellTopNavItemBrush" Color="#0D1218"/>
+    <SolidColorBrush x:Key="ShellTopNavBorderBrush" Color="#24FFFFFF"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBrush" Color="#131821"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBorderBrush" Color="#33FF4C58"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBrush" Color="#18FF4C58"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBorderBrush" Color="#66FF4C58"/>
+    <SolidColorBrush x:Key="ShellBrandChipBrush" Color="#121720"/>
+    <SolidColorBrush x:Key="ShellBrandChipBorderBrush" Color="#44FF4C58"/>
+    <SolidColorBrush x:Key="ShellBrandAccentBrush" Color="#FF4C58"/>
+    <SolidColorBrush x:Key="ShellWarmGlowBrush" Color="#14FF4C58"/>
+    <SolidColorBrush x:Key="ShellCoolGlowBrush" Color="#1200D5FF"/>
+
+    <LinearGradientBrush x:Key="AppSurfaceGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#171B24" Offset="0"/>
+        <GradientStop Color="#10141A" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppSurfaceAccentGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#1A141B" Offset="0"/>
+        <GradientStop Color="#101319" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppMetricTileGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#171B24" Offset="0"/>
+        <GradientStop Color="#10141B" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppDetailSheetGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#171C24" Offset="0"/>
+        <GradientStop Color="#10141A" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="AppInsetSurfaceBrush" Color="#0F131A"/>
+    <SolidColorBrush x:Key="AppChipSurfaceBrush" Color="#10151E"/>
+    <SolidColorBrush x:Key="AppQuietButtonBrush" Color="#10151D"/>
+    <SolidColorBrush x:Key="AppQuietButtonHoverBrush" Color="#151922"/>
+    <SolidColorBrush x:Key="AppQuietButtonPressedBrush" Color="#1C2028"/>
+    <SolidColorBrush x:Key="AppMetricTileHoverBrush" Color="#181D27"/>
+    <SolidColorBrush x:Key="AppSearchSurfaceBrush" Color="#10141C"/>
+    <SolidColorBrush x:Key="AppWorkspaceSurfaceBrush" Color="#121720"/>
+    <SolidColorBrush x:Key="AppWorkspaceHoverBrush" Color="#181D28"/>
+    <SolidColorBrush x:Key="AppWorkspaceSelectedBrush" Color="#22FF4C58"/>
+    <SolidColorBrush x:Key="AppWorkspaceSelectedBorderBrush" Color="#80FF4C58"/>
+    <SolidColorBrush x:Key="AppSelectionBoxBrush" Color="#10151C"/>
+    <SolidColorBrush x:Key="AppSelectionBoxHoverBrush" Color="#141B24"/>
+    <SolidColorBrush x:Key="AppSelectionBoxCheckedBrush" Color="#255B8D"/>
+    <SolidColorBrush x:Key="AppSelectionBoxBorderBrush" Color="#73849A"/>
+    <SolidColorBrush x:Key="AppSelectionBoxHoverBorderBrush" Color="#92A3B8"/>
+    <SolidColorBrush x:Key="AppSelectionBoxCheckedBorderBrush" Color="#82C7FF"/>
+    <SolidColorBrush x:Key="AppSelectionCheckBrush" Color="#F9FBFF"/>
+    <SolidColorBrush x:Key="DashboardHeroIconBrush" Color="#132131"/>
+    <SolidColorBrush x:Key="DashboardHeroIconBorderBrush" Color="#3352C6FF"/>
 
     <!-- Shadows Match -->
     <Color x:Key="ShadowColorSmall">#26000000</Color>

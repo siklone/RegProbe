@@ -9,4 +9,5 @@ public sealed record ElevatedHostResponse(
     ElevatedServiceResponse? ServiceResponse = null,
     ElevatedScheduledTaskResponse? ScheduledTaskResponse = null,
     ElevatedFileResponse? FileResponse = null,
-    ElevatedCommandResponse? CommandResponse = null);
+    ElevatedCommandResponse? CommandResponse = null,
+    bool IsElevated = false);

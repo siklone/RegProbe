@@ -65,18 +65,16 @@ public sealed class PerformanceTweakProvider : BaseTweakProvider
 
         // Subsystem Performance
         yield return new DisableSuperfetchTweak(context.ElevatedCommandRunner);
-        yield return new DisableWindowsSearchTweak(context.ElevatedCommandRunner);
-
-        yield return CreateRegistryTweak(
+        yield return CreateServiceStartModeBatchTweak(
             context,
-            "performance.disable-background-apps",
-            "Disable Power Throttling",
-            "Disables Windows Power Throttling to ensure apps get full CPU performance even when in background.",
+            "power.disable-windows-search",
+            "Disable Windows Search",
+            "Disables the Windows Search indexing service. This can improve system performance but will slow down file searches. Useful for systems with SSDs where search performance is already fast.",
             TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Power",
-            "PowerThrottlingOff",
-            RegistryValueKind.DWord,
-            1);
+            new[] { "WSearch" },
+            ServiceStartMode.Disabled,
+            stopRunning: true,
+            requiresElevation: true);
+
     }
 }

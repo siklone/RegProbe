@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:services="clr-namespace:WindowsOptimizer.App.Services"
              mc:Ignorable="d"
-             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12">
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="ThemePickerPanel">
@@ -29,8 +29,8 @@
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border x:Name="Chip"
                                 Padding="12,8"
-                                Background="#17000000"
-                                BorderBrush="#26FFFFFF"
+                                Background="{DynamicResource AppChipSurfaceBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center"
@@ -38,12 +38,12 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}"/>
-                                <Setter TargetName="Chip" Property="Background" Value="#1B0C1118"/>
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
+                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Chip" Property="Background" Value="#22131B24"/>
-                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -83,19 +83,19 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Stretch"
                   Background="{DynamicResource BackgroundDarkestBrush}">
-        <Grid Margin="28">
-            <StackPanel MaxWidth="920">
-                <StackPanel Margin="0,0,0,16">
+        <Grid Margin="16,8,16,12"
+              HorizontalAlignment="Stretch">
+            <StackPanel Margin="0,6,0,8">
+                <StackPanel Margin="0,0,0,14">
                     <TextBlock Text="Preferences"
                                Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                     <TextBlock Text="{Binding Title}"
-                               Margin="0,4,0,0"
-                               Style="{StaticResource AppSectionTitleTextStyle}"
-                               FontSize="28"/>
-                    <TextBlock Margin="0,6,0,0"
-                               Style="{StaticResource AppSectionSubtitleTextStyle}"
-                               FontSize="12"
+                               Margin="0,3,0,0"
+                               Style="{StaticResource AppHeroTitleTextStyle}"/>
+                    <TextBlock Margin="0,4,0,0"
+                               Style="{StaticResource AppHeroSubtitleTextStyle}"
                                Text="Theme and general app behavior."/>
                 </StackPanel>
 

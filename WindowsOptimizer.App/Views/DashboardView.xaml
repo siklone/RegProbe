@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
              mc:Ignorable="d"
              d:DesignHeight="920"
              d:DesignWidth="1200"
-             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+             FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
              UseLayoutRounding="True"
              SnapsToDevicePixels="True">
@@ -21,22 +22,29 @@
         <Style x:Key="DashboardChipStyle"
                TargetType="Border"
                BasedOn="{StaticResource AppChipStyle}">
-            <Setter Property="Padding" Value="7,5"/>
-            <Setter Property="Margin" Value="0,0,5,5"/>
+            <Setter Property="Padding" Value="6,3"/>
+            <Setter Property="Margin" Value="0,0,4,4"/>
         </Style>
 
         <Style x:Key="DashboardActionButtonStyle"
                TargetType="Button"
                BasedOn="{StaticResource AppQuietActionButtonStyle}">
-            <Setter Property="Margin" Value="0,6,0,0"/>
-            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="10,6"/>
+        </Style>
+
+        <Style x:Key="DashboardPrimaryActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource AppPrimaryActionButtonStyle}">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="11,6"/>
         </Style>
 
         <Style x:Key="DashboardCardButtonStyle"
                TargetType="Button"
                BasedOn="{StaticResource AppMetricTileButtonStyle}">
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Padding" Value="11"/>
+            <Setter Property="Margin" Value="4"/>
         </Style>
 
         <Style x:Key="DashboardSummaryCardStyle"
@@ -44,17 +52,16 @@
                BasedOn="{StaticResource DashboardSurfaceStyle}">
             <Setter Property="Width" Value="190"/>
             <Setter Property="Height" Value="138"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
         </Style>
 
         <Style x:Key="DashboardRecommendationCardStyle"
                TargetType="Border"
                BasedOn="{StaticResource DashboardSurfaceStyle}">
-            <Setter Property="Width" Value="316"/>
-            <Setter Property="MinHeight" Value="188"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="MinHeight" Value="84"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="4"/>
         </Style>
 
         <Style x:Key="DashboardSourceCardStyle"
@@ -62,24 +69,61 @@
                BasedOn="{StaticResource DashboardSurfaceStyle}">
             <Setter Property="Width" Value="228"/>
             <Setter Property="MinHeight" Value="150"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Padding" Value="9"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
         </Style>
 
         <Style x:Key="DashboardHardwareCardStyle"
                TargetType="Button"
                BasedOn="{StaticResource DashboardCardButtonStyle}">
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="142"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Height" Value="122"/>
+            <Setter Property="Padding" Value="12,10"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="DashboardFeaturedHardwareCardStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DashboardHardwareCardStyle}">
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource AppSurfaceAccentGradientBrush}"/>
+        </Style>
+
+        <Style x:Key="DashboardCardLabelTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="8.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <Style x:Key="DashboardCardNameTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="14"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <Style x:Key="DashboardCardNameAccentTextStyle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource DashboardCardNameTextStyle}">
+            <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+        </Style>
+
+        <Style x:Key="DashboardCardMetaTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="13"/>
         </Style>
     </UserControl.Resources>
 
     <Grid>
-        <Border Background="#C6111418"
+        <Border Background="{DynamicResource ScrimOverlayBrush}"
                 Panel.ZIndex="10"
                 Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
             <Border Width="220"
@@ -102,44 +146,23 @@
         </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Margin="10,8,10,12">
-                <DockPanel Margin="0,0,0,8" LastChildFill="False">
-                    <Border DockPanel.Dock="Right"
-                            MinWidth="136"
-                            MaxWidth="172"
-                            Padding="8,6"
-                            CornerRadius="10"
-                            Background="#1D0C1118"
-                            BorderBrush="#2FC8F5FF"
-                            BorderThickness="1"
-                            Visibility="Collapsed">
-                        <StackPanel>
-                            <TextBlock Text="Quality"
-                                       FontSize="8"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                            <TextBlock Text="{Binding AuditCompactSummary}"
-                                       Margin="0,2,0,0"
-                                       FontSize="9"
-                                       FontWeight="Bold"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                       TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </Border>
+                      HorizontalScrollBarVisibility="Disabled"
+                      HorizontalContentAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch"
+                  Margin="16,8,16,12">
+            <StackPanel Margin="0,6,0,8">
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Overview"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <TextBlock Text="Dashboard"
+                               Margin="0,3,0,0"
+                               Style="{StaticResource AppHeroTitleTextStyle}"/>
+                    <TextBlock Text="{Binding PlatformIdentity}"
+                               Margin="0,4,0,0"
+                               Style="{StaticResource AppHeroSubtitleTextStyle}"/>
+                </StackPanel>
 
-                    <StackPanel Margin="0,0,10,0">
-                        <TextBlock Text="Overview"
-                                   Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                        <TextBlock Text="Dashboard"
-                                   Margin="0,3,0,0"
-                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
-                        <TextBlock Text="{Binding PlatformIdentity}"
-                                   Margin="0,3,0,0"
-                                   Style="{StaticResource AppSectionSubtitleTextStyle}"/>
-                    </StackPanel>
-                </DockPanel>
-
-                <Border Margin="0,0,0,8"
+                <Border Margin="0,0,0,12"
                         Style="{StaticResource DashboardSurfaceStyle}">
                     <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
@@ -151,8 +174,8 @@
                         <Border Width="44"
                                 Height="44"
                                 CornerRadius="12"
-                                Background="{DynamicResource BackgroundMediumBrush}"
-                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                Background="{DynamicResource DashboardHeroIconBrush}"
+                                BorderBrush="{DynamicResource DashboardHeroIconBorderBrush}"
                                 BorderThickness="1">
                             <Image Source="{Binding OsIconSource}"
                                    Width="24"
@@ -163,110 +186,127 @@
                         </Border>
 
                         <StackPanel Grid.Column="1"
-                                    Margin="10,0,0,0"
+                                    Margin="12,0,0,0"
                                     VerticalAlignment="Center">
                             <TextBlock Text="{Binding OsName}"
-                                       FontSize="14"
-                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource FontFamilyDisplay}"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding SystemName}"
-                                       Margin="0,2,0,0"
+                                       Margin="0,4,0,0"
                                        FontSize="11"
+                                       FontFamily="{DynamicResource FontFamilyMono}"
                                        FontWeight="SemiBold"
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
+                                       Foreground="{DynamicResource DangerBrush}"
                                        TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding OsCompactSummary}"
-                                       Margin="0,2,0,0"
-                                       FontSize="10"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       TextWrapping="Wrap"/>
+                            <Border Margin="0,6,0,0"
+                                    Style="{StaticResource DashboardChipStyle}"
+                                    HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding OsCompactSummary}"
+                                           FontSize="10"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                           TextWrapping="Wrap"/>
+                            </Border>
                         </StackPanel>
 
-                        <WrapPanel Grid.Column="2"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="12,0,0,0">
-                            <Border Style="{StaticResource DashboardChipStyle}">
-                                <StackPanel>
-                                    <TextBlock Text="PC"
-                                               FontSize="9"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Text="{Binding SystemName}"
-                                               Margin="0,2,0,0"
-                                               FontSize="10"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               TextWrapping="Wrap"
-                                               MaxWidth="130"/>
-                                </StackPanel>
-                            </Border>
+                        <Grid Grid.Column="2"
+                              Margin="20,0,0,0"
+                              VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Margin="0,0,28,0"
+                                        HorizontalAlignment="Right">
+                                <TextBlock Text="UPTIME"
+                                           FontSize="9"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Uptime}"
+                                           Margin="0,4,0,0"
+                                           FontSize="11"
+                                           FontFamily="{DynamicResource FontFamilyDisplay}"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           HorizontalAlignment="Right"/>
+                            </StackPanel>
 
-                            <Border Style="{StaticResource DashboardChipStyle}">
-                                <StackPanel>
-                                    <TextBlock Text="Uptime"
-                                               FontSize="9"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Text="{Binding Uptime}"
-                                               Margin="0,2,0,0"
-                                               FontSize="10"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               TextWrapping="Wrap"
-                                               MaxWidth="120"/>
-                                </StackPanel>
-                            </Border>
-                        </WrapPanel>
+                            <StackPanel Grid.Column="1"
+                                        HorizontalAlignment="Right">
+                                <TextBlock Text="PC NAME"
+                                           FontSize="9"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           Foreground="{DynamicResource MutedForegroundBrush}"
+                                           HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding SystemName}"
+                                           Margin="0,4,0,0"
+                                           FontSize="11"
+                                           FontFamily="{DynamicResource FontFamilyDisplay}"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                           HorizontalAlignment="Right"
+                                           MaxWidth="220"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Border>
 
-                <Border Margin="0,0,0,8"
+                <Border Margin="0,0,0,12"
                         Style="{StaticResource DashboardSurfaceStyle}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Margin="0,0,12,0">
-                            <TextBlock Text="Quick Actions"
-                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.DashboardQuickActionStatus}"
-                                       Margin="0,4,0,0"
-                                       FontSize="10"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       TextWrapping="Wrap"/>
-                            <ProgressBar Height="3"
-                                         Margin="0,8,0,0"
-                                         Style="{StaticResource AnimatedLoadingBarStyle}"
-                                         IsIndeterminate="True"
-                                         Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardQuickActionRunning, Converter={StaticResource BoolToVisibility}}"/>
-                        </StackPanel>
-
-                        <WrapPanel Grid.Column="1"
-                                   HorizontalAlignment="Right"
+                    <DockPanel LastChildFill="False">
+                        <TextBlock DockPanel.Dock="Left"
+                                   Text="Quick Actions"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,14,0"/>
+                        <WrapPanel DockPanel.Dock="Left"
                                    VerticalAlignment="Center">
                             <Button Style="{StaticResource DashboardActionButtonStyle}"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.RunDashboardScanCommand}"
                                     Content="Scan"/>
                             <Button Style="{StaticResource DashboardActionButtonStyle}"
-                                    Margin="6,6,0,0"
+                                    Margin="6,0,0,0"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.RunFastCleanCommand}"
                                     Content="Fast Clean"/>
-                            <Button Style="{StaticResource DashboardActionButtonStyle}"
-                                    Margin="6,6,0,0"
+                            <Button Style="{StaticResource DashboardPrimaryActionButtonStyle}"
+                                    Margin="6,0,0,0"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.OpenMaintenanceWorkspaceCommand}"
                                     Content="Maintenance"/>
                         </WrapPanel>
-                    </Grid>
+                        <ProgressBar DockPanel.Dock="Right"
+                                     Width="128"
+                                     Height="3"
+                                     Margin="12,0,0,0"
+                                     VerticalAlignment="Center"
+                                     Style="{StaticResource AnimatedLoadingBarStyle}"
+                                     IsIndeterminate="True"
+                                     Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardQuickActionRunning, Converter={StaticResource BoolToVisibility}}"/>
+                    </DockPanel>
                 </Border>
 
-                <TextBlock Text="Hardware"
-                           Margin="0,0,0,6"
-                           Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Hardware"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <Border Grid.Column="1"
+                            Height="1"
+                            Margin="12,7,0,0"
+                            Background="{DynamicResource GlassBorderBrush}"
+                            VerticalAlignment="Center"/>
+                </Grid>
 
-                <WrapPanel Margin="0,0,0,10"
-                           ItemWidth="190">
+                <primitives:UniformGrid Columns="5"
+                                        Margin="-4,-4,-4,6">
                     <Button Style="{StaticResource DashboardHardwareCardStyle}"
                             Command="{Binding OpenDetailCommand}"
                             CommandParameter="os">
@@ -277,28 +317,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding OsIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Operating System"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
-                                    <TextBlock Text="{Binding OsName}"
+                                    <TextBlock Text="OPERATING SYSTEM"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
+                                    <TextBlock Text="{Binding OsCardTitle}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding OsCompactSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -312,32 +346,26 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding MotherboardIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Motherboard"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="MOTHERBOARD"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding BaseboardProduct}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding MotherboardCompactSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
-                    <Button Style="{StaticResource DashboardHardwareCardStyle}"
+                    <Button Style="{StaticResource DashboardFeaturedHardwareCardStyle}"
                             Command="{Binding OpenDetailCommand}"
                             CommandParameter="cpu">
                         <Grid>
@@ -347,32 +375,26 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding CpuIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Processor"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
-                                    <TextBlock Text="{Binding ProcessorName}"
+                                    <TextBlock Text="PROCESSOR"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
+                                    <TextBlock Text="{Binding ProcessorCardTitle}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DashboardCardNameAccentTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding ProcessorCompactSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
-                    <Button Style="{StaticResource DashboardHardwareCardStyle}"
+                    <Button Style="{StaticResource DashboardFeaturedHardwareCardStyle}"
                             Command="{Binding OpenDetailCommand}"
                             CommandParameter="gpu">
                         <Grid>
@@ -382,28 +404,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding GpuIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Graphics"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
-                                    <TextBlock Text="{Binding GpuName}"
+                                    <TextBlock Text="GRAPHICS"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
+                                    <TextBlock Text="{Binding GpuCardTitle}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"
-                                               TextWrapping="Wrap"/>
+                                               Style="{StaticResource DashboardCardNameAccentTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding GraphicsCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -417,27 +433,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding MemoryIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Memory"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="MEMORY"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding TotalPhysicalMemory}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding MemoryCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -451,27 +462,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding StorageIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Storage"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="STORAGE"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding DiskDrives.Count, StringFormat={}{0} drives}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding StorageCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -485,27 +491,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding DisplayIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Displays"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="DISPLAYS"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding Monitors.Count, StringFormat={}{0} displays}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding DisplayCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -519,27 +520,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding NetworkIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Network"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="NETWORK"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding NetworkAdapters.Count, StringFormat={}{0} adapters}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding NetworkCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -553,27 +549,22 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding UsbIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
                                     <TextBlock Text="USB"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding UsbHeadline}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding UsbCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
 
@@ -587,128 +578,129 @@
                             </Grid.RowDefinitions>
                             <DockPanel LastChildFill="True">
                                 <Image Source="{Binding AudioIconSource}"
-                                       Width="28"
-                                       Height="28"
+                                       Width="24"
+                                       Height="24"
                                        Stretch="Uniform"
-                                       Margin="0,0,10,0"/>
+                                       Margin="0,0,8,0"/>
                                 <StackPanel>
-                                    <TextBlock Text="Audio"
-                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                               FontSize="12"/>
+                                    <TextBlock Text="AUDIO"
+                                               Style="{StaticResource DashboardCardLabelTextStyle}"/>
                                     <TextBlock Text="{Binding AudioDeviceCount, StringFormat={}{0} devices}"
                                                Margin="0,2,0,0"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               FontWeight="SemiBold"
-                                               FontSize="13"/>
+                                               Style="{StaticResource DashboardCardNameTextStyle}"/>
                                 </StackPanel>
                             </DockPanel>
                             <TextBlock Grid.Row="1"
                                        Text="{Binding AudioCardSummary}"
-                                       Margin="0,8,0,0"
-                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"/>
+                                       Margin="0,7,0,0"
+                                       Style="{StaticResource DashboardCardMetaTextStyle}"/>
                         </Grid>
                     </Button>
-                </WrapPanel>
+                </primitives:UniformGrid>
 
-                <StackPanel Margin="0,0,0,10"
-                            Visibility="{Binding HasInstallRecommendations, Converter={StaticResource BoolToVisibility}}">
+                <Grid Margin="0,0,0,10"
+                      Visibility="{Binding HasInstallRecommendations, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock Text="Drivers &amp; Recommended Installs"
                                Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                    <TextBlock Text="Only the installs that make sense for this PC. Nothing runs until you choose it."
-                               Margin="0,4,0,0"
-                               FontSize="10"
-                               Foreground="{DynamicResource ForegroundLightBrush}"
-                               TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding InstallRecommendationReadySummary}"
-                               Margin="0,4,0,0"
-                               FontSize="10"
-                               Foreground="{DynamicResource AccentBrightCyanBrush}"
-                               TextWrapping="Wrap"
-                               Visibility="{Binding HasInstallRecommendationReadySummary, Converter={StaticResource BoolToVisibility}}"/>
+                    <Border Grid.Column="1"
+                            Height="1"
+                            Margin="12,7,0,0"
+                            Background="#18FFFFFF"
+                            VerticalAlignment="Center"/>
+                </Grid>
 
-                    <ItemsControl ItemsSource="{Binding InstallRecommendations}"
-                                  Margin="0,8,0,0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
+                <Border Margin="0,0,0,10"
+                        Style="{StaticResource DashboardSurfaceStyle}"
+                        Visibility="{Binding HasInstallRecommendations, Converter={StaticResource BoolToVisibility}}">
+                    <StackPanel>
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock Text="Only installs that make sense for this PC. Nothing runs until you choose it."
+                                       FontSize="11"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,10,6"/>
+                            <Border Padding="10,5"
+                                    Background="{DynamicResource SuccessSurfaceBrush}"
+                                    BorderBrush="{DynamicResource SuccessBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Margin="0,0,0,6"
+                                    Visibility="{Binding HasInstallRecommendationReadySummary, Converter={StaticResource BoolToVisibility}}">
+                                <TextBlock Text="{Binding InstallRecommendationReadySummary}"
+                                           FontSize="10"
+                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                           Foreground="{DynamicResource SuccessBrush}"
+                                           TextWrapping="Wrap"/>
+                            </Border>
+                        </WrapPanel>
 
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Style="{StaticResource DashboardRecommendationCardStyle}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                        <ItemsControl ItemsSource="{Binding InstallRecommendations}"
+                                      Margin="0,8,0,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <primitives:UniformGrid Columns="2"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
 
-                                        <DockPanel LastChildFill="True">
-                                            <Border DockPanel.Dock="Right"
-                                                    Style="{StaticResource DashboardChipStyle}"
-                                                    Margin="8,0,0,0">
-                                                <TextBlock Text="{Binding StatusLabel}"
-                                                           FontSize="9"
-                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource DashboardRecommendationCardStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Width="34"
+                                                    Height="34"
+                                                    CornerRadius="8"
+                                                    Background="{DynamicResource AppInsetSurfaceBrush}"
+                                                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                                                    BorderThickness="1"
+                                                    Margin="0,0,12,0"
+                                                    VerticalAlignment="Center">
+                                                <Ellipse Width="14"
+                                                         Height="14"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center"
+                                                         Fill="{Binding IndicatorBrush}"/>
                                             </Border>
 
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Category}"
-                                                           FontSize="9"
-                                                           Foreground="{DynamicResource ForegroundLightBrush}"/>
+                                            <StackPanel Grid.Column="1"
+                                                        VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding Title}"
-                                                           Margin="0,2,0,0"
-                                                           FontSize="12"
+                                                           FontSize="13"
                                                            FontWeight="SemiBold"
                                                            Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                            TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding Description}"
+                                                           Margin="0,2,0,0"
+                                                           FontSize="11"
+                                                           Foreground="{DynamicResource ForegroundLightBrush}"
+                                                           TextWrapping="Wrap"/>
                                             </StackPanel>
-                                        </DockPanel>
 
-                                        <TextBlock Grid.Row="1"
-                                                   Text="{Binding Description}"
-                                                   Margin="0,6,0,0"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                                   TextWrapping="Wrap"/>
-
-                                        <StackPanel Grid.Row="2"
-                                                    Margin="0,8,0,0">
-                                            <TextBlock Text="Detected on this PC"
-                                                       FontSize="9"
-                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding Reason}"
-                                                       Margin="0,2,0,0"
-                                                       FontSize="10"
-                                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                       TextWrapping="Wrap"/>
-                                            <TextBlock Text="Current status"
-                                                       Margin="0,6,0,0"
-                                                       FontSize="9"
-                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                            <TextBlock Text="{Binding CurrentState}"
-                                                       Margin="0,2,0,0"
-                                                       FontSize="10"
-                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                                       TextWrapping="Wrap"/>
-                                        </StackPanel>
-
-                                        <WrapPanel Grid.Row="3"
-                                                   Margin="0,8,0,0">
-                                            <Button Content="{Binding PrimaryActionLabel}"
-                                                    Command="{Binding PrimaryActionCommand}"
-                                                    Style="{StaticResource DashboardActionButtonStyle}"/>
-                                        </WrapPanel>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                                            <StackPanel Grid.Column="2"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        Margin="16,0,0,0">
+                                                <Button Content="{Binding PrimaryActionLabel}"
+                                                        Command="{Binding PrimaryActionCommand}"
+                                                        Style="{StaticResource DashboardActionButtonStyle}"
+                                                        HorizontalAlignment="Right"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
 
                 <StackPanel Margin="0,0,0,10"
                             Visibility="Collapsed">
@@ -1582,6 +1574,7 @@
                     </Button>
                 </WrapPanel>
             </StackPanel>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

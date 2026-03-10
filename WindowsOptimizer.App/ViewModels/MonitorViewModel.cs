@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -544,9 +544,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             csv.AppendLine("Metric,Value");
             csv.AppendLine($"CPU Usage,{CpuUsage:F2}%");
             csv.AppendLine($"RAM Usage,{RamUsedGb:F2} GB / {RamTotalGb:F2} GB ({RamUsagePercent:F2}%)");
-            csv.AppendLine($"CPU Temperature,{(HasCpuTemp ? $"{CpuTemp:F1}°C" : "N/A")}");
+                csv.AppendLine($"CPU Temperature,{(HasCpuTemp ? $"{CpuTemp:F1}\u00B0C" : "N/A")}");
             csv.AppendLine($"GPU Usage,{GpuUsage:F2}%");
-            csv.AppendLine($"GPU Temperature,{(HasGpuTemp ? $"{GpuTemp:F1}°C" : "N/A")}");
+                csv.AppendLine($"GPU Temperature,{(HasGpuTemp ? $"{GpuTemp:F1}\u00B0C" : "N/A")}");
             csv.AppendLine($"GPU VRAM,{(HasGpuMemory ? $"{GpuMemoryUsedGb:F1} GB / {GpuMemoryTotalGb:F1} GB ({GpuMemoryUsagePercent:F0}%)" : "N/A")}");
             csv.AppendLine($"CPU Fan,{CpuFanRpmText}");
             csv.AppendLine($"GPU Fan,{GpuFanRpmText}");
@@ -2028,7 +2028,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         _elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
         {
             HostExecutablePath = _elevatedHostExecutablePath,
-            PipeName = ElevatedHostDefaults.PipeName,
+            PipeName = ElevatedHostDefaults.GetPipeNameForProcess(Process.GetCurrentProcess().Id),
             ParentProcessId = Process.GetCurrentProcess().Id
         });
 
@@ -2567,6 +2567,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasCpuTemp));
                 OnPropertyChanged(nameof(CpuTempText));
+                OnPropertyChanged(nameof(CpuTileMetaText));
                 if (double.IsFinite(value))
                     _metricBus.Publish("cpu.temp", value);
             }
@@ -2577,7 +2578,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public bool IsCpuTempAvailable => HasCpuTemp;
 
-    public string CpuTempText => HasCpuTemp ? $"{CpuTemp:F0}°C" : "N/A";
+    public string CpuTempText => HasCpuTemp ? $"{CpuTemp:F0}\u00B0C" : "N/A";
+
+    public string CpuTileMetaText => HasCpuTemp
+        ? $"{CpuTempText} / {CpuClockText}"
+        : CpuClockText;
 
     // Chart Min/Max values for better readability
     public double CpuHistoryMax => CpuHistory.Count > 0 ? CpuHistory.Max() : 0;
@@ -2618,6 +2623,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
             {
                 OnPropertyChanged(nameof(HasGpuTemp));
                 OnPropertyChanged(nameof(GpuTempText));
+                OnPropertyChanged(nameof(GpuTileMetaText));
                 if (double.IsFinite(value))
                     _metricBus.Publish("gpu.temp", value);
             }
@@ -2626,7 +2632,15 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public bool HasGpuTemp => double.IsFinite(GpuTemp) && GpuTemp > 0;
 
-    public string GpuTempText => HasGpuTemp ? $"{GpuTemp:F0}°C" : "N/A";
+    public string GpuTempText => HasGpuTemp ? $"{GpuTemp:F0}\u00B0C" : "N/A";
+
+    public string GpuTileMetaText => HasGpuTemp && HasGpuMemory
+        ? $"{GpuTempText} / {GpuMemoryPercentText} VRAM"
+        : HasGpuTemp
+            ? GpuTempText
+            : HasGpuMemory
+                ? $"{GpuMemoryPercentText} VRAM"
+                : "Activity";
 
     public double GpuUsage
     {
@@ -2767,7 +2781,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
     public bool HasGpuHotspotTemp => GpuHotspotTemp > 0;
-    public string GpuHotspotTempText => HasGpuHotspotTemp ? $"{GpuHotspotTemp:F0}°C" : "N/A";
+    public string GpuHotspotTempText => HasGpuHotspotTemp ? $"{GpuHotspotTemp:F0}\u00B0C" : "N/A";
 
     // GPU Core Clock
     private float _gpuCoreClock;
@@ -2850,6 +2864,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
     public string MemoryReservedText => FormatMb(_memoryPerformanceSnapshot.HardwareReservedMb);
 
+    public bool HasMemoryReserved => _memoryPerformanceSnapshot.HardwareReservedMb.HasValue
+        && _memoryPerformanceSnapshot.HardwareReservedMb.Value > 0;
+
     public string MemorySpeedText => FormatSpeedMhz(_memoryPerformanceSnapshot.SpeedMhz);
 
     public string MemorySlotUsageText => FormatSlotUsage(_memoryPerformanceSnapshot.SlotsUsed, _memoryPerformanceSnapshot.SlotsTotal);
@@ -2867,6 +2884,12 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public string GpuDriverVersionText => FormatText(_gpuPerformanceSnapshot.DriverVersion);
 
     public string GpuDriverDateText => FormatDate(_gpuPerformanceSnapshot.DriverDate);
+
+    public double CpuTileBarPercent => ClampTilePercent(CpuUsage);
+
+    public double MemoryTileBarPercent => ClampTilePercent(RamUsagePercent);
+
+    public double GpuTileBarPercent => ClampTilePercent(GpuUsage);
 
     public ObservableCollection<DiskHealthItemViewModel> DiskHealthItems { get; }
 
@@ -2889,6 +2912,29 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public string DiskWorstResponseText =>
         $"{_diskPerformanceSnapshots.Select(d => d.AvgResponseMs ?? 0).DefaultIfEmpty(0).Max():F1} ms";
 
+    public double StorageTileBarPercent
+    {
+        get
+        {
+            var activePercent = _diskPerformanceSnapshots
+                .Select(d => d.ActiveTimePercent ?? 0)
+                .DefaultIfEmpty(0)
+                .Max();
+
+            if (activePercent > 0)
+            {
+                return ClampTilePercent(activePercent);
+            }
+
+            if (DiskHealthPercent.HasValue)
+            {
+                return Math.Max(16, ClampTilePercent(DiskHealthPercent.Value));
+            }
+
+            return _diskPerformanceSnapshots.Count > 0 ? 14 : 0;
+        }
+    }
+
     public string NetworkAdapterCountText => FormatCount(NetworkAdapters.Count);
 
     public string ActiveNetworkAdapterText =>
@@ -2896,9 +2942,24 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         ?? NetworkAdapters.FirstOrDefault(adapter => adapter.IsUp)?.Name
         ?? "No active adapter";
 
-    public string NetworkReceiveTotalText => $"{NetworkAdapters.Sum(adapter => adapter.ReceiveMbps):F1} Mbps";
+    public string NetworkReceiveTotalText => $"{GetDisplayedNetworkReceiveMbps():F1} Mbps";
 
-    public string NetworkSendTotalText => $"{NetworkAdapters.Sum(adapter => adapter.SendMbps):F1} Mbps";
+    public string NetworkSendTotalText => $"{GetDisplayedNetworkSendMbps():F1} Mbps";
+
+    public double NetworkTileBarPercent
+    {
+        get
+        {
+            var totalMbps = GetDisplayedNetworkReceiveMbps() + GetDisplayedNetworkSendMbps();
+            if (totalMbps <= 0.01)
+            {
+                return NetworkLatencyMs.HasValue ? 6 : 0;
+            }
+
+            var normalized = Math.Log10(totalMbps + 1) * 42;
+            return Math.Max(8, Math.Min(100, normalized));
+        }
+    }
 
     public string PrimaryAdapterLinkSpeedText
     {
@@ -3096,13 +3157,26 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     public int? WifiSignalQuality
     {
         get => _wifiSignalQuality;
-        private set => SetProperty(ref _wifiSignalQuality, value);
+        private set
+        {
+            if (SetProperty(ref _wifiSignalQuality, value))
+            {
+                OnPropertyChanged(nameof(HasWifiSignal));
+                OnPropertyChanged(nameof(WifiSignalText));
+            }
+        }
     }
 
     public string WifiSsid
     {
         get => _wifiSsid;
-        private set => SetProperty(ref _wifiSsid, value);
+        private set
+        {
+            if (SetProperty(ref _wifiSsid, value))
+            {
+                OnPropertyChanged(nameof(WifiSignalDetail));
+            }
+        }
     }
 
     public string StatusMessage
@@ -3111,9 +3185,11 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _statusMessage, value);
     }
 
-    public string WifiSignalText => WifiSignalQuality.HasValue
-        ? $"{WifiSignalQuality.Value}%"
-        : "N/A";
+    public bool HasWifiSignal => WifiSignalQuality.HasValue;
+
+    public string WifiSignalText => HasWifiSignal
+        ? $"{WifiSignalQuality!.Value}%"
+        : "Not connected";
 
     public string WifiSignalDetail => string.IsNullOrWhiteSpace(WifiSsid)
         ? "Not connected"
@@ -3358,8 +3434,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var existing = PerformanceItems.ToDictionary(item => item.Key, item => item, StringComparer.OrdinalIgnoreCase);
 
         // 1. CPU
-        var cpuSpeedText = FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz ?? _cpuPerformanceSnapshot.BaseSpeedMhz);
-        var cpuSubtitle = $"{CpuUsage:F0}% · {CpuTempText}";
+        var cpuSubtitle = BuildCpuPerformanceSubtitle();
         // Simplified subtitle, detail panel has the rest.
         
         items.Add(new PerformanceItemViewModel(
@@ -3380,7 +3455,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         { IsActive = true });
 
         // 3. GPU
-        var gpuSubtitle = $"{GpuUsage:F0}% · {GpuTempText}";
+        var gpuSubtitle = BuildGpuPerformanceSubtitle();
         
         items.Add(new PerformanceItemViewModel(
             "gpu",
@@ -3417,9 +3492,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         { IsActive = true });
 
         // 5. Network (Summary)
-        var totalDown = NetworkAdapters.Sum(a => a.ReceiveMbps);
-        var totalUp = NetworkAdapters.Sum(a => a.SendMbps);
-        var netSubtitle = $"{totalDown:F1} ↓ / {totalUp:F1} ↑ Mbps";
+        var totalDown = GetDisplayedNetworkReceiveMbps();
+        var totalUp = GetDisplayedNetworkSendMbps();
+        var netSubtitle = $"{totalDown:F1} down / {totalUp:F1} up Mbps";
 
         items.Add(new PerformanceItemViewModel(
             "net",
@@ -3491,14 +3566,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Speed", FormatSpeedGHz(_cpuPerformanceSnapshot.CurrentSpeedMhz)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Base speed", FormatSpeedGHz(_cpuPerformanceSnapshot.BaseSpeedMhz)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Processes", FormatCount(_cpuPerformanceSnapshot.ProcessCount)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Threads", FormatCount(_cpuPerformanceSnapshot.ThreadCount)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Handles", FormatCount(_cpuPerformanceSnapshot.HandleCount)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Sockets", FormatCount(_cpuPerformanceSnapshot.Sockets)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Cores", FormatCount(_cpuPerformanceSnapshot.Cores)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Logical processors", FormatCount(_cpuPerformanceSnapshot.LogicalProcessors)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Virtualization", FormatBool(_cpuPerformanceSnapshot.VirtualizationEnabled)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("L2 cache", FormatCacheKb(_cpuPerformanceSnapshot.L2CacheKb)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("L3 cache", FormatCacheKb(_cpuPerformanceSnapshot.L3CacheKb)));
+                PerformanceDetailItems.Add(new PerformanceDetailItem("Topology", CpuTopologyText));
                 break;
 
             case PerformanceItemKind.Memory:
@@ -3512,12 +3581,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Available", $"{_memoryPerformanceSnapshot.AvailableGb:F1} GB"));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Committed", FormatPairGb(_memoryPerformanceSnapshot.CommittedGb, _memoryPerformanceSnapshot.CommitLimitGb)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Cached", FormatGb(_memoryPerformanceSnapshot.CachedGb)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Paged pool", FormatGb(_memoryPerformanceSnapshot.PagedPoolGb)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Non-paged pool", FormatGb(_memoryPerformanceSnapshot.NonPagedPoolGb)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Speed", FormatSpeedMhz(_memoryPerformanceSnapshot.SpeedMhz)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Slots used", FormatSlotUsage(_memoryPerformanceSnapshot.SlotsUsed, _memoryPerformanceSnapshot.SlotsTotal)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Form factor", _memoryPerformanceSnapshot.FormFactor ?? "N/A"));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Hardware reserved", FormatMb(_memoryPerformanceSnapshot.HardwareReservedMb)));
                 break;
 
             case PerformanceItemKind.Disk:
@@ -3557,16 +3622,6 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 {
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Overall Health", DiskHealthText));
                 }
-                
-                // Compact list of all disks
-                PerformanceDetailItems.Add(new PerformanceDetailItem("", "")); // Spacer
-                PerformanceDetailItems.Add(new PerformanceDetailItem("All Disks", "Activity"));
-                foreach (var d in _diskPerformanceSnapshots)
-                {
-                   var activity = d.ActiveTimePercent.HasValue ? $"{d.ActiveTimePercent:F0}%" : "0%";
-                   var rw = $"{d.ReadMbps.GetValueOrDefault():F1}/{d.WriteMbps.GetValueOrDefault():F1} MB/s";
-                   PerformanceDetailItems.Add(new PerformanceDetailItem($"{d.DriveLetter} ({d.DriveLetter})", $"{activity} · {rw}"));
-                }
                 break;
             }
 
@@ -3600,8 +3655,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 else
                 {
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Adapters", FormatCount(NetworkAdapters.Count)));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Receive", $"{NetworkAdapters.Sum(a => a.ReceiveMbps):F1} Mbps"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Send", $"{NetworkAdapters.Sum(a => a.SendMbps):F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Receive", $"{GetDisplayedNetworkReceiveMbps():F1} Mbps"));
+                    PerformanceDetailItems.Add(new PerformanceDetailItem("Send", $"{GetDisplayedNetworkSendMbps():F1} Mbps"));
                 }
 
                 if (!string.IsNullOrWhiteSpace(GatewayLatencyText))
@@ -3609,17 +3664,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Gateway latency", GatewayLatencyText));
                 }
 
-                if (!string.IsNullOrWhiteSpace(WifiSignalText))
+                if (HasWifiSignal)
                 {
                     PerformanceDetailItems.Add(new PerformanceDetailItem("Wi-Fi signal", WifiSignalText));
-                }
-                 
-                // Compact list of all adapters
-                PerformanceDetailItems.Add(new PerformanceDetailItem("", "")); // Spacer
-                PerformanceDetailItems.Add(new PerformanceDetailItem("All Adapters", "D/U Mbps"));
-                foreach (var a in NetworkAdapters)
-                {
-                    PerformanceDetailItems.Add(new PerformanceDetailItem(a.Name, $"{a.ReceiveMbps:F1} ↓ / {a.SendMbps:F1} ↑"));
                 }
                 break;
             }
@@ -3635,11 +3682,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Usage", $"{GpuUsage:F0}%"));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Temperature", GpuTempText));
                 if (HasGpuPower) PerformanceDetailItems.Add(new PerformanceDetailItem("Power", GpuPowerText));
-                if (HasGpuVoltage) PerformanceDetailItems.Add(new PerformanceDetailItem("Voltage", GpuVoltageText));
-                if (HasGpuFan) PerformanceDetailItems.Add(new PerformanceDetailItem("Fan speed", GpuFanRpmText));
                 if (HasGpuHotspotTemp) PerformanceDetailItems.Add(new PerformanceDetailItem("Hotspot", GpuHotspotTempText));
-                if (HasGpuCoreClock) PerformanceDetailItems.Add(new PerformanceDetailItem("Core Clock", GpuCoreClockText));
-                if (HasGpuMemoryClock) PerformanceDetailItems.Add(new PerformanceDetailItem("Memory Clock", GpuMemoryClockText));
 
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Memory", GpuMemoryUsageText));
                 var dedicatedMb = _gpuPerformanceSnapshot.DedicatedMemoryMb;
@@ -3648,20 +3691,8 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     dedicatedMb = GpuMemoryTotalMb;
                 }
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Dedicated memory", FormatMemoryMb(dedicatedMb)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Shared memory", FormatMemoryMb(_gpuPerformanceSnapshot.SharedMemoryMb)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Driver version", FormatText(_gpuPerformanceSnapshot.DriverVersion)));
                 PerformanceDetailItems.Add(new PerformanceDetailItem("Driver date", FormatDate(_gpuPerformanceSnapshot.DriverDate)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("DirectX version", FormatText(_gpuPerformanceSnapshot.DirectXVersion)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Location", FormatText(_gpuPerformanceSnapshot.LocationInfo)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Adapter", FormatText(_gpuPerformanceSnapshot.AdapterCompatibility)));
-                PerformanceDetailItems.Add(new PerformanceDetailItem("Video processor", FormatText(_gpuPerformanceSnapshot.VideoProcessor)));
-                if (_gpuEngineUsageSnapshot.IsAvailable)
-                {
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("3D", $"{_gpuEngineUsageSnapshot.Engine3DPercent:F0}%"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Copy", $"{_gpuEngineUsageSnapshot.CopyPercent:F0}%"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Video Encode", $"{_gpuEngineUsageSnapshot.VideoEncodePercent:F0}%"));
-                    PerformanceDetailItems.Add(new PerformanceDetailItem("Video Decode", $"{_gpuEngineUsageSnapshot.VideoDecodePercent:F0}%"));
-                }
                 break;
         }
 
@@ -3673,6 +3704,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
     private void RaisePerformanceContextPropertyChanges()
     {
         OnPropertyChanged(nameof(CpuClockText));
+        OnPropertyChanged(nameof(CpuTileMetaText));
         OnPropertyChanged(nameof(CpuBaseClockText));
         OnPropertyChanged(nameof(CpuProcessCountText));
         OnPropertyChanged(nameof(CpuThreadCountText));
@@ -3693,16 +3725,24 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(GpuEngineDecodeText));
         OnPropertyChanged(nameof(GpuDriverVersionText));
         OnPropertyChanged(nameof(GpuDriverDateText));
+        OnPropertyChanged(nameof(GpuTileMetaText));
+        OnPropertyChanged(nameof(HasMemoryReserved));
+        OnPropertyChanged(nameof(CpuTileBarPercent));
+        OnPropertyChanged(nameof(MemoryTileBarPercent));
+        OnPropertyChanged(nameof(GpuTileBarPercent));
         OnPropertyChanged(nameof(DiskDriveCountText));
         OnPropertyChanged(nameof(DiskPeakReadText));
         OnPropertyChanged(nameof(DiskPeakWriteText));
         OnPropertyChanged(nameof(BusiestDiskText));
         OnPropertyChanged(nameof(DiskWorstResponseText));
+        OnPropertyChanged(nameof(StorageTileBarPercent));
         OnPropertyChanged(nameof(NetworkAdapterCountText));
         OnPropertyChanged(nameof(ActiveNetworkAdapterText));
         OnPropertyChanged(nameof(NetworkReceiveTotalText));
         OnPropertyChanged(nameof(NetworkSendTotalText));
+        OnPropertyChanged(nameof(NetworkTileBarPercent));
         OnPropertyChanged(nameof(PrimaryAdapterLinkSpeedText));
+        OnPropertyChanged(nameof(HasWifiSignal));
     }
 
     private static double GetCombinedHistoryMax(ObservableCollection<double> primary, ObservableCollection<double> secondary)
@@ -3719,6 +3759,155 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
 
         return mhz.Value >= 1000 ? $"{mhz.Value / 1000:F2} GHz" : $"{mhz.Value:F0} MHz";
+    }
+
+    private static double ClampTilePercent(double value)
+    {
+        if (double.IsNaN(value) || double.IsInfinity(value))
+        {
+            return 0;
+        }
+
+        return Math.Max(0, Math.Min(100, value));
+    }
+
+    private string BuildCpuPerformanceSubtitle()
+    {
+        var usageText = $"{CpuUsage:F0}%";
+        if (HasCpuTemp)
+        {
+            return $"{usageText} / {CpuTempText}";
+        }
+
+        if (!string.Equals(CpuClockText, "N/A", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"{usageText} / {CpuClockText}";
+        }
+
+        return $"{usageText} load";
+    }
+
+    private string BuildGpuPerformanceSubtitle()
+    {
+        var usageText = $"{GpuUsage:F0}%";
+        if (HasGpuTemp)
+        {
+            return $"{usageText} / {GpuTempText}";
+        }
+
+        if (HasGpuMemory)
+        {
+            return $"{usageText} / {GpuMemoryPercentText} VRAM";
+        }
+
+        return $"{usageText} load";
+    }
+
+    private double GetDisplayedNetworkReceiveMbps()
+    {
+        return SelectPreferredNetworkAdapters(NetworkAdapters)
+            .Select(adapter => double.IsFinite(adapter.ReceiveMbps) && adapter.ReceiveMbps > 0 ? adapter.ReceiveMbps : 0)
+            .Sum();
+    }
+
+    private double GetDisplayedNetworkSendMbps()
+    {
+        return SelectPreferredNetworkAdapters(NetworkAdapters)
+            .Select(adapter => double.IsFinite(adapter.SendMbps) && adapter.SendMbps > 0 ? adapter.SendMbps : 0)
+            .Sum();
+    }
+
+    private static List<NetworkAdapterInfo> SelectPreferredNetworkAdapters(IEnumerable<NetworkAdapterInfo> adapters)
+    {
+        var all = adapters
+            .Where(adapter => adapter != null && !adapter.IsLoopback)
+            .ToList();
+
+        if (all.Count == 0)
+        {
+            return adapters.ToList();
+        }
+
+        var preferred = all.Where(adapter => adapter.IsUp && adapter.IsActive && !adapter.IsVirtual).ToList();
+        if (preferred.Count > 0)
+        {
+            return preferred;
+        }
+
+        preferred = all.Where(adapter => adapter.IsUp && adapter.IsActive).ToList();
+        if (preferred.Count > 0)
+        {
+            return preferred;
+        }
+
+        preferred = all.Where(adapter => adapter.IsUp && !adapter.IsVirtual).ToList();
+        if (preferred.Count > 0)
+        {
+            return preferred;
+        }
+
+        preferred = all.Where(adapter => adapter.IsUp).ToList();
+        if (preferred.Count > 0)
+        {
+            return preferred;
+        }
+
+        preferred = all.Where(adapter => !adapter.IsVirtual).ToList();
+        return preferred.Count > 0 ? preferred : all;
+    }
+
+    private List<ProcessInfo> SanitizeTopNetworkProcesses(IEnumerable<ProcessInfo> processes)
+    {
+        var measuredTotal = GetDisplayedNetworkReceiveMbps() + GetDisplayedNetworkSendMbps();
+        if (measuredTotal <= 0.05)
+        {
+            measuredTotal = NetworkAdapters.Sum(adapter =>
+                Math.Max(0, double.IsFinite(adapter.ReceiveMbps) ? adapter.ReceiveMbps : 0) +
+                Math.Max(0, double.IsFinite(adapter.SendMbps) ? adapter.SendMbps : 0));
+        }
+
+        var cleaned = processes
+            .Where(process => process != null && !string.IsNullOrWhiteSpace(process.Name) && double.IsFinite(process.IoMbps))
+            .Select(process => new ProcessInfo
+            {
+                Name = process.Name,
+                Pid = process.Pid,
+                CpuPercent = process.CpuPercent,
+                RamMb = process.RamMb,
+                IoMbps = Math.Max(0, process.IoMbps),
+                DiskMBps = process.DiskMBps,
+                Threads = process.Threads,
+                Handles = process.Handles,
+                Status = process.Status
+            })
+            .ToList();
+
+        if (cleaned.Count == 0)
+        {
+            return cleaned;
+        }
+
+        var perProcessCap = Math.Max(measuredTotal * 1.5, 5.0);
+        foreach (var process in cleaned)
+        {
+            process.IoMbps = Math.Min(process.IoMbps, perProcessCap);
+        }
+
+        var sum = cleaned.Sum(process => process.IoMbps);
+        var totalCap = Math.Max(measuredTotal * 1.15, 5.0);
+        if (sum > totalCap && sum > 0)
+        {
+            var scale = totalCap / sum;
+            foreach (var process in cleaned)
+            {
+                process.IoMbps *= scale;
+            }
+        }
+
+        return cleaned
+            .Where(process => process.IoMbps >= 0.05)
+            .OrderByDescending(process => process.IoMbps)
+            .ToList();
     }
 
     private static string FormatSpeedMhz(double? mhz)
@@ -3973,7 +4162,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var cpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "cpu");
         if (cpuItem != null)
         {
-            cpuItem.Subtitle = $"{CpuUsage:F0}% · {CpuTempText}";
+            cpuItem.Subtitle = BuildCpuPerformanceSubtitle();
         }
 
         // 2. Memory
@@ -3987,7 +4176,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var gpuItem = PerformanceItems.FirstOrDefault(item => item.Key == "gpu");
         if (gpuItem != null)
         {
-             gpuItem.Subtitle = $"{GpuUsage:F0}% · {GpuTempText}";
+             gpuItem.Subtitle = BuildGpuPerformanceSubtitle();
         }
 
         // 4. Storage (Summary)
@@ -4016,9 +4205,9 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         var netItem = PerformanceItems.FirstOrDefault(item => item.Key == "net");
         if (netItem != null)
         {
-            var totalDown = NetworkAdapters.Sum(a => a.ReceiveMbps);
-            var totalUp = NetworkAdapters.Sum(a => a.SendMbps);
-            netItem.Subtitle = $"{totalDown:F1} ↓ / {totalUp:F1} ↑ Mbps";
+            var totalDown = GetDisplayedNetworkReceiveMbps();
+            var totalUp = GetDisplayedNetworkSendMbps();
+            netItem.Subtitle = $"{totalDown:F1} down / {totalUp:F1} up Mbps";
         }
     }
 
@@ -4424,6 +4613,13 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                 LogMonitorWarning("Monitor: Process fallback snapshot used (insufficient data).");
             }
 
+            snapshot = new ProcessMetricsSnapshot(
+                snapshot.TopCpu,
+                snapshot.TopRam,
+                SanitizeTopNetworkProcesses(snapshot.TopNetwork),
+                snapshot.TopDisk,
+                snapshot.NetworkMode);
+
             await DispatchAsync(() =>
             {
                 UpdateCollection(TopProcessesByCpu, snapshot.TopCpu);
@@ -4826,6 +5022,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
                     OnPropertyChanged(nameof(GpuMemoryTotalGb));
                     OnPropertyChanged(nameof(GpuMemoryUsageText));
                     OnPropertyChanged(nameof(GpuMemoryPercentText));
+                    OnPropertyChanged(nameof(GpuTileMetaText));
 
                     var adjustedDedicated = metricsSnapshot.GpuPerformance.DedicatedMemoryMb;
                     var adjustedTotal = metricsSnapshot.GpuPerformance.TotalMemoryMb;
@@ -4918,6 +5115,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
 
                 OnPropertyChanged(nameof(WifiSignalText));
                 OnPropertyChanged(nameof(WifiSignalDetail));
+                OnPropertyChanged(nameof(HasWifiSignal));
 
                 UpdatePerformanceSelection();
             }).ConfigureAwait(false);
@@ -4998,7 +5196,7 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         public string PowerOnText => PowerOnHours > 0 ? $"{PowerOnHours:N0} hours" : "N/A";
         public string TotalReadsText => TotalReadsGB > 0 ? $"{TotalReadsGB:F1} GB" : "N/A";
         public string TotalWritesText => TotalWritesGB > 0 ? $"{TotalWritesGB:F1} GB" : "N/A";
-        public string TemperatureText => Temperature > 0 ? $"{Temperature:F0}°C" : "N/A";
+    public string TemperatureText => Temperature > 0 ? $"{Temperature:F0}\u00B0C" : "N/A";
         public string ThroughputText => (ReadMBps > 0 || WriteMBps > 0) 
             ? $"R: {ReadMBps:F1} / W: {WriteMBps:F1} MB/s" 
             : "";
@@ -5189,3 +5387,4 @@ public sealed class MonitorViewModel : ViewModelBase, IDisposable
         }
     }
 }
+

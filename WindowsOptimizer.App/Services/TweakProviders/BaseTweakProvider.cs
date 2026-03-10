@@ -7,6 +7,7 @@ using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Commands.RegistryOps;
 using Microsoft.Win32;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
@@ -39,11 +40,14 @@ public sealed class DocumentedTweak : ITweak, ITweakWithDocumentation
 
 public abstract class BaseTweakProvider : ITweakProvider
 {
+    private const string PoliciesPrefix = @"Software\Policies\";
+    private const string LegacyPoliciesPrefix = @"Software\Microsoft\Windows\CurrentVersion\Policies\";
+
     public abstract string CategoryName { get; }
 
     public abstract IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated);
 
-    protected RegistryValueTweak CreateRegistryTweak(
+    protected ITweak CreateRegistryTweak(
         TweakContext context,
         string id,
         string name,
@@ -57,8 +61,25 @@ public abstract class BaseTweakProvider : ITweakProvider
         RegistryView view = RegistryView.Default,
         bool? requiresElevation = null)
     {
-        var effectiveRequiresElevation = requiresElevation ?? hive != RegistryHive.CurrentUser;
-        var accessor = effectiveRequiresElevation ? context.ElevatedRegistry : context.LocalRegistry;
+        var effectiveRequiresElevation = ResolveRequiresElevation(hive, keyPath, requiresElevation);
+        if (ShouldUseCommandBackedRegistryExecution(hive, keyPath, effectiveRequiresElevation))
+        {
+            return CreateCommandBackedRegistryTweak(
+                context,
+                id,
+                name,
+                description,
+                risk,
+                hive,
+                keyPath,
+                valueName,
+                valueKind,
+                targetValue,
+                view,
+                effectiveRequiresElevation);
+        }
+
+        var accessor = context.LocalRegistry;
 
         return new RegistryValueTweak(
             id,
@@ -72,10 +93,10 @@ public abstract class BaseTweakProvider : ITweakProvider
             targetValue,
             accessor,
             view,
-            requiresElevation);
+            effectiveRequiresElevation);
     }
 
-    protected RegistryValueSetTweak CreateRegistryValueSetTweak(
+    protected ITweak CreateRegistryValueSetTweak(
         TweakContext context,
         string id,
         string name,
@@ -87,8 +108,25 @@ public abstract class BaseTweakProvider : ITweakProvider
         RegistryView view = RegistryView.Default,
         bool? requiresElevation = null)
     {
-        var effectiveRequiresElevation = requiresElevation ?? hive != RegistryHive.CurrentUser;
-        var accessor = effectiveRequiresElevation ? context.ElevatedRegistry : context.LocalRegistry;
+        var effectiveRequiresElevation = ResolveRequiresElevation(hive, keyPath, requiresElevation);
+        if (ShouldUseCommandBackedRegistryExecution(hive, keyPath, effectiveRequiresElevation))
+        {
+            var batchEntries = entries
+                .Select(entry => new RegistryValueBatchEntry(hive, keyPath, entry.Name, entry.Kind, entry.TargetValue, view))
+                .ToList();
+
+            return new RegistryCommandBatchTweak(
+                id,
+                name,
+                description,
+                risk,
+                batchEntries,
+                context.LocalRegistry,
+                context.ElevatedRegistry,
+                effectiveRequiresElevation);
+        }
+
+        var accessor = context.LocalRegistry;
 
         return new RegistryValueSetTweak(
             id,
@@ -100,10 +138,10 @@ public abstract class BaseTweakProvider : ITweakProvider
             entries,
             accessor,
             view,
-            requiresElevation);
+            effectiveRequiresElevation);
     }
 
-    protected RegistryValueBatchTweak CreateRegistryValueBatchTweak(
+    protected ITweak CreateRegistryValueBatchTweak(
         TweakContext context,
         string id,
         string name,
@@ -114,8 +152,21 @@ public abstract class BaseTweakProvider : ITweakProvider
     {
         if (entries is null) throw new ArgumentNullException(nameof(entries));
 
-        var effectiveRequiresElevation = requiresElevation ?? entries.Any(entry => entry.Hive != RegistryHive.CurrentUser);
-        var accessor = effectiveRequiresElevation ? context.ElevatedRegistry : context.LocalRegistry;
+        var effectiveRequiresElevation = ResolveRequiresElevation(entries, requiresElevation);
+        if (entries.Any(entry => ShouldUseCommandBackedRegistryExecution(entry.Hive, entry.KeyPath, effectiveRequiresElevation)))
+        {
+            return new RegistryCommandBatchTweak(
+                id,
+                name,
+                description,
+                risk,
+                entries,
+                context.LocalRegistry,
+                context.ElevatedRegistry,
+                effectiveRequiresElevation);
+        }
+
+        var accessor = context.LocalRegistry;
 
         return new RegistryValueBatchTweak(
             id,
@@ -123,6 +174,81 @@ public abstract class BaseTweakProvider : ITweakProvider
             description,
             risk,
             entries,
+            accessor,
+            effectiveRequiresElevation);
+    }
+
+    protected RegistryCommandBatchTweak CreateCommandBackedRegistryTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        RegistryHive hive,
+        string keyPath,
+        string valueName,
+        RegistryValueKind valueKind,
+        object targetValue,
+        RegistryView view = RegistryView.Default,
+        bool? requiresElevation = null)
+    {
+        return new RegistryCommandBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            new[]
+            {
+                new RegistryValueBatchEntry(hive, keyPath, valueName, valueKind, targetValue, view)
+            },
+            context.LocalRegistry,
+            context.ElevatedRegistry,
+            requiresElevation);
+    }
+
+    protected RegistryCommandBatchTweak CreateCommandBackedRegistryValueBatchTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<RegistryValueBatchEntry> entries,
+        bool? requiresElevation = null)
+    {
+        if (entries is null) throw new ArgumentNullException(nameof(entries));
+
+        return new RegistryCommandBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            entries,
+            context.LocalRegistry,
+            context.ElevatedRegistry,
+            requiresElevation);
+    }
+
+    protected RegistryValuePresetBatchTweak CreateRegistryValuePresetBatchTweak(
+        TweakContext context,
+        string id,
+        string name,
+        string description,
+        TweakRiskLevel risk,
+        IReadOnlyList<RegistryValuePresetBatchOption> presets,
+        string defaultPresetKey,
+        bool? requiresElevation = null)
+    {
+        if (presets is null) throw new ArgumentNullException(nameof(presets));
+
+        var accessor = context.LocalRegistry;
+
+        return new RegistryValuePresetBatchTweak(
+            id,
+            name,
+            description,
+            risk,
+            presets,
+            defaultPresetKey,
             accessor,
             requiresElevation);
     }
@@ -226,4 +352,31 @@ public abstract class BaseTweakProvider : ITweakProvider
     /// <param name="url">Full URL to Microsoft Learn documentation</param>
     protected DocumentedTweak WithMicrosoftDoc(ITweak tweak, string url)
         => new DocumentedTweak(tweak, TweakDocumentation.FromMicrosoft(url));
+
+    private static bool IsPolicyLikeRegistryPath(string keyPath)
+    {
+        if (string.IsNullOrWhiteSpace(keyPath))
+        {
+            return false;
+        }
+
+        var normalized = keyPath.TrimStart('\\');
+        return normalized.StartsWith(PoliciesPrefix, StringComparison.OrdinalIgnoreCase)
+            || normalized.StartsWith(LegacyPoliciesPrefix, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool ResolveRequiresElevation(RegistryHive hive, string keyPath, bool? requiresElevation)
+    {
+        return requiresElevation ?? hive != RegistryHive.CurrentUser;
+    }
+
+    private static bool ResolveRequiresElevation(IReadOnlyList<RegistryValueBatchEntry> entries, bool? requiresElevation)
+    {
+        return requiresElevation ?? entries.Any(entry => entry.Hive != RegistryHive.CurrentUser);
+    }
+
+    private static bool ShouldUseCommandBackedRegistryExecution(RegistryHive hive, string keyPath, bool requiresElevation)
+    {
+        return requiresElevation || hive != RegistryHive.CurrentUser;
+    }
 }

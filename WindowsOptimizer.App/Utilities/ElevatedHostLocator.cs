@@ -47,7 +47,7 @@ public static class ElevatedHostLocator
 
         foreach (var candidate in uniqueCandidates)
         {
-            if (File.Exists(candidate))
+            if (IsCompleteHostCandidate(candidate))
             {
                 return candidate;
             }
@@ -55,6 +55,32 @@ public static class ElevatedHostLocator
 
         LogNotFound(baseDirectory, uniqueCandidates);
         return Path.Combine(baseDirectory, "ElevatedHost", exeName);
+    }
+
+    private static bool IsCompleteHostCandidate(string candidate)
+    {
+        if (!File.Exists(candidate))
+        {
+            return false;
+        }
+
+        try
+        {
+            var directory = Path.GetDirectoryName(candidate);
+            var baseName = Path.GetFileNameWithoutExtension(candidate);
+            if (string.IsNullOrWhiteSpace(directory) || string.IsNullOrWhiteSpace(baseName))
+            {
+                return false;
+            }
+
+            var companionDll = Path.Combine(directory, $"{baseName}.dll");
+            var runtimeConfig = Path.Combine(directory, $"{baseName}.runtimeconfig.json");
+            return File.Exists(companionDll) && File.Exists(runtimeConfig);
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static string GetProcessBaseDirectory()

@@ -10,22 +10,22 @@
         xmlns:views="clr-namespace:WindowsOptimizer.App.Views"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
-        Width="1280"
-        Height="800"
-        MinWidth="1000"
-        MinHeight="600"
-        Background="{DynamicResource BackgroundDarkestBrush}"
+        Width="1000"
+        Height="780"
+        MinWidth="920"
+        MinHeight="620"
+        Background="{DynamicResource ShellWindowBackgroundBrush}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="False"
         ResizeMode="CanResizeWithGrip"
-        FontFamily="Segoe UI Variable Display, Segoe UI, Segoe UI Emoji, sans-serif"
+        FontFamily="{DynamicResource FontFamilyText}"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextRenderingMode="ClearType">
 
     <!-- WindowChrome for resize borders -->
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="48"
+        <WindowChrome CaptionHeight="44"
                       ResizeBorderThickness="6"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
@@ -66,7 +66,7 @@
         <Style x:Key="ShellTopNavItemStyle" TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,6,0" />
+            <Setter Property="Margin" Value="0,0,10,0" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -74,21 +74,22 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border x:Name="Border"
-                                Background="Transparent"
-                                CornerRadius="10"
+                                Background="{DynamicResource ShellTopNavItemBrush}"
+                                CornerRadius="7"
                                 BorderThickness="1"
-                                BorderBrush="Transparent"
-                                Padding="12,7">
+                                BorderBrush="{DynamicResource ShellTopNavBorderBrush}"
+                                Padding="12,6">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}" />
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}" />
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}" />
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}" />
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
                                 <Setter Property="FontWeight" Value="SemiBold" />
                             </Trigger>
@@ -158,16 +159,44 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundGradientBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="44"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
+        <Ellipse Grid.RowSpan="2"
+                 Width="520"
+                 Height="520"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="90,-210,0,0"
+                 Fill="{DynamicResource ShellWarmGlowBrush}"
+                 IsHitTestVisible="False">
+            <Ellipse.Effect>
+                <BlurEffect Radius="120"/>
+            </Ellipse.Effect>
+        </Ellipse>
+
+        <Ellipse Grid.RowSpan="2"
+                 Width="660"
+                 Height="500"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Top"
+                 Margin="0,-170,120,0"
+                 Fill="{DynamicResource ShellCoolGlowBrush}"
+                 IsHitTestVisible="False">
+            <Ellipse.Effect>
+                <BlurEffect Radius="150"/>
+            </Ellipse.Effect>
+        </Ellipse>
+
         <!-- Custom Title Bar -->
         <Border Grid.Row="0" 
                 Panel.ZIndex="100"
-                Background="{DynamicResource BackgroundDarkBrush}">
+                Background="{DynamicResource ShellTitleBarBackgroundBrush}"
+                BorderBrush="{DynamicResource ShellTitleBarBorderBrush}"
+                BorderThickness="0,0,0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -178,19 +207,31 @@
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0"
                             MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                             MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
-                    <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
-                               Foreground="{DynamicResource AccentBrightCyanBrush}"
-                               VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Border Width="18"
+                            Height="18"
+                            CornerRadius="9"
+                            Background="{DynamicResource ShellBrandChipBrush}"
+                            BorderBrush="{DynamicResource ShellBrandChipBorderBrush}"
+                            BorderThickness="1"
+                            Margin="0,0,10,0">
+                        <TextBlock Text="&#xE945;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource ShellBrandAccentBrush}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </Border>
                     <TextBlock Text="Windows Optimizer Suite" 
-                               Foreground="{DynamicResource ForegroundLightBrush}"
-                               FontSize="12" FontWeight="Medium" VerticalAlignment="Center"/>
+                               Foreground="{DynamicResource ForegroundBrightBrush}"
+                               FontFamily="{DynamicResource FontFamilyDisplay}"
+                               FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
                 </StackPanel>
                 
                 <!-- Window Controls -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
                     <!-- Minimize -->
                     <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
-                            Width="46" Height="48" 
+                            Width="44" Height="44" 
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
                             Focusable="False"
                             FocusVisualStyle="{x:Null}"
@@ -221,7 +262,7 @@
                     
                     <!-- Maximize/Restore -->
                     <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
-                            Width="46" Height="48"
+                            Width="44" Height="44"
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
                             Focusable="False"
                             FocusVisualStyle="{x:Null}"
@@ -253,7 +294,7 @@
                     
                     <!-- Close -->
                     <Button x:Name="CloseButton" Click="CloseButton_Click"
-                            Width="46" Height="48"
+                            Width="44" Height="44"
                             Background="Transparent" BorderThickness="0" Cursor="Hand"
                             Focusable="False"
                             FocusVisualStyle="{x:Null}"
@@ -293,10 +334,10 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0"
-                    Background="{DynamicResource BackgroundDarkBrush}"
-                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                    Background="#A6090B10"
+                    BorderBrush="#16FFFFFF"
                     BorderThickness="0,0,0,1"
-                    Padding="12,8">
+                    Padding="10,6">
                 <DockPanel LastChildFill="False">
                     <ListBox DockPanel.Dock="Left"
                              ItemsSource="{Binding NavigationItems}"
@@ -315,6 +356,7 @@
                                     <TextBlock Text="{Binding Title}"
                                                Margin="8,0,0,0"
                                                VerticalAlignment="Center"
+                                       FontFamily="{DynamicResource FontFamilyDisplay}"
                                                FontSize="12"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -327,6 +369,7 @@
                         <TextBlock Text="{Binding AppVersionLabel}"
                                    Margin="0,0,4,0"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
+                                       FontFamily="{DynamicResource FontFamilyMono}"
                                    FontSize="10"
                                    VerticalAlignment="Center"/>
                     </StackPanel>

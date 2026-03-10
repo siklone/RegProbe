@@ -12,6 +12,7 @@
     <!-- Analysis Settings -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
+    <DefaultItemExcludes>$(DefaultItemExcludes);**\artifacts\**</DefaultItemExcludes>
     
     <!-- 
       Note: Null warnings (CS8600-CS8609) are enabled but NOT treated as errors.

@@ -8,6 +8,7 @@ namespace WindowsOptimizer.Infrastructure.Metrics;
 
 public sealed class ProcessMonitor : IDisposable
 {
+    private const double MinimumRateSampleSeconds = 0.35;
     private Dictionary<int, (DateTime Time, TimeSpan TotalProcessorTime)> _previousCpuUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousIoUsage = new();
     private Dictionary<int, (DateTime Time, ulong TotalBytes)> _previousNetworkUsage = new();
@@ -321,7 +322,7 @@ public sealed class ProcessMonitor : IDisposable
 
             _previousIoUsage[pid] = (currentTime, currentTotalBytes);
 
-            if (seconds > 0)
+            if (seconds >= MinimumRateSampleSeconds)
             {
                 var bytesPerSecond = diffBytes / seconds;
                 return (bytesPerSecond * 8.0) / (1024.0 * 1024.0);
@@ -343,7 +344,7 @@ public sealed class ProcessMonitor : IDisposable
 
             _previousNetworkUsage[pid] = (currentTime, currentTotalBytes);
 
-            if (seconds > 0)
+            if (seconds >= MinimumRateSampleSeconds)
             {
                 var bytesPerSecond = diffBytes / seconds;
                 return (bytesPerSecond * 8.0) / (1024.0 * 1024.0);
@@ -365,7 +366,7 @@ public sealed class ProcessMonitor : IDisposable
 
             _previousDiskUsage[pid] = (currentTime, currentTotalBytes);
 
-            if (seconds > 0)
+            if (seconds >= MinimumRateSampleSeconds)
             {
                 return (diffBytes / seconds) / (1024.0 * 1024.0);
             }

@@ -372,7 +372,10 @@ public sealed class DashboardViewModel : ViewModelBase
     public string SnapshotChangeDetail { get => _snapshotChangeDetail; private set => SetProperty(ref _snapshotChangeDetail, value); }
     public string SnapshotChangeContext { get => _snapshotChangeContext; private set => SetProperty(ref _snapshotChangeContext, value); }
     public string PlatformIdentity => JoinNonEmpty(SystemManufacturer, SystemModel);
+    public string OsCardTitle => HardwarePresentationFormatter.BuildCompactOsTitle(OsName);
     public string OsCompactSummary => JoinNonEmpty(OsVersion, HasValue(OsBuild) ? $"Build {OsBuild}" : null, OsArchitecture);
+    public string ProcessorCardTitle => HardwarePresentationFormatter.BuildCompactCpuTitle(ProcessorName);
+    public string GpuCardTitle => HardwarePresentationFormatter.BuildCompactGpuTitle(GpuName);
     public string SystemEnvironmentSummary => JoinNonEmpty(
         HasValue(SystemType) ? SystemType : null,
         NormalizeOemValue(SystemSku),
@@ -1667,7 +1670,10 @@ public sealed class DashboardViewModel : ViewModelBase
     private void NotifyCompactSummaryPropertiesChanged()
     {
         OnPropertyChanged(nameof(PlatformIdentity));
+        OnPropertyChanged(nameof(OsCardTitle));
         OnPropertyChanged(nameof(OsCompactSummary));
+        OnPropertyChanged(nameof(ProcessorCardTitle));
+        OnPropertyChanged(nameof(GpuCardTitle));
         OnPropertyChanged(nameof(SystemEnvironmentSummary));
         OnPropertyChanged(nameof(ProcessorCompactSummary));
         OnPropertyChanged(nameof(MemoryCompactSummary));

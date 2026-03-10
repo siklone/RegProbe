@@ -97,6 +97,65 @@
     <SolidColorBrush x:Key="DisabledOverlayBrush" Color="#FFFFFF" Opacity="0.45"/>
     <SolidColorBrush x:Key="ScrimOverlayBrush" Color="#000000" Opacity="0.5"/>
 
+    <!-- Shared shell and surface brushes -->
+    <SolidColorBrush x:Key="ShellWindowBackgroundBrush" Color="#F4F6FA"/>
+    <SolidColorBrush x:Key="ShellTitleBarBackgroundBrush" Color="#EEF2F8"/>
+    <SolidColorBrush x:Key="ShellTitleBarBorderBrush" Color="#18000000"/>
+    <SolidColorBrush x:Key="ShellTopNavItemBrush" Color="#F7F9FD"/>
+    <SolidColorBrush x:Key="ShellTopNavBorderBrush" Color="#16000000"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBrush" Color="#EEF3FA"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBorderBrush" Color="#3396A8C6"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBrush" Color="#22D86A6A"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBorderBrush" Color="#66D86A6A"/>
+    <SolidColorBrush x:Key="ShellBrandChipBrush" Color="#F8FAFD"/>
+    <SolidColorBrush x:Key="ShellBrandChipBorderBrush" Color="#55D86A6A"/>
+    <SolidColorBrush x:Key="ShellBrandAccentBrush" Color="#D86A6A"/>
+    <SolidColorBrush x:Key="ShellWarmGlowBrush" Color="#08D86A6A"/>
+    <SolidColorBrush x:Key="ShellCoolGlowBrush" Color="#086F94CA"/>
+
+    <LinearGradientBrush x:Key="AppSurfaceGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFFFFF" Offset="0"/>
+        <GradientStop Color="#F1F5FA" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppSurfaceAccentGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFF8F9" Offset="0"/>
+        <GradientStop Color="#F3F6FB" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppMetricTileGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FCFDFE" Offset="0"/>
+        <GradientStop Color="#EEF3F9" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AppDetailSheetGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFFFFF" Offset="0"/>
+        <GradientStop Color="#EEF2F8" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="AppInsetSurfaceBrush" Color="#F7F9FD"/>
+    <SolidColorBrush x:Key="AppChipSurfaceBrush" Color="#F5F7FC"/>
+    <SolidColorBrush x:Key="AppQuietButtonBrush" Color="#F6F8FC"/>
+    <SolidColorBrush x:Key="AppQuietButtonHoverBrush" Color="#EEF3FA"/>
+    <SolidColorBrush x:Key="AppQuietButtonPressedBrush" Color="#E6ECF5"/>
+    <SolidColorBrush x:Key="AppMetricTileHoverBrush" Color="#EEF3FA"/>
+    <SolidColorBrush x:Key="AppSearchSurfaceBrush" Color="#F8FAFD"/>
+    <SolidColorBrush x:Key="AppWorkspaceSurfaceBrush" Color="#F6F8FC"/>
+    <SolidColorBrush x:Key="AppWorkspaceHoverBrush" Color="#EEF3FA"/>
+    <SolidColorBrush x:Key="AppWorkspaceSelectedBrush" Color="#22D86A6A"/>
+    <SolidColorBrush x:Key="AppWorkspaceSelectedBorderBrush" Color="#66D86A6A"/>
+    <SolidColorBrush x:Key="AppSelectionBoxBrush" Color="#F8FAFD"/>
+    <SolidColorBrush x:Key="AppSelectionBoxHoverBrush" Color="#EEF2F8"/>
+    <SolidColorBrush x:Key="AppSelectionBoxCheckedBrush" Color="#6F94CA"/>
+    <SolidColorBrush x:Key="AppSelectionBoxBorderBrush" Color="#A8B4C3"/>
+    <SolidColorBrush x:Key="AppSelectionBoxHoverBorderBrush" Color="#8C9DB1"/>
+    <SolidColorBrush x:Key="AppSelectionBoxCheckedBorderBrush" Color="#6F94CA"/>
+    <SolidColorBrush x:Key="AppSelectionCheckBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DashboardHeroIconBrush" Color="#EAF3FF"/>
+    <SolidColorBrush x:Key="DashboardHeroIconBorderBrush" Color="#66A8C9FF"/>
+    <SolidColorBrush x:Key="MetricCyanSurfaceBrush" Color="#E9F6FB"/>
+    <SolidColorBrush x:Key="MetricBlueSurfaceBrush" Color="#E9EEF9"/>
+    <SolidColorBrush x:Key="MetricPurpleSurfaceBrush" Color="#F2ECF7"/>
+    <SolidColorBrush x:Key="MetricGreenSurfaceBrush" Color="#E8F4EA"/>
+    <SolidColorBrush x:Key="MetricOrangeSurfaceBrush" Color="#F8EEE6"/>
+
     <!-- Shadows -->
     <Color x:Key="ShadowColorSmall">#12000000</Color>
     <Color x:Key="ShadowColorMedium">#20000000</Color>

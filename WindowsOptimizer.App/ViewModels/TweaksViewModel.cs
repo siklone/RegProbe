@@ -49,6 +49,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         "cleanup.wer-files"
     };
 
+    private static readonly string[] DiskCheckTweakIds =
+    {
+        "system-check-disk-health"
+    };
+
     private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
     private readonly RelayCommand _exportLogsCommand;
@@ -100,9 +105,18 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private bool _showFavoritesOnly = false;
+    private bool _showDiskChecksOnly = false;
     private string _selectedCategoryName = string.Empty;
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
     private int _selectedMainTabIndex;
+    private static readonly string[] MainTabNames =
+    [
+        "Configuration",
+        "Policy Reference",
+        "Services",
+        "Bloatware",
+        "Startup"
+    ];
     private bool _hasVisibleTweaks;
     private bool _isFlatView;
     private readonly IFavoritesStore _favoritesStore;
@@ -152,7 +166,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentTab
     {
         get => _currentTab;
-        set => SetProperty(ref _currentTab, value);
+        set
+        {
+            var normalized = NormalizeMainTabName(value);
+            if (SetProperty(ref _currentTab, normalized))
+            {
+                var tabIndex = GetMainTabIndex(normalized);
+                if (_selectedMainTabIndex != tabIndex)
+                {
+                    _selectedMainTabIndex = tabIndex;
+                    OnPropertyChanged(nameof(SelectedMainTabIndex));
+                }
+
+                RaiseMainTabPropertiesChanged();
+            }
+        }
     }
 
     public ConfigurationWorkspaceKind SelectedWorkspace
@@ -162,6 +190,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             if (SetProperty(ref _selectedWorkspace, value))
             {
+                if (value != ConfigurationWorkspaceKind.Settings && _showDiskChecksOnly)
+                {
+                    _showDiskChecksOnly = false;
+                    OnPropertyChanged(nameof(ShowDiskChecksOnly));
+                }
+
                 RaiseWorkspacePropertiesChanged();
 
                 if (!string.IsNullOrWhiteSpace(_selectedCategoryName) && !CurrentWorkspaceContainsCategory(_selectedCategoryName))
@@ -180,7 +214,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public int SelectedMainTabIndex
     {
         get => _selectedMainTabIndex;
-        set => SetProperty(ref _selectedMainTabIndex, value);
+        set
+        {
+            var normalized = NormalizeMainTabIndex(value);
+            if (SetProperty(ref _selectedMainTabIndex, normalized))
+            {
+                var tabName = GetMainTabName(normalized);
+                if (!string.Equals(_currentTab, tabName, StringComparison.Ordinal))
+                {
+                    _currentTab = tabName;
+                    OnPropertyChanged(nameof(CurrentTab));
+                }
+
+                RaiseMainTabPropertiesChanged();
+            }
+        }
     }
 
     public TweaksViewModel(
@@ -212,12 +260,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 		var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
 		{
 			HostExecutablePath = _elevatedHostExecutablePath,
-			PipeName = ElevatedHostDefaults.PipeName,
+			PipeName = ElevatedHostDefaults.GetPipeNameForProcess(Process.GetCurrentProcess().Id),
 			ParentProcessId = Process.GetCurrentProcess().Id
 		});
-        _localRegistryAccessor = new LocalRegistryAccessor();
+        var machineLocalRegistryAccessor = new LocalRegistryAccessor();
         _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
-        var hybridRegistryAccessor = new HybridRegistryAccessor(_localRegistryAccessor, _elevatedRegistryAccessor);
+        _localRegistryAccessor = new RoutingRegistryAccessor(machineLocalRegistryAccessor, _elevatedRegistryAccessor);
+        var hybridRegistryAccessor = new HybridRegistryAccessor(machineLocalRegistryAccessor, _elevatedRegistryAccessor);
         _scanAwareElevatedRegistryAccessor = _isElevated ? _elevatedRegistryAccessor : hybridRegistryAccessor;
         _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
         _elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
@@ -547,6 +596,39 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
         ? "One-click cleanup and repair tasks for when Windows feels messy, slow, or stuck."
         : "PC behavior and feature switches that stay in place until you change them again.";
+
+    public string CurrentMainTabEyebrow => CurrentTab switch
+    {
+        "Policy Reference" => "Policy Reference",
+        "Services" => "Services",
+        "Bloatware" => "Bloatware",
+        "Startup" => "Startup",
+        _ => "Configuration"
+    };
+
+    public string CurrentMainTabTitle => CurrentTab switch
+    {
+        "Policy Reference" => "Windows Policy Reference",
+        "Services" => "Service Management",
+        "Bloatware" => "Bloatware",
+        "Startup" => "Startup Apps",
+        _ => CurrentWorkspaceLabel
+    };
+
+    public string CurrentMainTabSubtitle => CurrentTab switch
+    {
+        "Policy Reference" => "See which parts of Windows and installed components are driven by policy paths.",
+        "Services" => "Review Windows services with descriptions, startup modes, and safe actions.",
+        "Bloatware" => "Review installed apps and remove the ones you do not want on this PC.",
+        "Startup" => "Trim startup items so Windows boots cleaner and quieter.",
+        _ => CurrentWorkspaceDescription
+    };
+
+    public bool IsConfigurationTabSelected => SelectedMainTabIndex == 0;
+    public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
+    public bool IsServicesTabSelected => SelectedMainTabIndex == 2;
+    public bool IsBloatwareTabSelected => SelectedMainTabIndex == 3;
+    public bool IsStartupTabSelected => SelectedMainTabIndex == 4;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
         ? $"{CurrentWorkspaceItemCount} tasks available"
@@ -892,6 +974,24 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             if (SetProperty(ref _showFavoritesOnly, value))
             {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowDiskChecksOnly
+    {
+        get => _showDiskChecksOnly;
+        set
+        {
+            if (SetProperty(ref _showDiskChecksOnly, value))
+            {
+                if (value)
+                {
+                    SelectedCategoryName = string.Empty;
+                }
+
                 TweaksView.Refresh();
                 UpdateFilterSummary();
             }
@@ -1246,6 +1346,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             return false;
         }
 
+        if (_showDiskChecksOnly && !IsDiskCheckTweak(item))
+        {
+            return false;
+        }
+
         if (item.Risk == TweakRiskLevel.Safe && !_showSafe)
         {
             return false;
@@ -1322,14 +1427,18 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         foreach (var tweak in Tweaks.Where(t => FilterTweaksInternal(t, includeCategoryFilter: false)))
         {
-            var parts = (tweak.Id ?? string.Empty)
+            var tweakId = tweak.Id ?? string.Empty;
+            var parts = tweakId
                 .Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             if (parts.Length == 0)
             {
                 continue;
             }
 
-            var rootCatName = FormatGroupName(parts[0], "Other");
+            var rootCatName = !string.IsNullOrWhiteSpace(tweak.Category) &&
+                              !string.Equals(tweak.Category, "Other", StringComparison.OrdinalIgnoreCase)
+                ? tweak.Category
+                : FormatGroupName(parts[0], "Other");
             
             if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
             {
@@ -1342,7 +1451,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
             // Handle intermediate sub-groups (e.g. network.tcp.tweak)
             var parent = currentGroup;
-            for (int i = 1; i < parts.Length - 1; i++)
+            var subgroupStartIndex = tweakId.StartsWith("plugin.", StringComparison.OrdinalIgnoreCase) ? 2 : 1;
+            for (int i = subgroupStartIndex; i < parts.Length - 1; i++)
             {
                 var subName = FormatGroupName(parts[i], "Other");
                 var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
@@ -1377,6 +1487,18 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             CategoryGroups.Add(g);
         }
+
+        if (!string.IsNullOrWhiteSpace(_selectedCategoryName)
+            && !CategoryGroups.Any(g => string.Equals(g.CategoryName, _selectedCategoryName, StringComparison.OrdinalIgnoreCase)))
+        {
+            _selectedCategoryName = string.Empty;
+            OnPropertyChanged(nameof(SelectedCategoryName));
+            OnPropertyChanged(nameof(IsAllCategoriesSelected));
+            OnPropertyChanged(nameof(SelectedCategoryLabel));
+            OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+            TweaksView.Refresh();
+            FilterSummary = $"Showing {TweaksView.Cast<object>().Count()} of {CurrentWorkspaceItemCount} {(IsMaintenanceWorkspaceSelected ? "tasks" : "settings")}.";
+        }
     }
 
     private ConfigurationWorkspaceKind GetWorkspaceKind(TweakItemViewModel tweak)
@@ -1405,7 +1527,58 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(EmptyStateDescription));
         OnPropertyChanged(nameof(SelectedCategoryLabel));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+        OnPropertyChanged(nameof(CurrentMainTabTitle));
+        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
     }
+
+    private void RaiseMainTabPropertiesChanged()
+    {
+        OnPropertyChanged(nameof(CurrentMainTabEyebrow));
+        OnPropertyChanged(nameof(CurrentMainTabTitle));
+        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
+        OnPropertyChanged(nameof(IsConfigurationTabSelected));
+        OnPropertyChanged(nameof(IsPolicyReferenceTabSelected));
+        OnPropertyChanged(nameof(IsServicesTabSelected));
+        OnPropertyChanged(nameof(IsBloatwareTabSelected));
+        OnPropertyChanged(nameof(IsStartupTabSelected));
+    }
+
+    private static string NormalizeMainTabName(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return MainTabNames[0];
+        }
+
+        var match = MainTabNames.FirstOrDefault(tab => string.Equals(tab, value, StringComparison.OrdinalIgnoreCase));
+        return match ?? MainTabNames[0];
+    }
+
+    private static int NormalizeMainTabIndex(int value)
+    {
+        if (value < 0)
+        {
+            return 0;
+        }
+
+        return value >= MainTabNames.Length ? MainTabNames.Length - 1 : value;
+    }
+
+    private static int GetMainTabIndex(string? value)
+    {
+        var normalized = NormalizeMainTabName(value);
+        for (var i = 0; i < MainTabNames.Length; i++)
+        {
+            if (string.Equals(MainTabNames[i], normalized, StringComparison.Ordinal))
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private static string GetMainTabName(int index) => MainTabNames[NormalizeMainTabIndex(index)];
 
     public void ExpandAllCategories()
     {
@@ -1430,6 +1603,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowDiskChecksOnly = false;
         SelectedCategoryName = string.Empty;
     }
 
@@ -1459,6 +1633,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
         SelectedCategoryName = string.Empty;
         StatusFilter = string.Empty;
+        ShowDiskChecksOnly = false;
         SearchText = entry.SearchFragment;
     }
 
@@ -1474,8 +1649,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowDiskChecksOnly = false;
         TweaksView.Refresh();
         UpdateFilterSummary();
+    }
+
+    private static bool IsDiskCheckTweak(TweakItemViewModel item)
+    {
+        if (DiskCheckTweakIds.Any(id => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
+        {
+            return true;
+        }
+
+        return item.Id.Contains("disk-health", StringComparison.OrdinalIgnoreCase)
+            || item.Name.Contains("Disk Health", StringComparison.OrdinalIgnoreCase)
+            || item.Description.Contains("file system errors", StringComparison.OrdinalIgnoreCase);
     }
 
     public async Task RunFastCleanAsync(CancellationToken ct = default)

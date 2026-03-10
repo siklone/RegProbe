@@ -16,8 +16,8 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="14"/>
-        <Setter Property="Padding" Value="20"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="16"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect Color="{DynamicResource ShadowColorSmall}"
@@ -163,62 +163,71 @@
     </Style>
 
     <Style x:Key="AppSurfaceCardStyle" TargetType="Border" BasedOn="{StaticResource ModernCardStyle}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1E252D" Offset="0"/>
-                    <GradientStop Color="#151A20" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="#34FFFFFF"/>
-        <Setter Property="CornerRadius" Value="16"/>
-        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Background" Value="{DynamicResource AppSurfaceGradientBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="11"/>
     </Style>
 
     <Style x:Key="AppInsetPanelStyle" TargetType="Border">
-        <Setter Property="Background" Value="#12000000"/>
-        <Setter Property="BorderBrush" Value="#22FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AppInsetSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="13"/>
-        <Setter Property="Padding" Value="9"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="8,7"/>
     </Style>
 
     <Style x:Key="AppChipStyle" TargetType="Border">
-        <Setter Property="Background" Value="#14000000"/>
-        <Setter Property="BorderBrush" Value="#24FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AppChipSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="7,4"/>
-        <Setter Property="Margin" Value="0,0,6,6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Padding" Value="7,3"/>
+        <Setter Property="Margin" Value="0,0,5,5"/>
     </Style>
 
     <Style x:Key="AppSectionEyebrowTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="9"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     </Style>
 
     <Style x:Key="AppSectionTitleTextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     </Style>
 
     <Style x:Key="AppSectionSubtitleTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
-    <Style x:Key="AppQuietActionButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#18000000"/>
+    <Style x:Key="AppHeroTitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="ExtraBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-        <Setter Property="BorderBrush" Value="#33FFFFFF"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+    </Style>
+
+    <Style x:Key="AppHeroSubtitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="AppQuietActionButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource AppQuietButtonBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Padding" Value="9,5"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -229,18 +238,18 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10">
+                            CornerRadius="6">
                         <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           Margin="{TemplateBinding Padding}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ButtonRoot" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                            <Setter TargetName="ButtonRoot" Property="Background" Value="#1D0C1118"/>
+                            <Setter TargetName="ButtonRoot" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                            <Setter TargetName="ButtonRoot" Property="Background" Value="{DynamicResource AppQuietButtonHoverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="ButtonRoot" Property="Background" Value="#260C1118"/>
+                            <Setter TargetName="ButtonRoot" Property="Background" Value="{DynamicResource AppQuietButtonPressedBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ButtonRoot" Property="Opacity" Value="0.45"/>
@@ -251,33 +260,41 @@
         </Setter>
     </Style>
 
+    <Style x:Key="AppPrimaryActionButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource AppQuietActionButtonStyle}">
+        <Setter Property="Foreground" Value="#FFF8FAFC"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF3E46" Offset="0"/>
+                    <GradientStop Color="#FF5A67" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="AppMetricTileBorderStyle" TargetType="Border">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="11,9"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Focusable" Value="True"/>
-        <Setter Property="Margin" Value="0,0,6,6"/>
-        <Setter Property="MinHeight" Value="80"/>
-        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="Margin" Value="0,0,8,8"/>
+        <Setter Property="MinHeight" Value="84"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1E242C" Offset="0"/>
-                    <GradientStop Color="#161A21" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="#34FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AppMetricTileGradientBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                <Setter Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource AppMetricTileHoverBrush}"/>
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -310,8 +327,9 @@
     </Style>
 
     <Style x:Key="AppMetricTileButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource AppMetricTileGradientBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Focusable" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -319,12 +337,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="TileRoot"
-                            Style="{StaticResource AppMetricTileBorderStyle}">
+                            Style="{StaticResource AppMetricTileBorderStyle}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter Margin="{TemplateBinding Padding}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="TileRoot" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                            <Setter TargetName="TileRoot" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -335,37 +356,33 @@
     <Style x:Key="AppMetricLabelTextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="9"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
         <Setter Property="Margin" Value="0,0,0,6"/>
     </Style>
 
     <Style x:Key="AppMetricValueTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
 
     <Style x:Key="AppMetricMetaTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-        <Setter Property="Margin" Value="0,6,0,0"/>
+        <Setter Property="Margin" Value="0,5,0,0"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="TextWrapping" Value="NoWrap"/>
     </Style>
 
     <Style x:Key="AppDetailSheetStyle" TargetType="Border">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1D242E" Offset="0"/>
-                    <GradientStop Color="#151A22" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="#34FFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AppDetailSheetGradientBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Padding" Value="12"/>
         <Setter Property="Margin" Value="0,0,0,10"/>
     </Style>
@@ -374,10 +391,10 @@
         <Setter Property="MinWidth" Value="118"/>
         <Setter Property="Margin" Value="0,0,6,6"/>
         <Setter Property="Padding" Value="8,6"/>
-        <Setter Property="Background" Value="#16000000"/>
-        <Setter Property="BorderBrush" Value="#1EFFFFFF"/>
+        <Setter Property="Background" Value="{DynamicResource AppChipSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="CornerRadius" Value="6"/>
     </Style>
 
     <Style x:Key="AnimatedLoadingBarStyle" TargetType="ProgressBar">
@@ -391,27 +408,27 @@
                 <ControlTemplate TargetType="ProgressBar">
                     <Grid x:Name="Root" SnapsToDevicePixels="True" ClipToBounds="True">
                         <Border x:Name="Track"
-                                Background="#18242A36"
-                                BorderBrush="#229BCD9E"
+                                Background="{DynamicResource AppQuietButtonBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
                                 BorderThickness="1"
-                                CornerRadius="999"/>
+                                CornerRadius="4"/>
                         <Border x:Name="AnimatedFill"
-                                Width="82"
+                                Width="96"
                                 HorizontalAlignment="Left"
-                                CornerRadius="999"
-                                Opacity="0.96"
+                                CornerRadius="4"
+                                Opacity="0.98"
                                 Visibility="Collapsed"
                                 RenderTransformOrigin="0,0.5">
                             <Border.RenderTransform>
-                                <TranslateTransform x:Name="SweepTransform" X="-96"/>
+                                <TranslateTransform x:Name="SweepTransform" X="-120"/>
                             </Border.RenderTransform>
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                    <GradientStop Color="#006BEAA5" Offset="0.00"/>
-                                    <GradientStop Color="#9BE8FFCF" Offset="0.42"/>
-                                    <GradientStop Color="#F6F6FFF9" Offset="0.52"/>
-                                    <GradientStop Color="#9BE8FFCF" Offset="0.62"/>
-                                    <GradientStop Color="#006BEAA5" Offset="1.00"/>
+                                    <GradientStop Color="#00FF4C58" Offset="0.00"/>
+                                    <GradientStop Color="#A5FF4C58" Offset="0.28"/>
+                                    <GradientStop Color="#FFF8FCFF" Offset="0.50"/>
+                                    <GradientStop Color="#A500D5FF" Offset="0.72"/>
+                                    <GradientStop Color="#0000D5FF" Offset="1.00"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
@@ -424,9 +441,9 @@
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation Storyboard.TargetName="SweepTransform"
                                                          Storyboard.TargetProperty="X"
-                                                         From="-96"
-                                                         To="340"
-                                                         Duration="0:0:0.95"/>
+                                                         From="-120"
+                                                         To="420"
+                                                         Duration="0:0:0.9"/>
                                         <DoubleAnimation Storyboard.TargetName="AnimatedFill"
                                                          Storyboard.TargetProperty="Opacity"
                                                          From="0.72"

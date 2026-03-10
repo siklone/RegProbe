@@ -14,7 +14,7 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
 {
     private string? _settingsPath;
     private bool _hasDetected;
-    private JsonDocument? _originalSettings;
+    private string? _originalJson;
 
     public DisableVSCodeTelemetryTweak()
     {
@@ -50,7 +50,7 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
             }
 
             var json = await File.ReadAllTextAsync(_settingsPath, ct);
-            _originalSettings = JsonDocument.Parse(json);
+            _originalJson = json;
 
             _hasDetected = true;
             return new TweakResult(
@@ -82,6 +82,12 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
 
         try
         {
+            var settingsDirectory = Path.GetDirectoryName(_settingsPath);
+            if (!string.IsNullOrWhiteSpace(settingsDirectory))
+            {
+                Directory.CreateDirectory(settingsDirectory);
+            }
+
             var telemetrySettings = new
             {
                 telemetry = new { telemetryLevel = "off" },
@@ -107,24 +113,15 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
                 update_releaseNotes = false
             };
 
-            JsonDocument existing;
             if (File.Exists(_settingsPath))
             {
                 var json = await File.ReadAllTextAsync(_settingsPath, ct);
-                existing = JsonDocument.Parse(json);
-            }
-            else
-            {
-                // Create empty JSON object
-                existing = JsonDocument.Parse("{}");
+                _originalJson ??= json;
             }
 
-            // Merge settings (simple approach: serialize both and manually merge)
             var options = new JsonSerializerOptions { WriteIndented = true };
             var telemetryJson = JsonSerializer.Serialize(telemetrySettings, options);
 
-            // For simplicity, just write the telemetry settings
-            // A full implementation would merge with existing settings
             await File.WriteAllTextAsync(_settingsPath, telemetryJson, ct);
 
             return new TweakResult(
@@ -160,7 +157,7 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
 
     public async Task<TweakResult> RollbackAsync(CancellationToken ct)
     {
-        if (_originalSettings == null || _settingsPath == null)
+        if (_settingsPath == null)
         {
             return new TweakResult(
                 TweakStatus.Failed,
@@ -170,9 +167,17 @@ public sealed class DisableVSCodeTelemetryTweak : ITweak
 
         try
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var originalJson = JsonSerializer.Serialize(_originalSettings, options);
-            await File.WriteAllTextAsync(_settingsPath, originalJson, ct);
+            if (_originalJson is null)
+            {
+                if (File.Exists(_settingsPath))
+                {
+                    File.Delete(_settingsPath);
+                }
+            }
+            else
+            {
+                await File.WriteAllTextAsync(_settingsPath, _originalJson, ct);
+            }
 
             return new TweakResult(
                 TweakStatus.RolledBack,

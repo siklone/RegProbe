@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using WindowsOptimizer.Core.Commands;
 using WindowsOptimizer.Infrastructure.Elevation;
 using WindowsOptimizer.Core.Registry;
 using Xunit;
@@ -52,6 +56,36 @@ public sealed class ElevatedRegistryAccessorTests
     }
 
     [Fact]
+    public async Task SetValueAsync_FallsBackTo_RegExe_OnAccessDenied()
+    {
+        var client = new RecordingClient
+        {
+            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "Access to the path is denied.", null),
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.CurrentUser,
+            RegistryView.Default,
+            "Software\\Policies\\Microsoft\\Windows\\Explorer",
+            "TestValue");
+
+        await accessor.SetValueAsync(
+            reference,
+            new RegistryValueData(RegistryValueKind.DWord, NumericValue: 1),
+            CancellationToken.None);
+
+        Assert.Equal(2, client.Requests.Count);
+        Assert.Equal(ElevatedHostRequestType.Registry, client.Requests[0].RequestType);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
+        Assert.Equal("add", client.Requests[1].CommandRequest!.Command.Arguments.First());
+    }
+
+    [Fact]
     public async Task DeleteValueAsync_SendsDeleteRequest()
     {
         var client = new RecordingClient();
@@ -67,20 +101,124 @@ public sealed class ElevatedRegistryAccessorTests
         Assert.Equal(ElevatedRegistryOperation.DeleteValue, client.LastRequest!.RegistryRequest!.Operation);
     }
 
+    [Fact]
+    public async Task DeleteValueAsync_FallsBackTo_RegExe_OnAccessDenied()
+    {
+        var client = new RecordingClient
+        {
+            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "Access is denied.", null),
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.CurrentUser,
+            RegistryView.Default,
+            "Software\\Policies\\Microsoft\\Windows\\Explorer",
+            "TestValue");
+
+        await accessor.DeleteValueAsync(reference, CancellationToken.None);
+
+        Assert.Equal(2, client.Requests.Count);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
+        Assert.Equal("delete", client.Requests[1].CommandRequest!.Command.Arguments.First());
+    }
+
+    [Fact]
+    public async Task SetValueAsync_FallsBackTo_RegExe_OnUnauthorizedAccessException()
+    {
+        var client = new RecordingClient
+        {
+            RegistryResponseFactory = _ => throw new UnauthorizedAccessException("Access to the path is denied."),
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.LocalMachine,
+            RegistryView.Default,
+            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
+            "Priority");
+
+        await accessor.SetValueAsync(
+            reference,
+            new RegistryValueData(RegistryValueKind.DWord, NumericValue: 8),
+            CancellationToken.None);
+
+        Assert.Equal(2, client.Requests.Count);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
+        Assert.Equal("add", client.Requests[1].CommandRequest!.Command.Arguments.First());
+    }
+
+    [Fact]
+    public async Task DeleteValueAsync_FallsBackTo_RegExe_OnWin32AccessDenied()
+    {
+        var client = new RecordingClient
+        {
+            RegistryResponseFactory = _ => throw new Win32Exception("Not all privileges or groups referenced are assigned to the caller."),
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.CurrentUser,
+            RegistryView.Default,
+            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
+            "TurnOffSPIAnimations");
+
+        await accessor.DeleteValueAsync(reference, CancellationToken.None);
+
+        Assert.Equal(2, client.Requests.Count);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
+        Assert.Equal("delete", client.Requests[1].CommandRequest!.Command.Arguments.First());
+    }
+
     private sealed class RecordingClient : IElevatedHostClient
     {
         public ElevatedHostRequest? LastRequest { get; private set; }
+        public List<ElevatedHostRequest> Requests { get; } = new();
         public Func<ElevatedRegistryRequest, ElevatedRegistryResponse>? RegistryResponseFactory { get; set; }
+        public Func<ElevatedCommandRequest, ElevatedCommandResponse>? CommandResponseFactory { get; set; }
 
         public Task<ElevatedHostResponse> SendAsync(ElevatedHostRequest request, CancellationToken ct)
         {
             LastRequest = request;
-            var registryRequest = request.RegistryRequest
-                ?? throw new InvalidOperationException("Registry request payload is required.");
-            var response = RegistryResponseFactory?.Invoke(registryRequest)
-                ?? new ElevatedRegistryResponse(request.RequestId, true, null, null);
-            var hostResponse = new ElevatedHostResponse(request.RequestId, request.RequestType, RegistryResponse: response);
-            return Task.FromResult(hostResponse);
+            Requests.Add(request);
+
+            if (request.RequestType == ElevatedHostRequestType.Registry)
+            {
+                var registryRequest = request.RegistryRequest
+                    ?? throw new InvalidOperationException("Registry request payload is required.");
+                var response = RegistryResponseFactory?.Invoke(registryRequest)
+                    ?? new ElevatedRegistryResponse(request.RequestId, true, null, null);
+                var hostResponse = new ElevatedHostResponse(request.RequestId, request.RequestType, RegistryResponse: response);
+                return Task.FromResult(hostResponse);
+            }
+
+            if (request.RequestType == ElevatedHostRequestType.Command)
+            {
+                var commandRequest = request.CommandRequest
+                    ?? throw new InvalidOperationException("Command request payload is required.");
+                var response = CommandResponseFactory?.Invoke(commandRequest)
+                    ?? new ElevatedCommandResponse(
+                        request.RequestId,
+                        true,
+                        null,
+                        new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero));
+                var hostResponse = new ElevatedHostResponse(request.RequestId, request.RequestType, CommandResponse: response);
+                return Task.FromResult(hostResponse);
+            }
+
+            throw new InvalidOperationException($"Unexpected request type: {request.RequestType}.");
         }
     }
 }

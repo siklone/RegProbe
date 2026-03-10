@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
 
 namespace WindowsOptimizer.App.Behaviors;
@@ -30,7 +31,6 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
         set => SetValue(TransitionProperty, value);
     }
 
-    private FrameworkElement? _currentElement;
     private DependencyPropertyDescriptor? _contentPropertyDescriptor;
 
     protected override void OnAttached()
@@ -55,70 +55,57 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
             ContentControl.ContentProperty,
             typeof(ContentControl));
         _contentPropertyDescriptor?.AddValueChanged(AssociatedObject, OnContentChanged);
-
-        // Initialize first view
-        if (AssociatedObject.Content is FrameworkElement element)
-        {
-            _currentElement = element;
-            PrepareElement(element);
-            AnimateIn(element);
-        }
+        BeginIncomingTransition();
     }
 
     private void OnContentChanged(object? sender, EventArgs e)
     {
-        var oldElement = _currentElement;
-
-        if (AssociatedObject.Content is not FrameworkElement newElement)
-        {
-            return;
-        }
-
-        if (oldElement != null)
-        {
-            AnimateOut(oldElement, () =>
-            {
-                // After old element fades out, bring in new element
-                _currentElement = newElement;
-                PrepareElement(newElement);
-                AnimateIn(newElement);
-            });
-        }
-        else
-        {
-            _currentElement = newElement;
-            PrepareElement(newElement);
-            AnimateIn(newElement);
-        }
+        BeginIncomingTransition();
     }
 
-    private void PrepareElement(FrameworkElement element)
+    private void BeginIncomingTransition()
     {
-        // Ensure element has a mutable transform we can animate.
-        // WPF can freeze Freezables coming from resources/templates; animating a frozen transform throws:
-        // "Cannot animate '(0).(1)' on an immutable object instance."
-        if (element.RenderTransform is TransformGroup existingGroup)
+        AssociatedObject.Dispatcher.BeginInvoke(
+            DispatcherPriority.Loaded,
+            new Action(() =>
+            {
+                try
+                {
+                    PrepareHost();
+                    AnimateIn();
+                }
+                catch (Exception ex)
+                {
+                    AppDiagnostics.LogException("NavigationTransitionBehavior.BeginIncomingTransition", ex);
+                    AssociatedObject.Opacity = 1;
+                    GetTranslateTransform().Y = 0;
+                }
+            }));
+    }
+
+    private void PrepareHost()
+    {
+        if (AssociatedObject.RenderTransform is TransformGroup existingGroup)
         {
             if (existingGroup.IsFrozen || existingGroup.Children.IsFrozen)
             {
-                element.RenderTransform = existingGroup.CloneCurrentValue();
+                AssociatedObject.RenderTransform = existingGroup.CloneCurrentValue();
             }
         }
-        else if (element.RenderTransform is Freezable freezable && freezable.IsFrozen)
+        else if (AssociatedObject.RenderTransform is Freezable freezable && freezable.IsFrozen)
         {
-            element.RenderTransform = (Transform)freezable.CloneCurrentValue();
+            AssociatedObject.RenderTransform = (Transform)freezable.CloneCurrentValue();
         }
 
-        if (element.RenderTransform is not TransformGroup group)
+        if (AssociatedObject.RenderTransform is not TransformGroup group)
         {
             group = new TransformGroup();
-            group.Children.Add(new ScaleTransform());
             group.Children.Add(new TranslateTransform());
-            element.RenderTransform = group;
+            AssociatedObject.RenderTransform = group;
         }
 
         EnsureTranslateTransform(group);
-        element.RenderTransformOrigin = new Point(0.5, 0.5);
+        AssociatedObject.RenderTransformOrigin = new Point(0.5, 0.5);
     }
 
     private static TranslateTransform EnsureTranslateTransform(TransformGroup group)
@@ -143,108 +130,53 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
         return translate;
     }
 
-    private TranslateTransform GetTranslateTransform(FrameworkElement element)
+    private TranslateTransform GetTranslateTransform()
     {
-        PrepareElement(element);
-        var group = (TransformGroup)element.RenderTransform;
+        PrepareHost();
+        var group = (TransformGroup)AssociatedObject.RenderTransform;
         return EnsureTranslateTransform(group);
     }
 
-    private void AnimateOut(FrameworkElement element, Action? onCompleted = null)
+    private void AnimateIn()
     {
         var storyboard = new Storyboard();
 
         try
         {
-            if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
-            {
-                var fadeOut = new DoubleAnimation
-                {
-                    From = 1.0,
-                    To = 0.0,
-                    Duration = TimeSpan.FromMilliseconds(200),
-                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
-                };
-                Storyboard.SetTarget(fadeOut, element);
-                Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
-                storyboard.Children.Add(fadeOut);
-            }
+            var translate = GetTranslateTransform();
+            AssociatedObject.BeginAnimation(UIElement.OpacityProperty, null);
+            translate.BeginAnimation(TranslateTransform.YProperty, null);
 
-            if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
-            {
-                var translate = GetTranslateTransform(element);
-                var slideOut = new DoubleAnimation
-                {
-                    From = 0,
-                    To = -50,
-                    Duration = TimeSpan.FromMilliseconds(200),
-                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
-                };
-                Storyboard.SetTarget(slideOut, translate);
-                Storyboard.SetTargetProperty(slideOut, new PropertyPath(TranslateTransform.XProperty));
-                storyboard.Children.Add(slideOut);
-            }
-
-            if (onCompleted != null)
-            {
-                storyboard.Completed += (s, e) => onCompleted();
-            }
-
-            storyboard.Begin();
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.LogException("NavigationTransitionBehavior.AnimateOut", ex);
-
-            try
-            {
-                element.Opacity = 0;
-                GetTranslateTransform(element).X = -50;
-            }
-            catch
-            {
-            }
-
-            onCompleted?.Invoke();
-        }
-    }
-
-    private void AnimateIn(FrameworkElement element)
-    {
-        var storyboard = new Storyboard();
-
-        try
-        {
             if (Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide)
             {
                 var fadeIn = new DoubleAnimation
                 {
                     From = 0.0,
                     To = 1.0,
-                    Duration = TimeSpan.FromMilliseconds(300),
-                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+                    Duration = TimeSpan.FromMilliseconds(190),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
                 };
-                Storyboard.SetTarget(fadeIn, element);
+                Storyboard.SetTarget(fadeIn, AssociatedObject);
                 Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
                 storyboard.Children.Add(fadeIn);
             }
 
             if (Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide)
             {
-                var translate = GetTranslateTransform(element);
                 var slideIn = new DoubleAnimation
                 {
-                    From = 50,
+                    From = 6,
                     To = 0,
-                    Duration = TimeSpan.FromMilliseconds(300),
+                    Duration = TimeSpan.FromMilliseconds(190),
                     EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
                 };
                 Storyboard.SetTarget(slideIn, translate);
-                Storyboard.SetTargetProperty(slideIn, new PropertyPath(TranslateTransform.XProperty));
+                Storyboard.SetTargetProperty(slideIn, new PropertyPath(TranslateTransform.YProperty));
                 storyboard.Children.Add(slideIn);
             }
 
-            element.Opacity = Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide ? 0 : 1;
+            AssociatedObject.Opacity = Transition == TransitionType.Fade || Transition == TransitionType.FadeAndSlide ? 0 : 1;
+            translate.Y = Transition == TransitionType.Slide || Transition == TransitionType.FadeAndSlide ? 6 : 0;
             storyboard.Begin();
         }
         catch (Exception ex)
@@ -253,8 +185,8 @@ public sealed class NavigationTransitionBehavior : Behavior<ContentControl>
 
             try
             {
-                element.Opacity = 1;
-                GetTranslateTransform(element).X = 0;
+                AssociatedObject.Opacity = 1;
+                GetTranslateTransform().Y = 0;
             }
             catch
             {

@@ -38,9 +38,13 @@
     <Resource Include="Resources\tray-icon.ico" Condition="Exists('Resources\tray-icon.ico')" />
     <Resource Include="Resources\Icons\**\*.png" />
     <Resource Include="Assets\Icons\**\*.png" />
+    <Resource Include="Resources\Fonts\*.ttf" />
     <!-- Hardware DB JSONs are large generated artifacts. They are copied only when present; prefer rule-based matching in source.
          These files are allowed to be removed during cleanup. -->
     <Content Include="Assets\HardwareDb\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\*-OFL.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -58,7 +62,10 @@
       <ElevatedHostRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</ElevatedHostRid>
       <ElevatedHostRid Condition="'$(ElevatedHostRid)' == ''">win-x64</ElevatedHostRid>
 
-      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\$(ElevatedHostRid)\\</ElevatedHostOutputDir>
+      <ElevatedHostRootOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\</ElevatedHostRootOutputDir>
+      <ElevatedHostRidOutputDir>$(ElevatedHostRootOutputDir)$(ElevatedHostRid)\\</ElevatedHostRidOutputDir>
+      <ElevatedHostOutputDir Condition="Exists('$(ElevatedHostRidOutputDir)')">$(ElevatedHostRidOutputDir)</ElevatedHostOutputDir>
+      <ElevatedHostOutputDir Condition="'$(ElevatedHostOutputDir)' == ''">$(ElevatedHostRootOutputDir)</ElevatedHostOutputDir>
       <ElevatedHostDestinationDir>$(TargetDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>
@@ -73,7 +80,10 @@
       <ElevatedHostRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</ElevatedHostRid>
       <ElevatedHostRid Condition="'$(ElevatedHostRid)' == ''">win-x64</ElevatedHostRid>
 
-      <ElevatedHostOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\$(ElevatedHostRid)\\</ElevatedHostOutputDir>
+      <ElevatedHostRootOutputDir>$(MSBuildProjectDirectory)\\..\\WindowsOptimizer.ElevatedHost\\bin\\$(Configuration)\\$(TargetFramework)\\</ElevatedHostRootOutputDir>
+      <ElevatedHostRidOutputDir>$(ElevatedHostRootOutputDir)$(ElevatedHostRid)\\</ElevatedHostRidOutputDir>
+      <ElevatedHostOutputDir Condition="Exists('$(ElevatedHostRidOutputDir)')">$(ElevatedHostRidOutputDir)</ElevatedHostOutputDir>
+      <ElevatedHostOutputDir Condition="'$(ElevatedHostOutputDir)' == ''">$(ElevatedHostRootOutputDir)</ElevatedHostOutputDir>
       <ElevatedHostDestinationDir>$(PublishDir)ElevatedHost\\</ElevatedHostDestinationDir>
     </PropertyGroup>
     <ItemGroup>

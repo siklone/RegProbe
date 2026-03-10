@@ -102,6 +102,30 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "system.kernel-cache-aware-scheduling",
+            "Kernel: Cache-Aware Scheduling",
+            "Restores Windows' documented cache-aware scheduling default so the scheduler stays aligned with normal CPU cache topology behavior.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Kernel",
+            "CacheAwareScheduling",
+            RegistryValueKind.DWord,
+            47);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.kernel-default-dynamic-hetero-cpu-policy",
+            "Kernel: Default Dynamic Hetero CPU Policy",
+            "Returns Windows' hybrid CPU scheduling policy to the documented default used for heterogeneous core systems.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Kernel",
+            "DefaultDynamicHeteroCpuPolicy",
+            RegistryValueKind.DWord,
+            3);
+
+        yield return CreateRegistryTweak(
+            context,
             "system.kernel-thread-dpc-enable",
             "Kernel: Threaded DPC Enable",
             "Enables threaded DPCs using the documented default value.",
@@ -313,6 +337,20 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             0,
             requiresElevation: false);
 
+        yield return WithMicrosoftDoc(
+            CreateRegistryTweak(
+                context,
+                "system.disable-game-recording-broadcasting",
+                "Disable Game Recording & Broadcasting",
+                "Disables Windows game recording and broadcasting for all users through the official policy setting.",
+                TweakRiskLevel.Safe,
+                RegistryHive.LocalMachine,
+                @"SOFTWARE\Policies\Microsoft\Windows\GameDVR",
+                "AllowGameDVR",
+                RegistryValueKind.DWord,
+                0),
+            "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement");
+
         yield return CreateRegistryValueSetTweak(
             context,
             "system.disable-fullscreen-optimizations",
@@ -331,7 +369,7 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             requiresElevation: false);
 
         // Windows Search policies
-        yield return CreateRegistryTweak(
+        yield return CreateCommandBackedRegistryTweak(
             context,
             "system.disable-search-web-results",
             "Disable Web Search Results",
@@ -414,6 +452,66 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
             "DisablePagingExecutive",
+            RegistryValueKind.DWord,
+            1);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.memory-large-system-cache-client",
+            "Memory: Use Client System Cache",
+            "Keeps memory behavior on the normal desktop/client default so Windows favors applications instead of file-server style caching.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
+            "LargeSystemCache",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.memory-paged-pool-dynamic",
+            "Memory: Reset Paged Pool Size",
+            "Returns kernel paged pool allocation to the Windows-managed dynamic default. Use this when a manual pool tweak should be undone.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
+            "PagedPoolSize",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.memory-nonpaged-pool-dynamic",
+            "Memory: Reset Non-Paged Pool Size",
+            "Returns kernel non-paged pool allocation to the Windows-managed dynamic default. This is mainly a rollback-to-default style setting.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
+            "NonPagedPoolSize",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.memory-registry-quota-default",
+            "Memory: Reset Registry Quota",
+            "Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
+            "RegistryQuota",
+            RegistryValueKind.DWord,
+            0x200000);
+
+        yield return CreateRegistryTweak(
+            context,
+            "system.graphics-page-fault-debug-mode",
+            "Graphics: Page Fault Debug Mode",
+            "Restores the graphics page-fault debug mode value Windows expects by default. Useful when undoing manual scheduler experiments.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers",
+            "PageFaultDebugMode",
             RegistryValueKind.DWord,
             1);
 

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
 using WindowsOptimizer.App.HardwareDb;
@@ -42,7 +43,7 @@ public partial class App : Application
         // GPU hardware acceleration settings for smoother UI
         // Render settings configured later after MainWindow is created
 
-        StartupWindow? splash = null;
+        SplashWindowHost? splashHost = null;
         try
         {
             AppDiagnostics.Log("[APP] OnStartup begin");
@@ -55,27 +56,27 @@ public partial class App : Application
             UiPreferences.Current.EnableCardShadows = false;
             UiPreferences.Current.IsCompactMode = false;
 
-            var showSplash = settings.RunStartupScanOnLaunch;
+            var showSplash = true;
             if (showSplash)
             {
-                splash = new StartupWindow();
-                splash.Show();
-                await Dispatcher.Yield(DispatcherPriority.Render);
+                splashHost = new SplashWindowHost();
+                await splashHost.ShowAsync();
+                await Task.Delay(80);
             }
 
             var preloadProgress = showSplash
-                ? new Progress<PreloadProgress>(progress => splash?.UpdatePreloadProgress(progress))
+                ? new Progress<PreloadProgress>(progress => splashHost?.UpdatePreloadProgress(progress))
                 : new Progress<PreloadProgress>(_ => { });
 
             var preloader = CreateStartupPreloader(preloadProgress);
 
             AppDiagnostics.Log("[APP] Calling PreloadAllAsync...");
-            await preloader.RunAllAsync(CancellationToken.None);
+            await Task.Run(() => preloader.RunAllAsync(CancellationToken.None));
             AppDiagnostics.Log("[APP] PreloadAllAsync done.");
 
             var mainWindow = new MainWindow
             {
-                Visibility = Visibility.Hidden
+                Opacity = 0
             };
             MainWindow = mainWindow;
 
@@ -83,14 +84,30 @@ public partial class App : Application
             ConfigureRenderSettings();
 
             mainWindow.Show();
+            await Dispatcher.Yield(DispatcherPriority.Render);
+
+            if (splashHost != null)
+            {
+                await splashHost.CompleteAndCloseAsync();
+            }
+
+            var revealAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(180),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            mainWindow.BeginAnimation(UIElement.OpacityProperty, revealAnimation);
+            mainWindow.Opacity = 1;
             mainWindow.Activate();
-            splash?.Close();
 
             QueueDeferredStartupWork(settings, mainWindow);
         }
         catch (Exception ex)
         {
-            splash?.Close();
+            splashHost?.CloseImmediately();
             AppDiagnostics.LogException("Startup sequence failed", ex);
             _ = CrashReportService.LogCrashAsync(ex, "Startup", true);
 
@@ -100,7 +117,9 @@ public partial class App : Application
                 MainWindow = new MainWindow();
             }
 
+            MainWindow.Opacity = 1;
             MainWindow.Show();
+            MainWindow.Activate();
         }
     }
 

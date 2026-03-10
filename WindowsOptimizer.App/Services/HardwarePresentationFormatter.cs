@@ -119,6 +119,64 @@ public static class HardwarePresentationFormatter
         return null;
     }
 
+    public static string BuildCompactCpuTitle(string? processorName)
+    {
+        if (string.IsNullOrWhiteSpace(processorName))
+        {
+            return string.Empty;
+        }
+
+        var compact = Regex.Replace(processorName.Trim(), @"\s+", " ");
+        compact = Regex.Replace(compact, @"\s+\d+\-Core Processor\b", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\s+Processor\b", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\s+CPU\b", string.Empty, RegexOptions.IgnoreCase);
+        compact = compact.Trim();
+        return string.IsNullOrWhiteSpace(compact) ? processorName.Trim() : compact;
+    }
+
+    public static string BuildCompactOsTitle(string? osName)
+    {
+        if (string.IsNullOrWhiteSpace(osName))
+        {
+            return string.Empty;
+        }
+
+        var compact = Regex.Replace(osName.Trim(), @"\s+", " ");
+        compact = Regex.Replace(compact, @"^Microsoft\s+", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\s*\([^)]*\)", string.Empty);
+        compact = compact.Trim();
+        return string.IsNullOrWhiteSpace(compact) ? osName.Trim() : compact;
+    }
+
+    public static string BuildCompactGpuTitle(string? gpuName)
+    {
+        if (string.IsNullOrWhiteSpace(gpuName))
+        {
+            return string.Empty;
+        }
+
+        var compact = Regex.Replace(gpuName.Trim(), @"\s+", " ");
+        compact = Regex.Replace(compact, @"\bNVIDIA\s+GeForce\s+", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\bNVIDIA\s+", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\bAMD\s+Radeon\s+", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\bAMD\s+", string.Empty, RegexOptions.IgnoreCase);
+        compact = Regex.Replace(compact, @"\bIntel\s+Arc\s+", "Arc ", RegexOptions.IgnoreCase);
+
+        var nvidiaMatch = Regex.Match(compact, @"\b(RTX|GTX)\s+\d{3,4}[A-Z]*\b", RegexOptions.IgnoreCase);
+        if (nvidiaMatch.Success)
+        {
+            return nvidiaMatch.Value.ToUpperInvariant();
+        }
+
+        var amdMatch = Regex.Match(compact, @"\bRX\s+\d{3,4}\s*[A-Z]*\b", RegexOptions.IgnoreCase);
+        if (amdMatch.Success)
+        {
+            return Regex.Replace(amdMatch.Value.ToUpperInvariant(), @"\s+", " ").Trim();
+        }
+
+        return compact;
+    }
+
     public static string BuildStorageInterfaceSummary(string? interfaceType, string? mediaType, bool isExternal = false)
     {
         if (isExternal ||

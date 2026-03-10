@@ -63,13 +63,14 @@ public sealed class TweakCatalogService : ITweakCatalog
         var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
         {
             HostExecutablePath = ElevatedHostPath,
-            PipeName = ElevatedHostDefaults.PipeName,
+            PipeName = ElevatedHostDefaults.GetPipeNameForProcess(Process.GetCurrentProcess().Id),
             ParentProcessId = Process.GetCurrentProcess().Id
         });
 
+        var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
         _context = new TweakContext(
-            new LocalRegistryAccessor(),
-            new ElevatedRegistryAccessor(elevatedHostClient),
+            new RoutingRegistryAccessor(new LocalRegistryAccessor(), elevatedRegistryAccessor),
+            elevatedRegistryAccessor,
             new ElevatedServiceManager(elevatedHostClient),
             new ElevatedScheduledTaskManager(elevatedHostClient),
             new ElevatedFileSystemAccessor(elevatedHostClient),

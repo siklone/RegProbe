@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+             FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12">
     <UserControl.Resources>
         <Style x:Key="SectionCardStyle" TargetType="Border">
@@ -17,25 +17,21 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="{DynamicResource BackgroundDarkestBrush}">
-        <Grid Margin="32">
-            <StackPanel MaxWidth="800" HorizontalAlignment="Left">
-                <!-- Header with Logo -->
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,32">
-                    <Border Background="{DynamicResource AccentDarkBlueBrush}" CornerRadius="16" Padding="16" Margin="0,0,20,0">
-                        <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="28"
-                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                    </Border>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Title}" 
-                                   FontSize="32" 
-                                   FontWeight="Bold" 
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                        <TextBlock Margin="0,4,0,0"
-                                   Text="Modern, safe, and reversible Windows optimization tool"
-                                   Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                   FontSize="14"/>
-                    </StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalContentAlignment="Stretch"
+                  Background="{DynamicResource BackgroundDarkestBrush}">
+        <Grid Margin="16,8,16,12"
+              HorizontalAlignment="Stretch">
+            <StackPanel Margin="0,6,0,8">
+                <StackPanel Margin="0,0,0,18">
+                    <TextBlock Text="About"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <TextBlock Text="{Binding Title}"
+                               Margin="0,3,0,0"
+                               Style="{StaticResource AppHeroTitleTextStyle}"/>
+                    <TextBlock Margin="0,4,0,0"
+                               Text="Modern, safe, and reversible Windows optimization tool"
+                               Style="{StaticResource AppHeroSubtitleTextStyle}"/>
                 </StackPanel>
 
                 <!-- Version Info Cards -->

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:WindowsOptimizer.App.ViewModels"
              mc:Ignorable="d"
-             FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+             FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12">
     <UserControl.Resources>
         <Style x:Key="StartupTitleStyle" TargetType="TextBlock">

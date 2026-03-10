@@ -56,7 +56,7 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
             using var key = OpenOrCreateKey(reference);
             key.SetValue(reference.ValueName, value.ToObject(), value.Kind);
         }
-        catch (UnauthorizedAccessException)
+        catch (UnauthorizedAccessException) when (ShouldAttemptOwnership(reference))
         {
             // If access denied, try to take ownership and retry
             using (new RegistryOwnershipScope(reference.Hive, reference.View, reference.KeyPath))
@@ -83,7 +83,7 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
         {
             await ExecuteDeleteAsync(reference);
         }
-        catch (UnauthorizedAccessException)
+        catch (UnauthorizedAccessException) when (ShouldAttemptOwnership(reference))
         {
             using (new RegistryOwnershipScope(reference.Hive, reference.View, reference.KeyPath))
             {
@@ -114,5 +114,12 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
         }
 
         return key;
+    }
+
+    private static bool ShouldAttemptOwnership(RegistryValueReference reference)
+    {
+        // HKCU failures are commonly policy-ACL or session-specific and should surface
+        // as a normal access error rather than trying to escalate token privileges.
+        return reference.Hive != RegistryHive.CurrentUser;
     }
 }

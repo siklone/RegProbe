@@ -7,17 +7,17 @@
         xmlns:converters="clr-namespace:WindowsOptimizer.App.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}"
-        Width="760"
-        Height="700"
+        Width="720"
+        Height="680"
         MinWidth="620"
         MinHeight="560"
-        MaxWidth="1100"
+        MaxWidth="820"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         AllowsTransparency="False"
         ResizeMode="CanResizeWithGrip"
         Background="{DynamicResource BackgroundDarkestBrush}"
-        FontFamily="Segoe UI Variable Text, Segoe UI, Segoe UI Emoji"
+        FontFamily="{DynamicResource FontFamilyText}"
         FontSize="12"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
@@ -54,16 +54,17 @@
             <Style x:Key="HardwareDetailShellCardStyle"
                    TargetType="Border"
                    BasedOn="{StaticResource AppSurfaceCardStyle}">
-                <Setter Property="Padding" Value="16"/>
-                <Setter Property="CornerRadius" Value="18"/>
+                <Setter Property="Padding" Value="18,20"/>
+                <Setter Property="CornerRadius" Value="14"/>
             </Style>
 
             <Style x:Key="InsightCardStyle"
                    TargetType="Border"
                    BasedOn="{StaticResource AppInsetPanelStyle}">
-                <Setter Property="Padding" Value="12,10"/>
-                <Setter Property="Margin" Value="0,0,10,10"/>
-                <Setter Property="MinHeight" Value="92"/>
+                <Setter Property="Padding" Value="14,14,14,12"/>
+                <Setter Property="Margin" Value="0,0,8,8"/>
+                <Setter Property="MinHeight" Value="88"/>
+                <Setter Property="CornerRadius" Value="10"/>
             </Style>
 
             <Style x:Key="HardwareDetailTabHostStyle"
@@ -111,28 +112,32 @@
             <Style x:Key="HardwareDetailSpecCardStyle"
                    TargetType="Border"
                    BasedOn="{StaticResource AppInsetPanelStyle}">
-                <Setter Property="Padding" Value="12,10"/>
-                <Setter Property="CornerRadius" Value="14"/>
+                <Setter Property="Padding" Value="14,10"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Margin" Value="0,0,0,5"/>
             </Style>
 
             <Style x:Key="HardwareDetailInsightTitleStyle"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource AppSectionEyebrowTextStyle}">
                 <Setter Property="FontSize" Value="10"/>
+                <Setter Property="Margin" Value="0,0,0,7"/>
             </Style>
 
             <Style x:Key="HardwareDetailInsightBodyStyle"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource AppSectionSubtitleTextStyle}">
-                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="FontSize" Value="11.5"/>
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="LineHeight" Value="18"/>
             </Style>
 
             <Style x:Key="HardwareDetailSectionTitleStyle"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource AppSectionTitleTextStyle}">
-                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -170,7 +175,11 @@
             </Grid.RowDefinitions>
 
             <!-- Row 0: Header -->
-            <Border x:Name="HeaderCard" Grid.Row="0" Margin="10,10,10,8" Style="{StaticResource HardwareDetailShellCardStyle}">
+            <Border x:Name="HeaderCard"
+                    Grid.Row="0"
+                    Margin="10,10,10,6"
+                    Style="{StaticResource HardwareDetailShellCardStyle}"
+                    Padding="18,18">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -179,13 +188,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0"
-                            Width="42"
-                            Height="42"
-                            CornerRadius="11"
+                            Width="46"
+                            Height="46"
+                            CornerRadius="12"
                             Style="{StaticResource AppInsetPanelStyle}"
                             Padding="0"
                             VerticalAlignment="Center"
-                            Margin="0,0,10,0">
+                            Margin="0,0,14,0">
                         <Image Source="{Binding IconSource}"
                                Width="24"
                                Height="24"
@@ -196,20 +205,23 @@
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock Text="Device details"
-                                   Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                                   Style="{StaticResource AppSectionEyebrowTextStyle}"
+                                   FontSize="10"
+                                   Margin="0,0,0,4"/>
                         <TextBlock Text="{Binding Title}"
-                                   Margin="0,3,0,0"
+                                   Margin="0,0,0,0"
                                    Style="{StaticResource HardwareDetailSectionTitleStyle}"
                                    TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding Subtitle}"
                                    Margin="0,4,0,0"
                                    Style="{StaticResource AppSectionSubtitleTextStyle}"
+                                   FontSize="12"
                                    TextWrapping="Wrap"/>
                     </StackPanel>
 
                     <Button Grid.Column="2"
-                            Width="34"
-                            Height="34"
+                            Width="32"
+                            Height="32"
                             Margin="12,0,0,0"
                             Padding="0"
                             VerticalAlignment="Top"
@@ -226,7 +238,10 @@
             </Border>
 
             <!-- Row 1: Scrollable Content -->
-            <Border Grid.Row="1" Margin="10,0,10,10" Style="{StaticResource HardwareDetailShellCardStyle}">
+            <Border Grid.Row="1"
+                    Margin="10,0,10,10"
+                    Style="{StaticResource HardwareDetailShellCardStyle}"
+                    Padding="18,20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -236,14 +251,13 @@
 
                     <UniformGrid Grid.Row="0"
                                  Columns="2"
-                                 Margin="0,0,0,10"
+                                 Margin="0,0,0,12"
                                  Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                         <Border Style="{StaticResource InsightCardStyle}">
                             <StackPanel>
                                 <TextBlock Text="What this is"
                                            Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding WhatThisIs}"
-                                           Margin="0,6,0,0"
                                            Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
@@ -253,7 +267,6 @@
                                 <TextBlock Text="Why it matters"
                                            Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding WhyItMatters}"
-                                           Margin="0,6,0,0"
                                            Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
@@ -263,17 +276,15 @@
                                 <TextBlock Text="Driver / runtime"
                                            Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding DriverRuntime}"
-                                           Margin="0,6,0,0"
                                            Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
 
-                        <Border Style="{StaticResource InsightCardStyle}" Margin="0,0,0,10">
+                        <Border Style="{StaticResource InsightCardStyle}" Margin="0,0,0,8">
                             <StackPanel>
                                 <TextBlock Text="Common actions"
                                            Style="{StaticResource HardwareDetailInsightTitleStyle}"/>
                                 <TextBlock Text="{Binding CommonActions}"
-                                           Margin="0,6,0,0"
                                            Style="{StaticResource HardwareDetailInsightBodyStyle}"/>
                             </StackPanel>
                         </Border>
@@ -281,7 +292,7 @@
 
                     <Border x:Name="HasDeviceTabsBorder"
                             Grid.Row="1"
-                            Margin="0,0,0,10"
+                            Margin="0,0,0,12"
                             Style="{StaticResource HardwareDetailTabHostStyle}"
                             Visibility="{Binding HasDeviceTabs, Converter={StaticResource BoolToVisibility}}">
                         <ListBox ItemsSource="{Binding DeviceTabs}"
@@ -317,14 +328,21 @@
                         </ListBox>
                     </Border>
 
+                    <Border Grid.Row="2"
+                            Height="1"
+                            VerticalAlignment="Top"
+                            Margin="0,0,0,0"
+                            Background="#0CFFFFFF"
+                            Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+
                     <!-- Loading Skeleton -->
                     <Grid Grid.Row="2" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}">
-                        <StackPanel Margin="8">
+                        <StackPanel Margin="4">
                             <ItemsControl ItemsSource="{Binding SkeletonRows}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Height="20"
-                                                Margin="0,0,0,6"
+                                                Margin="0,0,0,7"
                                                 CornerRadius="8"
                                                 Background="{DynamicResource BackgroundMediumBrush}"
                                                 Opacity="0.6"/>
@@ -342,7 +360,7 @@
                                   CanContentScroll="True"
                                   PanningMode="VerticalOnly"
                                   Style="{DynamicResource AutoHidingScrollViewerStyle}"
-                                  Margin="0,2,0,0"
+                                  Margin="0,12,0,0"
                                   Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                         <ScrollViewer.Resources>
                             <Style TargetType="ScrollBar">
@@ -350,58 +368,53 @@
                             </Style>
                         </ScrollViewer.Resources>
 
-                        <ItemsControl ItemsSource="{Binding Specs}" Margin="4,2,4,4">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                        <ItemsControl ItemsSource="{Binding Specs}" Margin="0,2,0,4">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid x:Name="SpecItemRoot"
-                                          Width="332"
-                                          Margin="0,0,10,10">
+                                    <Grid x:Name="SpecItemRoot">
                                         <Border x:Name="ValueRowBorder"
                                                 Style="{StaticResource HardwareDetailSpecCardStyle}">
-                                            <Grid x:Name="ValueRow">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Grid.Row="0"
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0"
                                                            Text="{Binding Label}"
                                                            Foreground="{DynamicResource MutedForegroundBrush}"
-                                                           FontSize="10"
-                                                           TextWrapping="Wrap"
-                                                           VerticalAlignment="Top"/>
-                                                <TextBlock Grid.Row="1"
-                                                           Text="{Binding Value}"
-                                                           Margin="0,4,0,0"
-                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
                                                            FontSize="11"
+                                                           VerticalAlignment="Center"
+                                                           TextWrapping="NoWrap"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding Value}"
+                                                           Margin="16,0,0,0"
+                                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                           FontSize="12"
                                                            FontWeight="SemiBold"
+                                                           VerticalAlignment="Center"
                                                            TextWrapping="Wrap"
-                                                           VerticalAlignment="Top"/>
+                                                           MaxWidth="360"
+                                                           TextAlignment="Right"/>
                                             </Grid>
                                         </Border>
 
                                         <StackPanel x:Name="HeaderRow"
-                                                    Width="560"
                                                     Visibility="Collapsed"
-                                                    Margin="2,8,2,2">
+                                                    Margin="2,10,2,6">
                                             <TextBlock Text="{Binding Label}"
                                                        Style="{StaticResource AppSectionEyebrowTextStyle}"
+                                                       FontSize="10"
                                                        TextWrapping="Wrap"/>
                                             <Border Height="1"
-                                                    Margin="0,6,0,0"
-                                                    Background="#20FFFFFF"/>
+                                                    Margin="0,5,0,0"
+                                                    Background="#12FFFFFF"/>
                                         </StackPanel>
                                     </Grid>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding IsGroupHeader}" Value="True">
                                             <Setter TargetName="ValueRowBorder" Property="Visibility" Value="Collapsed"/>
                                             <Setter TargetName="HeaderRow" Property="Visibility" Value="Visible"/>
-                                            <Setter TargetName="SpecItemRoot" Property="Width" Value="560"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>

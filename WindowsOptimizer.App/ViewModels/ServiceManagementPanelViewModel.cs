@@ -26,6 +26,7 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
     private readonly RelayCommand _openDocsCommand;
     private readonly RelayCommand _enableServiceCommand;
     private readonly RelayCommand _disableServiceCommand;
+    private readonly RelayCommand _setFilterCommand;
     private readonly ObservableCollection<WindowsServiceCatalogEntry> _items = new();
     private readonly ICollectionView _itemsView;
     private string _searchText = string.Empty;
@@ -36,6 +37,7 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
     private int _runningCount;
     private int _disabledCount;
     private int _driverCount;
+    private ServiceListFilter _selectedFilter = ServiceListFilter.All;
 
     public ServiceManagementPanelViewModel(IServiceManager serviceManager, bool isElevatedHostAvailable, IAppLogger appLogger)
     {
@@ -49,17 +51,20 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
         _openDocsCommand = new RelayCommand(_ => OpenDocs(), _ => SelectedService is not null && !string.IsNullOrWhiteSpace(SelectedService.DocsLink));
         _enableServiceCommand = new RelayCommand(_ => _ = SetServiceStartModeAsync(CoreServiceStartMode.Manual), _ => CanEnableSelectedService);
         _disableServiceCommand = new RelayCommand(_ => _ = SetServiceStartModeAsync(CoreServiceStartMode.Disabled), _ => CanDisableSelectedService);
+        _setFilterCommand = new RelayCommand(param => SetFilter(param as string));
 
         RefreshCommand = _refreshCommand;
         OpenDocsCommand = _openDocsCommand;
         EnableServiceCommand = _enableServiceCommand;
         DisableServiceCommand = _disableServiceCommand;
+        SetFilterCommand = _setFilterCommand;
     }
 
     public ICommand RefreshCommand { get; }
     public ICommand OpenDocsCommand { get; }
     public ICommand EnableServiceCommand { get; }
     public ICommand DisableServiceCommand { get; }
+    public ICommand SetFilterCommand { get; }
 
     public ICollectionView ItemsView => _itemsView;
 
@@ -72,6 +77,8 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
         get => _context;
         private set => SetProperty(ref _context, value);
     }
+
+    public string FilterStatusText => $"{VisibleCount} shown";
 
     public string StatusMessage
     {
@@ -86,8 +93,7 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
         {
             if (SetProperty(ref _searchText, value))
             {
-                _itemsView.Refresh();
-                OnPropertyChanged(nameof(HasItems));
+                RefreshItemsView();
             }
         }
     }
@@ -107,6 +113,7 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
     }
 
     public int TotalCount => _items.Count;
+
     public int RunningCount
     {
         get => _runningCount;
@@ -125,7 +132,13 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
         private set => SetProperty(ref _driverCount, value);
     }
 
+    public int VisibleCount => _itemsView.Cast<object>().Count();
+
     public bool HasItems => _itemsView.Cast<object>().Any();
+    public bool IsAllFilterSelected => _selectedFilter == ServiceListFilter.All;
+    public bool IsRunningFilterSelected => _selectedFilter == ServiceListFilter.Running;
+    public bool IsDisabledFilterSelected => _selectedFilter == ServiceListFilter.Disabled;
+    public bool IsDriversFilterSelected => _selectedFilter == ServiceListFilter.Drivers;
 
     public WindowsServiceCatalogEntry? SelectedService
     {
@@ -154,7 +167,7 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
 
     public string SelectedState => SelectedService == null
         ? "Choose a service from the list."
-        : $"{SelectedService.Status} · {SelectedService.StartType} · {SelectedService.KindText}";
+        : $"{SelectedService.Status} | {SelectedService.StartType} | {SelectedService.KindText}";
 
     public string SelectedWhatItDoes => SelectedService?.DescriptionOrFallback ?? string.Empty;
 
@@ -199,17 +212,11 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
             RunningCount = _items.Count(static entry => entry.Status.Equals("Running", StringComparison.OrdinalIgnoreCase));
             DisabledCount = _items.Count(static entry => entry.StartMode == CoreServiceStartMode.Disabled);
             DriverCount = _items.Count(static entry => entry.IsDriver);
-            Context = $"{_items.Count} entries · {RunningCount} running · {DisabledCount} disabled · {DriverCount} drivers";
+            Context = $"{_items.Count} entries | {RunningCount} running | {DisabledCount} disabled | {DriverCount} drivers";
             StatusMessage = _items.Count == 0 ? "No services were detected." : "Services loaded.";
-            _itemsView.Refresh();
-
-            if (SelectedService == null || !_items.Contains(SelectedService))
-            {
-                SelectedService = _items.FirstOrDefault();
-            }
 
             OnPropertyChanged(nameof(TotalCount));
-            OnPropertyChanged(nameof(HasItems));
+            RefreshItemsView();
         }
         catch (Exception ex)
         {
@@ -229,17 +236,15 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(_searchText))
-        {
-            return true;
-        }
-
-        return entry.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
+        var searchMatches = string.IsNullOrWhiteSpace(_searchText)
+            || entry.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || entry.DisplayName.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || entry.DescriptionOrFallback.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || entry.Status.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || entry.StartType.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
             || entry.KindText.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+
+        return searchMatches && MatchesSelectedFilter(entry);
     }
 
     private void OpenDocs()
@@ -298,5 +303,61 @@ public sealed class ServiceManagementPanelViewModel : ViewModelBase
         }
     }
 
+    private void SetFilter(string? filterKey)
+    {
+        var filter = filterKey?.ToLowerInvariant() switch
+        {
+            "running" => ServiceListFilter.Running,
+            "disabled" => ServiceListFilter.Disabled,
+            "drivers" => ServiceListFilter.Drivers,
+            _ => ServiceListFilter.All
+        };
+
+        if (_selectedFilter == filter)
+        {
+            return;
+        }
+
+        _selectedFilter = filter;
+        OnPropertyChanged(nameof(IsAllFilterSelected));
+        OnPropertyChanged(nameof(IsRunningFilterSelected));
+        OnPropertyChanged(nameof(IsDisabledFilterSelected));
+        OnPropertyChanged(nameof(IsDriversFilterSelected));
+        RefreshItemsView();
+    }
+
+    private bool MatchesSelectedFilter(WindowsServiceCatalogEntry entry)
+    {
+        return _selectedFilter switch
+        {
+            ServiceListFilter.Running => entry.Status.Equals("Running", StringComparison.OrdinalIgnoreCase),
+            ServiceListFilter.Disabled => entry.StartMode == CoreServiceStartMode.Disabled,
+            ServiceListFilter.Drivers => entry.IsDriver,
+            _ => true
+        };
+    }
+
+    private void RefreshItemsView()
+    {
+        _itemsView.Refresh();
+
+        if (SelectedService == null || !_itemsView.Cast<WindowsServiceCatalogEntry>().Contains(SelectedService))
+        {
+            SelectedService = _itemsView.Cast<WindowsServiceCatalogEntry>().FirstOrDefault();
+        }
+
+        OnPropertyChanged(nameof(HasItems));
+        OnPropertyChanged(nameof(VisibleCount));
+        OnPropertyChanged(nameof(FilterStatusText));
+    }
+
     private static string FormatValue(string? value) => string.IsNullOrWhiteSpace(value) ? "Not exposed by Windows" : value;
+
+    private enum ServiceListFilter
+    {
+        All,
+        Running,
+        Disabled,
+        Drivers
+    }
 }
