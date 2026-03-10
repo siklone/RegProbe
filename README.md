@@ -1,145 +1,241 @@
-# Windows Optimizer
+# Windows Optimizer Suite
 
-Windows Optimizer is a WPF/.NET 8 desktop app for Windows 10/11 focused on safe, reversible tweaks, hardware-aware diagnostics, and traceable documentation.
+Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware-aware diagnostics**, and **traceable system research**.
 
-![.NET Version](https://img.shields.io/badge/.NET-8.0-blue)
-![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
+It is built for people who want more than a random "FPS boost" script:
+
+- 🛡️ every SAFE tweak follows `Detect -> Apply -> Verify -> Rollback`
+- 🧠 the app understands the PC it is running on
+- 🔍 tweaks are increasingly backed by documented sources and local audit notes
+- ⚡ elevated actions run out-of-process through a dedicated host instead of forcing the whole app to run as admin
+
+![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
+![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
+![UI](https://img.shields.io/badge/UI-WPF-1f2937)
+![Status](https://img.shields.io/badge/status-active%20development-ff5a5f)
 ![License](https://img.shields.io/badge/license-TBD-yellow)
 
-## Features
+## ✨ What It Does
 
-### Monitoring and hardware details
-- Real-time CPU, RAM, disk, network, and temperature monitoring
-- Dashboard cards for OS, motherboard, CPU, GPU, memory, storage, displays, network, and USB
-- Detail windows with richer hardware metadata and source-aware fallbacks
-- Optional hardware knowledge DB and icon mapping for better model matching
+### 🧩 Configuration Workspace
+- Browse tweak categories with search, filters, live status, and batch selection
+- Apply single tweaks directly from the row or queue multiple tweaks for bulk actions
+- Use richer policy-aware and registry-aware entries instead of opaque one-line scripts
+- Explore dedicated sections for:
+  - `Configuration`
+  - `Policy Reference`
+  - `Services`
+  - `Bloatware`
+  - `Startup`
 
-### Tweak engine
-- Safe pipeline: Detect -> Apply -> Verify -> Rollback
-- Preview-first behavior by default
-- Risk levels: Safe / Advanced / Risky
-- Category navigation, search, multi-select, and batch execution
-- Export/import profiles and built-in presets
+### 📊 Dashboard & Monitoring
+- Hardware-first dashboard for OS, motherboard, CPU, GPU, memory, storage, displays, network, USB, and audio
+- Live monitor tiles for CPU, memory, GPU, storage, and network
+- Detail sheets with charts, top processes, adapter details, and hardware-specific summaries
+- Device detail windows with cleaner specs, insights, and grouped metadata
 
-### Documentation and research linkage
-- Tweak entries can link back to generated docs and category docs
-- Research attribution is centered around `nohuto/win-config` plus official Microsoft sources
-- Local docs are copied into build/publish output for in-app navigation
+### 🧪 Tweak Engine
+- SAFE pipeline: `Detect -> Apply -> Verify -> Rollback`
+- Risk levels: `Safe`, `Advanced`, `Risky`
+- Local logging and exportable tweak history
+- Support for preset-backed tweaks and registry-backed multi-value actions
+- Elevated registry and command execution via `WindowsOptimizer.ElevatedHost`
 
-### Extensibility
-- Elevated operations are isolated in `WindowsOptimizer.ElevatedHost`
-- Plugin loading is supported through the `Plugins` folder
-- `WindowsOptimizer.Plugins.DevTools` acts as the bundled example/support plugin
+### 📚 Research & Provenance
+- Local documentation and source mapping under `Docs/`
+- Nohuto-oriented research integration (`win-config`, `win-registry`, related audits)
+- Microsoft-backed and repo-backed coverage tests for tweak providers
 
-## Solution layout
+## 🚀 Why This Project Feels Different
+
+Most Windows tweak tools stop at "click button, hope for the best."
+
+Windows Optimizer Suite aims for something better:
+
+- 🧭 **Readable UI** instead of script-dump UX
+- 🔁 **Reversible behavior** instead of blind mutation
+- 🪟 **Windows-native shell** instead of a web wrapper
+- 🛠️ **Real hardware context** instead of generic system labels
+- 🧾 **Source-aware documentation** instead of folklore-only tuning
+
+## 🖥️ Current Surface Areas
+
+### Dashboard
+- System hero card
+- Quick actions
+- Hardware grid
+- Drivers & recommended installs
+
+### Configuration
+- Searchable tweak workspace
+- Category rail
+- Inline apply actions
+- Batch queue / batch actions
+- Policy browser
+- Services browser
+- Bloatware remover
+- Startup manager
+
+### Monitoring
+- Compact live tiles
+- Trend charts
+- Top app panels
+- Adapter / disk / GPU breakdowns
+
+### Settings
+- Theme and behavior preferences
+- Startup scan behavior
+- Preview hints and shell preferences
+
+## 🧱 Solution Layout
 
 ```text
-WindowsOptimizer.App/              WPF UI, view models, assets, app startup
-WindowsOptimizer.Core/             Contracts, models, plugin and tweak interfaces
-WindowsOptimizer.Engine/           Tweak execution pipeline and providers
-WindowsOptimizer.Infrastructure/   Registry, metrics, elevation, hardware access
-WindowsOptimizer.ElevatedHost/     Elevated helper process
-WindowsOptimizer.CLI/              CLI surface for non-UI scenarios
-WindowsOptimizer.Plugins.DevTools/ Bundled plugin/support assembly
+WindowsOptimizer.App/              WPF UI, view models, startup, assets, views
+WindowsOptimizer.Core/             Contracts, models, plugin and tweak abstractions
+WindowsOptimizer.Engine/           Tweak execution pipeline and concrete tweak types
+WindowsOptimizer.Infrastructure/   Registry, metrics, elevation, files, monitoring
+WindowsOptimizer.ElevatedHost/     Elevated helper process for admin-required actions
+WindowsOptimizer.CLI/              CLI entry point for non-UI scenarios
+WindowsOptimizer.Plugins.DevTools/ Bundled example/support plugin
 WindowsOptimizer.Tests/            Unit tests
-Docs/                              Tweak docs, generated catalogs, source attribution
-Tools/                             One-off developer utilities for icon work
-scripts/                           Packaging, docs, cleanup, and asset generation scripts
+Docs/                              Research notes, audits, tweak source maps
+Tools/                             One-off developer utilities
+scripts/                           Build, publish, cleanup, asset generation
 ```
 
-## Getting started
+## 🛡️ Safety Model
+
+All SAFE tweak work is expected to remain reversible and auditable.
+
+- ✅ `Detect -> Apply -> Verify -> Rollback`
+- ✅ no automatic system modification on startup
+- ✅ elevated work is isolated from the main app process
+- ✅ tweak activity is logged
+- ✅ preview-first workflow is preserved
+
+Things this project intentionally avoids under SAFE:
+
+- ❌ disable Defender
+- ❌ disable Firewall
+- ❌ disable SmartScreen
+- ❌ irreversible "trust me bro" system mutations
+
+## 🏁 Getting Started
 
 ### Prerequisites
 - Windows 10 or Windows 11
 - .NET 8 SDK
-- PowerShell 7+ recommended for helper scripts
+- PowerShell 7+ recommended
 
-### Build
+### Clone
 
 ```powershell
 git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
 cd WPF-Windows-optimizer-with-safe-reversible-tweaks
+```
+
+### Build
+
+```powershell
 dotnet build WindowsOptimizerSuite.sln
 ```
 
-### Run
+### Run the app
 
 ```powershell
 dotnet run --project WindowsOptimizer.App/WindowsOptimizer.App.csproj
 ```
 
-If the app cannot locate the elevated helper when running from source, set:
+### Run tests
 
 ```powershell
-$env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
+dotnet test WindowsOptimizer.Tests/WindowsOptimizer.Tests.csproj -v minimal
 ```
 
-### Publish a release build
+### Publish
 
-Use the repo script instead of ad-hoc publish commands so output stays deterministic:
+Use the repo script for deterministic output:
 
 ```powershell
 pwsh -File scripts/publish_release.ps1
 ```
 
-### Clean generated build output
+### Clean build artifacts
 
 ```powershell
 pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
 ```
 
-## Optional generated assets
+## 🔐 Elevated Host Notes
 
-The hardware icon and knowledge-db work has two layers:
+The app is **not** always-admin.
 
-- Source code fallbacks: rule-based matching and default icons continue to work without generated datasets
-- Optional generated inputs: `WindowsOptimizer.App/Assets/HardwareDb/*.json` and extended icon packs improve matching quality and UI coverage when present
+Admin-required operations are delegated to `WindowsOptimizer.ElevatedHost`, which is resolved by:
 
-Useful related scripts:
+- normal publish layout
+- app discovery logic
+- optional override through:
 
-- `scripts/build_and_download_icon_db.ps1` regenerates icon source data and downloads icon assets
-- The icon generator also scans `WindowsOptimizer.App/Assets/HardwareDb/hardware_db_*.json` so newly introduced `iconKey` values can automatically become downloadable icon targets
-- `scripts/publish_release.ps1` creates a deterministic `publish_final/` folder
-- `scripts/clean_build_outputs.ps1` removes generated `bin/`, `obj/`, and `publish/` folders
+```powershell
+$env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
+```
 
-`WindowsOptimizer.App/Assets/HardwareDb/HardwareIconDownloadReport.json` is treated as a local generation report, not a source artifact.
+## 🧠 Optional Generated Assets
 
-## Safety model
+Hardware coverage has two layers:
 
-All tweak work is expected to remain reversible and auditable:
+- built-in rule-based fallbacks
+- optional generated icon / hardware-db inputs for better matching
 
-- Reversible flow: Detect -> Apply -> Verify -> Rollback
-- No automatic system modification on startup
-- Logging to `%TEMP%\WindowsOptimizer_Debug.log` and tweak execution logs
-- Elevated work runs out-of-process instead of forcing the app to run always-admin
+Useful scripts:
 
-## Documentation
+- `scripts/build_and_download_icon_db.ps1`
+- `scripts/publish_release.ps1`
+- `scripts/clean_build_outputs.ps1`
 
-- Main source map: [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
-- Research attribution: [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
-- Service notes: [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
-- Hardware dashboard manual checklist: [Docs/system/dashboard_hardware_live_checklist.md](Docs/system/dashboard_hardware_live_checklist.md)
+Generation reports such as `HardwareIconDownloadReport.json` are local artifacts, not core source files.
 
-## Contributing
+## 📖 Documentation
 
-`main` is the only intended remote branch. Keep changes small, testable, and reversible, especially around tweaks and elevated operations.
+Good starting points:
 
-Before opening a PR or merging work:
+- [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
+- [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
+- [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
+- [Docs/NOHUTO_CONFIGURATION_AUDIT_2026-03-09.md](Docs/NOHUTO_CONFIGURATION_AUDIT_2026-03-09.md)
+- [Docs/NOHUTO_TRANCHE_EVALUATION_2026-03-09.md](Docs/NOHUTO_TRANCHE_EVALUATION_2026-03-09.md)
+- [ARCHITECTURE.md](ARCHITECTURE.md)
 
-1. Build the solution.
-2. Add or update tests where behavior changed.
-3. Keep docs in `Docs/` aligned with tweak/source changes.
-4. Avoid committing build outputs, temp probes, or local scratch folders.
+## 🧪 Development Notes
 
-## License
+- WPF + MVVM shell architecture
+- Admin work goes through `ElevatedHost`
+- Prefer small, composable services
+- Add tests when changing engine contracts, registry routing, command-backed tweaks, or provider coverage
+- `main` is the intended remote branch
 
-TBD. No `LICENSE` file is committed yet.
+## 🤝 Contributing
 
-## Acknowledgments
+Before opening a PR or pushing a larger change:
+
+1. Build the solution
+2. Run tests
+3. Keep docs in sync with tweak/source changes
+4. Do not commit temp outputs, scratch folders, or generated junk
+
+## 🙏 Acknowledgments
 
 - [nohuto/win-config](https://github.com/nohuto/win-config)
 - [nohuto/win-registry](https://github.com/nohuto/win-registry)
+- Microsoft Learn / Windows documentation
 - LibreHardwareMonitor
-- Microsoft Learn and related official Windows documentation
 
-Use at your own risk. This app can modify Windows settings, so create a restore point before applying changes.
+## ⚠️ Disclaimer
+
+This app can modify Windows settings.
+
+Use it carefully, review what a tweak changes, and create a restore point before doing broad system changes.
+
+## 📄 License
+
+`LICENSE` has not been committed yet, so the project is currently **license TBD**.
