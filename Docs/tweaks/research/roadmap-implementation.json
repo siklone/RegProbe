@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:41:19Z",
+  "generated_utc": "2026-03-13T15:46:01Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -276,21 +276,6 @@
     {
       "sprint_number": 2,
       "priority_index": 14,
-      "record_id": "security.powershell-unrestricted",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell instead of the official policy path under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
-        "The current app does not write the official EnableScripts policy value."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell::ExecutionPolicy=Unrestricted to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::EnableScripts (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::ExecutionPolicy (example AllSigned). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/security.powershell-unrestricted.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 15,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -304,7 +289,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 16,
+      "priority_index": 15,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -319,7 +304,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 16,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -334,7 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 17,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -350,7 +335,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 18,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

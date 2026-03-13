@@ -203,17 +203,17 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             });
 
         // Developer & Modern Features
-        yield return CreateRegistryTweak(
+        yield return CreateRegistryValueBatchTweak(
             context,
             "security.powershell-unrestricted",
             "Set PowerShell Policy to Unrestricted",
             "Allows all PowerShell scripts to run without signing requirements. Very risky for general use.",
             TweakRiskLevel.Risky,
-            RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell",
-            "ExecutionPolicy",
-            RegistryValueKind.String,
-            "Unrestricted");
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\PowerShell", "EnableScripts", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\PowerShell", "ExecutionPolicy", RegistryValueKind.String, "Unrestricted")
+            });
 
         yield return CreateRegistryTweak(
             context,

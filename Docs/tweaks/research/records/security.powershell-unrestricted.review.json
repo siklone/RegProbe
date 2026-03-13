@@ -1,0 +1,268 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.powershell-unrestricted",
+  "tweak_id": "security.powershell-unrestricted",
+  "record_status": "validated",
+  "summary": "Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell; it now writes the documented Group Policy path instead.",
+  "setting": {
+    "name": "Windows PowerShell Script Execution Policy",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "PowerShell can be configured to block scripts, allow only signed scripts, or allow all scripts. The official policy uses a Group Policy path to control that behavior.",
+    "why_people_change_it": "People loosen it when they want easier script execution, and tighten it when they want stronger script controls.",
+    "tradeoffs_overview": "Allowing all scripts removes a major safety barrier against unsafe PowerShell script execution.",
+    "professional_notes": "PowerShellExecutionPolicy.admx documents the official policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. It uses EnableScripts = 1 plus ExecutionPolicy values such as AllSigned, RemoteSigned, or Unrestricted. The app now writes both official policy values through one batch tweak. This record remains conservative on apply_allowed because Unrestricted materially weakens script-execution protections.",
+    "targets": [
+      {
+        "target_id": "enable-scripts-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "EnableScripts",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The policy does not override PowerShell script execution through Group Policy.",
+            "evidence_ids": [
+              "local-powershellpolicy-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "No scripts allowed",
+            "meaning": "If the policy is disabled, no scripts are allowed to run.",
+            "evidence_ids": [
+              "local-powershellpolicy-admx",
+              "local-powershellpolicy-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Scripts allowed by selected execution policy",
+            "meaning": "If the policy is enabled, script execution follows the selected ExecutionPolicy string value.",
+            "evidence_ids": [
+              "local-powershellpolicy-admx",
+              "local-powershellpolicy-adml"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "execution-policy-string",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "ExecutionPolicy",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "AllSigned",
+            "label": "Allow only signed scripts",
+            "meaning": "Only scripts signed by a trusted publisher are allowed to run.",
+            "evidence_ids": [
+              "local-powershellpolicy-admx",
+              "local-powershellpolicy-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "RemoteSigned",
+            "label": "Allow local scripts and remote signed scripts",
+            "meaning": "Local scripts can run, but scripts from the Internet must be signed by a trusted publisher.",
+            "evidence_ids": [
+              "local-powershellpolicy-admx",
+              "local-powershellpolicy-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Unrestricted",
+            "label": "Allow all scripts",
+            "meaning": "All scripts are allowed to run.",
+            "evidence_ids": [
+              "local-powershellpolicy-admx",
+              "local-powershellpolicy-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
+    "writes": [
+      {
+        "target_id": "enable-scripts-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "EnableScripts",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "execution-policy-string",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+        "value_name": "ExecutionPolicy",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "Unrestricted"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting the Windows PowerShell execution policy setting",
+      "states": [
+        {
+          "target_id": "enable-scripts-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official script execution policy unset."
+        }
+      ],
+      "notes": "The local ADML help text says that if this policy is disabled or not configured, control reverts to the per-machine preference setting; if that is not configured, the default is no scripts allowed.",
+      "evidence_ids": [
+        "local-powershellpolicy-admx",
+        "local-powershellpolicy-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users",
+        "Machines that should avoid over-broad script execution"
+      ],
+      "avoid_for": [
+        "Research-only comparison with the unrestricted policy"
+      ],
+      "states": [
+        {
+          "target_id": "enable-scripts-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want to avoid weakening script-execution protections.",
+      "bad_when": "You intentionally need all scripts to run without signing requirements.",
+      "tradeoffs": [
+        "The official policy surface remains untouched."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-powershellpolicy-adml"
+      ]
+    },
+    {
+      "profile_id": "unrestricted-policy",
+      "label": "Unrestricted scripts",
+      "intended_for": [
+        "Advanced labs",
+        "Highly controlled developer or test environments"
+      ],
+      "avoid_for": [
+        "General users",
+        "Security-sensitive machines"
+      ],
+      "states": [
+        {
+          "target_id": "enable-scripts-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable scripts through the official policy surface."
+        },
+        {
+          "target_id": "execution-policy-string",
+          "state_kind": "value",
+          "value": "Unrestricted",
+          "rationale": "Allow all scripts under the official Group Policy surface."
+        }
+      ],
+      "good_when": "You explicitly need unrestricted script execution and understand the risk.",
+      "bad_when": "You want a generally safe published preset.",
+      "tradeoffs": [
+        "All scripts are allowed to run.",
+        "This materially weakens a core PowerShell safety control."
+      ],
+      "apply_allowed": false,
+      "notes": "Validated official path, but intentionally not publishable as a general apply preset because of the security risk.",
+      "evidence_ids": [
+        "local-powershellpolicy-admx",
+        "local-powershellpolicy-adml"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-powershellpolicy-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft PowerShellExecutionPolicy.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\PowerShellExecutionPolicy.admx",
+      "summary": "The local ADMX file maps the official script execution policy to HKLM or HKCU Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy values such as AllSigned, RemoteSigned, and Unrestricted.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-powershellpolicy-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft PowerShellExecutionPolicy.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\PowerShellExecutionPolicy.adml",
+      "summary": "The local ADML help text says enabling the policy allows the selected script type, disabling it allows no scripts, and if the policy is disabled or not configured it reverts to the per-machine preference setting whose default is no scripts allowed.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official PowerShell Group Policy surface is clear, and the app now writes both required policy values. The record remains non-publishable for general apply because Unrestricted materially weakens script-execution protections.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T19:02:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\PowerShellExecutionPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values."
+  }
+}

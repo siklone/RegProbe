@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:41:19Z",
+  "generated_utc": "2026-03-13T15:46:01Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 111,
+  "source_record_count": 110,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 19,
+    "implementation-mismatch": 18,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 21,
+    "heuristic": 20,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1807,32 +1807,6 @@
         "exact_quote_or_path": "Windows Platform Binary Table (WPBT): The WPBT allows vendors and OEMs to run an .exe program in the UEFI layer. Every time Windows boots, it looks at the UEFI, and runs the .exe.; Not configured: Intune doesn't change or update this setting.; Enabled: Enables the WPBT and allows .exe programs in the UEFI layer to run.; Disabled: Disables the WPBT and prevents .exe programs in the UEFI layer from running.",
         "key_found_on_page": true,
         "notes": "Official Microsoft documentation publishes WPBT as a UEFI/DFCI-managed setting with Not configured, Enabled, and Disabled states. The current app writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1 instead, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "security.powershell-unrestricted",
-      "tweak_id": "security.powershell-unrestricted",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell instead of the official policy path under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.powershell-unrestricted.review.json",
-      "summary": "Microsoft documents an official PowerShell script execution policy surface, but the current app writes only the shell preference value under the legacy PowerShell path instead of the documented Group Policy path. This stays in review until the implementation is aligned or separately classified as a preference tweak.",
-      "decision_why": "The official PowerShell Group Policy surface is clear, but the current app writes only a non-policy preference value under a different path.",
-      "blocking_issues": [
-        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell instead of the official policy path under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
-        "The current app does not write the official EnableScripts policy value."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\PowerShellExecutionPolicy.admx",
-        "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy. The record remains review-required because the app writes only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell."
       }
     },
     {

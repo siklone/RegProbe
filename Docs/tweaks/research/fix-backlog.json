@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:41:19Z",
+  "generated_utc": "2026-03-13T15:46:01Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 19,
+  "entry_count": 18,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -665,40 +665,6 @@
           "value_name": "WPBT",
           "value_type": "UEFI setting",
           "example_value": "Enabled"
-        }
-      ]
-    },
-    {
-      "record_id": "security.powershell-unrestricted",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell::ExecutionPolicy=Unrestricted to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::EnableScripts (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::ExecutionPolicy (example AllSigned). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.powershell-unrestricted.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell",
-          "value_name": "ExecutionPolicy",
-          "value_type": "REG_SZ",
-          "state_kind": "value",
-          "value": "Unrestricted"
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
-          "value_name": "EnableScripts",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
-          "value_name": "ExecutionPolicy",
-          "value_type": "REG_SZ",
-          "example_value": "AllSigned"
         }
       ]
     }
