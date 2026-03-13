@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:02:24Z",
+  "generated_utc": "2026-03-13T15:31:02Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -142,36 +142,6 @@
     {
       "sprint_number": 2,
       "priority_index": 5,
-      "record_id": "system.disable-game-dvr",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the official machine policy path documented in this record.",
-        "The GameConfigStore value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy vs Observed User Preference",
-      "notes": "Move the implementation from HKCU\\System\\GameConfigStore::GameDVR_Enabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR::AllowGameDVR (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/system.disable-game-dvr.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 6,
-      "record_id": "system.disable-search-highlights",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the official machine policy path documented in this record.",
-        "The HKCU SearchSettings value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings::IsDynamicSearchBoxEnabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::EnableDynamicContentInWSB (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/system.disable-search-highlights.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 7,
       "record_id": "developer.python-path-fix",
       "category": "fix",
       "estimated_effort": "large",
@@ -186,7 +156,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 8,
+      "priority_index": 6,
       "record_id": "network.disable-mdns",
       "category": "fix",
       "estimated_effort": "large",
@@ -200,7 +170,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 9,
+      "priority_index": 7,
       "record_id": "network.disable-netbios",
       "category": "fix",
       "estimated_effort": "large",
@@ -215,7 +185,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 10,
+      "priority_index": 8,
       "record_id": "network.smb-disable-leasing",
       "category": "fix",
       "estimated_effort": "large",
@@ -230,22 +200,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 11,
-      "record_id": "power.disable-fast-startup",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "Current app implementation writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power instead of the researched Session Manager path.",
-        "Windows default behavior is feature dependent and still needs clean-VM capture."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Registry Configuration",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::HiberbootEnabled=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power::HiberbootEnabled. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 9,
       "record_id": "privacy.disable-reserved-storage",
       "category": "fix",
       "estimated_effort": "large",
@@ -260,7 +215,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 13,
+      "priority_index": 10,
       "record_id": "security.disable-p2p-updates",
       "category": "fix",
       "estimated_effort": "large",
@@ -274,7 +229,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 14,
+      "priority_index": 11,
       "record_id": "security.disable-wpbt",
       "category": "fix",
       "estimated_effort": "large",
@@ -289,7 +244,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 15,
+      "priority_index": 12,
       "record_id": "system.memory-registry-quota-default",
       "category": "fix",
       "estimated_effort": "large",
@@ -304,7 +259,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 16,
+      "priority_index": 13,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -319,7 +274,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 14,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -335,7 +290,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 15,
       "record_id": "security.disable-system-restore",
       "category": "fix",
       "estimated_effort": "large",
@@ -349,7 +304,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 16,
       "record_id": "security.powershell-unrestricted",
       "category": "fix",
       "estimated_effort": "large",
@@ -364,7 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 20,
+      "priority_index": 17,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -378,7 +333,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 21,
+      "priority_index": 18,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -393,7 +348,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 22,
+      "priority_index": 19,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -408,7 +363,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 23,
+      "priority_index": 20,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -424,7 +379,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 24,
+      "priority_index": 21,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

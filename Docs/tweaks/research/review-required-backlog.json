@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:14:40Z",
+  "generated_utc": "2026-03-13T15:31:01Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 114,
+  "source_record_count": 113,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 22,
+    "implementation-mismatch": 21,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 24,
+    "heuristic": 23,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1625,32 +1625,6 @@
         "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
         "key_found_on_page": true,
         "notes": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values. The current app writes CipherSuiteOrder under service parameter paths instead, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "power.disable-fast-startup",
-      "tweak_id": "power.disable-fast-startup",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "Current app implementation writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power instead of the researched Session Manager path.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Power",
-      "technical_area": "Registry Configuration",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json",
-      "summary": "Fast Startup is a real Windows setting, but the current app path appears to disagree with the documented or reverse-engineered location that controls HiberbootEnabled. This should stay out of normal Apply until the mapping is resolved.",
-      "decision_why": "The user-facing setting is real, but the current app path is under dispute and should not be treated as safe until clean validation confirms the correct mapping.",
-      "blocking_issues": [
-        "Current app implementation writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power instead of the researched Session Manager path.",
-        "Windows default behavior is feature dependent and still needs clean-VM capture."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
-        "exact_quote_or_path": "To disable fast startup, set the following registry value: Key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power Name: HiberbootEnabled Type: DWORD Value: 0 (0 = Disabled, 1 = Enabled)",
-        "key_found_on_page": true,
-        "notes": "Official Microsoft guidance documents Fast Startup through HiberbootEnabled under the Session Manager Power path. The current app writes HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power instead, so this record remains review-required as an implementation mismatch."
       }
     },
     {

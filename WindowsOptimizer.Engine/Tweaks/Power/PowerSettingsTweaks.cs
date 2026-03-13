@@ -37,7 +37,7 @@ public static class PowerSettingsTweaks
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
+            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(

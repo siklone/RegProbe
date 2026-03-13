@@ -42,7 +42,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             TweakRiskLevel.Safe,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", RegistryValueKind.DWord, 0, RegistryView.Default)
             },
             requiresElevation: true);
 

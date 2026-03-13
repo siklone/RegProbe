@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:02:24Z",
+  "generated_utc": "2026-03-13T15:31:01Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 24,
+  "entry_count": 21,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -450,33 +450,6 @@
       ]
     },
     {
-      "record_id": "power.disable-fast-startup",
-      "current_state": "mismatch-suspected | Registry Configuration",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::HiberbootEnabled=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power::HiberbootEnabled. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Configuration",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-          "value_name": "HiberbootEnabled",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
-          "value_name": "HiberbootEnabled",
-          "value_type": "REG_DWORD",
-          "example_value": null
-        }
-      ]
-    },
-    {
       "record_id": "power.optimize-cpu-boost",
       "current_state": "mismatch-suspected | Processor Boost Behavior",
       "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization=PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
@@ -753,60 +726,6 @@
           "value_name": "ExecutionPolicy",
           "value_type": "REG_SZ",
           "example_value": "AllSigned"
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-game-dvr",
-      "current_state": "partially-matches | Policy vs Observed User Preference",
-      "notes": "Move the implementation from HKCU\\System\\GameConfigStore::GameDVR_Enabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR::AllowGameDVR (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy vs Observed User Preference",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.disable-game-dvr.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\System\\GameConfigStore",
-          "value_name": "GameDVR_Enabled",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
-          "value_name": "AllowGameDVR",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-search-highlights",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings::IsDynamicSearchBoxEnabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::EnableDynamicContentInWSB (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.disable-search-highlights.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
-          "value_name": "IsDynamicSearchBoxEnabled",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
-          "value_name": "EnableDynamicContentInWSB",
-          "value_type": "REG_DWORD",
-          "example_value": 0
         }
       ]
     },
