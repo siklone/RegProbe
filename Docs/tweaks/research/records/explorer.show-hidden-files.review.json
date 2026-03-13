@@ -1,0 +1,204 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "explorer.show-hidden-files",
+  "tweak_id": "explorer.show-hidden-files",
+  "record_status": "validated",
+  "summary": "Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\\Advanced with symbolic SHOW and HIDE semantics, while a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.",
+  "setting": {
+    "name": "Show Hidden Files and Folders",
+    "category": "Explorer",
+    "area": "Observed Explorer Runtime Setting",
+    "scope": "user",
+    "casual_explanation": "File Explorer can show or hide files and folders marked with the hidden attribute. Power users often enable this to inspect more of the filesystem.",
+    "why_people_change_it": "People turn this on when they need to troubleshoot software, inspect config folders, or work directly with Windows internals.",
+    "tradeoffs_overview": "Showing hidden items is a low-risk Explorer preference change, but it increases visual clutter and makes it easier to browse files that Windows usually keeps out of sight.",
+    "professional_notes": "Microsoft Open Specifications documents Hidden under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and describes the setting using symbolic SHOW and HIDE terms. A reversible runtime capture on 2026-03-13 resolved the numeric mapping used by Explorer on this host. During the capture, PowerShell wrote Hidden = 1 and Hidden = 2, Explorer.EXE queried the same value after each restart, and a File Explorer UI automation check showed both ghost.txt and visible.txt when Hidden = 1 but only visible.txt when Hidden = 2. That runtime trace is the decisive proof for the numeric semantics used by Explorer on this machine.",
+    "targets": [
+      {
+        "target_id": "explorer-hidden-flag",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "Hidden",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Show hidden files and folders",
+            "meaning": "Explorer shows items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 1 after restart and the Explorer UI listed both ghost.txt and visible.txt.",
+            "evidence_ids": [
+              "procmon-hidden-runtime",
+              "app-visibility-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Hide hidden files and folders",
+            "meaning": "Explorer hides items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 2 after restart and the Explorer UI listed only visible.txt.",
+            "evidence_ids": [
+              "procmon-hidden-runtime"
+            ]
+          }
+        ],
+        "notes": "The official path and value name remain useful context, but this record validates the runtime semantics with Procmon and a direct Explorer UI observation because the published Microsoft source uses symbolic SHOW and HIDE terminology instead of explicit numeric values."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. The runtime capture confirmed that 1 is the show-hidden state consumed by Explorer on Windows 11 Pro 10.0.26200.8037.",
+    "writes": [
+      {
+        "target_id": "explorer-hidden-flag",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "Hidden",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed hidden-item default",
+      "applies_to": "Explorer user profiles",
+      "states": [
+        {
+          "target_id": "explorer-hidden-flag",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This record validates the explicit runtime values 1 and 2. It does not publish a machine-checked missing-value default."
+        }
+      ],
+      "notes": "Explorer typically hides hidden items by default at the UX level, but this record's machine-checked proof focuses on the explicit runtime values used by Explorer.",
+      "evidence_ids": [
+        "ms-gppref-global-folder-options-vista-hidden",
+        "procmon-hidden-runtime"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "show-hidden-files",
+      "label": "Show hidden files",
+      "intended_for": [
+        "Power users",
+        "Users troubleshooting software or inspecting system folders"
+      ],
+      "avoid_for": [
+        "Users who prefer a simpler Explorer view"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-hidden-flag",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Runtime proof showed that Hidden = 1 makes Explorer show hidden items."
+        }
+      ],
+      "good_when": "You need direct visibility into hidden files and folders.",
+      "bad_when": "You want Explorer to stay less cluttered and avoid exposing hidden system content.",
+      "tradeoffs": [
+        "Explorer shows hidden items.",
+        "This helps with troubleshooting and manual inspection.",
+        "Reversible by writing Hidden = 2 and restarting Explorer."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "procmon-hidden-runtime",
+        "app-visibility-provider"
+      ]
+    },
+    {
+      "profile_id": "hide-hidden-files",
+      "label": "Hide hidden files",
+      "intended_for": [
+        "Users who want the cleaner default Explorer presentation"
+      ],
+      "avoid_for": [
+        "Users who need direct visibility into hidden items"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-hidden-flag",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Runtime proof showed that Hidden = 2 makes Explorer hide hidden items."
+        }
+      ],
+      "good_when": "You want Explorer to hide hidden files and folders.",
+      "bad_when": "You need to troubleshoot software or inspect hidden folders.",
+      "tradeoffs": [
+        "Explorer hides hidden items.",
+        "This keeps the file view simpler but can obscure troubleshooting targets."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "procmon-hidden-runtime"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-gppref-global-folder-options-vista-hidden",
+      "kind": "official-doc",
+      "title": "Microsoft Open Specifications: GlobalFolderOptionsVista element",
+      "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "summary": "Microsoft Open Specifications documents Hidden under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and confirms the official path and value name. The live numeric mapping on this host was resolved with Procmon and direct Explorer UI observation because the published source uses symbolic SHOW and HIDE semantics.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-hidden-runtime",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
+      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidden_capture_20260313.pml",
+      "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden after each restart, and a direct Explorer UI automation check listed ghost.txt plus visible.txt when Hidden = 1 but only visible.txt when Hidden = 2.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The app writes the runtime show-hidden state. This is a low-risk user-scope Explorer preference, but it is best suited to advanced users.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T17:35:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidden_capture_20260313.csv",
+    "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2",
+    "key_found_on_page": true,
+    "notes": "In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host."
+  }
+}

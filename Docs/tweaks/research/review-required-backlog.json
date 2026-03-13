@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:11:09Z",
+  "generated_utc": "2026-03-13T14:33:31Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 124,
+  "source_record_count": 122,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 32,
+    "implementation-mismatch": 30,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 34,
+    "heuristic": 32,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1394,58 +1394,6 @@
         "exact_quote_or_path": "The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; .wslconfig section label: [wsl2]; memory size 50% of total memory on Windows How much memory to assign to the WSL 2 VM.; Example: [wsl2] memory=4GB; No matching text found for DefaultVersion on the page.",
         "key_found_on_page": true,
         "notes": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The same official page does not document the app's HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss\\DefaultVersion registry value as a memory-limit surface."
-      }
-    },
-    {
-      "record_id": "explorer.show-file-extensions",
-      "tweak_id": "explorer.show-file-extensions",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "Microsoft Open Specifications says HideFileExt displays known file extensions and MUST be 1 to enable, while the current app writes 0 to show extensions.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Explorer",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json",
-      "summary": "Microsoft Open Specifications documents HideFileExt under Explorer\\Advanced, but the published 0/1 semantics conflict with the current app assumption. The app currently writes 0 to show file extensions, so this record stays in review as a value-semantics mismatch.",
-      "decision_why": "Microsoft Open Specifications now documents the exact HideFileExt path, but the published 0/1 semantics conflict with the current app assumption. The path is sourced; the value interpretation is not yet safe to validate.",
-      "blocking_issues": [
-        "Microsoft Open Specifications says HideFileExt displays known file extensions and MUST be 1 to enable, while the current app writes 0 to show extensions.",
-        "The exact 0/1 semantics need reconciliation before this record can be validated."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
-        "exact_quote_or_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt; hideFileExt | Displays known file extensions. MUST be 1 to enable, or 0 to disable.",
-        "key_found_on_page": true,
-        "notes": "Microsoft Open Specifications publishes the exact Explorer Advanced path and HideFileExt value name. The remaining blocker is value semantics: the official page says 1 enables displaying known file extensions, while the current app writes 0 to show extensions."
-      }
-    },
-    {
-      "record_id": "explorer.show-hidden-files",
-      "tweak_id": "explorer.show-hidden-files",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The captured official source documents Hidden using SHOW/HIDE semantics rather than the numeric values written by the app.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Explorer",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json",
-      "summary": "Microsoft Open Specifications documents Hidden under Explorer\\Advanced, but the published semantics use symbolic SHOW/HIDE language rather than the numeric values written by the app. The current app writes Hidden = 1 to show hidden files, so the record stays in review until the exact numeric mapping is sourced from a stronger primary surface.",
-      "decision_why": "Microsoft Open Specifications now documents the exact Hidden path under Explorer\\Advanced, but the captured source uses symbolic SHOW/HIDE semantics instead of the numeric values written by the app. The path is sourced; the exact numeric mapping is not yet safe to validate.",
-      "blocking_issues": [
-        "The captured official source documents Hidden using SHOW/HIDE semantics rather than the numeric values written by the app.",
-        "The exact numeric mapping for Hidden = 1 still needs a stronger primary Microsoft source before this record can be validated."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
-        "exact_quote_or_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden; hidden | Hides or shows files and folders. MUST be HIDE to hide files and folders, or SHOW to show files and folders.",
-        "key_found_on_page": true,
-        "notes": "Microsoft Open Specifications publishes the exact Explorer Advanced path and Hidden value name. The remaining blocker is that the captured page uses symbolic SHOW/HIDE semantics instead of the numeric values written by the app."
       }
     },
     {
