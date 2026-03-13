@@ -37,17 +37,27 @@ public sealed class PeripheralTweakProvider : BaseTweakProvider
             "506",
             requiresElevation: false);
 
-        yield return CreateRegistryTweak(
+        yield return CreateRegistryValueBatchTweak(
             context,
             "peripheral.disable-autoplay",
             "Disable AutoPlay",
-            "Disables AutoPlay for removable media on this user account.",
+            "Disables AutoPlay on all drives and blocks AutoPlay for non-volume devices for the current user.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers",
-            "DisableAutoplay",
-            RegistryValueKind.DWord,
-            1,
+            new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.CurrentUser,
+                    @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
+                    "NoDriveTypeAutoRun",
+                    RegistryValueKind.DWord,
+                    255),
+                new RegistryValueBatchEntry(
+                    RegistryHive.CurrentUser,
+                    @"Software\Policies\Microsoft\Windows\Explorer",
+                    "NoAutoplayfornonVolume",
+                    RegistryValueKind.DWord,
+                    1)
+            },
             requiresElevation: false);
 
         yield return CreateRegistryValueBatchTweak(

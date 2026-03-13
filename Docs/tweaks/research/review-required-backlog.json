@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:40:36Z",
+  "generated_utc": "2026-03-13T14:43:51Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 120,
+  "source_record_count": 119,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 28,
+    "implementation-mismatch": 27,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 30,
+    "heuristic": 29,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1650,32 +1650,6 @@
         "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
         "key_found_on_page": true,
         "notes": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values. The current app writes CipherSuiteOrder under service parameter paths instead, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "peripheral.disable-autoplay",
-      "tweak_id": "peripheral.disable-autoplay",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official AutoPlay policy surfaces documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Peripheral",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/peripheral.disable-autoplay.review.json",
-      "summary": "Microsoft documents AutoPlay controls through TurnOffAutoPlay and DisallowAutoplayForNonVolumeDevices policy surfaces. The current app instead writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\DisableAutoplay = 1, so this record stays in review until that user-side value is sourced as an official equivalent.",
-      "decision_why": "Microsoft documents AutoPlay through policy surfaces different from the Explorer value used by the current app, so the current mapping should stay in review.",
-      "blocking_issues": [
-        "The current app does not use the official AutoPlay policy surfaces documented in this record.",
-        "The Explorer AutoplayHandlers\\DisableAutoplay value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\AutoPlay.admx",
-        "exact_quote_or_path": "<policy name=\"Autorun\" class=\"Both\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\"> <enum id=\"Autorun_Box\" valueName=\"NoDriveTypeAutoRun\" required=\"true\">; <policy name=\"NoAutoplayfornonVolume\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"NoAutoplayfornonVolume\">; AutoPlay.adml: \"If you enable this policy setting, Autoplay is disabled on CD-ROM and removable media drives, or disabled on all drives.\" and \"If you enable this policy setting, AutoPlay is not allowed for MTP devices like cameras or phones.\"",
-        "key_found_on_page": true,
-        "notes": "Local official Microsoft ADMX/ADML files document the official AutoPlay policy surfaces as NoDriveTypeAutoRun and NoAutoplayfornonVolume. The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\DisableAutoplay instead, so this record remains review-required as an implementation mismatch."
       }
     },
     {
