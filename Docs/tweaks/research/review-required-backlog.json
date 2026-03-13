@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:37:37Z",
+  "generated_utc": "2026-03-13T15:41:19Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 112,
+  "source_record_count": 111,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 20,
+    "implementation-mismatch": 19,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 22,
+    "heuristic": 21,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1702,31 +1702,6 @@
         "exact_quote_or_path": "./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume; Default Value 0; 0 (Default) CrossDeviceResume is Enabled. 1 CrossDeviceResume is Disabled.",
         "key_found_on_page": true,
         "notes": "Microsoft Learn directly documents the official user-scope Connectivity Policy CSP control and its 0/1 semantics. The record remains review-required because the app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed instead of the documented policy surface."
-      }
-    },
-    {
-      "record_id": "security.disable-p2p-updates",
-      "tweak_id": "security.disable-p2p-updates",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.disable-p2p-updates.review.json",
-      "summary": "The official Delivery Optimization policy is clear, and value 0 does mean HTTP only with no peering. But the current app writes that value under a PolicyManager default path instead of the official policy path, so this stays in review until the implementation is aligned or the relationship is documented.",
-      "decision_why": "The official Delivery Optimization policy is clear, but the current app writes the value to a different path than the official policy surface.",
-      "blocking_issues": [
-        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\DeliveryOptimization.admx",
-        "exact_quote_or_path": "DeliveryOptimization.admx: `valueName=\"DODownloadMode\"`; DeliveryOptimization.adml: `Download Mode` / `Specifies the method that Delivery Optimization can use to download content on behalf of various Microsoft products.` The local ADMX/ADML pair documents DODownloadMode under the official policy path and its enum values 0, 1, 2, 3, 99, and 100.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization. The record remains review-required because the app writes DODownloadMode under HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization instead of the official policy path."
       }
     },
     {

@@ -234,7 +234,7 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             "Disables Delivery Optimization peer-to-peer caching for updates.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\PolicyManager\default\DeliveryOptimization",
+            @"SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization",
             "DODownloadMode",
             RegistryValueKind.DWord,
             0);

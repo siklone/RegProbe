@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:37:38Z",
+  "generated_utc": "2026-03-13T15:41:19Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -216,20 +216,6 @@
     {
       "sprint_number": 2,
       "priority_index": 10,
-      "record_id": "security.disable-p2p-updates",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization::DODownloadMode=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization::DODownloadMode (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/security.disable-p2p-updates.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 11,
       "record_id": "security.disable-wpbt",
       "category": "fix",
       "estimated_effort": "large",
@@ -244,7 +230,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -259,7 +245,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -275,7 +261,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "security.disable-system-restore",
       "category": "fix",
       "estimated_effort": "large",
@@ -289,7 +275,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 15,
+      "priority_index": 14,
       "record_id": "security.powershell-unrestricted",
       "category": "fix",
       "estimated_effort": "large",
@@ -304,7 +290,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 16,
+      "priority_index": 15,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -318,7 +304,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 16,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -333,7 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 17,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -348,7 +334,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 18,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -364,7 +350,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 20,
+      "priority_index": 19,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

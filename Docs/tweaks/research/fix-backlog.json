@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:37:37Z",
+  "generated_utc": "2026-03-13T15:41:19Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 20,
+  "entry_count": 19,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -526,33 +526,6 @@
           "path": "./User/Vendor/MSFT/Policy/Config/Connectivity",
           "value_name": "DisableCrossDeviceResume",
           "value_type": "int",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "security.disable-p2p-updates",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization::DODownloadMode=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization::DODownloadMode (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.disable-p2p-updates.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization",
-          "value_name": "DODownloadMode",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
-          "value_name": "DODownloadMode",
-          "value_type": "REG_DWORD",
           "example_value": 0
         }
       ]
