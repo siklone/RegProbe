@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:54:19Z",
+  "generated_utc": "2026-03-13T14:59:08Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -440,20 +440,6 @@
     {
       "sprint_number": 2,
       "priority_index": 25,
-      "record_id": "network.disable-active-probing",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The tweak mixes an official policy write with extra runtime values that are not yet sourced as the same Microsoft control."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy plus observed runtime writes",
-      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe=1; HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity::DisallowNetworkConnectivityActiveTests=1; HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet::EnableUserActiveProbing=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/network.disable-active-probing.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 26,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

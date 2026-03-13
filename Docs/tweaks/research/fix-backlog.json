@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:54:18Z",
+  "generated_utc": "2026-03-13T14:59:08Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 26,
+  "entry_count": 25,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -61,49 +61,6 @@
           "value_name": "[wsl2].memory",
           "value_type": "WSL setting",
           "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "network.disable-active-probing",
-      "current_state": "partially-matches | Policy plus observed runtime writes",
-      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe=1; HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity::DisallowNetworkConnectivityActiveTests=1; HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet::EnableUserActiveProbing=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy plus observed runtime writes",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/network.disable-active-probing.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
-          "value_name": "NoActiveProbe",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity",
-          "value_name": "DisallowNetworkConnectivityActiveTests",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet",
-          "value_name": "EnableUserActiveProbing",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "group-policy",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
-          "value_name": "NoActiveProbe",
-          "value_type": "REG_DWORD",
-          "example_value": 0
         }
       ]
     },

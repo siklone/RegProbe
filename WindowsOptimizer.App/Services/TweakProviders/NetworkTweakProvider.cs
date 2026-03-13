@@ -193,10 +193,7 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             TweakRiskLevel.Advanced,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\default\Connectivity", "DisallowNetworkConnectivityActiveTests", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "EnableUserActiveProbing", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\NlaSvc\Parameters\Internet", "MaxActiveProbes", RegistryValueKind.DWord, 1)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", RegistryValueKind.DWord, 1)
             });
 
         yield return CreateRegistryTweak(
