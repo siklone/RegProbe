@@ -113,12 +113,11 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             "Disable Low Disk Space Warning",
             "Turns off the low disk space warning notification.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
+            RegistryHive.LocalMachine,
             @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
             "NoLowDiskSpaceChecks",
             RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
+            1);
 
         // System Visuals & Animations
         yield return CreateRegistryTweak(

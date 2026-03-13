@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T13:18:38Z",
+  "generated_utc": "2026-03-13T13:30:04Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -186,21 +186,6 @@
     {
       "sprint_number": 2,
       "priority_index": 8,
-      "record_id": "explorer.disable-low-disk-space-warning",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the documented HKLM path described in the official Microsoft article.",
-        "The HKCU Explorer path still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Documented Registry Path vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks=1 to the researched surface HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 9,
       "record_id": "explorer.disable-taskbar-chat",
       "category": "fix",
       "estimated_effort": "large",
@@ -215,7 +200,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 10,
+      "priority_index": 9,
       "record_id": "explorer.disable-taskbar-widgets",
       "category": "fix",
       "estimated_effort": "large",
@@ -230,7 +215,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 11,
+      "priority_index": 10,
       "record_id": "explorer.taskbar-alignment-left",
       "category": "fix",
       "estimated_effort": "large",
@@ -244,7 +229,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "privacy.disable-advertising-id",
       "category": "fix",
       "estimated_effort": "large",
@@ -260,7 +245,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "privacy.disable-resume",
       "category": "fix",
       "estimated_effort": "large",
@@ -275,7 +260,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "system.disable-game-dvr",
       "category": "fix",
       "estimated_effort": "large",
@@ -290,7 +275,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 15,
+      "priority_index": 14,
       "record_id": "system.disable-search-highlights",
       "category": "fix",
       "estimated_effort": "large",
@@ -305,7 +290,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 16,
+      "priority_index": 15,
       "record_id": "developer.python-path-fix",
       "category": "fix",
       "estimated_effort": "large",
@@ -320,7 +305,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 16,
       "record_id": "network.disable-mdns",
       "category": "fix",
       "estimated_effort": "large",
@@ -334,7 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 17,
       "record_id": "network.disable-netbios",
       "category": "fix",
       "estimated_effort": "large",
@@ -349,7 +334,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 18,
       "record_id": "network.smb-disable-leasing",
       "category": "fix",
       "estimated_effort": "large",
@@ -364,7 +349,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 20,
+      "priority_index": 19,
       "record_id": "power.disable-fast-startup",
       "category": "fix",
       "estimated_effort": "large",
@@ -379,7 +364,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 21,
+      "priority_index": 20,
       "record_id": "privacy.disable-reserved-storage",
       "category": "fix",
       "estimated_effort": "large",
@@ -394,7 +379,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 22,
+      "priority_index": 21,
       "record_id": "security.disable-p2p-updates",
       "category": "fix",
       "estimated_effort": "large",
@@ -408,7 +393,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 23,
+      "priority_index": 22,
       "record_id": "security.disable-wpbt",
       "category": "fix",
       "estimated_effort": "large",
@@ -423,7 +408,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 24,
+      "priority_index": 23,
       "record_id": "system.disable-search-web-results",
       "category": "fix",
       "estimated_effort": "large",
@@ -438,7 +423,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 25,
+      "priority_index": 24,
       "record_id": "system.memory-registry-quota-default",
       "category": "fix",
       "estimated_effort": "large",
@@ -453,7 +438,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 26,
+      "priority_index": 25,
       "record_id": "peripheral.disable-autoplay",
       "category": "fix",
       "estimated_effort": "large",
@@ -468,7 +453,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 27,
+      "priority_index": 26,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -483,7 +468,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 28,
+      "priority_index": 27,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -499,7 +484,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 29,
+      "priority_index": 28,
       "record_id": "security.disable-system-restore",
       "category": "fix",
       "estimated_effort": "large",
@@ -513,7 +498,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 30,
+      "priority_index": 29,
       "record_id": "security.powershell-unrestricted",
       "category": "fix",
       "estimated_effort": "large",
@@ -528,7 +513,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 31,
+      "priority_index": 30,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -542,7 +527,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 32,
+      "priority_index": 31,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -557,7 +542,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 33,
+      "priority_index": 32,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -572,7 +557,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 34,
+      "priority_index": 33,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -588,7 +573,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 35,
+      "priority_index": 34,
       "record_id": "network.disable-active-probing",
       "category": "fix",
       "estimated_effort": "large",
@@ -602,7 +587,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 36,
+      "priority_index": 35,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

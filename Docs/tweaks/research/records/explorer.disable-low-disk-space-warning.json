@@ -1,0 +1,190 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "explorer.disable-low-disk-space-warning",
+  "tweak_id": "explorer.disable-low-disk-space-warning",
+  "record_status": "validated",
+  "summary": "Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The app implementation was aligned to that documented machine-policy path on 2026-03-13, so this record now validates the official control surface rather than the previously mismatched HKCU variant.",
+  "setting": {
+    "name": "Low Disk Space Warning",
+    "category": "Explorer",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can warn you when a drive is running low on space. People sometimes turn these warnings off on lab machines or kiosk-like systems, but most users should keep them on.",
+    "why_people_change_it": "People disable low disk warnings when they already monitor storage another way, when alerts are noisy on managed systems, or when they are working with temporary lab environments.",
+    "tradeoffs_overview": "Turning the warning off reduces notification noise, but it also removes a useful warning that helps many users avoid running a drive completely full.",
+    "professional_notes": "Microsoft documents NoLowDiskSpaceChecks in an official troubleshooting article using HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1. The app previously wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1, but that implementation mismatch was corrected on 2026-03-13 to use the documented HKLM path. The official article is the primary proof source and names the exact key path, value name, and value data.",
+    "targets": [
+      {
+        "target_id": "no-low-disk-space-checks",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "NoLowDiskSpaceChecks",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default",
+            "meaning": "Windows follows its normal low disk warning behavior and can display low-disk warnings.",
+            "evidence_ids": [
+              "ms-low-disk-warning-article"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Low disk warning disabled",
+            "meaning": "Windows does not check for or display the documented low disk space warnings.",
+            "evidence_ids": [
+              "ms-low-disk-warning-article",
+              "app-visibility-provider"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). The official article documents writing 1 to disable the warning; deleting the value returns the system to normal warning behavior."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app now writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1, which matches the documented Microsoft control surface. The older HKCU variant was removed on 2026-03-13 as part of the implementation-mismatch fix.",
+    "writes": [
+      {
+        "target_id": "no-low-disk-space-checks",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "NoLowDiskSpaceChecks",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows documented baseline",
+      "applies_to": "Windows systems using the documented Explorer machine-policy path",
+      "states": [
+        {
+          "target_id": "no-low-disk-space-checks",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the documented registry value absent."
+        }
+      ],
+      "notes": "This record uses only the documented HKLM path from the official Microsoft article.",
+      "evidence_ids": [
+        "ms-low-disk-warning-article"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Anyone who wants Windows to keep warning about low disk space"
+      ],
+      "avoid_for": [
+        "Managed systems that intentionally suppress storage alerts"
+      ],
+      "states": [
+        {
+          "target_id": "no-low-disk-space-checks",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the documented value absent."
+        }
+      ],
+      "good_when": "You want Windows to keep warning users when storage is running low.",
+      "bad_when": "You already manage low storage conditions another way and want fewer alerts.",
+      "tradeoffs": [
+        "Windows can continue surfacing helpful low-disk warnings.",
+        "No registry value is written at the documented policy path."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-low-disk-warning-article"
+      ]
+    },
+    {
+      "profile_id": "disable-low-disk-warning",
+      "label": "Disable low disk space warning",
+      "intended_for": [
+        "Managed systems that intentionally suppress low storage alerts",
+        "Kiosk or lab environments monitored another way"
+      ],
+      "avoid_for": [
+        "General users who rely on Windows to warn before storage is exhausted"
+      ],
+      "states": [
+        {
+          "target_id": "no-low-disk-space-checks",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented Explorer machine-policy value from the Microsoft article."
+        }
+      ],
+      "good_when": "You already manage storage pressure another way and want to suppress this specific Windows warning.",
+      "bad_when": "You want Windows to keep warning users when disks are running low on space.",
+      "tradeoffs": [
+        "Windows stops checking for or displaying the documented low-disk warnings.",
+        "Users may miss an early warning before a drive becomes full."
+      ],
+      "apply_allowed": true,
+      "notes": "apply_allowed=true. The proof chain is exact: the Microsoft article names the HKLM path, NoLowDiskSpaceChecks value, and value data 1. The app now writes the same machine-policy path.",
+      "evidence_ids": [
+        "ms-low-disk-warning-article",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-low-disk-warning-article",
+      "kind": "official-doc",
+      "title": "Microsoft Learn troubleshooting article for low disk space warnings",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
+      "summary": "Microsoft documents NoLowDiskSpaceChecks under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1 to turn off low disk space checks and warnings.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
+    "exact_quote_or_path": "Locate and select the following registry subkey: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK.",
+    "key_found_on_page": true,
+    "notes": "The official troubleshooting article documents the HKLM Explorer policy path and NoLowDiskSpaceChecks = 1 flow exactly. The app now writes the same machine-policy path."
+  }
+}
