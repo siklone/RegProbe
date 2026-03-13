@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T12:43:50Z",
+  "generated_utc": "2026-03-13T13:18:38Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 62,
+  "entry_count": 63,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -372,6 +372,21 @@
           "track": "Procmon or settings-diff capture",
           "why_not_validated": "Binary rename is more invasive than a validated policy or preference control.",
           "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-pca-diagnostics.policy",
+      "current_state": "not-mapped | Application Compatibility",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Application Compatibility",
+      "implementation_status": "not-mapped",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Local Microsoft pca.admx - DisablePcaUIPolicy (C:\\Windows\\PolicyDefinitions\\pca.admx)"
         }
       ]
     },
