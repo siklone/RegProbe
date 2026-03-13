@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:31:01Z",
+  "generated_utc": "2026-03-13T15:37:37Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 21,
+  "entry_count": 20,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -726,33 +726,6 @@
           "value_name": "ExecutionPolicy",
           "value_type": "REG_SZ",
           "example_value": "AllSigned"
-        }
-      ]
-    },
-    {
-      "record_id": "system.memory-registry-quota-default",
-      "current_state": "mismatch-suspected | Registry Storage Space",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management::RegistryQuota=2097152 to the researched surface HKLM\\System\\CurrentControlSet\\Control::RegistrySizeLimit (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Storage Space",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/system.memory-registry-quota-default.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
-          "value_name": "RegistryQuota",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 2097152
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Control",
-          "value_name": "RegistrySizeLimit",
-          "value_type": "REG_DWORD",
-          "example_value": 0
         }
       ]
     }

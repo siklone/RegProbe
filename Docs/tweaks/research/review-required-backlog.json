@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:31:01Z",
+  "generated_utc": "2026-03-13T15:37:37Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 113,
+  "source_record_count": 112,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 21,
+    "implementation-mismatch": 20,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 23,
+    "heuristic": 22,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1858,32 +1858,6 @@
         "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",
         "key_found_on_page": true,
         "notes": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy. The record remains review-required because the app writes only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell."
-      }
-    },
-    {
-      "record_id": "system.memory-registry-quota-default",
-      "tweak_id": "system.memory-registry-quota-default",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes RegistryQuota under Session Manager\\Memory Management instead of the published RegistrySizeLimit control under HKLM\\System\\CurrentControlSet\\Control.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "System",
-      "technical_area": "Registry Storage Space",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.memory-registry-quota-default.review.json",
-      "summary": "The current app writes RegistryQuota = 0x200000 under Memory Management as a 'reset registry quota' action. Microsoft's published registry-size control surface instead documents RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control, so this record stays in review until the app value is sourced as a supported equivalent or corrected.",
-      "decision_why": "The official Microsoft-published control surface centers on RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control, while the app currently writes RegistryQuota on a different path without a primary-source equivalence mapping.",
-      "blocking_issues": [
-        "The current app writes RegistryQuota under Session Manager\\Memory Management instead of the published RegistrySizeLimit control under HKLM\\System\\CurrentControlSet\\Control.",
-        "This research pass has not found a primary Microsoft source that publishes RegistryQuota as the supported equivalent control."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
-        "exact_quote_or_path": "If the RegistrySizeLimit key exists or is set to a value other than 0, delete the key or set it to 0. This will allow the operating system to automatically set the registry size as needed.; Registry Storage Space: The RegistrySizeLimit value establishes the maximum amount of paged pool that can be consumed by registry data from all applications.",
-        "key_found_on_page": true,
-        "notes": "Official Microsoft documentation publishes RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control as the supported registry-size control. The current app writes RegistryQuota under Session Manager\\Memory Management instead, so the record remains review-required as an implementation mismatch."
       }
     },
     {

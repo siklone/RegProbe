@@ -485,10 +485,10 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             "Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management",
-            "RegistryQuota",
+            @"SYSTEM\CurrentControlSet\Control",
+            "RegistrySizeLimit",
             RegistryValueKind.DWord,
-            0x200000);
+            0);
 
         yield return CreateRegistryTweak(
             context,
