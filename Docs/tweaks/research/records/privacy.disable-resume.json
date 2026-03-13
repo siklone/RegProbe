@@ -1,0 +1,224 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-resume",
+  "tweak_id": "privacy.disable-resume",
+  "record_status": "review-required",
+  "summary": "Observed implementation only: current-user Resume setting under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed. Repo Procmon notes show Settings > Apps > Resume writing 0 when the feature is turned off and 1 when it is turned on. This record intentionally models that narrower user preference, not the broader official machine policy for Phone-PC linking and Continue on PC experiences. The setting is useful as a real runtime surface, but it is not yet backed by a primary Microsoft source.",
+  "setting": {
+    "name": "Disable Resume Experiences",
+    "category": "Privacy",
+    "area": "Observed User Setting",
+    "scope": "user",
+    "casual_explanation": "Resume lets you start on one device and continue on this PC. This tweak targets the current-user Resume setting that Settings exposes, so it controls the handoff experience for the signed-in user rather than pushing a device-wide policy.",
+    "why_people_change_it": "People turn it off when they do not want cross-device handoff behavior for their own account. They leave it on when they use Continue on PC or related app handoff flows.",
+    "tradeoffs_overview": "Turning it off reduces cross-device convenience for the current user. This record stays in review because the user setting is runtime-observed rather than directly documented by a primary Microsoft source.",
+    "professional_notes": "Repo Procmon notes in Docs/privacy/privacy.md show Settings > Apps > Resume writing HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 when Resume is turned off and 1 when Resume is turned on. The same note says stock Windows 11 25H2 defaults Resume to enabled and uses companion values such as IsOneDriveResumeAllowed for app-specific participation. This is narrower than the official machine policy already covered by privacy.disable-phone-linking, which uses EnableMmx and blocks broader Phone-PC linking and Continue on PC participation. This record therefore documents the observed current-user Resume surface the app actually writes and keeps it in docs-first territory because it is not yet backed by a primary Microsoft source.",
+    "targets": [
+      {
+        "target_id": "resume-user-setting",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+        "value_name": "IsResumeAllowed",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No explicit user setting",
+            "meaning": "Windows uses its default Resume behavior for the current user. Repo notes say stock Windows 11 25H2 defaults Resume to enabled, but that default is not yet backed by a primary Microsoft source.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Resume disabled",
+            "meaning": "Observed Settings and app value for turning Resume off for the current user.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes",
+              "local-resume-registry-observation",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Resume enabled",
+            "meaning": "Observed Settings value for turning Resume on for the current user.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes"
+            ]
+          }
+        ],
+        "notes": "This record models the narrower current-user Resume toggle only. The broader machine policy for Phone-PC linking and Continue on PC is tracked separately by privacy.disable-phone-linking via EnableMmx."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes IsResumeAllowed = 0 under the observed current-user CrossDeviceResume setting. That matches the runtime surface this record intentionally documents.",
+    "writes": [
+      {
+        "target_id": "resume-user-setting",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+        "value_name": "IsResumeAllowed",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Windows baseline",
+      "applies_to": "Current-user profiles using Resume on Windows 11",
+      "states": [
+        {
+          "target_id": "resume-user-setting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the user setting unset and let Windows keep its ordinary Resume behavior."
+        }
+      ],
+      "notes": "Repo Procmon notes say stock Windows 11 25H2 defaults Resume to enabled, but this remains an observed baseline rather than a primary-source-backed default.",
+      "evidence_ids": [
+        "repo-resume-procmon-notes"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want Windows to keep its normal Resume behavior"
+      ],
+      "avoid_for": [
+        "People who explicitly want Resume off for the current user"
+      ],
+      "states": [
+        {
+          "target_id": "resume-user-setting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the observed user setting unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary cross-device Resume behavior for the current user.",
+      "bad_when": "You want to explicitly disable Resume for the current user account.",
+      "tradeoffs": [
+        "Resume stays available where Windows would normally allow it.",
+        "The app avoids publishing a runtime-observed setting as fully validated policy."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-resume-procmon-notes"
+      ]
+    },
+    {
+      "profile_id": "disable-resume-user-setting",
+      "label": "Disable Resume for current user",
+      "intended_for": [
+        "People who want the Settings > Apps > Resume toggle off for the signed-in user"
+      ],
+      "avoid_for": [
+        "Anyone expecting a broader device-wide Phone-PC linking block"
+      ],
+      "states": [
+        {
+          "target_id": "resume-user-setting",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Observed Settings and app value for turning Resume off for the current user."
+        }
+      ],
+      "good_when": "You want the narrower per-user Resume preference off without relying on the broader machine policy.",
+      "bad_when": "You want a fully documented Microsoft policy surface or a device-wide block.",
+      "tradeoffs": [
+        "Disables Resume for the current user account.",
+        "This remains not yet backed by a primary Microsoft source and is therefore kept as docs-first research."
+      ],
+      "apply_allowed": false,
+      "notes": "This is kept as docs-first because the setting is runtime-observed and not yet backed by a primary Microsoft source.",
+      "evidence_ids": [
+        "repo-resume-procmon-notes",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-resume-procmon-notes",
+      "kind": "repo-doc",
+      "title": "Repo Procmon notes for Resume settings",
+      "location": "Docs/privacy/privacy.md",
+      "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on. The same notes say stock Windows 11 25H2 defaults Resume to enabled and uses companion values such as IsOneDriveResumeAllowed.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "default"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "local-resume-registry-observation",
+      "kind": "registry-observation",
+      "title": "Local CrossDeviceResume registry observation",
+      "location": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+      "summary": "Local read-only registry query on 2026-03-13 found IsResumeAllowed = 0 and IsOneDriveResumeAllowed = 1 under the current-user CrossDeviceResume configuration key, confirming the observed path is present and active on this build.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "official-phone-linking-policy-context",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.admx / GroupPolicy.adml context for Phone-PC linking",
+      "location": "C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx ; C:\\Windows\\PolicyDefinitions\\en-US\\GroupPolicy.adml",
+      "summary": "The official machine policy EnableMmx blocks broader Phone-PC linking and Continue on PC experiences. This record uses that context only to explain scope boundaries and why privacy.disable-phone-linking remains a separate, broader control.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "This record intentionally documents a real runtime user setting the app actually writes, but it is observed implementation only and not yet backed by a primary Microsoft source. The broader official machine policy already exists separately as privacy.disable-phone-linking.",
+    "blocking_issues": [
+      "IsResumeAllowed is not yet backed by a primary Microsoft source. Current semantics come from repo Procmon notes and local observation rather than official Microsoft documentation."
+    ]
+  },
+  "open_questions": [
+    "Can a primary Microsoft source be found for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed?",
+    "Should this remain as a narrow current-user Resume toggle, or should the product steer users toward the broader privacy.disable-phone-linking policy when they want a fully documented Microsoft-managed surface?"
+  ]
+}
