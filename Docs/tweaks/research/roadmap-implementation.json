@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:11:10Z",
+  "generated_utc": "2026-03-13T14:54:19Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -84,50 +84,6 @@
     {
       "sprint_number": 2,
       "priority_index": 1,
-      "record_id": "explorer.show-file-extensions",
-      "category": "fix",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "Microsoft Open Specifications says HideFileExt displays known file extensions and MUST be 1 to enable, while the current app writes 0 to show extensions.",
-        "The exact 0/1 semantics need reconciliation before this record can be validated."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Explorer Advanced Flags",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 2,
-      "record_id": "explorer.show-hidden-files",
-      "category": "fix",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The captured official source documents Hidden using SHOW/HIDE semantics rather than the numeric values written by the app.",
-        "The exact numeric mapping for Hidden = 1 still needs a stronger primary Microsoft source before this record can be validated."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Explorer Advanced Flags",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden=1 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 3,
-      "record_id": "privacy.disable-location-consent",
-      "category": "fix",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The main HKCU consent-store path and the NonPackaged companion path are now officially sourced, but the tweak still writes ShowGlobalPrompts = 1 without a matching primary-source proof."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Observed Runtime Consent",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value=Deny to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value (example Allow). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-location-consent.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 4,
       "record_id": "power.optimize-cpu-boost",
       "category": "fix",
       "estimated_effort": "medium",
@@ -141,22 +97,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 5,
-      "record_id": "privacy.disable-rsop-logging",
-      "category": "fix",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "The extra Winlogon companion value is not sourced by the official Microsoft policy files used in this record.",
-        "The product should either source that companion value or stop writing it before the tweak can be published as validated."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Mixed Registry Configuration",
-      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging=0; HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon::RsopLogging=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-rsop-logging.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 6,
+      "priority_index": 2,
       "record_id": "network.smb-increase-client-metadata-cache",
       "category": "fix",
       "estimated_effort": "large",
@@ -170,7 +111,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 7,
+      "priority_index": 3,
       "record_id": "developer.wsl2-memory",
       "category": "fix",
       "estimated_effort": "large",
@@ -185,23 +126,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 8,
-      "record_id": "privacy.disable-advertising-id",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "The current app does not use the official machine policy path documented in this record.",
-        "The HKCU AdvertisingInfo\\Enabled value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo::Enabled=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo::DisabledByGroupPolicy (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-advertising-id.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 9,
+      "priority_index": 4,
       "record_id": "privacy.disable-resume",
       "category": "fix",
       "estimated_effort": "large",
@@ -216,7 +141,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 10,
+      "priority_index": 5,
       "record_id": "system.disable-game-dvr",
       "category": "fix",
       "estimated_effort": "large",
@@ -231,7 +156,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 11,
+      "priority_index": 6,
       "record_id": "system.disable-search-highlights",
       "category": "fix",
       "estimated_effort": "large",
@@ -246,7 +171,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 7,
       "record_id": "developer.python-path-fix",
       "category": "fix",
       "estimated_effort": "large",
@@ -261,7 +186,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 13,
+      "priority_index": 8,
       "record_id": "network.disable-mdns",
       "category": "fix",
       "estimated_effort": "large",
@@ -275,7 +200,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 14,
+      "priority_index": 9,
       "record_id": "network.disable-netbios",
       "category": "fix",
       "estimated_effort": "large",
@@ -290,7 +215,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 15,
+      "priority_index": 10,
       "record_id": "network.smb-disable-leasing",
       "category": "fix",
       "estimated_effort": "large",
@@ -305,7 +230,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 16,
+      "priority_index": 11,
       "record_id": "power.disable-fast-startup",
       "category": "fix",
       "estimated_effort": "large",
@@ -320,7 +245,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 12,
       "record_id": "privacy.disable-reserved-storage",
       "category": "fix",
       "estimated_effort": "large",
@@ -335,7 +260,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 13,
       "record_id": "security.disable-p2p-updates",
       "category": "fix",
       "estimated_effort": "large",
@@ -349,7 +274,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 14,
       "record_id": "security.disable-wpbt",
       "category": "fix",
       "estimated_effort": "large",
@@ -364,7 +289,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 20,
+      "priority_index": 15,
       "record_id": "system.disable-search-web-results",
       "category": "fix",
       "estimated_effort": "large",
@@ -379,7 +304,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 21,
+      "priority_index": 16,
       "record_id": "system.memory-registry-quota-default",
       "category": "fix",
       "estimated_effort": "large",
@@ -394,22 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 22,
-      "record_id": "peripheral.disable-autoplay",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the official AutoPlay policy surfaces documented in this record.",
-        "The Explorer AutoplayHandlers\\DisableAutoplay value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers::DisableAutoplay=1 to the researched surface TurnOffAutoPlay::TurnOffAutoPlay (example 0); HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer::NoAutoplayfornonVolume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/peripheral.disable-autoplay.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 23,
+      "priority_index": 17,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -424,7 +334,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 24,
+      "priority_index": 18,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -440,7 +350,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 25,
+      "priority_index": 19,
       "record_id": "security.disable-system-restore",
       "category": "fix",
       "estimated_effort": "large",
@@ -454,7 +364,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 26,
+      "priority_index": 20,
       "record_id": "security.powershell-unrestricted",
       "category": "fix",
       "estimated_effort": "large",
@@ -469,7 +379,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 27,
+      "priority_index": 21,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -483,7 +393,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 28,
+      "priority_index": 22,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -498,7 +408,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 29,
+      "priority_index": 23,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -513,7 +423,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 30,
+      "priority_index": 24,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -529,7 +439,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 31,
+      "priority_index": 25,
       "record_id": "network.disable-active-probing",
       "category": "fix",
       "estimated_effort": "large",
@@ -543,7 +453,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 32,
+      "priority_index": 26,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

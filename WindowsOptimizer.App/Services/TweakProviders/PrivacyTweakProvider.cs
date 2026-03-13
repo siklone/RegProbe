@@ -253,7 +253,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             TweakRiskLevel.Advanced,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "RsopLogging", RegistryValueKind.DWord, 0),
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\SYSTEM", "RsopLogging", RegistryValueKind.DWord, 0)
             });
 

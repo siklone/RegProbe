@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:11:09Z",
+  "generated_utc": "2026-03-13T14:54:18Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 32,
+  "entry_count": 26,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -61,60 +61,6 @@
           "value_name": "[wsl2].memory",
           "value_type": "WSL setting",
           "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "explorer.show-file-extensions",
-      "current_state": "mismatch-suspected | Explorer Advanced Flags",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-          "value_name": "HideFileExt",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-          "value_name": "HideFileExt",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "explorer.show-hidden-files",
-      "current_state": "partially-matches | Explorer Advanced Flags",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden=1 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-          "value_name": "Hidden",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-          "value_name": "Hidden",
-          "value_type": "REG_DWORD",
-          "example_value": 1
         }
       ]
     },
@@ -547,40 +493,6 @@
       ]
     },
     {
-      "record_id": "peripheral.disable-autoplay",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers::DisableAutoplay=1 to the researched surface TurnOffAutoPlay::TurnOffAutoPlay (example 0); HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer::NoAutoplayfornonVolume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/peripheral.disable-autoplay.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers",
-          "value_name": "DisableAutoplay",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "policy-csp",
-          "path": "TurnOffAutoPlay",
-          "value_name": "TurnOffAutoPlay",
-          "value_type": "policy",
-          "example_value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
-          "value_name": "NoAutoplayfornonVolume",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
       "record_id": "power.disable-fast-startup",
       "current_state": "mismatch-suspected | Registry Configuration",
       "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::HiberbootEnabled=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power::HiberbootEnabled. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
@@ -635,60 +547,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-advertising-id",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo::Enabled=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo::DisabledByGroupPolicy (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-advertising-id.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
-          "value_name": "Enabled",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
-          "value_name": "DisabledByGroupPolicy",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "privacy.disable-location-consent",
-      "current_state": "partially-matches | Observed Runtime Consent",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value=Deny to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value (example Allow). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Observed Runtime Consent",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-location-consent.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
-          "value_name": "Value",
-          "value_type": "REG_SZ",
-          "state_kind": "value",
-          "value": "Deny"
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
-          "value_name": "Value",
-          "value_type": "REG_SZ",
-          "example_value": "Allow"
-        }
-      ]
-    },
-    {
       "record_id": "privacy.disable-reserved-storage",
       "current_state": "mismatch-suspected | Feature Command vs Observed Registry Value",
       "notes": "Move the implementation from HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager::DisableDeletes=1 to the researched surface DISM.exe /Online /Set-ReservedStorageState::State (example Enabled). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
@@ -738,41 +596,6 @@
           "path": "./User/Vendor/MSFT/Policy/Config/Connectivity",
           "value_name": "DisableCrossDeviceResume",
           "value_type": "int",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "privacy.disable-rsop-logging",
-      "current_state": "partially-matches | Mixed Registry Configuration",
-      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging=0; HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon::RsopLogging=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Mixed Registry Configuration",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-rsop-logging.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
-          "value_name": "RSoPLogging",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
-          "value_name": "RsopLogging",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
-          "value_name": "RSoPLogging",
-          "value_type": "REG_DWORD",
           "example_value": 0
         }
       ]

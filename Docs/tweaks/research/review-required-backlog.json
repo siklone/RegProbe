@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:43:51Z",
+  "generated_utc": "2026-03-13T14:54:18Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 119,
+  "source_record_count": 118,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 27,
+    "implementation-mismatch": 26,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 29,
+    "heuristic": 28,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1753,32 +1753,6 @@
         "exact_quote_or_path": "./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume; Default Value 0; 0 (Default) CrossDeviceResume is Enabled. 1 CrossDeviceResume is Disabled.",
         "key_found_on_page": true,
         "notes": "Microsoft Learn directly documents the official user-scope Connectivity Policy CSP control and its 0/1 semantics. The record remains review-required because the app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed instead of the documented policy surface."
-      }
-    },
-    {
-      "record_id": "privacy.disable-rsop-logging",
-      "tweak_id": "privacy.disable-rsop-logging",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The extra Winlogon companion value is not sourced by the official Microsoft policy files used in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Privacy",
-      "technical_area": "Mixed Registry Configuration",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-rsop-logging.json",
-      "summary": "This record validates the official Group Policy surface for RSoP logging and keeps the extra Winlogon companion value flagged as an implementation mismatch.",
-      "decision_why": "The official Group Policy mapping is now backed by exact Microsoft policy-file proof. The record remains blocked only because the app also writes an extra Winlogon companion value that is still unsourced.",
-      "blocking_issues": [
-        "The extra Winlogon companion value is not sourced by the official Microsoft policy files used in this record.",
-        "The product should either source that companion value or stop writing it before the tweak can be published as validated."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx",
-        "exact_quote_or_path": "<policy name=\"RSoPLogging\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"RSoPLogging\"> ... <enabledValue><decimal value=\"0\" /></enabledValue>; GroupPolicy.adml: If you enable this setting, RSoP logging is turned off. If you disable or do not configure this setting, RSoP logging is turned on. By default, RSoP logging is always on.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns RSoP logging off. The record remains review-required only because the app also writes an unsourced Winlogon companion value."
       }
     },
     {
