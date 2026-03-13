@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:30:19Z",
+  "generated_utc": "2026-03-13T23:36:26Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 13,
+  "entry_count": 14,
   "entries": [
     {
       "record_id": "developer.wsl2-memory",
@@ -446,6 +446,40 @@
           "value_name": "PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization",
           "value_type": "REG_DWORD bundle",
           "example_value": null
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-resume",
+      "current_state": "mismatch-suspected | Policy CSP versus observed user setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed=0 to the researched surface ./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume::DisableCrossDeviceResume (example 0); HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy CSP versus observed user setting",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+          "value_name": "IsResumeAllowed",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "policy-csp",
+          "path": "./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume",
+          "value_name": "DisableCrossDeviceResume",
+          "value_type": "integer",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+          "value_name": "IsResumeAllowed",
+          "value_type": "REG_DWORD",
+          "example_value": 0
         }
       ]
     },

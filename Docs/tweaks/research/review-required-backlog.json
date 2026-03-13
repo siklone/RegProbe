@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:30:19Z",
+  "generated_utc": "2026-03-13T23:36:26Z",
   "source_record_statuses": [
     "review-required"
   ],
@@ -12,15 +12,15 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 13,
+    "implementation-mismatch": 14,
     "rename": 4,
     "split-needed": 25,
-    "docs-first": 65
+    "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 15,
+    "heuristic": 16,
     "manual-override": 75,
-    "proof-gate": 17
+    "proof-gate": 16
   },
   "entries": [
     {
@@ -491,25 +491,6 @@
       "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).",
       "decision_why": "Kanit zinciri tam: pca.admx explicit enabledValue/disabledValue + pca.adml exact behavior text + MS Learn CSP page. Numeric direction acik, context inference yok. Risk dusuk - detection kapatiliyor, PCA tamamen kapatilmiyor. recommended_for_general_users=false cunku fark minimal ve general user icin baglam gerektiriyor. Procmon opsiyonel - explicit ADMX zinciri bu tur kayitlar icin yeterli kabul ediliyor.",
       "blocking_issues": []
-    },
-    {
-      "record_id": "privacy.disable-resume",
-      "tweak_id": "privacy.disable-resume",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "IsResumeAllowed is not yet backed by a primary Microsoft source. Current semantics come from repo Procmon notes and local observation rather than official Microsoft documentation.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Observed User Setting",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
-      "summary": "Observed implementation only: current-user Resume setting under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed. Repo Procmon notes show Settings > Apps > Resume writing 0 when the feature is turned off and 1 when it is turned on. This record intentionally models that narrower user preference, not the broader official machine policy for Phone-PC linking and Continue on PC experiences. The setting is useful as a real runtime surface, but it is not yet backed by a primary Microsoft source.",
-      "decision_why": "This record intentionally documents a real runtime user setting the app actually writes, but it is observed implementation only and not yet backed by a primary Microsoft source. The broader official machine policy already exists separately as privacy.disable-phone-linking.",
-      "blocking_issues": [
-        "IsResumeAllowed is not yet backed by a primary Microsoft source. Current semantics come from repo Procmon notes and local observation rather than official Microsoft documentation."
-      ]
     },
     {
       "record_id": "privacy.disable-switchback.policy",
@@ -1663,6 +1644,32 @@
         "exact_quote_or_path": "PERFBOOSTMODE determines how processors select a performance level when current operating conditions allow for boosting performance above the nominal level. GUID: be337238-0d82-4146-a960-4f3749d470c7. PowerCfg alias: PERFBOOSTMODE. Index 0 = Disabled, Index 1 = Aggressive.",
         "key_found_on_page": true,
         "notes": "Microsoft documents a supported processor-boost control surface by GUID and power-setting alias, but not the raw HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power registry bundle written by the app."
+      }
+    },
+    {
+      "record_id": "privacy.disable-resume",
+      "tweak_id": "privacy.disable-resume",
+      "source_record_status": "review-required",
+      "label": "implementation-mismatch",
+      "classification_method": "heuristic",
+      "classification_reason": "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead of the documented user-scope policy DisableCrossDeviceResume.",
+      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "category": "Privacy",
+      "technical_area": "Policy CSP versus observed user setting",
+      "implementation_status": "mismatch-suspected",
+      "apply_allowed": false,
+      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
+      "summary": "Microsoft documents a user-scope Connectivity policy named DisableCrossDeviceResume that disables cross-device resume experiences. The current app instead writes the runtime current-user setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. That observed setting is real, but it is not the same supported control surface as the documented policy, so this record now tracks an implementation mismatch.",
+      "decision_why": "Microsoft now provides a documented user-scope policy for disabling cross-device resume, and the current app does not write that supported surface. It writes a different runtime HKCU setting instead.",
+      "blocking_issues": [
+        "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead of the documented user-scope policy DisableCrossDeviceResume.",
+        "The DisableCrossDeviceResume CSP page still carries Windows Insider Preview language as of March 14, 2026, so any future surface alignment should also verify shipping-build applicability."
+      ],
+      "validation_proof": {
+        "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
+        "exact_quote_or_path": "DisableCrossDeviceResume. Scope User. Default Value 0. Format int. 0 = CrossDeviceResume is enabled. 1 = CrossDeviceResume is Disabled.",
+        "key_found_on_page": true,
+        "notes": "Microsoft directly documents DisableCrossDeviceResume as the supported user-scope policy surface. The current app writes a different runtime HKCU setting instead."
       }
     },
     {

@@ -4,17 +4,45 @@
   "record_id": "privacy.disable-resume",
   "tweak_id": "privacy.disable-resume",
   "record_status": "review-required",
-  "summary": "Observed implementation only: current-user Resume setting under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed. Repo Procmon notes show Settings > Apps > Resume writing 0 when the feature is turned off and 1 when it is turned on. This record intentionally models that narrower user preference, not the broader official machine policy for Phone-PC linking and Continue on PC experiences. The setting is useful as a real runtime surface, but it is not yet backed by a primary Microsoft source.",
+  "summary": "Microsoft documents a user-scope Connectivity policy named DisableCrossDeviceResume that disables cross-device resume experiences. The current app instead writes the runtime current-user setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. That observed setting is real, but it is not the same supported control surface as the documented policy, so this record now tracks an implementation mismatch.",
   "setting": {
-    "name": "Disable Resume Experiences",
+    "name": "Disable Cross-Device Resume",
     "category": "Privacy",
-    "area": "Observed User Setting",
+    "area": "Policy CSP versus observed user setting",
     "scope": "user",
-    "casual_explanation": "Resume lets you start on one device and continue on this PC. This tweak targets the current-user Resume setting that Settings exposes, so it controls the handoff experience for the signed-in user rather than pushing a device-wide policy.",
-    "why_people_change_it": "People turn it off when they do not want cross-device handoff behavior for their own account. They leave it on when they use Continue on PC or related app handoff flows.",
-    "tradeoffs_overview": "Turning it off reduces cross-device convenience for the current user. This record stays in review because the user setting is runtime-observed rather than directly documented by a primary Microsoft source.",
-    "professional_notes": "Repo Procmon notes in Docs/privacy/privacy.md show Settings > Apps > Resume writing HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 when Resume is turned off and 1 when Resume is turned on. The same note says stock Windows 11 25H2 defaults Resume to enabled and uses companion values such as IsOneDriveResumeAllowed for app-specific participation. This is narrower than the official machine policy already covered by privacy.disable-phone-linking, which uses EnableMmx and blocks broader Phone-PC linking and Continue on PC participation. This record therefore documents the observed current-user Resume surface the app actually writes and keeps it in docs-first territory because it is not yet backed by a primary Microsoft source.",
+    "casual_explanation": "Resume lets you start on one device and continue on this PC. Microsoft publishes a user-scope policy for disabling that experience, but the app currently writes a separate runtime current-user setting instead.",
+    "why_people_change_it": "People turn it off when they do not want cross-device handoff behavior for their account. They leave it on when they use Continue on PC or related app handoff flows.",
+    "tradeoffs_overview": "Turning it off reduces cross-device convenience for the current user. The key product issue is not whether the feature exists, but that the current app writes a different runtime setting than the official Microsoft-managed surface documented for this behavior.",
+    "professional_notes": "Microsoft Learn documents DisableCrossDeviceResume in Policy CSP - Connectivity as a user-scope policy with default 0 and disabled state 1. Local registry confirms that the app currently writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead. The observed IsResumeAllowed setting may influence the same Settings experience, but this research pass does not treat it as the same supported surface as the documented CSP policy. The CSP page still carries Windows Insider Preview language as of March 14, 2026, so a future implementation alignment should also verify shipping-build applicability before publication.",
     "targets": [
+      {
+        "target_id": "disable-cross-device-resume-policy",
+        "location_kind": "policy-csp",
+        "path": "./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume",
+        "value_name": "DisableCrossDeviceResume",
+        "value_type": "integer",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Cross-device resume allowed",
+            "meaning": "Default policy state. Cross-device resume is not disabled by policy.",
+            "evidence_ids": [
+              "ms-connectivity-disable-cross-device-resume"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Cross-device resume disabled",
+            "meaning": "The user-scope policy disables cross-device resume.",
+            "evidence_ids": [
+              "ms-connectivity-disable-cross-device-resume"
+            ]
+          }
+        ],
+        "notes": "This is the official Microsoft-managed surface captured in this record."
+      },
       {
         "target_id": "resume-user-setting",
         "location_kind": "registry",
@@ -26,7 +54,7 @@
             "state_kind": "missing",
             "value": null,
             "label": "No explicit user setting",
-            "meaning": "Windows uses its default Resume behavior for the current user. Repo notes say stock Windows 11 25H2 defaults Resume to enabled, but that default is not yet backed by a primary Microsoft source.",
+            "meaning": "Windows uses its normal current-user Resume behavior.",
             "evidence_ids": [
               "repo-resume-procmon-notes"
             ]
@@ -34,8 +62,8 @@
           {
             "state_kind": "value",
             "value": 0,
-            "label": "Resume disabled",
-            "meaning": "Observed Settings and app value for turning Resume off for the current user.",
+            "label": "Observed app profile",
+            "meaning": "Observed Settings and app value for turning the current-user Resume setting off. This is tracked as a runtime setting, not as the official CSP surface.",
             "evidence_ids": [
               "repo-resume-procmon-notes",
               "local-resume-registry-observation",
@@ -45,21 +73,21 @@
           {
             "state_kind": "value",
             "value": 1,
-            "label": "Resume enabled",
-            "meaning": "Observed Settings value for turning Resume on for the current user.",
+            "label": "Observed Resume enabled",
+            "meaning": "Observed Settings value for turning the current-user Resume setting on.",
             "evidence_ids": [
               "repo-resume-procmon-notes"
             ]
           }
         ],
-        "notes": "This record models the narrower current-user Resume toggle only. The broader machine policy for Phone-PC linking and Continue on PC is tracked separately by privacy.disable-phone-linking via EnableMmx."
+        "notes": "This is the runtime user setting the app currently writes. This research pass does not treat it as the same supported surface as the documented DisableCrossDeviceResume CSP."
       }
     ]
   },
   "app_current_implementation": {
-    "status": "matches-research",
+    "status": "mismatch-suspected",
     "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes IsResumeAllowed = 0 under the observed current-user CrossDeviceResume setting. That matches the runtime surface this record intentionally documents.",
+    "notes": "The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key. Microsoft's documented managed surface for this behavior is the user-scope DisableCrossDeviceResume policy CSP, not the runtime setting the app currently changes.",
     "writes": [
       {
         "target_id": "resume-user-setting",
@@ -73,95 +101,93 @@
   },
   "windows_defaults": [
     {
-      "label": "Observed Windows baseline",
-      "applies_to": "Current-user profiles using Resume on Windows 11",
+      "label": "Windows managed default",
+      "applies_to": "User profiles where the official DisableCrossDeviceResume policy is not set",
       "states": [
         {
-          "target_id": "resume-user-setting",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Leave the user setting unset and let Windows keep its ordinary Resume behavior."
+          "target_id": "disable-cross-device-resume-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft documents 0 as the default policy value."
         }
       ],
-      "notes": "Repo Procmon notes say stock Windows 11 25H2 defaults Resume to enabled, but this remains an observed baseline rather than a primary-source-backed default.",
+      "notes": "This record treats the documented policy surface as authoritative and keeps the current app runtime setting separate.",
       "evidence_ids": [
-        "repo-resume-procmon-notes"
+        "ms-connectivity-disable-cross-device-resume"
       ]
     }
   ],
   "recommended_profiles": [
     {
-      "profile_id": "windows-default",
-      "label": "Windows default",
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
       "intended_for": [
         "General users",
-        "People who want Windows to keep its normal Resume behavior"
+        "People who want Windows to keep its normal cross-device Resume behavior"
       ],
       "avoid_for": [
         "People who explicitly want Resume off for the current user"
       ],
       "states": [
         {
-          "target_id": "resume-user-setting",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Leave the observed user setting unset."
-        }
-      ],
-      "good_when": "You want Windows to keep its ordinary cross-device Resume behavior for the current user.",
-      "bad_when": "You want to explicitly disable Resume for the current user account.",
-      "tradeoffs": [
-        "Resume stays available where Windows would normally allow it.",
-        "The app avoids publishing a runtime-observed setting as fully validated policy."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "repo-resume-procmon-notes"
-      ]
-    },
-    {
-      "profile_id": "disable-resume-user-setting",
-      "label": "Disable Resume for current user",
-      "intended_for": [
-        "People who want the Settings > Apps > Resume toggle off for the signed-in user"
-      ],
-      "avoid_for": [
-        "Anyone expecting a broader device-wide Phone-PC linking block"
-      ],
-      "states": [
-        {
-          "target_id": "resume-user-setting",
+          "target_id": "disable-cross-device-resume-policy",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Observed Settings and app value for turning Resume off for the current user."
+          "rationale": "Leave the documented user-scope policy at its default state."
         }
       ],
-      "good_when": "You want the narrower per-user Resume preference off without relying on the broader machine policy.",
-      "bad_when": "You want a fully documented Microsoft policy surface or a device-wide block.",
+      "good_when": "You want Windows to keep its ordinary cross-device Resume behavior.",
+      "bad_when": "You explicitly want to disable cross-device resume.",
       "tradeoffs": [
-        "Disables Resume for the current user account.",
-        "This remains not yet backed by a primary Microsoft source and is therefore kept as docs-first research."
+        "Resume stays available where Windows would normally allow it.",
+        "The current app avoids publishing an unsupported runtime setting as the official control surface."
       ],
       "apply_allowed": false,
-      "notes": "This is kept as docs-first because the setting is runtime-observed and not yet backed by a primary Microsoft source.",
       "evidence_ids": [
-        "repo-resume-procmon-notes",
-        "app-privacy-provider"
+        "ms-connectivity-disable-cross-device-resume"
       ]
     }
   ],
   "evidence": [
     {
+      "evidence_id": "ms-connectivity-disable-cross-device-resume",
+      "kind": "policy-csp",
+      "title": "Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
+      "summary": "Microsoft documents DisableCrossDeviceResume as a user-scope policy with default value 0 and disabled state 1. The page still carries Windows Insider Preview language as of March 14, 2026.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-disable-cross-device-resume-policy-observation",
+      "kind": "registry-observation",
+      "title": "Local PolicyManager default observation",
+      "location": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume",
+      "summary": "Local read-only registry query on March 14, 2026 found the PolicyManager default definition for DisableCrossDeviceResume with lowrange 0, highrange 1, and default value 0, confirming the policy contract exists on this build.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "repo-resume-procmon-notes",
       "kind": "repo-doc",
       "title": "Repo Procmon notes for Resume settings",
       "location": "Docs/privacy/privacy.md",
-      "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on. The same notes say stock Windows 11 25H2 defaults Resume to enabled and uses companion values such as IsOneDriveResumeAllowed.",
+      "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
       "supports": [
         "path",
         "value",
-        "behavior",
-        "default"
+        "behavior"
       ],
       "strength": "medium"
     },
@@ -170,7 +196,7 @@
       "kind": "registry-observation",
       "title": "Local CrossDeviceResume registry observation",
       "location": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
-      "summary": "Local read-only registry query on 2026-03-13 found IsResumeAllowed = 0 and IsOneDriveResumeAllowed = 1 under the current-user CrossDeviceResume configuration key, confirming the observed path is present and active on this build.",
+      "summary": "Local read-only registry query on March 14, 2026 found IsResumeAllowed = 0 and IsOneDriveResumeAllowed = 1 under the current-user CrossDeviceResume configuration key, confirming the observed runtime path is present and active on this build.",
       "supports": [
         "path",
         "value",
@@ -187,38 +213,34 @@
       "supports": [
         "path",
         "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "official-phone-linking-policy-context",
-      "kind": "official-doc",
-      "title": "Local Microsoft GroupPolicy.admx / GroupPolicy.adml context for Phone-PC linking",
-      "location": "C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx ; C:\\Windows\\PolicyDefinitions\\en-US\\GroupPolicy.adml",
-      "summary": "The official machine policy EnableMmx blocks broader Phone-PC linking and Continue on PC experiences. This record uses that context only to explain scope boundaries and why privacy.disable-phone-linking remains a separate, broader control.",
-      "supports": [
-        "behavior",
-        "side-effects",
-        "version-scope"
+        "ui-mapping",
+        "app-mismatch"
       ],
       "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "This record intentionally documents a real runtime user setting the app actually writes, but it is observed implementation only and not yet backed by a primary Microsoft source. The broader official machine policy already exists separately as privacy.disable-phone-linking.",
+    "needs_vm_validation": false,
+    "why": "Microsoft now provides a documented user-scope policy for disabling cross-device resume, and the current app does not write that supported surface. It writes a different runtime HKCU setting instead.",
     "blocking_issues": [
-      "IsResumeAllowed is not yet backed by a primary Microsoft source. Current semantics come from repo Procmon notes and local observation rather than official Microsoft documentation."
+      "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead of the documented user-scope policy DisableCrossDeviceResume.",
+      "The DisableCrossDeviceResume CSP page still carries Windows Insider Preview language as of March 14, 2026, so any future surface alignment should also verify shipping-build applicability."
     ]
   },
   "open_questions": [
-    "Can a primary Microsoft source be found for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed?",
-    "Should this remain as a narrow current-user Resume toggle, or should the product steer users toward the broader privacy.disable-phone-linking policy when they want a fully documented Microsoft-managed surface?"
-  ]
+    "Should the product align to the documented DisableCrossDeviceResume policy surface, or intentionally keep the narrower runtime current-user setting and rename the tweak to match that observed behavior?",
+    "If the product aligns to the policy surface, what is the safest supported local implementation path outside MDM management?"
+  ],
+  "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
+    "exact_quote_or_path": "DisableCrossDeviceResume. Scope User. Default Value 0. Format int. 0 = CrossDeviceResume is enabled. 1 = CrossDeviceResume is Disabled.",
+    "key_found_on_page": true,
+    "notes": "Microsoft directly documents DisableCrossDeviceResume as the supported user-scope policy surface. The current app writes a different runtime HKCU setting instead."
+  }
 }
