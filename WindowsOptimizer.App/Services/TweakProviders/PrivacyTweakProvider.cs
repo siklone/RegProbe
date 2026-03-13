@@ -1053,18 +1053,6 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "privacy.disable-reserved-storage",
-            "Disable Reserved Storage",
-            "Disables Windows reserved storage for updates.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"Software\Microsoft\Windows\CurrentVersion\ReserveManager",
-            "DisableDeletes",
-            RegistryValueKind.DWord,
-            1);
-
-        yield return CreateRegistryTweak(
-            context,
             "privacy.disable-biometrics",
             "Disable Biometrics",
             "Turns off Windows biometric features on this device.",

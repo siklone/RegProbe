@@ -1,0 +1,231 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.disable-reserved-storage",
+  "tweak_id": "cleanup.disable-reserved-storage",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "summary": "Official command-backed tweak for disabling Windows Reserved Storage. Microsoft documents reserved storage through DISM command and API surfaces, and the repo already implements that exact model in cleanup.disable-reserved-storage via /Get-ReservedStorageState for detection and /Set-ReservedStorageState /State:Disabled for apply. A local DISM detect run on Windows 11 Pro 10.0.26200.8037 returned 'Reserved storage is disabled.' The internal ReserveManager registry write observed elsewhere is treated as an implementation detail of the documented DISM surface, not the public control surface itself.",
+  "setting": {
+    "name": "Disable Reserved Storage",
+    "category": "Cleanup",
+    "area": "DISM Command",
+    "scope": "device",
+    "casual_explanation": "Reserved storage keeps disk space available for Windows updates, temporary files, and servicing. This tweak uses the official DISM command surface to disable that reserved space and reclaim capacity on smaller drives.",
+    "why_people_change_it": "People disable reserved storage when they need to reclaim disk space, especially on small SSDs or low-capacity systems. They leave it enabled when update reliability and servicing headroom matter more than recovering a few gigabytes.",
+    "tradeoffs_overview": "Disabling reserved storage can reclaim space, but it also removes Windows' built-in disk headroom for updates, caches, and servicing. The official control surface is documented and reversible, but the operational tradeoff is still real.",
+    "professional_notes": "Microsoft documents reserved storage with DISM /Get-ReservedStorageState and /Set-ReservedStorageState plus the DISM API. The repo command tweak cleanup.disable-reserved-storage already matches that official surface exactly. Detect command: dism.exe /Online /Get-ReservedStorageState. Apply command: dism.exe /Online /Set-ReservedStorageState /State:Disabled /NoRestart. Rollback command: dism.exe /Online /Set-ReservedStorageState /State:Enabled /NoRestart when the previously detected state was not already disabled. A local read-only detect run on 2026-03-13 returned 'Reserved storage is disabled.' Repo docs also capture the documented command driving ReserveManager\\DisableDeletes=1 as an internal side effect, but this record intentionally publishes only the official DISM surface.",
+    "targets": [
+      {
+        "target_id": "reserved-storage-state-command",
+        "location_kind": "command",
+        "path": "DISM.exe /Online /Set-ReservedStorageState",
+        "value_name": "State",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Enabled",
+            "label": "Reserved storage enabled",
+            "meaning": "Reserved storage is enabled through the documented DISM surface.",
+            "evidence_ids": [
+              "ms-dism-reserved-storage",
+              "ms-dism-reserved-storage-api"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Reserved storage disabled",
+            "meaning": "Reserved storage is disabled through the documented DISM surface.",
+            "evidence_ids": [
+              "ms-dism-reserved-storage",
+              "ms-dism-reserved-storage-api",
+              "engine-cleanup-command-tweak"
+            ]
+          }
+        ],
+        "notes": "Detection uses DISM.exe /Online /Get-ReservedStorageState. Repo docs and local observation show the command may also drive ReserveManager\\DisableDeletes internally, but that registry value is not treated as the public-facing control surface."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+    "notes": "The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate.",
+    "writes": [
+      {
+        "target_id": "reserved-storage-state-command",
+        "path": "DISM.exe /Online /Set-ReservedStorageState",
+        "value_name": "State",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed reserved-storage baseline",
+      "applies_to": "Windows systems that support Reserved Storage",
+      "states": [
+        {
+          "target_id": "reserved-storage-state-command",
+          "state_kind": "feature-dependent",
+          "rationale": "Microsoft documents the command surface, but the current effective baseline depends on the installed image and prior servicing state."
+        }
+      ],
+      "notes": "Use DISM /Get-ReservedStorageState to observe the current device state instead of assuming a universal baseline.",
+      "evidence_ids": [
+        "ms-dism-reserved-storage",
+        "ms-dism-reserved-storage-api",
+        "local-dism-detect"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-baseline",
+      "label": "Windows managed baseline",
+      "intended_for": [
+        "General users",
+        "Systems where update reliability matters more than reclaiming a few gigabytes"
+      ],
+      "avoid_for": [
+        "Low-capacity devices where reclaiming space is the primary goal"
+      ],
+      "states": [
+        {
+          "target_id": "reserved-storage-state-command",
+          "state_kind": "feature-dependent",
+          "rationale": "Leave Reserved Storage in its current documented Windows-managed state."
+        }
+      ],
+      "good_when": "You want Windows to keep managing update headroom and servicing space normally.",
+      "bad_when": "You need to reclaim reserved storage on a constrained disk.",
+      "tradeoffs": [
+        "Reserved storage continues to protect update and servicing workflows.",
+        "No explicit state change is pushed through DISM."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-dism-reserved-storage",
+        "local-dism-detect"
+      ]
+    },
+    {
+      "profile_id": "disable-reserved-storage",
+      "label": "Disable reserved storage",
+      "intended_for": [
+        "Advanced users on low-capacity systems",
+        "Admins who explicitly want to reclaim reserved update space"
+      ],
+      "avoid_for": [
+        "Systems where servicing resilience matters more than a modest space gain",
+        "General users who may not understand the update tradeoff"
+      ],
+      "states": [
+        {
+          "target_id": "reserved-storage-state-command",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Use the documented DISM surface to disable Reserved Storage."
+        }
+      ],
+      "good_when": "You need to reclaim disk space and accept the servicing tradeoff.",
+      "bad_when": "You want Windows to keep reserving storage for updates and temporary files.",
+      "tradeoffs": [
+        "Can reclaim a few gigabytes of disk space.",
+        "Reduces Windows servicing headroom for updates, caches, and temporary files."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dism-reserved-storage",
+        "ms-dism-reserved-storage-api",
+        "engine-cleanup-command-tweak"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dism-reserved-storage",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: DISM Reserved Storage Command-line Options",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11",
+      "summary": "Microsoft documents /Get-ReservedStorageState and /Set-ReservedStorageState with State values Enabled and Disabled for Reserved Storage.",
+      "supports": [
+        "path",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-dism-reserved-storage-api",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: DismGetReservedStorageState function",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism/dismgetreservedstoragestate-function?view=windows-11",
+      "summary": "Microsoft documents a DISM API for reading Reserved Storage state, reinforcing that the supported control model is DISM command and API based.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-cleanup-command-tweak",
+      "kind": "repo-code",
+      "title": "Current cleanup command implementation",
+      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+      "summary": "The engine tweak uses the documented DISM detect/apply/rollback flow: /Get-ReservedStorageState, /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback to /State:Enabled when needed.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-dism-detect",
+      "kind": "vm-test",
+      "title": "Local DISM detect run for Reserved Storage state",
+      "location": "Local run - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
+      "summary": "Read-only command run: dism.exe /Online /Get-ReservedStorageState returned 'Reserved storage is disabled.' on the current machine. This confirms the documented detect surface is live on this build.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-reserve-manager-side-effect",
+      "kind": "repo-doc",
+      "title": "Repo Procmon note for Reserved Storage side effect",
+      "location": "Docs/privacy/privacy.md",
+      "summary": "Repo documentation records that dism /online /Set-ReservedStorageState /State:Disabled /NoRestart caused dismhost.exe to set HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ReserveManager\\DisableDeletes = 1. This supports treating the registry write as an internal side effect of the documented DISM surface, not the public control surface itself.",
+      "supports": [
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft explicitly documents Reserved Storage through DISM command and API surfaces, the current cleanup tweak already implements that exact detect/apply/rollback flow, and a local DISM detect run confirmed the official command surface is live on this Windows 11 build.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11",
+    "exact_quote_or_path": "/Set-ReservedStorageState /State:<state>; State can be Enabled or Disabled.; DISM.exe /Online /Set-ReservedStorageState /State:Disabled; DismSetReservedStorageState: Sets the reserved storage state of the image.",
+    "key_found_on_page": true,
+    "notes": "Microsoft publishes Reserved Storage through DISM command and API surfaces, and the current cleanup.disable-reserved-storage command tweak matches that documented model. The ReserveManager DisableDeletes write is treated as a side effect of the official DISM surface, not the public control surface itself."
+  }
+}

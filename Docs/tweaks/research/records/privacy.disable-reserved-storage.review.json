@@ -1,0 +1,118 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-reserved-storage",
+  "tweak_id": "privacy.disable-reserved-storage",
+  "record_status": "deprecated",
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "summary": "This record previously tracked a privacy-category duplicate that wrote HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager\\DisableDeletes = 1 directly. It was retired on 2026-03-13 because the repo already contains the proper official command-backed tweak cleanup.disable-reserved-storage, which uses the documented DISM Reserved Storage surface. This record remains only as an audit trail from the retired privacy ID to the surviving cleanup tweak.",
+  "setting": {
+    "name": "Disable Reserved Storage (Deprecated Privacy Duplicate)",
+    "category": "Privacy",
+    "area": "Deprecated Duplicate Audit Trail",
+    "scope": "device",
+    "casual_explanation": "This privacy-category record is deprecated. Use cleanup.disable-reserved-storage for the supported Reserved Storage control.",
+    "why_people_change_it": "This record is no longer used for research or implementation decisions because the duplicate privacy tweak was retired in favor of the official cleanup tweak.",
+    "tradeoffs_overview": "Keeping the deprecated record preserves the old ID and explains why the duplicate was removed without leaving future research to reason about the wrong registry-only surface.",
+    "professional_notes": "The retired privacy tweak wrote ReserveManager\\DisableDeletes directly. Research confirmed that Reserved Storage is officially documented through DISM command and API surfaces, and the repo already had a command-backed cleanup.disable-reserved-storage tweak implementing that official model. The privacy duplicate was therefore removed from PrivacyTweakProvider.cs instead of being fixed in place.",
+    "targets": [
+      {
+        "target_id": "deprecated-privacy-duplicate",
+        "location_kind": "feature",
+        "path": "Use cleanup.disable-reserved-storage instead",
+        "value_name": "DeprecatedState",
+        "value_type": "STATE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "deprecated",
+            "label": "Deprecated duplicate record",
+            "meaning": "This record exists only as an audit trail. Use cleanup.disable-reserved-storage for the current supported Reserved Storage tweak.",
+            "evidence_ids": [
+              "duplicate-retirement-audit"
+            ]
+          }
+        ],
+        "notes": "Synthetic audit-only target added to keep the deprecated record schema-valid."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Deprecated audit trail",
+      "applies_to": "Research metadata only",
+      "states": [
+        {
+          "target_id": "deprecated-privacy-duplicate",
+          "state_kind": "value",
+          "value": "deprecated",
+          "rationale": "This record remains only to preserve the retired privacy ID and point to the supported cleanup tweak."
+        }
+      ],
+      "notes": "No Windows behavior is modeled here anymore; use cleanup.disable-reserved-storage for the live command-backed implementation.",
+      "evidence_ids": [
+        "duplicate-retirement-audit"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "use-cleanup-record",
+      "label": "Use cleanup record",
+      "intended_for": [
+        "Researchers reviewing the retired privacy duplicate"
+      ],
+      "avoid_for": [
+        "Anyone looking for a current Reserved Storage implementation"
+      ],
+      "states": [
+        {
+          "target_id": "deprecated-privacy-duplicate",
+          "state_kind": "value",
+          "value": "deprecated",
+          "rationale": "Use cleanup.disable-reserved-storage instead of the retired privacy duplicate."
+        }
+      ],
+      "good_when": "You need the audit trail from the retired privacy ID to the surviving cleanup tweak.",
+      "bad_when": "You are trying to make apply or publication decisions from this deprecated record.",
+      "tradeoffs": [
+        "Preserves historical linkage for the retired privacy ID.",
+        "Prevents future research from treating the old registry-only surface as a current source of truth."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "duplicate-retirement-audit"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "duplicate-retirement-audit",
+      "kind": "repo-doc",
+      "title": "Reserved Storage duplicate retirement audit trail",
+      "location": "Docs/tweaks/research/records/",
+      "summary": "The privacy.disable-reserved-storage duplicate was retired on 2026-03-13 because the repo already exposes the official DISM-backed cleanup.disable-reserved-storage tweak. The privacy duplicate had written ReserveManager\\DisableDeletes directly, while the surviving cleanup tweak uses the documented DISM detect/apply/rollback surface.",
+      "supports": [
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "Deprecated after duplicate retirement. The privacy ID pointed to an internal registry side effect while the repo already had a proper official cleanup tweak for Reserved Storage. This record now exists only as an audit trail.",
+    "blocking_issues": []
+  },
+  "open_questions": []
+}
