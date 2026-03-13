@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:19:01Z",
+  "generated_utc": "2026-03-13T16:24:04Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -217,20 +217,6 @@
     {
       "sprint_number": 2,
       "priority_index": 10,
-      "record_id": "security.disable-system-restore",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app writes RPSessionInterval under the runtime CurrentVersion path instead of the official policy values DisableSR and DisableConfig under the Policies path."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore::RPSessionInterval=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableSR (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableConfig (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/security.disable-system-restore.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 11,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -244,7 +230,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -259,7 +245,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -274,7 +260,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -290,7 +276,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 15,
+      "priority_index": 14,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

@@ -243,13 +243,13 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             context,
             "security.disable-system-restore",
             "Disable System Restore",
-            "Disables System Restore by setting the restore session interval to zero.",
+            "Disables System Restore through the official machine policy surface.",
             TweakRiskLevel.Risky,
             RegistryHive.LocalMachine,
-            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore",
-            "RPSessionInterval",
+            @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore",
+            "DisableSR",
             RegistryValueKind.DWord,
-            0);
+            1);
 
         yield return CreateRegistryTweak(
             context,

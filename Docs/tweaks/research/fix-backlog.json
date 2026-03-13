@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:19:00Z",
+  "generated_utc": "2026-03-13T16:24:04Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 15,
+  "entry_count": 14,
   "entries": [
     {
       "record_id": "developer.wsl2-memory",
@@ -481,40 +481,6 @@
           "value_name": "ExploitProtectionSettings",
           "value_type": "REG_SZ",
           "example_value": "<path-or-url-to-config.xml>"
-        }
-      ]
-    },
-    {
-      "record_id": "security.disable-system-restore",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore::RPSessionInterval=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableSR (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableConfig (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.disable-system-restore.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore",
-          "value_name": "RPSessionInterval",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
-          "value_name": "DisableSR",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
-          "value_name": "DisableConfig",
-          "value_type": "REG_DWORD",
-          "example_value": 0
         }
       ]
     },

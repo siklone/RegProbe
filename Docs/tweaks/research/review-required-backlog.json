@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:19:00Z",
+  "generated_utc": "2026-03-13T16:24:04Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 108,
+  "source_record_count": 107,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 15,
+    "implementation-mismatch": 14,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 17,
+    "heuristic": 16,
     "manual-override": 75,
     "proof-gate": 16
   },
@@ -1670,31 +1670,6 @@
         "exact_quote_or_path": "<policy name=\"ExploitProtection_Name\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection\" ... <text id=\"ExploitProtection_Name\" valueName=\"ExploitProtectionSettings\" required=\"true\" maxLength=\"65535\" />; ExploitGuard.adml: \"Generate an XML file with the settings from the device ... and place the generated XML file in a shared or local path.\"",
         "key_found_on_page": true,
         "notes": "Local official Microsoft ADMX/ADML files document Exploit Protection through the ExploitProtectionSettings XML path under the Exploit Guard policy key. The current app writes raw MitigationOptions and MitigationAuditOptions blobs under HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel instead, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "security.disable-system-restore",
-      "tweak_id": "security.disable-system-restore",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes RPSessionInterval under the runtime CurrentVersion path instead of the official policy values DisableSR and DisableConfig under the Policies path.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.disable-system-restore.review.json",
-      "summary": "Microsoft documents official System Restore policies, but the current app does not use those policy values. It writes RPSessionInterval = 0 under the runtime SystemRestore key, so this record stays in review until the implementation is aligned with the official control surface or separately documented.",
-      "decision_why": "The official System Restore policy surface is clear, but the current app does not write those documented policy values.",
-      "blocking_issues": [
-        "The current app writes RPSessionInterval under the runtime CurrentVersion path instead of the official policy values DisableSR and DisableConfig under the Policies path."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\SystemRestore.admx",
-        "exact_quote_or_path": "<policy name=\"SR_DisableConfig\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\" valueName=\"DisableConfig\">; <policy name=\"SR_DisableSR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\" valueName=\"DisableSR\">; SystemRestore.adml: \"Turn off System Restore\" and \"Turn off Configuration\".",
-        "key_found_on_page": true,
-        "notes": "Local official Microsoft ADMX/ADML files document DisableSR and DisableConfig as the supported System Restore policy values. The current app writes RPSessionInterval under the CurrentVersion runtime path instead, so this record remains review-required as an implementation mismatch."
       }
     },
     {
