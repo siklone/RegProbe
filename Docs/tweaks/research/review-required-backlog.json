@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:59:08Z",
+  "generated_utc": "2026-03-13T15:02:24Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 117,
+  "source_record_count": 116,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 25,
+    "implementation-mismatch": 24,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 27,
+    "heuristic": 26,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1936,32 +1936,6 @@
         "exact_quote_or_path": "<policy name=\"AllowSearchHighlights\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"EnableDynamicContentInWSB\">; Search.adml: Disabling this setting turns off search highlights in the start menu search box and in search home.",
         "key_found_on_page": true,
         "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights. The record remains review-required because the app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings\\IsDynamicSearchBoxEnabled instead of the documented policy surface."
-      }
-    },
-    {
-      "record_id": "system.disable-search-web-results",
-      "tweak_id": "system.disable-search-web-results",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The app writes DoNotUseWebResults as if it were the registry value name, but the official value name is ConnectedSearchUseWeb.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "System",
-      "technical_area": "Registry Policy",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-search-web-results.review.json",
-      "summary": "Microsoft documents the policy by name as DoNotUseWebResults, but the official registry value name in Search.admx is ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1. The current app writes DoNotUseWebResults = 1 as if it were the actual registry value, so this stays in review.",
-      "decision_why": "The official Microsoft policy mapping is clear, and it does not match the registry value name currently written by the app.",
-      "blocking_issues": [
-        "The app writes DoNotUseWebResults as if it were the registry value name, but the official value name is ConnectedSearchUseWeb.",
-        "The official disable state is ConnectedSearchUseWeb = 0, not DoNotUseWebResults = 1."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\Search.admx",
-        "exact_quote_or_path": "<policy name=\"DoNotUseWebResults\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"ConnectedSearchUseWeb\">; Search.adml: If you enable this policy setting, queries won't be performed on the web and web results won't be displayed when a user performs a query in Search.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The record remains review-required because the app writes DoNotUseWebResults = 1 as if it were the value name."
       }
     },
     {

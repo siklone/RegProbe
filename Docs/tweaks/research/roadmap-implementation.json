@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:59:08Z",
+  "generated_utc": "2026-03-13T15:02:24Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -290,21 +290,6 @@
     {
       "sprint_number": 2,
       "priority_index": 15,
-      "record_id": "system.disable-search-web-results",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The app writes DoNotUseWebResults as if it were the registry value name, but the official value name is ConnectedSearchUseWeb.",
-        "The official disable state is ConnectedSearchUseWeb = 0, not DoNotUseWebResults = 1."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::DoNotUseWebResults=1 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::ConnectedSearchUseWeb (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/system.disable-search-web-results.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 16,
       "record_id": "system.memory-registry-quota-default",
       "category": "fix",
       "estimated_effort": "large",
@@ -319,7 +304,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 17,
+      "priority_index": 16,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -334,7 +319,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 18,
+      "priority_index": 17,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -350,7 +335,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 19,
+      "priority_index": 18,
       "record_id": "security.disable-system-restore",
       "category": "fix",
       "estimated_effort": "large",
@@ -364,7 +349,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 20,
+      "priority_index": 19,
       "record_id": "security.powershell-unrestricted",
       "category": "fix",
       "estimated_effort": "large",
@@ -379,7 +364,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 21,
+      "priority_index": 20,
       "record_id": "network.disable-lltd",
       "category": "fix",
       "estimated_effort": "large",
@@ -393,7 +378,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 22,
+      "priority_index": 21,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -408,7 +393,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 23,
+      "priority_index": 22,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -423,7 +408,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 24,
+      "priority_index": 23,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -439,7 +424,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 25,
+      "priority_index": 24,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

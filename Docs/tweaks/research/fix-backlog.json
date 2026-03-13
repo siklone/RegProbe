@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T14:59:08Z",
+  "generated_utc": "2026-03-13T15:02:24Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 25,
+  "entry_count": 24,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -805,33 +805,6 @@
           "location_kind": "registry",
           "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
           "value_name": "EnableDynamicContentInWSB",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-search-web-results",
-      "current_state": "mismatch-suspected | Registry Policy",
-      "notes": "Move the implementation from HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::DoNotUseWebResults=1 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::ConnectedSearchUseWeb (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/system.disable-search-web-results.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
-          "value_name": "DoNotUseWebResults",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
-          "value_name": "ConnectedSearchUseWeb",
           "value_type": "REG_DWORD",
           "example_value": 0
         }

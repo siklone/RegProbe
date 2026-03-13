@@ -1,0 +1,213 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-search-web-results",
+  "tweak_id": "system.disable-search-web-results",
+  "record_status": "validated",
+  "summary": "Microsoft documents the policy by name as DoNotUseWebResults, but the official registry value name in Search.admx is ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1. The app now writes that documented registry value and disable state exactly.",
+  "setting": {
+    "name": "Web Results in Windows Search",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
+    "why_people_change_it": "People disable it when they want a more local-only search experience and do not want web results shown in Search.",
+    "tradeoffs_overview": "Turning it off reduces web-connected search behavior, but it also removes web results and some online search convenience.",
+    "professional_notes": "Search.admx defines the policy name DoNotUseWebResults, but the actual registry value name is ConnectedSearchUseWeb under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search. The official mapping uses enabledValue 0 and disabledValue 1. Search.adml says enabling the policy stops web queries and web results. The app now writes ConnectedSearchUseWeb = 0, which matches the documented disabled state.",
+    "targets": [
+      {
+        "target_id": "connected-search-use-web",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "ConnectedSearchUseWeb",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can choose whether Search performs web queries and shows web results.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Web results disabled",
+            "meaning": "Search does not perform web queries and does not display web results.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml",
+              "app-system-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Web results allowed",
+            "meaning": "Search can perform web queries and display web results.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The app now writes ConnectedSearchUseWeb = 0 under the Windows Search policy key, which matches the documented disabled state.",
+    "writes": [
+      {
+        "target_id": "connected-search-use-web",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "ConnectedSearchUseWeb",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems exposing the older Windows Search web-results policy",
+      "states": [
+        {
+          "target_id": "connected-search-use-web",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "notes": "The local ADML help text says users can choose web-search behavior when the policy is not configured.",
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users"
+      ],
+      "avoid_for": [
+        "Users who want a forced local-only Search experience"
+      ],
+      "states": [
+        {
+          "target_id": "connected-search-use-web",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want to keep the standard Windows Search behavior.",
+      "bad_when": "You want web-connected results turned off by policy.",
+      "tradeoffs": [
+        "Web-connected search remains available.",
+        "Users keep control over search behavior."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-adml"
+      ]
+    },
+    {
+      "profile_id": "official-local-only-search",
+      "label": "Official local-only search",
+      "intended_for": [
+        "Advanced users who want a more local-only Search experience"
+      ],
+      "avoid_for": [
+        "Users who depend on web results in Search"
+      ],
+      "states": [
+        {
+          "target_id": "connected-search-use-web",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "This is the official value that disables web results according to Search.admx."
+        }
+      ],
+      "good_when": "You want Windows Search to stay local and avoid web queries and web results.",
+      "bad_when": "You want Search to keep online suggestions and web results.",
+      "tradeoffs": [
+        "Web results are removed from Windows Search.",
+        "Some online search convenience is lost."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-search-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\Search.admx",
+      "summary": "The local ADMX file defines the DoNotUseWebResults policy under the Windows Search key, but maps it to the registry value name ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-search-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\Search.adml",
+      "summary": "The local ADML help text says enabling the policy prevents Search from querying the web and displaying web results, while not configuring it leaves the choice to the user.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes ConnectedSearchUseWeb = 0 under the Windows Search policy key.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Microsoft policy mapping is clear, and the app now writes the correct registry value name and disable state documented in Search.admx and Search.adml. The tweak is reversible and publishable, but it is not recommended for general users because it removes web-connected Search behavior.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\Search.admx",
+    "exact_quote_or_path": "<policy name=\"DoNotUseWebResults\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"ConnectedSearchUseWeb\">; Search.adml: If you enable this policy setting, queries won't be performed on the web and web results won't be displayed when a user performs a query in Search.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly."
+  }
+}

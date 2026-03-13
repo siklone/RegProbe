@@ -377,9 +377,9 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             TweakRiskLevel.Safe,
             RegistryHive.LocalMachine,
             @"SOFTWARE\Policies\Microsoft\Windows\Windows Search",
-            "DoNotUseWebResults",
+            "ConnectedSearchUseWeb",
             RegistryValueKind.DWord,
-            1);
+            0);
 
         yield return CreateRegistryTweak(
             context,
