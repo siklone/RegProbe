@@ -95,19 +95,6 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "explorer.disable-taskbar-widgets",
-            "Disable Taskbar Widgets Icon",
-            "Removes the Widgets/News and Interests icon from the taskbar.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "TaskbarDa",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
-        yield return CreateRegistryTweak(
-            context,
             "explorer.disable-low-disk-space-warning",
             "Disable Low Disk Space Warning",
             "Turns off the low disk space warning notification.",

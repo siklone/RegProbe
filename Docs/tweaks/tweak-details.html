@@ -286,6 +286,149 @@
         <div class="label">Main doc</div><div><a href="../cleanup/cleanup.md#cleanup.windows-update-cache">Docs/cleanup/cleanup.md</a></div>
       </div>
     </div>
+    <div class="entry" id="developer.docker-performance">
+      <h2><code>developer.docker-performance</code> - Optimize Docker Desktop Performance</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Enables experimental features and WSL2 backend for better Docker performance on Windows.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L140</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.docker-performance">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.dotnet-telemetry-disable">
+      <h2><code>developer.dotnet-telemetry-disable</code> - Disable .NET SDK Telemetry</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Stops .NET SDK from sending usage data to Microsoft. Source: Microsoft .NET SDK Documentation</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L41</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.dotnet-telemetry-disable">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.git-long-paths">
+      <h2><code>developer.git-long-paths</code> - Enable Git Long Path Support</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Removes Windows 260 character path limit for Git repositories. Essential for modern Node.js projects with deeply nested dependencies. Source: Microsoft Windows Developer Documentation</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L27</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.git-long-paths">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.nodejs-performance">
+      <h2><code>developer.nodejs-performance</code> - Optimize Node.js Performance</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Increases Node.js memory limit and enables performance optimizations for large JavaScript projects.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L85</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.nodejs-performance">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.powershell-execution">
+      <h2><code>developer.powershell-execution</code> - Allow Local PowerShell Scripts</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Sets PowerShell execution policy to RemoteSigned, allowing local scripts to run while requiring signatures for remote scripts. Source: Microsoft PowerShell Documentation</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L155</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.powershell-execution">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.python-path-fix">
+      <h2><code>developer.python-path-fix</code> - Fix Python Path Length Issues</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Ensures Python can handle long paths on Windows, preventing import errors in deep directory structures.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L113</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.python-path-fix">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.ssh-agent-autostart">
+      <h2><code>developer.ssh-agent-autostart</code> - Enable SSH Agent Auto-start</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Automatically starts SSH agent on login for seamless Git SSH key authentication.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L168</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.ssh-agent-autostart">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.terminal-dev-mode">
+      <h2><code>developer.terminal-dev-mode</code> - Enable Windows Terminal Developer Features</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Enables advanced features in Windows Terminal like debug tap and developer mode settings.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L69</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.terminal-dev-mode">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.vs-intellisense-cache">
+      <h2><code>developer.vs-intellisense-cache</code> - Optimize VS IntelliSense Cache</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Increases Visual Studio IntelliSense cache size for better code completion performance in large projects.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L55</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.vs-intellisense-cache">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.vs-solution-load">
+      <h2><code>developer.vs-solution-load</code> - Speed Up Visual Studio Solution Load</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables background solution load analysis for faster Visual Studio startup on large solutions.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L197</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.vs-solution-load">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.vscode-git-autofetch">
+      <h2><code>developer.vscode-git-autofetch</code> - Disable VS Code Git Autofetch</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables automatic Git fetching in VS Code to reduce network usage and CPU spikes.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L99</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.vscode-git-autofetch">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.windows-dev-mode">
+      <h2><code>developer.windows-dev-mode</code> - Enable Windows Developer Mode</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Enables Windows Developer Mode for sideloading apps and accessing advanced development features. Source: Microsoft Windows Developer Documentation</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L127</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.windows-dev-mode">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="developer.wsl2-memory">
+      <h2><code>developer.wsl2-memory</code> - Optimize WSL2 Memory Usage</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Limits WSL2 memory consumption to prevent it from consuming all available RAM during development. Source: Microsoft WSL Documentation</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>Developer</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L183</code></div>
+        <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#developer.wsl2-memory">Docs/tweaks/tweaks.md</a></div>
+      </div>
+    </div>
     <div class="entry" id="explorer.disable-compact-mode">
       <h2><code>explorer.disable-compact-mode</code> - Enable Compact View</h2>
       <div class="meta">
@@ -304,30 +447,19 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Explorer</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L110</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L96</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#explorer.disable-low-disk-space-warning">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
     <div class="entry" id="explorer.disable-taskbar-chat">
-      <h2><code>explorer.disable-taskbar-chat</code> - Disable Taskbar Chat Icon</h2>
+      <h2><code>explorer.disable-taskbar-chat</code> - Hide Taskbar Chat Icon</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Removes the Microsoft Teams Chat icon from the taskbar.</div>
+        <div class="label">Changes</div><div>Hides the Microsoft Teams Chat icon from the taskbar by default.</div>
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Explorer</div>
         <div class="label">Area</div><div>Registry</div>
         <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L84</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#explorer.disable-taskbar-chat">Docs/visibility/visibility.md</a></div>
-      </div>
-    </div>
-    <div class="entry" id="explorer.disable-taskbar-widgets">
-      <h2><code>explorer.disable-taskbar-widgets</code> - Disable Taskbar Widgets Icon</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Removes the Widgets/News and Interests icon from the taskbar.</div>
-        <div class="label">Risk</div><div>Safe</div>
-        <div class="label">Category</div><div>Explorer</div>
-        <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L97</code></div>
-        <div class="label">Main doc</div><div><a href="../visibility/visibility.md#explorer.disable-taskbar-widgets">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
     <div class="entry" id="explorer.show-file-extensions">
@@ -407,17 +539,6 @@
         <div class="label">Main doc</div><div><a href="../misc/misc.md#misc.disable-onedrive">Docs/misc/misc.md</a></div>
       </div>
     </div>
-    <div class="entry" id="misc.disable-search-web-results">
-      <h2><code>misc.disable-search-web-results</code> - Disable Search Web Results</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Prevents Windows Search from showing Bing web results in the Start menu.</div>
-        <div class="label">Risk</div><div>Advanced</div>
-        <div class="label">Category</div><div>Misc</div>
-        <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\MiscTweakProvider.cs#L44</code></div>
-        <div class="label">Main doc</div><div><a href="../misc/misc.md#misc.disable-search-web-results">Docs/misc/misc.md</a></div>
-      </div>
-    </div>
     <div class="entry" id="misc.disable-visual-studio-telemetry">
       <h2><code>misc.disable-visual-studio-telemetry</code> - Disable Visual Studio Telemetry</h2>
       <div class="meta">
@@ -427,17 +548,6 @@
         <div class="label">Area</div><div>Registry</div>
         <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Misc\DisableVisualStudioTelemetryTweak.cs#L37</code></div>
         <div class="label">Main doc</div><div><a href="../misc/misc.md#misc.disable-visual-studio-telemetry">Docs/misc/misc.md</a></div>
-      </div>
-    </div>
-    <div class="entry" id="misc.notepadplusplus-default-editor">
-      <h2><code>misc.notepadplusplus-default-editor</code> - Set Notepad++ as Default Editor</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Sets Notepad++ as the default editor for batch files and text files. Requires Notepad++ to be installed.</div>
-        <div class="label">Risk</div><div>Safe</div>
-        <div class="label">Category</div><div>Misc</div>
-        <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Misc\SetNotepadPlusPlusDefaultEditorTweak.cs#L22</code></div>
-        <div class="label">Main doc</div><div><a href="../misc/misc.md#misc.notepadplusplus-default-editor">Docs/misc/misc.md</a></div>
       </div>
     </div>
     <div class="entry" id="misc.optimize-7zip-settings">
@@ -458,7 +568,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L170</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L188</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-active-probing">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -469,7 +579,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L322</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L340</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-default-shares">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -480,7 +590,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L64</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L82</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-ipv6">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -491,7 +601,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L102</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L120</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-llmnr">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -502,7 +612,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L150</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L168</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-lltd">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -513,7 +623,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L114</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L132</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-mdns">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -524,7 +634,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L76</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L94</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-netbios">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -535,7 +645,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L126</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L144</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-netbios-resolution">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -546,7 +656,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L358</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L376</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-plaintext-smb-passwords">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -557,7 +667,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L138</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L156</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-smart-name-resolution">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -568,7 +678,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L334</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L352</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-smb1">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -579,7 +689,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L346</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L364</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-smb2">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -590,7 +700,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L88</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L106</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.disable-wifi-sense">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -645,7 +755,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L184</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L202</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.prefer-ipv4">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -656,7 +766,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L370</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L388</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.require-ntlmv2-session-security">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -678,7 +788,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L260</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L278</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-disable-leasing">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -689,7 +799,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L197</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L215</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-enable-large-mtu">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -700,7 +810,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L272</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L290</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-enable-multichannel">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -711,7 +821,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L284</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L302</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-enable-quic">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -722,7 +832,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L236</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L254</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-encrypt-data">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -733,7 +843,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L248</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L266</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-reject-unencrypted-access">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -744,7 +854,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L296</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L314</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-require-dialect-3_1_1">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -755,7 +865,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L209</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L227</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-require-signing-client">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -766,7 +876,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L222</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L240</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-require-signing-server">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -777,7 +887,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Network</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L310</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L328</code></div>
         <div class="label">Main doc</div><div><a href="../network/network.md#network.smb-set-cipher-suite-order">Docs/network/network.md</a></div>
       </div>
     </div>
@@ -788,7 +898,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Notifications</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L507</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L508</code></div>
         <div class="label">Main doc</div><div><a href="../notifications/notifications.md#notifications.disable-feedback-frequency">Docs/notifications/notifications.md</a></div>
       </div>
     </div>
@@ -799,7 +909,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Notifications</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L494</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L495</code></div>
         <div class="label">Main doc</div><div><a href="../notifications/notifications.md#notifications.disable-lock-screen">Docs/notifications/notifications.md</a></div>
       </div>
     </div>
@@ -810,7 +920,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Notifications</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L545</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L546</code></div>
         <div class="label">Main doc</div><div><a href="../notifications/notifications.md#notifications.disable-mirroring">Docs/notifications/notifications.md</a></div>
       </div>
     </div>
@@ -821,7 +931,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Notifications</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L532</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L533</code></div>
         <div class="label">Main doc</div><div><a href="../notifications/notifications.md#notifications.disable-tile">Docs/notifications/notifications.md</a></div>
       </div>
     </div>
@@ -832,30 +942,19 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Notifications</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L481</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L482</code></div>
         <div class="label">Main doc</div><div><a href="../notifications/notifications.md#notifications.disable-toast">Docs/notifications/notifications.md</a></div>
       </div>
     </div>
     <div class="entry" id="performance.disable-animations">
       <h2><code>performance.disable-animations</code> - Disable Window Animations</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Disables window animations to make the UI feel snappier and improve responsiveness on lower-end hardware.</div>
+        <div class="label">Changes</div><div>Disables window animations to make the UI feel snappier. Reference: Microsoft PC Performance Guidelines</div>
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Performance</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L19</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L27</code></div>
         <div class="label">Main doc</div><div><a href="../performance/performance.md#performance.disable-animations">Docs/performance/performance.md</a></div>
-      </div>
-    </div>
-    <div class="entry" id="performance.disable-background-apps">
-      <h2><code>performance.disable-background-apps</code> - Disable Power Throttling</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Disables Windows Power Throttling to ensure apps get full CPU performance even when in background.</div>
-        <div class="label">Risk</div><div>Advanced</div>
-        <div class="label">Category</div><div>Performance</div>
-        <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L62</code></div>
-        <div class="label">Main doc</div><div><a href="../performance/performance.md#performance.disable-background-apps">Docs/performance/performance.md</a></div>
       </div>
     </div>
     <div class="entry" id="performance.disable-menu-show-delay">
@@ -865,7 +964,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Performance</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L32</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L40</code></div>
         <div class="label">Main doc</div><div><a href="../performance/performance.md#performance.disable-menu-show-delay">Docs/performance/performance.md</a></div>
       </div>
     </div>
@@ -876,7 +975,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Performance</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L45</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L53</code></div>
         <div class="label">Main doc</div><div><a href="../performance/performance.md#performance.disable-taskbar-animations">Docs/performance/performance.md</a></div>
       </div>
     </div>
@@ -986,7 +1085,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L56</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L79</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-cpu-idle-states">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1002,13 +1101,13 @@
       </div>
     </div>
     <div class="entry" id="power.disable-fast-startup">
-      <h2><code>power.disable-fast-startup</code> - Disable Fast Startup</h2>
+      <h2><code>power.disable-fast-startup</code> - Disable Fast Startup (Hiberboot)</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Disables fast startup (hiberboot) via policy.</div>
-        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Changes</div><div>Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.</div>
+        <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L75</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L37</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-fast-startup">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1030,7 +1129,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L23</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L24</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-modern-standby">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1041,7 +1140,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\NetworkAdapterPowerTweaks.cs#L32</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L109</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-network-power-saving">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1052,7 +1151,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L63</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L49</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-power-throttling">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1067,25 +1166,14 @@
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-superfetch">Docs/power/power.md</a></div>
       </div>
     </div>
-    <div class="entry" id="power.disable-usb-selective-suspend">
-      <h2><code>power.disable-usb-selective-suspend</code> - Disable USB Selective Suspend</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Disables USB Selective Suspend to prevent USB devices from powering down unexpectedly. This can resolve issues with USB devices disconnecting or becoming unresponsive.</div>
-        <div class="label">Risk</div><div>Safe</div>
-        <div class="label">Category</div><div>Power</div>
-        <div class="label">Area</div><div>Command</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Commands\Power\DisableUsbSelectiveSuspendTweak.cs#L17</code></div>
-        <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-usb-selective-suspend">Docs/power/power.md</a></div>
-      </div>
-    </div>
     <div class="entry" id="power.disable-windows-search">
       <h2><code>power.disable-windows-search</code> - Disable Windows Search</h2>
       <div class="meta">
         <div class="label">Changes</div><div>Disables the Windows Search indexing service. This can improve system performance but will slow down file searches. Useful for systems with SSDs where search performance is already fast.</div>
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
-        <div class="label">Area</div><div>Command</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Commands\Performance\DisableWindowsSearchTweak.cs#L13</code></div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L68</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.disable-windows-search">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1096,7 +1184,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L63</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L164</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.hide-hibernate-option">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1107,7 +1195,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L39</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L140</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.hide-lock-option">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1118,7 +1206,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L51</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L152</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.hide-sleep-option">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1129,7 +1217,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L86</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L93</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.optimize-cpu-boost">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1140,7 +1228,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\NetworkAdapterPowerTweaks.cs#L61</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L123</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.optimize-gaming-network">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1151,7 +1239,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Power</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Power\PowerSettingsTweaks.cs#L98</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L61</code></div>
         <div class="label">Main doc</div><div><a href="../power/power.md#power.optimize-performance">Docs/power/power.md</a></div>
       </div>
     </div>
@@ -1162,7 +1250,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L735</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L780</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.block-microsoft-accounts">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1173,7 +1261,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L396</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L397</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.deny-app-access">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1184,7 +1272,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L46</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L47</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-activity-history">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1195,7 +1283,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L33</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L34</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-advertising-id">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1206,7 +1294,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L432</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L433</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-app-diagnostics">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1217,7 +1305,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L999</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1044</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-app-launch-tracking">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1228,7 +1316,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L314</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L315</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-app-suggestions">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1239,7 +1327,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Composite</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L73</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L74</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-application-compatibility">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1250,7 +1338,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L61</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L62</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-application-telemetry">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1261,7 +1349,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L468</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L469</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-background-apps">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1272,7 +1360,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1024</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1069</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-biometrics">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1283,7 +1371,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1048</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1093</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-biometrics-domain-logon">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1294,7 +1382,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1036</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1081</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-biometrics-logon">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1305,7 +1393,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L456</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L457</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-camera">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1316,7 +1404,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L127</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L128</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-ceip">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1327,7 +1415,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L654</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L699</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-cli-telemetry">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1338,7 +1426,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L877</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L922</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-consumer-account-content">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1349,18 +1437,18 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L369</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L370</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-copilot">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
     <div class="entry" id="privacy.disable-cross-device-experiences">
-      <h2><code>privacy.disable-cross-device-experiences</code> - Disable Cross-Device Experiences</h2>
+      <h2><code>privacy.disable-cross-device-experiences</code> - Cross-Device Sharing</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Disables continue experiences on this device (CDP).</div>
+        <div class="label">Changes</div><div>Choose whether nearby Windows experiences stay off, work only with your devices, or are available to everyone nearby.</div>
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L593</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L594</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-cross-device-experiences">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1371,7 +1459,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L140</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L141</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-device-name-telemetry">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1382,7 +1470,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L21</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L22</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-diagnostic-data">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1393,7 +1481,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L164</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L165</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-diagnostic-data-delete">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1404,7 +1492,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L152</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L153</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-diagnostic-data-viewer">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1415,7 +1503,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L912</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L957</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-edge-search-suggestions">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1426,7 +1514,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>File</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L903</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L948</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-f1-help">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1437,7 +1525,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L520</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L521</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-feedback-notifications">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1448,8 +1536,19 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L559</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L560</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-file-history">Docs/privacy/privacy-verified.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="privacy.disable-find-my-device">
+      <h2><code>privacy.disable-find-my-device</code> - Disable Find My Device</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Stops Windows from registering this PC with Find My Device and keeps location-based recovery turned off.</div>
+        <div class="label">Risk</div><div>Safe</div>
+        <div class="label">Category</div><div>Privacy</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L638</code></div>
+        <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-find-my-device">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
     <div class="entry" id="privacy.disable-font-providers">
@@ -1459,7 +1558,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L344</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L345</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-font-providers">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1470,7 +1569,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L356</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L357</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-inking-typing-personalization">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1481,7 +1580,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L236</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L237</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-kms-activation-telemetry">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1492,7 +1591,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L669</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L714</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-language-list-access">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1503,7 +1602,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L747</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L792</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-local-security-questions">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1514,7 +1613,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L925</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L970</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-location-consent">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1525,7 +1624,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L939</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L984</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-location-consent-system">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1536,7 +1635,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L951</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L996</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-location-scripting">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1547,7 +1646,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L444</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L445</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-location-services">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1558,7 +1657,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L642</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L687</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-mdm-enrollment">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1569,7 +1668,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L630</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L675</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-message-sync">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1580,7 +1679,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Composite</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L572</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L573</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-offline-files">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1591,7 +1690,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L224</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L225</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-onesettings-downloads">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1602,7 +1701,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L889</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L934</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-online-tips">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1613,7 +1712,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L605</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L650</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-phone-linking">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1624,7 +1723,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L382</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L383</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-recall">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1635,7 +1734,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1012</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1057</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-reserved-storage">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1646,7 +1745,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L617</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L662</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-resume">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1657,7 +1756,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L248</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L249</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-rsop-logging">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1668,7 +1767,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L796</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L841</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-search-box-suggestions">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1679,7 +1778,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L783</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L828</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-search-history">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1690,7 +1789,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L975</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1020</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-sensors">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1701,18 +1800,18 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L260</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L261</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-sleep-study-diagnostics">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
     <div class="entry" id="privacy.disable-steps-recorder">
       <h2><code>privacy.disable-steps-recorder</code> - Disable Steps Recorder</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Disables Steps Recorder to prevent recording user actions.</div>
+        <div class="label">Changes</div><div>Disables Steps Recorder through policy to prevent recording user actions.</div>
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
-        <div class="label">Area</div><div>Composite</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L988</code></div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1032</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-steps-recorder">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1723,7 +1822,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L859</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L904</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-suggestions">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1734,7 +1833,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L327</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L328</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-suggestions-cdm">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1745,7 +1844,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L704</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L749</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-sync-settings">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1756,7 +1855,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L176</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L177</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-telemetry-change-notifications">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1767,7 +1866,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L188</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L189</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-telemetry-optin-ui">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1778,7 +1877,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L115</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L116</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-wer">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1789,7 +1888,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L963</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1008</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-windows-location-provider">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1800,7 +1899,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L301</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L302</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-windows-tips">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1811,7 +1910,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L682</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L727</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.disable-wmplayer-telemetry">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1822,7 +1921,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L759</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L804</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-last-logged-in-user">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1833,7 +1932,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L834</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L879</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-recommended-personalized-sites">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1844,7 +1943,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L846</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L891</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-recommended-personalized-sites-user">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1855,7 +1954,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L809</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L854</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-recommended-section">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1866,7 +1965,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L821</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L866</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-recommended-section-user">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1877,7 +1976,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L771</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L816</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.hide-username-at-signin">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1888,7 +1987,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L200</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L201</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.limit-diagnostic-log-collection">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1899,7 +1998,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L212</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L213</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.limit-dump-collection">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1910,7 +2009,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Privacy</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L288</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L289</code></div>
         <div class="label">Main doc</div><div><a href="../privacy/privacy-verified.md#privacy.troubleshooter-dont-run">Docs/privacy/privacy-verified.md</a></div>
       </div>
     </div>
@@ -1921,7 +2020,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L250</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L254</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-downloads-blocking">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1932,7 +2031,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L189</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L193</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-ntfs-encryption">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1943,7 +2042,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L226</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L230</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-p2p-updates">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1954,7 +2053,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L57</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L58</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-password-reveal">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1965,7 +2064,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L69</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L70</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-picture-password">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1976,7 +2075,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L177</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L181</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-remote-assistance">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1987,7 +2086,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L108</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L112</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-system-mitigations">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -1998,7 +2097,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L238</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L242</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-system-restore">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2008,8 +2107,8 @@
         <div class="label">Changes</div><div>Disables User Account Control entirely. Requires a reboot and severely lowers system security.</div>
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
-        <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L33</code></div>
+        <div class="label">Area</div><div>Command</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Commands\Security\DisableUacFullTweak.cs#L18</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-uac">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2020,18 +2119,18 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L120</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L124</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-vbs">Docs/security/security-verified.md</a></div>
       </div>
     </div>
     <div class="entry" id="security.disable-windows-firewall">
       <h2><code>security.disable-windows-firewall</code> - Disable Windows Firewall</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Turns off Windows Defender Firewall for Domain, Private, and Public profiles.</div>
+        <div class="label">Changes</div><div>Turns off Windows Defender Firewall for Domain, Private, and Public profiles. Reference: Microsoft Defender Firewall Docs</div>
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L95</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L99</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-windows-firewall">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2042,7 +2141,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L148</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L152</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-windows-update">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2053,7 +2152,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L135</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L139</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-wpbt">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2064,7 +2163,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L163</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L167</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.disable-wu-driver-updates">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2075,7 +2174,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L81</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L82</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.enable-dynamic-lock">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2086,7 +2185,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L214</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L218</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.enable-sudo">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2097,7 +2196,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L202</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L206</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.powershell-unrestricted">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2108,18 +2207,18 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L45</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L46</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.trusted-path-credential-prompting">Docs/security/security-verified.md</a></div>
       </div>
     </div>
     <div class="entry" id="security.uac-never-notify">
       <h2><code>security.uac-never-notify</code> - Set UAC to Never Notify</h2>
       <div class="meta">
-        <div class="label">Changes</div><div>Lowers User Account Control prompts to the least restrictive setting. Risky for security but reduces interruptions.</div>
+        <div class="label">Changes</div><div>Lowers User Account Control prompts to the least restrictive setting. Risky for security but reduces interruptions. Reference: Microsoft Security Baselines</div>
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>Security</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L18</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SecurityTweakProvider.cs#L29</code></div>
         <div class="label">Main doc</div><div><a href="../security/security-verified.md#security.uac-never-notify">Docs/security/security-verified.md</a></div>
       </div>
     </div>
@@ -2130,7 +2229,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Other</div>
         <div class="label">Area</div><div>Command</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L13</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L14</code></div>
         <div class="label">Main doc</div><div><a href="../tweaks/tweaks.md#system-check-disk-health">Docs/tweaks/tweaks.md</a></div>
       </div>
     </div>
@@ -2141,7 +2240,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L127</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L195</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.aero-shake">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2152,7 +2251,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L383</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L421</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.bsod-disable-auto-reboot">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2163,7 +2262,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L371</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L409</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.bsod-display-parameters">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2174,7 +2273,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L421</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L519</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-app-archiving">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2185,7 +2284,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L191</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L259</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-auto-maintenance">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2196,7 +2295,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L179</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L247</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-background-gp-updates">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2207,7 +2306,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L153</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L221</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-clipboard-history">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2218,7 +2317,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L167</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L235</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-clipboard-redirection">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2229,7 +2328,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L316</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L354</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-fullscreen-optimizations">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2240,7 +2339,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L303</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L327</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-game-dvr">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2251,19 +2350,8 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L140</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L208</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-jpeg-reduction">Docs/system/system.md</a></div>
-      </div>
-    </div>
-    <div class="entry" id="system.disable-non-essential-services">
-      <h2><code>system.disable-non-essential-services</code> - Disable Non-Essential Services</h2>
-      <div class="meta">
-        <div class="label">Changes</div><div>Disables various non-critical services (Print Spooler, Bluetooth if unused, etc.) to free up resources.</div>
-        <div class="label">Risk</div><div>Risky</div>
-        <div class="label">Category</div><div>System</div>
-        <div class="label">Area</div><div>Service</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L103</code></div>
-        <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-non-essential-services">Docs/system/system.md</a></div>
       </div>
     </div>
     <div class="entry" id="system.disable-restartable-apps">
@@ -2273,7 +2361,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L215</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L283</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-restartable-apps">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2284,7 +2372,7 @@
         <div class="label">Risk</div><div>Risky</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Task</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L86</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L100</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-scheduled-tasks">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2295,7 +2383,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L72</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L86</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-search-highlights">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2306,7 +2394,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L266</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L334</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-search-highlights-policy">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2317,7 +2405,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L346</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L384</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-search-remote-queries">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2328,7 +2416,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L334</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L372</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-search-web-results">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2339,7 +2427,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L278</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L346</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-service-splitting">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2350,7 +2438,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L60</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L74</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-shortcut-arrow">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2361,7 +2449,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L34</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L48</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-startup-delay">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2372,7 +2460,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L242</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L310</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-storage-sense">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2383,7 +2471,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L254</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L322</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-storage-sense-temp-cleanup">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2394,7 +2482,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L203</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L271</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.disable-store-open-with">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2405,7 +2493,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L201</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L225</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.dwm-disable-mpo">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2416,7 +2504,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L213</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L237</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.dwm-disable-overlay-min-fps">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2427,7 +2515,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L21</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L35</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.enable-game-mode">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2438,7 +2526,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L230</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L298</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.enable-hags">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2449,7 +2537,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L358</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L396</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.enable-indexing-encrypted-items">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2460,8 +2548,19 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L188</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L212</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-disable-overlays">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.graphics-page-fault-debug-mode">
+      <h2><code>system.graphics-page-fault-debug-mode</code> - Graphics: Page Fault Debug Mode</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Restores the graphics page-fault debug mode value Windows expects by default. Useful when undoing manual scheduler experiments.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L506</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-page-fault-debug-mode">Docs/system/system.md</a></div>
       </div>
     </div>
     <div class="entry" id="system.graphics-tdr-ddi-delay">
@@ -2471,7 +2570,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L140</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-tdr-ddi-delay">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2482,7 +2581,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L128</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-tdr-delay">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2493,7 +2592,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-tdr-level">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2504,7 +2603,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L188</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-tdr-limit-count">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2515,7 +2614,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L200</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.graphics-tdr-limit-time">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2530,6 +2629,28 @@
         <div class="label">Main doc</div><div><a href="../system/system.md#system.kernel-adjust-dpc-threshold">Docs/system/system.md</a></div>
       </div>
     </div>
+    <div class="entry" id="system.kernel-cache-aware-scheduling">
+      <h2><code>system.kernel-cache-aware-scheduling</code> - Kernel: Cache-Aware Scheduling</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Restores Windows&#x27; documented cache-aware scheduling default so the scheduler stays aligned with normal CPU cache topology behavior.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.kernel-cache-aware-scheduling">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.kernel-default-dynamic-hetero-cpu-policy">
+      <h2><code>system.kernel-default-dynamic-hetero-cpu-policy</code> - Kernel: Default Dynamic Hetero CPU Policy</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Returns Windows&#x27; hybrid CPU scheduling policy to the documented default used for heterogeneous core systems.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.kernel-default-dynamic-hetero-cpu-policy">Docs/system/system.md</a></div>
+      </div>
+    </div>
     <div class="entry" id="system.kernel-disable-low-qos-timer-resolution">
       <h2><code>system.kernel-disable-low-qos-timer-resolution</code> - Kernel: Disable Low QoS Timer Resolution</h2>
       <div class="meta">
@@ -2537,7 +2658,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L139</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.kernel-disable-low-qos-timer-resolution">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2603,7 +2724,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L127</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.kernel-thread-dpc-enable">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2614,7 +2735,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L396</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L434</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-clear-pagefile-at-shutdown">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2625,8 +2746,52 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L408</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L446</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-disable-paging-executive">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.memory-large-system-cache-client">
+      <h2><code>system.memory-large-system-cache-client</code> - Memory: Use Client System Cache</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Keeps memory behavior on the normal desktop/client default so Windows favors applications instead of file-server style caching.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L458</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-large-system-cache-client">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.memory-nonpaged-pool-dynamic">
+      <h2><code>system.memory-nonpaged-pool-dynamic</code> - Memory: Reset Non-Paged Pool Size</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Returns kernel non-paged pool allocation to the Windows-managed dynamic default. This is mainly a rollback-to-default style setting.</div>
+        <div class="label">Risk</div><div>Risky</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L482</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-nonpaged-pool-dynamic">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.memory-paged-pool-dynamic">
+      <h2><code>system.memory-paged-pool-dynamic</code> - Memory: Reset Paged Pool Size</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Returns kernel paged pool allocation to the Windows-managed dynamic default. Use this when a manual pool tweak should be undone.</div>
+        <div class="label">Risk</div><div>Risky</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L470</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-paged-pool-dynamic">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.memory-registry-quota-default">
+      <h2><code>system.memory-registry-quota-default</code> - Memory: Reset Registry Quota</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior.</div>
+        <div class="label">Risk</div><div>Advanced</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Registry</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L494</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.memory-registry-quota-default">Docs/system/system.md</a></div>
       </div>
     </div>
     <div class="entry" id="system.ntfs-disable-8dot3">
@@ -2636,7 +2801,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L226</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.ntfs-disable-8dot3">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2647,7 +2812,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L238</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.ntfs-disable-last-access">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2658,7 +2823,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.ntfs-enable-long-paths">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2669,7 +2834,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L286</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.ntfs-reset-memory-usage">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2680,7 +2845,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L298</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.ntfs-reset-mft-zone">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2702,8 +2867,151 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L287</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L311</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.reduce-shutdown-timeouts">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-bluetooth-audio-gateway">
+      <h2><code>system.services.disable-bluetooth-audio-gateway</code> - Disable Bluetooth Audio Gateway Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the Bluetooth Audio Gateway service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L189</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-bluetooth-audio-gateway">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-bluetooth-support">
+      <h2><code>system.services.disable-bluetooth-support</code> - Disable Bluetooth Support Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the main Bluetooth support service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L177</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-bluetooth-support">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-bluetooth-user-service">
+      <h2><code>system.services.disable-bluetooth-user-service</code> - Disable Bluetooth User Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables per-user Bluetooth services.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L183</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-bluetooth-user-service">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-connected-user-experiences">
+      <h2><code>system.services.disable-connected-user-experiences</code> - Disable Connected User Experiences Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the Connected User Experiences and Telemetry service (DiagTrack).</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L117</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-connected-user-experiences">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-print-device-configuration">
+      <h2><code>system.services.disable-print-device-configuration</code> - Disable Print Device Configuration Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the printer device configuration service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L165</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-print-device-configuration">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-print-notifications">
+      <h2><code>system.services.disable-print-notifications</code> - Disable Print Notification Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the printer notification service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L153</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-print-notifications">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-print-scan-broker">
+      <h2><code>system.services.disable-print-scan-broker</code> - Disable Print Scan Broker Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the print and scan broker service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L171</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-print-scan-broker">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-print-spooler">
+      <h2><code>system.services.disable-print-spooler</code> - Disable Print Spooler Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the Print Spooler service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L147</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-print-spooler">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-print-workflow-user-service">
+      <h2><code>system.services.disable-print-workflow-user-service</code> - Disable Print Workflow User Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables per-user print workflow services.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L159</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-print-workflow-user-service">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-sysmain">
+      <h2><code>system.services.disable-sysmain</code> - Disable SysMain Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the SysMain (Superfetch) service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L129</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-sysmain">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-wap-push-routing">
+      <h2><code>system.services.disable-wap-push-routing</code> - Disable WAP Push Routing Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the WAP Push Message Routing service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L123</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-wap-push-routing">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-windows-error-reporting">
+      <h2><code>system.services.disable-windows-error-reporting</code> - Disable Windows Error Reporting Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the Windows Error Reporting service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L141</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-windows-error-reporting">Docs/system/system.md</a></div>
+      </div>
+    </div>
+    <div class="entry" id="system.services.disable-windows-search">
+      <h2><code>system.services.disable-windows-search</code> - Disable Windows Search Service</h2>
+      <div class="meta">
+        <div class="label">Changes</div><div>Disables the Windows Search indexing service.</div>
+        <div class="label">Risk</div><div>Unknown</div>
+        <div class="label">Category</div><div>System</div>
+        <div class="label">Area</div><div>Service</div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L135</code></div>
+        <div class="label">Main doc</div><div><a href="../system/system.md#system.services.disable-windows-search">Docs/system/system.md</a></div>
       </div>
     </div>
     <div class="entry" id="system.verbose-status-messages">
@@ -2713,7 +3021,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>System</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L47</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L61</code></div>
         <div class="label">Main doc</div><div><a href="../system/system.md#system.verbose-status-messages">Docs/system/system.md</a></div>
       </div>
     </div>
@@ -2724,7 +3032,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L149</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L134</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.default-account-picture">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2735,7 +3043,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L375</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L360</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-acrylic-logon">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2746,7 +3054,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L124</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L109</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-common-control-animations">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2757,7 +3065,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L173</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L158</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-first-signin-animation">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2768,7 +3076,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L315</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L300</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-lock-screen">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2779,7 +3087,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L327</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L312</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-lock-screen-camera">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2790,7 +3098,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L363</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L348</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-lock-screen-changes">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2801,7 +3109,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L351</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L336</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-lock-screen-motion">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2812,7 +3120,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L339</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L324</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-lock-screen-slideshow">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2823,7 +3131,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L262</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L247</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-action-center">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2834,7 +3142,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L288</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L273</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-desktop-collection">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2845,7 +3153,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L236</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L221</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-features">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2856,7 +3164,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L275</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L260</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-settings">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2867,7 +3175,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L301</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L286</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-third-party">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2878,7 +3186,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L249</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L234</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-spotlight-welcome">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2889,7 +3197,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L161</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L146</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-wcn-wizards">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2900,7 +3208,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L198</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L183</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-widgets">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2911,7 +3219,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L137</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L122</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.disable-window-animations">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2922,7 +3230,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L400</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L385</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.force-classic-control-panel">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2933,7 +3241,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L185</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L170</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.hide-language-bar">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2944,7 +3252,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L210</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L195</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.hide-most-used-apps">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2955,7 +3263,7 @@
         <div class="label">Risk</div><div>Advanced</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L222</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L207</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.hide-people-bar">Docs/visibility/visibility.md</a></div>
       </div>
     </div>
@@ -2966,7 +3274,7 @@
         <div class="label">Risk</div><div>Safe</div>
         <div class="label">Category</div><div>Visibility</div>
         <div class="label">Area</div><div>Registry</div>
-        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L387</code></div>
+        <div class="label">Source</div><div><code>WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L372</code></div>
         <div class="label">Main doc</div><div><a href="../visibility/visibility.md#visibility.restore-classic-context-menu">Docs/visibility/visibility.md</a></div>
       </div>
     </div>

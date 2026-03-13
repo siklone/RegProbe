@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T13:36:10Z",
+  "generated_utc": "2026-03-13T13:57:03Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 34,
+  "entry_count": 33,
   "entries": [
     {
       "record_id": "developer.python-path-fix",
@@ -61,33 +61,6 @@
           "value_name": "[wsl2].memory",
           "value_type": "WSL setting",
           "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "explorer.disable-taskbar-widgets",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarDa=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh::AllowNewsAndInterests (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-          "value_name": "TaskbarDa",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
-          "value_name": "AllowNewsAndInterests",
-          "value_type": "REG_DWORD",
-          "example_value": 1
         }
       ]
     },

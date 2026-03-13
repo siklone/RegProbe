@@ -1,10 +1,10 @@
 {
-  "GeneratedAtUtc": "2026-03-08T19:26:38Z",
-  "Summary": "268/268 tweaks have nohuto evidence, 132 have Windows Internals context, 1 still need review.",
-  "TotalTweaks": 268,
-  "RepoBackedTweaks": 268,
-  "InternalsBackedTweaks": 132,
-  "ReviewNeededTweaks": 1,
+  "GeneratedAtUtc": "2026-03-13T13:56:53Z",
+  "Summary": "293/296 tweaks have nohuto evidence, 149 have Windows Internals context, 24 still need review.",
+  "TotalTweaks": 296,
+  "RepoBackedTweaks": 293,
+  "InternalsBackedTweaks": 149,
+  "ReviewNeededTweaks": 24,
   "Sources": [
     {
       "Repository": "win-config",
@@ -891,6 +891,421 @@
       ]
     },
     {
+      "Id": "developer.docker-performance",
+      "Name": "Optimize Docker Desktop Performance",
+      "Category": "Developer",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L140",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "desktop"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / affinities/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.dotnet-telemetry-disable",
+      "Name": "Disable .NET SDK Telemetry",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L41",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "environment"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.git-long-paths",
+      "Name": "Enable Git Long Path Support",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L27",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "win-registry"
+      ],
+      "MatchedTokens": [
+        "filesystem",
+        "longpathsenabled"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / records/FileSystem.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt",
+          "Summary": "Matched 2 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.nodejs-performance",
+      "Name": "Optimize Node.js Performance",
+      "Category": "Developer",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L85",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "environment"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / ntoskrnl",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl",
+          "Summary": "Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths."
+        }
+      ]
+    },
+    {
+      "Id": "developer.powershell-execution",
+      "Name": "Allow Local PowerShell Scripts",
+      "Category": "Developer",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L155",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "policies",
+        "powershell",
+        "executionpolicy"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / security/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / affinities/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.python-path-fix",
+      "Name": "Fix Python Path Length Issues",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L113",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "filesystem"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / security/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.ssh-agent-autostart",
+      "Name": "Enable SSH Agent Auto-start",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L168",
+      "HasNohutoEvidence": false,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": true,
+      "CoverageState": "unmapped",
+      "Summary": "No upstream provenance match found yet. Keep this tweak in review-only state.",
+      "SourceRepositories": [],
+      "MatchedTokens": [],
+      "References": []
+    },
+    {
+      "Id": "developer.terminal-dev-mode",
+      "Name": "Enable Windows Terminal Developer Features",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L69",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "terminal"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.vs-intellisense-cache",
+      "Name": "Optimize VS IntelliSense Cache",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L55",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "visualstudio"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.vs-solution-load",
+      "Name": "Speed Up Visual Studio Solution Load",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L197",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "visualstudio"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.vscode-git-autofetch",
+      "Name": "Disable VS Code Git Autofetch",
+      "Category": "Developer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L99",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 2 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "explorer",
+        "advanced"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "developer.windows-dev-mode",
+      "Name": "Enable Windows Developer Mode",
+      "Category": "Developer",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L127",
+      "HasNohutoEvidence": false,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": true,
+      "CoverageState": "unmapped",
+      "Summary": "No upstream provenance match found yet. Keep this tweak in review-only state.",
+      "SourceRepositories": [],
+      "MatchedTokens": [],
+      "References": []
+    },
+    {
+      "Id": "developer.wsl2-memory",
+      "Name": "Optimize WSL2 Memory Usage",
+      "Category": "Developer",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\DeveloperTweakProvider.cs#L183",
+      "HasNohutoEvidence": false,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": true,
+      "CoverageState": "unmapped",
+      "Summary": "No upstream provenance match found yet. Keep this tweak in review-only state.",
+      "SourceRepositories": [],
+      "MatchedTokens": [],
+      "References": []
+    },
+    {
       "Id": "explorer.disable-compact-mode",
       "Name": "Enable Compact View",
       "Category": "Explorer",
@@ -936,7 +1351,7 @@
       "Name": "Disable Low Disk Space Warning",
       "Category": "Explorer",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L110",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L96",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -974,7 +1389,7 @@
     },
     {
       "Id": "explorer.disable-taskbar-chat",
-      "Name": "Disable Taskbar Chat Icon",
+      "Name": "Hide Taskbar Chat Icon",
       "Category": "Explorer",
       "Risk": "Safe",
       "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L84",
@@ -987,67 +1402,27 @@
         "win-config"
       ],
       "MatchedTokens": [
-        "explorer",
-        "advanced"
+        "policies",
+        "chat"
       ],
       "References": [
         {
           "Kind": "nohuto",
-          "Title": "win-config / cleanup/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
           "Summary": "Matched 2 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
           "Summary": "Matched 2 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
-          "Title": "win-config / power/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        }
-      ]
-    },
-    {
-      "Id": "explorer.disable-taskbar-widgets",
-      "Name": "Disable Taskbar Widgets Icon",
-      "Category": "Explorer",
-      "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L97",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
-      "SourceRepositories": [
-        "win-config"
-      ],
-      "MatchedTokens": [
-        "explorer",
-        "advanced",
-        "taskbarda"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / visibility/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/visibility/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / cleanup/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
+          "Title": "win-config / affinities/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
         }
       ]
     },
@@ -1320,46 +1695,6 @@
       ]
     },
     {
-      "Id": "misc.disable-search-web-results",
-      "Name": "Disable Search Web Results",
-      "Category": "Misc",
-      "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\MiscTweakProvider.cs#L44",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
-      "SourceRepositories": [
-        "win-config"
-      ],
-      "MatchedTokens": [
-        "policies",
-        "explorer",
-        "disablesearchboxsuggestions"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / privacy/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        }
-      ]
-    },
-    {
       "Id": "misc.disable-visual-studio-telemetry",
       "Name": "Disable Visual Studio Telemetry",
       "Category": "Misc",
@@ -1384,34 +1719,6 @@
           "Title": "win-config / misc/desc.md#disable-vs-telemetry",
           "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry",
           "Summary": "Documents the Visual Studio telemetry and feedback controls across supported versions."
-        }
-      ]
-    },
-    {
-      "Id": "misc.notepadplusplus-default-editor",
-      "Name": "Set Notepad++ as Default Editor",
-      "Category": "Misc",
-      "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Misc\\SetNotepadPlusPlusDefaultEditorTweak.cs#L22",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Mapped to the exact nohuto Notepad++ section for the shell edit command association.",
-      "SourceRepositories": [
-        "win-config"
-      ],
-      "MatchedTokens": [
-        "notepad++",
-        "batfile",
-        "shell edit command"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md#notepad",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md#notepad",
-          "Summary": "Documents setting Notepad++ as the editor for batch files via the shell edit command."
         }
       ]
     },
@@ -1450,7 +1757,7 @@
       "Name": "Disable Active Probing",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L170",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L188",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1504,7 +1811,7 @@
       "Name": "Disable Default Shares",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L322",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L340",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1556,7 +1863,7 @@
       "Name": "Disable IPv6",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L64",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L82",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1601,7 +1908,7 @@
       "Name": "Disable LLMNR",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L102",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L120",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1647,7 +1954,7 @@
       "Name": "Disable Network Discovery (LLTD)",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L150",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L168",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1692,7 +1999,7 @@
       "Name": "Disable mDNS",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L114",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L132",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1738,7 +2045,7 @@
       "Name": "Disable NetBIOS over TCP/IP",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L76",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L94",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1784,7 +2091,7 @@
       "Name": "Disable NetBIOS Name Resolution",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L126",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L144",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1830,7 +2137,7 @@
       "Name": "Disable Plaintext SMB Passwords",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L358",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L376",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1881,7 +2188,7 @@
       "Name": "Disable Smart Multi-Homed Name Resolution",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L138",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L156",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1927,7 +2234,7 @@
       "Name": "Disable SMBv1",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L334",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L352",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -1973,7 +2280,7 @@
       "Name": "Disable SMBv2/SMBv3",
       "Category": "Network",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L346",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L364",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2018,7 +2325,7 @@
       "Name": "Disable Wi-Fi Sense",
       "Category": "Network",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L88",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L106",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2247,7 +2554,7 @@
       "Name": "Prefer IPv4 over IPv6",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L184",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L202",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2292,7 +2599,7 @@
       "Name": "Require NTLMv2 Session Security",
       "Category": "Network",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L370",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L388",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2373,7 +2680,7 @@
       "Name": "SMB: Disable Leasing",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L260",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L278",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2425,7 +2732,7 @@
       "Name": "SMB: Enable Large MTU",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L197",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L215",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2476,7 +2783,7 @@
       "Name": "SMB: Enable Multichannel",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L272",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L290",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2527,7 +2834,7 @@
       "Name": "SMB: Enable QUIC",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L284",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L302",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2579,7 +2886,7 @@
       "Name": "SMB: Require Encryption",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L236",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L254",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2631,7 +2938,7 @@
       "Name": "SMB: Reject Unencrypted Access",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L248",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L266",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2683,7 +2990,7 @@
       "Name": "SMB: Require Dialect 3.1.1",
       "Category": "Network",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L296",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L314",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2737,7 +3044,7 @@
       "Name": "SMB: Require Client Signing",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L209",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L227",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2787,7 +3094,7 @@
       "Name": "SMB: Require Signing (Server)",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L222",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L240",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2837,7 +3144,7 @@
       "Name": "SMB: Set Cipher Suite Order",
       "Category": "Network",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L310",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\NetworkTweakProvider.cs#L328",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -2889,7 +3196,7 @@
       "Name": "Disable Feedback Requests",
       "Category": "Notifications",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L507",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L508",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -2929,7 +3236,7 @@
       "Name": "Disable Lock Screen Notifications",
       "Category": "Notifications",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L494",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L495",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -2969,7 +3276,7 @@
       "Name": "Disable Notification Mirroring",
       "Category": "Notifications",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L545",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L546",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -3009,7 +3316,7 @@
       "Name": "Disable Tile Notifications",
       "Category": "Notifications",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L532",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L533",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -3049,7 +3356,7 @@
       "Name": "Disable Toast Notifications",
       "Category": "Notifications",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L481",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L482",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -3089,7 +3396,7 @@
       "Name": "Disable Window Animations",
       "Category": "Performance",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L19",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L27",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -3140,64 +3447,11 @@
       ]
     },
     {
-      "Id": "performance.disable-background-apps",
-      "Name": "Disable Power Throttling",
-      "Category": "Performance",
-      "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L62",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
-      "SourceRepositories": [
-        "win-config",
-        "win-registry",
-        "decompiled-pseudocode"
-      ],
-      "MatchedTokens": [
-        "power",
-        "powerthrottlingoff"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / power/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-registry / README.md",
-          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-          "Summary": "Matched 2 audit token(s) in win-registry."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / affinities/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
-          "Summary": "Matched 1 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "decompiled-pseudocode / ntoskrnl",
-          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl",
-          "Summary": "Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths."
-        },
-        {
-          "Kind": "internals",
-          "Title": "Windows Internals resource page",
-          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
-        }
-      ]
-    },
-    {
       "Id": "performance.disable-menu-show-delay",
       "Name": "Remove Menu Show Delay",
       "Category": "Performance",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L32",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L40",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -3251,7 +3505,7 @@
       "Name": "Disable Taskbar Animations",
       "Category": "Performance",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L45",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L53",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -3726,49 +3980,41 @@
       "Name": "Disable CPU Idle States (C-States)",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\CPUPowerTweaks.cs#L56",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L79",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 13 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
       "SourceRepositories": [
         "win-config",
+        "win-registry",
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "disables",
-        "idle",
-        "states",
-        "minimum",
-        "latency",
-        "increases",
         "power",
-        "consumption",
-        "improves",
-        "responsiveness",
-        "recommended",
-        "gaming",
-        "audio"
+        "disableidlestatesatboot",
+        "idlestatetimeout",
+        "exitlatencycheckenabled"
       ],
       "References": [
         {
           "Kind": "nohuto",
-          "Title": "win-config / system/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 13 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
           "Title": "win-config / power/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 10 audit token(s) in win-config."
+          "Summary": "Matched 4 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
-          "Title": "win-config / network/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
-          "Summary": "Matched 10 audit token(s) in win-config."
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 4 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / assets/power/power-symbols.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt",
+          "Summary": "Matched 3 audit token(s) in win-registry."
         },
         {
           "Kind": "nohuto",
@@ -3835,10 +4081,10 @@
     },
     {
       "Id": "power.disable-fast-startup",
-      "Name": "Disable Fast Startup",
+      "Name": "Disable Fast Startup (Hiberboot)",
       "Category": "Power",
-      "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L75",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L37",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -3850,7 +4096,7 @@
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "policies",
+        "power",
         "hiberbootenabled"
       ],
       "References": [
@@ -3930,25 +4176,41 @@
       "Name": "Disable Modern Standby",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\PowerSettingsTweaks.cs#L23",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L24",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
       "SourceRepositories": [
         "win-config",
+        "win-registry",
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "disable modern standby"
+        "power",
+        "msdisabled",
+        "modernsleep",
+        "enabledactions"
       ],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / power/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 1 audit token(s) in win-config."
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 4 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
@@ -3969,47 +4231,42 @@
       "Name": "Disable Network Adapter Power Saving",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\NetworkAdapterPowerTweaks.cs#L32",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L109",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 10 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "disables",
-        "network",
-        "throttling",
-        "optimizes",
+        "tcpip",
         "multimedia",
-        "responsiveness",
-        "improves",
-        "gaming",
-        "streaming",
-        "performance"
+        "systemprofile",
+        "networkthrottlingindex",
+        "systemresponsiveness"
       ],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / system/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 10 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / power/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 6 audit token(s) in win-config."
+          "Summary": "Matched 5 audit token(s) in win-config."
         },
         {
           "Kind": "nohuto",
           "Title": "win-registry / README.md",
           "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-          "Summary": "Matched 6 audit token(s) in win-registry."
+          "Summary": "Matched 5 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / records/MultiMedia.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
+          "Summary": "Matched 4 audit token(s) in win-registry."
         },
         {
           "Kind": "nohuto",
@@ -4030,7 +4287,7 @@
       "Name": "Disable Power Throttling",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\PowerSettingsTweaks.cs#L63",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L49",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4038,14 +4295,34 @@
       "Summary": "Mapped to nohuto power-value research for the PowerThrottlingOff policy value.",
       "SourceRepositories": [
         "win-config",
-        "decompiled-pseudocode",
-        "win-registry"
+        "win-registry",
+        "decompiled-pseudocode"
       ],
       "MatchedTokens": [
+        "power",
+        "powerthrottling",
         "powerthrottlingoff",
         "power throttling"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 3 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
         {
           "Kind": "nohuto",
           "Title": "decompiled-pseudocode / mmcss",
@@ -4114,59 +4391,11 @@
       ]
     },
     {
-      "Id": "power.disable-usb-selective-suspend",
-      "Name": "Disable USB Selective Suspend",
-      "Category": "Power",
-      "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Commands\\Power\\DisableUsbSelectiveSuspendTweak.cs#L17",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Mapped to nohuto PnP and USB power-management documentation for selective suspend and idle-state handling.",
-      "SourceRepositories": [
-        "win-config",
-        "decompiled-pseudocode",
-        "win-registry"
-      ],
-      "MatchedTokens": [
-        "usb selective suspend",
-        "selectivesuspendon",
-        "idleinworkingstate"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "decompiled-pseudocode / mmcss",
-          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
-          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
-        },
-        {
-          "Kind": "internals",
-          "Title": "Windows Internals resource page",
-          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / power/desc.md#pnp-device-values",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md#pnp-device-values",
-          "Summary": "Documents device-parameter values such as SelectiveSuspendOn and IdleInWorkingState."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-registry / USB device power values",
-          "Url": "https://github.com/nohuto/win-registry/blob/main/records/USB-Flags.txt",
-          "Summary": "Provides nohuto's registry notes for USB device parameters and power-management related values."
-        }
-      ]
-    },
-    {
       "Id": "power.disable-windows-search",
       "Name": "Disable Windows Search",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Commands\\Performance\\DisableWindowsSearchTweak.cs#L13",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PerformanceTweakProvider.cs#L68",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4177,13 +4406,13 @@
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "disable windows search"
+        "wsearch"
       ],
       "References": [
         {
           "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
           "Summary": "Matched 1 audit token(s) in win-config."
         },
         {
@@ -4194,8 +4423,8 @@
         },
         {
           "Kind": "nohuto",
-          "Title": "win-config / system/assets/disable-services-drivers-suboption-audit.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md",
+          "Title": "win-config / system/assets/services.txt",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/services.txt",
           "Summary": "Matched 1 audit token(s) in win-config."
         },
         {
@@ -4217,7 +4446,7 @@
       "Name": "Hide Hibernate Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L63",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L164",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4270,7 +4499,7 @@
       "Name": "Hide Lock Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L39",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L140",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4323,7 +4552,7 @@
       "Name": "Hide Sleep Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L51",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L152",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4376,7 +4605,7 @@
       "Name": "Optimize CPU Performance Boost",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\CPUPowerTweaks.cs#L86",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L93",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4384,16 +4613,35 @@
       "Summary": "Mapped to nohuto power-value research for PerfBoostAtGuaranteed, HighPerfDurationBoot, and related boost fields.",
       "SourceRepositories": [
         "win-config",
-        "decompiled-pseudocode",
-        "win-registry"
+        "win-registry",
+        "decompiled-pseudocode"
       ],
       "MatchedTokens": [
+        "power",
         "perfboostatguaranteed",
         "highperfdurationboot",
         "latencytolerancedefault",
         "perfcalculateactualutilization"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 5 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 5 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / assets/power/power-symbols.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt",
+          "Summary": "Matched 3 audit token(s) in win-registry."
+        },
         {
           "Kind": "nohuto",
           "Title": "decompiled-pseudocode / mmcss",
@@ -4425,48 +4673,47 @@
       "Name": "Optimize Gaming Network Settings",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\NetworkAdapterPowerTweaks.cs#L61",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L123",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 11 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "Summary": "Matched 10 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
         "decompiled-pseudocode"
       ],
       "MatchedTokens": [
-        "boosts",
-        "priority",
-        "gaming",
+        "multimedia",
+        "systemprofile",
         "tasks",
-        "network",
-        "latency",
-        "frame",
-        "timing",
-        "sets",
+        "games",
+        "priority",
+        "scheduling category",
         "high",
-        "scheduling"
+        "sfio priority",
+        "gpu priority",
+        "affinity"
       ],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / system/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 11 audit token(s) in win-config."
+          "Summary": "Matched 10 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / records/MultiMedia.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
+          "Summary": "Matched 7 audit token(s) in win-registry."
         },
         {
           "Kind": "nohuto",
           "Title": "win-registry / README.md",
           "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-          "Summary": "Matched 10 audit token(s) in win-registry."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / nvidia/assets/d3dlist.cpp",
-          "Url": "https://github.com/nohuto/win-config/blob/main/nvidia/assets/d3dlist.cpp",
-          "Summary": "Matched 9 audit token(s) in win-config."
+          "Summary": "Matched 6 audit token(s) in win-registry."
         },
         {
           "Kind": "nohuto",
@@ -4487,7 +4734,7 @@
       "Name": "Optimize Power Settings for Performance",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Power\\PowerSettingsTweaks.cs#L98",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L61",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4495,16 +4742,37 @@
       "Summary": "Mapped to nohuto power-value research covering timer coalescing, deep IO coalescing, parking, and energy-estimation fields.",
       "SourceRepositories": [
         "win-config",
-        "decompiled-pseudocode",
-        "win-registry"
+        "win-registry",
+        "decompiled-pseudocode"
       ],
       "MatchedTokens": [
+        "power",
         "coalescingtimerinterval",
         "deepiocoalescingenabled",
-        "energyestimationenabled",
-        "latencytoleranceparked"
+        "eventprocessorenabled",
+        "latencytoleranceparked",
+        "latencytolerancesoftparked",
+        "energyestimationenabled"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 7 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 7 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / assets/power/power-symbols.txt",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt",
+          "Summary": "Matched 5 audit token(s) in win-registry."
+        },
         {
           "Kind": "nohuto",
           "Title": "decompiled-pseudocode / mmcss",
@@ -4542,7 +4810,7 @@
       "Name": "Block Microsoft Accounts",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L735",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L780",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4581,7 +4849,7 @@
       "Name": "Deny App Access (Except Microphone)",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L396",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L397",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4646,7 +4914,7 @@
       "Name": "Disable Activity History",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L46",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L47",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4684,7 +4952,7 @@
       "Name": "Disable Advertising ID",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L33",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L34",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4722,37 +4990,22 @@
       "Name": "Disable App Diagnostics",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L432",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L433",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "appprivacy"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / privacy/assets/locationaccess-LocationApi.c",
-          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c",
-          "Summary": "Matched 1 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / privacy/assets/maps.c",
-          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c",
-          "Summary": "Matched 1 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -4761,7 +5014,7 @@
       "Name": "Disable App Launch Tracking",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L999",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1044",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4800,7 +5053,7 @@
       "Name": "Disable App Suggestions in Start",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L314",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L315",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4832,7 +5085,7 @@
       "Name": "Disable Application Compatibility",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L73",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L74",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4858,7 +5111,7 @@
       "Name": "Disable Application Telemetry",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L61",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L62",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4898,7 +5151,7 @@
       "Name": "Disable Background Apps",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L468",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L469",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4938,7 +5191,7 @@
       "Name": "Disable Biometrics",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1024",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1069",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -4978,7 +5231,7 @@
       "Name": "Disable Biometrics for Domain Logon",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1048",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1093",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5020,7 +5273,7 @@
       "Name": "Disable Biometrics Logon",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1036",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1081",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5062,7 +5315,7 @@
       "Name": "Disable Camera Access (Policy)",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L456",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L457",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5102,42 +5355,24 @@
       "Name": "Disable CEIP",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L127",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L128",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 7 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "Summary": "Matched 1 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
       "SourceRepositories": [
         "win-config"
       ],
       "MatchedTokens": [
-        "policies",
-        "appv",
-        "ceip",
-        "ceipenable",
-        "sqmclient",
-        "messenger",
-        "client"
+        "disable ceip"
       ],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 7 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / power/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
+          "Summary": "Matched 1 audit token(s) in win-config."
         }
       ]
     },
@@ -5146,7 +5381,7 @@
       "Name": "Disable PowerShell & .NET CLI Telemetry",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L654",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L699",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5184,38 +5419,22 @@
       "Name": "Disable Consumer Account State Content",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L877",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L922",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "cloudcontent",
-        "disableconsumeraccountstatecontent"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / visibility/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/visibility/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -5224,7 +5443,7 @@
       "Name": "Disable Windows Copilot",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L369",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L370",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5261,40 +5480,25 @@
     },
     {
       "Id": "privacy.disable-cross-device-experiences",
-      "Name": "Disable Cross-Device Experiences",
+      "Name": "Cross-Device Sharing",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L593",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L594",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "enablecdp"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / privacy/assets/locationaccess-LocationApi.c",
-          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c",
-          "Summary": "Matched 1 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / privacy/assets/maps.c",
-          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c",
-          "Summary": "Matched 1 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -5303,7 +5507,7 @@
       "Name": "Disable Device Name in Diagnostics",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L140",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L141",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5343,7 +5547,7 @@
       "Name": "Disable Diagnostic Data (Policy)",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L21",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L22",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5383,7 +5587,7 @@
       "Name": "Disable Diagnostic Data Deletion",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L164",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L165",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5423,7 +5627,7 @@
       "Name": "Disable Diagnostic Data Viewer",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L152",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L153",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5463,42 +5667,22 @@
       "Name": "Disable Edge Search Suggestions",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L912",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L957",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 7 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "edge",
-        "searchsuggestenabled",
-        "localprovidersenabled",
-        "microsoftedge",
-        "searchscopes",
-        "showsearchsuggestionsglobal"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 7 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/assets/services.txt",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/services.txt",
-          "Summary": "Matched 3 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -5507,7 +5691,7 @@
       "Name": "Disable F1 Help",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L903",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L948",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5533,7 +5717,7 @@
       "Name": "Disable Feedback Notifications",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L520",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L521",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5573,7 +5757,7 @@
       "Name": "Disable File History",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L559",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L560",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5609,11 +5793,51 @@
       ]
     },
     {
+      "Id": "privacy.disable-find-my-device",
+      "Name": "Disable Find My Device",
+      "Category": "Privacy",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L638",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "policies",
+        "findmydevice",
+        "allowfindmydevice"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / visibility/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/visibility/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/assets/locationaccess-LocationApi.c",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
       "Id": "privacy.disable-font-providers",
       "Name": "Disable Font Providers",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L344",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L345",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5652,7 +5876,7 @@
       "Name": "Disable Inking & Typing Personalization",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L356",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L357",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5696,7 +5920,7 @@
       "Name": "Disable KMS Activation Telemetry",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L236",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L237",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5737,7 +5961,7 @@
       "Name": "Disable Website Access to Language List",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L669",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L714",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5779,7 +6003,7 @@
       "Name": "Disable Local Security Questions",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L747",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L792",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5818,7 +6042,7 @@
       "Name": "Disable Location Consent (User)",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L925",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L970",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5862,7 +6086,7 @@
       "Name": "Disable Location Consent (System)",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L939",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L984",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5903,7 +6127,7 @@
       "Name": "Disable Location Scripting",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L951",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L996",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5943,7 +6167,7 @@
       "Name": "Disable Location Services",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L444",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L445",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -5983,7 +6207,7 @@
       "Name": "Disable MDM Enrollment",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L642",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L687",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6022,7 +6246,7 @@
       "Name": "Disable Message Sync",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L630",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L675",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6062,7 +6286,7 @@
       "Name": "Disable Offline Files",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L572",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L573",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6088,7 +6312,7 @@
       "Name": "Disable OneSettings Downloads",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L224",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L225",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6128,7 +6352,7 @@
       "Name": "Disable Online Tips",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L889",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L934",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6168,7 +6392,7 @@
       "Name": "Disable Phone Linking",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L605",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L650",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6207,7 +6431,7 @@
       "Name": "Disable Windows Recall",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L382",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L383",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6247,7 +6471,7 @@
       "Name": "Disable Reserved Storage",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1012",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1057",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6274,7 +6498,7 @@
       "Name": "Disable Resume Experiences",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L617",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L662",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6314,7 +6538,7 @@
       "Name": "Disable RSoP Logging",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L248",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L249",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6354,7 +6578,7 @@
       "Name": "Disable Search Box Suggestions",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L796",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L841",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6394,7 +6618,7 @@
       "Name": "Disable Search History",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L783",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L828",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6434,7 +6658,7 @@
       "Name": "Disable Sensors",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L975",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1020",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6474,7 +6698,7 @@
       "Name": "Disable Sleep Study Diagnostics",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L260",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L261",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6528,7 +6752,7 @@
       "Name": "Disable Steps Recorder",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L988",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1032",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6538,11 +6762,31 @@
         "win-config"
       ],
       "MatchedTokens": [
-        "steps recorder",
+        "policies",
+        "appcompat",
         "disableuar",
+        "steps recorder",
         "psr.exe"
       ],
       "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / privacy/assets/locationaccess-LocationApi.c",
+          "Url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md#disable-psr",
@@ -6562,7 +6806,7 @@
       "Name": "Disable Suggestions & Tips",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L859",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L904",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6594,7 +6838,7 @@
       "Name": "Disable Content Delivery Manager Suggestions",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L327",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L328",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6626,7 +6870,7 @@
       "Name": "Disable Settings Sync",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L704",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L749",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6665,7 +6909,7 @@
       "Name": "Disable Diagnostic Data Change Notifications",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L176",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L177",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6705,7 +6949,7 @@
       "Name": "Disable Diagnostic Data Opt-in UI",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L188",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L189",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6745,7 +6989,7 @@
       "Name": "Disable Windows Error Reporting",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L115",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L116",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6786,7 +7030,7 @@
       "Name": "Disable Windows Location Provider",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L963",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L1008",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6826,7 +7070,7 @@
       "Name": "Disable Windows Tips & Tricks",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L301",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L302",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6859,7 +7103,7 @@
       "Name": "Disable Windows Media Player Telemetry",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L682",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L727",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6899,7 +7143,7 @@
       "Name": "Hide Last Logged-In User",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L759",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L804",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -6938,38 +7182,22 @@
       "Name": "Hide Start Personalized Site Recommendations (Policy)",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L834",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L879",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "explorer",
-        "hiderecommendedpersonalizedsites"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -6978,7 +7206,7 @@
       "Name": "Hide Start Personalized Site Recommendations (User)",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L846",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L891",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7018,38 +7246,22 @@
       "Name": "Hide Start Recommended Section (Policy)",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L809",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L854",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "explorer",
-        "hiderecommendedsection"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / privacy/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         }
       ]
     },
@@ -7058,7 +7270,7 @@
       "Name": "Hide Start Recommended Section (User)",
       "Category": "Privacy",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L821",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L866",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7098,7 +7310,7 @@
       "Name": "Hide Username at Sign-In",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L771",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L816",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7137,7 +7349,7 @@
       "Name": "Limit Diagnostic Log Collection",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L200",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L201",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7177,7 +7389,7 @@
       "Name": "Limit Dump Collection",
       "Category": "Privacy",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L212",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L213",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7217,7 +7429,7 @@
       "Name": "Troubleshooter: Don't Run Any",
       "Category": "Privacy",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L288",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PrivacyTweakProvider.cs#L289",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -7260,7 +7472,7 @@
       "Name": "Disable Downloads Blocking",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L250",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L254",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7306,7 +7518,7 @@
       "Name": "Disable NTFS Encryption (EFS)",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L189",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L193",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7352,7 +7564,7 @@
       "Name": "Disable P2P Updates",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L226",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L230",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7398,7 +7610,7 @@
       "Name": "Disable Password Reveal Button",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L57",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L58",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7444,7 +7656,7 @@
       "Name": "Disable Picture Password Sign-In",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L69",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L70",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7490,7 +7702,7 @@
       "Name": "Disable Remote Assistance",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L177",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L181",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7536,7 +7748,7 @@
       "Name": "Disable System Mitigations",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L108",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L112",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7592,7 +7804,7 @@
       "Name": "Disable System Restore",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L238",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L242",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7631,38 +7843,22 @@
       "Name": "Disable UAC (Full)",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L33",
+      "Source": "WindowsOptimizer.Engine\\Tweaks\\Commands\\Security\\DisableUacFullTweak.cs#L18",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
-        "win-config",
-        "win-registry"
+        "win-config"
       ],
-      "MatchedTokens": [
-        "policies",
-        "enablelua"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / security/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / security/assets/Windows-Defender.txt",
-          "Url": "https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt",
-          "Summary": "Matched 1 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-registry / records/CV-Policies.txt",
-          "Url": "https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt",
-          "Summary": "Matched 2 audit token(s) in win-registry."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         },
         {
           "Kind": "internals",
@@ -7677,7 +7873,7 @@
       "Name": "Disable VBS (HVCI)",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L120",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L124",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7722,7 +7918,7 @@
       "Name": "Disable Windows Firewall",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L95",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L99",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7771,7 +7967,7 @@
       "Name": "Disable Windows Update",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L148",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L152",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7823,7 +8019,7 @@
       "Name": "Disable WPBT Execution",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L135",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L139",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7877,7 +8073,7 @@
       "Name": "Disable WU Driver Updates",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L163",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L167",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7926,7 +8122,7 @@
       "Name": "Enable Dynamic Lock",
       "Category": "Security",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L81",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L82",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -7971,7 +8167,7 @@
       "Name": "Enable Windows Sudo",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L214",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L218",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8017,7 +8213,7 @@
       "Name": "Set PowerShell Policy to Unrestricted",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L202",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L206",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8063,7 +8259,7 @@
       "Name": "Require Trusted Path for Credentials",
       "Category": "Security",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L45",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L46",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8109,7 +8305,7 @@
       "Name": "Set UAC to Never Notify",
       "Category": "Security",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L18",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SecurityTweakProvider.cs#L29",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8153,7 +8349,7 @@
       "Name": "Check Disk Health (C:)",
       "Category": "Other",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.Engine\\Tweaks\\Commands\\System\\CheckDiskHealthTweak.cs#L13",
+      "Source": "WindowsOptimizer.Engine\\Tweaks\\Commands\\System\\CheckDiskHealthTweak.cs#L14",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -8187,7 +8383,7 @@
       "Name": "Disable Aero Shake",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L127",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L195",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8240,7 +8436,7 @@
       "Name": "Disable Auto Reboot on Crash",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L383",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L421",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8293,7 +8489,7 @@
       "Name": "Show BSOD Parameters",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L371",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L409",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8345,7 +8541,7 @@
       "Name": "Disable Automatic App Archiving",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L421",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L519",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8398,7 +8594,7 @@
       "Name": "Disable Automatic Maintenance",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L191",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L259",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8451,7 +8647,7 @@
       "Name": "Disable Background Group Policy Updates",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L179",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L247",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8503,7 +8699,7 @@
       "Name": "Disable Clipboard History & Sync",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L153",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L221",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8554,7 +8750,7 @@
       "Name": "Disable Clipboard Redirection (RDP)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L167",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L235",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8607,7 +8803,7 @@
       "Name": "Disable Fullscreen Optimizations",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L316",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L354",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8652,7 +8848,7 @@
       "Name": "Disable Game DVR",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L303",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L327",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8697,7 +8893,7 @@
       "Name": "Disable JPEG Reduction",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L140",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L208",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8746,72 +8942,11 @@
       ]
     },
     {
-      "Id": "system.disable-non-essential-services",
-      "Name": "Disable Non-Essential Services",
-      "Category": "System",
-      "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L103",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 11 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
-      "SourceRepositories": [
-        "win-config",
-        "decompiled-pseudocode"
-      ],
-      "MatchedTokens": [
-        "diagtrack",
-        "dmwappushservice",
-        "sysmain",
-        "wsearch",
-        "wersvc",
-        "spooler",
-        "printnotify",
-        "printdeviceconfigurationservice",
-        "printscanbrokerservice",
-        "bthserv",
-        "btagservice"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 11 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/assets/services.txt",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/services.txt",
-          "Summary": "Matched 11 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / peripheral/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
-          "Summary": "Matched 6 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "decompiled-pseudocode / mmcss",
-          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
-          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
-        },
-        {
-          "Kind": "internals",
-          "Title": "Windows Internals resource page",
-          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
-        }
-      ]
-    },
-    {
       "Id": "system.disable-restartable-apps",
       "Name": "Disable Restartable Apps",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L215",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L283",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8863,7 +8998,7 @@
       "Name": "Disable Telemetry & Maintenance Tasks",
       "Category": "System",
       "Risk": "Risky",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L86",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L100",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8931,7 +9066,7 @@
       "Name": "Disable Search Highlights",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L72",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L86",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -8971,7 +9106,7 @@
       "Name": "Disable Search Highlights (Policy)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L266",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L334",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9024,7 +9159,7 @@
       "Name": "Disable Remote Search Queries",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L346",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L384",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9077,39 +9212,23 @@
       "Name": "Disable Web Search Results",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L334",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L372",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
       ],
-      "MatchedTokens": [
-        "policies",
-        "search",
-        "donotusewebresults"
-      ],
+      "MatchedTokens": [],
       "References": [
         {
           "Kind": "nohuto",
           "Title": "win-config / system/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 3 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/assets/services.txt",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/services.txt",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / misc/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
         },
         {
           "Kind": "nohuto",
@@ -9130,7 +9249,7 @@
       "Name": "Disable Service Splitting",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L278",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L346",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9175,7 +9294,7 @@
       "Name": "Remove Shortcut Arrow Overlay",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L60",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L74",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9229,7 +9348,7 @@
       "Name": "Disable Startup Program Delay",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L34",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L48",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9282,7 +9401,7 @@
       "Name": "Disable Storage Sense",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L242",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L310",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9335,7 +9454,7 @@
       "Name": "Disable Storage Sense Temporary Files Cleanup",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L254",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L322",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9388,7 +9507,7 @@
       "Name": "Disable Store in Open With",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L203",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L271",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9441,7 +9560,7 @@
       "Name": "DWM: Disable Multiplane Overlay (MPO)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L201",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L225",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9493,7 +9612,7 @@
       "Name": "DWM: Disable Overlay Minimum FPS",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L213",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L237",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9545,7 +9664,7 @@
       "Name": "Enable Game Mode",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L21",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L35",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9597,7 +9716,7 @@
       "Name": "Enable Hardware-Accelerated GPU Scheduling",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L230",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L298",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9650,7 +9769,7 @@
       "Name": "Enable Indexing of Encrypted Items",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L358",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L396",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9703,7 +9822,7 @@
       "Name": "Graphics: Disable Overlay Planes",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L188",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L212",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9752,11 +9871,64 @@
       ]
     },
     {
+      "Id": "system.graphics-page-fault-debug-mode",
+      "Name": "Graphics: Page Fault Debug Mode",
+      "Category": "System",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L506",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "win-registry",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "graphicsdrivers",
+        "pagefaultdebugmode"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 2 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c",
+          "Summary": "Matched 2 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / dxgkrnl",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl",
+          "Summary": "Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
       "Id": "system.graphics-tdr-ddi-delay",
       "Name": "Graphics: TDR DDI Delay (Default)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L140",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L164",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9809,7 +9981,7 @@
       "Name": "Graphics: TDR Delay (Default)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L128",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L152",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9862,7 +10034,7 @@
       "Name": "Graphics: TDR Level (Default)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L152",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L176",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9915,7 +10087,7 @@
       "Name": "Graphics: TDR Limit Count (Default)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L164",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L188",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -9968,7 +10140,7 @@
       "Name": "Graphics: TDR Limit Time (Default)",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L176",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L200",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10072,11 +10244,121 @@
       ]
     },
     {
+      "Id": "system.kernel-cache-aware-scheduling",
+      "Name": "Kernel: Cache-Aware Scheduling",
+      "Category": "System",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L103",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "win-registry",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "kernel",
+        "cacheawarescheduling"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 4 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/assets/disable-services-drivers-suboption-audit.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.kernel-default-dynamic-hetero-cpu-policy",
+      "Name": "Kernel: Default Dynamic Hetero CPU Policy",
+      "Category": "System",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L115",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "win-registry",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "kernel",
+        "defaultdynamicheterocpupolicy"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-registry / README.md",
+          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
+          "Summary": "Matched 4 audit token(s) in win-registry."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/assets/disable-services-drivers-suboption-audit.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md",
+          "Summary": "Matched 3 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
       "Id": "system.kernel-disable-low-qos-timer-resolution",
       "Name": "Kernel: Disable Low QoS Timer Resolution",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L115",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L139",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10406,7 +10688,7 @@
       "Name": "Kernel: Threaded DPC Enable",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L103",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L127",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10461,7 +10743,7 @@
       "Name": "Clear Page File at Shutdown",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L396",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L434",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10515,7 +10797,7 @@
       "Name": "Disable Paging Executive",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L408",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L446",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10567,11 +10849,227 @@
       ]
     },
     {
+      "Id": "system.memory-large-system-cache-client",
+      "Name": "Memory: Use Client System Cache",
+      "Category": "System",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L458",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "memory",
+        "management"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.memory-nonpaged-pool-dynamic",
+      "Name": "Memory: Reset Non-Paged Pool Size",
+      "Category": "System",
+      "Risk": "Risky",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L482",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "memory",
+        "management"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.memory-paged-pool-dynamic",
+      "Name": "Memory: Reset Paged Pool Size",
+      "Category": "System",
+      "Risk": "Risky",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L470",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "memory",
+        "management"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.memory-registry-quota-default",
+      "Name": "Memory: Reset Registry Quota",
+      "Category": "System",
+      "Risk": "Advanced",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L494",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "session",
+        "manager",
+        "memory",
+        "management"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / network/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 4 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
       "Id": "system.ntfs-disable-8dot3",
       "Name": "Disable 8.3 Name Creation",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L226",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L250",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10623,7 +11121,7 @@
       "Name": "Disable Last Access Updates",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L238",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L262",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10675,7 +11173,7 @@
       "Name": "Enable Win32 Long Paths",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L250",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L274",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10728,7 +11226,7 @@
       "Name": "Reset NTFS Memory Usage",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L262",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L286",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10781,7 +11279,7 @@
       "Name": "Reset NTFS MFT Zone Reservation",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L274",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L298",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10886,7 +11384,7 @@
       "Name": "Reduce Shutdown Timeouts",
       "Category": "System",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L287",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemRegistryTweakProvider.cs#L311",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10942,11 +11440,494 @@
       ]
     },
     {
+      "Id": "system.services.disable-bluetooth-audio-gateway",
+      "Name": "Disable Bluetooth Audio Gateway Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L189",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-bluetooth-support",
+      "Name": "Disable Bluetooth Support Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L177",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-bluetooth-user-service",
+      "Name": "Disable Bluetooth User Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L183",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-connected-user-experiences",
+      "Name": "Disable Connected User Experiences Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L117",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-print-device-configuration",
+      "Name": "Disable Print Device Configuration Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L165",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-print-notifications",
+      "Name": "Disable Print Notification Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L153",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-print-scan-broker",
+      "Name": "Disable Print Scan Broker Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L171",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-print-spooler",
+      "Name": "Disable Print Spooler Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L147",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-print-workflow-user-service",
+      "Name": "Disable Print Workflow User Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L159",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-sysmain",
+      "Name": "Disable SysMain Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L129",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-wap-push-routing",
+      "Name": "Disable WAP Push Routing Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L123",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-windows-error-reporting",
+      "Name": "Disable Windows Error Reporting Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L141",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": true,
+      "CoverageState": "category-fallback",
+      "Summary": "Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+          "Summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
+      "Id": "system.services.disable-windows-search",
+      "Name": "Disable Windows Search Service",
+      "Category": "System",
+      "Risk": "Unknown",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L135",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": true,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Ready to use as documented upstream-backed evidence.",
+      "SourceRepositories": [
+        "win-config",
+        "decompiled-pseudocode"
+      ],
+      "MatchedTokens": [
+        "disable windows search service"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / system/assets/disable-services-drivers-suboption-audit.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "decompiled-pseudocode / mmcss",
+          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+        },
+        {
+          "Kind": "internals",
+          "Title": "Windows Internals resource page",
+          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+        }
+      ]
+    },
+    {
       "Id": "system.verbose-status-messages",
       "Name": "Enable Verbose Status Messages",
       "Category": "System",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L47",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\SystemTweakProvider.cs#L61",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -10998,7 +11979,7 @@
       "Name": "Use Default Account Picture",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L149",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L134",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11039,7 +12020,7 @@
       "Name": "Disable Acrylic Logon Background",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L375",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L360",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11079,7 +12060,7 @@
       "Name": "Disable Common Control Animations",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L124",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L109",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11120,7 +12101,7 @@
       "Name": "Disable First Sign-In Animation",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L173",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L158",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11159,7 +12140,7 @@
       "Name": "Disable Lock Screen",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L315",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L300",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11199,7 +12180,7 @@
       "Name": "Disable Lock Screen Camera",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L327",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L312",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11239,7 +12220,7 @@
       "Name": "Prevent Changing Lock Screen",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L363",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L348",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11279,7 +12260,7 @@
       "Name": "Disable Lock Screen Background Motion",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L351",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L336",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11319,7 +12300,7 @@
       "Name": "Disable Lock Screen Slideshow",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L339",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L324",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11359,7 +12340,7 @@
       "Name": "Disable Windows Spotlight on Action Center",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L262",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L247",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11399,7 +12380,7 @@
       "Name": "Disable Spotlight Collection on Desktop",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L288",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L273",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11439,7 +12420,7 @@
       "Name": "Disable Windows Spotlight Features",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L236",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L221",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11479,7 +12460,7 @@
       "Name": "Disable Windows Spotlight on Settings",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L275",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L260",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11519,7 +12500,7 @@
       "Name": "Disable Spotlight Third-Party Suggestions",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L301",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L286",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11559,7 +12540,7 @@
       "Name": "Disable Windows Spotlight Welcome Experience",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L249",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L234",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11599,7 +12580,7 @@
       "Name": "Disable Windows Connect Now Wizards",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L161",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L146",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11638,7 +12619,7 @@
       "Name": "Disable Widgets (Policy)",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L198",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L183",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11677,7 +12658,7 @@
       "Name": "Disable Window Animations",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L137",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L122",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11717,7 +12698,7 @@
       "Name": "Force Classic Control Panel View",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L400",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L385",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11757,7 +12738,7 @@
       "Name": "Hide Language Bar",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L185",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L170",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11784,7 +12765,7 @@
       "Name": "Hide Most Used Apps",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L210",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L195",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11824,7 +12805,7 @@
       "Name": "Hide People Bar",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L222",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L207",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11864,7 +12845,7 @@
       "Name": "Restore Classic Context Menu",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L387",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L372",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,

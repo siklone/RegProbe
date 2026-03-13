@@ -1,1 +1,35 @@
 id,name,docs,docs_exists,docs_anchor,details_anchor,catalog_anchor,source,risk,area,priority
+developer.docker-performance,Optimize Docker Desktop Performance,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L140,Advanced,Registry,P1
+developer.dotnet-telemetry-disable,Disable .NET SDK Telemetry,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L41,Safe,Registry,P2
+developer.git-long-paths,Enable Git Long Path Support,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L27,Safe,Registry,P2
+developer.nodejs-performance,Optimize Node.js Performance,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L85,Advanced,Registry,P1
+developer.powershell-execution,Allow Local PowerShell Scripts,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L155,Advanced,Registry,P1
+developer.python-path-fix,Fix Python Path Length Issues,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L113,Safe,Registry,P2
+developer.ssh-agent-autostart,Enable SSH Agent Auto-start,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L168,Safe,Registry,P2
+developer.terminal-dev-mode,Enable Windows Terminal Developer Features,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L69,Safe,Registry,P2
+developer.vs-intellisense-cache,Optimize VS IntelliSense Cache,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L55,Safe,Registry,P2
+developer.vs-solution-load,Speed Up Visual Studio Solution Load,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L197,Safe,Registry,P2
+developer.vscode-git-autofetch,Disable VS Code Git Autofetch,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L99,Safe,Registry,P2
+developer.windows-dev-mode,Enable Windows Developer Mode,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L127,Advanced,Registry,P1
+developer.wsl2-memory,Optimize WSL2 Memory Usage,Docs\tweaks\tweaks.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L183,Advanced,Registry,P1
+privacy.disable-find-my-device,Disable Find My Device,Docs\privacy\privacy-verified.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L638,Safe,Registry,P2
+system.graphics-page-fault-debug-mode,Graphics: Page Fault Debug Mode,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L506,Advanced,Registry,P1
+system.kernel-cache-aware-scheduling,Kernel: Cache-Aware Scheduling,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103,Advanced,Registry,P1
+system.kernel-default-dynamic-hetero-cpu-policy,Kernel: Default Dynamic Hetero CPU Policy,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115,Advanced,Registry,P1
+system.memory-large-system-cache-client,Memory: Use Client System Cache,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L458,Advanced,Registry,P1
+system.memory-nonpaged-pool-dynamic,Memory: Reset Non-Paged Pool Size,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L482,Risky,Registry,P0
+system.memory-paged-pool-dynamic,Memory: Reset Paged Pool Size,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L470,Risky,Registry,P0
+system.memory-registry-quota-default,Memory: Reset Registry Quota,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L494,Advanced,Registry,P1
+system.services.disable-bluetooth-audio-gateway,Disable Bluetooth Audio Gateway Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L189,Unknown,Service,P3
+system.services.disable-bluetooth-support,Disable Bluetooth Support Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L177,Unknown,Service,P3
+system.services.disable-bluetooth-user-service,Disable Bluetooth User Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L183,Unknown,Service,P3
+system.services.disable-connected-user-experiences,Disable Connected User Experiences Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L117,Unknown,Service,P3
+system.services.disable-print-device-configuration,Disable Print Device Configuration Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L165,Unknown,Service,P3
+system.services.disable-print-notifications,Disable Print Notification Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L153,Unknown,Service,P3
+system.services.disable-print-scan-broker,Disable Print Scan Broker Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L171,Unknown,Service,P3
+system.services.disable-print-spooler,Disable Print Spooler Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L147,Unknown,Service,P3
+system.services.disable-print-workflow-user-service,Disable Print Workflow User Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L159,Unknown,Service,P3
+system.services.disable-sysmain,Disable SysMain Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L129,Unknown,Service,P3
+system.services.disable-wap-push-routing,Disable WAP Push Routing Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L123,Unknown,Service,P3
+system.services.disable-windows-error-reporting,Disable Windows Error Reporting Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L141,Unknown,Service,P3
+system.services.disable-windows-search,Disable Windows Search Service,Docs\system\system.md,yes,yes,no,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L135,Unknown,Service,P3
