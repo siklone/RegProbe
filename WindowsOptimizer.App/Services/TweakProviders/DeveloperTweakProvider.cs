@@ -118,9 +118,9 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             TweakRiskLevel.Safe,
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Control\FileSystem",
-            "Win95TruncatedExtensions",
+            "LongPathsEnabled",
             RegistryValueKind.DWord,
-            0);
+            1);
 
         // Windows Developer Mode
         // Source: https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development

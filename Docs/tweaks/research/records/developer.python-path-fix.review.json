@@ -1,0 +1,250 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "developer.python-path-fix",
+  "tweak_id": "developer.python-path-fix",
+  "record_status": "validated",
+  "summary": "Official Python guidance for Windows path-length issues points developers to enabling Windows long paths. The relevant control is LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, and the app now writes that exact documented value.",
+  "setting": {
+    "name": "Enable Windows Long Paths for Python Workflows",
+    "category": "Developer",
+    "area": "Python / Windows Path Handling",
+    "scope": "device",
+    "casual_explanation": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
+    "why_people_change_it": "People enable it when Python installs, builds, virtual environments, or imports fail because the path is too long.",
+    "tradeoffs_overview": "This is a Windows-wide prerequisite, not a Python-only setting. It helps Python and other long-path-aware applications, while older applications that do not opt in keep their normal behavior.",
+    "professional_notes": "Python's official Windows documentation points developers to removing the MAX_PATH limitation on Windows, and Microsoft documents LongPathsEnabled as that machine-wide switch. Local FileSys.admx maps the same path and value name with enabledValue 1 and disabledValue 0. The current app now writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, which matches the documented Windows long-path control that Python relies on.",
+    "targets": [
+      {
+        "target_id": "windows-long-paths",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default long-path behavior",
+            "meaning": "Windows keeps the normal path-length baseline because LongPathsEnabled is not explicitly enabled.",
+            "evidence_ids": [
+              "python-using-windows-doc",
+              "ms-maximum-path-limitation",
+              "local-filesys-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Long paths disabled",
+            "meaning": "Win32 long-path support is not enabled through this registry setting.",
+            "evidence_ids": [
+              "local-filesys-admx",
+              "local-filesys-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Long paths enabled",
+            "meaning": "Long-path-aware applications, including Python workflows that rely on the Windows long-path setting, can access paths beyond the normal 260-character limit.",
+            "evidence_ids": [
+              "python-using-windows-doc",
+              "ms-maximum-path-limitation",
+              "local-filesys-admx",
+              "local-filesys-adml",
+              "app-developer-provider"
+            ]
+          }
+        ],
+        "notes": "This is the same Windows long-path switch used by other workflow-specific tweaks. The Python-specific promise is acceptable because official Python documentation directly points to the Windows long-path control."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The current app writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem, matching the official Windows long-path control referenced by Python documentation.",
+    "writes": [
+      {
+        "target_id": "windows-long-paths",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows systems that have not explicitly enabled LongPathsEnabled",
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the Windows long-path control at the default baseline."
+        }
+      ],
+      "notes": "When the value is not set, long-path support is not explicitly enabled for Win32 applications through this control.",
+      "evidence_ids": [
+        "python-using-windows-doc",
+        "ms-maximum-path-limitation",
+        "local-filesys-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Machines that do not hit long-path limits"
+      ],
+      "avoid_for": [
+        "Developer workstations that regularly hit deep path trees"
+      ],
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the Windows long-path baseline unchanged."
+        }
+      ],
+      "good_when": "You do not have Python projects or tooling that hit long path errors.",
+      "bad_when": "Python environments, package installs, or build outputs repeatedly hit path-length limits.",
+      "tradeoffs": [
+        "Windows keeps its normal path-length baseline.",
+        "Python and other compatible tools can still hit long path errors."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "python-using-windows-doc",
+        "ms-maximum-path-limitation"
+      ]
+    },
+    {
+      "profile_id": "python-long-path-workflows",
+      "label": "Python long-path workflows",
+      "intended_for": [
+        "Python developers",
+        "Build machines",
+        "Systems using deep folder trees or package caches"
+      ],
+      "avoid_for": [
+        "Machines that do not need extended path support"
+      ],
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable the documented Windows long-path prerequisite that Python points to."
+        }
+      ],
+      "good_when": "You hit Python path-length issues on Windows.",
+      "bad_when": "You do not need the feature and want to keep the system closer to its default baseline.",
+      "tradeoffs": [
+        "Long-path-aware applications can exceed the old 260-character limit.",
+        "The setting is Windows-wide and also affects other compatible applications, not only Python."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "python-using-windows-doc",
+        "ms-maximum-path-limitation",
+        "local-filesys-admx",
+        "local-filesys-adml",
+        "app-developer-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "python-using-windows-doc",
+      "kind": "official-doc",
+      "title": "Python documentation: Using Python on Windows",
+      "location": "https://docs.python.org/3/using/windows.html",
+      "summary": "Python's Windows documentation says that on Python 3.6 and newer, long paths can be enabled by removing the MAX_PATH limitation and points readers to the Windows long-path documentation.",
+      "supports": [
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-maximum-path-limitation",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Maximum Path Length Limitation",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and explains that a value of 1 enables long paths for compatible applications.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\FileSys.admx",
+      "summary": "The local ADMX file maps LongPathsEnabled to System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\FileSys.adml",
+      "summary": "The local ADML help text says enabling the setting allows manifested Win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260-character limit.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-developer-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem for the Python path-length fix.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Official Python guidance and Microsoft documentation both point to the same Windows long-path control, and the app now writes that exact documented value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T18:15:00+03:00",
+  "validation_proof": {
+    "source_url": "https://docs.python.org/3/using/windows.html",
+    "exact_quote_or_path": "In the latest versions of Windows, this limitation can be expanded to approximately 32,000 characters. Your administrator will need to activate the 'Enable Win32 long paths' group policy, or set LongPathsEnabled to 1 in the registry key HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
+    "key_found_on_page": true,
+    "notes": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem."
+  }
+}

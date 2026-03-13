@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T16:12:12Z",
+  "generated_utc": "2026-03-13T16:19:00Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,35 +8,8 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 16,
+  "entry_count": 15,
   "entries": [
-    {
-      "record_id": "developer.python-path-fix",
-      "current_state": "mismatch-suspected | Python / Windows Path Handling",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::Win95TruncatedExtensions=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::LongPathsEnabled (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Python / Windows Path Handling",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/developer.python-path-fix.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
-          "value_name": "Win95TruncatedExtensions",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
-          "value_name": "LongPathsEnabled",
-          "value_type": "REG_DWORD",
-          "example_value": 1
-        }
-      ]
-    },
     {
       "record_id": "developer.wsl2-memory",
       "current_state": "mismatch-suspected | WSL Configuration vs Registry Observation",
