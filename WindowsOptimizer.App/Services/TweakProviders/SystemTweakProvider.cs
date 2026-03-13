@@ -17,6 +17,20 @@ public sealed class SystemTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
+        ITweak CreateDisableServiceTweak(
+            string id,
+            string name,
+            string description,
+            params string[] serviceNames)
+            => CreateServiceStartModeBatchTweak(
+                context,
+                id,
+                name,
+                description,
+                TweakRiskLevel.Risky,
+                serviceNames,
+                ServiceStartMode.Disabled);
+
         // Core System Behavior
         yield return CreateRegistryTweak(
             context,
@@ -69,19 +83,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             RegistryValueKind.String,
             @"%windir%\System32\shell32.dll,-50");
 
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-search-highlights",
-            "Disable Search Highlights",
-            "Turns off dynamic 'highlights' content in the Windows search box.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\SearchSettings",
-            "IsDynamicSearchBoxEnabled",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         // Mass Disablements
         yield return CreateScheduledTaskBatchTweak(
             context,
@@ -100,29 +101,83 @@ public sealed class SystemTweakProvider : BaseTweakProvider
                 @"\Microsoft\Windows\Windows Error Reporting\QueueReporting"
             });
 
-        yield return CreateServiceStartModeBatchTweak(
-            context,
-            "system.disable-non-essential-services",
-            "Disable Non-Essential Services",
-            "Disables various non-critical services (Print Spooler, Bluetooth if unused, etc.) to free up resources.",
-            TweakRiskLevel.Risky,
-            new[]
-            {
-                "DiagTrack",       // Connected User Experiences and Telemetry
-                "dmwappushservice", // WAP Push Message Routing Service
-                "SysMain",          // Superfetch/SysMain (can be risky on SSDs)
-                "WSearch",          // Windows Search
-                "WerSvc",           // Windows Error Reporting Service
-                "Spooler",          // Print Spooler
-                "PrintNotify",      // Printer Notifications
-                "PrintWorkflowUserSvc_*", // Per-user print workflow
-                "PrintDeviceConfigurationService", // Printer device configuration
-                "PrintScanBrokerService", // Print/Scan broker
-                "bthserv",          // Bluetooth Support Service
-                "BluetoothUserService_*", // Per-user Bluetooth service
-                "BTAGService"       // Bluetooth Audio Gateway
-            },
-            ServiceStartMode.Disabled);
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-connected-user-experiences",
+            "Disable Connected User Experiences Service",
+            "Disables the Connected User Experiences and Telemetry service (DiagTrack).",
+            "DiagTrack");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-wap-push-routing",
+            "Disable WAP Push Routing Service",
+            "Disables the WAP Push Message Routing service.",
+            "dmwappushservice");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-sysmain",
+            "Disable SysMain Service",
+            "Disables the SysMain (Superfetch) service.",
+            "SysMain");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-windows-search",
+            "Disable Windows Search Service",
+            "Disables the Windows Search indexing service.",
+            "WSearch");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-windows-error-reporting",
+            "Disable Windows Error Reporting Service",
+            "Disables the Windows Error Reporting service.",
+            "WerSvc");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-print-spooler",
+            "Disable Print Spooler Service",
+            "Disables the Print Spooler service.",
+            "Spooler");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-print-notifications",
+            "Disable Print Notification Service",
+            "Disables the printer notification service.",
+            "PrintNotify");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-print-workflow-user-service",
+            "Disable Print Workflow User Service",
+            "Disables per-user print workflow services.",
+            "PrintWorkflowUserSvc_*");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-print-device-configuration",
+            "Disable Print Device Configuration Service",
+            "Disables the printer device configuration service.",
+            "PrintDeviceConfigurationService");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-print-scan-broker",
+            "Disable Print Scan Broker Service",
+            "Disables the print and scan broker service.",
+            "PrintScanBrokerService");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-bluetooth-support",
+            "Disable Bluetooth Support Service",
+            "Disables the main Bluetooth support service.",
+            "bthserv");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-bluetooth-user-service",
+            "Disable Bluetooth User Service",
+            "Disables per-user Bluetooth services.",
+            "BluetoothUserService_*");
+
+        yield return CreateDisableServiceTweak(
+            "system.services.disable-bluetooth-audio-gateway",
+            "Disable Bluetooth Audio Gateway Service",
+            "Disables the Bluetooth Audio Gateway service.",
+            "BTAGService");
 
         yield return CreateRegistryTweak(
             context,

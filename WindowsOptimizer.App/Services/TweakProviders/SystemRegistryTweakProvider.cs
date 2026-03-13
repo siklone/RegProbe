@@ -324,19 +324,6 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             requiresElevation: true);
 
         // Game DVR + Fullscreen Optimizations
-        yield return CreateRegistryTweak(
-            context,
-            "system.disable-game-dvr",
-            "Disable Game DVR",
-            "Turns off Game DVR recording features for the current user.",
-            TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"System\GameConfigStore",
-            "GameDVR_Enabled",
-            RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
-
         yield return WithMicrosoftDoc(
             CreateRegistryTweak(
                 context,

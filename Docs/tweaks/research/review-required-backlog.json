@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T15:02:24Z",
+  "generated_utc": "2026-03-13T15:14:40Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 116,
+  "source_record_count": 114,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 24,
+    "implementation-mismatch": 22,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 26,
+    "heuristic": 24,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1884,58 +1884,6 @@
         "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",
         "key_found_on_page": true,
         "notes": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy. The record remains review-required because the app writes only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell."
-      }
-    },
-    {
-      "record_id": "system.disable-game-dvr",
-      "tweak_id": "system.disable-game-dvr",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official machine policy path documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "System",
-      "technical_area": "Policy vs Observed User Preference",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-game-dvr.json",
-      "summary": "Microsoft documents the official Game DVR control as the machine policy HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR. This record validates that official policy surface and keeps the current HKCU GameConfigStore value flagged as an implementation mismatch.",
-      "decision_why": "The official Game DVR policy surface is now backed by exact Microsoft policy-file proof. The record remains blocked only because the app uses a user-side GameConfigStore value instead of the documented machine policy path.",
-      "blocking_issues": [
-        "The current app does not use the official machine policy path documented in this record.",
-        "The GameConfigStore value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\GameDVR.admx",
-        "exact_quote_or_path": "<policy name=\"AllowGameDVR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\GameDVR\" valueName=\"AllowGameDVR\">; GameDVR.adml: Windows Game Recording and Broadcasting.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact machine-policy key and value name for AllowGameDVR. The record stays review-required because the app still writes HKCU\\System\\GameConfigStore\\GameDVR_Enabled instead of the documented policy surface."
-      }
-    },
-    {
-      "record_id": "system.disable-search-highlights",
-      "tweak_id": "system.disable-search-highlights",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official machine policy path documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "System",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-search-highlights.json",
-      "summary": "This record validates Microsoft's machine-policy surface for Search Highlights and keeps the current HKCU SearchSettings value flagged as an implementation mismatch.",
-      "decision_why": "The official Search Highlights machine policy is now backed by exact Microsoft policy-file proof. The record remains blocked only because the app writes a user-side SearchSettings value instead of the documented policy surface.",
-      "blocking_issues": [
-        "The current app does not use the official machine policy path documented in this record.",
-        "The HKCU SearchSettings value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\Search.admx",
-        "exact_quote_or_path": "<policy name=\"AllowSearchHighlights\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"EnableDynamicContentInWSB\">; Search.adml: Disabling this setting turns off search highlights in the start menu search box and in search home.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights. The record remains review-required because the app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings\\IsDynamicSearchBoxEnabled instead of the documented policy surface."
       }
     },
     {
