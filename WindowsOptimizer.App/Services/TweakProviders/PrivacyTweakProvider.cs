@@ -93,7 +93,7 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                         new RegistryValueSetEntry("DisableApplicationFootprint", RegistryValueKind.DWord, 1),
                         new RegistryValueSetEntry("DisableInstallTracing", RegistryValueKind.DWord, 1),
                         new RegistryValueSetEntry("DisableWin32AppBackup", RegistryValueKind.DWord, 1),
-                        new RegistryValueSetEntry("DisablePcaUI", RegistryValueKind.DWord, 1),
+                        new RegistryValueSetEntry("DisablePCA", RegistryValueKind.DWord, 1),
                         new RegistryValueSetEntry("SbEnable", RegistryValueKind.DWord, 0)
                     }),
                 CreateScheduledTaskBatchTweak(
@@ -1029,17 +1029,17 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        var psrPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "psr.exe");
-        yield return CreateCompositeTweak(
+        yield return CreateRegistryTweak(
+            context,
             "privacy.disable-steps-recorder",
             "Disable Steps Recorder",
-            "Disables Steps Recorder to prevent recording user actions.",
+            "Disables Steps Recorder through policy to prevent recording user actions.",
             TweakRiskLevel.Advanced,
-            new ITweak[]
-            {
-                CreateRegistryTweak(context, "privacy.disable-steps-recorder.policy", "Disable Steps Recorder (Policy)", "", TweakRiskLevel.Advanced, RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\AppCompat", "DisableUAR", RegistryValueKind.DWord, 1),
-                CreateFileRenameTweak(context, "privacy.disable-steps-recorder.binary", "Disable Steps Recorder (Binary)", "", TweakRiskLevel.Advanced, psrPath, psrPath + ".disabled")
-            });
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\AppCompat",
+            "DisableUAR",
+            RegistryValueKind.DWord,
+            1);
 
         yield return CreateRegistryTweak(
             context,

@@ -1,0 +1,1992 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-03-13T12:43:50Z",
+  "sprint_order": [
+    {
+      "sprint_number": 1,
+      "category": "rename"
+    },
+    {
+      "sprint_number": 2,
+      "category": "fix"
+    },
+    {
+      "sprint_number": 3,
+      "category": "split"
+    },
+    {
+      "sprint_number": 4,
+      "category": "docs-first"
+    }
+  ],
+  "items": [
+    {
+      "sprint_number": 1,
+      "priority_index": 1,
+      "record_id": "developer.enable-windows-long-paths",
+      "category": "rename",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The app enables the Windows long-path prerequisite but does not capture a Git-specific configuration surface in this research pass.",
+        "The tweak name overstates the scope of what the current implementation actually changes."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Windows Path Handling vs Git Configuration",
+      "notes": "Suggested name: Enable Windows Long Paths. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "source_file": "Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json"
+    },
+    {
+      "sprint_number": 1,
+      "priority_index": 2,
+      "record_id": "network.require-ntlm-ssp-client-session-security",
+      "category": "rename",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current app description is narrower than the official Microsoft scope.",
+        "The tweak should be renamed or re-explained before it is published as a validated general control."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Security Option",
+      "notes": "Suggested name: Require NTLM SSP Client Session Security. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "source_file": "Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json"
+    },
+    {
+      "sprint_number": 1,
+      "priority_index": 3,
+      "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
+      "category": "rename",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "AllowTelemetry = 0 is not a general-purpose off switch on every Windows edition.",
+        "The tweak name and UX need edition-aware gating or a more accurate label."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Suggested name: Set Diagnostic Data to Minimum Supported Level. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "source_file": "Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json"
+    },
+    {
+      "sprint_number": 1,
+      "priority_index": 4,
+      "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
+      "category": "rename",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current app writes *UserOverride = 0, which Microsoft documents as allowing users to turn syncing back on.",
+        "The tweak name suggests a hard disable even though the current bundle behaves more like default-off plus user override.",
+        "The product should split soft default-off behavior from strict no-override behavior before this can be published as validated."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy Bundle",
+      "notes": "Suggested name: Turn Off Sync by Default (Allow User Override). Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "source_file": "Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 1,
+      "record_id": "explorer.show-file-extensions",
+      "category": "fix",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Microsoft Open Specifications says HideFileExt displays known file extensions and MUST be 1 to enable, while the current app writes 0 to show extensions.",
+        "The exact 0/1 semantics need reconciliation before this record can be validated."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Explorer Advanced Flags",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 2,
+      "record_id": "explorer.show-hidden-files",
+      "category": "fix",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The captured official source documents Hidden using SHOW/HIDE semantics rather than the numeric values written by the app.",
+        "The exact numeric mapping for Hidden = 1 still needs a stronger primary Microsoft source before this record can be validated."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Explorer Advanced Flags",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden=1 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 3,
+      "record_id": "privacy.disable-location-consent",
+      "category": "fix",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The main HKCU consent-store path and the NonPackaged companion path are now officially sourced, but the tweak still writes ShowGlobalPrompts = 1 without a matching primary-source proof."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Observed Runtime Consent",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value=Deny to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value (example Allow). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-location-consent.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 4,
+      "record_id": "power.optimize-cpu-boost",
+      "category": "fix",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft registry mapping was found for the exact raw bundle used by the app."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Processor Boost Behavior",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization=PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/power.optimize-cpu-boost.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 5,
+      "record_id": "privacy.disable-rsop-logging",
+      "category": "fix",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The extra Winlogon companion value is not sourced by the official Microsoft policy files used in this record.",
+        "The product should either source that companion value or stop writing it before the tweak can be published as validated."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Mixed Registry Configuration",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging=0; HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon::RsopLogging=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-rsop-logging.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 6,
+      "record_id": "network.smb-increase-client-metadata-cache",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app uses metadata cache and MaxCmds values that do not match Microsoft's published tuning guidance."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Registry Optimization Bundle",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax=4096; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds=32768 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax (example 16); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax (example 64); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax (example 128); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds (example 15). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 7,
+      "record_id": "developer.wsl2-memory",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The app writes Lxss\\DefaultVersion = 2, which is not the documented WSL memory-limit surface captured in this pass.",
+        "The documented WSL memory control uses .wslconfig, not the current registry key."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | WSL Configuration vs Registry Observation",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss::DefaultVersion=2 to the researched surface %UserProfile%\\.wslconfig::[wsl2].memory. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/developer.wsl2-memory.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 8,
+      "record_id": "explorer.disable-low-disk-space-warning",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the documented HKLM path described in the official Microsoft article.",
+        "The HKCU Explorer path still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Documented Registry Path vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks=1 to the researched surface HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 9,
+      "record_id": "explorer.disable-taskbar-chat",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official ConfigureChatIcon policy path documented in this record.",
+        "The Explorer TaskbarMn value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarMn=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat::ChatIcon (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-chat.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 10,
+      "record_id": "explorer.disable-taskbar-widgets",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official AllowNewsAndInterests policy path documented in this record.",
+        "Microsoft's Windows 11 settings reference documents Explorer\\\\Advanced\\\\TaskbarDa as a subkey with value name SystemSettings_DesktopTaskbar_Da (REG_SZ), but the app writes TaskbarDa as a REG_DWORD value on the parent Advanced key."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarDa=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh::AllowNewsAndInterests (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 11,
+      "record_id": "explorer.taskbar-alignment-left",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "Microsoft's Windows 11 settings reference documents Explorer\\Advanced\\TaskbarAl as a subkey with value name SystemSettings_DesktopTaskbar_Al (REG_SZ), but the app writes TaskbarAl as REG_DWORD on the parent Advanced key."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Windows 11 Settings Reference vs Observed Explorer Value",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarAl=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl::SystemSettings_DesktopTaskbar_Al (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 12,
+      "record_id": "privacy.disable-advertising-id",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "The current app does not use the official machine policy path documented in this record.",
+        "The HKCU AdvertisingInfo\\Enabled value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo::Enabled=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo::DisabledByGroupPolicy (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-advertising-id.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 13,
+      "record_id": "privacy.disable-resume",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official Connectivity Policy CSP path documented in this record.",
+        "The IsResumeAllowed registry path still needs formal sourcing or VM validation before it can be presented as an official disable control."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Policy CSP vs Observed Registry Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed=0 to the researched surface ./User/Vendor/MSFT/Policy/Config/Connectivity::DisableCrossDeviceResume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 14,
+      "record_id": "system.disable-game-dvr",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official machine policy path documented in this record.",
+        "The GameConfigStore value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Preference",
+      "notes": "Move the implementation from HKCU\\System\\GameConfigStore::GameDVR_Enabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR::AllowGameDVR (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/system.disable-game-dvr.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 15,
+      "record_id": "system.disable-search-highlights",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official machine policy path documented in this record.",
+        "The HKCU SearchSettings value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings::IsDynamicSearchBoxEnabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::EnableDynamicContentInWSB (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/system.disable-search-highlights.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 16,
+      "record_id": "developer.python-path-fix",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The app writes Win95TruncatedExtensions = 0 instead of the sourced LongPathsEnabled control.",
+        "This research pass did not capture a primary source connecting Win95TruncatedExtensions to Python path-length fixes."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Python / Windows Path Handling",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::Win95TruncatedExtensions=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::LongPathsEnabled (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/developer.python-path-fix.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 17,
+      "record_id": "network.disable-mdns",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app describes policy-disabled local-settings behavior as a direct mDNS disable."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Group Policy versus observed implementation",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 18,
+      "record_id": "network.disable-netbios",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "Current app implementation writes NoNameReleaseOnDemand instead of the documented per-interface NetbiosOptions value.",
+        "A correct UX likely needs adapter enumeration instead of a single global toggle."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Per-interface Registry Configuration",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters::NoNameReleaseOnDemand=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*::NetbiosOptions (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.disable-netbios.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 19,
+      "record_id": "network.smb-disable-leasing",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the documented EnableLeasing control surface.",
+        "The service-path DisableLeasing write still needs formal sourcing or validation before publication."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | API vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::DisableLeasing=1 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableLeasing (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-disable-leasing.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 20,
+      "record_id": "power.disable-fast-startup",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "Current app implementation writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power instead of the researched Session Manager path.",
+        "Windows default behavior is feature dependent and still needs clean-VM capture."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Registry Configuration",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::HiberbootEnabled=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power::HiberbootEnabled. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 21,
+      "record_id": "privacy.disable-reserved-storage",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official DISM reserved-storage surface documented in this record.",
+        "The ReserveManager DisableDeletes value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Feature Command vs Observed Registry Value",
+      "notes": "Move the implementation from HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager::DisableDeletes=1 to the researched surface DISM.exe /Online /Set-ReservedStorageState::State (example Enabled). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 22,
+      "record_id": "security.disable-p2p-updates",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization::DODownloadMode=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization::DODownloadMode (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.disable-p2p-updates.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 23,
+      "record_id": "security.disable-wpbt",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app uses a registry path that has not yet been tied to an official Microsoft WPBT policy or registry reference in this research set.",
+        "The documented Microsoft WPBT surface found so far is UEFI or DFCI oriented, not the Session Manager registry path used by the app."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | UEFI",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager::DisableWpbtExecution=1 to the researched surface UEFI CSP / DFCI / Windows Platform Binary Table (WPBT)::WPBT (example Enabled). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.disable-wpbt.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 24,
+      "record_id": "system.disable-search-web-results",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The app writes DoNotUseWebResults as if it were the registry value name, but the official value name is ConnectedSearchUseWeb.",
+        "The official disable state is ConnectedSearchUseWeb = 0, not DoNotUseWebResults = 1."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::DoNotUseWebResults=1 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::ConnectedSearchUseWeb (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/system.disable-search-web-results.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 25,
+      "record_id": "system.memory-registry-quota-default",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes RegistryQuota under Session Manager\\Memory Management instead of the published RegistrySizeLimit control under HKLM\\System\\CurrentControlSet\\Control.",
+        "This research pass has not found a primary Microsoft source that publishes RegistryQuota as the supported equivalent control."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Registry Storage Space",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management::RegistryQuota=2097152 to the researched surface HKLM\\System\\CurrentControlSet\\Control::RegistrySizeLimit (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/system.memory-registry-quota-default.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 26,
+      "record_id": "peripheral.disable-autoplay",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official AutoPlay policy surfaces documented in this record.",
+        "The Explorer AutoplayHandlers\\DisableAutoplay value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers::DisableAutoplay=1 to the researched surface TurnOffAutoPlay::TurnOffAutoPlay (example 0); HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer::NoAutoplayfornonVolume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/peripheral.disable-autoplay.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 27,
+      "record_id": "network.smb-enable-multichannel",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the documented EnableMultiChannel control surface.",
+        "The current app only touches the client side, while Microsoft's documented feature model includes both client and server."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | API vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DisableMultiChannel=0 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration::EnableMultiChannel (example false); Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableMultiChannel (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-enable-multichannel.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 28,
+      "record_id": "security.disable-system-mitigations",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes raw binary mitigation values instead of using the documented Exploit Guard XML policy surface.",
+        "The exact byte-level meaning of the current MitigationOptions and MitigationAuditOptions blobs is not yet documented in this research dataset.",
+        "Microsoft warns that exploit protection changes can have compatibility issues and should be tested before broad deployment."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Exploit Protection",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationOptions=00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00; HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationAuditOptions=02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection::ExploitProtectionSettings (example <path-or-url-to-config.xml>). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.disable-system-mitigations.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 29,
+      "record_id": "security.disable-system-restore",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes RPSessionInterval under the runtime CurrentVersion path instead of the official policy values DisableSR and DisableConfig under the Policies path."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore::RPSessionInterval=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableSR (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableConfig (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.disable-system-restore.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 30,
+      "record_id": "security.powershell-unrestricted",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes to HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell instead of the official policy path under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
+        "The current app does not write the official EnableScripts policy value."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell::ExecutionPolicy=Unrestricted to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::EnableScripts (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::ExecutionPolicy (example AllSigned). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.powershell-unrestricted.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 31,
+      "record_id": "network.disable-lltd",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "Policy disabled and not configured states are documented as default behavior, not as a guaranteed LLTD feature-off state."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Observed policy misuse",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableLLTDIO=0; HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableRspndr=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableLLTDIO (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableRspndr (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 32,
+      "record_id": "network.smb-enable-quic",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
+        "The service-path EnableSMBQUIC writes still need formal sourcing or validation before publication."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::EnableSMBQUIC=1; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::EnableSMBQUIC=1 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::EnableSMBQUIC (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::EnableSMBQUIC (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-enable-quic.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 33,
+      "record_id": "network.smb-set-cipher-suite-order",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the documented LanmanWorkstation and LanmanServer policy paths for cipher suite order.",
+        "The service-path REG_MULTI_SZ mapping still needs formal sourcing or validation before publication."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::CipherSuiteOrder=AES_256_GCM|AES_256_CCM; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::CipherSuiteOrder=AES_256_GCM|AES_256_CCM to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::CipherSuiteOrder (example custom-supported-order); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::CipherSuiteOrder (example custom-supported-order). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 34,
+      "record_id": "security.disable-windows-firewall",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app writes EnableFirewall = 0 under HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy instead of HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall.",
+        "The app also writes PublicProfile under the runtime tree, while the main local policy evidence used here documents DomainProfile and StandardProfile.",
+        "The SharedAccess runtime paths are confirmed by Microsoft troubleshooting guidance, but not by a primary policy design document equivalent to Firewall CSP."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile::EnableFirewall=0; HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile::EnableFirewall=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile::EnableFirewall (example 0); HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile::EnableFirewall (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/security.disable-windows-firewall.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 35,
+      "record_id": "network.disable-active-probing",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The tweak mixes an official policy write with extra runtime values that are not yet sourced as the same Microsoft control."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy plus observed runtime writes",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe=1; HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity::DisallowNetworkConnectivityActiveTests=1; HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet::EnableUserActiveProbing=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.disable-active-probing.review.json"
+    },
+    {
+      "sprint_number": 2,
+      "priority_index": 36,
+      "record_id": "network.smb-require-dialect-3_1_1",
+      "category": "fix",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
+        "MaxSmb2Dialect = 65536 is not one of the official documented policy values."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxSmb2Dialect=65536; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MaxSmb2Dialect=65536 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MaxSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MaxSmb2Dialect (example 514). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "source_file": "Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 1,
+      "record_id": "privacy.disable-app-suggestions",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current app does not use the official CloudContent policy path documented in this record.",
+        "The SystemPaneSuggestionsEnabled value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [
+        "privacy.disable-app-suggestions.official-cloudcontent-policy-path",
+        "privacy.disable-app-suggestions.observed-contentdeliverymanager-preference-path"
+      ],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Split into 2 parts: Official CloudContent policy path, Observed ContentDeliveryManager preference path. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 2,
+      "record_id": "privacy.disable-application-compatibility",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The composite wraps subrecords that are not yet product-ready."
+      ],
+      "depends_on": [
+        "privacy.disable-application-compatibility.application-compatibility-policy-bundle",
+        "privacy.disable-application-compatibility.application-experience-scheduled-task-bundle"
+      ],
+      "current_state": "partially-matches | Composite",
+      "notes": "Split into 2 parts: Application compatibility policy bundle, Application Experience scheduled task bundle. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 3,
+      "record_id": "privacy.disable-inking-typing-personalization",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Mixed bundle semantics are not yet explained well enough for a validated toggle."
+      ],
+      "depends_on": [
+        "privacy.disable-inking-typing-personalization.typing-personalization-controls",
+        "privacy.disable-inking-typing-personalization.windows-ink-workspace-controls"
+      ],
+      "current_state": "partially-matches | Registry Bundle",
+      "notes": "Split into 2 parts: Typing personalization controls, Windows Ink Workspace controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 4,
+      "record_id": "privacy.disable-offline-files.binary",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Binary rename goes beyond the validated Offline Files policy surface."
+      ],
+      "depends_on": [
+        "privacy.disable-offline-files.binary.sync-center-entry-point-behavior",
+        "privacy.disable-offline-files.binary.mobsync-exe-binary-rename-workflow"
+      ],
+      "current_state": "partially-matches | File Rename",
+      "notes": "Split into 2 parts: Sync Center entry-point behavior, mobsync.exe binary rename workflow. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 5,
+      "record_id": "privacy.disable-offline-files.services",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Service shutdown goes beyond the validated Offline Files policy surface."
+      ],
+      "depends_on": [
+        "privacy.disable-offline-files.services.csc-service-handling",
+        "privacy.disable-offline-files.services.cscservice-handling"
+      ],
+      "current_state": "partially-matches | Service Start Mode",
+      "notes": "Split into 2 parts: CSC service handling, CscService handling. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 6,
+      "record_id": "privacy.disable-offline-files.tasks",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The task bundle is an observed implementation layer beyond the validated Offline Files feature policy."
+      ],
+      "depends_on": [
+        "privacy.disable-offline-files.tasks.background-sync-task",
+        "privacy.disable-offline-files.tasks.logon-sync-task"
+      ],
+      "current_state": "partially-matches | Scheduled Task Bundle",
+      "notes": "Split into 2 parts: Background sync task, Logon sync task. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 7,
+      "record_id": "privacy.disable-windows-tips",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current app does not use the official machine policy path documented in this record.",
+        "The ContentDeliveryManager value still needs formal sourcing or validation before it can be published as an official equivalent."
+      ],
+      "depends_on": [
+        "privacy.disable-windows-tips.official-disablesoftlanding-policy",
+        "privacy.disable-windows-tips.observed-contentdeliverymanager-preference"
+      ],
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Split into 2 parts: Official DisableSoftLanding policy, Observed ContentDeliveryManager preference. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-windows-tips.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 8,
+      "record_id": "privacy.troubleshooter-dont-run",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The tweak is modeled as a simple block action even though the official policy is a six-value dropdown.",
+        "The extra WindowsMitigation UserPreference write still needs a primary Microsoft source or removal."
+      ],
+      "depends_on": [
+        "privacy.troubleshooter-dont-run.official-troubleshooting-policy-dropdown",
+        "privacy.troubleshooter-dont-run.windowsmitigation-companion-preference"
+      ],
+      "current_state": "partially-matches | Mixed Registry Configuration",
+      "notes": "Split into 2 parts: Official troubleshooting policy dropdown, WindowsMitigation companion preference. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 9,
+      "record_id": "security.disable-windows-update",
+      "category": "split",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current tweak combines official policy values with non-policy pause timestamp writes under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings.",
+        "The bundle should be split into narrower controls before it is published as validated."
+      ],
+      "depends_on": [
+        "security.disable-windows-update.official-windows-update-policy-controls",
+        "security.disable-windows-update.runtime-pause-timestamp-handling"
+      ],
+      "current_state": "partially-matches | Registry Policy Bundle",
+      "notes": "Split into 2 parts: Official Windows Update policy controls, Runtime pause timestamp handling. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/security.disable-windows-update.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 10,
+      "record_id": "audio.disable-system-sounds",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for the exact HKCU\\AppEvents\\Schemes bundle written by the app was captured in this pass."
+      ],
+      "depends_on": [
+        "audio.disable-system-sounds.system-event-sound-assignments",
+        "audio.disable-system-sounds.notification-sound-assignments",
+        "audio.disable-system-sounds.explorer-and-shell-sound-assignments"
+      ],
+      "current_state": "unknown | AppEvents Sound Scheme Entries",
+      "notes": "Split into 3 parts: System event sound assignments, Notification sound assignments, Explorer and shell sound assignments. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/audio.disable-system-sounds.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 11,
+      "record_id": "network.optimize-smb",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The app's 30-second cache lifetimes do not match the Microsoft documented defaults or example tuning values."
+      ],
+      "depends_on": [
+        "network.optimize-smb.smb-metadata-cache-tuning",
+        "network.optimize-smb.smb-command-window-tuning",
+        "network.optimize-smb.smb-throttle-or-timeout-tuning"
+      ],
+      "current_state": "mismatch-suspected | Registry Optimization Bundle",
+      "notes": "Split into 3 parts: SMB metadata cache tuning, SMB command/window tuning, SMB throttle or timeout tuning. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/network.optimize-smb.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 12,
+      "record_id": "power.disable-network-power-saving",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The bundle mixes TCP/IP offload behavior with MMCSS scheduling behavior.",
+        "NetworkThrottlingIndex has not been confirmed from a primary Microsoft source in this review."
+      ],
+      "depends_on": [
+        "power.disable-network-power-saving.tcp-ip-task-offload-switch",
+        "power.disable-network-power-saving.mmcss-systemresponsiveness-tuning",
+        "power.disable-network-power-saving.networkthrottlingindex-handling"
+      ],
+      "current_state": "partially-matches | Mixed Network and MMCSS Registry",
+      "notes": "Split into 3 parts: TCP/IP task offload switch, MMCSS SystemResponsiveness tuning, NetworkThrottlingIndex handling. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/power.disable-network-power-saving.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 13,
+      "record_id": "privacy.disable-application-compatibility.tasks",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The task bundle is broader than a single official policy mapping."
+      ],
+      "depends_on": [
+        "privacy.disable-application-compatibility.tasks.application-experience-telemetry-tasks",
+        "privacy.disable-application-compatibility.tasks.compatibility-analysis-tasks",
+        "privacy.disable-application-compatibility.tasks.version-specific-inventory-tasks"
+      ],
+      "current_state": "partially-matches | Scheduled Task Bundle",
+      "notes": "Split into 3 parts: Application Experience telemetry tasks, Compatibility analysis tasks, Version-specific inventory tasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 14,
+      "record_id": "privacy.disable-ceip",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "Mixed policy family bundle still needs stronger per-target sourcing."
+      ],
+      "depends_on": [
+        "privacy.disable-ceip.sqmclient-controls",
+        "privacy.disable-ceip.app-v-ceip-controls",
+        "privacy.disable-ceip.messenger-or-legacy-product-telemetry-controls"
+      ],
+      "current_state": "partially-matches | Registry Policy Bundle",
+      "notes": "Split into 3 parts: SQMClient controls, App-V CEIP controls, Messenger or legacy product telemetry controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-ceip.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 15,
+      "record_id": "privacy.disable-cross-device-experiences",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The preset model mixes one official machine policy with undocumented user-side CDP values.",
+        "The product should not present fully trusted preset semantics until those user values are sourced and validated."
+      ],
+      "depends_on": [
+        "privacy.disable-cross-device-experiences.official-device-wide-enablecdp-policy",
+        "privacy.disable-cross-device-experiences.observed-user-side-cdp-registry-values",
+        "privacy.disable-cross-device-experiences.preset-ux-or-profile-selection-model"
+      ],
+      "current_state": "partially-matches | Mixed Registry Configuration",
+      "notes": "Split into 3 parts: Official device-wide EnableCdp policy, Observed user-side CDP registry values, Preset UX or profile selection model. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 16,
+      "record_id": "privacy.disable-sleep-study-diagnostics",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "Diagnostic-channel bundle still needs stronger primary-source mapping."
+      ],
+      "depends_on": [
+        "privacy.disable-sleep-study-diagnostics.sleep-study-event-channels",
+        "privacy.disable-sleep-study-diagnostics.power-diagnostics-event-channels",
+        "privacy.disable-sleep-study-diagnostics.user-facing-diagnostic-justification-and-rollback"
+      ],
+      "current_state": "partially-matches | Event Channel Bundle",
+      "notes": "Split into 3 parts: Sleep Study event channels, Power diagnostics event channels, User-facing diagnostic justification and rollback. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 17,
+      "record_id": "privacy.disable-suggestions",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface."
+      ],
+      "depends_on": [
+        "privacy.disable-suggestions.start-or-shell-suggestions",
+        "privacy.disable-suggestions.settings-or-tips-suggestions",
+        "privacy.disable-suggestions.opaque-contentdeliverymanager-identifiers"
+      ],
+      "current_state": "partially-matches | Observed User Preference Bundle",
+      "notes": "Split into 3 parts: Start or shell suggestions, Settings or tips suggestions, Opaque ContentDeliveryManager identifiers. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 18,
+      "record_id": "privacy.disable-wmplayer-telemetry",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "Windows Media Player preference bundle still lacks a clean official policy mapping."
+      ],
+      "depends_on": [
+        "privacy.disable-wmplayer-telemetry.metadata-retrieval-preferences",
+        "privacy.disable-wmplayer-telemetry.usage-or-recommendations-preferences",
+        "privacy.disable-wmplayer-telemetry.windows-media-player-product-specific-ux-copy"
+      ],
+      "current_state": "partially-matches | Observed App Preference Bundle",
+      "notes": "Split into 3 parts: Metadata retrieval preferences, Usage or recommendations preferences, Windows Media Player product-specific UX copy. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 19,
+      "record_id": "power.optimize-performance",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft registry mapping was found for the exact raw bundle used by the app."
+      ],
+      "depends_on": [
+        "power.optimize-performance.processor-policy-values",
+        "power.optimize-performance.timer-or-latency-values",
+        "power.optimize-performance.qos-or-multimedia-scheduler-values",
+        "power.optimize-performance.raw-power-manager-overrides"
+      ],
+      "current_state": "mismatch-suspected | Raw Power Manager Registry",
+      "notes": "Split into 4 parts: Processor policy values, Timer or latency values, QoS or multimedia scheduler values, Raw power-manager overrides. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/power.optimize-performance.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 20,
+      "record_id": "privacy.deny-app-access",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The bundle is very broad and mixes AppPrivacy policies with an extra System policy write.",
+        "The LetAppsAccess* policy family should not be presented as if it fully governs classic Win32 desktop apps."
+      ],
+      "depends_on": [
+        "privacy.deny-app-access.capability-access-deny-bundle",
+        "privacy.deny-app-access.microphone-specific-handling",
+        "privacy.deny-app-access.user-info-access-policy",
+        "privacy.deny-app-access.per-capability-ux-copy-and-risk-gating"
+      ],
+      "current_state": "partially-matches | Registry Policy Bundle",
+      "notes": "Split into 4 parts: Capability access deny bundle, Microphone-specific handling, User info access policy, Per-capability UX copy and risk gating. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.deny-app-access.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 21,
+      "record_id": "privacy.disable-offline-files",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface."
+      ],
+      "depends_on": [
+        "privacy.disable-offline-files.official-offline-files-policy",
+        "privacy.disable-offline-files.offline-files-services",
+        "privacy.disable-offline-files.offline-files-scheduled-tasks",
+        "privacy.disable-offline-files.sync-center-binary-or-entry-point-changes"
+      ],
+      "current_state": "partially-matches | Composite",
+      "notes": "Split into 4 parts: Official Offline Files policy, Offline Files services, Offline Files scheduled tasks, Sync Center binary or entry-point changes. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 22,
+      "record_id": "privacy.disable-suggestions-cdm",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The current app does not use the named official CloudContent policies documented in this record.",
+        "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
+      ],
+      "depends_on": [
+        "privacy.disable-suggestions-cdm.third-party-suggestions-mapping",
+        "privacy.disable-suggestions-cdm.settings-suggestions-mapping",
+        "privacy.disable-suggestions-cdm.welcome-experience-mapping",
+        "privacy.disable-suggestions-cdm.subscribedcontent-identifier-mapping"
+      ],
+      "current_state": "partially-matches | Observed ContentDeliveryManager Values vs Named CloudContent Policies",
+      "notes": "Split into 4 parts: Third-party suggestions mapping, Settings suggestions mapping, Welcome experience mapping, SubscribedContent identifier mapping. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 23,
+      "record_id": "security.disable-vbs",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "Windows 11 24H2-class behavior can override or reassert effective VBS state after reboot even when policy values are written.",
+        "Windows Hello and PIN-backed scenarios can be operationally coupled to VBS state and should be modeled separately from a simple VBS-off toggle."
+      ],
+      "depends_on": [
+        "security.disable-vbs.core-vbs-policy-handling",
+        "security.disable-vbs.hvci-mode-handling",
+        "security.disable-vbs.credential-guard-state-and-lock-handling",
+        "security.disable-vbs.windows-hello-or-pin-dependency-checks-and-ux-gating"
+      ],
+      "current_state": "matches-research | Registry Policy Bundle",
+      "notes": "Split into 4 parts: Core VBS policy handling, HVCI mode handling, Credential Guard state and lock handling, Windows Hello or PIN dependency checks and UX gating. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/security.disable-vbs.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 24,
+      "record_id": "system.reduce-shutdown-timeouts",
+      "category": "split",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "Only the service timeout path is directly published in primary Microsoft registry documentation captured in this dataset.",
+        "The current app writes WaitToKillAppTimeout, while repo notes indicate WaitToKillTimeout may be the more relevant modern concept.",
+        "This research pass did not capture a primary Microsoft source for AutoEndTasks as a supported current shutdown control."
+      ],
+      "depends_on": [
+        "system.reduce-shutdown-timeouts.waittokillservicetimeout",
+        "system.reduce-shutdown-timeouts.waittokillapptimeout-or-waittokilltimeout",
+        "system.reduce-shutdown-timeouts.hungapptimeout",
+        "system.reduce-shutdown-timeouts.autoendtasks"
+      ],
+      "current_state": "partially-matches | Shutdown and Logoff Timing",
+      "notes": "Split into 4 parts: WaitToKillServiceTimeout, WaitToKillAppTimeout or WaitToKillTimeout, HungAppTimeout, AutoEndTasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json"
+    },
+    {
+      "sprint_number": 3,
+      "priority_index": 25,
+      "record_id": "system.disable-scheduled-tasks",
+      "category": "split",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "The bundle spans multiple Windows feature areas with different side effects.",
+        "At least one task path is version-dependent on the current review host.",
+        "The current record documents the bundle honestly but does not yet validate it as a safe preset."
+      ],
+      "depends_on": [
+        "system.disable-scheduled-tasks.application-compatibility-tasks",
+        "system.disable-scheduled-tasks.ceip-tasks",
+        "system.disable-scheduled-tasks.cleanup-tasks",
+        "system.disable-scheduled-tasks.feedback-tasks",
+        "system.disable-scheduled-tasks.error-reporting-tasks"
+      ],
+      "current_state": "matches-research | Scheduled Tasks",
+      "notes": "Split into 5 parts: Application compatibility tasks, CEIP tasks, Cleanup tasks, Feedback tasks, Error-reporting tasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
+      "source_file": "Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 1,
+      "record_id": "performance.disable-animations",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate was captured in this pass.",
+        "The app uses a direct registry write instead of the public Win32 feature surface captured here."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Win32 Animation Effects vs Registry Observation",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/performance.disable-animations.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 2,
+      "record_id": "performance.disable-menu-show-delay",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Control Panel\\Desktop\\MenuShowDelay was captured in this pass.",
+        "The app uses a direct registry write instead of the public Win32 feature surface captured here."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Win32 Menu Timing vs Registry Observation",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 3,
+      "record_id": "peripheral.autoplay-take-no-action",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The exact MSTakeNoAction handler mapping is not yet backed by an official Microsoft registry source in this dataset.",
+        "The app writes user-choice handler paths rather than a documented policy surface."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Observed User Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 4,
+      "record_id": "peripheral.disable-sticky-keys-prompt",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags was captured in this pass.",
+        "The app uses a direct registry write instead of the public Sticky Keys feature surface captured here."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Accessibility Sticky Keys Flags vs Registry Observation",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 5,
+      "record_id": "power.disable-cpu-idle-states",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "No primary Microsoft registry mapping was found for the exact raw bundle used by the app."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Processor Idle Behavior",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/power.disable-cpu-idle-states.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 6,
+      "record_id": "power.disable-modern-standby",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "Official Microsoft guidance says switching sleep models is not supported through a Windows setting change.",
+        "No primary Microsoft registry mapping was found that validates the current app bundle as a supported transition path."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Sleep Model",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/power.disable-modern-standby.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 7,
+      "record_id": "privacy.disable-appcompat-engine.policy",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [],
+      "depends_on": [],
+      "current_state": "matches-research | Application Compatibility",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 8,
+      "record_id": "privacy.disable-appdeviceinventory.policy",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [],
+      "depends_on": [],
+      "current_state": "matches-research | Application Compatibility",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 9,
+      "record_id": "privacy.disable-f1-help",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Binary rename is more invasive than a validated policy or preference control."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | File Rename",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-f1-help.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 10,
+      "record_id": "privacy.hide-username-at-signin",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Local Windows security metadata maps the documented sign-in privacy option to DontDisplayLockedUserId, while the app currently writes DontDisplayUserName.",
+        "A stronger Microsoft source or Procmon-backed sign-in trace is needed to prove which registry value Windows actually honors for this behavior."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Security Option",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/privacy.hide-username-at-signin.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 11,
+      "record_id": "system.bsod-display-parameters",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "A primary Microsoft Learn or local official metadata source for DisplayParameters has not yet been captured.",
+        "The current app write should not be published as validated until the registry semantics are formally sourced."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Crash Recovery / Bug Check Display",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.bsod-display-parameters.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 12,
+      "record_id": "system.disable-auto-maintenance",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current record does not yet contain a strong primary-source table for the raw MaintenanceDisabled values.",
+        "The product should not publish a validated recommendation until the raw semantics are sourced or experimentally confirmed."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Observed Registry Setting",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-auto-maintenance.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 13,
+      "record_id": "system.disable-fullscreen-optimizations",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft registry source for the four GameConfigStore Fullscreen Optimizations values was captured in this research pass.",
+        "The current app mapping relies on repo provenance rather than a primary Microsoft registry publication."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | GameConfigStore / Compatibility Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 14,
+      "record_id": "system.disable-jpeg-reduction",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
+        "The current app mapping relies on repo observation for the raw registry semantics."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Desktop Wallpaper Import Behavior",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 15,
+      "record_id": "system.disable-restartable-apps",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The current record does not yet contain a strong primary-source registry mapping for RestartApps.",
+        "The product should not publish a validated recommendation until the raw registry semantics are sourced or experimentally confirmed."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Feature Setting vs Observed Registry Setting",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-restartable-apps.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 16,
+      "record_id": "system.disable-startup-delay",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for StartupDelayInMSec was captured in this research pass.",
+        "The current app mapping relies on repo observation for the raw registry semantics."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Explorer Startup Behavior",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-startup-delay.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 17,
+      "record_id": "system.enable-game-mode",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for the AutoGameModeEnabled registry path was captured in this research pass.",
+        "The current app mapping relies on repo observation for the raw registry semantics."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Gaming Feature / GameBar Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.enable-game-mode.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 18,
+      "record_id": "system.memory-large-system-cache-client",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Microsoft marks the LargeSystemCache property obsolete and unsupported.",
+        "This research pass did not find a modern primary registry page that validates the exact registry path as a supported tuning control."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Memory Management / Cache Mode",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 19,
+      "record_id": "system.memory-nonpaged-pool-dynamic",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "Microsoft's current published control surface documents NonPagedPoolLimit rather than the exact NonPagedPoolSize reset value used by the app.",
+        "This research pass has not found a primary modern Microsoft source that explicitly publishes NonPagedPoolSize = 0 as the supported reset state."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Memory Management / Legacy Pool Tuning",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 20,
+      "record_id": "system.memory-paged-pool-dynamic",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "Microsoft's current published control surface documents PagedPoolLimit rather than the exact PagedPoolSize reset value used by the app.",
+        "This research pass has not found a primary modern Microsoft source that explicitly publishes PagedPoolSize = 0 as the supported reset state."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Memory Management / Legacy Pool Tuning",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 21,
+      "record_id": "system.ntfs-reset-memory-usage",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "The app writes NtfsMemoryUsage = 0 even though Microsoft only documents values 1 and 2.",
+        "This record should not be published or applied until the 0 value is either sourced as a supported equivalent or the app is corrected."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | File System Runtime Setting",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 22,
+      "record_id": "system.priority-control",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The modern primary sources captured in this research pass do not publish the exact raw 0x26 Win32PrioritySeparation mapping.",
+        "The app's scheduler bitmask currently relies on repo provenance rather than a directly captured modern Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Scheduler / Priority Control",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.priority-control.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 23,
+      "record_id": "visibility.restore-classic-context-menu",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft registry source was captured for the classic-context-menu CLSID workaround in this review."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Explorer Context Menu",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 24,
+      "record_id": "explorer.enable-explorer-compact-mode",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
+        "The tweak id implies disabling compact mode while the current app writes UseCompactMode = 1."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | Explorer Advanced Flags",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 25,
+      "record_id": "privacy.disable-switchback.policy",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [],
+      "depends_on": [],
+      "current_state": "matches-research | Application Compatibility",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 26,
+      "record_id": "security.disable-ntfs-encryption",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "The extra write to HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableEncryption is not documented by the local Microsoft policy files used for validation."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/security.disable-ntfs-encryption.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 27,
+      "record_id": "security.enable-dynamic-lock",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+        "The current app writes EnableGoodbye under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/security.enable-dynamic-lock.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 28,
+      "record_id": "security.trusted-path-credential-prompting",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
+        "The current raw value needs a cleaner explicit primary-source confirmation before promotion to validated."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 29,
+      "record_id": "visibility.hide-language-bar",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft registry source was captured for the ShowStatus value mapping in this review."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | User Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/visibility.hide-language-bar.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 30,
+      "record_id": "developer.docker-performance",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No vendor-published registry or settings-store contract for HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2 was captured in this pass.",
+        "The current record can document the feature area, but not yet validate the exact registry write."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Docker Desktop / WSL Integration",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.docker-performance.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 31,
+      "record_id": "developer.ssh-agent-autostart",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Windows autostart contract for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent was captured in this pass.",
+        "The current record can document the startup behavior, but not validate it as the official Windows control surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | OpenSSH Agent Startup",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 32,
+      "record_id": "developer.terminal-dev-mode",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Windows Terminal source for DeveloperMode or EnableDebugTap was captured in this pass.",
+        "The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Windows Terminal Internal Flags",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.terminal-dev-mode.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 33,
+      "record_id": "developer.vs-intellisense-cache",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\VisualStudio\\IntelliSense\\DisableAutoUpdating was captured in this pass.",
+        "The current record can document the app behavior, but not validate it as the supported Visual Studio control surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Visual Studio IntelliSense",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.vs-intellisense-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 34,
+      "record_id": "developer.vs-solution-load",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading\\BackgroundAnalysis was captured in this pass.",
+        "The current record can document the app behavior, but not validate it as the supported Visual Studio control surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Visual Studio Solution Loading",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.vs-solution-load.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 35,
+      "record_id": "system.dwm-disable-mpo",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
+        "The current app write cannot be published as a validated MPO control until its value semantics are sourced."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Desktop Window Manager / Overlay Overrides",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.dwm-disable-mpo.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 36,
+      "record_id": "system.enable-hags",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for the HwSchMode registry path was captured in this research pass.",
+        "The current app mapping relies on repo observation for the raw registry semantics."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Graphics Drivers / Scheduling Feature",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.enable-hags.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 37,
+      "record_id": "system.graphics-disable-overlays",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for DisableOverlays was captured in this research pass.",
+        "The current app write cannot be published as a validated overlay-plane control until its value semantics are sourced."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Graphics Drivers / Overlay Diagnostics",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.graphics-disable-overlays.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 38,
+      "record_id": "system.graphics-page-fault-debug-mode",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for PageFaultDebugMode was captured in this research pass.",
+        "The current app write cannot be published as a validated graphics-debug control until its semantics are sourced."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Graphics Drivers / Debug Setting",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 39,
+      "record_id": "system.kernel-adjust-dpc-threshold",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for AdjustDpcThreshold was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / DPC Scheduling",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 40,
+      "record_id": "system.kernel-cache-aware-scheduling",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for CacheAwareScheduling was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / Scheduler Topology",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 41,
+      "record_id": "system.kernel-default-dynamic-hetero-cpu-policy",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.",
+        "The current app mapping only partially aligns with official adjacent heterogeneous scheduling policy docs."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | Kernel / Heterogeneous Scheduling",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 42,
+      "record_id": "system.kernel-disable-low-qos-timer-resolution",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for DisableLowQosTimerResolution was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / Timer Resolution Behavior",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 43,
+      "record_id": "system.kernel-dpc-queue-depth",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for DpcQueueDepth was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / DPC Scheduling",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 44,
+      "record_id": "system.kernel-ideal-dpc-rate",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for IdealDpcRate was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / DPC Scheduling",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 45,
+      "record_id": "system.kernel-minimum-dpc-rate",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for MinimumDpcRate was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / DPC Scheduling",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 46,
+      "record_id": "network.smb-encrypt-data",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Registry Security Baseline",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/network.smb-encrypt-data.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 47,
+      "record_id": "performance.disable-taskbar-animations",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations was captured in this pass."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Explorer Taskbar Animation Flags",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 48,
+      "record_id": "system.disable-service-splitting",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.",
+        "The current app override still relies on repo provenance for the raw threshold value."
+      ],
+      "depends_on": [],
+      "current_state": "partially-matches | svchost Process Model",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.disable-service-splitting.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 49,
+      "record_id": "system.services.disable-print-device-configuration",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-print-device-configuration.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 50,
+      "record_id": "system.services.disable-print-scan-broker",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-print-scan-broker.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 51,
+      "record_id": "system.services.disable-print-workflow-user-service",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Official Microsoft service guidance marks PrintWorkflowUserSvc as No guidance rather than OK to disable."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 52,
+      "record_id": "system.services.disable-sysmain",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Official Microsoft guidance conflicts with the current disable recommendation."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-sysmain.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 53,
+      "record_id": "system.services.disable-wap-push-routing",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Official Microsoft service guidance marks dmwappushservice as No guidance rather than OK to disable."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 54,
+      "record_id": "system.services.disable-windows-error-reporting",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Official Microsoft guidance conflicts with the current disable recommendation."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Service Start Mode",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 55,
+      "record_id": "audio.disable-beep",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Driver Start Mode",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/audio.disable-beep.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 56,
+      "record_id": "audio.disable-spatial-audio",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Audio Engine Flags",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/audio.disable-spatial-audio.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 57,
+      "record_id": "audio.show-disconnected-devices",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices was captured in this pass."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/audio.show-disconnected-devices.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 58,
+      "record_id": "audio.show-hidden-devices",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices was captured in this pass."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/audio.show-hidden-devices.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 59,
+      "record_id": "developer.vscode-git-autofetch",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "VS Code'un git.autofetch ayar\u0131 do\u011fruland\u0131 ancak uygulaman\u0131n yazd\u0131\u011f\u0131 Explorer\\Advanced\\DisableGitAutofetch registry path'i i\u00e7in birincil Microsoft kayna\u011f\u0131 bulunamad\u0131.",
+        "The app writes an Explorer registry value instead of the documented git.autofetch setting."
+      ],
+      "depends_on": [],
+      "current_state": "mismatch-suspected | VS Code Setting vs Registry Observation",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/developer.vscode-git-autofetch.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 60,
+      "record_id": "system.kernel-dpc-watchdog-period",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / DPC Watchdog",
+      "notes": "Evidence first. Prioritize: ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 61,
+      "record_id": "system.kernel-serialize-timer-expiration",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "No primary Microsoft source for SerializeTimerExpiration was captured in this research pass.",
+        "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Kernel / Timer Scheduling",
+      "notes": "Evidence first. Prioritize: ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 62,
+      "record_id": "system.memory-disable-paging-executive",
+      "category": "docs-first",
+      "estimated_effort": "large",
+      "blocking_issues": [
+        "Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change.",
+        "The key exists and is writable, but it should not be exposed as an effective Windows 11 tweak."
+      ],
+      "depends_on": [],
+      "current_state": "matches-research | Memory Management",
+      "notes": "Evidence first. Prioritize: ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "Docs/tweaks/research/records/system.memory-disable-paging-executive.json"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-application-compatibility.policy",
+  "tweak_id": "privacy.disable-application-compatibility.policy",
+  "record_status": "deprecated",
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "summary": "This record previously documented the full seven-value AppCompat policy bundle written by the app. It was split on 2026-03-13 into three focused child records and now exists only as an audit trail: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.",
+  "setting": {
+    "name": "Application Compatibility Policy Bundle (Deprecated Split Reference)",
+    "category": "Privacy",
+    "area": "Application Compatibility",
+    "scope": "device",
+    "casual_explanation": "This parent record is deprecated. Use the child records for current research.",
+    "why_people_change_it": "This record is no longer used for research decisions because the original mixed bundle has been split by policy family.",
+    "tradeoffs_overview": "Keeping a deprecated parent preserves the audit trail and old record identity without forcing future research to reason about a mixed-policy bundle.",
+    "professional_notes": "The original split happened before the provider fix. Today the app still writes the seven-value bundle in one code path, but the PCA value has been corrected from DisablePcaUI to DisablePCA. Child records: privacy.disable-appcompat-engine.policy (DisableEngine + SbEnable), privacy.disable-appdeviceinventory.policy (DisableAPISamping + DisableApplicationFootprint + DisableInstallTracing + DisableWin32AppBackup), privacy.disable-program-compatibility-assistant (DisablePCA).",
+    "targets": [
+      {
+        "target_id": "deprecated-split-reference",
+        "location_kind": "feature",
+        "path": "Application compatibility research split audit trail",
+        "value_name": "DeprecatedState",
+        "value_type": "STATE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "deprecated",
+            "label": "Deprecated split record",
+            "meaning": "This record exists only as an audit trail. Use the three child records for current research and publication decisions.",
+            "evidence_ids": [
+              "split-audit"
+            ]
+          }
+        ],
+        "notes": "Synthetic audit-only target added to satisfy schema requirements while preserving this record ID as a deprecated reference."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "App implementation unchanged. See child records for current implementation details and evidence mapping.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Deprecated audit trail",
+      "applies_to": "Research metadata only",
+      "states": [
+        {
+          "target_id": "deprecated-split-reference",
+          "state_kind": "value",
+          "value": "deprecated",
+          "rationale": "This record remains only to preserve the split history and the original record identity."
+        }
+      ],
+      "notes": "No OS behavior is modeled here anymore; this baseline exists only to keep the deprecated parent schema-valid.",
+      "evidence_ids": [
+        "split-audit"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "use-child-records",
+      "label": "Use child records",
+      "intended_for": [
+        "Researchers reviewing the former mixed bundle"
+      ],
+      "avoid_for": [
+        "Anyone looking for a current publishable policy record"
+      ],
+      "states": [
+        {
+          "target_id": "deprecated-split-reference",
+          "state_kind": "value",
+          "value": "deprecated",
+          "rationale": "This profile points reviewers to the child records instead of the retired mixed bundle."
+        }
+      ],
+      "good_when": "You need an audit trail from the old record ID to the new focused records.",
+      "bad_when": "You are trying to make apply or publication decisions from this deprecated parent record.",
+      "tradeoffs": [
+        "Preserves history and linkage for the old record ID.",
+        "Prevents future research from treating the mixed bundle as a current source of truth."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "split-audit"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "split-audit",
+      "kind": "repo-doc",
+      "title": "Split audit trail",
+      "location": "Docs/tweaks/research/records/",
+      "summary": "The original mixed application-compatibility policy record was retired on 2026-03-13 and replaced with three focused child records: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.",
+      "supports": [
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "Deprecated after the mixed bundle was split into focused child records. This parent record remains only as an audit trail and should not drive research, validation, or publication decisions.",
+    "blocking_issues": []
+  },
+  "open_questions": []
+}

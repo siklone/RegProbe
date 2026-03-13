@@ -1,0 +1,1196 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-03-13T12:43:49Z",
+  "backlog_type": "implementation-mismatch",
+  "priority_order": [
+    "rename",
+    "implementation-mismatch",
+    "split-needed",
+    "docs-first"
+  ],
+  "entry_count": 36,
+  "entries": [
+    {
+      "record_id": "developer.python-path-fix",
+      "current_state": "mismatch-suspected | Python / Windows Path Handling",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::Win95TruncatedExtensions=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem::LongPathsEnabled (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Python / Windows Path Handling",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/developer.python-path-fix.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "Win95TruncatedExtensions",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+          "value_name": "LongPathsEnabled",
+          "value_type": "REG_DWORD",
+          "example_value": 1
+        }
+      ]
+    },
+    {
+      "record_id": "developer.wsl2-memory",
+      "current_state": "mismatch-suspected | WSL Configuration vs Registry Observation",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss::DefaultVersion=2 to the researched surface %UserProfile%\\.wslconfig::[wsl2].memory. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "WSL Configuration vs Registry Observation",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/developer.wsl2-memory.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss",
+          "value_name": "DefaultVersion",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 2
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "file",
+          "path": "%UserProfile%\\.wslconfig",
+          "value_name": "[wsl2].memory",
+          "value_type": "WSL setting",
+          "example_value": null
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.disable-low-disk-space-warning",
+      "current_state": "partially-matches | Documented Registry Path vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks=1 to the researched surface HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer::NoLowDiskSpaceChecks (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Documented Registry Path vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "NoLowDiskSpaceChecks",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+          "value_name": "NoLowDiskSpaceChecks",
+          "value_type": "REG_DWORD",
+          "example_value": 1
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.disable-taskbar-chat",
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarMn=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat::ChatIcon (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-chat.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "TaskbarMn",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+          "value_name": "ChatIcon",
+          "value_type": "REG_DWORD",
+          "example_value": 1
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.disable-taskbar-widgets",
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarDa=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh::AllowNewsAndInterests (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "TaskbarDa",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+          "value_name": "AllowNewsAndInterests",
+          "value_type": "REG_DWORD",
+          "example_value": 1
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.show-file-extensions",
+      "current_state": "mismatch-suspected | Explorer Advanced Flags",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::HideFileExt (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Explorer Advanced Flags",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "HideFileExt",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "HideFileExt",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.show-hidden-files",
+      "current_state": "partially-matches | Explorer Advanced Flags",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden=1 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::Hidden (example 1). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Explorer Advanced Flags",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "Hidden",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "Hidden",
+          "value_type": "REG_DWORD",
+          "example_value": 1
+        }
+      ]
+    },
+    {
+      "record_id": "explorer.taskbar-alignment-left",
+      "current_state": "mismatch-suspected | Windows 11 Settings Reference vs Observed Explorer Value",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced::TaskbarAl=0 to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl::SystemSettings_DesktopTaskbar_Al (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Windows 11 Settings Reference vs Observed Explorer Value",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "TaskbarAl",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl",
+          "value_name": "SystemSettings_DesktopTaskbar_Al",
+          "value_type": "REG_SZ",
+          "example_value": "0"
+        }
+      ]
+    },
+    {
+      "record_id": "network.disable-active-probing",
+      "current_state": "partially-matches | Policy plus observed runtime writes",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe=1; HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity::DisallowNetworkConnectivityActiveTests=1; HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet::EnableUserActiveProbing=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator::NoActiveProbe (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy plus observed runtime writes",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.disable-active-probing.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+          "value_name": "NoActiveProbe",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity",
+          "value_name": "DisallowNetworkConnectivityActiveTests",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NlaSvc\\Parameters\\Internet",
+          "value_name": "EnableUserActiveProbing",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "group-policy",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+          "value_name": "NoActiveProbe",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "network.disable-lltd",
+      "current_state": "mismatch-suspected | Observed policy misuse",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableLLTDIO=0; HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableRspndr=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableLLTDIO (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD::EnableRspndr (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Observed policy misuse",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+          "value_name": "EnableLLTDIO",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+          "value_name": "EnableRspndr",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "group-policy",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+          "value_name": "EnableLLTDIO",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        },
+        {
+          "location_kind": "group-policy",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+          "value_name": "EnableRspndr",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "network.disable-mdns",
+      "current_state": "mismatch-suspected | Group Policy versus observed implementation",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Group Policy versus observed implementation",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+          "value_name": "EnableMDNS",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "group-policy",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+          "value_name": "EnableMDNS",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "network.disable-netbios",
+      "current_state": "mismatch-suspected | Per-interface Registry Configuration",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters::NoNameReleaseOnDemand=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*::NetbiosOptions (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Per-interface Registry Configuration",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/network.disable-netbios.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters",
+          "value_name": "NoNameReleaseOnDemand",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*",
+          "value_name": "NetbiosOptions",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-disable-leasing",
+      "current_state": "partially-matches | API vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::DisableLeasing=1 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableLeasing (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "API vs Observed Service Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.smb-disable-leasing.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "value_name": "DisableLeasing",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "wmi",
+          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+          "value_name": "EnableLeasing",
+          "value_type": "BOOLEAN",
+          "example_value": false
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-enable-multichannel",
+      "current_state": "partially-matches | API vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DisableMultiChannel=0 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration::EnableMultiChannel (example false); Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableMultiChannel (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "API vs Observed Service Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.smb-enable-multichannel.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "DisableMultiChannel",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "wmi",
+          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration",
+          "value_name": "EnableMultiChannel",
+          "value_type": "BOOLEAN",
+          "example_value": false
+        },
+        {
+          "location_kind": "wmi",
+          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+          "value_name": "EnableMultiChannel",
+          "value_type": "BOOLEAN",
+          "example_value": false
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-enable-quic",
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::EnableSMBQUIC=1; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::EnableSMBQUIC=1 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::EnableSMBQUIC (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::EnableSMBQUIC (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed Service Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.smb-enable-quic.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "EnableSMBQUIC",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "value_name": "EnableSMBQUIC",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+          "value_name": "EnableSMBQUIC",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+          "value_name": "EnableSMBQUIC",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-increase-client-metadata-cache",
+      "current_state": "mismatch-suspected | Registry Optimization Bundle",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax=4096; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds=32768 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax (example 16); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax (example 64); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax (example 128); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds (example 15). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Optimization Bundle",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "DirectoryCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 4096
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "FileInfoCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 32768
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "FileNotFoundCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 32768
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "MaxCmds",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 32768
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "DirectoryCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "example_value": 16
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "FileInfoCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "example_value": 64
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "FileNotFoundCacheEntriesMax",
+          "value_type": "REG_DWORD",
+          "example_value": 128
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "MaxCmds",
+          "value_type": "REG_DWORD",
+          "example_value": 15
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-require-dialect-3_1_1",
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxSmb2Dialect=65536; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MaxSmb2Dialect=65536 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MaxSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MaxSmb2Dialect (example 514). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed Service Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "MinSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 785
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "MaxSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 65536
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "value_name": "MinSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 785
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "value_name": "MaxSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 65536
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+          "value_name": "MinSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "example_value": 514
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+          "value_name": "MaxSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "example_value": 514
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+          "value_name": "MinSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "example_value": 514
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+          "value_name": "MaxSmb2Dialect",
+          "value_type": "REG_DWORD",
+          "example_value": 514
+        }
+      ]
+    },
+    {
+      "record_id": "network.smb-set-cipher-suite-order",
+      "current_state": "partially-matches | Policy vs Observed Service Setting",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::CipherSuiteOrder=AES_256_GCM|AES_256_CCM; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::CipherSuiteOrder=AES_256_GCM|AES_256_CCM to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::CipherSuiteOrder (example custom-supported-order); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::CipherSuiteOrder (example custom-supported-order). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed Service Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+          "value_name": "CipherSuiteOrder",
+          "value_type": "REG_MULTI_SZ",
+          "state_kind": "value",
+          "value": "AES_256_GCM|AES_256_CCM"
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+          "value_name": "CipherSuiteOrder",
+          "value_type": "REG_MULTI_SZ",
+          "state_kind": "value",
+          "value": "AES_256_GCM|AES_256_CCM"
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+          "value_name": "CipherSuiteOrder",
+          "value_type": "REG_MULTI_SZ",
+          "example_value": "custom-supported-order"
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+          "value_name": "CipherSuiteOrder",
+          "value_type": "REG_MULTI_SZ",
+          "example_value": "custom-supported-order"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.disable-autoplay",
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers::DisableAutoplay=1 to the researched surface TurnOffAutoPlay::TurnOffAutoPlay (example 0); HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer::NoAutoplayfornonVolume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/peripheral.disable-autoplay.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers",
+          "value_name": "DisableAutoplay",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "policy-csp",
+          "path": "TurnOffAutoPlay",
+          "value_name": "TurnOffAutoPlay",
+          "value_type": "policy",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+          "value_name": "NoAutoplayfornonVolume",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "power.disable-fast-startup",
+      "current_state": "mismatch-suspected | Registry Configuration",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::HiberbootEnabled=0 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power::HiberbootEnabled. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Configuration",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "HiberbootEnabled",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "value_name": "HiberbootEnabled",
+          "value_type": "REG_DWORD",
+          "example_value": null
+        }
+      ]
+    },
+    {
+      "record_id": "power.optimize-cpu-boost",
+      "current_state": "mismatch-suspected | Processor Boost Behavior",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization=PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Processor Boost Behavior",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/power.optimize-cpu-boost.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization",
+          "value_type": "REG_DWORD bundle",
+          "state_kind": "value",
+          "value": "PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1"
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization",
+          "value_type": "REG_DWORD bundle",
+          "example_value": null
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-advertising-id",
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo::Enabled=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo::DisabledByGroupPolicy (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-advertising-id.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+          "value_name": "Enabled",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+          "value_name": "DisabledByGroupPolicy",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-location-consent",
+      "current_state": "partially-matches | Observed Runtime Consent",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value=Deny to the researched surface HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location::Value (example Allow). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Observed Runtime Consent",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-location-consent.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+          "value_name": "Value",
+          "value_type": "REG_SZ",
+          "state_kind": "value",
+          "value": "Deny"
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+          "value_name": "Value",
+          "value_type": "REG_SZ",
+          "example_value": "Allow"
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-reserved-storage",
+      "current_state": "mismatch-suspected | Feature Command vs Observed Registry Value",
+      "notes": "Move the implementation from HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager::DisableDeletes=1 to the researched surface DISM.exe /Online /Set-ReservedStorageState::State (example Enabled). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Feature Command vs Observed Registry Value",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager",
+          "value_name": "DisableDeletes",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "command",
+          "path": "DISM.exe /Online /Set-ReservedStorageState",
+          "value_name": "State",
+          "value_type": "enum",
+          "example_value": "Enabled"
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-resume",
+      "current_state": "mismatch-suspected | Policy CSP vs Observed Registry Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed=0 to the researched surface ./User/Vendor/MSFT/Policy/Config/Connectivity::DisableCrossDeviceResume (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy CSP vs Observed Registry Setting",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+          "value_name": "IsResumeAllowed",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "policy-csp",
+          "path": "./User/Vendor/MSFT/Policy/Config/Connectivity",
+          "value_name": "DisableCrossDeviceResume",
+          "value_type": "int",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "privacy.disable-rsop-logging",
+      "current_state": "partially-matches | Mixed Registry Configuration",
+      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging=0; HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon::RsopLogging=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\System::RSoPLogging (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Mixed Registry Configuration",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/privacy.disable-rsop-logging.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+          "value_name": "RSoPLogging",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+          "value_name": "RsopLogging",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+          "value_name": "RSoPLogging",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-p2p-updates",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization::DODownloadMode=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization::DODownloadMode (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Policy",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/security.disable-p2p-updates.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization",
+          "value_name": "DODownloadMode",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+          "value_name": "DODownloadMode",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-system-mitigations",
+      "current_state": "mismatch-suspected | Exploit Protection",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationOptions=00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00; HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationAuditOptions=02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection::ExploitProtectionSettings (example <path-or-url-to-config.xml>). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Exploit Protection",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/security.disable-system-mitigations.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel",
+          "value_name": "MitigationOptions",
+          "value_type": "REG_BINARY",
+          "state_kind": "value",
+          "value": "00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00"
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel",
+          "value_name": "MitigationAuditOptions",
+          "value_type": "REG_BINARY",
+          "state_kind": "value",
+          "value": "02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00"
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "group-policy",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection",
+          "value_name": "ExploitProtectionSettings",
+          "value_type": "REG_SZ",
+          "example_value": "<path-or-url-to-config.xml>"
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-system-restore",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore::RPSessionInterval=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableSR (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore::DisableConfig (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Policy",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/security.disable-system-restore.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore",
+          "value_name": "RPSessionInterval",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+          "value_name": "DisableSR",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+          "value_name": "DisableConfig",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-windows-firewall",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile::EnableFirewall=0; HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile::EnableFirewall=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile::EnableFirewall (example 0); HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile::EnableFirewall (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Policy",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/security.disable-windows-firewall.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+          "value_name": "EnableFirewall",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+          "value_name": "EnableFirewall",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+          "value_name": "EnableFirewall",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+          "value_name": "EnableFirewall",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-wpbt",
+      "current_state": "partially-matches | UEFI",
+      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager::DisableWpbtExecution=1 to the researched surface UEFI CSP / DFCI / Windows Platform Binary Table (WPBT)::WPBT (example Enabled). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "UEFI",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/security.disable-wpbt.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
+          "value_name": "DisableWpbtExecution",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "policy-csp",
+          "path": "UEFI CSP / DFCI / Windows Platform Binary Table (WPBT)",
+          "value_name": "WPBT",
+          "value_type": "UEFI setting",
+          "example_value": "Enabled"
+        }
+      ]
+    },
+    {
+      "record_id": "security.powershell-unrestricted",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell::ExecutionPolicy=Unrestricted to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::EnableScripts (example 0); HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell::ExecutionPolicy (example AllSigned). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Policy",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/security.powershell-unrestricted.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell",
+          "value_name": "ExecutionPolicy",
+          "value_type": "REG_SZ",
+          "state_kind": "value",
+          "value": "Unrestricted"
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+          "value_name": "EnableScripts",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        },
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell",
+          "value_name": "ExecutionPolicy",
+          "value_type": "REG_SZ",
+          "example_value": "AllSigned"
+        }
+      ]
+    },
+    {
+      "record_id": "system.disable-game-dvr",
+      "current_state": "partially-matches | Policy vs Observed User Preference",
+      "notes": "Move the implementation from HKCU\\System\\GameConfigStore::GameDVR_Enabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR::AllowGameDVR (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Preference",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/system.disable-game-dvr.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\System\\GameConfigStore",
+          "value_name": "GameDVR_Enabled",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+          "value_name": "AllowGameDVR",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "system.disable-search-highlights",
+      "current_state": "partially-matches | Policy vs Observed User Setting",
+      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings::IsDynamicSearchBoxEnabled=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::EnableDynamicContentInWSB (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Policy vs Observed User Setting",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/system.disable-search-highlights.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+          "value_name": "IsDynamicSearchBoxEnabled",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "EnableDynamicContentInWSB",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "system.disable-search-web-results",
+      "current_state": "mismatch-suspected | Registry Policy",
+      "notes": "Move the implementation from HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::DoNotUseWebResults=1 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search::ConnectedSearchUseWeb (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Policy",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/system.disable-search-web-results.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "DoNotUseWebResults",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 1
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+          "value_name": "ConnectedSearchUseWeb",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    },
+    {
+      "record_id": "system.memory-registry-quota-default",
+      "current_state": "mismatch-suspected | Registry Storage Space",
+      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management::RegistryQuota=2097152 to the researched surface HKLM\\System\\CurrentControlSet\\Control::RegistrySizeLimit (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
+      "technical_area": "Registry Storage Space",
+      "implementation_status": "mismatch-suspected",
+      "source_file": "Docs/tweaks/research/records/system.memory-registry-quota-default.review.json",
+      "current_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+          "value_name": "RegistryQuota",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 2097152
+        }
+      ],
+      "expected_surfaces": [
+        {
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Control",
+          "value_name": "RegistrySizeLimit",
+          "value_type": "REG_DWORD",
+          "example_value": 0
+        }
+      ]
+    }
+  ]
+}
