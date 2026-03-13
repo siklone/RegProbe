@@ -1,0 +1,247 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "explorer.disable-taskbar-chat",
+  "tweak_id": "explorer.disable-taskbar-chat",
+  "record_status": "validated",
+  "summary": "Microsoft documents the Chat icon through the device policy ConfigureChatIcon under HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat. The app implementation was aligned to that official policy surface on 2026-03-13 and now uses ChatIcon=2, the documented Hide state that removes the Chat icon from the taskbar by default while still allowing users to show or hide it in Settings.",
+  "setting": {
+    "name": "Taskbar Chat Icon",
+    "category": "Explorer",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows 11 can show a Chat icon on the taskbar. People often hide it when they do not use Chat or want a cleaner taskbar.",
+    "why_people_change_it": "People hide the Chat icon to reduce taskbar clutter and remove a feature they do not use.",
+    "tradeoffs_overview": "Hiding the Chat icon makes the taskbar cleaner, but it also removes a quick entry point to Chat. Using the Hide state is less invasive than the Disabled state because users can still show or hide the icon in Settings.",
+    "professional_notes": "Microsoft documents ConfigureChatIcon in the Experience Policy CSP and Taskbar.admx. The official control is a device policy with states Not configured, Show, Hide, and Disabled. The app previously wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarMn = 0, but that implementation mismatch was corrected on 2026-03-13 to use the documented machine-policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2 (Hide). The app intentionally uses Hide rather than Disabled so the icon is hidden by default without locking users out of changing it in Settings.",
+    "targets": [
+      {
+        "target_id": "configure-chat-icon-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+        "value_name": "ChatIcon",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The Chat icon follows the defaults for the Windows edition.",
+            "evidence_ids": [
+              "ms-experience-configure-chat-icon",
+              "local-taskbar-adml-chat"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Show",
+            "meaning": "The Chat icon is shown on the taskbar by default, and users can still show or hide it in Settings.",
+            "evidence_ids": [
+              "ms-experience-configure-chat-icon",
+              "local-taskbar-admx-chat",
+              "local-taskbar-adml-chat"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Hide",
+            "meaning": "The Chat icon is hidden by default, and users can still show or hide it in Settings. This is the state the app now applies.",
+            "evidence_ids": [
+              "ms-experience-configure-chat-icon",
+              "local-taskbar-admx-chat",
+              "local-taskbar-adml-chat",
+              "app-visibility-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Disabled",
+            "meaning": "The Chat icon is not displayed and users cannot show or hide it in Settings.",
+            "evidence_ids": [
+              "ms-experience-configure-chat-icon",
+              "local-taskbar-admx-chat",
+              "local-taskbar-adml-chat"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). The app intentionally uses Hide (2) rather than Disabled (3) to match the lighter-weight current behavior of removing the icon without hard-locking the Settings toggle."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13.",
+    "writes": [
+      {
+        "target_id": "configure-chat-icon-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+        "value_name": "ChatIcon",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 2
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows Chat policy default",
+      "applies_to": "Windows 11 systems supporting ConfigureChatIcon policy",
+      "states": [
+        {
+          "target_id": "configure-chat-icon-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official device policy unset."
+        }
+      ],
+      "notes": "Microsoft documents the policy default as not configured.",
+      "evidence_ids": [
+        "ms-experience-configure-chat-icon",
+        "local-taskbar-adml-chat"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want the edition default for Chat"
+      ],
+      "avoid_for": [
+        "Users who want the Chat icon hidden by policy"
+      ],
+      "states": [
+        {
+          "target_id": "configure-chat-icon-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want Chat to follow the Windows edition default.",
+      "bad_when": "You want an explicit hide policy for the icon.",
+      "tradeoffs": [
+        "Windows keeps its default Chat icon behavior."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-configure-chat-icon"
+      ]
+    },
+    {
+      "profile_id": "hide-chat-icon",
+      "label": "Hide Chat icon",
+      "intended_for": [
+        "Users who want a cleaner taskbar without removing Settings control"
+      ],
+      "avoid_for": [
+        "People who want Chat shown by default",
+        "Admins who want the stronger Disabled state instead of Hide"
+      ],
+      "states": [
+        {
+          "target_id": "configure-chat-icon-policy",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the documented Hide state in ConfigureChatIcon."
+        }
+      ],
+      "good_when": "You want the Chat icon hidden by default but still want users to be able to change it in Settings.",
+      "bad_when": "You want a hard-disable policy that prevents users from changing the icon visibility.",
+      "tradeoffs": [
+        "The Chat icon is hidden by default.",
+        "Users can still show or hide it in Settings because this uses Hide, not Disabled."
+      ],
+      "apply_allowed": true,
+      "notes": "apply_allowed=true. The proof chain is explicit: Microsoft documents ConfigureChatIcon and local Taskbar.admx defines value 2 as Hide. The app now writes the same machine-policy path and value.",
+      "evidence_ids": [
+        "ms-experience-configure-chat-icon",
+        "local-taskbar-admx-chat",
+        "local-taskbar-adml-chat",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-configure-chat-icon",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: Experience / ConfigureChatIcon",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon",
+      "summary": "Official Microsoft documentation for the Chat icon policy and its allowed values 0 through 3.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-taskbar-admx-chat",
+      "kind": "official-doc",
+      "title": "Local Microsoft Taskbar.admx ConfigureChatIcon mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\Taskbar.admx",
+      "summary": "The local ADMX file maps ConfigureChatIcon to Software\\Policies\\Microsoft\\Windows\\Windows Chat and defines enum values 1 Show, 2 Hide, and 3 Disabled.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-taskbar-adml-chat",
+      "kind": "official-doc",
+      "title": "Local Microsoft Taskbar.adml ConfigureChatIcon help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\Taskbar.adml",
+      "summary": "The local ADML help text explains the Show, Hide, and Disabled Chat icon policy states and the user experience for each.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact ConfigureChatIcon device-policy surface, enum values, and Hide behavior. The app now writes the same machine-policy path and uses the documented Hide value 2, so the implementation matches the researched control surface. recommended_for_general_users remains false because the practical benefit is mostly cosmetic and Windows defaults may already suit most users.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\Taskbar.admx",
+    "exact_quote_or_path": "<policy name=\"ConfigureChatIcon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Windows Chat\"> ... <enum id=\"ConfigureChatIcon_Action\" valueName=\"ChatIcon\" ...> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact device-policy key and ChatIcon enum surface; local ADML confirms the Hide behavior. The app now writes the documented machine-policy path with value 2."
+  }
+}

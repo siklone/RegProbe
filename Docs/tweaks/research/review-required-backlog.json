@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T13:30:04Z",
+  "generated_utc": "2026-03-13T13:36:10Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 127,
+  "source_record_count": 126,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 35,
+    "implementation-mismatch": 34,
     "rename": 4,
     "split-needed": 25,
     "docs-first": 63
   },
   "counts_by_method": {
-    "heuristic": 37,
+    "heuristic": 36,
     "manual-override": 75,
     "proof-gate": 15
   },
@@ -1394,32 +1394,6 @@
         "exact_quote_or_path": "The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; .wslconfig section label: [wsl2]; memory size 50% of total memory on Windows How much memory to assign to the WSL 2 VM.; Example: [wsl2] memory=4GB; No matching text found for DefaultVersion on the page.",
         "key_found_on_page": true,
         "notes": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The same official page does not document the app's HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss\\DefaultVersion registry value as a memory-limit surface."
-      }
-    },
-    {
-      "record_id": "explorer.disable-taskbar-chat",
-      "tweak_id": "explorer.disable-taskbar-chat",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official ConfigureChatIcon policy path documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Explorer",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/explorer.disable-taskbar-chat.json",
-      "summary": "Microsoft documents the Chat icon through the device policy ConfigureChatIcon under Software\\Policies\\Microsoft\\Windows\\Windows Chat, while the app writes the Explorer-side TaskbarMn value. This record keeps the official policy proof and leaves the app surface flagged as an implementation mismatch.",
-      "decision_why": "Local Microsoft Taskbar policy files document the exact ConfigureChatIcon device-policy surface, enum values, and behavior. The record remains blocked only because the app writes the unsourced Explorer TaskbarMn value instead of the documented policy path.",
-      "blocking_issues": [
-        "The current app does not use the official ConfigureChatIcon policy path documented in this record.",
-        "The Explorer TaskbarMn value still needs formal sourcing or validation before it can be published as an official equivalent."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\Taskbar.admx",
-        "exact_quote_or_path": "<policy name=\"ConfigureChatIcon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Windows Chat\"> ... <enum id=\"ConfigureChatIcon_Action\" valueName=\"ChatIcon\" ...> ... <decimal value=\"1\" /> ... <decimal value=\"2\" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact device-policy key and ChatIcon enum surface; local ADML confirms the Show/Hide/Disabled behavior. The record remains review-required because the app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarMn instead of the documented policy path."
       }
     },
     {

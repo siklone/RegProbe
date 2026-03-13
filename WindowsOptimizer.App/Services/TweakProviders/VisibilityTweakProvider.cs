@@ -84,15 +84,14 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
         yield return CreateRegistryTweak(
             context,
             "explorer.disable-taskbar-chat",
-            "Disable Taskbar Chat Icon",
-            "Removes the Microsoft Teams Chat icon from the taskbar.",
+            "Hide Taskbar Chat Icon",
+            "Hides the Microsoft Teams Chat icon from the taskbar by default.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
-            "TaskbarMn",
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\Windows Chat",
+            "ChatIcon",
             RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
+            2);
 
         yield return CreateRegistryTweak(
             context,
