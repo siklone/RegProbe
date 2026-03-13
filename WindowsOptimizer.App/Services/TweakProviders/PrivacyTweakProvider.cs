@@ -37,12 +37,11 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "Disable Advertising ID",
             "Prevents Windows from tracking you for advertising personalization.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo",
-            "Enabled",
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\AdvertisingInfo",
+            "DisabledByGroupPolicy",
             RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
+            1);
 
         yield return CreateRegistryValueSetTweak(
             context,
