@@ -1,0 +1,191 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "peripheral.disable-sticky-keys-prompt",
+  "tweak_id": "peripheral.disable-sticky-keys-prompt",
+  "record_status": "validated",
+  "summary": "Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags = \"510\", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = \"506\". The current app write of Flags = \"506\" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.",
+  "setting": {
+    "name": "Disable Sticky Keys Prompt",
+    "category": "Peripheral",
+    "area": "Accessibility Sticky Keys Flags",
+    "scope": "user",
+    "casual_explanation": "Sticky Keys can show a prompt when Shift is pressed repeatedly. Some users turn that off to avoid accidental popups while gaming or typing quickly.",
+    "why_people_change_it": "People disable the prompt when they hit Shift repeatedly during games, shortcuts, or rapid typing and do not want Sticky Keys prompts appearing unexpectedly.",
+    "tradeoffs_overview": "Turning the prompt off can reduce interruptions, but it also makes the Sticky Keys shortcut less discoverable for users who actually need the accessibility feature. This record is validated through the official Sticky Keys API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for the Flags path.",
+    "professional_notes": "Microsoft documents Sticky Keys through SystemParametersInfo(SPI_GETSTICKYKEYS / SPI_SETSTICKYKEYS) and the STICKYKEYS.dwFlags bitfield, including SKF_HOTKEYACTIVE and SKF_CONFIRMHOTKEY. On 2026-03-14, a local runtime diff showed SPI_SETSTICKYKEYS 510 persisting Flags = \"510\" and SPI_SETSTICKYKEYS 506 persisting Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys, with the original local state restored afterward. The difference between 510 and 506 is the SKF_HOTKEYACTIVE bit, so the app's Flags = \"506\" write maps to the same documented Sticky Keys feature surface while leaving the hotkey inactive.",
+    "targets": [
+      {
+        "target_id": "stickykeys-flags-registry",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+        "value_name": "Flags",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "506",
+            "label": "Sticky Keys prompt-disabled profile",
+            "meaning": "A local SPI_SETSTICKYKEYS runtime diff confirmed that Flags = \"506\" is the persisted backend when the documented Sticky Keys flag set does not include SKF_HOTKEYACTIVE. This suppresses the Shift hotkey path that would otherwise trigger the prompt.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-stickykeys",
+              "ms-stickykeys-struct",
+              "runtime-spi-stickykeys-diff",
+              "app-peripheral-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "510",
+            "label": "Sticky Keys hotkey-active profile",
+            "meaning": "A local SPI_SETSTICKYKEYS runtime diff confirmed that Flags = \"510\" is the persisted backend when the documented Sticky Keys flag set includes SKF_HOTKEYACTIVE.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-stickykeys",
+              "ms-stickykeys-struct",
+              "runtime-spi-stickykeys-diff"
+            ]
+          }
+        ],
+        "notes": "Validated as an API-backed runtime registry mapping. No Microsoft page captured in this pass publishes the StickyKeys Flags registry path directly as the supported contract."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+    "notes": "The app writes Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys. A local runtime diff confirmed that this matches the persisted API-backed profile that leaves SKF_HOTKEYACTIVE cleared on this build.",
+    "writes": [
+      {
+        "target_id": "stickykeys-flags-registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+        "value_name": "Flags",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "506"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed local baseline",
+      "applies_to": "Windows user profiles where StickyKeys Flags is present",
+      "states": [
+        {
+          "target_id": "stickykeys-flags-registry",
+          "state_kind": "value",
+          "value": "510",
+          "rationale": "510 is the documented hotkey-active comparison state captured in the runtime diff."
+        }
+      ],
+      "notes": "This record validates the persisted 506 and 510 states. It does not claim that all Windows installs default to 510 or that an absent-value default was captured in this pass.",
+      "evidence_ids": [
+        "runtime-spi-stickykeys-diff"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "disable-sticky-keys-prompt",
+      "label": "Disable Sticky Keys prompt",
+      "intended_for": [
+        "Users who trigger Sticky Keys prompts accidentally",
+        "Gamers and fast typists who do not want repeated-Shift interruptions"
+      ],
+      "avoid_for": [
+        "Users who rely on the Sticky Keys shortcut to discover or enable the accessibility feature"
+      ],
+      "states": [
+        {
+          "target_id": "stickykeys-flags-registry",
+          "state_kind": "value",
+          "value": "506",
+          "rationale": "Set the observed persisted registry backend to the profile with SKF_HOTKEYACTIVE cleared."
+        }
+      ],
+      "good_when": "You want to prevent accidental Sticky Keys prompts from repeated Shift presses.",
+      "bad_when": "You want the Sticky Keys hotkey path to stay available.",
+      "tradeoffs": [
+        "Repeated Shift presses no longer follow the hotkey-active path that triggers the prompt.",
+        "The accessibility shortcut becomes less discoverable."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-systemparametersinfo-stickykeys",
+        "ms-stickykeys-struct",
+        "runtime-spi-stickykeys-diff",
+        "app-peripheral-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-systemparametersinfo-stickykeys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: SystemParametersInfo - Sticky Keys actions",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa",
+      "summary": "Microsoft documents SPI_GETSTICKYKEYS and SPI_SETSTICKYKEYS as the public Win32 surface for reading and changing Sticky Keys settings.",
+      "supports": [
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-stickykeys-struct",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: STICKYKEYS structure",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys",
+      "summary": "Microsoft documents the Sticky Keys flag bits including SKF_HOTKEYACTIVE, SKF_CONFIRMHOTKEY, and related option flags used to describe the feature state.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "runtime-spi-stickykeys-diff",
+      "kind": "runtime-diff",
+      "title": "Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence",
+      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+      "summary": "A local runtime diff called SPI_SETSTICKYKEYS with 510 and 506, then read both SPI_GETSTICKYKEYS and HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags after each change. Setting 510 produced API flags 510 with registry value \"510\". Setting 506 produced API flags 506 with registry value \"506\". The original local state was restored at the end.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-peripheral-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+      "summary": "The provider writes Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The Sticky Keys feature semantics are officially documented through the Win32 accessibility API, and a local runtime diff now proves that the app's Flags = \"506\" profile is the persisted backend for the documented Sticky Keys feature state on this build. The remaining limitation is documentation quality: the registry path was validated through API-backed runtime observation rather than a Microsoft-published registry contract.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+    "exact_quote_or_path": "after_hotkey_on: API flags 510, registry Flags = \"510\". after_hotkey_off: API flags 506, registry Flags = \"506\". restored: API flags 506, registry Flags = \"506\".",
+    "key_found_on_page": true,
+    "notes": "The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state."
+  }
+}

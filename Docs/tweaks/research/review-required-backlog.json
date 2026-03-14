@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T14:04:15Z",
+  "generated_utc": "2026-03-14T14:08:14Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 88,
+  "source_record_count": 87,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 55
+    "docs-first": 54
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 68,
+    "manual-override": 67,
     "proof-gate": 10
   },
   "entries": [
@@ -249,26 +249,6 @@
       "blocking_issues": [
         "The exact MSTakeNoAction handler mapping is not yet backed by an official Microsoft registry source in this dataset.",
         "The app writes user-choice handler paths rather than a documented policy surface."
-      ]
-    },
-    {
-      "record_id": "peripheral.disable-sticky-keys-prompt",
-      "tweak_id": "peripheral.disable-sticky-keys-prompt",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Peripheral",
-      "technical_area": "Accessibility Sticky Keys Flags vs Registry Observation",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json",
-      "summary": "Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. The current app writes HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags = \"506\" directly, but this research pass did not capture a primary Microsoft registry contract for that path, so the record stays in review.",
-      "decision_why": "The Sticky Keys feature semantics are officially documented, but this research pass did not capture a primary Microsoft registry contract for the Flags path used by the app.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags was captured in this pass.",
-        "The app uses a direct registry write instead of the public Sticky Keys feature surface captured here."
       ]
     },
     {
