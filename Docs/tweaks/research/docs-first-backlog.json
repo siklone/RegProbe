@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:43:48Z",
+  "generated_utc": "2026-03-14T04:56:54Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 64,
+  "entry_count": 63,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -387,26 +387,6 @@
           "track": "ADMX / Policy CSP mapping",
           "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
           "next_source": "Local Microsoft pca.admx - DisablePcaUIPolicy (C:\\Windows\\PolicyDefinitions\\pca.admx)"
-        }
-      ]
-    },
-    {
-      "record_id": "privacy.disable-switchback.policy",
-      "current_state": "matches-research | Application Compatibility",
-      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Application Compatibility",
-      "implementation_status": "matches-research",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "ADMX / Policy CSP mapping",
-          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
-          "next_source": "Local Microsoft AppCompat.admx mappings (C:\\Windows\\PolicyDefinitions\\AppCompat.admx)"
-        },
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
     },

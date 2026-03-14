@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T04:50:06Z",
+  "generated_utc": "2026-03-14T04:56:54Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 101,
+  "source_record_count": 100,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 6,
     "rename": 6,
     "split-needed": 25,
-    "docs-first": 64
+    "docs-first": 63
   },
   "counts_by_method": {
     "heuristic": 8,
     "manual-override": 77,
-    "proof-gate": 16
+    "proof-gate": 15
   },
   "entries": [
     {
@@ -490,23 +490,6 @@
       "source_file": "Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json",
       "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).",
       "decision_why": "Kanit zinciri tam: pca.admx explicit enabledValue/disabledValue + pca.adml exact behavior text + MS Learn CSP page. Numeric direction acik, context inference yok. Risk dusuk - detection kapatiliyor, PCA tamamen kapatilmiyor. recommended_for_general_users=false cunku fark minimal ve general user icin baglam gerektiriyor. Procmon opsiyonel - explicit ADMX zinciri bu tur kayitlar icin yeterli kabul ediliyor.",
-      "blocking_issues": []
-    },
-    {
-      "record_id": "privacy.disable-switchback.policy",
-      "tweak_id": "privacy.disable-switchback.policy",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "Proof chain is complete and no comparable BSOD or engine-wide compatibility risk is documented for SbEnable. AppCompat.admx provides explicit enabledValue=0, the Microsoft Learn CSP page confirms policy existence and scope, and Procmon confirmed the runtime write. recommended_for_general_users remains false because the practical benefit is small and most users do not need to manage this policy explicitly.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Application Compatibility",
-      "implementation_status": "matches-research",
-      "apply_allowed": true,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json",
-      "summary": "Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.",
-      "decision_why": "Proof chain is complete and no comparable BSOD or engine-wide compatibility risk is documented for SbEnable. AppCompat.admx provides explicit enabledValue=0, the Microsoft Learn CSP page confirms policy existence and scope, and Procmon confirmed the runtime write. recommended_for_general_users remains false because the practical benefit is small and most users do not need to manage this policy explicitly.",
       "blocking_issues": []
     },
     {

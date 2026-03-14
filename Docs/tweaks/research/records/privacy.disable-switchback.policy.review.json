@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "privacy.disable-switchback.policy",
   "tweak_id": "privacy.disable-switchback.policy",
-  "record_status": "review-required",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "summary": "Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.",
   "setting": {
     "name": "Disable SwitchBack Compatibility Policy",
@@ -232,7 +232,11 @@
     "why": "Proof chain is complete and no comparable BSOD or engine-wide compatibility risk is documented for SbEnable. AppCompat.admx provides explicit enabledValue=0, the Microsoft Learn CSP page confirms policy existence and scope, and Procmon confirmed the runtime write. recommended_for_general_users remains false because the practical benefit is small and most users do not need to manage this policy explicitly.",
     "blocking_issues": []
   },
-  "open_questions": [
-    "privacy.disable-appcompat-engine.policy still documents SbEnable as part of the current bundle. Keep that overlap as audit context, or eventually narrow the parent record to DisableEngine-only publication guidance?"
-  ]
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\AppCompat.admx",
+    "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you disable or do not configure this policy setting, the Switchback will be turned on.`",
+    "key_found_on_page": true,
+    "notes": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037."
+  }
 }
