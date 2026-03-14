@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T05:03:04Z",
+  "generated_utc": "2026-03-14T05:08:03Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 98,
+  "source_record_count": 97,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 6,
     "rename": 6,
     "split-needed": 25,
-    "docs-first": 61
+    "docs-first": 60
   },
   "counts_by_method": {
     "heuristic": 8,
     "manual-override": 77,
-    "proof-gate": 13
+    "proof-gate": 12
   },
   "entries": [
     {
@@ -421,23 +421,6 @@
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
       }
-    },
-    {
-      "record_id": "privacy.disable-appcompat-engine.policy",
-      "tweak_id": "privacy.disable-appcompat-engine.policy",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Application Compatibility",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json",
-      "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
-      "decision_why": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
-      "blocking_issues": []
     },
     {
       "record_id": "privacy.disable-f1-help",

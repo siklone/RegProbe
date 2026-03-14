@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "privacy.disable-appcompat-engine.policy",
   "tweak_id": "privacy.disable-appcompat-engine.policy",
-  "record_status": "review-required",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
   "setting": {
     "name": "Disable Application Compatibility Engine and SwitchBack",
@@ -236,5 +236,11 @@
     "why": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
     "blocking_issues": []
   },
-  "open_questions": []
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\AppCompat.admx",
+    "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">` with `<enabledValue><decimal value=\"0\" /></enabledValue>` and `<disabledValue><decimal value=\"1\" /></disabledValue>`; AppCompat.admx: `<policy name=\"AppCompatTurnOffEngine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableEngine\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.`",
+    "key_found_on_page": true,
+    "notes": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. Procmon then confirmed gpsvc writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037."
+  }
 }
