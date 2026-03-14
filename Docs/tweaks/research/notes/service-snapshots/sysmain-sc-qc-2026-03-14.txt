@@ -1,0 +1,17 @@
+Review host: Microsoft Windows 11 Pro 10.0.26200 (build 26200)
+Capture date: 2026-03-14
+Command: sc.exe qc SysMain
+
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: SysMain
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        START_TYPE         : 4   DISABLED
+        ERROR_CONTROL      : 0   IGNORE
+        BINARY_PATH_NAME   : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+        LOAD_ORDER_GROUP   : profsvc_group
+        TAG                : 0
+        DISPLAY_NAME       : SysMain
+        DEPENDENCIES       : rpcss
+                           : fileinfo
+        SERVICE_START_NAME : LocalSystem

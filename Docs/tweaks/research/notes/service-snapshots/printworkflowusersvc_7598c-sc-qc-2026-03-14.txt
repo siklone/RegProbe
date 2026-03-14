@@ -1,0 +1,16 @@
+Review host: Microsoft Windows 11 Pro 10.0.26200 (build 26200)
+Capture date: 2026-03-14
+Command: sc.exe qc PrintWorkflowUserSvc_7598c
+
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: PrintWorkflowUserSvc_7598c
+        TYPE               : e0  USER_SHARE_PROCESS INSTANCE
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\WINDOWS\system32\svchost.exe -k PrintWorkflow
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : PrintWorkflow_7598c
+        DEPENDENCIES       :
+        SERVICE_START_NAME :

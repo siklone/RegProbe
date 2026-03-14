@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T05:08:03Z",
+  "generated_utc": "2026-03-14T08:20:09Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -905,7 +905,7 @@
       "suggested_evidence_tracks": [
         {
           "track": "Service or scheduled-task baseline diff",
-          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
+          "why_not_validated": "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintDeviceConfigurationService in this review pass.",
           "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
         }
       ]
@@ -920,7 +920,7 @@
       "suggested_evidence_tracks": [
         {
           "track": "Service or scheduled-task baseline diff",
-          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
+          "why_not_validated": "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintScanBrokerService in this review pass.",
           "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
         }
       ]

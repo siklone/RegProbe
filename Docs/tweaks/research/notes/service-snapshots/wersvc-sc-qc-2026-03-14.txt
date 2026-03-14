@@ -1,0 +1,16 @@
+Review host: Microsoft Windows 11 Pro 10.0.26200 (build 26200)
+Capture date: 2026-03-14
+Command: sc.exe qc WerSvc
+
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: WerSvc
+        TYPE               : 10  WIN32_OWN_PROCESS
+        START_TYPE         : 4   DISABLED
+        ERROR_CONTROL      : 0   IGNORE
+        BINARY_PATH_NAME   : C:\WINDOWS\System32\svchost.exe -k WerSvcGroup
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : Windows Error Reporting Service
+        DEPENDENCIES       :
+        SERVICE_START_NAME : localSystem

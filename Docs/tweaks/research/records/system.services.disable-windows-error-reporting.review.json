@@ -1,0 +1,205 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-windows-error-reporting",
+  "tweak_id": "system.services.disable-windows-error-reporting",
+  "record_status": "review-required",
+  "summary": "The app uses the official Windows Error Reporting service control surface, but Microsoft's Windows IoT Enterprise service guidance explicitly marks the service as `Don't disable`. Because the current app disables it anyway, this record stays in review.",
+  "setting": {
+    "name": "Windows Error Reporting Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "Windows Error Reporting collects crash and failure details so Windows can report problems and sometimes suggest or surface fixes.",
+    "why_people_change_it": "People disable it when they want fewer background diagnostics or do not want Windows to send error reports.",
+    "tradeoffs_overview": "Turning it off reduces error-reporting activity, but Microsoft does not recommend disabling it and diagnostics or repair experiences may stop working correctly.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Windows Error Reporting Service `(WerSvc)` with a default start mode of `Manual` and marks it `Don't disable`. Microsoft describes it as allowing errors to be reported and allowing diagnostic and repair services to generate and surface results. A local SCM snapshot confirms the exact WerSvc identity on the review host: display name `Windows Error Reporting Service`, binary path `C:\\WINDOWS\\System32\\svchost.exe -k WerSvcGroup`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak.",
+    "targets": [
+      {
+        "target_id": "wersvc-start-mode",
+        "location_kind": "service",
+        "path": "WerSvc",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Manual",
+            "label": "Windows default",
+            "meaning": "Windows Error Reporting keeps Microsoft's documented default service mode.",
+            "evidence_ids": [
+              "ms-iot-services-wersvc"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Error reporting disabled",
+            "meaning": "The service no longer starts, but Microsoft does not recommend disabling it.",
+            "evidence_ids": [
+              "ms-iot-services-wersvc",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables WerSvc by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
+    "writes": [
+      {
+        "target_id": "wersvc-start-mode",
+        "path": "WerSvc",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems using the normal Windows Error Reporting service configuration",
+      "states": [
+        {
+          "target_id": "wersvc-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Microsoft lists WerSvc with a Manual default start mode and advises not to disable it."
+        }
+      ],
+      "notes": "This review record keeps the documented baseline because Microsoft's guidance conflicts with the current tweak intent.",
+      "evidence_ids": [
+        "ms-iot-services-wersvc"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where crash diagnostics and repair flows matter"
+      ],
+      "avoid_for": [
+        "None by default until stronger evidence exists"
+      ],
+      "states": [
+        {
+          "target_id": "wersvc-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented default because Microsoft marks WerSvc as Don't disable."
+        }
+      ],
+      "good_when": "You want to preserve Windows error reporting and related diagnostics.",
+      "bad_when": "You are trying to publish a validated disable preset for WerSvc today.",
+      "tradeoffs": [
+        "Error reporting and repair-related flows remain available.",
+        "The app's current disable action is intentionally not published as a validated preset."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-iot-services-wersvc"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "wersvc-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Document the current app behavior without validating it as recommended."
+        }
+      ],
+      "good_when": "You are documenting the current product behavior for cleanup work.",
+      "bad_when": "You want a Microsoft-backed recommended state.",
+      "tradeoffs": [
+        "The control surface itself is real and reversible.",
+        "Microsoft explicitly advises against disabling the service."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-iot-services-wersvc",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-wersvc",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "Microsoft lists Windows Error Reporting Service `(WerSvc)` with start mode `Manual` and marks it `Don't disable`.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-scm-wersvc-2026-03-14",
+      "kind": "repo-doc",
+      "title": "Local SCM snapshot - WerSvc",
+      "location": "Docs/tweaks/research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt",
+      "summary": "Checked-in `sc qc WerSvc` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables the `WerSvc` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The service control surface is official, but Microsoft's own service guidance marks WerSvc as Don't disable, so the current tweak should stay in review rather than in the validated safe set.",
+    "blocking_issues": [
+      "Official Microsoft guidance conflicts with the current disable recommendation."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt",
+    "exact_quote_or_path": "SERVICE_NAME: WerSvc | START_TYPE : 4 DISABLED | DISPLAY_NAME: Windows Error Reporting Service | BINARY_PATH_NAME: C:\\WINDOWS\\System32\\svchost.exe -k WerSvcGroup",
+    "key_found_on_page": true,
+    "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
+  }
+}
