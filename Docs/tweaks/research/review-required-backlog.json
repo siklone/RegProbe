@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T04:56:54Z",
+  "generated_utc": "2026-03-14T05:00:05Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 100,
+  "source_record_count": 99,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 6,
     "rename": 6,
     "split-needed": 25,
-    "docs-first": 63
+    "docs-first": 62
   },
   "counts_by_method": {
     "heuristic": 8,
     "manual-override": 77,
-    "proof-gate": 15
+    "proof-gate": 14
   },
   "entries": [
     {
@@ -437,23 +437,6 @@
       "source_file": "Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json",
       "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
       "decision_why": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
-      "blocking_issues": []
-    },
-    {
-      "record_id": "privacy.disable-appdeviceinventory.policy",
-      "tweak_id": "privacy.disable-appdeviceinventory.policy",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon capture showing gpsvc writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Application Compatibility",
-      "implementation_status": "matches-research",
-      "apply_allowed": true,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json",
-      "summary": "Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.",
-      "decision_why": "All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon capture showing gpsvc writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker.",
       "blocking_issues": []
     },
     {

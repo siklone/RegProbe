@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "privacy.disable-appdeviceinventory.policy",
   "tweak_id": "privacy.disable-appdeviceinventory.policy",
-  "record_status": "review-required",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "summary": "Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.",
   "setting": {
     "name": "Disable App Device Inventory Policies",
@@ -347,7 +347,11 @@
     "why": "All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon capture showing gpsvc writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker.",
     "blocking_issues": []
   },
-  "open_questions": [
-    "Has the AppDeviceInventory CSP page been updated to remove Insider Preview language since 2026-03-13? If so, version-scope note can be tightened."
-  ]
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\AppDeviceInventory.admx",
+    "exact_quote_or_path": "AppDeviceInventory.admx: `<policy name=\"TurnOffInstallTracing\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableInstallTracing\">`, `<policy name=\"TurnOffAPISamping\" ... valueName=\"DisableAPISamping\">`, `<policy name=\"TurnOffApplicationFootprint\" ... valueName=\"DisableApplicationFootprint\">`, and `<policy name=\"TurnOffWin32AppBackup\" ... valueName=\"DisableWin32AppBackup\">`, each with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows_11_0_24H2\"`.",
+    "key_found_on_page": true,
+    "notes": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and Procmon confirmed gpsvc writes all four values on Windows 11 Pro 10.0.26200.8037."
+  }
 }
