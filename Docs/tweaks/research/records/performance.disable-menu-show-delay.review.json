@@ -1,0 +1,176 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "performance.disable-menu-show-delay",
+  "tweak_id": "performance.disable-menu-show-delay",
+  "record_status": "validated",
+  "summary": "Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\\Control Panel\\Desktop\\MenuShowDelay = \"400\", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = \"0\". The current app write of MenuShowDelay = \"0\" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.",
+  "setting": {
+    "name": "Remove Menu Show Delay",
+    "category": "Performance",
+    "area": "Win32 Menu Timing",
+    "scope": "user",
+    "casual_explanation": "Windows can wait a short moment before showing some menus. Setting the delay lower can make menus feel faster and more immediate.",
+    "why_people_change_it": "People reduce menu delay when they want faster-feeling desktop interactions and less waiting before menus appear.",
+    "tradeoffs_overview": "A lower menu delay can feel snappier, but menus can appear more abruptly. This record is validated through the official Win32 menu-delay API plus a local API-to-registry runtime diff, not through a Microsoft-published registry contract for MenuShowDelay.",
+    "professional_notes": "Microsoft documents SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY as the supported feature surface and states that the value is a delay in milliseconds. On 2026-03-14, a local runtime diff showed SPI_SETMENUSHOWDELAY 400 persisting MenuShowDelay = \"400\" and SPI_SETMENUSHOWDELAY 0 persisting MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop, with the original local state restored afterward. That validates MenuShowDelay as the observed persisted backend for the public Win32 feature surface on this build.",
+    "targets": [
+      {
+        "target_id": "menu-show-delay-registry",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "MenuShowDelay",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "0",
+            "label": "No menu show delay",
+            "meaning": "A local SPI_SETMENUSHOWDELAY runtime diff confirmed that setting the official Win32 menu-delay feature to 0 persists MenuShowDelay = \"0\" on this build.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-menushowdelay",
+              "runtime-spi-menushowdelay-diff",
+              "app-performance-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "400",
+            "label": "Default-like menu delay",
+            "meaning": "A local SPI_SETMENUSHOWDELAY runtime diff confirmed that setting the official Win32 menu-delay feature to 400 persists MenuShowDelay = \"400\" on this build.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-menushowdelay",
+              "runtime-spi-menushowdelay-diff"
+            ]
+          }
+        ],
+        "notes": "Validated as an API-backed runtime registry mapping. No Microsoft page captured in this pass publishes MenuShowDelay directly as the supported registry contract."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "notes": "The app writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build.",
+    "writes": [
+      {
+        "target_id": "menu-show-delay-registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "MenuShowDelay",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "0"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed local baseline",
+      "applies_to": "Windows user profiles where MenuShowDelay is present",
+      "states": [
+        {
+          "target_id": "menu-show-delay-registry",
+          "state_kind": "value",
+          "value": "400",
+          "rationale": "400 ms is the commonly observed local baseline captured in the runtime diff and represents the non-zero delayed menu state on this machine."
+        }
+      ],
+      "notes": "This record validates the persisted 0 and 400 states. It does not claim that all Windows installs default to 400 or that an absent-value default was captured in this pass.",
+      "evidence_ids": [
+        "runtime-spi-menushowdelay-diff"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "remove-menu-show-delay",
+      "label": "Remove menu show delay",
+      "intended_for": [
+        "Users who want faster-feeling menu interactions",
+        "People who prefer immediate menu display"
+      ],
+      "avoid_for": [
+        "Users who prefer a softer, slightly delayed menu feel"
+      ],
+      "states": [
+        {
+          "target_id": "menu-show-delay-registry",
+          "state_kind": "value",
+          "value": "0",
+          "rationale": "Set the observed persisted registry backend to the zero-delay state proven through SPI_SETMENUSHOWDELAY."
+        }
+      ],
+      "good_when": "You want menus to open immediately.",
+      "bad_when": "You prefer a small built-in delay before menus appear.",
+      "tradeoffs": [
+        "Menus appear more quickly.",
+        "The interface can feel more abrupt."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-systemparametersinfo-menushowdelay",
+        "runtime-spi-menushowdelay-diff",
+        "app-performance-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-systemparametersinfo-menushowdelay",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: SystemParametersInfo - menu show delay actions",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa",
+      "summary": "Microsoft documents SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY as the public Win32 surface for reading and changing the menu show delay in milliseconds.",
+      "supports": [
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "runtime-spi-menushowdelay-diff",
+      "kind": "runtime-diff",
+      "title": "Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence",
+      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
+      "summary": "A local runtime diff called SPI_SETMENUSHOWDELAY with 400 and 0, then read both SPI_GETMENUSHOWDELAY and HKCU\\Control Panel\\Desktop\\MenuShowDelay after each change. Setting 400 produced API 400 with registry value \"400\". Setting 0 produced API 0 with registry value \"0\". The original local state was restored at the end.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-performance-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+      "summary": "The provider writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The menu-delay feature semantics are officially documented through the Win32 API, and a local runtime diff now proves that MenuShowDelay is the persisted backend for the tested delayed and zero-delay states on this build. The remaining limitation is documentation quality: MenuShowDelay was validated through API-backed runtime observation rather than a Microsoft-published registry contract.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
+    "exact_quote_or_path": "after_slow: API 400, registry MenuShowDelay = \"400\". after_fast: API 0, registry MenuShowDelay = \"0\". restored: API 0, registry MenuShowDelay = \"0\".",
+    "key_found_on_page": true,
+    "notes": "The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state."
+  }
+}
