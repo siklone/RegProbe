@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T01:24:13Z",
+  "generated_utc": "2026-03-14T01:31:36Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 105,
+  "source_record_count": 104,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 10,
+    "implementation-mismatch": 9,
     "rename": 6,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 12,
+    "heuristic": 11,
     "manual-override": 77,
     "proof-gate": 16
   },
@@ -1491,32 +1491,6 @@
         "exact_quote_or_path": "LanmanWorkstation.admx: `<enum id=\"MaxSmb2Dialect\" valueName=\"MaxSmb2Dialect\" required=\"true\">` and `<enum id=\"MinSmb2Dialect\" valueName=\"MinSmb2Dialect\" required=\"true\">`; LanmanWorkstation.adml / LanmanServer.adml label the documented enum values through `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785.",
         "key_found_on_page": true,
         "notes": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and the official dialect enum values. The record remains review-required because the app writes service-path values instead of policy keys and uses 65536 as MaxSmb2Dialect, which is not in the official documented enum list."
-      }
-    },
-    {
-      "record_id": "network.smb-set-cipher-suite-order",
-      "tweak_id": "network.smb-set-cipher-suite-order",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the documented LanmanWorkstation and LanmanServer policy paths for cipher suite order.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Policy vs Observed Service Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json",
-      "summary": "Microsoft documents SMB cipher suite order as a policy-backed REG_MULTI_SZ setting under the LanmanWorkstation and LanmanServer policy keys. The current app instead writes CipherSuiteOrder under the service parameter paths, so this record stays in review until that service-path mapping is sourced as an official equivalent.",
-      "decision_why": "The official policy surface is clear, but the current app writes a different service-path REG_MULTI_SZ control that this record does not yet publish as an official equivalent.",
-      "blocking_issues": [
-        "The current app does not use the documented LanmanWorkstation and LanmanServer policy paths for cipher suite order.",
-        "The service-path REG_MULTI_SZ mapping still needs formal sourcing or validation before publication."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
-        "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
-        "key_found_on_page": true,
-        "notes": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values. The current app writes CipherSuiteOrder under service parameter paths instead, so this record remains review-required as an implementation mismatch."
       }
     },
     {

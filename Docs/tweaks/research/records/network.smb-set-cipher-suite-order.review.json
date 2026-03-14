@@ -1,0 +1,294 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-set-cipher-suite-order",
+  "tweak_id": "network.smb-set-cipher-suite-order",
+  "record_status": "validated",
+  "summary": "Sets SMB cipher suite order by writing CipherSuiteOrder under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define CipherSuiteOrder as a multi-text policy value. The app previously wrote the same list under service parameter paths; it now targets the official policy surface directly.",
+  "setting": {
+    "name": "SMB Cipher Suite Order",
+    "category": "Network",
+    "area": "Policy vs Observed Service Setting",
+    "scope": "mixed",
+    "casual_explanation": "This setting controls which SMB encryption cipher suites are preferred and in what order. It matters mostly for advanced SMB hardening or specific compliance requirements.",
+    "why_people_change_it": "People change cipher suite order when they want to prioritize stronger SMB encryption algorithms or match a specific security baseline. Most casual users should leave it alone unless they know exactly why they need it.",
+    "tradeoffs_overview": "The official Microsoft control is a policy-backed REG_MULTI_SZ list. Reordering cipher suites is an advanced hardening choice for environments with specific SMB encryption requirements and is not a normal baseline tweak for most systems.",
+    "professional_notes": "LanmanWorkstation.admx and LanmanServer.admx document CipherSuiteOrder under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer. The app previously wrote REG_MULTI_SZ values under HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters and HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters. On 2026-03-14 the provider was aligned to the documented policy keys. This research record serializes REG_MULTI_SZ values as a pipe-delimited string for schema compatibility.",
+    "targets": [
+      {
+        "target_id": "client-cipher-suite-order-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "CipherSuiteOrder",
+        "value_type": "REG_MULTI_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default cipher suite order",
+            "meaning": "If the policy is disabled or not configured, the default SMB client cipher suite order is used.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-cipher-order",
+              "local-lanmanworkstation-adml-cipher-order"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "custom-supported-order",
+            "label": "Custom client cipher suite order",
+            "meaning": "If the policy is enabled with at least one supported suite, the SMB client prioritizes cipher suites in the specified order.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-cipher-order",
+              "local-lanmanworkstation-adml-cipher-order"
+            ]
+          }
+        ],
+        "notes": "REG_MULTI_SZ values are serialized as strings in this research schema."
+      },
+      {
+        "target_id": "server-cipher-suite-order-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "CipherSuiteOrder",
+        "value_type": "REG_MULTI_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default cipher suite order",
+            "meaning": "If the policy is disabled or not configured, the default SMB server cipher suite order is used.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-cipher-order",
+              "local-lanmanserver-adml-cipher-order"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "custom-supported-order",
+            "label": "Custom server cipher suite order",
+            "meaning": "If the policy is enabled with at least one supported suite, the SMB server prioritizes cipher suites in the specified order.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-cipher-order",
+              "local-lanmanserver-adml-cipher-order"
+            ]
+          }
+        ],
+        "notes": "REG_MULTI_SZ values are serialized as strings in this research schema."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The app now writes the CipherSuiteOrder REG_MULTI_SZ list under the documented LanmanWorkstation and LanmanServer policy keys.",
+    "writes": [
+      {
+        "target_id": "client-cipher-suite-order-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "CipherSuiteOrder",
+        "value_type": "REG_MULTI_SZ",
+        "state_kind": "value",
+        "value": "AES_256_GCM|AES_256_CCM"
+      },
+      {
+        "target_id": "server-cipher-suite-order-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "CipherSuiteOrder",
+        "value_type": "REG_MULTI_SZ",
+        "state_kind": "value",
+        "value": "AES_256_GCM|AES_256_CCM"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows SMB client and server releases exposing the CipherSuiteOrder policy",
+      "states": [
+        {
+          "target_id": "client-cipher-suite-order-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is disabled or not configured, Windows uses the default SMB client cipher suite order."
+        },
+        {
+          "target_id": "server-cipher-suite-order-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is disabled or not configured, Windows uses the default SMB server cipher suite order."
+        }
+      ],
+      "notes": "This record validates the official SMB cipher suite order policy surface.",
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-cipher-order",
+        "local-lanmanserver-adml-cipher-order"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems without a specific SMB cipher-order policy requirement"
+      ],
+      "avoid_for": [
+        "Advanced environments that need a custom SMB cipher suite order"
+      ],
+      "states": [
+        {
+          "target_id": "client-cipher-suite-order-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official client policy unset."
+        },
+        {
+          "target_id": "server-cipher-suite-order-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official server policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep the built-in SMB cipher suite order.",
+      "bad_when": "You need a formally documented custom SMB cipher priority policy.",
+      "tradeoffs": [
+        "Windows keeps its normal SMB cipher ordering.",
+        "No explicit SMB cipher priority policy is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-cipher-order",
+        "local-lanmanserver-adml-cipher-order"
+      ]
+    },
+    {
+      "profile_id": "prefer-aes-256-cipher-order",
+      "label": "Prefer AES-256 cipher suites",
+      "intended_for": [
+        "Advanced administrators hardening SMB encryption",
+        "Environments that want AES-256 suites first"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems that do not require a custom SMB cipher priority list"
+      ],
+      "states": [
+        {
+          "target_id": "client-cipher-suite-order-policy",
+          "state_kind": "value",
+          "value": "AES_256_GCM|AES_256_CCM",
+          "rationale": "Use the documented client policy key to prioritize AES_256_GCM and AES_256_CCM."
+        },
+        {
+          "target_id": "server-cipher-suite-order-policy",
+          "state_kind": "value",
+          "value": "AES_256_GCM|AES_256_CCM",
+          "rationale": "Use the documented server policy key to prioritize AES_256_GCM and AES_256_CCM."
+        }
+      ],
+      "good_when": "You intentionally want AES-256 SMB cipher suites to be tried before other supported suites.",
+      "bad_when": "You do not need custom SMB cipher ordering or are not sure every peer supports your preferred order.",
+      "tradeoffs": [
+        "Cipher suites are prioritized in the specified order for both SMB client and server policy surfaces.",
+        "This is an advanced hardening setting and can be unnecessary on normal systems."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated official LanmanWorkstation and LanmanServer policy paths.",
+      "evidence_ids": [
+        "local-lanmanworkstation-admx-cipher-order",
+        "local-lanmanworkstation-adml-cipher-order",
+        "local-lanmanserver-admx-cipher-order",
+        "local-lanmanserver-adml-cipher-order",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-lanmanworkstation-admx-cipher-order",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.admx cipher suite order mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+      "summary": "The local ADMX file documents CipherSuiteOrder under the LanmanWorkstation policy key as a multi-text policy value.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanworkstation-adml-cipher-order",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.adml cipher suite order help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanWorkstation.adml",
+      "summary": "The local ADML help text says the SMB client uses the default cipher suite order when the policy is disabled or not configured, and uses the specified order when enabled with supported suites.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-admx-cipher-order",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.admx cipher suite order mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanServer.admx",
+      "summary": "The local ADMX file documents CipherSuiteOrder under the LanmanServer policy key as a multi-text policy value.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-adml-cipher-order",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.adml cipher suite order help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanServer.adml",
+      "summary": "The local ADML help text says the SMB server uses the default cipher suite order when the policy is disabled or not configured, and uses the specified order when enabled with supported suites.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes REG_MULTI_SZ CipherSuiteOrder values under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local official ADMX and ADML files document the exact CipherSuiteOrder policy surfaces and semantics for both LanmanWorkstation and LanmanServer, and the app now writes those documented policy keys directly.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+    "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
+    "key_found_on_page": true,
+    "notes": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values, and the app now writes those documented policy keys directly."
+  }
+}
