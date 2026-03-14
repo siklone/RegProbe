@@ -56,7 +56,7 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "explorer.disable-compact-mode",
+            "explorer.enable-explorer-compact-mode",
             "Enable Compact View",
             "Reduces the spacing between items in File Explorer for a more information-dense view.",
             TweakRiskLevel.Safe,

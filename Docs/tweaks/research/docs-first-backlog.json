@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T11:47:28Z",
+  "generated_utc": "2026-03-14T12:43:33Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 58,
+  "entry_count": 57,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -157,26 +157,6 @@
           "track": "Vendor docs or product settings schema",
           "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Another option is to disable the auto fetch feature by changing the following setting: \"git.autofetch\": false. The page proves the git.autofetch setting exists, but it does not prove the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path.",
           "next_source": "VS Code documentation: Default settings reference (https://code.visualstudio.com/docs/reference/default-settings)"
-        }
-      ]
-    },
-    {
-      "record_id": "explorer.enable-explorer-compact-mode",
-      "current_state": "mismatch-suspected | Explorer Advanced Flags",
-      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "ADMX / Policy CSP mapping",
-          "why_not_validated": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
-          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page"
-        },
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
     },

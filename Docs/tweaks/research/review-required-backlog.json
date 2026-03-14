@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T11:47:27Z",
+  "generated_utc": "2026-03-14T12:43:33Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 91,
+  "source_record_count": 90,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 58
+    "docs-first": 57
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 71,
+    "manual-override": 70,
     "proof-gate": 10
   },
   "entries": [
@@ -186,26 +186,6 @@
         "key_found_on_page": false,
         "notes": "The page proves the git.autofetch setting exists, but it does not prove the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path."
       }
-    },
-    {
-      "record_id": "explorer.enable-explorer-compact-mode",
-      "tweak_id": "explorer.disable-compact-mode",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Explorer",
-      "technical_area": "Explorer Advanced Flags",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, which reads like enabling compact mode. This Sprint 2 pass rechecked local ADMX files and Microsoft Learn and still did not capture a Microsoft-published UseCompactMode contract, so the record moves to docs-first while the observed app preference remains documented.",
-      "decision_why": "This Sprint 2 pass still did not capture a primary Microsoft source for the UseCompactMode registry contract, so the record should stay docs-first until stronger Microsoft evidence is available.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
-        "The tweak id implies disabling compact mode while the current app writes UseCompactMode = 1."
-      ]
     },
     {
       "record_id": "network.smb-encrypt-data",

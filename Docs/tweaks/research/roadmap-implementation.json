@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T11:47:28Z",
+  "generated_utc": "2026-03-14T12:43:33Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -939,21 +939,6 @@
     {
       "sprint_number": 4,
       "priority_index": 23,
-      "record_id": "explorer.enable-explorer-compact-mode",
-      "category": "docs-first",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
-        "The tweak id implies disabling compact mode while the current app writes UseCompactMode = 1."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Explorer Advanced Flags",
-      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json"
-    },
-    {
-      "sprint_number": 4,
-      "priority_index": 24,
       "record_id": "security.disable-ntfs-encryption",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -968,7 +953,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 25,
+      "priority_index": 24,
       "record_id": "security.enable-dynamic-lock",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -983,7 +968,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 26,
+      "priority_index": 25,
       "record_id": "security.trusted-path-credential-prompting",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -998,7 +983,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 27,
+      "priority_index": 26,
       "record_id": "visibility.hide-language-bar",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1012,7 +997,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 28,
+      "priority_index": 27,
       "record_id": "developer.docker-performance",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1027,7 +1012,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 29,
+      "priority_index": 28,
       "record_id": "developer.ssh-agent-autostart",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1042,7 +1027,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 30,
+      "priority_index": 29,
       "record_id": "developer.terminal-dev-mode",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1057,7 +1042,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 31,
+      "priority_index": 30,
       "record_id": "developer.vs-intellisense-cache",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1072,7 +1057,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 32,
+      "priority_index": 31,
       "record_id": "developer.vs-solution-load",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1087,7 +1072,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 33,
+      "priority_index": 32,
       "record_id": "system.dwm-disable-mpo",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1102,7 +1087,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 34,
+      "priority_index": 33,
       "record_id": "system.enable-hags",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1117,7 +1102,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 35,
+      "priority_index": 34,
       "record_id": "system.graphics-disable-overlays",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1132,7 +1117,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 36,
+      "priority_index": 35,
       "record_id": "system.graphics-page-fault-debug-mode",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1147,7 +1132,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 37,
+      "priority_index": 36,
       "record_id": "system.kernel-adjust-dpc-threshold",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1162,7 +1147,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 38,
+      "priority_index": 37,
       "record_id": "system.kernel-cache-aware-scheduling",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1177,7 +1162,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 39,
+      "priority_index": 38,
       "record_id": "system.kernel-default-dynamic-hetero-cpu-policy",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1192,7 +1177,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 40,
+      "priority_index": 39,
       "record_id": "system.kernel-disable-low-qos-timer-resolution",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1207,7 +1192,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 41,
+      "priority_index": 40,
       "record_id": "system.kernel-dpc-queue-depth",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1222,7 +1207,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 42,
+      "priority_index": 41,
       "record_id": "system.kernel-ideal-dpc-rate",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1237,7 +1222,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 43,
+      "priority_index": 42,
       "record_id": "system.kernel-minimum-dpc-rate",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1252,7 +1237,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 44,
+      "priority_index": 43,
       "record_id": "network.smb-encrypt-data",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1266,7 +1251,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 45,
+      "priority_index": 44,
       "record_id": "performance.disable-taskbar-animations",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1280,7 +1265,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 46,
+      "priority_index": 45,
       "record_id": "system.disable-service-splitting",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1295,7 +1280,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 47,
+      "priority_index": 46,
       "record_id": "system.services.disable-print-device-configuration",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1310,7 +1295,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 48,
+      "priority_index": 47,
       "record_id": "system.services.disable-print-scan-broker",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1325,7 +1310,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 49,
+      "priority_index": 48,
       "record_id": "system.services.disable-print-workflow-user-service",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1339,7 +1324,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 50,
+      "priority_index": 49,
       "record_id": "system.services.disable-sysmain",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1353,7 +1338,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 51,
+      "priority_index": 50,
       "record_id": "system.services.disable-wap-push-routing",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1367,7 +1352,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 52,
+      "priority_index": 51,
       "record_id": "system.services.disable-windows-error-reporting",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -1381,7 +1366,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 53,
+      "priority_index": 52,
       "record_id": "audio.disable-beep",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1395,7 +1380,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 54,
+      "priority_index": 53,
       "record_id": "audio.disable-spatial-audio",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1409,7 +1394,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 55,
+      "priority_index": 54,
       "record_id": "developer.vscode-git-autofetch",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1424,7 +1409,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 56,
+      "priority_index": 55,
       "record_id": "system.kernel-dpc-watchdog-period",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1439,7 +1424,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 57,
+      "priority_index": 56,
       "record_id": "system.kernel-serialize-timer-expiration",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1454,7 +1439,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 58,
+      "priority_index": 57,
       "record_id": "system.memory-disable-paging-executive",
       "category": "docs-first",
       "estimated_effort": "large",
