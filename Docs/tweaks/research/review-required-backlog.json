@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T10:06:22Z",
+  "generated_utc": "2026-03-14T11:47:27Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 93,
+  "source_record_count": 91,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 60
+    "docs-first": 58
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 73,
+    "manual-override": 71,
     "proof-gate": 10
   },
   "entries": [
@@ -59,44 +59,6 @@
       "decision_why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract.",
       "blocking_issues": [
         "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
-      ]
-    },
-    {
-      "record_id": "audio.show-disconnected-devices",
-      "tweak_id": "audio.show-disconnected-devices",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Audio",
-      "technical_area": "Sound Control Panel DeviceCpl Flags",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/audio.show-disconnected-devices.review.json",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices. The repo provenance ties the value to upstream research, but this pass did not capture a primary Microsoft source for the exact DeviceCpl registry contract, so the record stays in review.",
-      "decision_why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact DeviceCpl registry contract.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices was captured in this pass."
-      ]
-    },
-    {
-      "record_id": "audio.show-hidden-devices",
-      "tweak_id": "audio.show-hidden-devices",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Audio",
-      "technical_area": "Sound Control Panel DeviceCpl Flags",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/audio.show-hidden-devices.review.json",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices. The repo provenance ties the value to upstream research, but this pass did not capture a primary Microsoft source for the exact DeviceCpl registry contract, so the record stays in review.",
-      "decision_why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact DeviceCpl registry contract.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices was captured in this pass."
       ]
     },
     {

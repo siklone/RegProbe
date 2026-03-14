@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T10:06:23Z",
+  "generated_utc": "2026-03-14T11:47:28Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -1410,34 +1410,6 @@
     {
       "sprint_number": 4,
       "priority_index": 55,
-      "record_id": "audio.show-disconnected-devices",
-      "category": "docs-first",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices was captured in this pass."
-      ],
-      "depends_on": [],
-      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "source_file": "Docs/tweaks/research/records/audio.show-disconnected-devices.review.json"
-    },
-    {
-      "sprint_number": 4,
-      "priority_index": 56,
-      "record_id": "audio.show-hidden-devices",
-      "category": "docs-first",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices was captured in this pass."
-      ],
-      "depends_on": [],
-      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "source_file": "Docs/tweaks/research/records/audio.show-hidden-devices.review.json"
-    },
-    {
-      "sprint_number": 4,
-      "priority_index": 57,
       "record_id": "developer.vscode-git-autofetch",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1452,7 +1424,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 58,
+      "priority_index": 56,
       "record_id": "system.kernel-dpc-watchdog-period",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1467,7 +1439,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 59,
+      "priority_index": 57,
       "record_id": "system.kernel-serialize-timer-expiration",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1482,7 +1454,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 60,
+      "priority_index": 58,
       "record_id": "system.memory-disable-paging-executive",
       "category": "docs-first",
       "estimated_effort": "large",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T10:06:23Z",
+  "generated_utc": "2026-03-14T11:47:28Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 60,
+  "entry_count": 58,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -41,36 +41,6 @@
         {
           "track": "Vendor docs or product settings schema",
           "why_not_validated": "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass.",
-          "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
-        }
-      ]
-    },
-    {
-      "record_id": "audio.show-disconnected-devices",
-      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Sound Control Panel DeviceCpl Flags",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/audio.show-disconnected-devices.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Vendor docs or product settings schema",
-          "why_not_validated": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices was captured in this pass.",
-          "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
-        }
-      ]
-    },
-    {
-      "record_id": "audio.show-hidden-devices",
-      "current_state": "unknown | Sound Control Panel DeviceCpl Flags",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Sound Control Panel DeviceCpl Flags",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/audio.show-hidden-devices.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Vendor docs or product settings schema",
-          "why_not_validated": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices was captured in this pass.",
           "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
         }
       ]
