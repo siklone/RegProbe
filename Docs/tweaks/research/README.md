@@ -282,6 +282,27 @@ Rule:
 - Do not validate from feature similarity alone.
 - Mark the record as needing either an implementation fix or a Procmon/settings-diff follow-up, depending on whether the app should migrate to the documented surface or intentionally track a separate observed runtime key.
 
+### Service Control Surface Caveat
+
+Service-disable tweaks do not fit the same proof shape as ADMX, CSP, or direct registry-policy records.
+
+Typical service evidence looks different:
+
+- the exact service exists in the local Service Control Manager database
+- Microsoft may publish general service guidance or disable taxonomy
+- there is usually no `enabledValue` or `disabledValue` block to quote
+
+Rule:
+
+- Do not fake registry-style proof for a service tweak.
+- Do not mark a service record `validated` just because the service exists locally.
+- Separate three questions:
+  - Is the exact service identifier real on the reviewed build?
+  - Does Microsoft publish guidance for that service or service family?
+  - Does the app implementation target that same service surface?
+
+For the repeatable workflow and evidence requirements, see [notes/service-proof-validation.md](./notes/service-proof-validation.md).
+
 ## Validation Proof Gate
 
 From schema version `1.1` onward, every new `validated` or `published` record must carry a machine-checkable `validation_proof` block:
@@ -306,6 +327,29 @@ Rules:
 - A "verified source URL" pool is useful for faster research, but a URL alone is not record-level proof until the exact quote or path has been captured for that specific record.
 - A verified URL can still be legacy, version-scoped, or incomplete for the current Windows release; if so, keep `decision.needs_vm_validation = true` or leave the record in research-only status until runtime behavior is confirmed.
 - If a primary Microsoft source explicitly says that newer Windows versions do not need or do not use the change, it is reasonable to keep `decision.needs_vm_validation = false` and classify the record as a documented legacy or no-op setting instead of treating VM testing as required.
+
+### Service-Type Validation Proof
+
+Service records may use a checked-in local Service Control Manager snapshot as the machine-checkable `validation_proof` source when a web page alone is not exact enough.
+
+Allowed pattern:
+
+- `validation_proof.source_url`: path to a checked-in service snapshot or transcript captured during review
+- `validation_proof.exact_quote_or_path`: exact service identifier plus the captured startup-type or service-configuration lines
+- `validation_proof.key_found_on_page`: `true` only when the exact service name appears in that captured source artifact
+
+Required companion evidence:
+
+- an official Microsoft source that gives service guidance, service purpose, or supportability context
+- repo-code evidence showing that the app targets the same service name
+
+Practical interpretation:
+
+- the local snapshot proves the exact service control surface exists on the reviewed build
+- the Microsoft source proves the service is real and gives the safety context for disabling it
+- the app evidence proves the implementation surface matches
+
+This is still not enough when Microsoft guidance explicitly says `Don't disable`, `No guidance`, or otherwise conflicts with a safe user-facing recommendation. In that case the record may stay `review-required` even when the service identity itself is proven.
 
 ## Apply Gate
 
