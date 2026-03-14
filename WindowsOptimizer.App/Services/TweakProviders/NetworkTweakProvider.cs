@@ -262,17 +262,7 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        yield return CreateRegistryTweak(
-            context,
-            "network.smb-disable-leasing",
-            "SMB: Disable Leasing",
-            "Disables SMB server leasing (read/write/handle caching).",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanServer\Parameters",
-            "DisableLeasing",
-            RegistryValueKind.DWord,
-            1);
+        yield return new DisableSmbLeasingTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryTweak(
             context,

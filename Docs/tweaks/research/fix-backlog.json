@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T01:31:36Z",
+  "generated_utc": "2026-03-14T02:05:06Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 9,
+  "entry_count": 8,
   "entries": [
     {
       "record_id": "developer.wsl2-memory",
@@ -34,33 +34,6 @@
           "value_name": "[wsl2].memory",
           "value_type": "WSL setting",
           "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "network.smb-disable-leasing",
-      "current_state": "partially-matches | API vs Observed Service Setting",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::DisableLeasing=1 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableLeasing (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "API vs Observed Service Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/network.smb-disable-leasing.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
-          "value_name": "DisableLeasing",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 1
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "wmi",
-          "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
-          "value_name": "EnableLeasing",
-          "value_type": "BOOLEAN",
-          "example_value": false
         }
       ]
     },

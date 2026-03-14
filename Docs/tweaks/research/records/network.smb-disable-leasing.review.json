@@ -1,0 +1,237 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-disable-leasing",
+  "tweak_id": "network.smb-disable-leasing",
+  "record_status": "validated",
+  "summary": "Disables SMB server leasing through the documented SMB server configuration surface. Microsoft documents EnableLeasing as a boolean property of MSFT_SmbServerConfiguration and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported way to disable leasing. The app previously wrote DisableLeasing = 1 under the LanmanServer service parameter path; it now uses a command-backed implementation that applies the documented EnableLeasing = false surface and can restore the previously detected boolean state.",
+  "setting": {
+    "name": "SMB Server Leasing",
+    "category": "Network",
+    "area": "SMB Server Configuration",
+    "scope": "device",
+    "casual_explanation": "SMB leasing is part of the modern SMB protocol and supports read, write, and handle caching. It usually improves performance, but it can also be part of specific compatibility or troubleshooting scenarios.",
+    "why_people_change_it": "People disable leasing only for narrow troubleshooting or compatibility cases. They usually keep it enabled because it is part of normal SMBv2 and SMBv3 behavior.",
+    "tradeoffs_overview": "Microsoft explicitly warns that leasing is an integral SMB feature and that many caching behaviors depend on it. Disabling it can help investigate certain SMB issues, but it can also reduce performance or change normal SMB behavior.",
+    "professional_notes": "Microsoft documents EnableLeasing on the SMB server configuration surface in Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration and through the Set-SmbServerConfiguration PowerShell cmdlet. The app previously wrote HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\DisableLeasing = 1, which was an observed runtime path rather than the documented management surface. On 2026-03-14 the provider was aligned to a command-backed implementation that detects EnableLeasing, applies Set-SmbServerConfiguration -EnableLeasing $false -Force, verifies the resulting state, and restores the previously detected boolean value on rollback.",
+    "targets": [
+      {
+        "target_id": "server-enable-leasing",
+        "location_kind": "wmi",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+        "value_name": "EnableLeasing",
+        "value_type": "BOOLEAN",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": false,
+            "label": "Leasing disabled",
+            "meaning": "The SMB server does not use leasing.",
+            "evidence_ids": [
+              "ms-smbserver-class",
+              "ms-slow-smb-leasing"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": true,
+            "label": "Leasing enabled",
+            "meaning": "The SMB server uses SMB leasing.",
+            "evidence_ids": [
+              "ms-smbserver-class",
+              "ms-slow-smb-leasing"
+            ]
+          }
+        ],
+        "notes": "This is the documented SMB server management surface. The app now applies the false state via Set-SmbServerConfiguration -EnableLeasing $false."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+    "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false.",
+    "writes": [
+      {
+        "target_id": "server-enable-leasing",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+        "value_name": "EnableLeasing",
+        "value_type": "BOOLEAN",
+        "state_kind": "value",
+        "value": false,
+        "notes": "Applied through Set-SmbServerConfiguration -EnableLeasing $false and restored to the previously detected boolean state during rollback."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows SMB server leasing baseline",
+      "applies_to": "Windows SMB server releases with SMBv2 and SMBv3 behavior",
+      "states": [
+        {
+          "target_id": "server-enable-leasing",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Microsoft documents the configuration surface and describes leasing as integral to SMBv2 and SMBv3, but this record avoids collapsing every Windows build into one explicit baseline value."
+        }
+      ],
+      "notes": "This record validates the documented SMB server configuration surface and keeps the default state feature-dependent.",
+      "evidence_ids": [
+        "ms-smbserver-class",
+        "ms-slow-smb-leasing"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-baseline",
+      "label": "Windows managed baseline",
+      "intended_for": [
+        "General users",
+        "Normal SMBv2 and SMBv3 environments",
+        "Systems that rely on SMB caching behavior"
+      ],
+      "avoid_for": [
+        "Targeted troubleshooting where leasing is the suspected problem"
+      ],
+      "states": [
+        {
+          "target_id": "server-enable-leasing",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the normal Windows SMB leasing baseline."
+        }
+      ],
+      "good_when": "You want normal SMB protocol behavior and do not have a specific leasing problem to investigate.",
+      "bad_when": "You are testing a known issue where disabling leasing is part of the diagnosis.",
+      "tradeoffs": [
+        "Read, write, and handle caching remain available.",
+        "No explicit SMB leasing override is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smbserver-class",
+        "ms-slow-smb-leasing"
+      ]
+    },
+    {
+      "profile_id": "disable-smb-leasing",
+      "label": "Disable SMB leasing",
+      "intended_for": [
+        "Advanced administrators troubleshooting SMB behavior",
+        "Known compatibility scenarios where leasing is the suspected cause"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems that benefit from normal SMB caching behavior"
+      ],
+      "states": [
+        {
+          "target_id": "server-enable-leasing",
+          "state_kind": "value",
+          "value": false,
+          "rationale": "Use the documented SMB server configuration surface to disable leasing."
+        }
+      ],
+      "good_when": "You are intentionally testing or mitigating an SMB issue where leasing is part of the diagnosis.",
+      "bad_when": "You want the normal SMB performance baseline or do not have evidence that leasing is related to the problem.",
+      "tradeoffs": [
+        "Read, write, and handle caching behaviors can be reduced.",
+        "SMB performance or expected caching behavior can change.",
+        "This is an advanced troubleshooting setting, not a normal baseline tweak."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated documented SMB server configuration surface. The app now uses Set-SmbServerConfiguration -EnableLeasing $false and can restore the prior boolean state on rollback.",
+      "evidence_ids": [
+        "ms-smbserver-class",
+        "ms-slow-smb-leasing",
+        "engine-network-command-tweak",
+        "local-smb-leasing-detect"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smbserver-class",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: MSFT_SmbServerConfiguration class",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+      "summary": "Microsoft documents EnableLeasing as a boolean SMB server configuration property in the Root\\Microsoft\\Windows\\Smb namespace.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-slow-smb-leasing",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: slow SMB file transfer guidance for leasing",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/slow-smb-file-transfer",
+      "summary": "Microsoft shows disabling leasing with Set-SmbServerConfiguration -EnableLeasing $false and warns that leasing is an integral SMB feature that many caching behaviors depend on.",
+      "supports": [
+        "behavior",
+        "risk",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "NetworkTweakProvider exposes the SMB leasing tweak and delegates it to a command-backed SMB server configuration implementation.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-network-command-tweak",
+      "kind": "repo-code",
+      "title": "Command-backed SMB leasing implementation",
+      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+      "summary": "The engine tweak detects the current EnableLeasing boolean, applies Set-SmbServerConfiguration -EnableLeasing $false, verifies that leasing is disabled, and restores the previously detected boolean state during rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-smb-leasing-detect",
+      "kind": "vm-test",
+      "title": "Local read-only SMB leasing detect run",
+      "location": "Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037",
+      "summary": "Read-only Get-SmbServerConfiguration run on the current machine returned EnableLeasing = True, confirming that the documented SMB server configuration surface is live on this build.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft explicitly documents EnableLeasing as the SMB server configuration surface and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported disable method. The app now matches that model with a command-backed implementation that detects the current boolean state, applies the documented disable action, verifies the result, and restores the previously detected value on rollback.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+    "exact_quote_or_path": "`MSFT_SmbServerConfiguration` includes `boolean EnableLeasing;` and the property description says `Controls whether leasing will be enabled.` Complementary Microsoft troubleshooting guidance says `Leasing is an integral part of the SMB protocol` and shows `Set-SmbServerConfiguration -EnableLeasing $false` as the supported disable method.",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents the official control surface as the SMB server configuration property EnableLeasing, and the app now uses that documented surface through a command-backed implementation."
+  }
+}
