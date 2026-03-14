@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:43:48Z",
+  "generated_utc": "2026-03-14T01:24:13Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 106,
+  "source_record_count": 105,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 11,
+    "implementation-mismatch": 10,
     "rename": 6,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 13,
+    "heuristic": 12,
     "manual-override": 77,
     "proof-gate": 16
   },
@@ -1440,32 +1440,6 @@
         "exact_quote_or_path": "Manage SMB Multichannel: `Because SMB Multichannel is enabled by default` and `Set-SmbServerConfiguration -EnableMultiChannel $false` / `Set-SmbClientConfiguration -EnableMultiChannel $false`; MSFT_SmbServerConfiguration: `EnableMultiChannel ... Controls whether SMB Multichannel is enabled for this server.`; SetConfiguration method of MSFT_SmbClientConfiguration: `EnableMultiChannel [in] Enable the use of multiple physical network interfaces.`",
         "key_found_on_page": true,
         "notes": "Microsoft documents the official control surface as the EnableMultiChannel property on both SMB client and SMB server configuration surfaces. The record remains review-required because the app writes DisableMultiChannel under the LanmanWorkstation service path and does not model the documented client-plus-server control pair."
-      }
-    },
-    {
-      "record_id": "network.smb-enable-quic",
-      "tweak_id": "network.smb-enable-quic",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Policy vs Observed Service Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.smb-enable-quic.review.json",
-      "summary": "Microsoft documents SMB over QUIC as policy-backed EnableSMBQUIC controls under the LanmanWorkstation and LanmanServer policy keys. The current app instead writes EnableSMBQUIC under the service parameter paths, so this record stays in review until that service-path mapping is sourced as an official equivalent.",
-      "decision_why": "The official policy surface is clear, but the current app writes a different service-path control that this record does not yet publish as an official equivalent.",
-      "blocking_issues": [
-        "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
-        "The service-path EnableSMBQUIC writes still need formal sourcing or validation before publication."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
-        "exact_quote_or_path": "LanmanWorkstation.admx: `<policy ... name=\"Pol_EnableSMBQUIC\" ... valueName=\"EnableSMBQUIC\">`; LanmanWorkstation.adml: `This policy setting controls whether the SMB client will enable SMB over QUIC.`; LanmanServer.admx / LanmanServer.adml mirror the same `EnableSMBQUIC` policy for the SMB server.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact EnableSMBQUIC policy surfaces for both LanmanWorkstation and LanmanServer. The record remains review-required because the app writes EnableSMBQUIC under the service parameter paths instead of the documented policy keys."
       }
     },
     {

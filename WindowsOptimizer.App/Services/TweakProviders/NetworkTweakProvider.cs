@@ -294,8 +294,8 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             TweakRiskLevel.Advanced,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "EnableSMBQUIC", RegistryValueKind.DWord, 1)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanWorkstation", "EnableSMBQUIC", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanServer", "EnableSMBQUIC", RegistryValueKind.DWord, 1)
             });
 
         yield return CreateRegistryValueBatchTweak(

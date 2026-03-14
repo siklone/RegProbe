@@ -1,0 +1,312 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-enable-quic",
+  "tweak_id": "network.smb-enable-quic",
+  "record_status": "validated",
+  "summary": "Enables SMB over QUIC by writing EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the same value name with enabledValue 1 and disabledValue 0. The app previously wrote the same value name under service parameter paths; it now targets the official policy surface directly.",
+  "setting": {
+    "name": "SMB over QUIC",
+    "category": "Network",
+    "area": "Policy vs Observed Service Setting",
+    "scope": "mixed",
+    "casual_explanation": "SMB over QUIC lets Windows use SMB through QUIC instead of normal TCP in supported scenarios. It is a newer transport option and not a normal baseline tweak for most people.",
+    "why_people_change_it": "People enable SMB over QUIC when they are building specific modern SMB deployments that need QUIC transport. They leave it alone when they do not use that feature set or do not want to force a transport override.",
+    "tradeoffs_overview": "The official Microsoft control is policy-backed and applies to both SMB client and server. Enabling SMB over QUIC is useful only in environments that intentionally deploy the feature; most systems should leave it at the Windows baseline.",
+    "professional_notes": "LanmanWorkstation.admx and LanmanServer.admx document EnableSMBQUIC under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer with enabledValue 1 and disabledValue 0. The app previously wrote the same value name under HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters and HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters. On 2026-03-14 the provider was aligned to the documented policy keys.",
+    "targets": [
+      {
+        "target_id": "client-smb-quic-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "EnableSMBQUIC",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB client may allow initiating SMB over QUIC according to the Windows baseline.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-quic",
+              "local-lanmanworkstation-adml-quic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "SMB over QUIC disabled for client",
+            "meaning": "The SMB client will not allow initiating SMB over QUIC and can fall back to TCP.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-quic",
+              "local-lanmanworkstation-adml-quic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "SMB over QUIC enabled for client",
+            "meaning": "The SMB client is allowed to initiate SMB over QUIC.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-quic",
+              "local-lanmanworkstation-adml-quic"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "server-smb-quic-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "EnableSMBQUIC",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB server may accept SMB over QUIC connections according to the Windows baseline.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-quic",
+              "local-lanmanserver-adml-quic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "SMB over QUIC disabled for server",
+            "meaning": "The SMB server will not accept SMB over QUIC connections.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-quic",
+              "local-lanmanserver-adml-quic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "SMB over QUIC enabled for server",
+            "meaning": "The SMB server can accept SMB over QUIC connections.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-quic",
+              "local-lanmanserver-adml-quic"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The app now writes EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys.",
+    "writes": [
+      {
+        "target_id": "client-smb-quic-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "EnableSMBQUIC",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "server-smb-quic-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "EnableSMBQUIC",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 11 and Windows Server releases exposing the SMB over QUIC policies",
+      "states": [
+        {
+          "target_id": "client-smb-quic-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official client policy is not configured by default."
+        },
+        {
+          "target_id": "server-smb-quic-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official server policy is not configured by default."
+        }
+      ],
+      "notes": "This record validates the official SMB over QUIC policy surface.",
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-quic",
+        "local-lanmanserver-adml-quic"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems not explicitly deploying SMB over QUIC by policy"
+      ],
+      "avoid_for": [
+        "People who need SMB over QUIC forced on by policy"
+      ],
+      "states": [
+        {
+          "target_id": "client-smb-quic-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official client policy unset."
+        },
+        {
+          "target_id": "server-smb-quic-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official server policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep the normal baseline until the app uses a sourced control surface.",
+      "bad_when": "You explicitly need SMB over QUIC forced on.",
+      "tradeoffs": [
+        "You keep the official policy surface untouched.",
+        "SMB over QUIC is not forced on."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-quic",
+        "local-lanmanserver-adml-quic"
+      ]
+    },
+    {
+      "profile_id": "enable-smb-over-quic",
+      "label": "Enable SMB over QUIC",
+      "intended_for": [
+        "Modern SMB deployments that intentionally use QUIC",
+        "Advanced administrators configuring SMB over QUIC"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems that do not use SMB over QUIC"
+      ],
+      "states": [
+        {
+          "target_id": "client-smb-quic-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented client policy value to allow initiating SMB over QUIC."
+        },
+        {
+          "target_id": "server-smb-quic-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented server policy value to allow accepting SMB over QUIC."
+        }
+      ],
+      "good_when": "You intentionally deploy SMB over QUIC and need the feature enabled by policy.",
+      "bad_when": "You do not use SMB over QUIC or do not want to force a transport policy.",
+      "tradeoffs": [
+        "The feature is explicitly enabled for both SMB client and server policy surfaces.",
+        "This is an advanced transport setting and not a normal baseline tweak."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated official LanmanWorkstation and LanmanServer policy paths.",
+      "evidence_ids": [
+        "local-lanmanworkstation-admx-quic",
+        "local-lanmanworkstation-adml-quic",
+        "local-lanmanserver-admx-quic",
+        "local-lanmanserver-adml-quic",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-lanmanworkstation-admx-quic",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+      "summary": "The local ADMX file documents the client-side EnableSMBQUIC policy under Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanworkstation-adml-quic",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.adml SMB over QUIC help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanWorkstation.adml",
+      "summary": "The local ADML help text explains that disabling the policy prevents the SMB client from initiating QUIC connections and that not configured leaves the baseline behavior in place.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-admx-quic",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.admx SMB over QUIC mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanServer.admx",
+      "summary": "The local ADMX file documents the server-side EnableSMBQUIC policy under Software\\Policies\\Microsoft\\Windows\\LanmanServer with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-adml-quic",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.adml SMB over QUIC help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanServer.adml",
+      "summary": "The local ADML help text explains that disabling the policy prevents the SMB server from accepting QUIC connections and that not configured leaves the baseline behavior in place.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes EnableSMBQUIC = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local official ADMX and ADML files document the exact EnableSMBQUIC policy surfaces and values for both LanmanWorkstation and LanmanServer, and the app now writes those documented policy keys directly.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+    "exact_quote_or_path": "LanmanWorkstation.admx: `<policy ... name=\"Pol_EnableSMBQUIC\" ... valueName=\"EnableSMBQUIC\">`; LanmanWorkstation.adml: `This policy setting controls whether the SMB client will enable SMB over QUIC.`; LanmanServer.admx / LanmanServer.adml mirror the same `EnableSMBQUIC` policy for the SMB server.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files document the exact EnableSMBQUIC policy surfaces for both LanmanWorkstation and LanmanServer, and the app now writes those documented policy keys directly."
+  }
+}
