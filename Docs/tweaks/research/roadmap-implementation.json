@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T08:20:09Z",
+  "generated_utc": "2026-03-14T08:42:04Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -23,21 +23,6 @@
     {
       "sprint_number": 1,
       "priority_index": 1,
-      "record_id": "developer.enable-windows-long-paths",
-      "category": "rename",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The app enables the Windows long-path prerequisite but does not capture a Git-specific configuration surface in this research pass.",
-        "The tweak name overstates the scope of what the current implementation actually changes."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Windows Path Handling vs Git Configuration",
-      "notes": "Suggested name: Enable Windows Long Paths. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "source_file": "Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json"
-    },
-    {
-      "sprint_number": 1,
-      "priority_index": 2,
       "record_id": "network.disable-lltd",
       "category": "rename",
       "estimated_effort": "small",
@@ -52,7 +37,7 @@
     },
     {
       "sprint_number": 1,
-      "priority_index": 3,
+      "priority_index": 2,
       "record_id": "network.disable-mdns",
       "category": "rename",
       "estimated_effort": "small",
@@ -67,22 +52,7 @@
     },
     {
       "sprint_number": 1,
-      "priority_index": 4,
-      "record_id": "network.require-ntlm-ssp-client-session-security",
-      "category": "rename",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The current app description is narrower than the official Microsoft scope.",
-        "The tweak should be renamed or re-explained before it is published as a validated general control."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Registry Security Option",
-      "notes": "Suggested name: Require NTLM SSP Client Session Security. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "source_file": "Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json"
-    },
-    {
-      "sprint_number": 1,
-      "priority_index": 5,
+      "priority_index": 3,
       "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "category": "rename",
       "estimated_effort": "small",
@@ -97,7 +67,7 @@
     },
     {
       "sprint_number": 1,
-      "priority_index": 6,
+      "priority_index": 4,
       "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "category": "rename",
       "estimated_effort": "small",

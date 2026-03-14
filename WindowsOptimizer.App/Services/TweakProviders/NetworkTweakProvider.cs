@@ -354,9 +354,9 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
-            "network.require-ntlmv2-session-security",
-            "Require NTLMv2 Session Security",
-            "Requires NTLMv2 session security and 128-bit encryption for SMB clients.",
+            "network.require-ntlm-ssp-client-session-security",
+            "Require NTLM SSP Client Session Security and 128-bit Encryption",
+            "Requires NTLMv2 session security and 128-bit encryption for NTLM SSP based clients.",
             TweakRiskLevel.Risky,
             RegistryHive.LocalMachine,
             @"System\CurrentControlSet\Control\Lsa\MSV1_0",

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T08:27:23Z",
+  "generated_utc": "2026-03-14T08:42:04Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 96,
+  "source_record_count": 95,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -13,13 +13,13 @@
   },
   "counts_by_label": {
     "implementation-mismatch": 6,
-    "rename": 5,
+    "rename": 4,
     "split-needed": 25,
     "docs-first": 60
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 76,
+    "manual-override": 75,
     "proof-gate": 10
   },
   "entries": [
@@ -1523,26 +1523,6 @@
         "key_found_on_page": true,
         "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast."
       }
-    },
-    {
-      "record_id": "network.require-ntlm-ssp-client-session-security",
-      "tweak_id": "network.require-ntlmv2-session-security",
-      "source_record_status": "review-required",
-      "label": "rename",
-      "classification_method": "manual-override",
-      "classification_reason": "The current app description is narrower than the official Microsoft scope.",
-      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "category": "Network",
-      "technical_area": "Registry Security Option",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json",
-      "summary": "The app writes NTLMMinClientSec = 537395200 under MSV1_0, and Microsoft documents that numeric combination. But the official control is 'Minimum session security for NTLM SSP based clients', which is broader than the current app wording about SMB clients, so this record stays in review until the UX and scope are aligned.",
-      "decision_why": "The official numeric mapping is clear, but the current product wording narrows the scope to SMB clients even though Microsoft documents a broader NTLM SSP client security option.",
-      "blocking_issues": [
-        "The current app description is narrower than the official Microsoft scope.",
-        "The tweak should be renamed or re-explained before it is published as a validated general control."
-      ]
     },
     {
       "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
