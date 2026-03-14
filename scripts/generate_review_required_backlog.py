@@ -28,6 +28,7 @@ PROOF_GATED_SCHEMA_VERSIONS = {"1.1"}
 MANUAL_LABELS = {
     "rename": {
         "developer.enable-windows-long-paths",
+        "network.disable-lltd",
         "network.disable-mdns",
         "network.require-ntlm-ssp-client-session-security",
         "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -201,6 +202,7 @@ ACTION_HINTS = {
 
 RENAME_SUGGESTIONS = {
     "developer.enable-windows-long-paths": "Enable Windows Long Paths",
+    "network.disable-lltd": "Set LLTD Policies to Default Behavior",
     "network.require-ntlm-ssp-client-session-security": "Require NTLM SSP Client Session Security",
     "privacy.set-diagnostic-data-to-minimum-supported-level": "Set Diagnostic Data to Minimum Supported Level",
     "privacy.turn-off-sync-by-default-allow-user-override": "Turn Off Sync by Default (Allow User Override)",

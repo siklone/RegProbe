@@ -1,0 +1,324 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-lltd",
+  "tweak_id": "network.disable-lltd",
+  "record_status": "review-required",
+  "summary": "The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. This is therefore a naming and scope issue, not a wrong-key issue: the current 'Disable Network Discovery (LLTD)' UX overstates what the documented policy-disabled state guarantees.",
+  "setting": {
+    "name": "LLTD Policy Scope Mapping",
+    "category": "Network",
+    "area": "Group Policy scope and semantics",
+    "scope": "device",
+    "casual_explanation": "LLTD is part of the older Windows network discovery stack. The current app uses the documented LLTD policy values, but Microsoft's own documentation says the disabled state returns Windows to default behavior instead of guaranteeing that LLTD is fully off.",
+    "why_people_change_it": "People disable LLTD when they want less local network discovery exposure or when they think the feature is unnecessary.",
+    "tradeoffs_overview": "The feature area and policy path are real, but the current app overstates the effect. Microsoft describes the disabled side of these policies as default-behavior handling, not as a guaranteed hard-disable of LLTD.",
+    "professional_notes": "Microsoft documents EnableLLTDIO and EnableRspndr under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Their enabled states force LLTD Mapper I/O and Responder behavior on. Microsoft also says disabling or not configuring those policies leaves default behavior in place. The app currently writes 0 to both main values and sets subordinate booleans to 0. That means the app is on the correct LLTD policy surface, but the current UX claim is broader than the documented effect. Microsoft Learn also notes that changing these policies can trigger NIC rebind behavior and temporary network disruption when Group Policy reapplies them.",
+    "targets": [
+      {
+        "target_id": "lltdio-policy",
+        "location_kind": "group-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableLLTDIO",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default behavior",
+            "meaning": "The policy is not configured, so Windows uses the default LLTDIO behavior.",
+            "evidence_ids": [
+              "ms-lltd-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Policy disabled",
+            "meaning": "The policy is disabled, which Microsoft says falls back to default LLTDIO behavior.",
+            "evidence_ids": [
+              "ms-lltd-admx",
+              "ms-lltd-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Policy enabled",
+            "meaning": "The LLTDIO driver is explicitly turned on by policy.",
+            "evidence_ids": [
+              "ms-lltd-admx",
+              "ms-lltd-adml"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "lltd-responder-policy",
+        "location_kind": "group-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableRspndr",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default behavior",
+            "meaning": "The policy is not configured, so Windows uses the default Responder behavior.",
+            "evidence_ids": [
+              "ms-lltd-responder-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Policy disabled",
+            "meaning": "The policy is disabled, which Microsoft says falls back to default Responder behavior.",
+            "evidence_ids": [
+              "ms-lltd-responder-admx",
+              "ms-lltd-responder-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Policy enabled",
+            "meaning": "The Responder driver is explicitly turned on by policy.",
+            "evidence_ids": [
+              "ms-lltd-responder-admx",
+              "ms-lltd-responder-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The mismatch is semantic rather than path-based: Microsoft's policy help text describes those 0 states as policy-disabled/default-behavior handling, so the current 'Disable Network Discovery (LLTD)' wording overstates the documented effect.",
+    "writes": [
+      {
+        "target_id": "lltdio-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableLLTDIO",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "lltd-responder-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableRspndr",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Policy not configured",
+      "applies_to": "Windows Vista and later",
+      "states": [
+        {
+          "target_id": "lltdio-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Default LLTDIO behavior applies when the policy is not configured."
+        },
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Default Responder behavior applies when the policy is not configured."
+        }
+      ],
+      "evidence_ids": [
+        "ms-lltd-adml",
+        "ms-lltd-responder-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Anyone who wants a Microsoft-backed baseline"
+      ],
+      "avoid_for": [
+        "People who have already identified a separate documented feature-off method"
+      ],
+      "states": [
+        {
+          "target_id": "lltdio-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not force the LLTDIO policy off through a value Microsoft describes as default behavior."
+        },
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not force the Responder policy off through a value Microsoft describes as default behavior."
+        }
+      ],
+      "good_when": "You want the safest documented baseline.",
+      "bad_when": "You already have another validated way to disable discovery for your environment.",
+      "tradeoffs": [
+        "The Microsoft policy semantics remain intact.",
+        "This does not publish a hard-disable stance."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-lltd-adml",
+        "ms-lltd-responder-adml"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "lltdio-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Observed app write."
+        },
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Observed app write."
+        }
+      ],
+      "good_when": "You are documenting what the current app does today.",
+      "bad_when": "You want a trustworthy hard-disable mapping.",
+      "tradeoffs": [
+        "Documents current behavior.",
+        "Does not meet the validation bar for a published disable setting."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-lltd-admx",
+      "kind": "official-doc",
+      "title": "Microsoft administrative template for LLTD Mapper I/O",
+      "location": "C:\\Windows\\PolicyDefinitions\\LinkLayerTopologyDiscovery.admx",
+      "summary": "The template documents EnableLLTDIO with enabled value 1 and disabled value 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-lltd-adml",
+      "kind": "official-doc",
+      "title": "Microsoft help text for LLTD Mapper I/O policy",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LinkLayerTopologyDiscovery.adml",
+      "summary": "Microsoft says that disabling or not configuring the LLTDIO policy leaves default behavior in place.",
+      "supports": [
+        "behavior",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-lltd-responder-admx",
+      "kind": "official-doc",
+      "title": "Microsoft administrative template for LLTD Responder",
+      "location": "C:\\Windows\\PolicyDefinitions\\LinkLayerTopologyDiscovery.admx",
+      "summary": "The template documents EnableRspndr with enabled value 1 and disabled value 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-lltd-responder-adml",
+      "kind": "official-doc",
+      "title": "Microsoft help text for LLTD Responder policy",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LinkLayerTopologyDiscovery.adml",
+      "summary": "Microsoft says that disabling or not configuring the Responder policy leaves default behavior in place.",
+      "supports": [
+        "behavior",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-admx-linklayertopologydiscovery-csp",
+      "kind": "policy-csp",
+      "title": "Policy CSP - ADMX_LinkLayerTopologyDiscovery",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
+      "summary": "Microsoft Learn publishes both LLTD_EnableLLTDIO and LLTD_EnableRspndr. For each policy, Microsoft says that if you disable or do not configure the policy, the default behavior will apply.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-lltd-disconnect-kb",
+      "kind": "official-doc",
+      "title": "Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos",
+      "summary": "Microsoft documents that changing these LLTD-related policies can require protocol rebind on the NIC and temporarily disrupt network connectivity during policy reapplication.",
+      "supports": [
+        "side-effects",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current network tweak provider",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The app writes zero values to both LLTD policy controls and several subordinate booleans while calling the bundle a disable tweak.",
+      "supports": [
+        "ui-mapping",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The app writes the documented LLTD policy path and value names, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled default-behavior handling as a direct LLTD hard-disable.",
+    "blocking_issues": [
+      "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
+      "No stronger Microsoft-documented hard-disable surface for LLTD was captured in this pass."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
+    "exact_quote_or_path": "LLTD_EnableLLTDIO and LLTD_EnableRspndr. Registry Key Name: Software\\Policies\\Microsoft\\Windows\\LLTD. Registry Value Name: EnableLLTDIO / EnableRspndr. If you disable or don't configure this policy setting, the default behavior of LLTDIO will apply. If you disable or don't configure this policy setting, the default behavior for the Responder will apply.",
+    "key_found_on_page": true,
+    "notes": "Microsoft Learn and the local official ADMX/ADML files agree on the exact LLTD policy path and value names. The key finding is semantic: value 0 is documented as policy-disabled/default-behavior handling, not as a guaranteed hard-disable state."
+  }
+}

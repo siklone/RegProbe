@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:15:13Z",
+  "generated_utc": "2026-03-14T00:21:38Z",
   "backlog_type": "rename",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 5,
+  "entry_count": 6,
   "entries": [
     {
       "record_id": "developer.enable-windows-long-paths",
@@ -18,6 +18,15 @@
       "implementation_status": "partially-matches",
       "source_file": "Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json",
       "suggested_name": "Enable Windows Long Paths"
+    },
+    {
+      "record_id": "network.disable-lltd",
+      "current_state": "partially-matches | Group Policy scope and semantics",
+      "notes": "Suggested name: Set LLTD Policies to Default Behavior. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "technical_area": "Group Policy scope and semantics",
+      "implementation_status": "partially-matches",
+      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json",
+      "suggested_name": "Set LLTD Policies to Default Behavior"
     },
     {
       "record_id": "network.disable-mdns",

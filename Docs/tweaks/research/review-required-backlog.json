@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:15:13Z",
+  "generated_utc": "2026-03-14T00:21:38Z",
   "source_record_statuses": [
     "review-required"
   ],
@@ -12,14 +12,14 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 13,
-    "rename": 5,
+    "implementation-mismatch": 12,
+    "rename": 6,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 15,
-    "manual-override": 76,
+    "heuristic": 14,
+    "manual-override": 77,
     "proof-gate": 16
   },
   "entries": [
@@ -1391,31 +1391,6 @@
       }
     },
     {
-      "record_id": "network.disable-lltd",
-      "tweak_id": "network.disable-lltd",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "Policy disabled and not configured states are documented as default behavior, not as a guaranteed LLTD feature-off state.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Observed policy misuse",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json",
-      "summary": "The current app writes LLTD policy values to 0 and labels that as disabling network discovery. Microsoft's policy help text says a disabled or not configured LLTD policy falls back to default behavior, so this record remains blocked until the app uses a truly documented feature-off surface.",
-      "decision_why": "The app is currently using policy-disabled states that Microsoft documents as returning to default behavior, so this should not be published as a hard disable until the implementation is corrected or a different surface is sourced.",
-      "blocking_issues": [
-        "Policy disabled and not configured states are documented as default behavior, not as a guaranteed LLTD feature-off state."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\LinkLayerTopologyDiscovery.admx",
-        "exact_quote_or_path": "<policy name=\"LLTD_EnableLLTDIO\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableLLTDIO\">; <policy name=\"LLTD_EnableRspndr\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableRspndr\">; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior of LLTDIO will apply.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact LLTD policy values. The record remains review-required because Microsoft describes the disabled state as falling back to default behavior rather than guaranteeing a hard feature-off state."
-      }
-    },
-    {
       "record_id": "network.disable-netbios",
       "tweak_id": "network.disable-netbios",
       "source_record_status": "review-required",
@@ -1725,6 +1700,32 @@
         "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
         "key_found_on_page": true,
         "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record still stays review-required because the tweak name implies Git-specific support while the implementation only changes the Windows prerequisite."
+      }
+    },
+    {
+      "record_id": "network.disable-lltd",
+      "tweak_id": "network.disable-lltd",
+      "source_record_status": "review-required",
+      "label": "rename",
+      "classification_method": "manual-override",
+      "classification_reason": "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
+      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "category": "Network",
+      "technical_area": "Group Policy scope and semantics",
+      "implementation_status": "partially-matches",
+      "apply_allowed": false,
+      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json",
+      "summary": "The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. This is therefore a naming and scope issue, not a wrong-key issue: the current 'Disable Network Discovery (LLTD)' UX overstates what the documented policy-disabled state guarantees.",
+      "decision_why": "The app writes the documented LLTD policy path and value names, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled default-behavior handling as a direct LLTD hard-disable.",
+      "blocking_issues": [
+        "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
+        "No stronger Microsoft-documented hard-disable surface for LLTD was captured in this pass."
+      ],
+      "validation_proof": {
+        "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
+        "exact_quote_or_path": "LLTD_EnableLLTDIO and LLTD_EnableRspndr. Registry Key Name: Software\\Policies\\Microsoft\\Windows\\LLTD. Registry Value Name: EnableLLTDIO / EnableRspndr. If you disable or don't configure this policy setting, the default behavior of LLTDIO will apply. If you disable or don't configure this policy setting, the default behavior for the Responder will apply.",
+        "key_found_on_page": true,
+        "notes": "Microsoft Learn and the local official ADMX/ADML files agree on the exact LLTD policy path and value names. The key finding is semantic: value 0 is documented as policy-disabled/default-behavior handling, not as a guaranteed hard-disable state."
       }
     },
     {
