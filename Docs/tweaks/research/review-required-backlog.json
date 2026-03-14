@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T08:20:09Z",
+  "generated_utc": "2026-03-14T08:27:23Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 97,
+  "source_record_count": 96,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -13,13 +13,13 @@
   },
   "counts_by_label": {
     "implementation-mismatch": 6,
-    "rename": 6,
+    "rename": 5,
     "split-needed": 25,
     "docs-first": 60
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 77,
+    "manual-override": 76,
     "proof-gate": 10
   },
   "entries": [
@@ -1470,32 +1470,6 @@
         "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PrivateProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PublicProfile/EnableFirewall; Azure VM recovery guidance: HKLM:\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile|PublicProfile|StandardProfile -> EnableFirewall",
         "key_found_on_page": true,
         "notes": "Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. Microsoft troubleshooting guidance also confirms the SharedAccess runtime profile paths are real, but the app still writes the runtime surface instead of the official policy surface, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "developer.enable-windows-long-paths",
-      "tweak_id": "developer.git-long-paths",
-      "source_record_status": "review-required",
-      "label": "rename",
-      "classification_method": "manual-override",
-      "classification_reason": "The app enables the Windows long-path prerequisite but does not capture a Git-specific configuration surface in this research pass.",
-      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "category": "Developer",
-      "technical_area": "Windows Path Handling vs Git Configuration",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json",
-      "summary": "Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. However, the tweak is presented as Git long path support while this research pass did not capture a Git-specific configuration change from the app, so the record stays in review for scope and naming accuracy.",
-      "decision_why": "The Windows prerequisite is officially documented, but the current product wording promises Git-specific support that is broader than the captured implementation.",
-      "blocking_issues": [
-        "The app enables the Windows long-path prerequisite but does not capture a Git-specific configuration surface in this research pass.",
-        "The tweak name overstates the scope of what the current implementation actually changes."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
-        "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
-        "key_found_on_page": true,
-        "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record still stays review-required because the tweak name implies Git-specific support while the implementation only changes the Windows prerequisite."
       }
     },
     {

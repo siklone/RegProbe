@@ -22,13 +22,13 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
-        // Git Long Path Support
+        // Windows Long Paths
         // Source: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation
         yield return CreateRegistryTweak(
             context,
-            "developer.git-long-paths",
-            "Enable Git Long Path Support",
-            "Removes Windows 260 character path limit for Git repositories. Essential for modern Node.js projects with deeply nested dependencies. Source: Microsoft Windows Developer Documentation",
+            "developer.enable-windows-long-paths",
+            "Enable Windows Long Paths",
+            "Enables the Windows long-path prerequisite for compatible applications, including development tools that work with deep directory trees. Source: Microsoft Windows Developer Documentation",
             TweakRiskLevel.Safe,
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Control\FileSystem",

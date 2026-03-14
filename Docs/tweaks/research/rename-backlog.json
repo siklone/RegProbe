@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:21:38Z",
+  "generated_utc": "2026-03-14T08:27:23Z",
   "backlog_type": "rename",
   "priority_order": [
     "rename",
@@ -8,17 +8,8 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 6,
+  "entry_count": 5,
   "entries": [
-    {
-      "record_id": "developer.enable-windows-long-paths",
-      "current_state": "partially-matches | Windows Path Handling vs Git Configuration",
-      "notes": "Suggested name: Enable Windows Long Paths. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "technical_area": "Windows Path Handling vs Git Configuration",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json",
-      "suggested_name": "Enable Windows Long Paths"
-    },
     {
       "record_id": "network.disable-lltd",
       "current_state": "partially-matches | Group Policy scope and semantics",
