@@ -282,14 +282,14 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             context,
             "network.smb-require-dialect-3_1_1",
             "SMB: Require Dialect 3.1.1",
-            "Restricts SMB client/server dialects to SMB 3.1.1 or newer.",
+            "Restricts SMB client/server dialects to exactly SMB 3.1.1.",
             TweakRiskLevel.Risky,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MaxSmb2Dialect", RegistryValueKind.DWord, 65536),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\LanmanServer\Parameters", "MaxSmb2Dialect", RegistryValueKind.DWord, 65536)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanWorkstation", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanWorkstation", "MaxSmb2Dialect", RegistryValueKind.DWord, 785),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanServer", "MinSmb2Dialect", RegistryValueKind.DWord, 785),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"Software\Policies\Microsoft\Windows\LanmanServer", "MaxSmb2Dialect", RegistryValueKind.DWord, 785)
             });
 
         yield return CreateRegistryValueBatchTweak(

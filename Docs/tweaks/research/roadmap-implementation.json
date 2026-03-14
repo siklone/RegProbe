@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T04:24:47Z",
+  "generated_utc": "2026-03-14T04:50:07Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -200,21 +200,6 @@
       "current_state": "partially-matches | Registry Policy",
       "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile::EnableFirewall=0; HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile::EnableFirewall=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile::EnableFirewall (example 0); HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile::EnableFirewall (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
       "source_file": "Docs/tweaks/research/records/security.disable-windows-firewall.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 7,
-      "record_id": "network.smb-require-dialect-3_1_1",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
-        "MaxSmb2Dialect = 65536 is not one of the official documented policy values."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Policy vs Observed Service Setting",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxSmb2Dialect=65536; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MinSmb2Dialect=785; HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters::MaxSmb2Dialect=65536 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation::MaxSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MinSmb2Dialect (example 514); HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer::MaxSmb2Dialect (example 514). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json"
     },
     {
       "sprint_number": 3,

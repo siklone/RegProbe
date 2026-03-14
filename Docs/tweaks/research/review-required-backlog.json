@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T04:24:47Z",
+  "generated_utc": "2026-03-14T04:50:06Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 102,
+  "source_record_count": 101,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,13 +12,13 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 7,
+    "implementation-mismatch": 6,
     "rename": 6,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 9,
+    "heuristic": 8,
     "manual-override": 77,
     "proof-gate": 16
   },
@@ -1413,32 +1413,6 @@
         "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 64; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 16; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 128; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 15.",
         "key_found_on_page": true,
         "notes": "The official SMB tuning page explicitly lists the exact LanmanWorkstation registry paths and defaults for all four values. The record stays in review because the app writes much larger numbers than Microsoft's documented defaults and examples."
-      }
-    },
-    {
-      "record_id": "network.smb-require-dialect-3_1_1",
-      "tweak_id": "network.smb-require-dialect-3_1_1",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Policy vs Observed Service Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json",
-      "summary": "Microsoft documents minimum and maximum SMB dialect policies under the LanmanWorkstation and LanmanServer policy keys. The current app instead writes service-path values, and its MaxSmb2Dialect value of 65536 does not match the official documented policy enum values, so this record stays in review.",
-      "decision_why": "The official policy mapping is clear, but the current app uses service-path writes and an undocumented maximum value that do not match the official Microsoft policy enum.",
-      "blocking_issues": [
-        "The current app does not use the official LanmanWorkstation and LanmanServer policy paths documented in this record.",
-        "MaxSmb2Dialect = 65536 is not one of the official documented policy values."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
-        "exact_quote_or_path": "LanmanWorkstation.admx: `<enum id=\"MaxSmb2Dialect\" valueName=\"MaxSmb2Dialect\" required=\"true\">` and `<enum id=\"MinSmb2Dialect\" valueName=\"MinSmb2Dialect\" required=\"true\">`; LanmanWorkstation.adml / LanmanServer.adml label the documented enum values through `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and the official dialect enum values. The record remains review-required because the app writes service-path values instead of policy keys and uses 65536 as MaxSmb2Dialect, which is not in the official documented enum list."
       }
     },
     {

@@ -1,0 +1,566 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-require-dialect-3_1_1",
+  "tweak_id": "network.smb-require-dialect-3_1_1",
+  "record_status": "validated",
+  "summary": "Restricts SMB client and server dialect negotiation to exactly SMB 3.1.1 by writing MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the official enum values for both MinSmb2Dialect and MaxSmb2Dialect, where 785 corresponds to SMB 3.1.1. The app previously wrote service-path values and used an undocumented MaxSmb2Dialect value of 65536; it now targets the official policy surface directly.",
+  "setting": {
+    "name": "Require SMB Dialect 3.1.1",
+    "category": "Network",
+    "area": "Policy vs Observed Service Setting",
+    "scope": "mixed",
+    "casual_explanation": "This setting forces both SMB client and SMB server components to use only SMB 3.1.1. It is a strict compatibility boundary and can quickly block older devices or software that do not support that dialect.",
+    "why_people_change_it": "People require SMB 3.1.1 when they want to eliminate older SMB dialect negotiation and standardize on the newest documented dialect in their environment. They leave it alone when they need broad interoperability with mixed Windows, NAS, or legacy SMB devices.",
+    "tradeoffs_overview": "The official Microsoft control is policy-backed and uses documented enum values under the LanmanWorkstation and LanmanServer policy keys. Requiring exactly SMB 3.1.1 is a strong compatibility and hardening decision, so it should be limited to environments that already know every SMB endpoint supports that dialect.",
+    "professional_notes": "LanmanWorkstation.admx and LanmanServer.admx document MinSmb2Dialect and MaxSmb2Dialect under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer. The official enum values are 514 (SMB 2.0.2), 528 (SMB 2.1.0), 768 (SMB 3.0.0), 770 (SMB 3.0.2), and 785 (SMB 3.1.1). Requiring exactly SMB 3.1.1 means setting both minimum and maximum dialect values to 785 on both client and server policy surfaces. On 2026-03-14 the provider was aligned from service-path writes to the documented policy keys and the undocumented MaxSmb2Dialect = 65536 write was removed.",
+    "targets": [
+      {
+        "target_id": "client-min-smb2-dialect-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "MinSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB client keeps the Windows baseline minimum dialect behavior.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 514,
+            "label": "SMB 2.0.2 minimum",
+            "meaning": "Minimum dialect is SMB 2.0.2.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 528,
+            "label": "SMB 2.1.0 minimum",
+            "meaning": "Minimum dialect is SMB 2.1.0.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 768,
+            "label": "SMB 3.0.0 minimum",
+            "meaning": "Minimum dialect is SMB 3.0.0.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 770,
+            "label": "SMB 3.0.2 minimum",
+            "meaning": "Minimum dialect is SMB 3.0.2.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 785,
+            "label": "SMB 3.1.1 minimum",
+            "meaning": "Minimum dialect is SMB 3.1.1.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects",
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "client-max-smb2-dialect-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "MaxSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB client keeps the Windows baseline maximum dialect behavior.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 514,
+            "label": "SMB 2.0.2 maximum",
+            "meaning": "Maximum dialect is SMB 2.0.2.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 528,
+            "label": "SMB 2.1.0 maximum",
+            "meaning": "Maximum dialect is SMB 2.1.0.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 768,
+            "label": "SMB 3.0.0 maximum",
+            "meaning": "Maximum dialect is SMB 3.0.0.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 770,
+            "label": "SMB 3.0.2 maximum",
+            "meaning": "Maximum dialect is SMB 3.0.2.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 785,
+            "label": "SMB 3.1.1 maximum",
+            "meaning": "Maximum dialect is SMB 3.1.1.",
+            "evidence_ids": [
+              "local-lanmanworkstation-admx-dialects",
+              "local-lanmanworkstation-adml-dialects",
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "server-min-smb2-dialect-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "MinSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB server keeps the Windows baseline minimum dialect behavior.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 514,
+            "label": "SMB 2.0.2 minimum",
+            "meaning": "Minimum dialect is SMB 2.0.2.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 528,
+            "label": "SMB 2.1.0 minimum",
+            "meaning": "Minimum dialect is SMB 2.1.0.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 768,
+            "label": "SMB 3.0.0 minimum",
+            "meaning": "Minimum dialect is SMB 3.0.0.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 770,
+            "label": "SMB 3.0.2 minimum",
+            "meaning": "Minimum dialect is SMB 3.0.2.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 785,
+            "label": "SMB 3.1.1 minimum",
+            "meaning": "Minimum dialect is SMB 3.1.1.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects",
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "server-max-smb2-dialect-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "MaxSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The SMB server keeps the Windows baseline maximum dialect behavior.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 514,
+            "label": "SMB 2.0.2 maximum",
+            "meaning": "Maximum dialect is SMB 2.0.2.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 528,
+            "label": "SMB 2.1.0 maximum",
+            "meaning": "Maximum dialect is SMB 2.1.0.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 768,
+            "label": "SMB 3.0.0 maximum",
+            "meaning": "Maximum dialect is SMB 3.0.0.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 770,
+            "label": "SMB 3.0.2 maximum",
+            "meaning": "Maximum dialect is SMB 3.0.2.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 785,
+            "label": "SMB 3.1.1 maximum",
+            "meaning": "Maximum dialect is SMB 3.1.1.",
+            "evidence_ids": [
+              "local-lanmanserver-admx-dialects",
+              "local-lanmanserver-adml-dialects",
+              "app-network-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces.",
+    "writes": [
+      {
+        "target_id": "client-min-smb2-dialect-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "MinSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 785
+      },
+      {
+        "target_id": "client-max-smb2-dialect-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+        "value_name": "MaxSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 785
+      },
+      {
+        "target_id": "server-min-smb2-dialect-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "MinSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 785
+      },
+      {
+        "target_id": "server-max-smb2-dialect-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer",
+        "value_name": "MaxSmb2Dialect",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 785
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 11 and Windows Server releases exposing the SMB dialect policies",
+      "states": [
+        {
+          "target_id": "client-min-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official client minimum-dialect policy is not configured by default."
+        },
+        {
+          "target_id": "client-max-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official client maximum-dialect policy is not configured by default."
+        },
+        {
+          "target_id": "server-min-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official server minimum-dialect policy is not configured by default."
+        },
+        {
+          "target_id": "server-max-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The official server maximum-dialect policy is not configured by default."
+        }
+      ],
+      "notes": "This record validates the official SMB dialect policy surface.",
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-dialects",
+        "local-lanmanserver-adml-dialects"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Networks that need broad SMB compatibility"
+      ],
+      "avoid_for": [
+        "People who intentionally need SMB 3.1.1 only"
+      ],
+      "states": [
+        {
+          "target_id": "client-min-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official client minimum-dialect policy unset."
+        },
+        {
+          "target_id": "client-max-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official client maximum-dialect policy unset."
+        },
+        {
+          "target_id": "server-min-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official server minimum-dialect policy unset."
+        },
+        {
+          "target_id": "server-max-smb2-dialect-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official server maximum-dialect policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep the normal SMB dialect negotiation baseline.",
+      "bad_when": "You need a strict SMB 3.1.1-only policy.",
+      "tradeoffs": [
+        "Normal SMB compatibility is preserved.",
+        "No explicit SMB dialect restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-lanmanworkstation-adml-dialects",
+        "local-lanmanserver-adml-dialects"
+      ]
+    },
+    {
+      "profile_id": "require-smb-3_1_1-only",
+      "label": "Require SMB 3.1.1 only",
+      "intended_for": [
+        "Advanced administrators who control every SMB endpoint",
+        "Environments standardizing on SMB 3.1.1 only"
+      ],
+      "avoid_for": [
+        "General users",
+        "Mixed networks with older NAS devices or legacy SMB stacks"
+      ],
+      "states": [
+        {
+          "target_id": "client-min-smb2-dialect-policy",
+          "state_kind": "value",
+          "value": 785,
+          "rationale": "Use the documented client policy value for SMB 3.1.1 minimum."
+        },
+        {
+          "target_id": "client-max-smb2-dialect-policy",
+          "state_kind": "value",
+          "value": 785,
+          "rationale": "Use the documented client policy value for SMB 3.1.1 maximum."
+        },
+        {
+          "target_id": "server-min-smb2-dialect-policy",
+          "state_kind": "value",
+          "value": 785,
+          "rationale": "Use the documented server policy value for SMB 3.1.1 minimum."
+        },
+        {
+          "target_id": "server-max-smb2-dialect-policy",
+          "state_kind": "value",
+          "value": 785,
+          "rationale": "Use the documented server policy value for SMB 3.1.1 maximum."
+        }
+      ],
+      "good_when": "You intentionally want SMB client and server negotiation restricted to exactly SMB 3.1.1.",
+      "bad_when": "You need interoperability with any SMB endpoint that cannot negotiate SMB 3.1.1.",
+      "tradeoffs": [
+        "Only SMB 3.1.1 is allowed on both SMB client and server policy surfaces.",
+        "Compatibility with older SMB dialects is intentionally removed."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated official LanmanWorkstation and LanmanServer policy keys with the documented SMB 3.1.1 enum value 785 on both minimum and maximum dialect settings.",
+      "evidence_ids": [
+        "local-lanmanworkstation-admx-dialects",
+        "local-lanmanworkstation-adml-dialects",
+        "local-lanmanserver-admx-dialects",
+        "local-lanmanserver-adml-dialects",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-lanmanworkstation-admx-dialects",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.admx SMB dialect mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+      "summary": "The local ADMX file documents MinSmb2Dialect and MaxSmb2Dialect under the LanmanWorkstation policy key with official enum values 514, 528, 768, 770, and 785.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanworkstation-adml-dialects",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanWorkstation.adml SMB dialect help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanWorkstation.adml",
+      "summary": "The local ADML help text explains that the client policies control the minimum and maximum SMB protocol versions and labels the documented enum values through SMB 3.1.1.",
+      "supports": [
+        "behavior",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-admx-dialects",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.admx SMB dialect mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\LanmanServer.admx",
+      "summary": "The local ADMX file documents MinSmb2Dialect and MaxSmb2Dialect under the LanmanServer policy key with official enum values 514, 528, 768, 770, and 785.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-lanmanserver-adml-dialects",
+      "kind": "official-doc",
+      "title": "Local Microsoft LanmanServer.adml SMB dialect help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LanmanServer.adml",
+      "summary": "The local ADML help text explains that the server policies control the minimum and maximum SMB protocol versions and labels the documented enum values through SMB 3.1.1.",
+      "supports": [
+        "behavior",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official enum values for both LanmanWorkstation and LanmanServer, and the app now writes the documented SMB 3.1.1 value directly to those policy keys.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\LanmanWorkstation.admx",
+    "exact_quote_or_path": "LanmanWorkstation.admx: `<enum id=\"MinSmb2Dialect\" valueName=\"MinSmb2Dialect\" required=\"true\">` and `<enum id=\"MaxSmb2Dialect\" valueName=\"MaxSmb2Dialect\" required=\"true\">`; LanmanWorkstation.adml / LanmanServer.adml label `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official dialect enum values. The app now writes the documented LanmanWorkstation and LanmanServer policy keys directly with MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 to require exactly SMB 3.1.1."
+  }
+}
