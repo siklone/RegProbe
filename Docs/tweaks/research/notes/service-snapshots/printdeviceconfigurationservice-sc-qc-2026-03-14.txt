@@ -1,0 +1,16 @@
+Review host: Microsoft Windows 11 Pro 10.0.26200 (build 26200)
+Capture date: 2026-03-14
+Command: sc.exe qc PrintDeviceConfigurationService
+
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: PrintDeviceConfigurationService
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : Print Device Configuration Service
+        DEPENDENCIES       : RPCSS
+        SERVICE_START_NAME : LocalSystem

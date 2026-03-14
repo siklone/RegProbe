@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T05:08:03Z",
+  "generated_utc": "2026-03-14T08:12:21Z",
   "source_record_statuses": [
     "review-required"
   ],
@@ -18,9 +18,9 @@
     "docs-first": 60
   },
   "counts_by_method": {
-    "heuristic": 8,
+    "heuristic": 9,
     "manual-override": 77,
-    "proof-gate": 12
+    "proof-gate": 11
   },
   "entries": [
     {
@@ -1131,24 +1131,25 @@
       "tweak_id": "system.services.disable-print-device-configuration",
       "source_record_status": "review-required",
       "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
+      "classification_method": "heuristic",
+      "classification_reason": "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintDeviceConfigurationService in this review pass.",
       "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
       "category": "System",
       "technical_area": "Service Start Mode",
       "implementation_status": "matches-research",
       "apply_allowed": false,
       "source_file": "Docs/tweaks/research/records/system.services.disable-print-device-configuration.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. Official Windows service control for Print Device Configuration Service (PrintDeviceConfigurationService). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. Microsoft documents the PrintDeviceConfigurationService service name, default start mode, and that it is OK to disable, and the app's service-start-mode action matches that control surface.",
+      "summary": "Official Windows service control for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot now confirms the exact service identifier, display name, binary path, and current start type on the review host. The app disables the same service by setting its start mode to Disabled. This record stays in review because the current pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page.",
+      "decision_why": "The exact service identity is now proven locally through a checked-in SCM snapshot, and the app targets that same service control surface. However, this review pass did not re-capture a machine-checkable exact Microsoft guidance row for PrintDeviceConfigurationService from the live services page. Under the service-proof methodology, that means the service identity is proven but the official guidance proof is still incomplete, so the record stays in review.",
       "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
+        "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintDeviceConfigurationService in this review pass.",
+        "Under the service-proof methodology, local SCM identity proof alone is not enough to restore validated status without exact Microsoft guidance capture."
       ],
       "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
+        "source_url": "Docs/tweaks/research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt",
+        "exact_quote_or_path": "SERVICE_NAME: PrintDeviceConfigurationService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: Print Device Configuration Service | BINARY_PATH_NAME: C:\\WINDOWS\\System32\\svchost.exe -k LocalSystemNetworkRestricted -p",
+        "key_found_on_page": true,
+        "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass."
       }
     },
     {
