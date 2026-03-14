@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T08:42:04Z",
+  "generated_utc": "2026-03-14T10:06:22Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 95,
+  "source_record_count": 93,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -13,13 +13,13 @@
   },
   "counts_by_label": {
     "implementation-mismatch": 6,
-    "rename": 4,
+    "rename": 2,
     "split-needed": 25,
     "docs-first": 60
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 75,
+    "manual-override": 73,
     "proof-gate": 10
   },
   "entries": [
@@ -1470,58 +1470,6 @@
         "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PrivateProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PublicProfile/EnableFirewall; Azure VM recovery guidance: HKLM:\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile|PublicProfile|StandardProfile -> EnableFirewall",
         "key_found_on_page": true,
         "notes": "Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. Microsoft troubleshooting guidance also confirms the SharedAccess runtime profile paths are real, but the app still writes the runtime surface instead of the official policy surface, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "network.disable-lltd",
-      "tweak_id": "network.disable-lltd",
-      "source_record_status": "review-required",
-      "label": "rename",
-      "classification_method": "manual-override",
-      "classification_reason": "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
-      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "category": "Network",
-      "technical_area": "Group Policy scope and semantics",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json",
-      "summary": "The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. This is therefore a naming and scope issue, not a wrong-key issue: the current 'Disable Network Discovery (LLTD)' UX overstates what the documented policy-disabled state guarantees.",
-      "decision_why": "The app writes the documented LLTD policy path and value names, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled default-behavior handling as a direct LLTD hard-disable.",
-      "blocking_issues": [
-        "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
-        "No stronger Microsoft-documented hard-disable surface for LLTD was captured in this pass."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
-        "exact_quote_or_path": "LLTD_EnableLLTDIO and LLTD_EnableRspndr. Registry Key Name: Software\\Policies\\Microsoft\\Windows\\LLTD. Registry Value Name: EnableLLTDIO / EnableRspndr. If you disable or don't configure this policy setting, the default behavior of LLTDIO will apply. If you disable or don't configure this policy setting, the default behavior for the Responder will apply.",
-        "key_found_on_page": true,
-        "notes": "Microsoft Learn and the local official ADMX/ADML files agree on the exact LLTD policy path and value names. The key finding is semantic: value 0 is documented as policy-disabled/default-behavior handling, not as a guaranteed hard-disable state."
-      }
-    },
-    {
-      "record_id": "network.disable-mdns",
-      "tweak_id": "network.disable-mdns",
-      "source_record_status": "review-required",
-      "label": "rename",
-      "classification_method": "manual-override",
-      "classification_reason": "Naming mismatch: the current app describes the official policy-disabled local-settings behavior (EnableMDNS = 0) as a direct mDNS disable.",
-      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "category": "Network",
-      "technical_area": "Group Policy versus observed implementation",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json",
-      "summary": "The app writes the official EnableMDNS = 0 policy surface under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. Microsoft documents that disabled or not configured returns the DNS client to locally configured settings rather than guaranteeing a hard mDNS-off state. This is therefore a naming and scope problem, not a wrong-key problem: the current 'Disable mDNS' UX overstates what the documented policy-disabled state guarantees.",
-      "decision_why": "The app writes the documented mDNS policy path and value name, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled local-settings behavior as a direct mDNS hard-disable.",
-      "blocking_issues": [
-        "Naming mismatch: the current app describes the official policy-disabled local-settings behavior (EnableMDNS = 0) as a direct mDNS disable.",
-        "No stronger Microsoft-documented hard-disable surface for mDNS was captured in this pass."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\DnsClient.admx",
-        "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast."
       }
     },
     {

@@ -3,16 +3,16 @@
   "schema_version": "1.1",
   "record_id": "network.disable-lltd",
   "tweak_id": "network.disable-lltd",
-  "record_status": "review-required",
-  "summary": "The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. This is therefore a naming and scope issue, not a wrong-key issue: the current 'Disable Network Discovery (LLTD)' UX overstates what the documented policy-disabled state guarantees.",
+  "record_status": "validated",
+  "summary": "The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. The record is now modeled honestly as setting LLTD policies back to default behavior rather than as a direct LLTD hard-disable.",
   "setting": {
-    "name": "LLTD Policy Scope Mapping",
+    "name": "Set LLTD Policies to Default Behavior",
     "category": "Network",
-    "area": "Group Policy scope and semantics",
+    "area": "LLTD Policy Semantics",
     "scope": "device",
-    "casual_explanation": "LLTD is part of the older Windows network discovery stack. The current app uses the documented LLTD policy values, but Microsoft's own documentation says the disabled state returns Windows to default behavior instead of guaranteeing that LLTD is fully off.",
-    "why_people_change_it": "People disable LLTD when they want less local network discovery exposure or when they think the feature is unnecessary.",
-    "tradeoffs_overview": "The feature area and policy path are real, but the current app overstates the effect. Microsoft describes the disabled side of these policies as default-behavior handling, not as a guaranteed hard-disable of LLTD.",
+    "casual_explanation": "LLTD is part of the older Windows network discovery stack. This tweak disables the explicit LLTD mapper and responder policies so Windows falls back to the documented default LLTD behavior.",
+    "why_people_change_it": "People use it when they want to remove an explicit LLTD policy override and let Windows use its default behavior instead.",
+    "tradeoffs_overview": "This does not guarantee that LLTD is fully off. Microsoft documents the disabled side of these policies as default-behavior handling, so the effective result depends on the rest of the machine's configuration and discovery stack.",
     "professional_notes": "Microsoft documents EnableLLTDIO and EnableRspndr under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. Their enabled states force LLTD Mapper I/O and Responder behavior on. Microsoft also says disabling or not configuring those policies leaves default behavior in place. The app currently writes 0 to both main values and sets subordinate booleans to 0. That means the app is on the correct LLTD policy surface, but the current UX claim is broader than the documented effect. Microsoft Learn also notes that changing these policies can trigger NIC rebind behavior and temporary network disruption when Group Policy reapplies them.",
     "targets": [
       {
@@ -94,9 +94,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "partially-matches",
+    "status": "matches-research",
     "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
-    "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The mismatch is semantic rather than path-based: Microsoft's policy help text describes those 0 states as policy-disabled/default-behavior handling, so the current 'Disable Network Discovery (LLTD)' wording overstates the documented effect.",
+    "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable.",
     "writes": [
       {
         "target_id": "lltdio-policy",
@@ -166,48 +166,53 @@
         }
       ],
       "good_when": "You want the safest documented baseline.",
-      "bad_when": "You already have another validated way to disable discovery for your environment.",
+      "bad_when": "You need to remove an explicit LLTD policy override through the app.",
       "tradeoffs": [
         "The Microsoft policy semantics remain intact.",
         "This does not publish a hard-disable stance."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-lltd-adml",
         "ms-lltd-responder-adml"
       ]
     },
     {
-      "profile_id": "current-app-profile",
-      "label": "Current app profile",
+      "profile_id": "set-lltd-policies-to-default-behavior",
+      "label": "Set LLTD policies to default behavior",
       "intended_for": [
-        "Research comparison only"
+        "Admins who want to remove explicit LLTD policy overrides",
+        "Research and troubleshooting scenarios where default LLTD behavior is preferred"
       ],
       "avoid_for": [
-        "Normal Apply exposure"
+        "People expecting a guaranteed LLTD hard-disable"
       ],
       "states": [
         {
           "target_id": "lltdio-policy",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Observed app write."
+          "rationale": "Disable the explicit LLTDIO policy so Windows uses the documented default behavior."
         },
         {
           "target_id": "lltd-responder-policy",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Observed app write."
+          "rationale": "Disable the explicit Responder policy so Windows uses the documented default behavior."
         }
       ],
-      "good_when": "You are documenting what the current app does today.",
-      "bad_when": "You want a trustworthy hard-disable mapping.",
+      "good_when": "You want the documented policy-disabled default-behavior handling for LLTD.",
+      "bad_when": "You need a stronger Microsoft-documented hard-disable surface for LLTD.",
       "tradeoffs": [
-        "Documents current behavior.",
-        "Does not meet the validation bar for a published disable setting."
+        "Matches the official documented policy semantics.",
+        "Does not guarantee that LLTD is fully off."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
+        "ms-lltd-admx",
+        "ms-lltd-adml",
+        "ms-lltd-responder-admx",
+        "ms-lltd-responder-adml",
         "app-network-provider"
       ]
     }
@@ -293,7 +298,7 @@
       "kind": "repo-code",
       "title": "Current network tweak provider",
       "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
-      "summary": "The app writes zero values to both LLTD policy controls and several subordinate booleans while calling the bundle a disable tweak.",
+      "summary": "The app writes zero values to both LLTD policy controls and presents the bundle as setting the LLTD policies back to documented default behavior.",
       "supports": [
         "ui-mapping",
         "value"
@@ -303,16 +308,13 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The app writes the documented LLTD policy path and value names, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled default-behavior handling as a direct LLTD hard-disable.",
-    "blocking_issues": [
-      "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
-      "No stronger Microsoft-documented hard-disable surface for LLTD was captured in this pass."
-    ]
+    "why": "The app writes the documented LLTD policy path and value names, and the UX now reflects Microsoft's actual semantics for value 0: policy-disabled default-behavior handling rather than a guaranteed hard-disable.",
+    "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {

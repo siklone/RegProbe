@@ -122,8 +122,8 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
         yield return CreateRegistryTweak(
             context,
             "network.disable-mdns",
-            "Disable mDNS",
-            "Turns off multicast DNS name resolution.",
+            "Set mDNS Policy to Local Settings",
+            "Disables the explicit mDNS policy so Windows falls back to locally configured mDNS behavior.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows NT\DNSClient",
@@ -158,8 +158,8 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
         yield return CreateRegistryValueSetTweak(
             context,
             "network.disable-lltd",
-            "Disable Network Discovery (LLTD)",
-            "Disables LLTD mapper and responder for network discovery.",
+            "Set LLTD Policies to Default Behavior",
+            "Disables the explicit LLTD mapper and responder policies so Windows uses the documented default behavior.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\LLTD",

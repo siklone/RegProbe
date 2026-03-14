@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T08:42:04Z",
+  "generated_utc": "2026-03-14T10:06:23Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -23,36 +23,6 @@
     {
       "sprint_number": 1,
       "priority_index": 1,
-      "record_id": "network.disable-lltd",
-      "category": "rename",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "Naming mismatch: the current app describes policy-disabled default-behavior handling as a direct LLTD disable.",
-        "No stronger Microsoft-documented hard-disable surface for LLTD was captured in this pass."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Group Policy scope and semantics",
-      "notes": "Suggested name: Set LLTD Policies to Default Behavior. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "source_file": "Docs/tweaks/research/records/network.disable-lltd.review.json"
-    },
-    {
-      "sprint_number": 1,
-      "priority_index": 2,
-      "record_id": "network.disable-mdns",
-      "category": "rename",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "Naming mismatch: the current app describes the official policy-disabled local-settings behavior (EnableMDNS = 0) as a direct mDNS disable.",
-        "No stronger Microsoft-documented hard-disable surface for mDNS was captured in this pass."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Group Policy versus observed implementation",
-      "notes": "Suggested name: Rename this tweak so the title matches the actual scope. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json"
-    },
-    {
-      "sprint_number": 1,
-      "priority_index": 3,
       "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "category": "rename",
       "estimated_effort": "small",
@@ -67,7 +37,7 @@
     },
     {
       "sprint_number": 1,
-      "priority_index": 4,
+      "priority_index": 2,
       "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "category": "rename",
       "estimated_effort": "small",
