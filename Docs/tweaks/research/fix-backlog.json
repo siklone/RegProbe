@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T23:36:26Z",
+  "generated_utc": "2026-03-14T00:15:13Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 14,
+  "entry_count": 13,
   "entries": [
     {
       "record_id": "developer.wsl2-memory",
@@ -74,33 +74,6 @@
           "location_kind": "group-policy",
           "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
           "value_name": "EnableRspndr",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
-    {
-      "record_id": "network.disable-mdns",
-      "current_state": "mismatch-suspected | Group Policy versus observed implementation",
-      "notes": "Move the implementation from HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS=0 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient::EnableMDNS (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Group Policy versus observed implementation",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
-          "value_name": "EnableMDNS",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "group-policy",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
-          "value_name": "EnableMDNS",
           "value_type": "REG_DWORD",
           "example_value": 0
         }

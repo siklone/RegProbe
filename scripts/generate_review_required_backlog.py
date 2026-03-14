@@ -28,6 +28,7 @@ PROOF_GATED_SCHEMA_VERSIONS = {"1.1"}
 MANUAL_LABELS = {
     "rename": {
         "developer.enable-windows-long-paths",
+        "network.disable-mdns",
         "network.require-ntlm-ssp-client-session-security",
         "privacy.set-diagnostic-data-to-minimum-supported-level",
         "privacy.turn-off-sync-by-default-allow-user-override",

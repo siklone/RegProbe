@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-13T23:36:26Z",
+  "generated_utc": "2026-03-14T00:15:13Z",
   "source_record_statuses": [
     "review-required"
   ],
@@ -12,14 +12,14 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 14,
-    "rename": 4,
+    "implementation-mismatch": 13,
+    "rename": 5,
     "split-needed": 25,
     "docs-first": 64
   },
   "counts_by_method": {
-    "heuristic": 16,
-    "manual-override": 75,
+    "heuristic": 15,
+    "manual-override": 76,
     "proof-gate": 16
   },
   "entries": [
@@ -1416,31 +1416,6 @@
       }
     },
     {
-      "record_id": "network.disable-mdns",
-      "tweak_id": "network.disable-mdns",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app describes policy-disabled local-settings behavior as a direct mDNS disable.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Group Policy versus observed implementation",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json",
-      "summary": "The current app writes EnableMDNS = 0 and calls that disabling mDNS. Microsoft's DNS client policy help says disabled or not configured returns to locally configured settings, so this does not yet meet the bar for a published hard-disable record.",
-      "decision_why": "The official policy semantics do not publish value 0 as a guaranteed hard-disable state, so this tweak should remain blocked until the implementation is corrected or a better Microsoft surface is sourced.",
-      "blocking_issues": [
-        "The current app describes policy-disabled local-settings behavior as a direct mDNS disable."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\DnsClient.admx",
-        "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",
-        "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The record remains review-required because Microsoft describes value 0 as policy-disabled or local-settings behavior, not as a guaranteed hard-disable state."
-      }
-    },
-    {
       "record_id": "network.disable-netbios",
       "tweak_id": "network.disable-netbios",
       "source_record_status": "review-required",
@@ -1750,6 +1725,32 @@
         "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
         "key_found_on_page": true,
         "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record still stays review-required because the tweak name implies Git-specific support while the implementation only changes the Windows prerequisite."
+      }
+    },
+    {
+      "record_id": "network.disable-mdns",
+      "tweak_id": "network.disable-mdns",
+      "source_record_status": "review-required",
+      "label": "rename",
+      "classification_method": "manual-override",
+      "classification_reason": "Naming mismatch: the current app describes the official policy-disabled local-settings behavior (EnableMDNS = 0) as a direct mDNS disable.",
+      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
+      "category": "Network",
+      "technical_area": "Group Policy versus observed implementation",
+      "implementation_status": "partially-matches",
+      "apply_allowed": false,
+      "source_file": "Docs/tweaks/research/records/network.disable-mdns.review.json",
+      "summary": "The app writes the official EnableMDNS = 0 policy surface under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. Microsoft documents that disabled or not configured returns the DNS client to locally configured settings rather than guaranteeing a hard mDNS-off state. This is therefore a naming and scope problem, not a wrong-key problem: the current 'Disable mDNS' UX overstates what the documented policy-disabled state guarantees.",
+      "decision_why": "The app writes the documented mDNS policy path and value name, but Microsoft's documented semantics for value 0 are narrower than the current UX claim. This is a naming and scope issue: the product presents policy-disabled local-settings behavior as a direct mDNS hard-disable.",
+      "blocking_issues": [
+        "Naming mismatch: the current app describes the official policy-disabled local-settings behavior (EnableMDNS = 0) as a direct mDNS disable.",
+        "No stronger Microsoft-documented hard-disable surface for mDNS was captured in this pass."
+      ],
+      "validation_proof": {
+        "source_url": "C:\\Windows\\PolicyDefinitions\\DnsClient.admx",
+        "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",
+        "key_found_on_page": true,
+        "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast."
       }
     },
     {
