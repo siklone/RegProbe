@@ -86,6 +86,24 @@ Practical interpretation:
 - Treat Procmon, VM tests, or official behavior documentation as stronger proof for runtime behavior.
 - For critical or behavior-sensitive records, it is reasonable to keep `decision.needs_vm_validation = true` even when ADMX proof is sufficient to move the record to `validated`.
 
+### Enum And Range Proof Order
+
+When a setting is not a simple binary on/off switch, use the following evidence order before escalating to reverse engineering:
+
+1. ADMX enum or `valueList` mapping
+2. Microsoft Learn or ADML behavior text
+3. WPR or ETW behavioral diff
+4. Reverse engineering such as Ghidra
+
+Practical interpretation:
+
+- Binary on/off with explicit ADMX `enabledValue` and `disabledValue`: ADMX is usually sufficient for value meaning. Procmon is still useful for runtime-write confirmation, but not for basic value semantics.
+- Enum or multi-state setting with an ADMX `valueList` or enum block: treat ADMX as the primary source for the meaning of each documented value.
+- Enum or multi-state setting without a usable ADMX enum and without a Microsoft Learn mapping: use WPR, ETW, or other behavioral diffs before escalating to disassembly.
+- Fully undocumented settings with no usable primary source: Ghidra or similar reverse engineering is a last-resort tool, not the first step.
+
+Do not escalate to Ghidra just because a value is non-binary. If the ADMX already defines the enum list, that is the authoritative meaning source for the documented values.
+
 ### Procmon Requirement Tiers
 
 Use the following three-way split when deciding whether Procmon is needed:
@@ -150,6 +168,22 @@ Rule of thumb:
 - exact official surface match: Procmon usually not required
 - official feature but different surface: Procmon is usually helpful
 - no official surface: Procmon is usually required
+
+### Undocumented Key Range Work
+
+Documentation-first still comes before runtime inference.
+
+If a key has no complete Microsoft documentation and we do not yet know the full value range, finish the normal documentation pass first and treat runtime range exploration as a later follow-up task.
+
+Use runtime testing for undocumented keys to answer questions such as:
+
+- which values are actually written or read on a tested build
+- whether `missing`, `0`, `1`, or other tested values produce visibly different behavior
+- which process or service consumes the key
+
+Do not treat runtime testing alone as exhaustive proof of the full allowed range.
+
+For the repeatable workflow and recording template, see [notes/undocumented-runtime-validation.md](./notes/undocumented-runtime-validation.md).
 
 ### Accessibility And Safety Caveat
 
