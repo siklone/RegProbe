@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T05:00:05Z",
+  "generated_utc": "2026-03-14T05:03:04Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 99,
+  "source_record_count": 98,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 6,
     "rename": 6,
     "split-needed": 25,
-    "docs-first": 62
+    "docs-first": 61
   },
   "counts_by_method": {
     "heuristic": 8,
     "manual-override": 77,
-    "proof-gate": 14
+    "proof-gate": 13
   },
   "entries": [
     {
@@ -457,23 +457,6 @@
       "blocking_issues": [
         "Binary rename is more invasive than a validated policy or preference control."
       ]
-    },
-    {
-      "record_id": "privacy.disable-pca-diagnostics.policy",
-      "tweak_id": "privacy.disable-pca-diagnostics.policy",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "Kanit zinciri tam: pca.admx explicit enabledValue/disabledValue + pca.adml exact behavior text + MS Learn CSP page. Numeric direction acik, context inference yok. Risk dusuk - detection kapatiliyor, PCA tamamen kapatilmiyor. recommended_for_general_users=false cunku fark minimal ve general user icin baglam gerektiriyor. Procmon opsiyonel - explicit ADMX zinciri bu tur kayitlar icin yeterli kabul ediliyor.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Application Compatibility",
-      "implementation_status": "not-mapped",
-      "apply_allowed": true,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json",
-      "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).",
-      "decision_why": "Kanit zinciri tam: pca.admx explicit enabledValue/disabledValue + pca.adml exact behavior text + MS Learn CSP page. Numeric direction acik, context inference yok. Risk dusuk - detection kapatiliyor, PCA tamamen kapatilmiyor. recommended_for_general_users=false cunku fark minimal ve general user icin baglam gerektiriyor. Procmon opsiyonel - explicit ADMX zinciri bu tur kayitlar icin yeterli kabul ediliyor.",
-      "blocking_issues": []
     },
     {
       "record_id": "privacy.hide-username-at-signin",
