@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T12:43:33Z",
+  "generated_utc": "2026-03-14T14:00:10Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 57,
+  "entry_count": 56,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -172,21 +172,6 @@
           "track": "Service or scheduled-task baseline diff",
           "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
           "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
-        }
-      ]
-    },
-    {
-      "record_id": "performance.disable-animations",
-      "current_state": "partially-matches | Win32 Animation Effects vs Registry Observation",
-      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Win32 Animation Effects vs Registry Observation",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/performance.disable-animations.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or VM toggle-diff validation",
-          "why_not_validated": "No primary Microsoft source for HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate was captured in this pass.",
-          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
         }
       ]
     },

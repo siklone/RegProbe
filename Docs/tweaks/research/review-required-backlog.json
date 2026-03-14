@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T12:43:33Z",
+  "generated_utc": "2026-03-14T14:00:10Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 90,
+  "source_record_count": 89,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 57
+    "docs-first": 56
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 70,
+    "manual-override": 69,
     "proof-gate": 10
   },
   "entries": [
@@ -211,26 +211,6 @@
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
       }
-    },
-    {
-      "record_id": "performance.disable-animations",
-      "tweak_id": "performance.disable-animations",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Performance",
-      "technical_area": "Win32 Animation Effects vs Registry Observation",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/performance.disable-animations.review.json",
-      "summary": "Win32 officially documents window-animation behavior through SystemParametersInfo and ANIMATIONINFO.iMinAnimate. The current app writes HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate = \"0\" directly, but this research pass did not capture a primary Microsoft registry contract for that path, so the record stays in review.",
-      "decision_why": "The animation feature semantics are officially documented, but this research pass did not capture a primary Microsoft registry contract for the MinAnimate path used by the app.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate was captured in this pass.",
-        "The app uses a direct registry write instead of the public Win32 feature surface captured here."
-      ]
     },
     {
       "record_id": "performance.disable-menu-show-delay",
