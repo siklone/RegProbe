@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T02:05:07Z",
+  "generated_utc": "2026-03-14T04:24:47Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -172,21 +172,6 @@
     {
       "sprint_number": 2,
       "priority_index": 5,
-      "record_id": "network.smb-enable-multichannel",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app does not use the documented EnableMultiChannel control surface.",
-        "The current app only touches the client side, while Microsoft's documented feature model includes both client and server."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | API vs Observed Service Setting",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DisableMultiChannel=0 to the researched surface Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration::EnableMultiChannel (example false); Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration::EnableMultiChannel (example false). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/network.smb-enable-multichannel.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 6,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -202,7 +187,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 7,
+      "priority_index": 6,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -218,7 +203,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 8,
+      "priority_index": 7,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",

@@ -94,6 +94,79 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public async Task EnableSmbMultichannelTweak_DetectAsync_WhenBothSidesEnabled_ReturnsAppliedStatus()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"ClientEnableMultiChannel\":true,\"ServerEnableMultiChannel\":true}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)));
+
+        var tweak = new EnableSmbMultichannelTweak(mockRunner.Object);
+
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+        Assert.Contains("ClientEnableMultiChannel", result.Message);
+    }
+
+    [Fact]
+    public async Task EnableSmbMultichannelTweak_ApplyVerifyAndRollback_UseClientAndServerCommands()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"ClientEnableMultiChannel\":false,\"ServerEnableMultiChannel\":false}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"ClientEnableMultiChannel\":true,\"ServerEnableMultiChannel\":true}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"ClientEnableMultiChannel\":true,\"ServerEnableMultiChannel\":true}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"ClientEnableMultiChannel\":false,\"ServerEnableMultiChannel\":false}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(50)));
+
+        var tweak = new EnableSmbMultichannelTweak(mockRunner.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var verifyResult = await tweak.VerifyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.Verified, verifyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Arguments.Contains("Set-SmbClientConfiguration -EnableMultiChannel $true -Force | Out-Null; Set-SmbServerConfiguration -EnableMultiChannel $true -Force | Out-Null; Write-Output '{\"ClientEnableMultiChannel\":true,\"ServerEnableMultiChannel\":true}'")),
+            It.IsAny<CancellationToken>()), Times.Once);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Arguments.Contains("Set-SmbClientConfiguration -EnableMultiChannel $false -Force | Out-Null; Set-SmbServerConfiguration -EnableMultiChannel $false -Force | Out-Null; Write-Output '{\"ClientEnableMultiChannel\":false,\"ServerEnableMultiChannel\":false}'")),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
     public async Task DisableHibernationTweak_DetectAsync_WhenHibernationEnabled_ReturnsDetectedStatus()
     {
         // Arrange

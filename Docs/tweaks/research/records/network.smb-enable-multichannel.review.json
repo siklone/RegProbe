@@ -1,0 +1,306 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-enable-multichannel",
+  "tweak_id": "network.smb-enable-multichannel",
+  "record_status": "validated",
+  "summary": "Enables SMB Multichannel through the documented SMB client and SMB server configuration surfaces. Microsoft documents EnableMultiChannel on both MSFT_SmbClientConfiguration and MSFT_SmbServerConfiguration, and Microsoft states that SMB Multichannel is enabled by default. The app previously wrote DisableMultiChannel = 0 under the LanmanWorkstation service path; it now uses a command-backed implementation that applies EnableMultiChannel = true on both client and server surfaces and can restore the previously detected boolean states.",
+  "setting": {
+    "name": "SMB Multichannel",
+    "category": "Network",
+    "area": "SMB Client and Server Configuration",
+    "scope": "mixed",
+    "casual_explanation": "SMB Multichannel lets Windows use multiple network paths at the same time for file sharing. This can improve throughput and keep transfers running if one path fails.",
+    "why_people_change_it": "People usually leave SMB Multichannel enabled because it is part of the normal modern SMB stack. They change it only when they need to force the documented multichannel state during advanced troubleshooting or controlled SMB deployments.",
+    "tradeoffs_overview": "Microsoft documents SMB Multichannel as enabled by default. Forcing it on by configuration is usually redundant on healthy systems, but it can be useful in environments that want an explicit managed state for both SMB client and server surfaces.",
+    "professional_notes": "Microsoft documents SMB Multichannel through the EnableMultiChannel property on both MSFT_SmbClientConfiguration and MSFT_SmbServerConfiguration, and the corresponding Set-SmbClientConfiguration and Set-SmbServerConfiguration cmdlets. The app previously wrote HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableMultiChannel = 0, which was a client-side service-path write and did not also configure the documented server surface. On 2026-03-14 the provider was aligned to a command-backed implementation that detects both booleans, applies EnableMultiChannel = true on client and server, verifies the result, and restores the previously detected boolean pair on rollback.",
+    "targets": [
+      {
+        "target_id": "client-enable-multichannel",
+        "location_kind": "wmi",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration",
+        "value_name": "EnableMultiChannel",
+        "value_type": "BOOLEAN",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": false,
+            "label": "SMB Multichannel disabled on client",
+            "meaning": "The SMB client does not use multiple network connections for a session.",
+            "evidence_ids": [
+              "ms-manage-smb-multichannel",
+              "ms-smbclient-setconfiguration"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": true,
+            "label": "SMB Multichannel enabled on client",
+            "meaning": "The SMB client can use multiple network connections for a session when the configuration supports it.",
+            "evidence_ids": [
+              "ms-manage-smb-multichannel",
+              "ms-smbclient-setconfiguration"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "server-enable-multichannel",
+        "location_kind": "wmi",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+        "value_name": "EnableMultiChannel",
+        "value_type": "BOOLEAN",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": false,
+            "label": "SMB Multichannel disabled on server",
+            "meaning": "The SMB server does not use multiple network connections for a session.",
+            "evidence_ids": [
+              "ms-manage-smb-multichannel",
+              "ms-smbserver-class"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": true,
+            "label": "SMB Multichannel enabled on server",
+            "meaning": "The SMB server can use multiple network connections for a session when the configuration supports it.",
+            "evidence_ids": [
+              "ms-manage-smb-multichannel",
+              "ms-smbserver-class"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
+    "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
+    "writes": [
+      {
+        "target_id": "client-enable-multichannel",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbClientConfiguration",
+        "value_name": "EnableMultiChannel",
+        "value_type": "BOOLEAN",
+        "state_kind": "value",
+        "value": true,
+        "notes": "Applied through Set-SmbClientConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback."
+      },
+      {
+        "target_id": "server-enable-multichannel",
+        "path": "Root\\Microsoft\\Windows\\Smb\\MSFT_SmbServerConfiguration",
+        "value_name": "EnableMultiChannel",
+        "value_type": "BOOLEAN",
+        "state_kind": "value",
+        "value": true,
+        "notes": "Applied through Set-SmbServerConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows SMB Multichannel default",
+      "applies_to": "Supported Windows SMB client and server releases with SMB 3.0 and later behavior",
+      "states": [
+        {
+          "target_id": "client-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Microsoft states that SMB Multichannel is enabled by default."
+        },
+        {
+          "target_id": "server-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Microsoft states that SMB Multichannel is enabled by default."
+        }
+      ],
+      "notes": "Microsoft documents SMB Multichannel as a normal default part of the modern SMB stack.",
+      "evidence_ids": [
+        "ms-manage-smb-multichannel"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Modern SMB environments",
+        "Normal file server and client deployments"
+      ],
+      "avoid_for": [
+        "Very narrow troubleshooting that intentionally disables SMB Multichannel"
+      ],
+      "states": [
+        {
+          "target_id": "client-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Keep the documented default client behavior."
+        },
+        {
+          "target_id": "server-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Keep the documented default server behavior."
+        }
+      ],
+      "good_when": "You want the normal Windows SMB baseline with higher throughput and failover potential when multiple paths are available.",
+      "bad_when": "You are running a targeted test that specifically needs SMB Multichannel disabled.",
+      "tradeoffs": [
+        "Throughput and resilience are usually better when the environment supports it.",
+        "No extra override beyond the documented default is needed."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-manage-smb-multichannel"
+      ]
+    },
+    {
+      "profile_id": "force-enable-smb-multichannel",
+      "label": "Force-enable SMB Multichannel",
+      "intended_for": [
+        "Advanced administrators managing SMB policy explicitly",
+        "Controlled environments that want both client and server multichannel forced on"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems where Windows default behavior is already sufficient"
+      ],
+      "states": [
+        {
+          "target_id": "client-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Use the documented SMB client configuration surface."
+        },
+        {
+          "target_id": "server-enable-multichannel",
+          "state_kind": "value",
+          "value": true,
+          "rationale": "Use the documented SMB server configuration surface."
+        }
+      ],
+      "good_when": "You intentionally want an explicit managed multichannel-on state for both SMB client and server.",
+      "bad_when": "You do not need policy enforcement beyond the normal default behavior.",
+      "tradeoffs": [
+        "The feature is explicitly enabled on both documented surfaces.",
+        "This is an advanced management setting and can be redundant on normal systems."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated documented SMB client and server configuration surfaces. The app now applies and restores both booleans through command-backed client and server configuration calls.",
+      "evidence_ids": [
+        "ms-manage-smb-multichannel",
+        "ms-smbclient-setconfiguration",
+        "ms-smbserver-class",
+        "engine-network-command-tweak",
+        "local-smb-multichannel-detect"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-manage-smb-multichannel",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Manage SMB Multichannel",
+      "location": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
+      "summary": "Microsoft documents that SMB Multichannel is enabled by default and shows EnableMultiChannel on both client and server configuration surfaces.",
+      "supports": [
+        "default",
+        "behavior",
+        "risk",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-smbclient-setconfiguration",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration",
+      "summary": "Microsoft documents EnableMultiChannel as a boolean SMB client configuration parameter in the Root\\Microsoft\\Windows\\Smb namespace.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-smbserver-class",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: MSFT_SmbServerConfiguration class",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+      "summary": "Microsoft documents EnableMultiChannel as a boolean SMB server configuration property in the Root\\Microsoft\\Windows\\Smb namespace.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "NetworkTweakProvider exposes the SMB Multichannel tweak and delegates it to a command-backed client and server configuration implementation.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-network-command-tweak",
+      "kind": "repo-code",
+      "title": "Command-backed SMB Multichannel implementation",
+      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
+      "summary": "The engine tweak detects the current SMB client and server EnableMultiChannel booleans, applies Set-SmbClientConfiguration -EnableMultiChannel $true and Set-SmbServerConfiguration -EnableMultiChannel $true, verifies that both report true, and restores the previously detected boolean pair during rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-smb-multichannel-detect",
+      "kind": "vm-test",
+      "title": "Local read-only SMB Multichannel detect run",
+      "location": "Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037",
+      "summary": "Read-only Get-SmbClientConfiguration and Get-SmbServerConfiguration runs on the current machine returned ClientEnableMultiChannel = True and ServerEnableMultiChannel = True, confirming that both documented configuration surfaces are live on this build.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents EnableMultiChannel as the supported SMB client and SMB server configuration surface, and also states that SMB Multichannel is enabled by default. The app now matches that model with a command-backed implementation that detects both booleans, applies the documented client and server enable actions, verifies the result, and restores the previously detected values on rollback.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
+    "exact_quote_or_path": "Manage SMB Multichannel: `Because SMB Multichannel is enabled by default` and `Set-SmbServerConfiguration -EnableMultiChannel $false` / `Set-SmbClientConfiguration -EnableMultiChannel $false`; MSFT_SmbServerConfiguration: `EnableMultiChannel ... Controls whether SMB Multichannel is enabled for this server.`; SetConfiguration method of MSFT_SmbClientConfiguration: `EnableMultiChannel [in] Enable the use of multiple physical network interfaces.`",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents the official control surface as the EnableMultiChannel property on both SMB client and SMB server configuration surfaces, and the app now uses those documented surfaces through a command-backed implementation."
+  }
+}

@@ -264,17 +264,7 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
 
         yield return new DisableSmbLeasingTweak(context.ElevatedCommandRunner);
 
-        yield return CreateRegistryTweak(
-            context,
-            "network.smb-enable-multichannel",
-            "SMB: Enable Multichannel",
-            "Enables SMB multichannel for parallel network paths.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"System\CurrentControlSet\Services\LanmanWorkstation\Parameters",
-            "DisableMultiChannel",
-            RegistryValueKind.DWord,
-            0);
+        yield return new EnableSmbMultichannelTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryValueBatchTweak(
             context,
