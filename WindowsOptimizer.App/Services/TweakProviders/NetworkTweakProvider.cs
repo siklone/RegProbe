@@ -91,17 +91,7 @@ public sealed class NetworkTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             0xFF);
 
-        yield return CreateRegistryTweak(
-            context,
-            "network.disable-netbios",
-            "Disable NetBIOS over TCP/IP",
-            "Disables the legacy NetBIOS protocol to modernize the network stack.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.LocalMachine,
-            @"SYSTEM\CurrentControlSet\Services\NetBT\Parameters",
-            "NoNameReleaseOnDemand",
-            RegistryValueKind.DWord,
-            1);
+        yield return new DisableNetbiosOverTcpIpTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryTweak(
             context,

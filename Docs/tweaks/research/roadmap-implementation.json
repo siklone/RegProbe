@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T00:21:38Z",
+  "generated_utc": "2026-03-14T00:43:48Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -172,21 +172,6 @@
     {
       "sprint_number": 2,
       "priority_index": 5,
-      "record_id": "network.disable-netbios",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "Current app implementation writes NoNameReleaseOnDemand instead of the documented per-interface NetbiosOptions value.",
-        "A correct UX likely needs adapter enumeration instead of a single global toggle."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Per-interface Registry Configuration",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters::NoNameReleaseOnDemand=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*::NetbiosOptions (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/network.disable-netbios.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 6,
       "record_id": "network.smb-disable-leasing",
       "category": "fix",
       "estimated_effort": "large",
@@ -201,7 +186,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 7,
+      "priority_index": 6,
       "record_id": "network.smb-enable-multichannel",
       "category": "fix",
       "estimated_effort": "large",
@@ -216,7 +201,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 8,
+      "priority_index": 7,
       "record_id": "security.disable-system-mitigations",
       "category": "fix",
       "estimated_effort": "large",
@@ -232,7 +217,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 9,
+      "priority_index": 8,
       "record_id": "network.smb-enable-quic",
       "category": "fix",
       "estimated_effort": "large",
@@ -247,7 +232,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 10,
+      "priority_index": 9,
       "record_id": "network.smb-set-cipher-suite-order",
       "category": "fix",
       "estimated_effort": "large",
@@ -262,7 +247,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 11,
+      "priority_index": 10,
       "record_id": "security.disable-windows-firewall",
       "category": "fix",
       "estimated_effort": "large",
@@ -278,7 +263,7 @@
     },
     {
       "sprint_number": 2,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "network.smb-require-dialect-3_1_1",
       "category": "fix",
       "estimated_effort": "large",
