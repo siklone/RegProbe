@@ -22,8 +22,8 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-diagnostic-data",
-            "Disable Diagnostic Data (Policy)",
-            "Sets diagnostic data collection to the minimum level required for Windows to operate.",
+            "Set Diagnostic Data to Minimum Supported Level",
+            "Sets diagnostic data collection to the lowest documented level supported by the edition.",
             TweakRiskLevel.Risky,
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\DataCollection",
