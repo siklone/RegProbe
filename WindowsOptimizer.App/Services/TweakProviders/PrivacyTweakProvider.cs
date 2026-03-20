@@ -747,8 +747,8 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
         yield return CreateRegistryValueSetTweak(
             context,
             "privacy.disable-sync-settings",
-            "Disable Settings Sync",
-            "Disables syncing Windows settings and related data across devices.",
+            "Turn Off Settings Sync by Default",
+            "Turns off syncing Windows settings and related data across devices while still allowing user override.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"Software\Policies\Microsoft\Windows\SettingSync",

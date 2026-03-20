@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:53:54Z",
+  "generated_utc": "2026-03-20T19:09:14Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -34,22 +34,6 @@
       "current_state": "partially-matches | Registry Policy",
       "notes": "Suggested name: Set Diagnostic Data to Minimum Supported Level. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
       "source_file": "Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json"
-    },
-    {
-      "sprint_number": 1,
-      "priority_index": 2,
-      "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "category": "rename",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The current app writes *UserOverride = 0, which Microsoft documents as allowing users to turn syncing back on.",
-        "The tweak name suggests a hard disable even though the current bundle behaves more like default-off plus user override.",
-        "The product should split soft default-off behavior from strict no-override behavior before this can be published as validated."
-      ],
-      "depends_on": [],
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Suggested name: Turn Off Sync by Default (Allow User Override). Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "source_file": "Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json"
     },
     {
       "sprint_number": 2,

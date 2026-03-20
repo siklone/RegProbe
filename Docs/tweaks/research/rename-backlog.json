@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:37:47Z",
+  "generated_utc": "2026-03-20T19:09:14Z",
   "backlog_type": "rename",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 2,
+  "entry_count": 1,
   "entries": [
     {
       "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -18,15 +18,6 @@
       "implementation_status": "partially-matches",
       "source_file": "Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
       "suggested_name": "Set Diagnostic Data to Minimum Supported Level"
-    },
-    {
-      "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Suggested name: Turn Off Sync by Default (Allow User Override). Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
-      "suggested_name": "Turn Off Sync by Default (Allow User Override)"
     }
   ]
 }

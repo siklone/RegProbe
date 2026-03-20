@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:53:54Z",
+  "generated_utc": "2026-03-20T19:09:14Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 73,
+  "source_record_count": 72,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -13,13 +13,13 @@
   },
   "counts_by_label": {
     "implementation-mismatch": 1,
-    "rename": 2,
+    "rename": 1,
     "split-needed": 25,
     "docs-first": 45
   },
   "counts_by_method": {
     "heuristic": 5,
-    "manual-override": 60,
+    "manual-override": 59,
     "proof-gate": 8
   },
   "entries": [
@@ -1054,27 +1054,6 @@
       "blocking_issues": [
         "AllowTelemetry = 0 is not a general-purpose off switch on every Windows edition.",
         "The tweak name and UX need edition-aware gating or a more accurate label."
-      ]
-    },
-    {
-      "record_id": "privacy.turn-off-sync-by-default-allow-user-override",
-      "tweak_id": "privacy.disable-sync-settings",
-      "source_record_status": "review-required",
-      "label": "rename",
-      "classification_method": "manual-override",
-      "classification_reason": "The current app writes *UserOverride = 0, which Microsoft documents as allowing users to turn syncing back on.",
-      "suggested_action": "Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
-      "category": "Privacy",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
-      "summary": "The app writes the official SettingSync policy family, but it also sets every *UserOverride value to 0. Microsoft documents that 0 as 'allow users to turn syncing on', so the current tweak behaves more like 'sync off by default' than a strict policy-backed disable.",
-      "decision_why": "The official policy family is documented clearly, but the current app label collapses two different behaviors: policy-based disablement and user-override allowance.",
-      "blocking_issues": [
-        "The current app writes *UserOverride = 0, which Microsoft documents as allowing users to turn syncing back on.",
-        "The tweak name suggests a hard disable even though the current bundle behaves more like default-off plus user override.",
-        "The product should split soft default-off behavior from strict no-override behavior before this can be published as validated."
       ]
     },
     {
