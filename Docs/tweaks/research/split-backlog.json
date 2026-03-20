@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:37:47Z",
+  "generated_utc": "2026-03-20T20:15:30Z",
   "backlog_type": "split-needed",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 25,
+  "entry_count": 24,
   "entries": [
     {
       "record_id": "audio.disable-system-sounds",
@@ -258,19 +258,6 @@
         "Settings suggestions mapping",
         "Welcome experience mapping",
         "SubscribedContent identifier mapping"
-      ]
-    },
-    {
-      "record_id": "privacy.disable-windows-tips",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Split into 2 parts: Official DisableSoftLanding policy, Observed ContentDeliveryManager preference. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-windows-tips.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Official DisableSoftLanding policy",
-        "Observed ContentDeliveryManager preference"
       ]
     },
     {

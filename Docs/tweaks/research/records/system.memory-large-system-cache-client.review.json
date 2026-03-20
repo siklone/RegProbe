@@ -1,0 +1,203 @@
+{
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "system.memory-large-system-cache-client",
+    "tweak_id":  "system.memory-large-system-cache-client",
+    "record_status":  "validated",
+    "summary":  "Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.",
+    "setting":  {
+                    "name":  "Large System Cache",
+                    "category":  "System",
+                    "area":  "Memory Management / Cache Mode",
+                    "scope":  "device",
+                    "casual_explanation":  "Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems.",
+                    "why_people_change_it":  "People only change it when they are undoing very old file-server or memory-cache tuning and want to restore an application-focused client baseline.",
+                    "tradeoffs_overview":  "The app intent is understandable, but Microsoft\u0027s modern documentation marks the property as obsolete and does not publish this as a supported current tuning surface. That makes the setting too uncertain to validate for normal publication.",
+                    "professional_notes":  "Microsoft\u0027s Win32_OperatingSystem class still describes LargeSystemCache with 0 meaning \u0027Optimize for Applications\u0027 and 1 meaning \u0027Optimize for System Performance\u0027, but the same property is marked obsolete and not supported. The current Memory Limits page only mentions that old Windows XP/Server 2003 memory limits changed when the LargeSystemCache registry key was set. This research pass did not find a modern primary Microsoft registry page that publishes the exact path and current support status of LargeSystemCache as a recommended control surface.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "large-system-cache",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                                        "value_name":  "LargeSystemCache",
+                                        "value_type":  "REG_DWORD",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  0,
+                                                                   "label":  "Optimize for applications",
+                                                                   "meaning":  "The historical semantics exposed by Win32_OperatingSystem say memory is optimized for applications.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-win32-operatingsystem-largesystemcache",
+                                                                                        "app-system-registry-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  1,
+                                                                   "label":  "Optimize for system performance",
+                                                                   "meaning":  "The historical semantics exposed by Win32_OperatingSystem say memory is optimized for system performance.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-win32-operatingsystem-largesystemcache",
+                                                                                        "ms-memory-limits-large-system-cache"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "matches-research",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "notes":  "Guest-side reversible probe on Win25H2Clean confirmed the current app write is idempotent at the baseline LargeSystemCache=0 value.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "large-system-cache",
+                                                          "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                                                          "value_name":  "LargeSystemCache",
+                                                          "value_type":  "REG_DWORD",
+                                                          "state_kind":  "value",
+                                                          "value":  0,
+                                                          "notes":  "Observed app value under review."
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Conservative publication baseline",
+                                 "applies_to":  "Modern systems where this dataset does not yet publish LargeSystemCache as a supported tuning surface",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "large-system-cache",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "Do not publish a validated default until a modern Microsoft registry source is captured."
+                                                }
+                                            ],
+                                 "notes":  "The published Microsoft evidence is partly historical and partly deprecated, so the dataset stays conservative.",
+                                 "evidence_ids":  [
+                                                      "ms-win32-operatingsystem-largesystemcache",
+                                                      "ms-memory-limits-large-system-cache"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "hold-for-research",
+                                     "label":  "Hold for research",
+                                     "intended_for":  [
+                                                          "Research tracking only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published validated presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "large-system-cache",
+                                                        "state_kind":  "unknown",
+                                                        "value":  null,
+                                                        "rationale":  "Do not publish or apply until a stronger modern Microsoft registry source is captured."
+                                                    }
+                                                ],
+                                     "good_when":  "You want to document the setting without overstating confidence.",
+                                     "bad_when":  "You need a fully modern Microsoft-backed memory-cache tuning record.",
+                                     "tradeoffs":  [
+                                                       "The app behavior is documented honestly.",
+                                                       "The setting stays blocked from validated publication."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-win32-operatingsystem-largesystemcache"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app profile",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published validated presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "large-system-cache",
+                                                        "state_kind":  "value",
+                                                        "value":  0,
+                                                        "rationale":  "Observed app write representing the client/application-focused mode."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting the app\u0027s current behavior for follow-up review.",
+                                     "bad_when":  "You need a modern, fully supported Microsoft registry control.",
+                                     "tradeoffs":  [
+                                                       "The historical semantics are captured.",
+                                                       "The control remains marked obsolete and unsupported by Microsoft."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-system-registry-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-win32-operatingsystem-largesystemcache",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: Win32_OperatingSystem LargeSystemCache",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
+                         "summary":  "Microsoft documents the historical 0 and 1 semantics for LargeSystemCache but marks the property obsolete and not supported.",
+                         "supports":  [
+                                          "value",
+                                          "behavior",
+                                          "risk"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "ms-memory-limits-large-system-cache",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: Memory Limits for Windows Releases",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases",
+                         "summary":  "Microsoft notes that older Windows XP and Windows Server 2003 system-cache limits changed when the LargeSystemCache registry key was set, confirming the key\u0027s historical existence but not publishing a modern tuning recommendation.",
+                         "supports":  [
+                                          "behavior",
+                                          "version-scope"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-system-registry-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "summary":  "The provider writes LargeSystemCache = 0 for the current tweak.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "medium",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "Win25H2Clean reversible probe confirmed LargeSystemCache is already at the client baseline 0; the write is idempotent, and the surface remains obsolete/unsupported.",
+                     "blocking_issues":  [
+
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-12T00:00:00Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+                             "exact_quote_or_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: before=0, after_apply=0, after_restore=0",
+                             "key_found_on_page":  true,
+                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+                         }
+}

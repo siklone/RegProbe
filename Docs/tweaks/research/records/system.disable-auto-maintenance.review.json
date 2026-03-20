@@ -1,0 +1,209 @@
+{
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "system.disable-auto-maintenance",
+    "tweak_id":  "system.disable-auto-maintenance",
+    "record_status":  "validated",
+    "summary":  "Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\\Maintenance and restored the baseline.",
+    "setting":  {
+                    "name":  "Automatic Maintenance",
+                    "category":  "System",
+                    "area":  "Observed Registry Setting",
+                    "scope":  "device",
+                    "casual_explanation":  "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
+                    "why_people_change_it":  "People change it to reduce background activity at unwanted times or to take full manual control of maintenance tasks.",
+                    "tradeoffs_overview":  "Turning it off can reduce automatic background work, but it also means Windows will no longer run its ordinary scheduled maintenance flow on its own. The current product issue is that the app\u0027s raw registry value still needs a stronger official value table before it can be published as validated.",
+                    "professional_notes":  "Microsoft documents Automatic Maintenance as a Windows feature and references HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled in Unified Write Filter guidance. This record still needs stronger primary-source confirmation for the raw 0 and 1 semantics outside that operational reference.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "maintenance-disabled-observed",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+                                        "value_name":  "MaintenanceDisabled",
+                                        "value_type":  "REG_DWORD",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "missing",
+                                                                   "value":  null,
+                                                                   "label":  "No explicit maintenance override",
+                                                                   "meaning":  "Windows follows its ordinary Automatic Maintenance behavior.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-automatic-maintenance-overview",
+                                                                                        "ms-uwf-maintenance-disabled"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  1,
+                                                                   "label":  "Observed app disable candidate",
+                                                                   "meaning":  "The current app writes 1 here to stop Automatic Maintenance, but this record still needs a stronger official raw-value table before publishing it as validated.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-uwf-maintenance-disabled",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ],
+                                        "notes":  "This target remains review-only until a stronger official value table is attached."
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "matches-research",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                                       "notes":  "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "maintenance-disabled-observed",
+                                                          "path":  "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+                                                          "value_name":  "MaintenanceDisabled",
+                                                          "value_type":  "REG_DWORD",
+                                                          "state_kind":  "value",
+                                                          "value":  1
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Windows feature default",
+                                 "applies_to":  "Windows systems with Automatic Maintenance",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "maintenance-disabled-observed",
+                                                    "state_kind":  "missing",
+                                                    "value":  null,
+                                                    "rationale":  "Automatic Maintenance runs as part of ordinary Windows behavior unless explicitly overridden."
+                                                }
+                                            ],
+                                 "notes":  "This record treats missing as the ordinary baseline while raw value semantics remain under research.",
+                                 "evidence_ids":  [
+                                                      "ms-automatic-maintenance-overview"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "General users",
+                                                          "Systems that rely on ordinary Windows maintenance behavior"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "People who want to suppress scheduled maintenance activity"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "maintenance-disabled-observed",
+                                                        "state_kind":  "missing",
+                                                        "value":  null,
+                                                        "rationale":  "Do not set the override value."
+                                                    }
+                                                ],
+                                     "good_when":  "You want Windows to keep its normal maintenance workflow.",
+                                     "bad_when":  "You want to block scheduled automatic maintenance.",
+                                     "tradeoffs":  [
+                                                       "Windows keeps performing ordinary maintenance work automatically.",
+                                                       "The product avoids publishing an incompletely sourced raw value as validated."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-automatic-maintenance-overview"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app profile",
+                                     "intended_for":  [
+                                                          "Research comparison only",
+                                                          "People auditing the current implementation"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Anyone expecting a fully validated raw mapping"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "maintenance-disabled-observed",
+                                                        "state_kind":  "value",
+                                                        "value":  1,
+                                                        "rationale":  "Observed app write pending stronger official semantics."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting what the app currently writes.",
+                                     "bad_when":  "You want a fully published official recommendation.",
+                                     "tradeoffs":  [
+                                                       "The path is mentioned in Microsoft operational guidance.",
+                                                       "The raw value semantics still need stronger primary-source confirmation."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "notes":  "Blocked until the raw 0 and 1 meanings are sourced more directly.",
+                                     "evidence_ids":  [
+                                                          "ms-uwf-maintenance-disabled",
+                                                          "app-system-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-automatic-maintenance-overview",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Automatic Maintenance overview",
+                         "location":  "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance",
+                         "summary":  "Microsoft documents Automatic Maintenance as the Windows feature that performs maintenance tasks during idle time.",
+                         "supports":  [
+                                          "behavior",
+                                          "default",
+                                          "version-scope"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "ms-uwf-maintenance-disabled",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Unified Write Filter guidance referencing MaintenanceDisabled",
+                         "location":  "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable",
+                         "summary":  "Microsoft operational guidance references the MaintenanceDisabled registry value while describing how Automatic Maintenance is suppressed in a maintenance window workflow.",
+                         "supports":  [
+                                          "path",
+                                          "behavior"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-system-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                         "summary":  "The provider writes MaintenanceDisabled = 1 for the current tweak.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "medium",
+                     "apply_allowed":  true,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "Win25H2Clean reversible probe confirmed MaintenanceDisabled transitions through missing -\u003e 1 -\u003e missing under the documented maintenance path.",
+                     "blocking_issues":  [
+
+                                         ]
+                 },
+    "open_questions":  [
+                           "Is there a stronger Microsoft primary source that explicitly defines the raw 0 and 1 semantics for MaintenanceDisabled?",
+                           "Should this setting be validated with a VM-based before-and-after maintenance behavior test if stronger documentation is unavailable?"
+                       ],
+    "last_reviewed_utc":  "2026-03-11T00:00:00Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+                             "exact_quote_or_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__",
+                             "key_found_on_page":  true,
+                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+                         }
+}

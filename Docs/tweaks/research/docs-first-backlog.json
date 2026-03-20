@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:50:04Z",
+  "generated_utc": "2026-03-20T20:15:30Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 43,
+  "entry_count": 36,
   "entries": [
     {
       "record_id": "audio.disable-spatial-audio",
@@ -176,26 +176,6 @@
       ]
     },
     {
-      "record_id": "security.trusted-path-credential-prompting",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "ADMX / Policy CSP mapping",
-          "why_not_validated": "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
-          "next_source": "Local Microsoft CredUI.admx mapping (C:\\Windows\\PolicyDefinitions\\CredUI.admx)"
-        },
-        {
-          "track": "Service or scheduled-task baseline diff",
-          "why_not_validated": "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
-          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
-        }
-      ]
-    },
-    {
       "record_id": "system.bsod-display-parameters",
       "current_state": "partially-matches | Crash Recovery / Bug Check Display",
       "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
@@ -211,51 +191,6 @@
       ]
     },
     {
-      "record_id": "system.disable-auto-maintenance",
-      "current_state": "partially-matches | Observed Registry Setting",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Observed Registry Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.disable-auto-maintenance.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "The current record does not yet contain a strong primary-source table for the raw MaintenanceDisabled values.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-fullscreen-optimizations",
-      "current_state": "unknown | GameConfigStore / Compatibility Preference",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "GameConfigStore / Compatibility Preference",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft registry source for the four GameConfigStore Fullscreen Optimizations values was captured in this research pass.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-jpeg-reduction",
-      "current_state": "unknown | Desktop Wallpaper Import Behavior",
-      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Desktop Wallpaper Import Behavior",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or VM toggle-diff validation",
-          "why_not_validated": "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
-          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
-        }
-      ]
-    },
-    {
       "record_id": "system.disable-service-splitting",
       "current_state": "partially-matches | svchost Process Model",
       "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
@@ -267,21 +202,6 @@
           "track": "Service or scheduled-task baseline diff",
           "why_not_validated": "No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.",
           "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-startup-delay",
-      "current_state": "unknown | Explorer Startup Behavior",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Explorer Startup Behavior",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/system.disable-startup-delay.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft source for StartupDelayInMSec was captured in this research pass.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
     },
@@ -531,21 +451,6 @@
       ]
     },
     {
-      "record_id": "system.memory-large-system-cache-client",
-      "current_state": "partially-matches | Memory Management / Cache Mode",
-      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Memory Management / Cache Mode",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or VM toggle-diff validation",
-          "why_not_validated": "Microsoft marks the LargeSystemCache property obsolete and unsupported.",
-          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
-        }
-      ]
-    },
-    {
       "record_id": "system.memory-nonpaged-pool-dynamic",
       "current_state": "mismatch-suspected | Memory Management / Legacy Pool Tuning",
       "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
@@ -587,21 +492,6 @@
           "track": "Procmon or settings-diff capture",
           "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
           "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        }
-      ]
-    },
-    {
-      "record_id": "system.priority-control",
-      "current_state": "partially-matches | Scheduler / Priority Control",
-      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Scheduler / Priority Control",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.priority-control.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or VM toggle-diff validation",
-          "why_not_validated": "The modern primary sources captured in this research pass do not publish the exact raw 0x26 Win32PrioritySeparation mapping.",
-          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
         }
       ]
     },

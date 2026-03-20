@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:50:04Z",
+  "generated_utc": "2026-03-20T20:15:30Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 67,
+  "source_record_count": 60,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 24,
-    "docs-first": 43
+    "docs-first": 36
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 57,
+    "manual-override": 50,
     "proof-gate": 6
   },
   "entries": [
@@ -241,26 +241,6 @@
       ]
     },
     {
-      "record_id": "security.trusted-path-credential-prompting",
-      "tweak_id": "security.trusted-path-credential-prompting",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json",
-      "summary": "The official Microsoft policy surface and behavior are clear, but the local ADMX file does not spell out the raw enabled and disabled numeric values in the same explicit form as many other policies. The current app writes EnableSecureCredentialPrompting = 1, which is plausible, but this stays in review until that raw mapping is pinned down from a cleaner primary source.",
-      "decision_why": "The official behavior and path are clear, but the raw numeric mapping is not exposed as explicitly as the dataset now expects for validated policy records.",
-      "blocking_issues": [
-        "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
-        "The current raw value needs a cleaner explicit primary-source confirmation before promotion to validated."
-      ]
-    },
-    {
       "record_id": "system.bsod-display-parameters",
       "tweak_id": "system.bsod-display-parameters",
       "source_record_status": "review-required",
@@ -281,66 +261,6 @@
       ]
     },
     {
-      "record_id": "system.disable-auto-maintenance",
-      "tweak_id": "system.disable-auto-maintenance",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "The current record does not yet contain a strong primary-source table for the raw MaintenanceDisabled values.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Observed Registry Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-auto-maintenance.review.json",
-      "summary": "Microsoft documents Automatic Maintenance as a Windows feature and references the MaintenanceDisabled registry value in Unified Write Filter guidance, but this record does not yet have a strong primary-source value table that proves the raw semantics of the current app write. The app writes MaintenanceDisabled = 1, so the tweak stays in review.",
-      "decision_why": "The feature and registry path are supported by Microsoft sources, but the record still needs a stronger official raw-value mapping before the tweak can move to validated.",
-      "blocking_issues": [
-        "The current record does not yet contain a strong primary-source table for the raw MaintenanceDisabled values.",
-        "The product should not publish a validated recommendation until the raw semantics are sourced or experimentally confirmed."
-      ]
-    },
-    {
-      "record_id": "system.disable-fullscreen-optimizations",
-      "tweak_id": "system.disable-fullscreen-optimizations",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft registry source for the four GameConfigStore Fullscreen Optimizations values was captured in this research pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "GameConfigStore / Compatibility Preference",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json",
-      "summary": "The current app writes four HKCU\\System\\GameConfigStore values to disable Fullscreen Optimizations (FSO). Microsoft publishes the feature surface and user-facing per-app toggle, but this research pass did not capture a primary Microsoft document that publishes these exact GameConfigStore registry values, so the record stays in review.",
-      "decision_why": "The Windows feature is official, but this research pass did not capture a primary Microsoft document that publishes the exact GameConfigStore registry values used by the app.",
-      "blocking_issues": [
-        "No primary Microsoft registry source for the four GameConfigStore Fullscreen Optimizations values was captured in this research pass.",
-        "The current app mapping relies on repo provenance rather than a primary Microsoft registry publication."
-      ]
-    },
-    {
-      "record_id": "system.disable-jpeg-reduction",
-      "tweak_id": "system.disable-jpeg-reduction",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Desktop Wallpaper Import Behavior",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json",
-      "summary": "The current app writes HKCU\\Control Panel\\Desktop\\JPEGImportQuality = 100 to stop Windows from reducing wallpaper import quality below 100%. Repo research notes document the path and explain a default/fallback of 85, but this research pass did not capture a primary Microsoft source that publishes the registry key, so the record stays in review.",
-      "decision_why": "This research pass did not capture a primary Microsoft source for JPEGImportQuality and its exact semantics.",
-      "blocking_issues": [
-        "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
-        "The current app mapping relies on repo observation for the raw registry semantics."
-      ]
-    },
-    {
       "record_id": "system.disable-service-splitting",
       "tweak_id": "system.disable-service-splitting",
       "source_record_status": "review-required",
@@ -358,26 +278,6 @@
       "blocking_issues": [
         "No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.",
         "The current app override still relies on repo provenance for the raw threshold value."
-      ]
-    },
-    {
-      "record_id": "system.disable-startup-delay",
-      "tweak_id": "system.disable-startup-delay",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for StartupDelayInMSec was captured in this research pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Explorer Startup Behavior",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-startup-delay.review.json",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec = 0 to remove the startup program delay. This research pass found repo provenance for the registry path but did not capture a primary Microsoft source that publishes StartupDelayInMSec and its semantics, so the record stays in review.",
-      "decision_why": "This research pass did not capture a primary Microsoft source for StartupDelayInMSec and its exact semantics.",
-      "blocking_issues": [
-        "No primary Microsoft source for StartupDelayInMSec was captured in this research pass.",
-        "The current app mapping relies on repo observation for the raw registry semantics."
       ]
     },
     {
@@ -647,26 +547,6 @@
       }
     },
     {
-      "record_id": "system.memory-large-system-cache-client",
-      "tweak_id": "system.memory-large-system-cache-client",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "Microsoft marks the LargeSystemCache property obsolete and unsupported.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Memory Management / Cache Mode",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json",
-      "summary": "The current app writes LargeSystemCache = 0 under Memory Management to keep Windows in the application-focused client-cache mode. Microsoft still exposes the 0 and 1 semantics through the deprecated Win32_OperatingSystem property and old memory-limit guidance, but this control is marked obsolete and not supported, so the record stays in review.",
-      "decision_why": "The historical semantics are visible in Microsoft sources, but the property is explicitly marked obsolete and unsupported, and this research pass did not capture a modern primary registry guidance page for the exact control surface.",
-      "blocking_issues": [
-        "Microsoft marks the LargeSystemCache property obsolete and unsupported.",
-        "This research pass did not find a modern primary registry page that validates the exact registry path as a supported tuning control."
-      ]
-    },
-    {
       "record_id": "system.memory-nonpaged-pool-dynamic",
       "tweak_id": "system.memory-nonpaged-pool-dynamic",
       "source_record_status": "review-required",
@@ -746,26 +626,6 @@
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
       }
-    },
-    {
-      "record_id": "system.priority-control",
-      "tweak_id": "system.priority-control",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "The modern primary sources captured in this research pass do not publish the exact raw 0x26 Win32PrioritySeparation mapping.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Scheduler / Priority Control",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.priority-control.review.json",
-      "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation = 38 (0x26) as a balanced foreground scheduling profile. Microsoft does publish the registry mapping and related scheduler concepts through Win32_OperatingSystem, but the modern primary sources captured in this research pass do not publish the exact raw 0x26 bitmask mapping the app uses, so the record stays in review.",
-      "decision_why": "Microsoft documents the registry mapping and related scheduler concepts, but this research pass did not capture a modern primary Microsoft source that validates the exact raw 0x26 bitmask used by the app.",
-      "blocking_issues": [
-        "The modern primary sources captured in this research pass do not publish the exact raw 0x26 Win32PrioritySeparation mapping.",
-        "The app's scheduler bitmask currently relies on repo provenance rather than a directly captured modern Microsoft source."
-      ]
     },
     {
       "record_id": "system.services.disable-print-device-configuration",
