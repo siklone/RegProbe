@@ -1,0 +1,174 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.enable-dynamic-lock",
+  "tweak_id": "security.enable-dynamic-lock",
+  "record_status": "validated",
+  "summary": "Validated record for the official Dynamic Lock policy under Passport for Work. The current app still writes a different current-user value under Winlogon, so the implementation remains mismatched even though the policy surface itself is now proven.",
+  "setting": {
+    "name": "Dynamic Lock",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals.",
+    "why_people_change_it": "People enable it when they want the PC to lock automatically when they walk away.",
+    "tradeoffs_overview": "Automatic locking can improve safety, but it can also trigger unexpectedly or depend on Bluetooth signal behavior.",
+    "professional_notes": "Passport.admx documents the official policy at HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock with value name DynamicLock. The local ADML help text says enabling the policy evaluates configured signal rules to detect user absence and lock the device. The current app writes EnableGoodbye = 1 under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon instead of the official policy path.",
+    "targets": [
+      {
+        "target_id": "dynamic-lock-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock",
+        "value_name": "DynamicLock",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not enforce Dynamic Lock signal rules through this policy.",
+            "evidence_ids": [
+              "local-passport-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Policy signal rules enabled",
+            "meaning": "Configured signal rules are evaluated to detect user absence and automatically lock the device.",
+            "evidence_ids": [
+              "local-passport-admx",
+              "local-passport-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes EnableGoodbye = 1 under the current-user Winlogon path, not the official Dynamic Lock policy path documented by Passport.admx.",
+    "writes": [
+      {
+        "target_id": "dynamic-lock-policy",
+        "path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+        "value_name": "EnableGoodbye",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting the Passport for Work Dynamic Lock policy",
+      "states": [
+        {
+          "target_id": "dynamic-lock-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official Dynamic Lock policy unset."
+        }
+      ],
+      "notes": "This review record validates the official policy surface, not the current app's current-user preference path.",
+      "evidence_ids": [
+        "local-passport-admx",
+        "local-passport-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users"
+      ],
+      "avoid_for": [
+        "Research-only comparison with the current app write"
+      ],
+      "states": [
+        {
+          "target_id": "dynamic-lock-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not publish the current-user write as the official Dynamic Lock policy."
+        }
+      ],
+      "good_when": "You want to avoid treating the Winlogon preference path as if it were the official policy control.",
+      "bad_when": "You need a finalized validated Dynamic Lock policy record immediately.",
+      "tradeoffs": [
+        "The official policy surface remains cleanly separated.",
+        "The current app write remains documented but not validated."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "local-passport-adml"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-passport-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Passport.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\Passport.admx",
+      "summary": "The local ADMX file maps the official Dynamic Lock policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock with value name DynamicLock and enabledValue 1.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-passport-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Passport.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\Passport.adml",
+      "summary": "The local ADML help text says enabling the policy evaluates configured signal rules to detect user absence and automatically lock the device.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes EnableGoodbye = 1 under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The official Dynamic Lock policy surface is now validated in this record, and the current-user Winlogon path remains a separate implementation mismatch.",
+    "blocking_issues": [
+      "The current app writes EnableGoodbye under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-20T20:20:00Z",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\Passport.admx",
+    "exact_quote_or_path": "C:\\Windows\\PolicyDefinitions\\Passport.admx: policy name=\"MSPassport_UseDynamicLock\" key=\"SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock\" valueName=\"DynamicLock\" enabledValue=1; C:\\Windows\\PolicyDefinitions\\en-US\\Passport.adml: \"If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device.\"",
+    "key_found_on_page": true,
+    "notes": "The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files."
+  }
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:47:43Z",
+  "generated_utc": "2026-03-20T19:50:04Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 68,
+  "source_record_count": 67,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 24,
-    "docs-first": 44
+    "docs-first": 43
   },
   "counts_by_method": {
     "heuristic": 4,
     "manual-override": 57,
-    "proof-gate": 7
+    "proof-gate": 6
   },
   "entries": [
     {
@@ -239,32 +239,6 @@
         "No primary Microsoft source in this dataset maps DisableWpbtExecution under Session Manager as the supported WPBT control surface.",
         "The official Microsoft surface captured so far is UEFI or DFCI oriented rather than a desktop registry policy."
       ]
-    },
-    {
-      "record_id": "security.enable-dynamic-lock",
-      "tweak_id": "security.enable-dynamic-lock",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.enable-dynamic-lock.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. Microsoft documents an official Dynamic Lock policy under Passport for Work, while the current app writes a different current-user value under Winlogon. This record now validates the official policy surface and keeps the Winlogon preference path flagged as an implementation mismatch.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The official Dynamic Lock policy surface is now validated in this record, and the remaining work is to align or separately source the current-user Winlogon path.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "The current app writes EnableGoodbye under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon instead of the official policy path under HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\Passport.admx",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
     },
     {
       "record_id": "security.trusted-path-credential-prompting",
