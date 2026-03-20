@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:09:14Z",
+  "generated_utc": "2026-03-20T19:29:46Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -34,22 +34,6 @@
       "current_state": "partially-matches | Registry Policy",
       "notes": "Suggested name: Set Diagnostic Data to Minimum Supported Level. Rename the tweak and UX copy so the title, description, and risk text match the actual scope and behavior.",
       "source_file": "Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json"
-    },
-    {
-      "sprint_number": 2,
-      "priority_index": 1,
-      "record_id": "security.disable-system-mitigations",
-      "category": "fix",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The current app writes raw binary mitigation values instead of using the documented Exploit Guard XML policy surface.",
-        "The exact byte-level meaning of the current MitigationOptions and MitigationAuditOptions blobs is not yet documented in this research dataset.",
-        "Microsoft warns that exploit protection changes can have compatibility issues and should be tested before broad deployment."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | Exploit Protection",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationOptions=00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00; HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationAuditOptions=02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection::ExploitProtectionSettings (example <path-or-url-to-config.xml>). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "source_file": "Docs/tweaks/research/records/security.disable-system-mitigations.review.json"
     },
     {
       "sprint_number": 3,

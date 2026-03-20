@@ -647,6 +647,90 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public async Task DisableSystemMitigationsTweak_DetectAsync_WhenExportMatchesDesired_ReturnsAppliedStatus()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"BackupPath\":\"C:\\\\Temp\\\\exploit.xml\",\"MatchesDesired\":true}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(120)));
+
+        var tweak = new DisableSystemMitigationsTweak(mockRunner.Object);
+
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+        Assert.Contains("Current state:", result.Message);
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("powershell.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count == 4
+                && req.Arguments[2] == "-Command"
+                && req.Arguments[3].Contains("Get-ProcessMitigation -RegistryConfigFilePath", StringComparison.Ordinal)),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task DisableSystemMitigationsTweak_ApplyVerifyAndRollback_UsePolicyFilePathCommands()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .SetupSequence(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"BackupPath\":\"C:\\\\Temp\\\\exploit-backup.xml\",\"MatchesDesired\":false}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(120)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "Imported exploit protection XML.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(120)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "{\"BackupPath\":\"C:\\\\Temp\\\\exploit-verify.xml\",\"MatchesDesired\":true}\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(120)))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "Restored exploit protection XML.\r\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(120)));
+
+        var tweak = new DisableSystemMitigationsTweak(mockRunner.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        var applyResult = await tweak.ApplyAsync(CancellationToken.None);
+        var verifyResult = await tweak.VerifyAsync(CancellationToken.None);
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+        Assert.Equal(TweakStatus.Applied, applyResult.Status);
+        Assert.Equal(TweakStatus.Verified, verifyResult.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollbackResult.Status);
+
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("powershell.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count == 4
+                && req.Arguments[2] == "-Command"
+                && req.Arguments[3].Contains("Set-ProcessMitigation -PolicyFilePath", StringComparison.Ordinal)),
+            It.IsAny<CancellationToken>()), Times.Exactly(2));
+        mockRunner.Verify(r => r.RunAsync(
+            It.Is<CommandRequest>(req => req.Executable.EndsWith("powershell.exe", StringComparison.OrdinalIgnoreCase)
+                && req.Arguments.Count == 4
+                && req.Arguments[2] == "-Command"
+                && req.Arguments[3].Contains("Get-ProcessMitigation -RegistryConfigFilePath", StringComparison.Ordinal)),
+            It.IsAny<CancellationToken>()), Times.Exactly(2));
+    }
+
+    [Fact]
     public async Task DisableFindMyDeviceTweak_ApplyVerifyAndRollback_UseRegCommands()
     {
         var mockRunner = new Mock<ICommandRunner>();

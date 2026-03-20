@@ -100,26 +100,15 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             context,
             "security.disable-windows-firewall",
             "Disable Windows Firewall",
-            "Turns off Windows Defender Firewall for Domain, Private, and Public profiles. Reference: Microsoft Defender Firewall Docs",
+            "Turns off Windows Defender Firewall for the documented Domain and Standard firewall policy profiles. Reference: Microsoft Defender Firewall Docs",
             TweakRiskLevel.Risky,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "EnableFirewall", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", RegistryValueKind.DWord, 0),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile", "EnableFirewall", RegistryValueKind.DWord, 0)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", "EnableFirewall", RegistryValueKind.DWord, 0),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "EnableFirewall", RegistryValueKind.DWord, 0)
             });
 
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "security.disable-system-mitigations",
-            "Disable System Mitigations",
-            "Turns off system-wide exploit mitigation settings (ASLR, DEP, etc.) for performance.",
-            TweakRiskLevel.Risky,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Control\Session Manager\kernel", "MitigationOptions", RegistryValueKind.Binary, new byte[] { 0x00, 0x22, 0x22, 0x20, 0x22, 0x20, 0x22, 0x22, 0x22, 0x20, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Control\Session Manager\kernel", "MitigationAuditOptions", RegistryValueKind.Binary, new byte[] { 0x02, 0x22, 0x22, 0x02, 0x02, 0x02, 0x20, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 })
-            });
+        yield return new DisableSystemMitigationsTweak(context.ElevatedCommandRunner);
 
         yield return CreateRegistryValueSetTweak(
             context,

@@ -11,4 +11,8 @@
     <ProjectReference Include="..\\WindowsOptimizer.Infrastructure\\WindowsOptimizer.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Tweaks\\Commands\\Security\\DisableSystemMitigations.xml" />
+  </ItemGroup>
+
 </Project>

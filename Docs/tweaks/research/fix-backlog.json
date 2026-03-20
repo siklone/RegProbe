@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:37:47Z",
+  "generated_utc": "2026-03-20T19:29:46Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,42 +8,6 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 1,
-  "entries": [
-    {
-      "record_id": "security.disable-system-mitigations",
-      "current_state": "mismatch-suspected | Exploit Protection",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationOptions=00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00; HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel::MitigationAuditOptions=02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00 to the researched surface HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection::ExploitProtectionSettings (example <path-or-url-to-config.xml>). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Exploit Protection",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/security.disable-system-mitigations.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel",
-          "value_name": "MitigationOptions",
-          "value_type": "REG_BINARY",
-          "state_kind": "value",
-          "value": "00 22 22 20 22 20 22 22 22 20 22 22 22 22 22 22 00 00 00 00 00 00 00 00"
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel",
-          "value_name": "MitigationAuditOptions",
-          "value_type": "REG_BINARY",
-          "state_kind": "value",
-          "value": "02 22 22 02 02 02 20 22 22 22 22 22 22 22 22 22 00 00 00 00 00 00 00 00"
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "group-policy",
-          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection",
-          "value_name": "ExploitProtectionSettings",
-          "value_type": "REG_SZ",
-          "example_value": "<path-or-url-to-config.xml>"
-        }
-      ]
-    }
-  ]
+  "entry_count": 0,
+  "entries": []
 }
