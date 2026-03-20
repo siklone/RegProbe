@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:33:10Z",
+  "generated_utc": "2026-03-20T19:47:43Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 70,
+  "source_record_count": 68,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,13 +14,13 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 25,
-    "docs-first": 45
+    "split-needed": 24,
+    "docs-first": 44
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 58,
-    "proof-gate": 8
+    "manual-override": 57,
+    "proof-gate": 7
   },
   "entries": [
     {
@@ -219,32 +219,6 @@
       "blocking_issues": [
         "Binary rename is more invasive than a validated policy or preference control."
       ]
-    },
-    {
-      "record_id": "security.disable-ntfs-encryption",
-      "tweak_id": "security.disable-ntfs-encryption",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.disable-ntfs-encryption.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates the official NTFS encryption policy surface and keeps the extra runtime write under Control\\FileSystem flagged as an implementation mismatch.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The official EFS policy surface is now validated in this record, and the remaining work is to source or remove the extra runtime path.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "The extra write to HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableEncryption is not documented by the local Microsoft policy files used for validation."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\FileSys.admx",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
     },
     {
       "record_id": "security.disable-wpbt",
@@ -1354,26 +1328,6 @@
       "blocking_issues": [
         "The current app does not use the named official CloudContent policies documented in this record.",
         "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-windows-tips",
-      "tweak_id": "privacy.disable-windows-tips",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The current app does not use the official machine policy path documented in this record.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-windows-tips.review.json",
-      "summary": "Microsoft documents Windows tips with the machine policy HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding. The current app instead writes a per-user ContentDeliveryManager value, so this record stays in review until that user-side value is formally sourced as an official equivalent.",
-      "decision_why": "The official Windows tips policy is clear, but the current app uses a different user-side registry value that this record does not yet publish as equivalent.",
-      "blocking_issues": [
-        "The current app does not use the official machine policy path documented in this record.",
-        "The ContentDeliveryManager value still needs formal sourcing or validation before it can be published as an official equivalent."
       ]
     },
     {

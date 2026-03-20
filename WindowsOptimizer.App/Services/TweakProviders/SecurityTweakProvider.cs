@@ -187,8 +187,7 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             TweakRiskLevel.Risky,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Policies", "NtfsDisableEncryption", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Control\FileSystem", "NtfsDisableEncryption", RegistryValueKind.DWord, 1)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"System\CurrentControlSet\Policies", "NtfsDisableEncryption", RegistryValueKind.DWord, 1)
             });
 
         // Developer & Modern Features

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T19:09:14Z",
+  "generated_utc": "2026-03-20T19:47:43Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 45,
+  "entry_count": 44,
   "entries": [
     {
       "record_id": "audio.disable-spatial-audio",
@@ -156,26 +156,6 @@
         {
           "track": "Procmon or settings-diff capture",
           "why_not_validated": "Binary rename is more invasive than a validated policy or preference control.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        }
-      ]
-    },
-    {
-      "record_id": "security.disable-ntfs-encryption",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.disable-ntfs-encryption.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "ADMX / Policy CSP mapping",
-          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
-          "next_source": "Local Microsoft FileSys.admx mapping (C:\\Windows\\PolicyDefinitions\\FileSys.admx)"
-        },
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
           "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
