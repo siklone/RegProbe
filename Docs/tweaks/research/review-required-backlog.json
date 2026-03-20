@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T16:57:13Z",
+  "generated_utc": "2026-03-20T17:15:26Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 86,
+  "source_record_count": 85,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 53
+    "docs-first": 52
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 66,
+    "manual-override": 65,
     "proof-gate": 10
   },
   "entries": [
@@ -599,26 +599,6 @@
       "blocking_issues": [
         "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
         "The current app write cannot be published as a validated MPO control until its value semantics are sourced."
-      ]
-    },
-    {
-      "record_id": "system.enable-hags",
-      "tweak_id": "system.enable-hags",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for the HwSchMode registry path was captured in this research pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Graphics Drivers / Scheduling Feature",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.enable-hags.review.json",
-      "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). Microsoft officially documents the HAGS feature, but this research pass did not capture a primary Microsoft source that publishes the exact HwSchMode registry semantics, so the record stays in review.",
-      "decision_why": "HAGS is officially documented as a feature, but this research pass did not capture a primary Microsoft source for the exact HwSchMode registry control.",
-      "blocking_issues": [
-        "No primary Microsoft source for the HwSchMode registry path was captured in this research pass.",
-        "The current app mapping relies on repo observation for the raw registry semantics."
       ]
     },
     {

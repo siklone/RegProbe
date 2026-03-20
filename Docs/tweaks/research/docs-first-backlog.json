@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T16:57:13Z",
+  "generated_utc": "2026-03-20T17:15:26Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 53,
+  "entry_count": 52,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -461,26 +461,6 @@
         {
           "track": "ReactOS-adjacent or driver-source comparison",
           "why_not_validated": "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
-          "next_source": "ReactOS-adjacent code search, open-source driver references, or low-level graphics/kernel docs for the same subsystem"
-        }
-      ]
-    },
-    {
-      "record_id": "system.enable-hags",
-      "current_state": "partially-matches | Graphics Drivers / Scheduling Feature",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Graphics Drivers / Scheduling Feature",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.enable-hags.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft source for the HwSchMode registry path was captured in this research pass.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        },
-        {
-          "track": "ReactOS-adjacent or driver-source comparison",
-          "why_not_validated": "No primary Microsoft source for the HwSchMode registry path was captured in this research pass.",
           "next_source": "ReactOS-adjacent code search, open-source driver references, or low-level graphics/kernel docs for the same subsystem"
         }
       ]
