@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T14:08:14Z",
+  "generated_utc": "2026-03-20T16:57:13Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 54,
+  "entry_count": 53,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -462,21 +462,6 @@
           "track": "ReactOS-adjacent or driver-source comparison",
           "why_not_validated": "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
           "next_source": "ReactOS-adjacent code search, open-source driver references, or low-level graphics/kernel docs for the same subsystem"
-        }
-      ]
-    },
-    {
-      "record_id": "system.enable-game-mode",
-      "current_state": "partially-matches | Gaming Feature / GameBar Preference",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Gaming Feature / GameBar Preference",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.enable-game-mode.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft source for the AutoGameModeEnabled registry path was captured in this research pass.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
     },

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T14:08:14Z",
+  "generated_utc": "2026-03-20T16:57:13Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 87,
+  "source_record_count": 86,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 54
+    "docs-first": 53
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 67,
+    "manual-override": 66,
     "proof-gate": 10
   },
   "entries": [
@@ -599,26 +599,6 @@
       "blocking_issues": [
         "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
         "The current app write cannot be published as a validated MPO control until its value semantics are sourced."
-      ]
-    },
-    {
-      "record_id": "system.enable-game-mode",
-      "tweak_id": "system.enable-game-mode",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for the AutoGameModeEnabled registry path was captured in this research pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Gaming Feature / GameBar Preference",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.enable-game-mode.review.json",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Microsoft officially documents the Game Mode feature, but this research pass did not capture a primary Microsoft registry publication for AutoGameModeEnabled, so the record stays in review.",
-      "decision_why": "Game Mode is officially documented as a Windows feature, but this research pass did not capture a primary Microsoft source for the exact AutoGameModeEnabled registry control.",
-      "blocking_issues": [
-        "No primary Microsoft source for the AutoGameModeEnabled registry path was captured in this research pass.",
-        "The current app mapping relies on repo observation for the raw registry semantics."
       ]
     },
     {
