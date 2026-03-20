@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T18:37:47Z",
+  "generated_utc": "2026-03-20T18:53:54Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 74,
+  "source_record_count": 73,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 1,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 46
+    "docs-first": 45
   },
   "counts_by_method": {
     "heuristic": 5,
     "manual-override": 60,
-    "proof-gate": 9
+    "proof-gate": 8
   },
   "entries": [
     {
@@ -219,32 +219,6 @@
       "blocking_issues": [
         "Binary rename is more invasive than a validated policy or preference control."
       ]
-    },
-    {
-      "record_id": "privacy.hide-username-at-signin",
-      "tweak_id": "privacy.hide-username-at-signin",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "Local Windows security metadata maps the documented sign-in privacy option to DontDisplayLockedUserId, while the app currently writes DontDisplayUserName.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Privacy",
-      "technical_area": "Security Option",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.hide-username-at-signin.json",
-      "summary": "Research record for hiding username information during sign-in. The app currently writes DontDisplayUserName, but local Windows security metadata for the documented security option points to DontDisplayLockedUserId instead, so the current implementation cannot be validated yet.",
-      "decision_why": "Microsoft documents the security-option behavior, but local Windows security metadata does not confirm the app's exact DontDisplayUserName surface. The current implementation should stay research-only until a primary source or runtime trace proves that DontDisplayUserName is the supported control instead of DontDisplayLockedUserId.",
-      "blocking_issues": [
-        "Local Windows security metadata maps the documented sign-in privacy option to DontDisplayLockedUserId, while the app currently writes DontDisplayUserName.",
-        "A stronger Microsoft source or Procmon-backed sign-in trace is needed to prove which registry value Windows actually honors for this behavior."
-      ],
-      "validation_proof": {
-        "source_url": "C:\\Windows\\inf\\sceregvl.inf",
-        "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLockedUserId,4,%DontDisplayLockedUserId%,3,1|%LockedUserID0%,2|%LockedUserID1%,3|%LockedUserID2%,4|%LockedUserID3%",
-        "key_found_on_page": false,
-        "notes": "The official local Windows security metadata exposes DontDisplayLockedUserId for the documented sign-in privacy option, not the app's DontDisplayUserName value. This is feature-area evidence only, not an exact-surface validation."
-      }
     },
     {
       "record_id": "security.disable-ntfs-encryption",
