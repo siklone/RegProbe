@@ -1,0 +1,200 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-encrypt-data",
+  "tweak_id": "network.smb-encrypt-data",
+  "record_status": "validated",
+  "summary": "Legacy validated record now backed by a machine-checkable guest reversible probe. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.",
+  "setting": {
+    "name": "SMB Server Encryption Requirement",
+    "category": "Network",
+    "area": "Registry Security Baseline",
+    "scope": "device",
+    "casual_explanation": "SMB encryption protects file-sharing traffic so other systems on the network cannot easily read it in transit. Turning this on at the server level makes the machine stricter about how its shared data is accessed.",
+    "why_people_change_it": "People require SMB encryption to better protect shared data on the network, especially on untrusted networks or stricter business environments. They avoid forcing it when older clients still need plain SMB traffic or when they want to minimize compatibility problems.",
+    "tradeoffs_overview": "Requiring SMB encryption is safer for shared data, but some older clients may stop connecting and encryption can add CPU overhead.",
+    "professional_notes": "Microsoft documents EncryptData under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a server-side SMB encryption control. SMB encryption can also be managed in other surfaces such as SMB configuration tools and share-level settings, so this record only documents the app's global registry write.",
+    "targets": [
+      {
+        "target_id": "server-encrypt-data",
+        "location_kind": "registry",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "EncryptData",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows managed baseline",
+            "meaning": "Windows keeps its SMB server encryption baseline without an explicit local override in this registry value.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Global encryption not required",
+            "meaning": "The server does not force global SMB encryption through this registry override.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Global encryption required",
+            "meaning": "The server requires SMB encryption for shared data through this registry override.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          }
+        ],
+        "notes": "This record documents the global LanmanServer value only, not every SMB share-level encryption control."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes EncryptData = 1, which matches the documented global SMB server encryption requirement.",
+    "writes": [
+      {
+        "target_id": "server-encrypt-data",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "EncryptData",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows SMB server baseline",
+      "applies_to": "Windows SMB server releases that expose the EncryptData LanmanServer value",
+      "states": [
+        {
+          "target_id": "server-encrypt-data",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The official source documents the control and registry value, but this record does not collapse every Windows release baseline into a single universal number."
+        }
+      ],
+      "notes": "This record validates the control surface and numeric meaning without claiming one static Windows default across all SMB server scenarios.",
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "Users who want the normal SMB server baseline",
+        "People who are not ready to force encryption globally"
+      ],
+      "avoid_for": [
+        "Security baselines that explicitly require SMB encryption"
+      ],
+      "states": [
+        {
+          "target_id": "server-encrypt-data",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the explicit registry override absent."
+        }
+      ],
+      "good_when": "You want Windows or other SMB management surfaces to keep the default behavior.",
+      "bad_when": "You need a clear hardening override for all hosted SMB traffic.",
+      "tradeoffs": [
+        "You avoid forcing an explicit global encryption override.",
+        "Hosted shares are not guaranteed to require encryption through this value alone."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting"
+      ]
+    },
+    {
+      "profile_id": "require-global-encryption",
+      "label": "Require global encryption",
+      "intended_for": [
+        "Security-focused file servers",
+        "Modern managed environments",
+        "Users who want stronger protection for hosted SMB data"
+      ],
+      "avoid_for": [
+        "Old SMB clients",
+        "Compatibility-first environments"
+      ],
+      "states": [
+        {
+          "target_id": "server-encrypt-data",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Force the LanmanServer global encryption requirement."
+        }
+      ],
+      "good_when": "You want the machine to enforce encrypted SMB access to hosted shares as part of a stricter baseline.",
+      "bad_when": "You still serve older clients that cannot use SMB encryption correctly.",
+      "tradeoffs": [
+        "Shared SMB data is better protected in transit.",
+        "Older clients may fail and encryption can add CPU overhead."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smb-security-troubleshooting",
+      "kind": "official-doc",
+      "title": "Microsoft SMB security enhancements troubleshooting",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
+      "summary": "Microsoft documents EncryptData under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes EncryptData = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "A guest-side reversible probe on Win25H2Clean confirmed the EncryptData mapping through the documented server configuration surface: False -> True -> False -> restored False. The current app write matches the documented global SMB encryption requirement. The apply decision remains conservative because older SMB clients and some environments can lose compatibility or pay a performance cost.",
+    "blocking_issues": []
+  },
+  "validation_proof": {
+    "source_url": "H:\\Temp\\vm-tooling-staging\\smb_encrypt_data_probe_out.txt",
+    "exact_quote_or_path": "smb_encrypt_data_probe_out.txt: BASELINE=False. AFTER_TRUE=True. AFTER_FALSE=False. RESTORED=False.",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the SMB server EncryptData state transitions and restored the machine back to the baseline False state."
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00Z"
+}

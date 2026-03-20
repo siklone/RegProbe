@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:24:29Z",
+  "generated_utc": "2026-03-20T17:29:58Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 84,
+  "source_record_count": 83,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 51
+    "docs-first": 50
   },
   "counts_by_method": {
     "heuristic": 10,
     "manual-override": 64,
-    "proof-gate": 10
+    "proof-gate": 9
   },
   "entries": [
     {
@@ -185,31 +185,6 @@
         "exact_quote_or_path": "Another option is to disable the auto fetch feature by changing the following setting: \"git.autofetch\": false.",
         "key_found_on_page": false,
         "notes": "The page proves the git.autofetch setting exists, but it does not prove the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path."
-      }
-    },
-    {
-      "record_id": "network.smb-encrypt-data",
-      "tweak_id": "network.smb-encrypt-data",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Network",
-      "technical_area": "Registry Security Baseline",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.smb-encrypt-data.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. Microsoft documents the exact registry control used by the app for global SMB encryption, even though broader SMB encryption behavior can also be managed through other SMB surfaces.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
       }
     },
     {
