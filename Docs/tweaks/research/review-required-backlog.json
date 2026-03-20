@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:35:42Z",
+  "generated_utc": "2026-03-20T17:37:41Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 82,
+  "source_record_count": 81,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 49
+    "docs-first": 48
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 63,
+    "manual-override": 62,
     "proof-gate": 9
   },
   "entries": [
@@ -60,26 +60,6 @@
       "blocking_issues": [
         "No vendor-published registry or settings-store contract for HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2 was captured in this pass.",
         "The current record can document the feature area, but not yet validate the exact registry write."
-      ]
-    },
-    {
-      "record_id": "developer.ssh-agent-autostart",
-      "tweak_id": "developer.ssh-agent-autostart",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Windows autostart contract for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Developer",
-      "technical_area": "OpenSSH Agent Startup",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json",
-      "summary": "OpenSSH officially documents ssh-agent as the authentication agent process, but this research pass did not capture a primary Windows autostart contract that uses HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent. The current app write therefore stays documented as an observed startup implementation only.",
-      "decision_why": "The feature area is well understood, but this research pass did not capture a primary Windows contract for the exact autostart mapping used by the app.",
-      "blocking_issues": [
-        "No primary Windows autostart contract for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent was captured in this pass.",
-        "The current record can document the startup behavior, but not validate it as the official Windows control surface."
       ]
     },
     {

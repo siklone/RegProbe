@@ -1,0 +1,176 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "developer.ssh-agent-autostart",
+  "tweak_id": "developer.ssh-agent-autostart",
+  "record_status": "validated",
+  "summary": "Microsoft's Run and RunOnce registry documentation confirms that the Run key is a supported autostart surface when a user logs on. The current app writes ssh-agent.exe into HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, so this record now has a documented Windows autostart contract.",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+    "exact_quote_or_path": "lines 39-46: Use `Run` registry keys to make a program run when a user logs on. The `Run` key makes the program run every time the user logs on.",
+    "key_found_on_page": true,
+    "notes": "The Windows Run key documentation establishes the supported autostart surface used by the current app implementation."
+  },
+  "setting": {
+    "name": "SSH Agent Auto-start",
+    "category": "Developer",
+    "area": "OpenSSH Agent Startup",
+    "scope": "user",
+    "casual_explanation": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
+    "why_people_change_it": "People enable it so SSH-based Git and remote workflows work immediately after sign-in without manually starting the agent.",
+    "tradeoffs_overview": "Automatically starting ssh-agent can make development workflows smoother, but it also starts an extra background process for the current user.",
+    "professional_notes": "OpenSSH documents ssh-agent as the process that stores private keys for public-key authentication. Windows documents the HKCU Run key as a supported way to run a program at logon, and the current app writes ssh-agent.exe there.",
+    "targets": [
+      {
+        "target_id": "ssh-agent-run-key",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "value_name": "SSH Agent",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "No ssh-agent autostart entry is present for the current user.",
+            "evidence_ids": [
+              "ms-run-registry-keys",
+              "openssh-ssh-agent-doc"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "label": "SSH Agent autostart enabled",
+            "meaning": "The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key.",
+            "evidence_ids": [
+              "ms-run-registry-keys",
+              "openssh-ssh-agent-doc",
+              "app-developer-provider"
+            ]
+          }
+        ],
+        "notes": "The Windows Run key is a supported autostart surface. This record documents the current app's ssh-agent entry as a valid user-logon startup mapping."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface.",
+    "writes": [
+      {
+        "target_id": "ssh-agent-run-key",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "value_name": "SSH Agent",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "Windows developer profiles",
+      "states": [
+        {
+          "target_id": "ssh-agent-run-key",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the Run key value absent if you do not want ssh-agent to start automatically at logon."
+        }
+      ],
+      "notes": "Absence of the Run key entry means ssh-agent does not auto-start for the current user.",
+      "evidence_ids": [
+        "ms-run-registry-keys",
+        "openssh-ssh-agent-doc"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "auto-start-ssh-agent",
+      "label": "Auto-start SSH Agent",
+      "intended_for": [
+        "Developers who use SSH-based Git workflows",
+        "Users who want ssh-agent available immediately after sign-in"
+      ],
+      "avoid_for": [
+        "Users who do not want additional background processes at sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "ssh-agent-run-key",
+          "state_kind": "value",
+          "value": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+          "rationale": "The Run key is a supported autostart surface and this command starts ssh-agent at logon."
+        }
+      ],
+      "good_when": "You want ssh-agent available automatically for developer workflows.",
+      "bad_when": "You want to keep sign-in startup minimal.",
+      "tradeoffs": [
+        "ssh-agent starts automatically for the current user.",
+        "You can reverse this by removing the Run value."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-run-registry-keys",
+        "openssh-ssh-agent-doc",
+        "app-developer-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-run-registry-keys",
+      "kind": "official-doc",
+      "title": "Run and RunOnce Registry Keys",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+      "summary": "Microsoft documents the Run key as a supported way to make a program run when a user logs on, for both user and machine scopes.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "openssh-ssh-agent-doc",
+      "kind": "official-doc",
+      "title": "OpenSSH manual: ssh-agent",
+      "location": "https://man.openbsd.org/ssh-agent",
+      "summary": "OpenSSH documents ssh-agent as the agent process that stores private keys for public-key authentication.",
+      "supports": [
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-developer-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "summary": "The provider writes SSH Agent = C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the Run key as a supported logon autostart surface, and the current app writes ssh-agent.exe into that surface for the current user. That is enough to validate the mapping as a documented Windows startup control.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-20T00:00:00Z"
+}
