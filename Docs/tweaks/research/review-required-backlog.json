@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T20:15:30Z",
+  "generated_utc": "2026-03-20T20:35:32Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 60,
+  "source_record_count": 59,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 24,
-    "docs-first": 36
+    "docs-first": 35
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 50,
+    "manual-override": 49,
     "proof-gate": 6
   },
   "entries": [
@@ -238,26 +238,6 @@
       "blocking_issues": [
         "No primary Microsoft source in this dataset maps DisableWpbtExecution under Session Manager as the supported WPBT control surface.",
         "The official Microsoft surface captured so far is UEFI or DFCI oriented rather than a desktop registry policy."
-      ]
-    },
-    {
-      "record_id": "system.bsod-display-parameters",
-      "tweak_id": "system.bsod-display-parameters",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "A primary Microsoft Learn or local official metadata source for DisplayParameters has not yet been captured.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Crash Recovery / Bug Check Display",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.bsod-display-parameters.review.json",
-      "summary": "The current app writes DisplayParameters = 1 under CrashControl so the blue screen shows additional bug-check parameters. The intent is clear, but this research pass has not yet found a primary Microsoft Learn or local policy source that publishes DisplayParameters as an official supported control surface with explicit value semantics.",
-      "decision_why": "The app behavior is clear, but this research pass has not yet found a primary Microsoft source that explicitly publishes DisplayParameters and its value semantics.",
-      "blocking_issues": [
-        "A primary Microsoft Learn or local official metadata source for DisplayParameters has not yet been captured.",
-        "The current app write should not be published as validated until the registry semantics are formally sourced."
       ]
     },
     {
