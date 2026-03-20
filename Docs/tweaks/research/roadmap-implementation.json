@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:31:11Z",
+  "generated_utc": "2026-03-20T17:35:42Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -1263,20 +1263,6 @@
     {
       "sprint_number": 4,
       "priority_index": 45,
-      "record_id": "audio.disable-beep",
-      "category": "docs-first",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass."
-      ],
-      "depends_on": [],
-      "current_state": "unknown | Driver Start Mode",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "source_file": "Docs/tweaks/research/records/audio.disable-beep.review.json"
-    },
-    {
-      "sprint_number": 4,
-      "priority_index": 46,
       "record_id": "audio.disable-spatial-audio",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1290,7 +1276,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 47,
+      "priority_index": 46,
       "record_id": "developer.vscode-git-autofetch",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -1305,7 +1291,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 48,
+      "priority_index": 47,
       "record_id": "system.kernel-dpc-watchdog-period",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1320,7 +1306,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 49,
+      "priority_index": 48,
       "record_id": "system.kernel-serialize-timer-expiration",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -1335,7 +1321,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 50,
+      "priority_index": 49,
       "record_id": "system.memory-disable-paging-executive",
       "category": "docs-first",
       "estimated_effort": "large",

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:29:58Z",
+  "generated_utc": "2026-03-20T17:35:42Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 83,
+  "source_record_count": 82,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,33 +15,14 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 50
+    "docs-first": 49
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 64,
+    "manual-override": 63,
     "proof-gate": 9
   },
   "entries": [
-    {
-      "record_id": "audio.disable-beep",
-      "tweak_id": "audio.disable-beep",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Audio",
-      "technical_area": "Driver Start Mode",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/audio.disable-beep.review.json",
-      "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start = 4 to disable the Beep driver. The repo provenance ties the value to upstream research, but this pass did not capture a primary Microsoft source for the exact Beep start-mode contract, so the record stays in review.",
-      "decision_why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact Beep start-mode contract.",
-      "blocking_issues": [
-        "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass."
-      ]
-    },
     {
       "record_id": "audio.disable-spatial-audio",
       "tweak_id": "audio.disable-spatial-audio",

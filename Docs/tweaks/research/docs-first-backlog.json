@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:31:11Z",
+  "generated_utc": "2026-03-20T17:35:42Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,28 +8,8 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 50,
+  "entry_count": 49,
   "entries": [
-    {
-      "record_id": "audio.disable-beep",
-      "current_state": "unknown | Driver Start Mode",
-      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Driver Start Mode",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/audio.disable-beep.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Vendor docs or product settings schema",
-          "why_not_validated": "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass.",
-          "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
-        },
-        {
-          "track": "Service or scheduled-task baseline diff",
-          "why_not_validated": "No primary Microsoft source for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start was captured in this pass.",
-          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
-        }
-      ]
-    },
     {
       "record_id": "audio.disable-spatial-audio",
       "current_state": "unknown | Audio Engine Flags",
