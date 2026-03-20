@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:15:26Z",
+  "generated_utc": "2026-03-20T17:24:29Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 52,
+  "entry_count": 51,
   "entries": [
     {
       "record_id": "audio.disable-beep",
@@ -397,21 +397,6 @@
           "track": "Procmon or VM toggle-diff validation",
           "why_not_validated": "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
           "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
-        }
-      ]
-    },
-    {
-      "record_id": "system.disable-restartable-apps",
-      "current_state": "unknown | Feature Setting vs Observed Registry Setting",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Feature Setting vs Observed Registry Setting",
-      "implementation_status": "unknown",
-      "source_file": "Docs/tweaks/research/records/system.disable-restartable-apps.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "The current record does not yet contain a strong primary-source registry mapping for RestartApps.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
         }
       ]
     },

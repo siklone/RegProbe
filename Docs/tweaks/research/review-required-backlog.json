@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:15:26Z",
+  "generated_utc": "2026-03-20T17:24:29Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 85,
+  "source_record_count": 84,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 6,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 52
+    "docs-first": 51
   },
   "counts_by_method": {
     "heuristic": 10,
-    "manual-override": 65,
+    "manual-override": 64,
     "proof-gate": 10
   },
   "entries": [
@@ -519,26 +519,6 @@
       "blocking_issues": [
         "No primary Microsoft source for JPEGImportQuality was captured in this research pass.",
         "The current app mapping relies on repo observation for the raw registry semantics."
-      ]
-    },
-    {
-      "record_id": "system.disable-restartable-apps",
-      "tweak_id": "system.disable-restartable-apps",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "The current record does not yet contain a strong primary-source registry mapping for RestartApps.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Feature Setting vs Observed Registry Setting",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-restartable-apps.review.json",
-      "summary": "Microsoft documents the restart-apps feature in Sign-in options, but this record does not yet have a strong primary-source registry mapping for HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps. The current app writes 0 there, so the tweak remains in review.",
-      "decision_why": "The user-facing feature is officially documented, but the current record still needs a strong primary-source registry mapping before the raw RestartApps value can move to validated.",
-      "blocking_issues": [
-        "The current record does not yet contain a strong primary-source registry mapping for RestartApps.",
-        "The product should not publish a validated recommendation until the raw registry semantics are sourced or experimentally confirmed."
       ]
     },
     {
