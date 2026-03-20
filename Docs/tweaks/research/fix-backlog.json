@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-14T04:50:07Z",
+  "generated_utc": "2026-03-20T18:37:47Z",
   "backlog_type": "implementation-mismatch",
   "priority_order": [
     "rename",
@@ -8,168 +8,8 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 6,
+  "entry_count": 1,
   "entries": [
-    {
-      "record_id": "developer.wsl2-memory",
-      "current_state": "mismatch-suspected | WSL Configuration vs Registry Observation",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss::DefaultVersion=2 to the researched surface %UserProfile%\\.wslconfig::[wsl2].memory. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "WSL Configuration vs Registry Observation",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/developer.wsl2-memory.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss",
-          "value_name": "DefaultVersion",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 2
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "file",
-          "path": "%UserProfile%\\.wslconfig",
-          "value_name": "[wsl2].memory",
-          "value_type": "WSL setting",
-          "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "network.smb-increase-client-metadata-cache",
-      "current_state": "mismatch-suspected | Registry Optimization Bundle",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax=4096; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax=32768; HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds=32768 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::DirectoryCacheEntriesMax (example 16); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileInfoCacheEntriesMax (example 64); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::FileNotFoundCacheEntriesMax (example 128); HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters::MaxCmds (example 15). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Optimization Bundle",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "DirectoryCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 4096
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "FileInfoCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 32768
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "FileNotFoundCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 32768
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "MaxCmds",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 32768
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "DirectoryCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "example_value": 16
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "FileInfoCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "example_value": 64
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "FileNotFoundCacheEntriesMax",
-          "value_type": "REG_DWORD",
-          "example_value": 128
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
-          "value_name": "MaxCmds",
-          "value_type": "REG_DWORD",
-          "example_value": 15
-        }
-      ]
-    },
-    {
-      "record_id": "power.optimize-cpu-boost",
-      "current_state": "mismatch-suspected | Processor Boost Behavior",
-      "notes": "Move the implementation from HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization=PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1 to the researched surface HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power::PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization. Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Processor Boost Behavior",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/power.optimize-cpu-boost.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-          "value_name": "PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization",
-          "value_type": "REG_DWORD bundle",
-          "state_kind": "value",
-          "value": "PerfBoostAtGuaranteed=1;HighPerfDurationBoot=120000;LatencyToleranceDefault=0;PerfCalculateActualUtilization=1"
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-          "value_name": "PerfBoostAtGuaranteed + HighPerfDurationBoot + LatencyToleranceDefault + PerfCalculateActualUtilization",
-          "value_type": "REG_DWORD bundle",
-          "example_value": null
-        }
-      ]
-    },
-    {
-      "record_id": "privacy.disable-resume",
-      "current_state": "mismatch-suspected | Policy CSP versus observed user setting",
-      "notes": "Move the implementation from HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed=0 to the researched surface ./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume::DisableCrossDeviceResume (example 0); HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration::IsResumeAllowed (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Policy CSP versus observed user setting",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
-          "value_name": "IsResumeAllowed",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "policy-csp",
-          "path": "./User/Vendor/MSFT/Policy/Config/Connectivity/DisableCrossDeviceResume",
-          "value_name": "DisableCrossDeviceResume",
-          "value_type": "integer",
-          "example_value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
-          "value_name": "IsResumeAllowed",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        }
-      ]
-    },
     {
       "record_id": "security.disable-system-mitigations",
       "current_state": "mismatch-suspected | Exploit Protection",
@@ -202,48 +42,6 @@
           "value_name": "ExploitProtectionSettings",
           "value_type": "REG_SZ",
           "example_value": "<path-or-url-to-config.xml>"
-        }
-      ]
-    },
-    {
-      "record_id": "security.disable-windows-firewall",
-      "current_state": "partially-matches | Registry Policy",
-      "notes": "Move the implementation from HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile::EnableFirewall=0; HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile::EnableFirewall=0 to the researched surface HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile::EnableFirewall (example 0); HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile::EnableFirewall (example 0). Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.disable-windows-firewall.review.json",
-      "current_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
-          "value_name": "EnableFirewall",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
-          "value_name": "EnableFirewall",
-          "value_type": "REG_DWORD",
-          "state_kind": "value",
-          "value": 0
-        }
-      ],
-      "expected_surfaces": [
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
-          "value_name": "EnableFirewall",
-          "value_type": "REG_DWORD",
-          "example_value": 0
-        },
-        {
-          "location_kind": "registry",
-          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
-          "value_name": "EnableFirewall",
-          "value_type": "REG_DWORD",
-          "example_value": 0
         }
       ]
     }

@@ -90,20 +90,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             },
             requiresElevation: true);
 
-        yield return CreateRegistryValueBatchTweak(
-            context,
-            "power.optimize-cpu-boost",
-            "Optimize CPU Performance Boost",
-            "Optimizes CPU boost behavior for better performance. Enables boost at guaranteed frequency, extends high-performance duration, and minimizes latency tolerance.",
-            TweakRiskLevel.Safe,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfBoostAtGuaranteed", RegistryValueKind.DWord, 1, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HighPerfDurationBoot", RegistryValueKind.DWord, 120000, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "LatencyToleranceDefault", RegistryValueKind.DWord, 0, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "PerfCalculateActualUtilization", RegistryValueKind.DWord, 1, RegistryView.Default)
-            },
-            requiresElevation: true);
+        yield return new SetCpuBoostPerfModeTweak(context.ElevatedCommandRunner);
 
         // Network Power Management
         yield return CreateRegistryValueBatchTweak(

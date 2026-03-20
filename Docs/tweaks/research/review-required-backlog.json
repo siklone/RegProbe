@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T17:40:24Z",
+  "generated_utc": "2026-03-20T18:37:47Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 80,
+  "source_record_count": 74,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -12,14 +12,14 @@
     "docs-first": "The current record is useful as reference, but the evidence or supported control surface is not strong enough for a normal apply path yet."
   },
   "counts_by_label": {
-    "implementation-mismatch": 6,
+    "implementation-mismatch": 1,
     "rename": 2,
     "split-needed": 25,
-    "docs-first": 47
+    "docs-first": 46
   },
   "counts_by_method": {
-    "heuristic": 10,
-    "manual-override": 61,
+    "heuristic": 5,
+    "manual-override": 60,
     "proof-gate": 9
   },
   "entries": [
@@ -40,26 +40,6 @@
       "decision_why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract.",
       "blocking_issues": [
         "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
-      ]
-    },
-    {
-      "record_id": "developer.docker-performance",
-      "tweak_id": "developer.docker-performance",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No vendor-published registry or settings-store contract for HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2 was captured in this pass.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Developer",
-      "technical_area": "Docker Desktop / WSL Integration",
-      "implementation_status": "unknown",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/developer.docker-performance.review.json",
-      "summary": "Docker officially documents the WSL 2 backend for Docker Desktop on Windows, but this research pass did not capture a Docker-published registry contract for HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2. The current app write stays documented as an observed implementation only.",
-      "decision_why": "The feature area is vendor-documented, but this research pass did not capture an official Docker contract for the exact registry value written by the app.",
-      "blocking_issues": [
-        "No vendor-published registry or settings-store contract for HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2 was captured in this pass.",
-        "The current record can document the feature area, but not yet validate the exact registry write."
       ]
     },
     {
@@ -1056,108 +1036,6 @@
       ]
     },
     {
-      "record_id": "developer.wsl2-memory",
-      "tweak_id": "developer.wsl2-memory",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The app writes Lxss\\DefaultVersion = 2, which is not the documented WSL memory-limit surface captured in this pass.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Developer",
-      "technical_area": "WSL Configuration vs Registry Observation",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/developer.wsl2-memory.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. Microsoft documents WSL 2 memory limits through the .wslconfig file, while the current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss\\DefaultVersion = 2. This record now validates the documented WSL memory-control surface and keeps the current registry write flagged as an implementation mismatch.",
-      "decision_why": "Microsoft documents WSL 2 memory limits through the .wslconfig file under the [wsl2] section, not through the Lxss\\DefaultVersion registry value. This record now carries machine-checkable proof for the documented memory surface and keeps the current app write blocked as an implementation mismatch.",
-      "blocking_issues": [
-        "The app writes Lxss\\DefaultVersion = 2, which is not the documented WSL memory-limit surface captured in this pass.",
-        "The documented WSL memory control uses .wslconfig, not the current registry key."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
-        "exact_quote_or_path": "The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; .wslconfig section label: [wsl2]; memory size 50% of total memory on Windows How much memory to assign to the WSL 2 VM.; Example: [wsl2] memory=4GB; No matching text found for DefaultVersion on the page.",
-        "key_found_on_page": true,
-        "notes": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The same official page does not document the app's HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss\\DefaultVersion registry value as a memory-limit surface."
-      }
-    },
-    {
-      "record_id": "network.smb-increase-client-metadata-cache",
-      "tweak_id": "network.smb-increase-client-metadata-cache",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app uses metadata cache and MaxCmds values that do not match Microsoft's published tuning guidance.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Network",
-      "technical_area": "Registry Optimization Bundle",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's documented SMB client metadata-cache defaults and high-latency example values. The current app's numbers remain far above that published guidance and stay flagged as an implementation mismatch.",
-      "decision_why": "Microsoft's SMB performance tuning page documents the exact LanmanWorkstation registry paths and the default values for DirectoryCacheEntriesMax, FileInfoCacheEntriesMax, FileNotFoundCacheEntriesMax, and MaxCmds. The app targets those same registry values, but its numbers are far above the published defaults and Microsoft example values, so the record remains review-only.",
-      "blocking_issues": [
-        "The current app uses metadata cache and MaxCmds values that do not match Microsoft's published tuning guidance."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
-        "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 64; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 16; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 128; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 15.",
-        "key_found_on_page": true,
-        "notes": "The official SMB tuning page explicitly lists the exact LanmanWorkstation registry paths and defaults for all four values. The record stays in review because the app writes much larger numbers than Microsoft's documented defaults and examples."
-      }
-    },
-    {
-      "record_id": "power.optimize-cpu-boost",
-      "tweak_id": "power.optimize-cpu-boost",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "No primary Microsoft registry mapping was found for the exact raw bundle used by the app.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Power",
-      "technical_area": "Processor Boost Behavior",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/power.optimize-cpu-boost.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates that Microsoft publishes supported CPU boost tuning through power settings such as PERFBOOSTMODE, not through the raw registry bundle written by the app.",
-      "decision_why": "Microsoft's supported CPU boost surface is the PERFBOOSTMODE power setting, documented by GUID and index table. The app instead writes an undocumented raw registry bundle under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power, so this record stays review-only as an implementation mismatch.",
-      "blocking_issues": [
-        "No primary Microsoft registry mapping was found for the exact raw bundle used by the app."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
-        "exact_quote_or_path": "PERFBOOSTMODE determines how processors select a performance level when current operating conditions allow for boosting performance above the nominal level. GUID: be337238-0d82-4146-a960-4f3749d470c7. PowerCfg alias: PERFBOOSTMODE. Index 0 = Disabled, Index 1 = Aggressive.",
-        "key_found_on_page": true,
-        "notes": "Microsoft documents a supported processor-boost control surface by GUID and power-setting alias, but not the raw HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power registry bundle written by the app."
-      }
-    },
-    {
-      "record_id": "privacy.disable-resume",
-      "tweak_id": "privacy.disable-resume",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead of the documented user-scope policy DisableCrossDeviceResume.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Privacy",
-      "technical_area": "Policy CSP versus observed user setting",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
-      "summary": "Microsoft documents a user-scope Connectivity policy named DisableCrossDeviceResume that disables cross-device resume experiences. The current app instead writes the runtime current-user setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. That observed setting is real, but it is not the same supported control surface as the documented policy, so this record now tracks an implementation mismatch.",
-      "decision_why": "Microsoft now provides a documented user-scope policy for disabling cross-device resume, and the current app does not write that supported surface. It writes a different runtime HKCU setting instead.",
-      "blocking_issues": [
-        "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 instead of the documented user-scope policy DisableCrossDeviceResume.",
-        "The DisableCrossDeviceResume CSP page still carries Windows Insider Preview language as of March 14, 2026, so any future surface alignment should also verify shipping-build applicability."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
-        "exact_quote_or_path": "DisableCrossDeviceResume. Scope User. Default Value 0. Format int. 0 = CrossDeviceResume is enabled. 1 = CrossDeviceResume is Disabled.",
-        "key_found_on_page": true,
-        "notes": "Microsoft directly documents DisableCrossDeviceResume as the supported user-scope policy surface. The current app writes a different runtime HKCU setting instead."
-      }
-    },
-    {
       "record_id": "security.disable-system-mitigations",
       "tweak_id": "security.disable-system-mitigations",
       "source_record_status": "review-required",
@@ -1182,33 +1060,6 @@
         "exact_quote_or_path": "<policy name=\"ExploitProtection_Name\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection\" ... <text id=\"ExploitProtection_Name\" valueName=\"ExploitProtectionSettings\" required=\"true\" maxLength=\"65535\" />; ExploitGuard.adml: \"Generate an XML file with the settings from the device ... and place the generated XML file in a shared or local path.\"",
         "key_found_on_page": true,
         "notes": "Local official Microsoft ADMX/ADML files document Exploit Protection through the ExploitProtectionSettings XML path under the Exploit Guard policy key. The current app writes raw MitigationOptions and MitigationAuditOptions blobs under HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel instead, so this record remains review-required as an implementation mismatch."
-      }
-    },
-    {
-      "record_id": "security.disable-windows-firewall",
-      "tweak_id": "security.disable-windows-firewall",
-      "source_record_status": "review-required",
-      "label": "implementation-mismatch",
-      "classification_method": "heuristic",
-      "classification_reason": "The current app writes EnableFirewall = 0 under HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy instead of HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall.",
-      "suggested_action": "Align the implementation to the official or explicitly documented surface, or narrow the tweak to the behavior the app actually writes.",
-      "category": "Security",
-      "technical_area": "Registry Policy",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.disable-windows-firewall.review.json",
-      "summary": "The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, while the current app writes EnableFirewall = 0 under runtime service paths beneath SharedAccess\\Parameters\\FirewallPolicy. The runtime paths are real and appear in Microsoft troubleshooting guidance, but the app is still not using the official policy surface, so this stays in review.",
-      "decision_why": "The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files, and Microsoft troubleshooting guidance confirms that the SharedAccess profile paths are real runtime surfaces. The current app still writes the runtime surface instead of the official policy surface, so the record remains implementation-mismatch rather than validated.",
-      "blocking_issues": [
-        "The current app writes EnableFirewall = 0 under HKLM\\System\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy instead of HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall.",
-        "The app also writes PublicProfile under the runtime tree, while the main local policy evidence used here documents DomainProfile and StandardProfile.",
-        "The SharedAccess runtime paths are confirmed by Microsoft troubleshooting guidance, but not by a primary policy design document equivalent to Firewall CSP."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
-        "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PrivateProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/PublicProfile/EnableFirewall; Azure VM recovery guidance: HKLM:\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile|PublicProfile|StandardProfile -> EnableFirewall",
-        "key_found_on_page": true,
-        "notes": "Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. Microsoft troubleshooting guidance also confirms the SharedAccess runtime profile paths are real, but the app still writes the runtime surface instead of the official policy surface, so this record remains review-required as an implementation mismatch."
       }
     },
     {
