@@ -40,11 +40,11 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
 | `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
-| `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `62ac52404c43f97b5ee0976797a053e46547335053da863a8f001380012075b3` | `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb` | 1 |
+| `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb` | 1 |
 | `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `7543ec7f7cc3822bcd0a772da1b7be217691616f539ac2600cd3fb4f7c753a33` | `8b792ad081c25666c1212d9ac5d02658188059f46eb3e7f5853d28765d0f84fa` | 1 |
 | `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
 | `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd` | `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0` | 1 |
-| `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59` | 1 |
+| `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 1 |
 | `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 4 |
 | `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `00d2fee5568aced7a3174f207b2b1b126271e7b72b4f1515a1f645440b68f642` | `0ee737a75d10889c50be7e89c9a3c5d98fae4ec54afc4bce7825a2d61ac406a2` | 1 |
 | `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `41bfcc52f0d7832756c5b7446383f983eac7e9a5cb420453d0214d578693a75b` | `4d70ca029c77128de2ff086067dec0863968274249c4a057c3b80a15dc6b4ab8` | 3 |
@@ -961,7 +961,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json`
-- Source SHA256: `62ac52404c43f97b5ee0976797a053e46547335053da863a8f001380012075b3`
+- Source SHA256: `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39`
 - Proof SHA256: `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb`
 
 **Summary:** Deprecated audit trail for the Offline Files service subrecord. The app disables CSC and CscService as part of the broader Offline Files bundle, but the validated publishable control surface is tracked separately in the policy record.
@@ -1084,7 +1084,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-suggestions.review.json`
 - Source SHA256: `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7`
-- Proof SHA256: `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59`
+- Proof SHA256: `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c`
 
 **Summary:** Deprecated audit trail for the old suggestions bundle. The ContentDeliveryManager IDs are still observed, but the parent record is no longer the primary research surface.
 
@@ -1097,15 +1097,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 **Evidence**
 
 - `app-privacy-provider` | `repo-code` | Current privacy provider CDM suggestions bundle | `high`
+- `repo-privacy-verified-suggestions` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestion IDs | `high`
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider CDM suggestions bundle: The provider writes five current-user ContentDeliveryManager suggestion-related values to 0. |
+| source_url | Docs/privacy/privacy-verified.md |
+| exact_quote_or_path | Repo privacy docs for Content Delivery Manager suggestion IDs: the observed ContentDeliveryManager values and named policy equivalents are explicitly documented in privacy-verified docs. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-privacy-verified-suggestions (repo-doc); deprecated audit trail. |
 ### `privacy.disable-suggestions-cdm`
 
 - Status: `deprecated`

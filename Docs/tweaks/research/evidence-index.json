@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:33:39.779835Z",
+  "generated_utc": "2026-03-21T10:36:00.350621Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -3786,8 +3786,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "This is an implementation-level hardening step layered on top of the official policy and needs separate review.",
+        "needs_vm_validation": false,
+        "why": "The service disable behavior is now documented in the repo alongside the official Offline Files policy surface, so the remaining concern is that it is a broader hardening step rather than a missing proof problem.",
         "blocking_issues": [
           "Service shutdown goes beyond the validated Offline Files policy surface."
         ]
@@ -3936,13 +3936,26 @@
             "ui-mapping",
             "behavior"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-verified-offline-files",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for Offline Files service hardening",
+          "location": "Docs/privacy/privacy-verified.md",
+          "summary": "The repo docs list the Offline Files registry policy and the service commands Set-Service -Name \"CSC\" -StartupType Disabled and Set-Service -Name \"CscService\" -StartupType Disabled.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
-        "exact_quote_or_path": "Existing Offline Files policy record: The core Offline Files feature policy is already documented separately.",
+        "source_url": "Docs/privacy/privacy-verified.md",
+        "exact_quote_or_path": "Repo privacy docs for Offline Files service hardening: the repo docs list the Set-Service commands for CSC and CscService along with the registry policy path.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-verified-offline-files (repo-doc); deprecated audit trail."
       }
     },
     {

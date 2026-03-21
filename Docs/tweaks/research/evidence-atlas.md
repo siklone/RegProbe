@@ -18145,7 +18145,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old suggestions bundle. The ContentDeliveryManager IDs are still observed, but the parent record is no longer the primary research surface.
 
@@ -18180,15 +18180,16 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `app-privacy-provider` | `repo-code` | Current privacy provider CDM suggestions bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-privacy-verified-suggestions` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestion IDs | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider CDM suggestions bundle: The provider writes five current-user ContentDeliveryManager suggestion-related values to 0. |
+| Source URL | Docs/privacy/privacy-verified.md |
+| Exact quote / path | Repo privacy docs for Content Delivery Manager suggestion IDs: the observed ContentDeliveryManager values and named policy equivalents are explicitly documented in privacy-verified docs. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-privacy-verified-suggestions (repo-doc); deprecated audit trail. |
 
 **Decision**
 
@@ -18198,8 +18199,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The bundle is useful to track, but the numeric suggestion IDs still need stronger semantic provenance. |
+| Needs VM validation | `False` |
+| Why | The bundle is useful to track and the repo docs now enumerate the observed ContentDeliveryManager IDs alongside the named CloudContent policy equivalents. The remaining issue is bundle semantics rather than missing proof. |
 
 Blocking issues:
 - Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface.
