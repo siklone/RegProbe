@@ -27,6 +27,16 @@ def escape_md_cell(value: Any) -> str:
     return text.replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
 
 
+def render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
+    out = [
+        "| " + " | ".join(headers) + " |",
+        "| " + " | ".join(["---"] * len(headers)) + " |",
+    ]
+    for row in rows:
+        out.append("| " + " | ".join(row) + " |")
+    return out
+
+
 def load_index() -> dict[str, Any]:
     with INDEX_PATH.open("r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -65,6 +75,7 @@ def normalize_record(index_record: dict[str, Any]) -> dict[str, Any]:
         "evidence": index_record.get("evidence", []),
         "validation_proof": proof,
         "validation_proof_sha256": proof_hash,
+        "provenance": index_record.get("provenance"),
     }
 
 
@@ -89,7 +100,8 @@ def render_md(manifest: dict[str, Any]) -> str:
     lines.append("# Evidence Manifest")
     lines.append("")
     lines.append("This manifest is the forensic companion to the evidence atlas.")
-    lines.append("Each record includes the raw source-file SHA256 and the exact validation proof block.")
+    lines.append("Each record includes the raw source-file SHA256, the exact validation proof block, and provenance.")
+    lines.append("Nohuto references are lineage / naming provenance only; value semantics remain sourced from the record evidence and validation proof.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
@@ -158,12 +170,61 @@ def render_md(manifest: dict[str, Any]) -> str:
         lines.append("")
         lines.append("**Evidence**")
         lines.append("")
+        evidence_rows = []
         for evidence in record.get("evidence", []):
-            lines.append(
-                f"- `{escape_md_cell(evidence.get('evidence_id'))}` | `{escape_md_cell(evidence.get('kind'))}` | "
-                f"{escape_md_cell(evidence.get('title'))} | `{escape_md_cell(evidence.get('strength'))}`"
-            )
+            evidence_rows.append([
+                f"`{escape_md_cell(evidence.get('evidence_id'))}`",
+                f"`{escape_md_cell(evidence.get('kind'))}`",
+                f"`{escape_md_cell(evidence.get('origin'))}`",
+                escape_md_cell(evidence.get("title")),
+                f"`{escape_md_cell(evidence.get('strength'))}`",
+            ])
+        lines.extend(render_table(["Evidence ID", "Kind", "Origin", "Title", "Strength"], evidence_rows))
         lines.append("")
+
+        provenance = record.get("provenance")
+        lines.append("**Provenance**")
+        lines.append("")
+        if isinstance(provenance, dict):
+            provenance_rows = [
+                ["Coverage state", escape_md_cell(provenance.get("coverage_state"))],
+                ["Has nohuto evidence", escape_md_cell(provenance.get("has_nohuto_evidence"))],
+                ["Has Windows Internals context", escape_md_cell(provenance.get("has_windows_internals_context"))],
+                ["Needs review", escape_md_cell(provenance.get("needs_review"))],
+                ["Source repositories", escape_md_cell(", ".join(provenance.get("source_repositories", []) or []))],
+                ["Matched tokens", escape_md_cell(", ".join(provenance.get("matched_tokens", []) or []))],
+                ["Lineage note", escape_md_cell(provenance.get("lineage_note"))],
+            ]
+            lines.extend(render_table(["Field", "Value"], provenance_rows))
+            lines.append("")
+
+            if provenance.get("nohuto_references"):
+                lines.append("Nohuto lineage references:")
+                for ref in provenance.get("nohuto_references", []):
+                    lines.append(
+                        f"- {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
+                    )
+                lines.append("")
+
+            if provenance.get("windows_internals_references"):
+                lines.append("Windows Internals references:")
+                for ref in provenance.get("windows_internals_references", []):
+                    lines.append(
+                        f"- {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
+                    )
+                lines.append("")
+
+            if provenance.get("other_references"):
+                lines.append("Other provenance references:")
+                for ref in provenance.get("other_references", []):
+                    lines.append(
+                        f"- {escape_md_cell(ref.get('Kind'))}: {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
+                    )
+                lines.append("")
+        else:
+            lines.append("_No provenance block present._")
+            lines.append("")
+
         proof = record.get("validation_proof")
         lines.append("**Validation proof**")
         lines.append("")

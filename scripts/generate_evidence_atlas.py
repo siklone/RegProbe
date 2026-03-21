@@ -120,6 +120,58 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.extend(render_table(["Target", "Path", "Value", "State", "Kind", "Notes"], write_rows))
         lines.append("")
 
+    provenance = record.get("provenance") or {}
+    lines.append("**Provenance**")
+    lines.append("")
+    provenance_rows = [
+        ["Coverage state", md_code(provenance.get("coverage_state"))],
+        ["Has nohuto evidence", md_code(provenance.get("has_nohuto_evidence"))],
+        ["Has Windows Internals context", md_code(provenance.get("has_windows_internals_context"))],
+        ["Needs review", md_code(provenance.get("needs_review"))],
+        ["Source repositories", md_escape(", ".join(provenance.get("source_repositories", []) or []))],
+        ["Matched tokens", md_escape(", ".join(provenance.get("matched_tokens", []) or []))],
+        ["Lineage note", md_escape(provenance.get("lineage_note"))],
+    ]
+    lines.extend(render_table(["Field", "Value"], provenance_rows))
+    lines.append("")
+    if provenance.get("nohuto_references"):
+        lines.append("Nohuto lineage references:")
+        lines.append("")
+        nohuto_rows = []
+        for ref in provenance.get("nohuto_references", []) or []:
+            nohuto_rows.append([
+                md_escape(ref.get("Title")),
+                md_escape(ref.get("Url")),
+                md_escape(ref.get("Summary")),
+            ])
+        lines.extend(render_table(["Title", "URL", "Summary"], nohuto_rows))
+        lines.append("")
+    if provenance.get("windows_internals_references"):
+        lines.append("Windows Internals references:")
+        lines.append("")
+        internals_rows = []
+        for ref in provenance.get("windows_internals_references", []) or []:
+            internals_rows.append([
+                md_escape(ref.get("Title")),
+                md_escape(ref.get("Url")),
+                md_escape(ref.get("Summary")),
+            ])
+        lines.extend(render_table(["Title", "URL", "Summary"], internals_rows))
+        lines.append("")
+    if provenance.get("other_references"):
+        lines.append("Other provenance references:")
+        lines.append("")
+        other_rows = []
+        for ref in provenance.get("other_references", []) or []:
+            other_rows.append([
+                md_escape(ref.get("Kind")),
+                md_escape(ref.get("Title")),
+                md_escape(ref.get("Url")),
+                md_escape(ref.get("Summary")),
+            ])
+        lines.extend(render_table(["Kind", "Title", "URL", "Summary"], other_rows))
+        lines.append("")
+
     targets = record.get("setting", {}).get("targets", []) or []
     lines.append("**Targets**")
     lines.append("")
@@ -182,12 +234,13 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
             evidence_rows.append([
                 md_code(item.get("evidence_id")),
                 md_code(item.get("kind")),
+                md_code(item.get("origin")),
                 md_escape(item.get("title")),
                 md_escape(item.get("location")),
                 md_code(item.get("strength")),
                 md_escape(", ".join(item.get("supports", []) or [])),
             ])
-        lines.extend(render_table(["Evidence ID", "Kind", "Title", "Location", "Strength", "Supports"], evidence_rows))
+        lines.extend(render_table(["Evidence ID", "Kind", "Origin", "Title", "Location", "Strength", "Supports"], evidence_rows))
         lines.append("")
 
     proof = record.get("validation_proof")
@@ -243,6 +296,7 @@ def main() -> int:
     lines.append("# Evidence Atlas")
     lines.append("")
     lines.append("This report consolidates every tweak record into a single human-readable atlas of key/value mappings, allowed values, evidence, and validation proof.")
+    lines.append("Nohuto references are lineage / naming provenance only; value semantics are validated separately in the record evidence and validation proof.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")

@@ -1,6 +1,7 @@
 # Evidence Atlas
 
 This report consolidates every tweak record into a single human-readable atlas of key/value mappings, allowed values, evidence, and validation proof.
+Nohuto references are lineage / naming provenance only; value semantics are validated separately in the record evidence and validation proof.
 
 ## Summary
 
@@ -66,6 +67,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `beep-start-mode` | `HKLM\SYSTEM\CurrentControlSet\Services\Beep` | `Start` | `4` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | beep, start |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -80,12 +102,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-services-registry-tree` | `official-doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree | `high` | path, value, allowed-values, version-scope |
-| `runtime-beep-registry-diff` | `runtime-diff` | Guest reversible probe - Beep driver start mode | H:\Temp\vm-tooling-staging\beep_start_toggle_out.txt | `high` | value, behavior, version-scope |
-| `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-audio-disable-beep` | `repo-doc` | Repo provenance for audio.disable-beep | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree | `high` | path, value, allowed-values, version-scope |
+| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | H:\Temp\vm-tooling-staging\beep_start_toggle_out.txt | `high` | value, behavior, version-scope |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-beep | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -138,6 +160,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `audio-devicecpl-show-disconnected` | `HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl` | `ShowDisconnectedDevices` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | multimedia, audio, devicecpl, showdisconnecteddevices |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -151,10 +194,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -207,6 +250,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `audio-devicecpl-show-hidden` | `HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl` | `ShowHiddenDevices` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | multimedia, audio, devicecpl, showhiddendevices |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -220,10 +284,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -278,6 +342,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `reserved-storage-state-command` | `DISM.exe /Online /Set-ReservedStorageState` | `State` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable reserved storage |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -292,13 +374,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dism-reserved-storage` | `official-doc` | Microsoft Learn: DISM Reserved Storage Command-line Options | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11 | `high` | path, allowed-values, behavior, version-scope |
-| `ms-dism-reserved-storage-api` | `official-doc` | Microsoft Learn: DismGetReservedStorageState function | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism/dismgetreservedstoragestate-function?view=windows-11 | `high` | behavior, version-scope |
-| `engine-cleanup-command-tweak` | `repo-code` | Current cleanup command implementation | WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs | `high` | path, value, ui-mapping |
-| `local-dism-detect` | `vm-test` | Local DISM detect run for Reserved Storage state | Local run - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
-| `repo-reserve-manager-side-effect` | `repo-doc` | Repo Procmon note for Reserved Storage side effect | Docs/privacy/privacy.md | `medium` | behavior, side-effects |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dism-reserved-storage` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DISM Reserved Storage Command-line Options | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11 | `high` | path, allowed-values, behavior, version-scope |
+| `ms-dism-reserved-storage-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DismGetReservedStorageState function | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism/dismgetreservedstoragestate-function?view=windows-11 | `high` | behavior, version-scope |
+| `engine-cleanup-command-tweak` | `repo-code` | `Current repo code` | Current cleanup command implementation | WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs | `high` | path, value, ui-mapping |
+| `local-dism-detect` | `vm-test` | `VM test / probe` | Local DISM detect run for Reserved Storage state | Local run - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
+| `repo-reserve-manager-side-effect` | `repo-doc` | `Current repo docs` | Repo Procmon note for Reserved Storage side effect | Docs/privacy/privacy.md | `medium` | behavior, side-effects |
 
 **Validation proof**
 
@@ -353,6 +435,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `docker-desktop-wsl2-backend` | `%APPDATA%\Docker\settings-store.json` | `linuxVM.wslEngineEnabled.value` | true | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -367,11 +461,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `docker-settings-file-doc` | `official-doc` | Docker Docs: Change your Docker Desktop settings | https://docs.docker.com/desktop/settings-and-maintenance/settings/ | `high` | path, behavior, version-scope |
-| `docker-wsl-backend-doc` | `official-doc` | Docker Docs: Docker Desktop WSL 2 backend on Windows | https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/ | `high` | behavior, side-effects, value |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `docker-settings-file-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Change your Docker Desktop settings | https://docs.docker.com/desktop/settings-and-maintenance/settings/ | `high` | path, behavior, version-scope |
+| `docker-wsl-backend-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Docker Desktop WSL 2 backend on Windows | https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/ | `high` | behavior, side-effects, value |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -424,6 +518,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dotnet-cli-telemetry-optout` | `HKCU\Environment` | `DOTNET_CLI_TELEMETRY_OPTOUT` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -438,11 +552,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
-| `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -498,6 +612,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `windows-long-paths` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/FileSystem.txt | https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -512,10 +646,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -568,6 +702,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `node-options` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` | `NODE_OPTIONS` | `--max-old-space-size=8192` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
 **Targets**
 
 **Windows defaults**
@@ -582,12 +737,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `node-cli-node-options` | `official-doc` | Node.js CLI documentation: NODE_OPTIONS | https://nodejs.org/api/cli.html | `high` | path, value, behavior |
-| `node-cli-max-old-space-size` | `official-doc` | Node.js CLI documentation: --max-old-space-size | https://nodejs.org/api/cli.html | `high` | value, allowed-values, behavior |
-| `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `node-cli-node-options` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: NODE_OPTIONS | https://nodejs.org/api/cli.html | `high` | path, value, behavior |
+| `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | https://nodejs.org/api/cli.html | `high` | value, allowed-values, behavior |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -640,6 +795,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `powershell-execution-policy` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell` | `ExecutionPolicy` | `RemoteSigned` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, powershell, executionpolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -654,11 +829,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-powershell-executionpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values |
-| `local-powershell-executionpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values |
+| `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -714,6 +889,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `windows-long-paths` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/FileSystem.txt | https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -728,13 +923,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `python-using-windows-doc` | `official-doc` | Python documentation: Using Python on Windows | https://docs.python.org/3/using/windows.html | `high` | behavior, side-effects |
-| `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
-| `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `python-using-windows-doc` | `official-doc` | `Microsoft official doc` | Python documentation: Using Python on Windows | https://docs.python.org/3/using/windows.html | `high` | behavior, side-effects |
+| `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -787,6 +982,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `C:\Windows\System32\OpenSSH\ssh-agent.exe` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `unmapped` |
+| Has nohuto evidence | `False` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
 **Targets**
 
 **Windows defaults**
@@ -800,11 +1007,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-run-registry-keys` | `official-doc` | Run and RunOnce Registry Keys | https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys | `high` | path, behavior, version-scope |
-| `openssh-ssh-agent-doc` | `official-doc` | OpenSSH manual: ssh-agent | https://man.openbsd.org/ssh-agent | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys | `high` | path, behavior, version-scope |
+| `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | https://man.openbsd.org/ssh-agent | `medium` | behavior, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -857,6 +1064,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-development-without-dev-license` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock` | `AllowDevelopmentWithoutDevLicense` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `unmapped` |
+| Has nohuto evidence | `False` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
 **Targets**
 
 **Windows defaults**
@@ -871,12 +1090,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-enable-device-for-development` | `official-doc` | Microsoft Learn: Enable your device for development | https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode | `high` | path, value, behavior |
-| `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
-| `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode | `high` | path, value, behavior |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -929,6 +1148,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wsl2-memory-setting` | `%UserProfile%\.wslconfig` | `[wsl2].memory` | `4GB` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -942,9 +1173,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-wsl-config` | `official-doc` | Microsoft Learn: Advanced settings configuration in WSL | https://learn.microsoft.com/en-us/windows/wsl/wsl-config | `high` | behavior, allowed-values, app-matching |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-wsl-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Advanced settings configuration in WSL | https://learn.microsoft.com/en-us/windows/wsl/wsl-config | `high` | behavior, allowed-values, app-matching |
 
 **Validation proof**
 
@@ -999,6 +1230,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-low-disk-space-checks` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `NoLowDiskSpaceChecks` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-registry, win-config |
+| Matched tokens | policies, explorer, nolowdiskspacechecks |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-registry / records/CV-Policies.txt | https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1013,10 +1264,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-low-disk-warning-article` | `official-doc` | Microsoft Learn troubleshooting article for low disk space warnings | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft | `high` | path, value, behavior |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft | `high` | path, value, behavior |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1069,6 +1320,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `configure-chat-icon-policy` | `HKLM\Software\Policies\Microsoft\Windows\Windows Chat` | `ChatIcon` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, chat |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1083,12 +1354,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-configure-chat-icon` | `policy-csp` | Microsoft Policy CSP: Experience / ConfigureChatIcon | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-taskbar-admx-chat` | `official-doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | C:\Windows\PolicyDefinitions\Taskbar.admx | `high` | path, value, allowed-values, version-scope |
-| `local-taskbar-adml-chat` | `official-doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | C:\Windows\PolicyDefinitions\en-US\Taskbar.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-configure-chat-icon` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Experience / ConfigureChatIcon | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | C:\Windows\PolicyDefinitions\Taskbar.admx | `high` | path, value, allowed-values, version-scope |
+| `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | C:\Windows\PolicyDefinitions\en-US\Taskbar.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1141,6 +1412,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `explorer-usecompactmode-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `UseCompactMode` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-registry, win-config |
+| Matched tokens | explorer, advanced, usecompactmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-registry / records/CV-Explorer.txt | https://github.com/nohuto/win-registry/blob/main/records/CV-Explorer.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1154,10 +1445,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\explorer_batch_applied_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\explorer_compact_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\explorer_batch_applied_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\explorer_compact_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1210,6 +1501,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `explorer-hidefileext-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `HideFileExt` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1224,11 +1535,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
-| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1281,6 +1592,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `explorer-fullpath-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState` | `FullPath` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, cabinetstate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1295,11 +1626,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-gppref-global-folder-options` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptions | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a | `high` | path, value, allowed-values, behavior |
-| `repo-provenance-explorer-show-full-path` | `repo-doc` | Repo provenance for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a | `high` | path, value, allowed-values, behavior |
+| `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo provenance for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1352,6 +1683,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `explorer-hidden-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `Hidden` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced, hidden |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1366,11 +1717,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
-| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidden_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidden_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1423,6 +1774,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `taskbar-alignment` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `TaskbarAl` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced, taskbaral |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -1437,11 +1808,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11 | `high` | behavior, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11 | `high` | behavior, version-scope |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1496,6 +1867,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ncsi-noactiveprobe-policy` | `HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator` | `NoActiveProbe` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, networkconnectivitystatusindicator, noactiveprobe |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1510,11 +1907,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-ncsi-icm-admx` | `official-doc` | Microsoft administrative template for NCSI active probing | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `ms-ncsi-icm-adml` | `official-doc` | Microsoft help text for NCSI active probing policy | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, risk, default |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
+| `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, risk, default |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
 
 **Validation proof**
 
@@ -1568,6 +1965,33 @@ Current write(s):
 | `auto-share-server` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `AutoShareServer` | `0` | `value` |  |
 | `auto-share-workstation` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `AutoShareWks` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver, autoshareserver, autosharewks |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -1583,12 +2007,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-remove-admin-shares` | `official-doc` | Microsoft Learn: remove administrative shares | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares | `high` | path, value, behavior, risk |
-| `ms-admin-shares-missing` | `official-doc` | Microsoft Learn: administrative shares are missing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing | `high` | path, value, default, allowed-values, behavior, risk |
-| `ms-mss-autosharewks` | `policy-csp` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy | `medium` | ui-mapping, version-scope |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-remove-admin-shares` | `official-doc` | `Microsoft official doc` | Microsoft Learn: remove administrative shares | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares | `high` | path, value, behavior, risk |
+| `ms-admin-shares-missing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: administrative shares are missing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing | `high` | path, value, default, allowed-values, behavior, risk |
+| `ms-mss-autosharewks` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy | `medium` | ui-mapping, version-scope |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1641,6 +2065,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ipv6-disabled-components` | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters` | `DisabledComponents` | `255` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disabledcomponents, tcpip6 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1655,10 +2105,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -1711,6 +2161,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-multicast` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableMulticast` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablemulticast |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1725,12 +2201,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
-| `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-llmnr` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -1784,6 +2260,32 @@ Current write(s):
 | `lltdio-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableLLTDIO` | `0` | `value` |  |
 | `lltd-responder-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableRspndr` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1799,15 +2301,15 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-lltd-admx` | `official-doc` | Microsoft administrative template for LLTD Mapper I/O | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
-| `ms-lltd-adml` | `official-doc` | Microsoft help text for LLTD Mapper I/O policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default |
-| `ms-lltd-responder-admx` | `official-doc` | Microsoft administrative template for LLTD Responder | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
-| `ms-lltd-responder-adml` | `official-doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default |
-| `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery | `high` | path, behavior, version-scope |
-| `ms-lltd-disconnect-kb` | `official-doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos | `medium` | side-effects, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default |
+| `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery | `high` | path, behavior, version-scope |
+| `ms-lltd-disconnect-kb` | `official-doc` | `Microsoft official doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos | `medium` | side-effects, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -1860,6 +2362,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dnsclient-enable-mdns` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableMDNS` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablemdns |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1874,11 +2402,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dnsclient-mdns-admx` | `official-doc` | Microsoft administrative template for mDNS | C:\Windows\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
-| `ms-dnsclient-mdns-adml` | `official-doc` | Microsoft help text for mDNS policy | C:\Windows\PolicyDefinitions\en-US\DnsClient.adml | `high` | behavior, default |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | C:\Windows\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
+| `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | C:\Windows\PolicyDefinitions\en-US\DnsClient.adml | `high` | behavior, default |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -1931,6 +2459,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `netbios-options` | `HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_*` | `NetbiosOptions` | `2` | `per-interface` | Applied per IP-enabled adapter via Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2). |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | disable, netbios, over, disables, enabled, adapters, using, interface, surface, documented |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 9 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 10 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 8 audit token(s) in win-registry. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -1946,14 +2500,14 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-netbios-wmi` | `official-doc` | Microsoft WMI: SetTcpipNetbios method | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration | `high` | path, value, allowed-values, behavior, version-scope |
-| `ms-netbios-unattend` | `official-doc` | Microsoft unattended setup: NetbiosOptions | https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-netbt-interfaces-interface-netbiosoptions | `high` | path, value, allowed-values, default |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | Command-backed NetBIOS implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs | `high` | path, value, behavior, ui-mapping |
-| `local-netbios-cim-detect` | `vm-test` | Local read-only CIM detect run for NetBIOS over TCP/IP | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
-| `repo-provenance-netbios` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | risk, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-netbios-wmi` | `official-doc` | `Microsoft official doc` | Microsoft WMI: SetTcpipNetbios method | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration | `high` | path, value, allowed-values, behavior, version-scope |
+| `ms-netbios-unattend` | `official-doc` | `Microsoft official doc` | Microsoft unattended setup: NetbiosOptions | https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-netbt-interfaces-interface-netbiosoptions | `high` | path, value, allowed-values, default |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed NetBIOS implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `local-netbios-cim-detect` | `vm-test` | `VM test / probe` | Local read-only CIM detect run for NetBIOS over TCP/IP | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
+| `repo-provenance-netbios` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | risk, version-scope |
 
 **Validation proof**
 
@@ -2006,6 +2560,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-netbios` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableNetbios` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablenetbios |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2021,12 +2601,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `medium` | path, behavior, ui-mapping |
-| `local-dnsclient-netbios-admx` | `official-doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-netbios-resolution` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `medium` | path, behavior, ui-mapping |
+| `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values, behavior |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -2079,6 +2659,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-plaintext-password` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `EnablePlainTextPassword` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation, enableplaintextpassword |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -2094,11 +2701,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-plaintext-smb-password-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers | `high` | path, value, allowed-values, behavior, risk |
-| `ms-sceregvl-plaintext-smb-password` | `official-doc` | Local Microsoft security metadata: sceregvl.inf | C:\Windows\inf\sceregvl.inf | `high` | path, value |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers | `high` | path, value, allowed-values, behavior, risk |
+| `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | C:\Windows\inf\sceregvl.inf | `high` | path, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2151,6 +2758,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-smart-name-resolution` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `DisableSmartNameResolution` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, disablesmartnameresolution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2165,12 +2798,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
-| `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-smart-name-resolution` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -2223,6 +2856,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `lanmanserver-smb1` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters` | `SMB1` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, smb1 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/LanmanServer.txt | https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2238,11 +2897,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-disable-enable` | `official-doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1 | `high` | path, value, allowed-values, behavior, version-scope, risk |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-smb1` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1 | `high` | path, value, allowed-values, behavior, version-scope, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk, version-scope |
 
 **Validation proof**
 
@@ -2295,6 +2954,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `lanmanserver-smb2` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters` | `SMB2` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver, smb2 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2309,10 +2994,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-protocol-toggle` | `official-doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3 | `high` | path, value, default, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-protocol-toggle` | `official-doc` | `Microsoft official doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3 | `high` | path, value, default, allowed-values, behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2365,6 +3050,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wifi-sense-policy` | `HKLM\Software\Microsoft\wcmsvc\wifinetworkmanager\config` | `AutoConnectAllowedOEM` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | wcmsvc, wifinetworkmanager, config, autoconnectallowedoem |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2379,11 +3090,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-wifisense-admx` | `official-doc` | Microsoft administrative template for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\wlansvc.admx | `high` | path, value, allowed-values |
-| `ms-wifisense-adml` | `official-doc` | Microsoft help text for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\en-US\wlansvc.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\wlansvc.admx | `high` | path, value, allowed-values |
+| `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\en-US\wlansvc.adml | `high` | behavior, default, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -2436,6 +3147,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `lltd-responder-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableRspndr` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd, enablerspndr |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2450,11 +3187,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-lltd-responder-admx` | `official-doc` | Microsoft administrative template for LLTD Responder | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
-| `ms-lltd-responder-adml` | `official-doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -2507,6 +3244,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `lltdio-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableLLTDIO` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd, enablelltdio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / network/assets/QoS-Policy.ps1 | https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1 | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2521,11 +3284,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-lltd-admx` | `official-doc` | Microsoft administrative template for LLTD Mapper I/O | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
-| `ms-lltd-adml` | `official-doc` | Microsoft help text for LLTD Mapper I/O policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -2578,6 +3341,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ipv6-disabled-components` | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters` | `DisabledComponents` | `32` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disabledcomponents, tcpip6 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2592,10 +3381,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -2648,6 +3437,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntlm-min-client-sec` | `HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0` | `NTLMMinClientSec` | `537395200` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | ntlmminclientsec |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-registry / records/Lsa.txt | https://github.com/nohuto/win-registry/blob/main/records/Lsa.txt | Matched 1 audit token(s) in win-registry. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -2662,11 +3476,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-ntlm-client-security-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-sceregvl-ntlm-min-client-sec` | `official-doc` | Local Windows sceregvl NTLMMinClientSec metadata | C:\Windows\inf\sceregvl.inf | `high` | path, value, allowed-values, ui-mapping |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-ntlm-client-security-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | C:\Windows\inf\sceregvl.inf | `high` | path, value, allowed-values, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2719,6 +3533,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `server-enable-leasing` | `Root\Microsoft\Windows\Smb\MSFT_SmbServerConfiguration` | `EnableLeasing` | false | `value` | Applied through Set-SmbServerConfiguration -EnableLeasing $false and restored to the previously detected boolean state during rollback. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -2733,13 +3572,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smbserver-class` | `official-doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
-| `ms-slow-smb-leasing` | `official-doc` | Microsoft Learn: slow SMB file transfer guidance for leasing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/slow-smb-file-transfer | `high` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | Command-backed SMB leasing implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs | `high` | path, value, behavior, ui-mapping |
-| `local-smb-leasing-detect` | `vm-test` | Local read-only SMB leasing detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
+| `ms-slow-smb-leasing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: slow SMB file transfer guidance for leasing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/slow-smb-file-transfer | `high` | behavior, risk, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB leasing implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `local-smb-leasing-detect` | `vm-test` | `VM test / probe` | Local read-only SMB leasing detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 
 **Validation proof**
 
@@ -2792,6 +3631,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-large-mtu` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `DisableLargeMtu` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation, disablelargemtu |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -2807,10 +3673,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-file-server-performance` | `official-doc` | Microsoft performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server | `high` | path, value, default, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-file-server-performance` | `official-doc` | `Microsoft official doc` | Microsoft performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server | `high` | path, value, default, allowed-values, behavior |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2864,6 +3730,31 @@ Current write(s):
 | `client-enable-multichannel` | `Root\Microsoft\Windows\Smb\MSFT_SmbClientConfiguration` | `EnableMultiChannel` | true | `value` | Applied through Set-SmbClientConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback. |
 | `server-enable-multichannel` | `Root\Microsoft\Windows\Smb\MSFT_SmbServerConfiguration` | `EnableMultiChannel` | true | `value` | Applied through Set-SmbServerConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -2879,14 +3770,14 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-manage-smb-multichannel` | `official-doc` | Microsoft Learn: Manage SMB Multichannel | https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel | `high` | default, behavior, risk, ui-mapping, version-scope |
-| `ms-smbclient-setconfiguration` | `official-doc` | Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration | `high` | path, value, allowed-values, behavior |
-| `ms-smbserver-class` | `official-doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | Command-backed SMB Multichannel implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs | `high` | path, value, behavior, ui-mapping |
-| `local-smb-multichannel-detect` | `vm-test` | Local read-only SMB Multichannel detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-manage-smb-multichannel` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage SMB Multichannel | https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel | `high` | default, behavior, risk, ui-mapping, version-scope |
+| `ms-smbclient-setconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration | `high` | path, value, allowed-values, behavior |
+| `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB Multichannel implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `local-smb-multichannel-detect` | `vm-test` | `VM test / probe` | Local read-only SMB Multichannel detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 
 **Validation proof**
 
@@ -2940,6 +3831,33 @@ Current write(s):
 | `client-smb-quic-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation` | `EnableSMBQUIC` | `1` | `value` |  |
 | `server-smb-quic-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `EnableSMBQUIC` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, enablesmbquic, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 3 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -2955,13 +3873,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-quic` | `official-doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-quic` | `official-doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
-| `local-lanmanserver-admx-quic` | `official-doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-quic` | `official-doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
+| `local-lanmanserver-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3014,6 +3932,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `server-encrypt-data` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `EncryptData` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, encryptdata |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/LanmanServer.txt | https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3028,10 +3973,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3087,6 +4032,18 @@ Current write(s):
 | `smb-filenotfound-cache-entries-max` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `FileNotFoundCacheEntriesMax` | `32768` | `value` |  |
 | `smb-maxcmds` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `MaxCmds` | `32768` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -3104,10 +4061,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-client-tuning` | `official-doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -3160,6 +4117,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `server-reject-unencrypted-access` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `RejectUnencryptedAccess` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, rejectunencryptedaccess |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/LanmanServer.txt | https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3174,10 +4158,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3233,6 +4217,33 @@ Current write(s):
 | `server-min-smb2-dialect-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `MinSmb2Dialect` | `785` | `value` |  |
 | `server-max-smb2-dialect-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `MaxSmb2Dialect` | `785` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, minsmb2dialect, maxsmb2dialect, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 3 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3250,13 +4261,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-dialects` | `official-doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-dialects` | `official-doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, allowed-values, version-scope |
-| `local-lanmanserver-admx-dialects` | `official-doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-dialects` | `official-doc` | Local Microsoft LanmanServer.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, allowed-values, version-scope |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, allowed-values, version-scope |
+| `local-lanmanserver-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, allowed-values, version-scope |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3310,6 +4321,33 @@ Current write(s):
 | `client-require-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `RequireSecuritySignature` | `1` | `value` |  |
 | `client-enable-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `EnableSecuritySignature` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3325,11 +4363,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-signing-overview` | `official-doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
-| `ms-client-signing-policy` | `official-doc` | Microsoft network client: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852186(v=ws.11) | `medium` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
+| `ms-client-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network client: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852186(v=ws.11) | `medium` | behavior, risk, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3383,6 +4421,33 @@ Current write(s):
 | `server-require-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `RequireSecuritySignature` | `1` | `value` |  |
 | `server-enable-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `EnableSecuritySignature` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3398,11 +4463,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-signing-overview` | `official-doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
-| `ms-server-signing-policy` | `official-doc` | Microsoft network server: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852239(v=ws.11) | `medium` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
+| `ms-server-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network server: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852239(v=ws.11) | `medium` | behavior, risk, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3456,6 +4521,33 @@ Current write(s):
 | `client-cipher-suite-order-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation` | `CipherSuiteOrder` | `AES_256_GCM|AES_256_CCM` | `value` |  |
 | `server-cipher-suite-order-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `CipherSuiteOrder` | `AES_256_GCM|AES_256_CCM` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, ciphersuiteorder, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 3 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -3471,13 +4563,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-cipher-order` | `official-doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-cipher-order` | `official-doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
-| `local-lanmanserver-admx-cipher-order` | `official-doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-cipher-order` | `official-doc` | Local Microsoft LanmanServer.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
-| `app-network-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | C:\Windows\PolicyDefinitions\LanmanWorkstation.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
+| `local-lanmanserver-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3532,6 +4624,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `siuf-feedback-frequency` | `HKCU\Software\Microsoft\Siuf\Rules` | `NumberOfSIUFInPeriod` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | siuf, numberofsiufinperiod, rules |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -3546,10 +4658,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-feedback-frequency` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | Current privacy provider feedback-frequency write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-feedback-frequency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, allowed-values, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider feedback-frequency write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3602,6 +4714,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-toast-application-notification-on-lock-screen` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoToastApplicationNotificationOnLockScreen` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notoastapplicationnotificationonlockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -3616,12 +4748,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3674,6 +4806,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disallow-notification-mirroring` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `DisallowNotificationMirroring` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, disallownotificationmirroring |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -3688,12 +4840,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-wpn-no-mirroring` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-mirroring` | `official-doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-mirroring` | `official-doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-mirroring` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3746,6 +4898,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-tile-application-notification` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoTileApplicationNotification` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notileapplicationnotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -3760,12 +4932,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-notifications-csp-tile` | `policy-csp` | Microsoft Policy CSP: Notifications / DisallowTileNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-tile` | `official-doc` | Local Microsoft WPN.admx NoTileNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-tile` | `official-doc` | Local Microsoft WPN.adml NoTileNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-notifications-csp-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Notifications / DisallowTileNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3818,6 +4990,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-toast-application-notification` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoToastApplicationNotification` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notoastapplicationnotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -3832,12 +5024,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-wpn-no-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `local-wpn-admx-no-toast` | `official-doc` | Local Microsoft WPN.admx NoToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-toast` | `official-doc` | Local Microsoft WPN.adml NoToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
+| `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3892,6 +5084,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `minanimate-registry` | `HKCU\Control Panel\Desktop\WindowMetrics` | `MinAnimate` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | panel, desktop, windowmetrics, minanimate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / records/ControlPanel-Desktop.txt | https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt | Matched 4 audit token(s) in win-registry. |
+| win-config / visibility/assets/Icon-Spacing.ps1 | https://github.com/nohuto/win-config/blob/main/visibility/assets/Icon-Spacing.ps1 | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -3905,12 +5124,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-animationinfo` | `official-doc` | Microsoft Learn: ANIMATIONINFO structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo | `high` | value, behavior |
-| `ms-systemparametersinfo-animation` | `official-doc` | Microsoft Learn: SystemParametersInfo - animation actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
-| `runtime-spi-minanimate-diff` | `runtime-diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | C:\Users\<USER>\AppData\Local\Temp\minanimate_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-animationinfo` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ANIMATIONINFO structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo | `high` | value, behavior |
+| `ms-systemparametersinfo-animation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - animation actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
+| `runtime-spi-minanimate-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | C:\Users\<USER>\AppData\Local\Temp\minanimate_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3963,6 +5182,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `menu-show-delay-registry` | `HKCU\Control Panel\Desktop` | `MenuShowDelay` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | panel, desktop, menushowdelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-registry / records/ControlPanel-Desktop.txt | https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -3976,11 +5222,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-systemparametersinfo-menushowdelay` | `official-doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | value, behavior, allowed-values |
-| `runtime-spi-menushowdelay-diff` | `runtime-diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | C:\Users\<USER>\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-menushowdelay` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | value, behavior, allowed-values |
+| `runtime-spi-menushowdelay-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | C:\Users\<USER>\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4033,6 +5279,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `taskbar-animations-registry` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `TaskbarAnimations` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4046,11 +5319,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | H:\Temp\vm-tooling-staging\taskbar_animations_probe_out.txt | `high` | value, behavior, version-scope |
-| `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo provenance for performance.disable-taskbar-animations | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | H:\Temp\vm-tooling-staging\taskbar_animations_probe_out.txt | `high` | value, behavior, version-scope |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo provenance for performance.disable-taskbar-animations | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4106,6 +5379,33 @@ Current write(s):
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, autoplayhandlers, userchosenexecutehandlers, storageonarrival, mstakenoaction, eventhandlersdefaultselection, cameraalternate, showpicturesonarrival, playdvdmovieonarrival, playenhanceddvdonarrival, handledvdburningonarrival, playdvdaudioonarrival, playblurayonarrival, handlebdburningonarrival, playcdaudioonarrival, playenhancedcdonarrival, handlecdburningonarrival, playvideocdmovieonarrival, playsupervideocdmovieonarrival, autoruninflegacyarrival |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 20 audit token(s) in win-config. |
+| win-config / peripheral/assets/touch-twinui.c | https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c | Matched 1 audit token(s) in win-config. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4120,11 +5420,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `microsoft-learn-autoplay-handlers` | `official-doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `high` | path, value, allowed-values, behavior |
-| `local-autoplay-adml-remember-choice` | `official-doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
-| `app-peripheral-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `high` | path, value, allowed-values, behavior |
+| `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -4178,6 +5478,33 @@ Current write(s):
 | `turn-off-autoplay-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `NoDriveTypeAutoRun` | `255` | `value` |  |
 | `no-autoplay-for-non-volume-policy` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `NoAutoplayfornonVolume` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4193,15 +5520,15 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-autoplay-turnoff` | `policy-csp` | Microsoft Policy CSP: AutoPlay / TurnOffAutoPlay | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#turnoffautoplay | `high` | behavior, default, version-scope |
-| `local-autoplay-admx-turnoff` | `official-doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | C:\Windows\PolicyDefinitions\AutoPlay.admx | `high` | path, value, allowed-values, version-scope |
-| `local-autoplay-adml-turnoff` | `official-doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
-| `ms-autoplay-non-volume` | `policy-csp` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices | `high` | path, value, allowed-values, behavior, default, version-scope |
-| `local-autoplay-admx-non-volume` | `official-doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | C:\Windows\PolicyDefinitions\AutoPlay.admx | `high` | path, value, allowed-values, version-scope |
-| `local-autoplay-adml-non-volume` | `official-doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
-| `app-peripheral-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-autoplay-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / TurnOffAutoPlay | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#turnoffautoplay | `high` | behavior, default, version-scope |
+| `local-autoplay-admx-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | C:\Windows\PolicyDefinitions\AutoPlay.admx | `high` | path, value, allowed-values, version-scope |
+| `local-autoplay-adml-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
+| `ms-autoplay-non-volume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices | `high` | path, value, allowed-values, behavior, default, version-scope |
+| `local-autoplay-admx-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | C:\Windows\PolicyDefinitions\AutoPlay.admx | `high` | path, value, allowed-values, version-scope |
+| `local-autoplay-adml-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4254,6 +5581,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `stickykeys-flags-registry` | `HKCU\Control Panel\Accessibility\StickyKeys` | `Flags` | `506` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-registry, win-config, decompiled-pseudocode |
+| Matched tokens | panel, accessibility, stickykeys, flags |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-registry / records/Accessibility.txt | https://github.com/nohuto/win-registry/blob/main/records/Accessibility.txt | Matched 4 audit token(s) in win-registry. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4267,12 +5621,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-systemparametersinfo-stickykeys` | `official-doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
-| `ms-stickykeys-struct` | `official-doc` | Microsoft Learn: STICKYKEYS structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys | `high` | value, allowed-values, behavior |
-| `runtime-spi-stickykeys-diff` | `runtime-diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | C:\Users\<USER>\AppData\Local\Temp\stickykeys_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-peripheral-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-stickykeys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
+| `ms-stickykeys-struct` | `official-doc` | `Microsoft official doc` | Microsoft Learn: STICKYKEYS structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys | `high` | value, allowed-values, behavior |
+| `runtime-spi-stickykeys-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | C:\Users\<USER>\AppData\Local\Temp\stickykeys_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4327,6 +5681,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `cpu-idle-states-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled` | `DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, disableidlestatesatboot, idlestatetimeout, exitlatencycheckenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-registry / assets/power/power-symbols.txt | https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt | Matched 3 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4340,12 +5721,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-cpu-idle-states` | `official-doc` | Microsoft Learn: Introduction to Processor Idle States | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states | `high` | behavior, side-effects, version-scope, app-mismatch |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
-| `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states | `high` | behavior, side-effects, version-scope, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -4398,6 +5779,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hiberboot-enabled` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power` | `HiberbootEnabled` | `0` | `value` | Current implementation path. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, power, hiberbootenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / power/assets/hiberboot-PopReadHiberbootGroupPolicy.c | https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4412,13 +5820,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-fast-startup-doc` | `official-doc` | Microsoft Fast Startup guidance for HiberbootEnabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm | `high` | path, value, behavior, version-scope |
-| `admx-wininit-csp` | `policy-csp` | Policy CSP - ADMX_WinInit | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wininit | `high` | path, behavior, version-scope |
-| `nohuto-fast-startup-asset` | `decompilation` | nohuto power asset for HiberbootEnabled research | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c | `medium` | path, value, app-mismatch |
-| `live-registry-divergence` | `registry-observation` | Live build observation of diverging HiberbootEnabled values | Local observation - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `medium` | path, app-mismatch |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs and WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-fast-startup-doc` | `official-doc` | `Microsoft official doc` | Microsoft Fast Startup guidance for HiberbootEnabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm | `high` | path, value, behavior, version-scope |
+| `admx-wininit-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_WinInit | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wininit | `high` | path, behavior, version-scope |
+| `nohuto-fast-startup-asset` | `decompilation` | `Ghidra decompilation` | nohuto power asset for HiberbootEnabled research | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c | `medium` | path, value, app-mismatch |
+| `live-registry-divergence` | `registry-observation` | `VM registry observation` | Live build observation of diverging HiberbootEnabled values | Local observation - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `medium` | path, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs and WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4471,6 +5879,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `modern-standby-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `MSDisabled + ModernSleep\EnabledActions` | `MSDisabled=1;EnabledActions=0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, msdisabled, modernsleep, enabledactions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4484,12 +5919,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-modern-standby` | `official-doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `nohuto-power-msdisabled-trace` | `registry-observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
-| `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -4543,6 +5978,18 @@ Current write(s):
 | `disable-task-offload` | `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters` | `DisableTaskOffload` | `0` | `value` |  |
 | `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -4557,11 +6004,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-task-offload` | `official-doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
-| `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4614,6 +6061,35 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `power-throttling-off` | `HKLM\System\CurrentControlSet\Control\Power\PowerThrottling` | `PowerThrottlingOff` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, powerthrottling, powerthrottlingoff, power throttling |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 3 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 3 audit token(s) in win-registry. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / power/desc.md#power-values | https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values | Documents the PowerThrottling registry path and behavior. |
+| win-registry / Power Values | https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values | Provides reverse-engineered notes for PowerThrottlingOff and related values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4628,11 +6104,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-power-admx` | `official-doc` | Local Microsoft Power.admx mapping | C:\Windows\PolicyDefinitions\Power.admx | `high` | path, value, allowed-values, version-scope |
-| `local-power-adml` | `official-doc` | Local Microsoft Power.adml help text | C:\Windows\PolicyDefinitions\en-US\Power.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | C:\Windows\PolicyDefinitions\Power.admx | `high` | path, value, allowed-values, version-scope |
+| `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | C:\Windows\PolicyDefinitions\en-US\Power.adml | `high` | behavior, default, side-effects |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4685,6 +6161,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wsearch-start-mode` | `WSearch` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | wsearch |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4699,11 +6202,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
-| `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4756,6 +6259,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `show-hibernate-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowHibernateOption` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showhibernateoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4770,12 +6300,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
-| `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
 
 **Validation proof**
 
@@ -4828,6 +6358,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `show-lock-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowLockOption` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showlockoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4842,11 +6399,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4899,6 +6456,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `show-sleep-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowSleepOption` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showsleepoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4913,11 +6497,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4970,6 +6554,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `cpu-boost-perfmode-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setactive SCHEME_CURRENT` | `PERFBOOSTMODE` | `2` | `value` | Detected state is serialized as the previous AC/DC indices and restored on rollback. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
+| Matched tokens | perfboostatguaranteed, highperfdurationboot, latencytolerancedefault, perfcalculateactualutilization |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / power/desc.md#power-values | https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values | Documents CPU performance boost related power-manager fields. |
+| win-registry / Power Values | https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values | Provides nohuto's registry analysis for performance boost values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -4983,12 +6593,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-perfboostmode` | `official-doc` | Microsoft Learn: PERFBOOSTMODE | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode | `high` | path, value, behavior, allowed-values, version-scope, app-mapping |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
-| `engine-power-perfboostmode` | `repo-code` | Command-backed CPU boost implementation | WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
-| `runtime-perfboostmode-diff` | `vm-test` | Guest reversible probe for PERFBOOSTMODE | H:\Temp\vm-tooling-staging\perfboostmode-transition-probe.txt | `high` | path, value, behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-perfboostmode` | `official-doc` | `Microsoft official doc` | Microsoft Learn: PERFBOOSTMODE | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode | `high` | path, value, behavior, allowed-values, version-scope, app-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
+| `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
+| `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | H:\Temp\vm-tooling-staging\perfboostmode-transition-probe.txt | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -5045,6 +6655,33 @@ Current write(s):
 | `games-gpu-priority` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games` | `GPU Priority` | `8` | `value` |  |
 | `games-affinity` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games` | `Affinity` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | multimedia, systemprofile, tasks, games, priority, scheduling category, high, sfio priority, gpu priority, affinity |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 10 audit token(s) in win-config. |
+| win-registry / records/MultiMedia.txt | https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt | Matched 7 audit token(s) in win-registry. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 6 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -5059,10 +6696,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, allowed-values, behavior, version-scope |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, allowed-values, behavior, version-scope |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5117,6 +6754,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-connected-user` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `NoConnectedUser` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, noconnecteduser |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5132,11 +6789,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-block-microsoft-accounts` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -5189,6 +6846,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `appprivacy-deny-bundle` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `BundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -5203,10 +6872,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-appprivacy-admx` | `official-doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -5261,6 +6930,26 @@ Current write(s):
 | `publish-user-activities` | `HKLM\Software\Policies\Microsoft\Windows\System` | `PublishUserActivities` | `0` | `value` |  |
 | `upload-user-activities` | `HKLM\Software\Policies\Microsoft\Windows\System` | `UploadUserActivities` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5277,12 +6966,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-privacy-policy-csp` | `policy-csp` | Microsoft Privacy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy | `high` | path, value, allowed-values, default, behavior |
-| `local-ospolicy-admx` | `official-doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-activity-history` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-privacy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Privacy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy | `high` | path, value, allowed-values, default, behavior |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -5335,6 +7024,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `advertising-id-policy` | `HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo` | `DisabledByGroupPolicy` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5349,11 +7058,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-userprofiles-admx-advertising` | `official-doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | C:\Windows\PolicyDefinitions\UserProfiles.admx | `high` | path, value, allowed-values, version-scope |
-| `local-userprofiles-adml-advertising` | `official-doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | C:\Windows\PolicyDefinitions\en-US\UserProfiles.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | C:\Windows\PolicyDefinitions\UserProfiles.admx | `high` | path, value, allowed-values, version-scope |
+| `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | C:\Windows\PolicyDefinitions\en-US\UserProfiles.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5406,6 +7115,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `let-apps-get-diagnostic-info` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `LetAppsGetDiagnosticInfo` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -5420,11 +7147,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appprivacy-admx-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-appprivacy-adml-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5477,6 +7204,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `start-trackprogs-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `Start_TrackProgs` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5491,11 +7238,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windows-privacy-track-app-launches` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, ui-mapping |
-| `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5 | `high` | path, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windows-privacy-track-app-launches` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, ui-mapping |
+| `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5 | `high` | path, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -5548,6 +7295,25 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `system-pane-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SystemPaneSuggestionsEnabled` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5563,12 +7329,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `microsoft-learn-contentdeliverymanager` | `official-doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration | `high` | path, value, behavior |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `microsoft-learn-contentdeliverymanager` | `official-doc` | `Microsoft official doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration | `high` | path, value, behavior |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -5622,6 +7388,18 @@ Current write(s):
 | `sb-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `SbEnable` | `0` | `value` |  |
 | `disable-engine` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableEngine` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -5637,13 +7415,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
-| `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) | `high` | value, behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
+| `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -5699,6 +7477,18 @@ Current write(s):
 | `disable-install-tracing` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableInstallTracing` | `1` | `value` |  |
 | `disable-win32-app-backup` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableWin32AppBackup` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -5716,12 +7506,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appdeviceinventory-admx` | `official-doc` | Local Microsoft AppDeviceInventory.admx mappings | C:\Windows\PolicyDefinitions\AppDeviceInventory.admx | `high` | path, value, allowed-values, version-scope |
-| `csp-appdeviceinventory` | `policy-csp` | Policy CSP - AppDeviceInventory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory | `high` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | Procmon + LGPO capture - four AppDeviceInventory policies | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200) | `high` | value, behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | C:\Windows\PolicyDefinitions\AppDeviceInventory.admx | `high` | path, value, allowed-values, version-scope |
+| `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory | `high` | path, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - four AppDeviceInventory policies | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -5774,6 +7564,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `appcompat-ait-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `AITEnable` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, appcompat, aitenable |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5788,13 +7598,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-appcompat-application-telemetry` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values, version-scope |
-| `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, default |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-application-telemetry` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-appcompat-application-telemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values, version-scope |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, default |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -5847,6 +7657,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `let-apps-run-in-background` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `LetAppsRunInBackground` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, appprivacy, letappsruninbackground |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5861,11 +7691,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appprivacy-admx-background` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-appprivacy-adml-background` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5918,6 +7748,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `biometrics-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics` | `Enabled` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -5932,11 +7782,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -5989,6 +7839,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `biometric-domain-accounts` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider` | `Domain Accounts` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, credential, provider, domain accounts |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6003,11 +7873,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6060,6 +7930,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `biometric-logon-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider` | `Enabled` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, credential, provider, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6074,11 +7964,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics-logon` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6131,6 +8021,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-camera` | `HKLM\Software\Policies\Microsoft\Camera` | `AllowCamera` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, camera, allowcamera |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6145,12 +8055,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-camera-admx` | `official-doc` | Local Microsoft Camera.admx mapping | C:\WINDOWS\PolicyDefinitions\Camera.admx | `high` | path, value, allowed-values, version-scope |
-| `local-camera-adml` | `official-doc` | Local Microsoft Camera.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Camera.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-camera` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | C:\WINDOWS\PolicyDefinitions\Camera.admx | `high` | path, value, allowed-values, version-scope |
+| `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Camera.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6204,6 +8114,26 @@ Current write(s):
 | `powershell-telemetry-optout` | `HKCU\Environment` | `POWERSHELL_TELEMETRY_OPTOUT` | `1` | `value` |  |
 | `dotnet-cli-telemetry-optout` | `HKCU\Environment` | `DOTNET_CLI_TELEMETRY_OPTOUT` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6219,12 +8149,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-powershell-about-environment-variables` | `official-doc` | Microsoft Learn: about_Environment_Variables | https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5 | `high` | value, allowed-values, behavior |
-| `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: Telemetry for the .NET CLI | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
-| `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, default, behavior |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-powershell-about-environment-variables` | `official-doc` | `Microsoft official doc` | Microsoft Learn: about_Environment_Variables | https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5 | `high` | value, allowed-values, behavior |
+| `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Telemetry for the .NET CLI | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, default, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6277,6 +8207,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-consumer-account-state-content` | `HKLM\Software\Policies\Microsoft\Windows\CloudContent` | `DisableConsumerAccountStateContent` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -6291,12 +8239,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | Microsoft Policy CSP: DisableConsumerAccountStateContent | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx-consumer` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-consumer-account-content` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6349,6 +8297,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `turn-off-windows-copilot` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot` | `TurnOffWindowsCopilot` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, windowscopilot, turnoffwindowscopilot |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6363,13 +8331,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-windowscopilot-turnoff` | `policy-csp` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-windowscopilot-admx` | `official-doc` | Local Microsoft WindowsCopilot.admx mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowscopilot-adml` | `official-doc` | Local Microsoft WindowsCopilot.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-copilot` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6422,6 +8390,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-cdp-policy` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableCdp` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -6436,12 +8416,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -6494,6 +8474,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-device-name-in-telemetry` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `AllowDeviceNameInTelemetry` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, allowdevicenameintelemetry |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6508,12 +8508,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-device-name` | `policy-csp` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-device-name-telemetry` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6566,6 +8566,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-device-delete` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableDeviceDelete` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabledevicedelete |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6580,12 +8600,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-device-delete` | `policy-csp` | Microsoft Policy CSP: DisableDeviceDelete | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6638,6 +8658,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-diagnostic-data-viewer` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableDiagnosticDataViewer` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disablediagnosticdataviewer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6652,12 +8692,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-ddv` | `policy-csp` | Microsoft Policy CSP: DisableDiagnosticDataViewer | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6712,6 +8752,24 @@ Current write(s):
 | `local-providers-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Edge` | `LocalProvidersEnabled` | `0` | `value` |  |
 | `show-search-suggestions-global` | `HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes` | `ShowSearchSuggestionsGlobal` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -6728,13 +8786,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-edge-search-suggest-enabled` | `official-doc` | Microsoft Edge policy documentation: SearchSuggestEnabled | https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `ms-edge-local-providers-enabled` | `official-doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-microsoftedge-admx` | `official-doc` | Local Microsoft MicrosoftEdge.admx mapping | C:\Windows\PolicyDefinitions\MicrosoftEdge.admx | `high` | path, value, allowed-values, version-scope |
-| `local-microsoftedge-adml` | `official-doc` | Local Microsoft MicrosoftEdge.adml help text | C:\Windows\PolicyDefinitions\en-US\MicrosoftEdge.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-edge-search-suggest-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: SearchSuggestEnabled | https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `ms-edge-local-providers-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-microsoftedge-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.admx mapping | C:\Windows\PolicyDefinitions\MicrosoftEdge.admx | `high` | path, value, allowed-values, version-scope |
+| `local-microsoftedge-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.adml help text | C:\Windows\PolicyDefinitions\en-US\MicrosoftEdge.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6787,6 +8845,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `do-not-show-feedback-notifications` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DoNotShowFeedbackNotifications` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, donotshowfeedbacknotifications |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6801,12 +8879,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-feedback-notifications` | `policy-csp` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-feedback-notifications-admx` | `official-doc` | Local Microsoft FeedbackNotifications.admx mapping | C:\WINDOWS\PolicyDefinitions\FeedbackNotifications.admx | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | C:\WINDOWS\PolicyDefinitions\FeedbackNotifications.admx | `high` | path, value, allowed-values, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6859,6 +8937,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-file-history` | `HKLM\Software\Policies\Microsoft\Windows\FileHistory` | `Disabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, filehistory, disabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6873,12 +8971,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-filehistory-admx` | `official-doc` | Local Microsoft FileHistory.admx mapping | C:\WINDOWS\PolicyDefinitions\FileHistory.admx | `high` | path, value, allowed-values, version-scope |
-| `local-filehistory-adml` | `official-doc` | Local Microsoft FileHistory.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\FileHistory.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-file-history` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | C:\WINDOWS\PolicyDefinitions\FileHistory.admx | `high` | path, value, allowed-values, version-scope |
+| `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\FileHistory.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -6931,6 +9029,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-find-my-device` | `HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice` | `AllowFindMyDevice` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, findmydevice, allowfindmydevice |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -6945,13 +9063,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-allow-find-my-device` | `policy-csp` | Microsoft Experience Policy CSP: AllowFindMyDevice | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-findmy-admx` | `official-doc` | Local Microsoft FindMy.admx mapping | C:\Windows\PolicyDefinitions\FindMy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-findmy-adml` | `official-doc` | Local Microsoft FindMy.adml help text | C:\Windows\PolicyDefinitions\en-US\FindMy.adml | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-find-my-device` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-allow-find-my-device` | `policy-csp` | `Microsoft policy CSP` | Microsoft Experience Policy CSP: AllowFindMyDevice | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | C:\Windows\PolicyDefinitions\FindMy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | C:\Windows\PolicyDefinitions\en-US\FindMy.adml | `high` | behavior, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7004,6 +9122,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-font-providers` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableFontProviders` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, enablefontproviders |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7018,12 +9156,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-grouppolicy-admx-fonts` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-fonts` | `official-doc` | Local Microsoft GroupPolicy.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-font-providers` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7076,6 +9214,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-gen-ticket` | `HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform` | `NoGenTicket` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, protection, platform, nogenticket |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7090,13 +9248,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-avs-validation-admx` | `official-doc` | Local Microsoft AVSValidationGP.admx mapping | C:\WINDOWS\PolicyDefinitions\AVSValidationGP.admx | `high` | path, value, allowed-values, version-scope |
-| `local-avs-validation-adml` | `official-doc` | Local Microsoft AVSValidationGP.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\AVSValidationGP.adml | `high` | behavior, default, side-effects |
-| `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx reference bundle | C:\WINDOWS\PolicyDefinitions\ICM.admx | `medium` | path, value |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | C:\WINDOWS\PolicyDefinitions\AVSValidationGP.admx | `high` | path, value, allowed-values, version-scope |
+| `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\AVSValidationGP.adml | `high` | behavior, default, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | C:\WINDOWS\PolicyDefinitions\ICM.admx | `medium` | path, value |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7149,6 +9307,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `http-accept-language-opt-out` | `HKCU\Control Panel\International\User Profile` | `HttpAcceptLanguageOptOut` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | panel, international, user, profile, httpacceptlanguageoptout |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 3 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7163,10 +9341,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windows-privacy-language-list` | `official-doc` | Microsoft privacy guidance for language list access | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windows-privacy-language-list` | `official-doc` | `Microsoft official doc` | Microsoft privacy guidance for language list access | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -7219,6 +9397,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-local-password-reset-questions` | `HKLM\Software\Policies\Microsoft\Windows\System` | `NoLocalPasswordResetQuestions` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, nolocalpasswordresetquestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7233,13 +9431,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-credui-no-local-password-reset-questions` | `policy-csp` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | C:\WINDOWS\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
-| `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-local-security-questions` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-credui-no-local-password-reset-questions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\WINDOWS\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7293,6 +9491,26 @@ Current write(s):
 | `user-location-consent` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` | `Value` | `Deny` | `value` |  |
 | `user-location-consent-nonpackaged` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged` | `Value` | `Deny` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | capabilityaccessmanager, consentstore, location, value, deny, nonpackaged |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 6 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7308,10 +9526,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-location-consent-runtime-user` | `official-doc` | Microsoft location consent runtime guidance for current-user access | https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | Current privacy provider location-consent batch | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-location-consent-runtime-user` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime guidance for current-user access | https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location | `high` | path, value, allowed-values, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider location-consent batch | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7364,6 +9582,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `system-location-consent` | `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` | `Value` | `Deny` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | capabilityaccessmanager, consentstore, location, value |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7378,10 +9616,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-location-consent-runtime` | `official-doc` | Microsoft location consent runtime registry guidance | https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | Current privacy provider system location-consent write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-location-consent-runtime` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime registry guidance | https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically | `high` | path, value, allowed-values, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider system location-consent write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7434,6 +9672,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-location-scripting` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableLocationScripting` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablelocationscripting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7448,12 +9706,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | Microsoft Policy CSP: DisableLocationScripting | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-location-scripting` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7506,6 +9764,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-location` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableLocation` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablelocation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7520,11 +9798,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-sensors-admx-location` | `official-doc` | Local Microsoft Sensors.admx DisableLocation mapping | C:\Windows\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, version-scope |
-| `local-sensors-adml-location` | `official-doc` | Local Microsoft Sensors.adml DisableLocation help text | C:\Windows\PolicyDefinitions\en-US\Sensors.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | C:\Windows\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, version-scope |
+| `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | C:\Windows\PolicyDefinitions\en-US\Sensors.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7577,6 +9855,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-registration` | `HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\MDM` | `DisableRegistration` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, disableregistration |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7591,12 +9889,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-mdm-admx` | `official-doc` | Local Microsoft MDM.admx mapping | C:\WINDOWS\PolicyDefinitions\MDM.admx | `high` | path, value, allowed-values, version-scope |
-| `local-mdm-adml` | `official-doc` | Local Microsoft MDM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\MDM.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-mdm-enrollment` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | C:\WINDOWS\PolicyDefinitions\MDM.admx | `high` | path, value, allowed-values, version-scope |
+| `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\MDM.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7649,6 +9947,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-message-sync` | `HKLM\Software\Policies\Microsoft\Windows\Messaging` | `AllowMessageSync` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, messaging, allowmessagesync |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7663,12 +9981,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-messaging-csp-allow-message-sync` | `policy-csp` | Microsoft Policy CSP: Messaging / AllowMessageSync | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-messaging-admx` | `official-doc` | Local Microsoft messaging.admx mapping | C:\WINDOWS\PolicyDefinitions\messaging.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-message-sync` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | C:\WINDOWS\PolicyDefinitions\messaging.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7721,6 +10039,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-enabled` | `HKLM\Software\Policies\Microsoft\Windows\NetCache` | `Enabled` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -7735,12 +10065,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-offlinefiles-csp` | `policy-csp` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles | `high` | path, value, default, behavior, ui-mapping, version-scope |
-| `local-offlinefiles-admx` | `official-doc` | Local Microsoft OfflineFiles.admx mapping | C:\Windows\PolicyDefinitions\OfflineFiles.admx | `high` | path, value, allowed-values |
-| `local-offlinefiles-adml` | `official-doc` | Local Microsoft OfflineFiles.adml help text | C:\Windows\PolicyDefinitions\en-US\OfflineFiles.adml | `high` | default, behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-offlinefiles-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles | `high` | path, value, default, behavior, ui-mapping, version-scope |
+| `local-offlinefiles-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.admx mapping | C:\Windows\PolicyDefinitions\OfflineFiles.admx | `high` | path, value, allowed-values |
+| `local-offlinefiles-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.adml help text | C:\Windows\PolicyDefinitions\en-US\OfflineFiles.adml | `high` | default, behavior, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7793,6 +10123,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-onesettings-downloads` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableOneSettingsDownloads` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disableonesettingsdownloads |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7807,13 +10157,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-disable-onesettings-downloads` | `policy-csp` | Microsoft System Policy CSP: DisableOneSettingsDownloads | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads | `high` | path, behavior, default, version-scope |
-| `local-datacollection-admx-onesettings` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml-onesettings` | `official-doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-onesettings-downloads` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-disable-onesettings-downloads` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: DisableOneSettingsDownloads | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads | `high` | path, behavior, default, version-scope |
+| `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7866,6 +10216,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-online-tips` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `AllowOnlineTips` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, allowonlinetips |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -7880,12 +10250,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-settings-csp-allow-online-tips` | `policy-csp` | Microsoft Policy CSP: AllowOnlineTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-control-panel-admx` | `official-doc` | Local Microsoft ControlPanel.admx mapping | C:\WINDOWS\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-online-tips` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | C:\WINDOWS\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -7932,6 +10302,18 @@ Current write(s):
 | Provider source | `` |
 | Notes | The app does not currently write DisablePcaUI. Previously, PrivacyTweakProvider.cs wrote DisablePcaUI=1 intending to disable PCA - this was incorrect on two levels: wrong key (should be DisablePCA) and wrong value (1 means detection active, not disabled). That was corrected on 2026-03-13 to write DisablePCA=1. This record tracks DisablePcaUI as a standalone diagnostics policy with correct semantics. No app mapping currently exists for this policy. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -7946,11 +10328,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-pca-admx` | `official-doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | C:\Windows\PolicyDefinitions\pca.admx | `high` | path, value, allowed-values, version-scope |
-| `local-pca-adml` | `official-doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | C:\Windows\PolicyDefinitions\en-US\pca.adml | `high` | behavior, side-effects |
-| `admx-pca-csp` | `policy-csp` | Policy CSP - ADMX_pca | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca | `high` | path, behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | C:\Windows\PolicyDefinitions\pca.admx | `high` | path, value, allowed-values, version-scope |
+| `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | C:\Windows\PolicyDefinitions\en-US\pca.adml | `high` | behavior, side-effects |
+| `admx-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_pca | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca | `high` | path, behavior, version-scope |
 
 **Validation proof**
 
@@ -8003,6 +10385,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-mmx` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableMmx` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, enablemmx |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8017,11 +10419,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-grouppolicy-admx` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml` | `official-doc` | Local Microsoft GroupPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8074,6 +10476,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-pca` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisablePCA` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -8088,13 +10502,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects |
-| `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects |
+| `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8147,6 +10561,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-ai-data-analysis` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI` | `DisableAIDataAnalysis` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsai, disableaidataanalysis |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8162,13 +10596,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `local-windowscopilot-admx-recall` | `official-doc` | Local Microsoft WindowsCopilot.admx Recall mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowscopilot-adml-recall` | `official-doc` | Local Microsoft WindowsCopilot.adml Recall help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-recall` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | `Microsoft policy CSP` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
+| `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8221,6 +10655,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `resume-user-setting` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration` | `IsResumeAllowed` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | crossdeviceresume, configuration, isresumeallowed |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8234,12 +10688,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | Docs/privacy/privacy.md | `medium` | path, value, behavior |
-| `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration | `medium` | path, value, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume | `high` | behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | Docs/privacy/privacy.md | `medium` | path, value, behavior |
+| `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration | `medium` | path, value, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume | `high` | behavior, version-scope |
 
 **Validation proof**
 
@@ -8292,6 +10746,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `rsop-logging-policy` | `HKLM\Software\Policies\Microsoft\Windows\System` | `RSoPLogging` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, rsoplogging |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8306,12 +10780,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8364,6 +10838,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-search-box-suggestions` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `DisableSearchBoxSuggestions` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, disablesearchboxsuggestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8378,12 +10872,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | Microsoft Policy CSP: DisableSearchBoxSuggestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-windows-explorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-search-box-suggestions` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8436,6 +10930,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-search-history` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `DisableSearchHistory` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, disablesearchhistory |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8450,12 +10964,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8508,6 +11022,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-sensors` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableSensors` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablesensors |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8522,12 +11056,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | Microsoft Policy CSP: DisableSensors | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-sensors` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8580,6 +11114,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-uar` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableUAR` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, appcompat, disableuar, steps recorder, psr.exe |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/desc.md#disable-psr | https://github.com/nohuto/win-config/blob/main/privacy/desc.md#disable-psr | Documents PSR deprecation, the DisableUAR policy, and renaming psr.exe. |
+
+Other provenance references:
+
+| Kind | Title | URL | Summary |
+| --- | --- | --- | --- |
+| microsoft | Steps Recorder deprecation | https://support.microsoft.com/en-gb/windows/steps-recorder-deprecation-a64888d7-8482-4965-8ce3-25fb004e975f | Official Microsoft notice that Steps Recorder is deprecated. |
+
 **Targets**
 
 **Windows defaults**
@@ -8594,12 +11155,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-appcompat-policy-csp` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord | `high` | path, value, allowed-values, default, behavior |
-| `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | C:\WINDOWS\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-steps-recorder` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord | `high` | path, value, allowed-values, default, behavior |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\WINDOWS\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8646,6 +11207,18 @@ Current write(s):
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes opaque ContentDeliveryManager SubscribedContent values in the parent audit trail. This child record intentionally models only the official named CloudContent policies. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -8662,14 +11235,14 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-settings` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-settings` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
 
 **Validation proof**
 
@@ -8722,6 +11295,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sb-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `SbEnable` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -8736,13 +11321,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
-| `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
+| `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8795,6 +11380,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-telemetry-opt-in-change-notification` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableTelemetryOptInChangeNotification` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabletelemetryoptinchangenotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8809,12 +11414,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8867,6 +11472,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-telemetry-optin-settings-ux` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableTelemetryOptInSettingsUx` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabletelemetryoptinsettingsux |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8881,13 +11506,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-configure-telemetry-optin-ui` | `policy-csp` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-datacollection-admx-optin-ui` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml-optin-ui` | `official-doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-configure-telemetry-optin-ui` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8940,6 +11565,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wer-disabled` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting` | `Disabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, error, reporting, disabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 4 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -8954,14 +11599,14 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-errorreporting-disable-wer` | `policy-csp` | Microsoft ADMX_ErrorReporting Policy CSP: WerDisable_2 | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2 | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-errorreporting-admx` | `official-doc` | Local Microsoft ErrorReporting.admx mapping | C:\Windows\PolicyDefinitions\ErrorReporting.admx | `high` | path, value, allowed-values, version-scope |
-| `local-errorreporting-adml` | `official-doc` | Local Microsoft ErrorReporting.adml help text | C:\Windows\PolicyDefinitions\en-US\ErrorReporting.adml | `high` | behavior, side-effects, default |
-| `local-icm-adml` | `official-doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-wer` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-errorreporting-disable-wer` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ErrorReporting Policy CSP: WerDisable_2 | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2 | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | C:\Windows\PolicyDefinitions\ErrorReporting.admx | `high` | path, value, allowed-values, version-scope |
+| `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | C:\Windows\PolicyDefinitions\en-US\ErrorReporting.adml | `high` | behavior, side-effects, default |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9014,6 +11659,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-location-provider` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableWindowsLocationProvider` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablewindowslocationprovider |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9028,12 +11693,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-location-provider-policy-csp` | `policy-csp` | Microsoft Policy CSP: DisableWindowsLocationProvider | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-location-provider-admx` | `official-doc` | Local Microsoft LocationProviderAdm.admx mapping | C:\WINDOWS\PolicyDefinitions\LocationProviderAdm.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-windows-location-provider` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | C:\WINDOWS\PolicyDefinitions\LocationProviderAdm.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9086,6 +11751,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-soft-landing-policy` | `HKLM\Software\Policies\Microsoft\Windows\CloudContent` | `DisableSoftLanding` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9101,12 +11786,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-allowwindowstips` | `policy-csp` | Microsoft Policy CSP: AllowWindowsTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips | `high` | behavior, default, version-scope |
-| `local-cloudcontent-admx-softlanding` | `official-doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-softlanding` | `official-doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-allowwindowstips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips | `high` | behavior, default, version-scope |
+| `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -9159,6 +11844,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dont-display-last-user-name` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DontDisplayLastUserName` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dontdisplaylastusername |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9173,13 +11878,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-security-option-hide-last-user` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11) | `high` | behavior, default, side-effects, version-scope |
-| `local-security-registry-last-user` | `official-doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
-| `local-security-defaults-last-user` | `official-doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-last-logged-in-user` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11) | `high` | behavior, default, side-effects, version-scope |
+| `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
+| `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9232,6 +11937,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-personalized-sites` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedPersonalizedSites` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -9246,12 +11969,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9304,6 +12027,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-personalized-sites` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedPersonalizedSites` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hiderecommendedpersonalizedsites |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9318,12 +12061,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9376,6 +12119,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-section` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedSection` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -9390,12 +12151,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-section` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9448,6 +12209,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-section` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedSection` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hiderecommendedsection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9462,12 +12243,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-section-user` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9520,6 +12301,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dont-display-user-name` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DontDisplayUserName` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, dontdisplayusername |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9534,13 +12335,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-security-option-hide-username-signin` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11) | `high` | behavior, side-effects, version-scope |
-| `local-security-registry-hide-username` | `official-doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
-| `local-security-defaults-hide-username` | `official-doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-username-at-signin` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11) | `high` | behavior, side-effects, version-scope |
+| `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
+| `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9593,6 +12394,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `limit-diagnostic-log-collection` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `LimitDiagnosticLogCollection` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, limitdiagnosticlogcollection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9607,12 +12428,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | Microsoft Policy CSP: LimitDiagnosticLogCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9665,6 +12486,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `limit-dump-collection` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `LimitDumpCollection` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, limitdumpcollection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9679,12 +12520,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | Microsoft Policy CSP: LimitDumpCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-limit-dump-collection` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-crashdump-gate` | `decompilation` | `Ghidra decompilation` | nohuto crash-dump gate trace | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c; Docs/privacy/assets/crashdmp.c | `medium` | path, behavior, dependency |
 
 **Validation proof**
 
@@ -9737,6 +12579,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-telemetry` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `AllowTelemetry` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -9751,12 +12605,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-system-allowtelemetry` | `policy-csp` | Microsoft System Policy CSP: AllowTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-datacollection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml` | `official-doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, version-scope, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-system-allowtelemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: AllowTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, version-scope, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -9809,6 +12663,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `troubleshooting-allow-recommendations` | `HKLM\Software\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations` | `TroubleshootingAllowRecommendations` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, troubleshooting, allowrecommendations, troubleshootingallowrecommendations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -9823,12 +12697,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-troubleshooting-allowrecommendations` | `policy-csp` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-msdt-admx` | `official-doc` | Local Microsoft MSDT.admx mapping | C:\Windows\PolicyDefinitions\MSDT.admx | `high` | path, value, allowed-values, version-scope |
-| `local-msdt-adml` | `official-doc` | Local Microsoft MSDT.adml help text | C:\Windows\PolicyDefinitions\en-US\MSDT.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-troubleshooting-allowrecommendations` | `policy-csp` | `Microsoft policy CSP` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | C:\Windows\PolicyDefinitions\MSDT.admx | `high` | path, value, allowed-values, version-scope |
+| `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | C:\Windows\PolicyDefinitions\en-US\MSDT.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -9883,6 +12757,18 @@ Current write(s):
 | `setting-sync-useroverride-family` | `HKLM\Software\Policies\Microsoft\Windows\SettingSync` | `DisableSettingSyncUserOverride / DisableAppSyncSettingSyncUserOverride / DisableApplicationSettingSyncUserOverride / DisableCredentialsSettingSyncUserOverride / DisablePersonalizationSettingSyncUserOverride / DisableDesktopThemeSettingSyncUserOverride / DisableStartLayoutSettingSyncUserOverride / DisableWebBrowserSettingSyncUserOverride / DisableWindowsSettingSyncUserOverride` | `0` | `value` |  |
 | `disable-sync-on-paid-network` | `HKLM\Software\Policies\Microsoft\Windows\SettingSync` | `DisableSyncOnPaidNetwork` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -9899,12 +12785,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-settingsync` | `policy-csp` | Microsoft ADMX_SettingSync Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-settingsync-admx` | `official-doc` | Local Microsoft SettingSync.admx mapping | C:\Windows\PolicyDefinitions\SettingSync.admx | `high` | path, value, allowed-values, version-scope |
-| `local-settingsync-adml` | `official-doc` | Local Microsoft SettingSync.adml help text | C:\Windows\PolicyDefinitions\en-US\SettingSync.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-settingsync` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_SettingSync Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-settingsync-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.admx mapping | C:\Windows\PolicyDefinitions\SettingSync.admx | `high` | path, value, allowed-values, version-scope |
+| `local-settingsync-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.adml help text | C:\Windows\PolicyDefinitions\en-US\SettingSync.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -9959,6 +12845,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `save-zone-information` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments` | `SaveZoneInformation` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, attachments, savezoneinformation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / nvidia/desc.md | https://github.com/nohuto/win-config/blob/main/nvidia/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -9973,11 +12885,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-attachmentmanager-admx` | `official-doc` | Local Microsoft AttachmentManager.admx mapping | C:\Windows\PolicyDefinitions\AttachmentManager.admx | `high` | path, value, allowed-values, version-scope |
-| `local-attachmentmanager-adml` | `official-doc` | Local Microsoft AttachmentManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AttachmentManager.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-attachmentmanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.admx mapping | C:\Windows\PolicyDefinitions\AttachmentManager.admx | `high` | path, value, allowed-values, version-scope |
+| `local-attachmentmanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AttachmentManager.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10030,6 +12942,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-encryption-policy` | `HKLM\System\CurrentControlSet\Policies` | `NtfsDisableEncryption` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, ntfsdisableencryption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10043,11 +12981,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10100,6 +13038,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `do-download-mode-policy` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization` | `DODownloadMode` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, deliveryoptimization, dodownloadmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10114,11 +13078,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-deliveryoptimization-admx` | `official-doc` | Local Microsoft DeliveryOptimization.admx mapping | C:\Windows\PolicyDefinitions\DeliveryOptimization.admx | `high` | path, value, allowed-values, version-scope |
-| `local-deliveryoptimization-adml` | `official-doc` | Local Microsoft DeliveryOptimization.adml help text | C:\Windows\PolicyDefinitions\en-US\DeliveryOptimization.adml | `high` | behavior, allowed-values, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-deliveryoptimization-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.admx mapping | C:\Windows\PolicyDefinitions\DeliveryOptimization.admx | `high` | path, value, allowed-values, version-scope |
+| `local-deliveryoptimization-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.adml help text | C:\Windows\PolicyDefinitions\en-US\DeliveryOptimization.adml | `high` | behavior, allowed-values, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10171,6 +13135,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-password-reveal` | `HKLM\Software\Policies\Microsoft\Windows\CredUI` | `DisablePasswordReveal` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, credui, disablepasswordreveal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10185,11 +13175,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, value, allowed-values, version-scope |
-| `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, value, allowed-values, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10242,6 +13232,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `block-domain-picture-password` | `HKLM\Software\Policies\Microsoft\Windows\System` | `BlockDomainPicturePassword` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, blockdomainpicturepassword |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+| win-registry / records/Policies-System.txt | https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt | Matched 2 audit token(s) in win-registry. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10256,11 +13272,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-credentialproviders-admx` | `official-doc` | Local Microsoft CredentialProviders.admx mapping | C:\Windows\PolicyDefinitions\CredentialProviders.admx | `high` | path, value, allowed-values, version-scope |
-| `local-credentialproviders-adml` | `official-doc` | Local Microsoft CredentialProviders.adml help text | C:\Windows\PolicyDefinitions\en-US\CredentialProviders.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | C:\Windows\PolicyDefinitions\CredentialProviders.admx | `high` | path, value, allowed-values, version-scope |
+| `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | C:\Windows\PolicyDefinitions\en-US\CredentialProviders.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10313,6 +13329,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `fallowtogethelp` | `HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services` | `fAllowToGetHelp` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, terminal, fallowtogethelp |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10327,12 +13369,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-remote-assistance-csp` | `policy-csp` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance | `high` | path, value, default, behavior, ui-mapping |
-| `local-remoteassistance-admx` | `official-doc` | Local Microsoft RemoteAssistance.admx mapping | C:\Windows\PolicyDefinitions\RemoteAssistance.admx | `high` | path, value, allowed-values |
-| `local-remoteassistance-adml` | `official-doc` | Local Microsoft RemoteAssistance.adml help text | C:\Windows\PolicyDefinitions\en-US\RemoteAssistance.adml | `high` | default, behavior, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-remote-assistance-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance | `high` | path, value, default, behavior, ui-mapping |
+| `local-remoteassistance-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.admx mapping | C:\Windows\PolicyDefinitions\RemoteAssistance.admx | `high` | path, value, allowed-values |
+| `local-remoteassistance-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.adml help text | C:\Windows\PolicyDefinitions\en-US\RemoteAssistance.adml | `high` | default, behavior, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10385,6 +13427,30 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `exploit-protection-policy` | `%TEMP%\WindowsOptimizer\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable system mitigations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10399,12 +13465,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-exploitguard-admx` | `official-doc` | Local Microsoft ExploitGuard.admx mapping | C:\Windows\PolicyDefinitions\ExploitGuard.admx | `high` | path, value, version-scope |
-| `local-exploitguard-adml` | `official-doc` | Local Microsoft ExploitGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\ExploitGuard.adml | `high` | behavior, default, side-effects |
-| `ms-exploit-protection-doc` | `official-doc` | Microsoft Learn exploit protection guidance | https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection | `high` | behavior, allowed-values, risk |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-exploitguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.admx mapping | C:\Windows\PolicyDefinitions\ExploitGuard.admx | `high` | path, value, version-scope |
+| `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\ExploitGuard.adml | `high` | behavior, default, side-effects |
+| `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection | `high` | behavior, allowed-values, risk |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -10457,6 +13523,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-system-restore-policy` | `HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore` | `DisableSR` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, systemrestore |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10471,11 +13563,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-systemrestore-admx` | `official-doc` | Local Microsoft SystemRestore.admx mapping | C:\Windows\PolicyDefinitions\SystemRestore.admx | `high` | path, value, allowed-values, version-scope |
-| `local-systemrestore-adml` | `official-doc` | Local Microsoft SystemRestore.adml help text | C:\Windows\PolicyDefinitions\en-US\SystemRestore.adml | `high` | behavior, default, side-effects, risk |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | C:\Windows\PolicyDefinitions\SystemRestore.admx | `high` | path, value, allowed-values, version-scope |
+| `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | C:\Windows\PolicyDefinitions\en-US\SystemRestore.adml | `high` | behavior, default, side-effects, risk |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10529,6 +13621,32 @@ Current write(s):
 | `domain-firewall-policy` | `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile` | `EnableFirewall` | `0` | `value` |  |
 | `standard-firewall-policy` | `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile` | `EnableFirewall` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsfirewall, domainprofile, enablefirewall, standardprofile |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10544,13 +13662,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-firewall-csp` | `official-doc` | Microsoft Learn: Firewall CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-windowsfirewall-admx` | `official-doc` | Local Microsoft WindowsFirewall.admx mapping | C:\Windows\PolicyDefinitions\WindowsFirewall.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsfirewall-adml` | `official-doc` | Local Microsoft WindowsFirewall.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsFirewall.adml | `high` | behavior, default, side-effects |
-| `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | Microsoft Learn: Azure VM firewall recovery guidance | https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows | `medium-high` | path, runtime-surface |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-firewall-csp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Firewall CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-windowsfirewall-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.admx mapping | C:\Windows\PolicyDefinitions\WindowsFirewall.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsFirewall.adml | `high` | behavior, default, side-effects |
+| `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows | `medium-high` | path, runtime-surface |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
 
 **Validation proof**
 
@@ -10604,6 +13722,18 @@ Current write(s):
 | `disable-windows-update-access` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` | `DisableWindowsUpdateAccess` | `1` | `value` |  |
 | `no-auto-update` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU` | `NoAutoUpdate` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -10618,12 +13748,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -10678,6 +13808,32 @@ Current write(s):
 | `dont-search-windows-update` | `HKLM\Software\Policies\Microsoft\Windows\DriverSearching` | `DontSearchWindowsUpdate` | `1` | `value` |  |
 | `exclude-wu-drivers-in-quality-update` | `HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate` | `ExcludeWUDriversInQualityUpdate` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsupdate, excludewudriversinqualityupdate, driversearching, searchorderconfig, dontsearchwindowsupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 6 audit token(s) in win-config. |
+| win-config / policies/desc.md | https://github.com/nohuto/win-config/blob/main/policies/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10694,15 +13850,15 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-devicesetup-admx` | `official-doc` | Local Microsoft DeviceSetup.admx mapping | C:\Windows\PolicyDefinitions\DeviceSetup.admx | `high` | path, value, allowed-values, version-scope |
-| `local-devicesetup-adml` | `official-doc` | Local Microsoft DeviceSetup.adml help text | C:\Windows\PolicyDefinitions\en-US\DeviceSetup.adml | `high` | behavior, allowed-values, side-effects |
-| `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `local-icm-adml` | `official-doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, side-effects |
-| `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-devicesetup-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.admx mapping | C:\Windows\PolicyDefinitions\DeviceSetup.admx | `high` | path, value, allowed-values, version-scope |
+| `local-devicesetup-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.adml help text | C:\Windows\PolicyDefinitions\en-US\DeviceSetup.adml | `high` | behavior, allowed-values, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, side-effects |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10755,6 +13911,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dynamic-lock-policy` | `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon` | `EnableGoodbye` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | winlogon, enablegoodbye |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10768,11 +13950,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-passport-admx` | `official-doc` | Local Microsoft Passport.admx mapping | C:\Windows\PolicyDefinitions\Passport.admx | `high` | path, value, allowed-values, version-scope |
-| `local-passport-adml` | `official-doc` | Local Microsoft Passport.adml help text | C:\Windows\PolicyDefinitions\en-US\Passport.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | C:\Windows\PolicyDefinitions\Passport.admx | `high` | path, value, allowed-values, version-scope |
+| `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | C:\Windows\PolicyDefinitions\en-US\Passport.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -10828,6 +14010,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sudo-enabled-mode` | `HKLM\Software\Policies\Microsoft\Windows\Sudo` | `Enabled` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, sudo, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10842,11 +14050,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-sudo-admx` | `official-doc` | Local Microsoft Sudo.admx mapping | C:\Windows\PolicyDefinitions\Sudo.admx | `high` | path, value, allowed-values, version-scope |
-| `local-sudo-adml` | `official-doc` | Local Microsoft Sudo.adml help text | C:\Windows\PolicyDefinitions\en-US\Sudo.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | C:\Windows\PolicyDefinitions\Sudo.admx | `high` | path, value, allowed-values, version-scope |
+| `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | C:\Windows\PolicyDefinitions\en-US\Sudo.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10900,6 +14108,32 @@ Current write(s):
 | `enable-scripts-policy` | `HKLM\Software\Policies\Microsoft\Windows\PowerShell` | `EnableScripts` | `1` | `value` |  |
 | `execution-policy-string` | `HKLM\Software\Policies\Microsoft\Windows\PowerShell` | `ExecutionPolicy` | `Unrestricted` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, powershell, enablescripts, executionpolicy, unrestricted |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 5 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / nvidia/assets/nvcpl.ps1 | https://github.com/nohuto/win-config/blob/main/nvidia/assets/nvcpl.ps1 | Matched 3 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10914,11 +14148,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-powershellpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-powershellpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, default, side-effects, risk |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, default, side-effects, risk |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10971,6 +14205,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-secure-credential-prompting` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI` | `EnableSecureCredentialPrompting` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, credui, enablesecurecredentialprompting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -10985,11 +14245,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
-| `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11044,6 +14304,32 @@ Current write(s):
 | `consent-prompt-admin` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `ConsentPromptBehaviorAdmin` | `0` | `value` |  |
 | `prompt-secure-desktop` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `PromptOnSecureDesktop` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11060,12 +14346,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings | `high` | path, value, allowed-values, default, behavior |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `nohuto-uac-bootphase` | `decompilation` | nohuto boot-phase UAC value read | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c | `medium` | path, behavior, dependency |
-| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | Local capture - C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.pml and C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.csv | `high` | path, value, behavior, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings | `high` | path, value, allowed-values, default, behavior |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-uac-bootphase` | `decompilation` | `Ghidra decompilation` | nohuto boot-phase UAC value read | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c | `medium` | path, behavior, dependency |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | Local capture - C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.pml and C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.csv | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -11120,6 +14406,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-window-minimizing-shortcuts` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `NoWindowMinimizingShortcuts` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, nowindowminimizingshortcuts |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11134,12 +14447,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-desktop-policy` | `policy-csp` | Microsoft ADMX_Desktop Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop | `high` | path, behavior, default, ui-mapping |
-| `local-desktop-admx` | `official-doc` | Local Microsoft Desktop.admx mapping | C:\WINDOWS\PolicyDefinitions\Desktop.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-aero-shake` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-desktop-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Desktop Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop | `high` | path, behavior, default, ui-mapping |
+| `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | C:\WINDOWS\PolicyDefinitions\Desktop.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -11192,6 +14505,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `auto-reboot` | `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` | `AutoReboot` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | autoreboot, crashcontrol |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-registry / records/CrashControl.txt | https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11206,12 +14546,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-configure-system-failure-recovery` | `official-doc` | Microsoft Learn: Configure system failure and recovery options | https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options | `high` | path, value, default, behavior, side-effects |
-| `ms-memory-dump-file-options` | `official-doc` | Microsoft Learn: Memory dump file options | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options | `high` | path, value, default, version-scope |
-| `ms-win32-osrecoveryconfiguration` | `official-doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration | `high` | path, behavior |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-configure-system-failure-recovery` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure system failure and recovery options | https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options | `high` | path, value, default, behavior, side-effects |
+| `ms-memory-dump-file-options` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory dump file options | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options | `high` | path, value, default, version-scope |
+| `ms-win32-osrecoveryconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration | `high` | path, behavior |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11264,6 +14604,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `display-parameters` | `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` | `DisplayParameters` | `1` | `value` | Observed app value under review. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | crashcontrol |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 1 audit token(s) in win-registry. |
+| win-config / privacy/assets/crashdmp-SecureDump_PrepareForInit.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11278,10 +14645,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `microsoft-support-display-parameters` | `official-doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237 | `high` | path, value, allowed-values, behavior |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237 | `high` | path, value, allowed-values, behavior |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11334,6 +14701,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-automatic-app-archiving` | `HKLM\Software\Policies\Microsoft\Windows\Appx` | `AllowAutomaticAppArchiving` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, appx, allowautomaticapparchiving |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11348,12 +14742,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
-| `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11406,6 +14800,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `maintenance-disabled-observed` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance` | `MaintenanceDisabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | schedule, maintenance, maintenancedisabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/ScheduledTasksList.ps1 | https://github.com/nohuto/win-config/blob/main/system/assets/ScheduledTasksList.ps1 | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11420,11 +14841,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-automatic-maintenance-overview` | `official-doc` | Microsoft Automatic Maintenance overview | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance | `high` | behavior, default, version-scope |
-| `ms-uwf-maintenance-disabled` | `official-doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `medium` | path, behavior |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance | `high` | behavior, default, version-scope |
+| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `medium` | path, behavior |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -11477,6 +14898,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-background-group-policy` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DisableBkGndGroupPolicy` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, disablebkgndgrouppolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11491,12 +14939,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-grouppolicy-policy-csp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy | `high` | path, default, behavior, ui-mapping |
-| `local-grouppolicy-admx` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, ui-mapping, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-background-gp-updates` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-grouppolicy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy | `high` | path, default, behavior, ui-mapping |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, ui-mapping, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -11550,6 +14998,33 @@ Current write(s):
 | `allow-clipboard-history` | `HKLM\Software\Policies\Microsoft\Windows\System` | `AllowClipboardHistory` | `0` | `value` |  |
 | `allow-cross-device-clipboard` | `HKLM\Software\Policies\Microsoft\Windows\System` | `AllowCrossDeviceClipboard` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11566,13 +15041,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-clipboard-history-csp` | `policy-csp` | Microsoft Policy CSP: AllowClipboardHistory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory | `high` | path, value, allowed-values, default, behavior |
-| `ms-cross-device-clipboard-csp` | `policy-csp` | Microsoft Policy CSP: AllowCrossDeviceClipboard | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard | `high` | path, value, allowed-values, default, behavior |
-| `local-ospolicy-admx` | `official-doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-clipboard-history` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-clipboard-history-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowClipboardHistory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory | `high` | path, value, allowed-values, default, behavior |
+| `ms-cross-device-clipboard-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowCrossDeviceClipboard | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard | `high` | path, value, allowed-values, default, behavior |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -11625,6 +15100,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-clipboard-redirection` | `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services` | `fDisableClip` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, terminal, fdisableclip |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11640,12 +15142,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-terminalserver-clipboard-policy` | `policy-csp` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection | `high` | path, value, allowed-values, default, behavior |
-| `local-terminalserver-admx` | `official-doc` | Local Microsoft TerminalServer.admx mapping | C:\Windows\PolicyDefinitions\TerminalServer.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-clipboard-redirection` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-terminalserver-clipboard-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection | `high` | path, value, allowed-values, default, behavior |
+| `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | C:\Windows\PolicyDefinitions\TerminalServer.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -11701,6 +15203,32 @@ Current write(s):
 | `gameconfigstore-fso-values` | `HKCU\System\GameConfigStore` | `GameDVR_HonorUserFSEBehaviorMode` | `1` | `value` |  |
 | `gameconfigstore-fso-values` | `HKCU\System\GameConfigStore` | `GameDVR_DXGIHonorFSEWindowsCompatible` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | gameconfigstore |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/gamemode-GamingHandlers.c | https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11715,11 +15243,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952 | `medium` | behavior, side-effects, version-scope |
-| `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952 | `medium` | behavior, side-effects, version-scope |
+| `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11772,6 +15300,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-game-dvr` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR` | `AllowGameDVR` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -11786,12 +15326,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-applicationmanagement-allowgamedvr` | `policy-csp` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-gamedvr-admx` | `official-doc` | Local Microsoft GameDVR.admx mapping | C:\Windows\PolicyDefinitions\GameDVR.admx | `high` | path, value, allowed-values, version-scope |
-| `local-gamedvr-adml` | `official-doc` | Local Microsoft GameDVR.adml help text | C:\Windows\PolicyDefinitions\en-US\GameDVR.adml | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-applicationmanagement-allowgamedvr` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | C:\Windows\PolicyDefinitions\GameDVR.admx | `high` | path, value, allowed-values, version-scope |
+| `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | C:\Windows\PolicyDefinitions\en-US\GameDVR.adml | `high` | behavior, default, side-effects |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11844,6 +15384,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `jpeg-import-quality` | `HKCU\Control Panel\Desktop` | `JPEGImportQuality` | `100` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | panel, desktop, jpegimportquality |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/jpeg-TranscodeImage.c | https://github.com/nohuto/win-config/blob/main/system/assets/jpeg-TranscodeImage.c | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11858,10 +15425,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11914,6 +15481,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `restart-apps-registry-observed` | `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon` | `RestartApps` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | winlogon, restartapps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11928,11 +15522,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-support-restart-apps` | `official-doc` | Microsoft support article for the Restart apps sign-in feature | https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d | `medium` | behavior, default, side-effects, version-scope |
-| `runtime-restartapps-registry-diff` | `runtime-diff` | Guest reversible probe - RestartApps registry mapping | H:\Temp\vm-tooling-staging\restartapps_toggle_out.txt | `high` | value, behavior, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d | `medium` | behavior, default, side-effects, version-scope |
+| `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | H:\Temp\vm-tooling-staging\restartapps_toggle_out.txt | `high` | value, behavior, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -11985,6 +15579,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-dynamic-content-in-wsb` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `EnableDynamicContentInWSB` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, enabledynamiccontentinwsb |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -11999,12 +15620,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-search-policy-csp` | `policy-csp` | Microsoft Search Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights | `high` | path, value, allowed-values, default, behavior |
-| `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-search-highlights` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-search-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Search Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights | `high` | path, value, allowed-values, default, behavior |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -12057,6 +15678,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `prevent-remote-queries` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `PreventRemoteQueries` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, preventremotequeries |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12071,11 +15719,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12128,6 +15776,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `connected-search-use-web` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `ConnectedSearchUseWeb` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12142,11 +15815,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12199,6 +15872,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `shell-icons-29` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons` | `29` | `%windir%\System32\shell32.dll,-50` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, shell, icons, 29 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12213,10 +15913,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-shell-icons-shortcut-arrow` | `official-doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p | `medium` | path, value, default, behavior |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p | `medium` | path, value, default, behavior |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12269,6 +15969,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `startup-delay-in-msec` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize` | `StartupDelayInMSec` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | explorer, serialize |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12283,10 +16010,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12339,6 +16066,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-storage-sense-global` | `HKLM\Software\Policies\Microsoft\Windows\StorageSense` | `AllowStorageSenseGlobal` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, storagesense, allowstoragesenseglobal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 3 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12353,12 +16107,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-storage-policy-csp` | `policy-csp` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage | `high` | path, value, allowed-values, default, behavior |
-| `local-storagesense-admx` | `official-doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-storage-sense` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage | `high` | path, value, allowed-values, default, behavior |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -12411,6 +16165,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-storage-sense-temporary-files-cleanup` | `HKLM\Software\Policies\Microsoft\Windows\StorageSense` | `AllowStorageSenseTemporaryFilesCleanup` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, storagesense, allowstoragesensetemporaryfilescleanup |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12425,12 +16206,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-storage-policy-csp` | `policy-csp` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup | `high` | path, value, allowed-values, default, behavior |
-| `local-storagesense-admx` | `official-doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup | `high` | path, value, allowed-values, default, behavior |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -12483,6 +16264,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-use-store-open-with` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `NoUseStoreOpenWith` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, nousestoreopenwith |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12497,12 +16305,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-icm-policy-csp` | `policy-csp` | Microsoft ADMX_ICM Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2 | `high` | path, behavior, default, ui-mapping |
-| `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping | C:\WINDOWS\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-store-open-with` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-icm-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ICM Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2 | `high` | path, behavior, default, ui-mapping |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | C:\WINDOWS\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -12555,6 +16363,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `overlay-min-fps` | `HKLM\SOFTWARE\Microsoft\Windows\Dwm` | `OverlayMinFPS` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | overlayminfps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 1 audit token(s) in win-registry. |
+| win-registry / assets/dwm/OverlayMinFPS.c | https://github.com/nohuto/win-registry/blob/main/assets/dwm/OverlayMinFPS.c | Matched 1 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12569,10 +16404,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dwm-registry-settings` | `official-doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `high` | path, value, behavior, side-effects, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `high` | path, value, behavior, side-effects, risk, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12625,6 +16460,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `auto-game-mode-enabled` | `HKCU\Software\Microsoft\GameBar` | `AutoGameModeEnabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | gamebar, autogamemodeenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/gamemode-GamingHandlers.c | https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12639,12 +16501,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-game-mode-feature` | `official-doc` | Xbox Support: Use Game Mode while gaming on your Windows device | https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc | `high` | behavior, side-effects, version-scope |
-| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
-| `repo-system-doc-game-mode` | `repo-doc` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc | `high` | behavior, side-effects, version-scope |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
+| `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12697,6 +16559,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hw-sch-mode` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `HwSchMode` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, hwschmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-registry / records/Graphics-Drivers.txt | https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12711,12 +16600,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-hags-feature` | `official-doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/ | `high` | behavior, side-effects, version-scope |
-| `repo-system-doc-hags` | `repo-doc` | Repo system research notes for HAGS | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `runtime-hags-registry-diff` | `runtime-diff` | Guest reversible probe for HwSchMode | H:\Temp\vm-tooling-staging\hags_toggle_out.txt | `high` | path, value, behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-hags-feature` | `official-doc` | `Microsoft official doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/ | `high` | behavior, side-effects, version-scope |
+| `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | H:\Temp\vm-tooling-staging\hags_toggle_out.txt | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -12769,6 +16658,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-indexing-encrypted-stores-or-items` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `AllowIndexingEncryptedStoresOrItems` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, allowindexingencryptedstoresoritems |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 2 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12783,11 +16699,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects, risk |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects, risk |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12840,6 +16756,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `tdr-ddi-delay` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrDdiDelay` | `5` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrddidelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / security/assets/TdrInit.c | https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12853,10 +16796,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12909,6 +16852,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `tdr-delay` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrDelay` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrdelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / security/assets/TdrInit.c | https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12922,10 +16892,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12978,6 +16948,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `tdr-level` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLevel` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlevel |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / security/assets/TdrInit.c | https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -12991,10 +16988,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, allowed-values, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, allowed-values, behavior, side-effects, version-scope, risk |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13047,6 +17044,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `tdr-limit-count` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLimitCount` | `5` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlimitcount |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / security/assets/TdrInit.c | https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13060,10 +17084,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13116,6 +17140,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `tdr-limit-time` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLimitTime` | `60` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlimittime |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-config / security/assets/TdrInit.c | https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13129,10 +17180,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13185,6 +17236,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `thread-dpc-enable` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `ThreadDpcEnable` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, threaddpcenable |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13199,10 +17277,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-threaded-dpcs` | `official-doc` | Microsoft Learn: Introduction to threaded DPCs | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13255,6 +17333,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `clear-pagefile-at-shutdown` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `ClearPageFileAtShutdown` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13269,12 +17374,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile | `high` | value, behavior, side-effects |
-| `local-sceregvl-inf` | `official-doc` | Local Microsoft security registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, value |
-| `local-defltbase-inf` | `official-doc` | Local Microsoft default security template | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile | `high` | value, behavior, side-effects |
+| `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, value |
+| `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | C:\Windows\inf\defltbase.inf | `high` | default, value |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13327,6 +17432,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-paging-executive` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `DisablePagingExecutive` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management, disablepagingexecutive |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 5 audit token(s) in win-registry. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13341,12 +17473,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-kernel-trace-control-api` | `official-doc` | Microsoft Learn: Kernel Trace Control API Reference | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference | `high` | path, value, behavior, version-scope |
-| `ms-enable-trace-parameters-v1` | `official-doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1 | `high` | path, value, behavior, side-effects, risk, version-scope |
-| `ms-wpr-disablepagingexecutive` | `official-doc` | Microsoft Learn: WPR Command-Line Options | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options | `high` | value, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-kernel-trace-control-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Kernel Trace Control API Reference | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference | `high` | path, value, behavior, version-scope |
+| `ms-enable-trace-parameters-v1` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1 | `high` | path, value, behavior, side-effects, risk, version-scope |
+| `ms-wpr-disablepagingexecutive` | `official-doc` | `Microsoft official doc` | Microsoft Learn: WPR Command-Line Options | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options | `high` | value, behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13403,6 +17535,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `large-system-cache` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `LargeSystemCache` | `0` | `value` | Observed app value under review. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13417,11 +17576,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-win32-operatingsystem-largesystemcache` | `official-doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | value, behavior, risk |
-| `ms-memory-limits-large-system-cache` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `medium` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-win32-operatingsystem-largesystemcache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | value, behavior, risk |
+| `ms-memory-limits-large-system-cache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `medium` | behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13474,6 +17633,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `nonpaged-pool-size` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `NonPagedPoolSize` | `0` | `value` | Observed app value now matches the documented default. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13487,12 +17673,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-memory-management-qna-nonpaged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
-| `ms-memory-management-registry-keys` | `official-doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
-| `ms-memory-limits` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `high` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
+| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
+| `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `high` | behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -13545,6 +17731,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `paged-pool-size` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `PagedPoolSize` | `0` | `value` | Observed app value now matches the documented default. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 4 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13558,12 +17771,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-memory-management-qna-paged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
-| `ms-memory-management-registry-keys` | `official-doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
-| `ms-unable-allocate-paged-pool` | `official-doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool | `high` | path, value, behavior, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
+| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
+| `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool | `high` | path, value, behavior, risk, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -13616,6 +17829,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `registry-size-limit` | `HKLM\System\CurrentControlSet\Control` | `RegistrySizeLimit` | `0` | `value` | Current implementation path. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13629,13 +17867,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-registry-storage-space` | `official-doc` | Microsoft Learn: Registry Storage Space | https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-storage-space | `high` | path, default, behavior, side-effects |
-| `ms-rsl-functionality` | `official-doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set | `high` | path, value, default, behavior, side-effects, version-scope |
-| `ms-getsystemregistryquota` | `official-doc` | Microsoft Learn: GetSystemRegistryQuota | https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota | `medium` | behavior, version-scope |
-| `live-registrysize-missing` | `registry-observation` | Validation host observation of missing RegistrySizeLimit | Local observation - 2026-03-13, HKLM\System\CurrentControlSet\Control | `medium` | default |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-registry-storage-space` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Storage Space | https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-storage-space | `high` | path, default, behavior, side-effects |
+| `ms-rsl-functionality` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set | `high` | path, value, default, behavior, side-effects, version-scope |
+| `ms-getsystemregistryquota` | `official-doc` | `Microsoft official doc` | Microsoft Learn: GetSystemRegistryQuota | https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota | `medium` | behavior, version-scope |
+| `live-registrysize-missing` | `registry-observation` | `VM registry observation` | Validation host observation of missing RegistrySizeLimit | Local observation - 2026-03-13, HKLM\System\CurrentControlSet\Control | `medium` | default |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13688,6 +17926,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-8dot3-name-creation` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsDisable8dot3NameCreation` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsdisable8dot3namecreation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13702,12 +17967,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-fsutil-8dot3name` | `official-doc` | Microsoft Learn: fsutil 8dot3name | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name | `high` | path, value, allowed-values, default, behavior |
-| `local-filesys-admx-shortnames` | `official-doc` | Local Microsoft FileSys.admx short-name mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | value, allowed-values, version-scope |
-| `local-filesys-adml-shortnames` | `official-doc` | Local Microsoft FileSys.adml short-name help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-fsutil-8dot3name` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil 8dot3name | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name | `high` | path, value, allowed-values, default, behavior |
+| `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | value, allowed-values, version-scope |
+| `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | allowed-values, default, behavior, side-effects |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13760,6 +18025,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-last-access-update` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsDisableLastAccessUpdate` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsdisablelastaccessupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13774,12 +18066,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, behavior, side-effects, version-scope |
-| `ms-performance-tuning-web-servers` | `official-doc` | Microsoft Learn: Performance Tuning Web Servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/ | `high` | path, default, behavior, side-effects, version-scope |
-| `ms-using-agestore` | `official-doc` | Microsoft Learn: Using AgeStore | https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore | `high` | default, value, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, behavior, side-effects, version-scope |
+| `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/ | `high` | path, default, behavior, side-effects, version-scope |
+| `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore | `high` | default, value, behavior, side-effects |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13832,6 +18124,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `long-paths-enabled` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-registry / records/FileSystem.txt | https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13846,12 +18165,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-maximum-file-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
-| `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-maximum-file-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13904,6 +18223,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-memory-usage` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsMemoryUsage` | `1` | `value` | Observed app value now matches the documented default. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsmemoryusage |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-registry / records/FileSystem.txt | https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13917,10 +18263,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -13973,6 +18319,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-mft-zone-reservation` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsMftZoneReservation` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsmftzonereservation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-registry / records/FileSystem.txt | https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -13987,11 +18360,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | value, allowed-values, default, behavior, version-scope |
-| `ms-ntfs-reserves-space-for-mft` | `official-doc` | Microsoft Learn: How NTFS reserves space for MFT | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft | `high` | path, value, allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | value, allowed-values, default, behavior, version-scope |
+| `ms-ntfs-reserves-space-for-mft` | `official-doc` | `Microsoft official doc` | Microsoft Learn: How NTFS reserves space for MFT | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft | `high` | path, value, allowed-values, default, behavior, side-effects |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14044,6 +18417,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `win32-priority-separation` | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` | `Win32PrioritySeparation` | `38` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | prioritycontrol, win32priorityseparation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/lsc-cimwin32.c | https://github.com/nohuto/win-config/blob/main/system/assets/lsc-cimwin32.c | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Win32PrioritySeparation | Docs/system/assets/Win32PrioritySeparation.pdf | Local research asset for Win32PrioritySeparation and scheduler-related registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -14058,11 +18458,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-win32-operatingsystem-priority` | `official-doc` | Microsoft Learn: Win32_OperatingSystem class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | path, behavior, version-scope, risk |
-| `repo-system-doc-priority` | `repo-doc` | Repo system research notes for Win32PrioritySeparation | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | path, behavior, version-scope, risk |
+| `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14118,6 +18518,33 @@ Current write(s):
 | `hung-app-timeout` | `HKCU\Control Panel\Desktop` | `HungAppTimeout` | `1500` | `value` |  |
 | `auto-end-tasks` | `HKCU\Control Panel\Desktop` | `AutoEndTasks` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | waittokillservicetimeout, 2500, panel, desktop, waittokillapptimeout, hungapptimeout, 1500, autoendtasks, 1 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 9 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 5 audit token(s) in win-registry. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14135,13 +18562,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-systemparametersinfo-timeouts` | `official-doc` | Microsoft Learn: SystemParametersInfoW function | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfow | `high` | value, default, behavior, version-scope |
-| `ms-rm-shutdown-type` | `official-doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type | `high` | behavior, side-effects, version-scope |
-| `ms-service-control-handler` | `official-doc` | Microsoft Learn: Service Control Handler Function | https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function | `high` | path, value, behavior, side-effects, risk |
-| `repo-system-doc-shutdown` | `repo-doc` | Repo system research notes for shutdown timeouts | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfoW function | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfow | `high` | value, default, behavior, version-scope |
+| `ms-rm-shutdown-type` | `official-doc` | `Microsoft official doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type | `high` | behavior, side-effects, version-scope |
+| `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function | `high` | path, value, behavior, side-effects, risk |
+| `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo system research notes for shutdown timeouts | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14194,6 +18621,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `btagservice-start-mode` | `BTAGService` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14208,10 +18660,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-btagservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-btagservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14264,6 +18716,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `bthserv-start-mode` | `bthserv` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14278,10 +18755,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-bthserv` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-bthserv` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14334,6 +18811,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `bluetoothuserservice-start-mode` | `BluetoothUserService_*` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14348,10 +18850,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-bluetoothuserservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-bluetoothuserservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14404,6 +18906,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `diagtrack-start-mode` | `DiagTrack` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14418,10 +18945,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-diagtrack` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-diagtrack` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14474,6 +19001,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printnotify-start-mode` | `PrintNotify` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14488,10 +19040,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-printnotify` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-printnotify` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14544,6 +19096,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `spooler-start-mode` | `Spooler` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14558,10 +19135,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-spooler` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-spooler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14614,6 +19191,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wsearch-start-mode` | `WSearch` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable windows search service |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14628,12 +19230,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `local-scm-wsearch-2026-03-14` | `repo-doc` | Local SCM snapshot - WSearch | Docs/tweaks/research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | Docs/tweaks/research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14686,6 +19288,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `verbose-status` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `VerboseStatus` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, verbosestatus |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/drivers.txt | https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -14700,11 +19329,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-logon-verbose-status` | `policy-csp` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-verbose-status-messages` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-logon-verbose-status` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-verbose-status-messages` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14759,6 +19388,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `use-default-tile` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `UseDefaultTile` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, explorer, usedefaulttile |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-registry / records/CV-Policies.txt | https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -14773,11 +19422,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-cpls-use-default-tile` | `policy-csp` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile | `high` | path, behavior, default, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-default-account-picture` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-cpls-use-default-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile | `high` | path, behavior, default, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-default-account-picture` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14830,6 +19479,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-acrylic-background-on-logon` | `HKLM\Software\Policies\Microsoft\Windows\System` | `DisableAcrylicBackgroundOnLogon` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, disableacrylicbackgroundonlogon |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/assets/animation-WinMain.c | https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c | Matched 1 audit token(s) in win-config. |
+| win-registry / records/Policies-System.txt | https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt | Matched 2 audit token(s) in win-registry. |
+
 **Targets**
 
 **Windows defaults**
@@ -14844,13 +19513,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-logon-page` | `policy-csp` | Microsoft ADMX_Logon Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
-| `local-logon-admx-acrylic` | `official-doc` | Local Microsoft Logon.admx mapping | C:\Windows\PolicyDefinitions\Logon.admx | `high` | path, ui-mapping, version-scope |
-| `local-logon-adml-acrylic` | `official-doc` | Local Microsoft Logon.adml help text | C:\Windows\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-acrylic-logon` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-logon-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
+| `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\Windows\PolicyDefinitions\Logon.admx | `high` | path, ui-mapping, version-scope |
+| `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\Windows\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14903,6 +19572,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `turn-off-spi-animations` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `TurnOffSPIAnimations` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, explorer, turnoffspianimations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-registry / records/CV-Policies.txt | https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -14917,12 +19606,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-explorer-admx-animations` | `official-doc` | Local Microsoft Explorer.admx mapping | C:\Windows\PolicyDefinitions\Explorer.admx | `high` | path, value, allowed-values, version-scope |
-| `local-explorer-adml-animations` | `official-doc` | Local Microsoft Explorer.adml help text | C:\Windows\PolicyDefinitions\en-US\Explorer.adml | `high` | behavior, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-common-control-animations` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | C:\Windows\PolicyDefinitions\Explorer.admx | `high` | path, value, allowed-values, version-scope |
+| `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | C:\Windows\PolicyDefinitions\en-US\Explorer.adml | `high` | behavior, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14975,6 +19664,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-first-logon-animation` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableFirstLogonAnimation` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, enablefirstlogonanimation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/assets/animation-WinMain.c | https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c | Matched 2 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -14989,12 +19698,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-logon-admx` | `official-doc` | Local Microsoft Logon.admx mapping | C:\WINDOWS\PolicyDefinitions\Logon.admx | `high` | path, value, allowed-values, version-scope |
-| `local-logon-adml` | `official-doc` | Local Microsoft Logon.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-first-signin-animation` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\WINDOWS\PolicyDefinitions\Logon.admx | `high` | path, value, allowed-values, version-scope |
+| `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15047,6 +19756,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreen` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15061,11 +19790,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-lock-screen` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15118,6 +19847,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen-camera` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreenCamera` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreencamera |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15132,12 +19881,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-camera` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15190,6 +19939,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-changing-lock-screen` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoChangingLockScreen` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nochanginglockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15204,13 +19973,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-changes` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
+| `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15263,6 +20032,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `animate-lock-screen-background` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `AnimateLockScreenBackground` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, animatelockscreenbackground |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15277,13 +20066,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-motion` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
+| `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15336,6 +20125,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen-slideshow` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreenSlideshow` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreenslideshow |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15350,13 +20159,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
+| `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15409,6 +20218,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-on-action-center` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightOnActionCenter` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightonactioncenter |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15423,12 +20252,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-action-center` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15481,6 +20310,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-spotlight-collection-on-desktop` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableSpotlightCollectionOnDesktop` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablespotlightcollectionondesktop |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15495,12 +20344,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | Microsoft Policy CSP: AllowSpotlightCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowSpotlightCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15553,6 +20402,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-features` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightFeatures` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightfeatures |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15567,12 +20436,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-features` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15625,6 +20494,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-on-settings` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightOnSettings` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightonsettings |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15639,12 +20528,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-settings` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15697,6 +20586,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-third-party-suggestions` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableThirdPartySuggestions` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablethirdpartysuggestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15711,12 +20620,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-third-party` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15769,6 +20678,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-welcome` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightWindowsWelcomeExperience` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightwindowswelcomeexperience |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15783,12 +20712,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-welcome` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15841,6 +20770,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-wcn-ui` | `HKLM\Software\Policies\Microsoft\Windows\WCN\UI` | `DisableWcnUi` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, disablewcnui |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/assets/animation-WinMain.c | https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15855,12 +20804,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-wcn-admx` | `official-doc` | Local Microsoft WindowsConnectNow.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsConnectNow.admx | `high` | path, value, allowed-values, version-scope |
-| `local-wcn-adml` | `official-doc` | Local Microsoft WindowsConnectNow.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\WindowsConnectNow.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-wcn-wizards` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsConnectNow.admx | `high` | path, value, allowed-values, version-scope |
+| `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\WindowsConnectNow.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15913,6 +20862,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-news-and-interests` | `HKLM\SOFTWARE\Policies\Microsoft\Dsh` | `AllowNewsAndInterests` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, allownewsandinterests |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/assets/animation-WinMain.c | https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -15927,13 +20896,13 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-news-and-interests-allow-widgets` | `policy-csp` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-news-and-interests-admx` | `official-doc` | Local Microsoft NewsAndInterests.admx mapping | C:\WINDOWS\PolicyDefinitions\NewsAndInterests.admx | `high` | path, value, allowed-values, version-scope |
-| `local-news-and-interests-adml` | `official-doc` | Local Microsoft NewsAndInterests.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\NewsAndInterests.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-widgets` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-news-and-interests-allow-widgets` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | C:\WINDOWS\PolicyDefinitions\NewsAndInterests.admx | `high` | path, value, allowed-values, version-scope |
+| `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\NewsAndInterests.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -15986,6 +20955,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disallow-animations` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM` | `DisallowAnimations` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, disallowanimations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+
 **Targets**
 
 **Windows defaults**
@@ -16000,12 +20989,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-dwm-admx` | `official-doc` | Local Microsoft DWM.admx mapping | C:\WINDOWS\PolicyDefinitions\DWM.admx | `high` | path, value, allowed-values, version-scope |
-| `local-dwm-adml` | `official-doc` | Local Microsoft DWM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\DWM.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-window-animations` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | C:\WINDOWS\PolicyDefinitions\DWM.admx | `high` | path, value, allowed-values, version-scope |
+| `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\DWM.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -16058,6 +21047,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `force-classic-control-panel` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `ForceClassicControlPanel` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, forceclassiccontrolpanel |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16072,11 +21081,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-controlpanel-admx-classic` | `official-doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | C:\Windows\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, version-scope |
-| `local-controlpanel-adml-classic` | `official-doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | C:\Windows\PolicyDefinitions\en-US\ControlPanel.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-controlpanel-admx-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | C:\Windows\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, version-scope |
+| `local-controlpanel-adml-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | C:\Windows\PolicyDefinitions\en-US\ControlPanel.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16129,6 +21138,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ctf-langbar-showstatus` | `HKCU\Software\Microsoft\CTF\LangBar` | `ShowStatus` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | langbar, showstatus |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16143,11 +21170,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `microsoft-qna-language-bar-showstatus` | `official-doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter | `medium` | path, value, behavior |
-| `repo-visibility-language-bar` | `repo-doc` | Repo visibility notes for language bar | Docs/visibility/visibility.md | `medium` | path, value, allowed-values, behavior |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter | `medium` | path, value, behavior |
+| `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | Docs/visibility/visibility.md | `medium` | path, value, allowed-values, behavior |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16200,6 +21227,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `show-or-hide-most-used-apps` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowOrHideMostUsedApps` | `2` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, showorhidemostusedapps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16214,12 +21261,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, value, allowed-values, version-scope |
-| `local-startmenu-adml` | `official-doc` | Local Microsoft StartMenu.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\StartMenu.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-most-used-apps` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, value, allowed-values, version-scope |
+| `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\StartMenu.adml | `high` | behavior, default, side-effects |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -16272,6 +21319,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-people-bar` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HidePeopleBar` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hidepeoplebar |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16286,11 +21353,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-start-hide-people-bar` | `policy-csp` | Microsoft Start Policy CSP: HidePeopleBar | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-people-bar` | `repo-doc` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-start-hide-people-bar` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP: HidePeopleBar | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -16343,6 +21410,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `classic-context-menu-clsid` | `HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32` | `` | `` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | classes, clsid, inprocserver32 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / visibility/assets/animation-WinMain.c | https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c | Matched 2 audit token(s) in win-config. |
+| win-registry / records/Intel-00XX.txt | https://github.com/nohuto/win-registry/blob/main/records/Intel-00XX.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16357,11 +21444,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-visibility-classic-context` | `repo-doc` | Repo visibility notes for classic context menu | Docs/visibility/visibility.md | `medium` | path, value, default, behavior |
-| `repo-visibility-classic-context-usecase` | `repo-doc` | Repo visibility use-case guide for classic context menu | Docs/visibility/use-case-guide.md | `medium` | path, value |
-| `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-visibility-classic-context` | `repo-doc` | `Current repo docs` | Repo visibility notes for classic context menu | Docs/visibility/visibility.md | `medium` | path, value, default, behavior |
+| `repo-visibility-classic-context-usecase` | `repo-doc` | `Current repo docs` | Repo visibility use-case guide for classic context menu | Docs/visibility/use-case-guide.md | `medium` | path, value |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16418,6 +21505,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `audio-disable-spatial-on-low-latency` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio` | `DisableSpatialOnLowLatency` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | audio, disablespatialonlowlatency |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / records/Audio.txt | https://github.com/nohuto/win-registry/blob/main/records/Audio.txt | Matched 2 audit token(s) in win-registry. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -16431,11 +21539,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | Repo provenance for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
-| `guest-audio-string-scan` | `vm-test` | Guest string scan for spatial-audio registry contract | H:\Temp\vm-tooling-staging\spatial_audio_string_search.txt | `low` | behavior, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | H:\Temp\vm-tooling-staging\spatial_audio_string_search.txt | `low` | behavior, app-mismatch |
 
 **Validation proof**
 
@@ -16491,6 +21599,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `appevents-sound-scheme-bundle` | `HKCU\AppEvents\Schemes\...` | `(multiple default values)` | `` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | appevents, schemes, apps, systemasterisk, current, notification, reminder, close, criticalbatteryalarm, systemhand, mailbeep, deviceconnect, devicedisconnect, devicefail, systemexclamation, lowbatteryalarm, maximize, menucommand, menupopup, messagenudge, minimize, faxbeep, mail, proximity, proximityconnection, open, printcomplete, appgpfault, systemquestion, restoredown, restoreup, ccselect, showband, systemnotification, changetheme, windowsuac, explorer, blockedpopup, activatingdocument, emptyrecyclebin, feeddiscovered, movemenuitem, securityband, navigating, sapisvr, disnumberssound, panelsound, misrecosound, huboffsound, hubonsound, hubsleepsound |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 51 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 10 audit token(s) in win-registry. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 9 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
 **Targets**
 
 **Windows defaults**
@@ -16504,10 +21633,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-provenance-audio-disable-system-sounds` | `repo-doc` | Repo provenance for audio.disable-system-sounds | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-provenance-audio-disable-system-sounds` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-system-sounds | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16566,6 +21695,26 @@ Current write(s):
 | `terminal-developer-mode` | `HKCU\Software\Microsoft\Windows Terminal` | `DeveloperMode` | `1` | `value` |  |
 | `terminal-enable-debug-tap` | `HKCU\Software\Microsoft\Windows Terminal` | `EnableDebugTap` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | terminal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16581,10 +21730,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `windows-terminal-settings-doc` | `official-doc` | Microsoft Learn: Windows Terminal settings | https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup | `medium` | behavior, app-mismatch |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup | `medium` | behavior, app-mismatch |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16641,6 +21790,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `vs-intellisense-disable-auto-updating` | `HKCU\Software\Microsoft\VisualStudio\IntelliSense` | `DisableAutoUpdating` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | visualstudio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16655,10 +21822,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `vs-performance-doc` | `official-doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16715,6 +21882,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `vs-solution-loading-background-analysis` | `HKCU\Software\Microsoft\VisualStudio\SolutionLoading` | `BackgroundAnalysis` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | visualstudio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16729,10 +21914,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `vs-performance-doc` | `official-doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16789,6 +21974,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `app-disable-git-autofetch-registry` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `DisableGitAutofetch` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -16804,11 +22009,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `vscode-settings-reference` | `official-doc` | VS Code documentation: Default settings reference | https://code.visualstudio.com/docs/reference/default-settings | `high` | value, allowed-values, behavior |
-| `vscode-source-control-faq` | `official-doc` | VS Code documentation: Source Control FAQ | https://code.visualstudio.com/docs/sourcecontrol/faq | `high` | value, behavior |
-| `app-developer-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | https://code.visualstudio.com/docs/reference/default-settings | `high` | value, allowed-values, behavior |
+| `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | https://code.visualstudio.com/docs/sourcecontrol/faq | `high` | value, behavior |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -16861,6 +22066,18 @@ Blocking issues:
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -16874,9 +22091,9 @@ Blocking issues:
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Widgets duplicate retirement audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Widgets duplicate retirement audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
 
 **Validation proof**
 
@@ -16933,6 +22150,33 @@ Current write(s):
 | `smb-fileinfo-cache-lifetime` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `FileInfoCacheLifetime` | `30` | `value` |  |
 | `smb-directory-cache-lifetime` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `DirectoryCacheLifetime` | `30` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Local asset: Windows Internals E7 Part 2 | Docs/affinities/assets/E7-P2.pdf | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+
 **Targets**
 
 **Windows defaults**
@@ -16949,10 +22193,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-smb-client-tuning` | `official-doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
-| `app-network-provider` | `repo-code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -17012,6 +22256,33 @@ Current write(s):
 | `network-throttling-index` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `NetworkThrottlingIndex` | `4294967295` | `value` |  |
 | `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | tcpip, multimedia, systemprofile, networkthrottlingindex, systemresponsiveness |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 5 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 5 audit token(s) in win-registry. |
+| win-registry / records/MultiMedia.txt | https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt | Matched 4 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -17027,12 +22298,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-task-offload` | `official-doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
-| `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -17089,6 +22360,36 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `power-performance-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled` | `CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, coalescingtimerinterval, deepiocoalescingenabled, eventprocessorenabled, latencytoleranceparked, latencytolerancesoftparked, energyestimationenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 7 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 7 audit token(s) in win-registry. |
+| win-registry / assets/power/power-symbols.txt | https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt | Matched 5 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / power/desc.md#power-values | https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values | Documents the base power-manager values used by this tweak. |
+| win-config / power/desc.md#disable-timer-coalescing | https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-timer-coalescing | Documents timer coalescing and deep IO coalescing behavior. |
+| win-config / power/desc.md#disable-energy-estimation | https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-energy-estimation | Documents the EnergyEstimationEnabled field used by this tweak. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -17102,10 +22403,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -17163,6 +22464,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `appprivacy-deny-bundle` | `Composite: HKLM\Software\Policies\Microsoft\Windows\AppPrivacy + HKLM\Software\Policies\Microsoft\Windows\System` | `BundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, allowuserinfoaccess, appprivacy, letappsaccessaccountinfo, letappsaccesscalendar, letappsaccesscallhistory, letappsaccesscamera, letappsaccesscontacts, letappsaccessemail, letappsaccessgraphicscaptureprogrammatic, letappsaccessgraphicscapturewithoutborder, letappsaccesshumanpresence, letappsaccesslocation, letappsaccessmessaging, letappsaccessmicrophone, letappsaccessmotion, letappsaccessnotifications, letappsaccessphone, letappsaccessradios, letappssyncwithdevices, letappsaccesstasks, letappsaccesstrusteddevices, letappsruninbackground, letappsgetdiagnosticinfo, letappsaccessgazeinput, letappsactivatewithvoice, letappsactivatewithvoiceabovelock, letappsaccessbackgroundspatialperception |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 28 audit token(s) in win-config. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/assets/maps.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17177,10 +22498,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-appprivacy-admx` | `official-doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -17237,6 +22558,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `appcompat-composite` | `Composite: AppCompat policy bundle + Application Experience task bundle` | `CompositeState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable application compatibility |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17251,11 +22590,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `policy-subrecord` | `repo-doc` | Existing AppCompat policy review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json | `high` | behavior, risk |
-| `tasks-subrecord` | `repo-doc` | Application Experience task review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json | `medium` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `policy-subrecord` | `repo-doc` | `Current repo docs` | Existing AppCompat policy review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json | `high` | behavior, risk |
+| `tasks-subrecord` | `repo-doc` | `Current repo docs` | Application Experience task review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json | `medium` | behavior, risk |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -17305,6 +22644,18 @@ Blocking issues:
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | App implementation unchanged. See child records for current implementation details and evidence mapping. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -17318,9 +22669,9 @@ Blocking issues:
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `split-audit` | `repo-doc` | Split audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `split-audit` | `repo-doc` | `Current repo docs` | Split audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
 
 **Validation proof**
 
@@ -17373,6 +22724,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `app-experience-task-bundle` | `\Microsoft\Windows\Application Experience\*` | `EnabledState` | `disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -17387,9 +22750,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
 
 **Validation proof**
 
@@ -17445,6 +22808,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ceip-bundle` | `Composite: AppV CEIP + SQMClient Windows + Messenger Client` | `BundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable ceip |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17459,9 +22840,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider CEIP bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CEIP bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17520,6 +22901,24 @@ Current write(s):
 | `cdp-user-channel-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CDP` | `CdpSessionUserAuthzPolicy` | `0` | `value` |  |
 | `cdp-user-channel-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CDP\SettingsPage` | `RomeSdkChannelUserAuthzPolicy` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+
 **Targets**
 
 **Windows defaults**
@@ -17534,14 +22933,14 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c | `medium` | path, value, behavior |
-| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv | `low` | behavior, version-scope |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c | `medium` | path, value, behavior |
+| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv | `low` | behavior, version-scope |
 
 **Validation proof**
 
@@ -17597,6 +22996,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `helppane-binary` | `C:\Windows\System32\HelpPane.exe` | `RenameState` | `renamed-disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable f1 help |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17611,9 +23028,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17669,6 +23086,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `inking-typing-bundle` | `Composite: TextInput + WindowsInkWorkspace` | `BundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, textinput, allowlinguisticdatacollection, windowsinkworkspace, allowsuggestedappsinwindowsinkworkspace, allowwindowsinkworkspace |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 6 audit token(s) in win-config. |
+| win-registry / records/CV-Policies.txt | https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt | Matched 3 audit token(s) in win-registry. |
+| win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17683,10 +23120,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider typing and ink bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-privacy-verified-inking-typing` | `repo-doc` | Repo privacy docs for inking and typing personalization | Docs/privacy/privacy.md | `high` | path, value, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider typing and ink bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-privacy-verified-inking-typing` | `repo-doc` | `Current repo docs` | Repo privacy docs for inking and typing personalization | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -17742,6 +23179,24 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-composite` | `Composite: Offline Files policy + services + tasks + Sync Center binary` | `CompositeState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable offline files |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -17756,10 +23211,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -17815,6 +23270,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `mobsync-binary` | `C:\Windows\System32\mobsync.exe` | `RenameState` | `renamed-disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -17829,9 +23296,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
 
 **Validation proof**
 
@@ -17887,6 +23354,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-services` | `CSC;CscService` | `StartMode` | `disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -17901,11 +23380,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | Current privacy provider service bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
-| `repo-privacy-verified-offline-files` | `repo-doc` | Repo privacy docs for Offline Files service hardening | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider service bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `repo-privacy-verified-offline-files` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files service hardening | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -17961,6 +23440,18 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-task-bundle` | `\Microsoft\Windows\Offline Files\*` | `EnabledState` | `disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -17975,11 +23466,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
-| `repo-privacy-offline-files-tasks` | `repo-doc` | Repo privacy docs for Offline Files scheduled tasks | Docs/privacy/privacy.md | `high` | path, value, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `repo-privacy-offline-files-tasks` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files scheduled tasks | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -18029,6 +23520,18 @@ Blocking issues:
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Windows defaults**
@@ -18042,9 +23545,9 @@ Blocking issues:
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Reserved Storage duplicate retirement audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Reserved Storage duplicate retirement audit trail | Docs/tweaks/research/records/ | `high` | app-mismatch |
 
 **Validation proof**
 
@@ -18097,6 +23600,27 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sleepstudy-diagnostic-bundle` | `Composite: WINEVT power and sleep diagnostic channels` | `BundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | winevt, channels, sleepstudy, diagnostic, enabled, kernel, processor, power, usermodepowerservice |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 9 audit token(s) in win-config. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Matched 6 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 6 audit token(s) in win-registry. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
 **Targets**
 
 **Windows defaults**
@@ -18111,9 +23635,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider sleep-study diagnostics bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider sleep-study diagnostics bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18169,6 +23693,25 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `cdm-suggestions-bundle` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-* bundle` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -18183,10 +23726,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider CDM suggestions bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-privacy-verified-suggestions` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestion IDs | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CDM suggestions bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-privacy-verified-suggestions` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestion IDs | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -18245,6 +23788,25 @@ Current write(s):
 | `content-delivery-manager-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-353694Enabled` | `0` | `value` |  |
 | `content-delivery-manager-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-353696Enabled` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 1 audit token(s) in win-config. |
+
 **Targets**
 
 **Windows defaults**
@@ -18262,16 +23824,16 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-settings` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-settings` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `repo-privacy-verified-suggestions-cdm` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestions | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `repo-privacy-verified-suggestions-cdm` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestions | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -18327,6 +23889,26 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wmplayer-preferences-bundle` | `HKCU\Software\Microsoft\MediaPlayer\Preferences` | `PreferenceBundleState` | `current-app-profile` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, regkit |
+| Matched tokens | mediaplayer, preferences |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / visibility/desc.md | https://github.com/nohuto/win-config/blob/main/visibility/desc.md | Matched 1 audit token(s) in win-config. |
+| regkit / README.md | https://github.com/nohuto/regkit/blob/main/README.md | Matched 1 audit token(s) in regkit. |
+
 **Targets**
 
 **Windows defaults**
@@ -18341,9 +23923,9 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | Current privacy provider Windows Media Player bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider Windows Media Player bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18403,6 +23985,32 @@ Current write(s):
 | `hvci-mode` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard` | `HypervisorEnforcedCodeIntegrity` | `0` | `value` |  |
 | `credential-guard-mode` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard` | `LsaCfgFlags` | `0` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | policies, deviceguard |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / security/assets/Windows-Defender.txt | https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt | Matched 1 audit token(s) in win-config. |
+| win-config / affinities/desc.md | https://github.com/nohuto/win-config/blob/main/affinities/desc.md | Matched 1 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18419,11 +24027,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-deviceguard-admx` | `official-doc` | Local Microsoft DeviceGuard.admx mapping | C:\Windows\PolicyDefinitions\DeviceGuard.admx | `high` | path, value, allowed-values, version-scope |
-| `local-deviceguard-adml` | `official-doc` | Local Microsoft DeviceGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\DeviceGuard.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | C:\Windows\PolicyDefinitions\DeviceGuard.admx | `high` | path, value, allowed-values, version-scope |
+| `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\DeviceGuard.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18482,6 +24090,32 @@ Current write(s):
 | `disable-windows-update-access` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` | `DisableWindowsUpdateAccess` | `1` | `value` |  |
 | `no-auto-update` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU` | `NoAutoUpdate` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | windowsupdate, settings, pausefeatureupdatesendtime, 2030-01-01t00:00:00z, pausequalityupdatesendtime, pauseupdatesexpirytime, policies, disablewindowsupdateaccess, noautoupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 9 audit token(s) in win-config. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 3 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 2 audit token(s) in win-config. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18495,12 +24129,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -18557,6 +24191,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-wpbt-execution` | `HKLM\System\CurrentControlSet\Control\Session Manager` | `DisableWpbtExecution` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, disablewpbtexecution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / security/desc.md | https://github.com/nohuto/win-config/blob/main/security/desc.md | Matched 3 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 3 audit token(s) in win-registry. |
+| win-registry / records/Session-Manager.txt | https://github.com/nohuto/win-registry/blob/main/records/Session-Manager.txt | Matched 3 audit token(s) in win-registry. |
+| decompiled-pseudocode / ntoskrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18570,11 +24231,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dfci-wpbt` | `official-doc` | Microsoft Learn DFCI WPBT setting reference | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings | `high` | behavior, allowed-values, default |
-| `repo-security-note` | `repo-doc` | Repo security notes for WPBT | Docs/security/security.md | `medium` | path, value, app-mismatch |
-| `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dfci-wpbt` | `official-doc` | `Microsoft official doc` | Microsoft Learn DFCI WPBT setting reference | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings | `high` | behavior, allowed-values, default |
+| `repo-security-note` | `repo-doc` | `Current repo docs` | Repo security notes for WPBT | Docs/security/security.md | `medium` | path, value, app-mismatch |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18627,13 +24288,25 @@ Blocking issues:
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Duplicate retirement audit trail | Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json | `high` | ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Duplicate retirement audit trail | Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json | `high` | ui-mapping |
 
 **Validation proof**
 
@@ -18692,6 +24365,33 @@ Current write(s):
 | `siuf-dmclient-task` | `\Microsoft\Windows\Feedback\Siuf\DmClient` | `Enabled` | `Disabled` | `value` |  |
 | `queue-reporting-task` | `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | `Enabled` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | application, experience, marebackup, compatibility, appraiser, customer, improvement, program, consolidator, usbceip, diskcleanup, silentcleanup, feedback, siuf, dmclient, error, reporting, queuereporting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 18 audit token(s) in win-config. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Matched 13 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | https://github.com/nohuto/win-config/blob/main/system/assets/services.txt | Matched 7 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18712,12 +24412,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-task-scheduler` | `official-doc` | Microsoft Learn: Task Scheduler start page | https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page | `high` | behavior, version-scope |
-| `vm-task-observation` | `vm-test` | Local Windows task file observation | C:\Windows\System32\Tasks\Microsoft\Windows | `medium` | path, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, ui-mapping |
-| `repo-system-doc` | `repo-doc` | Repo notes for the scheduled-tasks bundle | Docs/system/system.md | `medium` | behavior, side-effects |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-task-scheduler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Task Scheduler start page | https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page | `high` | behavior, version-scope |
+| `vm-task-observation` | `vm-test` | `VM test / probe` | Local Windows task file observation | C:\Windows\System32\Tasks\Microsoft\Windows | `medium` | path, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, ui-mapping |
+| `repo-system-doc` | `repo-doc` | `Current repo docs` | Repo notes for the scheduled-tasks bundle | Docs/system/system.md | `medium` | behavior, side-effects |
 
 **Validation proof**
 
@@ -18769,13 +24469,25 @@ Blocking issues:
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy. |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
 **Targets**
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Duplicate retirement audit trail | Docs/tweaks/research/records/system.disable-search-highlights-policy.json | `high` | ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Duplicate retirement audit trail | Docs/tweaks/research/records/system.disable-search-highlights-policy.json | `high` | ui-mapping |
 
 **Validation proof**
 
@@ -18828,6 +24540,32 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `svchost-split-threshold` | `HKLM\SYSTEM\CurrentControlSet\Control` | `SvcHostSplitThresholdInKB` | `4294967295` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | svchostsplitthresholdinkb |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/servicesplitting-ScReadSCMConfiguration.c | https://github.com/nohuto/win-config/blob/main/system/assets/servicesplitting-ScReadSCMConfiguration.c | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18842,12 +24580,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-svchost-service-refactoring` | `official-doc` | Microsoft Learn: Service host grouping in Windows 10 | https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring | `high` | behavior, side-effects, version-scope |
-| `repo-system-doc-service-splitting` | `repo-doc` | Repo system research notes for service splitting | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | Decompiled SCM configuration reader for service splitting | Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c | `medium` | path, value, behavior |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-svchost-service-refactoring` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service host grouping in Windows 10 | https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring | `high` | behavior, side-effects, version-scope |
+| `repo-system-doc-service-splitting` | `repo-doc` | `Current repo docs` | Repo system research notes for service splitting | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled SCM configuration reader for service splitting | Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c | `medium` | path, value, behavior |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18904,6 +24642,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dwm-overlay-test-mode` | `HKLM\SOFTWARE\Microsoft\Windows\Dwm` | `OverlayTestMode` | `5` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | overlaytestmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / nvidia/desc.md | https://github.com/nohuto/win-config/blob/main/nvidia/desc.md | Matched 1 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 1 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18918,10 +24683,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dwm-registry-settings` | `official-doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `medium` | path, behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18978,6 +24743,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-overlays` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `DisableOverlays` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, disableoverlays |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-registry / assets/dxg-values/DXGADAPTER_ReadConfig.c | https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/DXGADAPTER_ReadConfig.c | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -18992,10 +24784,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19052,6 +24844,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `page-fault-debug-mode` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `PageFaultDebugMode` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, pagefaultdebugmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 2 audit token(s) in win-registry. |
+| win-registry / assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c | https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c | Matched 2 audit token(s) in win-registry. |
+| decompiled-pseudocode / dxgkrnl | https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19066,10 +24885,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19126,6 +24945,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `adjust-dpc-threshold` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `AdjustDpcThreshold` | `20` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, adjustdpcthreshold |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19140,10 +24986,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19200,6 +25046,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `cache-aware-scheduling` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `CacheAwareScheduling` | `47` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, cacheawarescheduling |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19214,10 +25087,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19274,6 +25147,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `default-dynamic-hetero-cpu-policy` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DefaultDynamicHeteroCpuPolicy` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, defaultdynamicheterocpupolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19288,12 +25188,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-scheduling-policy` | `official-doc` | Microsoft Learn: SchedulingPolicy | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy | `high` | value, behavior, version-scope |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `nohuto-session-manager-quota` | `registry-observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-scheduling-policy` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SchedulingPolicy | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy | `high` | value, behavior, version-scope |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19350,6 +25250,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-low-qos-timer-resolution` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DisableLowQosTimerResolution` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, disablelowqostimerresolution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19364,12 +25291,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-timebeginperiod` | `official-doc` | Microsoft Learn: timeBeginPeriod function | https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod | `high` | behavior, side-effects, version-scope |
-| `ms-timer-resolution` | `official-doc` | Microsoft Learn: Timer Resolution | https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution | `high` | behavior, side-effects, version-scope |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-timebeginperiod` | `official-doc` | `Microsoft official doc` | Microsoft Learn: timeBeginPeriod function | https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod | `high` | behavior, side-effects, version-scope |
+| `ms-timer-resolution` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Timer Resolution | https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution | `high` | behavior, side-effects, version-scope |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19426,6 +25353,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dpc-queue-depth` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DpcQueueDepth` | `4` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, dpcqueuedepth |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19440,10 +25394,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19500,6 +25454,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dpc-watchdog-period` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DpcWatchdogPeriod` | `120000` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, dpcwatchdogperiod |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19514,12 +25495,12 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-dpc-watchdog-information` | `official-doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation | `high` | behavior, side-effects, version-scope |
-| `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems | `high` | behavior, side-effects, risk |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-dpc-watchdog-information` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation | `high` | behavior, side-effects, version-scope |
+| `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems | `high` | behavior, side-effects, risk |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19576,6 +25557,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ideal-dpc-rate` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `IdealDpcRate` | `20` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, idealdpcrate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19590,10 +25598,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19650,6 +25658,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `minimum-dpc-rate` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `MinimumDpcRate` | `3` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, minimumdpcrate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19664,10 +25699,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19724,6 +25759,33 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `serialize-timer-expiration` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `SerializeTimerExpiration` | `1` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, serializetimerexpiration |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 4 audit token(s) in win-config. |
+| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
+| win-config / system/assets/disable-services-drivers-suboption-audit.md | https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md | Matched 3 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19738,10 +25800,10 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19798,6 +25860,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printdeviceconfigurationservice-start-mode` | `PrintDeviceConfigurationService` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19812,11 +25899,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-printdeviceconfigurationservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, side-effects, version-scope |
-| `local-scm-printdeviceconfigurationservice-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintDeviceConfigurationService | Docs/tweaks/research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-printdeviceconfigurationservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, side-effects, version-scope |
+| `local-scm-printdeviceconfigurationservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintDeviceConfigurationService | Docs/tweaks/research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19873,6 +25960,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printscanbrokerservice-start-mode` | `PrintScanBrokerService` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19887,11 +25999,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-printscanbrokerservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, version-scope |
-| `local-scm-printscanbrokerservice-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintScanBrokerService | Docs/tweaks/research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-printscanbrokerservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, version-scope |
+| `local-scm-printscanbrokerservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintScanBrokerService | Docs/tweaks/research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19948,6 +26060,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printworkflowusersvc-start-mode` | `PrintWorkflowUserSvc_*` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -19962,11 +26099,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-printworkflowusersvc` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Workflow Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `local-scm-printworkflowusersvc-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintWorkflowUserSvc instance | Docs/tweaks/research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-printworkflowusersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Workflow Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `local-scm-printworkflowusersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintWorkflowUserSvc instance | Docs/tweaks/research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20022,6 +26159,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sysmain-start-mode` | `SysMain` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -20036,11 +26198,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-sysmain` | `official-doc` | Microsoft Learn: Guidance on configuring system services - SysMain | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `local-scm-sysmain-2026-03-14` | `repo-doc` | Local SCM snapshot - SysMain | Docs/tweaks/research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-sysmain` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - SysMain | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `local-scm-sysmain-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - SysMain | Docs/tweaks/research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20096,6 +26258,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dmwappushservice-start-mode` | `dmwappushservice` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -20110,11 +26297,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-dmwappushservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, version-scope |
-| `local-scm-dmwappushservice-2026-03-14` | `repo-doc` | Local SCM snapshot - dmwappushservice | Docs/tweaks/research/notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-dmwappushservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, version-scope |
+| `local-scm-dmwappushservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - dmwappushservice | Docs/tweaks/research/notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20170,6 +26357,31 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wersvc-start-mode` | `WerSvc` | `StartMode` | `Disabled` | `value` |  |
 
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `True` |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
+
 **Targets**
 
 **Windows defaults**
@@ -20184,11 +26396,11 @@ Current write(s):
 
 **Evidence**
 
-| Evidence ID | Kind | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- |
-| `ms-iot-services-wersvc` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `local-scm-wersvc-2026-03-14` | `repo-doc` | Local SCM snapshot - WerSvc | Docs/tweaks/research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-iot-services-wersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
+| `local-scm-wersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WerSvc | Docs/tweaks/research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 

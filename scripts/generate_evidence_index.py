@@ -9,6 +9,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
+PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
 OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
 REDACTED_USER = "<USER>"
 HOME_PATH = str(Path.home())
@@ -130,7 +131,71 @@ def compact_evidence(record: dict[str, Any]) -> list[dict[str, Any]]:
                 ],
             )
         )
+        evidence[-1]["origin"] = evidence_origin(evidence[-1].get("kind"))
     return evidence
+
+
+def evidence_origin(kind: Any) -> str:
+    mapping = {
+        "official-doc": "Microsoft official doc",
+        "policy-csp": "Microsoft policy CSP",
+        "troubleshoot-doc": "Microsoft support doc",
+        "repo-code": "Current repo code",
+        "repo-doc": "Current repo docs",
+        "procmon-trace": "VM Procmon trace",
+        "runtime-diff": "VM runtime diff",
+        "vm-test": "VM test / probe",
+        "registry-observation": "VM registry observation",
+        "decompilation": "Ghidra decompilation",
+        "decompiled-pseudocode": "nohuto upstream pseudocode",
+    }
+    return mapping.get(str(kind), "unspecified")
+
+
+def load_provenance_map() -> dict[str, dict[str, Any]]:
+    if not PROVENANCE_PATH.exists():
+        return {}
+    with PROVENANCE_PATH.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    result: dict[str, dict[str, Any]] = {}
+    for entry in data.get("Entries", []) or []:
+        entry_id = entry.get("Id")
+        if entry_id:
+            result[str(entry_id)] = entry
+    return result
+
+
+def compact_reference(item: dict[str, Any]) -> dict[str, Any]:
+    return pick(item, ["Kind", "Title", "Url", "Summary"])
+
+
+def compact_provenance(record: dict[str, Any], provenance_map: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    entry = provenance_map.get(str(record.get("record_id") or record.get("tweak_id") or ""))
+    if not entry:
+        return None
+
+    references = [compact_reference(item) for item in entry.get("References", []) or []]
+    nohuto_references = [item for item in references if item.get("Kind") == "nohuto"]
+    internals_references = [item for item in references if item.get("Kind") == "internals"]
+    other_references = [item for item in references if item.get("Kind") not in {"nohuto", "internals"}]
+
+    return sanitize_value(
+        {
+            "coverage_state": entry.get("CoverageState"),
+            "has_nohuto_evidence": entry.get("HasNohutoEvidence"),
+            "has_windows_internals_context": entry.get("HasWindowsInternalsContext"),
+            "needs_review": entry.get("NeedsReview"),
+            "source_repositories": entry.get("SourceRepositories"),
+            "matched_tokens": entry.get("MatchedTokens"),
+            "lineage_note": (
+                "Nohuto references are upstream lineage / naming provenance only. "
+                "Value semantics are validated separately in the record's evidence and validation_proof blocks."
+            ),
+            "nohuto_references": nohuto_references,
+            "windows_internals_references": internals_references,
+            "other_references": other_references,
+        }
+    )
 
 
 def compact_validation_proof(record: dict[str, Any]) -> dict[str, Any] | None:
@@ -180,6 +245,7 @@ def main() -> int:
     evidence_counts: Counter[str] = Counter()
     validation_proof_missing = 0
     deprecated_without_validation_proof = 0
+    provenance_map = load_provenance_map()
 
     for path in sorted(RECORDS_DIR.glob("*.json")):
         with path.open("r", encoding="utf-8") as handle:
@@ -218,6 +284,7 @@ def main() -> int:
                 "recommended_profiles": compact_profiles(record),
                 "evidence": evidence,
                 "validation_proof": proof,
+                "provenance": compact_provenance(record, provenance_map),
             }
         )
 

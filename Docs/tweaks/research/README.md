@@ -21,6 +21,7 @@ Every record should make the following questions easy to answer:
 
 - Documentation first. A setting can be useful even when it is not yet safe to apply.
 - Provenance is mandatory. We do not ship anonymous values.
+- Nohuto may be used for naming lineage and upstream context, but not as the source of value semantics. If a record cites nohuto, say exactly which upstream file or path provided the lineage and make it clear that the value meanings still come from Microsoft docs, VM/runtime proof, or other record evidence.
 - English only. Names, notes, evidence summaries, and labels stay consistent.
 - Reverse engineering is evidence, not a final recommendation by itself.
 - AI inference alone never unlocks Apply.

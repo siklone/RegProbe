@@ -1,7 +1,8 @@
 # Evidence Manifest
 
 This manifest is the forensic companion to the evidence atlas.
-Each record includes the raw source-file SHA256 and the exact validation proof block.
+Each record includes the raw source-file SHA256, the exact validation proof block, and provenance.
+Nohuto references are lineage / naming provenance only; value semantics remain sourced from the record evidence and validation proof.
 
 ## Summary
 
@@ -322,9 +323,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | Repo provenance for audio.disable-spatial-audio | `medium`
-- `app-audio-provider` | `repo-code` | Current app implementation | `high`
-- `guest-audio-string-scan` | `vm-test` | Guest string scan for spatial-audio registry contract | `low`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-spatial-audio | `medium` |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | `low` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | audio, disablespatialonlowlatency |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/Audio.txt | `https://github.com/nohuto/win-registry/blob/main/records/Audio.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -355,8 +376,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-provenance-audio-disable-system-sounds` | `repo-doc` | Repo provenance for audio.disable-system-sounds | `medium`
-- `app-audio-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-provenance-audio-disable-system-sounds` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-system-sounds | `medium` |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | appevents, schemes, apps, systemasterisk, current, notification, reminder, close, criticalbatteryalarm, systemhand, mailbeep, deviceconnect, devicedisconnect, devicefail, systemexclamation, lowbatteryalarm, maximize, menucommand, menupopup, messagenudge, minimize, faxbeep, mail, proximity, proximityconnection, open, printcomplete, appgpfault, systemquestion, restoredown, restoreup, ccselect, showband, systemnotification, changetheme, windowsuac, explorer, blockedpopup, activatingdocument, emptyrecyclebin, feeddiscovered, movemenuitem, securityband, navigating, sapisvr, disnumberssound, panelsound, misrecosound, huboffsound, hubonsound, hubsleepsound |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 51 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 10 audit token(s) in win-registry.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 9 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -389,8 +430,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `windows-terminal-settings-doc` | `official-doc` | Microsoft Learn: Windows Terminal settings | `medium`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | `medium` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | terminal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -421,8 +481,25 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `vs-performance-doc` | `official-doc` | Microsoft Learn: Optimize Visual Studio performance | `medium`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | `medium` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | visualstudio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -453,8 +530,25 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `vs-performance-doc` | `official-doc` | Microsoft Learn: Optimize Visual Studio performance | `medium`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | `medium` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | visualstudio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -489,9 +583,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `vscode-settings-reference` | `official-doc` | VS Code documentation: Default settings reference | `high`
-- `vscode-source-control-faq` | `official-doc` | VS Code documentation: Source Control FAQ | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | `high` |
+| `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -521,7 +634,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `duplicate-retirement-audit` | `repo-doc` | Widgets duplicate retirement audit trail | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Widgets duplicate retirement audit trail | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -559,8 +678,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-client-tuning` | `official-doc` | Microsoft Learn: Performance tuning for SMB file servers | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -594,10 +736,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-task-offload` | `official-doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | `high`
-- `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | `high` |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | tcpip, multimedia, systemprofile, networkthrottlingindex, systemresponsiveness |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 5 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 5 audit token(s) in win-registry.
+- win-registry / records/MultiMedia.txt | `https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt` | Matched 4 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -626,8 +791,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, coalescingtimerinterval, deepiocoalescingenabled, eventprocessorenabled, latencytoleranceparked, latencytolerancesoftparked, energyestimationenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 7 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 7 audit token(s) in win-registry.
+- win-registry / assets/power/power-symbols.txt | `https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt` | Matched 5 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+- win-config / power/desc.md#power-values | `https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values` | Documents the base power-manager values used by this tweak.
+- win-config / power/desc.md#disable-timer-coalescing | `https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-timer-coalescing` | Documents timer coalescing and deep IO coalescing behavior.
+- win-config / power/desc.md#disable-energy-estimation | `https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-energy-estimation` | Documents the EnergyEstimationEnabled field used by this tweak.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -657,8 +848,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-appprivacy-admx` | `official-doc` | Microsoft AppPrivacy administrative template | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider broad deny bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, allowuserinfoaccess, appprivacy, letappsaccessaccountinfo, letappsaccesscalendar, letappsaccesscallhistory, letappsaccesscamera, letappsaccesscontacts, letappsaccessemail, letappsaccessgraphicscaptureprogrammatic, letappsaccessgraphicscapturewithoutborder, letappsaccesshumanpresence, letappsaccesslocation, letappsaccessmessaging, letappsaccessmicrophone, letappsaccessmotion, letappsaccessnotifications, letappsaccessphone, letappsaccessradios, letappssyncwithdevices, letappsaccesstasks, letappsaccesstrusteddevices, letappsruninbackground, letappsgetdiagnosticinfo, letappsaccessgazeinput, letappsactivatewithvoice, letappsactivatewithvoiceabovelock, letappsaccessbackgroundspatialperception |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 28 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -688,9 +898,26 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `policy-subrecord` | `repo-doc` | Existing AppCompat policy review record | `high`
-- `tasks-subrecord` | `repo-doc` | Application Experience task review record | `medium`
-- `app-privacy-provider` | `repo-code` | Current privacy provider composite | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `policy-subrecord` | `repo-doc` | `Current repo docs` | Existing AppCompat policy review record | `high` |
+| `tasks-subrecord` | `repo-doc` | `Current repo docs` | Application Experience task review record | `medium` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable application compatibility |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -720,7 +947,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `split-audit` | `repo-doc` | Split audit trail | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `split-audit` | `repo-doc` | `Current repo docs` | Split audit trail | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -751,7 +984,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -781,7 +1020,24 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider CEIP bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CEIP bundle | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable ceip |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -817,12 +1073,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-grouppolicy-enablecdp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | `high`
-- `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | `high`
-- `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | `medium`
-- `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | `low`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | `high` |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | `high` |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | `medium` |
+| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | `low` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -852,7 +1125,24 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider file rename | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable f1 help |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -882,8 +1172,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider typing and ink bundle | `high`
-- `repo-privacy-verified-inking-typing` | `repo-doc` | Repo privacy docs for inking and typing personalization | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider typing and ink bundle | `high` |
+| `repo-privacy-verified-inking-typing` | `repo-doc` | `Current repo docs` | Repo privacy docs for inking and typing personalization | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, textinput, allowlinguisticdatacollection, windowsinkworkspace, allowsuggestedappsinwindowsinkworkspace, allowwindowsinkworkspace |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 6 audit token(s) in win-config.
+- win-registry / records/CV-Policies.txt | `https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -913,8 +1222,25 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider composite | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable offline files |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -944,7 +1270,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider file rename | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -974,9 +1306,15 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider service bundle | `high`
-- `repo-privacy-verified-offline-files` | `repo-doc` | Repo privacy docs for Offline Files service hardening | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider service bundle | `high` |
+| `repo-privacy-verified-offline-files` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files service hardening | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -1006,9 +1344,15 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | `high`
-- `repo-privacy-offline-files-tasks` | `repo-doc` | Repo privacy docs for Offline Files scheduled tasks | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | `high` |
+| `repo-privacy-offline-files-tasks` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files scheduled tasks | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -1038,7 +1382,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `duplicate-retirement-audit` | `repo-doc` | Reserved Storage duplicate retirement audit trail | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Reserved Storage duplicate retirement audit trail | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -1068,7 +1418,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider sleep-study diagnostics bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider sleep-study diagnostics bundle | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | winevt, channels, sleepstudy, diagnostic, enabled, kernel, processor, power, usermodepowerservice |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 9 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 6 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 6 audit token(s) in win-registry.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
 
 **Validation proof**
 
@@ -1098,8 +1468,26 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider CDM suggestions bundle | `high`
-- `repo-privacy-verified-suggestions` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestion IDs | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CDM suggestions bundle | `high` |
+| `repo-privacy-verified-suggestions` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestion IDs | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -1142,14 +1530,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high`
-- `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high`
-- `local-cloudcontent-admx-settings` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | `high`
-- `local-cloudcontent-adml-settings` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | `high`
-- `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | `high`
-- `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-privacy-verified-suggestions-cdm` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestions | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high` |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high` |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | `high` |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | `high` |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | `high` |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-privacy-verified-suggestions-cdm` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestions | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -1179,7 +1585,26 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `app-privacy-provider` | `repo-code` | Current privacy provider Windows Media Player bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider Windows Media Player bundle | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, regkit |
+| Matched tokens | mediaplayer, preferences |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
+- regkit / README.md | `https://github.com/nohuto/regkit/blob/main/README.md` | Matched 1 audit token(s) in regkit.
 
 **Validation proof**
 
@@ -1222,9 +1647,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-deviceguard-admx` | `official-doc` | Local Microsoft DeviceGuard.admx mapping | `high`
-- `local-deviceguard-adml` | `official-doc` | Local Microsoft DeviceGuard.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | `high` |
+| `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, deviceguard |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1257,10 +1704,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | `high`
-- `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | `high`
-- `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | `high` |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | `high` |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | windowsupdate, settings, pausefeatureupdatesendtime, 2030-01-01t00:00:00z, pausequalityupdatesendtime, pauseupdatesexpirytime, policies, disablewindowsupdateaccess, noautoupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 9 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1291,9 +1760,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dfci-wpbt` | `official-doc` | Microsoft Learn DFCI WPBT setting reference | `high`
-- `repo-security-note` | `repo-doc` | Repo security notes for WPBT | `medium`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dfci-wpbt` | `official-doc` | `Microsoft official doc` | Microsoft Learn DFCI WPBT setting reference | `high` |
+| `repo-security-note` | `repo-doc` | `Current repo docs` | Repo security notes for WPBT | `medium` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, disablewpbtexecution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 3 audit token(s) in win-registry.
+- win-registry / records/Session-Manager.txt | `https://github.com/nohuto/win-registry/blob/main/records/Session-Manager.txt` | Matched 3 audit token(s) in win-registry.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1320,7 +1812,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `duplicate-retirement-audit` | `repo-doc` | Duplicate retirement audit trail | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Duplicate retirement audit trail | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -1368,10 +1866,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-task-scheduler` | `official-doc` | Microsoft Learn: Task Scheduler start page | `high`
-- `vm-task-observation` | `vm-test` | Local Windows task file observation | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-system-doc` | `repo-doc` | Repo notes for the scheduled-tasks bundle | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-task-scheduler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Task Scheduler start page | `high` |
+| `vm-task-observation` | `vm-test` | `VM test / probe` | Local Windows task file observation | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-system-doc` | `repo-doc` | `Current repo docs` | Repo notes for the scheduled-tasks bundle | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | application, experience, marebackup, compatibility, appraiser, customer, improvement, program, consolidator, usbceip, diskcleanup, silentcleanup, feedback, siuf, dmclient, error, reporting, queuereporting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 18 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 13 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 7 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1398,7 +1919,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `duplicate-retirement-audit` | `repo-doc` | Duplicate retirement audit trail | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Duplicate retirement audit trail | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -1428,10 +1955,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-svchost-service-refactoring` | `official-doc` | Microsoft Learn: Service host grouping in Windows 10 | `high`
-- `repo-system-doc-service-splitting` | `repo-doc` | Repo system research notes for service splitting | `medium`
-- `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | Decompiled SCM configuration reader for service splitting | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-svchost-service-refactoring` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service host grouping in Windows 10 | `high` |
+| `repo-system-doc-service-splitting` | `repo-doc` | `Current repo docs` | Repo system research notes for service splitting | `medium` |
+| `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled SCM configuration reader for service splitting | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | svchostsplitthresholdinkb |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/servicesplitting-ScReadSCMConfiguration.c | `https://github.com/nohuto/win-config/blob/main/system/assets/servicesplitting-ScReadSCMConfiguration.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1462,8 +2011,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dwm-registry-settings` | `official-doc` | Microsoft Learn: DWM Registry Settings | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | overlaytestmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / nvidia/desc.md | `https://github.com/nohuto/win-config/blob/main/nvidia/desc.md` | Matched 1 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 1 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1494,8 +2066,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: TDR Registry Keys | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, disableoverlays |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-registry / assets/dxg-values/DXGADAPTER_ReadConfig.c | `https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/DXGADAPTER_ReadConfig.c` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1526,8 +2121,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: TDR Registry Keys | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, pagefaultdebugmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-registry / assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c | `https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1558,8 +2176,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, adjustdpcthreshold |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1590,8 +2231,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, cacheawarescheduling |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1622,10 +2286,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-scheduling-policy` | `official-doc` | Microsoft Learn: SchedulingPolicy | `high`
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `nohuto-session-manager-quota` | `registry-observation` | nohuto Session Manager quota-system trace | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-scheduling-policy` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SchedulingPolicy | `high` |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, defaultdynamicheterocpupolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1656,10 +2343,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-timebeginperiod` | `official-doc` | Microsoft Learn: timeBeginPeriod function | `high`
-- `ms-timer-resolution` | `official-doc` | Microsoft Learn: Timer Resolution | `high`
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-timebeginperiod` | `official-doc` | `Microsoft official doc` | Microsoft Learn: timeBeginPeriod function | `high` |
+| `ms-timer-resolution` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Timer Resolution | `high` |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, disablelowqostimerresolution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1690,8 +2400,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, dpcqueuedepth |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1722,10 +2455,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dpc-watchdog-information` | `official-doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | `high`
-- `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | `high`
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dpc-watchdog-information` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | `high` |
+| `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | `high` |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, dpcwatchdogperiod |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1756,8 +2512,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, idealdpcrate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1788,8 +2567,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, minimumdpcrate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1820,8 +2622,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, serializetimerexpiration |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1851,9 +2676,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-printdeviceconfigurationservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service | `medium`
-- `local-scm-printdeviceconfigurationservice-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintDeviceConfigurationService | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-printdeviceconfigurationservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service | `medium` |
+| `local-scm-printdeviceconfigurationservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintDeviceConfigurationService | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1883,9 +2729,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-printscanbrokerservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service | `medium`
-- `local-scm-printscanbrokerservice-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintScanBrokerService | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-printscanbrokerservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service | `medium` |
+| `local-scm-printscanbrokerservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintScanBrokerService | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1916,9 +2783,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-printworkflowusersvc` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Workflow Service | `high`
-- `local-scm-printworkflowusersvc-2026-03-14` | `repo-doc` | Local SCM snapshot - PrintWorkflowUserSvc instance | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-printworkflowusersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Workflow Service | `high` |
+| `local-scm-printworkflowusersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintWorkflowUserSvc instance | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1948,9 +2836,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-sysmain` | `official-doc` | Microsoft Learn: Guidance on configuring system services - SysMain | `high`
-- `local-scm-sysmain-2026-03-14` | `repo-doc` | Local SCM snapshot - SysMain | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-sysmain` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - SysMain | `high` |
+| `local-scm-sysmain-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - SysMain | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -1980,9 +2889,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-dmwappushservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service | `high`
-- `local-scm-dmwappushservice-2026-03-14` | `repo-doc` | Local SCM snapshot - dmwappushservice | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-dmwappushservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service | `high` |
+| `local-scm-dmwappushservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - dmwappushservice | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2012,9 +2942,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-wersvc` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service | `high`
-- `local-scm-wersvc-2026-03-14` | `repo-doc` | Local SCM snapshot - WerSvc | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-wersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service | `high` |
+| `local-scm-wersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WerSvc | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2045,10 +2996,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-services-registry-tree` | `official-doc` | HKLM\\SYSTEM\\CurrentControlSet\\Services Registry Tree | `high`
-- `runtime-beep-registry-diff` | `runtime-diff` | Guest reversible probe - Beep driver start mode | `high`
-- `app-audio-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-audio-disable-beep` | `repo-doc` | Repo provenance for audio.disable-beep | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\\SYSTEM\\CurrentControlSet\\Services Registry Tree | `high` |
+| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | `high` |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-beep | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | beep, start |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -2079,8 +3050,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | `high`
-- `app-audio-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | `high` |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | multimedia, audio, devicecpl, showdisconnecteddevices |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -2111,8 +3102,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | `high`
-- `app-audio-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | `high` |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | multimedia, audio, devicecpl, showhiddendevices |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -2143,11 +3154,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dism-reserved-storage` | `official-doc` | Microsoft Learn: DISM Reserved Storage Command-line Options | `high`
-- `ms-dism-reserved-storage-api` | `official-doc` | Microsoft Learn: DismGetReservedStorageState function | `high`
-- `engine-cleanup-command-tweak` | `repo-code` | Current cleanup command implementation | `high`
-- `local-dism-detect` | `vm-test` | Local DISM detect run for Reserved Storage state | `high`
-- `repo-reserve-manager-side-effect` | `repo-doc` | Repo Procmon note for Reserved Storage side effect | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dism-reserved-storage` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DISM Reserved Storage Command-line Options | `high` |
+| `ms-dism-reserved-storage-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DismGetReservedStorageState function | `high` |
+| `engine-cleanup-command-tweak` | `repo-code` | `Current repo code` | Current cleanup command implementation | `high` |
+| `local-dism-detect` | `vm-test` | `VM test / probe` | Local DISM detect run for Reserved Storage state | `high` |
+| `repo-reserve-manager-side-effect` | `repo-doc` | `Current repo docs` | Repo Procmon note for Reserved Storage side effect | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable reserved storage |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2179,9 +3207,15 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `docker-settings-file-doc` | `official-doc` | Docker Docs: Change your Docker Desktop settings | `high`
-- `docker-wsl-backend-doc` | `official-doc` | Docker Docs: Docker Desktop WSL 2 backend on Windows | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `docker-settings-file-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Change your Docker Desktop settings | `high` |
+| `docker-wsl-backend-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Docker Desktop WSL 2 backend on Windows | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -2212,9 +3246,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | `high`
-- `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | `high` |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2244,8 +3297,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/FileSystem.txt | `https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2275,10 +3347,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `node-cli-node-options` | `official-doc` | Node.js CLI documentation: NODE_OPTIONS | `high`
-- `node-cli-max-old-space-size` | `official-doc` | Node.js CLI documentation: --max-old-space-size | `high`
-- `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `node-cli-node-options` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: NODE_OPTIONS | `high` |
+| `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | `high` |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
 
 **Validation proof**
 
@@ -2310,9 +3402,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-powershell-executionpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | `high`
-- `local-powershell-executionpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | `high` |
+| `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, powershell, executionpolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2344,11 +3455,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `python-using-windows-doc` | `official-doc` | Python documentation: Using Python on Windows | `high`
-- `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | `high`
-- `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | `high`
-- `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `python-using-windows-doc` | `official-doc` | `Microsoft official doc` | Python documentation: Using Python on Windows | `high` |
+| `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | `high` |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | `high` |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/FileSystem.txt | `https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2379,9 +3509,23 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-run-registry-keys` | `official-doc` | Run and RunOnce Registry Keys | `high`
-- `openssh-ssh-agent-doc` | `official-doc` | OpenSSH manual: ssh-agent | `medium`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | `high` |
+| `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | `medium` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | unmapped |
+| Has nohuto evidence | False |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 **Validation proof**
 
@@ -2412,10 +3556,24 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-enable-device-for-development` | `official-doc` | Microsoft Learn: Enable your device for development | `high`
-- `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | `high`
-- `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | `high`
-- `app-developer-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | `high` |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | `high` |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | `high` |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | unmapped |
+| Has nohuto evidence | False |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 **Validation proof**
 
@@ -2446,7 +3604,13 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-wsl-config` | `official-doc` | Microsoft Learn: Advanced settings configuration in WSL | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-wsl-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Advanced settings configuration in WSL | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -2477,8 +3641,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-low-disk-warning-article` | `official-doc` | Microsoft Learn troubleshooting article for low disk space warnings | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-registry, win-config |
+| Matched tokens | policies, explorer, nolowdiskspacechecks |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-registry / records/CV-Policies.txt | `https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2511,10 +3694,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-configure-chat-icon` | `policy-csp` | Microsoft Policy CSP: Experience / ConfigureChatIcon | `high`
-- `local-taskbar-admx-chat` | `official-doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | `high`
-- `local-taskbar-adml-chat` | `official-doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-configure-chat-icon` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Experience / ConfigureChatIcon | `high` |
+| `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | `high` |
+| `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, chat |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2545,8 +3747,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-registry, win-config |
+| Matched tokens | explorer, advanced, usecompactmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-registry / records/CV-Explorer.txt | `https://github.com/nohuto/win-registry/blob/main/records/CV-Explorer.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2577,9 +3798,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high`
-- `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high` |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2610,9 +3850,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-gppref-global-folder-options` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptions | `high`
-- `repo-provenance-explorer-show-full-path` | `repo-doc` | Repo provenance for explorer.show-full-path | `medium`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | `high` |
+| `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo provenance for explorer.show-full-path | `medium` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, cabinetstate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2643,9 +3902,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high`
-- `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high` |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced, hidden |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2676,9 +3954,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | `high`
-- `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | `high` |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced, taskbaral |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -2709,9 +4006,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-ncsi-icm-admx` | `official-doc` | Microsoft administrative template for NCSI active probing | `high`
-- `ms-ncsi-icm-adml` | `official-doc` | Microsoft help text for NCSI active probing policy | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | `high` |
+| `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, networkconnectivitystatusindicator, noactiveprobe |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2746,10 +4065,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-remove-admin-shares` | `official-doc` | Microsoft Learn: remove administrative shares | `high`
-- `ms-admin-shares-missing` | `official-doc` | Microsoft Learn: administrative shares are missing | `high`
-- `ms-mss-autosharewks` | `policy-csp` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | `medium`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-remove-admin-shares` | `official-doc` | `Microsoft official doc` | Microsoft Learn: remove administrative shares | `high` |
+| `ms-admin-shares-missing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: administrative shares are missing | `high` |
+| `ms-mss-autosharewks` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | `medium` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver, autoshareserver, autosharewks |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -2781,8 +4123,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disabledcomponents, tcpip6 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2813,10 +4177,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | `high`
-- `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-llmnr` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | `high` |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablemulticast |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2851,13 +4237,35 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-lltd-admx` | `official-doc` | Microsoft administrative template for LLTD Mapper I/O | `high`
-- `ms-lltd-adml` | `official-doc` | Microsoft help text for LLTD Mapper I/O policy | `high`
-- `ms-lltd-responder-admx` | `official-doc` | Microsoft administrative template for LLTD Responder | `high`
-- `ms-lltd-responder-adml` | `official-doc` | Microsoft help text for LLTD Responder policy | `high`
-- `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | `high`
-- `ms-lltd-disconnect-kb` | `official-doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | `medium`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | `high` |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | `high` |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | `high` |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | `high` |
+| `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | `high` |
+| `ms-lltd-disconnect-kb` | `official-doc` | `Microsoft official doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | `medium` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2888,9 +4296,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dnsclient-mdns-admx` | `official-doc` | Microsoft administrative template for mDNS | `high`
-- `ms-dnsclient-mdns-adml` | `official-doc` | Microsoft help text for mDNS policy | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | `high` |
+| `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablemdns |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2922,12 +4352,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-netbios-wmi` | `official-doc` | Microsoft WMI: SetTcpipNetbios method | `high`
-- `ms-netbios-unattend` | `official-doc` | Microsoft unattended setup: NetbiosOptions | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `engine-network-command-tweak` | `repo-code` | Command-backed NetBIOS implementation | `high`
-- `local-netbios-cim-detect` | `vm-test` | Local read-only CIM detect run for NetBIOS over TCP/IP | `high`
-- `repo-provenance-netbios` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-netbios-wmi` | `official-doc` | `Microsoft official doc` | Microsoft WMI: SetTcpipNetbios method | `high` |
+| `ms-netbios-unattend` | `official-doc` | `Microsoft official doc` | Microsoft unattended setup: NetbiosOptions | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed NetBIOS implementation | `high` |
+| `local-netbios-cim-detect` | `vm-test` | `VM test / probe` | Local read-only CIM detect run for NetBIOS over TCP/IP | `high` |
+| `repo-provenance-netbios` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | disable, netbios, over, disables, enabled, adapters, using, interface, surface, documented |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 9 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 10 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 8 audit token(s) in win-registry.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2960,10 +4412,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | `medium`
-- `local-dnsclient-netbios-admx` | `official-doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-netbios-resolution` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | `medium` |
+| `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, enablenetbios |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -2994,9 +4468,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-plaintext-smb-password-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | `high`
-- `ms-sceregvl-plaintext-smb-password` | `official-doc` | Local Microsoft security metadata: sceregvl.inf | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | `high` |
+| `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation, enableplaintextpassword |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3027,10 +4524,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dnsclient-policy-csp` | `policy-csp` | Microsoft ADMX_DnsClient Policy CSP | `high`
-- `local-dnsclient-admx` | `official-doc` | Local Microsoft DnsClient.admx mapping | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-smart-name-resolution` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | `high` |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dnsclient, disablesmartnameresolution |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3062,9 +4581,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-disable-enable` | `official-doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-smb1` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, smb1 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/LanmanServer.txt | `https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3095,8 +4636,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-protocol-toggle` | `official-doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-protocol-toggle` | `official-doc` | `Microsoft official doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver, smb2 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3127,9 +4690,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-wifisense-admx` | `official-doc` | Microsoft administrative template for Wi-Fi Sense policy | `high`
-- `ms-wifisense-adml` | `official-doc` | Microsoft help text for Wi-Fi Sense policy | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | `high` |
+| `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | wcmsvc, wifinetworkmanager, config, autoconnectallowedoem |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3161,9 +4746,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-lltd-responder-admx` | `official-doc` | Microsoft administrative template for LLTD Responder | `high`
-- `ms-lltd-responder-adml` | `official-doc` | Microsoft help text for LLTD Responder policy | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | `high` |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd, enablerspndr |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3195,9 +4802,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-lltd-admx` | `official-doc` | Microsoft administrative template for LLTD Mapper I/O | `high`
-- `ms-lltd-adml` | `official-doc` | Microsoft help text for LLTD Mapper I/O policy | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | `high` |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lltd, enablelltdio |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / network/assets/QoS-Policy.ps1 | `https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3229,8 +4858,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-ipv6-config` | `official-doc` | Microsoft Learn: Configure IPv6 in Windows | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disabledcomponents, tcpip6 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3263,9 +4914,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-ntlm-client-security-policy` | `policy-csp` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | `high`
-- `local-sceregvl-ntlm-min-client-sec` | `official-doc` | Local Windows sceregvl NTLMMinClientSec metadata | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-ntlm-client-security-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | `high` |
+| `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | ntlmminclientsec |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-registry / records/Lsa.txt | `https://github.com/nohuto/win-registry/blob/main/records/Lsa.txt` | Matched 1 audit token(s) in win-registry.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3296,11 +4968,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smbserver-class` | `official-doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | `high`
-- `ms-slow-smb-leasing` | `official-doc` | Microsoft Learn: slow SMB file transfer guidance for leasing | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `engine-network-command-tweak` | `repo-code` | Command-backed SMB leasing implementation | `high`
-- `local-smb-leasing-detect` | `vm-test` | Local read-only SMB leasing detect run | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | `high` |
+| `ms-slow-smb-leasing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: slow SMB file transfer guidance for leasing | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB leasing implementation | `high` |
+| `local-smb-leasing-detect` | `vm-test` | `VM test / probe` | Local read-only SMB leasing detect run | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3331,8 +5024,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-file-server-performance` | `official-doc` | Microsoft performance tuning for SMB file servers | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-file-server-performance` | `official-doc` | `Microsoft official doc` | Microsoft performance tuning for SMB file servers | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation, disablelargemtu |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3365,12 +5081,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-manage-smb-multichannel` | `official-doc` | Microsoft Learn: Manage SMB Multichannel | `high`
-- `ms-smbclient-setconfiguration` | `official-doc` | Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration | `high`
-- `ms-smbserver-class` | `official-doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
-- `engine-network-command-tweak` | `repo-code` | Command-backed SMB Multichannel implementation | `high`
-- `local-smb-multichannel-detect` | `vm-test` | Local read-only SMB Multichannel detect run | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-manage-smb-multichannel` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage SMB Multichannel | `high` |
+| `ms-smbclient-setconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration | `high` |
+| `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB Multichannel implementation | `high` |
+| `local-smb-multichannel-detect` | `vm-test` | `VM test / probe` | Local read-only SMB Multichannel detect run | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3405,11 +5142,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-lanmanworkstation-admx-quic` | `official-doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | `high`
-- `local-lanmanworkstation-adml-quic` | `official-doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | `high`
-- `local-lanmanserver-admx-quic` | `official-doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | `high`
-- `local-lanmanserver-adml-quic` | `official-doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | `high` |
+| `local-lanmanworkstation-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | `high` |
+| `local-lanmanserver-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | `high` |
+| `local-lanmanserver-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, enablesmbquic, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 3 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3441,8 +5201,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, encryptdata |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/LanmanServer.txt | `https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3484,8 +5267,14 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-client-tuning` | `official-doc` | Microsoft Learn: Performance tuning for SMB file servers | `high`
-- `app-network-provider` | `repo-code` | Current network tweak provider | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -3516,8 +5305,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-security-troubleshooting` | `official-doc` | Microsoft SMB security enhancements troubleshooting | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | lanmanserver, rejectunencryptedaccess |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/LanmanServer.txt | `https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt` | Matched 2 audit token(s) in win-registry.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3572,11 +5384,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-lanmanworkstation-admx-dialects` | `official-doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | `high`
-- `local-lanmanworkstation-adml-dialects` | `official-doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | `high`
-- `local-lanmanserver-admx-dialects` | `official-doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | `high`
-- `local-lanmanserver-adml-dialects` | `official-doc` | Local Microsoft LanmanServer.adml SMB dialect help text | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | `high` |
+| `local-lanmanworkstation-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | `high` |
+| `local-lanmanserver-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | `high` |
+| `local-lanmanserver-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB dialect help text | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, minsmb2dialect, maxsmb2dialect, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 3 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3611,9 +5446,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-signing-overview` | `official-doc` | Microsoft SMB signing overview | `high`
-- `ms-client-signing-policy` | `official-doc` | Microsoft network client: Digitally sign communications (always) | `medium`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | `high` |
+| `ms-client-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network client: Digitally sign communications (always) | `medium` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanworkstation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3648,9 +5506,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-smb-signing-overview` | `official-doc` | Microsoft SMB signing overview | `high`
-- `ms-server-signing-policy` | `official-doc` | Microsoft network server: Digitally sign communications (always) | `medium`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | `high` |
+| `ms-server-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network server: Digitally sign communications (always) | `medium` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3685,11 +5566,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-lanmanworkstation-admx-cipher-order` | `official-doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | `high`
-- `local-lanmanworkstation-adml-cipher-order` | `official-doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | `high`
-- `local-lanmanserver-admx-cipher-order` | `official-doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | `high`
-- `local-lanmanserver-adml-cipher-order` | `official-doc` | Local Microsoft LanmanServer.adml cipher suite order help text | `high`
-- `app-network-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-lanmanworkstation-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | `high` |
+| `local-lanmanworkstation-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | `high` |
+| `local-lanmanserver-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | `high` |
+| `local-lanmanserver-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml cipher suite order help text | `high` |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, lanmanworkstation, ciphersuiteorder, lanmanserver |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 3 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Windows Internals E7 Part 2 | `Docs/affinities/assets/E7-P2.pdf` | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain.
 
 **Validation proof**
 
@@ -3719,8 +5623,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-feedback-frequency` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider feedback-frequency write | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-feedback-frequency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider feedback-frequency write | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | siuf, numberofsiufinperiod, rules |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -3751,10 +5674,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | `high`
-- `local-wpn-admx-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | `high`
-- `local-wpn-adml-no-lock-screen-toast` | `official-doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | `high` |
+| `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | `high` |
+| `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notoastapplicationnotificationonlockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -3785,10 +5727,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-wpn-no-mirroring` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | `high`
-- `local-wpn-admx-no-mirroring` | `official-doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | `high`
-- `local-wpn-adml-no-mirroring` | `official-doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-mirroring` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | `high` |
+| `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | `high` |
+| `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, disallownotificationmirroring |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -3819,10 +5780,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-notifications-csp-tile` | `policy-csp` | Microsoft Policy CSP: Notifications / DisallowTileNotification | `high`
-- `local-wpn-admx-no-tile` | `official-doc` | Local Microsoft WPN.admx NoTileNotification mapping | `high`
-- `local-wpn-adml-no-tile` | `official-doc` | Local Microsoft WPN.adml NoTileNotification help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-notifications-csp-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Notifications / DisallowTileNotification | `high` |
+| `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | `high` |
+| `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notileapplicationnotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -3853,10 +5833,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-wpn-no-toast` | `policy-csp` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | `high`
-- `local-wpn-admx-no-toast` | `official-doc` | Local Microsoft WPN.admx NoToastNotification mapping | `high`
-- `local-wpn-adml-no-toast` | `official-doc` | Local Microsoft WPN.adml NoToastNotification help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-wpn-no-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | `high` |
+| `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | `high` |
+| `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, pushnotifications, notoastapplicationnotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -3887,10 +5886,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-animationinfo` | `official-doc` | Microsoft Learn: ANIMATIONINFO structure | `high`
-- `ms-systemparametersinfo-animation` | `official-doc` | Microsoft Learn: SystemParametersInfo - animation actions | `high`
-- `runtime-spi-minanimate-diff` | `runtime-diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | `high`
-- `app-performance-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-animationinfo` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ANIMATIONINFO structure | `high` |
+| `ms-systemparametersinfo-animation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - animation actions | `high` |
+| `runtime-spi-minanimate-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | `high` |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | panel, desktop, windowmetrics, minanimate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / records/ControlPanel-Desktop.txt | `https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt` | Matched 4 audit token(s) in win-registry.
+- win-config / visibility/assets/Icon-Spacing.ps1 | `https://github.com/nohuto/win-config/blob/main/visibility/assets/Icon-Spacing.ps1` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3921,9 +5943,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-systemparametersinfo-menushowdelay` | `official-doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | `high`
-- `runtime-spi-menushowdelay-diff` | `runtime-diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | `high`
-- `app-performance-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-menushowdelay` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | `high` |
+| `runtime-spi-menushowdelay-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | `high` |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | panel, desktop, menushowdelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-registry / records/ControlPanel-Desktop.txt | `https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3954,9 +5999,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | `high`
-- `app-performance-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo provenance for performance.disable-taskbar-animations | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | `high` |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo provenance for performance.disable-taskbar-animations | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / ntoskrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl` | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -3987,9 +6055,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `microsoft-learn-autoplay-handlers` | `official-doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | `high`
-- `local-autoplay-adml-remember-choice` | `official-doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | `high`
-- `app-peripheral-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | `high` |
+| `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | `high` |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, autoplayhandlers, userchosenexecutehandlers, storageonarrival, mstakenoaction, eventhandlersdefaultselection, cameraalternate, showpicturesonarrival, playdvdmovieonarrival, playenhanceddvdonarrival, handledvdburningonarrival, playdvdaudioonarrival, playblurayonarrival, handlebdburningonarrival, playcdaudioonarrival, playenhancedcdonarrival, handlecdburningonarrival, playvideocdmovieonarrival, playsupervideocdmovieonarrival, autoruninflegacyarrival |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 20 audit token(s) in win-config.
+- win-config / peripheral/assets/touch-twinui.c | `https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c` | Matched 1 audit token(s) in win-config.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4024,13 +6115,36 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-autoplay-turnoff` | `policy-csp` | Microsoft Policy CSP: AutoPlay / TurnOffAutoPlay | `high`
-- `local-autoplay-admx-turnoff` | `official-doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | `high`
-- `local-autoplay-adml-turnoff` | `official-doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | `high`
-- `ms-autoplay-non-volume` | `policy-csp` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | `high`
-- `local-autoplay-admx-non-volume` | `official-doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | `high`
-- `local-autoplay-adml-non-volume` | `official-doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | `high`
-- `app-peripheral-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-autoplay-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / TurnOffAutoPlay | `high` |
+| `local-autoplay-admx-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | `high` |
+| `local-autoplay-adml-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | `high` |
+| `ms-autoplay-non-volume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | `high` |
+| `local-autoplay-admx-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | `high` |
+| `local-autoplay-adml-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | `high` |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4061,10 +6175,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-systemparametersinfo-stickykeys` | `official-doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | `high`
-- `ms-stickykeys-struct` | `official-doc` | Microsoft Learn: STICKYKEYS structure | `high`
-- `runtime-spi-stickykeys-diff` | `runtime-diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | `high`
-- `app-peripheral-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-stickykeys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | `high` |
+| `ms-stickykeys-struct` | `official-doc` | `Microsoft official doc` | Microsoft Learn: STICKYKEYS structure | `high` |
+| `runtime-spi-stickykeys-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | `high` |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-registry, win-config, decompiled-pseudocode |
+| Matched tokens | panel, accessibility, stickykeys, flags |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-registry / records/Accessibility.txt | `https://github.com/nohuto/win-registry/blob/main/records/Accessibility.txt` | Matched 4 audit token(s) in win-registry.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4093,10 +6230,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-cpu-idle-states` | `official-doc` | Microsoft Learn: Introduction to Processor Idle States | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | `medium`
-- `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | `medium` |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, disableidlestatesatboot, idlestatetimeout, exitlatencycheckenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-registry / assets/power/power-symbols.txt | `https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt` | Matched 3 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4128,11 +6288,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-fast-startup-doc` | `official-doc` | Microsoft Fast Startup guidance for HiberbootEnabled | `high`
-- `admx-wininit-csp` | `policy-csp` | Policy CSP - ADMX_WinInit | `high`
-- `nohuto-fast-startup-asset` | `decompilation` | nohuto power asset for HiberbootEnabled research | `medium`
-- `live-registry-divergence` | `registry-observation` | Live build observation of diverging HiberbootEnabled values | `medium`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-fast-startup-doc` | `official-doc` | `Microsoft official doc` | Microsoft Fast Startup guidance for HiberbootEnabled | `high` |
+| `admx-wininit-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_WinInit | `high` |
+| `nohuto-fast-startup-asset` | `decompilation` | `Ghidra decompilation` | nohuto power asset for HiberbootEnabled research | `medium` |
+| `live-registry-divergence` | `registry-observation` | `VM registry observation` | Live build observation of diverging HiberbootEnabled values | `medium` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, power, hiberbootenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / power/assets/hiberboot-PopReadHiberbootGroupPolicy.c | `https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4161,10 +6344,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-modern-standby` | `official-doc` | Microsoft Learn: What is Modern Standby | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `nohuto-power-msdisabled-trace` | `registry-observation` | nohuto power trace for MSDisabled | `medium`
-- `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | `medium` |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, msdisabled, modernsleep, enabledactions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4196,9 +6402,15 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-task-offload` | `official-doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | `high`
-- `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | `high` |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -4229,9 +6441,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-power-admx` | `official-doc` | Local Microsoft Power.admx mapping | `high`
-- `local-power-adml` | `official-doc` | Local Microsoft Power.adml help text | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | `high` |
+| `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | power, powerthrottling, powerthrottlingoff, power throttling |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 3 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 3 audit token(s) in win-registry.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+- win-config / power/desc.md#power-values | `https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values` | Documents the PowerThrottling registry path and behavior.
+- win-registry / Power Values | `https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values` | Provides reverse-engineered notes for PowerThrottlingOff and related values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4261,9 +6498,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | `high`
-- `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | `high`
-- `app-performance-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | `high` |
+| `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | `high` |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | wsearch |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4294,10 +6554,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | `high`
-- `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | `high` |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showhibernateoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4328,9 +6611,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | `high`
-- `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | `high` |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showlockoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4361,9 +6667,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | `high`
-- `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | `high` |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, showsleepoption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4396,10 +6725,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-perfboostmode` | `official-doc` | Microsoft Learn: PERFBOOSTMODE | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
-- `engine-power-perfboostmode` | `repo-code` | Command-backed CPU boost implementation | `high`
-- `runtime-perfboostmode-diff` | `vm-test` | Guest reversible probe for PERFBOOSTMODE | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-perfboostmode` | `official-doc` | `Microsoft official doc` | Microsoft Learn: PERFBOOSTMODE | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | `high` |
+| `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
+| Matched tokens | perfboostatguaranteed, highperfdurationboot, latencytolerancedefault, perfcalculateactualutilization |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+- win-config / power/desc.md#power-values | `https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values` | Documents CPU performance boost related power-manager fields.
+- win-registry / Power Values | `https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values` | Provides nohuto's registry analysis for performance boost values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4437,8 +6788,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high`
-- `app-power-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | multimedia, systemprofile, tasks, games, priority, scheduling category, high, sfio priority, gpu priority, affinity |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 10 audit token(s) in win-config.
+- win-registry / records/MultiMedia.txt | `https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt` | Matched 7 audit token(s) in win-registry.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 6 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -4469,9 +6843,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-block-microsoft-accounts` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, noconnecteduser |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4502,8 +6895,14 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-appprivacy-admx` | `official-doc` | Microsoft AppPrivacy administrative template | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider broad deny bundle | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -4542,10 +6941,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-privacy-policy-csp` | `policy-csp` | Microsoft Privacy Policy CSP | `high`
-- `local-ospolicy-admx` | `official-doc` | Local Microsoft OSPolicy.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-activity-history` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-privacy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Privacy Policy CSP | `high` |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4576,9 +6994,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-userprofiles-admx-advertising` | `official-doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | `high`
-- `local-userprofiles-adml-advertising` | `official-doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | `high` |
+| `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4610,9 +7047,26 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appprivacy-admx-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | `high`
-- `local-appprivacy-adml-diagnostics` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | `high` |
+| `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -4643,9 +7097,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windows-privacy-track-app-launches` | `official-doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | `high`
-- `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windows-privacy-track-app-launches` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | `high` |
+| `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4680,10 +7153,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `microsoft-learn-contentdeliverymanager` | `official-doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | `high`
-- `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high`
-- `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `microsoft-learn-contentdeliverymanager` | `official-doc` | `Microsoft official doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | `high` |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high` |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | contentdeliverymanager |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4719,11 +7210,17 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | `high`
-- `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | `high`
-- `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `procmon-appcompat-engine` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | `high` |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | `high` |
+| `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -4770,10 +7267,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appdeviceinventory-admx` | `official-doc` | Local Microsoft AppDeviceInventory.admx mappings | `high`
-- `csp-appdeviceinventory` | `policy-csp` | Policy CSP - AppDeviceInventory | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `procmon-appdeviceinventory` | `procmon-trace` | Procmon + LGPO capture - four AppDeviceInventory policies | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | `high` |
+| `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - four AppDeviceInventory policies | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -4804,11 +7307,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-appcompat-application-telemetry` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | `high`
-- `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | `high`
-- `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-application-telemetry` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-appcompat-application-telemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | `high` |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | `high` |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, appcompat, aitenable |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4840,9 +7362,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appprivacy-admx-background` | `official-doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | `high`
-- `local-appprivacy-adml-background` | `official-doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | `high` |
+| `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, appprivacy, letappsruninbackground |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4873,9 +7414,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-biometrics` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4906,9 +7466,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, credential, provider, domain accounts |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4939,9 +7518,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-biometrics-admx` | `official-doc` | Local Microsoft Biometrics.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-biometrics-logon` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, biometrics, credential, provider, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4972,10 +7570,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-camera-admx` | `official-doc` | Local Microsoft Camera.admx mapping | `high`
-- `local-camera-adml` | `official-doc` | Local Microsoft Camera.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-camera` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | `high` |
+| `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, camera, allowcamera |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5013,10 +7630,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-powershell-about-environment-variables` | `official-doc` | Microsoft Learn: about_Environment_Variables | `high`
-- `ms-dotnet-cli-telemetry` | `official-doc` | Microsoft Learn: Telemetry for the .NET CLI | `high`
-- `ms-win32-environment` | `official-doc` | Microsoft Learn: Win32_Environment class | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-powershell-about-environment-variables` | `official-doc` | `Microsoft official doc` | Microsoft Learn: about_Environment_Variables | `high` |
+| `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Telemetry for the .NET CLI | `high` |
+| `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | environment |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5047,10 +7683,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | Microsoft Policy CSP: DisableConsumerAccountStateContent | `high`
-- `local-cloud-content-admx-consumer` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-consumer-account-content` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | `high` |
+| `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -5081,11 +7734,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-windowscopilot-turnoff` | `policy-csp` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | `high`
-- `local-windowscopilot-admx` | `official-doc` | Local Microsoft WindowsCopilot.admx mapping | `high`
-- `local-windowscopilot-adml` | `official-doc` | Local Microsoft WindowsCopilot.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-copilot` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | `high` |
+| `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | `high` |
+| `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, windowscopilot, turnoffwindowscopilot |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5116,10 +7788,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-grouppolicy-enablecdp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | `high`
-- `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | `high`
-- `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | `high` |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | `high` |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -5150,10 +7828,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-device-name` | `policy-csp` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-device-name-telemetry` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, allowdevicenameintelemetry |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5184,10 +7881,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-device-delete` | `policy-csp` | Microsoft Policy CSP: DisableDeviceDelete | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabledevicedelete |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5218,10 +7934,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-ddv` | `policy-csp` | Microsoft Policy CSP: DisableDiagnosticDataViewer | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disablediagnosticdataviewer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5260,11 +7995,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-edge-search-suggest-enabled` | `official-doc` | Microsoft Edge policy documentation: SearchSuggestEnabled | `high`
-- `ms-edge-local-providers-enabled` | `official-doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | `high`
-- `local-microsoftedge-admx` | `official-doc` | Local Microsoft MicrosoftEdge.admx mapping | `high`
-- `local-microsoftedge-adml` | `official-doc` | Local Microsoft MicrosoftEdge.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-edge-search-suggest-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: SearchSuggestEnabled | `high` |
+| `ms-edge-local-providers-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | `high` |
+| `local-microsoftedge-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.admx mapping | `high` |
+| `local-microsoftedge-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -5295,10 +8047,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-feedback-notifications` | `policy-csp` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | `high`
-- `local-feedback-notifications-admx` | `official-doc` | Local Microsoft FeedbackNotifications.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | `high` |
+| `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, donotshowfeedbacknotifications |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5329,10 +8100,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-filehistory-admx` | `official-doc` | Local Microsoft FileHistory.admx mapping | `high`
-- `local-filehistory-adml` | `official-doc` | Local Microsoft FileHistory.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-file-history` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | `high` |
+| `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, filehistory, disabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5362,11 +8152,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-allow-find-my-device` | `policy-csp` | Microsoft Experience Policy CSP: AllowFindMyDevice | `high`
-- `local-findmy-admx` | `official-doc` | Local Microsoft FindMy.admx mapping | `high`
-- `local-findmy-adml` | `official-doc` | Local Microsoft FindMy.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-find-my-device` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-allow-find-my-device` | `policy-csp` | `Microsoft policy CSP` | Microsoft Experience Policy CSP: AllowFindMyDevice | `high` |
+| `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | `high` |
+| `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, findmydevice, allowfindmydevice |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5397,10 +8206,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-grouppolicy-admx-fonts` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | `high`
-- `local-grouppolicy-adml-fonts` | `official-doc` | Local Microsoft GroupPolicy.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-font-providers` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | `high` |
+| `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, enablefontproviders |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5431,11 +8259,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-avs-validation-admx` | `official-doc` | Local Microsoft AVSValidationGP.admx mapping | `high`
-- `local-avs-validation-adml` | `official-doc` | Local Microsoft AVSValidationGP.adml help text | `high`
-- `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx reference bundle | `medium`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | `high` |
+| `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | `high` |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | `medium` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, protection, platform, nogenticket |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5465,8 +8312,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windows-privacy-language-list` | `official-doc` | Microsoft privacy guidance for language list access | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windows-privacy-language-list` | `official-doc` | `Microsoft official doc` | Microsoft privacy guidance for language list access | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | panel, international, user, profile, httpacceptlanguageoptout |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 3 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5497,11 +8363,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-credui-no-local-password-reset-questions` | `policy-csp` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | `high`
-- `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | `high`
-- `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-local-security-questions` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-credui-no-local-password-reset-questions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | `high` |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | `high` |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, nolocalpasswordresetquestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5536,8 +8421,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-location-consent-runtime-user` | `official-doc` | Microsoft location consent runtime guidance for current-user access | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider location-consent batch | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-location-consent-runtime-user` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime guidance for current-user access | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider location-consent batch | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | capabilityaccessmanager, consentstore, location, value, deny, nonpackaged |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 6 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5568,8 +8472,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-location-consent-runtime` | `official-doc` | Microsoft location consent runtime registry guidance | `high`
-- `app-privacy-provider` | `repo-code` | Current privacy provider system location-consent write | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-location-consent-runtime` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime registry guidance | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider system location-consent write | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | capabilityaccessmanager, consentstore, location, value |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5600,10 +8523,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | Microsoft Policy CSP: DisableLocationScripting | `high`
-- `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-location-scripting` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | `high` |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablelocationscripting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5634,9 +8576,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-sensors-admx-location` | `official-doc` | Local Microsoft Sensors.admx DisableLocation mapping | `high`
-- `local-sensors-adml-location` | `official-doc` | Local Microsoft Sensors.adml DisableLocation help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | `high` |
+| `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablelocation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5667,10 +8628,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-mdm-admx` | `official-doc` | Local Microsoft MDM.admx mapping | `high`
-- `local-mdm-adml` | `official-doc` | Local Microsoft MDM.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-mdm-enrollment` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | `high` |
+| `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, disableregistration |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5701,10 +8681,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-messaging-csp-allow-message-sync` | `policy-csp` | Microsoft Policy CSP: Messaging / AllowMessageSync | `high`
-- `local-messaging-admx` | `official-doc` | Local Microsoft messaging.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-message-sync` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | `high` |
+| `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, messaging, allowmessagesync |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5735,10 +8734,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-offlinefiles-csp` | `policy-csp` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | `high`
-- `local-offlinefiles-admx` | `official-doc` | Local Microsoft OfflineFiles.admx mapping | `high`
-- `local-offlinefiles-adml` | `official-doc` | Local Microsoft OfflineFiles.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-offlinefiles-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | `high` |
+| `local-offlinefiles-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.admx mapping | `high` |
+| `local-offlinefiles-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -5768,11 +8773,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-disable-onesettings-downloads` | `policy-csp` | Microsoft System Policy CSP: DisableOneSettingsDownloads | `high`
-- `local-datacollection-admx-onesettings` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `local-datacollection-adml-onesettings` | `official-doc` | Local Microsoft DataCollection.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-onesettings-downloads` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-disable-onesettings-downloads` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: DisableOneSettingsDownloads | `high` |
+| `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disableonesettingsdownloads |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5803,10 +8827,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-settings-csp-allow-online-tips` | `policy-csp` | Microsoft Policy CSP: AllowOnlineTips | `high`
-- `local-control-panel-admx` | `official-doc` | Local Microsoft ControlPanel.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-online-tips` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | `high` |
+| `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, allowonlinetips |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5838,9 +8881,15 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-pca-admx` | `official-doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | `high`
-- `local-pca-adml` | `official-doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | `high`
-- `admx-pca-csp` | `policy-csp` | Policy CSP - ADMX_pca | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | `high` |
+| `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | `high` |
+| `admx-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_pca | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -5871,9 +8920,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-grouppolicy-admx` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | `high`
-- `local-grouppolicy-adml` | `official-doc` | Local Microsoft GroupPolicy.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | `high` |
+| `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, enablemmx |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5905,11 +8973,17 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | `high`
-- `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | `high`
-- `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | `high`
-- `procmon-disable-pca` | `procmon-trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | `high` |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | `high` |
+| `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | `high` |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -5940,11 +9014,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | `high`
-- `local-windowscopilot-admx-recall` | `official-doc` | Local Microsoft WindowsCopilot.admx Recall mapping | `high`
-- `local-windowscopilot-adml-recall` | `official-doc` | Local Microsoft WindowsCopilot.adml Recall help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-recall` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | `Microsoft policy CSP` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | `high` |
+| `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | `high` |
+| `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsai, disableaidataanalysis |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5976,10 +9069,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | `medium`
-- `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | `medium`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | `medium` |
+| `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | `medium` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | crossdeviceresume, configuration, isresumeallowed |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6010,10 +9122,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | `high`
-- `local-grouppolicy-admx-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | `high`
-- `local-grouppolicy-adml-rsoplogging` | `official-doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | `high` |
+| `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | `high` |
+| `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, rsoplogging |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6044,10 +9175,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | Microsoft Policy CSP: DisableSearchBoxSuggestions | `high`
-- `local-windows-explorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-search-box-suggestions` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | `high` |
+| `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, disablesearchboxsuggestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6078,10 +9228,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | `high`
-- `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | `high` |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, disablesearchhistory |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6112,10 +9281,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | Microsoft Policy CSP: DisableSensors | `high`
-- `local-sensors-admx` | `official-doc` | Local Microsoft Sensors.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-sensors` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | `high` |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablesensors |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6146,10 +9334,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-appcompat-policy-csp` | `policy-csp` | Microsoft ADMX_AppCompat Policy CSP | `high`
-- `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-steps-recorder` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | `high` |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, appcompat, disableuar, steps recorder, psr.exe |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/desc.md#disable-psr | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md#disable-psr` | Documents PSR deprecation, the DisableUAR policy, and renaming psr.exe.
+
+Other provenance references:
+- microsoft: Steps Recorder deprecation | `https://support.microsoft.com/en-gb/windows/steps-recorder-deprecation-a64888d7-8482-4965-8ce3-25fb004e975f` | Official Microsoft notice that Steps Recorder is deprecated.
 
 **Validation proof**
 
@@ -6188,12 +9399,18 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-cloudcontent-admx-thirdparty` | `official-doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high`
-- `local-cloudcontent-adml-thirdparty` | `official-doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high`
-- `local-cloudcontent-admx-settings` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | `high`
-- `local-cloudcontent-adml-settings` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | `high`
-- `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | `high`
-- `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | `high` |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | `high` |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | `high` |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | `high` |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | `high` |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -6225,11 +9442,17 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | `high`
-- `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | `high`
-- `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | `high`
-- `procmon-switchback` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | `high` |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | `high` |
+| `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | `high` |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -6260,10 +9483,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabletelemetryoptinchangenotification |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6293,11 +9535,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-configure-telemetry-optin-ui` | `policy-csp` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | `high`
-- `local-datacollection-admx-optin-ui` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `local-datacollection-adml-optin-ui` | `official-doc` | Local Microsoft DataCollection.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-configure-telemetry-optin-ui` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | `high` |
+| `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, disabletelemetryoptinsettingsux |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6328,12 +9589,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-errorreporting-disable-wer` | `policy-csp` | Microsoft ADMX_ErrorReporting Policy CSP: WerDisable_2 | `high`
-- `local-errorreporting-admx` | `official-doc` | Local Microsoft ErrorReporting.admx mapping | `high`
-- `local-errorreporting-adml` | `official-doc` | Local Microsoft ErrorReporting.adml help text | `high`
-- `local-icm-adml` | `official-doc` | Local Microsoft ICM.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-wer` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-errorreporting-disable-wer` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ErrorReporting Policy CSP: WerDisable_2 | `high` |
+| `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | `high` |
+| `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | `high` |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, error, reporting, disabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 4 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6364,10 +9644,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-location-provider-policy-csp` | `policy-csp` | Microsoft Policy CSP: DisableWindowsLocationProvider | `high`
-- `local-location-provider-admx` | `official-doc` | Local Microsoft LocationProviderAdm.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-windows-location-provider` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | `high` |
+| `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, locationandsensors, disablewindowslocationprovider |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6402,10 +9701,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-allowwindowstips` | `policy-csp` | Microsoft Policy CSP: AllowWindowsTips | `high`
-- `local-cloudcontent-admx-softlanding` | `official-doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | `high`
-- `local-cloudcontent-adml-softlanding` | `official-doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-allowwindowstips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsTips | `high` |
+| `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | `high` |
+| `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6435,11 +9753,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-security-option-hide-last-user` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | `high`
-- `local-security-registry-last-user` | `official-doc` | Local Windows security option registry mapping | `high`
-- `local-security-defaults-last-user` | `official-doc` | Local Windows default security baseline entry | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-last-logged-in-user` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | `high` |
+| `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | `high` |
+| `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dontdisplaylastusername |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6470,10 +9807,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | `high`
-- `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | `high` |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -6504,10 +9858,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | `high`
-- `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | `high` |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hiderecommendedpersonalizedsites |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6538,10 +9911,27 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | `high`
-- `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-recommended-section` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | `high` |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | True |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
 
 **Validation proof**
 
@@ -6572,10 +9962,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-start-policy-csp` | `policy-csp` | Microsoft Start Policy CSP | `high`
-- `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-recommended-section-user` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | `high` |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hiderecommendedsection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6605,11 +10014,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-security-option-hide-username-signin` | `official-doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | `high`
-- `local-security-registry-hide-username` | `official-doc` | Local Windows security option registry mapping | `high`
-- `local-security-defaults-hide-username` | `official-doc` | Local Windows default security baseline entry | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-username-at-signin` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | `high` |
+| `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | `high` |
+| `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, dontdisplayusername |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6640,10 +10068,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | Microsoft Policy CSP: LimitDiagnosticLogCollection | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, limitdiagnosticlogcollection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6674,10 +10121,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | Microsoft Policy CSP: LimitDumpCollection | `high`
-- `local-data-collection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-limit-dump-collection` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | `high` |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-crashdump-gate` | `decompilation` | `Ghidra decompilation` | nohuto crash-dump gate trace | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, datacollection, limitdumpcollection |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/assets/maps.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6709,10 +10176,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-system-allowtelemetry` | `policy-csp` | Microsoft System Policy CSP: AllowTelemetry | `high`
-- `local-datacollection-admx` | `official-doc` | Local Microsoft DataCollection.admx mapping | `high`
-- `local-datacollection-adml` | `official-doc` | Local Microsoft DataCollection.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-system-allowtelemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: AllowTelemetry | `high` |
+| `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | `high` |
+| `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -6747,10 +10220,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-troubleshooting-allowrecommendations` | `policy-csp` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | `high`
-- `local-msdt-admx` | `official-doc` | Local Microsoft MSDT.admx mapping | `high`
-- `local-msdt-adml` | `official-doc` | Local Microsoft MSDT.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-troubleshooting-allowrecommendations` | `policy-csp` | `Microsoft policy CSP` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | `high` |
+| `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | `high` |
+| `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, troubleshooting, allowrecommendations, troubleshootingallowrecommendations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -6791,10 +10283,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-settingsync` | `policy-csp` | Microsoft ADMX_SettingSync Policy CSP | `high`
-- `local-settingsync-admx` | `official-doc` | Local Microsoft SettingSync.admx mapping | `high`
-- `local-settingsync-adml` | `official-doc` | Local Microsoft SettingSync.adml help text | `high`
-- `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-settingsync` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_SettingSync Policy CSP | `high` |
+| `local-settingsync-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.admx mapping | `high` |
+| `local-settingsync-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.adml help text | `high` |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -6825,9 +10323,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-attachmentmanager-admx` | `official-doc` | Local Microsoft AttachmentManager.admx mapping | `high`
-- `local-attachmentmanager-adml` | `official-doc` | Local Microsoft AttachmentManager.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-attachmentmanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.admx mapping | `high` |
+| `local-attachmentmanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, attachments, savezoneinformation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / nvidia/desc.md | `https://github.com/nohuto/win-config/blob/main/nvidia/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -6858,9 +10378,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | `high`
-- `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | `high` |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, ntfsdisableencryption |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -6895,9 +10437,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-deliveryoptimization-admx` | `official-doc` | Local Microsoft DeliveryOptimization.admx mapping | `high`
-- `local-deliveryoptimization-adml` | `official-doc` | Local Microsoft DeliveryOptimization.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-deliveryoptimization-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.admx mapping | `high` |
+| `local-deliveryoptimization-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, deliveryoptimization, dodownloadmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -6928,9 +10492,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | `high`
-- `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | `high` |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, credui, disablepasswordreveal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -6961,9 +10547,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-credentialproviders-admx` | `official-doc` | Local Microsoft CredentialProviders.admx mapping | `high`
-- `local-credentialproviders-adml` | `official-doc` | Local Microsoft CredentialProviders.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | `high` |
+| `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, blockdomainpicturepassword |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-registry / records/Policies-System.txt | `https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt` | Matched 2 audit token(s) in win-registry.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -6994,10 +10602,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-remote-assistance-csp` | `policy-csp` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | `high`
-- `local-remoteassistance-admx` | `official-doc` | Local Microsoft RemoteAssistance.admx mapping | `high`
-- `local-remoteassistance-adml` | `official-doc` | Local Microsoft RemoteAssistance.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-remote-assistance-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | `high` |
+| `local-remoteassistance-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.admx mapping | `high` |
+| `local-remoteassistance-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, terminal, fallowtogethelp |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7027,10 +10657,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-exploitguard-admx` | `official-doc` | Local Microsoft ExploitGuard.admx mapping | `high`
-- `local-exploitguard-adml` | `official-doc` | Local Microsoft ExploitGuard.adml help text | `high`
-- `ms-exploit-protection-doc` | `official-doc` | Microsoft Learn exploit protection guidance | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-exploitguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.admx mapping | `high` |
+| `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | `high` |
+| `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | disable system mitigations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7062,9 +10712,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-systemrestore-admx` | `official-doc` | Local Microsoft SystemRestore.admx mapping | `high`
-- `local-systemrestore-adml` | `official-doc` | Local Microsoft SystemRestore.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | `high` |
+| `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, systemrestore |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7099,11 +10771,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-firewall-csp` | `official-doc` | Microsoft Learn: Firewall CSP | `high`
-- `local-windowsfirewall-admx` | `official-doc` | Local Microsoft WindowsFirewall.admx mapping | `high`
-- `local-windowsfirewall-adml` | `official-doc` | Local Microsoft WindowsFirewall.adml help text | `high`
-- `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | Microsoft Learn: Azure VM firewall recovery guidance | `medium-high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-firewall-csp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Firewall CSP | `high` |
+| `local-windowsfirewall-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.admx mapping | `high` |
+| `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | `high` |
+| `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | `medium-high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsfirewall, domainprofile, enablefirewall, standardprofile |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7136,10 +10830,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | `high`
-- `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | `high`
-- `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | `high` |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | `high` |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -7179,13 +10879,35 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-devicesetup-admx` | `official-doc` | Local Microsoft DeviceSetup.admx mapping | `high`
-- `local-devicesetup-adml` | `official-doc` | Local Microsoft DeviceSetup.adml help text | `high`
-- `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping | `high`
-- `local-icm-adml` | `official-doc` | Local Microsoft ICM.adml help text | `high`
-- `local-windowsupdate-admx` | `official-doc` | Local Microsoft WindowsUpdate.admx mapping | `high`
-- `local-windowsupdate-adml` | `official-doc` | Local Microsoft WindowsUpdate.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-devicesetup-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.admx mapping | `high` |
+| `local-devicesetup-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.adml help text | `high` |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | `high` |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | `high` |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | `high` |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, windowsupdate, excludewudriversinqualityupdate, driversearching, searchorderconfig, dontsearchwindowsupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 6 audit token(s) in win-config.
+- win-config / policies/desc.md | `https://github.com/nohuto/win-config/blob/main/policies/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7215,9 +10937,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-passport-admx` | `official-doc` | Local Microsoft Passport.admx mapping | `high`
-- `local-passport-adml` | `official-doc` | Local Microsoft Passport.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | `high` |
+| `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | winlogon, enablegoodbye |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7250,9 +10994,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-sudo-admx` | `official-doc` | Local Microsoft Sudo.admx mapping | `high`
-- `local-sudo-adml` | `official-doc` | Local Microsoft Sudo.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | `high` |
+| `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, sudo, enabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7287,9 +11053,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-powershellpolicy-admx` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | `high`
-- `local-powershellpolicy-adml` | `official-doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | `high` |
+| `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, powershell, enablescripts, executionpolicy, unrestricted |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 5 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / nvidia/assets/nvcpl.ps1 | `https://github.com/nohuto/win-config/blob/main/nvidia/assets/nvcpl.ps1` | Matched 3 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7319,9 +11107,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-credui-admx` | `official-doc` | Local Microsoft CredUI.admx mapping | `high`
-- `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | `high` |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, credui, enablesecurecredentialprompting |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7361,10 +11171,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | `high`
-- `app-security-provider` | `repo-code` | Current app implementation | `high`
-- `nohuto-uac-bootphase` | `decompilation` | nohuto boot-phase UAC value read | `medium`
-- `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | `high` |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `nohuto-uac-bootphase` | `decompilation` | `Ghidra decompilation` | nohuto boot-phase UAC value read | `medium` |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7395,10 +11227,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-desktop-policy` | `policy-csp` | Microsoft ADMX_Desktop Policy CSP | `high`
-- `local-desktop-admx` | `official-doc` | Local Microsoft Desktop.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-aero-shake` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-desktop-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Desktop Policy CSP | `high` |
+| `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, nowindowminimizingshortcuts |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7428,10 +11283,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-configure-system-failure-recovery` | `official-doc` | Microsoft Learn: Configure system failure and recovery options | `high`
-- `ms-memory-dump-file-options` | `official-doc` | Microsoft Learn: Memory dump file options | `high`
-- `ms-win32-osrecoveryconfiguration` | `official-doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-configure-system-failure-recovery` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure system failure and recovery options | `high` |
+| `ms-memory-dump-file-options` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory dump file options | `high` |
+| `ms-win32-osrecoveryconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | autoreboot, crashcontrol |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-registry / records/CrashControl.txt | `https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7461,8 +11339,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `microsoft-support-display-parameters` | `official-doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | crashcontrol |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 1 audit token(s) in win-registry.
+- win-config / privacy/assets/crashdmp-SecureDump_PrepareForInit.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7493,10 +11394,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | `high`
-- `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | `high`
-- `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | `high` |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | `high` |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, appx, allowautomaticapparchiving |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7527,9 +11451,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-automatic-maintenance-overview` | `official-doc` | Microsoft Automatic Maintenance overview | `high`
-- `ms-uwf-maintenance-disabled` | `official-doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | `high` |
+| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | schedule, maintenance, maintenancedisabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/ScheduledTasksList.ps1 | `https://github.com/nohuto/win-config/blob/main/system/assets/ScheduledTasksList.ps1` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7560,10 +11507,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-grouppolicy-policy-csp` | `policy-csp` | Microsoft ADMX_GroupPolicy Policy CSP | `high`
-- `local-grouppolicy-admx` | `official-doc` | Local Microsoft GroupPolicy.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-background-gp-updates` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-grouppolicy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP | `high` |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, disablebkgndgrouppolicy |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7598,11 +11568,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-clipboard-history-csp` | `policy-csp` | Microsoft Policy CSP: AllowClipboardHistory | `high`
-- `ms-cross-device-clipboard-csp` | `policy-csp` | Microsoft Policy CSP: AllowCrossDeviceClipboard | `high`
-- `local-ospolicy-admx` | `official-doc` | Local Microsoft OSPolicy.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-clipboard-history` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-clipboard-history-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowClipboardHistory | `high` |
+| `ms-cross-device-clipboard-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowCrossDeviceClipboard | `high` |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7633,10 +11626,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-terminalserver-clipboard-policy` | `policy-csp` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | `high`
-- `local-terminalserver-admx` | `official-doc` | Local Microsoft TerminalServer.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-clipboard-redirection` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-terminalserver-clipboard-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | `high` |
+| `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, terminal, fdisableclip |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7667,9 +11683,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | `medium`
-- `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | `medium` |
+| `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | gameconfigstore |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/gamemode-GamingHandlers.c | `https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7700,10 +11738,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-applicationmanagement-allowgamedvr` | `policy-csp` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | `high`
-- `local-gamedvr-admx` | `official-doc` | Local Microsoft GameDVR.admx mapping | `high`
-- `local-gamedvr-adml` | `official-doc` | Local Microsoft GameDVR.adml help text | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-applicationmanagement-allowgamedvr` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | `high` |
+| `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | `high` |
+| `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+_No provenance block present._
 
 **Validation proof**
 
@@ -7733,8 +11777,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | panel, desktop, jpegimportquality |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/jpeg-TranscodeImage.c | `https://github.com/nohuto/win-config/blob/main/system/assets/jpeg-TranscodeImage.c` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7766,9 +11833,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-support-restart-apps` | `official-doc` | Microsoft support article for the Restart apps sign-in feature | `medium`
-- `runtime-restartapps-registry-diff` | `runtime-diff` | Guest reversible probe - RestartApps registry mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | `medium` |
+| `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | winlogon, restartapps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7799,10 +11889,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-search-policy-csp` | `policy-csp` | Microsoft Search Policy CSP | `high`
-- `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-search-highlights` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-search-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Search Policy CSP | `high` |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, enabledynamiccontentinwsb |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7833,9 +11946,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | `high`
-- `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | `high` |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, preventremotequeries |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7866,9 +12002,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | `high`
-- `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | `high` |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7898,8 +12055,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-shell-icons-shortcut-arrow` | `official-doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, shell, icons, 29 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7929,8 +12109,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | explorer, serialize |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7961,10 +12164,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-storage-policy-csp` | `policy-csp` | Microsoft Storage Policy CSP | `high`
-- `local-storagesense-admx` | `official-doc` | Local Microsoft StorageSense.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-storage-sense` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | `high` |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, storagesense, allowstoragesenseglobal |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 3 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -7996,10 +12222,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-storage-policy-csp` | `policy-csp` | Microsoft Storage Policy CSP | `high`
-- `local-storagesense-admx` | `official-doc` | Local Microsoft StorageSense.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | `high` |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, storagesense, allowstoragesensetemporaryfilescleanup |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8030,10 +12279,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-icm-policy-csp` | `policy-csp` | Microsoft ADMX_ICM Policy CSP | `high`
-- `local-icm-admx` | `official-doc` | Local Microsoft ICM.admx mapping | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-store-open-with` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-icm-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ICM Policy CSP | `high` |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, explorer, nousestoreopenwith |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8063,8 +12335,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-dwm-registry-settings` | `official-doc` | Microsoft Learn: DWM Registry Settings | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | overlayminfps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 1 audit token(s) in win-registry.
+- win-registry / assets/dwm/OverlayMinFPS.c | `https://github.com/nohuto/win-registry/blob/main/assets/dwm/OverlayMinFPS.c` | Matched 1 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8094,10 +12389,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-game-mode-feature` | `official-doc` | Xbox Support: Use Game Mode while gaming on your Windows device | `high`
-- `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | `high`
-- `repo-system-doc-game-mode` | `repo-doc` | Repo system research notes for Game Mode | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | `high` |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | `high` |
+| `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | gamebar, autogamemodeenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/gamemode-GamingHandlers.c | `https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c` | Matched 1 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8128,10 +12446,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-hags-feature` | `official-doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | `high`
-- `repo-system-doc-hags` | `repo-doc` | Repo system research notes for HAGS | `medium`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `runtime-hags-registry-diff` | `runtime-diff` | Guest reversible probe for HwSchMode | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-hags-feature` | `official-doc` | `Microsoft official doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | `high` |
+| `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | `medium` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, hwschmode |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-registry / records/Graphics-Drivers.txt | `https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8162,9 +12503,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-search-admx` | `official-doc` | Local Microsoft Search.admx mapping | `high`
-- `local-search-adml` | `official-doc` | Local Microsoft Search.adml help text | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | `high` |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, search, allowindexingencryptedstoresoritems |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8193,8 +12557,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrddidelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / security/assets/TdrInit.c | `https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8223,8 +12610,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrdelay |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / security/assets/TdrInit.c | `https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8256,8 +12666,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlevel |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / security/assets/TdrInit.c | `https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8286,8 +12719,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlimitcount |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / security/assets/TdrInit.c | `https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8316,8 +12772,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-tdr-registry-keys` | `official-doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | graphicsdrivers, tdrlimittime |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
+- win-config / security/assets/TdrInit.c | `https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / dxgkrnl | `https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl` | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8348,8 +12827,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-threaded-dpcs` | `official-doc` | Microsoft Learn: Introduction to threaded DPCs | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, kernel, threaddpcenable |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8379,10 +12881,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | `high`
-- `local-sceregvl-inf` | `official-doc` | Local Microsoft security registry mapping | `high`
-- `local-defltbase-inf` | `official-doc` | Local Microsoft default security template | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | `high` |
+| `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | `high` |
+| `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8412,10 +12937,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-kernel-trace-control-api` | `official-doc` | Microsoft Learn: Kernel Trace Control API Reference | `high`
-- `ms-enable-trace-parameters-v1` | `official-doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | `high`
-- `ms-wpr-disablepagingexecutive` | `official-doc` | Microsoft Learn: WPR Command-Line Options | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-kernel-trace-control-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Kernel Trace Control API Reference | `high` |
+| `ms-enable-trace-parameters-v1` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | `high` |
+| `ms-wpr-disablepagingexecutive` | `official-doc` | `Microsoft official doc` | Microsoft Learn: WPR Command-Line Options | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management, disablepagingexecutive |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 5 audit token(s) in win-registry.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8445,9 +12993,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-win32-operatingsystem-largesystemcache` | `official-doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | `high`
-- `ms-memory-limits-large-system-cache` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-win32-operatingsystem-largesystemcache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | `high` |
+| `ms-memory-limits-large-system-cache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8476,10 +13047,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-memory-management-qna-nonpaged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | `medium`
-- `ms-memory-management-registry-keys` | `official-doc` | Microsoft Learn: Memory Management Registry Keys | `high`
-- `ms-memory-limits` | `official-doc` | Microsoft Learn: Memory Limits for Windows Releases | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | `medium` |
+| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | `high` |
+| `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8509,10 +13103,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-memory-management-qna-paged` | `official-doc` | Microsoft Q&A: default registry value for Memory Management | `medium`
-- `ms-memory-management-registry-keys` | `official-doc` | Microsoft Learn: Memory Management Registry Keys | `high`
-- `ms-unable-allocate-paged-pool` | `official-doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | `medium` |
+| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | `high` |
+| `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | session, manager, memory, management |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8543,11 +13160,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-registry-storage-space` | `official-doc` | Microsoft Learn: Registry Storage Space | `high`
-- `ms-rsl-functionality` | `official-doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | `high`
-- `ms-getsystemregistryquota` | `official-doc` | Microsoft Learn: GetSystemRegistryQuota | `medium`
-- `live-registrysize-missing` | `registry-observation` | Validation host observation of missing RegistrySizeLimit | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-registry-storage-space` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Storage Space | `high` |
+| `ms-rsl-functionality` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | `high` |
+| `ms-getsystemregistryquota` | `official-doc` | `Microsoft official doc` | Microsoft Learn: GetSystemRegistryQuota | `medium` |
+| `live-registrysize-missing` | `registry-observation` | `VM registry observation` | Validation host observation of missing RegistrySizeLimit | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8579,10 +13217,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-fsutil-8dot3name` | `official-doc` | Microsoft Learn: fsutil 8dot3name | `high`
-- `local-filesys-admx-shortnames` | `official-doc` | Local Microsoft FileSys.admx short-name mapping | `high`
-- `local-filesys-adml-shortnames` | `official-doc` | Local Microsoft FileSys.adml short-name help text | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-fsutil-8dot3name` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil 8dot3name | `high` |
+| `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | `high` |
+| `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsdisable8dot3namecreation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | `https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8612,10 +13273,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | `high`
-- `ms-performance-tuning-web-servers` | `official-doc` | Microsoft Learn: Performance Tuning Web Servers | `high`
-- `ms-using-agestore` | `official-doc` | Microsoft Learn: Using AgeStore | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | `high` |
+| `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | `high` |
+| `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsdisablelastaccessupdate |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | `https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8646,10 +13330,33 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-maximum-file-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | `high`
-- `local-filesys-admx` | `official-doc` | Local Microsoft FileSys.admx mapping | `high`
-- `local-filesys-adml` | `official-doc` | Local Microsoft FileSys.adml help text | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-maximum-file-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | `high` |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | `high` |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, longpathsenabled |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-registry / records/FileSystem.txt | `https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8679,8 +13386,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsmemoryusage |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-registry / records/FileSystem.txt | `https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8713,9 +13443,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-fsutil-behavior` | `official-doc` | Microsoft Learn: fsutil behavior | `high`
-- `ms-ntfs-reserves-space-for-mft` | `official-doc` | Microsoft Learn: How NTFS reserves space for MFT | `high`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | `high` |
+| `ms-ntfs-reserves-space-for-mft` | `official-doc` | `Microsoft official doc` | Microsoft Learn: How NTFS reserves space for MFT | `high` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | filesystem, ntfsmftzonereservation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-registry / records/FileSystem.txt | `https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt` | Matched 2 audit token(s) in win-registry.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8746,9 +13499,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-win32-operatingsystem-priority` | `official-doc` | Microsoft Learn: Win32_OperatingSystem class | `high`
-- `repo-system-doc-priority` | `repo-doc` | Repo system research notes for Win32PrioritySeparation | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | `high` |
+| `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | prioritycontrol, win32priorityseparation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/lsc-cimwin32.c | `https://github.com/nohuto/win-config/blob/main/system/assets/lsc-cimwin32.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+- Local asset: Win32PrioritySeparation | `Docs/system/assets/Win32PrioritySeparation.pdf` | Local research asset for Win32PrioritySeparation and scheduler-related registry behavior.
 
 **Validation proof**
 
@@ -8790,11 +13566,34 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-systemparametersinfo-timeouts` | `official-doc` | Microsoft Learn: SystemParametersInfoW function | `high`
-- `ms-rm-shutdown-type` | `official-doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | `high`
-- `ms-service-control-handler` | `official-doc` | Microsoft Learn: Service Control Handler Function | `high`
-- `repo-system-doc-shutdown` | `repo-doc` | Repo system research notes for shutdown timeouts | `medium`
-- `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfoW function | `high` |
+| `ms-rm-shutdown-type` | `official-doc` | `Microsoft official doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | `high` |
+| `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | `high` |
+| `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo system research notes for shutdown timeouts | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | waittokillservicetimeout, 2500, panel, desktop, waittokillapptimeout, hungapptimeout, 1500, autoendtasks, 1 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 9 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 5 audit token(s) in win-registry.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8824,8 +13623,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-btagservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-btagservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8855,8 +13675,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-bthserv` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-bthserv` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8887,8 +13728,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-bluetoothuserservice` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-bluetoothuserservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8918,8 +13780,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-diagtrack` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-diagtrack` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8949,8 +13832,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-printnotify` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-printnotify` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -8980,8 +13884,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-spooler` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-spooler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | category-fallback |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | True |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -9011,10 +13936,31 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | `high`
-- `local-scm-wsearch-2026-03-14` | `repo-doc` | Local SCM snapshot - WSearch | `high`
-- `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | `high` |
+| `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | `high` |
+| `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable windows search service |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/assets/disable-services-drivers-suboption-audit.md | `https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -9044,9 +13990,32 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-logon-verbose-status` | `policy-csp` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | `high`
-- `app-system-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-verbose-status-messages` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-logon-verbose-status` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | `high` |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-verbose-status-messages` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, verbosestatus |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/drivers.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt` | Matched 1 audit token(s) in win-config.
+- win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | `https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -9076,9 +14045,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-cpls-use-default-tile` | `policy-csp` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-default-account-picture` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-cpls-use-default-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-default-account-picture` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, explorer, usedefaulttile |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-registry / records/CV-Policies.txt | `https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9108,11 +14096,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-logon-page` | `policy-csp` | Microsoft ADMX_Logon Policy CSP | `high`
-- `local-logon-admx-acrylic` | `official-doc` | Local Microsoft Logon.admx mapping | `high`
-- `local-logon-adml-acrylic` | `official-doc` | Local Microsoft Logon.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-acrylic-logon` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-logon-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP | `high` |
+| `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | `high` |
+| `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, disableacrylicbackgroundonlogon |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/assets/animation-WinMain.c | `https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c` | Matched 1 audit token(s) in win-config.
+- win-registry / records/Policies-System.txt | `https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt` | Matched 2 audit token(s) in win-registry.
 
 **Validation proof**
 
@@ -9143,10 +14150,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-explorer-admx-animations` | `official-doc` | Local Microsoft Explorer.admx mapping | `high`
-- `local-explorer-adml-animations` | `official-doc` | Local Microsoft Explorer.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-common-control-animations` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | `high` |
+| `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, explorer, turnoffspianimations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-registry / records/CV-Policies.txt | `https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9177,10 +14203,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-logon-admx` | `official-doc` | Local Microsoft Logon.admx mapping | `high`
-- `local-logon-adml` | `official-doc` | Local Microsoft Logon.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-first-signin-animation` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | `high` |
+| `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, enablefirstlogonanimation |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/assets/animation-WinMain.c | `https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c` | Matched 2 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9210,9 +14255,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-lock-screen` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-lock-screen` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9242,10 +14306,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high`
-- `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-lock-screen-camera` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high` |
+| `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreencamera |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9275,11 +14358,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high`
-- `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high`
-- `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-lock-screen-changes` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high` |
+| `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high` |
+| `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nochanginglockscreen |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9309,11 +14411,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high`
-- `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high`
-- `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-lock-screen-motion` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high` |
+| `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high` |
+| `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, animatelockscreenbackground |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9343,11 +14464,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high`
-- `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high`
-- `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | Local Microsoft ControlPanelDisplay.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | `high` |
+| `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | `high` |
+| `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, personalization, nolockscreenslideshow |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9378,10 +14518,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-action-center` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightonactioncenter |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9412,10 +14571,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | Microsoft Policy CSP: AllowSpotlightCollection | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowSpotlightCollection | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablespotlightcollectionondesktop |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9446,10 +14624,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlight | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-features` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlight | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightfeatures |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9480,10 +14677,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-settings` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightonsettings |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9514,10 +14730,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-third-party` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablethirdpartysuggestions |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9548,10 +14783,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | `high`
-- `local-cloud-content-admx` | `official-doc` | Local Microsoft CloudContent.admx mapping | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-spotlight-welcome` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | `high` |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent, disablewindowsspotlightwindowswelcomeexperience |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9582,10 +14836,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-wcn-admx` | `official-doc` | Local Microsoft WindowsConnectNow.admx mapping | `high`
-- `local-wcn-adml` | `official-doc` | Local Microsoft WindowsConnectNow.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-wcn-wizards` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | `high` |
+| `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, disablewcnui |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/assets/animation-WinMain.c | `https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9616,11 +14889,30 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-news-and-interests-allow-widgets` | `policy-csp` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | `high`
-- `local-news-and-interests-admx` | `official-doc` | Local Microsoft NewsAndInterests.admx mapping | `high`
-- `local-news-and-interests-adml` | `official-doc` | Local Microsoft NewsAndInterests.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-widgets` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-news-and-interests-allow-widgets` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | `high` |
+| `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | `high` |
+| `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, allownewsandinterests |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/assets/animation-WinMain.c | `https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9651,10 +14943,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-dwm-admx` | `official-doc` | Local Microsoft DWM.admx mapping | `high`
-- `local-dwm-adml` | `official-doc` | Local Microsoft DWM.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-disable-window-animations` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | `high` |
+| `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, disallowanimations |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 2 audit token(s) in win-registry.
 
 **Validation proof**
 
@@ -9685,9 +14996,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-controlpanel-admx-classic` | `official-doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | `high`
-- `local-controlpanel-adml-classic` | `official-doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-controlpanel-admx-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | `high` |
+| `local-controlpanel-adml-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, forceclassiccontrolpanel |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9718,9 +15048,26 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `microsoft-qna-language-bar-showstatus` | `official-doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | `medium`
-- `repo-visibility-language-bar` | `repo-doc` | Repo visibility notes for language bar | `medium`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | `medium` |
+| `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | `medium` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | langbar, showstatus |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9752,10 +15099,29 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `local-startmenu-admx` | `official-doc` | Local Microsoft StartMenu.admx mapping | `high`
-- `local-startmenu-adml` | `official-doc` | Local Microsoft StartMenu.adml help text | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-most-used-apps` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | `high` |
+| `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, showorhidemostusedapps |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9785,9 +15151,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `ms-start-hide-people-bar` | `policy-csp` | Microsoft Start Policy CSP: HidePeopleBar | `high`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
-- `repo-provenance-hide-people-bar` | `repo-doc` | Existing tweak provenance record | `medium`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-start-hide-people-bar` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP: HidePeopleBar | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, explorer, hidepeoplebar |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -9817,9 +15202,28 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 **Evidence**
 
-- `repo-visibility-classic-context` | `repo-doc` | Repo visibility notes for classic context menu | `medium`
-- `repo-visibility-classic-context-usecase` | `repo-doc` | Repo visibility use-case guide for classic context menu | `medium`
-- `app-visibility-provider` | `repo-code` | Current app implementation | `high`
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-visibility-classic-context` | `repo-doc` | `Current repo docs` | Repo visibility notes for classic context menu | `medium` |
+| `repo-visibility-classic-context-usecase` | `repo-doc` | `Current repo docs` | Repo visibility use-case guide for classic context menu | `medium` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | classes, clsid, inprocserver32 |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / visibility/assets/animation-WinMain.c | `https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c` | Matched 2 audit token(s) in win-config.
+- win-registry / records/Intel-00XX.txt | `https://github.com/nohuto/win-registry/blob/main/records/Intel-00XX.txt` | Matched 3 audit token(s) in win-registry.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
