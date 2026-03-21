@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:02:03Z",
+  "generated_utc": "2026-03-21T06:05:24Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 58,
+  "source_record_count": 57,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 24,
-    "docs-first": 34
+    "docs-first": 33
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 48,
+    "manual-override": 47,
     "proof-gate": 6
   },
   "entries": [
@@ -127,26 +127,6 @@
         "key_found_on_page": false,
         "notes": "The page proves the git.autofetch setting exists, but it does not prove the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path."
       }
-    },
-    {
-      "record_id": "peripheral.autoplay-take-no-action",
-      "tweak_id": "peripheral.autoplay-take-no-action",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "The exact MSTakeNoAction handler mapping is not yet backed by an official Microsoft registry source in this dataset.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Peripheral",
-      "technical_area": "Observed User Preference",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json",
-      "summary": "The current app sets several AutoPlay event handlers to MSTakeNoAction under Explorer AutoplayHandlers. Microsoft documents the broader AutoPlay policy surfaces and the fact that AutoPlay can remember a user's choice, but this research pass has not yet found an official registry document for the MSTakeNoAction handler mapping itself.",
-      "decision_why": "The current app's user-choice mapping is plausible, but this research pass has not yet tied MSTakeNoAction and the exact per-event registry paths to an official Microsoft registry document.",
-      "blocking_issues": [
-        "The exact MSTakeNoAction handler mapping is not yet backed by an official Microsoft registry source in this dataset.",
-        "The app writes user-choice handler paths rather than a documented policy surface."
-      ]
     },
     {
       "record_id": "power.disable-cpu-idle-states",
