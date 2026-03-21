@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T20:35:32Z",
+  "generated_utc": "2026-03-21T06:02:03Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 59,
+  "source_record_count": 58,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,11 +15,11 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 24,
-    "docs-first": 35
+    "docs-first": 34
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 49,
+    "manual-override": 48,
     "proof-gate": 6
   },
   "entries": [
@@ -758,25 +758,6 @@
         "key_found_on_page": true,
         "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
       }
-    },
-    {
-      "record_id": "visibility.hide-language-bar",
-      "tweak_id": "visibility.hide-language-bar",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft registry source was captured for the ShowStatus value mapping in this review.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Visibility",
-      "technical_area": "User Preference",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/visibility.hide-language-bar.review.json",
-      "summary": "The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. The repo documents the value meanings, but this review did not find a primary Microsoft registry source for publishing the mapping as validated.",
-      "decision_why": "The feature and current mapping are clearly documented in the repo and app, but this review did not find a primary Microsoft registry source for publishing the ShowStatus semantics as validated.",
-      "blocking_issues": [
-        "No primary Microsoft registry source was captured for the ShowStatus value mapping in this review."
-      ]
     },
     {
       "record_id": "visibility.restore-classic-context-menu",

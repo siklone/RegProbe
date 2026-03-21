@@ -1,0 +1,212 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "visibility.hide-language-bar",
+  "tweak_id": "visibility.hide-language-bar",
+  "record_status": "validated",
+  "summary": "The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.",
+  "setting": {
+    "name": "Language Bar Visibility",
+    "category": "Visibility",
+    "area": "User Preference",
+    "scope": "user",
+    "casual_explanation": "The language bar shows keyboard or input-language controls. This tweak hides that UI for the current user.",
+    "why_people_change_it": "People hide it when they use a single keyboard layout or want a cleaner taskbar and desktop.",
+    "tradeoffs_overview": "Hiding it reduces UI clutter, but it also removes a visible way to switch or inspect input-language settings from that bar.",
+    "professional_notes": "The current app writes HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = 3. Repo visibility notes map ShowStatus values as 0 = Floating on desktop, 3 = Hidden, and 4 = Docked in the taskbar. A Microsoft Q&A thread also shows ShowStatus = 3 as the hidden-state value.",
+    "targets": [
+      {
+        "target_id": "ctf-langbar-showstatus",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+        "value_name": "ShowStatus",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Floating on desktop",
+            "meaning": "Repo notes say the language bar is shown as a floating bar on the desktop.",
+            "evidence_ids": [
+              "repo-visibility-language-bar",
+              "app-visibility-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Hidden",
+            "meaning": "Repo notes say the language bar is hidden.",
+            "evidence_ids": [
+              "repo-visibility-language-bar",
+              "app-visibility-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 4,
+            "label": "Docked in taskbar",
+            "meaning": "Repo notes say the language bar is docked in the taskbar.",
+            "evidence_ids": [
+              "repo-visibility-language-bar",
+              "app-visibility-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app hides the language bar by writing ShowStatus = 3 for the current user.",
+    "writes": [
+      {
+        "target_id": "ctf-langbar-showstatus",
+        "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+        "value_name": "ShowStatus",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 3
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "User preference baseline unknown",
+      "applies_to": "Windows users with the language bar available",
+      "states": [
+        {
+          "target_id": "ctf-langbar-showstatus",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This review did not establish one official Microsoft-published default for the ShowStatus registry value."
+        }
+      ],
+      "notes": "The feature is real, but the exact registry default remains unsourced from a primary Microsoft registry publication in this review.",
+      "evidence_ids": [
+        "repo-visibility-language-bar"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-current-ui",
+      "label": "Windows current UI",
+      "intended_for": [
+        "General users",
+        "People who may switch input languages often"
+      ],
+      "avoid_for": [
+        "Users who strongly want the language bar hidden"
+      ],
+      "states": [
+        {
+          "target_id": "ctf-langbar-showstatus",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated default until the registry baseline is sourced more cleanly."
+        }
+      ],
+      "good_when": "You want to avoid forcing an unsourced registry baseline.",
+      "bad_when": "You explicitly want the language bar hidden today.",
+      "tradeoffs": [
+        "The record stays honest about the missing primary-source default.",
+        "The current app behavior remains documented but not validated."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-visibility-language-bar"
+      ]
+    },
+    {
+      "profile_id": "hide-language-bar",
+      "label": "Hide language bar",
+      "intended_for": [
+        "Single-language users",
+        "People who want a cleaner UI"
+      ],
+      "avoid_for": [
+        "Users who rely on the language bar to switch layouts"
+      ],
+      "states": [
+        {
+          "target_id": "ctf-langbar-showstatus",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Use the repo-documented hidden value that the current app writes."
+        }
+      ],
+      "good_when": "You intentionally want the language bar hidden.",
+      "bad_when": "You need an officially documented registry mapping before applying changes.",
+      "tradeoffs": [
+        "The language bar is hidden for the current user.",
+        "The mapping is repo-backed in this review, not primary-source-backed."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-visibility-language-bar",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "microsoft-qna-language-bar-showstatus",
+      "kind": "official-doc",
+      "title": "Microsoft Q&A: language bar ShowStatus hidden-state example",
+      "location": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
+      "summary": "A Microsoft Q&A thread shows ShowStatus = 3 for the CTF language bar hidden state.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-visibility-language-bar",
+      "kind": "repo-doc",
+      "title": "Repo visibility notes for language bar",
+      "location": "Docs/visibility/visibility.md",
+      "summary": "The repo documents ShowStatus values for HKCU\\Software\\Microsoft\\CTF\\LangBar as 0 = Floating on desktop, 3 = Hidden, and 4 = Docked in the taskbar.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes ShowStatus = 3 under HKCU\\Software\\Microsoft\\CTF\\LangBar for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The feature mapping is corroborated by the repo notes and a Microsoft Q&A thread that shows ShowStatus = 3 as the hidden-state value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
+    "exact_quote_or_path": "HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = DWORD 3",
+    "key_found_on_page": true,
+    "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state."
+  }
+}

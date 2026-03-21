@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-20T20:35:32Z",
+  "generated_utc": "2026-03-21T06:02:03Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 35,
+  "entry_count": 34,
   "entries": [
     {
       "record_id": "audio.disable-spatial-audio",
@@ -566,26 +566,6 @@
         {
           "track": "Service or scheduled-task baseline diff",
           "why_not_validated": "Official Microsoft guidance conflicts with the current disable recommendation.",
-          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
-        }
-      ]
-    },
-    {
-      "record_id": "visibility.hide-language-bar",
-      "current_state": "matches-research | User Preference",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "User Preference",
-      "implementation_status": "matches-research",
-      "source_file": "Docs/tweaks/research/records/visibility.hide-language-bar.review.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or settings-diff capture",
-          "why_not_validated": "No primary Microsoft registry source was captured for the ShowStatus value mapping in this review.",
-          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
-        },
-        {
-          "track": "Service or scheduled-task baseline diff",
-          "why_not_validated": "No primary Microsoft registry source was captured for the ShowStatus value mapping in this review.",
           "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
         }
       ]
