@@ -137,7 +137,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
 | `power.disable-windows-search` | validated | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
-| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `d73c9dea52ecda2551020ddf95e533d3f7eee3f81ebc290fd7087a158d08079d` | `a28f3175ba6a74061e8e8af85f04c439db4a99ac500410e07d866494682b91f3` | 1 |
+| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `35056153bc20aafaa23c26abe707692368c40f2a78ad8ab91abb7d3a9846b2cb` | `a28f3175ba6a74061e8e8af85f04c439db4a99ac500410e07d866494682b91f3` | 1 |
 | `power.hide-lock-option` | validated | `Docs/tweaks/research/records/power.hide-lock-option.json` | `04e84392881dbc6a62efe7a4b1fa4508ef6ecfd6cef520c37df3d1092801b8a0` | `3a5fcbea36a37c95ba2bf3797f8d4b9795da320df22ef0f4c3fb7ebe193988fd` | 1 |
 | `power.hide-sleep-option` | validated | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `3219531d91fbdb783deef46ffa302ee08e79194092ebaa02ad10744bb70653a1` | `118762cc41cacc9939a69f7572284e779e6922b189bb3148777eb6ee540098fb` | 1 |
 | `power.optimize-cpu-boost` | validated | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
@@ -4095,6 +4095,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-cpu-idle-states` | `official-doc` | Microsoft Learn: Introduction to Processor Idle States | `high`
 - `app-power-provider` | `repo-code` | Current app implementation | `high`
+- `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | `medium`
 - `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
 
 **Validation proof**
@@ -4162,6 +4163,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-modern-standby` | `official-doc` | Microsoft Learn: What is Modern Standby | `high`
 - `app-power-provider` | `repo-code` | Current app implementation | `high`
+- `nohuto-power-msdisabled-trace` | `registry-observation` | nohuto power trace for MSDisabled | `medium`
 - `repo-power-doc` | `repo-doc` | Repo power notes | `medium`
 
 **Validation proof**
@@ -4278,7 +4280,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.hide-hibernate-option.json`
-- Source SHA256: `d73c9dea52ecda2551020ddf95e533d3f7eee3f81ebc290fd7087a158d08079d`
+- Source SHA256: `35056153bc20aafaa23c26abe707692368c40f2a78ad8ab91abb7d3a9846b2cb`
 - Proof SHA256: `a28f3175ba6a74061e8e8af85f04c439db4a99ac500410e07d866494682b91f3`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.

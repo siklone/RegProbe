@@ -4344,6 +4344,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-cpu-idle-states` | `official-doc` | Microsoft Learn: Introduction to Processor Idle States | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states | `high` | behavior, side-effects, version-scope, app-mismatch |
 | `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
 | `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
@@ -4487,6 +4488,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-modern-standby` | `official-doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
 | `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-power-msdisabled-trace` | `registry-observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
 | `repo-power-doc` | `repo-doc` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**

@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can show or hide Hibernate in the power menu. This policy decides whether that shortcut is visible.",
     "why_people_change_it": "People hide it when they want a simpler power menu or when hibernation should not be offered as a visible user choice.",
     "tradeoffs_overview": "Hiding Hibernate simplifies the menu, but it also removes one direct way to enter hibernation from the power menu.",
-    "professional_notes": "WindowsExplorer.admx maps ShowHibernateOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0. WindowsExplorer.adml says enabled shows Hibernate when supported by the hardware, disabled hides it, and not configured lets users choose through Power Options Control Panel.",
+    "professional_notes": "WindowsExplorer.admx maps ShowHibernateOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0. WindowsExplorer.adml says enabled shows Hibernate when supported by the hardware, disabled hides it, and not configured lets users choose through Power Options Control Panel. The local Power.txt trace also lists AllowHibernate, HiberFileSizePercent, and HiberFileType in the power block, which are about hibernation support itself rather than the Explorer menu visibility switch.",
     "targets": [
       {
         "target_id": "show-hibernate-option",
@@ -193,6 +193,19 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-power-hibernate-support-trace",
+      "kind": "registry-observation",
+      "title": "nohuto power trace for hibernation support",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+      "summary": "Power.txt lists AllowHibernate, HiberFileSizePercent, and HiberFileType in the power values block, which are adjacent to the Explorer ShowHibernateOption policy but govern hibernation support itself.",
+      "supports": [
+        "path",
+        "behavior",
+        "dependency"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {

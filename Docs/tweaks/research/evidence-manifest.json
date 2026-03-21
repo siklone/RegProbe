@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:10:03.075456Z",
+  "generated_utc": "2026-03-21T11:11:52.534774Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -23811,6 +23811,19 @@
           ]
         },
         {
+          "evidence_id": "nohuto-power-disable-idle-states-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for DisableIdleStatesAtBoot",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
+        },
+        {
           "evidence_id": "repo-power-doc",
           "kind": "repo-doc",
           "title": "Repo power notes",
@@ -24195,6 +24208,19 @@
             "value",
             "ui-mapping",
             "app-mismatch"
+          ]
+        },
+        {
+          "evidence_id": "nohuto-power-msdisabled-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for MSDisabled",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists MSDisabled in the power values block, showing the same local registry family used by the current app implementation.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
           ]
         },
         {
@@ -24843,8 +24869,8 @@
       "tweak_id": "power.hide-hibernate-option",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/power.hide-hibernate-option.json",
-      "source_file_sha256": "d73c9dea52ecda2551020ddf95e533d3f7eee3f81ebc290fd7087a158d08079d",
-      "source_file_size_bytes": 8629,
+      "source_file_sha256": "35056153bc20aafaa23c26abe707692368c40f2a78ad8ab91abb7d3a9846b2cb",
+      "source_file_size_bytes": 9406,
       "name": "Show Hibernate Option",
       "category": "Power",
       "area": "Registry Policy",

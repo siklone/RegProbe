@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:10:03.081511Z",
+  "generated_utc": "2026-03-21T11:11:52.556633Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -24705,6 +24705,19 @@
             "path",
             "value",
             "ui-mapping"
+          ]
+        },
+        {
+          "evidence_id": "nohuto-power-hibernate-support-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for hibernation support",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists AllowHibernate, HiberFileSizePercent, and HiberFileType in the power values block, which are adjacent to the Explorer ShowHibernateOption policy but govern hibernation support itself.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "dependency"
           ]
         }
       ],
