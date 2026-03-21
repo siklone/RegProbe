@@ -200,7 +200,7 @@
       "kind": "procmon-trace",
       "title": "Procmon + LGPO capture - AppCompatTurnOffSwitchBack",
       "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
-      "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable=REG_DWORD 0x0 during gpupdate /force. reg query confirmed the value at the expected path. Rollback deleted the value and gpupdate /force returned the key to its clean baseline. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
+      "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable=REG_DWORD 0x0 during gpupdate /force. reg query confirmed the value at the expected path. Rollback deleted the value and gpupdate /force returned the key to its clean baseline. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
       "supports": [
         "value",
         "behavior",

@@ -221,7 +221,7 @@
       "kind": "procmon-trace",
       "title": "Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack",
       "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro)",
-      "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0. reg query after gpupdate showed both values present at expected paths. Rollback removed Registry.pol, deleted both values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
+      "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0. reg query after gpupdate showed both values present at expected paths. Rollback removed Registry.pol, deleted both values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
       "supports": ["value", "behavior", "version-scope"],
       "strength": "high"
     }

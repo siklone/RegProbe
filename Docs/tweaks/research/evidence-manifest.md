@@ -73,8 +73,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `system.services.disable-wap-push-routing` | deprecated | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
 | `system.services.disable-windows-error-reporting` | deprecated | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
 | `audio.disable-beep` | validated | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `3efba036852ccfe1d739d4fe044a827c5869d7588470af089efd76924a5fc479` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
-| `audio.show-disconnected-devices` | validated | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `442f340c0fb5b4e1c9be6c9f9718f5ca9c4f9b70d9aec837fe20af1764cb264a` | `2baa85886aad3cd3241c8188621af8922df82e356b37321e7a9fceeae2153546` | 1 |
-| `audio.show-hidden-devices` | validated | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `ee02a4f703327abb0063c2c47d472f334819fae45f5d0a775dbc16e5be293513` | `ab7628ab8607cc7c9e9b9d7fef4dcd5ed48d7a003b77c0800a259aafc1161a80` | 1 |
+| `audio.show-disconnected-devices` | validated | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `fb77ec5f6d2975f5623ac5be10fcb9294f54aa94ce8fb9eb8bd2b91362ae71ac` | `2787838415398070d4fa42fa9be2a129552ec7168a3d80d840c067dde24b8725` | 1 |
+| `audio.show-hidden-devices` | validated | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `d270f7c190d9c6877e85c4cee64feb6013a0c180660e77127f2fafa2cc0966c7` | `b20c6cd1377978c30a74c06ba12034057fa29842124424947b081b8f9a10ead9` | 1 |
 | `cleanup.disable-reserved-storage` | validated | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
@@ -87,11 +87,11 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
-| `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `98e0041f5d2f2dded1dd441b4ec81f68be168272e0c7b0a8cd6a990453845547` | `bd1c89d937371569c46997ddf6ecef2a834a95dd5451872e3ffc896921fe5d1a` | 1 |
-| `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `6c0abf13dd6539f1bd85a08ca74104e2ceefe3ae09b84201326b834f96b38e7e` | `2dde98aa6282663ddfed2fee87312a1dd4b055b784bdc453b80206a28c2c38f5` | 1 |
+| `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
-| `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `596c0662d33c32f5d9e89fa209e75ad0b3781d8946ff0efcb71d9c564d781f40` | `1dc4dacff01f0d3c2184729f0b2f66678ac012b001177637c4661ca500a49e33` | 1 |
-| `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `bb6b2b6da886d979ba53fb6de34a50bfbe8b38c5c78d3f3da64b1f38cebd8ae1` | `dc181010baa59a95b1190a854a9c6f689a2479155e3c9f673441420f5808923d` | 1 |
+| `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
+| `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `be138f06d365aca0b48b8db6ef2514ed1010f0bf3fd8d93071552398ba19c2b7` | `924f10f0446949eaa0d7322817b3f335e1d1187cb2299d07d67541f81a651296` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
 | `network.disable-ipv6` | validated | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
@@ -125,12 +125,12 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `notifications.disable-mirroring` | validated | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
 | `notifications.disable-tile` | validated | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
 | `notifications.disable-toast` | validated | `Docs/tweaks/research/records/notifications.disable-toast.json` | `f34932c9eefe4f9474bc39b38dfabefca69ccc07ca11033d4a77395f228e8844` | `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a` | 1 |
-| `performance.disable-animations` | validated | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `3b370451d194624edce2d56ec5bef5a62afbb2873197b7d7e0469dbac86908b3` | `35e8d3d4d3dbb2df6a1d5704fefaa331708c914303be0edf761caa180f1f49c8` | 1 |
-| `performance.disable-menu-show-delay` | validated | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `1d48cb330582d42c07344cceecbb38b087fdf079a6315f1f28213f81e572c0df` | `98fd59152045dd6404b3eb3d07d53dc6e69621a54f8da692dd7fb13fbdd2aadc` | 1 |
+| `performance.disable-animations` | validated | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
+| `performance.disable-menu-show-delay` | validated | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
 | `performance.disable-taskbar-animations` | validated | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `67ac8083ab3c5c6fe6932db8dcf4c4bbaf3d757a95c8c15f549e764b6563943d` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
 | `peripheral.autoplay-take-no-action` | validated | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
-| `peripheral.disable-sticky-keys-prompt` | validated | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `fd004a883625cfb0d8cafce85716a2601158e349dfae21e2143daeb517843f5a` | `3d7d9621f069697a1bef40226ceb1c1cbaa113782aa188b032480b97827c8592` | 1 |
+| `peripheral.disable-sticky-keys-prompt` | validated | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
 | `power.disable-cpu-idle-states` | validated | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `bf7fca5032d4fb2fc2e82ffe078af4d38d51f4e376a8e492f5f7fee16aa08d7c` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
 | `power.disable-fast-startup` | validated | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `24055686b16c5c2970d5afdf963fcc25b1494bc139985b7ad387da77256174f8` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-modern-standby` | validated | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `bc34a4b596f512119526b7899ded90da9463d780ee0d1a1ecf43fded68585d3a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
@@ -149,8 +149,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-app-diagnostics` | validated | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
 | `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `51d9448382ac6ec23c09bf648ae6e20b3b05d73b0f07d2b06d086dcc555524ed` | `40668284efe2873cc8a787874d042a23fff9931283951ea011bc9cd93a695f5c` | 1 |
 | `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997` | `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a` | 2 |
-| `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `196ab0d65f1c87410911dc93ab0f22f19689aae10b8afa9162e1a7e84a3df00d` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
-| `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `40c39189c27aafb29e5e4d60fd49d46ff227f90fc4d6de5f4abdf0fccc44ad3d` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
+| `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
+| `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
 | `privacy.disable-application-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-application-telemetry.json` | `67e8bd36fa534079200de42f85ee86b72e358addfd2af66853bb00673b524f17` | `a968b51a0de4ed20b602bb28e37277b16294b8a2e3956a3d3b351f6cf8d071e9` | 1 |
 | `privacy.disable-background-apps` | validated | `Docs/tweaks/research/records/privacy.disable-background-apps.json` | `87f25eba44934a34cac1d1be07251d472926340620437f51f45d1e058bd842ed` | `bf3477ff8a0483d037ed07264ec9a1f37e93628b8515b4d92bcd052d59c38480` | 1 |
 | `privacy.disable-biometrics` | validated | `Docs/tweaks/research/records/privacy.disable-biometrics.json` | `382e974742bf17a273e1ad3c94f86a97f1ab69995da4a19947121a085421e6c7` | `aca211803f04fb1fc14cb757852759a28fcc4c6fc1b8966b0fe26de035e64638` | 1 |
@@ -183,7 +183,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-online-tips` | validated | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `965a13d3374e303e5a2837a0386e0af41ce9697ea28a897abab01f9cc2bd3aff` | `8d36266f9dcac9d389327ae49d6127d077aeb7da9f22db6f9639bcc597e6082f` | 1 |
 | `privacy.disable-pca-diagnostics.policy` | validated | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `731accead4218d90b0eecf4d29ce8ee860787f5c60cb8de927ee14ee710cf266` | `558a8aa1f3ad5522ac4f68b67fe1735d5e0f01ae49908cf9b26fc8b6cdf7f2b6` | 1 |
 | `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `2fa1d757d7f9bd8b007b029245556843bdd3b030b001f805fd7bc8398c723a5e` | `75976cc906c66e2106f84d4de7fbc6b4f022c70f7211acbba2a757d61463a1ae` | 1 |
-| `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `68b23cb9b1b707cd530cb6546f001026d500046d7d9fdfbce591a87f24dc8938` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
+| `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
 | `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `89ad22de4bed7c504943cea64a8d3b1a8bc0191c7757882bdaa849d6013dc7b7` | `5d82b8ec56397b6c2a7bba667874745516859db05637ce36a100bb7162ca5e7f` | 1 |
 | `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `36538de8f009954948f42b0c7c5c199766bdc26aa163a84e276497e1af137a23` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
 | `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
@@ -192,7 +192,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-sensors` | validated | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `32f17d8c9174fddd67b02f73a2b2677f6704617a6a3ea56ca22588151fcb0fce` | `c9d989e80e0cb84b74bae2c4014c896dcb01eb9ba89492bfb540330887063000` | 1 |
 | `privacy.disable-steps-recorder` | validated | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `e88fac5c0c0644395a18bccac5f47df80c5ae2abdc94090ca29ab445aa527112` | `c8351f2331e59f5a49d47be23a8a1ae7a98bfa1c765a07713c97331d145c275a` | 1 |
 | `privacy.disable-suggestions.policy` | validated | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
-| `privacy.disable-switchback.policy` | validated | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `2f34a4d89a538692969d94671b5221418b8fe69700fd382e96e38c296aede6cc` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
+| `privacy.disable-switchback.policy` | validated | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
 | `privacy.disable-telemetry-change-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-change-notifications.json` | `91d6621e50dda7419d14d656552cd10b86b3c6dca556381d8fe62fe8d2cdf6d2` | `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993` | 1 |
 | `privacy.disable-telemetry-optin-ui` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-optin-ui.json` | `3858e37369770d9634b602f39ac8e02bc2dae14350bce14e23ee5a0ab7976287` | `ae9ed2bdc3f41b3545e040c290372bd5f791100659e9d1a42a780196badc546a` | 1 |
 | `privacy.disable-wer` | validated | `Docs/tweaks/research/records/privacy.disable-wer.json` | `e3cfbb17de947b0be50216890ce6641583b702e0b87538e9b58246458ad012b8` | `f76a986e44138251f15e259e1d0c6babb0919ff2b6693bced3034453f0baf573` | 1 |
@@ -2055,8 +2055,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json`
-- Source SHA256: `442f340c0fb5b4e1c9be6c9f9718f5ca9c4f9b70d9aec837fe20af1764cb264a`
-- Proof SHA256: `2baa85886aad3cd3241c8188621af8922df82e356b37321e7a9fceeae2153546`
+- Source SHA256: `fb77ec5f6d2975f5623ac5be10fcb9294f54aa94ce8fb9eb8bd2b91362ae71ac`
+- Proof SHA256: `2787838415398070d4fa42fa9be2a129552ec7168a3d80d840c067dde24b8725`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -2076,7 +2076,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
 | exact_quote_or_path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:0. |
 | key_found_on_page | True |
 | notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
@@ -2087,8 +2087,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-hidden-devices.review.json`
-- Source SHA256: `ee02a4f703327abb0063c2c47d472f334819fae45f5d0a775dbc16e5be293513`
-- Proof SHA256: `ab7628ab8607cc7c9e9b9d7fef4dcd5ed48d7a003b77c0800a259aafc1161a80`
+- Source SHA256: `d270f7c190d9c6877e85c4cee64feb6013a0c180660e77127f2fafa2cc0966c7`
+- Proof SHA256: `b20c6cd1377978c30a74c06ba12034057fa29842124424947b081b8f9a10ead9`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -2108,7 +2108,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
 | exact_quote_or_path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0. |
 | key_found_on_page | True |
 | notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
@@ -2521,8 +2521,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Explorer Advanced Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json`
-- Source SHA256: `98e0041f5d2f2dded1dd441b4ec81f68be168272e0c7b0a8cd6a990453845547`
-- Proof SHA256: `bd1c89d937371569c46997ddf6ecef2a834a95dd5451872e3ffc896921fe5d1a`
+- Source SHA256: `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a`
+- Proof SHA256: `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode = 1, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
 
@@ -2542,7 +2542,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml |
 | exact_quote_or_path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0. |
 | key_found_on_page | True |
 | notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
@@ -2553,8 +2553,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-file-extensions.review.json`
-- Source SHA256: `6c0abf13dd6539f1bd85a08ca74104e2ceefe3ae09b84201326b834f96b38e7e`
-- Proof SHA256: `2dde98aa6282663ddfed2fee87312a1dd4b055b784bdc453b80206a28c2c38f5`
+- Source SHA256: `af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e`
+- Proof SHA256: `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d`
 
 **Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, while a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
 
@@ -2575,7 +2575,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv |
 | exact_quote_or_path | powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0 |
 | key_found_on_page | True |
 | notes | In the same reversible runtime session, Shell.Application displayed the test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0. That resolved the live Explorer semantics for this host. |
@@ -2619,8 +2619,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-hidden-files.review.json`
-- Source SHA256: `596c0662d33c32f5d9e89fa209e75ad0b3781d8946ff0efcb71d9c564d781f40`
-- Proof SHA256: `1dc4dacff01f0d3c2184729f0b2f66678ac012b001177637c4661ca500a49e33`
+- Source SHA256: `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd`
+- Proof SHA256: `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d`
 
 **Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\Advanced with symbolic SHOW and HIDE semantics, while a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
 
@@ -2641,7 +2641,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidden_capture_20260313.csv |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidden_capture_20260313.csv |
 | exact_quote_or_path | powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2 |
 | key_found_on_page | True |
 | notes | In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host. |
@@ -2652,8 +2652,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json`
-- Source SHA256: `bb6b2b6da886d979ba53fb6de34a50bfbe8b38c5c78d3f3da64b1f38cebd8ae1`
-- Proof SHA256: `dc181010baa59a95b1190a854a9c6f689a2479155e3c9f673441420f5808923d`
+- Source SHA256: `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b`
+- Proof SHA256: `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390`
 
 **Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, while a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
 
@@ -2674,7 +2674,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv |
 | exact_quote_or_path | reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1 |
 | key_found_on_page | True |
 | notes | The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace. |
@@ -3863,8 +3863,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Win32 Animation Effects`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/performance.disable-animations.review.json`
-- Source SHA256: `3b370451d194624edce2d56ec5bef5a62afbb2873197b7d7e0469dbac86908b3`
-- Proof SHA256: `35e8d3d4d3dbb2df6a1d5704fefaa331708c914303be0edf761caa180f1f49c8`
+- Source SHA256: `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97`
+- Proof SHA256: `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2`
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\Control Panel\Desktop\WindowMetrics\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
 
@@ -3886,7 +3886,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json |
 | exact_quote_or_path | after_disable: API false, registry MinAnimate = "0". after_enable: API true, registry MinAnimate = "1". restored: API false, registry MinAnimate = "0". |
 | key_found_on_page | True |
 | notes | The local runtime diff used the official SystemParametersInfo animation API to toggle the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -3897,8 +3897,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Win32 Menu Timing`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json`
-- Source SHA256: `1d48cb330582d42c07344cceecbb38b087fdf079a6315f1f28213f81e572c0df`
-- Proof SHA256: `98fd59152045dd6404b3eb3d07d53dc6e69621a54f8da692dd7fb13fbdd2aadc`
+- Source SHA256: `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930`
+- Proof SHA256: `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3`
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\Control Panel\Desktop\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
 
@@ -3919,7 +3919,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json |
 | exact_quote_or_path | after_slow: API 400, registry MenuShowDelay = "400". after_fast: API 0, registry MenuShowDelay = "0". restored: API 0, registry MenuShowDelay = "0". |
 | key_found_on_page | True |
 | notes | The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -4037,8 +4037,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Accessibility Sticky Keys Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json`
-- Source SHA256: `fd004a883625cfb0d8cafce85716a2601158e349dfae21e2143daeb517843f5a`
-- Proof SHA256: `3d7d9621f069697a1bef40226ceb1c1cbaa113782aa188b032480b97827c8592`
+- Source SHA256: `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837`
+- Proof SHA256: `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e`
 
 **Summary:** Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\Control Panel\Accessibility\StickyKeys\Flags = "510", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = "506". The current app write of Flags = "506" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.
 
@@ -4060,7 +4060,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json |
+| source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json |
 | exact_quote_or_path | after_hotkey_on: API flags 510, registry Flags = "510". after_hotkey_off: API flags 506, registry Flags = "506". restored: API flags 506, registry Flags = "506". |
 | key_found_on_page | True |
 | notes | The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state. |
@@ -4687,7 +4687,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Application Compatibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json`
-- Source SHA256: `196ab0d65f1c87410911dc93ab0f22f19689aae10b8afa9162e1a7e84a3df00d`
+- Source SHA256: `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78`
 - Proof SHA256: `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a`
 
 **Summary:** Two AppCompat.admx policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
@@ -4727,7 +4727,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Application Compatibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json`
-- Source SHA256: `40c39189c27aafb29e5e4d60fd49d46ff227f90fc4d6de5f4abdf0fccc44ad3d`
+- Source SHA256: `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250`
 - Proof SHA256: `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347`
 
 **Summary:** Four AppDeviceInventory policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.
@@ -5877,7 +5877,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Application Compatibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json`
-- Source SHA256: `68b23cb9b1b707cd530cb6546f001026d500046d7d9fdfbce591a87f24dc8938`
+- Source SHA256: `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5`
 - Proof SHA256: `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5`
 
 **Summary:** Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\Software\Policies\Microsoft\Windows\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.
@@ -6197,7 +6197,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Application Compatibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json`
-- Source SHA256: `2f34a4d89a538692969d94671b5221418b8fe69700fd382e96e38c296aede6cc`
+- Source SHA256: `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62`
 - Proof SHA256: `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54`
 
 **Summary:** Controls the SwitchBack policy under HKLM\Software\Policies\Microsoft\Windows\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.

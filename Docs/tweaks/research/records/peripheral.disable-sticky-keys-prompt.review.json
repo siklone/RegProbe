@@ -147,7 +147,7 @@
       "evidence_id": "runtime-spi-stickykeys-diff",
       "kind": "runtime-diff",
       "title": "Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence",
-      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+      "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
       "summary": "A local runtime diff called SPI_SETSTICKYKEYS with 510 and 506, then read both SPI_GETSTICKYKEYS and HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags after each change. Setting 510 produced API flags 510 with registry value \"510\". Setting 506 produced API flags 506 with registry value \"506\". The original local state was restored at the end.",
       "supports": [
         "path",
@@ -183,7 +183,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+    "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
     "exact_quote_or_path": "after_hotkey_on: API flags 510, registry Flags = \"510\". after_hotkey_off: API flags 506, registry Flags = \"506\". restored: API flags 506, registry Flags = \"506\".",
     "key_found_on_page": true,
     "notes": "The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state."

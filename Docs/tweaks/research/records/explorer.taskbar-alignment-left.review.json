@@ -155,7 +155,7 @@
       "evidence_id": "procmon-taskbar-alignment",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.pml",
+      "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.pml",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0 and 1, and Explorer.EXE queried the same value immediately after each restart. No runtime traffic for the documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was observed in this capture.",
       "supports": [
         "path",
@@ -192,7 +192,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T17:06:31+03:00",
   "validation_proof": {
-    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv",
+    "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv",
     "exact_quote_or_path": "reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1",
     "key_found_on_page": true,
     "notes": "The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace."

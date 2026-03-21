@@ -153,14 +153,14 @@ Current write(s):
 
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
@@ -222,14 +222,14 @@ Current write(s):
 
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
@@ -1156,14 +1156,14 @@ Current write(s):
 
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - C:\Users\Deniz\AppData\Local\Temp\explorer_batch_applied_20260314.pml and C:\Users\Deniz\AppData\Local\Temp\explorer_compact_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\explorer_batch_applied_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\explorer_compact_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
 | `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\explorer_batch_applied_20260314.pml |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\explorer_batch_applied_20260314.pml |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
@@ -1227,14 +1227,14 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
-| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\Deniz\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\hidefileext_capture_20260313.csv |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.csv |
 | Exact quote / path | powershell.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt Type: REG_DWORD, Length: 4, Data: 0 |
 | Key found on page | `True` |
 | Notes | In the same reversible runtime session, Shell.Application displayed the test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0. That resolved the live Explorer semantics for this host. |
@@ -1369,14 +1369,14 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
-| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | C:\Users\Deniz\AppData\Local\Temp\hidden_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidden_capture_20260313.pml | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\hidden_capture_20260313.csv |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\hidden_capture_20260313.csv |
 | Exact quote / path | powershell.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden Type: REG_DWORD, Length: 4, Data: 2 |
 | Key found on page | `True` |
 | Notes | In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host. |
@@ -1440,14 +1440,14 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11 | `high` | behavior, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\Deniz\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
+| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\taskbar_alignment_capture_20260313.csv |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.csv |
 | Exact quote / path | reg.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl Type: REG_DWORD Data: 1 |
 | Key found on page | `True` |
 | Notes | The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace. |
@@ -3909,14 +3909,14 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-animationinfo` | `official-doc` | Microsoft Learn: ANIMATIONINFO structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo | `high` | value, behavior |
 | `ms-systemparametersinfo-animation` | `official-doc` | Microsoft Learn: SystemParametersInfo - animation actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
-| `runtime-spi-minanimate-diff` | `runtime-diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | C:\Users\Deniz\AppData\Local\Temp\minanimate_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-minanimate-diff` | `runtime-diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | C:\Users\<USER>\AppData\Local\Temp\minanimate_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\minanimate_spi_diff_20260314.json |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\minanimate_spi_diff_20260314.json |
 | Exact quote / path | after_disable: API false, registry MinAnimate = "0". after_enable: API true, registry MinAnimate = "1". restored: API false, registry MinAnimate = "0". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo animation API to toggle the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -3979,14 +3979,14 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `ms-systemparametersinfo-menushowdelay` | `official-doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | value, behavior, allowed-values |
-| `runtime-spi-menushowdelay-diff` | `runtime-diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | C:\Users\Deniz\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-menushowdelay-diff` | `runtime-diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | C:\Users\<USER>\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json |
 | Exact quote / path | after_slow: API 400, registry MenuShowDelay = "400". after_fast: API 0, registry MenuShowDelay = "0". restored: API 0, registry MenuShowDelay = "0". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -4271,14 +4271,14 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-systemparametersinfo-stickykeys` | `official-doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
 | `ms-stickykeys-struct` | `official-doc` | Microsoft Learn: STICKYKEYS structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys | `high` | value, allowed-values, behavior |
-| `runtime-spi-stickykeys-diff` | `runtime-diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | C:\Users\Deniz\AppData\Local\Temp\stickykeys_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-stickykeys-diff` | `runtime-diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | C:\Users\<USER>\AppData\Local\Temp\stickykeys_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
 | `app-peripheral-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Users\Deniz\AppData\Local\Temp\stickykeys_spi_diff_20260314.json |
+| Source URL | C:\Users\<USER>\AppData\Local\Temp\stickykeys_spi_diff_20260314.json |
 | Exact quote / path | after_hotkey_on: API flags 510, registry Flags = "510". after_hotkey_off: API flags 506, registry Flags = "506". restored: API flags 506, registry Flags = "506". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state. |

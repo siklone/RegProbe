@@ -204,7 +204,7 @@
       "kind": "procmon-trace",
       "title": "Procmon + LGPO capture - Turn off Program Compatibility Assistant",
       "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
-      "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path. Rollback removed Registry.pol and gpt.ini, deleted DisablePCA, and gpupdate /force returned the key to its baseline state. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\disable_pca_capture_20260313_153643.pml",
+      "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path. Rollback removed Registry.pol and gpt.ini, deleted DisablePCA, and gpupdate /force returned the key to its baseline state. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\disable_pca_capture_20260313_153643.pml",
       "supports": [
         "value",
         "behavior",

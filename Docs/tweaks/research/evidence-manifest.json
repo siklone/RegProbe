@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T08:56:05.486221Z",
+  "generated_utc": "2026-03-21T09:10:05.923838Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -10439,8 +10439,8 @@
       "tweak_id": "audio.show-disconnected-devices",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/audio.show-disconnected-devices.review.json",
-      "source_file_sha256": "442f340c0fb5b4e1c9be6c9f9718f5ca9c4f9b70d9aec837fe20af1764cb264a",
-      "source_file_size_bytes": 8685,
+      "source_file_sha256": "fb77ec5f6d2975f5623ac5be10fcb9294f54aa94ce8fb9eb8bd2b91362ae71ac",
+      "source_file_size_bytes": 8688,
       "name": "Show Disconnected Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -10557,7 +10557,7 @@
           "evidence_id": "procmon-audio-show-disconnected-devices",
           "kind": "procmon-trace",
           "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-          "location": "Local captures - C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
+          "location": "Local captures - C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
           "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
           "strength": "high",
           "supports": [
@@ -10582,20 +10582,20 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
         "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:0.",
         "key_found_on_page": true,
         "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build."
       },
-      "validation_proof_sha256": "2baa85886aad3cd3241c8188621af8922df82e356b37321e7a9fceeae2153546"
+      "validation_proof_sha256": "2787838415398070d4fa42fa9be2a129552ec7168a3d80d840c067dde24b8725"
     },
     {
       "record_id": "audio.show-hidden-devices",
       "tweak_id": "audio.show-hidden-devices",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/audio.show-hidden-devices.review.json",
-      "source_file_sha256": "ee02a4f703327abb0063c2c47d472f334819fae45f5d0a775dbc16e5be293513",
-      "source_file_size_bytes": 8444,
+      "source_file_sha256": "d270f7c190d9c6877e85c4cee64feb6013a0c180660e77127f2fafa2cc0966c7",
+      "source_file_size_bytes": 8447,
       "name": "Show Hidden Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -10712,7 +10712,7 @@
           "evidence_id": "procmon-audio-show-hidden-devices",
           "kind": "procmon-trace",
           "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-          "location": "Local captures - C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
+          "location": "Local captures - C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
           "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
           "strength": "high",
           "supports": [
@@ -10737,12 +10737,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
         "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0.",
         "key_found_on_page": true,
         "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build."
       },
-      "validation_proof_sha256": "ab7628ab8607cc7c9e9b9d7fef4dcd5ed48d7a003b77c0800a259aafc1161a80"
+      "validation_proof_sha256": "b20c6cd1377978c30a74c06ba12034057fa29842124424947b081b8f9a10ead9"
     },
     {
       "record_id": "cleanup.disable-reserved-storage",
@@ -13187,8 +13187,8 @@
       "tweak_id": "explorer.enable-explorer-compact-mode",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json",
-      "source_file_sha256": "98e0041f5d2f2dded1dd441b4ec81f68be168272e0c7b0a8cd6a990453845547",
-      "source_file_size_bytes": 8254,
+      "source_file_sha256": "fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a",
+      "source_file_size_bytes": 8257,
       "name": "Enable Explorer Compact View",
       "category": "Explorer",
       "area": "Explorer Advanced Flags",
@@ -13304,7 +13304,7 @@
           "evidence_id": "procmon-explorer-compact-mode",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-          "location": "Local captures - C:\\Users\\Deniz\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml and C:\\Users\\Deniz\\AppData\\Local\\Temp\\explorer_compact_zero_20260314.pml",
+          "location": "Local captures - C:\\Users\\<USER>\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml and C:\\Users\\<USER>\\AppData\\Local\\Temp\\explorer_compact_zero_20260314.pml",
           "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this build.",
           "strength": "high",
           "supports": [
@@ -13329,20 +13329,20 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\explorer_batch_applied_20260314.pml",
         "exact_quote_or_path": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0.",
         "key_found_on_page": true,
         "notes": "The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart."
       },
-      "validation_proof_sha256": "bd1c89d937371569c46997ddf6ecef2a834a95dd5451872e3ffc896921fe5d1a"
+      "validation_proof_sha256": "db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2"
     },
     {
       "record_id": "explorer.show-file-extensions",
       "tweak_id": "explorer.show-file-extensions",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/explorer.show-file-extensions.review.json",
-      "source_file_sha256": "6c0abf13dd6539f1bd85a08ca74104e2ceefe3ae09b84201326b834f96b38e7e",
-      "source_file_size_bytes": 10769,
+      "source_file_sha256": "af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e",
+      "source_file_size_bytes": 10771,
       "name": "Show File Extensions",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -13501,7 +13501,7 @@
           "evidence_id": "procmon-hidefileext-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidefileext_capture_20260313.pml",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidefileext_capture_20260313.pml",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt after each restart, and a shell display check resolved the same test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0.",
           "strength": "high",
           "supports": [
@@ -13526,12 +13526,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv",
         "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0",
         "key_found_on_page": true,
         "notes": "In the same reversible runtime session, Shell.Application displayed the test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0. That resolved the live Explorer semantics for this host."
       },
-      "validation_proof_sha256": "2dde98aa6282663ddfed2fee87312a1dd4b055b784bdc453b80206a28c2c38f5"
+      "validation_proof_sha256": "65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d"
     },
     {
       "record_id": "explorer.show-full-path",
@@ -13741,8 +13741,8 @@
       "tweak_id": "explorer.show-hidden-files",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/explorer.show-hidden-files.review.json",
-      "source_file_sha256": "596c0662d33c32f5d9e89fa209e75ad0b3781d8946ff0efcb71d9c564d781f40",
-      "source_file_size_bytes": 10735,
+      "source_file_sha256": "66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd",
+      "source_file_size_bytes": 10737,
       "name": "Show Hidden Files and Folders",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -13901,7 +13901,7 @@
           "evidence_id": "procmon-hidden-runtime",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidden_capture_20260313.pml",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidden_capture_20260313.pml",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden after each restart, and a direct Explorer UI automation check listed ghost.txt plus visible.txt when Hidden = 1 but only visible.txt when Hidden = 2.",
           "strength": "high",
           "supports": [
@@ -13926,20 +13926,20 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidden_capture_20260313.csv",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidden_capture_20260313.csv",
         "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2",
         "key_found_on_page": true,
         "notes": "In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host."
       },
-      "validation_proof_sha256": "1dc4dacff01f0d3c2184729f0b2f66678ac012b001177637c4661ca500a49e33"
+      "validation_proof_sha256": "628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d"
     },
     {
       "record_id": "explorer.taskbar-alignment-left",
       "tweak_id": "explorer.taskbar-alignment-left",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json",
-      "source_file_sha256": "bb6b2b6da886d979ba53fb6de34a50bfbe8b38c5c78d3f3da64b1f38cebd8ae1",
-      "source_file_size_bytes": 10322,
+      "source_file_sha256": "463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b",
+      "source_file_size_bytes": 10324,
       "name": "Taskbar Alignment",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -14094,7 +14094,7 @@
           "evidence_id": "procmon-taskbar-alignment",
           "kind": "procmon-trace",
           "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.pml",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.pml",
           "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0 and 1, and Explorer.EXE queried the same value immediately after each restart. No runtime traffic for the documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was observed in this capture.",
           "strength": "high",
           "supports": [
@@ -14119,12 +14119,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\taskbar_alignment_capture_20260313.csv",
         "exact_quote_or_path": "reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl Type: REG_DWORD Data: 1",
         "key_found_on_page": true,
         "notes": "The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace."
       },
-      "validation_proof_sha256": "dc181010baa59a95b1190a854a9c6f689a2479155e3c9f673441420f5808923d"
+      "validation_proof_sha256": "f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390"
     },
     {
       "record_id": "network.disable-active-probing",
@@ -22311,8 +22311,8 @@
       "tweak_id": "performance.disable-animations",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/performance.disable-animations.review.json",
-      "source_file_sha256": "3b370451d194624edce2d56ec5bef5a62afbb2873197b7d7e0469dbac86908b3",
-      "source_file_size_bytes": 9665,
+      "source_file_sha256": "066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97",
+      "source_file_size_bytes": 9667,
       "name": "Disable Window Animations",
       "category": "Performance",
       "area": "Win32 Animation Effects",
@@ -22458,7 +22458,7 @@
           "evidence_id": "runtime-spi-minanimate-diff",
           "kind": "runtime-diff",
           "title": "Local SPI_SETANIMATION runtime diff - MinAnimate persistence",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json",
           "summary": "A local runtime diff called SPI_SETANIMATION with animations disabled and enabled, then read both SPI_GETANIMATION and HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate after each change. Disabled stayed at API false with MinAnimate = \"0\". Enabled switched to API true with MinAnimate = \"1\". The original local state was restored at the end.",
           "strength": "high",
           "supports": [
@@ -22483,20 +22483,20 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\minanimate_spi_diff_20260314.json",
         "exact_quote_or_path": "after_disable: API false, registry MinAnimate = \"0\". after_enable: API true, registry MinAnimate = \"1\". restored: API false, registry MinAnimate = \"0\".",
         "key_found_on_page": true,
         "notes": "The local runtime diff used the official SystemParametersInfo animation API to toggle the feature and then read the persisted registry backend. The machine ended in its original state."
       },
-      "validation_proof_sha256": "35e8d3d4d3dbb2df6a1d5704fefaa331708c914303be0edf761caa180f1f49c8"
+      "validation_proof_sha256": "b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2"
     },
     {
       "record_id": "performance.disable-menu-show-delay",
       "tweak_id": "performance.disable-menu-show-delay",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json",
-      "source_file_sha256": "1d48cb330582d42c07344cceecbb38b087fdf079a6315f1f28213f81e572c0df",
-      "source_file_size_bytes": 8989,
+      "source_file_sha256": "af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930",
+      "source_file_size_bytes": 8991,
       "name": "Remove Menu Show Delay",
       "category": "Performance",
       "area": "Win32 Menu Timing",
@@ -22628,7 +22628,7 @@
           "evidence_id": "runtime-spi-menushowdelay-diff",
           "kind": "runtime-diff",
           "title": "Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
           "summary": "A local runtime diff called SPI_SETMENUSHOWDELAY with 400 and 0, then read both SPI_GETMENUSHOWDELAY and HKCU\\Control Panel\\Desktop\\MenuShowDelay after each change. Setting 400 produced API 400 with registry value \"400\". Setting 0 produced API 0 with registry value \"0\". The original local state was restored at the end.",
           "strength": "high",
           "supports": [
@@ -22653,12 +22653,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\menushowdelay_spi_diff_20260314.json",
         "exact_quote_or_path": "after_slow: API 400, registry MenuShowDelay = \"400\". after_fast: API 0, registry MenuShowDelay = \"0\". restored: API 0, registry MenuShowDelay = \"0\".",
         "key_found_on_page": true,
         "notes": "The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state."
       },
-      "validation_proof_sha256": "98fd59152045dd6404b3eb3d07d53dc6e69621a54f8da692dd7fb13fbdd2aadc"
+      "validation_proof_sha256": "2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3"
     },
     {
       "record_id": "performance.disable-taskbar-animations",
@@ -23368,8 +23368,8 @@
       "tweak_id": "peripheral.disable-sticky-keys-prompt",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json",
-      "source_file_sha256": "fd004a883625cfb0d8cafce85716a2601158e349dfae21e2143daeb517843f5a",
-      "source_file_size_bytes": 10303,
+      "source_file_sha256": "6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837",
+      "source_file_size_bytes": 10305,
       "name": "Disable Sticky Keys Prompt",
       "category": "Peripheral",
       "area": "Accessibility Sticky Keys Flags",
@@ -23516,7 +23516,7 @@
           "evidence_id": "runtime-spi-stickykeys-diff",
           "kind": "runtime-diff",
           "title": "Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence",
-          "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+          "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
           "summary": "A local runtime diff called SPI_SETSTICKYKEYS with 510 and 506, then read both SPI_GETSTICKYKEYS and HKCU\\Control Panel\\Accessibility\\StickyKeys\\Flags after each change. Setting 510 produced API flags 510 with registry value \"510\". Setting 506 produced API flags 506 with registry value \"506\". The original local state was restored at the end.",
           "strength": "high",
           "supports": [
@@ -23541,12 +23541,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
+        "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\stickykeys_spi_diff_20260314.json",
         "exact_quote_or_path": "after_hotkey_on: API flags 510, registry Flags = \"510\". after_hotkey_off: API flags 506, registry Flags = \"506\". restored: API flags 506, registry Flags = \"506\".",
         "key_found_on_page": true,
         "notes": "The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state."
       },
-      "validation_proof_sha256": "3d7d9621f069697a1bef40226ceb1c1cbaa113782aa188b032480b97827c8592"
+      "validation_proof_sha256": "ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e"
     },
     {
       "record_id": "power.disable-cpu-idle-states",
@@ -27494,8 +27494,8 @@
       "tweak_id": "privacy.disable-appcompat-engine.policy",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json",
-      "source_file_sha256": "196ab0d65f1c87410911dc93ab0f22f19689aae10b8afa9162e1a7e84a3df00d",
-      "source_file_size_bytes": 16713,
+      "source_file_sha256": "88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78",
+      "source_file_size_bytes": 16714,
       "name": "Disable Application Compatibility Engine and SwitchBack",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -27768,7 +27768,7 @@
           "kind": "procmon-trace",
           "title": "Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack",
           "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro)",
-          "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0. reg query after gpupdate showed both values present at expected paths. Rollback removed Registry.pol, deleted both values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
+          "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0. reg query after gpupdate showed both values present at expected paths. Rollback removed Registry.pol, deleted both values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
           "strength": "high",
           "supports": [
             "value",
@@ -27790,8 +27790,8 @@
       "tweak_id": "privacy.disable-appdeviceinventory.policy",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json",
-      "source_file_sha256": "40c39189c27aafb29e5e4d60fd49d46ff227f90fc4d6de5f4abdf0fccc44ad3d",
-      "source_file_size_bytes": 20538,
+      "source_file_sha256": "2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250",
+      "source_file_size_bytes": 20539,
       "name": "Disable App Device Inventory Policies",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -28191,7 +28191,7 @@
           "kind": "procmon-trace",
           "title": "Procmon + LGPO capture - four AppDeviceInventory policies",
           "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200)",
-          "summary": "LGPO.exe applied six AppCompat policy values including all four AppDeviceInventory values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableAPISamping=REG_DWORD 0x1, DisableApplicationFootprint=REG_DWORD 0x1, DisableInstallTracing=REG_DWORD 0x1, and DisableWin32AppBackup=REG_DWORD 0x1. reg query after gpupdate showed all four values present at expected paths. Rollback removed Registry.pol, deleted the values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
+          "summary": "LGPO.exe applied six AppCompat policy values including all four AppDeviceInventory values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat during gpupdate /force. RegSetValue confirmed DisableAPISamping=REG_DWORD 0x1, DisableApplicationFootprint=REG_DWORD 0x1, DisableInstallTracing=REG_DWORD 0x1, and DisableWin32AppBackup=REG_DWORD 0x1. reg query after gpupdate showed all four values present at expected paths. Rollback removed Registry.pol, deleted the values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
           "strength": "high",
           "supports": [
             "value",
@@ -35452,8 +35452,8 @@
       "tweak_id": "privacy.disable-program-compatibility-assistant",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json",
-      "source_file_sha256": "68b23cb9b1b707cd530cb6546f001026d500046d7d9fdfbce591a87f24dc8938",
-      "source_file_size_bytes": 12114,
+      "source_file_sha256": "1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5",
+      "source_file_size_bytes": 12115,
       "name": "Disable Program Compatibility Assistant",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -35656,7 +35656,7 @@
           "kind": "procmon-trace",
           "title": "Procmon + LGPO capture - Turn off Program Compatibility Assistant",
           "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
-          "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path. Rollback removed Registry.pol and gpt.ini, deleted DisablePCA, and gpupdate /force returned the key to its baseline state. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\disable_pca_capture_20260313_153643.pml",
+          "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path. Rollback removed Registry.pol and gpt.ini, deleted DisablePCA, and gpupdate /force returned the key to its baseline state. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\disable_pca_capture_20260313_153643.pml",
           "strength": "high",
           "supports": [
             "value",
@@ -37614,8 +37614,8 @@
       "tweak_id": "privacy.disable-switchback.policy",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json",
-      "source_file_sha256": "2f34a4d89a538692969d94671b5221418b8fe69700fd382e96e38c296aede6cc",
-      "source_file_size_bytes": 12852,
+      "source_file_sha256": "7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62",
+      "source_file_size_bytes": 12853,
       "name": "Disable SwitchBack Compatibility Policy",
       "category": "Privacy",
       "area": "Application Compatibility",
@@ -37814,7 +37814,7 @@
           "kind": "procmon-trace",
           "title": "Procmon + LGPO capture - AppCompatTurnOffSwitchBack",
           "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
-          "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable=REG_DWORD 0x0 during gpupdate /force. reg query confirmed the value at the expected path. Rollback deleted the value and gpupdate /force returned the key to its clean baseline. Capture file: C:\\Users\\Deniz\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
+          "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable=REG_DWORD 0x0 during gpupdate /force. reg query confirmed the value at the expected path. Rollback deleted the value and gpupdate /force returned the key to its clean baseline. Capture file: C:\\Users\\<USER>\\AppData\\Local\\Temp\\appcompat_policy_capture_lgpo_clean.pml",
           "strength": "high",
           "supports": [
             "value",

@@ -117,7 +117,7 @@
       "evidence_id": "procmon-audio-show-disconnected-devices",
       "kind": "procmon-trace",
       "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-      "location": "Local captures - C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
+      "location": "Local captures - C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml and C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_zero_20260314.pml",
       "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
       "supports": [
         "path",
@@ -153,7 +153,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
+    "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml",
     "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:0.",
     "key_found_on_page": true,
     "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build."

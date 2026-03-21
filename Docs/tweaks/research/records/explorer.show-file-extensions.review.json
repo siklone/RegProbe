@@ -159,7 +159,7 @@
       "evidence_id": "procmon-hidefileext-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-      "location": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidefileext_capture_20260313.pml",
+      "location": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidefileext_capture_20260313.pml",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt after each restart, and a shell display check resolved the same test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0.",
       "supports": [
         "path",
@@ -196,7 +196,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T17:30:00+03:00",
   "validation_proof": {
-    "source_url": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv",
+    "source_url": "C:\\Users\\<USER>\\AppData\\Local\\Temp\\hidefileext_capture_20260313.csv",
     "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt Type: REG_DWORD, Length: 4, Data: 0",
     "key_found_on_page": true,
     "notes": "In the same reversible runtime session, Shell.Application displayed the test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0. That resolved the live Explorer semantics for this host."

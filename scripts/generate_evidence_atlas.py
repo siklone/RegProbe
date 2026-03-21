@@ -9,15 +9,29 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_INDEX_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
 OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-atlas.md"
+REDACTED_USER = "<USER>"
+HOME_PATH = str(Path.home())
+HOME_PATH_FWD = HOME_PATH.replace("\\", "/")
+USER_PATH_REPLACEMENTS = {
+    HOME_PATH: HOME_PATH.replace(Path.home().name, REDACTED_USER),
+    HOME_PATH_FWD: HOME_PATH_FWD.replace(Path.home().name, REDACTED_USER),
+}
+
+
+def sanitize_text(value: Any) -> str:
+    text = "" if value is None else str(value)
+    for source, replacement in USER_PATH_REPLACEMENTS.items():
+        text = text.replace(source, replacement)
+    return text
 
 
 def md_escape(value: Any) -> str:
-    text = "" if value is None else str(value)
+    text = sanitize_text(value)
     return text.replace("|", "\\|").replace("\n", "<br>")
 
 
 def md_code(value: Any) -> str:
-    text = "" if value is None else str(value)
+    text = sanitize_text(value)
     return "`" + text.replace("`", "\\`") + "`"
 
 

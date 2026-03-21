@@ -10,6 +10,30 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
 OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
+REDACTED_USER = "<USER>"
+HOME_PATH = str(Path.home())
+HOME_PATH_FWD = HOME_PATH.replace("\\", "/")
+USER_PATH_REPLACEMENTS = {
+    HOME_PATH: HOME_PATH.replace(Path.home().name, REDACTED_USER),
+    HOME_PATH_FWD: HOME_PATH_FWD.replace(Path.home().name, REDACTED_USER),
+}
+
+
+def sanitize_text(value: Any) -> Any:
+    if isinstance(value, str):
+        text = value
+        for source, replacement in USER_PATH_REPLACEMENTS.items():
+            text = text.replace(source, replacement)
+        return text
+    return value
+
+
+def sanitize_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: sanitize_value(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [sanitize_value(item) for item in value]
+    return sanitize_text(value)
 
 
 def pick(record: dict[str, Any], keys: list[str]) -> dict[str, Any]:
@@ -17,7 +41,7 @@ def pick(record: dict[str, Any], keys: list[str]) -> dict[str, Any]:
     for key in keys:
         value = record.get(key)
         if value is not None:
-            result[key] = value
+            result[key] = sanitize_value(value)
     return result
 
 
@@ -112,7 +136,7 @@ def compact_evidence(record: dict[str, Any]) -> list[dict[str, Any]]:
 def compact_validation_proof(record: dict[str, Any]) -> dict[str, Any] | None:
     proof = record.get("validation_proof")
     if isinstance(proof, dict):
-        return proof
+        return sanitize_value(proof)
     return None
 
 
