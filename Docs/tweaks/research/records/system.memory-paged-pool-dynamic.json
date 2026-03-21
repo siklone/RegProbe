@@ -1,0 +1,187 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.memory-paged-pool-dynamic",
+  "tweak_id": "system.memory-paged-pool-dynamic",
+  "record_status": "validated",
+  "summary": "Validated legacy paged-pool size control. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value.",
+  "setting": {
+    "name": "Paged Pool Size",
+    "category": "System",
+    "area": "Memory Management / Legacy Pool Tuning",
+    "scope": "device",
+    "casual_explanation": "Paged pool is kernel memory that Windows can page out when needed. This is a legacy low-level memory tuning area that most people should never touch manually.",
+    "why_people_change_it": "People only change it when undoing old memory-management tweaks or investigating unusual low-pool conditions on older systems.",
+    "tradeoffs_overview": "The current app writes the documented default reset value, but this remains a low-level legacy tuning area.",
+    "professional_notes": "Microsoft Q&A now captures PagedPoolSize = 0 as part of the default Memory Management registry snapshot. The current app writes PagedPoolSize = 0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management, matching that default reset value.",
+    "targets": [
+      {
+        "target_id": "paged-pool-size",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "PagedPoolSize",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Default paged pool size",
+            "meaning": "The default reset value captured in Microsoft Q&A.",
+            "evidence_ids": [
+              "ms-memory-management-qna-paged"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 4294967295,
+            "label": "Maximum paged pool for a specific older server issue",
+            "meaning": "Older Microsoft troubleshooting guidance uses 0xFFFFFFFF to allocate the maximum paged pool for a specific problem scenario.",
+            "evidence_ids": [
+              "ms-unable-allocate-paged-pool"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes PagedPoolSize = 0, matching the default value captured in Microsoft Q&A.",
+    "writes": [
+      {
+        "target_id": "paged-pool-size",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "PagedPoolSize",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0,
+        "notes": "Observed app value now matches the documented default."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative publication baseline",
+      "applies_to": "Modern systems where this dataset has not yet published a validated PagedPoolSize reset mapping",
+      "states": [
+        {
+          "target_id": "paged-pool-size",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft Q&A captures PagedPoolSize = 0 as the default value."
+        }
+      ],
+      "notes": "This record treats the default reset value as validated from Microsoft Q&A and documents the legacy tuning as low-level research, not a modern performance tweak.",
+      "evidence_ids": [
+        "ms-memory-management-registry-keys"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Typical desktops and laptops"
+      ],
+      "avoid_for": [
+        "Research comparisons against the current app write"
+      ],
+      "states": [
+        {
+          "target_id": "paged-pool-size",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the documented default reset value."
+        }
+      ],
+      "good_when": "You want the documented default paged-pool behavior.",
+      "bad_when": "You are trying to document the current app implementation as a non-default tweak.",
+      "tradeoffs": [
+        "The Windows default remains intact.",
+        "The current app write matches the documented default reset."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-memory-management-qna-paged"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-memory-management-qna-paged",
+      "kind": "official-doc",
+      "title": "Microsoft Q&A: default registry value for Memory Management",
+      "location": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "summary": "Microsoft Q&A captures PagedPoolSize = 0 as part of the default Memory Management registry snapshot.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ms-memory-management-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Memory Management Registry Keys",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
+      "summary": "Microsoft's current published memory-management article documents PagedPoolLimit for 32-bit systems, but not PagedPoolSize as a current modern limit surface.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-unable-allocate-paged-pool",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Unable to allocate memory from the system paged pool",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool",
+      "summary": "Microsoft's older troubleshooting guidance documents PagedPoolSize = 0xFFFFFFFF as a specific workaround for a server-side paged-pool exhaustion issue.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes PagedPoolSize = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Q&A now captures PagedPoolSize = 0 as part of the default Memory Management registry snapshot. The record matches the app and is validated for research, but it remains a low-level legacy tuning rather than a general Windows performance tweak.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+    "exact_quote_or_path": "\"PagedPoolSize\"=dword:00000000",
+    "key_found_on_page": true,
+    "notes": "Microsoft Q&A captures the default Memory Management registry snapshot and includes PagedPoolSize = 0."
+  }
+}

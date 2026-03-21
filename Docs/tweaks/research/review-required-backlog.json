@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:25:33Z",
+  "generated_utc": "2026-03-21T06:26:33Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 51,
+  "source_record_count": 50,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 23,
-    "docs-first": 28
+    "docs-first": 27
   },
   "counts_by_method": {
     "heuristic": 3,
     "manual-override": 45,
-    "proof-gate": 3
+    "proof-gate": 2
   },
   "entries": [
     {
@@ -452,33 +452,6 @@
         "No primary Microsoft source for SerializeTimerExpiration was captured in this research pass.",
         "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
       ]
-    },
-    {
-      "record_id": "system.memory-paged-pool-dynamic",
-      "tweak_id": "system.memory-paged-pool-dynamic",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Memory Management / Legacy Pool Tuning",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates that current Microsoft guidance publishes PagedPoolLimit and an older server troubleshooting case for PagedPoolSize = 0xFFFFFFFF, but not PagedPoolSize = 0 as a modern reset. The app's legacy reset value remains a documented implementation mismatch.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The current Microsoft control surface captured by this record is now validated, and the remaining work is to stop publishing the legacy app reset as a supported modern value.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "Microsoft's current published control surface documents PagedPoolLimit rather than the exact PagedPoolSize reset value used by the app.",
-        "This research pass has not found a primary modern Microsoft source that explicitly publishes PagedPoolSize = 0 as the supported reset state."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
     },
     {
       "record_id": "system.services.disable-print-device-configuration",
