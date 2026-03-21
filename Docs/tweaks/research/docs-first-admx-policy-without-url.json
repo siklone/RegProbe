@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-03-13T02:33:56Z",
+  "source_backlog": "Docs/tweaks/research/docs-first-backlog.json",
+  "filter": "docs-first entries whose suggested_evidence_tracks include ADMX or Policy CSP",
+  "group": "without-url",
+  "entry_count": 5,
+  "entries": [
+    {
+      "record_id": "explorer.enable-explorer-compact-mode",
+      "source_file": "Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json",
+      "current_state": "mismatch-suspected | Explorer Advanced Flags",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "matching_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "No primary Microsoft source for HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode was captured in this pass.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page",
+          "source_url": null
+        }
+      ],
+      "has_url_source": false,
+      "source_urls": []
+    },
+    {
+      "record_id": "security.disable-ntfs-encryption",
+      "source_file": "Docs/tweaks/research/records/security.disable-ntfs-encryption.json",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "matching_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
+          "next_source": "Local Microsoft FileSys.admx mapping (C:\\Windows\\PolicyDefinitions\\FileSys.admx)",
+          "source_url": null
+        }
+      ],
+      "has_url_source": false,
+      "source_urls": []
+    },
+    {
+      "record_id": "security.enable-dynamic-lock",
+      "source_file": "Docs/tweaks/research/records/security.enable-dynamic-lock.json",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "matching_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
+          "next_source": "Local Microsoft Passport.admx mapping (C:\\Windows\\PolicyDefinitions\\Passport.admx)",
+          "source_url": null
+        }
+      ],
+      "has_url_source": false,
+      "source_urls": []
+    },
+    {
+      "record_id": "security.trusted-path-credential-prompting",
+      "source_file": "Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json",
+      "current_state": "partially-matches | Registry Policy",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "matching_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "The local ADMX file does not expose explicit enabledValue and disabledValue blocks for this policy the way many validated records do.",
+          "next_source": "Local Microsoft CredUI.admx mapping (C:\\Windows\\PolicyDefinitions\\CredUI.admx)",
+          "source_url": null
+        }
+      ],
+      "has_url_source": false,
+      "source_urls": []
+    },
+    {
+      "record_id": "system.bsod-display-parameters",
+      "source_file": "Docs/tweaks/research/records/system.bsod-display-parameters.review.json",
+      "current_state": "partially-matches | Crash Recovery / Bug Check Display",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "matching_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "A primary Microsoft Learn or local official metadata source for DisplayParameters has not yet been captured.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page",
+          "source_url": null
+        }
+      ],
+      "has_url_source": false,
+      "source_urls": []
+    }
+  ]
+}
