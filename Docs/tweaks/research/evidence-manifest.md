@@ -44,8 +44,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `7543ec7f7cc3822bcd0a772da1b7be217691616f539ac2600cd3fb4f7c753a33` | `8b792ad081c25666c1212d9ac5d02658188059f46eb3e7f5853d28765d0f84fa` | 1 |
 | `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
 | `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd` | `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0` | 1 |
-| `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `2d5a7ee9934e79d4d677b23f841142392d2d7f77c6747caf8487c138f4403f84` | `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59` | 1 |
-| `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a` | 4 |
+| `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59` | 1 |
+| `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 4 |
 | `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `00d2fee5568aced7a3174f207b2b1b126271e7b72b4f1515a1f645440b68f642` | `0ee737a75d10889c50be7e89c9a3c5d98fae4ec54afc4bce7825a2d61ac406a2` | 1 |
 | `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `41bfcc52f0d7832756c5b7446383f983eac7e9a5cb420453d0214d578693a75b` | `4d70ca029c77128de2ff086067dec0863968274249c4a057c3b80a15dc6b4ab8` | 3 |
 | `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
@@ -1083,7 +1083,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Observed User Preference Bundle`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-suggestions.review.json`
-- Source SHA256: `2d5a7ee9934e79d4d677b23f841142392d2d7f77c6747caf8487c138f4403f84`
+- Source SHA256: `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7`
 - Proof SHA256: `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59`
 
 **Summary:** Deprecated audit trail for the old suggestions bundle. The ContentDeliveryManager IDs are still observed, but the parent record is no longer the primary research surface.
@@ -1114,7 +1114,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json`
 - Source SHA256: `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4`
-- Proof SHA256: `9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a`
+- Proof SHA256: `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9`
 
 **Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.
 
@@ -1146,15 +1146,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | `high`
 - `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | `high`
 - `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+- `repo-privacy-verified-suggestions-cdm` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestions | `high`
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| source_url | C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml |
-| exact_quote_or_path | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text: The local ADML help text says enabling the policy stops Windows Spotlight suggestions from appearing in the Settings app. |
+| source_url | Docs/privacy/privacy-verified.md |
+| exact_quote_or_path | Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id local-cloudcontent-adml-settings (official-doc); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-privacy-verified-suggestions-cdm (repo-doc); deprecated audit trail. |
 ### `privacy.disable-wmplayer-telemetry`
 
 - Status: `deprecated`

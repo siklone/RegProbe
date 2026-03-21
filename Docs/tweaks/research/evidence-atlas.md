@@ -18217,7 +18217,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.
 
@@ -18264,15 +18264,16 @@ Current write(s):
 | `local-cloudcontent-admx-welcome` | `official-doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-welcome` | `official-doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `repo-privacy-verified-suggestions-cdm` | `repo-doc` | Repo privacy docs for Content Delivery Manager suggestions | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml |
-| Exact quote / path | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text: The local ADML help text says enabling the policy stops Windows Spotlight suggestions from appearing in the Settings app. |
+| Source URL | Docs/privacy/privacy-verified.md |
+| Exact quote / path | Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id local-cloudcontent-adml-settings (official-doc); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-privacy-verified-suggestions-cdm (repo-doc); deprecated audit trail. |
 
 **Decision**
 
@@ -18282,12 +18283,11 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | The official CloudContent policies are clear, but the current app depends on opaque ContentDeliveryManager IDs that are not formally mapped in the sources used by this record. |
+| Needs VM validation | `False` |
+| Why | The official CloudContent policies are clear and the repo docs now enumerate the named policy trio plus the observed ContentDeliveryManager IDs. The remaining issue is bundle semantics and user-facing explanation rather than missing proof. |
 
 Blocking issues:
-- The current app does not use the named official CloudContent policies documented in this record.
-- The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents.
+- The current app still exposes a mixed bundle rather than separate official policy-backed toggles.
 
 ---
 

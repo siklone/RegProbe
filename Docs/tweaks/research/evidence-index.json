@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:33:02.460743Z",
+  "generated_utc": "2026-03-21T10:33:39.779835Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -4414,8 +4414,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The bundle is useful to track, but the numeric suggestion IDs still need stronger semantic provenance.",
+        "needs_vm_validation": false,
+        "why": "The bundle is useful to track and the repo docs now enumerate the observed ContentDeliveryManager IDs alongside the named CloudContent policy equivalents. The remaining issue is bundle semantics rather than missing proof.",
         "blocking_issues": [
           "Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface."
         ]
@@ -4552,13 +4552,26 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-verified-suggestions",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for Content Delivery Manager suggestion IDs",
+          "location": "Docs/privacy/privacy-verified.md",
+          "summary": "The repo docs enumerate the observed ContentDeliveryManager IDs used by the suggestions bundle and document the named CloudContent policy equivalents.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "exact_quote_or_path": "Current privacy provider CDM suggestions bundle: The provider writes five current-user ContentDeliveryManager suggestion-related values to 0.",
+        "source_url": "Docs/privacy/privacy-verified.md",
+        "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestion IDs: the observed ContentDeliveryManager values and named policy equivalents are explicitly documented in privacy-verified docs.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-verified-suggestions (repo-doc); deprecated audit trail."
       }
     },
     {

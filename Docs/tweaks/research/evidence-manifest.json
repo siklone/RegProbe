@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:33:02.465266Z",
+  "generated_utc": "2026-03-21T10:33:39.773265Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -4478,8 +4478,8 @@
       "tweak_id": "privacy.disable-suggestions",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions.review.json",
-      "source_file_sha256": "2d5a7ee9934e79d4d677b23f841142392d2d7f77c6747caf8487c138f4403f84",
-      "source_file_size_bytes": 6586,
+      "source_file_sha256": "63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7",
+      "source_file_size_bytes": 7228,
       "name": "Content Delivery Manager Suggestions Bundle",
       "category": "Privacy",
       "area": "Observed User Preference Bundle",
@@ -4657,11 +4657,10 @@
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "The official CloudContent policies are clear, but the current app depends on opaque ContentDeliveryManager IDs that are not formally mapped in the sources used by this record.",
+        "needs_vm_validation": false,
+        "why": "The official CloudContent policies are clear and the repo docs now enumerate the named policy trio plus the observed ContentDeliveryManager IDs. The remaining issue is bundle semantics and user-facing explanation rather than missing proof.",
         "blocking_issues": [
-          "The current app does not use the named official CloudContent policies documented in this record.",
-          "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
+          "The current app still exposes a mixed bundle rather than separate official policy-backed toggles."
         ]
       },
       "app_current_implementation": {
@@ -5053,15 +5052,28 @@
             "ui-mapping",
             "app-mismatch"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-verified-suggestions-cdm",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for Content Delivery Manager suggestions",
+          "location": "Docs/privacy/privacy-verified.md",
+          "summary": "The repo docs enumerate the named CloudContent policies DisableThirdPartySuggestions, DisableWindowsSpotlightOnSettings, and DisableWindowsSpotlightWindowsWelcomeExperience, plus the observed SubscribedContent IDs 338389, 310093, 338393, 353694, and 353696.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml",
-        "exact_quote_or_path": "Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text: The local ADML help text says enabling the policy stops Windows Spotlight suggestions from appearing in the Settings app.",
+        "source_url": "Docs/privacy/privacy-verified.md",
+        "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id local-cloudcontent-adml-settings (official-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-verified-suggestions-cdm (repo-doc); deprecated audit trail."
       },
-      "validation_proof_sha256": "9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a"
+      "validation_proof_sha256": "4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9"
     },
     {
       "record_id": "privacy.disable-wmplayer-telemetry",
