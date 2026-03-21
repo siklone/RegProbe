@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:52:27Z",
+  "generated_utc": "2026-03-21T06:54:24Z",
   "backlog_type": "split-needed",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 15,
+  "entry_count": 13,
   "entries": [
     {
       "record_id": "audio.disable-system-sounds",
@@ -191,35 +191,6 @@
         "HVCI mode handling",
         "Credential Guard state and lock handling",
         "Windows Hello or PIN dependency checks and UX gating"
-      ]
-    },
-    {
-      "record_id": "security.disable-windows-update",
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Split into 2 parts: Official Windows Update policy controls, Runtime pause timestamp handling. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/security.disable-windows-update.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Official Windows Update policy controls",
-        "Runtime pause timestamp handling"
-      ]
-    },
-    {
-      "record_id": "system.disable-scheduled-tasks",
-      "current_state": "matches-research | Scheduled Tasks",
-      "notes": "Split into 5 parts: Application compatibility tasks, CEIP tasks, Cleanup tasks, Feedback tasks, Error-reporting tasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Scheduled Tasks",
-      "implementation_status": "matches-research",
-      "source_file": "Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json",
-      "estimated_split_parts": 5,
-      "suggested_splits": [
-        "Application compatibility tasks",
-        "CEIP tasks",
-        "Cleanup tasks",
-        "Feedback tasks",
-        "Error-reporting tasks"
       ]
     }
   ]

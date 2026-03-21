@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:52:27Z",
+  "generated_utc": "2026-03-21T06:54:24Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 42,
+  "source_record_count": 40,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,12 +14,12 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 15,
+    "split-needed": 13,
     "docs-first": 27
   },
   "counts_by_method": {
     "heuristic": 3,
-    "manual-override": 37,
+    "manual-override": 35,
     "proof-gate": 2
   },
   "entries": [
@@ -863,47 +863,6 @@
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
       }
-    },
-    {
-      "record_id": "security.disable-windows-update",
-      "tweak_id": "security.disable-windows-update",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The current tweak combines official policy values with non-policy pause timestamp writes under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Security",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/security.disable-windows-update.review.json",
-      "summary": "The app bundles official Windows Update policies with extra pause timestamp writes under the UX settings path. The official policy pieces are real, but the current bundle mixes policy control with runtime pause state, so it stays in review until it is split or narrowed.",
-      "decision_why": "The official policy values are real, but the current tweak mixes them with runtime pause timestamps in one over-broad bundle.",
-      "blocking_issues": [
-        "The current tweak combines official policy values with non-policy pause timestamp writes under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings.",
-        "The bundle should be split into narrower controls before it is published as validated."
-      ]
-    },
-    {
-      "record_id": "system.disable-scheduled-tasks",
-      "tweak_id": "system.disable-scheduled-tasks",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The bundle spans multiple Windows feature areas with different side effects.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "System",
-      "technical_area": "Scheduled Tasks",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json",
-      "summary": "The current app disables a mixed batch of scheduled tasks covering application compatibility, CEIP, cleanup, feedback, and error reporting. The task paths are real and mostly present on Windows, but this bundle is too broad and version-dependent to publish as one validated preset without per-task review.",
-      "decision_why": "The task paths and app mapping are real, but the bundle mixes several feature areas and includes version-dependent tasks, so it should be reviewed task-by-task before being published as a validated preset.",
-      "blocking_issues": [
-        "The bundle spans multiple Windows feature areas with different side effects.",
-        "At least one task path is version-dependent on the current review host.",
-        "The current record documents the bundle honestly but does not yet validate it as a safe preset."
-      ]
     }
   ]
 }

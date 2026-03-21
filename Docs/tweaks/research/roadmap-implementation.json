@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:52:27Z",
+  "generated_utc": "2026-03-21T06:54:24Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -74,24 +74,6 @@
     {
       "sprint_number": 3,
       "priority_index": 4,
-      "record_id": "security.disable-windows-update",
-      "category": "split",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The current tweak combines official policy values with non-policy pause timestamp writes under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings.",
-        "The bundle should be split into narrower controls before it is published as validated."
-      ],
-      "depends_on": [
-        "security.disable-windows-update.official-windows-update-policy-controls",
-        "security.disable-windows-update.runtime-pause-timestamp-handling"
-      ],
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Split into 2 parts: Official Windows Update policy controls, Runtime pause timestamp handling. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/security.disable-windows-update.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 5,
       "record_id": "audio.disable-system-sounds",
       "category": "split",
       "estimated_effort": "medium",
@@ -109,7 +91,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 6,
+      "priority_index": 5,
       "record_id": "network.optimize-smb",
       "category": "split",
       "estimated_effort": "medium",
@@ -127,7 +109,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 7,
+      "priority_index": 6,
       "record_id": "power.disable-network-power-saving",
       "category": "split",
       "estimated_effort": "medium",
@@ -146,7 +128,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 8,
+      "priority_index": 7,
       "record_id": "privacy.disable-application-compatibility.tasks",
       "category": "split",
       "estimated_effort": "medium",
@@ -164,7 +146,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 9,
+      "priority_index": 8,
       "record_id": "privacy.disable-cross-device-experiences",
       "category": "split",
       "estimated_effort": "medium",
@@ -183,7 +165,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 10,
+      "priority_index": 9,
       "record_id": "privacy.disable-sleep-study-diagnostics",
       "category": "split",
       "estimated_effort": "medium",
@@ -201,7 +183,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 11,
+      "priority_index": 10,
       "record_id": "power.optimize-performance",
       "category": "split",
       "estimated_effort": "medium",
@@ -220,7 +202,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "privacy.deny-app-access",
       "category": "split",
       "estimated_effort": "medium",
@@ -240,7 +222,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "privacy.disable-suggestions-cdm",
       "category": "split",
       "estimated_effort": "medium",
@@ -260,7 +242,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "security.disable-vbs",
       "category": "split",
       "estimated_effort": "medium",
@@ -278,28 +260,6 @@
       "current_state": "matches-research | Registry Policy Bundle",
       "notes": "Split into 4 parts: Core VBS policy handling, HVCI mode handling, Credential Guard state and lock handling, Windows Hello or PIN dependency checks and UX gating. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
       "source_file": "Docs/tweaks/research/records/security.disable-vbs.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 15,
-      "record_id": "system.disable-scheduled-tasks",
-      "category": "split",
-      "estimated_effort": "large",
-      "blocking_issues": [
-        "The bundle spans multiple Windows feature areas with different side effects.",
-        "At least one task path is version-dependent on the current review host.",
-        "The current record documents the bundle honestly but does not yet validate it as a safe preset."
-      ],
-      "depends_on": [
-        "system.disable-scheduled-tasks.application-compatibility-tasks",
-        "system.disable-scheduled-tasks.ceip-tasks",
-        "system.disable-scheduled-tasks.cleanup-tasks",
-        "system.disable-scheduled-tasks.feedback-tasks",
-        "system.disable-scheduled-tasks.error-reporting-tasks"
-      ],
-      "current_state": "matches-research | Scheduled Tasks",
-      "notes": "Split into 5 parts: Application compatibility tasks, CEIP tasks, Cleanup tasks, Feedback tasks, Error-reporting tasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json"
     },
     {
       "sprint_number": 4,
