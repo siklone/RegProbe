@@ -49,7 +49,7 @@ public sealed class StorageDetailViewModel : BaseViewModel
         AddRowIf("Interface", storage.PrimaryInterface);
 
         AddHeader("Status");
-        AddRow("Tip", "Use Monitor tab for per-drive details");
+        AddRow("Tip", "Use Hardware Details for per-drive details");
 
         ResolveIcon(null, storage.PrimaryModel);
         AppDiagnostics.Log($"[StorageDetailVM] After populate: Title={Title}, Subtitle={Subtitle}, SpecsCount={Specs.Count}");

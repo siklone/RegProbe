@@ -28,10 +28,9 @@ It is built for people who want more than a random "FPS boost" script:
   - `Bloatware`
   - `Startup`
 
-### 📊 Dashboard & Monitoring
+### Dashboard & Hardware Details
 - Hardware-first dashboard for OS, motherboard, CPU, GPU, memory, storage, displays, network, USB, and audio
-- Live monitor tiles for CPU, memory, GPU, storage, and network
-- Detail sheets with charts, top processes, adapter details, and hardware-specific summaries
+- Hardware detail sheets with charts, adapter details, and hardware-specific summaries
 - Device detail windows with cleaner specs, insights, and grouped metadata
 
 ### 🧪 Tweak Engine
@@ -92,11 +91,11 @@ Windows Optimizer Suite aims for something better:
 - Bloatware remover
 - Startup manager
 
-### Monitoring
-- Compact live tiles
+### Hardware Details
+- Detail sheets
 - Trend charts
-- Top app panels
 - Adapter / disk / GPU breakdowns
+- Hardware summary cards
 
 ### Settings
 - Theme and behavior preferences
@@ -109,7 +108,7 @@ Windows Optimizer Suite aims for something better:
 WindowsOptimizer.App/              WPF UI, view models, startup, assets, views
 WindowsOptimizer.Core/             Contracts, models, plugin and tweak abstractions
 WindowsOptimizer.Engine/           Tweak execution pipeline and concrete tweak types
-WindowsOptimizer.Infrastructure/   Registry, metrics, elevation, files, monitoring
+WindowsOptimizer.Infrastructure/   Registry, elevation, files, hardware info
 WindowsOptimizer.ElevatedHost/     Elevated helper process for admin-required actions
 WindowsOptimizer.CLI/              CLI entry point for non-UI scenarios
 WindowsOptimizer.Plugins.DevTools/ Bundled example/support plugin

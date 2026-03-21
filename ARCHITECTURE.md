@@ -74,16 +74,8 @@ public interface ITweakProvider
 **Key Services**:
 - `LocalRegistryAccessor`: Direct registry access
 - `ElevatedRegistryAccessor`: Registry via elevated host
-- `MetricProvider`: Hardware metrics (CPU, RAM, temps)
-- `ProcessMonitor`: Process tracking
-- `NetworkMonitor`: Network adapter stats
-- `DiskMonitor`: Disk activity
+- Hardware info services and providers for OS, motherboard, storage, and display details
 - `PluginLoader`: Dynamic plugin loading
-
-**Metrics System**:
-- Uses `PerformanceCounter` for CPU/RAM/Disk/Network
-- Uses `LibreHardwareMonitor` for temperature sensors
-- Uses `System.Management` (WMI) for hardware info
 
 ### WindowsOptimizer.App
 **Purpose**: WPF presentation layer
@@ -91,14 +83,12 @@ public interface ITweakProvider
 **MVVM Pattern**:
 - `MainViewModel`: Navigation and top-level state
 - `TweaksViewModel`: Tweak management (4200+ lines)
-- `MonitorViewModel`: Real-time metrics
 - `DashboardViewModel`: Overview and health score
 
 **Key Features**:
 - ObservableCollection-based data binding
 - INotifyPropertyChanged via ViewModelBase
 - RelayCommand for button actions
-- DispatcherTimer for metrics updates (1 sec interval)
 - Health score is derived from *detected* tweak states (run Detect to populate current/applied status)
 
 **WPF Stability Notes**:
@@ -181,26 +171,11 @@ Update UI via INotifyPropertyChanged
 Log to FileTweakLogStore
 ```
 
-### Metrics Update (Monitor Page)
-```
-DispatcherTimer.Tick (every 1 second)
-    ↓
-MetricProvider.GetCpuUsage()
-ProcessMonitor.GetTopProcessesByCpu()
-NetworkMonitor.GetActiveAdapters()
-DiskMonitor.GetDiskActivity()
-    ↓
-Update ObservableCollections
-    ↓
-WPF Data Binding → UI updates
-```
-
 ## Threading Model
 
 - **UI Thread**: All ViewModels, WPF binding
 - **Background Threads**:
   - Tweak execution (async/await)
-  - Metrics collection (DispatcherTimer)
   - Plugin loading (Task.Run)
   - Hardware discovery (Task.Run)
 

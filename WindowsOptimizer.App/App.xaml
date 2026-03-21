@@ -34,9 +34,6 @@
             <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
                 <views:TweaksView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:MonitorViewModel}">
-                <views:MonitorView />
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
                 <views:SettingsView />
             </DataTemplate>

@@ -10,10 +10,10 @@ using WindowsOptimizer.Engine.Intelligence;
 using WindowsOptimizer.Engine.Services;
 using WindowsOptimizer.Infrastructure;
 using WindowsOptimizer.Infrastructure.Services;
+using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.Services.TweakProviders;
 using WindowsOptimizer.App.Utilities;
 
-using WindowsOptimizer.App.Services;
 
 namespace WindowsOptimizer.App.ViewModels;
 
@@ -83,40 +83,18 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         var tweaks = new TweaksViewModel(providers, _busyService, bloatware, startup);
         _tweaksViewModel = tweaks;
 
-        MonitorViewModel monitor;
-        try
-        {
-            monitor = new MonitorViewModel(AppServices.MetricWorkerPool);
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"MonitorViewModel creation failed: {ex.Message}");
-            if (!string.IsNullOrWhiteSpace(ex.StackTrace))
-            {
-                LogToFile(ex.StackTrace);
-            }
-
-            if (!string.IsNullOrWhiteSpace(ex.InnerException?.Message))
-            {
-                LogToFile($"Inner: {ex.InnerException.Message}");
-            }
-
-            throw; // Re-throw to see the actual error
-        }
-
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
         var dashboard = new DashboardViewModel();
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
-            new NavigationItem("dashboard", "Dashboard", "📊", dashboard),
-            new NavigationItem("tweaks", "Configuration", "🛠️", tweaks),
-            new NavigationItem("monitor", "Monitor", "📈", monitor),
-            new NavigationItem("settings", "Settings", "⚙️", settings),
-            new NavigationItem("about", "About", "ℹ️", about)
+            new NavigationItem("dashboard", "Dashboard", "Ã°Å¸â€œÅ ", dashboard),
+            new NavigationItem("tweaks", "Configuration", "Ã°Å¸â€ºÂ Ã¯Â¸Â", tweaks),
+            new NavigationItem("settings", "Settings", "Ã¢Å¡â„¢Ã¯Â¸Â", settings),
+            new NavigationItem("about", "About", "Ã¢â€žÂ¹Ã¯Â¸Â", about)
         };
-        
+
         // Sync tray tooltip values from tweaks
         SyncTrayTooltipValues();
 
@@ -146,9 +124,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(1));
         NavigateToBloatwareCommand = new RelayCommand(_ => NavigateToTab(1)); // Redirect to Configuration
         NavigateToStartupCommand = new RelayCommand(_ => NavigateToTab(1));   // Redirect to Configuration
-        NavigateToMonitorCommand = new RelayCommand(_ => NavigateToTab(2));
-        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(3));
-        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(4));
+        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(2));
+        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(3));
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
         RunDashboardScanCommand = new RelayCommand(_ => _ = RunDashboardScanAsync(), _ => CanRunDashboardQuickAction());
@@ -275,7 +252,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         {
             var profile = await _hardwareDiscovery.GetHardwareProfileAsync();
             var recommendations = _recommendationEngine.GetRecommendations(profile);
-            
+
             foreach (var item in NavigationItems)
             {
                 if (item.ViewModel is TweaksViewModel tweaks)
@@ -476,7 +453,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public RelayCommand NavigateToTweaksCommand { get; }
     public RelayCommand NavigateToBloatwareCommand { get; }
     public RelayCommand NavigateToStartupCommand { get; }
-    public RelayCommand NavigateToMonitorCommand { get; }
     public RelayCommand NavigateToSettingsCommand { get; }
     public RelayCommand NavigateToAboutCommand { get; }
     public RelayCommand FocusSearchCommand { get; }

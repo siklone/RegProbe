@@ -438,7 +438,7 @@ public sealed class MetricWorkerPool : IDisposable
 | Registry Ops | I/O Pool | Normal | On-demand |
 | File I/O | I/O Pool | Normal | On-demand |
 
-### 2.5 Performance Monitoring
+### 2.5 Threading Diagnostics
 
 ```csharp
 public class ThreadingDiagnostics
@@ -1709,12 +1709,12 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 }
 ```
 
-### 6.4 Monitor View Layout
+### 6.4 Hardware Details Layout
 
 ```xml
-<!-- WindowsOptimizer.App/Views/MonitorView.xaml (Redesigned) -->
+<!-- WindowsOptimizer.App/Views/HardwareDetailsView.xaml (Redesigned) -->
 
-<UserControl x:Class="WindowsOptimizer.App.Views.MonitorView">
+<UserControl x:Class="WindowsOptimizer.App.Views.HardwareDetailsView">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>  <!-- Header -->
@@ -2408,10 +2408,10 @@ public class ProcessTreeNode
 - [ ] Critical/non-critical task separation
 - [ ] Error recovery
 
-### Sprint 4: Monitor Redesign (2-3 weeks)
+### Sprint 4: Hardware Details Redesign (2-3 weeks)
 - [ ] HardwareCardView component
 - [ ] CPU/GPU/RAM/Storage/Network cards
-- [ ] MonitorView layout
+- [ ] Hardware details layout
 - [ ] Chart improvements
 
 ### Sprint 5: Process Management (1-2 weeks)
@@ -2445,14 +2445,14 @@ WindowsOptimizer.App/
 │   │   ├── StorageCardViewModel.cs
 │   │   ├── NetworkCardViewModel.cs
 │   │   └── MotherboardCardViewModel.cs
-│   └── MonitorViewModel.cs              (major update)
+│   └── Hardware detail view models      (major update)
 ├── Views/
 │   ├── Components/                       ✨ NEW FOLDER
 │   │   ├── HardwareCardView.xaml
 │   │   ├── StorageCardView.xaml
 │   │   ├── NetworkCardView.xaml
 │   │   └── ProcessListCard.xaml
-│   └── MonitorView.xaml                 (redesigned)
+│   └── Hardware details views           (redesigned)
 └── Resources/
     └── Colors.xaml                      (extended)
 

@@ -174,11 +174,6 @@ public partial class MainWindow : Window
         NavigateToTab("tweaks");
     }
 
-    private void MenuItem_Monitor_Click(object sender, RoutedEventArgs e)
-    {
-        NavigateToTab("monitor");
-    }
-
     private void ShowAndActivate()
     {
         Show();

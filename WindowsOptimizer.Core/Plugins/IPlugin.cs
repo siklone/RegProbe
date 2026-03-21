@@ -63,7 +63,6 @@ public enum PluginCategory
     Networking,
     Storage,
     Cleanup,
-    Monitoring,
     Automation,
     Customization
 }

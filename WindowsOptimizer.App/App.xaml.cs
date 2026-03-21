@@ -186,22 +186,6 @@ public partial class App : Application
 
     private static void RegisterCorePreloadTasks(PreloadManager preloader)
     {
-        preloader.RegisterTask("Initialize threading", _ =>
-        {
-            AppServices.InitializeMetricThreading(action =>
-            {
-                var dispatcher = Current?.Dispatcher;
-                if (dispatcher == null)
-                {
-                    action();
-                }
-                else
-                {
-                    dispatcher.InvokeAsync(action, DispatcherPriority.DataBind);
-                }
-            });
-            return Task.CompletedTask;
-        }, isCritical: true, priority: 100);
     }
 
     private void QueueDeferredStartupWork(AppSettings settings, MainWindow mainWindow)
@@ -355,12 +339,7 @@ public partial class App : Application
         {
             foreach (var arg in args)
             {
-                if (arg.Equals("--monitor", StringComparison.OrdinalIgnoreCase))
-                {
-                    // Navigate to Monitor tab
-                    AppDiagnostics.Log("[App] Navigating to Monitor via IPC arg");
-                }
-                else if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
+                if (arg.Equals("--tweaks", StringComparison.OrdinalIgnoreCase))
                 {
                     // Navigate to Tweaks tab
                     AppDiagnostics.Log("[App] Navigating to Tweaks via IPC arg");

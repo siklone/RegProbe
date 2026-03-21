@@ -34,12 +34,11 @@
 
     <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation: Ctrl+1 to Ctrl+5 -->
+        <!-- Navigation: Ctrl+1 to Ctrl+4 -->
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToDashboardCommand}"/>
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
-        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToMonitorCommand}"/>
-        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
-        <KeyBinding Key="D5" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
+        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
         <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <!-- Clear filters: Escape -->
@@ -681,7 +680,6 @@
                     </ContextMenu.Resources>
                     <MenuItem Header="Dashboard" Click="MenuItem_Dashboard_Click"/>
                     <MenuItem Header="Configuration" Click="MenuItem_Tweaks_Click"/>
-                    <MenuItem Header="Monitor" Click="MenuItem_Monitor_Click"/>
                     <Separator/>
                     <MenuItem Header="Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
                     <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>

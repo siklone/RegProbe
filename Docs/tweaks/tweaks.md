@@ -60,13 +60,13 @@ Do not edit manually.
 When running via `dotnet run`, you can override the elevated host location with:
 `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`.
 
-## Monitoring system
+## Execution logging
 
 ### Logging
 - Every step writes to the app log and the structured CSV log (`tweak-log.csv`).
 - CSV fields include `timestamp`, `tweak_id`, `tweak_name`, `action`, `status`, `message`, and `error`.
 
-### Real-time monitoring
+### Execution updates
 - The pipeline reports `TweakExecutionUpdate` for each step with action, status, message, and timestamp.
 - UI can render live indicators for Detect, Apply, Verify, and Rollback based on these updates.
 
