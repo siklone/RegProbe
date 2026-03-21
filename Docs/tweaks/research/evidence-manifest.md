@@ -138,9 +138,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
 | `power.disable-windows-search` | validated | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
-| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `c067a184fa552215890ecef141fd795a4b31e3bfa3714e306cbb4fabcff15bad` | `ee182636fa3cfcb7d8997ddc1f4c172cdc91e1e284a57b2e5fca01264bc58595` | 1 |
+| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `ee182636fa3cfcb7d8997ddc1f4c172cdc91e1e284a57b2e5fca01264bc58595` | 1 |
 | `power.hide-lock-option` | validated | `Docs/tweaks/research/records/power.hide-lock-option.json` | `bb61e4c516c76622f6b0770dcd2d393305f2d8dde6d325fe882796e6eb752dda` | `4a31f932c9fa2ce5fab2fda9c97d00fc5b971b503d4d6f9051039e49bfa664da` | 1 |
-| `power.hide-sleep-option` | validated | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `bc0674976bfaf40bf5418679c0e40813e987d9262ed93d92705fa7f418486325` | 1 |
+| `power.hide-sleep-option` | validated | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
 | `power.optimize-cpu-boost` | validated | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
 | `power.optimize-gaming-network` | validated | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `79e7719a7772df3cf7ef8515b4b2d1f377993f835b90c5697de4cf789fe89b70` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
 | `privacy.block-microsoft-accounts` | validated | `Docs/tweaks/research/records/privacy.block-microsoft-accounts.json` | `d44a370be73827a005595b0e5fa53b300eae3d558eaeedb76704704cd5e46ede` | `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45` | 1 |
@@ -6544,7 +6544,7 @@ Windows Internals references:
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.hide-hibernate-option.json`
-- Source SHA256: `c067a184fa552215890ecef141fd795a4b31e3bfa3714e306cbb4fabcff15bad`
+- Source SHA256: `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825`
 - Proof SHA256: `ee182636fa3cfcb7d8997ddc1f4c172cdc91e1e284a57b2e5fca01264bc58595`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
@@ -6660,7 +6660,7 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.hide-sleep-option.json`
 - Source SHA256: `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8`
-- Proof SHA256: `bc0674976bfaf40bf5418679c0e40813e987d9262ed93d92705fa7f418486325`
+- Proof SHA256: `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8`
 
 **Summary:** Policy-backed control for whether the Sleep option is shown in the power menu. Useful for managed or simplified menus, but it removes a common quick-sleep shortcut.
 
@@ -6679,6 +6679,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | `high` |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowSleepOption policy | `high` |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | `medium` |
 
 **Provenance**
 
@@ -6708,7 +6709,7 @@ Windows Internals references:
 | source_url | C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx |
 | exact_quote_or_path | <policy name="ShowSleepOption" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\Explorer" valueName="ShowSleepOption">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu. |
 | key_found_on_page | True |
-| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. |
+| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\power_hide_sleep_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 ### `power.optimize-cpu-boost`
 
 - Status: `validated`

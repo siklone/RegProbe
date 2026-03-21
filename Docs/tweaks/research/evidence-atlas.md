@@ -6507,6 +6507,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowSleepOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_sleep_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -6515,7 +6516,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowSleepOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowSleepOption">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at H:\Temp\vm-tooling-staging\power_hide_sleep_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 
 **Decision**
 
