@@ -2,9 +2,9 @@
 
 Scope: all current tweak research records, including deprecated audit trails.
 
-Registry key paths: 112
+Registry key paths: 113
 Composite bundle paths: 3
-Total registry values across distinct key paths: 272
+Total registry values across distinct key paths: 274
 
 ## HKCU
 
@@ -69,6 +69,7 @@ Total registry values across distinct key paths: 272
 | HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes | 1 | ShowSearchSuggestionsGlobal |
 | HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\DynamicLock | 1 | DynamicLock |
 | HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform | 1 | NoGenTicket |
+| HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability | 2 | TimeStampEnabled, TimeStampInterval |
 | HKLM\Software\Policies\Microsoft\Windows NT\DNSClient | 3 | DisableSmartNameResolution, EnableMulticast, EnableNetbios |
 | HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore | 1 | DisableSR |
 | HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services | 2 | fAllowToGetHelp, fDisableClip |

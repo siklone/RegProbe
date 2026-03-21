@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T15:34:52.244311Z",
+  "generated_utc": "2026-03-21T15:58:55.549935Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 279,
-    "validated": 227,
+    "total_records": 280,
+    "validated": 228,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 279,
+    "records_with_evidence": 280,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 279,
+    "records_with_source_hashes": 280,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -42902,6 +42902,20 @@
           "origin": "VM registry observation"
         },
         {
+          "evidence_id": "vm-resume-policymanager-probe",
+          "kind": "procmon-trace",
+          "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
+          "location": "H:\\Temp\\vm-tooling-staging\\crossdevice_resume_probe.csv and H:\\Temp\\vm-tooling-staging\\resume-policymanager-probe.txt",
+          "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -64556,6 +64570,20 @@
           "origin": "Current repo docs"
         },
         {
+          "evidence_id": "repo-system-decomp-prioritycontrol",
+          "kind": "decompilation",
+          "title": "Decompiled PriorityControl read/write path",
+          "location": "Docs/system/assets/lsc-cimwin32.c",
+          "summary": "Decompiled PriorityControl logic opens HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl, reads Win32PrioritySeparation, and writes it back after applying the ForegroundApplicationBoost bitfield.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -64574,9 +64602,9 @@
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation."
       },
-      "validation_proof_sha256": "3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f",
+      "validation_proof_sha256": "c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -65075,6 +65103,190 @@
         ],
         "other_references": []
       }
+    },
+    {
+      "record_id": "system.reliability-timestamp-enabled",
+      "tweak_id": "system.reliability-timestamp-enabled",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json",
+      "source_file_sha256": "721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e",
+      "source_file_size_bytes": 9192,
+      "name": "Reliability Event Timestamping",
+      "category": "System",
+      "area": "Reliability / Event Timestamps",
+      "scope": "device",
+      "summary": "Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": false,
+        "needs_vm_validation": false,
+        "why": "The decompiled function provides the exact read order and value semantics for the gate value, and the repo note gives the surrounding provenance. The setting is documented as research material rather than an app surface.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "notes": "The app does not currently expose this Reliability timestamp setting.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "reliability-timestamp-enabled",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+          "value_name": "TimeStampEnabled",
+          "value_type": "REG_DWORD",
+          "notes": "TimeStampInterval is the companion cadence value. The policy path is read first; the current-version Reliability path is the fallback.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Not configured",
+              "meaning": "No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
+              "evidence_ids": [
+                "repo-system-doc-reliability-timestamp",
+                "repo-system-decomp-reliability-timestamp"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Timestamping disabled",
+              "meaning": "The decompiled function returns 0 immediately when TimeStampEnabled is 0.",
+              "evidence_ids": [
+                "repo-system-decomp-reliability-timestamp"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Timestamping enabled",
+              "meaning": "The decompiled function continues to read TimeStampInterval when TimeStampEnabled is non-zero.",
+              "evidence_ids": [
+                "repo-system-decomp-reliability-timestamp"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "reliability-timestamp-interval",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+          "value_name": "TimeStampInterval",
+          "value_type": "REG_DWORD",
+          "notes": "The policy-path interval is capped at 24h. The fallback current-version path stores minutes and the decompiled code multiplies by 60 before applying the same cap.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Not configured",
+              "meaning": "No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
+              "evidence_ids": [
+                "repo-system-doc-reliability-timestamp",
+                "repo-system-decomp-reliability-timestamp"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 86400,
+              "label": "Maximum documented interval",
+              "meaning": "The decompiled function caps the policy interval at 86400 seconds, which the repo note describes as 24h.",
+              "evidence_ids": [
+                "repo-system-doc-reliability-timestamp",
+                "repo-system-decomp-reliability-timestamp"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Windows managed default",
+          "applies_to": "Systems where this dataset has not yet published an explicit Reliability timestamp policy",
+          "states": [
+            {
+              "target_id": "reliability-timestamp-enabled",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Leave the policy unset and let Windows use its normal reliability timestamp behavior."
+            }
+          ],
+          "evidence_ids": [
+            "repo-system-doc-reliability-timestamp",
+            "repo-system-decomp-reliability-timestamp"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hold-for-research",
+          "label": "Hold for research",
+          "intended_for": [
+            "Research tracking only",
+            "Reliability logging comparisons"
+          ],
+          "avoid_for": [
+            "Published presets"
+          ],
+          "states": [
+            {
+              "target_id": "reliability-timestamp-enabled",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Do not publish or apply the reliability timestamp gate until the companion cadence is also documented in the preset."
+            }
+          ],
+          "good_when": "You want to document the reliability timestamp gate without overstating preset confidence.",
+          "bad_when": "You need a published preset for reliability logging cadence.",
+          "tradeoffs": [
+            "The timestamping gate is documented honestly.",
+            "The companion cadence value stays separate from the gate."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-system-doc-reliability-timestamp",
+            "repo-system-decomp-reliability-timestamp"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-system-doc-reliability-timestamp",
+          "kind": "repo-doc",
+          "title": "Repo system research notes for reliability timestamping",
+          "location": "Docs/system/system.md",
+          "summary": "The repo note describes TimeStampEnabled / TimeStampInterval and documents the Reliability registry path used by the timestamping behavior.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "repo-system-decomp-reliability-timestamp",
+          "kind": "decompilation",
+          "title": "Decompiled OsEventsTimestampInterval read path",
+          "location": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
+          "summary": "The decompiled function reads TimeStampEnabled from the policy Reliability path first, returns 0 when it is disabled, then reads TimeStampInterval and caps it at 86400 seconds before falling back to the current-version Reliability path.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
+        "exact_quote_or_path": "RegOpenKeyExW(HKEY_LOCAL_MACHINE, L\"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability\", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L\"TimeStampEnabled\", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L\"TimeStampInterval\", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180",
+        "key_found_on_page": true,
+        "notes": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in Docs/system/system.md records the same Reliability path provenance."
+      },
+      "validation_proof_sha256": "095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af",
+      "provenance": null
     },
     {
       "record_id": "system.services.disable-bluetooth-audio-gateway",

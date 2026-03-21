@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 279 |
-| Validated | 227 |
+| Total records | 280 |
+| Validated | 228 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 279 |
+| Records with evidence | 280 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -267,8 +267,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.ntfs-enable-long-paths` | validated | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f` | `3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f` | 1 |
+| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
+| `system.reliability-timestamp-enabled` | validated | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
 | `system.services.disable-bluetooth-user-service` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
@@ -9074,6 +9075,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | `medium` |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | `medium` |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | `medium` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | `high` |
 
@@ -13487,7 +13489,7 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.priority-control.review.json`
 - Source SHA256: `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f`
-- Proof SHA256: `3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f`
+- Proof SHA256: `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b`
 
 **Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.
 
@@ -13504,6 +13506,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | `high` |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | `medium` |
+| `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | `high` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Provenance**
@@ -13534,7 +13537,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json |
 | exact_quote_or_path | HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2 |
 | key_found_on_page | True |
-| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. |
+| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
 ### `system.reduce-shutdown-timeouts`
 
 - Status: `validated`
@@ -13604,6 +13607,49 @@ Windows Internals references:
 | exact_quote_or_path | WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1 |
 | key_found_on_page | True |
 | notes | The proof bundle combines the documented service timeout path, the Restart Manager shutdown timeout guidance, and Microsoft Q&A examples for the user-side shutdown registry values. |
+### `system.reliability-timestamp-enabled`
+
+- Status: `validated`
+- Category: `System`
+- Area: `Reliability / Event Timestamps`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json`
+- Source SHA256: `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e`
+- Proof SHA256: `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af`
+
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability` / `TimeStampEnabled` / `REG_DWORD`
+  - Notes: TimeStampInterval is the companion cadence value. The policy path is read first; the current-version Reliability path is the fallback.
+  - missing | label=Not configured | meaning=No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present.
+  - value | value=0 | label=Timestamping disabled | meaning=The decompiled function returns 0 immediately when TimeStampEnabled is 0.
+  - value | value=1 | label=Timestamping enabled | meaning=The decompiled function continues to read TimeStampInterval when TimeStampEnabled is non-zero.
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability` / `TimeStampInterval` / `REG_DWORD`
+  - Notes: The policy-path interval is capped at 24h. The fallback current-version path stores minutes and the decompiled code multiplies by 60 before applying the same cap.
+  - missing | label=Not configured | meaning=No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present.
+  - value | value=86400 | label=Maximum documented interval | meaning=The decompiled function caps the policy interval at 86400 seconds, which the repo note describes as 24h.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | `medium` |
+| `repo-system-decomp-reliability-timestamp` | `decompilation` | `Ghidra decompilation` | Decompiled OsEventsTimestampInterval read path | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | Docs/system/assets/timestamp-OsEventsTimestampInterval.c |
+| exact_quote_or_path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
+| key_found_on_page | True |
+| notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in Docs/system/system.md records the same Reliability path provenance. |
 ### `system.services.disable-bluetooth-audio-gateway`
 
 - Status: `validated`

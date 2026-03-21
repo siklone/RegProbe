@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 279 |
-| Validated | 227 |
+| Total records | 280 |
+| Validated | 228 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 279 |
+| Records with evidence | 280 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -31,7 +31,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Power | 13 |
 | Privacy | 84 |
 | Security | 19 |
-| System | 73 |
+| System | 74 |
 | Visibility | 23 |
 
 ## Validated
@@ -10692,6 +10692,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | Docs/privacy/privacy.md | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration | `medium` | path, value, version-scope |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv and H:\Temp\vm-tooling-staging\resume-policymanager-probe.txt | `medium` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume | `high` | behavior, version-scope |
 
@@ -18462,6 +18463,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
+| `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | Docs/system/assets/lsc-cimwin32.c | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -18471,7 +18473,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
 | Exact quote / path | HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2 |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
 
 **Decision**
 
@@ -18589,6 +18591,81 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | Microsoft documents the timeout concepts and the supporting Microsoft Q&A threads now show the user-side registry values for the bundle. The record is validated as observed implementation, not as a recommendation for general users. |
+
+---
+
+### `system.reliability-timestamp-enabled`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `System` |
+| Area | `Reliability / Event Timestamps` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `` |
+| Notes | The app does not currently expose this Reliability timestamp setting. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Windows managed default (Systems where this dataset has not yet published an explicit Reliability timestamp policy)
+  - reliability-timestamp-enabled: missing — — Leave the policy unset and let Windows use its normal reliability timestamp behavior.
+
+**Recommended profiles**
+
+- `hold-for-research`: Hold for research (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | Docs/system/system.md | `medium` | path, value, behavior |
+| `repo-system-decomp-reliability-timestamp` | `decompilation` | `Ghidra decompilation` | Decompiled OsEventsTimestampInterval read path | Docs/system/assets/timestamp-OsEventsTimestampInterval.c | `high` | path, value, behavior |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | Docs/system/assets/timestamp-OsEventsTimestampInterval.c |
+| Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\Policies\\Microsoft\\Windows NT\\Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
+| Key found on page | `True` |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in Docs/system/system.md records the same Reliability path provenance. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `False` |
+| Needs VM validation | `False` |
+| Why | The decompiled function provides the exact read order and value semantics for the gate value, and the repo note gives the surrounding provenance. The setting is documented as research material rather than an app surface. |
 
 ---
 

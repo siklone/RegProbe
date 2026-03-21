@@ -1,0 +1,193 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.reliability-timestamp-enabled",
+  "tweak_id": "system.reliability-timestamp-enabled",
+  "record_status": "validated",
+  "summary": "Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.",
+  "setting": {
+    "name": "Reliability Event Timestamping",
+    "category": "System",
+    "area": "Reliability / Event Timestamps",
+    "scope": "device",
+    "casual_explanation": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
+    "why_people_change_it": "People only change it when debugging reliability reporting or comparing how often reliability events are timestamped.",
+    "tradeoffs_overview": "Disabling timestamping reduces reliability event detail. Leaving it enabled keeps the cadence available through the companion interval setting.",
+    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics.",
+    "targets": [
+      {
+        "target_id": "reliability-timestamp-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+        "value_name": "TimeStampEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
+            "evidence_ids": [
+              "repo-system-doc-reliability-timestamp",
+              "repo-system-decomp-reliability-timestamp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Timestamping disabled",
+            "meaning": "The decompiled function returns 0 immediately when TimeStampEnabled is 0.",
+            "evidence_ids": [
+              "repo-system-decomp-reliability-timestamp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Timestamping enabled",
+            "meaning": "The decompiled function continues to read TimeStampInterval when TimeStampEnabled is non-zero.",
+            "evidence_ids": [
+              "repo-system-decomp-reliability-timestamp"
+            ]
+          }
+        ],
+        "notes": "TimeStampInterval is the companion cadence value. The policy path is read first; the current-version Reliability path is the fallback."
+      },
+      {
+        "target_id": "reliability-timestamp-interval",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+        "value_name": "TimeStampInterval",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
+            "evidence_ids": [
+              "repo-system-doc-reliability-timestamp",
+              "repo-system-decomp-reliability-timestamp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 86400,
+            "label": "Maximum documented interval",
+            "meaning": "The decompiled function caps the policy interval at 86400 seconds, which the repo note describes as 24h.",
+            "evidence_ids": [
+              "repo-system-doc-reliability-timestamp",
+              "repo-system-decomp-reliability-timestamp"
+            ]
+          }
+        ],
+        "notes": "The policy-path interval is capped at 24h. The fallback current-version path stores minutes and the decompiled code multiplies by 60 before applying the same cap."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "notes": "The app does not currently expose this Reliability timestamp setting.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "Systems where this dataset has not yet published an explicit Reliability timestamp policy",
+      "states": [
+        {
+          "target_id": "reliability-timestamp-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset and let Windows use its normal reliability timestamp behavior."
+        }
+      ],
+      "notes": "The decompiled function reads the policy branch first and falls back to the current-version Reliability path when needed.",
+      "evidence_ids": [
+        "repo-system-doc-reliability-timestamp",
+        "repo-system-decomp-reliability-timestamp"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Reliability logging comparisons"
+      ],
+      "avoid_for": [
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "reliability-timestamp-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not publish or apply the reliability timestamp gate until the companion cadence is also documented in the preset."
+        }
+      ],
+      "good_when": "You want to document the reliability timestamp gate without overstating preset confidence.",
+      "bad_when": "You need a published preset for reliability logging cadence.",
+      "tradeoffs": [
+        "The timestamping gate is documented honestly.",
+        "The companion cadence value stays separate from the gate."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-system-doc-reliability-timestamp",
+        "repo-system-decomp-reliability-timestamp"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-system-doc-reliability-timestamp",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for reliability timestamping",
+      "location": "Docs/system/system.md",
+      "summary": "The repo note describes TimeStampEnabled / TimeStampInterval and documents the Reliability registry path used by the timestamping behavior.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-system-decomp-reliability-timestamp",
+      "kind": "decompilation",
+      "title": "Decompiled OsEventsTimestampInterval read path",
+      "location": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
+      "summary": "The decompiled function reads TimeStampEnabled from the policy Reliability path first, returns 0 when it is disabled, then reads TimeStampInterval and caps it at 86400 seconds before falling back to the current-version Reliability path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The decompiled function provides the exact read order and value semantics for the gate value, and the repo note gives the surrounding provenance. The setting is documented as research material rather than an app surface.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Should the companion TimeStampInterval cadence be split into its own record?",
+    "Should the app ever surface this reliability timestamp gate, or keep it as research-only?"
+  ],
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
+    "exact_quote_or_path": "RegOpenKeyExW(HKEY_LOCAL_MACHINE, L\"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability\", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L\"TimeStampEnabled\", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L\"TimeStampInterval\", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180",
+    "key_found_on_page": true,
+    "notes": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in Docs/system/system.md records the same Reliability path provenance."
+  }
+}
