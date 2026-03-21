@@ -649,6 +649,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | H:\Temp\vm-tooling-staging\devmode_longpaths_probe.csv and H:\Temp\vm-tooling-staging\devmode_longpaths_probe.pml | `medium` | path, value, behavior, ui-mapping |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -658,7 +659,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation |
 | Exact quote / path | The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior. |
 | Key found on page | `True` |
-| Notes | Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record is now scoped to the Windows prerequisite itself. |
+| Notes | Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself. |
 
 **Decision**
 
@@ -1093,6 +1094,7 @@ Current write(s):
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode | `high` | path, value, behavior |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | H:\Temp\vm-tooling-staging\devmode_probe2.csv and H:\Temp\vm-tooling-staging\devmode_probe2.txt | `medium` | path, behavior, default, ui-mapping |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -1104,7 +1106,7 @@ Current write(s):
 | Source URL | https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode |
 | Exact quote / path | To enable developer mode, set the values of this DWORD to 1: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock\AllowDevelopmentWithoutDevLicense |
 | Key found on page | `True` |
-| Notes | The official Microsoft page explicitly names the exact registry path and value used by the app. |
+| Notes | The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLicense while the developer settings page was open, which matches the missing/default baseline on this build. |
 
 **Decision**
 
@@ -16506,6 +16508,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc | `high` | behavior, side-effects, version-scope |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
+| `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | Docs/system/assets/gamemode-GamingHandlers.c | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -16527,7 +16530,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. |
+| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T15:58:55.302876Z",
+  "generated_utc": "2026-03-21T16:22:31.925388Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -13745,6 +13745,21 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "procmon-developer-long-paths",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
+          "location": "H:\\Temp\\vm-tooling-staging\\devmode_longpaths_probe.csv and H:\\Temp\\vm-tooling-staging\\devmode_longpaths_probe.pml",
+          "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state afterward.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
           "evidence_id": "app-developer-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -13763,7 +13778,7 @@
         "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
         "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
         "key_found_on_page": true,
-        "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record is now scoped to the Windows prerequisite itself."
+        "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -14945,6 +14960,21 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "procmon-developer-mode-baseline",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
+          "location": "H:\\Temp\\vm-tooling-staging\\devmode_probe2.csv and H:\\Temp\\vm-tooling-staging\\devmode_probe2.txt",
+          "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also confirmed the LongPathsEnabled read path on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "default",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
           "evidence_id": "local-appxpackagemanager-admx",
           "kind": "official-doc",
           "title": "Local Microsoft AppxPackageManager.admx mapping",
@@ -14992,7 +15022,7 @@
         "source_url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
         "exact_quote_or_path": "To enable developer mode, set the values of this DWORD to 1: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense",
         "key_found_on_page": true,
-        "notes": "The official Microsoft page explicitly names the exact registry path and value used by the app."
+        "notes": "The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLicense while the developer settings page was open, which matches the missing/default baseline on this build."
       },
       "provenance": {
         "coverage_state": "unmapped",
@@ -58786,7 +58816,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture.",
+        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -58947,6 +58977,21 @@
             "version-scope"
           ],
           "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "repo-system-decomp-game-mode",
+          "kind": "decompilation",
+          "title": "Decompiled Game Mode handler string reference",
+          "location": "Docs/system/assets/gamemode-GamingHandlers.c",
+          "summary": "The decompiled GamingHandlers source contains the AutoGameModeEnabled string reference and documents the broader Game Mode handler context in the repo notes.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "Ghidra decompilation"
         },
         {
           "evidence_id": "repo-system-doc-game-mode",

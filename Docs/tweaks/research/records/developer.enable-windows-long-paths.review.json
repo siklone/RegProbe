@@ -156,6 +156,20 @@
       "strength": "high"
     },
     {
+      "evidence_id": "procmon-developer-long-paths",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
+      "location": "H:\\Temp\\vm-tooling-staging\\devmode_longpaths_probe.csv and H:\\Temp\\vm-tooling-staging\\devmode_longpaths_probe.pml",
+      "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state afterward.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -184,6 +198,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
     "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
     "key_found_on_page": true,
-    "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record is now scoped to the Windows prerequisite itself."
+    "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself."
   }
 }

@@ -79,12 +79,12 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `cleanup.disable-reserved-storage` | validated | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
-| `developer.enable-windows-long-paths` | validated | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `899b4039d248968a6ead721b683ef9b8d9e868dfbf523013e35a3396cb762e5f` | `eac75fd96d382c06e970016647bde33dd5c8e49991b83fd7b0d270f8da6b377a` | 1 |
+| `developer.enable-windows-long-paths` | validated | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c` | `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29` | 1 |
 | `developer.nodejs-performance` | validated | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
 | `developer.powershell-execution` | validated | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ba780b14478019a7e9cd1947efbf71470b8ea01b6f6851e668ef40d460bd0784` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
 | `developer.python-path-fix` | validated | `Docs/tweaks/research/records/developer.python-path-fix.review.json` | `ce8f62b9295a1c477129e2e6aee7b1b55fb9f9764bfe6984328029bd2ee70ddc` | `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a` | 1 |
 | `developer.ssh-agent-autostart` | validated | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
-| `developer.windows-dev-mode` | validated | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `5cdb5dcf3dfd76c9692e55283cff22eaf65b4c112d47e77898f4f25d140f0e6e` | `bccd115013270a4312def9e0fa239db0fe7930ea6391c7b8a93d7a88d3069f32` | 1 |
+| `developer.windows-dev-mode` | validated | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
 | `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
@@ -247,7 +247,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `91eca68105f1bf46cc3abfbe4dcedbbd5fedbc58cfd056ac3c2a6b69a58faa76` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `789548874bc190f0ca00f67420b4d3b3e2e2013188ed3577667e81e2b01d3c53` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
@@ -3286,8 +3286,8 @@ Nohuto lineage references:
 - Area: `Windows Path Handling vs Git Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json`
-- Source SHA256: `899b4039d248968a6ead721b683ef9b8d9e868dfbf523013e35a3396cb762e5f`
-- Proof SHA256: `eac75fd96d382c06e970016647bde33dd5c8e49991b83fd7b0d270f8da6b377a`
+- Source SHA256: `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c`
+- Proof SHA256: `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29`
 
 **Summary:** Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.
 
@@ -3302,6 +3302,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | `high` |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | `medium` |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Provenance**
@@ -3328,7 +3329,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation |
 | exact_quote_or_path | The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior. |
 | key_found_on_page | True |
-| notes | Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. The record is now scoped to the Windows prerequisite itself. |
+| notes | Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself. |
 ### `developer.nodejs-performance`
 
 - Status: `validated`
@@ -3544,8 +3545,8 @@ Nohuto lineage references:
 - Area: `Registry Enablement`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/developer.windows-dev-mode.json`
-- Source SHA256: `5cdb5dcf3dfd76c9692e55283cff22eaf65b4c112d47e77898f4f25d140f0e6e`
-- Proof SHA256: `bccd115013270a4312def9e0fa239db0fe7930ea6391c7b8a93d7a88d3069f32`
+- Source SHA256: `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d`
+- Proof SHA256: `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841`
 
 **Summary:** Microsoft directly documents the AppModelUnlock registry method for enabling Windows Developer Mode, and the current app writes that same documented value. This record is now validated with machine-checkable proof.
 
@@ -3561,6 +3562,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | `high` |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | `medium` |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | `high` |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | `high` |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
@@ -3584,7 +3586,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode |
 | exact_quote_or_path | To enable developer mode, set the values of this DWORD to 1: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense |
 | key_found_on_page | True |
-| notes | The official Microsoft page explicitly names the exact registry path and value used by the app. |
+| notes | The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLicense while the developer settings page was open, which matches the missing/default baseline on this build. |
 ### `developer.wsl2-memory`
 
 - Status: `validated`
@@ -12379,7 +12381,7 @@ Windows Internals references:
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `91eca68105f1bf46cc3abfbe4dcedbbd5fedbc58cfd056ac3c2a6b69a58faa76`
+- Source SHA256: `789548874bc190f0ca00f67420b4d3b3e2e2013188ed3577667e81e2b01d3c53`
 - Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
 
 **Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
@@ -12396,6 +12398,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | `high` |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | `high` |
+| `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | `medium` |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
