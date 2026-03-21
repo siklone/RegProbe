@@ -1,0 +1,176 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.memory-nonpaged-pool-dynamic",
+  "tweak_id": "system.memory-nonpaged-pool-dynamic",
+  "record_status": "validated",
+  "summary": "Validated legacy nonpaged-pool size control. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value.",
+  "setting": {
+    "name": "Nonpaged Pool Size",
+    "category": "System",
+    "area": "Memory Management / Legacy Pool Tuning",
+    "scope": "device",
+    "casual_explanation": "Nonpaged pool is kernel memory that must always stay resident in RAM. This is a low-level legacy tuning area that normal users should not adjust manually.",
+    "why_people_change_it": "People only touch it when undoing old memory tweaks or investigating unusual kernel memory issues on older systems.",
+    "tradeoffs_overview": "The current app writes the documented default reset value, but this remains a low-level legacy tuning area.",
+    "professional_notes": "Microsoft Q&A now captures NonPagedPoolSize = 0 as part of the default Memory Management registry snapshot. The current app writes NonPagedPoolSize = 0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management, matching that default reset value.",
+    "targets": [
+      {
+        "target_id": "nonpaged-pool-size",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "NonPagedPoolSize",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Default nonpaged pool size",
+            "meaning": "The default reset value captured in Microsoft Q&A.",
+            "evidence_ids": [
+              "ms-memory-management-qna-nonpaged"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes NonPagedPoolSize = 0, matching the default value captured in Microsoft Q&A.",
+    "writes": [
+      {
+        "target_id": "nonpaged-pool-size",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "NonPagedPoolSize",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0,
+        "notes": "Observed app value now matches the documented default."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative publication baseline",
+      "applies_to": "Modern systems where this dataset has not yet published a validated NonPagedPoolSize reset mapping",
+      "states": [
+        {
+          "target_id": "nonpaged-pool-size",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft Q&A captures NonPagedPoolSize = 0 as the default value."
+        }
+      ],
+      "notes": "This record treats the default reset value as validated from Microsoft Q&A and documents the legacy tuning as low-level research, not a modern performance tweak.",
+      "evidence_ids": [
+        "ms-memory-management-registry-keys",
+        "ms-memory-limits"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Typical desktops and laptops"
+      ],
+      "avoid_for": [
+        "Research comparisons against the current app write"
+      ],
+      "states": [
+        {
+          "target_id": "nonpaged-pool-size",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the documented default reset value."
+        }
+      ],
+      "good_when": "You want the documented default nonpaged-pool behavior.",
+      "bad_when": "You are trying to document the current app implementation as a non-default tweak.",
+      "tradeoffs": [
+        "The Windows default remains intact.",
+        "The current app write matches the documented default reset."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-memory-management-qna-nonpaged"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-memory-management-qna-nonpaged",
+      "kind": "official-doc",
+      "title": "Microsoft Q&A: default registry value for Memory Management",
+      "location": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "summary": "Microsoft Q&A captures NonPagedPoolSize = 0 as part of the default Memory Management registry snapshot.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ms-memory-management-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Memory Management Registry Keys",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
+      "summary": "Microsoft's current published memory-management article documents NonPagedPoolLimit for 32-bit systems, but not NonPagedPoolSize as a current modern limit surface.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-memory-limits",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Memory Limits for Windows Releases",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases",
+      "summary": "Microsoft's memory-limits documentation discusses nonpaged-pool limits and notes that newer Windows versions use NonPagedPoolLimit, reinforcing that the currently published surface differs from the app's NonPagedPoolSize write.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes NonPagedPoolSize = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Q&A now captures NonPagedPoolSize = 0 as part of the default Memory Management registry snapshot. The record matches the app and is validated for research, but it remains a low-level legacy tuning rather than a general Windows performance tweak.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+    "exact_quote_or_path": "\"NonPagedPoolSize\"=dword:00000000",
+    "key_found_on_page": true,
+    "notes": "Microsoft Q&A captures the default Memory Management registry snapshot and includes NonPagedPoolSize = 0."
+  }
+}

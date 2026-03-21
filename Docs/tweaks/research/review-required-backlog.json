@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:19:36Z",
+  "generated_utc": "2026-03-21T06:25:33Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 53,
+  "source_record_count": 51,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 23,
-    "docs-first": 30
+    "docs-first": 28
   },
   "counts_by_method": {
     "heuristic": 3,
-    "manual-override": 46,
-    "proof-gate": 4
+    "manual-override": 45,
+    "proof-gate": 3
   },
   "entries": [
     {
@@ -454,33 +454,6 @@
       ]
     },
     {
-      "record_id": "system.memory-nonpaged-pool-dynamic",
-      "tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Memory Management / Legacy Pool Tuning",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates that current Microsoft memory-management guidance publishes NonPagedPoolLimit rather than NonPagedPoolSize = 0 as a modern reset surface. The app's legacy reset value remains a documented implementation mismatch.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The current Microsoft control surface captured by this record is now validated, and the remaining work is to stop publishing the legacy app reset as a supported modern value.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "Microsoft's current published control surface documents NonPagedPoolLimit rather than the exact NonPagedPoolSize reset value used by the app.",
-        "This research pass has not found a primary modern Microsoft source that explicitly publishes NonPagedPoolSize = 0 as the supported reset state."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
-    },
-    {
       "record_id": "system.memory-paged-pool-dynamic",
       "tweak_id": "system.memory-paged-pool-dynamic",
       "source_record_status": "review-required",
@@ -658,25 +631,6 @@
         "key_found_on_page": true,
         "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
       }
-    },
-    {
-      "record_id": "visibility.restore-classic-context-menu",
-      "tweak_id": "visibility.restore-classic-context-menu",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "manual-override",
-      "classification_reason": "No primary Microsoft registry source was captured for the classic-context-menu CLSID workaround in this review.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Visibility",
-      "technical_area": "Explorer Context Menu",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json",
-      "summary": "The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. The repo documents the mapping, but this review did not capture a primary Microsoft registry publication for it.",
-      "decision_why": "The mapping is consistently documented in the repo and matches the app, but this review did not capture a primary Microsoft registry source for publishing the workaround as validated.",
-      "blocking_issues": [
-        "No primary Microsoft registry source was captured for the classic-context-menu CLSID workaround in this review."
-      ]
     },
     {
       "record_id": "audio.disable-system-sounds",
