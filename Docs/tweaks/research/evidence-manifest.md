@@ -37,7 +37,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-application-compatibility.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `710892d24d9d90795d807d876e43eebf6b1117e941510fd6b9270a2ee75f8687` | `301b881ab3cd7ca126a445cd56e937a13ec91d84134995b1c7d0f8a6653f0686` | 1 |
 | `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f` | `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73` | 1 |
 | `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
-| `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `624557996b1de629d06b47e4d7234da2f4c35957e0dd1d126892688549d11671` | `257ccce633350676c52defc3bccbc34c2e43a320e908ca1ee5dce0b01993d27b` | 1 |
+| `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `4e3574d4caad562c3d178f89af47a4e38968788f8ea3bf25ca53e207943e1fed` | `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61` | 1 |
 | `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
 | `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
@@ -60,7 +60,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa` | `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0` | 1 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `a6dae46035b960252a4ada33a2caa5a9379c88650917a792252e361704543ca3` | `3028d51e35ee7ebffe78f4c69cec397847dc96a54a7d2ed9e31105d9b72758ee` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `89753fb62188d47bb03bfac049f5a79959911897e840f34023b39bc64992fadc` | `c6a065d0d3b3139c695abc4ec89c3d0bd0399f78be5eae82bec3c0cbd937a36c` | 1 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101` | `b12c9b95e2a37e938faa6a266f87913a0f0ecbbe0d69ad35bdce41a966c0c1eb` | 1 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `3cd332965fe34f0a7232c7e928c5b8796f881d12a631989cd5d687859c6a4b10` | `98c31b60eabc31dfda0d383d92c2948b1d5703d3224b0389fb7262238dc767c4` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `d2b0e6450222247b0d3476725ebb0797a877371d303934f9f03b5b3adefab8f3` | `635f3a9c58962cc5967fbe0d66c8e9df3aeb0ec9c11c269d18f1bf6f35a5d413` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `e78110b1b6cf518c9491ae40c910fee7742b5971f28c315d3c1beb2fad3a9993` | `59762eba3c15ce7a5714a73158eeb41bc86fae56ca8f1ae7f0934340d6546673` | 1 |
@@ -1112,8 +1112,8 @@ Nohuto lineage references:
 - Area: `File Rename`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-f1-help.review.json`
-- Source SHA256: `624557996b1de629d06b47e4d7234da2f4c35957e0dd1d126892688549d11671`
-- Proof SHA256: `257ccce633350676c52defc3bccbc34c2e43a320e908ca1ee5dce0b01993d27b`
+- Source SHA256: `4e3574d4caad562c3d178f89af47a4e38968788f8ea3bf25ca53e207943e1fed`
+- Proof SHA256: `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61`
 
 **Summary:** Deprecated audit trail for the F1 Help binary rename. The app disables F1 Help by renaming HelpPane.exe, but this is not an official policy surface.
 
@@ -1148,10 +1148,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider file rename: The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled. |
+| source_url | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md |
+| exact_quote_or_path | Works via renaming HelpPane.exe (Help and Support Windows desktop application) which was the help component in W8/W8.1. Note that HelpPane still handles the F1 shortcut. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface. |
 ### `privacy.disable-inking-typing-personalization`
 
 - Status: `deprecated`
@@ -2272,17 +2272,17 @@ Windows Internals references:
 - Area: `Kernel / Heterogeneous Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json`
-- Source SHA256: `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101`
-- Proof SHA256: `b12c9b95e2a37e938faa6a266f87913a0f0ecbbe0d69ad35bdce41a966c0c1eb`
+- Source SHA256: `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56`
+- Proof SHA256: `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66`
 
-**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, but this research pass did not capture a primary Microsoft source that maps the power-policy semantics onto the kernel registry key the app writes.
+**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
 
 **Targets**
 
 - `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel` / `DefaultDynamicHeteroCpuPolicy` / `REG_DWORD`
-  - Notes: Tracked as a partially matched heterogeneous-scheduling mapping only.
-  - unknown | label=Primary Microsoft kernel mapping not captured | meaning=This research pass did not capture a primary Microsoft source for the exact DefaultDynamicHeteroCpuPolicy registry semantics.
-  - value | value=3 | label=Observed app profile | meaning=The current app treats 3 as the default dynamic hetero CPU policy, with repo notes describing it as a 'Small' preference. Official Microsoft power-policy docs describe 3 as an efficient-processors preference for related scheduling controls, but the exact kernel mapping is still unvalidated.
+  - Notes: Tracked as a partially matched heterogeneous-scheduling mapping only; nohuto mirrors now document the same 3 mapping and kernel derivation path.
+  - unknown | label=Primary Microsoft kernel mapping not captured | meaning=This research pass did not capture a primary Microsoft source for the exact DefaultDynamicHeteroCpuPolicy registry semantics, but the nohuto mirror documents the same value family and decompiled kernel behavior.
+  - value | value=3 | label=Observed app profile | meaning=The current app treats 3 as the default dynamic hetero CPU policy, with repo notes describing it as a 'Small' preference. Official Microsoft power-policy docs describe 3 as an efficient-processors preference for related scheduling controls, and the nohuto mirror records the same 3 value with the 0..7 family while the kernel pseudocode derives KiDefaultHeteroCpuPolicy from KiDesiredHeteroCpuPolicy.
 
 **Evidence**
 
@@ -2290,6 +2290,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-scheduling-policy` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SchedulingPolicy | `high` |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
+| `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | `medium` |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -2318,10 +2319,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy |
-| exact_quote_or_path | Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy. |
+| source_url | Docs/tweaks/_source-mirrors/win-config/system/desc.md |
+| exact_quote_or_path | "DefaultDynamicHeteroCpuPolicy" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7). |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value. |
+| notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
 ### `system.kernel-disable-low-qos-timer-resolution`
 
 - Status: `deprecated`

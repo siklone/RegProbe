@@ -22978,7 +22978,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the F1 Help binary rename. The app disables F1 Help by renaming HelpPane.exe, but this is not an official policy surface.
 
@@ -22988,7 +22988,7 @@ Blocking issues:
 | --- | --- |
 | Status | `partially-matches` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
-| Notes | The app renames HelpPane.exe to HelpPane.exe.disabled. |
+| Notes | The app renames HelpPane.exe to HelpPane.exe.disabled. The upstream nohuto mirror documents the same HelpPane rename behavior and F1 handling. |
 
 Current write(s):
 
@@ -23036,10 +23036,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider file rename: The provider renames C:\Windows\System32\HelpPane.exe to HelpPane.exe.disabled. |
+| Source URL | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md |
+| Exact quote / path | Works via renaming HelpPane.exe (Help and Support Windows desktop application) which was the help component in W8/W8.1. Note that HelpPane still handles the F1 shortcut. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames C:\Windows\System32\HelpPane.exe to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface. |
 
 **Decision**
 
@@ -23049,8 +23049,8 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | This is a direct binary rename rather than an official settings surface. |
+| Needs VM validation | `False` |
+| Why | The app implementation is a direct file rename, and the nohuto mirror documents the same HelpPane rename behavior and F1 handling. This is a deprecated audit trail rather than a policy surface, so no further VM validation is required for the record itself. |
 
 Blocking issues:
 - Binary rename is more invasive than a validated policy or preference control.
@@ -25129,9 +25129,9 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, but this research pass did not capture a primary Microsoft source that maps the power-policy semantics onto the kernel registry key the app writes.
+**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
 
 **Current implementation**
 
@@ -25139,7 +25139,7 @@ Blocking issues:
 | --- | --- |
 | Status | `partially-matches` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
-| Notes | The current app writes DefaultDynamicHeteroCpuPolicy = 3. Microsoft publishes adjacent heterogeneous scheduling policy value meanings, but this research pass has not yet captured a primary Microsoft source for the exact kernel key. |
+| Notes | The current app writes DefaultDynamicHeteroCpuPolicy = 3. Microsoft publishes adjacent heterogeneous scheduling policy value meanings, and the nohuto mirror now captures the same 3 mapping plus the decompiled kernel derivation, but this remains a deprecated audit trail rather than an active published preset. |
 
 Current write(s):
 
@@ -25192,6 +25192,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-scheduling-policy` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SchedulingPolicy | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy | `high` | value, behavior, version-scope |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | Docs/tweaks/_source-mirrors/win-config/system/desc.md; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c | `medium` | value, behavior, kernel-derivation, version-scope |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -25199,10 +25200,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy |
-| Exact quote / path | Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy. |
+| Source URL | Docs/tweaks/_source-mirrors/win-config/system/desc.md |
+| Exact quote / path | "DefaultDynamicHeteroCpuPolicy" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7). |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value. |
+| Notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
 
 **Decision**
 
@@ -25212,8 +25213,8 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the missing kernel mapping. |
+| Needs VM validation | `False` |
+| Why | Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, and the nohuto mirror plus decompiled kernel pseudocode now capture the exact 3 mapping and derivation path for the kernel registry key. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the exact kernel mapping. |
 
 Blocking issues:
 - No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.
