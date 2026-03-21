@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T09:10:00.849508Z",
+  "generated_utc": "2026-03-21T09:31:06.754936Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -44547,15 +44547,15 @@
       "category": "Security",
       "area": "Registry Security Setting",
       "scope": "device",
-      "summary": "Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes.",
+      "summary": "Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.",
       "decision": {
         "confidence": "high",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System, and the app writes that exact control surface. This is still not a casual-safe profile, so the record remains non-default and VM validation is still reasonable before user-facing apply exposure.",
+        "needs_vm_validation": false,
+        "why": "Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System, and the app writes that exact control surface. A Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values. This is still not a casual-safe profile, so the record remains non-default even though validation is complete.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -44613,7 +44613,8 @@
               "meaning": "Admin Approval Mode is enabled.",
               "evidence_ids": [
                 "ms-uac-registry",
-                "app-security-provider"
+                "app-security-provider",
+                "procmon-uac-never-notify"
               ]
             }
           ]
@@ -44632,7 +44633,8 @@
               "meaning": "Administrators elevate without consent or credential prompts.",
               "evidence_ids": [
                 "ms-uac-registry",
-                "app-security-provider"
+                "app-security-provider",
+                "procmon-uac-never-notify"
               ]
             },
             {
@@ -44696,7 +44698,8 @@
               "meaning": "Elevation prompts appear on the normal interactive desktop instead of the Secure Desktop.",
               "evidence_ids": [
                 "ms-uac-registry",
-                "app-security-provider"
+                "app-security-provider",
+                "procmon-uac-never-notify"
               ]
             },
             {
@@ -44854,13 +44857,27 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "procmon-uac-never-notify",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - UAC policy value reads",
+          "location": "Local capture - C:\\Users\\<USER>\\AppData\\Local\\Temp\\uac-procmon\\uac_never_notify_capture.pml and C:\\Users\\<USER>\\AppData\\Local\\Temp\\uac-procmon\\uac_never_notify_capture.csv",
+          "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ]
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
         "exact_quote_or_path": "The registry keys are found under the key: `HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System`. `ConsentPromptBehaviorAdmin` 0 = Elevate without prompting ... 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled.",
         "key_found_on_page": true,
-        "notes": "The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app."
+        "notes": "The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open."
       }
     },
     {

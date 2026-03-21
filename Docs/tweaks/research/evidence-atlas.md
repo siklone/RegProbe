@@ -11021,9 +11021,9 @@ Current write(s):
 | Source file | `Docs/tweaks/research/records/security.uac-never-notify.json` |
 | Apply allowed | `False` |
 | Confidence | `high` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
-**Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes.
+**Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
 
 **Current implementation**
 
@@ -11061,6 +11061,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | Local capture - C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.pml and C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.csv | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -11069,7 +11070,7 @@ Current write(s):
 | Source URL | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings |
 | Exact quote / path | The registry keys are found under the key: `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`. `ConsentPromptBehaviorAdmin` 0 = Elevate without prompting ... 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
 | Key found on page | `True` |
-| Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. |
+| Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. |
 
 **Decision**
 
@@ -11079,8 +11080,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System, and the app writes that exact control surface. This is still not a casual-safe profile, so the record remains non-default and VM validation is still reasonable before user-facing apply exposure. |
+| Needs VM validation | `False` |
+| Why | Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System, and the app writes that exact control surface. A Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values. This is still not a casual-safe profile, so the record remains non-default even though validation is complete. |
 
 ---
 

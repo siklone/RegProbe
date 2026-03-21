@@ -224,7 +224,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `security.enable-sudo` | validated | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `8b0e09305cc1c955d9dbfe9d5267896ef3a8c2b0abf7f7c1e22bed7445a6ea32` | `46abb02e32d8ff5bbeeac6754e7b7a208fbd5fb52878e309097e1915130a284a` | 1 |
-| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `e4eebd118ed558cd349293ee1b625e4f7164785d92da9a006933a19c471fcd0b` | `89e7110905a022e901c05793351bbcde90e8114f24dfe5d3233339a6beb28ffa` | 3 |
+| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `693b5c107f281d3e5926edbe353436c6290e31be1318007393752e43dd7b734d` | `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd` | 3 |
 | `system.aero-shake` | validated | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
 | `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `a61ba20f6739dc4c3a9d864286d2d803f6af8cc9e777a6752b56a1b02d0afab5` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
@@ -7325,10 +7325,10 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Security Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.uac-never-notify.json`
-- Source SHA256: `e4eebd118ed558cd349293ee1b625e4f7164785d92da9a006933a19c471fcd0b`
-- Proof SHA256: `89e7110905a022e901c05793351bbcde90e8114f24dfe5d3233339a6beb28ffa`
+- Source SHA256: `693b5c107f281d3e5926edbe353436c6290e31be1318007393752e43dd7b734d`
+- Proof SHA256: `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd`
 
-**Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes.
+**Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
 
 **Targets**
 
@@ -7350,6 +7350,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | `high`
 - `app-security-provider` | `repo-code` | Current app implementation | `high`
+- `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | `high`
 
 **Validation proof**
 
@@ -7358,7 +7359,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | source_url | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings |
 | exact_quote_or_path | The registry keys are found under the key: `HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System`. `ConsentPromptBehaviorAdmin` 0 = Elevate without prompting ... 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
 | key_found_on_page | True |
-| notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. |
+| notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. |
 ### `system.aero-shake`
 
 - Status: `validated`
