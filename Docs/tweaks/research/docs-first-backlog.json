@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:15:55Z",
+  "generated_utc": "2026-03-21T06:18:29Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 32,
+  "entry_count": 30,
   "entries": [
     {
       "record_id": "audio.disable-spatial-audio",
@@ -107,21 +107,6 @@
       "technical_area": "Processor Idle Behavior",
       "implementation_status": "mismatch-suspected",
       "source_file": "Docs/tweaks/research/records/power.disable-cpu-idle-states.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "Procmon or VM toggle-diff validation",
-          "why_not_validated": "Validation proof did not confirm the exact key or path on the cited page: Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof.",
-          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
-        }
-      ]
-    },
-    {
-      "record_id": "power.disable-modern-standby",
-      "current_state": "mismatch-suspected | Sleep Model",
-      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Sleep Model",
-      "implementation_status": "mismatch-suspected",
-      "source_file": "Docs/tweaks/research/records/power.disable-modern-standby.json",
       "suggested_evidence_tracks": [
         {
           "track": "Procmon or VM toggle-diff validation",
@@ -401,21 +386,6 @@
         {
           "track": "ReactOS-adjacent or driver-source comparison",
           "why_not_validated": "No primary Microsoft source for SerializeTimerExpiration was captured in this research pass.",
-          "next_source": "ReactOS-adjacent code search, open-source driver references, or low-level graphics/kernel docs for the same subsystem"
-        }
-      ]
-    },
-    {
-      "record_id": "system.memory-disable-paging-executive",
-      "current_state": "matches-research | Memory Management",
-      "notes": "Evidence first. Prioritize: ReactOS-adjacent or driver-source comparison. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "technical_area": "Memory Management",
-      "implementation_status": "matches-research",
-      "source_file": "Docs/tweaks/research/records/system.memory-disable-paging-executive.json",
-      "suggested_evidence_tracks": [
-        {
-          "track": "ReactOS-adjacent or driver-source comparison",
-          "why_not_validated": "Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change.",
           "next_source": "ReactOS-adjacent code search, open-source driver references, or low-level graphics/kernel docs for the same subsystem"
         }
       ]

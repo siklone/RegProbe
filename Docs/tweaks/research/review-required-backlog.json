@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:15:55Z",
+  "generated_utc": "2026-03-21T06:18:29Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 55,
+  "source_record_count": 53,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 23,
-    "docs-first": 32
+    "docs-first": 30
   },
   "counts_by_method": {
-    "heuristic": 4,
+    "heuristic": 3,
     "manual-override": 46,
-    "proof-gate": 5
+    "proof-gate": 4
   },
   "entries": [
     {
@@ -149,33 +149,6 @@
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
-    },
-    {
-      "record_id": "power.disable-modern-standby",
-      "tweak_id": "power.disable-modern-standby",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "Power",
-      "technical_area": "Sleep Model",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/power.disable-modern-standby.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. Microsoft's guidance is now validated in this record, and it does not support switching between Modern Standby and S3 through a Windows setting change.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "Official Microsoft guidance says switching sleep models is not supported through a Windows setting change.",
-        "No primary Microsoft registry mapping was found that validates the current app bundle as a supported transition path."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
         "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
@@ -479,32 +452,6 @@
         "No primary Microsoft source for SerializeTimerExpiration was captured in this research pass.",
         "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
       ]
-    },
-    {
-      "record_id": "system.memory-disable-paging-executive",
-      "tweak_id": "system.memory-disable-paging-executive",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "heuristic",
-      "classification_reason": "Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "Memory Management",
-      "implementation_status": "matches-research",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.memory-disable-paging-executive.json",
-      "summary": "Officially documented Memory Management control for DisablePagingExecutive, but Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change. The key exists and is writable, but it should not be treated as an effective Windows 11 tweak.",
-      "decision_why": "Microsoft documents the exact path and values, but the same primary source explicitly states that systems with Windows 8 and higher do not need this registry change. That makes the key a documented legacy tracing surface rather than a meaningful Windows 11 tweak.",
-      "blocking_issues": [
-        "Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change.",
-        "The key exists and is writable, but it should not be exposed as an effective Windows 11 tweak."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
-        "exact_quote_or_path": "DisablePagingExecutive = 1. Systems with Windows 8 and higher do not need this registry change.",
-        "key_found_on_page": true,
-        "notes": "Microsoft explicitly documents the setting and explicitly says newer Windows systems do not need it, so the record stays research-only for Windows 11 rather than moving toward Apply."
-      }
     },
     {
       "record_id": "system.memory-nonpaged-pool-dynamic",

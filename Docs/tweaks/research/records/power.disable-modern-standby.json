@@ -1,0 +1,162 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-modern-standby",
+  "tweak_id": "power.disable-modern-standby",
+  "record_status": "validated",
+  "summary": "Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.",
+  "setting": {
+    "name": "Modern Standby Power Model",
+    "category": "Power",
+    "area": "Sleep Model",
+    "scope": "device",
+    "casual_explanation": "Modern Standby is the low-power idle sleep model used on many newer systems. This tweak tries to turn it off and push the system back toward traditional S3-style sleep behavior.",
+    "why_people_change_it": "People try to disable Modern Standby when they want classic sleep behavior or when they suspect Modern Standby is involved in battery drain, wake, or sleep issues.",
+    "tradeoffs_overview": "The feature is real, but Microsoft's guidance explicitly says switching power models is not supported by changing a setting in Windows. That makes this registry-based tweak too risky to validate.",
+    "professional_notes": "Microsoft's Modern Standby documentation states that switching between S3 and Modern Standby cannot be done by changing a setting and is not supported in Windows without a complete OS reinstall. The current app writes MSDisabled and ModernSleep\\EnabledActions registry values, but this review did not find a primary Microsoft registry mapping that blesses those writes as a supported transition path.",
+    "targets": [
+      {
+        "target_id": "modern-standby-registry-bundle",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MSDisabled + ModernSleep\\EnabledActions",
+        "value_type": "REG_DWORD bundle",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Unsupported Windows-side switch",
+            "meaning": "The official Microsoft guidance used in this review does not support switching between Modern Standby and S3 through a registry setting.",
+            "evidence_ids": [
+              "ms-modern-standby",
+              "app-power-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "mismatch-suspected",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The app writes MSDisabled = 1 and ModernSleep\\EnabledActions = 0, but the Microsoft guidance used here says switching power models is not supported by changing a Windows setting.",
+    "writes": [
+      {
+        "target_id": "modern-standby-registry-bundle",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MSDisabled + ModernSleep\\EnabledActions",
+        "value_type": "REG_DWORD bundle",
+        "state_kind": "value",
+        "value": "MSDisabled=1;EnabledActions=0"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Hardware and image dependent baseline",
+      "applies_to": "Systems whose shipped platform design supports either Modern Standby or S3",
+      "states": [
+        {
+          "target_id": "modern-standby-registry-bundle",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The shipped sleep model depends on platform support and image design, not on a validated post-install registry toggle."
+        }
+      ],
+      "notes": "This review follows Microsoft's guidance that switching power models is not a supported Windows setting change.",
+      "evidence_ids": [
+        "ms-modern-standby"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-shipped-baseline",
+      "label": "Windows shipped baseline",
+      "intended_for": [
+        "General users",
+        "Systems staying on their supported sleep model"
+      ],
+      "avoid_for": [
+        "None until a supported Microsoft transition path exists"
+      ],
+      "states": [
+        {
+          "target_id": "modern-standby-registry-bundle",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Stay on the system's supported shipped sleep model."
+        }
+      ],
+      "good_when": "You want to stay aligned with Microsoft's supported behavior.",
+      "bad_when": "You want to use an undocumented registry path to force a power-model change.",
+      "tradeoffs": [
+        "The system stays on its supported sleep model.",
+        "The current registry-based tweak remains documented but not validated."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-modern-standby"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-modern-standby",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: What is Modern Standby",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
+      "summary": "Microsoft documents Modern Standby and states that switching between S3 and Modern Standby is not supported in Windows without a complete OS reinstall.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The provider writes MSDisabled = 1 and ModernSleep\\EnabledActions = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes",
+      "location": "Docs/power/power.md",
+      "summary": "The repo tracks these registry values as power research, but this review did not promote them to a supported Microsoft transition mechanism.",
+      "supports": [
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft's guidance is now validated in this record, and it does not support switching between Modern Standby and S3 through a Windows setting change. The record is documented for research, not as a supported Windows tweak.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
+    "exact_quote_or_path": "Switching the power model is not supported in Windows without a complete OS re-install.",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change."
+  }
+}
