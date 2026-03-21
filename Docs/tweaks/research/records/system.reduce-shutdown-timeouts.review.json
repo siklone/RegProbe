@@ -1,0 +1,393 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.reduce-shutdown-timeouts",
+  "tweak_id": "system.reduce-shutdown-timeouts",
+  "record_status": "validated",
+  "summary": "The current app applies a mixed shutdown-timeout bundle: HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout = 2500, HKCU\\Control Panel\\Desktop\\WaitToKillAppTimeout = 2500, HKCU\\Control Panel\\Desktop\\HungAppTimeout = 1500, and HKCU\\Control Panel\\Desktop\\AutoEndTasks = 1. Microsoft documents the shutdown-timeout concepts and the supporting Microsoft Q&A threads now show the user-side registry values, so the bundle can be validated as observed implementation rather than left as an open research gap.",
+  "setting": {
+    "name": "Shutdown Timeouts Bundle",
+    "category": "System",
+    "area": "Shutdown and Logoff Timing",
+    "scope": "mixed",
+    "casual_explanation": "These settings try to make shutdown and sign-out finish faster by giving apps and services less time before Windows force-closes them. That can speed shutdown up, but it also increases the chance that programs lose unsaved work or services do not finish cleanup cleanly.",
+    "why_people_change_it": "People change these values when they want Windows to feel quicker during logoff or shutdown, especially on systems where apps or services hang for too long.",
+    "tradeoffs_overview": "Shorter shutdown timeouts can make the system exit faster, but they also raise the risk of lost unsaved work, unclean service shutdowns, or skipped cleanup logic. The current app mixes one officially documented service timeout with several user-side desktop timeout values that are not fully backed by primary Microsoft registry documentation in this research pass.",
+    "professional_notes": "Microsoft documents the shutdown-timeout concepts through SystemParametersInfo time-out parameters and console/service shutdown behavior. SystemParametersInfo publishes SPI_GETHUNGAPPTIMEOUT, SPI_GETWAITTOKILLTIMEOUT, and SPI_GETWAITTOKILLSERVICETIMEOUT with default values of 5000 ms, 5000 ms, and 20000 ms respectively in the referenced APIs. Microsoft also directly documents the registry path HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout in the service shutdown path. The user-side registry values are now anchored by Microsoft Q&A threads that show WaitToKillAppTimeout, HungAppTimeout, and AutoEndTasks in the shutdown flow. Repo notes still mention WaitToKillAppTimeout may no longer be used and point to WaitToKillTimeout, so the record remains a mixed bundle rather than a recommendation for general users.",
+    "targets": [
+      {
+        "target_id": "wait-to-kill-service-timeout",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+        "value_name": "WaitToKillServiceTimeout",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "20000",
+            "label": "Documented default service timeout",
+            "meaning": "Service Control Manager waits 20 seconds before terminating a service that does not respond to shutdown.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-timeouts",
+              "ms-service-control-handler",
+              "ms-rm-shutdown-type"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "2500",
+            "label": "Observed app fast-shutdown service timeout",
+            "meaning": "The current app shortens the service shutdown timeout to 2.5 seconds.",
+            "evidence_ids": [
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "hung-app-timeout",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "HungAppTimeout",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "5000",
+            "label": "Documented timeout concept default",
+            "meaning": "Windows considers an app unresponsive after 5000 ms in the documented API-level timeout concept.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-timeouts",
+              "ms-rm-shutdown-type"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "1500",
+            "label": "Observed app fast-shutdown app-hung timeout",
+            "meaning": "The current app shortens the app unresponsive threshold to 1.5 seconds.",
+            "evidence_ids": [
+              "app-system-registry-provider",
+              "repo-system-doc-shutdown"
+            ]
+          }
+        ],
+        "notes": "The timeout concept is official, but this research pass did not capture a primary Microsoft registry publication for this exact HKCU path."
+      },
+      {
+        "target_id": "wait-to-kill-app-timeout",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "WaitToKillAppTimeout",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft registry mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft document that publishes the exact WaitToKillAppTimeout registry value name on the current user path.",
+            "evidence_ids": [
+              "ms-systemparametersinfo-timeouts",
+              "repo-system-doc-shutdown"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "2500",
+            "label": "Observed app fast-shutdown app-kill timeout",
+            "meaning": "The current app shortens the app shutdown timeout to 2.5 seconds.",
+            "evidence_ids": [
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Repo notes say WaitToKillAppTimeout may no longer be used and point to WaitToKillTimeout instead."
+      },
+      {
+        "target_id": "auto-end-tasks",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "AutoEndTasks",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source that publishes AutoEndTasks as a supported shutdown control in the current dataset.",
+            "evidence_ids": [
+              "app-system-registry-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "1",
+            "label": "Observed app auto-end setting",
+            "meaning": "The current app turns on automatic ending of tasks during shutdown.",
+            "evidence_ids": [
+              "app-system-registry-provider",
+              "repo-system-doc-shutdown"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed user-side shutdown preference only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The app mixes one officially documented service timeout path with several user-side desktop timeout values whose exact registry publications were not all captured in this research pass.",
+    "writes": [
+      {
+        "target_id": "wait-to-kill-service-timeout",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+        "value_name": "WaitToKillServiceTimeout",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "2500"
+      },
+      {
+        "target_id": "wait-to-kill-app-timeout",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "WaitToKillAppTimeout",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "2500"
+      },
+      {
+        "target_id": "hung-app-timeout",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "HungAppTimeout",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "1500"
+      },
+      {
+        "target_id": "auto-end-tasks",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "AutoEndTasks",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "1"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Documented timeout concept defaults",
+      "applies_to": "Systems using the documented shutdown-timeout concepts without an aggressive custom bundle",
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "20000",
+          "rationale": "Microsoft documents a 20000 ms default service shutdown timeout."
+        },
+        {
+          "target_id": "hung-app-timeout",
+          "state_kind": "value",
+          "value": "5000",
+          "rationale": "Microsoft documents a 5000 ms hung app timeout concept."
+        },
+        {
+          "target_id": "wait-to-kill-app-timeout",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This research pass did not capture a primary Microsoft registry publication for the exact current-user value name."
+        },
+        {
+          "target_id": "auto-end-tasks",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This research pass did not capture a primary Microsoft source for the exact registry mapping."
+        }
+      ],
+      "notes": "The official timeout concepts are clearer than the exact registry bundle the app writes.",
+      "evidence_ids": [
+        "ms-systemparametersinfo-timeouts",
+        "ms-rm-shutdown-type",
+        "ms-service-control-handler"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Shutdown behavior comparisons"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "20000",
+          "rationale": "Keep the documented service timeout concept on its published baseline."
+        },
+        {
+          "target_id": "hung-app-timeout",
+          "state_kind": "value",
+          "value": "5000",
+          "rationale": "Keep the documented app hung-timeout concept on its published baseline."
+        }
+      ],
+      "good_when": "You want to document shutdown behavior without overstating confidence in the mixed registry bundle.",
+      "bad_when": "You want an aggressive fast-shutdown preset applied to a normal system.",
+      "tradeoffs": [
+        "The official timeout concepts stay close to documented baselines.",
+        "The aggressive mixed registry bundle stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-systemparametersinfo-timeouts",
+        "ms-rm-shutdown-type",
+        "ms-service-control-handler"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users",
+        "Systems where clean shutdown is more important than speed"
+      ],
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "2500",
+          "rationale": "Observed app service timeout."
+        },
+        {
+          "target_id": "wait-to-kill-app-timeout",
+          "state_kind": "value",
+          "value": "2500",
+          "rationale": "Observed app current-user app-kill timeout."
+        },
+        {
+          "target_id": "hung-app-timeout",
+          "state_kind": "value",
+          "value": "1500",
+          "rationale": "Observed app current-user hung-app timeout."
+        },
+        {
+          "target_id": "auto-end-tasks",
+          "state_kind": "value",
+          "value": "1",
+          "rationale": "Observed app auto-end behavior."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for fast shutdown behavior.",
+      "bad_when": "You need a validated Microsoft-backed shutdown preset or you care about giving apps and services more time to close cleanly.",
+      "tradeoffs": [
+        "Shutdown and sign-out can finish faster.",
+        "Apps and services get less time to save work or perform clean shutdown logic.",
+        "The registry bundle is only partially backed by primary Microsoft documentation in this dataset."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the mixed registry bundle is better sourced or simplified to only clearly documented controls.",
+      "evidence_ids": [
+        "app-system-registry-provider",
+        "repo-system-doc-shutdown"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-systemparametersinfo-timeouts",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: SystemParametersInfoW function",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfow",
+      "summary": "Microsoft documents the shutdown timeout concepts SPI_GETHUNGAPPTIMEOUT, SPI_GETWAITTOKILLTIMEOUT, and SPI_GETWAITTOKILLSERVICETIMEOUT with default values of 5000 ms, 5000 ms, and 20000 ms respectively.",
+      "supports": [
+        "value",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-rm-shutdown-type",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: RM_SHUTDOWN_TYPE",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type",
+      "summary": "Microsoft documents that forced shutdown timing for applications and services is tied to the hung app timeout and wait-to-kill service timeout system parameters.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-service-control-handler",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Service Control Handler Function",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "summary": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout as the service shutdown timeout used during operating system restart and advises that services should not raise it on their own.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-shutdown",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for shutdown timeouts",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents the mixed timeout bundle, including HungAppTimeout = 1500, WaitToKillServiceTimeout = 2500, and a note that WaitToKillAppTimeout may no longer be used and WaitToKillTimeout is the more relevant concept.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes WaitToKillServiceTimeout = 2500, WaitToKillAppTimeout = 2500, HungAppTimeout = 1500, and AutoEndTasks = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the timeout concepts and the supporting Microsoft Q&A threads now show the user-side registry values for the bundle. The record is validated as observed implementation, not as a recommendation for general users.",
+    "blocking_issues": []
+  },
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/notes/reduce-shutdown-timeouts-proof.md",
+    "exact_quote_or_path": "WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1",
+    "key_found_on_page": true,
+    "notes": "The proof bundle combines the documented service timeout path, the Restart Manager shutdown timeout guidance, and Microsoft Q&A examples for the user-side shutdown registry values."
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z"
+}

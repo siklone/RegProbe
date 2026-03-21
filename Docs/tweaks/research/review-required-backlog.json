@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:26:33Z",
+  "generated_utc": "2026-03-21T06:33:29Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 50,
+  "source_record_count": 49,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,12 +14,12 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 23,
+    "split-needed": 22,
     "docs-first": 27
   },
   "counts_by_method": {
     "heuristic": 3,
-    "manual-override": 45,
+    "manual-override": 44,
     "proof-gate": 2
   },
   "entries": [
@@ -1037,27 +1037,6 @@
         "The bundle spans multiple Windows feature areas with different side effects.",
         "At least one task path is version-dependent on the current review host.",
         "The current record documents the bundle honestly but does not yet validate it as a safe preset."
-      ]
-    },
-    {
-      "record_id": "system.reduce-shutdown-timeouts",
-      "tweak_id": "system.reduce-shutdown-timeouts",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "Only the service timeout path is directly published in primary Microsoft registry documentation captured in this dataset.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "System",
-      "technical_area": "Shutdown and Logoff Timing",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json",
-      "summary": "The current app applies a mixed shutdown-timeout bundle: HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout = 2500, HKCU\\Control Panel\\Desktop\\WaitToKillAppTimeout = 2500, HKCU\\Control Panel\\Desktop\\HungAppTimeout = 1500, and HKCU\\Control Panel\\Desktop\\AutoEndTasks = 1. Microsoft clearly documents the shutdown-timeout concepts and directly publishes WaitToKillServiceTimeout, but this research pass did not capture primary Microsoft registry publications for the full user-side bundle, so the record stays in review.",
-      "decision_why": "Microsoft clearly documents the timeout concepts and directly publishes WaitToKillServiceTimeout, but the full mixed registry bundle is only partially covered by primary Microsoft registry documentation in this research pass.",
-      "blocking_issues": [
-        "Only the service timeout path is directly published in primary Microsoft registry documentation captured in this dataset.",
-        "The current app writes WaitToKillAppTimeout, while repo notes indicate WaitToKillTimeout may be the more relevant modern concept.",
-        "This research pass did not capture a primary Microsoft source for AutoEndTasks as a supported current shutdown control."
       ]
     }
   ]
