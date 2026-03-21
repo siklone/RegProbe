@@ -53,7 +53,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `system.disable-game-dvr` | deprecated | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
 | `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `9b505be7b53da581504617af52ec4285c0940c8fc7168579a56f28628ce50e3c` | `40322a292ce62ce678a14b690d64ed26015b085370acfd32302aa703c2412dbd` | 7 |
 | `system.disable-search-highlights` | deprecated | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
-| `system.disable-service-splitting` | deprecated | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` | `3449bc70a2613fe29268144a5759964221906124d2516e593dc8f6f6a968b437` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 1 |
+| `system.disable-service-splitting` | deprecated | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` | `4a54e4039e3c13bf4495ee6f40577d7d4075ed2552f81ca1839175bae9a8d2d6` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 1 |
 | `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `be65179b8782418c3fc931cde2f8de3de9862a767abc72cafec837c34e249c23` | `4e44184e6dc57a482865e5627e3e6613adb5d9d49cf8d39aa60fc426a15abccd` | 1 |
 | `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `88adca28dc497c05a0e4db0c2fd1d8f86ddeb2d100f1c2568bc424a43087564e` | `c79fcdabc22d88b503005cf23a6d7beb062846e70008144b221066dc28658b2e` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa` | `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0` | 1 |
@@ -821,6 +821,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | `high`
 - `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | `high`
 - `app-privacy-provider` | `repo-code` | Current app implementation | `high`
+- `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | `medium`
+- `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | `low`
 
 **Validation proof**
 
@@ -1408,7 +1410,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `svchost Process Model`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-service-splitting.review.json`
-- Source SHA256: `3449bc70a2613fe29268144a5759964221906124d2516e593dc8f6f6a968b437`
+- Source SHA256: `4a54e4039e3c13bf4495ee6f40577d7d4075ed2552f81ca1839175bae9a8d2d6`
 - Proof SHA256: `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e`
 
 **Summary:** Deprecated audit trail for svchost service splitting. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\SvcHostSplitThresholdInKB = 0xFFFFFFFF to keep svchost service splitting from triggering on normal systems, but this research pass did not capture a primary Microsoft source that publishes 0xFFFFFFFF as the supported disable-splitting preset.

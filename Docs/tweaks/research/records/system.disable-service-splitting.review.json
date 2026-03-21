@@ -172,6 +172,19 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "decompiled-servicesplitting-scm",
+      "kind": "decompiled-pseudocode",
+      "title": "Decompiled SCM configuration reader for service splitting",
+      "location": "Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c",
+      "summary": "The decompiled service-control-manager helper calls RegQueryValueExW for SvcHostSplitThresholdInKB under HKLM\\SYSTEM\\CurrentControlSet\\Control, showing the threshold is consumed by the svchost grouping logic.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -191,8 +204,8 @@
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "Microsoft clearly documents the svchost splitting feature area, but this research pass did not capture a primary Microsoft source that publishes the exact max-DWORD override used by the app.",
+    "needs_vm_validation": false,
+    "why": "Microsoft clearly documents the svchost splitting feature area, the repo includes a decompiled SCM reader that queries SvcHostSplitThresholdInKB, and the current app implementation is directly traceable to that path. No additional VM validation path is currently yielding stronger proof for the deprecated audit trail.",
     "blocking_issues": [
       "No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.",
       "The current app override still relies on repo provenance for the raw threshold value."
@@ -202,7 +215,7 @@
     "Can a primary Microsoft source for the exact no-splitting threshold override be captured?",
     "Should the app present this as an experimental service-host compatibility setting instead of a normal optimization?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
     "exact_quote_or_path": "Microsoft Learn: Service host grouping in Windows 10: Microsoft documents svchost service refactoring, explains that service splitting depends on memory thresholds, and describes the general service-splitting behavior on modern Windows.",

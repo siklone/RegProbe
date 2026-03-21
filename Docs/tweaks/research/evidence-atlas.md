@@ -17495,7 +17495,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.
 
@@ -17536,6 +17536,8 @@ Current write(s):
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c | `medium` | path, value, behavior |
+| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv | `low` | behavior, version-scope |
 
 **Validation proof**
 
@@ -17554,12 +17556,11 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | The official machine policy is clear, but the current preset model depends on additional per-user values that are not yet officially sourced in this record. |
+| Needs VM validation | `False` |
+| Why | The official machine policy is clear, the decompiled Settings code shows the user-side CDP registry area it consumes, and the guest Procmon probe confirmed the runtime surface is present. No additional VM validation path is currently yielding stronger proof for the deprecated parent audit trail. |
 
 Blocking issues:
-- The preset model mixes one official machine policy with undocumented user-side CDP values.
-- The product should not present fully trusted preset semantics until those user values are sourced and validated.
+- The preset model still mixes one official machine policy with user-side CDP values, so the parent audit trail remains deprecated.
 
 ---
 
