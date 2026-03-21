@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:50:13Z",
+  "generated_utc": "2026-03-21T06:52:27Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -74,24 +74,6 @@
     {
       "sprint_number": 3,
       "priority_index": 4,
-      "record_id": "privacy.troubleshooter-dont-run",
-      "category": "split",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The tweak is modeled as a simple block action even though the official policy is a six-value dropdown.",
-        "The extra WindowsMitigation UserPreference write still needs a primary Microsoft source or removal."
-      ],
-      "depends_on": [
-        "privacy.troubleshooter-dont-run.official-troubleshooting-policy-dropdown",
-        "privacy.troubleshooter-dont-run.windowsmitigation-companion-preference"
-      ],
-      "current_state": "partially-matches | Mixed Registry Configuration",
-      "notes": "Split into 2 parts: Official troubleshooting policy dropdown, WindowsMitigation companion preference. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 5,
       "record_id": "security.disable-windows-update",
       "category": "split",
       "estimated_effort": "small",
@@ -109,7 +91,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 6,
+      "priority_index": 5,
       "record_id": "audio.disable-system-sounds",
       "category": "split",
       "estimated_effort": "medium",
@@ -127,7 +109,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 7,
+      "priority_index": 6,
       "record_id": "network.optimize-smb",
       "category": "split",
       "estimated_effort": "medium",
@@ -145,7 +127,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 8,
+      "priority_index": 7,
       "record_id": "power.disable-network-power-saving",
       "category": "split",
       "estimated_effort": "medium",
@@ -164,7 +146,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 9,
+      "priority_index": 8,
       "record_id": "privacy.disable-application-compatibility.tasks",
       "category": "split",
       "estimated_effort": "medium",
@@ -182,7 +164,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 10,
+      "priority_index": 9,
       "record_id": "privacy.disable-cross-device-experiences",
       "category": "split",
       "estimated_effort": "medium",
@@ -201,7 +183,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 11,
+      "priority_index": 10,
       "record_id": "privacy.disable-sleep-study-diagnostics",
       "category": "split",
       "estimated_effort": "medium",
@@ -219,7 +201,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "power.optimize-performance",
       "category": "split",
       "estimated_effort": "medium",
@@ -238,7 +220,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "privacy.deny-app-access",
       "category": "split",
       "estimated_effort": "medium",
@@ -258,7 +240,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "privacy.disable-suggestions-cdm",
       "category": "split",
       "estimated_effort": "medium",
@@ -278,7 +260,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 15,
+      "priority_index": 14,
       "record_id": "security.disable-vbs",
       "category": "split",
       "estimated_effort": "medium",
@@ -299,7 +281,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 16,
+      "priority_index": 15,
       "record_id": "system.disable-scheduled-tasks",
       "category": "split",
       "estimated_effort": "large",

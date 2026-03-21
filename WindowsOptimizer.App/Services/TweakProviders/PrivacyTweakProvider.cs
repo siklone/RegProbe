@@ -284,31 +284,30 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                     0)
             });
 
-        yield return CreateRegistryValueBatchTweak(
+        yield return CreateRegistryTweak(
             context,
             "privacy.troubleshooter-dont-run",
             "Troubleshooter: Don't Run Any",
             "Prevents recommended troubleshooters from running automatically.",
             TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\WindowsMitigation", "UserPreference", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations", "TroubleshootingAllowRecommendations", RegistryValueKind.DWord, 0)
-            });
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations",
+            "TroubleshootingAllowRecommendations",
+            RegistryValueKind.DWord,
+            0);
 
         // Experience & Personalization
         yield return CreateRegistryTweak(
             context,
             "privacy.disable-windows-tips",
-            "Disable Windows Tips & Tricks",
-            "Stops Windows from showing tips, shortcuts, and suggestions on the lock screen and in Settings.",
+            "Turn Off Windows Tips",
+            "Turns off Windows tips through the documented CloudContent machine policy.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager",
-            "SubscribedContent-338389Enabled",
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\CloudContent",
+            "DisableSoftLanding",
             RegistryValueKind.DWord,
-            0,
-            requiresElevation: false);
+            1);
 
         yield return CreateRegistryTweak(
             context,

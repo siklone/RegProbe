@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:50:13Z",
+  "generated_utc": "2026-03-21T06:52:27Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 43,
+  "source_record_count": 42,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,12 +14,12 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 16,
+    "split-needed": 15,
     "docs-first": 27
   },
   "counts_by_method": {
     "heuristic": 3,
-    "manual-override": 38,
+    "manual-override": 37,
     "proof-gate": 2
   },
   "entries": [
@@ -835,26 +835,6 @@
       "blocking_issues": [
         "The current app does not use the named official CloudContent policies documented in this record.",
         "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
-      ]
-    },
-    {
-      "record_id": "privacy.troubleshooter-dont-run",
-      "tweak_id": "privacy.troubleshooter-dont-run",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The tweak is modeled as a simple block action even though the official policy is a six-value dropdown.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Mixed Registry Configuration",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json",
-      "summary": "The official Microsoft policy for recommended troubleshooting is a multi-value dropdown from 0 to 5, but the current app writes both the official value 0 and an extra WindowsMitigation UserPreference value that is not yet officially sourced in this record.",
-      "decision_why": "The official policy is well documented, but the app currently mixes it with an extra value that is not yet officially sourced in this record.",
-      "blocking_issues": [
-        "The tweak is modeled as a simple block action even though the official policy is a six-value dropdown.",
-        "The extra WindowsMitigation UserPreference write still needs a primary Microsoft source or removal."
       ]
     },
     {

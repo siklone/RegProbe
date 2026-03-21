@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:50:13Z",
+  "generated_utc": "2026-03-21T06:52:27Z",
   "backlog_type": "split-needed",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 16,
+  "entry_count": 15,
   "entries": [
     {
       "record_id": "audio.disable-system-sounds",
@@ -176,19 +176,6 @@
         "Settings suggestions mapping",
         "Welcome experience mapping",
         "SubscribedContent identifier mapping"
-      ]
-    },
-    {
-      "record_id": "privacy.troubleshooter-dont-run",
-      "current_state": "partially-matches | Mixed Registry Configuration",
-      "notes": "Split into 2 parts: Official troubleshooting policy dropdown, WindowsMitigation companion preference. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Mixed Registry Configuration",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Official troubleshooting policy dropdown",
-        "WindowsMitigation companion preference"
       ]
     },
     {
