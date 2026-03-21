@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T09:59:40.248614Z",
+  "generated_utc": "2026-03-21T10:18:05.358495Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -21,15 +21,15 @@
       "category": "Audio",
       "area": "Audio Engine Flags",
       "scope": "device",
-      "summary": "Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.",
+      "summary": "Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract.",
+        "needs_vm_validation": false,
+        "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract. A Win25H2Clean guest string scan of likely audio binaries did not find the exact key string either, and the Ghidra headless attempt was not productive enough to turn this into a validated runtime contract. No additional VM validation path is currently yielding stronger proof for this deprecated audit trail.",
         "blocking_issues": [
           "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
         ]
@@ -153,13 +153,25 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "guest-audio-string-scan",
+          "kind": "vm-test",
+          "title": "Guest string scan for spatial-audio registry contract",
+          "location": "H:\\Temp\\vm-tooling-staging\\spatial_audio_string_search.txt",
+          "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Ghidra headless attempt was started but did not produce a usable result in this session.",
+          "strength": "low",
+          "supports": [
+            "behavior",
+            "app-mismatch"
+          ]
         }
       ],
       "validation_proof": {
         "source_url": "Docs/tweaks/tweak-provenance.json",
         "exact_quote_or_path": "Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan."
       }
     },
     {

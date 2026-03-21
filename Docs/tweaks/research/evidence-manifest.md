@@ -20,7 +20,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Record | Status | Source file | Source SHA256 | Proof SHA256 | Targets |
 | --- | --- | --- | --- | --- | --- |
-| `audio.disable-spatial-audio` | deprecated | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `b5ab6c67875d4862bb1ee41e77b8e5499e6804848cd5e9db9b1a71d9b339090f` | `eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776` | 1 |
+| `audio.disable-spatial-audio` | deprecated | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e` | `eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776` | 1 |
 | `audio.disable-system-sounds` | deprecated | `Docs/tweaks/research/records/audio.disable-system-sounds.review.json` | `3466da988a7ec485cac79e4a46a3598757530f7f7990c4ed902d6c246a7e5f2c` | `8c6baad92b01ec2a36a670ba00e7a7f372889f597cb30b1fc0ccc3d2e1d5a424` | 1 |
 | `developer.terminal-dev-mode` | deprecated | `Docs/tweaks/research/records/developer.terminal-dev-mode.review.json` | `9893430ee5f40c6f06d732b2583a151475bfded3989035674cd7662547ede627` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 2 |
 | `developer.vs-intellisense-cache` | deprecated | `Docs/tweaks/research/records/developer.vs-intellisense-cache.review.json` | `6714aec3308f79f05d56e0192c6ebd0e3fa402cb61b1dfda5f4646d58b69342b` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 1 |
@@ -309,7 +309,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Audio Engine Flags`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json`
-- Source SHA256: `b5ab6c67875d4862bb1ee41e77b8e5499e6804848cd5e9db9b1a71d9b339090f`
+- Source SHA256: `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e`
 - Proof SHA256: `eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776`
 
 **Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.
