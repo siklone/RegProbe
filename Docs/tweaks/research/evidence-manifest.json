@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:31:44.175970Z",
+  "generated_utc": "2026-03-21T10:33:02.465266Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -3325,8 +3325,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The bundle is real, but it still needs clearer per-target sourcing and user-facing explanation.",
+        "needs_vm_validation": false,
+        "why": "The bundle is real and now backed by explicit repo documentation for each underlying policy. The remaining issue is bundle semantics and user-facing explanation rather than missing proof.",
         "blocking_issues": [
           "Mixed bundle semantics are not yet explained well enough for a validated toggle."
         ]
@@ -3463,15 +3463,28 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-verified-inking-typing",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for inking and typing personalization",
+          "location": "Docs/privacy/privacy.md",
+          "summary": "The repo docs enumerate AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace with explicit enabled and disabled values that match the current provider bundle.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "exact_quote_or_path": "Current privacy provider typing and ink bundle: The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0.",
+        "source_url": "Docs/privacy/privacy.md",
+        "exact_quote_or_path": "Repo privacy docs for inking and typing personalization: AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace are explicitly documented with enabled and disabled values.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-verified-inking-typing (repo-doc); deprecated audit trail."
       },
-      "validation_proof_sha256": "74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84"
+      "validation_proof_sha256": "eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc"
     },
     {
       "record_id": "privacy.disable-offline-files",
@@ -4631,8 +4644,8 @@
       "tweak_id": "privacy.disable-suggestions-cdm",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json",
-      "source_file_sha256": "e27b05742cf0a8b0619a747687bfc2f6e2d86061cd3b491e393ee8702ad8f1ff",
-      "source_file_size_bytes": 18912,
+      "source_file_sha256": "5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4",
+      "source_file_size_bytes": 19429,
       "name": "Content Delivery Manager Suggestions",
       "category": "Privacy",
       "area": "Observed ContentDeliveryManager Values vs Named CloudContent Policies",

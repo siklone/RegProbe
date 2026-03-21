@@ -37,7 +37,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f` | `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73` | 1 |
 | `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
 | `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `624557996b1de629d06b47e4d7234da2f4c35957e0dd1d126892688549d11671` | `257ccce633350676c52defc3bccbc34c2e43a320e908ca1ee5dce0b01993d27b` | 1 |
-| `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84` | 1 |
+| `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
 | `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
 | `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `62ac52404c43f97b5ee0976797a053e46547335053da863a8f001380012075b3` | `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb` | 1 |
@@ -45,7 +45,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
 | `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd` | `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0` | 1 |
 | `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `2d5a7ee9934e79d4d677b23f841142392d2d7f77c6747caf8487c138f4403f84` | `3e891735564e507fd01511778805651c42f58eada3d89b8082ee0360e72c7b59` | 1 |
-| `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `e27b05742cf0a8b0619a747687bfc2f6e2d86061cd3b491e393ee8702ad8f1ff` | `9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a` | 4 |
+| `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a` | 4 |
 | `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `00d2fee5568aced7a3174f207b2b1b126271e7b72b4f1515a1f645440b68f642` | `0ee737a75d10889c50be7e89c9a3c5d98fae4ec54afc4bce7825a2d61ac406a2` | 1 |
 | `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `41bfcc52f0d7832756c5b7446383f983eac7e9a5cb420453d0214d578693a75b` | `4d70ca029c77128de2ff086067dec0863968274249c4a057c3b80a15dc6b4ab8` | 3 |
 | `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
@@ -870,7 +870,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json`
 - Source SHA256: `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5`
-- Proof SHA256: `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84`
+- Proof SHA256: `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc`
 
 **Summary:** Deprecated audit trail for the old inking and typing personalization bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
 
@@ -883,15 +883,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 **Evidence**
 
 - `app-privacy-provider` | `repo-code` | Current privacy provider typing and ink bundle | `high`
+- `repo-privacy-verified-inking-typing` | `repo-doc` | Repo privacy docs for inking and typing personalization | `high`
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider typing and ink bundle: The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0. |
+| source_url | Docs/privacy/privacy.md |
+| exact_quote_or_path | Repo privacy docs for inking and typing personalization: AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace are explicitly documented with enabled and disabled values. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-privacy-verified-inking-typing (repo-doc); deprecated audit trail. |
 ### `privacy.disable-offline-files`
 
 - Status: `deprecated`
@@ -1112,7 +1113,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Observed ContentDeliveryManager Values vs Named CloudContent Policies`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json`
-- Source SHA256: `e27b05742cf0a8b0619a747687bfc2f6e2d86061cd3b491e393ee8702ad8f1ff`
+- Source SHA256: `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4`
 - Proof SHA256: `9d002b3aea053959feb2d3d24c868b8e9aa22528004b6ebe8e3955cbbb73e84a`
 
 **Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.

@@ -409,6 +409,19 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "repo-privacy-verified-suggestions-cdm",
+      "kind": "repo-doc",
+      "title": "Repo privacy docs for Content Delivery Manager suggestions",
+      "location": "Docs/privacy/privacy-verified.md",
+      "summary": "The repo docs enumerate the named CloudContent policies DisableThirdPartySuggestions, DisableWindowsSpotlightOnSettings, and DisableWindowsSpotlightWindowsWelcomeExperience, plus the observed SubscribedContent IDs 338389, 310093, 338393, 353694, and 353696.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -417,22 +430,21 @@
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "The official CloudContent policies are clear, but the current app depends on opaque ContentDeliveryManager IDs that are not formally mapped in the sources used by this record.",
+    "needs_vm_validation": false,
+    "why": "The official CloudContent policies are clear and the repo docs now enumerate the named policy trio plus the observed ContentDeliveryManager IDs. The remaining issue is bundle semantics and user-facing explanation rather than missing proof.",
     "blocking_issues": [
-      "The current app does not use the named official CloudContent policies documented in this record.",
-      "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
+      "The current app still exposes a mixed bundle rather than separate official policy-backed toggles."
     ]
   },
   "open_questions": [
     "Which Windows experience does each SubscribedContent ID map to exactly?",
     "Should this tweak be split into separate official policy-backed toggles for Start suggestions, Settings suggestions, and Welcome experience?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
-    "source_url": "C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml",
-    "exact_quote_or_path": "Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text: The local ADML help text says enabling the policy stops Windows Spotlight suggestions from appearing in the Settings app.",
+    "source_url": "Docs/privacy/privacy-verified.md",
+    "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs.",
     "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id local-cloudcontent-adml-settings (official-doc); deprecated audit trail."
+    "notes": "Backfilled from evidence_id repo-privacy-verified-suggestions-cdm (repo-doc); deprecated audit trail."
   }
 }

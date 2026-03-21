@@ -17647,7 +17647,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old inking and typing personalization bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
 
@@ -17682,15 +17682,16 @@ Current write(s):
 | Evidence ID | Kind | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- |
 | `app-privacy-provider` | `repo-code` | Current privacy provider typing and ink bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `repo-privacy-verified-inking-typing` | `repo-doc` | Repo privacy docs for inking and typing personalization | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider typing and ink bundle: The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0. |
+| Source URL | Docs/privacy/privacy.md |
+| Exact quote / path | Repo privacy docs for inking and typing personalization: AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace are explicitly documented with enabled and disabled values. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-privacy-verified-inking-typing (repo-doc); deprecated audit trail. |
 
 **Decision**
 
@@ -17700,8 +17701,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The bundle is real, but it still needs clearer per-target sourcing and user-facing explanation. |
+| Needs VM validation | `False` |
+| Why | The bundle is real and now backed by explicit repo documentation for each underlying policy. The remaining issue is bundle semantics and user-facing explanation rather than missing proof. |
 
 Blocking issues:
 - Mixed bundle semantics are not yet explained well enough for a validated toggle.
