@@ -154,20 +154,33 @@
                                       ],
                          "strength":  "medium"
                      },
-                     {
-                         "evidence_id":  "app-system-provider",
-                         "kind":  "repo-code",
-                         "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                      {
+                          "evidence_id":  "app-system-provider",
+                          "kind":  "repo-code",
+                          "title":  "Current app implementation",
+                          "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
                          "summary":  "The provider writes StartupDelayInMSec = 0 for the current tweak.",
                          "supports":  [
                                           "path",
                                           "value",
                                           "ui-mapping"
-                                      ],
-                         "strength":  "high"
-                     }
-                 ],
+                          ],
+                          "strength":  "high"
+                      },
+                      {
+                          "evidence_id":  "ghidra-explorer-serialize-search",
+                          "kind":  "ghidra-trace",
+                          "title":  "Ghidra headless search on explorer.exe for Serialize",
+                          "location":  "H:\\Temp\\vm-tooling-staging\\ghidra_explorer_serialize.txt",
+                          "summary":  "Headless Ghidra analysis of explorer.exe with SearchMemoryForStringsRegExArg.java 'Serialize' produced three matches, confirming the Explorer Serialize string path in the binary.",
+                          "supports":  [
+                                           "path",
+                                           "string-reference",
+                                           "behavior"
+                                       ],
+                          "strength":  "medium"
+                      }
+                  ],
     "decision":  {
                      "confidence":  "medium",
                      "apply_allowed":  true,
@@ -186,9 +199,9 @@
                        ],
     "last_reviewed_utc":  "2026-03-12T00:00:00Z",
     "validation_proof":  {
-                             "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
-                             "exact_quote_or_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
-                             "key_found_on_page":  true,
-                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
-                         }
+                              "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+                              "exact_quote_or_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
+                              "key_found_on_page":  true,
+                              "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record."
+                          }
 }

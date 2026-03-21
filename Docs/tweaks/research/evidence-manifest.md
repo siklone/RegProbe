@@ -189,7 +189,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `edea839d158aab3eca120589fd44f387bee5fed5463392481da76d79c13e882c` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
 | `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
 | `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
-| `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384` | `932efde8f12aa6f98c0e98e26a100f4361639613f8fc81b2cae8c267d9a19951` | 1 |
+| `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
 | `privacy.disable-sensors` | validated | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215` | `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5` | 1 |
 | `privacy.disable-steps-recorder` | validated | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `c30ca6105b9e2cec0f671f6f27e4940f2efc14114323be321c1a4db8ea8c05d0` | `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915` | 1 |
 | `privacy.disable-suggestions.policy` | validated | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
@@ -242,7 +242,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-search-remote-queries` | validated | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `295a1dbec688a6fbf5bc4ad4a6cf7b69bad630de6af72b89aa8c0fb91eba3859` | `5d6498489ad0bfb3b401f9d5d514e491e6b0fb6652bfed6de644a496ebef6bee` | 1 |
+| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `b4d628a8ac67e0cf0424524af62ba332eb083b434d05ef0ceeed7f5be6c2dc65` | `5d6498489ad0bfb3b401f9d5d514e491e6b0fb6652bfed6de644a496ebef6bee` | 1 |
 | `system.disable-storage-sense` | validated | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -9246,7 +9246,7 @@ Nohuto lineage references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-search-history.json`
 - Source SHA256: `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384`
-- Proof SHA256: `932efde8f12aa6f98c0e98e26a100f4361639613f8fc81b2cae8c267d9a19951`
+- Proof SHA256: `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
 
@@ -9266,6 +9266,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | `high` |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | `low` |
 
 **Provenance**
 
@@ -9291,7 +9292,7 @@ Nohuto lineage references:
 | source_url | C:\\WINDOWS\\PolicyDefinitions\\Search.admx |
 | exact_quote_or_path | Search.admx: <policy name="DisableSearchHistory" class="User" ... key="Software\\Policies\\Microsoft\\Windows\\Explorer" valueName="DisableSearchHistory"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane." |
 | key_found_on_page | True |
-| notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. |
+| notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\search_history_probe.txt confirmed writes for 0 and 1 into the interactive user policy hive, live registry queries after each write, SearchHost launches in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
 ### `privacy.disable-sensors`
 
 - Status: `validated`
@@ -12134,7 +12135,7 @@ Windows Internals references:
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `295a1dbec688a6fbf5bc4ad4a6cf7b69bad630de6af72b89aa8c0fb91eba3859`
+- Source SHA256: `b4d628a8ac67e0cf0424524af62ba332eb083b434d05ef0ceeed7f5be6c2dc65`
 - Proof SHA256: `5d6498489ad0bfb3b401f9d5d514e491e6b0fb6652bfed6de644a496ebef6bee`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.

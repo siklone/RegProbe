@@ -11000,6 +11000,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | H:\Temp\vm-tooling-staging\search_history_probe.txt | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -11008,7 +11009,7 @@ Nohuto lineage references:
 | Source URL | C:\WINDOWS\PolicyDefinitions\Search.admx |
 | Exact quote / path | Search.admx: <policy name="DisableSearchHistory" class="User" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="DisableSearchHistory"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane." |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. |
+| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. Win25H2Clean reversible probe at H:\Temp\vm-tooling-staging\search_history_probe.txt confirmed writes for 0 and 1 into the interactive user policy hive, live registry queries after each write, SearchHost launches in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
 
 **Decision**
 
