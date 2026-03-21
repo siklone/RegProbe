@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,9 +22,11 @@ public static class Program
     {
         var options = HostOptions.Parse(args);
         using var cts = new CancellationTokenSource();
+        LogHostDiagnostic($"Main start. Pipe='{options.PipeName}' ParentPid={options.ParentProcessId}");
 
         if (!IsProcessElevated())
         {
+            LogHostDiagnostic("Startup aborted: process is not elevated.");
             Console.Error.WriteLine("ElevatedHost must run with administrator privileges.");
             return 5;
         }
@@ -36,14 +39,17 @@ public static class Program
         try
         {
             await RunServerAsync(options.PipeName, cts.Token);
+            LogHostDiagnostic("Server loop exited normally.");
             return 0;
         }
         catch (OperationCanceledException)
         {
+            LogHostDiagnostic("Server loop canceled.");
             return 0;
         }
         catch (Exception ex)
         {
+            LogHostDiagnostic($"Fatal startup error: {ex}");
             Console.Error.WriteLine(ex.Message);
             return 1;
         }
@@ -60,12 +66,9 @@ public static class Program
 
         while (!ct.IsCancellationRequested)
         {
-            using var server = new NamedPipeServerStream(
-                pipeName,
-                PipeDirection.InOut,
-                NamedPipeServerStream.MaxAllowedServerInstances,
-                PipeTransmissionMode.Byte,
-                PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly);
+            LogHostDiagnostic($"Creating pipe server for '{pipeName}'.");
+            using var server = CreatePipeServer(pipeName);
+            LogHostDiagnostic($"Pipe server created for '{pipeName}', waiting for connection.");
 
             try
             {
@@ -256,6 +259,53 @@ public static class Program
                         request.RequestId,
                         false,
                         "Unsupported elevated host request."));
+        }
+    }
+
+    private static NamedPipeServerStream CreatePipeServer(string pipeName)
+    {
+        return NamedPipeServerStreamAcl.Create(
+            pipeName,
+            PipeDirection.InOut,
+            NamedPipeServerStream.MaxAllowedServerInstances,
+            PipeTransmissionMode.Byte,
+            PipeOptions.Asynchronous,
+            0,
+            0,
+            CreatePipeSecurity(),
+            HandleInheritability.None);
+    }
+
+    private static PipeSecurity CreatePipeSecurity()
+    {
+        using var identity = WindowsIdentity.GetCurrent();
+        var userSid = identity.User
+            ?? throw new InvalidOperationException("ElevatedHost could not resolve the current user SID for pipe security.");
+        var security = new PipeSecurity();
+        security.AddAccessRule(new PipeAccessRule(userSid, PipeAccessRights.FullControl, AccessControlType.Allow));
+        security.AddAccessRule(new PipeAccessRule(
+            new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null),
+            PipeAccessRights.FullControl,
+            AccessControlType.Allow));
+        security.AddAccessRule(new PipeAccessRule(
+            new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null),
+            PipeAccessRights.FullControl,
+            AccessControlType.Allow));
+        LogHostDiagnostic($"Pipe security descriptor configured for user SID '{userSid.Value}'.");
+        return security;
+    }
+
+    private static void LogHostDiagnostic(string message)
+    {
+        try
+        {
+            var path = Path.Combine(Path.GetTempPath(), "WindowsOptimizer_ElevatedHost.log");
+            var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            File.AppendAllText(path, $"[{timestamp}] {message}{Environment.NewLine}");
+        }
+        catch
+        {
+            // Best-effort logging only.
         }
     }
 

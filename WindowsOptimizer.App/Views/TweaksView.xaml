@@ -1188,11 +1188,26 @@
                              <ComboBox ItemsSource="{Binding ChoiceOptions}"
                                        SelectedItem="{Binding SelectedChoiceOption, Mode=TwoWay}"
                                        DisplayMemberPath="Label"
-                                       Width="156"
+                                       Width="148"
                                        Margin="0,0,8,0"
                                        Style="{StaticResource RoundedComboBox}"
                                        ToolTip="{Binding SelectedChoiceDescription}"
                                        Visibility="{Binding HasChoiceOptions, Converter={StaticResource BoolToVisibility}}"/>
+                             <Button Content="Previous"
+                                     Command="{Binding RollbackCommand}"
+                                     Style="{StaticResource TweakActionButtonStyle}"
+                                     Padding="10,4"
+                                     MinWidth="74"
+                                     Margin="0,0,6,0"
+                                     ToolTip="Restore the previous value captured before Apply."/>
+                             <Button Content="{Binding RestoreDefaultButtonText}"
+                                     Command="{Binding RestoreDefaultCommand}"
+                                     Style="{StaticResource TweakActionButtonStyle}"
+                                     Padding="10,4"
+                                     MinWidth="82"
+                                     Margin="0,0,6,0"
+                                     ToolTip="{Binding RestoreDefaultTooltip}"
+                                     Visibility="{Binding HasDefaultChoice, Converter={StaticResource BoolToVisibility}}"/>
                              <Button Content="{Binding ActionButtonText}"
                                      Command="{Binding ApplyCommand}"
                                      Style="{StaticResource TweakPrimaryActionButtonStyle}"
@@ -1320,13 +1335,63 @@
                                  <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10" Margin="0,0,6,0">
                                      <StackPanel>
                                          <TextBlock Text="What this setting does" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
-                                         <TextBlock Text="{Binding Description}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                         <TextBlock Text="{Binding FriendlyDescription}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
                                      </StackPanel>
                                  </Border>
                                  <Border Background="{DynamicResource BackgroundDarkestBrush}" CornerRadius="6" Padding="10" Margin="6,0,0,0">
                                      <StackPanel>
                                          <TextBlock Text="What to expect" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
                                          <TextBlock Text="{Binding EffectSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                             </UniformGrid>
+
+                             <UniformGrid Columns="2"
+                                          Margin="0,0,0,10"
+                                          Visibility="{Binding HasExtendedGuidance, Converter={StaticResource BoolToVisibility}}">
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                         CornerRadius="6"
+                                         Padding="10"
+                                         Margin="0,0,6,0"
+                                         Visibility="{Binding HasGuidanceWhenHelpful, Converter={StaticResource BoolToVisibility}}">
+                                     <StackPanel>
+                                         <TextBlock Text="Good when" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding GuidanceWhenHelpful}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                         CornerRadius="6"
+                                         Padding="10"
+                                         Margin="6,0,0,0"
+                                         Visibility="{Binding HasGuidanceTradeoffs, Converter={StaticResource BoolToVisibility}}">
+                                     <StackPanel>
+                                         <TextBlock Text="Trade-offs" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding GuidanceTradeoffs}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                             </UniformGrid>
+
+                             <UniformGrid Columns="2"
+                                          Margin="0,0,0,10"
+                                          Visibility="{Binding HasExtendedGuidance, Converter={StaticResource BoolToVisibility}}">
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                         CornerRadius="6"
+                                         Padding="10"
+                                         Margin="0,0,6,0"
+                                         Visibility="{Binding HasDefaultVsPreviousSummary, Converter={StaticResource BoolToVisibility}}">
+                                     <StackPanel>
+                                         <TextBlock Text="Previous vs default" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding DefaultVsPreviousSummary}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                     </StackPanel>
+                                 </Border>
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                         CornerRadius="6"
+                                         Padding="10"
+                                         Margin="6,0,0,0"
+                                         Visibility="{Binding HasProfessionalNotes, Converter={StaticResource BoolToVisibility}}">
+                                     <StackPanel>
+                                         <TextBlock Text="Professional notes" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}"/>
+                                         <TextBlock Text="{Binding ProfessionalNotes}" Margin="0,4,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
                                      </StackPanel>
                                  </Border>
                              </UniformGrid>
@@ -1568,6 +1633,17 @@
 	                                             Style="{StaticResource TweakActionButtonStyle}"
 	                                             Margin="0,0,6,0"
 	                                             ToolTip="Detect: reads current state (no changes)."/>
+	                                     <Button Content="Restore Previous"
+	                                             Command="{Binding RollbackCommand}"
+	                                             Style="{StaticResource TweakActionButtonStyle}"
+	                                             Margin="0,0,6,0"
+	                                             ToolTip="Restore the previous value captured before Apply."/>
+	                                     <Button Content="{Binding RestoreDefaultButtonText}"
+	                                             Command="{Binding RestoreDefaultCommand}"
+	                                             Style="{StaticResource TweakActionButtonStyle}"
+	                                             Margin="0,0,6,0"
+	                                             ToolTip="{Binding RestoreDefaultTooltip}"
+	                                             Visibility="{Binding HasDefaultChoice, Converter={StaticResource BoolToVisibility}}"/>
 	                                     <Button Content="{Binding ActionButtonText}"
 	                                             Command="{Binding ApplyCommand}"
 	                                             Style="{StaticResource TweakPrimaryActionButtonStyle}"
@@ -1954,6 +2030,12 @@
                                       Style="{StaticResource SectionTabToggleStyle}">
                             <TextBlock Text="Startup"/>
                         </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDiskHealthTabSelected, Mode=OneWay}"
+                                      Command="{Binding SetTabCommand}"
+                                      CommandParameter="Disk Health"
+                                      Style="{StaticResource SectionTabToggleStyle}">
+                            <TextBlock Text="Disk Health"/>
+                        </ToggleButton>
                     </WrapPanel>
                 </Border>
 
@@ -2076,15 +2158,6 @@
                                                    FontSize="10"
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource MutedForegroundBrush}"/>
-                                    </StackPanel>
-                                </CheckBox>
-                                <CheckBox Tag="DiskChecks"
-                                          IsChecked="{Binding ShowDiskChecksOnly}"
-                                          Style="{StaticResource FilterCheckbox}"
-                                          Margin="0,0,6,6"
-                                          ToolTip="Show disk diagnostics and file-system checks only.">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Disk checks"/>
                                     </StackPanel>
                                 </CheckBox>
                                 <Button Content="Reset"
@@ -3007,6 +3080,133 @@
 
                 <TabItem Header="Startup">
                     <local:StartupView DataContext="{Binding Startup}"/>
+                </TabItem>
+
+                <TabItem Header="Disk Health">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Background="{StaticResource TweakPanelGradientBrush}"
+                                BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+                                    <TextBlock Text="Read-only diagnostics"
+                                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                                    <TextBlock Text="These checks live here so they are treated like tools, not persistent tweaks or optimization settings."
+                                               Margin="0,4,0,0"
+                                               Style="{StaticResource AppSectionSubtitleTextStyle}"/>
+                                </StackPanel>
+
+                                <Border Grid.Column="1"
+                                        Background="{DynamicResource AppChipSurfaceBrush}"
+                                        CornerRadius="10"
+                                        Padding="10,4"
+                                        Margin="12,0,0,0"
+                                        VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding DiskHealthCount, StringFormat={}{0} checks}"
+                                               FontSize="11"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Margin="0,10,0,10"
+                                Background="{DynamicResource AppInsetSurfaceBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Text="{Binding DiskHealthSearchText, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource SearchBoxStyle}"
+                                         Tag="Search disk checks, drives, or report text..."/>
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding DiskHealthFilterSummary}"
+                                           Margin="12,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="10"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Row="2">
+                            <Border Style="{StaticResource AppSurfaceCardStyle}"
+                                    Background="{StaticResource TweakPanelGradientBrush}"
+                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="12"
+                                    Padding="0">
+                                <ListBox ItemsSource="{Binding DiskHealthTweaksView}"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Padding="0,0,0,8"
+                                         HorizontalContentAlignment="Stretch"
+                                         VirtualizingPanel.IsVirtualizing="True"
+                                         VirtualizingPanel.VirtualizationMode="Recycling"
+                                         VirtualizingPanel.ScrollUnit="Pixel"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         ScrollViewer.CanContentScroll="True"
+                                         ItemTemplate="{StaticResource TweakItemTemplate}">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <ContentPresenter />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Border>
+
+                            <Border Padding="20"
+                                    Background="{DynamicResource BackgroundDarkBrush}"
+                                    CornerRadius="10"
+                                    Margin="0,20"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Visibility="{Binding HasVisibleDiskHealthTweaks, Converter={StaticResource InverseBoolToVisibility}}">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding DiskHealthEmptyStateTitle}"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding DiskHealthEmptyStateDescription}"
+                                               FontSize="11"
+                                               Foreground="{DynamicResource MutedForegroundBrush}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>

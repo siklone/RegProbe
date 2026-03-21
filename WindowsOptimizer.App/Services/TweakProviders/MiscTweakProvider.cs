@@ -17,7 +17,6 @@ public sealed class MiscTweakProvider : BaseTweakProvider
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // Maintenance & Tools
-        yield return SetNotepadPlusPlusDefaultEditorTweak.CreateSetNotepadPlusPlusDefaultEditorTweak(context.ElevatedRegistry);
         yield return SevenZipSettingsTweak.CreateOptimize7ZipSettingsTweak(context.LocalRegistry);
 
         // Command-based Cleanup

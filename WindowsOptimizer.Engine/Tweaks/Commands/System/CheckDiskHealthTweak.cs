@@ -5,9 +5,10 @@ using WindowsOptimizer.Core.Commands;
 
 namespace WindowsOptimizer.Engine.Tweaks.Commands.System;
 
-public sealed class CheckDiskHealthTweak : CommandTweak
+public sealed class CheckDiskHealthTweak : CommandTweak, ITweakStepTimeouts
 {
     private const string ChkdskExe = "chkdsk.exe";
+    private static readonly TimeSpan DiskHealthTimeout = TimeSpan.FromMinutes(5);
 
     public CheckDiskHealthTweak(ICommandRunner commandRunner)
         : base(
@@ -63,4 +64,10 @@ public sealed class CheckDiskHealthTweak : CommandTweak
         return result.StandardOutput.Contains("Windows has scanned", StringComparison.OrdinalIgnoreCase) ||
                result.StandardOutput.Contains("volume", StringComparison.OrdinalIgnoreCase);
     }
+
+    public TimeSpan? GetStepTimeout(TweakAction action) => action switch
+    {
+        TweakAction.Detect or TweakAction.Apply or TweakAction.Verify => DiskHealthTimeout,
+        _ => null
+    };
 }

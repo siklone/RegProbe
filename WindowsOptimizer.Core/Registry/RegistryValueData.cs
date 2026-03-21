@@ -56,12 +56,12 @@ public sealed record RegistryValueData(
             throw new ArgumentException("Numeric value is required for DWORD registry value.", nameof(value));
         }
 
-        if (value.Value is < int.MinValue or > int.MaxValue)
+        if (value.Value is < int.MinValue or > uint.MaxValue)
         {
             throw new OverflowException("DWORD registry value is out of range.");
         }
 
-        return (int)value.Value;
+        return unchecked((int)(uint)value.Value);
     }
 
     private static long ToInt64(long? value)

@@ -66,7 +66,6 @@ MANUAL_LABELS = {
         "audio.disable-spatial-audio",
         "audio.show-disconnected-devices",
         "audio.show-hidden-devices",
-        "developer.docker-performance",
         "developer.ssh-agent-autostart",
         "developer.terminal-dev-mode",
         "developer.vs-intellisense-cache",

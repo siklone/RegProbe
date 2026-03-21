@@ -156,6 +156,50 @@ public sealed class RegistryValueBatchTweakTests
         }
     }
 
+    [Fact]
+    public async Task Verify_TreatsUnsignedDwordSentinelAsMatchingSignedRegistryValue()
+    {
+        var keyPath = BuildKeyPath("UnsignedDword");
+        Registry.CurrentUser.DeleteSubKeyTree(keyPath, false);
+
+        try
+        {
+            var entries = new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.CurrentUser,
+                    keyPath,
+                    "NetworkThrottlingIndex",
+                    RegistryValueKind.DWord,
+                    0xFFFFFFFF)
+            };
+
+            var tweak = new RegistryValueBatchTweak(
+                "test.registrybatch.unsigned-dword",
+                "Test unsigned DWORD registry batch tweak",
+                "Ensures 0xFFFFFFFF compares correctly after registry round-tripping.",
+                TweakRiskLevel.Safe,
+                entries,
+                new LocalRegistryAccessor(),
+                requiresElevation: false);
+
+            await tweak.DetectAsync(CancellationToken.None);
+
+            var apply = await tweak.ApplyAsync(CancellationToken.None);
+            Assert.Equal(TweakStatus.Applied, apply.Status);
+
+            var verify = await tweak.VerifyAsync(CancellationToken.None);
+            Assert.Equal(TweakStatus.Verified, verify.Status);
+
+            var rollback = await tweak.RollbackAsync(CancellationToken.None);
+            Assert.Equal(TweakStatus.RolledBack, rollback.Status);
+        }
+        finally
+        {
+            Registry.CurrentUser.DeleteSubKeyTree(keyPath, false);
+        }
+    }
+
     private static RegistryValueBatchTweak BuildTweak(string keyPathA, string keyPathB, string target)
     {
         var entries = new[]

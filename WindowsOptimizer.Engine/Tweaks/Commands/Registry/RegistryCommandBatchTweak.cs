@@ -116,7 +116,7 @@ public sealed class RegistryCommandBatchTweak : ITweak
                 if (result.Exists
                     && result.Value is not null
                     && result.Value.Kind == entry.TargetData.Kind
-                    && ValuesEqual(result.Value.ToObject(), entry.TargetValue))
+                    && ValuesEqual(entry.TargetData.Kind, result.Value.ToObject(), entry.TargetValue))
                 {
                     matchingTargets++;
                 }
@@ -169,7 +169,7 @@ public sealed class RegistryCommandBatchTweak : ITweak
                 var alreadyMatches = snapshot.Exists
                     && snapshot.Value is not null
                     && snapshot.Value.Kind == entry.TargetData.Kind
-                    && ValuesEqual(snapshot.Value.ToObject(), entry.TargetValue);
+                    && ValuesEqual(entry.TargetData.Kind, snapshot.Value.ToObject(), entry.TargetValue);
 
                 if (!alreadyMatches)
                 {
@@ -233,7 +233,7 @@ public sealed class RegistryCommandBatchTweak : ITweak
                 }
 
                 var currentValue = result.Value.ToObject();
-                if (!ValuesEqual(currentValue, entry.TargetValue))
+                if (!ValuesEqual(entry.TargetData.Kind, currentValue, entry.TargetValue))
                 {
                     return new TweakResult(
                         TweakStatus.Failed,
@@ -293,36 +293,8 @@ public sealed class RegistryCommandBatchTweak : ITweak
         }
     }
 
-    private static bool ValuesEqual(object? actual, object? expected)
-    {
-        if (actual is null || expected is null)
-        {
-            return actual is null && expected is null;
-        }
-
-        if (actual is byte[] actualBytes && expected is byte[] expectedBytes)
-        {
-            return actualBytes.SequenceEqual(expectedBytes);
-        }
-
-        if (actual is string[] actualStrings && expected is string[] expectedStrings)
-        {
-            return actualStrings.SequenceEqual(expectedStrings, StringComparer.Ordinal);
-        }
-
-        if (IsNumeric(actual) && IsNumeric(expected))
-        {
-            return Convert.ToInt64(actual, CultureInfo.InvariantCulture)
-                == Convert.ToInt64(expected, CultureInfo.InvariantCulture);
-        }
-
-        return actual.Equals(expected);
-    }
-
-    private static bool IsNumeric(object value)
-    {
-        return value is byte or sbyte or short or ushort or int or uint or long or ulong;
-    }
+    private static bool ValuesEqual(RegistryValueKind kind, object? actual, object? expected)
+        => RegistryValueComparer.ValuesEqual(kind, actual, expected);
 
     private static string FormatValue(object? value)
     {

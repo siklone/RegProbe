@@ -14,6 +14,8 @@ namespace WindowsOptimizer.Infrastructure.Elevation;
 public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 {
     private const string System32RegExe = "reg.exe";
+    private const string PoliciesPrefix = @"Software\Policies\";
+    private const string LegacyPoliciesPrefix = @"Software\Microsoft\Windows\CurrentVersion\Policies\";
     private readonly IElevatedHostClient _client;
     private readonly ElevatedCommandRunner _commandRunner;
 
@@ -43,6 +45,12 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
     public async Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
     {
+        if (ShouldPreferCommandExecution(reference))
+        {
+            await RunRegAsync(BuildSetRequest(reference, value), ct);
+            return;
+        }
+
         try
         {
             var request = new ElevatedRegistryRequest(
@@ -73,6 +81,12 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
     public async Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
     {
+        if (ShouldPreferCommandExecution(reference))
+        {
+            await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
+            return;
+        }
+
         try
         {
             var request = new ElevatedRegistryRequest(
@@ -172,6 +186,23 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
             || message.Contains("privileges or groups referenced", StringComparison.OrdinalIgnoreCase);
     }
 
+    private static bool ShouldPreferCommandExecution(RegistryValueReference reference)
+    {
+        if (reference.Hive != RegistryHive.CurrentUser)
+        {
+            return true;
+        }
+
+        if (string.IsNullOrWhiteSpace(reference.KeyPath))
+        {
+            return false;
+        }
+
+        var normalized = reference.KeyPath.TrimStart('\\');
+        return normalized.StartsWith(PoliciesPrefix, StringComparison.OrdinalIgnoreCase)
+            || normalized.StartsWith(LegacyPoliciesPrefix, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static bool IsMissingDeleteResult(CommandResult result)
     {
         var combined = $"{result.StandardOutput}\n{result.StandardError}";
@@ -269,8 +300,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
     {
         return value.Kind switch
         {
-            RegistryValueKind.DWord or RegistryValueKind.QWord => value.NumericValue?.ToString(CultureInfo.InvariantCulture)
-                ?? throw new InvalidOperationException("Numeric registry value is missing."),
+            RegistryValueKind.DWord or RegistryValueKind.QWord => RegistryValueComparer.FormatNumericValueForRegExe(value.Kind, value.NumericValue),
             RegistryValueKind.String or RegistryValueKind.ExpandString => value.StringValue ?? string.Empty,
             RegistryValueKind.MultiString => string.Join("\\0", value.MultiStringValue ?? Array.Empty<string>()),
             RegistryValueKind.Binary => BitConverter.ToString(value.BinaryValue ?? Array.Empty<byte>()).Replace("-", string.Empty, StringComparison.Ordinal),

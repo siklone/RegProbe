@@ -111,7 +111,24 @@ public sealed class CompositeTweakTests
 
         // Assert
         Assert.Equal(TweakStatus.Detected, result.Status);
-        Assert.Contains("3 sub-tweaks", result.Message);
+        Assert.Contains("3 applicable sub-tweaks", result.Message);
+    }
+
+    [Fact]
+    public async Task DetectAsync_WhenAllApplicableTweaksAreAlreadyApplied_ReturnsApplied()
+    {
+        var subTweaks = new List<ITweak>
+        {
+            new AppliedDetectTweak("sub.1"),
+            new AppliedDetectTweak("sub.2"),
+            new NotApplicableTweak("sub.3")
+        };
+        var composite = CreateComposite(subTweaks);
+
+        var result = await composite.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, result.Status);
+        Assert.Contains("already match", result.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -339,6 +356,29 @@ public sealed class CompositeTweakTests
 
         public Task<TweakResult> DetectAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Detected, "Detected", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> ApplyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> VerifyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> RollbackAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
+    }
+
+    private sealed class AppliedDetectTweak : ITweak
+    {
+        public string Id { get; }
+        public string Name => "Applied Detect Tweak";
+        public string Description => "Reports applied during detect.";
+        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+        public bool RequiresElevation => false;
+
+        public AppliedDetectTweak(string id) => Id = id;
+
+        public Task<TweakResult> DetectAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Applied, "Already applied", DateTimeOffset.UtcNow));
 
         public Task<TweakResult> ApplyAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));

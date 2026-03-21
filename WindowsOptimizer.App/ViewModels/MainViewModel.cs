@@ -19,6 +19,10 @@ namespace WindowsOptimizer.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
+    private const string DashboardQuickActionScanKey = "scan";
+    private const string DashboardQuickActionFastCleanKey = "fast-clean";
+    private const string DashboardQuickActionMaintenanceKey = "maintenance";
+
     private NavigationItem? _selectedNavigationItem;
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
@@ -43,6 +47,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private bool _isRecovering;
     private bool _isStartupScanActive;
     private bool _isDashboardQuickActionRunning;
+    private string _dashboardQuickActionKey = string.Empty;
     private string _dashboardQuickActionStatus = "Run a quick settings scan or a lightweight cleanup pass right from the dashboard.";
 
     public MainViewModel()
@@ -148,7 +153,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
         RunDashboardScanCommand = new RelayCommand(_ => _ = RunDashboardScanAsync(), _ => CanRunDashboardQuickAction());
         RunFastCleanCommand = new RelayCommand(_ => _ = RunFastCleanAsync(), _ => CanRunDashboardQuickAction());
-        OpenMaintenanceWorkspaceCommand = new RelayCommand(_ => OpenMaintenanceWorkspace(), _ => _tweaksViewModel != null);
+        OpenMaintenanceWorkspaceCommand = new RelayCommand(_ => OpenMaintenanceWorkspace(), _ => CanRunDashboardQuickAction());
 
         // Initialize Intelligence with error handling
         _ = Task.Run(async () =>
@@ -186,7 +191,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         // Sync for tray tooltip
         OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
         TweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
-        TotalTweaksAvailable = _tweaksViewModel.Tweaks.Count;
+        TotalTweaksAvailable = _tweaksViewModel.TotalTweaksAvailable;
     }
 
     public void Dispose()
@@ -379,6 +384,29 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _dashboardQuickActionStatus, value);
     }
 
+    public string DashboardQuickActionKey
+    {
+        get => _dashboardQuickActionKey;
+        private set
+        {
+            if (SetProperty(ref _dashboardQuickActionKey, value))
+            {
+                OnPropertyChanged(nameof(IsDashboardScanSelected));
+                OnPropertyChanged(nameof(IsDashboardFastCleanSelected));
+                OnPropertyChanged(nameof(IsDashboardMaintenanceSelected));
+            }
+        }
+    }
+
+    public bool IsDashboardScanSelected =>
+        string.Equals(DashboardQuickActionKey, DashboardQuickActionScanKey, StringComparison.OrdinalIgnoreCase);
+
+    public bool IsDashboardFastCleanSelected =>
+        string.Equals(DashboardQuickActionKey, DashboardQuickActionFastCleanKey, StringComparison.OrdinalIgnoreCase);
+
+    public bool IsDashboardMaintenanceSelected =>
+        string.Equals(DashboardQuickActionKey, DashboardQuickActionMaintenanceKey, StringComparison.OrdinalIgnoreCase);
+
     public ICommand RecoverPendingRollbacksCommand { get; }
 
     public ICommand DismissPendingRollbacksCommand { get; }
@@ -509,11 +537,12 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private void OpenMaintenanceWorkspace()
     {
-        if (_tweaksViewModel == null)
+        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
         {
             return;
         }
 
+        DashboardQuickActionKey = DashboardQuickActionMaintenanceKey;
         NavigateToTab(1);
         _tweaksViewModel.ShowMaintenanceCleanupWorkspace();
         DashboardQuickActionStatus = "Opened Maintenance with cleanup tasks front and center.";
@@ -526,6 +555,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             return;
         }
 
+        DashboardQuickActionKey = DashboardQuickActionScanKey;
         IsDashboardQuickActionRunning = true;
         DashboardQuickActionStatus = "Scanning Windows settings and live tweak states...";
 
@@ -553,6 +583,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             return;
         }
 
+        DashboardQuickActionKey = DashboardQuickActionFastCleanKey;
         IsDashboardQuickActionRunning = true;
         DashboardQuickActionStatus = "Running Fast Clean on lightweight caches and cleanup tasks...";
 

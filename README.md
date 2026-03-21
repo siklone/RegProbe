@@ -46,6 +46,22 @@ It is built for people who want more than a random "FPS boost" script:
 - Nohuto-oriented research integration (`win-config`, `win-registry`, related audits)
 - Microsoft-backed and repo-backed coverage tests for tweak providers
 
+## 🧪 VM Validation Environment
+
+Runtime validation for this project happens in a dedicated VMware VM, not on the host machine.
+
+- Supported VM: `Win25H2Clean`
+- Use the VM for live app runs, registry experiments, performance testing, Procmon captures, WPR/WPA traces, and Ghidra headless analysis
+- Host usage is for source editing and offline preparation only
+- Tooling and wrapper paths are documented in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
+
+Available in the VM:
+
+- WPR / WPA / xperf
+- Procmon with a safe capture wrapper
+- Ghidra headless
+- Java 21 for Ghidra
+
 ## 🚀 Why This Project Feels Different
 
 Most Windows tweak tools stop at "click button, hope for the best."
@@ -199,6 +215,7 @@ Generation reports such as `HardwareIconDownloadReport.json` are local artifacts
 
 Good starting points:
 
+- [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)

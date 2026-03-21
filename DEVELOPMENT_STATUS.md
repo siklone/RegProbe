@@ -4,6 +4,8 @@
 **Project:** Windows Optimizer - WPF .NET 8
 **Branch:** main
 
+> Runtime validation is performed in the `Win25H2Clean` VMware VM. The host machine is reserved for source edits and offline preparation only. See `Docs/VM_WORKFLOW.md`.
+
 ---
 
 ## 📋 Table of Contents

@@ -74,9 +74,19 @@ public sealed class CompositeTweak : ITweak
                 return new TweakResult(TweakStatus.NotApplicable, "No sub-tweaks applicable.", DateTimeOffset.UtcNow);
             }
 
+            var applicableResults = results.Where(result => result.Status != TweakStatus.NotApplicable).ToList();
+            if (applicableResults.Count > 0
+                && applicableResults.All(result => result.Status is TweakStatus.Applied or TweakStatus.Verified))
+            {
+                return new TweakResult(
+                    TweakStatus.Applied,
+                    $"All {applicableResults.Count} applicable sub-tweaks already match the desired configuration.",
+                    DateTimeOffset.UtcNow);
+            }
+
             return new TweakResult(
                 TweakStatus.Detected,
-                $"Detected {results.Count} sub-tweaks.",
+                $"Detected {applicableResults.Count} applicable sub-tweaks.",
                 DateTimeOffset.UtcNow);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)

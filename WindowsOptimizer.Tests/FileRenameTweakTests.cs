@@ -41,6 +41,29 @@ public sealed class FileRenameTweakTests
         Assert.False(await fileSystem.FileExistsAsync(disabledPath, CancellationToken.None));
     }
 
+    [Fact]
+    public async Task Detect_WhenFileAlreadyRenamed_ReturnsApplied()
+    {
+        var sourcePath = "C:\\Windows\\System32\\test.exe";
+        var disabledPath = "C:\\Windows\\System32\\test.exe.disabled";
+        var fileSystem = new FakeFileSystemAccessor(new[] { disabledPath });
+
+        var tweak = new FileRenameTweak(
+            "test.file",
+            "Test file rename",
+            "Renames a file for testing.",
+            TweakRiskLevel.Advanced,
+            sourcePath,
+            disabledPath,
+            fileSystem,
+            requiresElevation: true);
+
+        var detect = await tweak.DetectAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Applied, detect.Status);
+        Assert.Contains("already renamed", detect.Message);
+    }
+
     private sealed class FakeFileSystemAccessor : IFileSystemAccessor
     {
         private readonly HashSet<string> _files = new(StringComparer.OrdinalIgnoreCase);

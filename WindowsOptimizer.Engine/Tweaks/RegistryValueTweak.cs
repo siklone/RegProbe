@@ -88,7 +88,7 @@ public sealed class RegistryValueTweak : ITweak, IRollbackAwareTweak
                 return new TweakResult(TweakStatus.Detected, "Value not set.", DateTimeOffset.UtcNow);
             }
 
-            if (kind == _valueKind && ValuesEqual(value, _targetValue))
+            if (kind == _valueKind && ValuesEqual(_valueKind, value, _targetValue))
             {
                 return new TweakResult(
                     TweakStatus.Applied,
@@ -155,7 +155,7 @@ public sealed class RegistryValueTweak : ITweak, IRollbackAwareTweak
                     DateTimeOffset.UtcNow);
             }
 
-            if (!ValuesEqual(value, _targetValue))
+            if (!ValuesEqual(_valueKind, value, _targetValue))
             {
                 return new TweakResult(
                     TweakStatus.Failed,
@@ -237,36 +237,8 @@ public sealed class RegistryValueTweak : ITweak, IRollbackAwareTweak
         return (true, value, result.Value.Kind, result.Value);
     }
 
-    private static bool ValuesEqual(object? actual, object? expected)
-    {
-        if (actual is null || expected is null)
-        {
-            return actual is null && expected is null;
-        }
-
-        if (actual is byte[] actualBytes && expected is byte[] expectedBytes)
-        {
-            return actualBytes.SequenceEqual(expectedBytes);
-        }
-
-        if (actual is string[] actualStrings && expected is string[] expectedStrings)
-        {
-            return actualStrings.SequenceEqual(expectedStrings, StringComparer.Ordinal);
-        }
-
-        if (IsNumeric(actual) && IsNumeric(expected))
-        {
-            return Convert.ToInt64(actual, CultureInfo.InvariantCulture)
-                == Convert.ToInt64(expected, CultureInfo.InvariantCulture);
-        }
-
-        return actual.Equals(expected);
-    }
-
-    private static bool IsNumeric(object value)
-    {
-        return value is byte or sbyte or short or ushort or int or uint or long or ulong;
-    }
+    private static bool ValuesEqual(RegistryValueKind kind, object? actual, object? expected)
+        => RegistryValueComparer.ValuesEqual(kind, actual, expected);
 
     private static string FormatValue(object? value)
     {

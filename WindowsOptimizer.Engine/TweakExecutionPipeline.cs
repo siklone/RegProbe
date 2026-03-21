@@ -9,6 +9,7 @@ namespace WindowsOptimizer.Engine;
 
 public sealed class TweakExecutionPipeline
 {
+    private static readonly TimeSpan DefaultStepTimeout = TimeSpan.FromSeconds(30);
     private readonly IAppLogger _logger;
     private readonly ITweakLogStore? _logStore;
     private readonly IRollbackStateStore? _rollbackStore;
@@ -54,6 +55,28 @@ public sealed class TweakExecutionPipeline
         if (options.DryRun)
         {
             await AppendSkippedStepsAsync(tweak, steps, progress, "DryRun enabled.", ct);
+            return BuildReport(tweak, options, steps, startedAt);
+        }
+
+        if (detectStep.Result.Status == TweakStatus.Applied)
+        {
+            await AppendSkippedStepAsync(tweak, TweakAction.Apply, steps, progress, "Already in the desired state.", ct);
+
+            if (options.VerifyAfterApply)
+            {
+                var verifyStep = await RunStepAsync(tweak, TweakAction.Verify, tweak.VerifyAsync, steps, progress, ct);
+                if (verifyStep.Result.Status == TweakStatus.Verified)
+                {
+                    await MarkAppliedAsync(tweak, ct);
+                }
+            }
+            else
+            {
+                await MarkAppliedAsync(tweak, ct);
+                await AppendSkippedStepAsync(tweak, TweakAction.Verify, steps, progress, "Already in the desired state.", ct);
+            }
+
+            await AppendSkippedStepAsync(tweak, TweakAction.Rollback, steps, progress, "No changes were made.", ct);
             return BuildReport(tweak, options, steps, startedAt);
         }
 
@@ -113,6 +136,11 @@ public sealed class TweakExecutionPipeline
             throw new ArgumentNullException(nameof(tweak));
         }
 
+        if (action == TweakAction.Rollback)
+        {
+            return ExecuteRollbackStepAsync(tweak, progress, ct);
+        }
+
         Func<CancellationToken, Task<TweakResult>> operation = action switch
         {
             TweakAction.Detect => tweak.DetectAsync,
@@ -126,13 +154,25 @@ public sealed class TweakExecutionPipeline
         return RunStepAsync(tweak, action, operation, steps, progress, ct);
     }
 
+    private async Task<TweakExecutionStep> ExecuteRollbackStepAsync(
+        ITweak tweak,
+        IProgress<TweakExecutionUpdate>? progress,
+        CancellationToken ct)
+    {
+        await TryRestoreRollbackStateAsync(tweak, ct);
+        var steps = new List<TweakExecutionStep>();
+        return await RunStepAsync(tweak, TweakAction.Rollback, tweak.RollbackAsync, steps, progress, ct);
+    }
+
     private static TweakExecutionReport BuildReport(
         ITweak tweak,
         TweakExecutionOptions options,
         IReadOnlyList<TweakExecutionStep> steps,
         DateTimeOffset startedAt)
     {
-        var applied = HasStep(steps, TweakAction.Apply, TweakStatus.Applied);
+        var applied = HasStep(steps, TweakAction.Apply, TweakStatus.Applied)
+            || HasStep(steps, TweakAction.Detect, TweakStatus.Applied)
+            || HasStep(steps, TweakAction.Verify, TweakStatus.Verified);
         var verified = HasStep(steps, TweakAction.Verify, TweakStatus.Verified);
         var rolledBack = HasStep(steps, TweakAction.Rollback, TweakStatus.RolledBack);
         var completedAt = DateTimeOffset.UtcNow;
@@ -208,12 +248,16 @@ public sealed class TweakExecutionPipeline
         {
             ct.ThrowIfCancellationRequested();
 
-            // Add timeout to prevent hanging (30 seconds per step)
+            var stepTimeout = ResolveStepTimeout(tweak, action);
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            cts.CancelAfter(TimeSpan.FromSeconds(30));
 
             var operationTask = operation(cts.Token);
-            var timeoutTask = Task.Delay(Timeout.Infinite, cts.Token);
+            _ = operationTask.ContinueWith(
+                static faultedTask => _ = faultedTask.Exception,
+                CancellationToken.None,
+                TaskContinuationOptions.OnlyOnFaulted,
+                TaskScheduler.Default);
+            var timeoutTask = Task.Delay(stepTimeout, ct);
 
             var completedTask = await Task.WhenAny(operationTask, timeoutTask);
 
@@ -223,9 +267,11 @@ public sealed class TweakExecutionPipeline
             }
             else
             {
+                ct.ThrowIfCancellationRequested();
+                cts.Cancel();
                 result = new TweakResult(
                     TweakStatus.Failed,
-                    $"Operation timed out after 30 seconds during {action}.",
+                    $"Operation timed out after {FormatTimeout(stepTimeout)} during {action}.",
                     DateTimeOffset.UtcNow);
             }
         }
@@ -246,6 +292,37 @@ public sealed class TweakExecutionPipeline
         steps.Add(step);
         await ReportStep(tweak, step, progress, ct);
         return step;
+    }
+
+    private static TimeSpan ResolveStepTimeout(ITweak tweak, TweakAction action)
+    {
+        if (tweak is ITweakStepTimeouts timeoutProvider)
+        {
+            var customTimeout = timeoutProvider.GetStepTimeout(action);
+            if (customTimeout.HasValue && customTimeout.Value > TimeSpan.Zero)
+            {
+                return customTimeout.Value;
+            }
+        }
+
+        return DefaultStepTimeout;
+    }
+
+    private static string FormatTimeout(TimeSpan timeout)
+    {
+        if (timeout.TotalMinutes >= 1 && Math.Abs(timeout.TotalMinutes - Math.Round(timeout.TotalMinutes)) < 0.001)
+        {
+            var minutes = (int)Math.Round(timeout.TotalMinutes);
+            return minutes == 1 ? "1 minute" : $"{minutes} minutes";
+        }
+
+        if (timeout.TotalSeconds >= 1 && Math.Abs(timeout.TotalSeconds - Math.Round(timeout.TotalSeconds)) < 0.001)
+        {
+            var seconds = (int)Math.Round(timeout.TotalSeconds);
+            return seconds == 1 ? "1 second" : $"{seconds} seconds";
+        }
+
+        return $"{timeout.TotalMilliseconds:F0} ms";
     }
 
     private async Task ReportStep(
@@ -315,6 +392,30 @@ public sealed class TweakExecutionPipeline
         {
             // Log but don't fail the operation
             _logger.Log(LogLevel.Warning, $"Failed to save rollback state for {tweak.Id}: {ex.Message}", ex);
+        }
+    }
+
+    private async Task TryRestoreRollbackStateAsync(ITweak tweak, CancellationToken ct)
+    {
+        if (_rollbackStore is null || tweak is not IRollbackAwareTweak rollbackAware || rollbackAware.HasCapturedState)
+        {
+            return;
+        }
+
+        try
+        {
+            var snapshot = await _rollbackStore.GetSnapshotAsync(tweak.Id, ct);
+            if (snapshot is null)
+            {
+                return;
+            }
+
+            rollbackAware.RestoreFromSnapshot(snapshot);
+            _logger.Log(LogLevel.Debug, $"Restored rollback snapshot for {tweak.Id}", null);
+        }
+        catch (Exception ex)
+        {
+            _logger.Log(LogLevel.Warning, $"Failed to restore rollback state for {tweak.Id}: {ex.Message}", ex);
         }
     }
 

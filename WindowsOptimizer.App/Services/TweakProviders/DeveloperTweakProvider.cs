@@ -5,6 +5,7 @@ using WindowsOptimizer.Core.Registry;
 using WindowsOptimizer.Core.Services;
 using WindowsOptimizer.Engine;
 using WindowsOptimizer.Engine.Tweaks;
+using WindowsOptimizer.Engine.Tweaks.Developer;
 
 namespace WindowsOptimizer.App.Services.TweakProviders;
 
@@ -137,18 +138,7 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
             1);
 
         // Docker Desktop Performance
-        yield return CreateRegistryTweak(
-            context,
-            "developer.docker-performance",
-            "Optimize Docker Desktop Performance",
-            "Enables experimental features and WSL2 backend for better Docker performance on Windows.",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Docker Inc.\Docker Desktop",
-            "UseWSL2",
-            RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
+        yield return new EnableDockerWsl2BackendTweak();
 
         // PowerShell Execution Policy
         // Source: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy
@@ -180,18 +170,7 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
 
         // WSL2 Memory Optimization
         // Source: https://learn.microsoft.com/en-us/windows/wsl/wsl-config
-        yield return CreateRegistryTweak(
-            context,
-            "developer.wsl2-memory",
-            "Optimize WSL2 Memory Usage",
-            "Limits WSL2 memory consumption to prevent it from consuming all available RAM during development. Source: Microsoft WSL Documentation",
-            TweakRiskLevel.Advanced,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows\CurrentVersion\Lxss",
-            "DefaultVersion",
-            RegistryValueKind.DWord,
-            2,
-            requiresElevation: false);
+        yield return new SetWsl2MemoryLimitTweak();
 
         // Visual Studio Solution Load Performance
         yield return CreateRegistryTweak(

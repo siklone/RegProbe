@@ -46,6 +46,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private readonly RelayCommand _applyCommand;
     private readonly RelayCommand _verifyCommand;
     private readonly RelayCommand _rollbackCommand;
+    private readonly RelayCommand _restoreDefaultCommand;
     private readonly RelayCommand _cancelCommand;
     private readonly RelayCommand _copyIdCommand;
     private CancellationTokenSource? _cts;
@@ -123,6 +124,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
         _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
         _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
+        _restoreDefaultCommand = new RelayCommand(_ => _ = RestoreDefaultAsync(), _ => CanRestoreDefault());
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
         _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
@@ -210,7 +212,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         "Preview: Dry run (no changes)\n" +
         "Apply: Detect -> Apply -> Verify (Rollback on failure)\n" +
         "Verify: Confirms current state matches desired\n" +
-        "Rollback: Restores value captured by Detect (same app session)";
+        "Restore Previous: Puts back the last state captured before Apply\n" +
+        "Restore Default: Applies the product's default option when the tweak defines one";
 
     private static string ExtractCategory(string id)
     {
@@ -233,12 +236,40 @@ public sealed class TweakItemViewModel : ViewModelBase
         var dotIndex = id.IndexOf('.');
         if (dotIndex <= 0)
         {
+            var hyphenIndex = id.IndexOf('-');
+            if (hyphenIndex > 0)
+            {
+                var candidate = id[..hyphenIndex];
+                if (IsKnownCategoryPrefix(candidate))
+                {
+                    return Utilities.StringPool.GetCategory(candidate);
+                }
+            }
+
             return Utilities.StringPool.Intern("Other");
         }
 
         var cat = id.Substring(0, dotIndex);
         return Utilities.StringPool.GetCategory(cat);
     }
+
+    private static bool IsKnownCategoryPrefix(string candidate) => candidate.ToLowerInvariant() switch
+    {
+        "system" or
+        "security" or
+        "privacy" or
+        "network" or
+        "visibility" or
+        "audio" or
+        "peripheral" or
+        "power" or
+        "performance" or
+        "cleanup" or
+        "explorer" or
+        "notifications" or
+        "devtools" => true,
+        _ => false
+    };
 
     private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
     {
@@ -263,6 +294,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         var area = tweak switch
         {
             RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak => "Registry",
+            IChoiceTweak => "Preset",
             ServiceStartModeBatchTweak => "Service",
             ScheduledTaskBatchTweak => "Task",
             SettingsToggleTweak => "Settings",
@@ -285,6 +317,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public ICommand VerifyCommand => _verifyCommand;
 
     public ICommand RollbackCommand => _rollbackCommand;
+
+    public ICommand RestoreDefaultCommand => _restoreDefaultCommand;
 
     public ICommand CancelCommand => _cancelCommand;
 
@@ -367,22 +401,22 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             OnPropertyChanged(nameof(SelectedChoiceDescription));
 
-            if (_isSyncingChoiceOption || value is null || _tweak is not RegistryValuePresetBatchTweak presetBatchTweak)
+            if (_isSyncingChoiceOption || value is null || _tweak is not IChoiceTweak choiceTweak)
             {
                 return;
             }
 
-            presetBatchTweak.SelectedPresetKey = value.Key;
+            choiceTweak.SelectedChoiceKey = value.Key;
             TargetValue = value.Label;
 
-            if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetLabel))
+            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
             {
-                CurrentValue = presetBatchTweak.MatchedPresetLabel!;
+                CurrentValue = choiceTweak.MatchedChoiceLabel!;
             }
 
-            if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetKey))
+            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
             {
-                AppliedStatus = string.Equals(presetBatchTweak.MatchedPresetKey, value.Key, StringComparison.OrdinalIgnoreCase)
+                AppliedStatus = string.Equals(choiceTweak.MatchedChoiceKey, value.Key, StringComparison.OrdinalIgnoreCase)
                     ? TweakAppliedStatus.Applied
                     : TweakAppliedStatus.NotApplied;
             }
@@ -392,6 +426,66 @@ public sealed class TweakItemViewModel : ViewModelBase
     }
 
     public string SelectedChoiceDescription => SelectedChoiceOption?.Description ?? string.Empty;
+
+    private TweakGuidance? Guidance => (_tweak as ITweakWithGuidance)?.Guidance;
+
+    public string FriendlyDescription => string.IsNullOrWhiteSpace(Guidance?.CasualSummary)
+        ? Description
+        : Guidance!.CasualSummary;
+
+    public string GuidanceWhenHelpful => Guidance?.WhenHelpful ?? string.Empty;
+
+    public bool HasGuidanceWhenHelpful => !string.IsNullOrWhiteSpace(GuidanceWhenHelpful);
+
+    public string GuidanceTradeoffs => Guidance?.Tradeoffs ?? string.Empty;
+
+    public bool HasGuidanceTradeoffs => !string.IsNullOrWhiteSpace(GuidanceTradeoffs);
+
+    public string DefaultVsPreviousSummary
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(Guidance?.DefaultVsPrevious))
+            {
+                return Guidance!.DefaultVsPrevious;
+            }
+
+            return HasDefaultChoice
+                ? "Restore Previous uses the snapshot captured before Apply. Restore Default applies the tweak's built-in default option."
+                : string.Empty;
+        }
+    }
+
+    public bool HasDefaultVsPreviousSummary => !string.IsNullOrWhiteSpace(DefaultVsPreviousSummary);
+
+    public string ProfessionalNotes => Guidance?.ProfessionalNotes ?? string.Empty;
+
+    public bool HasProfessionalNotes => !string.IsNullOrWhiteSpace(ProfessionalNotes);
+
+    public bool HasExtendedGuidance =>
+        HasGuidanceWhenHelpful ||
+        HasGuidanceTradeoffs ||
+        HasDefaultVsPreviousSummary ||
+        HasProfessionalNotes;
+
+    public bool HasDefaultChoice =>
+        _tweak is IChoiceTweak choiceTweak &&
+        !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
+
+    public string RestoreDefaultButtonText => HasDefaultChoice ? "Restore Default" : string.Empty;
+
+    public string RestoreDefaultTooltip
+    {
+        get
+        {
+            if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceLabel))
+            {
+                return "Restore the product's default option.";
+            }
+
+            return $"Apply '{choiceTweak.DefaultChoiceLabel}' instead of restoring your previously captured value.";
+        }
+    }
 
     public bool HasRegistryPath => !string.IsNullOrEmpty(RegistryPath);
 
@@ -1384,6 +1478,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _applyCommand.RaiseCanExecuteChanged();
         _verifyCommand.RaiseCanExecuteChanged();
         _rollbackCommand.RaiseCanExecuteChanged();
+        _restoreDefaultCommand.RaiseCanExecuteChanged();
         _cancelCommand.RaiseCanExecuteChanged();
         _toggleCommand.RaiseCanExecuteChanged();
     }
@@ -1391,6 +1486,14 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool CanToggle()
     {
         return !IsRunning && !IsBulkLocked && AppliedStatus != TweakAppliedStatus.Unknown;
+    }
+
+    private bool CanRestoreDefault()
+    {
+        return !IsRunning
+            && !IsBulkLocked
+            && _tweak is IChoiceTweak choiceTweak
+            && !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
     }
 
     /// <summary>
@@ -1674,6 +1777,16 @@ public sealed class TweakItemViewModel : ViewModelBase
                 }
 
                 break;
+            case IChoiceTweak choiceTweak:
+                InitializeChoiceOptions(choiceTweak);
+                SyncChoiceStateFromTweak(updateAppliedStatus: false);
+
+                if (string.IsNullOrWhiteSpace(CodeExample))
+                {
+                    CodeExample = "Choose a profile, click Apply to use it, Restore Previous to undo, or Restore Default to go back to the app's default behavior.";
+                }
+
+                break;
             case RegistryValueTweak registryValueTweak:
                 if (string.IsNullOrWhiteSpace(RegistryPath))
                 {
@@ -1719,19 +1832,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    private void InitializeChoiceOptions(RegistryValuePresetBatchTweak presetBatchTweak)
+    private void InitializeChoiceOptions(IChoiceTweak choiceTweak)
     {
         _isSyncingChoiceOption = true;
         try
         {
             ChoiceOptions.Clear();
-            foreach (var preset in presetBatchTweak.Presets)
+            foreach (var choice in choiceTweak.Choices)
             {
-                ChoiceOptions.Add(new TweakChoiceOption(preset.Key, preset.Label, preset.Description));
+                ChoiceOptions.Add(new TweakChoiceOption(choice.Key, choice.Label, choice.Description));
             }
 
             _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase));
+                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
         }
         finally
         {
@@ -1745,21 +1858,21 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void SyncChoiceStateFromTweak(bool updateAppliedStatus)
     {
-        if (_tweak is not RegistryValuePresetBatchTweak presetBatchTweak)
+        if (_tweak is not IChoiceTweak choiceTweak)
         {
             return;
         }
 
         if (ChoiceOptions.Count == 0)
         {
-            InitializeChoiceOptions(presetBatchTweak);
+            InitializeChoiceOptions(choiceTweak);
         }
 
         _isSyncingChoiceOption = true;
         try
         {
             _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase));
+                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
         }
         finally
         {
@@ -1774,9 +1887,9 @@ public sealed class TweakItemViewModel : ViewModelBase
             TargetValue = _selectedChoiceOption.Label;
         }
 
-        if (!string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetLabel))
+        if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
         {
-            CurrentValue = presetBatchTweak.MatchedPresetLabel!;
+            CurrentValue = choiceTweak.MatchedChoiceLabel!;
         }
         else if (HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied)
         {
@@ -1788,11 +1901,11 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(presetBatchTweak.MatchedPresetKey))
+        if (string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
         {
             AppliedStatus = TweakAppliedStatus.NotApplied;
         }
-        else if (string.Equals(presetBatchTweak.MatchedPresetKey, presetBatchTweak.SelectedPresetKey, StringComparison.OrdinalIgnoreCase))
+        else if (string.Equals(choiceTweak.MatchedChoiceKey, choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase))
         {
             AppliedStatus = TweakAppliedStatus.Applied;
         }
@@ -1975,7 +2088,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             LastUpdatedText = $"Last update: {cachedState.LastDetectedAtUtc.Value.ToLocalTime():HH:mm:ss}";
         }
 
-        if (_tweak is RegistryValuePresetBatchTweak presetBatchTweak && ChoiceOptions.Count > 0)
+        if (_tweak is IChoiceTweak choiceTweak && ChoiceOptions.Count > 0)
         {
             var matchingOption = ChoiceOptions.FirstOrDefault(option =>
                 option.Label.Equals(TargetValue, StringComparison.OrdinalIgnoreCase));
@@ -1984,7 +2097,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 _isSyncingChoiceOption = true;
                 try
                 {
-                    presetBatchTweak.SelectedPresetKey = matchingOption.Key;
+                    choiceTweak.SelectedChoiceKey = matchingOption.Key;
                     _selectedChoiceOption = matchingOption;
                 }
                 finally
@@ -2080,7 +2193,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         TryUpdateBatchDetailsFromMessage(message);
 
-        if (_tweak is RegistryValuePresetBatchTweak)
+        if (_tweak is IChoiceTweak)
         {
             SyncChoiceStateFromTweak(updateAppliedStatus: false);
             return;
@@ -2384,6 +2497,25 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
+        await RunApplyAsync(CancellationToken.None);
+    }
+
+    private async Task RestoreDefaultAsync()
+    {
+        if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey))
+        {
+            return;
+        }
+
+        var defaultOption = ChoiceOptions.FirstOrDefault(option =>
+            option.Key.Equals(choiceTweak.DefaultChoiceKey, StringComparison.OrdinalIgnoreCase));
+
+        if (defaultOption is null)
+        {
+            return;
+        }
+
+        SelectedChoiceOption = defaultOption;
         await RunApplyAsync(CancellationToken.None);
     }
 

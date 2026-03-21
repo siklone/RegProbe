@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,28 +56,7 @@ internal sealed class LocalScheduledTaskManager : IScheduledTaskManager
             throw new ArgumentException("Task path is required.", nameof(taskPath));
         }
 
-        var (folderPath, taskName) = SplitTaskPath(taskPath);
-        dynamic? service = null;
-        dynamic? folder = null;
-        dynamic? task = null;
-
-        try
-        {
-            service = Activator.CreateInstance(Type.GetTypeFromProgID("Schedule.Service")
-                ?? throw new InvalidOperationException("Task Scheduler service is not available."));
-            if (service == null) throw new InvalidOperationException("Task Scheduler instance is null.");
-            service.Connect();
-            folder = service.GetFolder(folderPath);
-            task = folder.GetTask(taskName);
-            task.Enabled = enabled;
-            return Task.CompletedTask;
-        }
-        finally
-        {
-            ReleaseComObject(task);
-            ReleaseComObject(folder);
-            ReleaseComObject(service);
-        }
+        return SetEnabledWithSchtasksAsync(taskPath, enabled, ct);
     }
 
     private static (string FolderPath, string TaskName) SplitTaskPath(string taskPath)
@@ -115,6 +96,44 @@ internal sealed class LocalScheduledTaskManager : IScheduledTaskManager
         if (instance is not null && Marshal.IsComObject(instance))
         {
             Marshal.FinalReleaseComObject(instance);
+        }
+    }
+
+    // The COM Enabled setter is flaky on some inbox tasks; schtasks.exe is more reliable.
+    private static async Task SetEnabledWithSchtasksAsync(string taskPath, bool enabled, CancellationToken ct)
+    {
+        var executable = Path.Combine(Environment.SystemDirectory, "schtasks.exe");
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = executable,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true,
+            WorkingDirectory = Environment.SystemDirectory
+        };
+
+        startInfo.ArgumentList.Add("/Change");
+        startInfo.ArgumentList.Add("/TN");
+        startInfo.ArgumentList.Add(taskPath);
+        startInfo.ArgumentList.Add(enabled ? "/ENABLE" : "/DISABLE");
+
+        using var process = new Process { StartInfo = startInfo };
+        if (!process.Start())
+        {
+            throw new InvalidOperationException("Failed to start schtasks.exe.");
+        }
+
+        var stdoutTask = process.StandardOutput.ReadToEndAsync();
+        var stderrTask = process.StandardError.ReadToEndAsync();
+        await process.WaitForExitAsync(ct);
+
+        var stdout = await stdoutTask;
+        var stderr = await stderrTask;
+        if (process.ExitCode != 0)
+        {
+            var error = string.IsNullOrWhiteSpace(stderr) ? stdout : stderr;
+            throw new InvalidOperationException($"schtasks failed ({process.ExitCode}): {error.Trim()}");
         }
     }
 }

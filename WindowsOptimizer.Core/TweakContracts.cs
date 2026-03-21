@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,6 +48,57 @@ public interface ITweak
     Task<TweakResult> ApplyAsync(CancellationToken ct);
     Task<TweakResult> VerifyAsync(CancellationToken ct);
     Task<TweakResult> RollbackAsync(CancellationToken ct);
+}
+
+/// <summary>
+/// Optional interface for tweaks that need custom per-step execution timeouts.
+/// </summary>
+public interface ITweakStepTimeouts
+{
+    TimeSpan? GetStepTimeout(TweakAction action);
+}
+
+/// <summary>
+/// Named options that a tweak can expose to the UI.
+/// </summary>
+public sealed record TweakChoiceDefinition(
+    string Key,
+    string Label,
+    string Description = "");
+
+/// <summary>
+/// Optional interface for tweaks that offer multiple selectable values.
+/// </summary>
+public interface IChoiceTweak : ITweak
+{
+    IReadOnlyList<TweakChoiceDefinition> Choices { get; }
+    string SelectedChoiceKey { get; set; }
+    string SelectedChoiceLabel { get; }
+    string SelectedChoiceDescription { get; }
+    string? MatchedChoiceKey { get; }
+    string? MatchedChoiceLabel { get; }
+    string? DefaultChoiceKey { get; }
+    string? DefaultChoiceLabel { get; }
+}
+
+/// <summary>
+/// Human-friendly guidance shown alongside a tweak.
+/// </summary>
+public sealed record TweakGuidance
+{
+    public string CasualSummary { get; init; } = string.Empty;
+    public string WhenHelpful { get; init; } = string.Empty;
+    public string Tradeoffs { get; init; } = string.Empty;
+    public string DefaultVsPrevious { get; init; } = string.Empty;
+    public string ProfessionalNotes { get; init; } = string.Empty;
+}
+
+/// <summary>
+/// Optional interface for tweaks that provide user-facing guidance.
+/// </summary>
+public interface ITweakWithGuidance
+{
+    TweakGuidance Guidance { get; }
 }
 
 /// <summary>

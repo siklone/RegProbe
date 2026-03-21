@@ -30,14 +30,106 @@
                TargetType="Button"
                BasedOn="{StaticResource AppQuietActionButtonStyle}">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Padding" Value="0"/>
         </Style>
 
         <Style x:Key="DashboardPrimaryActionButtonStyle"
                TargetType="Button"
-               BasedOn="{StaticResource AppPrimaryActionButtonStyle}">
+               BasedOn="{StaticResource DashboardActionButtonStyle}">
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="11,6"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style x:Key="DashboardQuickActionContentTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <Style x:Key="DashboardQuickActionContentHintStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="9.5"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="Margin" Value="0,3,0,0"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <Style x:Key="DashboardQuickActionSegmentStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DashboardActionButtonStyle}">
+            <Setter Property="Background" Value="{DynamicResource AppInsetSurfaceBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="MinWidth" Value="138"/>
+            <Setter Property="MinHeight" Value="52"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.55"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DashboardScanQuickActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DashboardQuickActionSegmentStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardScanSelected}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DashboardFastCleanQuickActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DashboardQuickActionSegmentStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardFastCleanSelected}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DashboardMaintenanceQuickActionButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource DashboardQuickActionSegmentStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardMaintenanceSelected}" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="DashboardCardButtonStyle"
@@ -259,28 +351,58 @@
 
                 <Border Margin="0,0,0,12"
                         Style="{StaticResource DashboardSurfaceStyle}">
-                    <DockPanel LastChildFill="False">
-                        <TextBlock DockPanel.Dock="Left"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
                                    Text="Quick Actions"
                                    FontSize="12"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
                                    VerticalAlignment="Center"
                                    Margin="0,0,14,0"/>
-                        <WrapPanel DockPanel.Dock="Left"
+
+                        <WrapPanel Grid.Row="0"
+                                   Grid.Column="1"
                                    VerticalAlignment="Center">
-                            <Button Style="{StaticResource DashboardActionButtonStyle}"
+                            <Button Style="{StaticResource DashboardScanQuickActionButtonStyle}"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.RunDashboardScanCommand}"
-                                    Content="Scan"/>
-                            <Button Style="{StaticResource DashboardActionButtonStyle}"
-                                    Margin="6,0,0,0"
+                                    ToolTip="Refreshes live tweak states without applying changes.">
+                                <StackPanel>
+                                    <TextBlock Text="Scan" Style="{StaticResource DashboardQuickActionContentTitleStyle}"/>
+                                    <TextBlock Text="Refresh live states" Style="{StaticResource DashboardQuickActionContentHintStyle}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource DashboardFastCleanQuickActionButtonStyle}"
+                                    Margin="8,0,0,0"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.RunFastCleanCommand}"
-                                    Content="Fast Clean"/>
-                            <Button Style="{StaticResource DashboardPrimaryActionButtonStyle}"
-                                    Margin="6,0,0,0"
+                                    ToolTip="Runs the lightweight cleanup bundle for safe cache and temp-file cleanup.">
+                                <StackPanel>
+                                    <TextBlock Text="Fast Clean" Style="{StaticResource DashboardQuickActionContentTitleStyle}"/>
+                                    <TextBlock Text="Clear safe caches" Style="{StaticResource DashboardQuickActionContentHintStyle}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource DashboardMaintenanceQuickActionButtonStyle}"
+                                    Margin="8,0,0,0"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.OpenMaintenanceWorkspaceCommand}"
-                                    Content="Maintenance"/>
+                                    ToolTip="Opens the maintenance workspace with cleanup and repair tasks highlighted.">
+                                <StackPanel>
+                                    <TextBlock Text="Maintenance" Style="{StaticResource DashboardQuickActionContentTitleStyle}"/>
+                                    <TextBlock Text="Open cleanup tasks" Style="{StaticResource DashboardQuickActionContentHintStyle}"/>
+                                </StackPanel>
+                            </Button>
                         </WrapPanel>
-                        <ProgressBar DockPanel.Dock="Right"
+
+                        <ProgressBar Grid.Row="0"
+                                     Grid.Column="2"
                                      Width="128"
                                      Height="3"
                                      Margin="12,0,0,0"
@@ -288,7 +410,22 @@
                                      Style="{StaticResource AnimatedLoadingBarStyle}"
                                      IsIndeterminate="True"
                                      Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsDashboardQuickActionRunning, Converter={StaticResource BoolToVisibility}}"/>
-                    </DockPanel>
+
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0,10,0,0"
+                                Padding="10,7"
+                                Background="{DynamicResource AppInsetSurfaceBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.DashboardQuickActionStatus}"
+                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                       FontSize="10.5"
+                                       TextWrapping="Wrap"/>
+                        </Border>
+                    </Grid>
                 </Border>
 
                 <Grid Margin="0,0,0,10">

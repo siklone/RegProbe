@@ -65,8 +65,13 @@ public sealed class FileRenameTweak : ITweak
                 return new TweakResult(TweakStatus.NotApplicable, "File not found.", DateTimeOffset.UtcNow);
             }
 
-            var message = disabledExists
-                ? "File is already renamed."
+            if (disabledExists && !sourceExists)
+            {
+                return new TweakResult(TweakStatus.Applied, "File is already renamed.", DateTimeOffset.UtcNow);
+            }
+
+            var message = sourceExists && disabledExists
+                ? "Both source and disabled files exist."
                 : "File is present and can be renamed.";
             return new TweakResult(TweakStatus.Detected, message, DateTimeOffset.UtcNow);
         }

@@ -10,7 +10,7 @@ using WindowsOptimizer.Core.Registry;
 
 namespace WindowsOptimizer.Engine.Tweaks;
 
-public sealed class RegistryValuePresetBatchTweak : ITweak
+public sealed class RegistryValuePresetBatchTweak : ITweak, IChoiceTweak
 {
     private readonly IReadOnlyList<PresetState> _presets;
     private readonly IReadOnlyList<RegistryValueReference> _allReferences;
@@ -135,19 +135,40 @@ public sealed class RegistryValuePresetBatchTweak : ITweak
     public IReadOnlyList<RegistryValuePresetBatchOptionInfo> Presets =>
         _presets.Select(static preset => new RegistryValuePresetBatchOptionInfo(preset.Key, preset.Label, preset.Description)).ToList();
 
+    public IReadOnlyList<TweakChoiceDefinition> Choices =>
+        _presets.Select(static preset => new TweakChoiceDefinition(preset.Key, preset.Label, preset.Description)).ToList();
+
     public string SelectedPresetKey
     {
         get => _selectedPresetKey;
         set => _selectedPresetKey = ResolvePreset(value).Key;
     }
 
+    public string SelectedChoiceKey
+    {
+        get => SelectedPresetKey;
+        set => SelectedPresetKey = value;
+    }
+
     public string SelectedPresetLabel => ResolvePreset(_selectedPresetKey).Label;
+
+    public string SelectedChoiceLabel => SelectedPresetLabel;
 
     public string SelectedPresetDescription => ResolvePreset(_selectedPresetKey).Description;
 
+    public string SelectedChoiceDescription => SelectedPresetDescription;
+
     public string? MatchedPresetKey { get; private set; }
 
+    public string? MatchedChoiceKey => MatchedPresetKey;
+
     public string? MatchedPresetLabel => TryResolvePreset(MatchedPresetKey)?.Label;
+
+    public string? MatchedChoiceLabel => MatchedPresetLabel;
+
+    public string? DefaultChoiceKey => null;
+
+    public string? DefaultChoiceLabel => null;
 
     public string PrimaryScopePath => FormatReference(ResolvePreset(_selectedPresetKey).Entries[0].Reference);
 
@@ -250,7 +271,7 @@ public sealed class RegistryValuePresetBatchTweak : ITweak
                         DateTimeOffset.UtcNow);
                 }
 
-                if (!ValuesEqual(result.Value.ToObject(), entry.TargetValue))
+                if (!ValuesEqual(entry.TargetData.Kind, result.Value.ToObject(), entry.TargetValue))
                 {
                     return new TweakResult(
                         TweakStatus.Failed,
@@ -337,7 +358,7 @@ public sealed class RegistryValuePresetBatchTweak : ITweak
                     && snapshot.Exists
                     && snapshot.Value is not null
                     && snapshot.Value.Kind == entry.TargetData.Kind
-                    && ValuesEqual(snapshot.Value.ToObject(), entry.TargetValue)))
+                    && ValuesEqual(entry.TargetData.Kind, snapshot.Value.ToObject(), entry.TargetValue)))
             {
                 return preset;
             }
@@ -346,38 +367,17 @@ public sealed class RegistryValuePresetBatchTweak : ITweak
         return null;
     }
 
-    private static bool ValuesEqual(object? actual, object? expected)
+    private static bool ValuesEqual(RegistryValueKind kind, object? actual, object? expected)
     {
-        if (actual is null || expected is null)
+        if (RegistryValueComparer.ValuesEqual(kind, actual, expected))
         {
-            return actual is null && expected is null;
-        }
-
-        if (actual is byte[] actualBytes && expected is byte[] expectedBytes)
-        {
-            return actualBytes.SequenceEqual(expectedBytes);
-        }
-
-        if (actual is string[] actualStrings && expected is string[] expectedStrings)
-        {
-            return actualStrings.SequenceEqual(expectedStrings, StringComparer.Ordinal);
-        }
-
-        if (IsNumeric(actual) && IsNumeric(expected))
-        {
-            return Convert.ToInt64(actual, CultureInfo.InvariantCulture)
-                == Convert.ToInt64(expected, CultureInfo.InvariantCulture);
+            return true;
         }
 
         return string.Equals(
             Convert.ToString(actual, CultureInfo.InvariantCulture),
             Convert.ToString(expected, CultureInfo.InvariantCulture),
             StringComparison.OrdinalIgnoreCase);
-    }
-
-    private static bool IsNumeric(object value)
-    {
-        return value is byte or sbyte or short or ushort or int or uint or long or ulong;
     }
 
     private static string FormatValue(object? value)

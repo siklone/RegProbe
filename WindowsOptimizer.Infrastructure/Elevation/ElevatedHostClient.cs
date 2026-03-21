@@ -265,7 +265,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
 
     private static bool IsConnectFailure(Exception ex)
     {
-        return ex is TimeoutException or IOException;
+        return ex is TimeoutException or IOException or UnauthorizedAccessException;
     }
 
     private static void LogToFile(string message)

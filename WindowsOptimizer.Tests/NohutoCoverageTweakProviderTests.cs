@@ -118,7 +118,11 @@ public sealed class NohutoCoverageTweakProviderTests
 
         foreach (var id in commandBackedIds)
         {
-            Assert.Equal("RegistryCommandBatchTweak", tweaks.Single(tweak => tweak.Id == id).GetType().Name);
+            var expectedType = id == "power.optimize-cpu-boost"
+                ? "SetCpuBoostPerfModeTweak"
+                : "RegistryCommandBatchTweak";
+
+            Assert.Equal(expectedType, tweaks.Single(tweak => tweak.Id == id).GetType().Name);
         }
     }
 
@@ -129,6 +133,18 @@ public sealed class NohutoCoverageTweakProviderTests
         var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
 
         Assert.Equal("ServiceStartModeBatchTweak", tweaks.Single(tweak => tweak.Id == "power.disable-windows-search").GetType().Name);
+    }
+
+    [Fact]
+    public void SystemProvider_Exposes_Individual_Service_Tweaks_Instead_Of_One_Bulk_Toggle()
+    {
+        var provider = new SystemTweakProvider();
+        var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
+
+        Assert.DoesNotContain(tweaks, tweak => tweak.Id == "system.disable-non-essential-services");
+        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-connected-user-experiences");
+        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-print-spooler");
+        Assert.Contains(tweaks, tweak => tweak.Id == "system.services.disable-bluetooth-support");
     }
 
     [Fact]

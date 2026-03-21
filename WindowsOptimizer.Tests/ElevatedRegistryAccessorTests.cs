@@ -56,11 +56,10 @@ public sealed class ElevatedRegistryAccessorTests
     }
 
     [Fact]
-    public async Task SetValueAsync_FallsBackTo_RegExe_OnAccessDenied()
+    public async Task SetValueAsync_ForCurrentUserPolicy_UsesRegExeFirst()
     {
         var client = new RecordingClient
         {
-            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "Access to the path is denied.", null),
             CommandResponseFactory = request => new ElevatedCommandResponse(
                 request.RequestId,
                 true,
@@ -79,10 +78,9 @@ public sealed class ElevatedRegistryAccessorTests
             new RegistryValueData(RegistryValueKind.DWord, NumericValue: 1),
             CancellationToken.None);
 
-        Assert.Equal(2, client.Requests.Count);
-        Assert.Equal(ElevatedHostRequestType.Registry, client.Requests[0].RequestType);
-        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
-        Assert.Equal("add", client.Requests[1].CommandRequest!.Command.Arguments.First());
+        Assert.Single(client.Requests);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[0].RequestType);
+        Assert.Equal("add", client.Requests[0].CommandRequest!.Command.Arguments.First());
     }
 
     [Fact]
@@ -102,11 +100,10 @@ public sealed class ElevatedRegistryAccessorTests
     }
 
     [Fact]
-    public async Task DeleteValueAsync_FallsBackTo_RegExe_OnAccessDenied()
+    public async Task DeleteValueAsync_ForCurrentUserPolicy_UsesRegExeFirst()
     {
         var client = new RecordingClient
         {
-            RegistryResponseFactory = request => new ElevatedRegistryResponse(request.RequestId, false, "Access is denied.", null),
             CommandResponseFactory = request => new ElevatedCommandResponse(
                 request.RequestId,
                 true,
@@ -122,9 +119,9 @@ public sealed class ElevatedRegistryAccessorTests
 
         await accessor.DeleteValueAsync(reference, CancellationToken.None);
 
-        Assert.Equal(2, client.Requests.Count);
-        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
-        Assert.Equal("delete", client.Requests[1].CommandRequest!.Command.Arguments.First());
+        Assert.Single(client.Requests);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[0].RequestType);
+        Assert.Equal("delete", client.Requests[0].CommandRequest!.Command.Arguments.First());
     }
 
     [Fact]
@@ -141,10 +138,10 @@ public sealed class ElevatedRegistryAccessorTests
         };
         var accessor = new ElevatedRegistryAccessor(client);
         var reference = new RegistryValueReference(
-            RegistryHive.LocalMachine,
+            RegistryHive.CurrentUser,
             RegistryView.Default,
-            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games",
-            "Priority");
+            @"Software\WindowsOptimizer",
+            "TestValue");
 
         await accessor.SetValueAsync(
             reference,
@@ -172,14 +169,74 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer",
-            "TurnOffSPIAnimations");
+            @"Software\WindowsOptimizer",
+            "TestValue");
 
         await accessor.DeleteValueAsync(reference, CancellationToken.None);
 
         Assert.Equal(2, client.Requests.Count);
         Assert.Equal(ElevatedHostRequestType.Command, client.Requests[1].RequestType);
         Assert.Equal("delete", client.Requests[1].CommandRequest!.Command.Arguments.First());
+    }
+
+    [Fact]
+    public async Task SetValueAsync_ForLocalMachine_UsesRegExeFirst()
+    {
+        var client = new RecordingClient
+        {
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.LocalMachine,
+            RegistryView.Default,
+            @"SOFTWARE\Policies\Microsoft\Windows\Appx",
+            "AllowAutomaticAppArchiving");
+
+        await accessor.SetValueAsync(
+            reference,
+            new RegistryValueData(RegistryValueKind.DWord, NumericValue: 0),
+            CancellationToken.None);
+
+        Assert.Single(client.Requests);
+        Assert.Equal(ElevatedHostRequestType.Command, client.Requests[0].RequestType);
+        Assert.Equal("add", client.Requests[0].CommandRequest!.Command.Arguments.First());
+    }
+
+    [Fact]
+    public async Task SetValueAsync_ForNegativeDword_FormatsUnsignedDataForRegExe()
+    {
+        var client = new RecordingClient
+        {
+            CommandResponseFactory = request => new ElevatedCommandResponse(
+                request.RequestId,
+                true,
+                null,
+                new CommandResult(0, string.Empty, string.Empty, false, TimeSpan.Zero))
+        };
+        var accessor = new ElevatedRegistryAccessor(client);
+        var reference = new RegistryValueReference(
+            RegistryHive.LocalMachine,
+            RegistryView.Default,
+            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile",
+            "NetworkThrottlingIndex");
+
+        await accessor.SetValueAsync(
+            reference,
+            new RegistryValueData(RegistryValueKind.DWord, NumericValue: -1),
+            CancellationToken.None);
+
+        var arguments = client.Requests[0].CommandRequest!.Command.Arguments;
+        var dataIndex = arguments
+            .Select((argument, index) => (argument, index))
+            .FirstOrDefault(entry => string.Equals(entry.argument, "/d", StringComparison.OrdinalIgnoreCase))
+            .index;
+        Assert.True(dataIndex >= 0);
+        Assert.Equal("4294967295", arguments[dataIndex + 1]);
     }
 
     private sealed class RecordingClient : IElevatedHostClient
