@@ -28,7 +28,8 @@
             "label": "Microsoft accounts allowed",
             "meaning": "The security option is disabled and users can add or sign in with Microsoft accounts normally.",
             "evidence_ids": [
-              "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
             ]
           },
           {
@@ -37,7 +38,8 @@
             "label": "Block adding new Microsoft accounts",
             "meaning": "Users cannot add new Microsoft accounts, but the stronger sign-in block is not enforced.",
             "evidence_ids": [
-              "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
             ]
           },
           {
@@ -46,7 +48,8 @@
             "label": "Block adding and signing in with Microsoft accounts",
             "meaning": "Users cannot add Microsoft accounts and cannot sign in with them on the device.",
             "evidence_ids": [
-              "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
             ]
           }
         ]
@@ -82,7 +85,8 @@
       ],
       "notes": "The official LocalPoliciesSecurityOptions documentation lists 0 as the default effective value for this setting.",
       "evidence_ids": [
-        "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
       ]
     }
   ],
@@ -114,7 +118,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
       ]
     },
     {
@@ -143,7 +148,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
       ]
     },
     {
@@ -175,7 +181,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-localpoliciessecurityoptions-block-microsoft-accounts",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-noconnecteduser-trace"
       ]
     }
   ],
@@ -220,6 +227,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-noconnecteduser-trace",
+      "kind": "registry-observation",
+      "title": "nohuto win-config mirror - NoConnectedUser registry trace",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The mirror trace shows services.exe writing HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser with Data 0, 1, and 3. The inline comments explain the semantics: 0 means the policy is disabled, 1 means users cannot add Microsoft accounts, and 3 means users cannot add or log on with Microsoft accounts.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -237,6 +258,6 @@
     "source_url": "C:\\Windows\\inf\\sceregvl.inf",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser,4,%BlockConnectedUser%,3,0|%PolicyDisabled%,1|%BlockAdd%,3|%BlockLogin%",
     "key_found_on_page": true,
-    "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states."
+    "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace."
   }
 }

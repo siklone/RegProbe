@@ -31,7 +31,8 @@
               "ms-experience-allow-find-my-device",
               "local-findmy-admx",
               "local-findmy-adml",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-findmydevice-admx"
             ]
           },
           {
@@ -42,7 +43,8 @@
             "evidence_ids": [
               "ms-experience-allow-find-my-device",
               "local-findmy-admx",
-              "local-findmy-adml"
+              "local-findmy-adml",
+              "nohuto-findmydevice-admx"
             ]
           }
         ]
@@ -78,7 +80,8 @@
       ],
       "notes": "By default, the feature is allowed to operate.",
       "evidence_ids": [
-        "ms-experience-allow-find-my-device"
+        "ms-experience-allow-find-my-device",
+        "nohuto-findmydevice-admx"
       ]
     }
   ],
@@ -109,7 +112,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-experience-allow-find-my-device"
+        "ms-experience-allow-find-my-device",
+        "nohuto-findmydevice-admx"
       ]
     },
     {
@@ -140,7 +144,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-experience-allow-find-my-device",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-findmydevice-admx"
       ]
     }
   ],
@@ -211,6 +216,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-findmydevice-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - Find My Device policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "FindMy_AllowFindMyDeviceConfig maps AllowFindMyDevice under HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice. The mirrored ExplainText says enabling Find My Device registers the device and its location in the cloud, while disabling it prevents registration and makes Find My Device unavailable. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -228,6 +247,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
     "exact_quote_or_path": "This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\FindMyDevice; Registry Value Name AllowFindMyDevice.",
     "key_found_on_page": true,
-    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-findmydevice-admx."
   }
 }

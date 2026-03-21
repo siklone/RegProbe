@@ -30,7 +30,8 @@
             "meaning": "PCA detects compatibility issues for applications and drivers. Default Windows behavior.",
             "evidence_ids": [
               "local-pca-admx",
-              "local-pca-adml"
+              "local-pca-adml",
+              "nohuto-pca-diagnostics-admx"
             ]
           },
           {
@@ -41,7 +42,8 @@
             "evidence_ids": [
               "local-pca-admx",
               "local-pca-adml",
-              "admx-pca-csp"
+              "admx-pca-csp",
+              "nohuto-pca-diagnostics-admx"
             ]
           },
           {
@@ -50,7 +52,8 @@
             "label": "PCA diagnostics detection active (policy explicit)",
             "meaning": "enabledValue in pca.admx. PCA detects compatibility issues. Equivalent to missing/not configured.",
             "evidence_ids": [
-              "local-pca-admx"
+              "local-pca-admx",
+              "nohuto-pca-diagnostics-admx"
             ]
           }
         ],
@@ -77,7 +80,8 @@
       ],
       "evidence_ids": [
         "local-pca-admx",
-        "local-pca-adml"
+        "local-pca-adml",
+        "nohuto-pca-diagnostics-admx"
       ]
     }
   ],
@@ -114,7 +118,8 @@
       "evidence_ids": [
         "local-pca-admx",
         "local-pca-adml",
-        "admx-pca-csp"
+        "admx-pca-csp",
+        "nohuto-pca-diagnostics-admx"
       ]
     },
     {
@@ -139,7 +144,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "local-pca-admx"
+        "local-pca-admx",
+        "nohuto-pca-diagnostics-admx"
       ]
     }
   ],
@@ -182,6 +188,20 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-pca-diagnostics-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisablePcaUI policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "pca.admx shows DisablePcaUIPolicy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. The mirrored ExplainText says enabling the policy configures PCA to detect application and driver compatibility failures, while disabling it stops detection. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -202,6 +222,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\pca.admx",
     "exact_quote_or_path": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows8\"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.`",
     "key_found_on_page": true,
-    "notes": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping."
+    "notes": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx."
   }
 }

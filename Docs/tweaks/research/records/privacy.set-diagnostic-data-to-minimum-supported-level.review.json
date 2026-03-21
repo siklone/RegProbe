@@ -30,7 +30,8 @@
             "meaning": "Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data.",
             "evidence_ids": [
               "ms-system-allowtelemetry",
-              "local-datacollection-adml"
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
             ]
           },
           {
@@ -42,7 +43,8 @@
               "ms-system-allowtelemetry",
               "local-datacollection-admx",
               "local-datacollection-adml",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-allowtelemetry-admx"
             ]
           },
           {
@@ -53,7 +55,8 @@
             "evidence_ids": [
               "ms-system-allowtelemetry",
               "local-datacollection-admx",
-              "local-datacollection-adml"
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
             ]
           },
           {
@@ -64,7 +67,8 @@
             "evidence_ids": [
               "ms-system-allowtelemetry",
               "local-datacollection-admx",
-              "local-datacollection-adml"
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
             ]
           }
         ]
@@ -101,7 +105,8 @@
       "notes": "The documented default behavior is not 'off'.",
       "evidence_ids": [
         "ms-system-allowtelemetry",
-        "local-datacollection-adml"
+        "local-datacollection-adml",
+        "nohuto-allowtelemetry-admx"
       ]
     }
   ],
@@ -132,7 +137,8 @@
       ],
       "apply_allowed": false,
       "evidence_ids": [
-        "ms-system-allowtelemetry"
+        "ms-system-allowtelemetry",
+        "nohuto-allowtelemetry-admx"
       ]
     },
     {
@@ -164,7 +170,8 @@
       "evidence_ids": [
         "ms-system-allowtelemetry",
         "local-datacollection-adml",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-allowtelemetry-admx"
       ]
     }
   ],
@@ -226,6 +233,20 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-allowtelemetry-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - AllowTelemetry policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "DataCollection.admx shows AllowTelemetry under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored enum lists 0 as Diagnostic data off, 1 as Send required diagnostic data, and 3 as Send optional diagnostic data. The ExplainText also states that disabling or not configuring the policy leaves required diagnostic data on and optional data user-configurable.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -242,7 +263,7 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
     "exact_quote_or_path": "C:\\Windows\\PolicyDefinitions\\DataCollection.admx (AllowTelemetry values 0, 1, and 3); C:\\Windows\\PolicyDefinitions\\en-US\\DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions).",
     "key_found_on_page": true,
-    "notes": "The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch."
+    "notes": "The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx."
   },
   "last_reviewed_utc": "2026-03-20T19:35:00Z"
 }

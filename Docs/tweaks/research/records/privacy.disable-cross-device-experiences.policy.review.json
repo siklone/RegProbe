@@ -30,7 +30,8 @@
             "meaning": "The device follows the Windows edition default for continue experiences.",
             "evidence_ids": [
               "ms-admx-grouppolicy-enablecdp",
-              "local-grouppolicy-adml-enablecdp"
+              "local-grouppolicy-adml-enablecdp",
+              "nohuto-enablecdp-admx"
             ]
           },
           {
@@ -42,7 +43,8 @@
               "ms-admx-grouppolicy-enablecdp",
               "local-grouppolicy-admx-enablecdp",
               "local-grouppolicy-adml-enablecdp",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-enablecdp-admx"
             ]
           },
           {
@@ -53,7 +55,8 @@
             "evidence_ids": [
               "ms-admx-grouppolicy-enablecdp",
               "local-grouppolicy-admx-enablecdp",
-              "local-grouppolicy-adml-enablecdp"
+              "local-grouppolicy-adml-enablecdp",
+              "nohuto-enablecdp-admx"
             ]
           }
         ]
@@ -90,7 +93,8 @@
       "notes": "The user-side CDP values remain outside this child record.",
       "evidence_ids": [
         "ms-admx-grouppolicy-enablecdp",
-        "local-grouppolicy-adml-enablecdp"
+        "local-grouppolicy-adml-enablecdp",
+        "nohuto-enablecdp-admx"
       ]
     }
   ],
@@ -122,7 +126,8 @@
       "apply_allowed": true,
       "recommended_for_general_users": false,
       "evidence_ids": [
-        "ms-admx-grouppolicy-enablecdp"
+        "ms-admx-grouppolicy-enablecdp",
+        "nohuto-enablecdp-admx"
       ]
     },
     {
@@ -154,7 +159,8 @@
       "evidence_ids": [
         "ms-admx-grouppolicy-enablecdp",
         "local-grouppolicy-admx-enablecdp",
-        "local-grouppolicy-adml-enablecdp"
+        "local-grouppolicy-adml-enablecdp",
+        "nohuto-enablecdp-admx"
       ]
     }
   ],
@@ -215,13 +221,27 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-enablecdp-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - EnableCdp policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "GroupPolicy.admx shows EnableCdp under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy allows the device to participate in cross-device experiences and be discoverable by other Windows devices, while disabling it prevents discoverability and cross-device participation. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
     "exact_quote_or_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp",
     "key_found_on_page": true,
-    "notes": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record."
+    "notes": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx."
   },
   "decision": {
     "confidence": "high",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T16:22:31.925388Z",
+  "generated_utc": "2026-03-21T16:38:49.137206Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -29494,7 +29494,8 @@
               "meaning": "Windows does not force Hibernate visibility and users can choose through the normal controls.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showhibernateoption-admx"
               ]
             },
             {
@@ -29505,7 +29506,8 @@
               "evidence_ids": [
                 "local-windowsexplorer-admx",
                 "local-windowsexplorer-adml",
-                "app-power-provider"
+                "app-power-provider",
+                "nohuto-showhibernateoption-admx"
               ]
             },
             {
@@ -29515,7 +29517,8 @@
               "meaning": "The Hibernate option is shown in the power menu when the hardware supports it.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showhibernateoption-admx"
               ]
             }
           ]
@@ -29535,7 +29538,8 @@
           ],
           "evidence_ids": [
             "local-windowsexplorer-admx",
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showhibernateoption-admx"
           ]
         }
       ],
@@ -29565,7 +29569,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showhibernateoption-admx"
           ]
         },
         {
@@ -29597,7 +29602,8 @@
           "evidence_ids": [
             "local-windowsexplorer-admx",
             "local-windowsexplorer-adml",
-            "app-power-provider"
+            "app-power-provider",
+            "nohuto-showhibernateoption-admx"
           ]
         }
       ],
@@ -29658,13 +29664,28 @@
             "dependency"
           ],
           "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "nohuto-showhibernateoption-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - ShowHibernateOption policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/power/desc.md",
+          "summary": "WindowsExplorer.admx shows ShowHibernateOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy shows Hibernate in the power options menu, disabling it never shows Hibernate, and not configuring it leaves the user able to choose via Power Options Control Panel. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
         "exact_quote_or_path": "<policy name=\"ShowHibernateOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowHibernateOption\">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -29767,7 +29788,8 @@
               "meaning": "Windows does not force Lock visibility and users can choose through the normal controls.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showlockoption-admx"
               ]
             },
             {
@@ -29778,7 +29800,8 @@
               "evidence_ids": [
                 "local-windowsexplorer-admx",
                 "local-windowsexplorer-adml",
-                "app-power-provider"
+                "app-power-provider",
+                "nohuto-showlockoption-admx"
               ]
             },
             {
@@ -29788,7 +29811,8 @@
               "meaning": "The Lock option is shown in the user tile menu.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showlockoption-admx"
               ]
             }
           ]
@@ -29808,7 +29832,8 @@
           ],
           "evidence_ids": [
             "local-windowsexplorer-admx",
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showlockoption-admx"
           ]
         }
       ],
@@ -29838,7 +29863,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showlockoption-admx"
           ]
         },
         {
@@ -29870,7 +29896,8 @@
           "evidence_ids": [
             "local-windowsexplorer-admx",
             "local-windowsexplorer-adml",
-            "app-power-provider"
+            "app-power-provider",
+            "nohuto-showlockoption-admx"
           ]
         }
       ],
@@ -29917,13 +29944,28 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-showlockoption-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - ShowLockOption policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/power/desc.md",
+          "summary": "WindowsExplorer.admx shows ShowLockOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy shows Lock in the user tile menu, disabling it never shows Lock, and not configuring it leaves the user able to choose the setting via Power Options Control Panel. The mirror also includes a DllHost.exe RegSetValue trace to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FlyoutMenuSettings\\ShowLockOption with Data 1.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
         "exact_quote_or_path": "<policy name=\"ShowLockOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowLockOption\">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -30026,7 +30068,8 @@
               "meaning": "Windows does not force Sleep visibility and users can choose through the normal controls.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showsleepoption-admx"
               ]
             },
             {
@@ -30037,7 +30080,8 @@
               "evidence_ids": [
                 "local-windowsexplorer-admx",
                 "local-windowsexplorer-adml",
-                "app-power-provider"
+                "app-power-provider",
+                "nohuto-showsleepoption-admx"
               ]
             },
             {
@@ -30047,7 +30091,8 @@
               "meaning": "The Sleep option is shown in the power menu when the hardware supports it.",
               "evidence_ids": [
                 "local-windowsexplorer-admx",
-                "local-windowsexplorer-adml"
+                "local-windowsexplorer-adml",
+                "nohuto-showsleepoption-admx"
               ]
             }
           ]
@@ -30067,7 +30112,8 @@
           ],
           "evidence_ids": [
             "local-windowsexplorer-admx",
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showsleepoption-admx"
           ]
         }
       ],
@@ -30097,7 +30143,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-windowsexplorer-adml"
+            "local-windowsexplorer-adml",
+            "nohuto-showsleepoption-admx"
           ]
         },
         {
@@ -30129,7 +30176,8 @@
           "evidence_ids": [
             "local-windowsexplorer-admx",
             "local-windowsexplorer-adml",
-            "app-power-provider"
+            "app-power-provider",
+            "nohuto-showsleepoption-admx"
           ]
         }
       ],
@@ -30176,13 +30224,28 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-showsleepoption-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - ShowSleepOption policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/power/desc.md",
+          "summary": "WindowsExplorer.admx shows ShowSleepOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy shows Sleep in the power options menu, disabling it never shows Sleep, and not configuring it leaves the user able to choose via Power Options Control Panel. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
         "exact_quote_or_path": "<policy name=\"ShowSleepOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowSleepOption\">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -30903,7 +30966,8 @@
               "label": "Microsoft accounts allowed",
               "meaning": "The security option is disabled and users can add or sign in with Microsoft accounts normally.",
               "evidence_ids": [
-                "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+                "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+                "nohuto-noconnecteduser-trace"
               ]
             },
             {
@@ -30912,7 +30976,8 @@
               "label": "Block adding new Microsoft accounts",
               "meaning": "Users cannot add new Microsoft accounts, but the stronger sign-in block is not enforced.",
               "evidence_ids": [
-                "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+                "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+                "nohuto-noconnecteduser-trace"
               ]
             },
             {
@@ -30921,7 +30986,8 @@
               "label": "Block adding and signing in with Microsoft accounts",
               "meaning": "Users cannot add Microsoft accounts and cannot sign in with them on the device.",
               "evidence_ids": [
-                "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+                "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+                "nohuto-noconnecteduser-trace"
               ]
             }
           ]
@@ -30940,7 +31006,8 @@
             }
           ],
           "evidence_ids": [
-            "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+            "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+            "nohuto-noconnecteduser-trace"
           ]
         }
       ],
@@ -30972,7 +31039,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+            "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+            "nohuto-noconnecteduser-trace"
           ]
         },
         {
@@ -31001,7 +31069,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-localpoliciessecurityoptions-block-microsoft-accounts"
+            "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+            "nohuto-noconnecteduser-trace"
           ]
         },
         {
@@ -31033,7 +31102,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-localpoliciessecurityoptions-block-microsoft-accounts",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-noconnecteduser-trace"
           ]
         }
       ],
@@ -31081,13 +31151,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-noconnecteduser-trace",
+          "kind": "registry-observation",
+          "title": "nohuto win-config mirror - NoConnectedUser registry trace",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The mirror trace shows services.exe writing HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser with Data 0, 1, and 3. The inline comments explain the semantics: 0 means the policy is disabled, 1 means users cannot add Microsoft accounts, and 3 means users cannot add or log on with Microsoft accounts.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "VM registry observation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\inf\\sceregvl.inf",
         "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser,4,%BlockConnectedUser%,3,0|%PolicyDisabled%,1|%BlockAdd%,3|%BlockLogin%",
         "key_found_on_page": true,
-        "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states."
+        "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -35832,7 +35917,8 @@
               "meaning": "The device follows the Windows edition default for continue experiences.",
               "evidence_ids": [
                 "ms-admx-grouppolicy-enablecdp",
-                "local-grouppolicy-adml-enablecdp"
+                "local-grouppolicy-adml-enablecdp",
+                "nohuto-enablecdp-admx"
               ]
             },
             {
@@ -35844,7 +35930,8 @@
                 "ms-admx-grouppolicy-enablecdp",
                 "local-grouppolicy-admx-enablecdp",
                 "local-grouppolicy-adml-enablecdp",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-enablecdp-admx"
               ]
             },
             {
@@ -35855,7 +35942,8 @@
               "evidence_ids": [
                 "ms-admx-grouppolicy-enablecdp",
                 "local-grouppolicy-admx-enablecdp",
-                "local-grouppolicy-adml-enablecdp"
+                "local-grouppolicy-adml-enablecdp",
+                "nohuto-enablecdp-admx"
               ]
             }
           ]
@@ -35875,7 +35963,8 @@
           ],
           "evidence_ids": [
             "ms-admx-grouppolicy-enablecdp",
-            "local-grouppolicy-adml-enablecdp"
+            "local-grouppolicy-adml-enablecdp",
+            "nohuto-enablecdp-admx"
           ]
         }
       ],
@@ -35906,7 +35995,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-admx-grouppolicy-enablecdp"
+            "ms-admx-grouppolicy-enablecdp",
+            "nohuto-enablecdp-admx"
           ]
         },
         {
@@ -35937,7 +36027,8 @@
           "evidence_ids": [
             "ms-admx-grouppolicy-enablecdp",
             "local-grouppolicy-admx-enablecdp",
-            "local-grouppolicy-adml-enablecdp"
+            "local-grouppolicy-adml-enablecdp",
+            "nohuto-enablecdp-admx"
           ]
         }
       ],
@@ -36002,13 +36093,28 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-enablecdp-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - EnableCdp policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "GroupPolicy.admx shows EnableCdp under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy allows the device to participate in cross-device experiences and be discoverable by other Windows devices, while disabling it prevents discoverability and cross-device participation. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
         "exact_quote_or_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp",
         "key_found_on_page": true,
-        "notes": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record."
+        "notes": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx."
       },
       "provenance": null
     },
@@ -36322,7 +36428,8 @@
               "meaning": "Windows does not force the diagnostic-data deletion policy.",
               "evidence_ids": [
                 "ms-system-policy-csp-device-delete",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-delete-admx"
               ]
             },
             {
@@ -36332,7 +36439,8 @@
               "meaning": "The policy is disabled and the delete option remains available.",
               "evidence_ids": [
                 "ms-system-policy-csp-device-delete",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-delete-admx"
               ]
             },
             {
@@ -36342,7 +36450,8 @@
               "meaning": "The delete option is blocked by policy.",
               "evidence_ids": [
                 "ms-system-policy-csp-device-delete",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-delete-admx"
               ]
             }
           ]
@@ -36362,7 +36471,8 @@
           ],
           "evidence_ids": [
             "ms-system-policy-csp-device-delete",
-            "local-data-collection-admx"
+            "local-data-collection-admx",
+            "nohuto-datacollection-delete-admx"
           ]
         }
       ],
@@ -36393,7 +36503,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-system-policy-csp-device-delete"
+            "ms-system-policy-csp-device-delete",
+            "nohuto-datacollection-delete-admx"
           ]
         },
         {
@@ -36424,7 +36535,8 @@
           "evidence_ids": [
             "ms-system-policy-csp-device-delete",
             "local-data-collection-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-datacollection-delete-admx"
           ]
         }
       ],
@@ -36488,13 +36600,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-datacollection-delete-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableDeviceDelete policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows DisableDeviceDelete under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored ExplainText says enabling the policy disables the Delete diagnostic data button, while disabling or not configuring it leaves the button enabled. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
         "exact_quote_or_path": "This policy setting controls whether the Delete diagnostic data button is enabled in Diagnostic & feedback Settings page. Default Value 0; Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DisableDeviceDelete.",
         "key_found_on_page": true,
-        "notes": "The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+        "notes": "The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-datacollection-delete-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -36583,7 +36710,8 @@
               "meaning": "Windows does not force the Diagnostic Data Viewer policy.",
               "evidence_ids": [
                 "ms-system-policy-csp-ddv",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-viewer-admx"
               ]
             },
             {
@@ -36593,7 +36721,8 @@
               "meaning": "The policy is disabled and the viewer remains available.",
               "evidence_ids": [
                 "ms-system-policy-csp-ddv",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-viewer-admx"
               ]
             },
             {
@@ -36603,7 +36732,8 @@
               "meaning": "The viewer is blocked by policy.",
               "evidence_ids": [
                 "ms-system-policy-csp-ddv",
-                "local-data-collection-admx"
+                "local-data-collection-admx",
+                "nohuto-datacollection-viewer-admx"
               ]
             }
           ]
@@ -36623,7 +36753,8 @@
           ],
           "evidence_ids": [
             "ms-system-policy-csp-ddv",
-            "local-data-collection-admx"
+            "local-data-collection-admx",
+            "nohuto-datacollection-viewer-admx"
           ]
         }
       ],
@@ -36654,7 +36785,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-system-policy-csp-ddv"
+            "ms-system-policy-csp-ddv",
+            "nohuto-datacollection-viewer-admx"
           ]
         },
         {
@@ -36685,7 +36817,8 @@
           "evidence_ids": [
             "ms-system-policy-csp-ddv",
             "local-data-collection-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-datacollection-viewer-admx"
           ]
         }
       ],
@@ -36749,13 +36882,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-datacollection-viewer-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableDiagnosticDataViewer policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows DisableDiagnosticDataViewer under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored ExplainText says enabling the policy prevents the Diagnostic Data Viewer from being enabled or showing Microsoft diagnostic data, while disabling or not configuring it leaves the viewer enabled. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer",
         "exact_quote_or_path": "DisableDiagnosticDataViewer ... Default Value 0 ... Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping ... Name DisableDiagnosticDataViewer ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection",
         "key_found_on_page": true,
-        "notes": "The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes."
+        "notes": "The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-datacollection-viewer-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -37757,7 +37905,8 @@
                 "ms-experience-allow-find-my-device",
                 "local-findmy-admx",
                 "local-findmy-adml",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-findmydevice-admx"
               ]
             },
             {
@@ -37768,7 +37917,8 @@
               "evidence_ids": [
                 "ms-experience-allow-find-my-device",
                 "local-findmy-admx",
-                "local-findmy-adml"
+                "local-findmy-adml",
+                "nohuto-findmydevice-admx"
               ]
             }
           ]
@@ -37787,7 +37937,8 @@
             }
           ],
           "evidence_ids": [
-            "ms-experience-allow-find-my-device"
+            "ms-experience-allow-find-my-device",
+            "nohuto-findmydevice-admx"
           ]
         }
       ],
@@ -37818,7 +37969,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-experience-allow-find-my-device"
+            "ms-experience-allow-find-my-device",
+            "nohuto-findmydevice-admx"
           ]
         },
         {
@@ -37849,7 +38001,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-experience-allow-find-my-device",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-findmydevice-admx"
           ]
         }
       ],
@@ -37925,13 +38078,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-findmydevice-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - Find My Device policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "FindMy_AllowFindMyDeviceConfig maps AllowFindMyDevice under HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice. The mirrored ExplainText says enabling Find My Device registers the device and its location in the cloud, while disabling it prevents registration and makes Find My Device unavailable. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
         "exact_quote_or_path": "This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\FindMyDevice; Registry Value Name AllowFindMyDevice.",
         "key_found_on_page": true,
-        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-findmydevice-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -41323,7 +41491,8 @@
               "meaning": "PCA detects compatibility issues for applications and drivers. Default Windows behavior.",
               "evidence_ids": [
                 "local-pca-admx",
-                "local-pca-adml"
+                "local-pca-adml",
+                "nohuto-pca-diagnostics-admx"
               ]
             },
             {
@@ -41334,7 +41503,8 @@
               "evidence_ids": [
                 "local-pca-admx",
                 "local-pca-adml",
-                "admx-pca-csp"
+                "admx-pca-csp",
+                "nohuto-pca-diagnostics-admx"
               ]
             },
             {
@@ -41343,7 +41513,8 @@
               "label": "PCA diagnostics detection active (policy explicit)",
               "meaning": "enabledValue in pca.admx. PCA detects compatibility issues. Equivalent to missing/not configured.",
               "evidence_ids": [
-                "local-pca-admx"
+                "local-pca-admx",
+                "nohuto-pca-diagnostics-admx"
               ]
             }
           ]
@@ -41363,7 +41534,8 @@
           ],
           "evidence_ids": [
             "local-pca-admx",
-            "local-pca-adml"
+            "local-pca-adml",
+            "nohuto-pca-diagnostics-admx"
           ]
         }
       ],
@@ -41400,7 +41572,8 @@
           "evidence_ids": [
             "local-pca-admx",
             "local-pca-adml",
-            "admx-pca-csp"
+            "admx-pca-csp",
+            "nohuto-pca-diagnostics-admx"
           ]
         },
         {
@@ -41425,7 +41598,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-pca-admx"
+            "local-pca-admx",
+            "nohuto-pca-diagnostics-admx"
           ]
         }
       ],
@@ -41471,13 +41645,28 @@
             "version-scope"
           ],
           "origin": "Microsoft policy CSP"
+        },
+        {
+          "evidence_id": "nohuto-pca-diagnostics-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisablePcaUI policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "pca.admx shows DisablePcaUIPolicy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. The mirrored ExplainText says enabling the policy configures PCA to detect application and driver compatibility failures, while disabling it stops detection. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\pca.admx",
         "exact_quote_or_path": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows8\"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.`",
         "key_found_on_page": true,
-        "notes": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping."
+        "notes": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx."
       },
       "provenance": null
     },
@@ -43607,7 +43796,8 @@
               "meaning": "Steps Recorder remains available because the policy is not forcing it off.",
               "evidence_ids": [
                 "ms-appcompat-policy-csp",
-                "local-appcompat-admx"
+                "local-appcompat-admx",
+                "nohuto-uar-admx"
               ]
             },
             {
@@ -43616,7 +43806,8 @@
               "label": "Steps Recorder allowed",
               "meaning": "The policy is disabled and Steps Recorder stays enabled.",
               "evidence_ids": [
-                "local-appcompat-admx"
+                "local-appcompat-admx",
+                "nohuto-uar-admx"
               ]
             },
             {
@@ -43626,7 +43817,8 @@
               "meaning": "The policy is enabled and Steps Recorder is turned off.",
               "evidence_ids": [
                 "ms-appcompat-policy-csp",
-                "local-appcompat-admx"
+                "local-appcompat-admx",
+                "nohuto-uar-admx"
               ]
             }
           ]
@@ -43646,7 +43838,8 @@
           ],
           "evidence_ids": [
             "ms-appcompat-policy-csp",
-            "local-appcompat-admx"
+            "local-appcompat-admx",
+            "nohuto-uar-admx"
           ]
         }
       ],
@@ -43676,7 +43869,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-appcompat-policy-csp"
+            "ms-appcompat-policy-csp",
+            "nohuto-uar-admx"
           ]
         },
         {
@@ -43708,7 +43902,8 @@
           "evidence_ids": [
             "ms-appcompat-policy-csp",
             "local-appcompat-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-uar-admx"
           ]
         }
       ],
@@ -43769,13 +43964,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-uar-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableUAR policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows DisableUAR under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. The mirrored ExplainText says enabling the policy disables Steps Recorder, while disabling or not configuring it leaves Steps Recorder enabled. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
         "exact_quote_or_path": "Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisableUAR.",
         "key_found_on_page": true,
-        "notes": "The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+        "notes": "The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-uar-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -44741,7 +44951,8 @@
               "evidence_ids": [
                 "ms-system-configure-telemetry-optin-ui",
                 "local-datacollection-admx-optin-ui",
-                "local-datacollection-adml-optin-ui"
+                "local-datacollection-adml-optin-ui",
+                "nohuto-datacollection-optin-ui-admx"
               ]
             },
             {
@@ -44753,7 +44964,8 @@
                 "ms-system-configure-telemetry-optin-ui",
                 "local-datacollection-admx-optin-ui",
                 "local-datacollection-adml-optin-ui",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-datacollection-optin-ui-admx"
               ]
             }
           ]
@@ -44772,7 +44984,8 @@
             }
           ],
           "evidence_ids": [
-            "ms-system-configure-telemetry-optin-ui"
+            "ms-system-configure-telemetry-optin-ui",
+            "nohuto-datacollection-optin-ui-admx"
           ]
         }
       ],
@@ -44803,7 +45016,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-system-configure-telemetry-optin-ui"
+            "ms-system-configure-telemetry-optin-ui",
+            "nohuto-datacollection-optin-ui-admx"
           ]
         },
         {
@@ -44834,7 +45048,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-system-configure-telemetry-optin-ui",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-datacollection-optin-ui-admx"
           ]
         }
       ],
@@ -44911,13 +45126,28 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-datacollection-optin-ui-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows DisableTelemetryOptInSettingsUx under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored enum lists 1 as disable diagnostic data opt-in settings and 0 as enable them, with EnabledValue=1 and DisabledValue=0. This is the exact policy UI gate for the telemetry opt-in settings surface.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
         "exact_quote_or_path": "This policy setting controls whether users can change the device diagnostic settings in settings. If you set this policy setting to Disable diagnostic data opt-in settings, the Settings app diagnostic data opt-in settings page is disabled. ... Default Value 0. Allowed values: 0 (Default) Enable diagnostic data opt-in settings. 1 Disable diagnostic data opt-in settings. Group policy mapping: Name ConfigureTelemetryOptInSettingsUx ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",
         "key_found_on_page": true,
-        "notes": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx."
+        "notes": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via nohuto-datacollection-optin-ui-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -47897,7 +48127,8 @@
               "meaning": "Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data.",
               "evidence_ids": [
                 "ms-system-allowtelemetry",
-                "local-datacollection-adml"
+                "local-datacollection-adml",
+                "nohuto-allowtelemetry-admx"
               ]
             },
             {
@@ -47909,7 +48140,8 @@
                 "ms-system-allowtelemetry",
                 "local-datacollection-admx",
                 "local-datacollection-adml",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-allowtelemetry-admx"
               ]
             },
             {
@@ -47920,7 +48152,8 @@
               "evidence_ids": [
                 "ms-system-allowtelemetry",
                 "local-datacollection-admx",
-                "local-datacollection-adml"
+                "local-datacollection-adml",
+                "nohuto-allowtelemetry-admx"
               ]
             },
             {
@@ -47931,7 +48164,8 @@
               "evidence_ids": [
                 "ms-system-allowtelemetry",
                 "local-datacollection-admx",
-                "local-datacollection-adml"
+                "local-datacollection-adml",
+                "nohuto-allowtelemetry-admx"
               ]
             }
           ]
@@ -47951,7 +48185,8 @@
           ],
           "evidence_ids": [
             "ms-system-allowtelemetry",
-            "local-datacollection-adml"
+            "local-datacollection-adml",
+            "nohuto-allowtelemetry-admx"
           ]
         }
       ],
@@ -47982,7 +48217,8 @@
           ],
           "apply_allowed": false,
           "evidence_ids": [
-            "ms-system-allowtelemetry"
+            "ms-system-allowtelemetry",
+            "nohuto-allowtelemetry-admx"
           ]
         },
         {
@@ -48014,7 +48250,8 @@
           "evidence_ids": [
             "ms-system-allowtelemetry",
             "local-datacollection-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-allowtelemetry-admx"
           ]
         }
       ],
@@ -48080,13 +48317,28 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-allowtelemetry-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - AllowTelemetry policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows AllowTelemetry under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored enum lists 0 as Diagnostic data off, 1 as Send required diagnostic data, and 3 as Send optional diagnostic data. The ExplainText also states that disabling or not configuring the policy leaves required diagnostic data on and optional data user-configurable.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
         "exact_quote_or_path": "C:\\Windows\\PolicyDefinitions\\DataCollection.admx (AllowTelemetry values 0, 1, and 3); C:\\Windows\\PolicyDefinitions\\en-US\\DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions).",
         "key_found_on_page": true,
-        "notes": "The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch."
+        "notes": "The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx."
       },
       "provenance": null
     },
@@ -52687,7 +52939,8 @@
               "label": "Not configured",
               "meaning": "Users enter credentials within the normal desktop session for supported nonlogon tasks.",
               "evidence_ids": [
-                "local-credui-adml"
+                "local-credui-adml",
+                "nohuto-enablesecurecredentialprompting-admx"
               ]
             },
             {
@@ -52696,7 +52949,8 @@
               "label": "Current app value",
               "meaning": "Observed app write intended to require Secure Desktop credential entry for supported nonlogon tasks.",
               "evidence_ids": [
-                "app-security-provider"
+                "app-security-provider",
+                "nohuto-enablesecurecredentialprompting-admx"
               ]
             }
           ]
@@ -52715,7 +52969,8 @@
             }
           ],
           "evidence_ids": [
-            "local-credui-adml"
+            "local-credui-adml",
+            "nohuto-enablesecurecredentialprompting-admx"
           ]
         }
       ],
@@ -52746,7 +53001,8 @@
           ],
           "apply_allowed": false,
           "evidence_ids": [
-            "local-credui-adml"
+            "local-credui-adml",
+            "nohuto-enablesecurecredentialprompting-admx"
           ]
         },
         {
@@ -52777,7 +53033,8 @@
           "evidence_ids": [
             "local-credui-admx",
             "local-credui-adml",
-            "app-security-provider"
+            "app-security-provider",
+            "nohuto-enablesecurecredentialprompting-admx"
           ]
         }
       ],
@@ -52823,13 +53080,27 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-enablesecurecredentialprompting-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - EnableSecureCredentialPrompting policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/security/desc.md",
+          "summary": "CredUI.admx shows EnableSecureCredentialPrompting under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI. The mirrored ExplainText says the policy requires trusted-path Windows credential entry on the Secure Desktop to prevent theft of credentials; disabling or not configuring it leaves credential prompts in the user session. The policy is explicitly called Require trusted path for credential entry.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI\\EnableSecureCredentialPrompting: before=__MISSING__, after_apply=1, after_restore=__MISSING__",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -71822,7 +72093,8 @@
               "label": "People Bar visible",
               "meaning": "The policy is disabled and the People Bar is not hidden.",
               "evidence_ids": [
-                "ms-start-hide-people-bar"
+                "ms-start-hide-people-bar",
+                "nohuto-hidepeoplebar-admx"
               ]
             },
             {
@@ -71831,7 +72103,8 @@
               "label": "People Bar hidden",
               "meaning": "The policy is enabled and the People Bar is removed from the taskbar.",
               "evidence_ids": [
-                "ms-start-hide-people-bar"
+                "ms-start-hide-people-bar",
+                "nohuto-hidepeoplebar-admx"
               ]
             }
           ]
@@ -71850,7 +72123,8 @@
             }
           ],
           "evidence_ids": [
-            "ms-start-hide-people-bar"
+            "ms-start-hide-people-bar",
+            "nohuto-hidepeoplebar-admx"
           ]
         }
       ],
@@ -71881,7 +72155,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-start-hide-people-bar"
+            "ms-start-hide-people-bar",
+            "nohuto-hidepeoplebar-admx"
           ]
         },
         {
@@ -71911,7 +72186,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-start-hide-people-bar",
-            "app-visibility-provider"
+            "app-visibility-provider",
+            "nohuto-hidepeoplebar-admx"
           ]
         }
       ],
@@ -71959,13 +72235,27 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-hidepeoplebar-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - HidePeopleBar policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/visibility/desc.md",
+          "summary": "StartMenu.admx shows HidePeopleBar under HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy removes the People Bar from the taskbar and disables the My People experience, removing the people icon and the corresponding settings toggle. The value is explicitly named HidePeopleBar.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\StartMenu.admx",
         "exact_quote_or_path": "<policy name=\"HidePeopleBar\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"HidePeopleBar\">; StartMenu.adml: This policy allows you to remove the People Bar from the taskbar and disables the My People experience.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience."
+        "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx."
       },
       "provenance": {
         "coverage_state": "repo-backed",

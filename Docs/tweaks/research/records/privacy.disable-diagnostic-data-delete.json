@@ -29,7 +29,8 @@
             "meaning": "Windows does not force the diagnostic-data deletion policy.",
             "evidence_ids": [
               "ms-system-policy-csp-device-delete",
-              "local-data-collection-admx"
+              "local-data-collection-admx",
+              "nohuto-datacollection-delete-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "meaning": "The policy is disabled and the delete option remains available.",
             "evidence_ids": [
               "ms-system-policy-csp-device-delete",
-              "local-data-collection-admx"
+              "local-data-collection-admx",
+              "nohuto-datacollection-delete-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "The delete option is blocked by policy.",
             "evidence_ids": [
               "ms-system-policy-csp-device-delete",
-              "local-data-collection-admx"
+              "local-data-collection-admx",
+              "nohuto-datacollection-delete-admx"
             ]
           }
         ]
@@ -86,7 +89,8 @@
       "notes": "This is the policy baseline rather than a guarantee that every UI surface is identical across Windows editions.",
       "evidence_ids": [
         "ms-system-policy-csp-device-delete",
-        "local-data-collection-admx"
+        "local-data-collection-admx",
+        "nohuto-datacollection-delete-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-system-policy-csp-device-delete"
+        "ms-system-policy-csp-device-delete",
+        "nohuto-datacollection-delete-admx"
       ]
     },
     {
@@ -148,7 +153,8 @@
       "evidence_ids": [
         "ms-system-policy-csp-device-delete",
         "local-data-collection-admx",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-datacollection-delete-admx"
       ]
     }
   ],
@@ -208,6 +214,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-datacollection-delete-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableDeviceDelete policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "DataCollection.admx shows DisableDeviceDelete under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored ExplainText says enabling the policy disables the Delete diagnostic data button, while disabling or not configuring it leaves the button enabled. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -225,6 +245,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
     "exact_quote_or_path": "This policy setting controls whether the Delete diagnostic data button is enabled in Diagnostic & feedback Settings page. Default Value 0; Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DisableDeviceDelete.",
     "key_found_on_page": true,
-    "notes": "The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+    "notes": "The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-datacollection-delete-admx."
   }
 }

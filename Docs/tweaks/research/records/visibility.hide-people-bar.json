@@ -28,7 +28,8 @@
             "label": "People Bar visible",
             "meaning": "The policy is disabled and the People Bar is not hidden.",
             "evidence_ids": [
-              "ms-start-hide-people-bar"
+              "ms-start-hide-people-bar",
+              "nohuto-hidepeoplebar-admx"
             ]
           },
           {
@@ -37,7 +38,8 @@
             "label": "People Bar hidden",
             "meaning": "The policy is enabled and the People Bar is removed from the taskbar.",
             "evidence_ids": [
-              "ms-start-hide-people-bar"
+              "ms-start-hide-people-bar",
+              "nohuto-hidepeoplebar-admx"
             ]
           }
         ]
@@ -73,7 +75,8 @@
       ],
       "notes": "The policy is user-scoped and defaults to not hiding the People Bar.",
       "evidence_ids": [
-        "ms-start-hide-people-bar"
+        "ms-start-hide-people-bar",
+        "nohuto-hidepeoplebar-admx"
       ]
     }
   ],
@@ -104,7 +107,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-start-hide-people-bar"
+        "ms-start-hide-people-bar",
+        "nohuto-hidepeoplebar-admx"
       ]
     },
     {
@@ -134,7 +138,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-start-hide-people-bar",
-        "app-visibility-provider"
+        "app-visibility-provider",
+        "nohuto-hidepeoplebar-admx"
       ]
     }
   ],
@@ -179,6 +184,19 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-hidepeoplebar-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - HidePeopleBar policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/visibility/desc.md",
+      "summary": "StartMenu.admx shows HidePeopleBar under HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy removes the People Bar from the taskbar and disables the My People experience, removing the people icon and the corresponding settings toggle. The value is explicitly named HidePeopleBar.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -196,6 +214,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"HidePeopleBar\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"HidePeopleBar\">; StartMenu.adml: This policy allows you to remove the People Bar from the taskbar and disables the My People experience.",
     "key_found_on_page": true,
-    "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience."
+    "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx."
   }
 }

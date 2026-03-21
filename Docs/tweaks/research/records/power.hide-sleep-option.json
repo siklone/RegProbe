@@ -29,7 +29,8 @@
             "meaning": "Windows does not force Sleep visibility and users can choose through the normal controls.",
             "evidence_ids": [
               "local-windowsexplorer-admx",
-              "local-windowsexplorer-adml"
+              "local-windowsexplorer-adml",
+              "nohuto-showsleepoption-admx"
             ]
           },
           {
@@ -40,7 +41,8 @@
             "evidence_ids": [
               "local-windowsexplorer-admx",
               "local-windowsexplorer-adml",
-              "app-power-provider"
+              "app-power-provider",
+              "nohuto-showsleepoption-admx"
             ]
           },
           {
@@ -50,7 +52,8 @@
             "meaning": "The Sleep option is shown in the power menu when the hardware supports it.",
             "evidence_ids": [
               "local-windowsexplorer-admx",
-              "local-windowsexplorer-adml"
+              "local-windowsexplorer-adml",
+              "nohuto-showsleepoption-admx"
             ]
           }
         ]
@@ -87,7 +90,8 @@
       "notes": "Not configured leaves Sleep visibility under the normal Windows controls.",
       "evidence_ids": [
         "local-windowsexplorer-admx",
-        "local-windowsexplorer-adml"
+        "local-windowsexplorer-adml",
+        "nohuto-showsleepoption-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "local-windowsexplorer-adml"
+        "local-windowsexplorer-adml",
+        "nohuto-showsleepoption-admx"
       ]
     },
     {
@@ -149,7 +154,8 @@
       "evidence_ids": [
         "local-windowsexplorer-admx",
         "local-windowsexplorer-adml",
-        "app-power-provider"
+        "app-power-provider",
+        "nohuto-showsleepoption-admx"
       ]
     }
   ],
@@ -193,6 +199,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-showsleepoption-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - ShowSleepOption policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/power/desc.md",
+      "summary": "WindowsExplorer.admx shows ShowSleepOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy shows Sleep in the power options menu, disabling it never shows Sleep, and not configuring it leaves the user able to choose via Power Options Control Panel. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -210,6 +230,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
     "exact_quote_or_path": "<policy name=\"ShowSleepOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowSleepOption\">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu.",
     "key_found_on_page": true,
-    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu."
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx."
   }
 }
