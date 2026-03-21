@@ -317,6 +317,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "nohuto-uac-bootphase",
+      "kind": "decompilation",
+      "title": "nohuto boot-phase UAC value read",
+      "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+      "summary": "PsBootPhaseComplete.c references EnableLUA, EnableVirtualization, and EnableInstallerDetection under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System during boot-phase processing.",
+      "supports": [
+        "path",
+        "behavior",
+        "dependency"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "procmon-uac-never-notify",
       "kind": "procmon-trace",
       "title": "Procmon capture - UAC policy value reads",

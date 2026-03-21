@@ -59,7 +59,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa` | `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0` | 1 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `a6dae46035b960252a4ada33a2caa5a9379c88650917a792252e361704543ca3` | `3028d51e35ee7ebffe78f4c69cec397847dc96a54a7d2ed9e31105d9b72758ee` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `89753fb62188d47bb03bfac049f5a79959911897e840f34023b39bc64992fadc` | `c6a065d0d3b3139c695abc4ec89c3d0bd0399f78be5eae82bec3c0cbd937a36c` | 1 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `4a70f9a7ba726581ff58fcc389eb57b83bb904454194e6d4347e17363df46b79` | `082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e` | 1 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101` | `082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `3cd332965fe34f0a7232c7e928c5b8796f881d12a631989cd5d687859c6a4b10` | `98c31b60eabc31dfda0d383d92c2948b1d5703d3224b0389fb7262238dc767c4` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `d2b0e6450222247b0d3476725ebb0797a877371d303934f9f03b5b3adefab8f3` | `635f3a9c58962cc5967fbe0d66c8e9df3aeb0ec9c11c269d18f1bf6f35a5d413` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `e78110b1b6cf518c9491ae40c910fee7742b5971f28c315d3c1beb2fad3a9993` | `59762eba3c15ce7a5714a73158eeb41bc86fae56ca8f1ae7f0934340d6546673` | 1 |
@@ -132,7 +132,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `peripheral.disable-autoplay` | validated | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
 | `peripheral.disable-sticky-keys-prompt` | validated | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
 | `power.disable-cpu-idle-states` | validated | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `bf7fca5032d4fb2fc2e82ffe078af4d38d51f4e376a8e492f5f7fee16aa08d7c` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
-| `power.disable-fast-startup` | validated | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `24055686b16c5c2970d5afdf963fcc25b1494bc139985b7ad387da77256174f8` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
+| `power.disable-fast-startup` | validated | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-modern-standby` | validated | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `bc34a4b596f512119526b7899ded90da9463d780ee0d1a1ecf43fded68585d3a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
 | `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
@@ -224,9 +224,9 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `security.enable-sudo` | validated | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `8b0e09305cc1c955d9dbfe9d5267896ef3a8c2b0abf7f7c1e22bed7445a6ea32` | `46abb02e32d8ff5bbeeac6754e7b7a208fbd5fb52878e309097e1915130a284a` | 1 |
-| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `693b5c107f281d3e5926edbe353436c6290e31be1318007393752e43dd7b734d` | `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd` | 3 |
+| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `5de1afe0d0b74cad2f71bc7fa16eb5d7bc0868ddef850c348b66791e478969c7` | `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd` | 3 |
 | `system.aero-shake` | validated | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
-| `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `a61ba20f6739dc4c3a9d864286d2d803f6af8cc9e777a6752b56a1b02d0afab5` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
+| `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
 | `system.disable-app-archiving` | validated | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
 | `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `fd477353de0e926b6bf09dbd5958efc84ab036016f4a2597ed67cd9436f2002e` | `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218` | 1 |
@@ -1608,7 +1608,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Kernel / Heterogeneous Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json`
-- Source SHA256: `4a70f9a7ba726581ff58fcc389eb57b83bb904454194e6d4347e17363df46b79`
+- Source SHA256: `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101`
 - Proof SHA256: `082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e`
 
 **Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, but this research pass did not capture a primary Microsoft source that maps the power-policy semantics onto the kernel registry key the app writes.
@@ -4111,7 +4111,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-fast-startup.review.json`
-- Source SHA256: `24055686b16c5c2970d5afdf963fcc25b1494bc139985b7ad387da77256174f8`
+- Source SHA256: `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472`
 - Proof SHA256: `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382`
 
 **Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\Software\Policies\Microsoft\Windows\System\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path.
@@ -7334,7 +7334,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Security Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.uac-never-notify.json`
-- Source SHA256: `693b5c107f281d3e5926edbe353436c6290e31be1318007393752e43dd7b734d`
+- Source SHA256: `5de1afe0d0b74cad2f71bc7fa16eb5d7bc0868ddef850c348b66791e478969c7`
 - Proof SHA256: `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
@@ -7359,6 +7359,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | `high`
 - `app-security-provider` | `repo-code` | Current app implementation | `high`
+- `nohuto-uac-bootphase` | `decompilation` | nohuto boot-phase UAC value read | `medium`
 - `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | `high`
 
 **Validation proof**
@@ -7410,7 +7411,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Crash Recovery`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json`
-- Source SHA256: `a61ba20f6739dc4c3a9d864286d2d803f6af8cc9e777a6752b56a1b02d0afab5`
+- Source SHA256: `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b`
 - Proof SHA256: `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181`
 
 **Summary:** Officially documented crash-recovery control for automatic restart after a system failure. Microsoft documents the same CrashControl path and AutoReboot value used by the app, including the default enabled state and the 0 = disabled troubleshooting state.

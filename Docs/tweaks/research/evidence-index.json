@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:47:49.273631Z",
+  "generated_utc": "2026-03-21T11:08:42.526492Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -7654,7 +7654,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": true,
-        "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes.",
+        "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the missing kernel mapping.",
         "blocking_issues": [
           "No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.",
           "The current app mapping only partially aligns with official adjacent heterogeneous scheduling policy docs."
@@ -7819,6 +7819,19 @@
           ]
         },
         {
+          "evidence_id": "nohuto-session-manager-quota",
+          "kind": "registry-observation",
+          "title": "nohuto Session Manager quota-system trace",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt",
+          "summary": "Session-Manager.txt lists EnableCpuQuota under the Quota System block, separate from the kernel heterogeneous scheduling policy values.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "dependency",
+            "behavior"
+          ]
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -7836,7 +7849,7 @@
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
         "exact_quote_or_path": "Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value."
       }
     },
     {
@@ -23666,7 +23679,7 @@
           "evidence_id": "nohuto-fast-startup-asset",
           "kind": "decompilation",
           "title": "nohuto power asset for HiberbootEnabled research",
-          "location": "https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c",
           "summary": "Reverse-engineered notes showing that PopReadHiberbootGroupPolicy reads the policy path and overrides PopReadHiberbootPolicy, which reads HiberbootEnabled from Control\\Session Manager\\Power.",
           "strength": "medium",
           "supports": [
@@ -44969,6 +44982,19 @@
             "path",
             "value",
             "ui-mapping"
+          ]
+        },
+        {
+          "evidence_id": "nohuto-uac-bootphase",
+          "kind": "decompilation",
+          "title": "nohuto boot-phase UAC value read",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+          "summary": "PsBootPhaseComplete.c references EnableLUA, EnableVirtualization, and EnableInstallerDetection under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System during boot-phase processing.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "dependency"
           ]
         },
         {

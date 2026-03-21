@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can automatically restart the PC after a blue screen. Turning that off gives you time to see the crash screen and stop code before the machine reboots.",
     "why_people_change_it": "People disable automatic restart when they are diagnosing crashes and want the blue screen to stay visible instead of disappearing immediately.",
     "tradeoffs_overview": "Turning it off helps troubleshooting, but it also means the machine stays down after a crash until someone restarts it manually.",
-    "professional_notes": "Microsoft documents the Startup and Recovery option under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl. The Windows Client troubleshooting guidance says AutoReboot is on by default and that setting AutoReboot to 0 disables automatic restart. Microsoft also publishes AutoReboot as a Win32_OSRecoveryConfiguration property mapped to the same registry value.",
+    "professional_notes": "Microsoft documents the Startup and Recovery option under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl. The Windows Client troubleshooting guidance says AutoReboot is on by default and that setting AutoReboot to 0 disables automatic restart. Microsoft also publishes AutoReboot as a Win32_OSRecoveryConfiguration property mapped to the same registry value. The same CrashControl area also contains AllowCrashDump and CrashDumpEnabled, but those control crash-dump behavior rather than automatic restart, so they should not be conflated with AutoReboot.",
     "targets": [
       {
         "target_id": "auto-reboot",

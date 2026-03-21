@@ -4415,7 +4415,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-fast-startup-doc` | `official-doc` | Microsoft Fast Startup guidance for HiberbootEnabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm | `high` | path, value, behavior, version-scope |
 | `admx-wininit-csp` | `policy-csp` | Policy CSP - ADMX_WinInit | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wininit | `high` | path, behavior, version-scope |
-| `nohuto-fast-startup-asset` | `decompilation` | nohuto power asset for HiberbootEnabled research | https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c | `medium` | path, value, app-mismatch |
+| `nohuto-fast-startup-asset` | `decompilation` | nohuto power asset for HiberbootEnabled research | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c | `medium` | path, value, app-mismatch |
 | `live-registry-divergence` | `registry-observation` | Live build observation of diverging HiberbootEnabled values | Local observation - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `medium` | path, app-mismatch |
 | `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs and WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
 
@@ -11061,6 +11061,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-uac-bootphase` | `decompilation` | nohuto boot-phase UAC value read | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c | `medium` | path, behavior, dependency |
 | `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | Local capture - C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.pml and C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.csv | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**

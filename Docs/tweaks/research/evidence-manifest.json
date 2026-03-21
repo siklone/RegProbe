@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:47:49.543475Z",
+  "generated_utc": "2026-03-21T11:08:42.521463Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -7762,8 +7762,8 @@
       "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json",
-      "source_file_sha256": "4a70f9a7ba726581ff58fcc389eb57b83bb904454194e6d4347e17363df46b79",
-      "source_file_size_bytes": 10816,
+      "source_file_sha256": "c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101",
+      "source_file_size_bytes": 11702,
       "name": "Default Dynamic Heterogeneous CPU Policy",
       "category": "System",
       "area": "Kernel / Heterogeneous Scheduling",
@@ -23823,8 +23823,8 @@
       "tweak_id": "power.disable-fast-startup",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/power.disable-fast-startup.review.json",
-      "source_file_sha256": "24055686b16c5c2970d5afdf963fcc25b1494bc139985b7ad387da77256174f8",
-      "source_file_size_bytes": 12124,
+      "source_file_sha256": "7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472",
+      "source_file_size_bytes": 12201,
       "name": "Fast Startup (Hiberboot)",
       "category": "Power",
       "area": "Registry Configuration",
@@ -24007,7 +24007,7 @@
           "evidence_id": "nohuto-fast-startup-asset",
           "kind": "decompilation",
           "title": "nohuto power asset for HiberbootEnabled research",
-          "location": "https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c",
           "summary": "Reverse-engineered notes showing that PopReadHiberbootGroupPolicy reads the policy path and overrides PopReadHiberbootPolicy, which reads HiberbootEnabled from Control\\Session Manager\\Power.",
           "strength": "medium",
           "supports": [
@@ -45271,8 +45271,8 @@
       "tweak_id": "security.uac-never-notify",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/security.uac-never-notify.json",
-      "source_file_sha256": "693b5c107f281d3e5926edbe353436c6290e31be1318007393752e43dd7b734d",
-      "source_file_size_bytes": 14521,
+      "source_file_sha256": "5de1afe0d0b74cad2f71bc7fa16eb5d7bc0868ddef850c348b66791e478969c7",
+      "source_file_size_bytes": 15096,
       "name": "User Account Control Prompting Profile",
       "category": "Security",
       "area": "Registry Security Setting",
@@ -45589,6 +45589,19 @@
           ]
         },
         {
+          "evidence_id": "nohuto-uac-bootphase",
+          "kind": "decompilation",
+          "title": "nohuto boot-phase UAC value read",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+          "summary": "PsBootPhaseComplete.c references EnableLUA, EnableVirtualization, and EnableInstallerDetection under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System during boot-phase processing.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "dependency"
+          ]
+        },
+        {
           "evidence_id": "procmon-uac-never-notify",
           "kind": "procmon-trace",
           "title": "Procmon capture - UAC policy value reads",
@@ -45832,8 +45845,8 @@
       "tweak_id": "system.bsod-disable-auto-reboot",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json",
-      "source_file_sha256": "a61ba20f6739dc4c3a9d864286d2d803f6af8cc9e777a6752b56a1b02d0afab5",
-      "source_file_size_bytes": 9456,
+      "source_file_sha256": "71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b",
+      "source_file_size_bytes": 9651,
       "name": "Automatic Restart on System Failure",
       "category": "System",
       "area": "Crash Recovery",

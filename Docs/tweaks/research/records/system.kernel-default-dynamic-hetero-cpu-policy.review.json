@@ -13,7 +13,7 @@
     "casual_explanation": "This appears to be a low-level policy for how Windows prefers performant versus efficient CPU cores on hybrid systems. It is not a normal consumer-facing tweak.",
     "why_people_change_it": "People would only touch it when experimenting with hybrid-core scheduling behavior or undoing manual kernel registry changes from advanced tweak guides.",
     "tradeoffs_overview": "Changing heterogeneous scheduling policy can affect where threads run on systems with different classes of CPU cores. Microsoft publishes official value meanings for related scheduling policies, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app uses.",
-    "professional_notes": "The repo research notes list DefaultDynamicHeteroCpuPolicy = 3 and describe the value range 0..7, including 3 = Small and 5 = Dynamic. Microsoft publishes official heterogeneous scheduling policy values for the power-policy SchedulingPolicy and ShortSchedulingPolicy settings, where 0..5 map to all processors, performant processors, prefer performant processors, efficient processors, prefer efficient processors, and automatic. That official material confirms the feature area and that 3 is a meaningful 'efficient processors' style preference, but this research pass did not capture a primary Microsoft source that maps those semantics onto the kernel registry key DefaultDynamicHeteroCpuPolicy.",
+    "professional_notes": "The repo research notes list DefaultDynamicHeteroCpuPolicy = 3 and describe the value range 0..7, including 3 = Small and 5 = Dynamic. Microsoft publishes official heterogeneous scheduling policy values for the power-policy SchedulingPolicy and ShortSchedulingPolicy settings, where 0..5 map to all processors, performant processors, prefer performant processors, efficient processors, prefer efficient processors, and automatic. That official material confirms the feature area and that 3 is a meaningful 'efficient processors' style preference, but this research pass did not capture a primary Microsoft source that maps those semantics onto the kernel registry key DefaultDynamicHeteroCpuPolicy. The local Session-Manager trace also shows EnableCpuQuota in the Quota System block, which should not be conflated with DefaultDynamicHeteroCpuPolicy.",
     "targets": [
       {
         "target_id": "default-dynamic-hetero-cpu-policy",
@@ -176,6 +176,19 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "nohuto-session-manager-quota",
+      "kind": "registry-observation",
+      "title": "nohuto Session Manager quota-system trace",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt",
+      "summary": "Session-Manager.txt lists EnableCpuQuota under the Quota System block, separate from the kernel heterogeneous scheduling policy values.",
+      "supports": [
+        "path",
+        "dependency",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -196,7 +209,7 @@
     "restore_default_supported": false,
     "restore_previous_supported": false,
     "needs_vm_validation": true,
-    "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes.",
+    "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the missing kernel mapping.",
     "blocking_issues": [
       "No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.",
       "The current app mapping only partially aligns with official adjacent heterogeneous scheduling policy docs."
@@ -211,6 +224,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
     "exact_quote_or_path": "Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy.",
     "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail."
+    "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value."
   }
 }
