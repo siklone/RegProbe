@@ -30,6 +30,7 @@ public partial class MainWindow : Window
         Instance = this;
         InitializeComponent();
         DataContext = new MainViewModel();
+        Loaded += MainWindow_Loaded;
 
         // Wire up notification host
         NotificationHost.NotificationService = Notifications;
@@ -45,6 +46,43 @@ public partial class MainWindow : Window
 
         // Show welcome notification
         Notifications.ShowInfo("Windows Optimizer is ready", "Welcome");
+    }
+
+    private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        ClampToWorkArea();
+    }
+
+    private void ClampToWorkArea()
+    {
+        var workArea = SystemParameters.WorkArea;
+        var minLeft = workArea.Left;
+        var minTop = workArea.Top;
+        var maxLeft = workArea.Right - ActualWidth;
+        var maxTop = workArea.Bottom - ActualHeight;
+
+        if (double.IsNaN(ActualWidth) || double.IsNaN(ActualHeight))
+        {
+            return;
+        }
+
+        if (Left < minLeft)
+        {
+            Left = minLeft;
+        }
+        else if (Left > maxLeft)
+        {
+            Left = maxLeft;
+        }
+
+        if (Top < minTop)
+        {
+            Top = minTop;
+        }
+        else if (Top > maxTop)
+        {
+            Top = maxTop;
+        }
     }
 
     #region Custom Title Bar Handlers

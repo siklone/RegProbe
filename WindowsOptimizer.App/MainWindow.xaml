@@ -383,137 +383,138 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Crash Recovery Banner -->
-                <Border Grid.Row="0"
-                        Background="{DynamicResource DangerBrush}"
-                        Padding="16,12"
-                        Visibility="{Binding HasPendingRollbacks, Converter={StaticResource BoolToVisibility}}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0">
+                    <!-- Crash Recovery Banner -->
+                    <Border Background="{DynamicResource DangerBrush}"
+                            Padding="16,12"
+                            Visibility="{Binding HasPendingRollbacks, Converter={StaticResource BoolToVisibility}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <!-- Warning Icon -->
-                        <TextBlock Grid.Column="0"
-                                   Text="&#xE7BA;"
-                                   FontFamily="Segoe MDL2 Assets"
-                                   FontSize="18"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                   Margin="0,0,12,0"/>
+                            <!-- Warning Icon -->
+                            <TextBlock Grid.Column="0"
+                                       Text="&#xE7BA;"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                       Margin="0,0,12,0"/>
 
-                        <!-- Message -->
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="Crash Recovery Required"
+                            <!-- Message -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Crash Recovery Required"
+                                           Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                           FontWeight="SemiBold"
+                                           FontSize="13"/>
+                                <TextBlock Text="{Binding PendingRollbackMessage}"
+                                           Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                           FontSize="11"
+                                           TextWrapping="Wrap"
+                                           Margin="0,2,0,0"/>
+                            </StackPanel>
+
+                            <!-- Action Buttons -->
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                <!-- Recover Button -->
+                                <Button Command="{Binding RecoverPendingRollbacksCommand}"
+                                        Background="{DynamicResource SuccessBrush}"
+                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
+                                        Padding="12,6"
+                                        Margin="0,0,8,0"
+                                        Cursor="Hand"
+                                        ToolTip="Roll back all pending tweaks to restore previous state">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border x:Name="Bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                CornerRadius="4"
+                                                                Padding="{TemplateBinding Padding}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SuccessHoverBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Recover" FontWeight="SemiBold" FontSize="12"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Dismiss Button -->
+                                <Button Command="{Binding DismissPendingRollbacksCommand}"
+                                        Background="Transparent"
+                                        Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                        Padding="12,6"
+                                        Cursor="Hand"
+                                        ToolTip="Dismiss this warning without rolling back (tweaks will remain applied)">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border x:Name="Bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderBrush="{DynamicResource ForegroundOnAccentBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="4"
+                                                                Padding="{TemplateBinding Padding}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <TextBlock Text="Dismiss" FontSize="12"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Recovery Progress Indicator -->
+                    <Border Background="{DynamicResource AccentDarkBlueBrush}"
+                            Padding="16,12"
+                            Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}"
+                            Margin="0,2,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="&#xE72C;"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                                       Margin="0,0,12,0"/>
+                            <TextBlock Text="Recovering pending rollbacks..."
                                        Foreground="{DynamicResource ForegroundOnAccentBrush}"
                                        FontWeight="SemiBold"
-                                       FontSize="13"/>
-                            <TextBlock Text="{Binding PendingRollbackMessage}"
-                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                       FontSize="11"
-                                       TextWrapping="Wrap"
-                                       Margin="0,2,0,0"/>
+                                       FontSize="13"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
-
-                        <!-- Action Buttons -->
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                            <!-- Recover Button -->
-                            <Button Command="{Binding RecoverPendingRollbacksCommand}"
-                                    Background="{DynamicResource SuccessBrush}"
-                                    Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                    Padding="12,6"
-                                    Margin="0,0,8,0"
-                                    Cursor="Hand"
-                                    ToolTip="Roll back all pending tweaks to restore previous state">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Border x:Name="Bd"
-                                                            Background="{TemplateBinding Background}"
-                                                            CornerRadius="4"
-                                                            Padding="{TemplateBinding Padding}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SuccessHoverBrush}"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsEnabled" Value="False">
-                                                            <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Button.Style>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Recover" FontWeight="SemiBold" FontSize="12"/>
-                                </StackPanel>
-                            </Button>
-
-                            <!-- Dismiss Button -->
-                            <Button Command="{Binding DismissPendingRollbacksCommand}"
-                                    Background="Transparent"
-                                    Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                    Padding="12,6"
-                                    Cursor="Hand"
-                                    ToolTip="Dismiss this warning without rolling back (tweaks will remain applied)">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Border x:Name="Bd"
-                                                            Background="{TemplateBinding Background}"
-                                                            BorderBrush="{DynamicResource ForegroundOnAccentBrush}"
-                                                            BorderThickness="1"
-                                                            CornerRadius="4"
-                                                            Padding="{TemplateBinding Padding}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsEnabled" Value="False">
-                                                            <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Button.Style>
-                                <TextBlock Text="Dismiss" FontSize="12"/>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </Border>
-
-                <!-- Recovery Progress Indicator -->
-                <Border Grid.Row="0"
-                        Background="{DynamicResource AccentDarkBlueBrush}"
-                        Padding="16,12"
-                        Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="&#xE72C;"
-                                   FontFamily="Segoe MDL2 Assets"
-                                   FontSize="16"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                   Margin="0,0,12,0"/>
-                        <TextBlock Text="Recovering pending rollbacks..."
-                                   Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                   FontWeight="SemiBold"
-                                   FontSize="13"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
+                    </Border>
+                </StackPanel>
 
                 <!-- Content with Page Transitions -->
                 <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
