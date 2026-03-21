@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:11:52.556633Z",
+  "generated_utc": "2026-03-21T11:12:36.410022Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -40378,6 +40378,19 @@
           "supports": [
             "ui-mapping",
             "risk"
+          ]
+        },
+        {
+          "evidence_id": "nohuto-crashdump-gate",
+          "kind": "decompilation",
+          "title": "nohuto crash-dump gate trace",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c; Docs/privacy/assets/crashdmp.c",
+          "summary": "IopInitializeDumpPolicySettings.c reads AllowCrashDump and IopCrashDumpPolicyChangeWnfCallback uses it to configure crash dumping, while crashdmp.c shows CrashDumpEnabled in the CrashControl block; these are separate from LimitDumpCollection.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "dependency"
           ]
         }
       ],

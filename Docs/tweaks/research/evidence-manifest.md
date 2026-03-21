@@ -205,7 +205,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.hide-recommended-section-user` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-section-user.json` | `a1fe3fa2dc7ff5da45634181080761a86162f16da17b767ed090b82070325c6e` | `497b81057fe283d7500aada3abdadf2c0e3dd9e4173e2537b70dc036e47f1436` | 1 |
 | `privacy.hide-username-at-signin` | validated | `Docs/tweaks/research/records/privacy.hide-username-at-signin.json` | `9c9cf39d539c33bb101ffb7886bdffa71618b4027dbb2dc30986d507713753a2` | `df9ac43701488dec143b457dfc5b9ddab403b78c3a76b87746a2ae2b44727a10` | 1 |
 | `privacy.limit-diagnostic-log-collection` | validated | `Docs/tweaks/research/records/privacy.limit-diagnostic-log-collection.json` | `d65f05c931176bcdee7d5171384631f89691f0f5f7963caa13172b39bdcdcbe3` | `2948ab88d6f0fff70ef6cd9e9a6e42917333afc393c67ed2db0d84a67b8c6486` | 1 |
-| `privacy.limit-dump-collection` | validated | `Docs/tweaks/research/records/privacy.limit-dump-collection.json` | `a4c199248a9d1949735af0efd2945905d3fff94646d9677df3abb5f67d2e29d1` | `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc` | 1 |
+| `privacy.limit-dump-collection` | validated | `Docs/tweaks/research/records/privacy.limit-dump-collection.json` | `621a160dd612a0c838aca609a12ae94fa51e766643a2e08bc798a51d942ee4e3` | `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc` | 1 |
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | `Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `39ac3ec5302db5d9c117147a34e2805b9d78a631854708e6da5b39baecafcfe1` | `7befc0cb7fa3edd7ddaa3f6bbdba99877ab2dc377c00f9f42df8ce303867703e` | 1 |
 | `privacy.troubleshooter-dont-run` | validated | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
@@ -4297,6 +4297,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | `high`
 - `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | `high`
 - `app-power-provider` | `repo-code` | Current app implementation | `high`
+- `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | `medium`
 
 **Validation proof**
 
@@ -6659,7 +6660,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.limit-dump-collection.json`
-- Source SHA256: `a4c199248a9d1949735af0efd2945905d3fff94646d9677df3abb5f67d2e29d1`
+- Source SHA256: `621a160dd612a0c838aca609a12ae94fa51e766643a2e08bc798a51d942ee4e3`
 - Proof SHA256: `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc`
 
 **Summary:** Machine policy for limiting diagnostic dump collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDumpCollection value name that the app uses, and the ADML help text explains the effect.

@@ -43,3 +43,4 @@ Session-Manager.txt
 - Treat `AllowCrashDump` as the lower-level crash-dump gate, not as a synonym for dump-limiting policy values.
 - Treat `EnableCpuQuota` as a tentative DFSS lead until a dedicated record is promoted.
 - Do not conflate `AllowCrashDump` with `AutoReboot` or `CrashDumpEnabled`; they sit in the same CrashControl area but control different behaviors.
+- Do not conflate `LimitDumpCollection` with `AllowCrashDump` or `CrashDumpEnabled`; the former limits dump types, while the latter control whether crash dump initialization is allowed.

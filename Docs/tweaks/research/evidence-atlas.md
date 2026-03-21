@@ -4775,6 +4775,7 @@ Current write(s):
 | `local-windowsexplorer-admx` | `official-doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
 
 **Validation proof**
 

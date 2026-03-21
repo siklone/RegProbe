@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can collect diagnostic dump data for troubleshooting. This policy decides whether that dump collection is limited.",
     "why_people_change_it": "Privacy-focused or tightly governed environments may want to reduce how much dump data can be collected from the device.",
     "tradeoffs_overview": "Limiting dump collection reduces potentially sensitive diagnostic data, but it can also weaken troubleshooting quality when crashes or failures need deeper analysis.",
-    "professional_notes": "DataCollection.admx maps this machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\LimitDumpCollection with enabledValue 1 and disabledValue 0.",
+    "professional_notes": "DataCollection.admx maps this machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\LimitDumpCollection with enabledValue 1 and disabledValue 0. The local crash-dump source mirror shows CrashDumpEnabled and AllowCrashDump as separate CrashControl values, so this policy should be treated as dump-limiting behavior rather than crash-dump enablement.",
     "targets": [
       {
         "target_id": "limit-dump-collection",
@@ -206,6 +206,19 @@
       "supports": [
         "ui-mapping",
         "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-crashdump-gate",
+      "kind": "decompilation",
+      "title": "nohuto crash-dump gate trace",
+      "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c; Docs/privacy/assets/crashdmp.c",
+      "summary": "IopInitializeDumpPolicySettings.c reads AllowCrashDump and IopCrashDumpPolicyChangeWnfCallback uses it to configure crash dumping, while crashdmp.c shows CrashDumpEnabled in the CrashControl block; these are separate from LimitDumpCollection.",
+      "supports": [
+        "path",
+        "behavior",
+        "dependency"
       ],
       "strength": "medium"
     }

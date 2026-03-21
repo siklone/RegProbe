@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:11:52.534774Z",
+  "generated_utc": "2026-03-21T11:12:36.397940Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -25062,6 +25062,19 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "nohuto-power-hibernate-support-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for hibernation support",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists AllowHibernate, HiberFileSizePercent, and HiberFileType in the power values block, which are adjacent to the Explorer ShowHibernateOption policy but govern hibernation support itself.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "dependency"
+          ]
         }
       ],
       "validation_proof": {
@@ -40718,8 +40731,8 @@
       "tweak_id": "privacy.limit-dump-collection",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.limit-dump-collection.json",
-      "source_file_sha256": "a4c199248a9d1949735af0efd2945905d3fff94646d9677df3abb5f67d2e29d1",
-      "source_file_size_bytes": 9489,
+      "source_file_sha256": "621a160dd612a0c838aca609a12ae94fa51e766643a2e08bc798a51d942ee4e3",
+      "source_file_size_bytes": 10338,
       "name": "Diagnostic Dump Collection",
       "category": "Privacy",
       "area": "Registry Policy",
