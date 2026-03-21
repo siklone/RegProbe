@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T22:16:43.676203Z",
+  "generated_utc": "2026-03-21T22:21:57.176435Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -53938,8 +53938,8 @@
       "tweak_id": "security.trusted-path-credential-prompting",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json",
-      "source_file_sha256": "c7b5f949e54f73800d29df01802c10c5e343ff367e1fef808031dc4fd69a864f",
-      "source_file_size_bytes": 9641,
+      "source_file_sha256": "33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e",
+      "source_file_size_bytes": 10284,
       "name": "Trusted Path for Credential Entry",
       "category": "Security",
       "area": "Registry Policy",
@@ -55660,8 +55660,8 @@
       "tweak_id": "system.disable-auto-maintenance",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-auto-maintenance.review.json",
-      "source_file_sha256": "fd477353de0e926b6bf09dbd5958efc84ab036016f4a2597ed67cd9436f2002e",
-      "source_file_size_bytes": 15999,
+      "source_file_sha256": "0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a",
+      "source_file_size_bytes": 9801,
       "name": "Automatic Maintenance",
       "category": "System",
       "area": "Observed Registry Setting",
@@ -56875,8 +56875,8 @@
       "tweak_id": "system.disable-fullscreen-optimizations",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json",
-      "source_file_sha256": "9719697f5da25544decdf8d0d9a29b6f58d1e9dda77e5477882392bcd87334f3",
-      "source_file_size_bytes": 19112,
+      "source_file_sha256": "f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9",
+      "source_file_size_bytes": 11595,
       "name": "Fullscreen Optimizations",
       "category": "System",
       "area": "GameConfigStore / Compatibility Preference",
@@ -57375,8 +57375,8 @@
       "tweak_id": "system.disable-jpeg-reduction",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json",
-      "source_file_sha256": "9193468335026df700c54f159e4d68b01cc04a52d197621dab837395b0996152",
-      "source_file_size_bytes": 14587,
+      "source_file_sha256": "70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f",
+      "source_file_size_bytes": 8784,
       "name": "Wallpaper JPEG Import Quality",
       "category": "System",
       "area": "Desktop Wallpaper Import Behavior",
@@ -58888,8 +58888,8 @@
       "tweak_id": "system.disable-startup-delay",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "b4d628a8ac67e0cf0424524af62ba332eb083b434d05ef0ceeed7f5be6c2dc65",
-      "source_file_size_bytes": 15582,
+      "source_file_sha256": "4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86",
+      "source_file_size_bytes": 9502,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -65157,8 +65157,8 @@
       "tweak_id": "system.priority-control",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.priority-control.review.json",
-      "source_file_sha256": "c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f",
-      "source_file_size_bytes": 17470,
+      "source_file_sha256": "0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d",
+      "source_file_size_bytes": 10960,
       "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
       "category": "System",
       "area": "Scheduler / Priority Control",
@@ -73021,15 +73021,30 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "procmon-language-bar-showstatus",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - ShowStatus language bar restart read",
+          "location": "H:\\Temp\\procmon-hide-language-bar-3.pml",
+          "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
         "exact_quote_or_path": "HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = DWORD 3",
         "key_found_on_page": true,
-        "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state."
+        "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. Added Win25H2Clean Procmon corroboration via procmon-hide-language-bar-3.pml around a ctfmon.exe restart."
       },
-      "validation_proof_sha256": "be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed",
+      "validation_proof_sha256": "3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

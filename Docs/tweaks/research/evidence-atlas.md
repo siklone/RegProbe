@@ -21292,6 +21292,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | Docs/visibility/visibility.md | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | H:\Temp\procmon-hide-language-bar-3.pml | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -21300,7 +21301,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter |
 | Exact quote / path | HKCU\Software\Microsoft\CTF\LangBar\ShowStatus = DWORD 3 |
 | Key found on page | `True` |
-| Notes | Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. |
+| Notes | Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. Added Win25H2Clean Procmon corroboration via procmon-hide-language-bar-3.pml around a ctfmon.exe restart. |
 
 **Decision**
 

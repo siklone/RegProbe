@@ -1,195 +1,207 @@
 {
-    "$schema":  "../setting-research.schema.json",
-    "schema_version":  "1.0",
-    "record_id":  "system.disable-jpeg-reduction",
-    "tweak_id":  "system.disable-jpeg-reduction",
-    "record_status":  "validated",
-    "summary":  "Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\\\Desktop and restored the baseline.",
-    "setting":  {
-                    "name":  "Wallpaper JPEG Import Quality",
-                    "category":  "System",
-                    "area":  "Desktop Wallpaper Import Behavior",
-                    "scope":  "user",
-                    "casual_explanation":  "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
-                    "why_people_change_it":  "People set it to 100 when they notice wallpaper compression artifacts or want the imported wallpaper to match the original image quality more closely.",
-                    "tradeoffs_overview":  "Raising JPEG import quality can improve wallpaper image fidelity, but the mapping in this dataset still comes from repo research rather than a primary Microsoft registry publication.",
-                    "professional_notes":  "The repo research notes attribute JPEGImportQuality behavior to desktop wallpaper import code, saying the value defaults to 85 when missing, is clamped to a 60..100 range, and is set to 100 by the current tweak. This research pass did not capture a primary Microsoft document that publishes HKCU\\Control Panel\\Desktop\\JPEGImportQuality as a supported control surface, so the record remains low-confidence and review-only.",
-                    "targets":  [
-                                    {
-                                        "target_id":  "jpeg-import-quality",
-                                        "location_kind":  "registry",
-                                        "path":  "HKCU\\Control Panel\\Desktop",
-                                        "value_name":  "JPEGImportQuality",
-                                        "value_type":  "REG_DWORD",
-                                        "allowed_values":  [
-                                                               {
-                                                                   "state_kind":  "unknown",
-                                                                   "value":  null,
-                                                                   "label":  "Primary Microsoft mapping not captured",
-                                                                   "meaning":  "This research pass did not capture a primary Microsoft source for the exact JPEGImportQuality registry semantics.",
-                                                                   "evidence_ids":  [
-                                                                                        "repo-system-doc-jpeg"
-                                                                                    ]
-                                                               },
-                                                               {
-                                                                   "state_kind":  "value",
-                                                                   "value":  100,
-                                                                   "label":  "Observed app max-quality profile",
-                                                                   "meaning":  "The current app treats 100 as the no-reduction wallpaper quality profile, based on repo observation rather than a captured primary Microsoft source.",
-                                                                   "evidence_ids":  [
-                                                                                        "repo-system-doc-jpeg",
-                                                                                        "app-system-provider"
-                                                                                    ]
-                                                               }
-                                                           ]
-                                    }
-                                ]
-                },
-    "app_current_implementation":  {
-                                       "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
-                                       "notes":  "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality.",
-                                       "writes":  [
-                                                      {
-                                                          "target_id":  "jpeg-import-quality",
-                                                          "path":  "HKCU\\Control Panel\\Desktop",
-                                                          "value_name":  "JPEGImportQuality",
-                                                          "value_type":  "REG_DWORD",
-                                                          "state_kind":  "value",
-                                                          "value":  100
-                                                      }
-                                                  ]
-                                   },
-    "windows_defaults":  [
-                             {
-                                 "label":  "Conservative baseline",
-                                 "applies_to":  "Systems where this dataset has not yet validated JPEGImportQuality from a primary Microsoft source",
-                                 "states":  [
-                                                {
-                                                    "target_id":  "jpeg-import-quality",
-                                                    "state_kind":  "unknown",
-                                                    "value":  null,
-                                                    "rationale":  "Do not publish a validated wallpaper-quality baseline until the exact registry mapping is backed by a primary Microsoft source."
-                                                }
-                                            ],
-                                 "notes":  "This keeps the wallpaper tweak documented without overstating registry confidence.",
-                                 "evidence_ids":  [
-                                                      "repo-system-doc-jpeg"
-                                                  ]
-                             }
-                         ],
-    "recommended_profiles":  [
-                                 {
-                                     "profile_id":  "hold-for-research",
-                                     "label":  "Hold for research",
-                                     "intended_for":  [
-                                                          "Research tracking only",
-                                                          "Wallpaper quality comparisons"
-                                                      ],
-                                     "avoid_for":  [
-                                                       "Published presets"
-                                                   ],
-                                     "states":  [
-                                                    {
-                                                        "target_id":  "jpeg-import-quality",
-                                                        "state_kind":  "unknown",
-                                                        "value":  null,
-                                                        "rationale":  "Do not publish or apply the registry mapping until a primary Microsoft source is captured."
-                                                    }
-                                                ],
-                                     "good_when":  "You want to document wallpaper quality behavior without overstating registry confidence.",
-                                     "bad_when":  "You need a primary-source Microsoft-backed JPEGImportQuality control.",
-                                     "tradeoffs":  [
-                                                       "The feature area is documented honestly.",
-                                                       "The registry mapping stays blocked from validated publication."
-                                                   ],
-                                     "apply_allowed":  false,
-                                     "evidence_ids":  [
-                                                          "repo-system-doc-jpeg"
-                                                      ]
-                                 },
-                                 {
-                                     "profile_id":  "current-app-profile",
-                                     "label":  "Current app profile",
-                                     "intended_for":  [
-                                                          "Research comparison only"
-                                                      ],
-                                     "avoid_for":  [
-                                                       "Published validated presets"
-                                                   ],
-                                     "states":  [
-                                                    {
-                                                        "target_id":  "jpeg-import-quality",
-                                                        "state_kind":  "value",
-                                                        "value":  100,
-                                                        "rationale":  "Observed app write used as the current max-quality wallpaper profile."
-                                                    }
-                                                ],
-                                     "good_when":  "You are documenting what the app currently writes for wallpaper JPEG quality.",
-                                     "bad_when":  "You need a validated Microsoft registry mapping.",
-                                     "tradeoffs":  [
-                                                       "The current app behavior is captured.",
-                                                       "The exact registry semantics remain based on repo provenance rather than a captured primary source."
-                                                   ],
-                                     "apply_allowed":  false,
-                                     "notes":  "Blocked until a primary Microsoft source for JPEGImportQuality is captured.",
-                                     "evidence_ids":  [
-                                                          "repo-system-doc-jpeg",
-                                                          "app-system-provider"
-                                                      ]
-                                 }
-                             ],
-    "evidence":  [
-                     {
-                         "evidence_id":  "repo-system-doc-jpeg",
-                         "kind":  "repo-doc",
-                         "title":  "Repo system research notes for wallpaper JPEG import quality",
-                         "location":  "Docs/system/system.md",
-                         "summary":  "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication.",
-                         "supports":  [
-                                          "path",
-                                          "value",
-                                          "behavior",
-                                          "ui-mapping",
-                                          "app-mismatch"
-                                      ],
-                         "strength":  "medium"
-                     },
-                     {
-                         "evidence_id":  "app-system-provider",
-                         "kind":  "repo-code",
-                         "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
-                         "summary":  "The provider writes JPEGImportQuality = 100 for the current tweak.",
-                         "supports":  [
-                                          "path",
-                                          "value",
-                                          "ui-mapping"
-                                      ],
-                         "strength":  "high"
-                     }
-                 ],
-    "decision":  {
-                     "confidence":  "medium",
-                     "apply_allowed":  true,
-                     "recommended_for_general_users":  false,
-                     "restore_default_supported":  true,
-                     "restore_previous_supported":  true,
-                     "needs_vm_validation":  false,
-                     "why":  "Win25H2Clean reversible probe confirmed JPEGImportQuality transitions through missing -\u003e 100 -\u003e missing on the documented Desktop path.",
-                     "blocking_issues":  [
-
-                                         ]
-                 },
-    "open_questions":  [
-                           "Can a primary Microsoft source for JPEGImportQuality be captured?",
-                           "Should this setting be treated only as an advanced wallpaper preference?"
-                       ],
-    "last_reviewed_utc":  "2026-03-12T00:00:00Z",
-    "validation_proof":  {
-                             "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
-                             "exact_quote_or_path":  "HKCU\\Control Panel\\Desktop\\JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__",
-                             "key_found_on_page":  true,
-                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
-                         }
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.disable-jpeg-reduction",
+  "tweak_id": "system.disable-jpeg-reduction",
+  "record_status": "validated",
+  "summary": "Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\\\Desktop and restored the baseline.",
+  "setting": {
+    "name": "Wallpaper JPEG Import Quality",
+    "category": "System",
+    "area": "Desktop Wallpaper Import Behavior",
+    "scope": "user",
+    "casual_explanation": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
+    "why_people_change_it": "People set it to 100 when they notice wallpaper compression artifacts or want the imported wallpaper to match the original image quality more closely.",
+    "tradeoffs_overview": "Raising JPEG import quality can improve wallpaper image fidelity, but the mapping in this dataset still comes from repo research rather than a primary Microsoft registry publication.",
+    "professional_notes": "The repo research notes attribute JPEGImportQuality behavior to desktop wallpaper import code, saying the value defaults to 85 when missing, is clamped to a 60..100 range, and is set to 100 by the current tweak. This research pass did not capture a primary Microsoft document that publishes HKCU\\Control Panel\\Desktop\\JPEGImportQuality as a supported control surface, so the record remains low-confidence and review-only.",
+    "targets": [
+      {
+        "target_id": "jpeg-import-quality",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "JPEGImportQuality",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source for the exact JPEGImportQuality registry semantics.",
+            "evidence_ids": [
+              "repo-system-doc-jpeg"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 100,
+            "label": "Observed app max-quality profile",
+            "meaning": "The current app treats 100 as the no-reduction wallpaper quality profile, based on repo observation rather than a captured primary Microsoft source.",
+            "evidence_ids": [
+              "repo-system-doc-jpeg",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality.",
+    "writes": [
+      {
+        "target_id": "jpeg-import-quality",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "JPEGImportQuality",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 100
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated JPEGImportQuality from a primary Microsoft source",
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated wallpaper-quality baseline until the exact registry mapping is backed by a primary Microsoft source."
+        }
+      ],
+      "notes": "This keeps the wallpaper tweak documented without overstating registry confidence.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Wallpaper quality comparisons"
+      ],
+      "avoid_for": [
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the registry mapping until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document wallpaper quality behavior without overstating registry confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed JPEGImportQuality control.",
+      "tradeoffs": [
+        "The feature area is documented honestly.",
+        "The registry mapping stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-system-doc-jpeg"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets"
+      ],
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "value",
+          "value": 100,
+          "rationale": "Observed app write used as the current max-quality wallpaper profile."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for wallpaper JPEG quality.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for JPEGImportQuality is captured.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-system-doc-jpeg",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for wallpaper JPEG import quality",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes JPEGImportQuality = 100 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-batch-probe-20260320-disable-jpeg-reduction",
+      "kind": "runtime-diff",
+      "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
+      "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+      "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Win25H2Clean reversible probe confirmed JPEGImportQuality transitions through missing -> 100 -> missing on the documented Desktop path.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Can a primary Microsoft source for JPEGImportQuality be captured?",
+    "Should this setting be treated only as an advanced wallpaper preference?"
+  ],
+  "last_reviewed_utc": "2026-03-12T00:00:00Z",
+  "validation_proof": {
+    "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+    "exact_quote_or_path": "HKCU\\Control Panel\\Desktop\\JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+  }
 }

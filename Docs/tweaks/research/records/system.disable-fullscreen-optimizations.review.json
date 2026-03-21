@@ -1,236 +1,248 @@
 {
-    "$schema":  "../setting-research.schema.json",
-    "schema_version":  "1.0",
-    "record_id":  "system.disable-fullscreen-optimizations",
-    "tweak_id":  "system.disable-fullscreen-optimizations",
-    "record_status":  "validated",
-    "summary":  "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.",
-    "setting":  {
-                    "name":  "Fullscreen Optimizations",
-                    "category":  "System",
-                    "area":  "GameConfigStore / Compatibility Preference",
-                    "scope":  "user",
-                    "casual_explanation":  "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
-                    "why_people_change_it":  "People disable it when they are troubleshooting stutter, unstable frame pacing, odd alt-tab behavior, capture conflicts, or game-specific compatibility problems.",
-                    "tradeoffs_overview":  "Turning Fullscreen Optimizations off can help a stubborn game, but it can also remove the newer presentation behavior Windows is trying to provide. The current product issue is that the app writes raw GameConfigStore values whose exact registry semantics are not published in a primary Microsoft source in this research pass.",
-                    "professional_notes":  "Microsoft documents Fullscreen Optimizations as a Windows feature and exposes user-facing ways to disable it per app through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. The repo\u0027s system research notes attribute these raw value semantics to observations from ResourcePolicyServer.dll, not to a primary Microsoft registry publication. This record therefore keeps the feature area documented while blocking validated publication of the current registry mapping.",
-                    "targets":  [
-                                    {
-                                        "target_id":  "gameconfigstore-fso-values",
-                                        "location_kind":  "registry",
-                                        "path":  "HKCU\\System\\GameConfigStore",
-                                        "value_name":  "GameDVR_FSEBehavior / GameDVR_FSEBehaviorMode / GameDVR_HonorUserFSEBehaviorMode / GameDVR_DXGIHonorFSEWindowsCompatible",
-                                        "value_type":  "REG_DWORD set",
-                                        "allowed_values":  [
-                                                               {
-                                                                   "state_kind":  "unknown",
-                                                                   "value":  null,
-                                                                   "label":  "Official registry mapping not captured",
-                                                                   "meaning":  "This research pass did not capture a primary Microsoft document that publishes the exact GameConfigStore registry mapping for Fullscreen Optimizations.",
-                                                                   "evidence_ids":  [
-                                                                                        "ms-windowed-games-optimizations",
-                                                                                        "repo-system-doc-fso"
-                                                                                    ]
-                                                               },
-                                                               {
-                                                                   "state_kind":  "value",
-                                                                   "value":  "2/2/1/1",
-                                                                   "label":  "Observed app FSO-off profile",
-                                                                   "meaning":  "The current app treats these four values as the disable-FSO profile, based on repo provenance rather than a primary Microsoft registry publication.",
-                                                                   "evidence_ids":  [
-                                                                                        "repo-system-doc-fso",
-                                                                                        "app-system-registry-provider"
-                                                                                    ]
-                                                               }
-                                                           ],
-                                        "notes":  "Tracked as an observed user-side GameConfigStore mapping only."
-                                    }
-                                ]
-                },
-    "app_current_implementation":  {
-                                       "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-                                       "notes":  "Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle.",
-                                       "writes":  [
-                                                      {
-                                                          "target_id":  "gameconfigstore-fso-values",
-                                                          "path":  "HKCU\\System\\GameConfigStore",
-                                                          "value_name":  "GameDVR_FSEBehavior",
-                                                          "value_type":  "REG_DWORD",
-                                                          "state_kind":  "value",
-                                                          "value":  2
-                                                      },
-                                                      {
-                                                          "target_id":  "gameconfigstore-fso-values",
-                                                          "path":  "HKCU\\System\\GameConfigStore",
-                                                          "value_name":  "GameDVR_FSEBehaviorMode",
-                                                          "value_type":  "REG_DWORD",
-                                                          "state_kind":  "value",
-                                                          "value":  2
-                                                      },
-                                                      {
-                                                          "target_id":  "gameconfigstore-fso-values",
-                                                          "path":  "HKCU\\System\\GameConfigStore",
-                                                          "value_name":  "GameDVR_HonorUserFSEBehaviorMode",
-                                                          "value_type":  "REG_DWORD",
-                                                          "state_kind":  "value",
-                                                          "value":  1
-                                                      },
-                                                      {
-                                                          "target_id":  "gameconfigstore-fso-values",
-                                                          "path":  "HKCU\\System\\GameConfigStore",
-                                                          "value_name":  "GameDVR_DXGIHonorFSEWindowsCompatible",
-                                                          "value_type":  "REG_DWORD",
-                                                          "state_kind":  "value",
-                                                          "value":  1
-                                                      }
-                                                  ]
-                                   },
-    "windows_defaults":  [
-                             {
-                                 "label":  "Conservative baseline",
-                                 "applies_to":  "Systems where this dataset has not yet validated the exact GameConfigStore registry mapping for Fullscreen Optimizations",
-                                 "states":  [
-                                                {
-                                                    "target_id":  "gameconfigstore-fso-values",
-                                                    "state_kind":  "unknown",
-                                                    "value":  null,
-                                                    "rationale":  "Do not publish a validated registry baseline until a primary Microsoft source is captured."
-                                                }
-                                            ],
-                                 "notes":  "This record documents the feature area, but keeps the raw registry values out of validated presets.",
-                                 "evidence_ids":  [
-                                                      "ms-windowed-games-optimizations",
-                                                      "repo-system-doc-fso"
-                                                  ]
-                             }
-                         ],
-    "recommended_profiles":  [
-                                 {
-                                     "profile_id":  "hold-for-research",
-                                     "label":  "Hold for research",
-                                     "intended_for":  [
-                                                          "Research tracking only",
-                                                          "People documenting GameConfigStore behavior"
-                                                      ],
-                                     "avoid_for":  [
-                                                       "Published presets",
-                                                       "General users"
-                                                   ],
-                                     "states":  [
-                                                    {
-                                                        "target_id":  "gameconfigstore-fso-values",
-                                                        "state_kind":  "unknown",
-                                                        "value":  null,
-                                                        "rationale":  "Do not publish or apply the raw registry mapping until it is backed by a primary Microsoft source."
-                                                    }
-                                                ],
-                                     "good_when":  "You want to document the feature without overstating registry confidence.",
-                                     "bad_when":  "You need a primary-source Microsoft-backed registry mapping for Fullscreen Optimizations.",
-                                     "tradeoffs":  [
-                                                       "The user-facing feature is documented honestly.",
-                                                       "The registry mapping stays blocked from validated publication."
-                                                   ],
-                                     "apply_allowed":  false,
-                                     "evidence_ids":  [
-                                                          "ms-windowed-games-optimizations",
-                                                          "repo-system-doc-fso"
-                                                      ]
-                                 },
-                                 {
-                                     "profile_id":  "current-app-profile",
-                                     "label":  "Current app profile",
-                                     "intended_for":  [
-                                                          "Research comparison only"
-                                                      ],
-                                     "avoid_for":  [
-                                                       "Published validated presets",
-                                                       "General users"
-                                                   ],
-                                     "states":  [
-                                                    {
-                                                        "target_id":  "gameconfigstore-fso-values",
-                                                        "state_kind":  "value",
-                                                        "value":  "2/2/1/1",
-                                                        "rationale":  "Observed app write used as the current disable-FSO implementation."
-                                                    }
-                                                ],
-                                     "good_when":  "You are documenting what the app currently writes for Fullscreen Optimizations.",
-                                     "bad_when":  "You need a validated Microsoft registry mapping.",
-                                     "tradeoffs":  [
-                                                       "The current app behavior is captured.",
-                                                       "The exact registry semantics are still based on repo provenance rather than a captured primary Microsoft source."
-                                                   ],
-                                     "apply_allowed":  false,
-                                     "notes":  "Blocked until the GameConfigStore values are formally sourced or the product switches to a more official control surface.",
-                                     "evidence_ids":  [
-                                                          "repo-system-doc-fso",
-                                                          "app-system-registry-provider"
-                                                      ]
-                                 }
-                             ],
-    "evidence":  [
-                     {
-                         "evidence_id":  "ms-windowed-games-optimizations",
-                         "kind":  "official-doc",
-                         "title":  "Microsoft Support: Optimizations for windowed games in Windows",
-                         "location":  "https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952",
-                         "summary":  "Microsoft documents the Fullscreen Optimizations and related presentation feature area from the user perspective, confirming that this is a real Windows feature even though this page does not publish the raw GameConfigStore registry values.",
-                         "supports":  [
-                                          "behavior",
-                                          "side-effects",
-                                          "version-scope"
-                                      ],
-                         "strength":  "medium"
-                     },
-                     {
-                         "evidence_id":  "repo-system-doc-fso",
-                         "kind":  "repo-doc",
-                         "title":  "Repo system research notes for Fullscreen Optimizations",
-                         "location":  "Docs/system/system.md",
-                         "summary":  "The repo\u0027s research notes list the four GameConfigStore values and attribute their semantics to values found in ResourcePolicyServer.dll, which is useful provenance but not a primary Microsoft registry publication.",
-                         "supports":  [
-                                          "value",
-                                          "ui-mapping",
-                                          "app-mismatch"
-                                      ],
-                         "strength":  "medium"
-                     },
-                     {
-                         "evidence_id":  "app-system-registry-provider",
-                         "kind":  "repo-code",
-                         "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-                         "summary":  "The provider writes the four GameConfigStore values 2/2/1/1 for the current Fullscreen Optimizations tweak.",
-                         "supports":  [
-                                          "path",
-                                          "value",
-                                          "ui-mapping"
-                                      ],
-                         "strength":  "high"
-                     }
-                 ],
-    "decision":  {
-                     "confidence":  "medium",
-                     "apply_allowed":  true,
-                     "recommended_for_general_users":  false,
-                     "restore_default_supported":  true,
-                     "restore_previous_supported":  true,
-                     "needs_vm_validation":  false,
-                     "why":  "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple writes and restored the baseline.",
-                     "blocking_issues":  [
-
-                                         ]
-                 },
-    "open_questions":  [
-                           "Can the GameConfigStore values be sourced from a Microsoft primary document or a directly inspectable supported UI mapping?",
-                           "Should the app present Fullscreen Optimizations as an experimental compatibility action rather than a validated tweak?"
-                       ],
-    "last_reviewed_utc":  "2026-03-12T00:00:00Z",
-    "validation_proof":  {
-                             "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
-                             "exact_quote_or_path":  "HKCU\\System\\GameConfigStore: GameDVR_FSEBehavior=2, GameDVR_FSEBehaviorMode=2, GameDVR_HonorUserFSEBehaviorMode=1, GameDVR_DXGIHonorFSEWindowsCompatible=1; restored to missing for all four values",
-                             "key_found_on_page":  true,
-                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
-                         }
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.disable-fullscreen-optimizations",
+  "tweak_id": "system.disable-fullscreen-optimizations",
+  "record_status": "validated",
+  "summary": "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.",
+  "setting": {
+    "name": "Fullscreen Optimizations",
+    "category": "System",
+    "area": "GameConfigStore / Compatibility Preference",
+    "scope": "user",
+    "casual_explanation": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
+    "why_people_change_it": "People disable it when they are troubleshooting stutter, unstable frame pacing, odd alt-tab behavior, capture conflicts, or game-specific compatibility problems.",
+    "tradeoffs_overview": "Turning Fullscreen Optimizations off can help a stubborn game, but it can also remove the newer presentation behavior Windows is trying to provide. The current product issue is that the app writes raw GameConfigStore values whose exact registry semantics are not published in a primary Microsoft source in this research pass.",
+    "professional_notes": "Microsoft documents Fullscreen Optimizations as a Windows feature and exposes user-facing ways to disable it per app through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. The repo's system research notes attribute these raw value semantics to observations from ResourcePolicyServer.dll, not to a primary Microsoft registry publication. This record therefore keeps the feature area documented while blocking validated publication of the current registry mapping.",
+    "targets": [
+      {
+        "target_id": "gameconfigstore-fso-values",
+        "location_kind": "registry",
+        "path": "HKCU\\System\\GameConfigStore",
+        "value_name": "GameDVR_FSEBehavior / GameDVR_FSEBehaviorMode / GameDVR_HonorUserFSEBehaviorMode / GameDVR_DXGIHonorFSEWindowsCompatible",
+        "value_type": "REG_DWORD set",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Official registry mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft document that publishes the exact GameConfigStore registry mapping for Fullscreen Optimizations.",
+            "evidence_ids": [
+              "ms-windowed-games-optimizations",
+              "repo-system-doc-fso"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "2/2/1/1",
+            "label": "Observed app FSO-off profile",
+            "meaning": "The current app treats these four values as the disable-FSO profile, based on repo provenance rather than a primary Microsoft registry publication.",
+            "evidence_ids": [
+              "repo-system-doc-fso",
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed user-side GameConfigStore mapping only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle.",
+    "writes": [
+      {
+        "target_id": "gameconfigstore-fso-values",
+        "path": "HKCU\\System\\GameConfigStore",
+        "value_name": "GameDVR_FSEBehavior",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 2
+      },
+      {
+        "target_id": "gameconfigstore-fso-values",
+        "path": "HKCU\\System\\GameConfigStore",
+        "value_name": "GameDVR_FSEBehaviorMode",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 2
+      },
+      {
+        "target_id": "gameconfigstore-fso-values",
+        "path": "HKCU\\System\\GameConfigStore",
+        "value_name": "GameDVR_HonorUserFSEBehaviorMode",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "gameconfigstore-fso-values",
+        "path": "HKCU\\System\\GameConfigStore",
+        "value_name": "GameDVR_DXGIHonorFSEWindowsCompatible",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated the exact GameConfigStore registry mapping for Fullscreen Optimizations",
+      "states": [
+        {
+          "target_id": "gameconfigstore-fso-values",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated registry baseline until a primary Microsoft source is captured."
+        }
+      ],
+      "notes": "This record documents the feature area, but keeps the raw registry values out of validated presets.",
+      "evidence_ids": [
+        "ms-windowed-games-optimizations",
+        "repo-system-doc-fso"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "People documenting GameConfigStore behavior"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "gameconfigstore-fso-values",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the raw registry mapping until it is backed by a primary Microsoft source."
+        }
+      ],
+      "good_when": "You want to document the feature without overstating registry confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed registry mapping for Fullscreen Optimizations.",
+      "tradeoffs": [
+        "The user-facing feature is documented honestly.",
+        "The registry mapping stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-windowed-games-optimizations",
+        "repo-system-doc-fso"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "gameconfigstore-fso-values",
+          "state_kind": "value",
+          "value": "2/2/1/1",
+          "rationale": "Observed app write used as the current disable-FSO implementation."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for Fullscreen Optimizations.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact registry semantics are still based on repo provenance rather than a captured primary Microsoft source."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until the GameConfigStore values are formally sourced or the product switches to a more official control surface.",
+      "evidence_ids": [
+        "repo-system-doc-fso",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-windowed-games-optimizations",
+      "kind": "official-doc",
+      "title": "Microsoft Support: Optimizations for windowed games in Windows",
+      "location": "https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952",
+      "summary": "Microsoft documents the Fullscreen Optimizations and related presentation feature area from the user perspective, confirming that this is a real Windows feature even though this page does not publish the raw GameConfigStore registry values.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-system-doc-fso",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for Fullscreen Optimizations",
+      "location": "Docs/system/system.md",
+      "summary": "The repo's research notes list the four GameConfigStore values and attribute their semantics to values found in ResourcePolicyServer.dll, which is useful provenance but not a primary Microsoft registry publication.",
+      "supports": [
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes the four GameConfigStore values 2/2/1/1 for the current Fullscreen Optimizations tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-batch-probe-20260320-disable-fullscreen-optimizations",
+      "kind": "runtime-diff",
+      "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
+      "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+      "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2Clean.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple writes and restored the baseline.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Can the GameConfigStore values be sourced from a Microsoft primary document or a directly inspectable supported UI mapping?",
+    "Should the app present Fullscreen Optimizations as an experimental compatibility action rather than a validated tweak?"
+  ],
+  "last_reviewed_utc": "2026-03-12T00:00:00Z",
+  "validation_proof": {
+    "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+    "exact_quote_or_path": "HKCU\\System\\GameConfigStore: GameDVR_FSEBehavior=2, GameDVR_FSEBehaviorMode=2, GameDVR_HonorUserFSEBehaviorMode=1, GameDVR_DXGIHonorFSEWindowsCompatible=1; restored to missing for all four values",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+  }
 }

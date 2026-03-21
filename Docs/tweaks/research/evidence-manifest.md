@@ -224,25 +224,25 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `security.enable-dynamic-lock` | validated | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `76033ac24f3d75f777cc0e8b05f9c33a7588a645fc1177c898c3ec045219dc61` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
-| `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `c7b5f949e54f73800d29df01802c10c5e343ff367e1fef808031dc4fd69a864f` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
+| `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
 | `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
 | `system.disable-app-archiving` | validated | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
-| `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `fd477353de0e926b6bf09dbd5958efc84ab036016f4a2597ed67cd9436f2002e` | `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218` | 1 |
+| `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a` | `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218` | 1 |
 | `system.disable-background-gp-updates` | validated | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `6c59ea8cc07f64420609a9b49dfd691f3bd53ff49b5f1c7ab56d5ee69f00a181` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
 | `system.disable-clipboard-history` | validated | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `9e8131cc869f26cc23d0fd9a3232dd821cdab8ed70d53220accdd372d164c516` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
 | `system.disable-clipboard-redirection` | validated | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `5cb8ad836f2d87a8de6e42bacc351d0908a2dc6fd0fd204c3f68469550be2053` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
-| `system.disable-fullscreen-optimizations` | validated | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `9719697f5da25544decdf8d0d9a29b6f58d1e9dda77e5477882392bcd87334f3` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
+| `system.disable-fullscreen-optimizations` | validated | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
 | `system.disable-game-recording-broadcasting` | validated | `Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json` | `5f934446faf47bd7cc617fa7233b69de7416e051e06b8e465f29cc846f390592` | `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe` | 1 |
-| `system.disable-jpeg-reduction` | validated | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `9193468335026df700c54f159e4d68b01cc04a52d197621dab837395b0996152` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
+| `system.disable-jpeg-reduction` | validated | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
 | `system.disable-restartable-apps` | validated | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
 | `system.disable-search-highlights-policy` | validated | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `42d8f1b01301696cf24408906b804403b17658ca55db1e5137b9e89dac384707` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
 | `system.disable-search-remote-queries` | validated | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `b4d628a8ac67e0cf0424524af62ba332eb083b434d05ef0ceeed7f5be6c2dc65` | `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e` | 1 |
+| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86` | `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e` | 1 |
 | `system.disable-storage-sense` | validated | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -267,7 +267,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.ntfs-enable-long-paths` | validated | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
+| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.reliability-timestamp-enabled` | validated | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
@@ -297,7 +297,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `visibility.disable-widgets` | validated | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `13c038cc0ba351f32d2e3082667307aa1c28428b000e37f615a746afe2419404` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
 | `visibility.disable-window-animations` | validated | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `05c681b441c2adb732c53a21f6c49c9ed0dac48e26aedb4551925c4ee61e6abc` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
 | `visibility.force-classic-control-panel` | validated | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
-| `visibility.hide-language-bar` | validated | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed` | 1 |
+| `visibility.hide-language-bar` | validated | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
 | `visibility.hide-most-used-apps` | validated | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `27c167bbdf4148602936b8099f51782296e65d2c67105e4947efb2c9244851f7` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
 | `visibility.hide-people-bar` | validated | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `d4be4445fae869dcf55e6ca3c463089eb7ce7c4d3dc97f16b43c0e01b7e2f43a` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
 | `visibility.restore-classic-context-menu` | validated | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
@@ -11134,7 +11134,7 @@ Windows Internals references:
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json`
-- Source SHA256: `c7b5f949e54f73800d29df01802c10c5e343ff367e1fef808031dc4fd69a864f`
+- Source SHA256: `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e`
 - Proof SHA256: `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02`
 
 **Summary:** Win25H2Clean reversible probe confirmed EnableSecureCredentialPrompting=1 on the documented CredUI path and restored the baseline.
@@ -11478,7 +11478,7 @@ Windows Internals references:
 - Area: `Observed Registry Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json`
-- Source SHA256: `fd477353de0e926b6bf09dbd5958efc84ab036016f4a2597ed67cd9436f2002e`
+- Source SHA256: `0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a`
 - Proof SHA256: `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218`
 
 **Summary:** Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\Maintenance and restored the baseline.
@@ -11710,7 +11710,7 @@ Windows Internals references:
 - Area: `GameConfigStore / Compatibility Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `9719697f5da25544decdf8d0d9a29b6f58d1e9dda77e5477882392bcd87334f3`
+- Source SHA256: `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9`
 - Proof SHA256: `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee`
 
 **Summary:** Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.
@@ -11805,7 +11805,7 @@ _No provenance block present._
 - Area: `Desktop Wallpaper Import Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json`
-- Source SHA256: `9193468335026df700c54f159e4d68b01cc04a52d197621dab837395b0996152`
+- Source SHA256: `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f`
 - Proof SHA256: `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377`
 
 **Summary:** Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\Desktop and restored the baseline.
@@ -12137,7 +12137,7 @@ Windows Internals references:
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `b4d628a8ac67e0cf0424524af62ba332eb083b434d05ef0ceeed7f5be6c2dc65`
+- Source SHA256: `4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86`
 - Proof SHA256: `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
@@ -13528,7 +13528,7 @@ Windows Internals references:
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.priority-control.review.json`
-- Source SHA256: `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f`
+- Source SHA256: `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d`
 - Proof SHA256: `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b`
 
 **Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.
@@ -15122,7 +15122,7 @@ Nohuto lineage references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/visibility.hide-language-bar.review.json`
 - Source SHA256: `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4`
-- Proof SHA256: `be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed`
+- Proof SHA256: `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
 
@@ -15140,6 +15140,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | `medium` |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | `medium` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | `medium` |
 
 **Provenance**
 
@@ -15163,7 +15164,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter |
 | exact_quote_or_path | HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = DWORD 3 |
 | key_found_on_page | True |
-| notes | Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. |
+| notes | Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. Added Win25H2Clean Procmon corroboration via procmon-hide-language-bar-3.pml around a ctfmon.exe restart. |
 ### `visibility.hide-most-used-apps`
 
 - Status: `validated`
