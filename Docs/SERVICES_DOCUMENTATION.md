@@ -1,137 +1,137 @@
-# Windows Optimizer - Servis Yönetimi Dokümantasyonu
+﻿# Windows Optimizer - Servis YÃ¶netimi DokÃ¼mantasyonu
 
-Bu belge, uygulamanın yönettiği tüm Windows servislerini, zamanlanmış görevleri ve sistem bileşenlerini detaylı olarak açıklar.
+Bu belge, uygulamanÄ±n yÃ¶nettiÄŸi tÃ¼m Windows servislerini, zamanlanmÄ±ÅŸ gÃ¶revleri ve sistem bileÅŸenlerini detaylÄ± olarak aÃ§Ä±klar.
 
 ---
 
-## 🔧 Devre Dışı Bırakılabilir Servisler
+## ðŸ”§ Devre DÄ±ÅŸÄ± BÄ±rakÄ±labilir Servisler
 
 ### Telemetri ve Veri Toplama
 
-| Servis | Görünen Ad | Risk | Açıklama |
+| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
 |--------|-----------|------|----------|
-| `DiagTrack` | Connected User Experiences and Telemetry | Safe | Microsoft'a telemetri gönderir |
-| `dmwappushservice` | WAP Push Message Routing | Safe | Push bildirim yönlendirme |
-| `WerSvc` | Windows Error Reporting Service | Safe | Hata raporları gönderir |
+| `DiagTrack` | Connected User Experiences and Telemetry | Safe | Microsoft'a telemetri gÃ¶nderir |
+| `dmwappushservice` | WAP Push Message Routing | Safe | Push bildirim yÃ¶nlendirme |
+| `WerSvc` | Windows Error Reporting Service | Safe | Hata raporlarÄ± gÃ¶nderir |
 
 ### Performans ve Arama
 
-| Servis | Görünen Ad | Risk | Açıklama |
+| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
 |--------|-----------|------|----------|
-| `SysMain` | Superfetch | Advanced | Uygulama ön yükleme (SSD'lerde gereksiz) |
-| `WSearch` | Windows Search | Advanced | Dosya indeksleme (SSD'de hız farkı az) |
+| `SysMain` | Superfetch | Advanced | Uygulama Ã¶n yÃ¼kleme (SSD'lerde gereksiz) |
+| `WSearch` | Windows Search | Advanced | Dosya indeksleme (SSD'de hÄ±z farkÄ± az) |
 
-### Yazdırma
+### YazdÄ±rma
 
-| Servis | Görünen Ad | Risk | Açıklama |
+| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
 |--------|-----------|------|----------|
-| `Spooler` | Print Spooler | Risky | Yazıcı yoksa devre dışı bırakılabilir |
-| `PrintNotify` | Printer Notifications | Safe | Yazıcı bildirimleri |
-| `PrintWorkflowUserSvc_*` | Per-user Print Workflow | Safe | Kullanıcı bazlı yazdırma |
-| `PrintDeviceConfigurationService` | Printer Device Configuration | Safe | Yazıcı yapılandırma |
-| `PrintScanBrokerService` | Print/Scan Broker | Safe | Yazdırma/tarama aracı |
+| `Spooler` | Print Spooler | Risky | YazÄ±cÄ± yoksa devre dÄ±ÅŸÄ± bÄ±rakÄ±labilir |
+| `PrintNotify` | Printer Notifications | Safe | YazÄ±cÄ± bildirimleri |
+| `PrintWorkflowUserSvc_*` | Per-user Print Workflow | Safe | KullanÄ±cÄ± bazlÄ± yazdÄ±rma |
+| `PrintDeviceConfigurationService` | Printer Device Configuration | Safe | YazÄ±cÄ± yapÄ±landÄ±rma |
+| `PrintScanBrokerService` | Print/Scan Broker | Safe | YazdÄ±rma/tarama aracÄ± |
 
 ### Bluetooth
 
-| Servis | Görünen Ad | Risk | Açıklama |
+| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
 |--------|-----------|------|----------|
-| `bthserv` | Bluetooth Support Service | Risky | BT kullanmıyorsanız kapatın |
-| `BluetoothUserService_*` | Per-user Bluetooth | Safe | Kullanıcı bazlı BT |
-| `BTAGService` | Bluetooth Audio Gateway | Advanced | BT ses geçidi |
+| `bthserv` | Bluetooth Support Service | Risky | BT kullanmÄ±yorsanÄ±z kapatÄ±n |
+| `BluetoothUserService_*` | Per-user Bluetooth | Safe | KullanÄ±cÄ± bazlÄ± BT |
+| `BTAGService` | Bluetooth Audio Gateway | Advanced | BT ses geÃ§idi |
 
 ---
 
-## ⏰ Devre Dışı Bırakılabilir Zamanlanmış Görevler
+## â° Devre DÄ±ÅŸÄ± BÄ±rakÄ±labilir ZamanlanmÄ±ÅŸ GÃ¶revler
 
-### Telemetri Görevleri
+### Telemetri GÃ¶revleri
 
-| Görev Yolu | Açıklama |
+| GÃ¶rev Yolu | AÃ§Ä±klama |
 |------------|----------|
-| `\Microsoft\Windows\Application Experience\MareBackup` | Uygulama uyumluluğu yedekleme |
-| `\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser` | Uyumluluk değerlendirmesi |
-| `\Microsoft\Windows\Customer Experience Improvement Program\Consolidator` | CEIP veri birleştirme |
+| `\Microsoft\Windows\Application Experience\MareBackup` | Uygulama uyumluluÄŸu yedekleme |
+| `\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser` | Uyumluluk deÄŸerlendirmesi |
+| `\Microsoft\Windows\Customer Experience Improvement Program\Consolidator` | CEIP veri birleÅŸtirme |
 | `\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip` | USB CEIP |
 | `\Microsoft\Windows\Feedback\Siuf\DmClient` | Geri bildirim istemcisi |
-| `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | Hata raporu kuyruğu |
+| `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | Hata raporu kuyruÄŸu |
 
-### Bakım Görevleri
+### BakÄ±m GÃ¶revleri
 
-| Görev Yolu | Risk | Açıklama |
+| GÃ¶rev Yolu | Risk | AÃ§Ä±klama |
 |------------|------|----------|
 | `\Microsoft\Windows\DiskCleanup\SilentCleanup` | Safe | Otomatik disk temizleme |
-| `\Microsoft\Windows\Diagnosis\Scheduled` | Safe | Zamanlanmış tanılama |
-| `\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector` | Safe | Disk tanılama |
-| `\Microsoft\Windows\Maintenance\WinSAT` | Safe | Windows Sistem Değerlendirmesi |
-| `\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem` | Safe | Güç verimliliği analizi |
+| `\Microsoft\Windows\Diagnosis\Scheduled` | Safe | ZamanlanmÄ±ÅŸ tanÄ±lama |
+| `\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector` | Safe | Disk tanÄ±lama |
+| `\Microsoft\Windows\Maintenance\WinSAT` | Safe | Windows Sistem DeÄŸerlendirmesi |
+| `\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem` | Safe | GÃ¼Ã§ verimliliÄŸi analizi |
 
-### Cihaz Bilgi Görevleri
+### Cihaz Bilgi GÃ¶revleri
 
-| Görev Yolu | Açıklama |
+| GÃ¶rev Yolu | AÃ§Ä±klama |
 |------------|----------|
 | `\Microsoft\Windows\Device Information\Device` | Cihaz bilgisi toplama |
-| `\Microsoft\Windows\Device Information\Device User` | Kullanıcı cihaz bilgisi |
+| `\Microsoft\Windows\Device Information\Device User` | KullanÄ±cÄ± cihaz bilgisi |
 
 ---
 
-## 📊 Tweak Kategorileri ve Sayıları
+## ðŸ“Š Tweak Kategorileri ve SayÄ±larÄ±
 
-| Kategori | Dosya | Tweak Sayısı | Açıklama |
+| Kategori | Dosya | Tweak SayÄ±sÄ± | AÃ§Ä±klama |
 |----------|-------|--------------|----------|
 | System | `SystemTweakProvider.cs` | 9 | Game Mode, Startup Delay, Services |
 | System Registry | `SystemRegistryTweakProvider.cs` | 30+ | Kernel, NTFS, DWM |
 | Privacy | `PrivacyTweakProvider.cs` | 70+ | Telemetri, Konum, Aktivite |
 | Security | `SecurityTweakProvider.cs` | 15 | UAC, Firewall, VBS |
-| Network | `NetworkTweakProvider.cs` | 30+ | SMB, IPv6, Adaptörler |
+| Network | `NetworkTweakProvider.cs` | 30+ | SMB, IPv6, AdaptÃ¶rler |
 | Performance | `PerformanceTweakProvider.cs` | 8 | Animasyonlar, Throttling |
 | Peripheral | `PeripheralTweakProvider.cs` | 10 | Mouse, Keyboard |
 | Audio | `AudioTweakProvider.cs` | 6 | Beep, Ducking |
-| Visibility | `VisibilityTweakProvider.cs` | 25 | UI öğeleri, Spotlight |
+| Visibility | `VisibilityTweakProvider.cs` | 25 | UI Ã¶ÄŸeleri, Spotlight |
 | Misc | `MiscTweakProvider.cs` | 5 | 3rd party apps |
-| Legacy | `LegacyTweakProvider.cs` | 100+ | Eski tweak kataloğu |
+| Legacy | `LegacyTweakProvider.cs` | 100+ | Eski tweak kataloÄŸu |
 
-**Toplam: 278+ tweak** (`Docs/tweaks/tweak-catalog.csv` kaynağı)
+**Toplam: 278+ tweak** (`Docs/tweaks/tweak-catalog.csv` kaynaÄŸÄ±)
 
 ---
 
-## 🔒 Yetki Gereksinimleri
+## ðŸ”’ Yetki Gereksinimleri
 
-### Admin Gerektiren İşlemler
+### Admin Gerektiren Ä°ÅŸlemler
 
 - `HKLM` registry yazma
-- Servis başlangıç modunu değiştirme
-- Zamanlanmış görev devre dışı bırakma
-- Sistem dosyası işlemleri
-- BCD (Boot Configuration Data) değişiklikleri
+- Servis baÅŸlangÄ±Ã§ modunu deÄŸiÅŸtirme
+- ZamanlanmÄ±ÅŸ gÃ¶rev devre dÄ±ÅŸÄ± bÄ±rakma
+- Sistem dosyasÄ± iÅŸlemleri
+- BCD (Boot Configuration Data) deÄŸiÅŸiklikleri
 
-### Kullanıcı Seviyesi İşlemler
+### KullanÄ±cÄ± Seviyesi Ä°ÅŸlemler
 
 - `HKCU` registry yazma
-- Kullanıcı profil ayarları
-- Tema ve görünüm değişiklikleri
+- KullanÄ±cÄ± profil ayarlarÄ±
+- Tema ve gÃ¶rÃ¼nÃ¼m deÄŸiÅŸiklikleri
 
 ---
 
-## 📁 İlgili Dosyalar
+## ðŸ“ Ä°lgili Dosyalar
 
 ```
 WindowsOptimizer.App/Services/TweakProviders/
-├── AudioTweakProvider.cs
-├── BaseTweakProvider.cs     # Abstract base class
-├── LegacyTweakProvider.cs   # 100+ eski tweak
-├── MiscTweakProvider.cs
-├── NetworkTweakProvider.cs
-├── PerformanceTweakProvider.cs
-├── PeripheralTweakProvider.cs
-├── PrivacyTweakProvider.cs
-├── SecurityTweakProvider.cs
-├── SystemRegistryTweakProvider.cs
-├── SystemTweakProvider.cs
-└── VisibilityTweakProvider.cs
+â”œâ”€â”€ AudioTweakProvider.cs
+â”œâ”€â”€ BaseTweakProvider.cs     # Abstract base class
+â”œâ”€â”€ LegacyTweakProvider.cs   # 100+ eski tweak
+â”œâ”€â”€ MiscTweakProvider.cs
+â”œâ”€â”€ NetworkTweakProvider.cs
+â”œâ”€â”€ PerformanceTweakProvider.cs
+â”œâ”€â”€ PeripheralTweakProvider.cs
+â”œâ”€â”€ PrivacyTweakProvider.cs
+â”œâ”€â”€ SecurityTweakProvider.cs
+â”œâ”€â”€ SystemRegistryTweakProvider.cs
+â”œâ”€â”€ SystemTweakProvider.cs
+â””â”€â”€ VisibilityTweakProvider.cs
 ```
 
 ---
 
-## 🔗 Referanslar
+## ðŸ”— Referanslar
 
 - [Windows Services Reference](https://learn.microsoft.com/en-us/windows/application-management/per-user-services-in-windows)
 - [Task Scheduler Reference](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)

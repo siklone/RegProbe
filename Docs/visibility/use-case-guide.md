@@ -1,4 +1,4 @@
-# Windows Visibility and Personalization Guide
+﻿# Windows Visibility and Personalization Guide
 ## Use-case based settings (English)
 
 This guide maps common visibility and personalization preferences to registry-backed settings.

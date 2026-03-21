@@ -1,4 +1,4 @@
-# Nohuto Configuration Sources
+﻿# Nohuto Configuration Sources
 
 This document defines how the app should use the four nohuto repositories that now form the configuration intelligence layer.
 

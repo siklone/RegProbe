@@ -1,9 +1,9 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 296
+Total tweaks: 291
 Missing docs files: 0
 Missing docs anchors: 0
-Missing details anchors: 34
+Missing details anchors: 0
 Missing catalog anchors: 0
 
 Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog.html)
@@ -34,22 +34,20 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `cleanup.wer-files` | `Docs\cleanup\cleanup.md` | yes | yes | yes | yes |
 | `cleanup.windows-old` | `Docs\cleanup\cleanup.md` | yes | yes | yes | yes |
 | `cleanup.windows-update-cache` | `Docs\cleanup\cleanup.md` | yes | yes | yes | yes |
-| `developer.docker-performance` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.dotnet-telemetry-disable` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.git-long-paths` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.nodejs-performance` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.powershell-execution` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.python-path-fix` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.ssh-agent-autostart` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.terminal-dev-mode` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.vs-intellisense-cache` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.vs-solution-load` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.vscode-git-autofetch` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.windows-dev-mode` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `developer.wsl2-memory` | `Docs\tweaks\tweaks.md` | yes | yes | no | yes |
-| `explorer.disable-compact-mode` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `developer.dotnet-telemetry-disable` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.enable-windows-long-paths` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.nodejs-performance` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.powershell-execution` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.python-path-fix` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.ssh-agent-autostart` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.terminal-dev-mode` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.vs-intellisense-cache` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.vs-solution-load` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.vscode-git-autofetch` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `developer.windows-dev-mode` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
 | `explorer.disable-low-disk-space-warning` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-chat` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.enable-explorer-compact-mode` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-file-extensions` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-full-path` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-hidden-files` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
@@ -77,7 +75,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `network.flush-dns-cache` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.optimize-smb` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.prefer-ipv4` | `Docs\network\network.md` | yes | yes | yes | yes |
-| `network.require-ntlmv2-session-security` | `Docs\network\network.md` | yes | yes | yes | yes |
+| `network.require-ntlm-ssp-client-session-security` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.reset-winsock` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-disable-leasing` | `Docs\network\network.md` | yes | yes | yes | yes |
 | `network.smb-enable-large-mtu` | `Docs\network\network.md` | yes | yes | yes | yes |
@@ -148,7 +146,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `privacy.disable-f1-help` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-feedback-notifications` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-file-history` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
-| `privacy.disable-find-my-device` | `Docs\privacy\privacy-verified.md` | yes | yes | no | yes |
+| `privacy.disable-find-my-device` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-font-providers` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-inking-typing-personalization` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-kms-activation-telemetry` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
@@ -165,7 +163,6 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `privacy.disable-online-tips` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-phone-linking` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-recall` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
-| `privacy.disable-reserved-storage` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-resume` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-rsop-logging` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-search-box-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
@@ -220,11 +217,9 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.disable-clipboard-history` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-clipboard-redirection` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-fullscreen-optimizations` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.disable-game-dvr` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-jpeg-reduction` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-restartable-apps` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-scheduled-tasks` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.disable-search-highlights` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-search-highlights-policy` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-search-remote-queries` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.disable-search-web-results` | `Docs\system\system.md` | yes | yes | yes | yes |
@@ -240,15 +235,15 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.enable-hags` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.enable-indexing-encrypted-items` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-disable-overlays` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.graphics-page-fault-debug-mode` | `Docs\system\system.md` | yes | yes | no | yes |
+| `system.graphics-page-fault-debug-mode` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-tdr-ddi-delay` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-tdr-delay` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-tdr-level` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-tdr-limit-count` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.graphics-tdr-limit-time` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.kernel-adjust-dpc-threshold` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.kernel-cache-aware-scheduling` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | `Docs\system\system.md` | yes | yes | no | yes |
+| `system.kernel-cache-aware-scheduling` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.kernel-disable-low-qos-timer-resolution` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.kernel-dpc-queue-depth` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.kernel-dpc-watchdog-period` | `Docs\system\system.md` | yes | yes | yes | yes |
@@ -258,10 +253,10 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.kernel-thread-dpc-enable` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.memory-clear-pagefile-at-shutdown` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.memory-disable-paging-executive` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.memory-large-system-cache-client` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.memory-nonpaged-pool-dynamic` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.memory-paged-pool-dynamic` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.memory-registry-quota-default` | `Docs\system\system.md` | yes | yes | no | yes |
+| `system.memory-large-system-cache-client` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.memory-nonpaged-pool-dynamic` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.memory-paged-pool-dynamic` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.memory-registry-quota-default` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.ntfs-disable-8dot3` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.ntfs-disable-last-access` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.ntfs-enable-long-paths` | `Docs\system\system.md` | yes | yes | yes | yes |
@@ -269,19 +264,19 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.ntfs-reset-mft-zone` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.priority-control` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.reduce-shutdown-timeouts` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.services.disable-bluetooth-audio-gateway` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-bluetooth-support` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-bluetooth-user-service` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-connected-user-experiences` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-print-device-configuration` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-print-notifications` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-print-scan-broker` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-print-spooler` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-print-workflow-user-service` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-sysmain` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-wap-push-routing` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-windows-error-reporting` | `Docs\system\system.md` | yes | yes | no | yes |
-| `system.services.disable-windows-search` | `Docs\system\system.md` | yes | yes | no | yes |
+| `system.services.disable-bluetooth-audio-gateway` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-bluetooth-support` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-bluetooth-user-service` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-connected-user-experiences` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-print-device-configuration` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-print-notifications` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-print-scan-broker` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-print-spooler` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-print-workflow-user-service` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-sysmain` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-wap-push-routing` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-windows-error-reporting` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.services.disable-windows-search` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.verbose-status-messages` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `visibility.default-account-picture` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `visibility.disable-acrylic-logon` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |

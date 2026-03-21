@@ -1,7 +1,7 @@
-# Desktop Wallpaper
+﻿# Desktop Wallpaper
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Requires elevation: No.
 
@@ -130,7 +130,7 @@ C:\ProgramData\Microsoft\Default Account Pictures
 
 ---
 
-`Global Account Picture`:  
+`Global Account Picture`:
 "This policy setting allows an administrator to standardize the account pictures for all users on a system to the default account picture."
 
 
@@ -333,8 +333,8 @@ Disables the preview function for (extensions):
 `{E357FCCD-A995-4576-B01F-234630154E96}` - Thumbnail Provider (Thumbnail image handler)
 `{BB2E617C-0920-11D1-9A0B-00C04FC2D6C1}` - Extract Image (Image handler)
 `{9DBD2C50-62AD-11D0-B806-00C04FD706EC}` - Default shell extension handler for thumbnails
-> https://learn.microsoft.com/en-us/windows/win32/shell/handlers#handler-names  
-> https://learn.microsoft.com/en-us/windows/win32/api/thumbcache/nn-thumbcache-ithumbnailprovider  
+> https://learn.microsoft.com/en-us/windows/win32/shell/handlers#handler-names
+> https://learn.microsoft.com/en-us/windows/win32/api/thumbcache/nn-thumbcache-ithumbnailprovider
 > https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iextractimage
 
 Enabled:
@@ -427,7 +427,7 @@ CMachine::RegQueryDWORD(
 ```
 `AnimationAfterUserOOBE` & `SkipNextFirstLogonAnimation` (`CurrentVersion\Winlogon`) also exist.
 
-> https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt  
+> https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt
 > [visibility/assets | animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c)
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/animation.png?raw=true)
@@ -500,7 +500,7 @@ Removing the `Bags` & `BagMRU` key resets all folder settings (view, size,...), 
 
 The revert may not work correctly yet, as it only creates the `Bags`/`BagsMRU` keys.
 
-> https://www.insomniacgeek.com/posts/how-to-disable-windows-folder-discovery/  
+> https://www.insomniacgeek.com/posts/how-to-disable-windows-folder-discovery/
 > https://github.com/LesFerch/WinSetView
 
 # Hide Language Bar
@@ -632,7 +632,7 @@ Requires elevation: No.
 |18|Show shadows under windows|
 |19|N/A|
 |39|Animate controls and elements inside windows|
-|48|Use the desktop language bar for when it’s available|
+|48|Use the desktop language bar for when itâ€™s available|
 |64|N/A|
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/visual1.png?raw=true)
@@ -792,7 +792,7 @@ Removes the `Quick access` in the File Explorer & sets `Open File Exporer to` to
 
 Requires elevation: Yes (HKLM).
 
-W11 uses `Segoe UI` by default. You can change it via registry edits, the selected font will be used for desktop interfaces, explorer, some apps (`StartAllBack` will use it), but won't get applied for e.g., `SystemSettings.exe` and app fonts in general. Some fonts will cause issues - `Yu Gothic UI Light` uses `¥` instead of `\` (picture).
+W11 uses `Segoe UI` by default. You can change it via registry edits, the selected font will be used for desktop interfaces, explorer, some apps (`StartAllBack` will use it), but won't get applied for e.g., `SystemSettings.exe` and app fonts in general. Some fonts will cause issues - `Yu Gothic UI Light` uses `Â¥` instead of `\` (picture).
 
 Either select a installed font with the command shown below or install new fonts via e.g.:
 > https://www.nerdfonts.com/font-downloads
@@ -1170,7 +1170,7 @@ Requires elevation: No.
 
 Spotlight is used to provide new pictures on your lock screen.
 
-> https://learn.microsoft.com/en-us/windows/configuration/windows-spotlight/?pivots=windows-11#policy-settings  
+> https://learn.microsoft.com/en-us/windows/configuration/windows-spotlight/?pivots=windows-11#policy-settings
 > https://www.dev2qa.com/how-to-show-or-hide-the-windows-spotlight-learn-about-this-picture-icon-on-windows-11-desktop/
 
 ```json
@@ -1302,8 +1302,8 @@ Requires elevation: No.
 
 Since `powershell.exe` has default color of white (foreground) and blue (background), some may want to change it.
 
-`ScreenColors` value, located in `HKCU\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe`  
-`0-3` bit = `Foreground color`  
+`ScreenColors` value, located in `HKCU\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe`
+`0-3` bit = `Foreground color`
 `4-7` bit = `Background color`
 
 | Color | Binary | Decimal |
@@ -1447,9 +1447,9 @@ else
 ```
 
 Type: `String` (`REG_SZ`) - it uses `StrToIntW` to read the value (converts a string that represents a decimal value to an integer)
-Min: `0`  
+Min: `0`
 Max: `65534`?
-Fallback: Depends on `GetDoubleClickTime()` (`Control Panel > Mouse > Double-click speed`), which would change the `DoubleClickSpeed` value (has a default of `500`, which is why the default of `MenuShowDelay` is `400`)  
+Fallback: Depends on `GetDoubleClickTime()` (`Control Panel > Mouse > Double-click speed`), which would change the `DoubleClickSpeed` value (has a default of `500`, which is why the default of `MenuShowDelay` is `400`)
 Default: `400`
 
 ```c
@@ -1488,7 +1488,7 @@ return SetTimer(this[2], v2, v4, 0LL);
 
 Timers 32771/32777/32776 clamp the delay to >=2 seconds, so setting `MenuShowDelay` to `0` won't impact everything. Timers 32778/32779 do'nt use the registry at all.
 
-> https://learn.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-strtointw  
+> https://learn.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-strtointw
 > https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdoubleclicktime
 
 # OEM Information
@@ -1535,7 +1535,7 @@ Example:
 
 ![](https://github.com/nohuto/win-config/blob/main/visibility/images/oem.png?raw=true)
 
-# Settings Page Visibility 
+# Settings Page Visibility
 
 Requires elevation: Yes (HKLM).
 
@@ -1574,9 +1574,9 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="explorer.disable-compact-mode"></a> `explorer.disable-compact-mode` | Enable Compact View | Reduces the spacing between items in File Explorer for a more information-dense view. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L57` |
 | <a id="explorer.disable-low-disk-space-warning"></a> `explorer.disable-low-disk-space-warning` | Disable Low Disk Space Warning | Turns off the low disk space warning notification. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L96` |
 | <a id="explorer.disable-taskbar-chat"></a> `explorer.disable-taskbar-chat` | Hide Taskbar Chat Icon | Hides the Microsoft Teams Chat icon from the taskbar by default. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L84` |
+| <a id="explorer.enable-explorer-compact-mode"></a> `explorer.enable-explorer-compact-mode` | Enable Compact View | Reduces the spacing between items in File Explorer for a more information-dense view. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L57` |
 | <a id="explorer.show-file-extensions"></a> `explorer.show-file-extensions` | Show File Extensions | Shows the file extension (e.g., .txt, .exe) for all known file types in File Explorer. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L31` |
 | <a id="explorer.show-full-path"></a> `explorer.show-full-path` | Show Full Path in Title Bar | Displays the complete directory path in the title bar of File Explorer windows. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L44` |
 | <a id="explorer.show-hidden-files"></a> `explorer.show-hidden-files` | Show Hidden Files and Folders | Configures File Explorer to show files and folders marked with the hidden attribute. | Safe | `WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L18` |

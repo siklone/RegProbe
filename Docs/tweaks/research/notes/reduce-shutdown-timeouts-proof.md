@@ -1,4 +1,4 @@
-# Reduce Shutdown Timeouts Proof Bundle
+﻿# Reduce Shutdown Timeouts Proof Bundle
 
 This note collects the machine-checkable proof for `system.reduce-shutdown-timeouts`.
 

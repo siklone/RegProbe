@@ -1,14 +1,14 @@
-# Interrupt Handling and Affinity Policies
+﻿# Interrupt Handling and Affinity Policies
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Requires elevation: Yes (device registry/HKLM).
 
 Note that everything written below is based on:
-> [affinities/assets | E7-P2.pdf](https://github.com/nohuto/win-config/blob/main/affinities/assets/E7-P2.pdf)  
-> [drivers/kernel | introduction-to-interrupt-service-routines](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-interrupt-service-routines)  
-> [drivers/kernel | interrupt-affinity-and-priority](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/interrupt-affinity-and-priority)  
+> [affinities/assets | E7-P2.pdf](https://github.com/nohuto/win-config/blob/main/affinities/assets/E7-P2.pdf)
+> [drivers/kernel | introduction-to-interrupt-service-routines](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-interrupt-service-routines)
+> [drivers/kernel | interrupt-affinity-and-priority](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/interrupt-affinity-and-priority)
 > [drivers/kernel | introduction-to-message-signaled-interrupts](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-message-signaled-interrupts)
 
 ## Line-Based vs. Message-Signaled Interrupts

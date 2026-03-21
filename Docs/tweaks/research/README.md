@@ -1,4 +1,4 @@
-# Setting Research System
+﻿# Setting Research System
 
 All research artifacts in this folder are English-only on purpose. The goal is to build a trustworthy setting knowledge base before we expand the set of tweaks that the app is allowed to apply.
 

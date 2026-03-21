@@ -1,4 +1,4 @@
-# Notifications & Suggestions Tweaks
+﻿# Notifications & Suggestions Tweaks
 > Update (2025-12-31): Dedicated notifications doc added.
 
 > Doc note: Reference material. The app may not implement every item; use the catalog for the actual tweak list.
@@ -39,9 +39,9 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Disable Feedback Requests | Stops Windows from asking for feedback or ratings. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L507` |
-| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Disable Lock Screen Notifications | Prevents app notifications from showing on the lock screen. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L494` |
-| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Disable Notification Mirroring | Stops notifications from being mirrored to other devices. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L545` |
-| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Disable Tile Notifications | Prevents apps from updating tiles and tile badges. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L532` |
-| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Disable Toast Notifications | Blocks balloon and toast notifications for all applications for the current user. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L481` |
+| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Disable Feedback Requests | Stops Windows from asking for feedback or ratings. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L505` |
+| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Disable Lock Screen Notifications | Prevents app notifications from showing on the lock screen. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L492` |
+| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Disable Notification Mirroring | Stops notifications from being mirrored to other devices. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L543` |
+| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Disable Tile Notifications | Prevents apps from updating tiles and tile badges. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L530` |
+| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Disable Toast Notifications | Blocks balloon and toast notifications for all applications for the current user. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L479` |
 <!-- TWEAK INDEX END -->

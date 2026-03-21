@@ -1,4 +1,4 @@
-# Research Credits
+﻿# Research Credits
 
 ## Primary Source
 

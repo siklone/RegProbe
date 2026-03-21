@@ -1,7 +1,7 @@
-# Disable General Telemetry
+﻿# Disable General Telemetry
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Related docs:
 - [Privacy verified documentation](privacy-verified.md)
@@ -16,9 +16,9 @@ Prevents sending info about your computer to microsoft, disables the diagnostic 
 \Registry\Machine\SOFTWARE\Policies\Microsoft\WINDOWS\DataCollection : AllowTelemetry_PolicyManager
 ```
 Seems to be a fallback if `AllowTelemetry` isn't set.
-> https://github.com/TechTech512/Win11Src/blob/840a61919419c94ed24a9b079ee1029f482d29f2/NT/onecore/base/telemetry/permission/product/telemetrypermission.cpp#L106  
+> https://github.com/TechTech512/Win11Src/blob/840a61919419c94ed24a9b079ee1029f482d29f2/NT/onecore/base/telemetry/permission/product/telemetrypermission.cpp#L106
 
-Miscellaneous notes:  
+Miscellaneous notes:
 
 ```json
 "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows": {
@@ -325,13 +325,13 @@ return (unsigned int)ZTraceReportPropagation(
 					   this);
 return v5;
 ```
-> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-maps  
+> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-maps
 > [privacy/assets | maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c)
 
 
 `AutoDownloadAndUpdateMapData` & `AllowUntriggeredNetworkTrafficOnSettingsPage`:
-> https://gpsearch.azurewebsites.net/#13439  
-> https://gpsearch.azurewebsites.net/#13350  
+> https://gpsearch.azurewebsites.net/#13439
+> https://gpsearch.azurewebsites.net/#13350
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-maps
 
 # Disable Website Access to Language List
@@ -352,7 +352,7 @@ Set-WinAcceptLanguageFromLanguageListOptOut -OptOut $True
 "powershell.exe","RegDeleteValue","HKCU\Control Panel\International\User Profile\HttpAcceptLanguageOptOut",""
 "powershell.exe","RegSetValue","HKCU\Software\Microsoft\Internet Explorer\International\AcceptLanguage","Type: REG_SZ, Length: 54, Data: en-US;q=0.7,en;q=0.3"
 ```
-> https://learn.microsoft.com/en-us/powershell/module/international/set-winacceptlanguagefromlanguagelistoptout?view=windowsserver2025-ps  
+> https://learn.microsoft.com/en-us/powershell/module/international/set-winacceptlanguagefromlanguagelistoptout?view=windowsserver2025-ps
 > https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#181-general
 
 # Disable Auto Maintenance
@@ -772,7 +772,7 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 Requires elevation: Yes (system policies).
 
-"Windows reserves `~7 GB` of disk space to ensure updates and system processes run reliably. Temporary files and updates use this reserved area first. If it's full, Windows uses normal disk space or asks for external storage. Size increases with optional features or extra languages. Unused ones can be removed to reduce it."
+"Windows reserves `~7â€¯GB` of disk space to ensure updates and system processes run reliably. Temporary files and updates use this reserved area first. If it's full, Windows uses normal disk space or asks for external storage. Size increases with optional features or extra languages. Unused ones can be removed to reduce it."
 
 `dism /online /Set-ReservedStorageState /State:Disabled /NoRestart` / `Set-WindowsReservedStorageState -State Disabled` set:
 ```bat
@@ -780,7 +780,7 @@ dismhost.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveM
 ```
 > https://learn.microsoft.com/en-us/powershell/module/dism/set-windowsreservedstoragestate?view=windowsserver2025-ps
 
-# Disable Biometrics 
+# Disable Biometrics
 
 Requires elevation: Yes (system policies).
 
@@ -868,18 +868,18 @@ mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy 
 Requires elevation: Yes (system policies).
 
 Disables remote desktop, remote assistance, RPC traffic, and device redirection.
-> https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remotepc/remote-pc-connections-faq  
+> https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remotepc/remote-pc-connections-faq
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remotedesktopservices
 
-`RemoteAssistance.admx`:  
+`RemoteAssistance.admx`:
 `CreateEncryptedOnlyTickets`: Allow only Windows Vista or later connections
 `fAllowFullControl` (`0`): Allow helpers to only view the computer
 `LoggingEnabled`: Turn on session logging
 
-`RPC.admx`:  
+`RPC.admx`:
 `RestrictRemoteClients` (`2`): Authenticated without exceptions
 
-`TerminalServer.admx`:  
+`TerminalServer.admx`:
 `fDisableCdm`: Do not allow drive redirection
 
 ```json
@@ -1662,16 +1662,16 @@ C:\WINDOWS\system32\Logfiles\WMI
 
 Removing all autologgers will cause issues, therefore it's not recommended to remove all of them.
 
-| Value | Type | Description | 
+| Value | Type | Description |
 |-------|------|-------------|
 | **BufferSize** | **REG_DWORD** | The size of each buffer, in kilobytes. Should be less than one megabyte. ETW uses the size of physical memory to calculate this value.|
-| **ClockType** | **REG_DWORD** | The timer to use when logging the time stamp for each event. <br> - 1 = Performance counter value (high resolution)<br> - 2 = System timer<br> - 3 = CPU cycle counter <br> For a description of each clock type, see the **ClientContext** member of [WNODE_HEADER](https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/ETW/wnode-header.md).<br> The default value is 1 (performance counter value) on Windows Vista and later. Prior to Windows Vista, the default value is 2 (system timer). | 
+| **ClockType** | **REG_DWORD** | The timer to use when logging the time stamp for each event. <br> - 1 = Performance counter value (high resolution)<br> - 2 = System timer<br> - 3 = CPU cycle counter <br> For a description of each clock type, see the **ClientContext** member of [WNODE_HEADER](https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/ETW/wnode-header.md).<br> The default value is 1 (performance counter value) on Windows Vista and later. Prior to Windows Vista, the default value is 2 (system timer). |
 | **DisableRealtimePersistence** | **REG_DWORD** | To disable real time persistence, set this value to 1. The default is 0 (enabled) for real time sessions.<br> If real time persistence is enabled, real-time events that were not delivered by the time the computer was shutdown will be persisted. The events will then be delivered to the consumer the next time the consumer connects to the session. |
 | **FileCounter** | **REG_DWORD** | Do not set or modify this value. This value is the serial number used to increment the log file name if **FileMax** is specified. If the value is not valid, 1 will be assumed.|
 | **FileName** | **REG_SZ** | The fully qualified path of the log file. The path to this file must exist. The log file is a sequential log file. The path is limited to 1024 characters.<br> If **FileName** is not specified, events are written to `%SystemRoot%\System32\LogFiles\WMI\\<sessionname>.etl`. |
 | **FileMax** | **REG_DWORD** | The maximum number of instances of the log file that ETW creates. If the log file specified in **FileName** exists, ETW appends the **FileCounter** value to the file name. For example, if the default log file name is used, the form is `%SystemRoot%\System32\LogFiles\WMI\\<sessionname>.etl.NNNN`. <br> The first time the computer is started, the file name is `<sessionname>.etl.0001`, the second time the file name is `<sessionname>.etl.0002`, and so on. If **FileMax** is 3, on the fourth restart of the computer, ETW resets the counter to 1 and overwrites `<sessionname>.etl.0001`, if it exists.<br> The maximum number of instances of the log file that are supported is 16.<br> Do not use this feature with the [EVENT_TRACE_FILE_MODE_NEWFILE](https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/ETW/logging-mode-constants.md) log file mode.|
 | **FlushTimer** | **REG_DWORD** | How often, in seconds, the trace buffers are forcibly flushed. The minimum flush time is 1 second. This forced flush is in addition to the automatic flush that occurs when a buffer is full and when the trace session stops. <br> For the case of a real-time logger, a value of zero (the default value) means that the flush time will be set to 1 second. A real-time logger is when **LogFileMode** is set to **EVENT_TRACE_REAL_TIME_MODE**.<br> The default value is 0. By default, buffers are flushed only when they are full. |
-| **Guid** | **REG_SZ** | A string that contains a GUID that uniquely identifies the session. This value is required. | 
+| **Guid** | **REG_SZ** | A string that contains a GUID that uniquely identifies the session. This value is required. |
 | **LogFileMode** | **REG_DWORD** | Specify one or more log modes. For possible values, see [Logging Mode Constants](https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/ETW/logging-mode-constants.md). The default is **EVENT_TRACE_FILE_MODE_SEQUENTIAL**. Instead of writing to a log file, you can specify either **EVENT_TRACE_BUFFERING_MODE** or **EVENT_TRACE_REAL_TIME_MODE**.<br> Specifying **EVENT_TRACE_BUFFERING_MODE** avoids the cost of flushing the contents of the session to disk when the file system becomes available. <br> Note that using **EVENT_TRACE_BUFFERING_MODE** will cause the system to ignore the **MaximumBuffers** value, as the buffer size is instead the product of **MinimumBuffers** and **BufferSize**.<br> AutoLogger sessions do not support the **EVENT_TRACE_FILE_MODE_NEWFILE** logging mode.<br> If **EVENT_TRACE_FILE_MODE_APPEND** is specified, **BufferSize** must be explicitly provided and must be the same in both the logger and the file being appended.|
 | **MaxFileSize** | **REG_DWORD** | The maximum file size of the log file, in megabytes. The session is closed when the maximum size is reached, unless you are in circular log file mode. To specify no limit, set value to 0. The default is 100 MB, if not set. The behavior that occurs when the maximum file size is reached depends on the value of **LogFileMode**.|
 | **MaximumBuffers** | **REG_DWORD** | The maximum number of buffers to allocate. Typically, this value is the minimum number of buffers plus twenty. ETW uses the buffer size and the size of physical memory to calculate this value. This value must be greater than or equal to the value for **MinimumBuffers**.|
@@ -1758,7 +1758,7 @@ Used for better suggestions by creating a custom dictionary using your typing hi
 Requires elevation: No.
 
 `HasAccepted` disables online speech recognition, voice input to apps like Cortana, and data upload to Microsoft. `AllowSpeechModelUpdate` blocks automatic updates of speech recognition and synthesis models. I found`DisableSpeechInput` randomly while looking for `HasAccepted`, related to mixed reality environments.
-> https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#bkmk-priv-speech  
+> https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#bkmk-priv-speech
 > [privacy/assets | locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c)
 
 # Disable Microsoft Copilot
@@ -1843,7 +1843,7 @@ Disallows the use of a camera on your system, by denying access via `LetAppsAcce
 | `FrameServer` | Enables multiple clients to access video frames from camera devices. |
 | `FrameServerMonitor` | Monitors the health and state for the Windows Camera Frame Server service. |
 
-`Disable Lock Screen Camera`:  
+`Disable Lock Screen Camera`:
 "Disables the lock screen camera toggle switch in PC Settings and prevents a camera from being invoked on the lock screen.By default, users can enable invocation of an available camera on the lock screen.If you enable this setting, users will no longer be able to enable or disable lock screen camera access in PC Settings, and the camera cannot be invoked on the lock screen." (`ControlPanelDisplay.admx`)
 
 > https://support.microsoft.com/en-us/windows/manage-cameras-with-camera-settings-in-windows-11-97997ed5-bb98-47b6-a13d-964106997757
@@ -2430,10 +2430,10 @@ Requires elevation: Yes (system policies).
 
 Requires elevation: Yes (system policies).
 
-`DisableRegistration`:  
+`DisableRegistration`:
 "This policy setting specifies whether Mobile Device Management (MDM) Enrollment is allowed. When MDM is enabled, it allows the user to have the computer remotely managed by a MDM Server. If you do not configure this policy setting, MDM Enrollment will be enabled. If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments.If you disable this policy setting, MDM Enrollment will be enabled for all users."
 
-`AutoEnrollMDM`:  
+`AutoEnrollMDM`:
 "This policy setting specifies whether to automatically enroll the device to the Mobile Device Management (MDM) service configured in Azure Active Directory (Azure AD). If the enrollment is successful, the device will remotely managed by the MDM service. Important: The device must be registered in Azure AD for enrollment to succeed. If you do not configure this policy setting, automatic MDM enrollment will not be initiated. If you enable this policy setting, a task is created to initiate enrollment of the device to MDM service specified in the Azure AD. If you disable this policy setting, MDM will be unenrolled."
 
 ```json
@@ -2513,7 +2513,7 @@ Requires elevation: Yes (system policies).
 
 Voluntary program that collects usage data to help improve the quality and performance of its products.
 
-> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm  
+> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-internetexplorer#disablecustomerexperienceimprovementprogramparticipation
 
 ```json
@@ -2576,9 +2576,9 @@ Requires elevation: Yes (system policies).
 
 "Cortana was a virtual assistant developed by Microsoft that used the Bing search engine to perform tasks such as setting reminders and answering questions for users."
 
-> https://en.wikipedia.org/wiki/Cortana_(virtual_assistant)  
-> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search  
-> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-abovelock  
+> https://en.wikipedia.org/wiki/Cortana_(virtual_assistant)
+> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search
+> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-abovelock
 > https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowcortana
 
 # Hide Last Logged-In User
@@ -2597,7 +2597,7 @@ services.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 services.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLastUserName	Type: REG_DWORD, Length: 4, Data: 0
 ```
 
-`Hide Username at Sign-In`:  
+`Hide Username at Sign-In`:
 "This security setting determines whether the username of the person signing in to this PC appears at Windows sign-in, after credentials are entered, and before the PC desktop is shown."
 
 ```c
@@ -2661,9 +2661,9 @@ Computer Configuration\Administrative Templates\Windows Components\App Privacy
 `Enabled` -> `Deny All changes`:
 ```powershell
 mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground	Type: REG_DWORD, Length: 4, Data: 2
-mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_UserInControlOfTheseApps	Type: REG_MULTI_SZ, Length: 2, Data: 
-mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_ForceAllowTheseApps	Type: REG_MULTI_SZ, Length: 2, Data: 
-mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_ForceDenyTheseApps	Type: REG_MULTI_SZ, Length: 2, Data: 
+mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_UserInControlOfTheseApps	Type: REG_MULTI_SZ, Length: 2, Data:
+mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_ForceAllowTheseApps	Type: REG_MULTI_SZ, Length: 2, Data:
+mmc.exe	RegSetValue	HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy Objects\{5D10D350-8BC7-4D14-9723-C79DF35A74B4}Machine\Software\Policies\Microsoft\Windows\AppPrivacy\LetAppsRunInBackground_ForceDenyTheseApps	Type: REG_MULTI_SZ, Length: 2, Data:
 ```
 
 ```json
@@ -2711,12 +2711,12 @@ WER (Windows Error Reporting) sends error logs to Microsoft, disabling it keeps 
 `DisableSendRequestAdditionalSoftwareToWER`: "Prevent Windows from sending an error report when a device driver requests additional software during installation"
 `DisableSendGenericDriverNotFoundToWER`: "Do not send a Windows error report when a generic driver is installed on a device"
 
-> https://learn.microsoft.com/en-us/troubleshoot/windows-client/system-management-components/windows-error-reporting-diagnostics-enablement-guidance#configure-network-endpoints-to-be-allowed  
-> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-errorreporting  
-> https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings  
+> https://learn.microsoft.com/en-us/troubleshoot/windows-client/system-management-components/windows-error-reporting-diagnostics-enablement-guidance#configure-network-endpoints-to-be-allowed
+> https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-errorreporting
+> https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings
 > [privacy/assets | wer-PciGetSystemWideHackFlagsFromRegistry.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/wer-PciGetSystemWideHackFlagsFromRegistry.c)
 
-`Disable DHA Report`:  
+`Disable DHA Report`:
 "This group policy enables Device Health Attestation reporting (DHA-report) on supported devices. It enables supported devices to send Device Health Attestation related information (device boot logs, PCR values, TPM certificate, etc.) to Device Health Attestation Service (DHA-Service) every time a device starts. Device Health Attestation Service validates the security state and health of the devices, and makes the findings accessible to enterprise administrators via a cloud based reporting portal. This policy is independent of DHA reports that are initiated by device manageability solutions (like MDM or SCCM), and will not interfere with their workflows."
 
 ```powershell
@@ -2771,10 +2771,10 @@ WER (Windows Error Reporting) sends error logs to Microsoft, disabling it keeps 
 
 ---
 
-Miscellaneous notes:  
+Miscellaneous notes:
 
 ```c
-`EnableWerUserReporting`  
+`EnableWerUserReporting`
 Default: `1` (`DbgkEnableWerUserReporting dd 1`)
 
 "Session Manager\Kernel","EnableWerUserReporting","0xFFFFF800CF1C335C","0x00000000","0x00000000","0x00000000"
@@ -3111,10 +3111,10 @@ CrashDumpEnabled REG_DWORD 0x7 = Automatic memory dump
 CrashDumpEnabled REG_DWORD 0x1 and FilterPages REG_DWORD 0x1 = Active memory dump
 ```
 
-> https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options#registry-values-for-startup-and-recovery  
-> https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump  
-> https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt  
-> [privacy/assets | crashdmp.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp.c)  
+> https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options#registry-values-for-startup-and-recovery
+> https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump
+> https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt
+> [privacy/assets | crashdmp.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp.c)
 > [privacy/assets | crashdmp-SecureDump_PrepareForInit.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c)
 
 # Disable Sleep Study
@@ -3134,7 +3134,7 @@ wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:false
 svchost.exe	RegSetValue	HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-UserModePowerService/Diagnostic\Enabled	Type: REG_DWORD, Length: 4, Data: 0
 ```
 
-> [privacy/assets | sleepstudy-FxLibraryGlobalsQueryRegistrySettings.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/sleepstudy-FxLibraryGlobalsQueryRegistrySettings.c)  
+> [privacy/assets | sleepstudy-FxLibraryGlobalsQueryRegistrySettings.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/sleepstudy-FxLibraryGlobalsQueryRegistrySettings.c)
 > [privacy/assets | sleepstudy-PoFxInitPowerManagement.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/sleepstudy-PoFxInitPowerManagement.c)
 
 ---
@@ -3143,13 +3143,13 @@ Miscellaenous notes:
 ```c
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
-    "SleepstudyAccountingEnabled"; = 1; // SleepstudyHelperAccountingEnabled 
-    "SleepstudyGlobalBlockerLimit"; = 3000; // SleepstudyHelperBlockerGlobalLimit (0x0BB8) 
-    "SleepstudyLibraryBlockerLimit"; = 200; // SleepstudyHelperBlockerLibraryLimit (0xC8) 
+    "SleepstudyAccountingEnabled"; = 1; // SleepstudyHelperAccountingEnabled
+    "SleepstudyGlobalBlockerLimit"; = 3000; // SleepstudyHelperBlockerGlobalLimit (0x0BB8)
+    "SleepstudyLibraryBlockerLimit"; = 200; // SleepstudyHelperBlockerLibraryLimit (0xC8)
 
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power";
-    "SleepStudyDeviceAccountingLevel"; = 4; // PopSleepStudyDeviceAccountingLevel 
-    "SleepStudyDisabled"; = 0; // PopSleepStudyDisabled 
+    "SleepStudyDeviceAccountingLevel"; = 4; // PopSleepStudyDeviceAccountingLevel
+    "SleepStudyDisabled"; = 0; // PopSleepStudyDisabled
 ```
 > https://github.com/nohuto/win-registry#power-values
 ```
@@ -3203,13 +3203,13 @@ Requires elevation: Yes (system policies).
 \Registry\Machine\SOFTWARE\Policies\Microsoft\Windows\SYSTEM : RsopLogging
 ```
 
-> https://learn.microsoft.com/en-us/previous-versions/windows/desktop/Policy/developing-an-rsop-management-tool  
+> https://learn.microsoft.com/en-us/previous-versions/windows/desktop/Policy/developing-an-rsop-management-tool
 
 # Disable Desktop Heap Logging
 
 Requires elevation: Yes (system policies).
 
-"It is meant to log information about desktop heap usage. This can be helpful when diagnosing issues where system resources for desktop objects might be strained." 
+"It is meant to log information about desktop heap usage. This can be helpful when diagnosing issues where system resources for desktop objects might be strained."
 
 ```c
 __int64 IsDesktopHeapLoggingOn(void)
@@ -3225,8 +3225,8 @@ __int64 IsDesktopHeapLoggingOn(void)
 
 `DesktopHeapLogging` seems to have a fallback of `0`, but the value exists by default and is set to `1`. Means deleting it/setting it to `0` should do the same.
 
-> [privacy/assets | rsop-IsDesktopHeapLoggingOn.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/rsop-IsDesktopHeapLoggingOn.c)  
-> https://answers.microsoft.com/en-us/windows/forum/all/question-about-some-dwm-registry-settings/341cac5c-d85a-43e5-89d3-d9734f84da4e  
+> [privacy/assets | rsop-IsDesktopHeapLoggingOn.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/rsop-IsDesktopHeapLoggingOn.c)
+> https://answers.microsoft.com/en-us/windows/forum/all/question-about-some-dwm-registry-settings/341cac5c-d85a-43e5-89d3-d9734f84da4e
 > https://github.com/nohuto/win-registry/blob/main/records/Winows-NT.txt
 
 # Disable Message Sync
@@ -3399,9 +3399,9 @@ Requires elevation: Yes (system policies).
 
 There are two options if this setting is enabled:
 
-• Users can't add Microsoft accounts means that existing connected accounts can still sign in to the device (and appear on the Sign in screen). However, users cannot use the Settings app to add new connected accounts (or connect local accounts to Microsoft accounts).
+â€¢ Users can't add Microsoft accounts means that existing connected accounts can still sign in to the device (and appear on the Sign in screen). However, users cannot use the Settings app to add new connected accounts (or connect local accounts to Microsoft accounts).
 
-• Users can't add or log on with Microsoft accounts means that users cannot add new connected accounts (or connect local accounts to Microsoft accounts) or use existing connected accounts through Settings.
+â€¢ Users can't add or log on with Microsoft accounts means that users cannot add new connected accounts (or connect local accounts to Microsoft accounts) or use existing connected accounts through Settings.
 
 This setting does not affect adding a Microsoft account for application authentication. For example, if this setting is enabled, a user can still provide a Microsoft account for authentication with an application such as Mail, but the user cannot use the Microsoft account for single sign-on authentication for other applications or services (in other words, the user will be prompted to authenticate for other applications or services).
 

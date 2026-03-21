@@ -1,4 +1,4 @@
-# Windows Security Settings Guide
+﻿# Windows Security Settings Guide
 ## Use-case based settings (English)
 
 This guide maps common security scenarios to registry-backed settings.

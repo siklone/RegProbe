@@ -1,4 +1,4 @@
-# Windows 11 Settings And Privacy Leads
+﻿# Windows 11 Settings And Privacy Leads
 
 These notes are incoming research leads, not auto-validated facts.
 

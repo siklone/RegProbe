@@ -1,13 +1,14 @@
 # Tweak Provenance Missing / Review Report
 
-- Missing or review-needed entries: 24
+- Missing or review-needed entries: 26
 
 | ID | Coverage | Repos | Notes |
 | --- | --- | --- | --- |
 | `developer.ssh-agent-autostart` | unmapped | `-` | No upstream provenance match found yet. Keep this tweak in review-only state. |
 | `developer.windows-dev-mode` | unmapped | `-` | No upstream provenance match found yet. Keep this tweak in review-only state. |
-| `developer.wsl2-memory` | unmapped | `-` | No upstream provenance match found yet. Keep this tweak in review-only state. |
 | `network.reset-winsock` | category-fallback | `win-config` | Official Microsoft netsh winsock documentation is linked, but this tweak stays review-only until a nohuto repo documents it directly. |
+| `network.smb-disable-leasing` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
+| `network.smb-enable-multichannel` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `privacy.disable-app-diagnostics` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `privacy.disable-consumer-account-content` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `privacy.disable-cross-device-experiences` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
@@ -16,6 +17,7 @@
 | `privacy.hide-recommended-section` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `security.disable-uac` | category-fallback | `win-config` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `system.disable-search-web-results` | category-fallback | `win-config, decompiled-pseudocode` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
+| `system.memory-registry-quota-default` | category-fallback | `win-config, decompiled-pseudocode` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `system.services.disable-bluetooth-audio-gateway` | category-fallback | `win-config, decompiled-pseudocode` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `system.services.disable-bluetooth-support` | category-fallback | `win-config, decompiled-pseudocode` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `system.services.disable-bluetooth-user-service` | category-fallback | `win-config, decompiled-pseudocode` | Linked to the closest nohuto win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |

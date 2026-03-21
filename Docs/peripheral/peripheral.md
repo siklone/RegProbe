@@ -1,11 +1,11 @@
-# Mouse Values
+﻿# Mouse Values
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Requires elevation: No.
 
-`RawMouseThrottleDuration` controls the throttle interval (in ms) for delivering raw mouse input to background windows. "We set out to reduce the amount of processing time it took to handle input requests by throttling and coalescing background raw mouse listeners and capping their message rate." 
+`RawMouseThrottleDuration` controls the throttle interval (in ms) for delivering raw mouse input to background windows. "We set out to reduce the amount of processing time it took to handle input requests by throttling and coalescing background raw mouse listeners and capping their message rate."
 
 Validate the changes with [MouseTester](https://github.com/valleyofdoom/MouseTester), move `MouseTester.exe` to the background after starting it by opening a different window.
 ```c
@@ -24,8 +24,8 @@ Validate the changes with [MouseTester](https://github.com/valleyofdoom/MouseTes
 ```
 `GetRawMouseThrottlingThresholds.c` includes more detail and my notes. `RawMouseThrottleDuration` has a minumum of `1` (`1000` Hz).
 
-> https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/  
-> https://github.com/valleyofdoom/PC-Tuning#1150-background-window-message-rate-permalink  
+> https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/
+> https://github.com/valleyofdoom/PC-Tuning#1150-background-window-message-rate-permalink
 > [peripheral/assets | mouse-GetRawMouseThrottlingThresholds.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/mouse-GetRawMouseThrottlingThresholds.c)
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/mousevalues.png?raw=true)
@@ -116,7 +116,7 @@ Requires elevation: Yes (HKLM audio settings).
 
 Spatial audio positions sounds in 3D space around you, surround sound mainly anchors audio to speaker directions.
 
-> https://github.com/nohuto/win-registry/blob/main/records/Audio.txt  
+> https://github.com/nohuto/win-registry/blob/main/records/Audio.txt
 > https://www.dolby.com/experience/home-entertainment/articles/what-is-spatial-audio/
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/spatial.jpeg?raw=true)
@@ -261,7 +261,7 @@ HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserCho
 HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\AutorunINFLegacyArrival\(Default)	Type: REG_SZ, Length: 30, Data: MSTakeNoAction
 ```
 
-# Disk Write Cache Policy 
+# Disk Write Cache Policy
 
 Requires elevation: Yes (device registry).
 
@@ -271,7 +271,7 @@ Enables write cache & turns off write cache buffer flushing on all connected dis
 \Registry\Machine\SYSTEM\ControlSet001\Enum\SCSI\Disk&Ven_NVMe&Prod_Samsung_SSD_990\5&33c33320&0&000000\Device Parameters\disk : CacheIsPowerProtected
 \Registry\Machine\SYSTEM\ControlSet001\Enum\SCSI\Disk&Ven_NVMe&Prod_Samsung_SSD_990\5&33c33320&0&000000\Device Parameters\disk : UserWriteCacheSetting
 ```
-> https://learn.microsoft.com/en-us/previous-versions/troubleshoot/windows-server/turn-disk-write-caching-on-off  
+> https://learn.microsoft.com/en-us/previous-versions/troubleshoot/windows-server/turn-disk-write-caching-on-off
 > [peripheral/assets | diskwritecache.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/diskwritecache.c)
 
 # Disable Bluetooth
@@ -312,7 +312,7 @@ if (!v11)
     // Set default to 100 if value was 0
     v11 = 100;
 }
-else if (v11 > 0xAAAAAAA) // ≈ 178956970
+else if (v11 > 0xAAAAAAA) // â‰ˆ 178956970
 {
     v12 = 2400;
 }
@@ -330,8 +330,8 @@ Value not present -> `v11 = 288` ?
 Value > `0xAAAAAAA` ->  Clamped to `2400`
 Otherwise `v11 * 24`
 
-> https://www.betaarchive.com/wiki/index.php/Microsoft_KB_Archive/102990  
-> [peripheral/assets | mkdata-MouConfiguration.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/mkdata-MouConfiguration.c)  
+> https://www.betaarchive.com/wiki/index.php/Microsoft_KB_Archive/102990
+> [peripheral/assets | mkdata-MouConfiguration.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/mkdata-MouConfiguration.c)
 > [peripheral/assets | mkdata-KbdConfiguration.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/mkdata-KbdConfiguration.c)
 
 # Device Manager
@@ -363,7 +363,7 @@ Click on `View` > `Devices by connection`.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/devman.png?raw=true)
 
-> https://learn.microsoft.com/en-us/powershell/module/pnpdevice/get-pnpdevice?view=windowsserver2025-ps  
+> https://learn.microsoft.com/en-us/powershell/module/pnpdevice/get-pnpdevice?view=windowsserver2025-ps
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
 
 # Disable Touch & Tablet
@@ -377,8 +377,8 @@ Get-PnpDevice -PresentOnly:$false | ? FriendlyName -eq 'HID-compliant touch scre
 
 "Tablet mode makes Windows more touch friendly and is helpful on touch capable devices."
 
-> https://support.microsoft.com/en-us/windows/turn-tablet-mode-on-or-off-in-windows-add3fbce-5cb5-bf76-0f9c-8d7b30041f30  
-> https://github.com/nohuto/win-registry/blob/main/records/Wisp.txt  
+> https://support.microsoft.com/en-us/windows/turn-tablet-mode-on-or-off-in-windows-add3fbce-5cb5-bf76-0f9c-8d7b30041f30
+> https://github.com/nohuto/win-registry/blob/main/records/Wisp.txt
 > [peripheral/assets | touch-IsTouchDisabled.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-IsTouchDisabled.c)
 
 ---
@@ -405,10 +405,10 @@ Everything listed below is based on personal research. Mistakes may exist, some 
     "MultiTouchEnabled"; = 1;
 
 "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad";
-    "AAPThreshold"; = 2; // range 0–4, touchpad sensitivity
-    "CursorSpeed"; = 10; // range 1–20, pointer speed
-    "FeedbackIntensity"; = 50; // range 0–100 (%), haptic feedback strength
-    "ClickForceSensitivity"; = 50; // range 0–100 (%), relative click-force sensitivity
+    "AAPThreshold"; = 2; // range 0â€“4, touchpad sensitivity
+    "CursorSpeed"; = 10; // range 1â€“20, pointer speed
+    "FeedbackIntensity"; = 50; // range 0â€“100 (%), haptic feedback strength
+    "ClickForceSensitivity"; = 50; // range 0â€“100 (%), relative click-force sensitivity
     "LeaveOnWithMouse"; = 1; // 0 = disable touchpad when mouse present, 1 = leave enabled
     "FeedbackEnabled"; = 1; // 0 = no haptics, 1 = haptics on
     "TapsEnabled"; = 1; // 0/1, single-finger tap-to-click
@@ -470,7 +470,7 @@ Everything listed below is based on personal research. Mistakes may exist, some 
     "DownLeft" = { 0x47F38E42CEFA51BC, 0xEBDFECA56A8CB1AC };
 ```
 
-> [peripheral/assets | touch-twinui.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c)  
+> [peripheral/assets | touch-twinui.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c)
 > [peripheral/assets | touch-InitializeInputSettingsGlobals.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-InitializeInputSettingsGlobals.c)
 
 ```
@@ -525,7 +525,7 @@ powercfg /devicequery wake_armed
 ```bat
 powercfg /devicedisablewake device
 ```
-Disables the device (replace '*Device*' with the device name) from waking the system from any sleep state. 
+Disables the device (replace '*Device*' with the device name) from waking the system from any sleep state.
 
 > https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options#availablesleepstates-or-a
 
@@ -541,18 +541,18 @@ Default values:
 WakeOnInputDeviceTypes = 6
 UnDimOnInputDeviceTypes = -1  // 0xFFFFFFFF
 ```
-> https://github.com/nohuto/win-registry/blob/main/records/Input.txt  
-> https://github.com/nohuto/win-registry/blob/main/records/Enum-USB.txt  
+> https://github.com/nohuto/win-registry/blob/main/records/Input.txt
+> https://github.com/nohuto/win-registry/blob/main/records/Enum-USB.txt
 > [peripheral/assets | wakedev-WakeOnInputDeviceTypes.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/wakedev-WakeOnInputDeviceTypes.c)
 
 ---
 
 ```c
-.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DC↓o
+.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DCâ†“o
 .rdata:00000001C00606C0                 dq offset aWakeonconnectu ; "WakeOnConnectUI"
 
 int *, _QWORD, _QWORD))(WdfFunctions_01015 + 1880))(
-             WdfDriverGlobals, // 
+             WdfDriverGlobals, //
              v7,
              &g_WakeOnConnectUI,
              4LL,
@@ -566,7 +566,7 @@ int *, _QWORD, _QWORD))(WdfFunctions_01015 + 1880))(
 
 > [peripheral/assets | wakedev-HUBREG_QueryGlobalHubValues.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/wakedev-HUBREG_QueryGlobalHubValues.c)
 
---- 
+---
 
 All available flags (`powercfg /devicequery query_flag`):
 
@@ -592,17 +592,17 @@ Requires elevation: No.
 
 | Value | Type | Values | Ranges | Notes |
 | --- | --- | --- | --- | --- |
-| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0–1` | Master toggle for Dynamic Lighting. |
-| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0–1` | When `1`, `Color` is ignored. |
-| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000–0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
-| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000–0x00FFFFFF`    | Secondary color for some effects. |
+| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0â€“1` | Master toggle for Dynamic Lighting. |
+| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0â€“1` | When `1`, `Color` is ignored. |
+| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000â€“0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
+| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000â€“0x00FFFFFF`    | Secondary color for some effects. |
 | `EffectType` | REG_DWORD | `0 = Solid`, `1 = Breathing`, `2 = Rainbow`, `4 = Wave`, `5 = Wheel`, `6 = Gradient` | `discrete enum` | Defines animation. |
-| `Speed` | REG_DWORD | `integer` | `1–10` | Higher = faster. |
-| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` · Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` · Wheel: `0 = Clockwise`, `1 = Counterclockwise` · Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
-| `Brightness` | REG_DWORD | `integer (%)` | `0–100` | - |
-| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0–1` | - |
+| `Speed` | REG_DWORD | `integer` | `1â€“10` | Higher = faster. |
+| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` Â· Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` Â· Wheel: `0 = Clockwise`, `1 = Counterclockwise` Â· Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
+| `Brightness` | REG_DWORD | `integer (%)` | `0â€“100` | - |
+| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0â€“1` | - |
 
-> https://learn.microsoft.com/en-us/windows-hardware/design/component-guidelines/dynamic-lighting-devices  
+> https://learn.microsoft.com/en-us/windows-hardware/design/component-guidelines/dynamic-lighting-devices
 > https://support.microsoft.com/en-us/windows/control-dynamic-lighting-devices-in-windows-8e8f22e3-e820-476c-8f9d-9ffc7b6ffcd2
 
 # Disable Printing
@@ -694,7 +694,7 @@ As you may know a bit can be `0` or `1`, means (bit depth * `6` = dB):
 
 `44.1` kHz with a bit depth of `16` is more than enough for general usage.
 
-> https://noirsonance.com/bit-depth-calculator-visualizer/  
+> https://noirsonance.com/bit-depth-calculator-visualizer/
 > https://de.wikipedia.org/wiki/Nyquist-Shannon-Abtasttheorem
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/samplerate.png?raw=true)
@@ -724,34 +724,34 @@ Requires elevation: No.
 
 Before starting the configuration, load your default settings, as many settings are already correctly configured by default.
 
-## **Game Mode** - `User`  
+## **Game Mode** - `User`
 Each profile has preconfigured settings. E.g. 'Read mode' is optimized for viewing documents, it probably decreases the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/) and increases the color temperature. Choose the profile you're satisfied with, for example the sRGB profile if you're a editor, then configure the other settings.
 
-## **Overdrive/OD/Response Time** - `Test`  
+## **Overdrive/OD/Response Time** - `Test`
 If you experience [ghosting](https://www.testufo.com/ghosting) (most noticeable in fast paced motions, e.g. FPS games), caused by a slow response time, which cannot keep up with the speed of the changing image, you should try to increase the OD option, which will increase the response time of your monitor. Ghosting looks like a image artifact that appears as a trail of pixels behind a moving object (pixels can't change color fast enough when a new image appears, parts of the old image remain visible), which is why it gets called ghosting -> the trace looks like a ghost of the object. Increasing the overdrive setting can end up in overshooting/inverse ghosting, which is the opposite of ghosting and get's caused from a too high OD. Which means that the response time is too fast for your monitor to handle it, resulting in pixels changing their color too fast. Ghosting (normally) ends up in a trace behind the object (like motion blur), inverse ghosting can cause artifacts in front and behind the object. Search for your monitor [here](https://www.rtings.com/), scroll down to the motion section and compare the response times, to see if your monitor even performs the best one the fastest option. And no you won't "see" a difference between them, if you experience inverse ghosting, renounce the lowest response time and decrease it (as ghosting makes the image unclear -> annoying), if you experience ghosting increase and test it.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor1.png?raw=true)
 
-## **Sharpness** - `0%`  
+## **Sharpness** - `0%`
 Personal preference. Increasing it too much will end up in [artificial sharpening](http://www.lagom.nl/lcd-test/sharpness.php) = exaggerated outlines.
 
-## **Dark Boost/Black Boost** - `Off`  
-Improved vision in [dark scenes](https://www.testufo.com/blacklevels) when increased, but can end up making black look gray, so don't increase it too much. 
+## **Dark Boost/Black Boost** - `Off`
+Improved vision in [dark scenes](https://www.testufo.com/blacklevels) when increased, but can end up making black look gray, so don't increase it too much.
 
-## **FreeSync, G-Sync...** - `Disabled`  
+## **FreeSync, G-Sync...** - `Disabled`
 G-Sync matches the monitor's refresh rate to the frame rate. The setting is used to eliminate screen tearing, if you don't experience [screen tearing](https://www.youtube.com/watch?v=5mWMP96UdGU&t=110s), leave it disabled. If you want to use it, set your framerate limit a bit lower (kind of a buffer, `freq-(freq*freq)/3600`) than your refresh rate. Optimally set the limit within the game. Never use pure V-Sync -> G-Sync + V-Sync + Reflex & limit. [Gsync/gsync101-input-lag-tests-and-settings](https://blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/) can still be read. It is old, but most of it is still correct. If information from the text above and from the website text don't match, the channel information is correct.
 
-## **Color Temperature** - `Warm`  
+## **Color Temperature** - `Warm`
 Changing it is one of the best ways to reduce eye stain. Using a warm temperature -> less [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/). (read the text below for more information about [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/)) Default mostly is `6500K`. One thing to add: a higher temperature will make it easier for you to concentrate.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor2.png?raw=true)
 
-## **Brightness** - `50-70`  
+## **Brightness** - `50-70`
 Depends on how much light there is in your room. If there's a lot of light, you'll have to increase the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/). If you mainly play in the dark, it's recommended to reduce the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/) to a level that is comfortable for your eyes. Remember: decreasing it *can* lower the [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) by `50+%` -> known to be phototoxic to your eyes ([retina](https://en.wikipedia.org/wiki/Retina) - light sensitive tissue), therefore lower the [brightness](https://plano.co/does-screen-brightness-affect-your-eyes/) to reduce the intensity of [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/). For your general knowledge, [blue light](https://eyesurgeryguide.org/debunking-the-blue-light-eye-damage-myth/) has a short wavelength (~[`450-500`](https://www.livephysics.com/physical-constants/optics-pc/wavelength-colors/)), which means that it carries more energy -> higher impact. Don't dim it too much, or it may end up in worse focus.
 
 ![](https://github.com/nohuto/win-config/blob/main/peripheral/images/monitor3.png?raw=true)
 
-## **Contrast** - `~60`  
+## **Contrast** - `~60`
 It shouldn't be set too high, otherwise you will [not be able to see any details](https://www.testufo.com/whitelevels) and not too low, or it will be too dark. You'll have to test it yourself and find the best value.
 
 ## App Coverage Notes (Audio DeviceCpl)
@@ -777,8 +777,8 @@ Do not edit manually.
 | <a id="audio.show-hidden-devices"></a> `audio.show-hidden-devices` | Show Hidden Audio Devices | Shows hidden audio devices in the sound control panel. | Safe | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L34` |
 | <a id="peripheral.audio-disable-ducking"></a> `peripheral.audio-disable-ducking` | Disable Audio Ducking | Disables Windows automatic volume adjustment when making calls or using communication apps. Equivalent to 'Do nothing' in Sound settings. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L24` |
 | <a id="peripheral.audio-disable-enhancements"></a> `peripheral.audio-disable-enhancements` | Disable Audio Enhancements | Disables audio enhancements and exclusive mode for audio devices. Provides cleaner audio output without processing. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L50` |
-| <a id="peripheral.autoplay-take-no-action"></a> `peripheral.autoplay-take-no-action` | AutoPlay: Take No Action | Sets AutoPlay handlers to take no action for common media events. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L53` |
-| <a id="peripheral.disable-autoplay"></a> `peripheral.disable-autoplay` | Disable AutoPlay | Disables AutoPlay for removable media on this user account. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40` |
+| <a id="peripheral.autoplay-take-no-action"></a> `peripheral.autoplay-take-no-action` | AutoPlay: Take No Action | Sets AutoPlay handlers to take no action for common media events. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L63` |
+| <a id="peripheral.disable-autoplay"></a> `peripheral.disable-autoplay` | Disable AutoPlay | Disables AutoPlay on all drives and blocks AutoPlay for non-volume devices for the current user. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40` |
 | <a id="peripheral.disable-sticky-keys-prompt"></a> `peripheral.disable-sticky-keys-prompt` | Disable Sticky Keys Prompt | Prevents the annoying prompt when pressing Shift multiple times. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L27` |
 | <a id="peripheral.keyboard-disable-language-hotkey"></a> `peripheral.keyboard-disable-language-hotkey` | Disable Language Switch Hotkey | Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52` |
 | <a id="peripheral.keyboard-optimize-repeat"></a> `peripheral.keyboard-optimize-repeat` | Optimize Keyboard Repeat Rate | Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27` |

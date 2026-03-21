@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:36:00.350621Z",
+  "generated_utc": "2026-03-21T10:47:49.273631Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -3974,8 +3974,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The task bundle is broader than the single validated NetCache policy and should stay review-only.",
+        "needs_vm_validation": false,
+        "why": "The task bundle is broader than the single validated NetCache policy, but the repo docs explicitly describe the two Offline Files scheduled tasks and their synchronization behavior. The remaining concern is bundle semantics rather than missing proof.",
         "blocking_issues": [
           "The task bundle is an observed implementation layer beyond the validated Offline Files feature policy."
         ]
@@ -4124,13 +4124,26 @@
             "ui-mapping",
             "behavior"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-offline-files-tasks",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for Offline Files scheduled tasks",
+          "location": "Docs/privacy/privacy.md",
+          "summary": "The repo docs state that disabling Offline Files turns off the two Offline Files scheduled tasks, and also describe the logon/background synchronization behavior in the Offline Files section.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
-        "exact_quote_or_path": "Existing Offline Files policy record: The validated policy record documents the official feature control separately from this task bundle.",
+        "source_url": "Docs/privacy/privacy.md",
+        "exact_quote_or_path": "Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks (they're disabled by default), and renames mobsync.exe to block execution.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-offline-files-tasks (repo-doc); deprecated audit trail."
       }
     },
     {

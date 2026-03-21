@@ -1,4 +1,4 @@
-# Service-Type Validation Proof
+﻿# Service-Type Validation Proof
 
 Use this note for records whose primary control surface is a Windows service, driver service, or other Service Control Manager entry rather than an ADMX or CSP-backed policy.
 

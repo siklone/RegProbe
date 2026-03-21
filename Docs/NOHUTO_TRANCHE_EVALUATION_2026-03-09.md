@@ -1,4 +1,4 @@
-# Nohuto Tranche Evaluation (2026-03-09)
+﻿# Nohuto Tranche Evaluation (2026-03-09)
 
 This note reviews the latest nohuto-derived registry/configuration tranche against the current Windows Optimizer configuration surface.
 
@@ -79,7 +79,7 @@ These are valuable to surface in the UI, but should start as evidence and contex
 
 | Area | Why read-only first |
 | --- | --- |
-| 25H2 graphics scheduler values | They are useful for “this system is using these scheduler knobs” diagnostics, but not yet good one-click candidates. |
+| 25H2 graphics scheduler values | They are useful for â€œthis system is using these scheduler knobsâ€ diagnostics, but not yet good one-click candidates. |
 | NVIDIA PhysX mode | Useful to show current GPU/CPU PhysX routing, even before adding change actions. |
 | NIC RSS / interrupt moderation state | Useful to inspect current adapter behavior and explain latency vs CPU tradeoffs. |
 | WHEA logging state | Good as a diagnostics readout; poor as a default tweak recommendation. |
@@ -92,12 +92,12 @@ These do not fit the main curated configuration list even if upstream documents 
 | --- | --- |
 | WHEA logging disable paths | Disabling or suppressing hardware error reporting is not aligned with a safe optimization surface. |
 | Per-device USB hack flags | Too fragile, too driver-dependent, and too hard to explain safely. |
-| Generic “kernel memory pool” sizing tweaks | Too easy to cargo-cult and too easy to misapply without clear user benefit. |
+| Generic â€œkernel memory poolâ€ sizing tweaks | Too easy to cargo-cult and too easy to misapply without clear user benefit. |
 | Experimental 25H2 scheduler write knobs | Evidence exists, but the repo itself treats parts of this area as still being worked out. |
 
 ## 6. Practical Product Decision
 
-The tranche should not be treated as “add all upstream knobs.”
+The tranche should not be treated as â€œadd all upstream knobs.â€
 
 The right product move is:
 
@@ -121,7 +121,7 @@ The right product move is:
 | High | Upgrade cross-device setting from on/off to enum-backed | Better matches upstream evidence |
 | Medium | Add read-only graphics scheduler inspector | Valuable on 25H2 systems without overpromising tweak safety |
 | Medium | Add NVIDIA advanced state card (PhysX mode only) | Good hardware-aware improvement |
-| Medium | Add NIC advanced inspector for RSS / IM / ITR | Better than generic “optimize NIC” toggles |
+| Medium | Add NIC advanced inspector for RSS / IM / ITR | Better than generic â€œoptimize NICâ€ toggles |
 | Low | Add raw mouse throttle advanced value editor | Good expert feature, lower general value |
 
 ## 8. Bottom Line
@@ -130,8 +130,8 @@ Yes, the tranche is useful.
 
 But it should be split into three buckets:
 
-- **already represented in the app**,  
-- **safe next additions**,  
+- **already represented in the app**,
+- **safe next additions**,
 - **upstream research that belongs in expert or read-only tooling rather than the main SAFE tweak list**.
 
-That keeps the app aligned with the repo’s strongest findings without turning the configuration surface into a raw registry browser.
+That keeps the app aligned with the repoâ€™s strongest findings without turning the configuration surface into a raw registry browser.

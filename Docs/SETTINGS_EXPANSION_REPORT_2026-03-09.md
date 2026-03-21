@@ -1,4 +1,4 @@
-# Settings Expansion Report
+﻿# Settings Expansion Report
 
 Date: 2026-03-09
 

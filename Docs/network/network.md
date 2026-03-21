@@ -1,7 +1,7 @@
-# Encrypted DNS
+﻿# Encrypted DNS
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Requires elevation: Yes (system network settings).
 
@@ -27,21 +27,21 @@ HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{Net
 | DNSCrypt  | A non IETF protocol that encrypts and authenticates DNS between client and resolver, with more limited ecosystem support. |
 | DoH       | DNS sent inside HTTPS (typically HTTP/2) on port 443, providing encrypted lookups that blend in with regular HTTPS traffic. |
 
-> https://www.cloudflare.com/learning/dns/dns-over-tls/  
+> https://www.cloudflare.com/learning/dns/dns-over-tls/
 > https://www.privacyguides.org/en/advanced/dns-overview/
 
 ## DNS Explained
 
 DNS (domain name system) is the phonebook of the internet, which means that it translates domains to the corresponding IP addresses (DNS resolution).
 
-The four types of DNS servers:  
+The four types of DNS servers:
 The **recursive resolver** sends requests to the other three nameservers (root -> TLD -> authoritative), if there's no cached data. It saves the data from the authoritative nameserver so the resolver can skip the requests and send back the IP from the domain to the client. If you're not using any specific DNS server, you're using the resolver from your ISP.
 
 The resolver firstly queries a [**root nameserver**](https://root-servers.org/), which returns the [TLD](https://www.iana.org/domains/root/db) (extension or last segment) -> e.g. `.com`, `.org`, `.net` & more. The root servers are managed by [ICANN](https://www.icann.org/resources/pages/what-2012-02-25-en). If the extension e.g. ends with `.org`, the root server would direct to the `.org` TLD nameserver.
 
 The **TLD nameserver** includes data for domain names, it redirects to the authoritative nameserver, after the correct TLD nameserver was found. They are managed from [IANA](https://www.iana.org/domains/root/db), which splits the TLDs into two groups, generic/gTLD (sTLD and uTLD - sponsored & unsponsored, ngTLD counts as gTLD) and county code/ccTLD.
 
-Types of TLDs:  
+Types of TLDs:
 - **gTLD** -> Generic, common domain names like `.com`, `.org`
 - **ccTLD** -> Country code TLDs, like `.us`, `.de`, `.uk` etc.
 - [**sTLD**](https://icannwiki.org/index.php?title=Sponsored_Top_level_Domain#List_of_Sponsored_Top_Level_Domains) -> Sponsored by private organizations, reserved for these groups: `.mil`, `.app`, `.gov`
@@ -51,24 +51,24 @@ Types of TLDs:
 
 The **authoritative nameserver** tells the resolver the IP address, from the [A record](https://support.dnsimple.com/articles/a-record/). [Records](https://www.cloudflare.com/learning/dns/dns-records/) are included in authoritative DNS servers and contain information like the IP address, TTL value and more.
 
-Step 9 is the HTTP request from the browser to the IP from the resolver & step 10 returns the web page (mostly HTML data). 
+Step 9 is the HTTP request from the browser to the IP from the resolver & step 10 returns the web page (mostly HTML data).
 
 ![](https://github.com/nohuto/win-config/blob/main/network/images/dnslookup.png?raw=true)
 
-Some additional info about HTTP request methods you may want to know:  
+Some additional info about HTTP request methods you may want to know:
 `GET` & `POST` HTTP request methods are the most common ones. `GET` request awaits data (read a web page), `POST` request means that the user is sending data. There more [request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), but I won't add them here. You're able to turn off `GET` requests in the DDG search engine settings, to hide search queries in the request body (queries aren't visible in browser history or logs), which is why I added this info. You can see request in the network tab (`F12`).
 
-> https://www.privacyguides.org/en/dns/  
+> https://www.privacyguides.org/en/dns/
 > https://dnsimple.com/comics
 
 # SMB Configuration
 
 Requires elevation: Yes (system network settings).
 
-SMB Client -> Outbound connections:  
+SMB Client -> Outbound connections:
 > https://learn.microsoft.com/en-us/powershell/module/smbshare/set-smbclientconfiguration?view=windowsserver2025-ps
 
-SMB Server -> Inbound connections:  
+SMB Server -> Inbound connections:
 > https://learn.microsoft.com/en-us/powershell/module/smbshare/set-smbserverconfiguration?view=windowsserver2025-ps
 
 ```powershell
@@ -87,7 +87,7 @@ Set-SmbClientConfiguration -EnableSecuritySignature $true
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\enablesecuritysignature	Type: REG_DWORD, Length: 4, Data: 1
 
 Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM, AES_256_CCM"
-RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\CipherSuiteOrder	Type: REG_MULTI_SZ, Length: 52, Data: AES_256_GCM, AES_256_CCM, 
+RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\CipherSuiteOrder	Type: REG_MULTI_SZ, Length: 52, Data: AES_256_GCM, AES_256_CCM,
 
 Set-SmbServerConfiguration -RequireSecuritySignature $true
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\RequireSecuritySignature	Type: REG_DWORD, Length: 4, Data: 1
@@ -99,13 +99,13 @@ Set-SmbServerConfiguration -EncryptData $true
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\EncryptData	Type: REG_DWORD, Length: 4, Data: 1
 
 Set-SmbServerConfiguration -EncryptionCiphers "AES_256_GCM, AES_256_CCM"
-RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\CipherSuiteOrder	Type: REG_MULTI_SZ, Length: 52, Data: AES_256_GCM, AES_256_CCM, 
+RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\CipherSuiteOrder	Type: REG_MULTI_SZ, Length: 52, Data: AES_256_GCM, AES_256_CCM,
 
 Set-SmbServerConfiguration -RejectUnencryptedAccess $true
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\RejectUnencryptedAccess	Type: REG_DWORD, Length: 4, Data: 1
 ```
 Encryption is enabled by default, some users reported slow read and write speeds. Disabling the encryption  (`$false`) may improve it, otherwise leave it enabled for your own security. Windows automatically uses the most advanced cipher, still 3.1.1 uses `128-GCM` by default. The last command prevent clients that do not support SMB encryption from connecting to encrypted shares.
-> https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing  
+> https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing
 > https://techcommunity.microsoft.com/blog/filecab/configure-smb-signing-with-confidence/2418102
 
 ```powershell
@@ -149,7 +149,7 @@ RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\MinSmb2Dialect	Type: REG_DWORD, Length: 4, Data: 785
 ```
 By default is it set to `None`, which means that the client can use any supported version. SMB 3.1.1, the most secure dialect of the protocol.
-> https://learn.microsoft.com/en-us/windows-server/storage/file-server/manage-smb-dialects?tabs=powershell  
+> https://learn.microsoft.com/en-us/windows-server/storage/file-server/manage-smb-dialects?tabs=powershell
 > https://techcommunity.microsoft.com/blog/filecab/controlling-smb-dialects/860024
 
 Disable default sharing:
@@ -158,12 +158,12 @@ Set-SmbServerConfiguration -AutoShareServer $false -AutoShareWorkstation $false 
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\AutoShareServer	Type: REG_DWORD, Length: 4, Data: 0
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters\AutoShareWks	Type: REG_DWORD, Length: 4, Data: 0
 ```
-> https://learn.microsoft.com/en-us/powershell/module/smbshare/set-smbserverconfiguration?view=windowsserver2025-ps  
+> https://learn.microsoft.com/en-us/powershell/module/smbshare/set-smbserverconfiguration?view=windowsserver2025-ps
 > https://woshub.com/enable-remote-access-to-admin-shares-in-workgroup/
 
 ---
 
-`Require NTLMv2 Session Security` (options applied for clients & servers):  
+`Require NTLMv2 Session Security` (options applied for clients & servers):
 "This security setting allows a client to require the negotiation of 128-bit encryption and/or NTLMv2 session security. These values are dependent on the LAN Manager Authentication Level security setting value. The options are:
 
 Require NTLMv2 session security: The connection will fail if NTLMv2 protocol is not negotiated.
@@ -184,7 +184,7 @@ RegSetValue	HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinClientSec	Ty
 
 ---
 
-`Send unencrypted password to connect to third-party SMB servers`:  
+`Send unencrypted password to connect to third-party SMB servers`:
 ```c
 // Enabled (security risk)
 RegSetValue	HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnablePlainTextPassword	Type: REG_DWORD, Length: 4, Data: 1
@@ -221,11 +221,11 @@ Capturing the network activity after adding the policy:
   TotalLength: 132 (0x84)
   Identification: 28587 (0x6FAB)
 ```
-> https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/network-monitor-3  
-> https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus1000/sw/4_0/qos/configuration/guide/nexus1000v_qos/qos_6dscp_val.pdf  
-> https://github.com/valleyofdoom/PC-Tuning/blob/main/docs/research.md#2-how-can-you-verify-whether-a-dscp-qos-policy-is-working-permalink  
-> https://webhostinggeeks.com/blog/what-is-differentiated-services-code-point-dscp/  
-> https://learn.microsoft.com/en-us/windows-server/networking/technologies/qos/qos-policy-top  
+> https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/network-monitor-3
+> https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus1000/sw/4_0/qos/configuration/guide/nexus1000v_qos/qos_6dscp_val.pdf
+> https://github.com/valleyofdoom/PC-Tuning/blob/main/docs/research.md#2-how-can-you-verify-whether-a-dscp-qos-policy-is-working-permalink
+> https://webhostinggeeks.com/blog/what-is-differentiated-services-code-point-dscp/
+> https://learn.microsoft.com/en-us/windows-server/networking/technologies/qos/qos-policy-top
 > https://learn.microsoft.com/en-us/windows-server/networking/technologies/qos/qos-policy-manage
 
 ![](https://github.com/nohuto/win-config/blob/main/network/images/qosvalues.png?raw=true)
@@ -239,13 +239,13 @@ Requires elevation: Yes (system network settings).
 
 "The Link Layer Discovery Protocol (LLDP) is a vendor-neutral link layer protocol used by network devices for advertising their identity, capabilities, and neighbors on a local area network based on IEEE 802 technology, principally wired Ethernet. LLDP performs functions similar to several proprietary protocols, such as CDP, FDP, NDP and LLTD."
 
-> https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol  
-> https://gpsearch.azurewebsites.net/#1829  
+> https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol
+> https://gpsearch.azurewebsites.net/#1829
 > https://gpsearch.azurewebsites.net/#1830
 
 Disable network discovery (includes LLTDIO, Rspndr, LLTD), by pasting the desired command into `powershell`:
 ```powershell
-Set-NetFirewallRule -DisplayGroup "Network Discovery" -Enabled False -Profile Any​ # Domain​, Private, Public​
+Set-NetFirewallRule -DisplayGroup "Network Discovery" -Enabled False -Profile Anyâ€‹ # Domainâ€‹, Private, Publicâ€‹
 ```
 Get the current states with:
 ```powershell
@@ -388,12 +388,12 @@ Requires elevation: Yes (system network settings).
 
 Placeholder.
 
-> https://www3.cs.stonybrook.edu/~anshul/comsnets24_bbrbbrv2.pdf  
-> https://github.com/google/bbr  
-> https://www.rfc-editor.org/rfc/rfc6582  
-> https://internet2.edu/wp-content/uploads/2022/12/techex22-AdvancedNetworking-ExploringtheBBRv2CongestionControlAlgorithm-Tierney.pdf  
-> https://datatracker.ietf.org/meeting/104/materials/slides-104-iccrg-an-update-on-bbr-00  
-> https://www.speedguide.net/articles/tcp-congestion-control-algorithms-comparison-7423  
+> https://www3.cs.stonybrook.edu/~anshul/comsnets24_bbrbbrv2.pdf
+> https://github.com/google/bbr
+> https://www.rfc-editor.org/rfc/rfc6582
+> https://internet2.edu/wp-content/uploads/2022/12/techex22-AdvancedNetworking-ExploringtheBBRv2CongestionControlAlgorithm-Tierney.pdf
+> https://datatracker.ietf.org/meeting/104/materials/slides-104-iccrg-an-update-on-bbr-00
+> https://www.speedguide.net/articles/tcp-congestion-control-algorithms-comparison-7423
 > https://datatracker.ietf.org/meeting/105/materials/slides-105-iccrg-bbr-v2-a-model-based-congestion-control-00
 
 Get your current congestion provider, by pasting the following into powershell:
@@ -443,9 +443,9 @@ See links below for a detailed documentation.
 
 `PassivePollPeriod` is set to `15` by default = Runs passive probe every 15 seconds. `MaxActiveProbes` to `0` (unlimited) = breaks connection status. If disabling active probes, but leaving passive probes enabled, enable `Enable Passive Mode`.
 
-> https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview  
-> https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-frequently-asked-questions  
-> https://github.com/nohuto/win-registry/blob/main/records/NlaSvc.txt  
+> https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview
+> https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-frequently-asked-questions
+> https://github.com/nohuto/win-registry/blob/main/records/NlaSvc.txt
 > [network/assets | probing-NcsiConfigData.c](https://github.com/nohuto/win-config/blob/main/network/assets/probing-NcsiConfigData.c)
 
 ---
@@ -541,12 +541,12 @@ rasphone -r "Name"
 ```
 or `WIN + I` > Network & Internet > VPN > Remove
 
-> https://learn.microsoft.com/en-us/powershell/module/vpnclient/remove-vpnconnection?view=windowsserver2025-ps  
+> https://learn.microsoft.com/en-us/powershell/module/vpnclient/remove-vpnconnection?view=windowsserver2025-ps
 > https://learn.microsoft.com/en-us/powershell/module/vpnclient/?view=windowsserver2025-ps
 
 `Allow VPN over metered networks`:
 ```c
-OSDATA__SYSTEM__CurrentControlSet__Services__RasMan__Parameters_1 = 
+OSDATA__SYSTEM__CurrentControlSet__Services__RasMan__Parameters_1 =
     L"SYSTEM\\CurrentControlSet\\Services\\RasMan\\Parameters\\Config\\VpnCostedNetworkSettings",
 
 VpnRegQueryDWord(
@@ -561,7 +561,7 @@ if ( !v17[0] )
 ```
 `Allow VPN while Roaming`:
 ```c
-OSDATA__SYSTEM__CurrentControlSet__Services__RasMan__Parameters = 
+OSDATA__SYSTEM__CurrentControlSet__Services__RasMan__Parameters =
     L"SYSTEM\\CurrentControlSet\\Services\\RasMan\\Parameters\\Config\\VpnCostedNetworkSettings",
 
 VpnRegQueryDWord(
@@ -623,9 +623,9 @@ Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force
 | Large MTU / 10 GbE support                         | No                               | Yes                              |
 | Improved energy efficiency (clients can sleep)     | No                               | Yes                              |
 
-> https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3?tabs=client#disable-smbv2-or-smbv3-for-troubleshooting  
-> https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3?tabs=server  
-> https://techcommunity.microsoft.com/blog/filecab/stop-using-smb1/425858  
+> https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3?tabs=client#disable-smbv2-or-smbv3-for-troubleshooting
+> https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3?tabs=server
+> https://techcommunity.microsoft.com/blog/filecab/stop-using-smb1/425858
 > https://thelinuxcode.com/how-to-detect-and-turn-on-off-smbv1-smbv2-and-smbv3-in-windows/
 
 # Disable NetBIOS/mDNS/LLMNR
@@ -636,7 +636,7 @@ Requires elevation: Yes (system network settings).
 
 Enabling the option includes disabling `LMHOSTS Lookups` - "LMHOSTS is a local text file Windows uses to map NetBIOS names to IPs when other NetBIOS methods (WINS, broadcast) don't give an answer. It lives in C:\Windows\System32\drivers\etc, there's an `lmhosts.sam` example, and it's checked only if `Enable LMHOSTS lookup` is on."
 
-> https://en.wikipedia.org/wiki/LMHOSTS  
+> https://en.wikipedia.org/wiki/LMHOSTS
 > https://github.com/nohuto/win-registry/blob/main/records/NetBT.txt
 
 `NetbiosOptions`:
@@ -658,9 +658,9 @@ RegSetValue	HKLM\System\CurrentControlSet\Services\NetBT\Parameters\Interfaces\T
 | mDNS (Multicast DNS) | Zero-config service/host discovery on local networks (e.g. printer.local) | Uses multicast to 224.0.0.251 (IPv6 ff02::fb) on UDP 5353, devices answer for their own .local names | Cross-platform (Apple Bonjour, now Windows), modern replacement for LLMNR in many cases |
 | NetBIOS over TCP/IP | Legacy Windows naming, service announcement and sessions | Uses broadcasts or WINS to resolve NetBIOS names, historically used by SMB/Windows networking | Very old, chatty, bigger attack surface, kept for backward compatibility |
 
-> https://en.wikipedia.org/wiki/Link-Local_Multicast_Name_Resolution  
-> https://en.wikipedia.org/wiki/Multicast_DNS  
-> https://en.wikipedia.org/wiki/NetBIOS  
+> https://en.wikipedia.org/wiki/Link-Local_Multicast_Name_Resolution
+> https://en.wikipedia.org/wiki/Multicast_DNS
+> https://en.wikipedia.org/wiki/NetBIOS
 
 ```json
 {
@@ -743,7 +743,7 @@ Requires elevation: Yes (system network settings).
 
 `0xFFFFFFFF` disables all IPv6 interfaces, even ones Windows needs. The TCP/IP stack then waits for them to initialize and times out, which adds the `~5s` boot delay. The documentation below was taken from the official support articles.
 
-Min Value: `0x00` (default value)  
+Min Value: `0x00` (default value)
 Max Value: `0xFF` (IPv6 disabled)
 Recommended by Microsoft: `0x20` (Prefer IPv4 over IPv6)
 
@@ -773,7 +773,7 @@ Windows use bitmasks to check the `DisabledComponents` values and determine whet
 |PreferIpv4|Prefer IPv4 in default prefix policy|
 |TunnelCp|Disable CP interfaces|
 |TunnelIpTls|Disable IP-TLS interfaces|
-  
+
 For each bit, **0** means false and **1** means true. Refer to the following table for an example.
 
 |Setting|Prefer IPv4 over IPv6 in prefix policies|Disable IPv6 on all nontunnel interfaces|Disable IPv6 on all tunnel interfaces|Disable IPv6 on nontunnel interfaces (except the loopback) and on IPv6 tunnel interface|
@@ -789,7 +789,7 @@ For each bit, **0** means false and **1** means true. Refer to the following tab
 |Binary|0010 0000|0001 0000|0000 0001|0001 0001|
 |Hexadecimal|0x20|0x10|0x01|0x11|
 
-> https://github.com/MicrosoftDocs/SupportArticles-docs/blob/main/support/windows-server/networking/configure-ipv6-in-windows.md  
+> https://github.com/MicrosoftDocs/SupportArticles-docs/blob/main/support/windows-server/networking/configure-ipv6-in-windows.md
 > https://support.microsoft.com/en-us/topic/startup-delay-occurs-after-you-disable-ipv6-in-windows-da7e0f60-27b0-c27e-7709-7ee9abfc6ef1
 
 # Disable Wi-Fi Sense
@@ -872,11 +872,11 @@ Excludes (deprecated, chimney too):
 | `*PMNSOffload` | A value that describes whether the device should be enabled to offload neighbor solicitation (NS) when the system enters a sleep state. | 1 | 0 | 1 |
 | `*PMWiFiRekeyOffload` | A value that describes whether the device should be enabled to offload group temporal key (GTK) rekeying for wake-on-wireless-LAN (WOL) when the computer enters a sleep state. | 1 | 0 | 1 |
 
-> https://github.com/nohuto/win-registry#intel-nic-values  
-> https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-subsystem/net-sub-performance-top  
-> https://www.intel.com/content/www/us/en/support/articles/000005593/ethernet-products.html  
-> https://docs.nvidia.com/networking/display/winof2v320/configuring+the+driver+registry+keys#src-111583782_ConfiguringtheDriverRegistryKeys-OffloadRegistryKeys  
-> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/standardized-inf-keywords-for-power-management.md  
+> https://github.com/nohuto/win-registry#intel-nic-values
+> https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-subsystem/net-sub-performance-top
+> https://www.intel.com/content/www/us/en/support/articles/000005593/ethernet-products.html
+> https://docs.nvidia.com/networking/display/winof2v320/configuring+the+driver+registry+keys#src-111583782_ConfiguringtheDriverRegistryKeys-OffloadRegistryKeys
+> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/standardized-inf-keywords-for-power-management.md
 > https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/using-registry-values-to-enable-and-disable-task-offloading.md
 
 # Disable WoL
@@ -891,7 +891,7 @@ The wake-on-LAN (WOL) feature wakes the computer from a low power state when a n
 powercfg /devicequery wake_programmable
 powercfg /devicequery wake_armed
 ```
-`powercfg /devicequery wake_programmable` -> devices that are user-configurable to wake the system from a sleep state  
+`powercfg /devicequery wake_programmable` -> devices that are user-configurable to wake the system from a sleep state
 `powercfg /devicequery wake_armed` -> currently configured to wake the system from any sleep state
 
 ```c
@@ -982,13 +982,13 @@ Requires elevation: Yes (system network settings).
 
 The maximum data differs for users, e.g. if applying `4096` it may get rejected, see `inf` blocks below.
 
-Transmit Buffers:  
+Transmit Buffers:
 > Defines the number of Transmit Descriptors. Transmit Descriptors are data segments that enable the adapter to track transmit packets in the system memory. Depending on the size of the packet, each transmit packet requires one or more Transmit Descriptors. You might choose to increase the number of Transmit Descriptors if you notice a problem with transmit performance. Increasing the number of Transmit Descriptors can enhance transmit performance. But, Transmit Descriptors consume system memory. If transmit performance is not an issue, use the default setting.
 
-Receive Buffers:  
+Receive Buffers:
 > Sets the number of buffers used by the driver when copying data to the protocol memory. Increasing this value can enhance the receive performance, but also consumes system memory. Receive Descriptors are data segments that enable the adapter to allocate received packets to memory. Each received packet requires one Receive Descriptor, and each descriptor uses 2 KB of memory.
 
-> https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/29.3.1/receive-buffers/  
+> https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/29.3.1/receive-buffers/
 > https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/transmit-buffers/
 
 ```inf
@@ -1037,8 +1037,8 @@ Requires elevation: Yes (system network settings).
 
 Some NICs expose multiple interrupt-moderation levels. Use interrupt moderation for CPU-bound workloads and weigh host-CPU savings against added latency. For the lowest possible latency, disable Interrupt Moderation, accepting higher CPU use as a tradeoff. At higher link speeds more interrupts drive up CPU and hurt performance, increasing the ITR lowers the interrupt rate and improves performance. IM batches received packets and starts a timer on first arrival, interrupting when the buffer fills or the timer expires. Many NICs offer more than on/off, with low/medium/high rates that map to shorter or longer timers to favor latency or reduce interrupts.
 
-> https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/interrupt-moderation-rate/  
-> https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-subsystem/net-sub-performance-tuning-nics?tabs=powershell#interrupt-moderation  
+> https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/interrupt-moderation-rate/
+> https://learn.microsoft.com/en-us/windows-server/networking/technologies/network-subsystem/net-sub-performance-tuning-nics?tabs=powershell#interrupt-moderation
 > https://enterprise-support.nvidia.com/s/article/understanding-interrupt-moderation
 
 ```
@@ -1117,33 +1117,33 @@ void __fastcall RSS::RssReadRegistryParameters(RSS *this, struct ADAPTER_CONTEXT
   REGISTRY::RegReadRegTable(v3, a2, a3, (struct REGTABLE_ENTRY *)&v4, 0xAu);
 }
 ```
---- 
+---
 
-`*MaxRssProcessors`:  
+`*MaxRssProcessors`:
 The maximum number of RSS processors.
 
-`*NumRssQueues`:  
+`*NumRssQueues`:
 The maximum number of the RSS queues that the device should use.
 
-Configures the number of RSS queues:  
+Configures the number of RSS queues:
 - One queue is used when low CPU utilization is required.
 - Two queues are used when good throughput and low CPU utilization are required.
 - Four or more queues are used for applications that demand high transaction rates such as web server based applications. With this setting, the CPU utilization may be higher.
 
 (Not all adapters support all RSS queue settings. RSS is not supported on some adapters configured to use Virtual Machine Queues (VMQ). For these adapters VMQ takes precedence over RSS. RSS is disabled.)
 
-`*RssBaseProcGroup`:  
+`*RssBaseProcGroup`:
 Sets the RSS base processor group for systems with more than 64 processors.
 
-`*RssBaseProcNumber`:  
+`*RssBaseProcNumber`:
 Sets the desired base CPU number for each interface. The number can be different for each interface. This allows partitioning of CPUs across network adapters.
 
 You might want to set it to a different core than 0 default / 1, e.g. core 2/3.
 
-`*RssMaxProcGroup`:  
+`*RssMaxProcGroup`:
 The maximum processor group of the RSS interface.
 
-`*RssMaxProcNumber`:  
+`*RssMaxProcNumber`:
 The maximum processor number of the RSS interface. If `*RssMaxProcNumber` is specified, then `*RssMaxProcGroup` should also be specified.
 
 ```json
@@ -1152,7 +1152,7 @@ The maximum processor number of the RSS interface. If `*RssMaxProcNumber` is spe
 { "*RssMaxProcNumber", "3" },
 ```
 
-`*RssProfile`:  
+`*RssProfile`:
 |SubkeyName|ParamDesc|Value|EnumDesc|
 |--- |--- |--- |--- |
 |**\*RSSProfile**|RSS load balancing profile|1|**ClosestProcessor**: Default behavior is consistent with that of Windows Server 2008 R2.|
@@ -1162,16 +1162,16 @@ The maximum processor number of the RSS interface. If `*RssMaxProcNumber` is spe
 |||5|**ConservativeScaling**: RSS uses as few processors as possible to sustain the load. This option helps reduce the number of interrupts.|
 |||6 (Default on heterogeneous CPU systems)|**NdisRssProfileBalanced**: RSS processor selection is based on traffic workload. Only available in [NetAdapterCx](https://learn.microsoft.com/en-us/windows-hardware/drivers/netcx/netadaptercx-receive-side-scaling-rss-), starting in WDK preview version 25197.|
 
-`RssV2`:  
+`RssV2`:
 Enables the RSS v2 feature which improves the Receive Side Scaling by offering dynamic, per-VPort spreading of queues. It reduces the time to update the indirection table. Note: RSSv2 is only supported by NDIS 6.80 and later versions.
 
-`ValidateRssV2`:  
-Enables strict argument validation for upper layer testing. Set along with the RssV2 key to enable the RSSv2 feature.  
+`ValidateRssV2`:
+Enables strict argument validation for upper layer testing. Set along with the RssV2 key to enable the RSSv2 feature.
 
-> https://docs.kernel.org/networking/scaling.html  
-> https://docs.nvidia.com/networking/display/winof2v280/configuring+the+driver+registry+keys  
-> https://docs.nvidia.com/networking/display/winofv55052000/receive+side+scaling+(rss)  
-> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling  
+> https://docs.kernel.org/networking/scaling.html
+> https://docs.nvidia.com/networking/display/winof2v280/configuring+the+driver+registry+keys
+> https://docs.nvidia.com/networking/display/winofv55052000/receive+side+scaling+(rss)
+> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling
 > https://www.intel.com/content/www/us/en/support/articles/000005593/ethernet-products.html
 
 ---
@@ -1213,7 +1213,7 @@ Name                           DisplayName                                      
 Ethernet                       File and Printer Sharing for Microsoft Networks    ms_server            False
 ```
 
-> https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/networking-mpssvc-svc-firewallgroups-firewallgroup-group  
+> https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/networking-mpssvc-svc-firewallgroups-firewallgroup-group
 > https://learn.microsoft.com/en-us/powershell/module/netadapter/get-netadapterbinding?view=windowsserver2025-ps
 
 ```json
@@ -1242,7 +1242,7 @@ Requires elevation: Yes (system network settings).
 
 This setting is used to enable/disable the logging of link state changes. If enabled, a link-up change event or a link-down change event generates a message that is displayed in the system event logger. This message contains the link's speed and duplex. Administrators view the event message from the system event log.
 
-The following events are logged:  
+The following events are logged:
 - The link is up. (`LINK_UP_CHANGE`)
 - The link is down. (`LINK_DOWN_CHANGE`)
 - Mismatch in duplex. (`LINK_DUPLEX_MISMATCH`)
@@ -1270,8 +1270,8 @@ Requires elevation: Yes (system network settings).
 
 A sending station (computer or network switch) may be transmitting data faster than the other end of the link can accept it. Using flow control, the receiving station can signal the sender requesting suspension of transmissions until the receiver catches up.
 
-- For adapters to benefit from this feature, link partners must support flow control frames.  
-- On systems running a Microsoft Windows Server* operating system, enabling QoS/priority flow control will disable link level flow control.  
+- For adapters to benefit from this feature, link partners must support flow control frames.
+- On systems running a Microsoft Windows Server* operating system, enabling QoS/priority flow control will disable link level flow control.
 - Some devices support Auto Negotiation. Selecting this will cause the device to advertise the value stored in its NVM (usually "Disabled").
 
 > https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/flow-control/
@@ -1304,13 +1304,13 @@ As the name says ("Jumbo"), it is used for big packets, you won't use this featu
 
 The Jumbo Frames feature enables or disables Jumbo Packet capability. The standard Ethernet frame size is about `1514 bytes`, while Jumbo Packets are larger than this. Jumbo Packets can increase throughput and decrease CPU utilization. However, additional latency may be introduced.
 
-- Enable Jumbo frames only if devices across the network support them and are configured to use the same frame size. When setting up Jumbo Frames on other network devices, be aware that different network devices calculate Jumbo Frame sizes differently. Some devices include the header information in the frame size while others do not. Intel® adapters do not include header information in the frame size.
+- Enable Jumbo frames only if devices across the network support them and are configured to use the same frame size. When setting up Jumbo Frames on other network devices, be aware that different network devices calculate Jumbo Frame sizes differently. Some devices include the header information in the frame size while others do not. IntelÂ® adapters do not include header information in the frame size.
 - Supported protocols are limited to IP (TCP, UDP).
 - Using Jumbo frames at 10 or 100 Mbps can result in poor performance or loss of link.
 - You must not lower Receive_Buffers or Transmit_Buffers below 256 if jumbo frames are enabled. Doing so will cause loss of link.
 - When configuring Jumbo frames on a switch, set the frame size 4 bytes higher for CRC, plus 4 bytes if using VLANs or QoS packet tagging.
 
-> https://www.intel.com/content/www/us/en/support/articles/000005593/ethernet-products.html  
+> https://www.intel.com/content/www/us/en/support/articles/000005593/ethernet-products.html
 > https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/30.5/jumbo-frames/
 
 ```inf
@@ -1333,7 +1333,7 @@ Starting in Windows 11, version 24H2, UDP receive segment coalescing offload (UR
 
 Coalescing UDP datagrams reduces the CPU cost to process packets in high-bandwidth flows, resulting in higher throughput and fewer cycles per byte.
 
-> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/udp-rsc-offload  
+> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/udp-rsc-offload
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/network/overview-of-receive-segment-coalescing
 
 `"*UdpRsc": { "Type": "REG_SZ", "Data": 1 }` causes high usage of the system idle process for whatever reason, I'll leave it out for now.
@@ -1449,9 +1449,9 @@ HKR, "", *VMQ, %REG_SZ%, "1"
 | `*TenGigVmqEnabled` | Enable/disable VMQ on all 10 Gbps adapters. | `0` System default (disabled for Windows Server 2008 R2) - `1` Enabled - `2` Explicitly disabled | - | Miniport that supports VMQ must not read this subkey. |
 | `*BelowTenGigVmqEnabled` | Enable/disable VMQ on all adapters <10 Gbps. | `0` System default (disabled for Windows Server 2008 R2) - `1` Enabled - `2` Explicitly disabled | - | Miniport that supports VMQ must not read this subkey. |
 
-> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/standardized-inf-keywords-for-vmq.md  
-> https://docs.nvidia.com/networking/display/winofv55053000/ethernet+registry+keys#src-25134589_EthernetRegistryKeys-FlowControlOptions  
-> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/virtual-machine-queue-architecture.md  
+> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/standardized-inf-keywords-for-vmq.md
+> https://docs.nvidia.com/networking/display/winofv55053000/ethernet+registry+keys#src-25134589_EthernetRegistryKeys-FlowControlOptions
+> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/virtual-machine-queue-architecture.md
 > https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/network/introduction-to-ndis-virtual-machine-queue--vmq-.md
 
 
@@ -1461,7 +1461,7 @@ Requires elevation: Yes (system network settings).
 
 Single Root I/O Virtualization (SR-IOV) is an extension to the PCI Express (PCIe) specification that improves network performance in virtualized environments. SR-IOV allows devices, such as network adapters, to separate access to their resources among various PCIe hardware functions, enabling near-native network performance in Hyper-V virtual machines.
 
-> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/overview-of-single-root-i-o-virtualization--sr-iov-  
+> https://learn.microsoft.com/en-us/windows-hardware/drivers/network/overview-of-single-root-i-o-virtualization--sr-iov-
 
 It depends on your adapter/driver if SR-IOV is enabled/disabled by default:
 
@@ -1521,9 +1521,9 @@ Requires elevation: Yes (system network settings).
 
 FEC (forwarded error correction) improves link stability, but increases latency. Many high quality optics, direct attach cables, and backplane channels provide a stable link without FEC.
 
-`Auto FEC`: Sets the FEC Mode based on the capabilities of the attached cable.  
-`CL108 RS-FEC`: Selects only RS-FEC ability and request capabilities.  
-`CL74 FC-FEC/BASE-R`: Selects only BASE-R ability and request capabilities.  
+`Auto FEC`: Sets the FEC Mode based on the capabilities of the attached cable.
+`CL108 RS-FEC`: Selects only RS-FEC ability and request capabilities.
+`CL74 FC-FEC/BASE-R`: Selects only BASE-R ability and request capabilities.
 `No FEC`: Disables FEC.
 
 > https://edc.intel.com/content/www/us/en/design/products/ethernet/adapters-and-devices-user-guide/forward-error-correction-fec-mode/
@@ -1568,7 +1568,7 @@ Probably a setting that controls how the adapter handles link negotiation when i
 
 This should only be enabled, if needed. The text above is just a personal assumption.
 
-`2` = Enabled  
+`2` = Enabled
 `1` = Disabled
 
 ```inf
@@ -1585,7 +1585,7 @@ HKR, PROSetNdi\NdiExt\Params\LinkNegotiationProcess,    ExposeLevel,            
 
 Requires elevation: Yes (system network settings).
 
-`Threaded DPC + Adaptive` = NDIS poll mode disabled, aptive receive completion method, packet burst buffering via threaded DPC.  
+`Threaded DPC + Adaptive` = NDIS poll mode disabled, aptive receive completion method, packet burst buffering via threaded DPC.
 `NDIS Poll Mode` = Packet burst handing disabled (unsupported), NDIS poll mode enabled.
 
 ## NDIS Poll Mode
@@ -1633,7 +1633,7 @@ This feature allows packet burst handling, while avoiding packet drops that may 
     "ThreadDpcEnable"; = 1; // KeThreadDpcEnable
 ```
 
-> https://github.com/nohuto/win-registry?tab=readme-ov-file#session-manager-values  
+> https://github.com/nohuto/win-registry?tab=readme-ov-file#session-manager-values
 > https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs
 
 | Data | Meaning |
@@ -1672,34 +1672,34 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="network.disable-active-probing"></a> `network.disable-active-probing` | Disable Active Probing | Turns off NCSI active probing for internet connectivity tests. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L170` |
-| <a id="network.disable-default-shares"></a> `network.disable-default-shares` | Disable Default Shares | Disables automatic administrative shares on the SMB server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L322` |
-| <a id="network.disable-ipv6"></a> `network.disable-ipv6` | Disable IPv6 | Disables IPv6 protocol system-wide. May cause issues with some modern network apps. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L64` |
-| <a id="network.disable-llmnr"></a> `network.disable-llmnr` | Disable LLMNR | Turns off multicast name resolution (LLMNR). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L102` |
-| <a id="network.disable-lltd"></a> `network.disable-lltd` | Disable Network Discovery (LLTD) | Disables LLTD mapper and responder for network discovery. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L150` |
-| <a id="network.disable-mdns"></a> `network.disable-mdns` | Disable mDNS | Turns off multicast DNS name resolution. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L114` |
-| <a id="network.disable-netbios"></a> `network.disable-netbios` | Disable NetBIOS over TCP/IP | Disables the legacy NetBIOS protocol to modernize the network stack. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L76` |
-| <a id="network.disable-netbios-resolution"></a> `network.disable-netbios-resolution` | Disable NetBIOS Name Resolution | Disables NetBIOS name resolution on the DNS client. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L126` |
-| <a id="network.disable-plaintext-smb-passwords"></a> `network.disable-plaintext-smb-passwords` | Disable Plaintext SMB Passwords | Prevents sending unencrypted passwords to SMB servers. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L358` |
-| <a id="network.disable-smart-name-resolution"></a> `network.disable-smart-name-resolution` | Disable Smart Multi-Homed Name Resolution | Disables smart name resolution across multiple network interfaces. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L138` |
-| <a id="network.disable-smb1"></a> `network.disable-smb1` | Disable SMBv1 | Disables the legacy SMBv1 protocol on the server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L334` |
-| <a id="network.disable-smb2"></a> `network.disable-smb2` | Disable SMBv2/SMBv3 | Disables the SMBv2/SMBv3 protocol on the server. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L346` |
-| <a id="network.disable-wifi-sense"></a> `network.disable-wifi-sense` | Disable Wi-Fi Sense | Prevents Windows from automatically connecting to suggested open hotspots. | Safe | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L88` |
+| <a id="network.disable-active-probing"></a> `network.disable-active-probing` | Disable Active Probing | Turns off NCSI active probing for internet connectivity tests. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L178` |
+| <a id="network.disable-default-shares"></a> `network.disable-default-shares` | Disable Default Shares | Disables automatic administrative shares on the SMB server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L307` |
+| <a id="network.disable-ipv6"></a> `network.disable-ipv6` | Disable IPv6 | Disables IPv6 protocol system-wide. May cause issues with some modern network apps. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L82` |
+| <a id="network.disable-llmnr"></a> `network.disable-llmnr` | Disable LLMNR | Turns off multicast name resolution (LLMNR). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L110` |
+| <a id="network.disable-lltd"></a> `network.disable-lltd` | Set LLTD Policies to Default Behavior | Disables the explicit LLTD mapper and responder policies so Windows uses the documented default behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L158` |
+| <a id="network.disable-mdns"></a> `network.disable-mdns` | Set mDNS Policy to Local Settings | Disables the explicit mDNS policy so Windows falls back to locally configured mDNS behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L122` |
+| <a id="network.disable-netbios"></a> `network.disable-netbios` | Disable NetBIOS over TCP/IP | Disables NetBIOS over TCP/IP on all IP-enabled adapters using the documented per-interface Windows control surface. | Advanced | `WindowsOptimizer.Engine\Tweaks\Commands\Network\DisableNetbiosOverTcpIpTweak.cs#L19` |
+| <a id="network.disable-netbios-resolution"></a> `network.disable-netbios-resolution` | Disable NetBIOS Name Resolution | Disables NetBIOS name resolution on the DNS client. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L134` |
+| <a id="network.disable-plaintext-smb-passwords"></a> `network.disable-plaintext-smb-passwords` | Disable Plaintext SMB Passwords | Prevents sending unencrypted passwords to SMB servers. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L343` |
+| <a id="network.disable-smart-name-resolution"></a> `network.disable-smart-name-resolution` | Disable Smart Multi-Homed Name Resolution | Disables smart name resolution across multiple network interfaces. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L146` |
+| <a id="network.disable-smb1"></a> `network.disable-smb1` | Disable SMBv1 | Disables the legacy SMBv1 protocol on the server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L319` |
+| <a id="network.disable-smb2"></a> `network.disable-smb2` | Disable SMBv2/SMBv3 | Disables the SMBv2/SMBv3 protocol on the server. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L331` |
+| <a id="network.disable-wifi-sense"></a> `network.disable-wifi-sense` | Disable Wi-Fi Sense | Prevents Windows from automatically connecting to suggested open hotspots. | Safe | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L96` |
 | <a id="network.enable-lltd-responder"></a> `network.enable-lltd-responder` | Enable LLTD Responder | Enables the Link-Layer Topology Discovery Responder driver for discovery by other PCs. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L31` |
 | <a id="network.enable-lltdio"></a> `network.enable-lltdio` | Enable LLTD Mapper I/O | Enables the Link-Layer Topology Discovery Mapper I/O driver for network mapping. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L19` |
 | <a id="network.flush-dns-cache"></a> `network.flush-dns-cache` | Flush DNS Cache | Clears the DNS resolver cache. Useful for resolving DNS issues or ensuring fresh DNS lookups. This is a one-time operation and cannot be... | Safe | `WindowsOptimizer.Engine\Tweaks\Commands\Network\FlushDnsCacheTweak.cs#L13` |
 | <a id="network.optimize-smb"></a> `network.optimize-smb` | Optimize SMB Performance | Enables SMB multichannel and optimizes cache lifetimes for network file sharing. | Safe | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L44` |
-| <a id="network.prefer-ipv4"></a> `network.prefer-ipv4` | Prefer IPv4 over IPv6 | Configures the IPv6 stack to prefer IPv4 without fully disabling IPv6. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L184` |
-| <a id="network.require-ntlmv2-session-security"></a> `network.require-ntlmv2-session-security` | Require NTLMv2 Session Security | Requires NTLMv2 session security and 128-bit encryption for SMB clients. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L370` |
+| <a id="network.prefer-ipv4"></a> `network.prefer-ipv4` | Prefer IPv4 over IPv6 | Configures the IPv6 stack to prefer IPv4 without fully disabling IPv6. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L189` |
+| <a id="network.require-ntlm-ssp-client-session-security"></a> `network.require-ntlm-ssp-client-session-security` | Require NTLM SSP Client Session Security and 128-bit Encryption | Requires NTLMv2 session security and 128-bit encryption for NTLM SSP based clients. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L355` |
 | <a id="network.reset-winsock"></a> `network.reset-winsock` | Reset Winsock Catalog | Resets the Winsock catalog to default settings. Useful for fixing network connectivity issues. Requires system restart to take effect. | Advanced | `WindowsOptimizer.Engine\Tweaks\Commands\Network\ResetNetworkStackTweak.cs#L13` |
-| <a id="network.smb-disable-leasing"></a> `network.smb-disable-leasing` | SMB: Disable Leasing | Disables SMB server leasing (read/write/handle caching). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L260` |
-| <a id="network.smb-enable-large-mtu"></a> `network.smb-enable-large-mtu` | SMB: Enable Large MTU | Enables large MTU support for SMB client connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L197` |
-| <a id="network.smb-enable-multichannel"></a> `network.smb-enable-multichannel` | SMB: Enable Multichannel | Enables SMB multichannel for parallel network paths. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L272` |
-| <a id="network.smb-enable-quic"></a> `network.smb-enable-quic` | SMB: Enable QUIC | Enables SMB over QUIC for client and server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L284` |
-| <a id="network.smb-encrypt-data"></a> `network.smb-encrypt-data` | SMB: Require Encryption | Requires SMB server encryption for shared data. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L236` |
-| <a id="network.smb-reject-unencrypted-access"></a> `network.smb-reject-unencrypted-access` | SMB: Reject Unencrypted Access | Rejects SMB clients that do not support encryption. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L248` |
-| <a id="network.smb-require-dialect-3_1_1"></a> `network.smb-require-dialect-3_1_1` | SMB: Require Dialect 3.1.1 | Restricts SMB client/server dialects to SMB 3.1.1 or newer. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L296` |
-| <a id="network.smb-require-signing-client"></a> `network.smb-require-signing-client` | SMB: Require Client Signing | Requires SMB client signing for outbound connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L209` |
-| <a id="network.smb-require-signing-server"></a> `network.smb-require-signing-server` | SMB: Require Signing (Server) | Requires SMB server signing for inbound connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L222` |
-| <a id="network.smb-set-cipher-suite-order"></a> `network.smb-set-cipher-suite-order` | SMB: Set Cipher Suite Order | Sets the SMB encryption cipher suite order to AES-256 variants. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L310` |
+| <a id="network.smb-disable-leasing"></a> `network.smb-disable-leasing` | SMB: Disable Leasing | Disables SMB server leasing using the documented SMB server configuration surface. | Advanced | `WindowsOptimizer.Engine\Tweaks\Commands\Network\DisableSmbLeasingTweak.cs#L15` |
+| <a id="network.smb-enable-large-mtu"></a> `network.smb-enable-large-mtu` | SMB: Enable Large MTU | Enables large MTU support for SMB client connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L202` |
+| <a id="network.smb-enable-multichannel"></a> `network.smb-enable-multichannel` | SMB: Enable Multichannel | Enables SMB Multichannel on the documented SMB client and SMB server configuration surfaces. | Advanced | `WindowsOptimizer.Engine\Tweaks\Commands\Network\EnableSmbMultichannelTweak.cs#L16` |
+| <a id="network.smb-enable-quic"></a> `network.smb-enable-quic` | SMB: Enable QUIC | Enables SMB over QUIC for client and server. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L269` |
+| <a id="network.smb-encrypt-data"></a> `network.smb-encrypt-data` | SMB: Require Encryption | Requires SMB server encryption for shared data. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L241` |
+| <a id="network.smb-reject-unencrypted-access"></a> `network.smb-reject-unencrypted-access` | SMB: Reject Unencrypted Access | Rejects SMB clients that do not support encryption. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L253` |
+| <a id="network.smb-require-dialect-3_1_1"></a> `network.smb-require-dialect-3_1_1` | SMB: Require Dialect 3.1.1 | Restricts SMB client/server dialects to exactly SMB 3.1.1. | Risky | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L281` |
+| <a id="network.smb-require-signing-client"></a> `network.smb-require-signing-client` | SMB: Require Client Signing | Requires SMB client signing for outbound connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L214` |
+| <a id="network.smb-require-signing-server"></a> `network.smb-require-signing-server` | SMB: Require Signing (Server) | Requires SMB server signing for inbound connections. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L227` |
+| <a id="network.smb-set-cipher-suite-order"></a> `network.smb-set-cipher-suite-order` | SMB: Set Cipher Suite Order | Sets the SMB encryption cipher suite order to AES-256 variants. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\NetworkTweakProvider.cs#L295` |
 <!-- TWEAK INDEX END -->

@@ -1,4 +1,4 @@
-# Windows Policies
+﻿# Windows Policies
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 > **Doc note (2025-12-27):** This document is a reference for Windows policy (ADMX) notes and parsing. The app currently only links out to documentation; it does not ship a full policy editor UI.

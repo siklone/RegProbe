@@ -40,8 +40,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
 | `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
-| `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb` | 1 |
-| `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `7543ec7f7cc3822bcd0a772da1b7be217691616f539ac2600cd3fb4f7c753a33` | `8b792ad081c25666c1212d9ac5d02658188059f46eb3e7f5853d28765d0f84fa` | 1 |
+| `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69` | 1 |
+| `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `14375a69f2cb3b5099925cd2c9522aa270c3a7e495bcc8269409808c71cff751` | `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256` | 1 |
 | `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
 | `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd` | `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0` | 1 |
 | `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 1 |
@@ -962,7 +962,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json`
 - Source SHA256: `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39`
-- Proof SHA256: `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb`
+- Proof SHA256: `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69`
 
 **Summary:** Deprecated audit trail for the Offline Files service subrecord. The app disables CSC and CscService as part of the broader Offline Files bundle, but the validated publishable control surface is tracked separately in the policy record.
 
@@ -976,15 +976,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | `high`
 - `app-privacy-provider` | `repo-code` | Current privacy provider service bundle | `high`
+- `repo-privacy-verified-offline-files` | `repo-doc` | Repo privacy docs for Offline Files service hardening | `high`
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| exact_quote_or_path | Existing Offline Files policy record: The core Offline Files feature policy is already documented separately. |
+| source_url | Docs/privacy/privacy-verified.md |
+| exact_quote_or_path | Repo privacy docs for Offline Files service hardening: the repo docs list the Set-Service commands for CSC and CscService along with the registry policy path. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-privacy-verified-offline-files (repo-doc); deprecated audit trail. |
 ### `privacy.disable-offline-files.tasks`
 
 - Status: `deprecated`
@@ -992,8 +993,8 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Scheduled Task Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json`
-- Source SHA256: `7543ec7f7cc3822bcd0a772da1b7be217691616f539ac2600cd3fb4f7c753a33`
-- Proof SHA256: `8b792ad081c25666c1212d9ac5d02658188059f46eb3e7f5853d28765d0f84fa`
+- Source SHA256: `14375a69f2cb3b5099925cd2c9522aa270c3a7e495bcc8269409808c71cff751`
+- Proof SHA256: `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256`
 
 **Summary:** Deprecated audit trail for the Offline Files task subrecord. The app disables the Offline Files background and logon synchronization tasks, but the publishable control surface is tracked separately in the policy record.
 
@@ -1007,15 +1008,16 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | `high`
 - `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | `high`
+- `repo-privacy-offline-files-tasks` | `repo-doc` | Repo privacy docs for Offline Files scheduled tasks | `high`
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| exact_quote_or_path | Existing Offline Files policy record: The validated policy record documents the official feature control separately from this task bundle. |
+| source_url | Docs/privacy/privacy.md |
+| exact_quote_or_path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks (they're disabled by default), and renames mobsync.exe to block execution. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-privacy-offline-files-tasks (repo-doc); deprecated audit trail. |
 ### `privacy.disable-reserved-storage`
 
 - Status: `deprecated`

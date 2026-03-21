@@ -1,7 +1,7 @@
-# Disable UAC
+﻿# Disable UAC
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Related guides:
 - [Security verified documentation](security-verified.md)
@@ -109,7 +109,7 @@ Value: `EnableVirtualization`
 | `0x00000000` | Disables data redirection for interactive processes.                                          |
 | `0x00000001` | Enables file and registry redirection for legacy apps to allow writes in user-writable paths. |
 
-> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/12867da0-2e4e-4a4f-9dc4-84a7f354c8d9  
+> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/12867da0-2e4e-4a4f-9dc4-84a7f354c8d9
 > https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration?tabs=reg
 
 ![](https://github.com/nohuto/win-config/blob/main/system/images/uac.png?raw=true)
@@ -128,7 +128,7 @@ Used to make powershell (`.ps1`) scripts work on your PC without showing any war
 | `EnableTranscripting` | Enables or disables transcription of PowerShell commands. If enabled, records the input and output of PowerShell commands into text-based transcripts stored by default in My Documents. |
 | `EnableScripts` | Controls which types of scripts are allowed to run on the system. Options include allowing only signed scripts, allowing local scripts and remote signed scripts, or allowing all scripts to run. |
 
-| **Scope**​ | **Description​** |
+| **Scope**â€‹ | **Descriptionâ€‹** |
 |---- | ---- |
 | `MachinePolicy` | Set by a Group Policy for all users of the computer |
 | `UserPolicy` | Set by a Group Policy for the current user of the computer |
@@ -157,11 +157,11 @@ Get-ExecutionPolicy -l
 powershell.exe    HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell\ExecutionPolicy    Type: REG_SZ, Length: 26, Data: Unrestricted
 ```
 
-> https://powershellisfun.com/2022/07/31/powershell-and-logging/  
-> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-7.5  
-> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5  
-> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_config?view=powershell-7.5  
-> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5  
+> https://powershellisfun.com/2022/07/31/powershell-and-logging/
+> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-7.5
+> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5
+> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_config?view=powershell-7.5
+> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.5
 > https://learn.microsoft.com/en-us/previous-versions/troubleshoot/browsers/security-privacy/ie-security-zones-registry-entries#zones
 > https://gpsearch.azurewebsites.net/#4954
 
@@ -312,7 +312,7 @@ bcdedit /set nx OptIn
 |**AlwaysOn** | Enables DEP for the operating system and all processes, including the Windows kernel and drivers. All attempts to disable DEP are ignored. |
 |**AlwaysOff** | Disables DEP. Attempts to enable DEP selectively are ignored. On Windows Vista, this parameter also disables Physical Address Extension (PAE). This parameter does not disable PAE on Windows Server 2008. |
 
-> https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention  
+> https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention
 > https://github.com/MicrosoftDocs/windows-driver-docs/blob/staging/windows-driver-docs-pr/devtest/bcdedit--set.md#verification-settings
 
 `MoveImages` value (`ASLR`) - it's recommended, to disable ASLR for a specific process instead:
@@ -760,9 +760,9 @@ Does:
 "wmiprvse.exe", "RegSetValue","HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore\RPSessionInterval","Type: REG_DWORD, Length: 4, Data: 0"
 ```
 
-> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/disable-computerrestore?view=powershell-5.1  
-> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin-delete-shadows  
-> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin-list-shadows  
+> https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/disable-computerrestore?view=powershell-5.1
+> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin-delete-shadows
+> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/vssadmin-list-shadows
 > https://learn.microsoft.com/en-us/windows-server/storage/file-server/volume-shadow-copy-service
 
 # Disable Downloads Blocking
@@ -774,8 +774,8 @@ Windows adds a hidden tag called `Zone.Identifier` to files downloaded from the 
 gi * -Stream "Zone.Identifier" -ErrorAction SilentlyContinue
 ```
 
-> https://www.cyberengage.org/post/unveiling-file-origins-the-role-of-alternate-data-streams-ads-zone-identifier-in-forensic-inve  
-> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/6e3f7352-d11c-4d76-8c39-2516a9df36e8?redirectedfrom=MSDN  
+> https://www.cyberengage.org/post/unveiling-file-origins-the-role-of-alternate-data-streams-ads-zone-identifier-in-forensic-inve
+> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/6e3f7352-d11c-4d76-8c39-2516a9df36e8?redirectedfrom=MSDN
 > https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms537183(v=vs.85)?redirectedfrom=MSDN
 
 ```powershell
@@ -783,17 +783,17 @@ gc -Path "C:\Path\Script.ps1" -Stream Zone.Identifier
 ```
 
 **ZoneID** (`HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones`) - number indicating the security zone the file came from:
-`0` – Local machine
-`1` – Local intranet (internal network)
-`2` – Trusted sites
-`3` – Internet (mostly web downloads)
-`4` – Untrusted / Restricted sites (flagged as dangerous by smartscreen)
+`0` â€“ Local machine
+`1` â€“ Local intranet (internal network)
+`2` â€“ Trusted sites
+`3` â€“ Internet (mostly web downloads)
+`4` â€“ Untrusted / Restricted sites (flagged as dangerous by smartscreen)
 
 Files downloaded from the internet still getting blocked? Unblock it/them with (one of them):
 ```powershell
 Unblock-File -Path "C:\Path\Script.ps1" -> File
 
-dir C:\Path\*Files* | Unblock-File -> Multiple files 
+dir C:\Path\*Files* | Unblock-File -> Multiple files
 ```
 
 ```powershell
@@ -831,7 +831,7 @@ WPBT allows hardware manufacturers to run programs during Windows startup that m
 \Registry\Machine\SYSTEM\ControlSet001\Control\Session Manager : DisableWpbtExecution
 ```
 
-> https://persistence-info.github.io/Data/wpbbin.html  
+> https://persistence-info.github.io/Data/wpbbin.html
 > https://github.com/Jamesits/dropWPBT
 
 # Block MRT via WU
@@ -851,8 +851,8 @@ Disable bitlocker on all volumes:
 $nvbvol = Get-BitLockerVolume
 Disable-BitLocker -MountPoint $nvbvol
 ```
-> https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/  
-> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior  
+> https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/
+> https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior
 > https://learn.microsoft.com/en-us/powershell/module/bitlocker/disable-bitlocker?view=windowsserver2025-ps
 
 `fsutil behavior set disableencryption 1` sets:
@@ -907,12 +907,12 @@ One such example security solution is memory integrity, which protects and harde
 | IOMMUs or SMMUs (Intel VT-D, AMD-Vi, Arm64 SMMUs) | All I/O devices capable of DMA must be behind an IOMMU or SMMU. An IOMMU can be used to enhance system resiliency against memory attacks. |
 | Trusted Platform Module (TPM) 2.0 | For more information, see Trusted Platform Module (TPM) 2.0. |
 | Firmware support for SMM protection | System firmware must adhere to the recommendations for hardening SMM code described in the Windows SMM Security Mitigations Table (WSMT) specification. The WSMT specification contains details of an ACPI table that was created for use with Windows operating systems that support VBS features. Firmware must implement the protections described in the WSMT specification, and set the corresponding protection flags as described in the specification to report compliance with these requirements to the operating system. |
-| Unified Extensible Firmware Interface (UEFI)<br>Memory Reporting | UEFI firmware must adhere to the following memory map reporting format and memory allocation guidelines in order for firmware to ensure compatibility with VBS.<br><br>• UEFI v2.6 Memory Attributes Table (MAT) - To ensure compatibility with VBS, firmware must cleanly separate EFI runtime memory ranges for code and data, and report this to the operating system. Proper segregation and reporting of EFI runtime memory ranges allows VBS to apply the necessary page protections to EFI runtime services code pages within the VBS secure region.<br><br>Conveying this information to the OS is accomplished using the EFI_MEMORY_ATTRIBUTES_TABLE. To implement the UEFI MAT, follow these guidelines:<br><br>1. The entire EFI runtime must be described by this table.<br>2. All appropriate attributes for EfiRuntimeServicesData and EfiRuntimeServicesCode pages must be marked.<br>3. These ranges must be aligned on page boundaries (4KB), and can not overlap.<br><br>• EFI Page Protections - All entries must include attributes EFI_MEMORY_RO, EFI_MEMORY_XP, or both. All UEFI memory that is marked executable must be read only. Memory marked writable must not be executable. Entries may not be left with neither of the attributes set, indicating memory that is both executable and writable. |
+| Unified Extensible Firmware Interface (UEFI)<br>Memory Reporting | UEFI firmware must adhere to the following memory map reporting format and memory allocation guidelines in order for firmware to ensure compatibility with VBS.<br><br>â€¢ UEFI v2.6 Memory Attributes Table (MAT) - To ensure compatibility with VBS, firmware must cleanly separate EFI runtime memory ranges for code and data, and report this to the operating system. Proper segregation and reporting of EFI runtime memory ranges allows VBS to apply the necessary page protections to EFI runtime services code pages within the VBS secure region.<br><br>Conveying this information to the OS is accomplished using the EFI_MEMORY_ATTRIBUTES_TABLE. To implement the UEFI MAT, follow these guidelines:<br><br>1. The entire EFI runtime must be described by this table.<br>2. All appropriate attributes for EfiRuntimeServicesData and EfiRuntimeServicesCode pages must be marked.<br>3. These ranges must be aligned on page boundaries (4KB), and can not overlap.<br><br>â€¢ EFI Page Protections - All entries must include attributes EFI_MEMORY_RO, EFI_MEMORY_XP, or both. All UEFI memory that is marked executable must be read only. Memory marked writable must not be executable. Entries may not be left with neither of the attributes set, indicating memory that is both executable and writable. |
 | Secure Memory Overwrite Request (MOR)<br>revision 2 | Secure MOR v2 is enhanced to protect the MOR lock setting using a UEFI secure variable. This helps guard against advanced memory attacks. For details, see Secure MOR implementation. |
 | Memory integrity-compatible drivers | Ensure all system drivers have been tested and verified to be compatible with memory integrity. The Windows Driver Kit and Driver Verifier contain tests for driver compatibility with memory integrity. There are three steps to verify driver compatibility:<br><br>1. Use Driver Verifier with the Code Integrity compatibility checks enabled.<br>2. Run the Hypervisor Code Integrity Readiness Test in the Windows HLK.<br>3. Test the driver on a system with VBS and memory integrity enabled. This step is imperative to validate the driver's behavior with memory integrity, as static code analysis tools simply aren't capable of detecting all memory integrity violations possible at runtime. |
 | Secure Boot | Secure Boot must be enabled on devices leveraging VBS. For more information, see Secure Boot |
 
-> https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs  
+> https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs
 > https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/
 > https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity?tabs=security
 
@@ -998,13 +998,13 @@ Set-VMSecurity -VMName <VMName> -VirtualizationBasedSecurityOptOut $true
 },
 ```
 
-# Disable Password Reveal 
+# Disable Password Reveal
 
 Requires elevation: Yes (system policies).
 
 "This policy setting allows you to configure the display of the password reveal button in password entry user experiences. If you enable this policy setting, the password reveal button won't be displayed after a user types a password in the password entry text box. If you disable or don't configure this policy setting, the password reveal button will be displayed after a user types a password in the password entry text box. By default, the password reveal button is displayed after a user types a password in the password entry text box."
 
-`Disable Picture Password Sign-In`:  
+`Disable Picture Password Sign-In`:
 "This policy setting allows you to control whether a domain user can sign in using a picture password. If you enable this policy setting, a domain user can't set up or sign in with a picture password. If you disable or don't configure this policy setting, a domain user can set up and use a picture password. Note that the user's domain password will be cached in the system vault when using this feature."
 
 ```json
@@ -1060,7 +1060,7 @@ The option applies `0` = disables peer-to-peer (P2P) caching but still allows De
 | Group | `2` | When group mode is set, the group is automatically selected based on the device's Active Directory Domain Services (AD DS) site (Windows 10, version 1607) or the domain the device is authenticated to (Windows 10, version 1511). In group mode, peering occurs across internal subnets, between devices that belong to the same group, including devices in remote offices. You can use GroupID option to create your own custom group independently of domains and AD DS sites. Starting with Windows 10, version 1803, you can use the GroupIDSource parameter to take advantage of other method to create groups dynamically. Group download mode is the recommended option for most organizations looking to achieve the best bandwidth optimization with Delivery Optimization. |
 | Internet | `3` | Enable Internet peer sources for Delivery Optimization. |
 | Simple | `99` | Simple mode disables the use of Delivery Optimization cloud services completely (for offline environments). Delivery Optimization switches to this mode automatically when the Delivery Optimization cloud services are unavailable, unreachable, or when the content file size is less than 50 MB, as the default. In this mode, Delivery Optimization provides a reliable download experience over HTTP from the download's original source or a Microsoft Connected Cache server, with no peer-to-peer caching. |
-| Bypass | `100` | Starting in Windows 11, this option is deprecated. Don't configure Download mode to ‘100' (Bypass), which can cause some content to fail to download. If you want to disable peer-to-peer functionality, configure DownloadMode to (0). If your device doesn't have internet access, configure Download Mode to (99). When you configure Bypass (100), the download bypasses Delivery Optimization and uses BITS instead. You don't need to configure this option if you're using Configuration Manager. |
+| Bypass | `100` | Starting in Windows 11, this option is deprecated. Don't configure Download mode to â€˜100' (Bypass), which can cause some content to fail to download. If you want to disable peer-to-peer functionality, configure DownloadMode to (0). If your device doesn't have internet access, configure Download Mode to (99). When you configure Bypass (100), the download bypasses Delivery Optimization and uses BITS instead. You don't need to configure this option if you're using Configuration Manager. |
 
 > https://learn.microsoft.com/en-us/windows/deployment/do/waas-delivery-optimization-reference#download-mode
 
@@ -1083,7 +1083,7 @@ By default it uses a minimum size of `1024` bits (both) - hardens Windows TLS en
 
 "NSA recommends RSA key transport and ephemeral DH (DHE) or ECDH (ECDHE) mechanisms, with RSA or DHE key exchange using at least 3072-bit keys and ECDHE key exchanges using the secp384r1 elliptic curve. For RSA keytransport and DH/DHE key exchange, keys less than 2048 bits should not be used, and ECDH/ECDHE using custom curves should not be used."
 
-> https://media.defense.gov/2021/Jan/05/2002560140/-1/-1/0/ELIMINATING_OBSOLETE_TLS_UOO197443-20.PDF  
+> https://media.defense.gov/2021/Jan/05/2002560140/-1/-1/0/ELIMINATING_OBSOLETE_TLS_UOO197443-20.PDF
 > https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings?tabs=diffie-hellman
 
 # Disable Legacy TLS/Crypto
@@ -1095,7 +1095,7 @@ Disables legacy/insecure protocols, ciphers, renegotiation, hashes, and forces .
 | Setting | Description | Registry security level |
 | ---- | ---- | ---- |
 | Send LM & NTLM responses | Client devices use LM and NTLM authentication, and they never use NTLMv2 session security. Domain controllers accept LM, NTLM, and NTLMv2 authentication. | 0 |
-| Send LM & NTLM – use NTLMv2 session security if negotiated | Client devices use LM and NTLM authentication, and they use NTLMv2 session security if the server supports it. Domain controllers accept LM, NTLM, and NTLMv2 authentication. | 1 |
+| Send LM & NTLM â€“ use NTLMv2 session security if negotiated | Client devices use LM and NTLM authentication, and they use NTLMv2 session security if the server supports it. Domain controllers accept LM, NTLM, and NTLMv2 authentication. | 1 |
 | Send NTLM response only | Client devices use NTLMv1 authentication, and they use NTLMv2 session security if the server supports it. Domain controllers accept LM, NTLM, and NTLMv2 authentication. | 2 |
 | Send NTLMv2 response only | Client devices use NTLMv2 authentication, and they use NTLMv2 session security if the server supports it. Domain controllers accept LM, NTLM, and NTLMv2 authentication. | 3 |
 | Send NTLMv2 response only. Refuse LM | Client devices use NTLMv2 authentication, and they use NTLMv2 session security if the server supports it. Domain controllers refuse to accept LM authentication, and they'll accept only NTLM and NTLMv2 authentication. | 4 |
@@ -1103,8 +1103,8 @@ Disables legacy/insecure protocols, ciphers, renegotiation, hashes, and forces .
 
 Level `5` gets applied.
 
-> https://learn.microsoft.com/en-us/dotnet/framework/network-programming/tls#schusestrongcrypto  
-> https://dirteam.com/sander/2019/07/30/howto-disable-weak-protocols-cipher-suites-and-hashing-algorithms-on-web-application-proxies-ad-fs-servers-and-windows-servers-running-azure-ad-connect/  
+> https://learn.microsoft.com/en-us/dotnet/framework/network-programming/tls#schusestrongcrypto
+> https://dirteam.com/sander/2019/07/30/howto-disable-weak-protocols-cipher-suites-and-hashing-algorithms-on-web-application-proxies-ad-fs-servers-and-windows-servers-running-azure-ad-connect/
 > https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/network-security-lan-manager-authentication-level
 
 ![](https://github.com/nohuto/win-config/blob/main/security/images/insecureconn.png?raw=true)
@@ -1184,15 +1184,15 @@ Requires elevation: Yes (system policies).
 | TdrDodPresentDelay | `TdrDodPresentDelay` | `2` seconds (min 1, max 900) | Extra time for display-only drivers to report an async present before a TDR is triggered.                 |
 | TdrDodVSyncDelay   | `TdrDodVSyncDelay`   | `2` seconds (min 1, max 900) | Time the VSync watchdog waits for VSync from a display-only driver before triggering TDR.                 |
 
-> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/display/tdr-registry-keys.md  
+> https://github.com/nohuto/windows-driver-docs/blob/staging/windows-driver-docs-pr/display/tdr-registry-keys.md
 > https://docs.nvidia.com/gameworks/content/developertools/desktop/timeout_detection_recovery.htm
 
-Default values:  
-`TdrLimitTime` - `60` (doc) / `5` driver?  
-`TdrLimitCount` - `5`  
-`TdrLevel` - `3` (`TdrLevelRecover`)  
-`TdrDelay` - `2`  
-`TdrDdiDelay` - `5`  
+Default values:
+`TdrLimitTime` - `60` (doc) / `5` driver?
+`TdrLimitCount` - `5`
+`TdrLevel` - `3` (`TdrLevelRecover`)
+`TdrDelay` - `2`
+`TdrDdiDelay` - `5`
 `TdrDebugMode` `2` (`TDR_DEBUG_MODE_RECOVER_NO_PROMPT`)
 
 Driver code snippets:
@@ -1229,22 +1229,22 @@ if (dword_1C015B874 != v15) {
     WdLogGlobalForLineNumber = 2387;
 }
 ```
-> https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt  
+> https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt
 > [security/assets | TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c)
 
 # Password Age
 
 Requires elevation: Yes (system policies).
 
-`/MAXPWAGE:{days | UNLIMITED}`:  
+`/MAXPWAGE:{days | UNLIMITED}`:
 "Sets the maximum number of days that a password is valid. No limit is specified by using UNLIMITED. /MAXPWAGE can't be less than /MINPWAGE. The range is 1-999; the default is 90 days."
 
 ```powershell
-NET ACCOUNTS  
-[/FORCELOGOFF:{minutes | NO}]  
-[/MINPWLEN:length]  
-[/MAXPWAGE:{days | UNLIMITED}]  
-[/MINPWAGE:days]  
+NET ACCOUNTS
+[/FORCELOGOFF:{minutes | NO}]
+[/MINPWLEN:length]
+[/MAXPWAGE:{days | UNLIMITED}]
+[/MINPWAGE:days]
 [/UNIQUEPW:number] [/DOMAIN]
 ```
 
@@ -1353,7 +1353,7 @@ Note that sudo uses administrator previledges and doesn't include `TrustedInstal
 }
 ```
 
-> https://learn.microsoft.com/en-us/windows/advanced-settings/sudo/  
+> https://learn.microsoft.com/en-us/windows/advanced-settings/sudo/
 > https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/
 
 ## App Coverage Notes (Remote Assistance)

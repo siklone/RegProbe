@@ -1,4 +1,4 @@
-# Undocumented Key Runtime Validation
+﻿# Undocumented Key Runtime Validation
 
 Use this note for keys that remain undocumented after the normal documentation-first pass.
 

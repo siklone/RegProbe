@@ -1,7 +1,7 @@
-# NVFetch
+﻿# NVFetch
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect → Apply → Verify → Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
 
 Requires elevation: No.
 
@@ -47,9 +47,9 @@ nvfetch red
 ```
 Valid colors: `Black`, `Blue`, `Cyan`, `DarkBlue`, `DarkCyan`, `DarkGray`, `DarkGreen`, `DarkMagenta`, `DarkRed`, `DarkYellow`, `Gray`, `Green`, `Magenta`, `Red`, `White`, `Yellow`.
 
-> https://docs.nvidia.com/deploy/nvidia-smi/index.html  
-> https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance?view=powershell-7.5  
-> https://github.com/fastfetch-cli/fastfetch  
+> https://docs.nvidia.com/deploy/nvidia-smi/index.html
+> https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance?view=powershell-7.5
+> https://github.com/fastfetch-cli/fastfetch
 > https://github.com/dylanaraps/neofetch
 
 # Explorer Blur
@@ -66,11 +66,11 @@ Open `%LOCALAPPDATA%\Noverse\ExplorerBlur\Release` - `config.ini`:
 
 ```ini
 [config]
-; Effect type 
-; 0 = Blur 
-; 1 = Acrylic 
-; 2 = Mica 
-; 3 = Blur(Clear) 
+; Effect type
+; 0 = Blur
+; 1 = Acrylic
+; 2 = Mica
+; 3 = Blur(Clear)
 ; 4 =MicaAlt
 ; Blur is only available up to W11 22h2, Blur (Clear) is available in both W10 and W11, Mica is only available in W11.
 effect=1
@@ -254,7 +254,7 @@ Enable `Theme support` (dark mode) and disable `Check for updates automatically`
 
 Requires elevation: No.
 
-An improved editor that supports dark mode, a far better `Find` tool, and much more. 
+An improved editor that supports dark mode, a far better `Find` tool, and much more.
 
 Installation:
 ```powershell
@@ -322,10 +322,10 @@ export const enum TelemetryLevel {
 	enumDescriptions: [
 		localize('manual', "Disable automatic background update checks. Updates will be available if you manually check for updates."),
 ```
-> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/workbench/contrib/extensions/common/extensions.ts#L185  
-> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/extensions/git/package.nls.json#L155  
-> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/extensions/npm/package.nls.json#L26  
-> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/platform/telemetry/common/telemetry.ts#L83  
+> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/workbench/contrib/extensions/common/extensions.ts#L185
+> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/extensions/git/package.nls.json#L155
+> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/extensions/npm/package.nls.json#L26
+> https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/platform/telemetry/common/telemetry.ts#L83
 > https://github.com/microsoft/vscode/blob/274d71002ec805c8b4f61ade3f058dd3cac1aceb/src/vs/workbench/services/assignment/common/assignmentService.ts#L110
 
 # Disable VS Telemetry
@@ -336,7 +336,7 @@ Disables VS telemetry, SQM data collection, IntelliCode remote analysis, feedbac
 
 ```powershell
 "14.0" = "VS 2015"
-"15.0" = "VS 2017" 
+"15.0" = "VS 2017"
 "16.0" = "VS 2019"
 "17.0" = "VS 2022"
 ```
@@ -409,11 +409,11 @@ Disables logging, data collection, opts out from CEIP, disables feedback collect
 
 | Category                                     | Where it appears | What the agent collects (by default)                                                                                                    | Scope / Versions                                                | Notes & Exceptions                                                                                                                                                                       |
 | -------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Recently opened documents & templates        | Documents                              | File name; file format/extension; total users; number of Office users/sessions                                                          | Office 2003–2019/2016 (agent supports multiple Office versions) | For network/SharePoint files: only file name + location. If MRU is disabled, no document inventory is collected. Outlook: no document inventory. OneNote: only notebook name + location. |
-| Document details                             | Document details                       | User name; computer name; location (path/URL); size (KB); author; last loaded; title; Office version                                    | Office 2003–2019/2016                                           | Same exceptions as above (MRU off, Outlook, OneNote, network/SharePoint).                                                                                                                |
-| Recently loaded add-ins & Apps for Office    | Solutions                              | Solution name; total users; number of Office users                                                                                      | Office 2003–2019/2016                                           | -                                                                                                                                                                                        |
-| Add-in / App details                         | Solution details                       | User name; computer name; solution version; architecture (x86/x64/ARM); load time; description; size (KB); location (DLL/manifest path) | Office 2003–2019/2016                                           | -                                                                                                                                                                                        |
-| User data (agents)                           | Agents                                 | User name; level (telemetry level); computer; last updated; label (1–4); agent version                                                  | All supported                                                   | -                                                                                                                                                                                        |
+| Recently opened documents & templates        | Documents                              | File name; file format/extension; total users; number of Office users/sessions                                                          | Office 2003â€“2019/2016 (agent supports multiple Office versions) | For network/SharePoint files: only file name + location. If MRU is disabled, no document inventory is collected. Outlook: no document inventory. OneNote: only notebook name + location. |
+| Document details                             | Document details                       | User name; computer name; location (path/URL); size (KB); author; last loaded; title; Office version                                    | Office 2003â€“2019/2016                                           | Same exceptions as above (MRU off, Outlook, OneNote, network/SharePoint).                                                                                                                |
+| Recently loaded add-ins & Apps for Office    | Solutions                              | Solution name; total users; number of Office users                                                                                      | Office 2003â€“2019/2016                                           | -                                                                                                                                                                                        |
+| Add-in / App details                         | Solution details                       | User name; computer name; solution version; architecture (x86/x64/ARM); load time; description; size (KB); location (DLL/manifest path) | Office 2003â€“2019/2016                                           | -                                                                                                                                                                                        |
+| User data (agents)                           | Agents                                 | User name; level (telemetry level); computer; last updated; label (1â€“4); agent version                                                  | All supported                                                   | -                                                                                                                                                                                        |
 | Hardware & software inventory (per computer) | Telemetry Processor                    | Computer name; level; users; computers; last updated (date/time)                                                                        | All supported                                                   | -                                                                                                                                                                                        |
 | Office deployment mix                        | Deployments                            | Office versions; # of 32-bit deployments; # of 64-bit deployments; # of ARM deployments                                                 | All supported                                                   | -                                                                                                                                                                                        |
 | Runtime document telemetry                   | Documents (runtime fields)             | Success (%); sessions; critical compatibility issue or crash; informative compatibility issue or load failure                           | Office 2013/2016/2019 (Excel/Outlook/PowerPoint/Word)           | Shown only after the app is run and documents/solutions are opened.                                                                                                                      |
@@ -459,7 +459,7 @@ Disables logging, data collection, opts out from CEIP, disables feedback collect
 - `0` = Allow reporting
 - Default = `0` (Allow reporting)
 
-> https://learn.microsoft.com/en-us/office/compatibility/data-that-the-telemetry-agent-collects-in-office  
+> https://learn.microsoft.com/en-us/office/compatibility/data-that-the-telemetry-agent-collects-in-office
 > https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office
 
 # Disable OneDrive
@@ -571,7 +571,7 @@ Edge is a whole mess, I wouldn't recommend anyone to use it, but here's an optio
 | `ShowRecommendationsEnabled` | Recommendations and desktop notifications |
 | `HideFirstRunExperience` | First-run experience |
 | `PinBrowserEssentialsToolbarButton` | Browser Essentials toolbar button |
-| `DefaultBrowserSettingEnabled` | "Set Edge as default browser” prompts |
+| `DefaultBrowserSettingEnabled` | "Set Edge as default browserâ€ prompts |
 | `EdgeFollowEnabled` | Follow creators |
 | `HubsSidebarEnabled` | Sidebar |
 | `StandaloneHubsSidebarEnabled` | Standalone Sidebar |
@@ -590,7 +590,7 @@ Edge is a whole mess, I wouldn't recommend anyone to use it, but here's an optio
 | `NewTabPageQuickLinksEnabled` | Quick links on New Tab |
 | `NewTabPageAllowedBackgroundTypes` | New Tab background image (restricts types) |
 | `NewTabPageContentEnabled` | Microsoft content on New Tab (news, highlights, etc.) |
-| `DisableHelpSticker` | Windows help tips ("help stickers”) |
+| `DisableHelpSticker` | Windows help tips ("help stickersâ€) |
 | `DisableMFUTracking` | Tracking of most-frequently-used apps |
 | `DisableRecentApps` | Recent apps UI in upper-left corner |
 | `DisableCharms` | Charms UI in upper-right corner |
@@ -760,7 +760,7 @@ SHA512: 4DFF4EA340F0A823F15D3F4F01AB62EAE0E5DA579CCB851F8DB9DFE84C58B2B37B89903A
 As you can see, adding a `1` to the file content has completely changed the hash values. You can try this yourself by editing the paths.
 
 ```c
-MD5("") 
+MD5("")
 0x d41d8cd98f00b204e9800998ecf8427e
 SHA1("")
 0x da39a3ee5e6b4b0d3255bfef95601890afd80709
@@ -771,8 +771,8 @@ SHA384("")
 SHA512("")
 0x cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
 ```
-> [SHA-2 | wikipedia](https://en.wikipedia.org/wiki/SHA-2#Test_vectors)  
-> [MD5 | wikipedia](https://en.wikipedia.org/wiki/MD5#MD5_hashes)  
+> [SHA-2 | wikipedia](https://en.wikipedia.org/wiki/SHA-2#Test_vectors)
+> [MD5 | wikipedia](https://en.wikipedia.org/wiki/MD5#MD5_hashes)
 > [SHA-1 | wikipedia](https://en.wikipedia.org/wiki/SHA-1#Example_hashes)
 
 ## App Coverage Notes (Search Suggestions)
@@ -791,8 +791,6 @@ Do not edit manually.
 | <a id="misc.disable-edge-features"></a> `misc.disable-edge-features` | Disable Microsoft Edge Features | Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeU... | Advanced | `WindowsOptimizer.Engine\Tweaks\Misc\DisableEdgeFeaturesTweaks.cs#L88` |
 | <a id="misc.disable-office-telemetry"></a> `misc.disable-office-telemetry` | Disable Microsoft Office Telemetry | Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications. | Safe | `WindowsOptimizer.Engine\Tweaks\Misc\DisableOfficeTelemetryTweak.cs#L51` |
 | <a id="misc.disable-onedrive"></a> `misc.disable-onedrive` | Disable OneDrive | Completely disables OneDrive sync, hides it from File Explorer, and prevents network traffic before user sign-in. | Advanced | `WindowsOptimizer.Engine\Tweaks\Misc\DisableOneDriveTweaks.cs#L36` |
-| <a id="misc.disable-search-web-results"></a> `misc.disable-search-web-results` | Disable Search Web Results | Prevents Windows Search from showing Bing web results in the Start menu. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\MiscTweakProvider.cs#L44` |
 | <a id="misc.disable-visual-studio-telemetry"></a> `misc.disable-visual-studio-telemetry` | Disable Visual Studio Telemetry | Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022. | Safe | `WindowsOptimizer.Engine\Tweaks\Misc\DisableVisualStudioTelemetryTweak.cs#L37` |
-| <a id="misc.notepadplusplus-default-editor"></a> `misc.notepadplusplus-default-editor` | Set Notepad++ as Default Editor | Sets Notepad++ as the default editor for batch files and text files. Requires Notepad++ to be installed. | Safe | `WindowsOptimizer.Engine\Tweaks\Misc\SetNotepadPlusPlusDefaultEditorTweak.cs#L22` |
 | <a id="misc.optimize-7zip-settings"></a> `misc.optimize-7zip-settings` | Optimize 7-Zip Context Menu Settings | Configures 7-Zip with optimal settings: cascaded menu, eliminate duplicate extraction folders, show icons in context menu, and propagate... | Safe | `WindowsOptimizer.Engine\Tweaks\Misc\SevenZipSettingsTweak.cs#L54` |
 <!-- TWEAK INDEX END -->

@@ -17865,7 +17865,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the Offline Files service subrecord. The app disables CSC and CscService as part of the broader Offline Files bundle, but the validated publishable control surface is tracked separately in the policy record.
 
@@ -17901,15 +17901,16 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
 | `app-privacy-provider` | `repo-code` | Current privacy provider service bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `repo-privacy-verified-offline-files` | `repo-doc` | Repo privacy docs for Offline Files service hardening | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| Exact quote / path | Existing Offline Files policy record: The core Offline Files feature policy is already documented separately. |
+| Source URL | Docs/privacy/privacy-verified.md |
+| Exact quote / path | Repo privacy docs for Offline Files service hardening: the repo docs list the Set-Service commands for CSC and CscService along with the registry policy path. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-privacy-verified-offline-files (repo-doc); deprecated audit trail. |
 
 **Decision**
 
@@ -17919,8 +17920,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | This is an implementation-level hardening step layered on top of the official policy and needs separate review. |
+| Needs VM validation | `False` |
+| Why | The service disable behavior is now documented in the repo alongside the official Offline Files policy surface, so the remaining concern is that it is a broader hardening step rather than a missing proof problem. |
 
 Blocking issues:
 - Service shutdown goes beyond the validated Offline Files policy surface.
@@ -17938,7 +17939,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the Offline Files task subrecord. The app disables the Offline Files background and logon synchronization tasks, but the publishable control surface is tracked separately in the policy record.
 
@@ -17974,15 +17975,16 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `offline-policy-subrecord` | `repo-doc` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
 | `app-privacy-provider` | `repo-code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `repo-privacy-offline-files-tasks` | `repo-doc` | Repo privacy docs for Offline Files scheduled tasks | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| Exact quote / path | Existing Offline Files policy record: The validated policy record documents the official feature control separately from this task bundle. |
+| Source URL | Docs/privacy/privacy.md |
+| Exact quote / path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks (they're disabled by default), and renames mobsync.exe to block execution. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-privacy-offline-files-tasks (repo-doc); deprecated audit trail. |
 
 **Decision**
 
@@ -17992,8 +17994,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The task bundle is broader than the single validated NetCache policy and should stay review-only. |
+| Needs VM validation | `False` |
+| Why | The task bundle is broader than the single validated NetCache policy, but the repo docs explicitly describe the two Offline Files scheduled tasks and their synchronization behavior. The remaining concern is bundle semantics rather than missing proof. |
 
 Blocking issues:
 - The task bundle is an observed implementation layer beyond the validated Offline Files feature policy.

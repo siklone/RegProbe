@@ -1,17 +1,17 @@
-# Tweak Dokümantasyon Şablonu
+﻿# Tweak DokÃ¼mantasyon Åžablonu
 
-Bu şablon, yeni tweak ekleme veya mevcut tweak'leri belgeleme için kullanılır.
+Bu ÅŸablon, yeni tweak ekleme veya mevcut tweak'leri belgeleme iÃ§in kullanÄ±lÄ±r.
 
 ---
 
-## Tweak Bilgi Kartı
+## Tweak Bilgi KartÄ±
 
 ```yaml
 id: tweak.category.name
-name: İnsan Okunabilir İsim
+name: Ä°nsan Okunabilir Ä°sim
 description: |
-  Tweak'in ne yaptığının açıklaması.
-  Bir cümlede özet.
+  Tweak'in ne yaptÄ±ÄŸÄ±nÄ±n aÃ§Ä±klamasÄ±.
+  Bir cÃ¼mlede Ã¶zet.
 risk: Safe | Advanced | Risky
 category: Privacy | System | Network | Power | etc.
 area: Registry | Service | Task | Command | Composite
@@ -24,59 +24,59 @@ windows_versions:
 
 ---
 
-## Detaylı Açıklama
+## DetaylÄ± AÃ§Ä±klama
 
 ### Ne Yapar?
-Tweak'in teknik açıklaması. Hangi registry anahtarlarını değiştiriyor, hangi servisleri durduruyor, vb.
+Tweak'in teknik aÃ§Ä±klamasÄ±. Hangi registry anahtarlarÄ±nÄ± deÄŸiÅŸtiriyor, hangi servisleri durduruyor, vb.
 
-### Neden Kullanılır?
-Kullanım senaryoları ve faydaları.
+### Neden KullanÄ±lÄ±r?
+KullanÄ±m senaryolarÄ± ve faydalarÄ±.
 
 ### Potansiyel Yan Etkiler
-- Liste halinde olası yan etkiler
+- Liste halinde olasÄ± yan etkiler
 - Hangi uygulamalar etkilenebilir
-- Uyumluluk sorunları
+- Uyumluluk sorunlarÄ±
 
 ---
 
 ## Teknik Detaylar
 
-### Registry Değişiklikleri
+### Registry DeÄŸiÅŸiklikleri
 ```
 HKEY_CURRENT_USER\Software\...
-  ValueName (REG_DWORD): OldValue → NewValue
+  ValueName (REG_DWORD): OldValue â†’ NewValue
 ```
 
-### Servis Değişiklikleri
+### Servis DeÄŸiÅŸiklikleri
 | Servis | Orijinal | Yeni |
 |--------|----------|------|
 | ServiceName | Automatic | Disabled |
 
-### Zamanlanmış Görevler
-| Görev Yolu | Durum |
+### ZamanlanmÄ±ÅŸ GÃ¶revler
+| GÃ¶rev Yolu | Durum |
 |------------|-------|
 | \Microsoft\Windows\... | Disabled |
 
 ---
 
-## Doğrulama Adımları
+## DoÄŸrulama AdÄ±mlarÄ±
 
-1. Registry Editor ile değerleri kontrol edin
+1. Registry Editor ile deÄŸerleri kontrol edin
 2. `services.msc` ile servis durumunu kontrol edin
-3. Task Scheduler ile görev durumunu kontrol edin
+3. Task Scheduler ile gÃ¶rev durumunu kontrol edin
 
 ---
 
-## Geri Alma Prosedürü
+## Geri Alma ProsedÃ¼rÃ¼
 
-Tweak otomatik olarak geri alınabilir. Manuel geri alma için:
+Tweak otomatik olarak geri alÄ±nabilir. Manuel geri alma iÃ§in:
 
-1. Adım 1
-2. Adım 2
+1. AdÄ±m 1
+2. AdÄ±m 2
 
 ---
 
 ## Referanslar
 
-- [Microsoft Docs: İlgili Sayfa](https://docs.microsoft.com/...)
+- [Microsoft Docs: Ä°lgili Sayfa](https://docs.microsoft.com/...)
 - [Windows Security Baseline](https://docs.microsoft.com/...)
