@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:30:16.575944Z",
+  "generated_utc": "2026-03-21T10:31:44.175970Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -3312,8 +3312,8 @@
       "tweak_id": "privacy.disable-inking-typing-personalization",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json",
-      "source_file_sha256": "38a5d80ae427ed6e1ff9ec7a11f6a959cf38a73a1b390e7d09c0e69dde87e136",
-      "source_file_size_bytes": 6512,
+      "source_file_sha256": "c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5",
+      "source_file_size_bytes": 7180,
       "name": "Inking and Typing Personalization Bundle",
       "category": "Privacy",
       "area": "Registry Bundle",
@@ -6571,8 +6571,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "Microsoft clearly documents the svchost splitting feature area, but this research pass did not capture a primary Microsoft source that publishes the exact max-DWORD override used by the app.",
+        "needs_vm_validation": false,
+        "why": "Microsoft clearly documents the svchost splitting feature area, the repo includes a decompiled SCM reader that queries SvcHostSplitThresholdInKB, and the current app implementation is directly traceable to that path. No additional VM validation path is currently yielding stronger proof for the deprecated audit trail.",
         "blocking_issues": [
           "No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.",
           "The current app override still relies on repo provenance for the raw threshold value."
@@ -6730,6 +6730,19 @@
             "value",
             "ui-mapping",
             "app-mismatch"
+          ]
+        },
+        {
+          "evidence_id": "decompiled-servicesplitting-scm",
+          "kind": "decompiled-pseudocode",
+          "title": "Decompiled SCM configuration reader for service splitting",
+          "location": "Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c",
+          "summary": "The decompiled service-control-manager helper calls RegQueryValueExW for SvcHostSplitThresholdInKB under HKLM\\SYSTEM\\CurrentControlSet\\Control, showing the threshold is consumed by the svchost grouping logic.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
           ]
         },
         {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:30:16.586997Z",
+  "generated_utc": "2026-03-21T10:31:44.191683Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -3269,8 +3269,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The bundle is real, but it still needs clearer per-target sourcing and user-facing explanation.",
+        "needs_vm_validation": false,
+        "why": "The bundle is real and now backed by explicit repo documentation for each underlying policy. The remaining issue is bundle semantics and user-facing explanation rather than missing proof.",
         "blocking_issues": [
           "Mixed bundle semantics are not yet explained well enough for a validated toggle."
         ]
@@ -3407,13 +3407,26 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "repo-privacy-verified-inking-typing",
+          "kind": "repo-doc",
+          "title": "Repo privacy docs for inking and typing personalization",
+          "location": "Docs/privacy/privacy.md",
+          "summary": "The repo docs enumerate AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace with explicit enabled and disabled values that match the current provider bundle.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
         }
       ],
       "validation_proof": {
-        "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-        "exact_quote_or_path": "Current privacy provider typing and ink bundle: The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0.",
+        "source_url": "Docs/privacy/privacy.md",
+        "exact_quote_or_path": "Repo privacy docs for inking and typing personalization: AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace are explicitly documented with enabled and disabled values.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-privacy-verified-inking-typing (repo-doc); deprecated audit trail."
       }
     },
     {

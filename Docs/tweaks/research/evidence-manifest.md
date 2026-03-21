@@ -37,7 +37,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f` | `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73` | 1 |
 | `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
 | `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `624557996b1de629d06b47e4d7234da2f4c35957e0dd1d126892688549d11671` | `257ccce633350676c52defc3bccbc34c2e43a320e908ca1ee5dce0b01993d27b` | 1 |
-| `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `38a5d80ae427ed6e1ff9ec7a11f6a959cf38a73a1b390e7d09c0e69dde87e136` | `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84` | 1 |
+| `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
 | `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
 | `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `62ac52404c43f97b5ee0976797a053e46547335053da863a8f001380012075b3` | `adadec7948b23d39cad0018b497c23db6bbb5778b660203ca07e47b7ceaa17cb` | 1 |
@@ -869,7 +869,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json`
-- Source SHA256: `38a5d80ae427ed6e1ff9ec7a11f6a959cf38a73a1b390e7d09c0e69dde87e136`
+- Source SHA256: `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5`
 - Proof SHA256: `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84`
 
 **Summary:** Deprecated audit trail for the old inking and typing personalization bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
@@ -1425,6 +1425,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-svchost-service-refactoring` | `official-doc` | Microsoft Learn: Service host grouping in Windows 10 | `high`
 - `repo-system-doc-service-splitting` | `repo-doc` | Repo system research notes for service splitting | `medium`
+- `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | Decompiled SCM configuration reader for service splitting | `medium`
 - `app-system-provider` | `repo-code` | Current app implementation | `high`
 
 **Validation proof**

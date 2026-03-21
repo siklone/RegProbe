@@ -18802,7 +18802,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for svchost service splitting. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\SvcHostSplitThresholdInKB = 0xFFFFFFFF to keep svchost service splitting from triggering on normal systems, but this research pass did not capture a primary Microsoft source that publishes 0xFFFFFFFF as the supported disable-splitting preset.
 
@@ -18838,6 +18838,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-svchost-service-refactoring` | `official-doc` | Microsoft Learn: Service host grouping in Windows 10 | https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring | `high` | behavior, side-effects, version-scope |
 | `repo-system-doc-service-splitting` | `repo-doc` | Repo system research notes for service splitting | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | Decompiled SCM configuration reader for service splitting | Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c | `medium` | path, value, behavior |
 | `app-system-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -18857,8 +18858,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | Microsoft clearly documents the svchost splitting feature area, but this research pass did not capture a primary Microsoft source that publishes the exact max-DWORD override used by the app. |
+| Needs VM validation | `False` |
+| Why | Microsoft clearly documents the svchost splitting feature area, the repo includes a decompiled SCM reader that queries SvcHostSplitThresholdInKB, and the current app implementation is directly traceable to that path. No additional VM validation path is currently yielding stronger proof for the deprecated audit trail. |
 
 Blocking issues:
 - No primary Microsoft source for the exact 0xFFFFFFFF no-splitting preset was captured in this research pass.
