@@ -93,7 +93,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
-| `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `be138f06d365aca0b48b8db6ef2514ed1010f0bf3fd8d93071552398ba19c2b7` | `924f10f0446949eaa0d7322817b3f335e1d1187cb2299d07d67541f81a651296` | 1 |
+| `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `924f10f0446949eaa0d7322817b3f335e1d1187cb2299d07d67541f81a651296` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
 | `network.disable-ipv6` | validated | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
 | `network.disable-llmnr` | validated | `Docs/tweaks/research/records/network.disable-llmnr.json` | `64bfbd33307d83a488f3f5e0b66cb44c38e70e3556487950f6d310bb9aa8b558` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
@@ -149,7 +149,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-advertising-id` | validated | `Docs/tweaks/research/records/privacy.disable-advertising-id.json` | `edd49eae00cb8bed1842e762e7a061284191e8518ffd6ac4afa825502ca823e5` | `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9` | 1 |
 | `privacy.disable-app-diagnostics` | validated | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
 | `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f` | `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0` | 1 |
-| `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997` | `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a` | 2 |
+| `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `32fdf673c98ded073a2f0a47920dc042cfacb15b2d48144401fb045532d40f30` | `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a` | 2 |
 | `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
 | `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
 | `privacy.disable-application-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-application-telemetry.json` | `67e8bd36fa534079200de42f85ee86b72e358addfd2af66853bb00673b524f17` | `a968b51a0de4ed20b602bb28e37277b16294b8a2e3956a3d3b351f6cf8d071e9` | 1 |
@@ -230,7 +230,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
 | `system.disable-app-archiving` | validated | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
-| `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a` | `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218` | 1 |
+| `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439` | `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218` | 1 |
 | `system.disable-background-gp-updates` | validated | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `6c59ea8cc07f64420609a9b49dfd691f3bd53ff49b5f1c7ab56d5ee69f00a181` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
 | `system.disable-clipboard-history` | validated | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `9e8131cc869f26cc23d0fd9a3232dd821cdab8ed70d53220accdd372d164c516` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
 | `system.disable-clipboard-redirection` | validated | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `5cb8ad836f2d87a8de6e42bacc351d0908a2dc6fd0fd204c3f68469550be2053` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
@@ -242,7 +242,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-search-remote-queries` | validated | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e` | 1 |
+| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
 | `system.disable-storage-sense` | validated | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -3996,7 +3996,7 @@ Nohuto lineage references:
 - Area: `Group Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.disable-active-probing.review.json`
-- Source SHA256: `be138f06d365aca0b48b8db6ef2514ed1010f0bf3fd8d93071552398ba19c2b7`
+- Source SHA256: `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa`
 - Proof SHA256: `924f10f0446949eaa0d7322817b3f335e1d1187cb2299d07d67541f81a651296`
 
 **Summary:** Microsoft documents NoActiveProbe = 1 as the policy state that turns off NCSI active tests. The app now writes only that official machine-policy value.
@@ -7148,7 +7148,7 @@ Nohuto lineage references:
 - Area: `Policy vs Observed User Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json`
-- Source SHA256: `69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997`
+- Source SHA256: `32fdf673c98ded073a2f0a47920dc042cfacb15b2d48144401fb045532d40f30`
 - Proof SHA256: `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a`
 
 **Summary:** Microsoft documents third-party app and content suggestions with the user policy HKCU\Software\Policies\Microsoft\Windows\CloudContent\DisableThirdPartySuggestions, and Microsoft Learn also documents the user-side ContentDeliveryManager value SystemPaneSuggestionsEnabled = 0. The current app writes the documented user-side value, so this record is now validated.
@@ -11479,7 +11479,7 @@ Windows Internals references:
 - Area: `Observed Registry Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json`
-- Source SHA256: `0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a`
+- Source SHA256: `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439`
 - Proof SHA256: `a7ad5b3f28edf54536e27120d35688f8f29f0b1c805972c8119fd71666b1b218`
 
 **Summary:** Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\Maintenance and restored the baseline.
@@ -12142,7 +12142,7 @@ Windows Internals references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-startup-delay.review.json`
 - Source SHA256: `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1`
-- Proof SHA256: `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e`
+- Proof SHA256: `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
 
@@ -12160,6 +12160,7 @@ Windows Internals references:
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | `medium` |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | `medium` |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | `medium` |
 
 **Provenance**
 
@@ -12189,7 +12190,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json |
 | exact_quote_or_path | HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
 | key_found_on_page | True |
-| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. |
+| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. |
 ### `system.disable-storage-sense`
 
 - Status: `validated`

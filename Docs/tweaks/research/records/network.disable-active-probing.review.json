@@ -189,6 +189,19 @@
         "path"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-ncsi-mirror",
+      "kind": "registry-observation",
+      "title": "nohuto mirror - NCSI NoActiveProbe registry evidence",
+      "location": "Docs/tweaks/_source-mirrors/win-config/network/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The local nohuto mirror records PolicyName and ValueName as NoActiveProbe and includes the registry path \\Registry\\Machine\\SOFTWARE\\Policies\\Microsoft\\WINDOWS\\NetworkConnectivityStatusIndicator : NoActiveProbe.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -206,6 +219,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\ICM.admx",
     "exact_quote_or_path": "<policy name=\"NoActiveProbe\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\" valueName=\"NoActiveProbe\">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network.",
     "key_found_on_page": true,
-    "notes": "Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly."
+    "notes": "Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. The local nohuto mirror independently corroborates the same policy name, value name, and registry path."
   }
 }

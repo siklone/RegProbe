@@ -240,6 +240,19 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-app-suggestions-mirror",
+      "kind": "registry-observation",
+      "title": "nohuto mirror - app suggestions registry evidence",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/23H2.txt and Docs/tweaks/_source-mirrors/win-registry/records/24H2.txt",
+      "summary": "The local nohuto mirror records the CloudContent policy name DisableThirdPartySuggestions and also shows the observed user-side ContentDeliveryManager setting SystemPaneSuggestionsEnabled in the registry dumps.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -258,6 +271,6 @@
     "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
     "exact_quote_or_path": "HKLM\\Temp\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f",
     "key_found_on_page": true,
-    "notes": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value."
+    "notes": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. The local nohuto mirror also captures the related CloudContent policy name and the observed registry setting in the source mirrors."
   }
 }

@@ -195,6 +195,19 @@
         "rollback"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-maintenance-mirror",
+      "kind": "registry-observation",
+      "title": "nohuto mirror - Automatic Maintenance registry evidence",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The local nohuto mirror records PolicyName and ValueName as MaintenanceDisabled and includes the registry path \\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance : MaintenanceDisabled.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -216,6 +229,6 @@
     "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
     "exact_quote_or_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__",
     "key_found_on_page": true,
-    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. The local nohuto mirror also shows the same MaintenanceDisabled registry path."
   }
 }

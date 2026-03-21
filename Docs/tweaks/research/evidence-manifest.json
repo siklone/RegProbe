@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T22:25:02.115604Z",
+  "generated_utc": "2026-03-21T22:30:38.566035Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -17019,8 +17019,8 @@
       "tweak_id": "network.disable-active-probing",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/network.disable-active-probing.review.json",
-      "source_file_sha256": "be138f06d365aca0b48b8db6ef2514ed1010f0bf3fd8d93071552398ba19c2b7",
-      "source_file_size_bytes": 8886,
+      "source_file_sha256": "d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa",
+      "source_file_size_bytes": 9639,
       "name": "NCSI Active Probing Policy",
       "category": "Network",
       "area": "Group Policy",
@@ -32959,8 +32959,8 @@
       "tweak_id": "privacy.disable-app-suggestions",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json",
-      "source_file_sha256": "69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997",
-      "source_file_size_bytes": 11632,
+      "source_file_sha256": "32fdf673c98ded073a2f0a47920dc042cfacb15b2d48144401fb045532d40f30",
+      "source_file_size_bytes": 12476,
       "name": "App Suggestions in Start",
       "category": "Privacy",
       "area": "Policy vs Observed User Setting",
@@ -55675,8 +55675,8 @@
       "tweak_id": "system.disable-auto-maintenance",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-auto-maintenance.review.json",
-      "source_file_sha256": "0e702564fe45f3c96b091227cd9112c465d7a1486d053831c4de41788d164d3a",
-      "source_file_size_bytes": 9801,
+      "source_file_sha256": "70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439",
+      "source_file_size_bytes": 10525,
       "name": "Automatic Maintenance",
       "category": "System",
       "area": "Observed Registry Setting",
@@ -59145,15 +59145,30 @@
             "rollback"
           ],
           "origin": "VM runtime diff"
+        },
+        {
+          "evidence_id": "procmon-startup-delay-shell-restart",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
+          "location": "H:\\Temp\\procmon-startup-delay.pml",
+          "summary": "Win25H2Clean Procmon capture during an Explorer restart while StartupDelayInMSec was toggled to 0 and restored. The trace backs the live shell startup-delay surface on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart."
       },
-      "validation_proof_sha256": "1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e",
+      "validation_proof_sha256": "0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

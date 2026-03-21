@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T22:25:02.153481Z",
+  "generated_utc": "2026-03-21T22:30:38.588218Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -16991,13 +16991,27 @@
             "path"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-ncsi-mirror",
+          "kind": "registry-observation",
+          "title": "nohuto mirror - NCSI NoActiveProbe registry evidence",
+          "location": "Docs/tweaks/_source-mirrors/win-config/network/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The local nohuto mirror records PolicyName and ValueName as NoActiveProbe and includes the registry path \\Registry\\Machine\\SOFTWARE\\Policies\\Microsoft\\WINDOWS\\NetworkConnectivityStatusIndicator : NoActiveProbe.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\ICM.admx",
         "exact_quote_or_path": "<policy name=\"NoActiveProbe\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\" valueName=\"NoActiveProbe\">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly."
+        "notes": "Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. The local nohuto mirror independently corroborates the same policy name, value name, and registry path."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -32813,13 +32827,27 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-app-suggestions-mirror",
+          "kind": "registry-observation",
+          "title": "nohuto mirror - app suggestions registry evidence",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/23H2.txt and Docs/tweaks/_source-mirrors/win-registry/records/24H2.txt",
+          "summary": "The local nohuto mirror records the CloudContent policy name DisableThirdPartySuggestions and also shows the observed user-side ContentDeliveryManager setting SystemPaneSuggestionsEnabled in the registry dumps.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
         "exact_quote_or_path": "HKLM\\Temp\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f",
         "key_found_on_page": true,
-        "notes": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value."
+        "notes": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. The local nohuto mirror also captures the related CloudContent policy name and the observed registry setting in the source mirrors."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -55242,13 +55270,27 @@
             "rollback"
           ],
           "origin": "VM runtime diff"
+        },
+        {
+          "evidence_id": "nohuto-maintenance-mirror",
+          "kind": "registry-observation",
+          "title": "nohuto mirror - Automatic Maintenance registry evidence",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The local nohuto mirror records PolicyName and ValueName as MaintenanceDisabled and includes the registry path \\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance : MaintenanceDisabled.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. The local nohuto mirror also shows the same MaintenanceDisabled registry path."
       },
       "provenance": {
         "coverage_state": "repo-backed",
