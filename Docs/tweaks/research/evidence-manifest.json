@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T09:31:06.960780Z",
+  "generated_utc": "2026-03-21T09:59:40.456009Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -30017,8 +30017,8 @@
       "tweak_id": "privacy.disable-copilot",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-copilot.json",
-      "source_file_sha256": "90aee5ae92bc747e168c2bbb6518135387558e91d91d50d40ad526f5645305c6",
-      "source_file_size_bytes": 10861,
+      "source_file_sha256": "c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331",
+      "source_file_size_bytes": 10952,
       "name": "Windows Copilot",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -30030,8 +30030,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, but Microsoft also marks the policy deprecated and says it doesn't govern the newer Copilot experience on some Windows builds.",
+        "needs_vm_validation": false,
+        "why": "Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, and the policy is deprecated for the newer Copilot experience. A Win25H2Clean surface discovery found no Copilot app or Start menu entry to exercise, so there is no additional guest-side runtime surface to validate on this build.",
         "blocking_issues": []
       },
       "app_current_implementation": {

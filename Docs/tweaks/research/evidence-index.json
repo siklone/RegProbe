@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T09:31:06.754936Z",
+  "generated_utc": "2026-03-21T09:59:40.248614Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -29608,8 +29608,8 @@
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, but Microsoft also marks the policy deprecated and says it doesn't govern the newer Copilot experience on some Windows builds.",
+        "needs_vm_validation": false,
+        "why": "Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, and the policy is deprecated for the newer Copilot experience. A Win25H2Clean surface discovery found no Copilot app or Start menu entry to exercise, so there is no additional guest-side runtime surface to validate on this build.",
         "blocking_issues": []
       },
       "app_current_implementation": {

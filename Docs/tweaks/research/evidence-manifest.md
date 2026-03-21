@@ -159,7 +159,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-camera` | validated | `Docs/tweaks/research/records/privacy.disable-camera.json` | `a10de2148caa579be126fb4d1e4906fe2e5da45e5228a18d1fd10eab08f48e0b` | `ed1c25600e7c9bf71b51abec244fcb3d70f9969db29e19606a32c0fc2686a822` | 1 |
 | `privacy.disable-cli-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` | `3b25a760d05afb16afce7a68a8768a2cabf41c82199c45d6f83b5a01589b87e5` | `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382` | 2 |
 | `privacy.disable-consumer-account-content` | validated | `Docs/tweaks/research/records/privacy.disable-consumer-account-content.json` | `c5e5af6aa8510de48023b0697e0fa003b8db07d26f03ab779f067ed6794e4083` | `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715` | 1 |
-| `privacy.disable-copilot` | validated | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `90aee5ae92bc747e168c2bbb6518135387558e91d91d50d40ad526f5645305c6` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
+| `privacy.disable-copilot` | validated | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
 | `privacy.disable-cross-device-experiences.policy` | validated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.policy.review.json` | `1c0b1def951669ec326601b097556b164b7122328945f888bdf64f8d32333de2` | `50bb327d8e01a21aa3696d6b28ea4927039f1cce3338680dd4e946d80c678270` | 1 |
 | `privacy.disable-device-name-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json` | `32a599a262c08f0ea78d3e87079d9abdbe9ef0c94646c895904d9f2e2542e9e7` | `3e897ca021e47e65cb1e48c382ccb9892ee5068b0f6a3e900ceaabd6e36807b4` | 1 |
 | `privacy.disable-diagnostic-data-delete` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-delete.json` | `cc522f3342434a2c471a25c03bfa7da50cf0c07a63f7c3df403e79105c1c4517` | `e17f0c7e49b010e5d2a75b267b3ac80cacb18a4f2a5895b42d2947b1fd945681` | 1 |
@@ -5054,7 +5054,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Registry Policy`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-copilot.json`
-- Source SHA256: `90aee5ae92bc747e168c2bbb6518135387558e91d91d50d40ad526f5645305c6`
+- Source SHA256: `c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331`
 - Proof SHA256: `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc`
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.

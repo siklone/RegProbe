@@ -6328,7 +6328,7 @@ Current write(s):
 | Source file | `Docs/tweaks/research/records/privacy.disable-copilot.json` |
 | Apply allowed | `True` |
 | Confidence | `high` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.
 
@@ -6385,8 +6385,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, but Microsoft also marks the policy deprecated and says it doesn't govern the newer Copilot experience on some Windows builds. |
+| Needs VM validation | `False` |
+| Why | Microsoft documents TurnOffWindowsCopilot directly in the WindowsAI Policy CSP and maps it to SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot\TurnOffWindowsCopilot with 0 as the default enabled state and 1 as disabled. The app writes that exact user policy surface, and the policy is deprecated for the newer Copilot experience. A Win25H2Clean surface discovery found no Copilot app or Start menu entry to exercise, so there is no additional guest-side runtime surface to validate on this build. |
 
 ---
 
